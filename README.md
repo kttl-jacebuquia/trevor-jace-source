@@ -5,6 +5,10 @@ It contains all the source code, but it lacks the necessary tools to build/run/d
 Please check out first using the [Pantheon](https://pantheon.io)'s git repository with the _`git clone --recurse-submodules`_ command.
 You will find this repository under the `source` folder.
 
+```shell script
+git clone --recurse-submodules ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
+```
+
 ## Technologies
 
 - [PHP 7.3](https://www.php.net/releases/7_3_0.php)
