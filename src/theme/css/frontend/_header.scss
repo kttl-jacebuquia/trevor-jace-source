@@ -1,0 +1,155 @@
+// General Wrapper for the Header
+.top-bar {
+
+}
+
+// Mobile Menu-Bar
+.title-bar {
+  @apply flex flex-row;
+  @apply justify-center content-center;
+
+  .logo-wrap {
+	@apply cursor-pointer flex-1 text-center;
+  }
+
+  .menu-icon {
+	@apply cursor-pointer;
+
+	&:before {
+	  @extend .trevor-ti-bars-solid:before;
+	}
+  }
+
+  @screen md {
+	@apply hidden;
+  }
+}
+
+// Top Bar
+.top-bar-inner {
+  @apply hidden;
+  @apply w-full mx-auto;
+
+  @screen md {
+	@apply block;
+  }
+}
+
+// Ceil Part
+// ----------------------------
+.top-bar-ceil {
+  @apply py-6;
+  @apply flex flex-row align-baseline;
+
+  // Switcher
+  .switcher {
+	@apply list-none;
+	@apply flex flex-row flex-1;
+
+	> li {
+	  @apply px-2;
+
+	  &:first-child {
+		@apply pl-0;
+	  }
+
+	  > a {
+		@apply pb-2;
+		@apply border-b-4 border-black;
+
+		&.active {
+		  @apply text-blue-dark;
+		  @apply border-blue-dark;
+		}
+	  }
+	}
+  }
+
+  // CTAs
+  .cta-wrap {
+
+  }
+}
+
+
+// Center Part
+// ----------------------------
+.top-bar-center {
+  @apply flex flex-row;
+
+  .logo-wrap {
+	@apply flex-1;
+
+	> .logo {
+	  @apply text-blue-dark text-3xl font-bold;
+	}
+  }
+}
+
+// Main Menu
+/* https://moderncss.dev/css-only-accessible-dropdown-navigation-menu/ */
+.main-menu-container {
+  @apply self-end;
+  @apply pb-4;
+
+  // Convert lists to grid
+  ul {
+	@apply grid;
+	@apply list-none m-0 p-0;
+
+	li {
+	  @apply p-0;
+	}
+  }
+
+  .main-menu {
+	@apply grid-flow-col;
+
+	> li {
+	  @apply relative;
+
+	  a {
+		@apply inline-block;
+	  }
+
+	  // Uppercase first tier
+	  > a {
+		@apply uppercase;
+	  }
+
+	  > ul {
+		// Dropdowns
+		@apply absolute;
+		// Pull up to overlap the parent list item very slightly
+		top: calc(100% - 0.25rem);
+		// Use the left from absolute position to shift the left side
+		left: 50%;
+		// Use translateX to shift the menu 50% of it's width back to the left
+		transform: rotateX(-90deg) translateX(-50%);
+		transform-origin: top center;
+		@apply opacity-25;
+		transition: 280ms all 120ms ease-out;
+	  }
+
+	  &:hover,
+	  &:focus-within {
+		> ul {
+		  @apply opacity-100 visible;
+		  transform: rotateX(0) translateX(-50%);
+		}
+	  }
+	}
+  }
+
+  li {
+	@apply block;
+	@apply cursor-pointer;
+  }
+}
+
+
+// Bottom Part
+// ----------------------------
+.top-bar-bottom {
+
+}

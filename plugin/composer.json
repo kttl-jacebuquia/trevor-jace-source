@@ -1,0 +1,21 @@
+{
+    "name": "kettle/trevor-wp-plugin",
+    "type": "wordpress-plugin",
+    "license": "Private",
+    "require": {
+        "twig/twig": "^3.0",
+        "monolog/monolog": "^2.1"
+    },
+    "config": {
+        "vendor-dir": "lib",
+        "autoloader-suffix": "TrevorWPPlugin",
+        "platform": {
+            "php": "7.3"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "TrevorWP\\": "inc/"
+        }
+    }
+}

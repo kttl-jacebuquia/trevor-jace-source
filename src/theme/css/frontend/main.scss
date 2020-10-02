@@ -1,0 +1,17 @@
+// Icon Fonts
+@import "../icon-font/trevor-ti";
+@import "../icon-font/vars";
+
+// Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: theme('colors.white');
+}
+
+// Our Components
+@import "./header";
+@import "./site-content";
+@import "./button";

@@ -1,0 +1,19 @@
+# Node
+/node_modules
+
+# Composer
+composer.phar
+/plugin/lib/
+/theme/lib/
+
+# Build
+/build
+/plugin/static/js
+/plugin/static/css
+/plugin/static/icon-font
+/theme/static/js
+/theme/static/css
+/theme/static/icon-font
+# Icon Fonts
+/src/plugin/css/icon-font
+/src/theme/css/icon-font

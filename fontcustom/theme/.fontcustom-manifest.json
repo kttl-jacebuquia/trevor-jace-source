@@ -1,0 +1,63 @@
+{
+  "checksum": {
+    "previous": "0be672471463f3dc2dc843b9deed23a40cb1c79956964180673155376561cf52",
+    "current": "0be672471463f3dc2dc843b9deed23a40cb1c79956964180673155376561cf52"
+  },
+  "fonts": [
+    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.ttf",
+    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.svg",
+    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.woff",
+    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.eot",
+    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.woff2"
+  ],
+  "glyphs": {
+    "bars-solid": {
+      "codepoint": 61697,
+      "source": "./vectors/bars-solid.svg"
+    },
+    "facebook-f-brands": {
+      "codepoint": 61698,
+      "source": "./vectors/facebook-f-brands.svg"
+    },
+    "twitter-brands": {
+      "codepoint": 61696,
+      "source": "./vectors/twitter-brands.svg"
+    }
+  },
+  "options": {
+    "autowidth": true,
+    "config": "config.yml",
+    "copyright": "",
+    "css3": false,
+    "css_selector": ".trevor-ti-{{glyph}}",
+    "debug": false,
+    "font_ascent": 448,
+    "font_descent": 64,
+    "font_design_size": 16,
+    "font_em": 512,
+    "font_name": "trevor-ti",
+    "force": true,
+    "input": {
+      "templates": "../templates",
+      "vectors": "./vectors"
+    },
+    "no_hash": false,
+    "output": {
+      "css": "../../src/theme/css/icon-font",
+      "fonts": "../../theme/static/icon-font",
+      "preview": "../../build/icon-font/theme"
+    },
+    "preprocessor_path": "/wp-content/themes/trevor/static/icon-font/",
+    "quiet": false,
+    "templates": [
+      "scss",
+      "preview",
+      "_vars.scss"
+    ]
+  },
+  "templates": [
+    "../../src/theme/css/icon-font/_trevor-ti.scss",
+    "../../build/icon-font/theme/trevor-ti-preview.html",
+    "../../src/theme/css/icon-font/_vars.scss"
+  ]
+}

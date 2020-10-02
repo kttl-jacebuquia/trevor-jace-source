@@ -1,0 +1,7 @@
+#site-content {
+  @apply mx-0 bg-white px-4 min-w-full;
+
+  @screen xl {
+	@apply mx-auto min-w-0 px-0;
+  }
+}
