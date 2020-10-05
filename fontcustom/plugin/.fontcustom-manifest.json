@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "8aec313bbf68ef5189eb429a8cb5db2c293e8df21bb41767c91a744f6179d1f5",
-    "current": "8aec313bbf68ef5189eb429a8cb5db2c293e8df21bb41767c91a744f6179d1f5"
+    "previous": "0abab36189db23f6df72632470f8632728ca5ab128891775e784f987fa3a8592",
+    "current": "0abab36189db23f6df72632470f8632728ca5ab128891775e784f987fa3a8592"
   },
   "fonts": [
-    "../../plugin/static/icon-font/trevor-pi_8aec313bbf68ef5189eb429a8cb5db2c.ttf",
-    "../../plugin/static/icon-font/trevor-pi_8aec313bbf68ef5189eb429a8cb5db2c.svg",
-    "../../plugin/static/icon-font/trevor-pi_8aec313bbf68ef5189eb429a8cb5db2c.woff",
-    "../../plugin/static/icon-font/trevor-pi_8aec313bbf68ef5189eb429a8cb5db2c.eot",
-    "../../plugin/static/icon-font/trevor-pi_8aec313bbf68ef5189eb429a8cb5db2c.woff2"
+    "../../plugin/static/icon-font/trevor-pi_0abab36189db23f6df72632470f86327.ttf",
+    "../../plugin/static/icon-font/trevor-pi_0abab36189db23f6df72632470f86327.svg",
+    "../../plugin/static/icon-font/trevor-pi_0abab36189db23f6df72632470f86327.woff",
+    "../../plugin/static/icon-font/trevor-pi_0abab36189db23f6df72632470f86327.eot",
+    "../../plugin/static/icon-font/trevor-pi_0abab36189db23f6df72632470f86327.woff2"
   ],
   "glyphs": {
     "twitter-brands": {
@@ -28,7 +28,7 @@
     "font_design_size": 16,
     "font_em": 512,
     "font_name": "trevor-pi",
-    "force": false,
+    "force": true,
     "input": {
       "templates": "../templates",
       "vectors": "./vectors"
