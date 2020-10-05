@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# Cleanup
+# Node Cleanup
 /app/scripts/cleanup-build-node.sh
+
+# FontCustom
+/app/scripts/pre-push-fontcustom.sh
 
 # Build
 echo "Building..."
