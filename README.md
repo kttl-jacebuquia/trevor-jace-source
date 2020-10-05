@@ -6,7 +6,7 @@ Please check out first using the [Pantheon](https://pantheon.io)'s git repositor
 You will find this repository under the `source` folder.
 
 ```shell script
-git clone --recurse-submodules ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
+git clone --recurse-submodules --depth 1 ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
 ```
 
 ## Technologies
@@ -37,7 +37,7 @@ Load {code _**_, db, files} from [dev|test|prod]
 lando pull
 ```
 
-You are ready to roll!
+Now your development environment should be ready and you should be able to see [http://trevor-web.lndo.site](http://trevor-web.lndo.site)!
 
 _* When going through the Mac OS X installer you can choose to not install **Docker Desktop**,
     if you already have it and/or don't want to change the current version.
@@ -280,7 +280,7 @@ It allows you to create your personal environment, and you can freely push anyth
 
 [Xdebug](https://xdebug.org/) is ready to use but if you need to modify something, 
 you can find the [xdebug.ini](docker/appserver/xdebug.ini) at the `_source/docker/appserver/` folder.
-To apply changes all you need to is re-start lando : `lando restart`.
+To apply changes, re-start lando : `lando restart`.
  
 - [Setting up your IDE for XDEBUG](https://docs.lando.dev/config/php.html#setting-up-your-ide-for-xdebug)
 - [xdebug settings](https://xdebug.org/docs/all_settings)
