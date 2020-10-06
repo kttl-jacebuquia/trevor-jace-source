@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\Theme\Customizer;
+use TrevorWP\Util\StaticFiles;
 
 /**
  * Theme Hooks
@@ -44,7 +45,7 @@ class Hooks {
 	public static function init(): void {
 		# Register Nav Menu(s)
 		register_nav_menus( [
-			'header-menu' => __( 'Header Menu' ),
+				'header-menu' => __( 'Header Menu' ),
 		] );
 	}
 
@@ -56,21 +57,29 @@ class Hooks {
 	public static function wp_enqueue_scripts(): void {
 		# Theme's frontend JS package
 		wp_enqueue_script(
-			self::NAME_PREFIX . 'theme-frontend-main',
-			TREVOR_THEME_STATIC_URL . '/js/frontend.js',
-			[ 'jquery' ],
-			\TrevorWP\Theme\VERSION,
-			true
+				self::NAME_PREFIX . 'theme-frontend-main',
+				TREVOR_THEME_STATIC_URL . '/js/frontend.js',
+				[ 'jquery' ],
+				\TrevorWP\Theme\VERSION,
+				true
 		);
 
-		# Main style file
-		if ( ! TREVOR_ON_DEV ) {
+		# Frontend style
+		if ( TREVOR_ON_DEV ) {
+			wp_enqueue_script(
+					self::NAME_PREFIX . 'theme-frontend-css',
+					TREVOR_THEME_STATIC_URL . '/css/frontend.js',
+					[ StaticFiles::NAME_JS_RUNTIME ],
+					\TrevorWP\Theme\VERSION,
+					false
+			);
+		} else {
 			wp_enqueue_style(
-				self::NAME_PREFIX . 'theme-frontend',
-				TREVOR_THEME_STATIC_URL . '/css/frontend.css',
-				[],
-				\TrevorWP\Theme\VERSION,
-				'all'
+					self::NAME_PREFIX . 'theme-frontend',
+					TREVOR_THEME_STATIC_URL . '/css/frontend.css',
+					[],
+					\TrevorWP\Theme\VERSION,
+					'all'
 			);
 		}
 	}
@@ -81,13 +90,31 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
 	 */
 	public static function admin_enqueue_scripts(): void {
-		# Admin Style
-		if ( ! constant( 'TREVOR_ON_DEV' ) ) {
-			wp_enqueue_style(
+		# Admin JS
+		wp_enqueue_script(
 				self::NAME_PREFIX . 'theme-admin-main',
-				TREVOR_THEME_STATIC_URL . '/css/admin.css',
-				[],
+				TREVOR_THEME_STATIC_URL . '/js/admin.js',
+				[ 'jquery' ],
 				\TrevorWP\Theme\VERSION,
+				true
+		);
+
+		# Admin Style
+		if ( TREVOR_ON_DEV ) {
+			wp_enqueue_script(
+					self::NAME_PREFIX . 'theme-admin-css',
+					TREVOR_THEME_STATIC_URL . '/css/admin.js',
+					[ StaticFiles::NAME_JS_RUNTIME ],
+					\TrevorWP\Theme\VERSION,
+					false
+			);
+		} else {
+			wp_enqueue_style(
+					self::NAME_PREFIX . 'theme-admin',
+					TREVOR_THEME_STATIC_URL . '/css/admin.css',
+					[],
+					\TrevorWP\Theme\VERSION,
+					'all'
 			);
 		}
 	}

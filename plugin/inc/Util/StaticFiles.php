@@ -4,6 +4,7 @@ use TrevorWP;
 
 class StaticFiles {
 	const NAME_PREFIX = 'trevor_';
+	const NAME_JS_RUNTIME = self::NAME_PREFIX . 'runtime';
 
 	/**
 	 * Enqueue scripts for all admin pages.
@@ -16,13 +17,13 @@ class StaticFiles {
 		$screen = get_current_screen();
 
 		# Runtime
-		$rt_name = self::_enqueue_js_runtime();
+		self::_enqueue_js_runtime();
 
 		# Plugin Main
 		wp_enqueue_script(
 			self::NAME_PREFIX . 'plugin-main',
 			TREVOR_PLUGIN_STATIC_URL . '/js/main.js',
-			[ 'jquery', 'wp-api', $rt_name ],
+			[ 'jquery', 'wp-api', self::NAME_JS_RUNTIME ],
 			TrevorWP\VERSION,
 			true
 		);
@@ -32,7 +33,7 @@ class StaticFiles {
 			wp_enqueue_script(
 				self::NAME_PREFIX . 'editor-blocks',
 				TREVOR_PLUGIN_STATIC_URL . '/js/blocks.js',
-				[ 'wp-api', 'wp-blocks', 'wp-element', 'wp-editor', 'jquery-ui-autocomplete', $rt_name ],
+				[ 'wp-api', 'wp-blocks', 'wp-element', 'wp-editor', 'jquery-ui-autocomplete', self::NAME_JS_RUNTIME ],
 				TrevorWP\VERSION,
 				true
 			);
@@ -44,12 +45,21 @@ class StaticFiles {
 //		}
 
 		# Admin Styles
-		if ( ! TREVOR_ON_DEV ) {
-			// Webpack loads this css file on development environment
+		if ( TREVOR_ON_DEV ) {
+			wp_enqueue_script(
+				self::NAME_PREFIX . 'plugin-admin-css',
+				TREVOR_PLUGIN_STATIC_URL . '/css/main.js',
+				[ self::NAME_JS_RUNTIME ],
+				TrevorWP\VERSION,
+				false
+			);
+		} else {
 			wp_enqueue_style(
 				self::NAME_PREFIX . 'plugin-main',
 				TREVOR_PLUGIN_STATIC_URL . '/css/main.css',
+				null,
 				TrevorWP\VERSION,
+				'all'
 			);
 		}
 	}
@@ -66,20 +76,14 @@ class StaticFiles {
 
 	/**
 	 * Enqueues JS runtime.
-	 *
-	 * @return string Script name.
 	 */
-	protected static function _enqueue_js_runtime(): string {
-		$name = self::NAME_PREFIX . 'runtime';
-
+	protected static function _enqueue_js_runtime(): void {
 		wp_enqueue_script(
-			$name,
+			self::NAME_JS_RUNTIME,
 			trailingslashit( TREVOR_ON_DEV ? getenv( 'MEDIA_DEV_PATH_PREFIX' ) : ( TREVOR_PLUGIN_STATIC_URL . '/js' ) ) . 'runtime.js',
 			null,
 			TrevorWP\VERSION,
 			false
 		);
-
-		return $name;
 	}
 }

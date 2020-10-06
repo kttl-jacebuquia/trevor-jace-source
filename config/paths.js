@@ -15,11 +15,14 @@ module.exports = {
     pluginJSMain: resolveApp('src/plugin/js/main'),
     pluginJSBlocks: resolveApp('src/plugin/js/blocks'),
     pluginCSSMain: resolveApp('src/plugin/css/main.scss'),
+    pluginCSSDevMain: resolveApp('src/plugin/css-dev/main.js'),
 	pluginPHP: resolveApp('plugin'),
     // - Theme
     themeJSAdmin: resolveApp('src/theme/js/admin'),
     themeJSFrontEnd: resolveApp('src/theme/js/frontend'),
     themeCSSFrontend: resolveApp('src/theme/css/frontend/main.scss'),
+    themeCSSDevFrontend: resolveApp('src/theme/css-dev/frontend.js'),
     themeCSSAdmin: resolveApp('src/theme/css/admin/main.scss'),
+    themeCSSDevAdmin: resolveApp('src/theme/css-dev/admin.js'),
 	themePHP: resolveApp('theme'),
 };

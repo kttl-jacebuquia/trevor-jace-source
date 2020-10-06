@@ -99,16 +99,25 @@ module.exports = function (webpackEnv) {
 		// - Plugin
 		'plugin/js/main': paths.pluginJSMain,
 		'plugin/js/blocks': paths.pluginJSBlocks,
-		'plugin/css/main': paths.pluginCSSMain,
 		// - Theme
 		'theme/js/admin': paths.themeJSAdmin,
 		'theme/js/frontend': paths.themeJSFrontEnd,
-		'theme/css/admin': paths.themeCSSAdmin,
-		'theme/css/frontend': paths.themeCSSFrontend,
 	};
 
 	if (isEnvDevelopment) {
+		// - Hot Loader
 		entry.webpackHot = require.resolve('react-dev-utils/webpackHotDevClient');
+		// - Plugin
+		entry['plugin/css/main'] = paths.pluginCSSDevMain;
+		// - Theme
+		entry['theme/css/admin'] = paths.themeCSSDevAdmin;
+		entry['theme/css/frontend'] = paths.themeCSSDevFrontend;
+	} else {
+		// - Plugin
+		entry['plugin/css/main'] = paths.pluginCSSMain;
+		// - Theme
+		entry['theme/css/admin'] = paths.themeCSSAdmin;
+		entry['theme/css/frontend'] = paths.themeCSSFrontend;
 	}
 
 	return {
