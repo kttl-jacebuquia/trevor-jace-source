@@ -20,19 +20,22 @@
 <![endif]-->
 <header id="top-bar" class="top-bar">
 	<div class="title-bar">
-		<div class="logo-wrap">
-			<a href="<?= get_home_url() ?>" rel="home">The Trevor Project</a>
+		<div class="container title-bar-inner">
+			<div class="logo-wrap">
+				<a href="<?= get_home_url() ?>" rel="home">The Trevor Project</a>
+			</div>
+			<label class="menu-icon" for="top-bar-open"></label>
 		</div>
-		<div class="menu-icon"></div>
 	</div>
+	<input id="top-bar-open" type="checkbox" class="hidden">
 	<div class="container top-bar-inner">
 		<div class="top-bar-ceil">
 			<ul class="switcher">
-				<li><a href="#" class="active">Support Center</a></li>
-				<li><a href="#">The Organization</a></li>
+				<li><a href="#">Support Center</a></li>
+				<li><a href="#" class="active">The Organization</a></li>
 			</ul>
 			<div class="cta-wrap">
-				<a href="#" class="btn bg-blue-dark p-4">Talk to a Counselor Now</a>
+				<a href="#" class="btn bg-blue-dark p-4 text-white">Talk to a Counselor Now</a>
 				<a href="#" class="btn rounded-full p-2 border border-blue-dark text-blue-dark" rel="noopener nofollow">Donate</a>
 			</div>
 		</div>
@@ -50,7 +53,7 @@
 					'theme_location'  => 'header-menu'
 			] ); ?>
 		</div>
-		<div class="top-bar-bottom"></div>
+		<div class="top-bar-floor"></div>
 	</div>
 </header>
 <?php wp_body_open(); ?>

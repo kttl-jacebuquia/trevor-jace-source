@@ -1,16 +1,20 @@
 {
   "checksum": {
-    "previous": "0be672471463f3dc2dc843b9deed23a40cb1c79956964180673155376561cf52",
-    "current": "0be672471463f3dc2dc843b9deed23a40cb1c79956964180673155376561cf52"
+    "previous": "1adbb586b8865401a7c8aa101a8c8b8368a771260e1f05d63e29ffe765505c0f",
+    "current": "1adbb586b8865401a7c8aa101a8c8b8368a771260e1f05d63e29ffe765505c0f"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.ttf",
-    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.svg",
-    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.woff",
-    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.eot",
-    "../../theme/static/icon-font/trevor-ti_0be672471463f3dc2dc843b9deed23a4.woff2"
+    "../../theme/static/icon-font/trevor-ti_1adbb586b8865401a7c8aa101a8c8b83.ttf",
+    "../../theme/static/icon-font/trevor-ti_1adbb586b8865401a7c8aa101a8c8b83.svg",
+    "../../theme/static/icon-font/trevor-ti_1adbb586b8865401a7c8aa101a8c8b83.woff",
+    "../../theme/static/icon-font/trevor-ti_1adbb586b8865401a7c8aa101a8c8b83.eot",
+    "../../theme/static/icon-font/trevor-ti_1adbb586b8865401a7c8aa101a8c8b83.woff2"
   ],
   "glyphs": {
+    "angle-down-solid": {
+      "codepoint": 61699,
+      "source": "./vectors/angle-down-solid.svg"
+    },
     "bars-solid": {
       "codepoint": 61697,
       "source": "./vectors/bars-solid.svg"

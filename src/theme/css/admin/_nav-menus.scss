@@ -1,0 +1,13 @@
+body.nav-menus-php {
+  #menu-to-edit {
+	.trevor-custom-menu-item-subtitle {
+	  display: none;
+	}
+
+	.menu-item-depth-1 {
+	  .trevor-custom-menu-item-subtitle {
+		display: block;
+	  }
+	}
+  }
+}

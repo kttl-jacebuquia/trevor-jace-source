@@ -5,11 +5,14 @@
 
 // Mobile Menu-Bar
 .title-bar {
-  @apply flex flex-row;
-  @apply justify-center content-center;
+  .title-bar-inner {
+	@apply flex flex-row;
+	@apply justify-center content-center;
+	@apply px-2 py-2 mx-auto;
+  }
 
   .logo-wrap {
-	@apply cursor-pointer flex-1 text-center;
+	@apply flex-1 text-center;
   }
 
   .menu-icon {
@@ -32,6 +35,46 @@
 
   @screen md {
 	@apply block;
+  }
+}
+
+// Mobile First
+@media screen and (max-width: theme('screens.md')) {
+  #top-bar-open:checked ~ .top-bar-inner {
+	@apply block;
+	@apply h-full;
+
+	.main-menu {
+	  @apply grid-flow-row;
+	  @apply px-6;
+	}
+
+	.top-bar-ceil,
+	.top-bar-floor,
+	.logo-wrap {
+	  @apply hidden;
+	}
+
+	.main-menu-container {
+	  @apply w-full;
+	}
+
+	.menu-item-has-children > a {
+	  @apply w-full;
+	  @apply flex flex-row;
+	  @apply text-xl;
+	  @apply border-b;
+
+	  .title-wrap {
+		@apply flex-1;
+	  }
+
+	  .submenu-icon {
+		@apply block;
+		@apply self-end;
+		transform: rotate(-90deg);
+	  }
+	}
   }
 }
 
@@ -87,63 +130,122 @@
 }
 
 // Main Menu
-/* https://moderncss.dev/css-only-accessible-dropdown-navigation-menu/ */
 .main-menu-container {
-  @apply self-end;
-  @apply pb-4;
-
-  // Convert lists to grid
-  ul {
-	@apply grid;
-	@apply list-none m-0 p-0;
-
-	li {
-	  @apply p-0;
-	}
+  .submenu-icon {
+	@apply hidden;
   }
 
-  .main-menu {
-	@apply grid-flow-col;
+  // Dropdowns
+  @screen md {
+	@apply self-end;
+	@apply pb-4;
+	$general-transition: 280ms all 120ms ease-out;
 
-	> li {
+	// Convert lists to grid
+	ul {
+	  @apply grid;
+	  @apply list-none m-0 p-0;
+
+	  li {
+		@apply p-0;
+	  }
+	}
+
+	li {
+	  @apply block;
+	  @apply cursor-pointer;
+	}
+
+	.main-menu {
+	  @apply grid-flow-col;
+	  @apply gap-x-6;
+
+	  // First tier
+	  > li {
+		> a {
+		  @apply uppercase;
+		}
+	  }
+	}
+
+	.top-bar-ceil,
+	.top-bar-floor,
+	.logo-wrap {
+	  @apply block;
+	}
+
+	.menu-item-has-children {
 	  @apply relative;
 
-	  a {
+	  // Submenu icon
+	  .submenu-icon {
 		@apply inline-block;
+		@apply ml-2;
+		transition: $general-transition;
 	  }
 
-	  // Uppercase first tier
-	  > a {
-		@apply uppercase;
-	  }
-
-	  > ul {
-		// Dropdowns
-		@apply absolute;
-		// Pull up to overlap the parent list item very slightly
-		top: calc(100% - 0.25rem);
-		// Use the left from absolute position to shift the left side
+	  .sub-menu {
+		position: absolute;
+		min-width: 16rem;
 		left: 50%;
-		// Use translateX to shift the menu 50% of it's width back to the left
+		top: calc(100% - 0.25rem);
+		transition: $general-transition;
 		transform: rotateX(-90deg) translateX(-50%);
 		transform-origin: top center;
-		@apply opacity-25;
-		transition: 280ms all 120ms ease-out;
+		visibility: hidden;
+		opacity: 0.3;
+		background-color: #F2F2F2;
+		@apply shadow;
+
+		//
+		@apply mt-2;
+		@apply border-t-4 border-blue-dark;
+
+		li {
+		  > a {
+			@apply py-4 px-4 w-full;
+			@apply block;
+
+			.title-wrap {
+			  @apply text-blue-dark underline;
+			}
+
+			&:hover {
+			  @apply bg-white;
+			}
+		  }
+		}
+
+		.subtitle {
+		  @apply mt-2;
+		  @apply text-black text-sm;
+		}
 	  }
 
 	  &:hover,
 	  &:focus-within {
-		> ul {
-		  @apply opacity-100 visible;
+		.submenu-icon {
+		  transform: rotate(90deg);
+		}
+
+		.sub-menu {
+		  opacity: 1;
 		  transform: rotateX(0) translateX(-50%);
+		  visibility: visible;
+
+		  a {
+			opacity: 1;
+		  }
+		}
+
+		&:after {
+		  opacity: 1;
 		}
 	  }
-	}
-  }
 
-  li {
-	@apply block;
-	@apply cursor-pointer;
+	}
+
+
   }
 }
 
