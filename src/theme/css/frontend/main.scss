@@ -11,6 +11,8 @@ body {
   background: theme('colors.white');
 }
 
+@import "./what-input";
+
 // Our Components
 @import "./header";
 @import "./site-content";
