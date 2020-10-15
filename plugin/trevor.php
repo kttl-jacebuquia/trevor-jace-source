@@ -18,6 +18,7 @@ defined( 'TREVOR_PLUGIN_NAME' ) or define( 'TREVOR_PLUGIN_NAME', trim( dirname( 
 defined( 'TREVOR_PLUGIN_DIR' ) or define( 'TREVOR_PLUGIN_DIR', WP_PLUGIN_DIR . '/' . TREVOR_PLUGIN_NAME );
 defined( 'TREVOR_PLUGIN_URL' ) or define( 'TREVOR_PLUGIN_URL', WP_PLUGIN_URL . '/' . TREVOR_PLUGIN_NAME );
 defined( 'TREVOR_CONTENT_DIR' ) or define( 'TREVOR_CONTENT_DIR', PANTHEON_PRIVATE_UPLOAD_DIR . '/trevor' );
+defined( 'TREVOR_PRIVATE_DATA_DIR' ) or define( 'TREVOR_PRIVATE_DATA_DIR', TREVOR_PLUGIN_DIR . '/private' );
 defined( 'TREVOR_CACHE_DIR' ) or define( 'TREVOR_CACHE_DIR', TREVOR_CONTENT_DIR . '/cache' );
 defined( 'TREVOR_LOGS_DIR' ) or define( 'TREVOR_LOGS_DIR', TREVOR_CONTENT_DIR . '/logs' );
 //defined( 'SENTRY_DSN' ) or define( 'SENTRY_DSN', '' ); // TODO: Add sentry? for production

@@ -4,7 +4,8 @@
     "license": "Private",
     "require": {
         "twig/twig": "^3.0",
-        "monolog/monolog": "^2.1"
+        "monolog/monolog": "^2.1",
+        "google/apiclient": "^2.7"
     },
     "config": {
         "vendor-dir": "lib",
@@ -17,5 +18,10 @@
         "psr-4": {
             "TrevorWP\\": "inc/"
         }
-    }
+    },
+	"extra": {
+		"google/apiclient-services": [
+			"AnalyticsReporting"
+		]
+	}
 }

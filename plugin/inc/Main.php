@@ -28,6 +28,11 @@ class Main {
 	 */
 	const META_KEY_PREFIX = '_trevor_';
 
+	/*
+	 * Admin Menu Slugs
+	 */
+	const ADMIN_MENU_SLUG_PREFIX = 'trevor-';
+
 	/**
 	 * Main constructor.
 	 */

@@ -1,0 +1,1 @@
+export notices from './notices';

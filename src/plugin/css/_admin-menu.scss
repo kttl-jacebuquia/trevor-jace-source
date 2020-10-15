@@ -1,0 +1,12 @@
+// Menu Icons
+#adminmenu {
+  // Classy
+  #toplevel_page_trevor-classy-api .wp-menu-image:before {
+	@extend .trevor-pi-classy-brands:before;
+  }
+
+  // Google
+  #toplevel_page_trevor-google-api .wp-menu-image:before {
+	@extend .trevor-pi-google-brands:before;
+  }
+}

@@ -248,11 +248,13 @@ module.exports = function (webpackEnv) {
 			"lodash": "lodash",
 		},
 		resolve: {
+			mainFiles: ['index'],
 			alias: {
 				'assets': path.join(paths.src, 'assets'),
 				'config$': path.join(paths.src, 'config'),
 				...(isEnvDevelopment ? {
 					// Dev aliases
+					'react-dom': '@hot-loader/react-dom',
 				} : {})
 			},
 			plugins: [
@@ -310,6 +312,8 @@ module.exports = function (webpackEnv) {
 								),
 
 								plugins: [
+									"react-hot-loader/babel",
+									"@babel/plugin-proposal-export-default-from",
 									[
 										require.resolve('babel-plugin-named-asset-import'),
 										{

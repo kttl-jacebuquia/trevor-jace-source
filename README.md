@@ -287,7 +287,7 @@ To apply changes, re-start lando : `lando restart`.
 
 #### Path Mappings
 
-- `_pantheon/source/docker/appserver/prepend.php` → `/src/includes/prepend.php`
+- `_pantheon/source/docker/appserver/prepend.php` → `/srv/includes/prepend.php`
 - `_pantheon/` → `/app`
 - `_pantheon/source/plugin` → `/app/web/wp-content/plugins/trevor`
 - `_pantheon/source/theme` → `/app/web/wp-content/themes/trevor`
@@ -299,6 +299,9 @@ To apply changes, re-start lando : `lando restart`.
    We may need to fork it or go with a lower level solution.
    Please do not depend on it.
 
+### License Attributions
+
+- [FontAwesome](https://fontawesome.com/license)
 
 ---
 

@@ -804,4 +804,36 @@ class Tools {
 
 		return [ $to_add, $to_del ];
 	}
+
+	/**
+	 * Returns the environment name.
+	 *
+	 * @return string
+	 */
+	public static function get_env(): string {
+		return (string) ( TREVOR_ON_DEV ? 'dev' : constant( 'PANTHEON_ENVIRONMENT' ) );
+	}
+
+	/**
+	 * Returns the path of the Google OAuth configuration file.
+	 *
+	 * @return string
+	 * @throws Exception\Internal If the config file is missing.
+	 * @deprecated
+	 */
+	public static function get_g_oauth_config(): string {
+		$env = self::get_env();
+
+		if ( $env == 'test' ) {
+			$env = 'dev';
+		}
+
+		$name = "g_oauth-{$env}.json";
+		$path = path_join( TREVOR_PRIVATE_DATA_DIR, $name );
+		if ( ! file_exists( $path ) ) {
+			throw new Exception\Internal( 'Google OAuth Client Id file is missing.' );
+		}
+
+		return $path;
+	}
 }
