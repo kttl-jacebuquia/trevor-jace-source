@@ -1,5 +1,11 @@
 // Menu Icons
 #adminmenu {
+  // CPT
+  //-// Support Resources
+  #menu-posts-trevor_support .wp-menu-image:before {
+	@extend .trevor-pi-hands-helping-solid:before;
+  }
+
   // Classy
   #toplevel_page_trevor-classy-api .wp-menu-image:before {
 	@extend .trevor-pi-classy-brands:before;

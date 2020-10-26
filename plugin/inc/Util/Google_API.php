@@ -1,17 +1,11 @@
 <?php namespace TrevorWP\Util;
 
-use TrevorWP\Main;
 use TrevorWP\Admin;
+use TrevorWP\Options;
 use TrevorWP\Exception;
 use TrevorWP\Exception\Unauthorized;
 
 class Google_API {
-	/* Option Keys */
-	const OPTION_KEY_PREFIX = Main::OPTION_KEY_PREFIX . '_google_';
-	const OPTION_KEY_ACCESS_TOKEN = self::OPTION_KEY_PREFIX . 'access_token';
-	const OPTION_KEY_VIEW_ID = self::OPTION_KEY_PREFIX . 'view_id';
-	const OPTION_KEY_POST_VIEW_WAIT = self::OPTION_KEY_PREFIX . 'post_view_wait';
-
 	/**
 	 * @var \Google_Client
 	 */
@@ -50,7 +44,7 @@ class Google_API {
 	 * @return false|mixed|void
 	 */
 	public static function get_token() {
-		return get_option( self::OPTION_KEY_ACCESS_TOKEN );
+		return get_option( Options\Google::KEY_ACCESS_KEY );
 	}
 
 	/**
@@ -102,7 +96,7 @@ class Google_API {
 	 * @throws Exception\Internal
 	 */
 	public static function set_token( array $access_token, bool $log_audit = true ): bool {
-		$result = update_option( self::OPTION_KEY_ACCESS_TOKEN, $access_token, false );
+		$result = update_option( Options\Google::KEY_ACCESS_KEY, $access_token, false );
 
 		if ( ! $result ) {
 			throw new Exception\Internal( 'Could not set the google access token.' );

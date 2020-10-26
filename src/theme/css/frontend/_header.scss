@@ -83,6 +83,7 @@
 .top-bar-ceil {
   @apply py-6;
   @apply flex flex-row align-baseline;
+  @apply mx-auto;
 
   // Switcher
   .switcher {
@@ -119,12 +120,13 @@
 // ----------------------------
 .top-bar-center {
   @apply flex flex-row;
+  @apply mx-auto mb-4;
 
   .logo-wrap {
 	@apply flex-1;
 
 	> .logo {
-	  @apply text-blue-dark text-3xl font-bold;
+	  @apply text-black text-3xl font-bold;
 	}
   }
 }
@@ -195,6 +197,7 @@
 		visibility: hidden;
 		opacity: 0.3;
 		background-color: #F2F2F2;
+		z-index: 10;
 		@apply shadow;
 
 		//
@@ -252,6 +255,15 @@
 
 // Bottom Part
 // ----------------------------
-.top-bar-bottom {
+.top-bar-floor {
+  @apply border border-l-0 border-r-0 border-gray;
+  @apply py-3;
 
+  .featured-tags {
+	@apply flex flex-row justify-center;
+
+	> .tag-box {
+	  @apply mx-1;
+	}
+  }
 }

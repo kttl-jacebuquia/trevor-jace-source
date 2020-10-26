@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "36a33bb78d4ee78d133137d1afd16bfafbb7394660d2f30f22e35c897e0fb0c9",
-    "current": "36a33bb78d4ee78d133137d1afd16bfafbb7394660d2f30f22e35c897e0fb0c9"
+    "previous": "72161845fe9b9146e0ab0980eeaca94f94c07755531d53060436cca27ca600a9",
+    "current": "72161845fe9b9146e0ab0980eeaca94f94c07755531d53060436cca27ca600a9"
   },
   "fonts": [
-    "../../plugin/static/icon-font/trevor-pi_36a33bb78d4ee78d133137d1afd16bfa.ttf",
-    "../../plugin/static/icon-font/trevor-pi_36a33bb78d4ee78d133137d1afd16bfa.svg",
-    "../../plugin/static/icon-font/trevor-pi_36a33bb78d4ee78d133137d1afd16bfa.woff",
-    "../../plugin/static/icon-font/trevor-pi_36a33bb78d4ee78d133137d1afd16bfa.eot",
-    "../../plugin/static/icon-font/trevor-pi_36a33bb78d4ee78d133137d1afd16bfa.woff2"
+    "../../plugin/static/icon-font/trevor-pi_72161845fe9b9146e0ab0980eeaca94f.ttf",
+    "../../plugin/static/icon-font/trevor-pi_72161845fe9b9146e0ab0980eeaca94f.svg",
+    "../../plugin/static/icon-font/trevor-pi_72161845fe9b9146e0ab0980eeaca94f.woff",
+    "../../plugin/static/icon-font/trevor-pi_72161845fe9b9146e0ab0980eeaca94f.eot",
+    "../../plugin/static/icon-font/trevor-pi_72161845fe9b9146e0ab0980eeaca94f.woff2"
   ],
   "glyphs": {
     "classy-brands": {
@@ -18,6 +18,10 @@
     "google-brands": {
       "codepoint": 61697,
       "source": "./vectors/google-brands.svg"
+    },
+    "hands-helping-solid": {
+      "codepoint": 61699,
+      "source": "./vectors/hands-helping-solid.svg"
     },
     "twitter-brands": {
       "codepoint": 61696,
@@ -47,7 +51,7 @@
       "fonts": "../../plugin/static/icon-font",
       "preview": "../../build/icon-font/plugin"
     },
-    "preprocessor_path": "/wp-content/plugins/trevor/static/icon-font/",
+    "preprocessor_path": "../icon-font",
     "quiet": false,
     "templates": [
       "scss",

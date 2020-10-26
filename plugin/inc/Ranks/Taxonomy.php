@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Ranks;
 
+use TrevorWP\Main;
 use TrevorWP\Meta;
 use TrevorWP\Exception\Internal;
 
@@ -45,12 +46,84 @@ class Taxonomy {
 			tt.count DESC
 		", $taxonomy, $post_type, Meta\Post::KEY_VIEW_COUNT_SHORT, Meta\Post::KEY_VIEW_COUNT_LONG ), ARRAY_N );
 
-		$meta_key = Meta\Taxonomy::KEY_POPULARITY_RANK_PREFIX . $post_type;
+		$meta_key = self::get_meta_key( $post_type );
 
 		foreach ( $results as $rank => list( $term_id ) ) {
 			update_term_meta( $term_id, $meta_key, $rank + 1 );
 		}
 
+		# Clear the cache
+		wp_cache_delete( $post_type, Main::CACHE_GROUP_TAX_PREFIX . $taxonomy );
+
 		return count( $results );
+	}
+
+	/**
+	 * Returns the ranks of terms in a taxonomy for a post type.
+	 *
+	 * @param string $taxonomy
+	 * @param string $post_type
+	 *
+	 * @return array [$term->id => $rank, ...]
+	 */
+	public static function get_ranks( string $taxonomy, string $post_type ): array {
+		global $wpdb;
+
+		$ranks = wp_cache_get( $post_type, Main::CACHE_GROUP_TAX_PREFIX . $taxonomy, false, $found );
+
+		if ( ! $found || ! is_array( $ranks ) ) {
+			$q = $wpdb->prepare( "
+			SELECT tm.term_id term_id, tm.meta_value rank
+			FROM {$wpdb->termmeta} tm
+			INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = tm.term_id
+			WHERE
+				tm.meta_key = %s AND
+				tt.taxonomy = %s
+			", self::get_meta_key( $post_type ), $taxonomy );
+
+			$ranks = $wpdb->get_results( $q, OBJECT_K );
+			$ranks = array_map( function ( \stdClass $row ) {
+				return intval( $row->rank );
+			}, $ranks );
+
+			# Save to cache
+			wp_cache_set(
+				$post_type,
+				$ranks,
+				Main::CACHE_GROUP_TAX_PREFIX . $taxonomy,
+				60
+			);
+		}
+
+		return $ranks;
+	}
+
+	public static function get_object_terms_ordered( \WP_Post $post, string $taxonomy ): array {
+		$terms = get_the_terms( $post, $taxonomy );
+
+		if ( ! $terms || is_wp_error( $terms ) ) {
+			return [];
+		}
+
+		$ranks = self::get_ranks( $taxonomy, $post->post_type );
+
+		foreach ( $terms as $term ) {
+			$term->rank = $ranks[ $term->term_id ] ?? PHP_INT_MAX;
+		}
+
+		# Sort by rank
+		usort( $terms, function ( $a, $b ) {
+			return $a->rank <=> $b->rank;
+		} );
+
+		return $terms;
+	}
+
+	public static function get_meta_key( string $post_type ): string {
+		return Meta\Taxonomy::KEY_POPULARITY_RANK_PREFIX . $post_type;
+	}
+
+	protected static function _order_terms_by_rank( \WP_Term $term ): int {
+
 	}
 }

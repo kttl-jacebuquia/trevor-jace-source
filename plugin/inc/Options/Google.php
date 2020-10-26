@@ -9,6 +9,7 @@ class Google {
 	/*
 	 * Keys
 	 */
+	const KEY_ACCESS_KEY = self::KEY_PREFIX . 'access_token';
 	const KEY_GA_VIEW_ID = self::KEY_PREFIX . 'ga_view_id';
 	const KEY_GA_PAGE_VIEW_TO = self::KEY_PREFIX . 'ga_page_view_to';
 

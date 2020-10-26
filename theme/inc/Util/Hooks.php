@@ -63,11 +63,11 @@ class Hooks {
 		);
 
 		// Auto-complete test
-		wp_enqueue_style('jquery-ui-theme', 'https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css');
-		wp_enqueue_script('jquery-ui-autocomplete');
+		wp_enqueue_style( 'jquery-ui-theme', 'https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css' );
+		wp_enqueue_script( 'jquery-ui-autocomplete' );
 
-		wp_enqueue_script('algoliasearch', 'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js');
-		wp_enqueue_script('autocomplete.js', 'https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js');
+		wp_enqueue_script( 'algoliasearch', 'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js' );
+		wp_enqueue_script( 'autocomplete.js', 'https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js' );
 
 		# Frontend style
 		if ( TREVOR_ON_DEV ) {
@@ -132,6 +132,11 @@ class Hooks {
 	public static function after_setup_theme(): void {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
+
+		register_nav_menus( [
+				'header-organization' => '[Header] Organization',
+				'header-support'      => '[Header] Support',
+		] );
 	}
 
 	/**

@@ -1,8 +1,11 @@
 <?php namespace TrevorWP\Util;
 
+use \Solarium\QueryType\Update\Query\Document\Document as SolariumDocument;
 use TrevorWP\Admin;
 use TrevorWP\Jobs\Jobs;
 use TrevorWP\Ranks;
+use TrevorWP\CPT;
+use TrevorWP\Options;
 
 class Hooks {
 	/**
@@ -80,12 +83,73 @@ class Hooks {
 
 		add_action( 'wp_ajax_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
 		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
+		add_action( 'wp_ajax_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
+		add_action( 'wp_ajax_nopriv_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
 
 		# Custom Hooks
 		add_action( 'trevor_post_ranks_updated', [ self::class, 'trevor_post_ranks_updated' ], 10, 1 );
+
+		# Post Links
+		add_filter( 'post_type_link', [ self::class, 'post_type_link' ], PHP_INT_MAX, 2 );
+		add_filter( 'post_type_archive_link', [ self::class, 'post_type_archive_link' ], PHP_INT_MAX, 2 );
+
+		# Solr Index
+		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
 	}
 
-	public static function autocomplete_test() {
+	public static function highlight_search(): void {
+		$term = @$_GET['term'];
+
+
+		$client = \SolrPower_Api::get_instance()->get_solr();
+
+		// get a select query instance
+		$query = $client->createSelect();
+		$query->setQuery( $aa = '"' . addslashes( $term ) . '"~2' );
+		$query->setFields( [ 'ID', 'post_title' ] );
+
+		// get highlighting component and apply settings
+		$hl = $query->getHighlighting();
+		$hl->setFields( [ 'post_title_t', 'post_content' ] );
+		$hl->setSimplePrefix( '<b>' );
+		$hl->setSimplePostfix( '</b>' );
+
+		// this executes the query and returns the result
+		$resultset    = $client->select( $query );
+		$highlighting = $resultset->getHighlighting();
+
+		$results = [];
+		/** @var \Solarium\QueryType\Select\Result\Document $document */
+		foreach ( $resultset->getDocuments() as $document ) {
+			$fields = $document->getFields();
+			$id     = absint( $fields['ID'] );
+			if ( ! $id ) {
+				continue;
+			}
+
+			if ( $highlight = $highlighting->getResult( $id ) ) {
+				$highlight = $highlight->getFields();
+				$highlight = array_map( 'reset', $highlight );
+			} else {
+				$highlight = [];
+			}
+
+			$results[] = [
+					'url'     => get_permalink( $id ),
+					'title'   => empty( $highlight['post_title_t'] ) ? $fields['post_title'] : $highlight['post_title_t'],
+					'content' => $highlight['post_content'] ?? '',
+			];
+		}
+
+		$response = [
+				'error'   => false,
+				'results' => $results
+		];
+
+		wp_send_json( $response );
+	}
+
+	public static function autocomplete_test(): void {
 		$term = @$_GET['term'];
 
 		$client = \SolrPower_Api::get_instance()->get_solr();
@@ -97,15 +161,15 @@ class Hooks {
 		// add spellcheck settings
 		$spellcheck = $query->getSpellcheck();
 		$spellcheck->setQuery( $term );
-		$spellcheck->setCount( 10 );
+		$spellcheck->setCount( 20 );
 		$spellcheck->setBuild( true );
 		$spellcheck->setCollate( true );
 		$spellcheck->setExtendedResults( true );
 		$spellcheck->setCollateExtendedResults( true );
-		$spellcheck->setMaxCollationEvaluations( 20 );
-		$spellcheck->setMaxCollations( 20 );
-		$spellcheck->setMaxCollationTries( 5 );
-//		$spellcheck->getOnlyMorePopular(true);
+		$spellcheck->setMaxCollationEvaluations( 100 );
+		$spellcheck->setMaxCollations( 5 );
+		$spellcheck->setMaxCollationTries( 100 );
+		$spellcheck->getOnlyMorePopular( true );
 
 		// this executes the query and returns the result
 		$resultset        = $client->select( $query );
@@ -145,6 +209,8 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
+		# Post Types
+		CPT\Support::init();
 	}
 
 	/**
@@ -228,25 +294,31 @@ class Hooks {
 			return;
 		}
 
-		$env = Tools::get_env();
+		$env  = Tools::get_env();
+		$wait = absint( get_option( Options\Google::KEY_GA_PAGE_VIEW_TO, Options\Google::DEFAULTS[ Options\Google::KEY_GA_PAGE_VIEW_TO ] ) ) * 1000;
 
 		$event_label = implode( '#', [ $post->ID, $post->post_name ] );
 		$args        = [
 				'event'          => 'post_event',
 				'eventCategory'  => "view_post_{$env}",
-				'eventAction'    => 'view_post',
+				'eventAction'    => "view_{$post->post_type}",
 				'eventLabel'     => $event_label,
 				'nonInteraction' => true,
 		];
 		?>
 		<script>
-			window.dataLayer && window.dataLayer.push(<?= json_encode( $args )?>);
+			jQuery(function () {
+				setTimeout(function () {
+					window.dataLayer && window.dataLayer.push(<?= json_encode( $args )?>);
+				}, <?=$wait?>);
+			});
 		</script>
 		<?php
 	}
 
 	/**
 	 * @param string $post_type
+	 *
 	 * @see Ranks\Post::update_ranks()
 	 */
 	public static function trevor_post_ranks_updated( string $post_type ): void {
@@ -257,5 +329,56 @@ class Hooks {
 				break;
 		}
 
+	}
+
+	/**
+	 * Filters the permalink for a post of a custom post type.
+	 *
+	 * @param string $post_link The post's permalink.
+	 * @param \WP_Post $post The post in question.
+	 *
+	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/post_type_link/
+	 */
+
+	public static function post_type_link( string $post_link, \WP_Post $post ): string {
+		switch ( $post->post_type ) {
+			case CPT\Support::POST_TYPE:
+				return home_url( "support/{$post->ID}-{$post->post_name}" );
+			default:
+				return $post_link;
+		}
+	}
+
+	/**
+	 * Filters the post type archive permalink.
+	 *
+	 * @param string $link
+	 * @param string $post_type
+	 *
+	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/post_type_archive_link/
+	 */
+	public static function post_type_archive_link( string $link, string $post_type ): string {
+		switch ( $post_type ) {
+			case CPT\Support::POST_TYPE:
+				return home_url( CPT\Support::PERMALINK_BASE . "/" );
+			default:
+				return $link;
+		}
+	}
+
+	/**
+	 * @param SolariumDocument $doc Generated Solr document.
+	 * @param \WP_Post $post_info Original post object.
+	 *
+	 * @see \SolrPower_Sync::build_document()
+	 */
+	public static function solr_build_document( SolariumDocument $doc, \WP_Post $post_info ): SolariumDocument {
+		$doc->addField( 'post_title_t', $post_info->post_title );
+
+		return $doc;
 	}
 }

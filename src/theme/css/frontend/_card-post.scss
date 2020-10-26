@@ -1,0 +1,43 @@
+.card-post {
+  .post-category {
+	@apply inline-block;
+	@apply mt-2 mb-1;
+	@apply font-light uppercase;
+  }
+
+  .post-title {
+	@apply my-2;
+	@apply font-bold;
+  }
+
+  .link-read-more {
+	@apply inline-block;
+	@apply text-blue-dark underline uppercase;
+	@apply mb-3;
+  }
+
+  .tags-box {
+	overflow-y: hidden;
+	height: 34px;
+	@apply flex flex-row flex-wrap;
+
+	&.show-all {
+	  height: auto !important;
+
+	  .ellipsis {
+		font-weight: bold;
+	  }
+	}
+
+	.tag-box {
+	  @apply inline-block;
+	  @apply mr-2 mb-2;
+	}
+
+	.ellipsis {
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	}
+  }
+}

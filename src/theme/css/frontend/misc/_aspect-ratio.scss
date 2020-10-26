@@ -1,0 +1,29 @@
+[data-aspectRatio="1:1"] {
+  --aspect-ratio: 1;
+}
+
+[data-aspectRatio="4:3"] {
+  --aspect-ratio: .75;
+}
+
+[data-aspectRatio] {
+  position: relative;
+
+  & > :first-child {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+  }
+
+  & > img {
+	height: auto;
+  }
+
+  &::before {
+	content: "";
+	display: block;
+	padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+}

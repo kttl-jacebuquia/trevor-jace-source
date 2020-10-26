@@ -30,6 +30,9 @@ module.exports = {
 			// current: 'currentColor',
 
 			black: '#000',
+			gray: {
+				default: '#ccc'
+			},
 			white: '#fff',
 			blue: {
 				light: '#D7F0FD',
@@ -37,6 +40,13 @@ module.exports = {
 				dark: '#3D94E2',
 			}
 		},
-		extend: {},
+		extend: {
+			container: {
+				padding: {
+					default: '1rem',
+					md: '2rem',
+				},
+			},
+		},
 	}
 }

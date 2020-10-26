@@ -1,9 +1,17 @@
 <?php get_header(); ?>
 
-<main id="site-content" class="container" role="main">
+<main id="site-content" role="main">
 
-	<div class="my-12">
-		<input type="text" placeholder="Auto Complete Test" class="border p-2 w-full" id="input-search">
+	<div class="container mx-auto">
+		<div class="my-12 w-1/2 mx-auto">
+			<input type="text" placeholder="Auto Complete Test" class="border p-2 w-full" id="input-search">
+		</div>
+	</div>
+
+	<div class="container mx-auto">
+		<div class="my-12 w-1/2 mx-auto">
+			<input type="text" placeholder="Highlight Test" class="border p-2 w-full" id="input-search-2">
+		</div>
 	</div>
 
 <!--	<div class="my-12">-->

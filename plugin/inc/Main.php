@@ -21,7 +21,7 @@ class Main {
 	/*
 	 * Post Types
 	 */
-	const POST_TYPE_PREFIX = 'trevor__';
+	const POST_TYPE_PREFIX = 'trevor_';
 
 	/*
 	 * Meta Keys
@@ -32,6 +32,13 @@ class Main {
 	 * Admin Menu Slugs
 	 */
 	const ADMIN_MENU_SLUG_PREFIX = 'trevor-';
+
+	/*
+	 * Cache Keys
+	 */
+	const CACHE_GROUP_PREFIX = 'trevor:';
+	const CACHE_GROUP_MAIN = self::CACHE_GROUP_PREFIX . 'main';
+	const CACHE_GROUP_TAX_PREFIX = self::CACHE_GROUP_PREFIX . 'tax:';
 
 	/**
 	 * Main constructor.
