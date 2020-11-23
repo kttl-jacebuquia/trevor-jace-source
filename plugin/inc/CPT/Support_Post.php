@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\CPT;
 
+use WP_Post;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Log;
 
@@ -29,6 +30,7 @@ class Support_Post {
 		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
 		add_filter( 'post_type_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
 		add_filter( 'post_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
+		add_filter( 'get_canonical_url', [ self::class, 'get_canonical_url' ], PHP_INT_MAX >> 1, 2 );
 
 		if ( is_admin() ) {
 			add_action( 'admin_menu', [ self::class, 'admin_menu' ], PHP_INT_MAX, 0 );
@@ -208,23 +210,45 @@ class Support_Post {
 	 * Filters the permalink for a post of a custom post type.
 	 *
 	 * @param string $post_link The post's permalink.
-	 * @param \WP_Post $post The post in question.
+	 * @param WP_Post $post The post in question.
 	 *
 	 * @return string
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/post_type_link/
 	 * @see Support_Post::init()
 	 */
-	public static function post_type_link( string $post_link, \WP_Post $post ): string {
+	public static function post_type_link( string $post_link, WP_Post $post ): string {
 		switch ( $post->post_type ) {
 			case static::POST_TYPE:
 			case Post::POST_TYPE:
 				$is_support = Is::support();
 				$base       = $is_support ? static::PERMALINK_BASE : Post::PERMALINK_BASE;
 
-				return home_url( "{$base}/{$post->ID}-{$post->post_name}" );
+				return trailingslashit( home_url( "{$base}/{$post->ID}-{$post->post_name}" ) );
 			default:
 				return $post_link;
+		}
+	}
+
+	/**
+	 * Filters the canonical URL for a post.
+	 *
+	 * @param string $canonical_url
+	 * @param WP_Post $post
+	 *
+	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/get_canonical_url/
+	 * @see Support_Post::init()
+	 */
+	public static function get_canonical_url( string $canonical_url, WP_Post $post ): string {
+		switch ( $post->post_type ) {
+			case static::POST_TYPE:
+				return trailingslashit( home_url( static::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
+			case  Post::PERMALINK_BASE:
+				return trailingslashit( home_url( Post::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
+			default:
+				return $canonical_url;
 		}
 	}
 }
