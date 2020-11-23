@@ -1,8 +1,4 @@
 module.exports = {
-	future: {
-		purgeLayersByDefault: true,
-		removeDeprecatedGapUtilities: true,
-	},
 	purge: {
 		preserveHtmlElements: true,
 		content: [
@@ -31,22 +27,26 @@ module.exports = {
 
 			black: '#000',
 			gray: {
-				default: '#ccc'
+				DEFAULT: '#ccc'
 			},
 			white: '#fff',
 			blue: {
 				light: '#D7F0FD',
-				default: '#7ED1FF',
+				DEFAULT: '#7ED1FF',
 				dark: '#3D94E2',
 			}
 		},
 		extend: {
 			container: {
 				padding: {
-					default: '1rem',
+					DEFAULT: '1rem',
 					md: '2rem',
 				},
 			},
 		},
-	}
+	},
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms'),
+	],
 }
