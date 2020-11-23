@@ -5,9 +5,9 @@ use \TrevorWP\Ranks;
 $has_thumbnail = has_post_thumbnail();
 
 // TODO: Will be there more than one categories?
-$categories = Ranks\Taxonomy::get_object_terms_ordered( get_post(), TrevorWP\CPT\Support::TAXONOMY_CATEGORY );
+$categories = Ranks\Taxonomy::get_object_terms_ordered( get_post(), TrevorWP\CPT\Support_Resource::TAXONOMY_CATEGORY );
 $first_cat  = empty( $categories ) ? null : reset( $categories );
-$tags       = Ranks\Taxonomy::get_object_terms_ordered( get_post(), TrevorWP\CPT\Support::TAXONOMY_TAG );
+$tags       = Ranks\Taxonomy::get_object_terms_ordered( get_post(), TrevorWP\CPT\Support_Resource::TAXONOMY_TAG );
 ?>
 <article class="card-post">
 	<?php if ( $first_cat ) { ?>

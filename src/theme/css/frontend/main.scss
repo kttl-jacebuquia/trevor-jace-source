@@ -14,6 +14,7 @@ body {
 @import "./what-input";
 
 // Our Components
+@import "./root";
 @import "./misc/index";
 @import "./header";
 @import "./site-content";
@@ -25,15 +26,16 @@ body {
 
 .hl-test-item {
   b {
-	background: yellow;
+	background: rgba(#FFFF00, .5);
   }
-
 
   .title {
 	font-weight: bold;
+	font-size: 12px;
   }
 
   .content {
 	font-weight: lighter;
+	font-size: 9px;
   }
 }

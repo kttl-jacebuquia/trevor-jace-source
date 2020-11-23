@@ -4,9 +4,10 @@ import 'what-input';
 import $ from 'jquery';
 
 import * as features from './features';
+import * as vendors from './vendors';
 
 
-window.trevorWP = {features};
+window.trevorWP = {features, vendors};
 
 features.tagBoxEllipsis($('.card-post'));
 
@@ -19,7 +20,7 @@ jQuery(function ($) {
 
 			$.post(url.toString(), (resp) => {
 				console.log(term, resp);
-				response(resp.collations.map(({query}) => query));
+				response(((resp.correctlySpelled || resp.collations.length === 0) ? [term] : []).concat(resp.collations.map(({query}) => query)));
 			});
 		}
 	});

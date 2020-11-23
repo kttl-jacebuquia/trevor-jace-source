@@ -9,16 +9,12 @@
 					more.</p>
 
 				<div class="my-10">
-					<?= '<form role="search" ' . $aria_label . 'method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
+					<?= '<form role="search" method="get" class="search-form" action="' . esc_url( get_post_type_archive_link( \TrevorWP\CPT\Support_Resource::POST_TYPE ) . 'search' ) . '">
 				<label>
 					<span class="sr-only">Search for:</span>
-					<input type="search" class="search-field p-4 w-full" placeholder="What are you looking for?" value="' . get_search_query() . '" name="s" />
+					<input type="search" class="search-field p-4 w-full" placeholder="What are you looking for?" value="' . get_search_query( true ) . '" name="s" />
 				</label>
-				<input type="submit" class="search-submit" value="Search" />
 			</form>'; ?>
-					<!--					<input type="search"-->
-					<!--						   placeholder="What are you looking for?"-->
-					<!--						   class="p-4 w-full">-->
 				</div>
 
 				<div>

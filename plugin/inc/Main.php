@@ -34,6 +34,11 @@ class Main {
 	const ADMIN_MENU_SLUG_PREFIX = 'trevor-';
 
 	/*
+	 * Query Vars
+	 */
+	const QV_PREFIX = 'trevor__';
+
+	/*
 	 * Cache Keys
 	 */
 	const CACHE_GROUP_PREFIX = 'trevor:';

@@ -1,0 +1,15 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply flex flex-col;
+
+  > main {
+	flex: 1 0 auto;
+  }
+
+  > footer {
+	@apply flex-shrink-0;
+  }
+}

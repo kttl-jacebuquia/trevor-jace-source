@@ -122,6 +122,7 @@
   @apply flex flex-row;
   @apply mx-auto mb-4;
 
+  // Logo
   .logo-wrap {
 	@apply flex-1;
 
@@ -129,10 +130,19 @@
 	  @apply text-black text-3xl font-bold;
 	}
   }
+
+  // Menu
+  /* @see: .main-menu-container */
+
+  // Search Button
+  .search-button {
+
+  }
 }
 
 // Main Menu
 .main-menu-container {
+
   .submenu-icon {
 	@apply hidden;
   }

@@ -55,7 +55,7 @@ $is_support = Is::support();
 	<div class="top-bar-inner">
 		<div class="container top-bar-ceil">
 			<ul class="switcher">
-				<li><a href="<?= esc_attr( get_post_type_archive_link( \TrevorWP\CPT\Support::POST_TYPE ) ) ?>"
+				<li><a href="<?= esc_attr( get_post_type_archive_link( \TrevorWP\CPT\Support_Resource::POST_TYPE ) ) ?>"
 					   class="<?= $is_support ? 'active' : '' ?>">Support Center</a></li>
 				<li><a href="<?= esc_attr( get_home_url() ) ?>"
 					   class="<?= $is_support ? '' : 'active' ?>">The Organization</a></li>
@@ -78,6 +78,10 @@ $is_support = Is::support();
 					'container_class' => 'main-menu-container',
 					'theme_location'  => $is_support ? 'header-support' : 'header-organization'
 			] ); ?>
+
+			<button class="search-button w-10 h-10 self-end ml-5 mb-2 text-white rounded-full bg-blue-dark hidden md:block">
+				<i class="trevor-ti-search-solid"></i>
+			</button>
 		</div>
 		<?php if ( $is_support ) { ?>
 			<div class="top-bar-floor">

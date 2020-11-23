@@ -12,15 +12,25 @@ class Is {
 	 * @return bool
 	 */
 	public static function support(): bool {
-		if ( is_post_type_archive( CPT\Support::POST_TYPE ) ) {
+		global $wp_query;
+
+		if ( is_post_type_archive( CPT\Support_Resource::POST_TYPE ) ) {
 			return true;
 		}
 
-		if ( is_singular( CPT\Support::POST_TYPE ) ) {
+		if ( is_singular( CPT\Support_Resource::POST_TYPE ) ) {
 			return true;
 		}
 
-		if ( is_tax( CPT\Support::TAXONOMY_CATEGORY ) || is_tax( CPT\Support::TAXONOMY_TAG ) ) {
+		if ( is_singular( CPT\Support_Post::POST_TYPE ) ) {
+			return $wp_query->get( CPT\Support_Post::QV_BLOG );
+		}
+
+		if ( is_singular( CPT\Post::POST_TYPE ) && $wp_query->get( CPT\Support_Post::QV_BLOG ) ) {
+			return true;
+		}
+
+		if ( is_tax( CPT\Support_Resource::TAXONOMY_CATEGORY ) || is_tax( CPT\Support_Resource::TAXONOMY_TAG ) ) {
 			return true;
 		}
 

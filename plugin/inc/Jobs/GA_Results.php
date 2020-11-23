@@ -1,15 +1,28 @@
 <?php namespace TrevorWP\Jobs;
 
+use TrevorWP\CPT\Support_Resource;
 use TrevorWP\Exception\Internal;
 use TrevorWP\Meta\Post;
 use TrevorWP\Options;
 use TrevorWP\Util\Google_API;
 use TrevorWP\Util\Log;
+use TrevorWP\Util\Tools;
 
 class GA_Results {
 	const POST_STATS_REPORT_ITEM_COUNT = 1;
 	const POST_STATS_REPORT_NEXT_PAGE_COOLING = 20; // seconds; API is restricted to a maximum of 10 requests per second per user.
+	const POST_TYPES = [
+		'post',
+		Support_Resource::POST_TYPE
+	];
 
+	/**
+	 * @return false
+	 * @throws Internal
+	 * @throws \Google_Exception
+	 *
+	 * @see Jobs::$RECURRING[Jobs::NAME_UPDATE_POST_STATS]
+	 */
 	public static function update_post_stats() {
 		$has_token = Google_API::has_token();
 
@@ -23,11 +36,13 @@ class GA_Results {
 	}
 
 	/**
-	 * @param null $page_token
+	 * @param string|null $page_token
 	 *
 	 * @return int
 	 * @throws Internal
 	 * @throws \Google_Exception
+	 *
+	 * @see Jobs::$SINGLE[Jobs::NAME_PROCESS_POST_STATS_PAGE]
 	 */
 	public static function get_the_post_stats_report_page( $page_token = null ): int {
 		$view_id = get_option( Options\Google::KEY_GA_VIEW_ID );
@@ -37,6 +52,7 @@ class GA_Results {
 			return 0;
 		}
 
+		$env    = Tools::get_env();
 		$client = Google_API::get_client( true );
 
 		// Create an authorized analytics service object.
@@ -74,7 +90,13 @@ class GA_Results {
 		$filter_cat = new \Google_Service_AnalyticsReporting_DimensionFilter();
 		$filter_cat->setDimensionName( 'ga:eventCategory' );
 		$filter_cat->setOperator( 'EXACT' );
-		$filter_cat->setExpressions( 'view_post_dev' );
+		$filter_cat->setExpressions( "view_post_{$env}" );
+
+		// Event Action (Post Types)
+		$filter_post_types = new \Google_Service_AnalyticsReporting_DimensionFilter();
+		$filter_post_types->setDimensionName( 'ga:eventAction' );
+		$filter_post_types->setOperator( 'IN_LIST' );
+		$filter_cat->setExpressions( self::POST_TYPES );
 
 		// Filter out "(not set)" values
 		$filter_not_set = new \Google_Service_AnalyticsReporting_DimensionFilter();
@@ -120,16 +142,10 @@ class GA_Results {
 
 	/**
 	 * @param \Google_Service_AnalyticsReporting_Report $report
-	 * @param string $post_type
-	 * @param string $post_status
 	 *
 	 * @return int Processed post count.
 	 */
-	protected static function _process_the_post_stats_report(
-		\Google_Service_AnalyticsReporting_Report $report,
-		string $post_type = 'post',
-		string $post_status = 'publish'
-	): int {
+	protected static function _process_the_post_stats_report( \Google_Service_AnalyticsReporting_Report $report ): int {
 		$processed = 0;
 		$rows      = $report->getData()->getRows();
 		for ( $rowIndex = 0; $rowIndex < count( $rows ); $rowIndex ++ ) {
@@ -144,35 +160,29 @@ class GA_Results {
 				continue;
 			}
 
-			$id        = (int) $parts[0];
-			$post_name = implode( '#', array_slice( $parts, 1 ) ); // fallback
+			# Get ID
+			$id = absint( $parts[0] );
+			if ( $id == 0 ) {
+				Log::notice( 'Post ID cannot be 0.', [ 'raw' => $id__post_name ] );
+				continue;
+			}
 
-			# Try to match with slug first
-			$get_posts = get_posts( [
-				'name'        => $post_name,
-				'post_type'   => $post_type,
-				'post_status' => $post_status,
-				'numberposts' => 1
-			] );
+			# Get post
+			$post = get_post( $id );
+			if ( ! $post ) {
+				Log::notice( 'No posts matched with the ID.', compact( 'id__post_name' ) );
+				continue;
+			}
 
-			# Nothing matched with the slug
-			if ( empty( $get_posts ) ) {
-				# Try to match with ID
-				$post = get_post( $id );
-				if ( $post && $post->post_type == $post_type && $post->post_status == $post_status ) {
-					Log::notice( 'Post matched with ID instead of slug.', compact( 'post_name', 'id' ) );
-				} else {
-					Log::notice( 'Could not found post the post with slug or id.', compact( 'post_name', 'id' ) );
-					continue;
-				}
-			} else {
-				# Matched post with the slug
-				$post = $get_posts[0];
+			# Check post type
+			if ( ! in_array( $post->post_type, self::POST_TYPES ) ) {
+				continue;
+			}
 
-				# Compare its ID
-				if ( $id != $post->ID ) {
-					Log::warning( 'ID & slug not matched on found post.', compact( 'id', 'post_name' ) );
-				}
+			# Compare slug
+			$post_name = implode( '#', array_slice( $parts, 1 ) );
+			if ( $post->post_name != $post_name ) {
+				Log::notice( "GA event label matched with ID but slugs are different.", compact( 'post', 'id__post_name' ) );
 			}
 
 			/** @var \Google_Service_AnalyticsReporting_DateRangeValues[] $metrics */
@@ -194,11 +204,13 @@ class GA_Results {
 			);
 		} else {
 			// Report finished, schedule the job for post rank calculation
-			wp_schedule_single_event(
-				time(),
-				Jobs::NAME_UPDATE_POST_RANKS,
-				[ $post_type ]
-			);
+			foreach ( self::POST_TYPES as $post_type ) {
+				wp_schedule_single_event(
+					time(),
+					Jobs::NAME_UPDATE_POST_RANKS,
+					[ $post_type ]
+				);
+			}
 		}
 
 		return $processed;
