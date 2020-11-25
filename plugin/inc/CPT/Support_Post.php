@@ -152,6 +152,9 @@ class Support_Post {
 	 * @param string $requested_url
 	 *
 	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/redirect_canonical/
+	 * @see Support_Post::init()
 	 */
 	public static function redirect_canonical( string $redirect_url, string $requested_url ): string {
 		if ( self::$_x_blog_url ) {
@@ -161,6 +164,14 @@ class Support_Post {
 		return $redirect_url;
 	}
 
+	/**
+	 * Fires after the query variable object is created, but before the actual query is run.
+	 *
+	 * @param \WP_Query $query
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
+	 * @see Support_Post::init()
+	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
 		if ( ! $query->is_main_query() ) {
 			return;
@@ -196,9 +207,9 @@ class Support_Post {
 	 * @param array $vars
 	 *
 	 * @return array
-	 * @see Support_Post::init()
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
+	 * @see Support_Post::init()
 	 */
 	public static function query_vars( array $vars ): array {
 		$vars[] = self::QV_BLOG;
@@ -221,8 +232,13 @@ class Support_Post {
 		switch ( $post->post_type ) {
 			case static::POST_TYPE:
 			case Post::POST_TYPE:
-				$is_support = Is::support();
-				$base       = $is_support ? static::PERMALINK_BASE : Post::PERMALINK_BASE;
+				if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX /* TODO: We need a qVar flag to force it */ ) ) {
+					$is_support = $post->post_type === static::POST_TYPE;
+				} else {
+					$is_support = Is::support();
+				}
+
+				$base = $is_support ? static::PERMALINK_BASE : Post::PERMALINK_BASE;
 
 				return trailingslashit( home_url( "{$base}/{$post->ID}-{$post->post_name}" ) );
 			default:
