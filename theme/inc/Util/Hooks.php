@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\Util;
 
+use TrevorWP\CPT;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Util\StaticFiles;
 
@@ -39,6 +40,9 @@ class Hooks {
 
 		# Excerpt Length
 		add_filter( 'excerpt_length', [ self::class, 'excerpt_length' ], 10, 1 );
+
+		# Pre get posts
+		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
 	}
 
 	/**
@@ -138,6 +142,7 @@ class Hooks {
 	public static function after_setup_theme(): void {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
+		add_theme_support( 'html5' );
 
 		register_nav_menus( [
 				'header-organization' => '[Header] Organization',
@@ -155,6 +160,7 @@ class Hooks {
 	public static function customize_register( \WP_Customize_Manager $manager ): void {
 		# Panels
 		new Customizer\External_Scripts( $manager );
+		new Customizer\Resources_Center( $manager );
 	}
 
 	/**
@@ -261,7 +267,7 @@ class Hooks {
 	public static function nav_menu_item_title( string $title, \WP_Post $item, \stdClass $args, int $depth ): string {
 		$title = "<span class='title-wrap'>{$title}</span>";
 		if ( $depth == 0 ) {
-			$title .= '<span class="submenu-icon trevor-ti-angle-down-solid"></span>';
+			$title .= '<span class="submenu-icon trevor-ti-caret-down"></span>';
 		} elseif ( $depth == 1 ) {
 			$subtitle = get_post_meta( $item->ID, Meta::KEY_MENU_ITEM_SUBTITLE, true );
 
@@ -310,5 +316,26 @@ class Hooks {
 	 */
 	public static function excerpt_length( int $length ): int {
 		return $length;
+	}
+
+	/**
+	 * Fires after the query variable object is created, but before the actual query is run.
+	 *
+	 * @param \WP_Query $query
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
+	 */
+	public static function pre_get_posts( \WP_Query $query ): void {
+		$template = false;
+
+		if ( ! empty( $query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
+			$template = locate_template( 'custom/resource-center-lp.php', false );
+		}
+
+		if ( ! empty( $template ) ) {
+			_wp_admin_bar_init(); // fix admin bar
+			load_template( $template ); // load template
+			die();
+		}
 	}
 }

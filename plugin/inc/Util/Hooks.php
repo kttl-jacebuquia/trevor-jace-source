@@ -90,9 +90,6 @@ class Hooks {
 		# Custom Hooks
 		add_action( 'trevor_post_ranks_updated', [ self::class, 'trevor_post_ranks_updated' ], 10, 1 );
 
-		# Post Links
-		add_filter( 'post_type_archive_link', [ self::class, 'post_type_archive_link' ], PHP_INT_MAX, 2 );
-
 		# Solr Index
 		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
 	}
@@ -216,9 +213,8 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		# Post Types
-		CPT\Support_Resource::init();
-		CPT\Support_Post::init();
+		# Resource Center Post Types
+		CPT\RC\RC_Object::init_all();
 	}
 
 	/**
@@ -328,13 +324,11 @@ class Hooks {
 	 * @see Ranks\Post::update_ranks()
 	 */
 	public static function trevor_post_ranks_updated( string $post_type ): void {
-		$rules = [
-				'post'                          => [ 'post_tag', 'category' ],
-				CPT\Support_Resource::POST_TYPE => [
-						CPT\Support_Resource::TAXONOMY_CATEGORY,
-						CPT\Support_Resource::TAXONOMY_TAG
-				]
-		];
+		$rules = [ 'post' => [ 'post_tag', 'category' ] ]
+				 + array_fill_keys( CPT\RC\RC_Object::$PUBLIC_POST_TYPES, [
+						CPT\RC\RC_Object::TAXONOMY_CATEGORY,
+						CPT\RC\RC_Object::TAXONOMY_TAG
+				] );
 
 		if ( ! array_key_exists( $post_type, $rules ) ) {
 			return;
@@ -342,25 +336,6 @@ class Hooks {
 
 		foreach ( $rules[ $post_type ] as $idx => $tax ) {
 			wp_schedule_single_event( time() + ( $idx * 10 ), Jobs::NAME_UPDATE_TAXONOMY_RANKS, [ $tax, $post_type ] );
-		}
-	}
-
-	/**
-	 * Filters the post type archive permalink.
-	 *
-	 * @param string $link
-	 * @param string $post_type
-	 *
-	 * @return string
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/post_type_archive_link/
-	 */
-	public static function post_type_archive_link( string $link, string $post_type ): string {
-		switch ( $post_type ) {
-			case CPT\Support_Resource::POST_TYPE:
-				return home_url( CPT\Support_Resource::PERMALINK_BASE . "/" );
-			default:
-				return $link;
 		}
 	}
 
