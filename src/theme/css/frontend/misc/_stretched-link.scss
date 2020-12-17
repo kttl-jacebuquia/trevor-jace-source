@@ -1,0 +1,16 @@
+// Stretched link
+// https://github.com/twbs/bootstrap/blob/27824ec5860dd0d954c13ce3e13ea02eccfc4e6c/scss/helpers/_stretched-link.scss
+$stretched-link-pseudo-element: after !default;
+$stretched-link-z-index: 1 !default;
+
+.stretched-link {
+  &::#{$stretched-link-pseudo-element} {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: $stretched-link-z-index;
+	content: "";
+  }
+}

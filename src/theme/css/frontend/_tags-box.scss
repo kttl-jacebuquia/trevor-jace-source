@@ -1,7 +1,7 @@
 .tag-box {
-  @apply text-blue-dark text-center;
-  @apply px-2 py-1;
-  @apply bg-blue-light;
-  @apply border border-blue-dark;
+  @apply text-indigo font-medium text-px14 leading-px18 tracking-px05;
+  @apply px-5 py-2;
+  @apply bg-violet-light;
   @apply cursor-pointer;
+  @apply rounded-full;
 }

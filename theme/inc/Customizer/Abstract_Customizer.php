@@ -1,10 +1,12 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
-
 /**
  * Abstract Customizer
  */
 abstract class Abstract_Customizer {
+	/* Prefixes */
+	const ID_PREFIX = 'trevor_';
+
 	/**
 	 * @var \WP_Customize_Manager
 	 */
@@ -12,6 +14,7 @@ abstract class Abstract_Customizer {
 
 	/**
 	 * @var array
+	 * @deprecated
 	 */
 	const ALL_SETTINGS = [];
 
@@ -57,7 +60,11 @@ abstract class Abstract_Customizer {
 	 * Registers settings.
 	 */
 	protected function _register_settings(): void {
-		foreach ( static::ALL_SETTINGS as $key ) {
+		foreach ( ( new \ReflectionClass( $this ) )->getConstants() as $constant => $key ) {
+			if ( strpos( $constant, 'SETTING_' ) !== 0 ) {
+				continue;
+			}
+
 			$this->_manager->add_setting( $key, [ 'default' => static::get_default( $key ) ] );
 		}
 	}

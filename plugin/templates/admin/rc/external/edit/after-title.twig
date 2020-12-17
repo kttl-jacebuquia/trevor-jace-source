@@ -1,0 +1,33 @@
+<table class="form-table" role="presentation">
+	<tbody>
+	<tr>
+		<td colspan="2">
+			<strong><label for="trevor-url">Url</label></strong>
+			<input id="_input_url"
+				   class="large-text"
+				   name="_input_url"
+				   type="text"
+				   value="{{ data.url|esc_url }}"
+				   placeholder="https://"
+				   autocomplete="off"
+				   required>
+			<p class="description">External url.</p>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<script>
+	jQuery(function ($) {
+		{# Add HTML5 required attr to title #}
+		$('#title').attr('required', true);
+
+		{# Validate title & definition before submit #}
+		$('#post').on('submit', function () {
+			if (!/\w+/.test(String($('#_input_url').val()))) {
+				TrevorWP.utils.notices.addError('Please the URL.');
+				return false;
+			}
+		});
+	});
+</script>

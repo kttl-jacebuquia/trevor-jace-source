@@ -4,6 +4,7 @@ use \Solarium\QueryType\Update\Query\Document\Document as SolariumDocument;
 use TrevorWP\Admin;
 use TrevorWP\Jobs\GA_Results;
 use TrevorWP\Jobs\Jobs;
+use TrevorWP\Meta\Post;
 use TrevorWP\Ranks;
 use TrevorWP\CPT;
 use TrevorWP\Options;
@@ -92,6 +93,15 @@ class Hooks {
 
 		# Solr Index
 		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
+
+		# Resource Center
+		CPT\RC\RC_Object::construct();
+
+		# Post Meta
+		Post::register_all();
+
+		# Admin Blocks Data
+		add_filter( 'trevor_editor_blocks_data', [ self::class, 'trevor_editor_blocks_data' ], 10, 1 );
 	}
 
 	public static function highlight_search(): void {
@@ -213,8 +223,10 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		# Resource Center Post Types
-		CPT\RC\RC_Object::init_all();
+		# Disable solr on rest api queries
+		foreach ( array_merge( CPT\RC\RC_Object::$ALL_POST_TYPES, [ 'post', 'page' ] ) as $post_type ) {
+			add_filter( "rest_{$post_type}_query", [ self::class, 'rest_post_type_query' ], 1, 1 );
+		}
 	}
 
 	/**
@@ -251,17 +263,25 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/admin_footer/
 	 */
 	static public function admin_footer(): void {
+		$screen = get_current_screen();
+
 		# Print buffer
 		foreach ( self::$admin_footer_buffer as $line ) {
 			echo $line;
 		}
 
-		foreach ( self::$admin_notices as $idx => $notice ) {
-			?>
+		foreach ( self::$admin_notices as $idx => $notice ) { ?>
 			<script>
 				jQuery(function () {
 					TrevorWP.utils.notices.add("<?=esc_js( $notice['msg'] );?>", {class: "<?=esc_js( $notice['class'] );?>"})
 				});
+			</script>
+			<?php
+		}
+
+		if ( $screen->is_block_editor && in_array( $screen->post_type, Tools::get_public_post_types() ) ) { ?>
+			<script>
+				Object.assign(window.TrevorWP.screen, {editorBlocksData: <?=json_encode( apply_filters( 'trevor_editor_blocks_data', [] ) )?>})
 			</script>
 			<?php
 		}
@@ -272,16 +292,36 @@ class Hooks {
 	 *
 	 * @param string $hook_suffix
 	 *
-	 * https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
+	 * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
 	 */
 	public static function admin_enqueue_scripts( string $hook_suffix ): void {
+		$post_types = array_fill_keys( array_merge( [ CPT\Post::POST_TYPE ], CPT\RC\RC_Object::$ALL_POST_TYPES ), [] );
+		foreach ( $post_types as $post_type => &$pt_data ) {
+			$obj              = get_post_type_object( $post_type );
+			$pt_data['label'] = $obj->label;
+		}
+
+		$taxonomies = array_fill_keys( [
+				'post_tag',
+				'category',
+				CPT\RC\RC_Object::TAXONOMY_CATEGORY,
+				CPT\RC\RC_Object::TAXONOMY_TAG
+		], [] );
+		foreach ( $taxonomies as $taxonomy => &$tax_data ) {
+			$obj               = get_taxonomy( $taxonomy );
+			$tax_data['label'] = $obj->label;
+		}
+
 		$js_ns = [
 				'screen'    => [
 						'hook_suffix' => esc_js( $hook_suffix )
 				],
-				'common'    => new \stdClass(),
 				'utils'     => new \stdClass(),
 				'adminApps' => new \stdClass(),
+				'common'    => [
+						'post_types' => $post_types,
+						'taxonomies' => $taxonomies
+				],
 		];
 		?>
 		<script>window.TrevorWP = <?= json_encode( $js_ns )?>;</script>
@@ -349,5 +389,34 @@ class Hooks {
 		$doc->addField( 'post_title_t', $post_info->post_title );
 
 		return $doc;
+	}
+
+	/**
+	 * Filters the query arguments for a request.
+	 *
+	 * @param array $args
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/rest_this-post_type_query/
+	 */
+	public static function rest_post_type_query( array $args ): array {
+		$args['solr_integrate'] = false;
+		Tools::disable_solr();
+
+		return $args;
+	}
+
+	/**
+	 * @param array $data
+	 */
+	public static function trevor_editor_blocks_data( array $data ): array {
+		global $post;
+
+		if ( ! $post ) {
+			return $data;
+		}
+
+		return array_merge( $data, Post::get_editor_config( $post ) );
 	}
 }

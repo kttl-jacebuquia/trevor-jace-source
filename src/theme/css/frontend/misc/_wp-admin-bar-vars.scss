@@ -1,0 +1,21 @@
+$var-tr-wp-admin-bar-h: --tr-wp-admin-bar-h;
+
+@media screen and (max-width: 600px) {
+  #wpadminbar {
+	position: fixed !important; // Reverse it
+  }
+}
+
+body {
+  #{$var-tr-wp-admin-bar-h}: 0;
+}
+
+body.admin-bar {
+  #{$var-tr-wp-admin-bar-h}: 46px;
+}
+
+@media screen and (min-width: 782px) {
+  body.admin-bar {
+	#{$var-tr-wp-admin-bar-h}: 32px;
+  }
+}

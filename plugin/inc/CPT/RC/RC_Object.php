@@ -23,20 +23,20 @@ abstract class RC_Object {
 
 	/* Query Vars */
 	const QV_BASE = Main::QV_PREFIX . 'rc';
-	const QV_SEARCH = self::QV_BASE . '__search';
 	const QV_RESOURCES_LP = self::QV_BASE . '__lp';
+	const QV_RESOURCES_NON_BLOG = self::QV_BASE . '__non_blog';
 
 	/* Permalinks */
 	const PERMALINK_BASE = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
 	const PERMALINK_BASE_TAX_TAG = self::PERMALINK_BASE . '/tag';
-	const PERMALINK_BASE_SEARCH = self::PERMALINK_BASE . '/search';
 
 	/* Collections */
 	const _ALL_ = [
 		Post::class,
 		Guide::class,
 		Article::class,
+		External::class,
 		Glossary::class,
 	];
 
@@ -51,22 +51,17 @@ abstract class RC_Object {
 	static $PUBLIC_POST_TYPES = [];
 
 	/**
-	 * @see init_all()
+	 * @see construct()
 	 */
-	abstract static function init(): void;
+	abstract static function register_post_type(): void;
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::init()
 	 */
-	final public static function init_all(): void {
-		global $wp_rewrite;
-
+	final public static function construct(): void {
 		# Init All
+		/** @var RC_Object $cls */
 		foreach ( self::_ALL_ as $cls ) {
-			# Init
-			/** @var RC_Object $cls */
-			$cls::init();
-
 			# Fill post types
 			self::$ALL_POST_TYPES[] = $cls::POST_TYPE;
 
@@ -75,18 +70,44 @@ abstract class RC_Object {
 			}
 		}
 
+		# Hooks
+		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'admin_menu', [ self::class, 'admin_menu' ], PHP_INT_MAX, 0 );
+		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
+		add_filter( 'post_type_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
+		add_filter( 'parent_file', [ self::class, 'parent_file' ], 10, 1 );
+		add_action( 'parse_request', [ self::class, 'parse_request' ], 10, 1 );
+		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
+	}
+
+	/**
+	 * Fires after WordPress has finished loading but before any headers are sent.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/init/
+	 *
+	 * @see construct()
+	 */
+	public static function init(): void {
+		# Post Types
+		foreach ( self::_ALL_ as $cls ) {
+			/** @var RC_Object $cls */
+			$cls::register_post_type();
+		}
+
 		# Taxonomies
 		## Category
 		register_taxonomy( self::TAXONOMY_CATEGORY, self::$PUBLIC_POST_TYPES, [
 			'public'            => true,
-			'hierarchical'      => true,
+			'hierarchical'      => false,
 			'show_in_rest'      => true,
 			'show_tagcloud'     => false,
 			'show_admin_column' => true,
 			'rewrite'           => [
 				'slug'         => self::PERMALINK_BASE_TAX_CATEGORY,
-				'hierarchical' => true,
-			]
+				'hierarchical' => false,
+				'with_front'   => false,
+			],
+			'labels'            => get_taxonomy_labels( get_taxonomy( 'category' ) ),
 		] );
 
 		## Tag
@@ -99,6 +120,7 @@ abstract class RC_Object {
 			'rewrite'           => [
 				'slug'         => self::PERMALINK_BASE_TAX_TAG,
 				'hierarchical' => false,
+				'with_front'   => false,
 			]
 		] );
 
@@ -126,14 +148,19 @@ abstract class RC_Object {
 			'rewrite'           => false
 		] );
 
-		# Other Hooks
-		add_action( 'admin_menu', [ self::class, 'admin_menu' ], PHP_INT_MAX, 0 );
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
-		add_filter( 'post_type_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
-		add_filter( 'parent_file', [ self::class, 'parent_file' ], 10, 1 );
-
 		# Rewrites
-		$q_prefix = "index.php?" . http_build_query( [ self::QV_BASE => 1 ] );
+		## Main Page
+		add_rewrite_rule(
+			self::PERMALINK_BASE . "/?$",
+			"index.php?" . http_build_query( array_merge(
+				[
+					self::QV_BASE         => 1,
+					self::QV_RESOURCES_LP => 1
+				],
+				array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 ),
+			) ),
+			'top'
+		);
 
 		## Taxonomy
 		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
@@ -143,20 +170,11 @@ abstract class RC_Object {
 			PHP_INT_MAX, 0
 		);
 
-		## Main Page
-		add_rewrite_rule(
-			self::PERMALINK_BASE . "/?$",
-			implode( '&', [ $q_prefix, http_build_query( [ self::QV_RESOURCES_LP => 1 ] ) ] ),
-			'top'
-		);
-
-		## Search
-		$q_prefix_search = implode( '&', [ $q_prefix, http_build_query( [ self::QV_SEARCH => 1 ] ) ] );
-		add_rewrite_rule( self::PERMALINK_BASE_SEARCH . "/?$", $q_prefix_search, 'top' );
-		add_rewrite_rule( self::PERMALINK_BASE_SEARCH . "/{$wp_rewrite->pagination_base}/([0-9]{1,})/?$", $q_prefix_search . '&paged=$matches[1]', 'top' );
-
-		## Posts
-		add_rewrite_rule( self::PERMALINK_BASE . "/(\d+)-([^/]+)/?$", $q_prefix . "&p=\$matches[1]", 'top' );
+		## Catch All
+		add_rewrite_rule( self::PERMALINK_BASE . "/(\d+)-([^/]+)/?$", "index.php?" . http_build_query( [
+				self::QV_BASE               => 1,
+				self::QV_RESOURCES_NON_BLOG => 1
+			] ) . "&p=\$matches[1]", 'top' );
 	}
 
 	/**
@@ -168,13 +186,14 @@ abstract class RC_Object {
 	 * @return string
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/post_type_link/
-	 * @see init_all()
+	 * @see construct()
 	 */
-	public static function post_type_link( string $post_link, \WP_Post $post ) {
+	public static function post_type_link( string $post_link, \WP_Post $post ): string {
 		switch ( $post->post_type ) {
 			case CPT\RC\Article::POST_TYPE:
 			case CPT\RC\Guide::POST_TYPE:
-				return home_url( static::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" );
+			case CPT\RC\External::POST_TYPE:
+				return trailingslashit( home_url( static::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
 			case CPT\Post::POST_TYPE:
 			case CPT\RC\Post::POST_TYPE:
 				if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX /* TODO: We need a qVar flag to force it */ ) ) {
@@ -197,7 +216,7 @@ abstract class RC_Object {
 	 * @return string[]
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/permastructname_rewrite_rules/
-	 * @see init_all()
+	 * @see construct()
 	 */
 	public static function rewrite_rules_tag(): array {
 		global $wp_rewrite;
@@ -214,7 +233,7 @@ abstract class RC_Object {
 	 * @return string[]
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/permastructname_rewrite_rules/
-	 * @see init_all()
+	 * @see construct()
 	 */
 	public static function rewrite_rules_category(): array {
 		global $wp_rewrite;
@@ -230,7 +249,7 @@ abstract class RC_Object {
 	 *
 	 * Modifies the admin menu tree to combine all post types into one main menu item.
 	 *
-	 * @see init_all()
+	 * @see construct()
 	 * @link https://developer.wordpress.org/reference/hooks/admin_menu/
 	 */
 	public static function admin_menu(): void {
@@ -326,15 +345,12 @@ abstract class RC_Object {
 	 * @param array $vars
 	 *
 	 * @return array
-	 * @see init_all()
+	 * @see construct()
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		$vars[] = self::QV_SEARCH;
-		$vars[] = self::QV_RESOURCES_LP;
-
-		return $vars;
+		return array_merge( $vars, [ self::QV_RESOURCES_LP, self::QV_RESOURCES_NON_BLOG ] );
 	}
 
 	/**
@@ -343,16 +359,64 @@ abstract class RC_Object {
 	 * @param string $parent_file
 	 *
 	 * @return string
-	 * @see init_all()
+	 * @see construct()
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/parent_file/
 	 */
 	public static function parent_file( string $parent_file ): string {
 		# Fix glossary main menu
-		if ( $parent_file == ( "edit.php?post_type=" . Glossary::POST_TYPE ) ) {
+		if ( $parent_file == ( "edit.php?post_type=" . Glossary::POST_TYPE ) ||
+		     $parent_file == ( "edit.php?post_type=" . External::POST_TYPE )
+		) {
 			$parent_file = "edit.php?post_type=" . reset( self::$ALL_POST_TYPES );
 		}
 
 		return $parent_file;
+	}
+
+	/**
+	 * Fires once all query variables for the current request have been parsed.
+	 *
+	 * @param \WP $wp
+	 * @param \WP_REWRITE
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/parse_request/
+	 */
+	public static function parse_request( \WP $wp ): void {
+		# LP Post Types
+		if ( $is_rc_lp = ! empty( $wp->query_vars[ self::QV_RESOURCES_LP ] ) ) {
+			$wp->query_vars['post_type'] = self::$PUBLIC_POST_TYPES;
+		}
+
+		# Catch All
+		if (
+			( $is_rc_non_blog = ! empty( $wp->query_vars[ self::QV_RESOURCES_NON_BLOG ] ) ) &&
+			( $p = intval( $wp->query_vars['p'] ?? 0 ) ) > 0 &&
+			( $post = get_post( $p ) ) &&
+			in_array( $post_type = get_post_type( $post ), self::$PUBLIC_POST_TYPES ) &&
+			$post_type != Post::POST_TYPE // non blog
+		) {
+			$wp->query_vars['post_type']        = $post->post_type;
+			$wp->query_vars[ $post->post_type ] = $post->post_name;
+		}
+	}
+
+	/**
+	 * Fires after the main query vars have been parsed.
+	 *
+	 * @param \WP_Query $query
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/parse_query/
+	 */
+	public static function parse_query( \WP_Query $query ): void {
+		# Fix Resources LP
+		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
+		if ( $is_rc_lp ) {
+			$query->is_single            = false;
+			$query->is_singular          = false;
+			$query->is_posts_page        = true;
+			$query->is_post_type_archive = true;
+			$query->set( 'name', null );
+		}
 	}
 }

@@ -1,55 +1,75 @@
 {
   "checksum": {
-    "previous": "f51a0e33f0769e167fa8241facbb4891445b1e763348f6a46b389df141c1d2c7",
-    "current": "f51a0e33f0769e167fa8241facbb4891445b1e763348f6a46b389df141c1d2c7"
+    "previous": "1e02319626fff33e8d7b6b58ef63c9855f3ce0f00b75c18735b11f401f7ad45f",
+    "current": "1e02319626fff33e8d7b6b58ef63c9855f3ce0f00b75c18735b11f401f7ad45f"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_f51a0e33f0769e167fa8241facbb4891.ttf",
-    "../../theme/static/icon-font/trevor-ti_f51a0e33f0769e167fa8241facbb4891.svg",
-    "../../theme/static/icon-font/trevor-ti_f51a0e33f0769e167fa8241facbb4891.woff",
-    "../../theme/static/icon-font/trevor-ti_f51a0e33f0769e167fa8241facbb4891.eot",
-    "../../theme/static/icon-font/trevor-ti_f51a0e33f0769e167fa8241facbb4891.woff2"
+    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.ttf",
+    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.svg",
+    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.woff",
+    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.eot",
+    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.woff2"
   ],
   "glyphs": {
-    "angle-down-solid": {
-      "codepoint": 61699,
-      "source": "./vectors/angle-down-solid.svg"
-    },
-    "arrow-right-solid": {
-      "codepoint": 61700,
-      "source": "./vectors/arrow-right-solid.svg"
-    },
-    "bars-solid": {
-      "codepoint": 61697,
-      "source": "./vectors/bars-solid.svg"
-    },
-    "download-solid": {
-      "codepoint": 61701,
-      "source": "./vectors/download-solid.svg"
-    },
-    "external-link-alt-solid": {
-      "codepoint": 61702,
-      "source": "./vectors/external-link-alt-solid.svg"
-    },
-    "facebook-f-brands": {
-      "codepoint": 61698,
-      "source": "./vectors/facebook-f-brands.svg"
-    },
-    "search-solid": {
-      "codepoint": 61704,
-      "source": "./vectors/search-solid.svg"
-    },
-    "share-alt-solid": {
-      "codepoint": 61705,
-      "source": "./vectors/share-alt-solid.svg"
-    },
-    "share-solid": {
-      "codepoint": 61703,
-      "source": "./vectors/share-solid.svg"
-    },
-    "twitter-brands": {
+    "arrow-left": {
       "codepoint": 61696,
-      "source": "./vectors/twitter-brands.svg"
+      "source": "./vectors/arrow-left.svg"
+    },
+    "arrow-right": {
+      "codepoint": 61697,
+      "source": "./vectors/arrow-right.svg"
+    },
+    "caret-down": {
+      "codepoint": 61698,
+      "source": "./vectors/caret-down.svg"
+    },
+    "chevron-down": {
+      "codepoint": 61699,
+      "source": "./vectors/chevron-down.svg"
+    },
+    "download": {
+      "codepoint": 61700,
+      "source": "./vectors/download.svg"
+    },
+    "facebook": {
+      "codepoint": 61701,
+      "source": "./vectors/facebook.svg"
+    },
+    "hamburger-menu": {
+      "codepoint": 61702,
+      "source": "./vectors/hamburger-menu.svg"
+    },
+    "link-out": {
+      "codepoint": 61703,
+      "source": "./vectors/link-out.svg"
+    },
+    "logo-icon": {
+      "codepoint": 61704,
+      "source": "./vectors/logo-icon.svg"
+    },
+    "logo-text": {
+      "codepoint": 61705,
+      "source": "./vectors/logo-text.svg"
+    },
+    "quote-close": {
+      "codepoint": 61706,
+      "source": "./vectors/quote-close.svg"
+    },
+    "quote-open": {
+      "codepoint": 61707,
+      "source": "./vectors/quote-open.svg"
+    },
+    "search": {
+      "codepoint": 61708,
+      "source": "./vectors/search.svg"
+    },
+    "share-others": {
+      "codepoint": 61709,
+      "source": "./vectors/share-others.svg"
+    },
+    "twitter": {
+      "codepoint": 61710,
+      "source": "./vectors/twitter.svg"
     }
   },
   "options": {

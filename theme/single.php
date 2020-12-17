@@ -1,41 +1,19 @@
 <?php get_header(); ?>
 
-<?php
-$others = array_merge(
-		get_posts( [
-				'numberposts' => 2,
-				'exclude'     => get_the_ID(),
-				'post_type'   => 'post',
-				'orderby'     => 'rand'
-		] ),
-		get_posts( [
-				'numberposts' => 2,
-				'exclude'     => get_the_ID(),
-				'post_type'   => TrevorWP\CPT\Support_Post::POST_TYPE,
-				'orderby'     => 'rand'
-		] )
-);
-shuffle($others);
-?>
-
 <main id="site-content" role="main">
-	<?php
+	<article <?php post_class( [ 'post-single' ] ); ?> id="post-<?php the_ID(); ?>">
+		<?= \TrevorWP\Theme\Helper\Header::post( $post ); ?>
 
-	if ( ! empty( $others ) ) {
-		echo '<ul>';
-		echo '<li><h3>Other Blog Posts:</h3></li>';
-		foreach ( $others as $other ) {
-			$pto   = get_post_type_object( $other->post_type );
-			$plink = get_permalink( $other );
-			echo '<li>';
-			echo "<a href='{$plink}'><strong>[{$pto->name}]</strong> {$other->post_title}</a>";
-			echo '</li>';
-		}
-		echo '</ul>';
-	}
+		<div class="post-content-wrap bg-white h-full flex-1 prose text-indigo max-w-none">
+			<div class="container mx-auto flex-1 grid md:grid-cols-8 lg:grid-cols-12">
+				<div class="post-content md:col-span-7 lg:col-span-8 lg:col-start-1">
+					<?php the_content(); ?>
+				</div>
+				<div class="side-col hidden lg:block lg:col-span-3 lg:col-start-1"></div>
+			</div>
+		</div><!-- .post-content-wrap -->
+	</article><!-- .post -->
 
-	get_template_part( 'template-parts/content', get_post_type() );
-	?>
 </main> <!-- #site-content -->
 
 <?php get_footer(); ?>

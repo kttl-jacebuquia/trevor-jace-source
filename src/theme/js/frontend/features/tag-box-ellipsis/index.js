@@ -20,7 +20,7 @@ class TagBoxEllipsis {
 		this.$boxes = this.$box.find('.tag-box');
 		this.$box.css('position', 'relative');
 
-		this.$ellipsis = $('<a href="#" class="tag-box ellipsis">&#8230;</a>')
+		this.$ellipsis = $('<a href="#" class="tag-box ellipsis">+</a>')
 			.on('click', this.toggleClick)
 			.appendTo(this.$box);
 
@@ -54,15 +54,11 @@ class TagBoxEllipsis {
 			this.$box.css('padding-right', this.$ellipsis.outerWidth() + marginR);
 			this.$ellipsis.show();
 			const marginL = $firstRowLastBox.get(0).offsetLeft + $firstRowLastBox.outerWidth() + marginR;
-			console.log($firstRowLastBox.get(0).offsetLeft, $firstRowLastBox.outerWidth(), marginR);
 			this.$ellipsis.css('left', marginL);
 			this.$ellipsis.css('right', 'auto');
-			console.log();
 		} else {
 			this.$ellipsis.hide();
 		}
-
-		console.log('showEllipsis', {showEllipsis});
 	}
 
 	toggleClick = (e) => {

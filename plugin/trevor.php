@@ -32,7 +32,11 @@ defined( 'TREVOR_PLUGIN_STATIC_URL' ) or define( 'TREVOR_PLUGIN_STATIC_URL', (
 	: plugin_dir_url( __FILE__ ) . 'static'
 );
 
-require_once __DIR__ . '/lib/autoload.php';
+# Plugin Autoloader
+require_once( __DIR__ . '/lib/autoload.php' );
+
+# Theme Autoloader (Try to load here first)
+include_once( get_template_directory() . '/lib/autoload.php' );
 
 # De/Activation Hooks
 register_activation_hook( __FILE__, [ \TrevorWP\Util\Activate::class, 'activate' ] );

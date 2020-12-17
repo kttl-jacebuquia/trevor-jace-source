@@ -8,21 +8,24 @@
 @tailwind utilities;
 
 body {
-  background: theme('colors.white');
+  background: theme('colors.white.DEFAULT');
 }
 
 @import "./what-input";
-
+@import "../utils/index";
+@import "./vendor/index";
 // Our Components
+@import "./fonts";
 @import "./root";
 @import "./misc/index";
+@import "./bg-gradients";
 @import "./header";
 @import "./site-content";
+@import "./footer";
 @import "./button";
 @import "./tags-box";
 @import "./card-post";
-@import "./post-header";
-@import "./post-content";
+@import "./single/index";
 
 .hl-test-item {
   b {

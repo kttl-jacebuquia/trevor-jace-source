@@ -8,7 +8,7 @@ class Article extends RC_Object {
 	const POST_TYPE = self::POST_TYPE_PREFIX . 'article';
 
 	/** @inheritDoc */
-	public static function init(): void {
+	public static function register_post_type(): void {
 		# Post Type
 		register_post_type( self::POST_TYPE, [
 			'labels'       => [
@@ -24,7 +24,9 @@ class Article extends RC_Object {
 				'editor',
 				'revisions',
 				'author',
-				'thumbnail'
+				'thumbnail',
+				'custom-fields',
+				'excerpt',
 			],
 			'has_archive'  => false,
 			'rewrite'      => false,

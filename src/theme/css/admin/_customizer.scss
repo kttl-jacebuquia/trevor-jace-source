@@ -1,0 +1,28 @@
+.customize-control-object_selector {
+  .object-list {
+	margin-top: 8px;
+  }
+
+  .list-item {
+	margin-bottom: 4px;
+	padding: 4px;
+	border: 1px solid #dddddd;
+	border-radius: 2px;
+	background: #f3f3f3;
+  }
+
+  .ui-sortable-placeholder {
+	height: 50px;
+	width: 100%;
+  }
+
+  .post-detail-wrap {
+	font-size: .75em;
+	font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+
+  .del-link {
+	text-decoration: none;
+  }
+}

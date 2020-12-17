@@ -10,7 +10,7 @@ class Post extends RC_Object {
 	const POST_TYPE = self::POST_TYPE_PREFIX . 'post';
 
 	/* Permalinks */
-	const PERMALINK_BASE = parent::PERMALINK_BASE . '/blog';
+	const PERMALINK_BASE_BLOG = self::PERMALINK_BASE . '/blog';
 
 	/* Query Vars */
 	const QV_BLOG = self::QV_BASE . '__blog';
@@ -21,7 +21,7 @@ class Post extends RC_Object {
 	private static $_x_blog_url = false;
 
 	/** @inheritDoc */
-	public static function init(): void {
+	public static function register_post_type(): void {
 		# Query Vars & Post Links
 		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
 		add_filter( 'post_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
@@ -45,7 +45,9 @@ class Post extends RC_Object {
 				'editor',
 				'revisions',
 				'author',
-				'thumbnail'
+				'thumbnail',
+				'custom-fields',
+				'excerpt',
 			],
 			'has_archive'  => false,
 			'rewrite'      => false,
@@ -59,7 +61,7 @@ class Post extends RC_Object {
 			] );
 
 		## Posts
-		add_rewrite_rule( self::PERMALINK_BASE . "/(\d+)-([^/]+)/?$", $q_prefix . "&p=\$matches[1]", 'top' );
+		add_rewrite_rule( self::PERMALINK_BASE_BLOG . "/(\d+)-([^/]+)/?$", $q_prefix . "&p=\$matches[1]", 'top' );
 	}
 
 	/**
@@ -71,7 +73,7 @@ class Post extends RC_Object {
 	 * @return string
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/redirect_canonical/
-	 * @see Post::init()
+	 * @see Post::register_post_type()
 	 */
 	public static function redirect_canonical( string $redirect_url, string $requested_url ): string {
 		if ( self::$_x_blog_url ) {
@@ -87,7 +89,7 @@ class Post extends RC_Object {
 	 * @param \WP_Query $query
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
-	 * @see Post::init()
+	 * @see Post::register_post_type()
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
 		if ( ! $query->is_main_query() ) {
@@ -126,7 +128,7 @@ class Post extends RC_Object {
 	 * @return array
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
-	 * @see Post::init()
+	 * @see Post::register_post_type()
 	 */
 	public static function query_vars( array $vars ): array {
 		$vars[] = self::QV_BLOG;
@@ -143,12 +145,12 @@ class Post extends RC_Object {
 	 * @return string
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/get_canonical_url/
-	 * @see Post::init()
+	 * @see Post::register_post_type()
 	 */
 	public static function get_canonical_url( string $canonical_url, WP_Post $post ): string {
 		switch ( $post->post_type ) {
 			case static::POST_TYPE:
-				return trailingslashit( home_url( static::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
+				return trailingslashit( home_url( static::PERMALINK_BASE_BLOG . "/{$post->ID}-{$post->post_name}" ) );
 			case  Post::PERMALINK_BASE:
 				return trailingslashit( home_url( Post::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
 			default:

@@ -4,7 +4,7 @@
  * External Script Settings
  */
 class External_Scripts extends Abstract_Customizer {
-	const SECTION_ID = 'trevor_ext_scr';
+	const SECTION_ID = self::ID_PREFIX . 'ext_scr';
 
 	const SETTING_PREFIX = self::SECTION_ID . '_';
 	const SETTING_HEAD_TOP = self::SETTING_PREFIX . 'head_top';

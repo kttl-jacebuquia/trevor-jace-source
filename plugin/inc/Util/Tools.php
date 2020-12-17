@@ -2,6 +2,7 @@
 
 use DateTime;
 use DateTimeZone;
+use TrevorWP\CPT\RC\RC_Object;
 use Twig;
 use TrevorWP\Exception;
 use TrevorWP\Main;
@@ -835,5 +836,31 @@ class Tools {
 		}
 
 		return $path;
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function get_public_post_types(): array {
+		return array_merge( [ \TrevorWP\CPT\Post::POST_TYPE ], RC_Object::$PUBLIC_POST_TYPES );
+	}
+
+	/**
+	 * Disables Solr filters
+	 */
+	public static function disable_solr() {
+		$inst = \SolrPower_WP_Query::get_instance();
+
+		remove_filter( 'pre_get_posts', array( $inst, 'pre_get_posts' ) );
+
+		remove_filter( 'posts_request', array( $inst, 'posts_request' ), 10 );
+
+		remove_filter( 'found_posts_query', array( $inst, 'found_posts_query' ), 5 );
+
+		remove_filter( 'found_posts', array( $inst, 'found_posts' ), 5 );
+
+		remove_filter( 'posts_pre_query', array( $inst, 'posts_pre_query' ), 10 );
+
+		remove_filter( 'the_posts', array( $inst, 'the_posts' ), 10 );
 	}
 }

@@ -251,6 +251,8 @@ module.exports = function (webpackEnv) {
 			mainFiles: ['index'],
 			alias: {
 				'assets': path.join(paths.src, 'assets'),
+				'plugin': path.join(paths.src, 'plugin'),
+				'theme': path.join(paths.src, 'theme'),
 				'config$': path.join(paths.src, 'config'),
 				...(isEnvDevelopment ? {
 					// Dev aliases

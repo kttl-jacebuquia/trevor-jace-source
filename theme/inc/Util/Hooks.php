@@ -41,8 +41,8 @@ class Hooks {
 		# Excerpt Length
 		add_filter( 'excerpt_length', [ self::class, 'excerpt_length' ], 10, 1 );
 
-		# Pre get posts
-		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+		# Template Load Fixes
+		add_filter( 'template_include', [ self::class, 'template_include' ], PHP_INT_MAX >> 1, 1 );
 	}
 
 	/**
@@ -143,6 +143,7 @@ class Hooks {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'html5' );
+		add_theme_support( 'admin-bar', [ 'callback' => '__return_false' ] );
 
 		register_nav_menus( [
 				'header-organization' => '[Header] Organization',
@@ -160,7 +161,7 @@ class Hooks {
 	public static function customize_register( \WP_Customize_Manager $manager ): void {
 		# Panels
 		new Customizer\External_Scripts( $manager );
-		new Customizer\Resources_Center( $manager );
+		new Customizer\Resource_Center( $manager );
 	}
 
 	/**
@@ -315,27 +316,25 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/excerpt_length/
 	 */
 	public static function excerpt_length( int $length ): int {
-		return $length;
+		return 20;
 	}
 
 	/**
-	 * Fires after the query variable object is created, but before the actual query is run.
+	 * Filters the path of the current template before including it.
 	 *
-	 * @param \WP_Query $query
+	 * @param string $template
 	 *
-	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
+	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/template_include/
 	 */
-	public static function pre_get_posts( \WP_Query $query ): void {
-		$template = false;
+	public static function template_include( string $template ): string {
+		global $wp_query;
 
-		if ( ! empty( $query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
+		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
 			$template = locate_template( 'custom/resource-center-lp.php', false );
 		}
 
-		if ( ! empty( $template ) ) {
-			_wp_admin_bar_init(); // fix admin bar
-			load_template( $template ); // load template
-			die();
-		}
+		return $template;
 	}
 }

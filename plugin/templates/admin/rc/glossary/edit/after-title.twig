@@ -1,0 +1,47 @@
+<table class="form-table" role="presentation">
+	<tbody>
+	<tr>
+		<th scope="row"><label for="trevor-caption">Caption</label></th>
+		<td>
+			<input id="trevor-caption"
+				   class="large-text"
+				   name="post_excerpt"
+				   type="text"
+				   value="{{ post.post_excerpt|esc_attr }}"
+				   autocomplete="off"
+				   required>
+			<p class="description">Phonetic pronunciation.</p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row"><label for="trevor-definition">Definition</label></th>
+		<td>
+            <textarea id="trevor-definition"
+					  class="large-text"
+					  name="post_content"
+					  rows="10"
+					  required>{{ post.post_content|esc_textarea }}</textarea>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+<script>
+	jQuery(function ($) {
+		{# Add HTML5 required attr to title #}
+		$('#title').attr('required', true);
+
+		{# Validate title & definition before submit #}
+		$('#post').on('submit', function () {
+			if (!/\w+/.test(String($('#title').val()))) {
+				TrevorWP.utils.notices.addError('Please enter a name.');
+				return false;
+			}
+
+			if (!/\w+/.test(String($('#trevor-definition').val()))) {
+				TrevorWP.utils.notices.addError('Please enter a definition.');
+				return false;
+			}
+		});
+	});
+</script>

@@ -2,12 +2,12 @@
 import 'what-input';
 // Auto-Complete Test
 import $ from 'jquery';
-
 import * as features from './features';
 import * as vendors from './vendors';
+import * as matchMedia from './match-media';
+import './nav';
 
-
-window.trevorWP = {features, vendors};
+window.trevorWP = {features, vendors, matchMedia};
 
 features.tagBoxEllipsis($('.card-post'));
 

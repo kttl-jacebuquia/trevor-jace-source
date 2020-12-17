@@ -15,7 +15,7 @@ class Glossary extends RC_Object {
 	const POST_TYPE = self::POST_TYPE_PREFIX . 'glossary';
 
 	/** @inheritDoc */
-	static function init(): void {
+	static function register_post_type(): void {
 		# Post Type
 		register_post_type( self::POST_TYPE, [
 			'labels'       => [
@@ -42,7 +42,7 @@ class Glossary extends RC_Object {
 	 * @param WP_Screen $screen
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/current_screen/
-	 * @see Glossary::init()
+	 * @see Glossary::register_post_type()
 	 */
 	public static function current_screen( WP_Screen $screen ): void {
 		if ( $screen->id != self::POST_TYPE ) {

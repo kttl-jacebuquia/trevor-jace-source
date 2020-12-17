@@ -3,7 +3,7 @@
 use \TrevorWP\Theme\Customizer;
 ?>
 
-<footer class="w-full h-40 bg-gray flex flex-col justify-center">
+<footer class="w-full h-40 flex flex-col justify-center">
 	<p class="text-white text-center text-3xl">Footer</p>
 </footer>
 
