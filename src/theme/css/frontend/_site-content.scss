@@ -1,3 +1,7 @@
-#site-content {
+.site-content {
   @apply min-w-full;
+  @apply flex-1;
+}
+
+.site-content-inner {
 }

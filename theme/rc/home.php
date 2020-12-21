@@ -1,4 +1,4 @@
-<?php /* Resources Center LP */ ?>
+<?php /* Resources Center: Home */ ?>
 <?php get_header(); ?>
 <?php
 
@@ -17,61 +17,54 @@ $featured_cats    = get_terms( [
 
 $featured_post_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_FEATURED ) );
 $used_post_ids     = [];
-
-
-// ---
-
-$is_search = is_search();
-
-error_log( '123' );
-
-
 ?>
 
 <?php if ( ! is_paged() ) { ?>
-	<div class="container mx-auto py-10 text-center flex-1">
-		<div class="lg:w-4/6 mx-auto">
-			<h2 class="bold text-white text-px14 leading-px18 tracking-px05">
-				FIND ANSWERS
-			</h2>
-			<h1>
+	<main id="site-content" role="main" class="site-content">
+		<div class="container mx-auto text-center site-content-inner">
+			<div class="lg:w-4/6 mx-auto">
+				<h2 class="bold text-white text-px14 leading-px18 tracking-px05">
+					FIND ANSWERS
+				</h2>
+				<h1>
 				<span class="text-white font-manrope"
 					  style="font-size: 32px; line-height: 42px; letter-spacing: 0.005em;">Connection starts</span>
-				<span class="block text-white font-caveat transform bold"
-					  style="--tw-rotate: -1deg; font-size: 44px; line-height: 54px;">with knowledge.</span>
-			</h1>
+					<span class="block text-white font-caveat transform bold"
+						  style="--tw-rotate: -1deg; font-size: 44px; line-height: 54px;">with knowledge.</span>
+				</h1>
 
-			<div class="my-10 lg:w-4/6 mx-auto">
-				<?= '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) . '">
+				<div class="my-10 lg:w-4/6 mx-auto">
+					<?= '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) . '">
 				<label>
 					<span class="sr-only">Search for:</span>
 					<input type="search" class="search-field p-4 w-full rounded-lg" placeholder="What do you want to learn about?" value="' . get_search_query( true ) . '" name="s" />
 				</label>
 			</form>'; ?>
-			</div>
+				</div>
 
-			<p class="text-white">Browse a topic or check out what’s trending.</p>
+				<p class="text-white">Browse a topic or check out what’s trending.</p>
 
-			<div class="flex flex-wrap justify-center mt-4">
-				<?php foreach ( $featured_cats as $cat ) { ?>
-					<a href="<?= esc_url( "#cat-{$cat->slug}" ) ?>"
-					   class="rounded-full py-1 px-5 bg-violet mx-2 mb-3 text-white">
-						<?= esc_html( $cat->name ); ?>
-					</a>
-				<?php } ?>
-			</div>
+				<div class="flex flex-wrap justify-center mt-4">
+					<?php foreach ( $featured_cats as $cat ) { ?>
+						<a href="<?= esc_url( "#cat-{$cat->slug}" ) ?>"
+						   class="rounded-full py-1 px-5 bg-violet mx-2 mb-3 text-white">
+							<?= esc_html( $cat->name ); ?>
+						</a>
+					<?php } ?>
+				</div>
 
-			<div class="mt-8 animate-bounce hidden md:block">
-				<i class="trevor-ti-chevron-down text-4xl text-white"></i>
-			</div>
+				<div class="mt-8 animate-bounce hidden md:block">
+					<i class="trevor-ti-chevron-down text-4xl text-white"></i>
+				</div>
 
-			<div class="mt-8 md:fixed md:bottom-10 md:right-10 z-10">
-				<a href="#"
-				   class="py-2 px-6 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl">Reach
-					a Counselor</a>
+				<div class="mt-8 md:fixed md:bottom-10 md:right-10 z-10">
+					<a href="#"
+					   class="py-2 px-6 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl">Reach
+						a Counselor</a>
+				</div>
 			</div>
 		</div>
-	</div>
+	</main>
 <?php } ?>
 
 <?php # Trending ?>

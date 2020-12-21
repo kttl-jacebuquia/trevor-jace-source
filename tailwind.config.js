@@ -11,7 +11,10 @@ module.exports = {
 		content: [
 			'./src/theme/**/*.js',
 			'./src/theme/**/*.scss',
-			'./theme/**/*.php',
+			'./theme/*.php',
+			'./theme/inc/**/*.php',
+			'./theme/rc/**/*.php',
+			'./theme/template-parts/**/*.php',
 		]
 	},
 	prefix: '',
@@ -19,10 +22,10 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			sm: '640px',
-			md: '768px',
-			lg: '1024px',
-			xl: '1280px', // TODO: put these css vars
+			sm: px2rem(640),
+			md: px2rem(768),
+			lg: px2rem(1024),
+			xl: px2rem(1280),
 			dark: {'raw': '(prefers-color-scheme: dark)'},
 		},
 		colors: {

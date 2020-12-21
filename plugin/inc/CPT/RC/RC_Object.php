@@ -412,6 +412,10 @@ abstract class RC_Object {
 		# Fix Resources LP
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp ) {
+			if ( ! empty( $query->get( 's' ) ) ) {
+				$query->is_search = true;
+			}
+
 			$query->is_single            = false;
 			$query->is_singular          = false;
 			$query->is_posts_page        = true;

@@ -4,7 +4,7 @@
 use TrevorWP\Theme\Customizer;
 use \TrevorWP\Theme\Util\Is;
 
-$is_support = Is::support();
+$is_rc = Is::support();
 ?>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
@@ -24,6 +24,9 @@ $is_support = Is::support();
 			f.parentNode.insertBefore(j, f);
 		})(window, document, 'script', 'dataLayer', 'GTM-KQFZF3W');</script>
 	<!-- End Google Tag Manager -->
+	<script>(function (e) {
+			e.className = e.className.replace(/\bno-js\b/, 'js');
+		})(document.documentElement)</script>
 	<?= Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_TOP ) ?>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,11 +56,11 @@ $is_support = Is::support();
 		<ul class="switcher">
 			<li>
 				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\Guide::PERMALINK_BASE ) ) ?>"
-				   class="<?= $is_support ? 'active' : '' ?>">Resource Center</a>
+				   class="<?= $is_rc ? 'active' : '' ?>">Resource Center</a>
 			</li>
 			<li>
 				<a href="<?= esc_attr( home_url() ) ?>"
-				   class="<?= $is_support ? '' : 'active' ?>">The Organization</a>
+				   class="<?= $is_rc ? '' : 'active' ?>">The Organization</a>
 			</li>
 		</ul>
 		<div class="cta-wrap">
@@ -84,7 +87,7 @@ $is_support = Is::support();
 			<?php wp_nav_menu( [
 					'menu_class'      => 'main-menu',
 					'container_class' => 'main-menu-container',
-					'theme_location'  => $is_support ? 'header-support' : 'header-organization'
+					'theme_location'  => $is_rc ? 'header-support' : 'header-organization'
 			] ); ?>
 
 			<button class="search-button w-10 h-10 ml-5 mb-2 text-white rounded-full bg-blue-dark hidden md:block">

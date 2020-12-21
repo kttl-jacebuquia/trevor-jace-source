@@ -2,7 +2,7 @@
 
 use DateTime;
 use DateTimeZone;
-use TrevorWP\CPT\RC\RC_Object;
+use TrevorWP\CPT;
 use Twig;
 use TrevorWP\Exception;
 use TrevorWP\Main;
@@ -842,7 +842,7 @@ class Tools {
 	 * @return array
 	 */
 	public static function get_public_post_types(): array {
-		return array_merge( [ \TrevorWP\CPT\Post::POST_TYPE ], RC_Object::$PUBLIC_POST_TYPES );
+		return array_merge( [ \TrevorWP\CPT\Post::POST_TYPE ], CPT\RC\RC_Object::$PUBLIC_POST_TYPES );
 	}
 
 	/**
@@ -862,5 +862,42 @@ class Tools {
 		remove_filter( 'posts_pre_query', array( $inst, 'posts_pre_query' ), 10 );
 
 		remove_filter( 'the_posts', array( $inst, 'the_posts' ), 10 );
+	}
+
+	/**
+	 * @param int|\WP_Post $post
+	 *
+	 * @return string|null
+	 */
+	public static function get_post_category_tax( $post ): ?string {
+		if ( in_array( get_post_type( $post ), CPT\RC\RC_Object::$PUBLIC_POST_TYPES ) ) {
+			return CPT\RC\RC_Object::TAXONOMY_CATEGORY;
+		}
+
+		return 'category';
+	}
+
+	/**
+	 * @param int|\WP_Post $post
+	 *
+	 * @return string|null
+	 */
+	public static function get_post_tag_tax( $post ): ?string {
+		if ( in_array( get_post_type( $post ), CPT\RC\RC_Object::$PUBLIC_POST_TYPES ) ) {
+			return CPT\RC\RC_Object::TAXONOMY_TAG;
+		}
+
+		return 'post_tag';
+	}
+
+	/**
+	 * @param int|\WP_Post $post
+	 *
+	 * @return string|null
+	 */
+	public static function get_post_search_tax( $post ): ?string {
+		if ( in_array( get_post_type( $post ), CPT\RC\RC_Object::$PUBLIC_POST_TYPES ) ) {
+			return CPT\RC\RC_Object::TAXONOMY_SEARCH_KEY;
+		}
 	}
 }

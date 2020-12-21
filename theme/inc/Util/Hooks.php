@@ -331,8 +331,14 @@ class Hooks {
 	public static function template_include( string $template ): string {
 		global $wp_query;
 
+		# Resource center home
 		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
-			$template = locate_template( 'custom/resource-center-lp.php', false );
+			$template = locate_template( 'rc/home.php', false );
+
+			# Search
+			if ( $wp_query->is_search() ) {
+				$template = locate_template( 'rc/search.php', false );
+			}
 		}
 
 		return $template;
