@@ -75,7 +75,7 @@ class Posts {
 	 * @return array
 	 */
 	public static function get_from_list( array $ids, int $num, $fallback = false, array $default_filter = [] ): array {
-		if ( empty( $fallback ) || ! is_array( $fallback ) ) {
+		if ( ! is_array( $fallback ) ) {
 			$fallback = false;
 		}
 
@@ -87,8 +87,13 @@ class Posts {
 			'ignore_sticky_posts' => true,
 		], $default_filter );
 
+		# Ordering
 		if ( empty( $def_args['orderby'] ) ) {
 			$def_args['orderby'] = 'post__in';
+
+			if ( empty( $def_args['order'] ) ) {
+				$def_args['order'] = 'ASC';
+			}
 		}
 
 		# Query
@@ -103,14 +108,27 @@ class Posts {
 		if ( ( $count = count( $posts ) ) < $num && is_array( $fallback ) ) {
 			$posts = array_merge(
 				$posts,
-				get_posts( array_merge( $def_args, [
+				get_posts( $aaaa = array_merge( $def_args, [
 					'post__not_in'   => wp_list_pluck( $posts, 'ID' ),
 					'posts_per_page' => $num - $count,
-					'orderby'        => 'rand',
+					'orderby'        => 'rand', // TODO: Rand from the Top 100 popular
 				], $fallback ) )
 			);
 		}
 
 		return $posts;
+	}
+
+	/**
+	 * @param array $ids
+	 * @param false $fallback
+	 * @param array $default_filter
+	 *
+	 * @return WP_Post|null
+	 */
+	public static function get_one_from_list( array $ids, $fallback = false, array $default_filter = [] ): ?\WP_Post {
+		$results = self::get_from_list( $ids, 1, $fallback, $default_filter );
+
+		return empty( $results ) ? null : reset( $results );
 	}
 }

@@ -25,7 +25,7 @@ $points: (
   @apply absolute top-0 left-0;
   @apply w-full h-full;
   @apply overflow-y-hidden;
-  z-index: -1;
+  @apply -z-1;
 }
 
 #bg-gradient {

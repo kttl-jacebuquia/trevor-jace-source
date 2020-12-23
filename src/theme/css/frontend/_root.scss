@@ -8,8 +8,10 @@ html {
 
 body {
   @apply flex flex-col;
-  @apply min-h-full relative;
+  @apply relative;
   @apply font-manrope;
+  @apply w-full;
+  min-height: calc(100vh - var(--tr-wp-admin-bar-h));
 
   > main {
 	flex: 1 0 auto;

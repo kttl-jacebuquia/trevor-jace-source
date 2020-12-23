@@ -8,45 +8,99 @@ import {
 	CheckboxControl,
 	ColorPalette,
 	SelectControl,
-	TextareaControl,
-	TextControl
 } from "@wordpress/components";
 
-const META_KEY_PREFIX = '_trevor_';
-
+const {editorBlocksData} = TrevorWP.screen;
+const {metaKeys} = editorBlocksData;
+const {[metaKeys.KEY_HEADER_BG_CLR]: BG_COLOR_DATA} = editorBlocksData;
 const META_KEY_MAP = {
-	headerType: META_KEY_PREFIX + 'header_type',
-}
+	headerType: metaKeys.KEY_HEADER_TYPE,
+	headerBgColor: metaKeys.KEY_HEADER_BG_CLR,
+	lengthInd: metaKeys.KEY_LENGTH_IND,
+	showShare: metaKeys.KEY_HEADER_SNOW_SHARE,
+};
+const BG_COLOR_HEX_2_NAME_MAP = (() => {
+	const out = {};
+	Object.keys(BG_COLOR_DATA.colors).forEach(key => out[BG_COLOR_DATA.colors[key].color] = key);
+	return out;
+})();
 
 class PostSidebar extends React.Component {
 	handleHeaderTypeChange = (newVal) => this.props.updatePostMeta('headerType', newVal);
+	handleShowShare = (newVal) => this.props.updatePostMeta('showShare', newVal);
+	handleHeaderBgColor = (colorHex) => {
+		this.props.updatePostMeta('headerBgColor', BG_COLOR_HEX_2_NAME_MAP[colorHex] || null);
+	}
+	handleLengthIndChange = (newVal) => this.props.updatePostMeta('lengthInd', newVal);
+
+	constructor(...args) {
+		super(...args);
+
+		this.selectOptions = {
+			headerTypes: (() => {
+				const {types} = editorBlocksData[META_KEY_MAP.headerType];
+
+				return Object.keys(types).map(key => {
+					const config = types[key];
+					return {value: key, label: config.name}
+				})
+			})(),
+			contentLength: (() => {
+				const {settings} = editorBlocksData[META_KEY_MAP.lengthInd];
+
+				return Object.keys(settings).map(key => {
+					const config = settings[key];
+
+					return {value: key, label: config.name};
+				})
+			})()
+		};
+	}
 
 	render() {
 		const {
 			headerType,
+			headerBgColor,
+			lengthInd,
+			showShare,
 		} = this.props;
+
+		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
 
 		return <>
 			<PluginDocumentSettingPanel name="trvr-entry-header" icon="store" title="Header">
 				<SelectControl
 					label="Header Type"
 					value={headerType}
-					options={(function () {
-						const {types} = TrevorWP.screen.editorBlocksData[META_KEY_MAP.headerType];
-
-						return Object.keys(types).map(key => {
-							const config = types[key];
-							return {value: key, label: config.name}
-						})
-					})()}
+					options={this.selectOptions.headerTypes}
 					onChange={this.handleHeaderTypeChange}
+				/>
+				{-1 !== headerSupports.indexOf('bg-color') &&
+				<BaseControl label="Background Color">
+					<ColorPalette
+						colors={Object.values(BG_COLOR_DATA.colors)}
+						clearable={false}
+						value={(BG_COLOR_DATA.colors[headerBgColor] || {color: BG_COLOR_DATA.colors[BG_COLOR_DATA.default]}).color}
+						disableCustomColors={true}
+						onChange={this.handleHeaderBgColor}
+					/>
+				</BaseControl>
+				}
+				<CheckboxControl label="Show Sharing"
+								 checked={showShare}
+								 onChange={this.handleShowShare}/>
+				<SelectControl
+					label="Content Length"
+					value={lengthInd}
+					options={this.selectOptions.contentLength}
+					onChange={this.handleLengthIndChange}
 				/>
 			</PluginDocumentSettingPanel>
 		</>
 	}
 }
 
-registerPlugin('hatch-babe-article-custom', {
+registerPlugin('trvr-article-custom', {
 	render: compose(
 		// Select
 		withSelect(select => {
@@ -68,8 +122,8 @@ registerPlugin('hatch-babe-article-custom', {
 			const {editPost} = dispatch('core/editor');
 
 			return {
-				updatePostMeta(key, value) {
-					editPost({meta: {[META_KEY_MAP[key]]: value}});
+				updatePostMeta(metaKey, value) {
+					editPost({meta: {[META_KEY_MAP[metaKey]]: value}});
 				},
 				editPost
 			};

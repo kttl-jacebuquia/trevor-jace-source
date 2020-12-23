@@ -1,14 +1,9 @@
 .card-post {
   @apply flex flex-col relative;
-  @apply overflow-hidden rounded-px10;
+  @apply overflow-hidden;
+  @apply shadow-lg rounded-px10;
   @apply text-indigo;
-  min-height: rem-calc(536px);
-
-  min-width: rem-calc(319px);
-  max-width: rem-calc(500px);
-
-  @apply shadow-lg;
-
+  height: rem-calc(503px);
 
   // Thumbnail
   .post-thumbnail-wrap {
@@ -25,6 +20,7 @@
 	@apply bg-white;
 	@apply p-6;
 	@apply flex flex-col flex-1;
+	@apply relative;
   }
 
   .post-category {
@@ -39,7 +35,10 @@
 	flex: 0 1;
   }
 
-  .post-desc{
+  .post-desc {
+	@apply flex-1;
+	overflow: hidden;
+	text-overflow: ellipsis;
   }
 
   .link-read-more {
@@ -51,7 +50,8 @@
   .tags-box {
 	@apply flex flex-row flex-wrap;
 	@apply overflow-y-hidden;
-	z-index: 1;
+	@apply z-1;
+	@apply mt-2;
 	height: rem-calc(34px);
 
 	&.show-all {
@@ -72,17 +72,29 @@
 	}
   }
 
+  // Full Bg
   &.bg-full {
 	@apply text-white;
 
 	.post-thumbnail-wrap {
 	  @apply absolute top-0 left-0 w-full h-full;
 	  @apply rounded-px10;
-	  z-index: -1;
+	  @apply -z-1;
 	}
 
 	.card-content {
 	  @apply bg-transparent;
 	}
+  }
+
+  // Icon
+  .icon-wrap {
+	@apply absolute top-6 right-5;
+	font-size: 1.5rem;
+  }
+
+
+  @screen lg {
+	height: rem-calc(536px);
   }
 }

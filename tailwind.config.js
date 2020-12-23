@@ -24,8 +24,8 @@ module.exports = {
 		screens: {
 			sm: px2rem(640),
 			md: px2rem(768),
-			lg: px2rem(1024),
-			xl: px2rem(1280),
+			lg: px2rem(1440),
+			xl: px2rem(1600),
 			dark: {'raw': '(prefers-color-scheme: dark)'},
 		},
 		colors: {
@@ -66,6 +66,9 @@ module.exports = {
 			},
 			gold: {
 				DEFAULT: '#F9C058',
+			},
+			highlight: {
+				DEFAULT: '#FDE6BC',
 			}
 		},
 		extend: {
@@ -75,12 +78,18 @@ module.exports = {
 			},
 			container: {
 				padding: {
-					DEFAULT: '1rem',
-					md: '2rem',
+					DEFAULT: px2rem(28),
+					md: px2rem(50),
+					lg: px2rem(100),
 				},
 			},
 			borderRadius: {
 				px10: px2rem(10)
+			},
+			height: {
+				px737: px2rem(737),
+				px600: px2rem(600),
+				px490: px2rem(490),
 			},
 			fontSize: {
 				px14: px2rem(14),
@@ -90,6 +99,7 @@ module.exports = {
 				px26: px2rem(26),
 				px32: px2rem(32),
 				px46: px2rem(46),
+				px60: px2rem(60),
 			},
 			lineHeight: {
 				px18: px2rem(18),
@@ -102,12 +112,22 @@ module.exports = {
 				px40: px2rem(40),
 				px42: px2rem(42),
 				px56: px2rem(56),
+				px70: px2rem(70),
 			},
 			letterSpacing: {
 				em005: '0.005em',
 				em001: '0.01em',
-				em_001: '-0.01em',
+				em002: '0.02em',
+				em_001: '-0.01em', // todo: convert to tailwind negative
 				px05: px2rem(.5),
+			},
+			zIndex: {
+				'1': '1',
+				'-1': '-1',
+			},
+			gap: {
+				'sm': px2rem(12),
+				'md': px2rem(28),
 			}
 		},
 	},

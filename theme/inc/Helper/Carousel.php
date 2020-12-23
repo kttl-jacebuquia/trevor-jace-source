@@ -1,7 +1,15 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-
+/**
+ * Carousel Helper
+ */
 class Carousel {
+	/**
+	 * @param array $posts
+	 * @param array $options
+	 *
+	 * @return string
+	 */
 	public static function posts( array $posts, array $options = [] ): string {
 		$options = array_merge( array_fill_keys( [
 				'id', // Main wrapper DOM id
@@ -29,7 +37,7 @@ class Carousel {
 
 		# Extra Classes
 		$ext_cls = [];
-		if ( $options['noMobile'] ) {
+		if ( ! empty( $options['noMobile'] ) ) {
 			$ext_cls[] = 'no-mobile';
 		}
 
@@ -62,8 +70,11 @@ class Carousel {
 		return ob_get_clean();
 	}
 
+	/**
+	 * @param string $base_selector
+	 * @param array $options
+	 */
 	public static function print_js( string $base_selector, array $options = [] ): void {
-		//FIXME; https://medium.com/@networkaaron/swiper-how-to-destroy-swiper-on-min-width-breakpoints-a947491ddec8
 		$options = array_merge( [
 				'slidesPerView'  => 'auto',
 				'spaceBetween'   => 30,

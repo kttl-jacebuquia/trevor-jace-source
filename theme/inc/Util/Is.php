@@ -7,11 +7,11 @@ use TrevorWP\CPT;
  */
 class Is {
 	/**
-	 * Tells whether the current page is related with the support center.
+	 * Tells whether the current page whether related with the resources center or not.
 	 *
 	 * @return bool
 	 */
-	public static function support(): bool {
+	public static function rc(): bool {
 		global $wp_query;
 
 		# Resource Center LP

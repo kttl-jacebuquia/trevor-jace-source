@@ -162,6 +162,7 @@ class Hooks {
 		# Panels
 		new Customizer\External_Scripts( $manager );
 		new Customizer\Resource_Center( $manager );
+		new Customizer\Posts( $manager );
 	}
 
 	/**

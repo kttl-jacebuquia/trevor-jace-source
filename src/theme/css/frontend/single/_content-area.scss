@@ -1,7 +1,58 @@
 .post-single {
-  @apply flex flex-1 flex-col;
+  @apply flex flex-col flex-1;
 }
 
 .post-content-wrap {
-  @apply pt-10;
+  @apply flex flex-col flex-1;
+  @apply bg-white;
+  @apply prose;
+  /* Should be after the prose */
+  @apply max-w-none text-indigo; // TODO: Fix this on tailwind config
+
+  h1, h2, h3, h4, h5 {
+	color: inherit;
+  }
+}
+
+.post-content-grid {
+  @apply mx-auto flex-1;
+  @apply flex flex-col flex-col-reverse;
+}
+
+.post-content {
+
+}
+
+.post-content-sidebar {
+
+}
+
+
+@screen md {
+  .post-content-grid {
+  }
+
+  .post-content {
+	width: percentage(7/8);
+  }
+
+  .post-content-sidebar {
+	width: percentage(5/8);
+  }
+}
+
+@screen lg {
+  .post-content-grid {
+	@apply flex-none grid grid-cols-12;
+  }
+
+  .post-content {
+	@apply w-auto;
+	@apply col-start-2 col-span-7;
+  }
+
+  .post-content-sidebar {
+	@apply w-auto;
+	@apply col-start-10 col-span-3;
+  }
 }

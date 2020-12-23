@@ -4,7 +4,7 @@
 use TrevorWP\Theme\Customizer;
 use \TrevorWP\Theme\Util\Is;
 
-$is_rc = Is::support();
+$is_rc = Is::rc();
 ?>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
@@ -71,7 +71,7 @@ $is_rc = Is::support();
 </div>
 <header id="top-nav" class="top-nav">
 	<input id="top-nav-open" type="checkbox" class="hidden">
-	<div class="top-nav-inner container">
+	<div class="top-nav-inner container <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
 			<a href="<?= esc_attr( get_home_url() ) ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>
@@ -90,7 +90,7 @@ $is_rc = Is::support();
 					'theme_location'  => $is_rc ? 'header-support' : 'header-organization'
 			] ); ?>
 
-			<button class="search-button w-10 h-10 ml-5 mb-2 text-white rounded-full bg-blue-dark hidden md:block">
+			<button class="search-button w-10 h-10 ml-5 mb-2 rounded-full bg-blue-dark hidden md:block">
 				<i class="trevor-ti-search"></i>
 			</button>
 		</div>

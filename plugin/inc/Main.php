@@ -45,6 +45,14 @@ class Main {
 	const CACHE_GROUP_MAIN = self::CACHE_GROUP_PREFIX . 'main';
 	const CACHE_GROUP_TAX_PREFIX = self::CACHE_GROUP_PREFIX . 'tax:';
 
+	/*
+	 * Collections
+	 */
+	const BLOG_POST_TYPES = [
+		CPT\Post::POST_TYPE,
+		CPT\RC\Post::POST_TYPE,
+	];
+
 	/**
 	 * Main constructor.
 	 */

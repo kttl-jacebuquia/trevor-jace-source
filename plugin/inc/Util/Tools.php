@@ -756,11 +756,11 @@ class Tools {
 	 * @param string $t HTML tag, e.g. `p`
 	 * @param string $html
 	 *
-	 * @return array [string $inside, array $attributes]
+	 * @return array [string $inside, array $attributes, string $tag_name]
 	 */
 	public static function parse_simple_block_tag( string $t, string $html ): array {
-		# Parse p tag
-		$result = preg_match( "#^\s+<{$t}\b(?<attrs>[^>]*)>(?<inside>.*?)<\/{$t}>\s+$#", $html, $matches );
+		# Parse
+		$result = preg_match( "#^\s+<(?<tag_name>{$t})\b(?<attrs>[^>]*)>(?<inside>.*?)<\/{$t}>\s+$#", $html, $matches );
 
 		if ( $result === false ) {
 			return [ false, false ];
@@ -777,7 +777,8 @@ class Tools {
 
 		return [
 			@$matches['inside'],
-			$attributes
+			$attributes,
+			@$matches['tag_name'],
 		];
 	}
 

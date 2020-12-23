@@ -1,5 +1,6 @@
 import $ from 'jquery';
-import throttle from 'lodash.throttle';
+import throttle from 'lodash/throttle';
+import './sharing';
 
 const $body = $('body');
 

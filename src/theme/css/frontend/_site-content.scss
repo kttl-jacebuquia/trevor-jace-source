@@ -1,7 +1,7 @@
-.site-content {
-  @apply min-w-full;
-  @apply flex-1;
+#site-content {
+  @apply flex flex-col;
 }
 
 .site-content-inner {
+  @apply flex flex-col flex-1;
 }

@@ -69,7 +69,6 @@ class TagBoxEllipsis {
 }
 
 export default function ($elem) {
-
 	$elem.each(function (idx, elem) {
 		const $elem = $(elem);
 

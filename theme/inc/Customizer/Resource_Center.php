@@ -25,10 +25,11 @@ class Resource_Center extends Abstract_Customizer {
 	const SETTING_HOME_CATS = self::SETTING_HOME_PREFIX . 'cats';
 	const SETTING_HOME_GUIDES = self::SETTING_HOME_PREFIX . 'guides';
 	const SETTING_HOME_GLOSSARY = self::SETTING_HOME_PREFIX . 'glossary';
+	const SETTING_HOME_GLOSSARY_BG_IMG = self::SETTING_HOME_PREFIX . 'glossary_bg_img';
 	const SETTING_HOME_CARD_NUM = self::SETTING_HOME_PREFIX . 'card_num';
 	const PREFIX_SETTING_HOME_CAT_POSTS = self::SETTING_HOME_PREFIX . 'cat_posts_';
 
-	/* All Default */
+	/* All Defaults */
 	const DEFAULTS = [
 		self::SETTING_HOME_CARD_NUM => 10,
 	];
@@ -111,7 +112,7 @@ class Resource_Center extends Abstract_Customizer {
 				'parent'     => 0
 			] ) as $cat
 		) {
-			// TODO: ORDER THEM
+			// TODO: Sort them by the order of categories
 			$setting_id = self::PREFIX_SETTING_HOME_CAT_POSTS . $cat->term_id;
 			$this->_manager->add_setting( $setting_id );
 			$this->_manager->add_control( new Control\Post_Select( $this->_manager, $setting_id, [
@@ -140,6 +141,13 @@ class Resource_Center extends Abstract_Customizer {
 			'allow_order' => true,
 			'label'       => 'Guides',
 			'post_type'   => CPT\RC\Guide::POST_TYPE,
+		] ) );
+
+		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_BG_IMG, [
+			'setting'   => self::SETTING_HOME_GLOSSARY_BG_IMG,
+			'section'   => self::SECTION_HOME_GUIDES,
+			'label'     => 'Background Image',
+			'mime_type' => 'image',
 		] ) );
 
 		## Glossary

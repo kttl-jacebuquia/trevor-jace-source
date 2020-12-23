@@ -199,7 +199,7 @@ abstract class RC_Object {
 				if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX /* TODO: We need a qVar flag to force it */ ) ) {
 					$is_support = $post->post_type === CPT\RC\Post::POST_TYPE;
 				} else {
-					$is_support = Is::support();
+					$is_support = Is::rc();
 				}
 
 				$base = $is_support ? CPT\RC\Post::PERMALINK_BASE : CPT\Post::PERMALINK_BASE;
@@ -388,16 +388,18 @@ abstract class RC_Object {
 			$wp->query_vars['post_type'] = self::$PUBLIC_POST_TYPES;
 		}
 
-		# Catch All
 		if (
-			( $is_rc_non_blog = ! empty( $wp->query_vars[ self::QV_RESOURCES_NON_BLOG ] ) ) &&
 			( $p = intval( $wp->query_vars['p'] ?? 0 ) ) > 0 &&
 			( $post = get_post( $p ) ) &&
-			in_array( $post_type = get_post_type( $post ), self::$PUBLIC_POST_TYPES ) &&
-			$post_type != Post::POST_TYPE // non blog
+			in_array( $post_type = get_post_type( $post ), self::$PUBLIC_POST_TYPES )
 		) {
 			$wp->query_vars['post_type']        = $post->post_type;
 			$wp->query_vars[ $post->post_type ] = $post->post_name;
+
+			if ( $post_type === Post::POST_TYPE ) {
+				// Mark the it as RC blog post
+				$wp->query_vars[ Post::QV_BLOG ] = 1;
+			}
 		}
 	}
 

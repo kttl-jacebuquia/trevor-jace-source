@@ -142,7 +142,7 @@ class External extends RC_Object {
 			$url = $_POST['_input_url'] ?? '';
 
 			if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
-				$post_data['draft']; // Mark it as draft until it has a valid URL
+				$post_data['post_status'] = 'draft'; // Mark it as draft until it has a valid URL
 			}
 		}
 

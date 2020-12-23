@@ -4,4 +4,9 @@
   @apply bg-violet-light;
   @apply cursor-pointer;
   @apply rounded-full;
+
+  &.ellipsis {
+	@apply bg-violet bg-opacity-60;
+	@apply text-white;
+  }
 }

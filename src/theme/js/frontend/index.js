@@ -9,6 +9,7 @@ import './nav';
 
 window.trevorWP = {features, vendors, matchMedia};
 
+// Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
 
 

@@ -7,7 +7,7 @@ $var-tr-wp-admin-bar-h: --tr-wp-admin-bar-h;
 }
 
 body {
-  #{$var-tr-wp-admin-bar-h}: 0;
+  #{$var-tr-wp-admin-bar-h}: 0px;
 }
 
 body.admin-bar {

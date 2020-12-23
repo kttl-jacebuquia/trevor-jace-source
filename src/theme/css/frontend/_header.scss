@@ -1,10 +1,10 @@
 :root {
   --top-bar-height: #{rem-calc(4px)};
-  --top-nav-height: 16rem;
+  --top-nav-height: 8.5rem;
   --top-nav-top-margin: calc(var(--top-bar-height) + var(#{$var-tr-wp-admin-bar-h}));
 
   @screen md {
-	--top-nav-height: 11rem;
+	--top-nav-height: 9rem;
   }
 
   @screen lg {
@@ -127,24 +127,25 @@ body.admin-bar {
   // Logo
   .logo-wrap {
 	@apply flex-1;
-
-	.logo {
-	  @apply inline-block relative;
-	  @apply text-white;
-
-	  .logo-text {
-		font-size: 7rem;
-		line-height: 7rem;
-	  }
-
-	  .logo-icon {
-		@apply block absolute;
-		font-size: 2rem;
-		top: -1.5rem;
-		right: -1rem;
-	  }
-	}
   }
+
+  .logo {
+	@apply inline-block relative;
+  }
+
+  .logo-text {
+	@apply block;
+	font-size: 4.75rem;
+	line-height: 4.75rem;
+  }
+
+  .logo-icon {
+	@apply block absolute;
+	font-size: 1.25rem;
+	top: -.75rem;
+	right: -.25rem;
+  }
+
 
   // Menu
   /* @see: .main-menu-container */
@@ -158,8 +159,9 @@ body.admin-bar {
   }
 
   .opener {
-	font-size: 2.5rem;
-	@apply text-white cursor-pointer;
+	font-size: 3rem;
+	padding-bottom: 1.75rem;
+	@apply cursor-pointer;
   }
 
   // Search Button
@@ -175,6 +177,22 @@ body.admin-bar {
 
 	.menu-wrap {
 	  @apply flex;
+	  margin-top: -4rem;
+	}
+
+	.logo-text {
+	  font-size: 7rem;
+	  line-height: 7rem;
+	  margin-left: -1.25rem;
+	  margin-top: 3rem;
+	  @apply block;
+	}
+
+	.logo-icon {
+	  @apply block absolute;
+	  font-size: 2.25rem;
+	  top: 1.75rem;
+	  right: -1rem;
 	}
   }
 }
@@ -259,7 +277,7 @@ body.admin-bar {
 	  // First tier
 	  > li {
 		> a {
-		  @apply text-white font-bold;
+		  @apply font-bold;
 		  font-size: rem-calc(22px);
 		  line-height: rem-calc(26px);
 		  letter-spacing: 0.01em;

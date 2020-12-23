@@ -1,5 +1,5 @@
 .post-header {
-  height: 100vh;
+  height: auto;
   min-height: 450px;
   max-height: 720px;
 }
@@ -10,24 +10,57 @@
 }
 
 .post-header-content {
-  @apply mx-auto flex flex-col items-center text-white;
+  @apply mx-auto flex flex-col items-center text-center;
+  @apply pt-2;
 
   .title-top {
-	@apply text-px14 leading-px18 tracking-px05 font-medium;
+	@apply text-px14 leading-px18 tracking-px05 font-medium uppercase;
   }
 
   .title {
 	@apply text-px32 leading-px40 tracking-em001 font-semibold;
-	@apply my-3;
+	@apply my-3.5;
   }
 
   .title-btm {
 	@apply text-px18 leading-px24 font-normal;
   }
 
+  // Mid Row
+  .mid-row {
+	@apply flex flex-row items-center;
+	@apply my-2;
+  }
+
+  .length-indicator {
+	@apply font-extrabold text-px14 leading-px26;
+  }
+
+  .mid-row-v-separator {
+	@apply mx-4;
+	width: rem-calc(1px);
+	height: rem-calc(29px);
+
+	.post-header.text-white & {
+	  @apply bg-white;
+	}
+
+	.post-header.text-indigo & {
+	  @apply bg-indigo;
+	}
+  }
+
   // Tags
   .tags-box {
-	@apply mt-6;
+	@apply flex justify-center flex-wrap;
+
+	> * {
+	  display: block;
+	  height: auto;
+	  width: auto;
+	  white-space: nowrap;
+	  @apply m-1;
+	}
   }
 
   // Sharing Box
@@ -53,6 +86,10 @@
 
 	.title-btm {
 	  @apply text-base leading-px22;
+	}
+
+	.length-indicator {
+	  @apply uppercase;
 	}
 
 	// Sharing Box
@@ -88,7 +125,6 @@
 
 // Types
 .post-header {
-
 
   &.type-split {
 	@apply z-10;
@@ -136,7 +172,7 @@
 	@apply relative overflow-hidden;
 
 	.thumbnail-wrap {
-	  z-index: -1;
+	  @apply -z-1;
 	  @apply h-full absolute top-0 left-0 w-screen;
 
 	  img {
@@ -151,7 +187,7 @@
 	/* Split */
 	&.type-split {
 	  .post-header-inner {
-		@apply grid grid-cols-2 gap-4;
+		@apply grid grid-cols-2 gap-y-20;
 	  }
 	}
 
@@ -180,7 +216,10 @@
 	/* Only horizontal & text_only keeps it centered. */
 	&:not(.type-horizontal):not(.type-text_only) {
 	  .post-header-content {
-		@apply items-start;
+		@apply items-start text-left;
+		.tags-box {
+		  @apply justify-start;
+		}
 	  }
 	}
   }
@@ -205,5 +244,14 @@
 		}
 	  }
 	}
+
+	/* Only horizontal & text_only keeps it centered. */
+	&:not(.type-horizontal):not(.type-text_only) {
+	  .post-header-content {
+		margin-top: 5rem;
+		margin-bottom: 9rem;
+	  }
+	}
+
   }
 }

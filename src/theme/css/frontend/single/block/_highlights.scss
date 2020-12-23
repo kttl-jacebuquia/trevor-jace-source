@@ -1,0 +1,49 @@
+.post-highlights-container {
+  .post-highlights-title {
+	@apply uppercase;
+	@apply font-extrabold text-px14 leading-px24
+  }
+
+  .post-highlights-list {
+	li {
+	  @apply px-0;
+	  @apply font-normal text-base leading-px22;
+
+	  & + li {
+		margin-top: rem-calc(14px);
+		margin-bottom: 0;
+	  }
+
+	  a {
+		@apply font-extrabold;
+		@apply no-underline;
+	  }
+
+	  &::before {
+		@apply hidden;
+	  }
+	}
+  }
+
+  .highlight-link {
+	@apply bg-highlight;
+  }
+
+
+  @screen lg {
+	.post-highlights-list {
+	  li {
+		& + li {
+		  margin-top: rem-calc(20px);
+		}
+	  }
+	}
+  }
+}
+
+// Highlight headings on link hover
+.post-content-wrap .highlight-heading {
+  @apply bg-highlight;
+  transition: all .2s;
+}
+
