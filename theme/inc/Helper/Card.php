@@ -18,7 +18,8 @@ class Card {
 		# Default class
 		$_class[] = 'card-post';
 
-		$title_top = $title_btm = $desc = $icon_cls = null;
+		$title_top  = $title_btm = $desc = $icon_cls = null;
+		$is_bg_full = false;
 
 		# Determine the type
 		if ( $post_type == CPT\RC\Glossary::POST_TYPE ) {
@@ -26,14 +27,14 @@ class Card {
 			$title_btm = $post->post_excerpt;
 			$desc      = $post->post_content;
 		} elseif ( $post_type == CPT\RC\External::POST_TYPE ) {
-			$title_top = 'Resource';
-			$desc      = $post->post_excerpt;
-			$_class[]  = 'bg-full'; // Full img bg
-			$icon_cls  = 'trevor-ti-link-out';
+			$title_top  = 'Resource';
+			$desc       = $post->post_excerpt;
+			$is_bg_full = true;
+			$icon_cls   = 'trevor-ti-link-out';
 		} elseif ( $post_type == CPT\RC\Guide::POST_TYPE ) {
-			$title_top = 'Guide';
-			$desc      = $post->post_excerpt;
-			$_class[]  = 'bg-full'; // Full img bg
+			$title_top  = 'Guide';
+			$desc       = $post->post_excerpt;
+			$is_bg_full = true;
 		} elseif ( $post_type == CPT\RC\Article::POST_TYPE ) {
 			$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
 			$first_cat  = empty( $categories ) ? null : reset( $categories );
@@ -45,16 +46,35 @@ class Card {
 			$title_top = 'Blog';
 		}
 
+		if ( $is_bg_full ) {
+			$_class[] = 'bg-full'; // Full img bg
+		}
+
 		# Tags
 		$tags = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_TAG );
+
+		# Thumbnail variants
+		$thumb_var   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];
+		$thumb_var_h = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+
+		if ( $is_bg_full ) {
+			// Prefer vertical image on full bg
+			array_unshift( $thumb_var, $thumb_var_h );
+		} else {
+			$thumb_var[] = $thumb_var_h;
+		}
+
+		// Fallback to the square
+		$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
 
 		ob_start();
 		?>
 		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
 			<?php if ( $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<?php /* TODO: Use Thumbnail helper to load different image types */ ?>
-					<?= get_the_post_thumbnail( $post, 'medium', [ 'class' => 'post-header-bg' ] ); ?>
+					<?= Thumbnail::post(
+							$post,
+							...$thumb_var ) ?>
 				</div>
 			<?php } ?>
 
@@ -94,5 +114,19 @@ class Card {
 		</article>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return array
+	 */
+	protected static function _get_thumb_var( string $type ): array {
+		return Thumbnail::variant(
+				Thumbnail::SCREEN_SM,
+				$type,
+				Thumbnail::SIZE_MD,
+				[ 'class' => 'post-header-bg' ]
+		);
 	}
 } ?>

@@ -1,0 +1,11 @@
+<div class="trevor-block trevor-block-link-list">
+	{% if title %}
+		<h3 class="list-title">{{ title }}</h3>
+	{% endif %}
+
+	<ul class="list">
+		{% for item in items %}
+			{{ item|raw }}
+		{% endfor %}
+	</ul>
+</div>

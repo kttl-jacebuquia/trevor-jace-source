@@ -75,7 +75,7 @@ class StaticFiles {
 	}
 
 	/**
-	 * Enqueues JS runtime.
+	 * Enqueues Webpack runtime.
 	 */
 	protected static function _enqueue_js_runtime(): void {
 		wp_enqueue_script(

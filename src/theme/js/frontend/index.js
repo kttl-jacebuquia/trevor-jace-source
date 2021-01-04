@@ -14,19 +14,19 @@ features.tagBoxEllipsis($('.card-post'));
 
 
 jQuery(function ($) {
-	$('#input-search').autocomplete({
-		source: function ({term}, response) {
-			const url = new URL($('meta[name=ac-ajax-url]').attr("content"));
-			url.searchParams.set('term', term);
+	// $('#input-search').autocomplete({
+	// 	source: function ({term}, response) {
+	// 		const url = new URL($('meta[name=ac-ajax-url]').attr("content"));
+	// 		url.searchParams.set('term', term);
+	//
+	// 		$.post(url.toString(), (resp) => {
+	// 			console.log(term, resp);
+	// 			response(((resp.correctlySpelled || resp.collations.length === 0) ? [term] : []).concat(resp.collations.map(({query}) => query)));
+	// 		});
+	// 	}
+	// });
 
-			$.post(url.toString(), (resp) => {
-				console.log(term, resp);
-				response(((resp.correctlySpelled || resp.collations.length === 0) ? [term] : []).concat(resp.collations.map(({query}) => query)));
-			});
-		}
-	});
-
-	$('#input-search-2').autocomplete({
+	$('#rc-search-main').autocomplete({
 		classes: {
 			"ui-autocomplete": "highlight-2"
 		},

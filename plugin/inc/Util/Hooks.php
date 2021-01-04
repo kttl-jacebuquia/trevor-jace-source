@@ -89,11 +89,6 @@ class Hooks {
 			Admin\Post_Rank_Column::register_hooks();
 		}
 
-		add_action( 'wp_ajax_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
-		add_action( 'wp_ajax_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
-
 		# Custom Hooks
 		add_action( 'trevor_post_ranks_updated', [ self::class, 'trevor_post_ranks_updated' ], 10, 1 );
 
@@ -114,6 +109,16 @@ class Hooks {
 
 		# Wrap Singular Post Blocks
 		add_filter( 'the_content', [ self::class, 'the_content' ], 8, 1 );
+
+		# Editor Blocks
+		add_filter( 'block_categories', [ self::class, 'block_categories' ], 10, 2 );
+		add_action( 'init', [ Block\Base::class, 'register_all' ] );
+
+		# TODO: Remove search demo hooks
+		add_action( 'wp_ajax_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
+		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
+		add_action( 'wp_ajax_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
+		add_action( 'wp_ajax_nopriv_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
 	}
 
 	public static function highlight_search(): void {
@@ -133,6 +138,9 @@ class Hooks {
 		$query = $client->createSelect();
 		$query->setQuery( $term );
 		$query->setFields( [ 'ID', 'post_title' ] );
+
+		$aa = "post_type:(" . implode( " OR ", CPT\RC\RC_Object::$ALL_POST_TYPES ) . ")";
+		$query->createFilterQuery( 'post_types' )->setQuery( $aa );
 
 		// get highlighting component and apply settings
 		$hl = $query->getHighlighting();
@@ -503,4 +511,25 @@ class Hooks {
 		return $content;
 	}
 
+	/**
+	 * Filter the default array of block categories.
+	 *
+	 * @param array $categories
+	 * @param WP_Post $post
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/block_categories/
+	 */
+	public static function block_categories( array $categories, WP_Post $post ): array {
+		if ( in_array( $post->post_type, Tools::get_public_post_types() ) ) {
+			array_unshift( $categories, [
+					'slug'  => 'trevor',
+					'title' => 'Trevor Custom',
+					'icon'  => null,
+			] );
+		}
+
+		return $categories;
+	}
 }

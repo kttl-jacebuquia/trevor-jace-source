@@ -1,7 +1,6 @@
 <?php namespace TrevorWP\CPT\RC;
 
 use TrevorWP\Main;
-use TrevorWP\Util\Tools;
 use WP_Post;
 use WP_Screen;
 

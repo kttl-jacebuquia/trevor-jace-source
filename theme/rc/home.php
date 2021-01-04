@@ -82,6 +82,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 						<label>
 							<span class="sr-only">Search for:</span>
 							<input type="search" class="search-field p-4 w-full rounded-lg"
+								   id="rc-search-main"
 								   placeholder="What do you want to learn about?"
 								   value="<?= get_search_query( true ) ?>" name="s"/>
 						</label>
@@ -104,9 +105,8 @@ $featured_word = Helper\Posts::get_one_from_list(
 				</div>
 
 				<div class="mt-8 md:fixed md:bottom-10 md:right-10 z-10">
-					<a href="#"
-					   class="py-2 px-6 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl">Reach
-						a Counselor</a>
+					<a class="py-2 px-6 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl"
+					   href="#">Reach a Counselor</a>
 				</div>
 			</div>
 		</div>

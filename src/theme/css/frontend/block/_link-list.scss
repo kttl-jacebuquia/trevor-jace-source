@@ -1,0 +1,65 @@
+.trevor-block-link-list {
+  @apply bg-gray;
+  @apply text-indigo;
+  padding: rem-calc(40px) rem-calc(28px);
+  width: 100vw;
+  margin-left: calc(-1 * theme('container.padding.DEFAULT')); // TODO: https://github.com/postcss/postcss-calc
+
+  .list-title {
+	@apply font-bold text-px24 leading-px36;
+	@apply mt-0;
+  }
+
+  .list {
+
+  }
+
+  .list-item {
+	// Reset prone
+	@apply pl-0;
+	&:before {
+	  @apply hidden;
+	}
+
+	a {
+	  color: inherit;
+	  @apply font-semibold text-px18 leading-px26;
+	}
+
+	.icon-external {
+	  @apply pl-2;
+	  font-size: .75em;
+	}
+  }
+
+  @screen sm {
+	margin-left: initial;
+	width: 100%;
+  }
+
+  @screen md {
+	padding: rem-calc(40px);
+
+	.list-title {
+	  @apply text-px28 leading-px38;
+	}
+
+	.list-item {
+	  a {
+		@apply leading-px28;
+	  }
+	}
+  }
+
+  @screen lg {
+	.list-title {
+	  @apply text-px30 leading-px40;
+	}
+
+	.list-item {
+	  a {
+		@apply text-px20 leading-px30;
+	  }
+	}
+  }
+}

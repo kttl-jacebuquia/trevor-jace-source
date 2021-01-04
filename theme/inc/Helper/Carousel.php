@@ -104,16 +104,23 @@ class Carousel {
 								'spaceBetween'   => 30,
 								'centeredSlides' => false,
 						]
-				]
+				],
+				'on'             => new \stdClass()
 		], $options );
 		?>
-		<script>
+		<script><?php /* TODO: Instead of printing this for each carousel, create a controller & use that. */ ?>
 			(function () {
 				var swiper;
+				var options = <?= json_encode( $options )?>;
+				options.on.init = function () {
+					document.querySelectorAll('<?= esc_js( $base_selector )?> .card-post').forEach(elem=>{
+						elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
+					});
+				}
 
 				function init() {
 					if (!swiper || swiper.destroyed) {
-						swiper = new trevorWP.vendors.Swiper('<?= esc_js( $base_selector )?> .carousel-container', <?= json_encode( $options )?>);
+						swiper = new trevorWP.vendors.Swiper('<?= esc_js( $base_selector )?> .carousel-container', options);
 					}
 				}
 

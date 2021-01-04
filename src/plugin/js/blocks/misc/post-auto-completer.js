@@ -9,8 +9,6 @@ export default (collectionName = 'Posts', _apiOptions = {}, context) => ({term: 
 		apiOptions.filter.nopaging = true;
 	}
 
-	console.log({collectionName})
-
 	const col = new wp.api.collections[collectionName]();
 
 	col.fetch({

@@ -171,7 +171,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
 	 */
 	public static function wp_head(): void {
-		if ( is_front_page() ) {
+		if ( $is_fp = is_front_page() ) {
 			echo '<meta name="description" content="' . esc_attr( get_option( 'blogdescription' ) ) . '"/>' . PHP_EOL;
 			echo '<meta property="og:title" content="' . esc_attr( get_option( 'blogname' ) ) . '"/>' . PHP_EOL;
 			echo '<meta property="og:url" content="' . home_url() . '"/>' . PHP_EOL;
@@ -181,7 +181,7 @@ class Hooks {
 			return;
 		}
 
-		if ( ! is_singular( 'post' ) ) {
+		if ( ! is_singular( \TrevorWP\Util\Tools::get_public_post_types() ) ) {
 			return;
 		}
 

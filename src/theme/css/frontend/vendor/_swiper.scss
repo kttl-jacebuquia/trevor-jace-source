@@ -129,6 +129,17 @@
   }
 }
 
+/* Hide Single Pagination Dot */
+.swiper-pagination-lock {
+  @apply hidden;
+}
 
+/* Hide the swiper buttons hidden by default */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none;
 
-
+  .swiper-container-initialized & {
+	display: initial;
+  }
+}

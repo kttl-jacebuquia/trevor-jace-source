@@ -2,6 +2,7 @@
 
 use TrevorWP\Main;
 use TrevorWP\Theme;
+use TrevorWP\CPT;
 use TrevorWP\Util\Tools;
 
 /**
@@ -17,6 +18,9 @@ class Post {
 	# Images
 	const KEY_IMAGE_SQUARE = Main::META_KEY_PREFIX . 'image_square';
 	const KEY_IMAGE_HORIZONTAL = Main::META_KEY_PREFIX . 'image_horizontal';
+
+	# File
+	const KEY_FILE = Main::META_KEY_PREFIX . 'file';
 
 	# Header
 	const KEY_HEADER_TYPE = Main::META_KEY_PREFIX . 'header_type';
@@ -34,6 +38,11 @@ class Post {
 
 	# Main Category
 	const KEY_MAIN_CATEGORY = Main::META_KEY_PREFIX . 'main_category';
+
+	# Misc
+	const FILE_ENABLED_POST_TYPES = [
+		CPT\RC\Guide::POST_TYPE,
+	];
 
 	/**
 	 * Registers all registered post meta.
@@ -60,12 +69,17 @@ class Post {
 				self::KEY_IMAGE_SQUARE      => [],
 				self::KEY_IMAGE_HORIZONTAL  => [],
 				self::KEY_HIGHLIGHTS        => [ 'type' => 'array', 'default' => [], 'show_in_rest' => false ],
-				self::KEY_MAIN_CATEGORY     => [ 'type' => 'integer', 'default' => 0 ]
+				self::KEY_MAIN_CATEGORY     => [ 'type' => 'integer', 'default' => 0 ],
 			] as $meta_key => $args
 		) {
 			foreach ( Tools::get_public_post_types() as $post_type ) {
 				register_post_meta( $post_type, $meta_key, array_merge( $default, $args ) );
 			}
+		}
+
+		# File Enabled
+		foreach ( self::FILE_ENABLED_POST_TYPES as $post_type ) {
+			register_post_meta( $post_type, self::KEY_FILE, $default );
 		}
 	}
 
@@ -108,7 +122,10 @@ class Post {
 	public static function get_editor_config( \WP_Post $post ): array {
 		$ppt    = Tools::get_public_post_types();
 		$config = [
-			'metaKeys' => []
+			'metaKeys'    => [],
+			'collections' => [
+				'fileEnabled' => self::FILE_ENABLED_POST_TYPES
+			]
 		];
 
 		# Collect Meta Keys
@@ -221,5 +238,20 @@ class Post {
 	 */
 	public static function get_square_img_id( int $post_id ): int {
 		return (int) get_post_meta( $post_id, self::KEY_IMAGE_SQUARE, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return int|null
+	 */
+	public static function get_file_id( int $post_id ): ?int {
+		$val = get_post_meta( $post_id, self::KEY_FILE, true );
+
+		if ( ! empty( $val ) && is_numeric( $val ) ) {
+			return (int) $val;
+		}
+
+		return null;
 	}
 }

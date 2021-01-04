@@ -1,0 +1,24 @@
+.post-file-wrap {
+  @apply my-8;
+
+  a {
+	@apply text-white;
+	@apply no-underline;
+  }
+}
+
+.post-file-btn {
+  @apply bg-indigo;
+  @apply rounded-full;
+  @apply text-base leading-px22;
+  padding: rem-calc(12px) rem-calc(28px);
+}
+
+
+.post-file-btn-cta {
+  @apply font-bold;
+}
+
+.post-file-btn-icn {
+  @apply ml-2;
+}

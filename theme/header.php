@@ -55,7 +55,7 @@ $is_rc = Is::rc();
 		</div>
 		<ul class="switcher">
 			<li>
-				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\Guide::PERMALINK_BASE ) ) ?>"
+				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>"
 				   class="<?= $is_rc ? 'active' : '' ?>">Resource Center</a>
 			</li>
 			<li>

@@ -8,7 +8,9 @@ import {
 	CheckboxControl,
 	ColorPalette,
 	SelectControl,
+	TextControl,
 } from "@wordpress/components";
+import FileFiled from "./fields/file";
 
 const {editorBlocksData} = TrevorWP.screen;
 const {metaKeys} = editorBlocksData;
@@ -32,6 +34,7 @@ class PostSidebar extends React.Component {
 		this.props.updatePostMeta('headerBgColor', BG_COLOR_HEX_2_NAME_MAP[colorHex] || null);
 	}
 	handleLengthIndChange = (newVal) => this.props.updatePostMeta('lengthInd', newVal);
+	handleSlugChange = (slug) => this.props.editPost({slug});
 
 	constructor(...args) {
 		super(...args);
@@ -62,19 +65,36 @@ class PostSidebar extends React.Component {
 			headerType,
 			headerBgColor,
 			lengthInd,
+			postType,
 			showShare,
+			slug,
 		} = this.props;
 
 		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
 
 		return <>
+			<PluginDocumentSettingPanel name="trvr-entry-general" icon="admin-settings" title="General">
+				{/* Slug */}
+				<TextControl label="Slug" value={slug} onChange={this.handleSlugChange}/>
+
+				{/* File */}
+				{-1 !== editorBlocksData.collections.fileEnabled.indexOf(postType) &&
+				<FileFiled
+					key="fileInput"
+					metaKey={TrevorWP.screen.editorBlocksData.metaKeys['KEY_FILE']}
+					label="PDF Version"
+					allowedTypes={['application/pdf']}
+				/>}
+			</PluginDocumentSettingPanel>
 			<PluginDocumentSettingPanel name="trvr-entry-header" icon="store" title="Header">
+				{/* Header Type */}
 				<SelectControl
 					label="Header Type"
 					value={headerType}
 					options={this.selectOptions.headerTypes}
 					onChange={this.handleHeaderTypeChange}
 				/>
+				{/* Header BG Color */}
 				{-1 !== headerSupports.indexOf('bg-color') &&
 				<BaseControl label="Background Color">
 					<ColorPalette
@@ -86,9 +106,13 @@ class PostSidebar extends React.Component {
 					/>
 				</BaseControl>
 				}
+
+				{/* Sharing Box */}
 				<CheckboxControl label="Show Sharing"
 								 checked={showShare}
 								 onChange={this.handleShowShare}/>
+
+				{/* Content Length */}
 				<SelectControl
 					label="Content Length"
 					value={lengthInd}
@@ -104,14 +128,15 @@ registerPlugin('trvr-article-custom', {
 	render: compose(
 		// Select
 		withSelect(select => {
-			const {getEditedPostAttribute, getCurrentPostType} = select('core/editor');
+			const {getEditedPostAttribute, getCurrentPostType, getEditedPostSlug} = select('core/editor');
 			const postID = getEditedPostAttribute('id');
 			const metaData = getEditedPostAttribute('meta');
+			const slug = getEditedPostSlug();
 			const normalTitle = getEditedPostAttribute('title');
 			const template = getEditedPostAttribute('template');
 			const postType = getCurrentPostType();
 
-			const out = {postID, normalTitle, template, postType};
+			const out = {postID, normalTitle, template, postType, slug};
 
 			Object.keys(META_KEY_MAP).forEach(varName => out[varName] = metaData[META_KEY_MAP[varName]]);
 

@@ -96,7 +96,10 @@ module.exports = {
 				px18: px2rem(18),
 				px20: px2rem(20),
 				px22: px2rem(22),
+				px24: px2rem(24),
 				px26: px2rem(26),
+				px28: px2rem(28),
+				px30: px2rem(30),
 				px32: px2rem(32),
 				px46: px2rem(46),
 				px60: px2rem(60),
@@ -107,8 +110,11 @@ module.exports = {
 				px22: px2rem(22),
 				px24: px2rem(24),
 				px26: px2rem(26),
+				px28: px2rem(28),
+				px30: px2rem(30),
 				px32: px2rem(32),
 				px36: px2rem(36),
+				px38: px2rem(38),
 				px40: px2rem(40),
 				px42: px2rem(42),
 				px56: px2rem(56),
@@ -128,6 +134,9 @@ module.exports = {
 			gap: {
 				'sm': px2rem(12),
 				'md': px2rem(28),
+			},
+			spacing: {
+				px30: px2rem(30)
 			}
 		},
 	},

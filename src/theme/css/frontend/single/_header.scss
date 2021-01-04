@@ -12,6 +12,7 @@
 .post-header-content {
   @apply mx-auto flex flex-col items-center text-center;
   @apply pt-2;
+  @apply w-full;
 
   .title-top {
 	@apply text-px14 leading-px18 tracking-px05 font-medium uppercase;

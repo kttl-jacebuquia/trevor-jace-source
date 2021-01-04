@@ -1,0 +1,25 @@
+.block-editor-block-list__block[data-type="trevor/link-list"] {
+  padding: 1rem 0;
+  border: 1px solid #ddd;
+
+  &:not(.is-selected) {
+	border-left: none;
+	border-right: none;
+  }
+
+  &.is-selected {
+	.wp-block-trevor-link-list {
+	  padding: 1rem;
+	}
+  }
+}
+
+.block-editor-block-list__block[data-type="trevor/link-list--item"] {
+  &.is-selected {
+	.wp-block-trevor-link-list--item {
+	  border: 1px dashed #ddd;
+	  padding: 1rem;
+	}
+  }
+}
+

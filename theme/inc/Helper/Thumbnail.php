@@ -127,7 +127,7 @@ class Thumbnail {
 			}
 
 			if ( $prev ) {
-				$class[] = 'hidden';
+				$class[] = 'hidden'; // tailwindcss md:hidden lg:hidden md:block lg:block
 				$class[] = $screen . ( empty( $screen ) ? '' : ':' ) . 'block';
 			}
 
@@ -171,4 +171,5 @@ class Thumbnail {
 	}
 
 
+	// TODO: FIND a way for variant <-> multiple image variations, it is important for the RC home heros
 }

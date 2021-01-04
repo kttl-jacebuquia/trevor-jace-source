@@ -111,7 +111,8 @@ abstract class RC_Object {
 		] );
 
 		## Tag
-		register_taxonomy( self::TAXONOMY_TAG, self::$PUBLIC_POST_TYPES, [
+		$tag_post_types = array_diff( self::$PUBLIC_POST_TYPES, [ External::POST_TYPE ] );
+		register_taxonomy( self::TAXONOMY_TAG, $tag_post_types, [
 			'public'            => true,
 			'hierarchical'      => false,
 			'show_in_rest'      => true,
