@@ -83,7 +83,7 @@ $is_rc = Is::rc();
 			<div class="opener"><i class="trevor-ti-hamburger-menu"></i></div>
 		</div>
 
-		<div class="menu-wrap flex pt-4 items-start">
+		<div class="menu-wrap flex pt-4 items-start lg:pt-0">
 			<?php wp_nav_menu( [
 					'menu_class'      => 'main-menu',
 					'container_class' => 'main-menu-container',

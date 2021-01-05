@@ -181,17 +181,17 @@ body.admin-bar {
 	}
 
 	.logo-text {
-	  font-size: 7rem;
+	  font-size: 7.25rem;
 	  line-height: 7rem;
 	  margin-left: -1.25rem;
-	  margin-top: 3rem;
+	  margin-top: 2rem;
 	  @apply block;
 	}
 
 	.logo-icon {
 	  @apply block absolute;
 	  font-size: 2.25rem;
-	  top: 1.75rem;
+	  top: 0.5rem;
 	  right: -1rem;
 	}
   }
@@ -208,7 +208,6 @@ body.admin-bar {
 	  @apply grid-flow-row;
 	  @apply px-6;
 	}
-
 
 	.logo-wrap {
 	  @apply hidden;

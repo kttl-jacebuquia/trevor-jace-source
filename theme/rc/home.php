@@ -64,26 +64,25 @@ $featured_word = Helper\Posts::get_one_from_list(
 
 <?php if ( ! is_paged() ) { ?>
 	<main id="site-content" role="main" class="site-content">
-		<div class="container mx-auto text-center site-content-inner">
-			<div class="lg:w-4/6 mx-auto">
-				<h2 class="bold text-white text-px14 leading-px18 tracking-px05">
+		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
+			<div class="mx-auto lg:w-4/6 lg:-mt-2">
+				<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 					FIND ANSWERS
 				</h2>
 				<h1>
-				<span class="text-white font-manrope"
-					  style="font-size: 32px; line-height: 42px; letter-spacing: 0.005em;">Connection starts</span>
-					<span class="block text-white font-caveat transform bold"
-						  style="--tw-rotate: -1deg; font-size: 44px; line-height: 54px;">with knowledge.</span>
+				<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>
+					<span class="block text-white font-caveat transform font-bold text-px44 leading-px54 tracking-em005 -mt-4 md:mt-0 lg:text-px70 lg:leading-px80"
+						  style="--tw-rotate: -1deg;">with knowledge.</span>
 				</h1>
 
-				<div class="my-10 lg:w-4/6 mx-auto">
+				<div class="my-8 mx-auto md:px-8 md:my-6 lg:w-9/12 lg:px-0">
 					<form role="search" method="get" class="search-form"
 						  action="<?= esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>">
 						<?= Helper\Search_Input::render_rc(); ?>
 					</form>
 				</div>
 
-				<p class="text-white">Browse a topic or check out what’s trending.</p>
+				<p class="text-white md:mt-8 md:mb-5">Browse a topic or check out what’s trending.</p>
 
 				<div class="flex flex-wrap justify-center mt-4">
 					<?php foreach ( $featured_cats as $cat ) { ?>
@@ -98,8 +97,8 @@ $featured_word = Helper\Posts::get_one_from_list(
 					<i class="trevor-ti-chevron-down text-4xl text-white"></i>
 				</div>
 
-				<div class="mt-8 md:fixed md:bottom-10 md:right-10 z-10">
-					<a class="py-2 px-6 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl"
+				<div class="my-14 md:fixed md:bottom-10 md:right-10 z-10">
+					<a class="py-4 px-12 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl"
 					   href="#">Reach a Counselor</a>
 				</div>
 			</div>
@@ -139,7 +138,7 @@ if ( $featured_guide ) {
 		   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
 	<?php } ?>
 	<h2 class="text-px32 leading-px42 font-semibold mb-5 lg:text-60 lg:leading-70"><?= get_the_title( $featured_guide ); ?></h2>
-	<a class="stretched-link underline font-semibold tracking-px05 text-px20 leading-px26 lg:text-px24 lg:leading-px26"
+	<a class="stretched-link underline font-semibold tracking-px05 text-px20 leading-px26 lg:text-px18 lg:leading-px26"
 	   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
 	<?php $context = ob_get_clean();
 	echo Helper\Hero::img_bg( get_post_thumbnail_id( $featured_guide ), $context, [ 'root_cls' => $root_cls ] );
