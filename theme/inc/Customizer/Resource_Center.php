@@ -108,6 +108,7 @@ class Resource_Center extends Abstract_Customizer {
 			'allow_order' => true,
 			'label'       => 'Featured Posts',
 			'post_type'   => CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
+			'description' => 'Suggested post count: 3'
 		] ) );
 
 		## Categories
