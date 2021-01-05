@@ -79,13 +79,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				<div class="my-10 lg:w-4/6 mx-auto">
 					<form role="search" method="get" class="search-form"
 						  action="<?= esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>">
-						<label>
-							<span class="sr-only">Search for:</span>
-							<input type="search" class="search-field p-4 w-full rounded-lg"
-								   id="rc-search-main"
-								   placeholder="What do you want to learn about?"
-								   value="<?= get_search_query( true ) ?>" name="s"/>
-						</label>
+						<?= Helper\Search_Input::render_rc(); ?>
 					</form>
 				</div>
 

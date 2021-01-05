@@ -18,18 +18,19 @@ class Glossary extends RC_Object {
 	static function register_post_type(): void {
 		# Post Type
 		register_post_type( self::POST_TYPE, [
-			'labels'       => [
+			'labels'              => [
 				'name'          => 'Glossary',
 				'singular_name' => 'Glossary Entry',
 				'add_new'       => 'Add New Entry'
 			],
-			'public'       => false,
-			'show_ui'      => true,
-			'hierarchical' => false,
-			'show_in_rest' => true,
-			'supports'     => [ 'title' ],
-			'has_archive'  => false,
-			'rewrite'      => false,
+			'public'              => false,
+			'show_ui'             => true,
+			'hierarchical'        => false,
+			'show_in_rest'        => true,
+			'supports'            => [ 'title' ],
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'exclude_from_search' => false,
 		] );
 
 		# Check page id for rest of the hooks

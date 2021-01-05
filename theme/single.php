@@ -15,6 +15,7 @@
 					</div>
 				</div>
 			</div><!-- .post-content-wrap -->
+			<?= \TrevorWP\Theme\Helper\Post::render_bottom_blocks($post) ?>
 		</article><!-- .post -->
 	</div>
 </main> <!-- #site-content -->

@@ -76,6 +76,10 @@
   &.bg-full {
 	@apply text-white;
 
+	&.no-thumbnail {
+	  @apply text-indigo bg-white;
+	}
+
 	.post-thumbnail-wrap {
 	  @apply absolute top-0 left-0 w-full h-full;
 	  @apply rounded-px10;

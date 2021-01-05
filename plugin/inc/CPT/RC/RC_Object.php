@@ -1,6 +1,8 @@
 <?php namespace TrevorWP\CPT\RC;
 
+use TrevorWP\Block\Glossary_Entry;
 use TrevorWP\Main;
+use TrevorWP\Theme\Customizer\Resource_Center;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Log;
 use TrevorWP\CPT;
@@ -78,6 +80,7 @@ abstract class RC_Object {
 		add_filter( 'parent_file', [ self::class, 'parent_file' ], 10, 1 );
 		add_action( 'parse_request', [ self::class, 'parse_request' ], 10, 1 );
 		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
+		add_filter( 'posts_request', [ self::class, 'posts_request' ], 8 /* Must be lower than the Solr's hook */, 2 );
 	}
 
 	/**
@@ -88,6 +91,8 @@ abstract class RC_Object {
 	 * @see construct()
 	 */
 	public static function init(): void {
+		global $wp_rewrite;
+
 		# Post Types
 		foreach ( self::_ALL_ as $cls ) {
 			/** @var RC_Object $cls */
@@ -151,15 +156,21 @@ abstract class RC_Object {
 
 		# Rewrites
 		## Main Page
+		$main_page_query = "index.php?" . http_build_query( array_merge( [
+				self::QV_BASE         => 1,
+				self::QV_RESOURCES_LP => 1
+			], array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 ) ) );
+
 		add_rewrite_rule(
 			self::PERMALINK_BASE . "/?$",
-			"index.php?" . http_build_query( array_merge(
-				[
-					self::QV_BASE         => 1,
-					self::QV_RESOURCES_LP => 1
-				],
-				array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 ),
-			) ),
+			$main_page_query,
+			'top'
+		);
+
+		### Pagination for search
+		add_rewrite_rule(
+			self::PERMALINK_BASE . "/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
+			$main_page_query . '&paged=$matches[1]',
 			'top'
 		);
 
@@ -386,7 +397,12 @@ abstract class RC_Object {
 	public static function parse_request( \WP $wp ): void {
 		# LP Post Types
 		if ( $is_rc_lp = ! empty( $wp->query_vars[ self::QV_RESOURCES_LP ] ) ) {
-			$wp->query_vars['post_type'] = self::$PUBLIC_POST_TYPES;
+			/**
+			 * required for the search to work
+			 * @see posts_request()
+			 */
+			$wp->query_vars['post_type'] = null;
+			$wp->query_vars['name']      = '';
 		}
 
 		if (
@@ -412,11 +428,16 @@ abstract class RC_Object {
 	 * @link https://developer.wordpress.org/reference/hooks/parse_query/
 	 */
 	public static function parse_query( \WP_Query $query ): void {
+		if ( ! $query->is_main_query() ) {
+			return;
+		}
+
 		# Fix Resources LP
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp ) {
 			if ( ! empty( $query->get( 's' ) ) ) {
 				$query->is_search = true;
+				$query->set( 'posts_per_page', Resource_Center::get_val( Resource_Center::SETTING_PAGINATION_SEARCH_RESULTS ) );
 			}
 
 			$query->is_single            = false;
@@ -425,5 +446,30 @@ abstract class RC_Object {
 			$query->is_post_type_archive = true;
 			$query->set( 'name', null );
 		}
+
+		# Taxonomy Pagination
+		if ( $query->is_tax( [ self::TAXONOMY_CATEGORY, self::TAXONOMY_TAG ] ) ) {
+			$query->set( 'posts_per_page', Resource_Center::get_val( Resource_Center::SETTING_PAGINATION_TAX_ARCHIVE ) );
+		}
+	}
+
+	/**
+	 * Filters the completed SQL query before sending.
+	 *
+	 * @param string $request
+	 * @param \WP_Query $query
+	 *
+	 * @return string
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/posts_request/
+	 */
+	public static function posts_request( string $request, \WP_Query $query ): string {
+		/* We need to modify the post_type qv right this time and just before the solr */
+		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
+		if ( $is_rc_lp && $query->is_search() ) {
+			$query->set( 'post_type', array_merge( self::$PUBLIC_POST_TYPES, [ Glossary_Entry::POST_TYPE ] ) );
+		}
+
+		return $request;
 	}
 }

@@ -17,6 +17,9 @@ class Resource_Center extends Abstract_Customizer {
 	const SECTION_HOME_GLOSSARY = self::SECTION_HOME_PREFIX . '_glossary';
 	const SECTION_HOME_GUIDES = self::SECTION_HOME_PREFIX . '_guides';
 	const SECTION_HOME_FEATURED_CATS = self::SECTION_HOME_PREFIX . '_featured_cats';
+	/* * Pagination */
+	const SECTION_PAGINATION = self::PANEL_ID . '_page';
+
 
 	/* Settings */
 	/* * Home */
@@ -28,10 +31,16 @@ class Resource_Center extends Abstract_Customizer {
 	const SETTING_HOME_GLOSSARY_BG_IMG = self::SETTING_HOME_PREFIX . 'glossary_bg_img';
 	const SETTING_HOME_CARD_NUM = self::SETTING_HOME_PREFIX . 'card_num';
 	const PREFIX_SETTING_HOME_CAT_POSTS = self::SETTING_HOME_PREFIX . 'cat_posts_';
+	/* * Pagination */
+	const SETTING_PAGINATION_PREFIX = self::SECTION_PAGINATION . '_';
+	const SETTING_PAGINATION_TAX_ARCHIVE = self::SETTING_PAGINATION_PREFIX . 'tax';
+	const SETTING_PAGINATION_SEARCH_RESULTS = self::SETTING_PAGINATION_PREFIX . 'search';
 
 	/* All Defaults */
 	const DEFAULTS = [
-		self::SETTING_HOME_CARD_NUM => 10,
+		self::SETTING_HOME_CARD_NUM             => 10,
+		self::SETTING_PAGINATION_TAX_ARCHIVE    => 12,
+		self::SETTING_PAGINATION_SEARCH_RESULTS => 6,
 	];
 
 	/** @inheritDoc */
@@ -70,6 +79,12 @@ class Resource_Center extends Abstract_Customizer {
 		$this->_manager->add_section( self::SECTION_HOME_GLOSSARY, [
 			'panel' => self::PANEL_ID,
 			'title' => '[Home] Glossary',
+		] );
+
+		# Pagination
+		$this->_manager->add_section( self::SECTION_PAGINATION, [
+			'panel' => self::PANEL_ID,
+			'title' => 'Pagination',
 		] );
 	}
 
@@ -158,5 +173,24 @@ class Resource_Center extends Abstract_Customizer {
 			'label'       => 'Glossary Entries',
 			'post_type'   => CPT\RC\Glossary::POST_TYPE,
 		] ) );
+
+		# Pagination
+		## Taxonomy Archive
+		$this->_manager->add_control( self::SETTING_PAGINATION_TAX_ARCHIVE, [
+			'setting'     => self::SETTING_PAGINATION_TAX_ARCHIVE,
+			'section'     => self::SECTION_PAGINATION,
+			'label'       => 'Taxonomy Pages',
+			'type'        => 'number',
+			'description' => 'Posts per page.'
+		] );
+
+		## Search Results
+		$this->_manager->add_control( self::SETTING_PAGINATION_SEARCH_RESULTS, [
+			'setting'     => self::SETTING_PAGINATION_SEARCH_RESULTS,
+			'section'     => self::SECTION_PAGINATION,
+			'label'       => 'Search Results',
+			'type'        => 'number',
+			'description' => 'Posts per page.'
+		] );
 	}
 }

@@ -79,14 +79,6 @@ class Thumbnail {
 			Log::warning( 'Small screen variant should be defined.', compact( 'variants', 'img_id' ) );
 		}
 
-		# Make sure small has all image variants
-		$group_small = &$screen_groups[ self::SCREEN_SM ];
-		foreach ( [ self::TYPE_VERTICAL, self::TYPE_HORIZONTAL, self::TYPE_SQUARE ] as $type ) {
-			if ( ! in_array( $type, $group_small ) ) {
-				array_push( $group_small, $type );
-			}
-		}
-
 		# Find the appropriate images
 		foreach ( $screen_groups as $screen => $variants ) {
 			foreach ( $variants as $idx => $variant ) {

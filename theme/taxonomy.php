@@ -14,13 +14,16 @@
 			<?php }
 			?>
 		</div>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<div class="trevor-grid-default">
 			<?php while ( have_posts() ) {
 				the_post();
 				echo \TrevorWP\Theme\Helper\Card::post( get_post() );
 				?>
 			<?php } ?>
-			<?php get_template_part( 'template-parts/pagination' ); ?>
+
+			<div class="trevor-pagination-default">
+				<?php get_template_part( 'template-parts/pagination' ); ?>
+			</div>
 		</div>
 	</div>
 </main> <!-- #site-content -->

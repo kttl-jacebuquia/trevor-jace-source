@@ -17,6 +17,7 @@ body {
 // Our Components
 @import "./fonts";
 @import "./root";
+@import "./grid";
 @import "./misc/index";
 @import "./bg-gradients";
 @import "./header";
@@ -27,6 +28,7 @@ body {
 @import "./card-post";
 @import "./single/index";
 @import "./block/index";
+@import "./pagination";
 
 .hl-test-item {
   b {

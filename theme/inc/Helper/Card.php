@@ -20,12 +20,14 @@ class Card {
 
 		$title_top  = $title_btm = $desc = $icon_cls = null;
 		$is_bg_full = false;
+		$title_link = true;
 
 		# Determine the type
 		if ( $post_type == CPT\RC\Glossary::POST_TYPE ) {
-			$title_top = 'Glossary';
-			$title_btm = $post->post_excerpt;
-			$desc      = $post->post_content;
+			$title_top  = 'Glossary';
+			$title_btm  = $post->post_excerpt;
+			$desc       = $post->post_content;
+			$title_link = false;
 		} elseif ( $post_type == CPT\RC\External::POST_TYPE ) {
 			$title_top  = 'Resource';
 			$desc       = $post->post_excerpt;
@@ -65,16 +67,19 @@ class Card {
 		}
 
 		// Fallback to the square
-		$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb_var[]   = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb         = Thumbnail::post( $post, ...$thumb_var );
+		$has_thumbnail = ! empty( $thumb );
+		if ( ! $has_thumbnail ) {
+			$_class[] = 'no-thumbnail';
+		}
 
 		ob_start();
 		?>
 		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
 			<?php if ( $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<?= Thumbnail::post(
-							$post,
-							...$thumb_var ) ?>
+					<?= $thumb ?>
 				</div>
 			<?php } ?>
 
@@ -88,8 +93,13 @@ class Card {
 				<?php } ?>
 
 				<h3 class="post-title">
-					<a href="<?= get_the_permalink( $post ) ?>"
-					   class="stretched-link"><?= get_the_title( $post ); ?></a>
+					<?php if ( $title_link ) { ?>
+						<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
+							<?= get_the_title( $post ); ?>
+						</a>
+					<?php } else { ?>
+						<?= get_the_title( $post ); ?>
+					<?php } ?>
 				</h3>
 
 				<?php if ( ! empty( $title_btm ) ) { ?>

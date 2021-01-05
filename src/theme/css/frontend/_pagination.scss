@@ -1,0 +1,25 @@
+.trevor-pagination-default {
+  @apply col-span-1;
+  @apply flex flex-row justify-center items-center;
+  @apply my-10;
+
+  .page-numbers {
+	@apply text-white;
+	@apply mx-2;
+
+	&.current {
+	  @apply bg-white text-indigo rounded-full;
+	  @apply w-8 h-8;
+	  @apply inline-flex justify-center items-center;
+	}
+  }
+
+
+  @screen md {
+	@apply col-span-2;
+  }
+
+  @screen lg {
+	@apply col-span-3;
+  }
+}

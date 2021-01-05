@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\Block;
+use TrevorWP\CPT\RC\External;
 use TrevorWP\Meta;
 
 /**
@@ -28,8 +29,6 @@ class Post {
 		# Floating Blocks Home, for >= Large
 		$out['floating_blocks_home'] = '<div class="floating-blocks-home hidden lg:block"></div>';
 
-		// TODO: Maybe a filter for future usage?
-
 		return implode( "\n", array_filter( $out ) );
 	}
 
@@ -43,9 +42,25 @@ class Post {
 		?>
 		<div class="post-file-wrap">
 			<a class="btn post-file-btn" href="<?= esc_attr( wp_get_attachment_url( $attachment_id ) ); ?>">
-				<span class="post-file-btn-cta">Download PDF Format</span> <i class="trevor-ti-download post-file-btn-icn"></i>
+				<span class="post-file-btn-cta">Download PDF Format</span> <i
+						class="trevor-ti-download post-file-btn-icn"></i>
 			</a>
 		</div>
 		<?php return ob_get_clean();
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return string
+	 */
+	public static function render_bottom_blocks( \WP_Post $post ): string {
+		$out = [];
+
+		if ( $post->post_type == External::POST_TYPE ) {
+			$out[] = Categories::render_rc_featured_hero();
+		}
+
+		return implode( "\n", array_filter( $out ) );
 	}
 }

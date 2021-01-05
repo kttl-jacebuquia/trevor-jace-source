@@ -1,0 +1,10 @@
+.trevor-grid-default {
+  @apply grid grid-cols-1 gap-8;
+
+  @screen md {
+	@apply grid-cols-2;
+  }
+  @screen lg {
+	@apply grid-cols-3;
+  }
+}
