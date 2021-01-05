@@ -1,5 +1,5 @@
 .trevor-block-link-list {
-  @apply bg-gray;
+  @apply bg-gray-light;
   @apply text-indigo;
   padding: rem-calc(40px) rem-calc(28px);
   width: 100vw;
@@ -35,6 +35,7 @@
   @screen sm {
 	margin-left: initial;
 	width: 100%;
+	border-radius: rem-calc(10px);
   }
 
   @screen md {
