@@ -9,6 +9,7 @@
   .post-thumbnail-wrap {
 	height: rem-calc(240px);
 	@apply overflow-hidden;
+	@apply flex-shrink-0;
 
 	img {
 	  @apply h-full;
@@ -16,11 +17,16 @@
 	}
   }
 
+  .title-top {
+	@apply font-semibold text-px14 leading-px18 tracking-px05;
+	@apply mb-2;
+  }
+
   .card-content {
 	@apply bg-white;
 	@apply p-6;
 	@apply flex flex-col flex-1;
-	@apply relative;
+	@apply overflow-hidden;
   }
 
   .post-category {
@@ -30,9 +36,17 @@
   }
 
   .post-title {
-	@apply font-bold text-px26 leading-px36 tracking-em005;
+	@apply font-semibold text-px24 leading-px28;
 	@apply mb-2;
 	flex: 0 1;
+
+	.title_top + & {
+	  @apply text-px22 leading-px32;
+	}
+
+	.bg-full & {
+	  @apply font-bold text-px32 leading-px42;
+	}
   }
 
   .post-desc {
@@ -56,9 +70,18 @@
 
 	&.show-all {
 	  height: auto !important;
+	  padding-right: 0 !important;
+	  @apply -mb-2 -mr-2;
+	  // take back the single item's margins
 
 	  .ellipsis {
 		@apply font-bold;
+		position: initial !important;
+
+
+		&::after {
+		  content: '–' !important;
+		}
 	  }
 	}
 
@@ -69,6 +92,13 @@
 
 	.ellipsis {
 	  @apply absolute top-0 right-0;
+	  @apply font-medium text-px24;
+	  @apply px-3;
+
+	  &::after {
+		@apply flex items-center;
+		content: '+';
+	  }
 	}
   }
 
@@ -88,6 +118,11 @@
 
 	.card-content {
 	  @apply bg-transparent;
+	  @apply pt-9;
+	}
+
+	.title_top {
+	  @apply mb-2;
 	}
   }
 
@@ -97,8 +132,31 @@
 	font-size: 1.5rem;
   }
 
+  @screen md {
+	.post-title {
+	  .title_top + & {
+		@apply leading-px28;
+	  }
+	}
+  }
 
   @screen lg {
 	height: rem-calc(536px);
+
+	.title-top {
+	  @apply mb-4;
+	}
+
+	.post-title {
+	  @apply text-px26 leading-px36 tracking-em005;
+
+	  .title_top + & {
+		@apply text-px26 leading-px36;
+	  }
+
+	  .bg-full & {
+		@apply font-bold text-px40 leading-px48;
+	  }
+	}
   }
 }

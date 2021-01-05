@@ -98,6 +98,12 @@ class Taxonomy {
 		return $ranks;
 	}
 
+	/**
+	 * @param \WP_Post $post
+	 * @param string $taxonomy
+	 *
+	 * @return array
+	 */
 	public static function get_object_terms_ordered( \WP_Post $post, string $taxonomy ): array {
 		$terms = get_the_terms( $post, $taxonomy );
 
@@ -105,7 +111,18 @@ class Taxonomy {
 			return [];
 		}
 
-		$ranks = self::get_ranks( $taxonomy, $post->post_type );
+		return self::sort_terms( $terms, $taxonomy, $post->post_type );
+	}
+
+	/**
+	 * @param array $terms
+	 * @param string $taxonomy
+	 * @param string $post_type
+	 *
+	 * @return array
+	 */
+	public static function sort_terms( array $terms, string $taxonomy, string $post_type ): array {
+		$ranks = self::get_ranks( $taxonomy, $post_type );
 
 		foreach ( $terms as $term ) {
 			$term->rank = $ranks[ $term->term_id ] ?? PHP_INT_MAX;
@@ -119,11 +136,12 @@ class Taxonomy {
 		return $terms;
 	}
 
+	/**
+	 * @param string $post_type
+	 *
+	 * @return string
+	 */
 	public static function get_meta_key( string $post_type ): string {
 		return Meta\Taxonomy::KEY_POPULARITY_RANK_PREFIX . $post_type;
-	}
-
-	protected static function _order_terms_by_rank( \WP_Term $term ): int {
-
 	}
 }

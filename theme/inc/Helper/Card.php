@@ -53,7 +53,7 @@ class Card {
 		}
 
 		# Tags
-		$tags = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_TAG );
+		$tags = Taxonomy::get_post_tags_distinctive( $post );
 
 		# Thumbnail variants
 		$thumb_var   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];
@@ -89,7 +89,7 @@ class Card {
 				<?php } ?>
 
 				<?php if ( ! empty( $title_top ) ) { ?>
-					<div class="title_top uppercase"><?= $title_top ?></div>
+					<div class="title-top uppercase"><?= $title_top ?></div>
 				<?php } ?>
 
 				<h3 class="post-title">

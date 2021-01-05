@@ -15,6 +15,7 @@ module.exports = {
 			'./theme/inc/**/*.php',
 			'./theme/rc/**/*.php',
 			'./theme/template-parts/**/*.php',
+			'./plugin/templates/blocks/**/*.twig',
 		]
 	},
 	prefix: '',
@@ -101,6 +102,7 @@ module.exports = {
 				px28: px2rem(28),
 				px30: px2rem(30),
 				px32: px2rem(32),
+				px40: px2rem(40),
 				px44: px2rem(44),
 				px46: px2rem(46),
 				px52: px2rem(52),
@@ -120,6 +122,7 @@ module.exports = {
 				px38: px2rem(38),
 				px40: px2rem(40),
 				px42: px2rem(42),
+				px48: px2rem(48),
 				px50: px2rem(50),
 				px54: px2rem(54),
 				px56: px2rem(56),
