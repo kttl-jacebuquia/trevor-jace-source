@@ -65,7 +65,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 <?php if ( ! is_paged() ) { ?>
 	<main id="site-content" role="main" class="site-content">
 		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
-			<div class="mx-auto lg:w-4/6 lg:-mt-2">
+			<div class="mx-auto mb-10 lg:w-4/6 lg:-mt-2">
 				<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 					FIND ANSWERS
 				</h2>
@@ -95,11 +95,6 @@ $featured_word = Helper\Posts::get_one_from_list(
 
 				<div class="mt-8 animate-bounce hidden md:block">
 					<i class="trevor-ti-chevron-down text-4xl text-white"></i>
-				</div>
-
-				<div class="my-14 md:fixed md:bottom-10 md:right-10 z-10">
-					<a class="py-4 px-12 rounded-full border-2 border-orange bg-orange text-white font-bold font-px22 leading-px22 tracking-em001 shadow-2xl"
-					   href="#">Reach a Counselor</a>
 				</div>
 			</div>
 		</div>

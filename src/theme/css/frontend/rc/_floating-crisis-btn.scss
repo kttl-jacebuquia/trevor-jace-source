@@ -1,0 +1,21 @@
+.floating-crisis-btn-wrap {
+  @apply fixed z-10 bottom-10 left-1/2;
+  transform: translate(-50%, -50%);
+
+  .floating-crisis-btn {
+	@apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
+	@apply text-white font-bold text-px22 leading-px22 tracking-em001;
+	@apply whitespace-nowrap;
+  }
+
+  @screen md {
+	@apply right-10 left-auto transform-none;
+
+	.floating-crisis-btn {
+	  @apply text-px20 leading-px20 tracking-px05;
+	}
+  }
+}
+
+
+

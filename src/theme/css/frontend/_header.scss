@@ -47,12 +47,11 @@
 	  }
 
 	  > a {
+		@apply font-manrope font-medium text-base leading-px20 tracking-em002;
 		@apply pb-2;
-		@apply font-manrope;
-		@apply text-base leading-none tracking-wide;
 
 		&.active {
-		  @apply font-bold;
+		  @apply font-extrabold;
 		}
 	  }
 	}
@@ -61,7 +60,8 @@
   // CTAs
   .cta-wrap {
 	.btn {
-	  @apply py-2 px-6 rounded-full border-2 border-orange;
+	  @apply font-bold text-px20 leading-px20 tracking-px05;
+	  @apply py-2.5 px-7 rounded-full border-orange;
 
 	  & + .btn {
 		@apply ml-2;

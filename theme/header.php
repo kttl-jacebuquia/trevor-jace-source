@@ -65,7 +65,7 @@ $is_rc = Is::rc();
 		</ul>
 		<div class="cta-wrap">
 			<a href="#" class="btn bg-orange text-white">Reach a Counselor</a>
-			<a href="#" class="btn bg-white text-orange" rel="noopener nofollow">Donate</a>
+			<a href="#" class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
 		</div>
 	</div>
 </div>

@@ -43,6 +43,9 @@ class Hooks {
 
 		# Template Load Fixes
 		add_filter( 'template_include', [ self::class, 'template_include' ], PHP_INT_MAX >> 1, 1 );
+
+		# Footer
+		add_action( 'wp_footer', [ self::class, 'wp_footer' ], 10, 0 );
 	}
 
 	/**
@@ -343,5 +346,19 @@ class Hooks {
 		}
 
 		return $template;
+	}
+
+	/**
+	 * Prints scripts or data before the closing body tag on the front end.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/wp_footer/
+	 */
+	public static function wp_footer(): void {
+		if ( Is::rc() ) { ?>
+			<div class="floating-crisis-btn-wrap">
+				<a class="btn floating-crisis-btn" href="#">Reach a Counselor</a>
+			</div>
+		<?php
+		}
 	}
 }
