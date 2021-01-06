@@ -14,6 +14,7 @@ class Posts {
 	 * @param int $num Max number of items to return.
 	 * @param array $options
 	 *  $force_thumbnail
+	 *  $force_main_category
 	 *
 	 * @return WP_Post[] Related posts.
 	 */
@@ -49,6 +50,19 @@ class Posts {
 			$meta_query[] = [
 				'key'     => '_thumbnail_id',
 				'compare' => 'EXISTS'
+			];
+		}
+
+		# Force Main Category
+		if ( ! empty( $options['force_main_category'] ) && ! empty( $main_cat_id = \TrevorWP\Meta\Post::get_main_category_id( $post->ID ) ) ) {
+			$tax_query = [
+				'relation' => 'AND',
+				[
+					'taxonomy' => Tools::get_post_category_tax( $post ),
+					'terms'    => [ $main_cat_id ],
+					'operator' => 'IN'
+				],
+				$tax_query,
 			];
 		}
 
