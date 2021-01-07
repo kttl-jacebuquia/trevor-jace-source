@@ -40,8 +40,8 @@ class Core_Heading implements Post_Save_Handler {
 			<h2 class="post-highlights-title"><?= self::HIGHLIGHT_POST_TYPE_TITLE_MAP[ $post->post_type ]; ?></h2>
 			<ul class="post-highlights-list">
 				<?php foreach ( $highlights as $dom_id => $highlight ) { ?>
-					<li>
-						<a class="highlight-link"
+					<li class="post-highlight relative">
+						<a class="highlight-link stretched-link"
 						   href="#<?= esc_attr( $dom_id ) ?>"><?= esc_html( $highlight['title'] ) ?></a>
 						<span><?= esc_html( $highlight['description'] ) ?></span>
 					</li>

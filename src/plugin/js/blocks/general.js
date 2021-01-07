@@ -73,7 +73,7 @@ class PostSidebar extends React.Component {
 		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
 
 		return <>
-			<PluginDocumentSettingPanel name="trvr-entry-general" icon="admin-settings" title="General">
+			<PluginDocumentSettingPanel name="trevor-entry-general" icon="admin-settings" title="General">
 				{/* Slug */}
 				<TextControl label="Slug" value={slug} onChange={this.handleSlugChange}/>
 
@@ -86,7 +86,7 @@ class PostSidebar extends React.Component {
 					allowedTypes={['application/pdf']}
 				/>}
 			</PluginDocumentSettingPanel>
-			<PluginDocumentSettingPanel name="trvr-entry-header" icon="store" title="Header">
+			<PluginDocumentSettingPanel name="trevor-entry-header" icon="store" title="Header">
 				{/* Header Type */}
 				<SelectControl
 					label="Header Type"
@@ -124,7 +124,7 @@ class PostSidebar extends React.Component {
 	}
 }
 
-registerPlugin('trvr-article-custom', {
+registerPlugin('trevor-article-custom', {
 	render: compose(
 		// Select
 		withSelect(select => {

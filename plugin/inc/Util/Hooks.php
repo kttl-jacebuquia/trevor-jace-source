@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\Util;
 
-use TrevorWP\Main;
 use WP_Post;
 use TrevorWP\Block;
 use \Solarium\QueryType\Update\Query\Document\Document as SolariumDocument;

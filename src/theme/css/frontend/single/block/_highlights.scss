@@ -1,7 +1,9 @@
 .post-highlights-container {
+
   .post-highlights-title {
 	@apply uppercase;
-	@apply font-extrabold text-px14 leading-px24
+	@apply font-extrabold text-px14 leading-px24;
+	@apply mt-0;
   }
 
   .post-highlights-list {
@@ -17,16 +19,13 @@
 	  a {
 		@apply font-extrabold;
 		@apply no-underline;
+		color: inherit;
 	  }
 
 	  &::before {
 		@apply hidden;
 	  }
 	}
-  }
-
-  .highlight-link {
-	@apply bg-highlight;
   }
 
 
@@ -41,9 +40,15 @@
   }
 }
 
-// Highlight headings on link hover
-.post-content-wrap .highlight-heading {
+.post-highlights-list .highlight-link,
+.post-content-wrap .highlight-wrapper {
+  @apply transition-colors duration-300;
+}
+
+
+.post-highlights-list .post-highlight:hover .highlight-link,
+.post-content-wrap .link-hover-active {
   @apply bg-highlight;
-  transition: all .2s;
+  @apply inline-block;
 }
 

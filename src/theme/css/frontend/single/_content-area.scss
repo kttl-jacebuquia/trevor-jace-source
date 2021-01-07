@@ -18,20 +18,42 @@
 .post-content-grid {
   @apply mx-auto flex-1;
   @apply flex flex-col flex-col-reverse;
-  @apply pt-2 pb-14;
+  @apply pb-4;
 }
 
 .post-content {
+  @apply pb-10;
 }
 
 .post-content-sidebar {
-
+  @apply py-10;
 }
 
+.post-content-sidebar > * + * {
+  @apply mt-10;
+}
+
+.post-content {
+  > :first-child {
+	@apply mt-0;
+  }
+}
 
 @screen md {
+  .post-content {
+	@apply pb-12;
+  }
+
+  .post-content-sidebar {
+	@apply py-12;
+  }
+
+  .post-content-sidebar > * + * {
+	@apply mt-12;
+  }
+
   .post-content-grid {
-	@apply pb-24;
+	@apply pb-14;
   }
 
   .post-content {
@@ -44,9 +66,18 @@
 }
 
 @screen lg {
+  .post-content,
+  .post-content-sidebar {
+	@apply py-14;
+  }
+
+  .post-content-sidebar > * + * {
+	@apply mt-14;
+  }
+
   .post-content-grid {
 	@apply flex-none grid grid-cols-12;
-	@apply pb-28;
+	@apply pb-14;
   }
 
   .post-content {

@@ -295,19 +295,7 @@ class Hooks {
 		 */
 		add_action( 'wp_head', function () {
 			?>
-			<style>
-				html,
-				* html body {
-					height: calc(100% - 32px);
-				}
-
-				@media screen and ( max-width: 782px ) {
-					html,
-					* html body {
-						height: calc(100% - 46px);
-					}
-				}
-			</style>
+			<script>document.documentElement.classList.add('admin-bar');</script>
 			<?php
 		}, PHP_INT_MAX, 0 );
 	}

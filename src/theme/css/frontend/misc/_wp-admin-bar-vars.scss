@@ -1,21 +1,29 @@
-$var-tr-wp-admin-bar-h: --tr-wp-admin-bar-h;
+html {
+  --tr-wp-admin-bar-h: 0px;
+}
+
+html.admin-bar,
+* html.admin-bar body {
+  height: calc(100% - 32px);
+}
+
+html.admin-bar {
+  --tr-wp-admin-bar-h: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  html.admin-bar,
+  * html.admin-bar body {
+	height: calc(100% - 46px);
+  }
+
+  html.admin-bar {
+	--tr-wp-admin-bar-h: 46px;
+  }
+}
 
 @media screen and (max-width: 600px) {
   #wpadminbar {
 	position: fixed !important; // Reverse it
-  }
-}
-
-:root {
-  #{$var-tr-wp-admin-bar-h}: 0px;
-}
-
-:root {
-  #{$var-tr-wp-admin-bar-h}: 46px;
-}
-
-@media screen and (min-width: 782px) {
-  :root {
-	#{$var-tr-wp-admin-bar-h}: 32px;
   }
 }

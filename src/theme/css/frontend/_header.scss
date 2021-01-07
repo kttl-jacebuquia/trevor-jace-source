@@ -1,7 +1,7 @@
 :root {
   --top-bar-height: #{rem-calc(4px)};
   --top-nav-height: 8.5rem;
-  --top-nav-top-margin: calc(var(--top-bar-height) + var(#{$var-tr-wp-admin-bar-h}));
+  --top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h));
 
   @screen md {
 	--top-nav-height: 9rem;
@@ -10,6 +10,11 @@
   @screen lg {
 	--top-bar-height: #{rem-calc(78px)};
 	--top-nav-height: 11rem;
+  }
+
+  // fixes anchor link connections
+  * {
+	scroll-margin-top: var(--top-nav-top-margin);
   }
 }
 
@@ -105,10 +110,10 @@
 
 // Fix top bar for wp admin bar
 body.admin-bar {
-  margin-top: var(#{$var-tr-wp-admin-bar-h});
+  margin-top: var(--tr-wp-admin-bar-h);
 
   #top-bar {
-	top: var(#{$var-tr-wp-admin-bar-h});
+	top: var(--tr-wp-admin-bar-h);
   }
 }
 

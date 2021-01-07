@@ -9,8 +9,17 @@ import './nav';
 
 window.trevorWP = {features, vendors, matchMedia};
 
+const $body = $('body');
+const isSingle = $body.hasClass('single');
+
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
+
+// Floating Blocks
+isSingle && features.floatingBlock($('.post-content .trevor-block-floating'), $('.post-content-sidebar .floating-blocks-home'));
+
+// Highlights
+isSingle && features.articleHighlights($('.post-highlights-list'));
 
 
 jQuery(function ($) {
