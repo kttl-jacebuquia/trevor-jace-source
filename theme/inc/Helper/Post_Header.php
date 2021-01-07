@@ -98,15 +98,27 @@ class Post_Header {
 		$variants = [];
 		switch ( $options['type'] ) {
 			case self::TYPE_SQUARE:
+				// Small
 				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_SQUARE );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_VERTICAL );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_HORIZONTAL );
 				break;
 			case self::TYPE_FULL:
 			case self::TYPE_HORIZONTAL:
-				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_VERTICAL, Thumbnail::SIZE_MD );
+				// Small
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_VERTICAL );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_HORIZONTAL );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_SQUARE );
+				// Medium
 				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_MD, Thumbnail::TYPE_HORIZONTAL );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_MD, Thumbnail::TYPE_SQUARE );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_MD, Thumbnail::TYPE_VERTICAL );
 				break;
 			case self::TYPE_SPLIT:
+				// Small
 				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_VERTICAL );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_SQUARE );
+				$variants[] = Thumbnail::variant( Thumbnail::SCREEN_SM, Thumbnail::TYPE_HORIZONTAL );
 				break;
 		}
 
