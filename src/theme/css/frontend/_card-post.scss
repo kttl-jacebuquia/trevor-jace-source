@@ -22,6 +22,10 @@
 	@apply mb-2;
   }
 
+  .title-btm {
+	@apply mb-2;
+  }
+
   .card-content {
 	@apply bg-white;
 	@apply p-6;
@@ -143,7 +147,8 @@
   @screen lg {
 	height: rem-calc(536px);
 
-	.title-top {
+	.title-top,
+	.title-btm {
 	  @apply mb-4;
 	}
 
