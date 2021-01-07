@@ -6,16 +6,16 @@ $var-tr-wp-admin-bar-h: --tr-wp-admin-bar-h;
   }
 }
 
-body {
+:root {
   #{$var-tr-wp-admin-bar-h}: 0px;
 }
 
-body.admin-bar {
+:root {
   #{$var-tr-wp-admin-bar-h}: 46px;
 }
 
 @media screen and (min-width: 782px) {
-  body.admin-bar {
+  :root {
 	#{$var-tr-wp-admin-bar-h}: 32px;
   }
 }

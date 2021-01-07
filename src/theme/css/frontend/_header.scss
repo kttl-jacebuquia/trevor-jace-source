@@ -78,6 +78,14 @@
 	.top-bar-inner {
 	  @apply flex;
 	}
+
+	.switcher {
+	  margin-left: rem-calc(-20px);
+	}
+
+	.cta-wrap {
+	  margin-right: rem-calc(-20px);
+	}
   }
 }
 
@@ -178,6 +186,7 @@ body.admin-bar {
 	.menu-wrap {
 	  @apply flex;
 	  margin-top: -4rem;
+	  margin-right: -1.5rem;
 	}
 
 	.logo-text {

@@ -7,7 +7,8 @@
   @apply bg-white;
   @apply prose;
   /* Should be after the prose */
-  @apply max-w-none text-indigo; // TODO: Fix this on tailwind config
+  @apply max-w-none text-indigo;
+  // TODO: Fix this on tailwind config
 
   h1, h2, h3, h4, h5 {
 	color: inherit;
@@ -17,10 +18,10 @@
 .post-content-grid {
   @apply mx-auto flex-1;
   @apply flex flex-col flex-col-reverse;
+  @apply pt-2 pb-14;
 }
 
 .post-content {
-
 }
 
 .post-content-sidebar {
@@ -30,6 +31,7 @@
 
 @screen md {
   .post-content-grid {
+	@apply pb-24;
   }
 
   .post-content {
@@ -44,6 +46,7 @@
 @screen lg {
   .post-content-grid {
 	@apply flex-none grid grid-cols-12;
+	@apply pb-28;
   }
 
   .post-content {

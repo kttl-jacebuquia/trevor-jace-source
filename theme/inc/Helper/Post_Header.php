@@ -70,11 +70,16 @@ class Post_Header {
 			$cls[] = 'text-white';
 		}
 
+		$thumb_wrap_attrs = [];
+		if ( $type == self::TYPE_SQUARE ) {
+			$thumb_wrap_attrs['data-aspectRatio'] = '1:1';
+		}
+
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<div class="container post-header-inner">
 				<?= self::_render_content_area( $post, $options ) ?>
-				<div class="thumbnail-wrap">
+				<div class="thumbnail-wrap" <?= Tools::flat_attr( $thumb_wrap_attrs ) ?>>
 					<?= self::_render_thumbnail( $post, $options ); ?>
 				</div>
 			</div>
@@ -172,7 +177,7 @@ class Post_Header {
 		}
 
 		# Tags
-		$tags = $hide_tags ? [] : get_the_terms( $post, Tools::get_post_tag_tax( $post ) );
+		$tags = $hide_tags ? [] : Taxonomy::get_post_tags_distinctive( $post );
 
 		ob_start(); ?>
 		<div class="post-header-content">

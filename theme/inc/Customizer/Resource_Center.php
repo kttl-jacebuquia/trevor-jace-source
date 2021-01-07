@@ -161,7 +161,7 @@ class Resource_Center extends Abstract_Customizer {
 
 		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_BG_IMG, [
 			'setting'   => self::SETTING_HOME_GLOSSARY_BG_IMG,
-			'section'   => self::SECTION_HOME_GUIDES,
+			'section'   => self::SETTING_HOME_GLOSSARY,
 			'label'     => 'Background Image',
 			'mime_type' => 'image',
 		] ) );
