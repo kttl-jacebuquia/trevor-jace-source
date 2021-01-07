@@ -1,13 +1,13 @@
 <?php /* Resources Center: Search */ ?>
 <?php get_header(); ?>
 <?php
-$no_results       = empty( $wp_query->found_posts );
+$no_results = empty( $wp_query->found_posts );
 ?>
 <main id="site-content" role="main" class="site-content">
 	<div class="container mx-auto site-content-inner">
 		<div class="search-input-wrap mb-10 mt-5 md:mb-12 md:mt-10 md:w-2/3 lg:w-1/2 lg:mb-20">
 			<form role="search" method="get" class="search-form"
-				  action="<?= esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>">
+				  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
 				<?= \TrevorWP\Theme\Helper\Search_Input::render_rc() ?>
 			</form>
 		</div>

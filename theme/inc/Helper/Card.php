@@ -115,7 +115,7 @@ class Card {
 				<?php if ( ! empty( $tags ) ) { ?>
 					<div class="tags-box">
 						<?php foreach ( $tags as $tag ) { ?>
-							<a href="<?= get_term_link( $tag ) ?>" class="tag-box"
+							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>" class="tag-box"
 							><?= $tag->name ?></a>
 						<?php } ?>
 					</div>

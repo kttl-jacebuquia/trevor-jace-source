@@ -472,4 +472,18 @@ abstract class RC_Object {
 
 		return $request;
 	}
+
+	/**
+	 * @param string|null $term
+	 *
+	 * @return string
+	 */
+	public static function get_search_url( string $term = null ): string {
+		$base = home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE );
+		if ( empty( $term ) ) {
+			return $base;
+		}
+
+		return $base . '?' . http_build_query( [ 's' => $term ] );
+	}
 }

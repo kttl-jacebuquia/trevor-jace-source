@@ -70,14 +70,14 @@ $featured_word = Helper\Posts::get_one_from_list(
 					FIND ANSWERS
 				</h2>
 				<h1>
-				<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>
+					<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>
 					<span class="block text-white font-caveat transform font-bold text-px44 leading-px54 tracking-em005 -mt-4 md:mt-0 lg:text-px70 lg:leading-px80"
 						  style="--tw-rotate: -1deg;">with knowledge.</span>
 				</h1>
 
 				<div class="my-8 mx-auto md:px-8 md:my-6 lg:w-9/12 lg:px-0">
 					<form role="search" method="get" class="search-form"
-						  action="<?= esc_url( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>">
+						  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
 						<?= Helper\Search_Input::render_rc(); ?>
 					</form>
 				</div>
