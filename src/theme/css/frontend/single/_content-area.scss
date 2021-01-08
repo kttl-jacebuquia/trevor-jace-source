@@ -27,6 +27,10 @@
 
 .post-content-sidebar {
   @apply py-10;
+
+  &.empty {
+	@apply pb-0;
+  }
 }
 
 .post-content-sidebar > * + * {

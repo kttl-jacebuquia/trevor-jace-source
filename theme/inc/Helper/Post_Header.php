@@ -83,7 +83,6 @@ class Post_Header {
 					<?= self::_render_thumbnail( $post, $options ); ?>
 				</div>
 			</div>
-			<div class="post-header-btm"></div>
 		</div>
 		<?php return ob_get_clean();
 	}
@@ -189,7 +188,10 @@ class Post_Header {
 		}
 
 		# Tags
-		$tags = $hide_tags ? [] : Taxonomy::get_post_tags_distinctive( $post );
+		$tags = $hide_tags ? [] : Taxonomy::get_post_tags_distinctive( $post, [
+				'filter_count_1' => false,
+				'limit'          => 0,
+		] );
 
 		ob_start(); ?>
 		<div class="post-header-content">

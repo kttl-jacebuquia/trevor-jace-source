@@ -107,7 +107,7 @@ if ( ! empty( $trending_posts ) ) {
 			'title'     => 'Trending',
 			'subtitle'  => 'Explore the latest articles, resources, and guides.',
 			'title_cls' => 'text-center',
-			'noMobile'  => true,
+			'onlyMd'    => true,
 	] );
 } ?>
 

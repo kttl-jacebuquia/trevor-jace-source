@@ -18,7 +18,8 @@ class Carousel {
 				'class'
 		], null ), [
 				'title_cls' => '',
-				'print_js'  => true
+				'print_js'  => true,
+				'swiper'    => [], // swiper options
 		], $options );
 
 		# ID check
@@ -29,16 +30,17 @@ class Carousel {
 
 		if ( $options['print_js'] ) {
 			add_action( 'wp_footer', function () use ( $options ) {
-				self::print_js( "#{$options['id']} .carousel-full-width-wrap", [
-						'noMobile' => $options['noMobile'] ?? null,
-				] );
+				self::print_js( "#{$options['id']} .carousel-full-width-wrap", array_merge( $options['swiper'], [
+						'onlyMd' => $options['onlyMd'] ?? null,
+				] ) );
 			}, PHP_INT_MAX >> 2, 0 );
 		}
 
 		# Extra Classes
 		$ext_cls = [];
-		if ( ! empty( $options['noMobile'] ) ) {
-			$ext_cls[] = 'no-mobile';
+		if ( ! empty( $options['onlyMd'] ) ) {
+//			$ext_cls[] = 'no-mobile'; todo: change css
+			$ext_cls[] = 'only-md';
 		}
 
 		ob_start(); ?>
@@ -75,6 +77,8 @@ class Carousel {
 	 * @param array $options
 	 */
 	public static function print_js( string $base_selector, array $options = [] ): void {
+		$breakpoints = empty( $options['breakpoints'] ) ? [] : $options['breakpoints'];
+
 		$options = array_merge( [
 				'slidesPerView'  => 'auto',
 				'spaceBetween'   => 30,
@@ -88,7 +92,7 @@ class Carousel {
 						'nextEl' => "{$base_selector} .swiper-button-next",
 						'prevEl' => "{$base_selector} .swiper-button-prev",
 				],
-				'breakpoints'    => [
+				'breakpoints'    => array_merge( [
 						768  => [
 								'slidesPerView'  => 2,
 								'spaceBetween'   => 20,
@@ -104,7 +108,7 @@ class Carousel {
 								'spaceBetween'   => 30,
 								'centeredSlides' => false,
 						]
-				],
+				], $breakpoints ),
 				'on'             => new \stdClass()
 		], $options );
 		?>
@@ -113,7 +117,7 @@ class Carousel {
 				var swiper;
 				var options = <?= json_encode( $options )?>;
 				options.on.init = function () {
-					document.querySelectorAll('<?= esc_js( $base_selector )?> .card-post').forEach(elem=>{
+					document.querySelectorAll('<?= esc_js( $base_selector )?> .card-post').forEach(elem => {
 						elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
 					});
 				}
@@ -124,11 +128,11 @@ class Carousel {
 					}
 				}
 
-				<?php if(! empty( $options['noMobile'] )){ ?>
+				<?php if(! empty( $options['onlyMd'] )){ ?>
 				jQuery(function () {
-					trevorWP.matchMedia.onlyMobile(function () {
+					trevorWP.matchMedia.onlyMedium(init, function () {
 						swiper && swiper.destroy();
-					}, init);
+					});
 				})
 				<?php }else{ ?>
 				init();

@@ -19,9 +19,10 @@ class Taxonomy {
 	 */
 	public static function get_post_tags_distinctive( \WP_Post $post, array $options = [] ): array {
 		$options = array_merge( [
-			'limit'      => 6,
-			'tax'        => Tools::get_post_tag_tax( $post ),
-			'tax_q_args' => []
+			'limit'          => 6,
+			'tax'            => Tools::get_post_tag_tax( $post ),
+			'tax_q_args'     => [],
+			'filter_count_1' => true,
 		], $options );
 
 		$tax_q_args = array_merge( [
@@ -31,8 +32,18 @@ class Taxonomy {
 		], $options['tax_q_args'] );
 
 		$terms = wp_get_object_terms( $post->ID, $options['tax'], $tax_q_args );
-		$terms = array_filter( $terms, [ self::class, '_filter_count_1' ] ); // filter if only itself
-		$terms = array_slice( $terms, 0, $options['limit'] );
+
+		# Filter if count == 1
+		if ( $options['filter_count_1'] ) {
+			$terms = array_filter( $terms, [ self::class, '_filter_count_1' ] ); // filter if only itself
+		}
+
+		# Limit
+		if ( $options['limit'] ) {
+			$terms = array_slice( $terms, 0, $options['limit'] );
+		}
+
+		# Sort by popularity
 		$terms = \TrevorWP\Ranks\Taxonomy::sort_terms( $terms, $options['tax'], $post->post_type ); // sort by popularity
 
 		return $terms;

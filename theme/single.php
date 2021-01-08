@@ -10,8 +10,10 @@
 					<div class="post-content">
 						<?php the_content(); ?>
 					</div>
-					<div class="post-content-sidebar">
-						<?= \TrevorWP\Theme\Helper\Post::render_side_blocks( $post ) ?>
+					<?php $side_blocks = \TrevorWP\Theme\Helper\Post::render_side_blocks( $post ); ?>
+					<div class="post-content-sidebar<?= empty( $side_blocks ) ? ' empty' : ''; ?>">
+						<?= $side_blocks; ?>
+						<div class="floating-blocks-home hidden lg:block"></div>
 					</div>
 				</div>
 			</div><!-- .post-content-wrap -->

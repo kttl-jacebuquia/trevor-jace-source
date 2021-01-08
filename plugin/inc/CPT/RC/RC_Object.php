@@ -27,11 +27,15 @@ abstract class RC_Object {
 	const QV_BASE = Main::QV_PREFIX . 'rc';
 	const QV_RESOURCES_LP = self::QV_BASE . '__lp';
 	const QV_RESOURCES_NON_BLOG = self::QV_BASE . '__non_blog';
+	const QV_GET_HELP = self::QV_BASE . '__get_help';
+	const QV_TREVOR_SPACE = self::QV_BASE . '__trevor_space';
 
 	/* Permalinks */
 	const PERMALINK_BASE = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
 	const PERMALINK_BASE_TAX_TAG = self::PERMALINK_BASE . '/tag';
+	const PERMALINK_GET_HELP = self::PERMALINK_BASE . '/get-help';
+	const PERMALINK_TREVOR_SPACE = self::PERMALINK_BASE . '/trevor-space';
 
 	/* Collections */
 	const _ALL_ = [
@@ -155,6 +159,27 @@ abstract class RC_Object {
 		] );
 
 		# Rewrites
+
+		## Taxonomy
+		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
+		add_filter(
+			self::TAXONOMY_CATEGORY . '_rewrite_rules',
+			[ self::class, 'rewrite_rules_category' ],
+			PHP_INT_MAX, 0
+		);
+
+		## Get Help
+		add_rewrite_rule( self::PERMALINK_GET_HELP . '/?$', 'index.php?' . http_build_query( [
+				self::QV_BASE     => 1,
+				self::QV_GET_HELP => 1,
+			] ), 'top' );
+
+		## Trevor Space
+		add_rewrite_rule( self::PERMALINK_TREVOR_SPACE . '/?$', 'index.php?' . http_build_query( [
+				self::QV_BASE         => 1,
+				self::QV_TREVOR_SPACE => 1,
+			] ), 'top' );
+
 		## Main Page
 		$main_page_query = "index.php?" . http_build_query( array_merge( [
 				self::QV_BASE         => 1,
@@ -162,7 +187,7 @@ abstract class RC_Object {
 			], array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 ) ) );
 
 		add_rewrite_rule(
-			self::PERMALINK_BASE . "/?$",
+			self::PERMALINK_BASE . '/?$',
 			$main_page_query,
 			'top'
 		);
@@ -172,14 +197,6 @@ abstract class RC_Object {
 			self::PERMALINK_BASE . "/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
 			$main_page_query . '&paged=$matches[1]',
 			'top'
-		);
-
-		## Taxonomy
-		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
-		add_filter(
-			self::TAXONOMY_CATEGORY . '_rewrite_rules',
-			[ self::class, 'rewrite_rules_category' ],
-			PHP_INT_MAX, 0
 		);
 
 		## Catch All
@@ -362,7 +379,13 @@ abstract class RC_Object {
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, [ self::QV_RESOURCES_LP, self::QV_RESOURCES_NON_BLOG ] );
+		return array_merge( $vars, [
+			self::QV_BASE,
+			self::QV_RESOURCES_LP,
+			self::QV_RESOURCES_NON_BLOG,
+			self::QV_GET_HELP,
+			self::QV_TREVOR_SPACE,
+		] );
 	}
 
 	/**

@@ -1,4 +1,5 @@
 const onlyMobileQ = window.matchMedia(`screen and (max-width: 768px)`);
+const onlyMediumQ = window.matchMedia(`screen and (min-width: 768px) and (max-width: 1440px)`);
 const onlyLargeQ = window.matchMedia(`screen and (min-width: 1440px)`);
 
 const watcherFactory = (q) => (matches, noMatches) => {
@@ -11,4 +12,6 @@ const watcherFactory = (q) => (matches, noMatches) => {
 
 export const onlyMobile = watcherFactory(onlyMobileQ);
 
-export const onlyLarge = watcherFactory(onlyLargeQ)
+export const onlyMedium = watcherFactory(onlyMediumQ);
+
+export const onlyLarge = watcherFactory(onlyLargeQ);

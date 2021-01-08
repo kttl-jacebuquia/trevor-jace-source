@@ -96,12 +96,12 @@
 	}
 
 	.title {
-	  @apply leading-px42 font-bold;
+	  @apply text-px38 leading-px42 font-bold;
 	  @apply my-2;
 	}
 
 	.title-btm {
-	  @apply text-base leading-px22;
+	  @apply text-px18 leading-px22;
 	}
 
 	.length-indicator {
@@ -111,7 +111,7 @@
 	// Sharing Box
 	.sharing-box {
 	  .share-icon {
-		font-size: rem-calc(12px);
+		font-size: rem-calc(14px);
 	  }
 	}
   }
@@ -119,7 +119,7 @@
   // Large
   @screen lg {
 	.title-top {
-	  @apply text-base leading-px20 font-bold;
+	  @apply text-base leading-px20 font-medium;
 	}
 
 	.title {
@@ -128,11 +128,11 @@
 	}
 
 	.title-btm {
-	  @apply text-px26 leading-px36 tracking-em005;
+	  @apply text-px24 leading-px36 tracking-em005;
 	}
 
 	.length-indicator {
-	  @apply tracking-px05;
+	  @apply tracking-px05 font-semibold;
 	}
   }
 }
@@ -177,6 +177,8 @@
 
   /* Text Only */
   &.type-text_only {
+	@apply flex flex-col justify-around;
+
 	.thumbnail-wrap {
 	  img {
 		@apply hidden;
@@ -253,11 +255,17 @@
 	  }
 	}
 
+	/* Text Only */
+	&.type-text_only {
+	  min-height: rem-calc(530px);
+	}
+
 	/* Horizontal */
 	&.type-horizontal {
 	  @include neg-img-btm-margin(rem-calc(-190px));
 
 	  .thumbnail-wrap {
+		@apply mt-7;
 		max-height: rem-calc(312px);
 	  }
 	}
@@ -315,6 +323,8 @@
 
 	/* Text Only */
 	&.type-text_only {
+	  min-height: rem-calc(720px);
+
 	  .post-header-content {
 		@apply pb-12;
 	  }

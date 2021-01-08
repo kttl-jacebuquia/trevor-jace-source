@@ -26,9 +26,6 @@ class Post {
 			$out['file_button'] = self::_render_file_button( $file_id );
 		}
 
-		# Floating Blocks Home, for >= Large
-		$out['floating_blocks_home'] = '<div class="floating-blocks-home hidden lg:block"></div>';
-
 		return implode( "\n", array_filter( $out ) );
 	}
 

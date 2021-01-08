@@ -323,14 +323,23 @@ class Hooks {
 	public static function template_include( string $template ): string {
 		global $wp_query;
 
-		# Resource center home
-		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
-			$template = locate_template( 'rc/home.php', false );
+		# Resources Center
+		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) ) ) {
+			# RC: Home
+			if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
+				$template = locate_template( 'rc/home.php', false );
 
-			# Search
-			if ( $wp_query->is_search() ) {
-				$template = locate_template( 'rc/search.php', false );
-			}
+				# Search
+				if ( $wp_query->is_search() ) {
+					$template = locate_template( 'rc/search.php', false );
+				}
+			} else # RC: Get Help
+				if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
+					$template = locate_template( 'rc/get-help.php', false );
+				} else # RC: Trevor Space
+					if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVOR_SPACE ) ) ) {
+						$template = locate_template( 'rc/trevor-space.php', false );
+					}
 		}
 
 		return $template;
@@ -346,7 +355,7 @@ class Hooks {
 			<div class="floating-crisis-btn-wrap">
 				<a class="btn floating-crisis-btn" href="#">Reach a Counselor</a>
 			</div>
-		<?php
+			<?php
 		}
 	}
 }
