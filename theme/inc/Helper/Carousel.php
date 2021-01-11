@@ -77,10 +77,33 @@ class Carousel {
 	 * @param array $options
 	 */
 	public static function print_js( string $base_selector, array $options = [] ): void {
-		$breakpoints = empty( $options['breakpoints'] ) ? [] : $options['breakpoints'];
+		$breakpoints = [
+				'768'  => [
+						'slidesPerView'  => 2,
+						'spaceBetween'   => 20,
+						'centeredSlides' => false,
+				],
+				'1400' => [
+						'slidesPerView'  => 3,
+						'spaceBetween'   => 30,
+						'centeredSlides' => false,
+				],
+				'1600' => [
+						'slidesPerView'  => 4,
+						'spaceBetween'   => 30,
+						'centeredSlides' => false,
+				],
+		];
+
+		// Merge breakpoints
+		if ( ! empty( $options['breakpoints'] ) ) {
+			foreach ( $options['breakpoints'] as $br_point => $br_options ) {
+				$breakpoints[ $br_point ] = $br_options;
+			}
+		}
 
 		$options = array_merge( [
-				'slidesPerView'  => 'auto',
+				'slidesPerView'  => 1,
 				'spaceBetween'   => 30,
 				'centeredSlides' => true,
 				'observer'       => true,
@@ -92,25 +115,11 @@ class Carousel {
 						'nextEl' => "{$base_selector} .swiper-button-next",
 						'prevEl' => "{$base_selector} .swiper-button-prev",
 				],
-				'breakpoints'    => array_merge( [
-						768  => [
-								'slidesPerView'  => 2,
-								'spaceBetween'   => 20,
-								'centeredSlides' => false,
-						],
-						1024 => [
-								'slidesPerView'  => 3,
-								'spaceBetween'   => 30,
-								'centeredSlides' => false,
-						],
-						1400 => [
-								'slidesPerView'  => 4,
-								'spaceBetween'   => 30,
-								'centeredSlides' => false,
-						]
-				], $breakpoints ),
 				'on'             => new \stdClass()
-		], $options );
+		],
+				$options,
+				[ 'breakpoints' => $breakpoints ],
+		);
 		?>
 		<script><?php /* TODO: Instead of printing this for each carousel, create a controller & use that. */ ?>
 			(function () {
