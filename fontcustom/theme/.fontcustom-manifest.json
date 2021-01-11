@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "1e02319626fff33e8d7b6b58ef63c9855f3ce0f00b75c18735b11f401f7ad45f",
-    "current": "1e02319626fff33e8d7b6b58ef63c9855f3ce0f00b75c18735b11f401f7ad45f"
+    "previous": "07661097099a277d3c5ce4cd4be3407769f46d2e01684b4c23afcf339afe73d8",
+    "current": "07661097099a277d3c5ce4cd4be3407769f46d2e01684b4c23afcf339afe73d8"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.ttf",
-    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.svg",
-    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.woff",
-    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.eot",
-    "../../theme/static/icon-font/trevor-ti_1e02319626fff33e8d7b6b58ef63c985.woff2"
+    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.ttf",
+    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.svg",
+    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.woff",
+    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.eot",
+    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -35,9 +35,17 @@
       "codepoint": 61701,
       "source": "./vectors/facebook.svg"
     },
+    "facebook-alt": {
+      "codepoint": 61711,
+      "source": "./vectors/facebook-alt.svg"
+    },
     "hamburger-menu": {
       "codepoint": 61702,
       "source": "./vectors/hamburger-menu.svg"
+    },
+    "link": {
+      "codepoint": 61712,
+      "source": "./vectors/link.svg"
     },
     "link-out": {
       "codepoint": 61703,
@@ -50,6 +58,10 @@
     "logo-text": {
       "codepoint": 61705,
       "source": "./vectors/logo-text.svg"
+    },
+    "mail": {
+      "codepoint": 61713,
+      "source": "./vectors/mail.svg"
     },
     "quote-close": {
       "codepoint": 61706,

@@ -1,0 +1,47 @@
+.post-share-more-content {
+  @apply bg-white opacity-90 text-indigo;
+  @apply rounded-px10;
+}
+
+.post-share-more-title {
+  @apply mb-3 font-bold text-base leading-px20 tracking-px05;
+}
+
+.post-share-more-list {
+  @apply -mx-4;
+
+  tr > td {
+	@apply py-1;
+
+	&:first-child {
+	  @apply pl-4;
+	  font-size: 1.2rem;
+	}
+
+	&:last-child {
+	  @apply pr-16;
+	  @apply font-semibold text-base leading-px24;
+	}
+  }
+
+  tr, td {
+	@apply transition-all;
+  }
+
+  tr:hover {
+	@apply cursor-pointer;
+
+	td {
+	  @apply bg-violet bg-opacity-20;
+	}
+  }
+
+
+  tr > td:first-child {
+	width: 3rem;
+  }
+}
+
+.post-share-more-icon {
+  @apply mr-4;
+}

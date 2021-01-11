@@ -5,7 +5,7 @@
   }
 
   @screen md {
-	border-radius: rem-calc(10px);
+	@apply rounded-px10;
 
 	&.is-style-full {
 	  width: calc(theme('screens.md') - (2 * theme('container.padding.md')));

@@ -168,50 +168,52 @@ class Post_Header {
 				<a target="_blank"
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
+				   data-type="facebook"
 				   href="https://www.facebook.com/sharer.php?<?= http_build_query( [ 'u' => get_permalink() ] ) ?>">
 					<i class="share-icon trevor-ti-facebook"></i>
 				</a>
 				<a target="_blank"
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
+				   data-type="twitter"
 				   href="https://twitter.com/share?<?= http_build_query( [
 						   'text' => get_the_title( $post ),
 						   'url'  => get_permalink( $post )
 				   ] ) ?>">
 					<i class="share-icon trevor-ti-twitter"></i>
 				</a>
-				<a href="#" class="post-share-others-btn">
-					<i class="share-icon trevor-ti-share-others"></i>
-				</a>
-				<div class="post-share-others-content bg-white opacity-90 text-indigo">
-					<h4 class="my-5 mx-4 font-bold text-base leading-px20 tracking-px05">SHARE</h4>
-					<ul>
-						<li>
-							<a href="#">
-								<i></i>
-								<span>Facebook</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i></i>
-								<span>Twitter</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i></i>
-								<span>Copy Link</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i></i>
-								<span>Email</span>
-							</a>
-						</li>
-					</ul>
-				</div>
+				<span>
+					<a href="#" class="post-share-more-btn" aria-expanded="true">
+						<i class="share-icon trevor-ti-share-others"></i>
+					</a>
+					<span class="hidden">
+						<div class="post-share-more-content">
+							<div class="py-5 px-4">
+								<h4 class="post-share-more-title">SHARE</h4>
+								<table class="post-share-more-list">
+									<tbody>
+									<tr data-row="facebook">
+									    <td><i class="trevor-ti-facebook-alt"></i></td>
+									    <td>Facebook</td>
+									</tr>
+									<tr data-row="twitter">
+									    <td><i class="trevor-ti-twitter"></i></td>
+									    <td>Twitter</td>
+									</tr>
+									<tr data-row="clipboard">
+									    <td><i class="trevor-ti-link"></i></td>
+									    <td>Copy Link</td>
+									</tr>
+									<tr data-row="email">
+									    <td><i class="trevor-ti-mail"></i></td>
+									    <td>Email</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</span>
+				</span>
 			</div>
 			<?php $mid_row[] = ob_get_clean();
 		}

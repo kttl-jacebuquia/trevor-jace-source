@@ -212,7 +212,7 @@
 	&.type-horizontal,
 	&.type-square {
 	  .thumbnail-wrap {
-		border-radius: rem-calc(10px);
+		@apply rounded-px10;
 		// reverse the mobile
 		@apply w-auto;
 		@apply ml-auto;

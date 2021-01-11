@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="link.svg"
+   id="svg835"
+   version="1.1"
+   fill="none"
+   viewBox="0 0 18 19"
+   height="19"
+   width="18">
+  <metadata
+     id="metadata841">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs839" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg835"
+     inkscape:window-maximized="0"
+     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:cy="9.5"
+     inkscape:cx="9"
+     inkscape:zoom="37.111111"
+     showgrid="false"
+     id="namedview837"
+     inkscape:window-height="480"
+     inkscape:window-width="820"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <path
+     style="fill:#000000"
+     id="path833"
+     fill="#101066"
+     d="M5.13289 18.0346C3.11073 18.0346 1.28767 16.8164 0.513692 14.9483C-0.260284 13.0801 0.167223 10.9296 1.59689 9.49953L3.71889 7.37753L5.13289 8.79153L3.01189 10.9125C2.25395 11.6705 1.95794 12.7752 2.23537 13.8106C2.51279 14.8459 3.3215 15.6546 4.35687 15.9321C5.39223 16.2095 6.49695 15.9135 7.25489 15.1555L9.37589 13.0345L10.7899 14.4495L8.66889 16.5705C7.73296 17.5111 6.45975 18.0382 5.13289 18.0346ZM5.83989 13.7415L4.42589 12.3275L11.4969 5.25653L12.9109 6.67053L5.84089 13.7405L5.83989 13.7415ZM13.6189 11.6205L12.2039 10.2065L14.3249 8.08553C15.0932 7.32986 15.3971 6.2202 15.1211 5.17851C14.8452 4.13683 14.0317 3.32318 12.9901 3.04698C11.9485 2.77077 10.8387 3.07445 10.0829 3.84253L7.96089 5.96353L6.54689 4.54953L8.66889 2.42753C10.624 0.489498 13.7779 0.496405 15.7244 2.44298C17.671 4.38956 17.6779 7.54345 15.7399 9.49853L13.6189 11.6195V11.6205Z" />
+</svg>

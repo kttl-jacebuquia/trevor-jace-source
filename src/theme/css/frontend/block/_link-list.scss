@@ -52,7 +52,7 @@
   @screen sm {
 	margin-left: initial;
 	width: 100%;
-	border-radius: rem-calc(10px);
+	@apply rounded-px10;
   }
 
   @screen md {

@@ -1,6 +1,5 @@
 // Vendors
 import 'what-input';
-// Auto-Complete Test
 import $ from 'jquery';
 import * as features from './features';
 import * as vendors from './vendors';
@@ -15,44 +14,23 @@ const isSingle = $body.hasClass('single');
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
 
-// Floating Blocks
-isSingle && features.floatingBlock($('.post-content .trevor-block-floating'), $('.post-content-sidebar .floating-blocks-home'));
+// Single (Detail) Page
+if (isSingle) {
+	// Floating Blocks
+	features.floatingBlock(
+		$('.post-content .trevor-block-floating'),
+		$('.post-content-sidebar .floating-blocks-home')
+	);
 
-// Highlights
-isSingle && features.articleHighlights($('.post-highlights-list'));
+	// Highlights
+	features.articleHighlights($('.post-highlights-list'));
 
+	// Sharing More: Dropdown/Native
+	features.sharingMore(
+		document.querySelector('.post-share-more-btn'),
+		document.querySelector('.post-share-more-content')
+	);
 
-jQuery(function ($) {
-	// $('#input-search').autocomplete({
-	// 	source: function ({term}, response) {
-	// 		const url = new URL($('meta[name=ac-ajax-url]').attr("content"));
-	// 		url.searchParams.set('term', term);
-	//
-	// 		$.post(url.toString(), (resp) => {
-	// 			console.log(term, resp);
-	// 			response(((resp.correctlySpelled || resp.collations.length === 0) ? [term] : []).concat(resp.collations.map(({query}) => query)));
-	// 		});
-	// 	}
-	// });
-
-	$('#rc-search-main').autocomplete({
-		classes: {
-			"ui-autocomplete": "highlight-2"
-		},
-		source: function ({term}, response) {
-			const url = new URL($('meta[name=ac2-ajax-url]').attr("content"));
-			url.searchParams.set('term', term);
-
-			$.post(url.toString(), (resp) => {
-				response(resp.results);
-			});
-		},
-		select: function (event, ui) {
-			window.location.href = ui.item.url;
-		}
-	}).autocomplete("instance")._renderItem = function (ul, item) {
-		return $("<li class='hl-test-item'>")
-			.append("<div class='title'>" + item.title + "</div><div class='content'>" + item.content + "</div>")
-			.appendTo(ul);
-	};
-});
+	// Open social media sharing pages in a popup
+	features.sharingPopUp($('.post-social-share-btn'));
+}
