@@ -1,10 +1,12 @@
 .wp-block-image {
   &.is-style-full {
 	width: 100vw;
-	margin-left: calc(-1 * theme('container.padding.DEFAULT'));
+	margin-left: calc((100vw - 100%) / -2);
   }
 
   @screen md {
+	border-radius: rem-calc(10px);
+
 	&.is-style-full {
 	  width: calc(theme('screens.md') - (2 * theme('container.padding.md')));
 	  margin-left: 0;
@@ -14,6 +16,12 @@
   @screen lg {
 	&.is-style-full {
 	  width: calc(11 / 12 * (theme('screens.lg') - (2 * theme('container.padding.lg'))));
+	}
+  }
+
+  @screen xl {
+	&.is-style-full {
+	  width: calc(11 / 12 * (theme('screens.xl') - (2 * theme('container.padding.xl'))));
 	}
   }
 }

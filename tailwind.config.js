@@ -82,6 +82,7 @@ module.exports = {
 					DEFAULT: px2rem(28),
 					md: px2rem(50),
 					lg: px2rem(100),
+					xl: px2rem(100),
 				},
 			},
 			borderRadius: {
