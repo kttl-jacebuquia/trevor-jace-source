@@ -1,0 +1,19 @@
+.trevor-block-glossary-entry {
+  @apply bg-gray-light rounded-px10 p-px30;
+
+  .entry-title {
+	@apply font-bold text-px22 leading-px28 mt-5;
+	letter-spacing: rem-calc(.5px);
+  }
+
+  .entry-excerpt {
+	@apply font-light text-base leading-px22 tracking-px05;
+  }
+
+  .entry-description {
+	@apply font-normal text-base leading-px24 tracking-em001;
+	@apply my-5;
+  }
+}
+
+

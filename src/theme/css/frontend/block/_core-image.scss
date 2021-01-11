@@ -1,0 +1,19 @@
+.wp-block-image {
+  &.is-style-full {
+	width: 100vw;
+	margin-left: calc(-1 * theme('container.padding.DEFAULT'));
+  }
+
+  @screen md {
+	&.is-style-full {
+	  width: calc(theme('screens.md') - (2 * theme('container.padding.md')));
+	  margin-left: 0;
+	}
+  }
+
+  @screen lg {
+	&.is-style-full {
+	  width: calc(11 / 12 * (theme('screens.lg') - (2 * theme('container.padding.lg'))));
+	}
+  }
+}

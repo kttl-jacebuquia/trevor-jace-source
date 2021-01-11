@@ -1,9 +1,9 @@
-<div class="trevor-block bg-gray-light rounded-px10 p-px30 trevor-block-glossary-entry trevor-block-floating">
-	<h3 class="font-bold text-px22 leading-px28 letter-spacing -tracking-px05">{{ post.post_title }}</h3>
+<div class="trevor-block trevor-block-glossary-entry trevor-block-floating">
+	<h3 class="entry-title">{{ post.post_title }}</h3>
 	{% if post.post_excerpt %}
-		<div class="font-light text-base leading-px22 tracking-px05">{{ post.post_excerpt }}</div>
+		<div class="entry-excerpt">{{ post.post_excerpt }}</div>
 	{% endif %}
 	{% if post.post_content %}
-		<p class="font-normal text-base leading-px24 tracking-em001">{{ post.post_content }}</p>
+		<p class="entry-description">{{ post.post_content }}</p>
 	{% endif %}
 </div>

@@ -53,7 +53,7 @@ class Card {
 		}
 
 		# Tags
-		$tags = Taxonomy::get_post_tags_distinctive( $post );
+		$tags = Taxonomy::get_post_tags_distinctive( $post, [ 'filter_count_1' => false ] );
 
 		# Thumbnail variants
 		$thumb_var   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];

@@ -183,6 +183,35 @@ class Post_Header {
 				<a href="#" class="post-share-others-btn">
 					<i class="share-icon trevor-ti-share-others"></i>
 				</a>
+				<div class="post-share-others-content bg-white opacity-90 text-indigo">
+					<h4 class="my-5 mx-4 font-bold text-base leading-px20 tracking-px05">SHARE</h4>
+					<ul>
+						<li>
+							<a href="#">
+								<i></i>
+								<span>Facebook</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i></i>
+								<span>Twitter</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i></i>
+								<span>Copy Link</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i></i>
+								<span>Email</span>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<?php $mid_row[] = ob_get_clean();
 		}
@@ -190,7 +219,6 @@ class Post_Header {
 		# Tags
 		$tags = $hide_tags ? [] : Taxonomy::get_post_tags_distinctive( $post, [
 				'filter_count_1' => false,
-				'limit'          => 0,
 		] );
 
 		ob_start(); ?>

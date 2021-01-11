@@ -56,11 +56,11 @@ $is_rc = Is::rc();
 		<ul class="switcher">
 			<li>
 				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>"
-				   class="<?= $is_rc ? 'active' : '' ?>">Resource Center</a>
+				   class="<?= $is_rc ? 'active' : '' ?>">Find Support</a>
 			</li>
 			<li>
 				<a href="<?= esc_attr( home_url() ) ?>"
-				   class="<?= $is_rc ? '' : 'active' ?>">The Organization</a>
+				   class="<?= $is_rc ? '' : 'active' ?>">Explore The Organization</a>
 			</li>
 		</ul>
 		<div class="cta-wrap">
