@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "07661097099a277d3c5ce4cd4be3407769f46d2e01684b4c23afcf339afe73d8",
-    "current": "07661097099a277d3c5ce4cd4be3407769f46d2e01684b4c23afcf339afe73d8"
+    "previous": "9af769973164a3c6c0e03a0bd45850332cba0f3660b4960177bc6e9cc600b12f",
+    "current": "9af769973164a3c6c0e03a0bd45850332cba0f3660b4960177bc6e9cc600b12f"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.ttf",
-    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.svg",
-    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.woff",
-    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.eot",
-    "../../theme/static/icon-font/trevor-ti_07661097099a277d3c5ce4cd4be34077.woff2"
+    "../../theme/static/icon-font/trevor-ti_9af769973164a3c6c0e03a0bd4585033.ttf",
+    "../../theme/static/icon-font/trevor-ti_9af769973164a3c6c0e03a0bd4585033.svg",
+    "../../theme/static/icon-font/trevor-ti_9af769973164a3c6c0e03a0bd4585033.woff",
+    "../../theme/static/icon-font/trevor-ti_9af769973164a3c6c0e03a0bd4585033.eot",
+    "../../theme/static/icon-font/trevor-ti_9af769973164a3c6c0e03a0bd4585033.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -19,9 +19,17 @@
       "codepoint": 61697,
       "source": "./vectors/arrow-right.svg"
     },
+    "call": {
+      "codepoint": 61714,
+      "source": "./vectors/call.svg"
+    },
     "caret-down": {
       "codepoint": 61698,
       "source": "./vectors/caret-down.svg"
+    },
+    "chat": {
+      "codepoint": 61715,
+      "source": "./vectors/chat.svg"
     },
     "chevron-down": {
       "codepoint": 61699,
@@ -78,6 +86,10 @@
     "share-others": {
       "codepoint": 61709,
       "source": "./vectors/share-others.svg"
+    },
+    "smartphone": {
+      "codepoint": 61716,
+      "source": "./vectors/smartphone.svg"
     },
     "twitter": {
       "codepoint": 61710,
