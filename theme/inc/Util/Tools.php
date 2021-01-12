@@ -15,7 +15,7 @@ class Tools {
 
 			if ( get_query_var( RC_Object::QV_GET_HELP ) ) {
 				$type = 'get_help';
-			} else if ( get_query_var( RC_Object::QV_TREVOR_SPACE ) ) {
+			} else if ( get_query_var( RC_Object::QV_TREVORSPACE ) ) {
 				$type = 'trevorspace';
 			}
 		}

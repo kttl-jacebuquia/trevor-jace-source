@@ -337,7 +337,7 @@ class Hooks {
 				if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
 					$template = locate_template( 'rc/get-help.php', false );
 				} else # RC: Trevor Space
-					if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVOR_SPACE ) ) ) {
+					if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) ) ) {
 						$template = locate_template( 'rc/trevor-space.php', false );
 					}
 		}

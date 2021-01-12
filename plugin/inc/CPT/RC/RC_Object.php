@@ -28,14 +28,14 @@ abstract class RC_Object {
 	const QV_RESOURCES_LP = self::QV_BASE . '__lp';
 	const QV_RESOURCES_NON_BLOG = self::QV_BASE . '__non_blog';
 	const QV_GET_HELP = self::QV_BASE . '__get_help';
-	const QV_TREVOR_SPACE = self::QV_BASE . '__trevor_space';
+	const QV_TREVORSPACE = self::QV_BASE . '__trevorspace';
 
 	/* Permalinks */
 	const PERMALINK_BASE = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
 	const PERMALINK_BASE_TAX_TAG = self::PERMALINK_BASE . '/tag';
 	const PERMALINK_GET_HELP = 'get-help';
-	const PERMALINK_TREVOR_SPACE = 'trevor-space';
+	const PERMALINK_TREVORSPACE = 'trevorspace';
 
 	/* Collections */
 	const _ALL_ = [
@@ -175,9 +175,9 @@ abstract class RC_Object {
 			] ), 'top' );
 
 		## Trevor Space
-		add_rewrite_rule( self::PERMALINK_TREVOR_SPACE . '/?$', 'index.php?' . http_build_query( [
-				self::QV_BASE         => 1,
-				self::QV_TREVOR_SPACE => 1,
+		add_rewrite_rule( self::PERMALINK_TREVORSPACE . '/?$', 'index.php?' . http_build_query( [
+				self::QV_BASE        => 1,
+				self::QV_TREVORSPACE => 1,
 			] ), 'top' );
 
 		## Main Page
@@ -384,7 +384,7 @@ abstract class RC_Object {
 			self::QV_RESOURCES_LP,
 			self::QV_RESOURCES_NON_BLOG,
 			self::QV_GET_HELP,
-			self::QV_TREVOR_SPACE,
+			self::QV_TREVORSPACE,
 		] );
 	}
 

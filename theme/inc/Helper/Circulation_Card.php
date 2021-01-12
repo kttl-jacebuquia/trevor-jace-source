@@ -72,7 +72,7 @@ class Circulation_Card {
 				'title'    => 'Meet new LGBTQ <tilt>friends</tilt> in TrevorSpace.',
 				'desc'     => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
 				'cta_text' => 'Check It Out',
-				'cta_url'  => home_url( RC_Object::PERMALINK_TREVOR_SPACE ),
+				'cta_url'  => home_url( RC_Object::PERMALINK_TREVORSPACE ),
 				'bg'       => 'gradient-type-trevorspace',
 		] ) )->render();
 	}
