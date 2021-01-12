@@ -27,7 +27,7 @@ Please check the information below.
 ### Step 1
 
 Please make sure you have permission to the project on [Pantheon](https://pantheon.io).
-You'll clone the main repository from the Pantheon using the command below, and it will clone this repo as well as a git-submodule.
+You'll clone the main repository from the Pantheon using the command below, and it will clone this repo as well (as git-submodule).
 
 ```shell script
 git clone --recurse-submodules --depth 1 ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
