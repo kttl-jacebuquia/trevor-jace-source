@@ -1,14 +1,5 @@
 # Trevor
 
-**Important!** This repository is constructed as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-It contains all the source code, but it lacks the necessary tools to build/run/deploy.
-Please check out first using the [Pantheon](https://pantheon.io)'s git repository with the _`git clone --recurse-submodules`_ command.
-You will find this repository under the `source` folder.
-
-```shell script
-git clone --recurse-submodules --depth 1 ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
-```
-
 ## Technologies
 
 - [PHP 7.3](https://www.php.net/releases/7_3_0.php)
@@ -22,29 +13,55 @@ git clone --recurse-submodules --depth 1 ssh://codeserver.dev.b60ba3a2-cd76-4e32
 
 ## Getting Started
 
+**Important!** This repository is constructed as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+It contains all the source code, but it lacks the necessary tools to build/run/deploy.
+**You shouldn't clone this repo directly.**
+Please check the information below.
+
 **Requirements**
 - Unix-based operating system (Linux or Mac OS X)
 - [Lando](https://docs.lando.dev/basics/installation.html) _*_
-- [Pantheon](https://pantheon.io) machine token
+- A [Pantheon](https://pantheon.io) account with access to the project
+- [Pantheon machine token](https://pantheon.io/docs/machine-tokens#create-a-machine-token)
+
+### Step 1
+
+Please make sure you have permission to the project on [Pantheon](https://pantheon.io).
+You'll clone the main repository from the Pantheon using the command below, and it will clone this repo as well as a git-submodule.
+
+```shell script
+git clone --recurse-submodules --depth 1 ssh://codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59@codeserver.dev.b60ba3a2-cd76-4e32-9990-a5b89450ec59.drush.in:2222/~/repository.git trevor-web
+```
+
+### Step 2
 
 Start the development environment.
+*It may take a while on the first run.*
 ```shell script
 lando start
 ```
 
-Load {code _**_, db, files} from [dev|test|prod] 
+### Step 3
+
+Load **everything** from the [**dev**|test|prod] 
 ```shell script
 lando pull
 ```
 
-Now your development environment should be ready and you should be able to see [http://trevor-web.lndo.site](http://trevor-web.lndo.site)!
+### Some Notes
+
+- Please check the **Project Structure** below.
+- Please do not modify anything  if it is not in the `_source` folder.
+- Please make sure you are pushing your changes to correct repo.
+  You should not use again the Pantheon's git repository directly.
+  (TLDR, you should be on the `_source` directory when calling any `git` command.)
+
+
+👍 Now, your development environment should be ready, and you should be able to see [http://trevor-web.lndo.site](http://trevor-web.lndo.site)!
 
 _* When going through the Mac OS X installer you can choose to not install **Docker Desktop**,
     if you already have it and/or don't want to change the current version.
     Check the `Customize` section on the `LandoInstaller.pkg`._
-    
-_** Lando refers to all source code in the running server, including but not limited to WordPress code files, 3rd party plugins, etc.
-    When you called `lando start` it will replace the main theme & plugin files with the local ones._
 
 
 ## Project Structure
