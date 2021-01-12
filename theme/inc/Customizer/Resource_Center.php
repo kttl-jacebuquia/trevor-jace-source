@@ -111,11 +111,11 @@ class Resource_Center extends Abstract_Customizer {
 		self::SETTING_PAGINATION_SEARCH_RESULTS     => 6,
 		/* * Get Help */
 		self::SETTING_GET_HELP_1_TITLE              => 'We’re here <tilt>for you.</tilt>',
-		self::SETTING_GET_HELP_1_DESC               => 'If you are thinking about harming yourself — get immediate support.  Connect to a Trevor counselor 24/7, 365 days a year, from  anywhere in the U.S. It is 100% confidential, and 100% free.',
+		self::SETTING_GET_HELP_1_DESC               => 'If you are thinking about harming yourself — get immediate support. Connect to a Trevor counselor 24/7, 365 days a year, from anywhere in the U.S. It is 100% confidential, and 100% free.',
 		self::SETTING_GET_HELP_2_TITLE              => 'Our trained counselors understand the challenges LGBTQ young people face.',
-		self::SETTING_GET_HELP_2_DESC               => 'They will listen, reflect back, and will not judge you. All of  your conversations are anonymous, and you can share as much  or as little as you’d like.',
+		self::SETTING_GET_HELP_2_DESC               => 'They will listen, reflect back, and will not judge you. All of your conversations are anonymous, and you can share as much or as little as you’d like.',
 		/* * * Text */
-		self::SETTING_GET_HELP_TEXT_TITLE           => 'Text us from  anywhere, anytime.',
+		self::SETTING_GET_HELP_TEXT_TITLE           => 'Text us from anywhere, anytime.',
 		self::SETTING_GET_HELP_TEXT_DESC            => 'Standard text messaging rates may apply.',
 		self::SETTING_GET_HELP_TEXT_CTA             => 'Text ‘START’ to 678-678',
 		self::SETTING_GET_HELP_TEXT_BTN_CTA         => 'Text Us',
@@ -134,7 +134,7 @@ class Resource_Center extends Abstract_Customizer {
 		self::SETTING_GET_HELP_NOTIFICATION_URL     => '',
 		/* * * Exercise */
 		self::SETTING_GET_HELP_EXERCISE_TITLE       => 'Not ready to talk?',
-		self::SETTING_GET_HELP_EXERCISE_DESC        => 'It’s not easy to say how you’re feeling. Try a few of these  calming exercises that will help you relax and focus.',
+		self::SETTING_GET_HELP_EXERCISE_DESC        => 'It’s not easy to say how you’re feeling. Try a few of these calming exercises that will help you relax and focus.',
 		self::SETTING_GET_HELP_EXERCISE_CTA         => 'Start ',
 		/* * * Circulation */
 		self::SETTING_GET_HELP_CIRCULATION_TITLE    => 'Looking for another kind of support?',
@@ -142,23 +142,23 @@ class Resource_Center extends Abstract_Customizer {
 
 		/* * TrevorSpace */
 		self::SETTING_TREVORSPACE_TITLE             => 'Find your <tilt>community</tilt> at TrevorSpace.',
-		self::SETTING_TREVORSPACE_DESC              => 'Get advice and support within an international community  for LGBTQ young people ages 13–24. Sign up and start  a conversation now.',
+		self::SETTING_TREVORSPACE_DESC              => 'Get advice and support within an international community for LGBTQ young people ages 13–24. Sign up and start a conversation now.',
 		self::SETTING_TREVORSPACE_JOIN_CTA          => 'Join Now',
 		self::SETTING_TREVORSPACE_JOIN_URL          => 'https://www.trevorspace.org/register/',
 		self::SETTING_TREVORSPACE_LOGIN_CTA         => 'Log In',
 		self::SETTING_TREVORSPACE_LOGIN_URL         => 'https://www.trevorspace.org/login/',
 		/* * * 1 */
 		self::SETTING_TREVORSPACE_1_TITLE_TOP       => 'An Understanding Community',
-		self::SETTING_TREVORSPACE_1_TITLE           => 'Say what’s  on your mind.',
+		self::SETTING_TREVORSPACE_1_TITLE           => 'Say what’s on your mind.',
 		self::SETTING_TREVORSPACE_1_DESC            => 'Coming out, family challenges, relationships, and more. Start a conversation about what’s happening in your life right now.',
 		/* * * 2 */
 		self::SETTING_TREVORSPACE_2_TITLE_TOP       => 'Start a Conversation',
-		self::SETTING_TREVORSPACE_2_TITLE           => 'Talk to someone  who understands.',
+		self::SETTING_TREVORSPACE_2_TITLE           => 'Talk to someone who understands.',
 		self::SETTING_TREVORSPACE_2_DESC            => 'Get advice and support from other members in similar situations. And make some new friends along the way!',
 		/* * * 3 */
 		self::SETTING_TREVORSPACE_3_TITLE_TOP       => 'Secure Space',
 		self::SETTING_TREVORSPACE_3_TITLE           => 'Your safety is our top priority.',
-		self::SETTING_TREVORSPACE_3_DESC            => 'This is a members-only, moderated, and affirming space for LGBTQ  young people.',
+		self::SETTING_TREVORSPACE_3_DESC            => 'This is a members-only, moderated, and affirming space for LGBTQ young people.',
 		/* * * Circulation */
 		self::SETTING_TREVORSPACE_CIRCULATION_TITLE => 'Looking for another kind of support?',
 		self::SETTING_TREVORSPACE_CIRCULATION_DESC  => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
