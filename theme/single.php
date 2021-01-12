@@ -9,6 +9,8 @@
 				<div class="container post-content-grid">
 					<div class="post-content">
 						<?php the_content(); ?>
+
+						<?= \TrevorWP\Theme\Helper\Post::render_content_footer( $post ) ?>
 					</div>
 					<?php $side_blocks = \TrevorWP\Theme\Helper\Post::render_side_blocks( $post ); ?>
 					<div class="post-content-sidebar<?= empty( $side_blocks ) ? ' empty' : ''; ?>">

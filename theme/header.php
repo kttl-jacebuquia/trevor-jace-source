@@ -51,7 +51,9 @@ $is_rc = Is::rc();
 <div id="top-bar" class="top-bar">
 	<div class="top-bar-inner container">
 		<div class="logo-icon">
-			<i class="trevor-ti-logo-icon"></i>
+			<a href="<?= esc_attr( home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ) ?>">
+				<i class="trevor-ti-logo-icon"></i>
+			</a>
 		</div>
 		<ul class="switcher">
 			<li>
@@ -64,8 +66,10 @@ $is_rc = Is::rc();
 			</li>
 		</ul>
 		<div class="cta-wrap">
-			<a href="#" class="btn bg-orange text-white">Reach a Counselor</a>
-			<a href="#" class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
+			<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>"
+			   class="btn bg-orange text-white">Reach a Counselor</a>
+			<a href="<?= esc_attr( home_url( \TrevorWP\Main::PERMALINK_DONATE ) ) ?>"
+			   class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
 		</div>
 	</div>
 </div>

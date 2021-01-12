@@ -42,7 +42,7 @@ foreach ( $featured_cats as $cat ) {
 
 	$cat_rows[]    = Helper\Carousel::posts( $cat_posts, [
 			'id'       => "cat-{$cat->slug}",
-			'title'    => $cat->name,
+			'title'    => '<a href="' . get_term_link( $cat ) . '">' . esc_html( $cat->name ) . '</a>',
 			'subtitle' => $cat->description,
 	] );
 	$used_post_ids = array_merge( $used_post_ids, wp_list_pluck( $cat_posts, 'ID' ) );
@@ -67,7 +67,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
 			<div class="mx-auto mb-10 lg:w-4/6 lg:-mt-2">
 				<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
-					FIND ANSWERS
+					FIND SUPPORT
 				</h2>
 				<h1>
 					<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>

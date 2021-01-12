@@ -46,6 +46,11 @@ class Main {
 	const CACHE_GROUP_TAX_PREFIX = self::CACHE_GROUP_PREFIX . 'tax:';
 
 	/*
+	 * Permalink
+	 */
+	const PERMALINK_DONATE = 'donate';
+
+	/*
 	 * Collections
 	 */
 	const BLOG_POST_TYPES = [

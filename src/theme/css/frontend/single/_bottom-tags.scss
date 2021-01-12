@@ -1,0 +1,43 @@
+.post-bottom-tags {
+  @apply relative;
+  @apply py-8;
+
+  hr {
+	@apply absolute w-full m-0;
+  }
+
+  .hr-top {
+	@apply top-0;
+  }
+
+  .hr-btm {
+	@apply bottom-0;
+  }
+
+  .list-container {
+	a {
+	  @apply inline-block bg-violet-light rounded-full;
+	  @apply py-1.5 px-3.5;
+	  @apply m-1;
+	  @apply text-indigo font-medium text-px14 leading-px18 tracking-em001 no-underline;
+	}
+  }
+
+  @screen md {
+	@apply py-10;
+
+	.list-container {
+	  a {
+		@apply leading-px20;
+	  }
+	}
+  }
+
+  @screen lg {
+	.list-container {
+	  a {
+		@apply text-base tracking-px05;
+	  }
+	}
+  }
+}

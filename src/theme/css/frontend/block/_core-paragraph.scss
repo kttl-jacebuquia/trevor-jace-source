@@ -1,0 +1,11 @@
+p {
+  &.has-medium-font-size {
+	@apply font-normal text-px22 leading-px32;
+  }
+
+  @screen lg {
+	&.has-medium-font-size {
+	  @apply text-px26 leading-px36 tracking-em005;
+	}
+  }
+}

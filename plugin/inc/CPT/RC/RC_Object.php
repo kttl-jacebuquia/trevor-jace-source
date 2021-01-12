@@ -34,8 +34,8 @@ abstract class RC_Object {
 	const PERMALINK_BASE = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
 	const PERMALINK_BASE_TAX_TAG = self::PERMALINK_BASE . '/tag';
-	const PERMALINK_GET_HELP = self::PERMALINK_BASE . '/get-help';
-	const PERMALINK_TREVOR_SPACE = self::PERMALINK_BASE . '/trevor-space';
+	const PERMALINK_GET_HELP = 'get-help';
+	const PERMALINK_TREVOR_SPACE = 'trevor-space';
 
 	/* Collections */
 	const _ALL_ = [

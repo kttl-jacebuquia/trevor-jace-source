@@ -2,7 +2,9 @@
 
 use TrevorWP\Block;
 use TrevorWP\CPT\RC\External;
+use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
+use TrevorWP\Util\Tools;
 
 /**
  * Post Helper
@@ -54,11 +56,14 @@ class Post {
 	public static function render_bottom_blocks( \WP_Post $post ): string {
 		$out = [];
 
+		# Featured Categories
 		if ( $post->post_type == External::POST_TYPE ) {
 			$out[] = Categories::render_rc_featured_hero();
 		}
 
-		return implode( "\n", array_filter( $out ) );
+		$inner = implode( "\n", array_filter( $out ) );
+
+		return "<div class='post-bottom-blocks'>{$inner}</div>";
 	}
 
 	/**
@@ -72,6 +77,8 @@ class Post {
 		];
 
 		return implode( "\n", array_filter( $out ) );
+
+		return "<div class='post-after-blocks'>{$inner}</div>";
 	}
 
 	/**
@@ -109,5 +116,77 @@ class Post {
 			</div>
 		</div>
 		<?php return ob_get_clean();
+	}
+
+	protected static function _render_bottom_tags( \WP_Post $post ): ?string {
+		$tax   = Tools::get_post_tag_tax( $post );
+		$terms = wp_get_object_terms( $post->ID, $tax );
+
+		if ( empty( $terms ) ) {
+			return null;
+		}
+
+		ob_start(); ?>
+		<div class="post-bottom-tags">
+			<hr class="wp-block-separator is-style-wave hr-top">
+			<div class="list-container">
+				<?php foreach ( $terms as $term ) { ?>
+					<a href="<?= esc_attr( get_term_link( $term ) ) ?>" rel="tag"><?= esc_attr( $term->name ) ?></a>
+				<?php } ?>
+			</div>
+			<hr class="wp-block-separator is-style-wave hr-btm">
+		</div>
+		<?php return ob_get_clean();
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return string|null
+	 */
+	protected static function _render_bottom_categories( \WP_Post $post ): ?string {
+		$tax   = Tools::get_post_category_tax( $post );
+		$terms = wp_get_object_terms( $post->ID, $tax );
+
+		if ( empty( $terms ) ) {
+			return null;
+		}
+
+		ob_start(); ?>
+		<div class="post-bottom-categories">
+			<h3 class="list-title">Browse trending content below or choose a topic category to explore.</h3>
+			<div class="list-container">
+				<?php foreach ( $terms as $term ) { ?>
+					<a href="<?= esc_attr( get_term_link( $term ) ) ?>" rel="tag"><?= esc_attr( $term->name ) ?></a>
+				<?php } ?>
+			</div>
+		</div>
+		<?php return ob_get_clean();
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return string|null
+	 */
+	protected static function _render_content_bottom_recirculation( \WP_Post $post ): ?string {
+		return null;
+	}
+
+	public static function render_content_footer( \WP_Post $post ): string {
+		$out = [
+			# All tags
+				self::_render_bottom_tags( $post ),
+
+			# Content Bottom Recirculation
+				self::_render_content_bottom_recirculation( $post ),
+
+			# All Categories
+				self::_render_bottom_categories( $post ),
+		];
+
+		$inner = implode( "\n", array_filter( $out ) );
+
+		return "<div class='post-content-footer'>{$inner}</div>";
 	}
 }

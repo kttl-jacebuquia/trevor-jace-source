@@ -1,0 +1,19 @@
+.post-content-footer {
+  @apply py-10;
+
+  & > * + * {
+	@apply mt-14;
+  }
+
+  @screen md {
+	& > * + * {
+	  @apply mt-12;
+	}
+  }
+
+  @screen lg {
+	& > * + * {
+	  @apply mt-14;
+	}
+  }
+}
