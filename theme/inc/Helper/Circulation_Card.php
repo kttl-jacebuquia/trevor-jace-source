@@ -6,8 +6,6 @@ use TrevorWP\CPT\RC\RC_Object;
  * Circulation Card Helper
  */
 class Circulation_Card {
-	const BG_GRADIENT_RC = 'gradient-rc';
-
 	/**
 	 * @var array
 	 */
@@ -19,7 +17,7 @@ class Circulation_Card {
 	 *  $desc string
 	 *  $cta_text string
 	 *  $cta_url string
-	 *  $bg string
+	 *  $bg string Can be a gradient type or bg class.
 	 *  $cls array
 	 */
 	public function __construct( array $args ) {
@@ -39,10 +37,16 @@ class Circulation_Card {
 	 * @return string|null
 	 */
 	public function render(): ?string {
-		$cls   = [
-				'circulation-card',
-				"bg-{$this->_args['bg']}",
-		];
+		$cls = [ 'circulation-card' ];
+
+		$gradient = null;
+		if ( 0 === strpos( $this->_args['bg'], 'gradient' ) ) {
+			$cls[] = 'bg-gradient';
+			$cls[] = $this->_args['bg'];
+		} else {
+			$cls[] = "bg-{$this->_args['bg']}";
+		}
+
 		$class = implode( ' ', array_merge( $cls, $this->_args['cls'] ) );
 		ob_start(); ?>
 		<div class="<?= esc_attr( $class ) ?>">
@@ -69,7 +73,7 @@ class Circulation_Card {
 				'desc'     => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
 				'cta_text' => 'Check It Out',
 				'cta_url'  => home_url( RC_Object::PERMALINK_TREVOR_SPACE ),
-				'bg'       => '',
+				'bg'       => 'gradient-type-trevorspace',
 		] ) )->render();
 	}
 
@@ -85,7 +89,7 @@ class Circulation_Card {
 				'desc'     => 'Is there something you want to learn more about? Find topics you’re interested in here.',
 				'cta_text' => 'Find Answers',
 				'cta_url'  => home_url( RC_Object::PERMALINK_BASE ),
-				'bg'       => self::BG_GRADIENT_RC,
+				'bg'       => 'gradient-type-rc',
 		] ) )->render();
 	}
 
@@ -101,7 +105,7 @@ class Circulation_Card {
 				'desc'     => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
 				'cta_text' => 'Reach a Counselor',
 				'cta_url'  => home_url( RC_Object::PERMALINK_GET_HELP ),
-				'bg'       => '',
+				'bg'       => 'gradient-type-get_help',
 		] ) )->render();
 	}
 }

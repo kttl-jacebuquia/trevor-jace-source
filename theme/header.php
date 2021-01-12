@@ -38,9 +38,11 @@ $is_rc = Is::rc();
 	<?= Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ) ?>
 </head>
 <body <?php body_class(); ?>>
-<div id="bg-wrap">
-	<div id="bg-gradient"></div>
-</div>
+<?php if ( ! empty( $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type() ) ) { ?>
+	<div id="bg-wrap">
+		<div id="bg-gradient" class="gradient-type-<?= esc_attr( $gradient_type ) ?>"></div>
+	</div>
+<?php } ?>
 <?= Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_BODY_TOP ) ?>
 <!--[if IE]>
 <p class="browserupgrade">

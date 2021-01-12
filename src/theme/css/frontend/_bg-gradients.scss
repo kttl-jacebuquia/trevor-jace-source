@@ -1,25 +1,65 @@
-$canvas-color: rgba(64, 0, 156, 1); // default background color
+@mixin create-gradient($canvas-color, $defaults, $points) {
+  background-color: $canvas-color;
 
-$defaults: (// if not specified below (in $points), these are the defaults
-		type: circle,
-		spread: 40%,
-		ending_alpha: 0,
-		sizing: farthest-corner,
-);
+  $gradient-list: ();
 
-$points: (
-		("at": 0% 0%, "color": rgba(64, 0, 156, 1)),
-		("at": 15% 15%, "color": rgba(107, 93, 246, 1)),
-		("at": 51% 14%, "color": rgba(157, 145, 255, 1), "spread": 35%),
-		("at": 89% 22%, "color": rgba(107, 93, 246, 1)),
-		("at": 8% 36%, "color": rgba(113, 85, 255, .5)),
-		("at": 27% 47%, "color": rgba(113, 85, 255, .5), "spread": 30%),
-		("at": 82% 56%, "color": rgba(124, 91, 184, 1), "spread": 30%),
-		("at": 12% 70%, "color": rgba(124, 91, 184, 1), "spread": 30%),
-		("at": 49% 71%, "color": rgba(124, 91, 184, 1), "spread": 30%),
-		("at": 98% 95%, "color": rgba(124, 91, 184, 1)),
-		("at": 99% 10%, "color": rgba(124, 91, 184, 1)),
-);
+  @each $gradient-data in $points {
+	$data: map-merge($defaults, $gradient-data);
+
+	$spread: map-get($data, 'spread');
+	$ending_alpha: map-get($data, 'ending_alpha');
+	$sizing: map-get($data, 'sizing');
+
+	$this: (
+			map-get($data, 'type') at map-get($data, 'at'),
+			map-get($data, 'color'),
+			rgba(map-get($data, 'color'), map-get($data, 'ending_alpha')) map-get($data, 'spread'),
+	);
+
+	$gradient-list: append($gradient-list, "radial-gradient(#{$this})", $separator: comma);
+  }
+
+  background: #{$gradient-list};
+}
+
+// Type: RC
+.gradient-type-rc {
+  @include create-gradient(
+				  rgba(64, 0, 156, 1), // default background color
+				  (// if not specified in below, these are the defaults
+						  type: circle,
+						  spread: 40%,
+						  ending_alpha: 0,
+						  sizing: farthest-corner,
+				  ),
+						  (// Stack of radial-gradient points
+								  ("at": 0% 0%, "color": rgba(64, 0, 156, 1)),
+								  ("at": 15% 15%, "color": rgba(107, 93, 246, 1)),
+								  ("at": 51% 14%, "color": rgba(157, 145, 255, 1), "spread": 35%),
+								  ("at": 89% 22%, "color": rgba(107, 93, 246, 1)),
+								  ("at": 8% 36%, "color": rgba(113, 85, 255, .5)),
+								  ("at": 27% 47%, "color": rgba(113, 85, 255, .5), "spread": 30%),
+								  ("at": 82% 56%, "color": rgba(124, 91, 184, 1), "spread": 30%),
+								  ("at": 12% 70%, "color": rgba(124, 91, 184, 1), "spread": 30%),
+								  ("at": 49% 71%, "color": rgba(124, 91, 184, 1), "spread": 30%),
+								  ("at": 98% 95%, "color": rgba(124, 91, 184, 1)),
+								  ("at": 99% 10%, "color": rgba(124, 91, 184, 1)),
+						  ),
+  )
+}
+
+// Type: Get Help
+.gradient-type-get_help {
+  background-color: tan; // temp
+  //@include create-gradient();
+}
+
+// Type: Trevorspace
+.gradient-type-trevorspace {
+  background-color: yellow; // temp
+  //@include create-gradient();
+}
+
 
 #bg-wrap {
   @apply absolute top-0 left-0;
@@ -32,26 +72,4 @@ $points: (
   width: 100%;
   height: 100%;
   min-height: 300rem;
-  background-color: $canvas-color;
-
-  $gradient-list: ();
-
-  @each $gradient-data in $points {
-	$data: map-merge($defaults, $gradient-data);
-
-	$spread: map-get($data, 'spread');
-	$ending_alpha: map-get($data, 'ending_alpha');
-	$sizing: map-get($data, 'sizing');
-
-
-	$this: (
-			map-get($data, 'type') at map-get($data, 'at'),
-			map-get($data, 'color'),
-			rgba(map-get($data, 'color'), map-get($data, 'ending_alpha')) map-get($data, 'spread'),
-	);
-
-	$gradient-list: append($gradient-list, "radial-gradient(#{$this})", $separator: comma);
-  }
-
-  background: #{$gradient-list};
 }
