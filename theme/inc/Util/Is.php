@@ -41,6 +41,6 @@ class Is {
 		// TODO: Check search
 		// TODO: Use static cache
 
-		return false;
+		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) );
 	}
 }

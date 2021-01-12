@@ -10,6 +10,8 @@ window.trevorWP = {features, vendors, matchMedia};
 
 const $body = $('body');
 const isSingle = $body.hasClass('single');
+const isGetHelp = !isSingle && $body.hasClass('is-get-help');
+const isTrevorspace = !isSingle && $body.hasClass('is-trevorspace');
 
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
@@ -34,3 +36,9 @@ if (isSingle) {
 	// Open social media sharing pages in a popup
 	features.sharingPopUp($('.post-social-share-btn'));
 }
+
+// Get Help
+isGetHelp && console.log('Get-Help page');
+
+// Trevorspace
+isTrevorspace && console.log('Trevorspace page');

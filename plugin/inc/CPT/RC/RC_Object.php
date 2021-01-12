@@ -85,6 +85,7 @@ abstract class RC_Object {
 		add_action( 'parse_request', [ self::class, 'parse_request' ], 10, 1 );
 		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
 		add_filter( 'posts_request', [ self::class, 'posts_request' ], 8 /* Must be lower than the Solr's hook */, 2 );
+		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
 	}
 
 	/**
@@ -508,5 +509,30 @@ abstract class RC_Object {
 		}
 
 		return $base . '?' . http_build_query( [ 's' => $term ] );
+	}
+
+	/**
+	 * Filters the list of CSS body class names for the current post or page.
+	 *
+	 * @param array $classes An array of body class names.
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/body_class/
+	 */
+	public static function body_class( array $classes ): array {
+		$is_rc = Is::rc();
+
+		if ( $is_rc ) {
+			$classes[] = 'is-rc';
+
+			if ( ! empty( get_query_var( self::QV_TREVORSPACE ) ) ) {
+				$classes[] = 'is-trevorspace';
+			} elseif ( ! empty( get_query_var( self::QV_GET_HELP ) ) ) {
+				$classes[] = 'is-get-help';
+			}
+		}
+
+		return $classes;
 	}
 }
