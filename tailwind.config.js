@@ -23,7 +23,7 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			sm: px2rem(640),
+			sm: px2rem(414),
 			md: px2rem(768),
 			lg: px2rem(1440),
 			xl: px2rem(1600),
@@ -70,6 +70,15 @@ module.exports = {
 			},
 			highlight: {
 				DEFAULT: '#FDE6BC',
+			}
+		},
+		// Custom
+		postCard: {
+			width: {
+				DEFAULT: px2rem(319),
+				md: px2rem(319),
+				lg: px2rem(395),
+				xl: px2rem(395),
 			}
 		},
 		extend: {

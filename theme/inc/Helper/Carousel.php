@@ -39,7 +39,6 @@ class Carousel {
 		# Extra Classes
 		$ext_cls = [];
 		if ( ! empty( $options['onlyMd'] ) ) {
-//			$ext_cls[] = 'no-mobile'; todo: change css
 			$ext_cls[] = 'only-md';
 		}
 
@@ -79,19 +78,13 @@ class Carousel {
 	public static function print_js( string $base_selector, array $options = [] ): void {
 		$breakpoints = [
 				'768'  => [
-						'slidesPerView'  => 2,
-						'spaceBetween'   => 20,
-						'centeredSlides' => false,
+						'spaceBetween' => 20,
 				],
 				'1400' => [
-						'slidesPerView'  => 3,
-						'spaceBetween'   => 30,
-						'centeredSlides' => false,
+						'spaceBetween' => 30,
 				],
 				'1600' => [
-						'slidesPerView'  => 4,
-						'spaceBetween'   => 30,
-						'centeredSlides' => false,
+						'spaceBetween' => 30,
 				],
 		];
 
@@ -104,8 +97,7 @@ class Carousel {
 
 		$options = array_merge( [
 				'slidesPerView'  => 1,
-				'spaceBetween'   => 30,
-				'centeredSlides' => true,
+				'spaceBetween'   => 20,
 				'observer'       => true,
 				'pagination'     => [
 						'el'        => "{$base_selector} .swiper-pagination",

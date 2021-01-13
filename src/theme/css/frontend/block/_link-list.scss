@@ -49,13 +49,10 @@
 	}
   }
 
-  @screen sm {
+  @screen md {
 	margin-left: initial;
 	width: 100%;
 	@apply rounded-px10;
-  }
-
-  @screen md {
 	padding: rem-calc(40px);
 
 	.list-title {

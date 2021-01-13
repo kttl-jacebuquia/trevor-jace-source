@@ -37,6 +37,14 @@
   @apply rounded-r-none;
 }
 
+@screen md {
+  .carousel-container {
+	width: 100% !important;
+	padding: 0 !important;
+	max-width: theme('postCard.width.md');
+  }
+}
+
 @screen lg {
   .swiper-button-prev,
   .swiper-button-next {
@@ -50,6 +58,10 @@
 
   .swiper-button-next {
 	@apply right-8;
+  }
+
+  .carousel-container {
+	max-width: theme('postCard.width.lg');
   }
 }
 
@@ -101,14 +113,6 @@
 // Only Md fixes
 
 .posts-carousel.only-md {
-  @media screen and (max-width: theme('screens.md')), screen and (min-width: theme('screens.lg')) {
-	.swiper-pagination,
-	.swiper-button-prev,
-	.swiper-button-next {
-	  @apply hidden;
-	}
-  }
-
   // Small
   @media screen and (max-width: theme('screens.md')) {
 	.carousel-container,
@@ -136,6 +140,12 @@
 
 	  .carousel-container {
 		@apply w-full;
+		max-width: none;
+
+		.swiper-wrapper {
+		  width: rem-calc(1240px) !important;
+		  margin: 0 auto;
+		}
 	  }
 
 	  .swiper-wrapper {
@@ -154,9 +164,9 @@
 /* Hide the swiper buttons hidden by default */
 .swiper-button-prev,
 .swiper-button-next {
-  display: none;
+  @apply hidden;
 
-  .swiper-container-initialized & {
-	display: initial;
+  .swiper-container-initialized ~ & {
+	@apply flex;
   }
 }
