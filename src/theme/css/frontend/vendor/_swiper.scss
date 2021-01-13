@@ -37,14 +37,6 @@
   @apply rounded-r-none;
 }
 
-@screen md {
-  .carousel-container {
-	width: 100% !important;
-	padding: 0 !important;
-	max-width: theme('postCard.width.md');
-  }
-}
-
 @screen lg {
   .swiper-button-prev,
   .swiper-button-next {
@@ -59,15 +51,9 @@
   .swiper-button-next {
 	@apply right-8;
   }
-
-  .carousel-container {
-	max-width: theme('postCard.width.lg');
-  }
 }
 
 .carousel-container {
-  width: calc(100% + var(--v-padding-full));
-  padding-right: 3rem;
   list-style: none;
   z-index: 1; /* Fix of Webkit flickering */
 }
@@ -108,51 +94,6 @@
 
 .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0 rem-calc(4px);
-}
-
-// Only Md fixes
-
-.posts-carousel.only-md {
-  // Small
-  @media screen and (max-width: theme('screens.md')) {
-	.carousel-container,
-	.carousel-full-width-wrap {
-	  @apply m-0 p-0 w-full;
-	}
-
-	.swiper-wrapper {
-	  @apply flex flex-col w-full;
-	}
-
-	.swiper-slide + .swiper-slide {
-	  @apply mt-5;
-	}
-
-	.card-post {
-	  @apply mx-auto;
-	}
-  }
-
-  // large
-  @media screen and (min-width: theme('screens.lg')) {
-	.carousel-full-width-wrap {
-	  @apply mx-auto px-0 w-full;
-
-	  .carousel-container {
-		@apply w-full;
-		max-width: none;
-
-		.swiper-wrapper {
-		  width: rem-calc(1240px) !important;
-		  margin: 0 auto;
-		}
-	  }
-
-	  .swiper-wrapper {
-		@apply grid grid-cols-3 gap-x-7;
-	  }
-	}
-  }
 }
 
 

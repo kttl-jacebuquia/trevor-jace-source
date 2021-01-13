@@ -37,7 +37,7 @@ class Carousel {
 		}
 
 		# Extra Classes
-		$ext_cls = [];
+		$ext_cls = [ 'post-carousel' ];
 		if ( ! empty( $options['onlyMd'] ) ) {
 			$ext_cls[] = 'only-md';
 		}
@@ -96,18 +96,18 @@ class Carousel {
 		}
 
 		$options = array_merge( [
-				'slidesPerView'  => 1,
-				'spaceBetween'   => 20,
-				'observer'       => true,
-				'pagination'     => [
+				'slidesPerView' => 1,
+				'spaceBetween'  => 20,
+				'observer'      => true,
+				'pagination'    => [
 						'el'        => "{$base_selector} .swiper-pagination",
 						'clickable' => true,
 				],
-				'navigation'     => [
+				'navigation'    => [
 						'nextEl' => "{$base_selector} .swiper-button-next",
 						'prevEl' => "{$base_selector} .swiper-button-prev",
 				],
-				'on'             => new \stdClass()
+				'on'            => new \stdClass()
 		],
 				$options,
 				[ 'breakpoints' => $breakpoints ],
@@ -131,7 +131,7 @@ class Carousel {
 
 				<?php if(! empty( $options['onlyMd'] )){ ?>
 				jQuery(function () {
-					trevorWP.matchMedia.onlyMedium(init, function () {
+					trevorWP.matchMedia.carouselWith3Cards(init, function () {
 						swiper && swiper.destroy();
 					});
 				})

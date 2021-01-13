@@ -1,5 +1,4 @@
-const onlyMobileQ = window.matchMedia(`screen and (max-width: 768px)`);
-const onlyMediumQ = window.matchMedia(`screen and (min-width: 768px) and (max-width: 1440px)`);
+const carouselWith3CardsQ = window.matchMedia(`screen and (min-width: 500px) and (max-width: 1275px)`);
 const onlyLargeQ = window.matchMedia(`screen and (min-width: 1440px)`);
 
 const watcherFactory = (q) => (matches, noMatches) => {
@@ -10,8 +9,6 @@ const watcherFactory = (q) => (matches, noMatches) => {
 	return () => q.removeListener(test);
 }
 
-export const onlyMobile = watcherFactory(onlyMobileQ);
 
-export const onlyMedium = watcherFactory(onlyMediumQ);
-
+export const carouselWith3Cards = watcherFactory(carouselWith3CardsQ);
 export const onlyLarge = watcherFactory(onlyLargeQ);

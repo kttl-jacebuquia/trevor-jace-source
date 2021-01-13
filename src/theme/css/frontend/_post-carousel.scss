@@ -1,0 +1,84 @@
+.post-carousel {
+  .carousel-container {
+	width: theme('postCard.width.DEFAULT');
+  }
+
+  @screen md {
+	.carousel-container {
+	  width: theme('postCard.width.md');
+	}
+  }
+
+  @screen lg {
+	.carousel-container {
+	  width: theme('postCard.width.lg');
+	}
+  }
+
+  // Only Md fixes
+  &.only-md {
+	// Small
+	@media screen and (max-width: theme('carousel.w3Card.minWidth') /*500px*/
+	) {
+	  .swiper-pagination {
+		@apply hidden;
+	  }
+
+	  .carousel-container,
+	  .carousel-full-width-wrap {
+		@apply m-0 p-0 w-full;
+	  }
+
+	  .swiper-wrapper {
+		@apply flex flex-col w-full;
+	  }
+
+	  .swiper-slide + .swiper-slide {
+		@apply mt-5;
+	  }
+
+	  .card-post {
+		@apply mx-auto;
+	  }
+	}
+
+	// large
+	@media screen and (min-width: theme('carousel.w3Card.maxWidth') /*1275px*/
+	) {
+	  .carousel-full-width-wrap {
+		@apply mx-auto px-0 w-screen;
+		margin-left: calc((100vw - 100%) / -2);
+
+		.carousel-container {
+		  @apply w-full;
+		  max-width: none;
+
+		  .swiper-wrapper {
+			width: rem-calc(1240px) !important;
+			margin: 0 auto;
+		  }
+		}
+
+		.swiper-wrapper {
+		  @apply grid grid-cols-3 gap-x-7;
+		}
+
+		.swiper-pagination {
+		  @apply hidden;
+		}
+	  }
+	}
+
+	// Swiper Active
+	@media screen and (min-width: theme('carousel.w3Card.minWidth')) and (max-width: theme('carousel.w3Card.maxWidth')) {
+	  .card-post {
+		width: theme('postCard.width.lg');
+	  }
+
+	  .carousel-container {
+		width: theme('postCard.width.lg');
+	  }
+	}
+  }
+
+}

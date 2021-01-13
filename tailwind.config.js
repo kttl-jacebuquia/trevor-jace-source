@@ -81,6 +81,13 @@ module.exports = {
 				xl: px2rem(395),
 			}
 		},
+		carousel: {
+			w3Card: {
+				minWidth: px2rem(500),
+				maxWidth: px2rem(1275),
+			}
+		},
+		// Extend
 		extend: {
 			fontFamily: {
 				caveat: ['Caveat', 'cursive', ...defaultTheme.fontFamily.serif],
