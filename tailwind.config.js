@@ -111,6 +111,7 @@ module.exports = {
 			},
 			fontSize: {
 				px14: px2rem(14),
+				px16: px2rem(16),
 				px18: px2rem(18),
 				px20: px2rem(20),
 				px22: px2rem(22),
@@ -122,6 +123,7 @@ module.exports = {
 				px36: px2rem(36),
 				px38: px2rem(38),
 				px40: px2rem(40),
+				px42: px2rem(42),
 				px44: px2rem(44),
 				px46: px2rem(46),
 				px48: px2rem(48),
@@ -161,6 +163,7 @@ module.exports = {
 				em002: '0.02em',
 				em_001: '-0.01em', // todo: convert to tailwind negative
 				px05: px2rem(.5),
+				px_015: px2rem(-1.5),
 				px_02: px2rem(-2),
 			},
 			zIndex: {
@@ -172,7 +175,12 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
-				px30: px2rem(30)
+				px30: px2rem(30),
+				px50: px2rem(50),
+				px60: px2rem(60),
+				px72: px2rem(72),
+				px88: px2rem(88),
+				px106: px2rem(106),
 			}
 		},
 	},

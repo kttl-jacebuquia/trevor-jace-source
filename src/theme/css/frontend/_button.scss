@@ -1,3 +1,16 @@
 .btn {
   box-sizing: content-box;
+  @apply font-bold text-white bg-orange py-4 px-12 rounded-px10;
+
+  &-link {
+  	@apply inline-flex text-indigo font-bold border-b-2 pb-0.5;
+  }
+
+  &-secondary {
+  	@apply bg-indigo;
+  }
+
+  @screen md {
+  	@apply px-8;
+  }
 }
