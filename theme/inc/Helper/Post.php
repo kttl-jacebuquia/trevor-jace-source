@@ -5,6 +5,7 @@ use TrevorWP\CPT\RC\External;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
 use TrevorWP\Util\Tools;
+use TrevorWP\Theme\Customizer;
 
 /**
  * Post Helper
@@ -145,8 +146,14 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_bottom_categories( \WP_Post $post ): ?string {
-		$tax   = Tools::get_post_category_tax( $post );
-		$terms = wp_get_object_terms( $post->ID, $tax );
+		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
+		$terms    = get_terms( [
+				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+				'orderby'    => 'include',
+				'include'    => $featured_cat_ids,
+				'parent'     => 0,
+				'hide_empty' => false,
+		] );
 
 		if ( empty( $terms ) ) {
 			return null;

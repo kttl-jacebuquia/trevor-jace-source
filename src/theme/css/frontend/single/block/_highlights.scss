@@ -42,7 +42,15 @@
 
 .post-highlights-list .highlight-link,
 .post-content-wrap .highlight-wrapper {
-  @apply transition-colors duration-300;
+  @apply transition-colors duration-700;
+}
+
+.post-highlights-list .highlight-link {
+  @apply ease-out;
+}
+
+.post-content-wrap .highlight-wrapper {
+  @apply ease-in;
 }
 
 

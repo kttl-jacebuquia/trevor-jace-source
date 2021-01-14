@@ -44,7 +44,7 @@ $no_results = empty( $wp_query->found_posts );
 					<p class="text-px18 leading-px24 -tracking-em005 mb-7 md:tracking-em001 lg:text-px26 lg:leading-px36 lg:mb-10">
 						Here’s some popular search terms other people have been exploring:
 					</p>
-					<div class="flex flex-wrap mb-20">
+					<div class="flex flex-wrap mb-20 lg:mb-40">
 						<?php foreach (
 								[
 										'Arbitrary Data',

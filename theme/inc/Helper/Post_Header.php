@@ -158,7 +158,7 @@ class Post_Header {
 
 		## Article Length
 		if ( ! empty( $len_ind = Content_Length::post( $post ) ) ) {
-			$mid_row[] = '<div class="length-indicator"> Article Length: ' . esc_html( $len_ind ) . "</div>";
+			$mid_row[] = '<div class="length-indicator"> ' . ( $post->post_type == CPT\RC\Guide::POST_TYPE ? 'Guide' : 'Article' ) . ' Length: ' . esc_html( $len_ind ) . "</div>";
 		}
 
 		## Sharing Box

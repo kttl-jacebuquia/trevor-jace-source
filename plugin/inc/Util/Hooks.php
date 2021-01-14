@@ -54,6 +54,7 @@ class Hooks {
 		add_action( 'wp_footer', [ self::class, 'wp_footer' ] );
 
 		# Register & Enqueue Scripts
+		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], PHP_INT_MAX >> 2, 0 );
 		add_action( 'wp_enqueue_scripts', [ StaticFiles::class, 'register_frontend' ], 10, 0 );
 
 		# Prints GA Post Events Tracker
@@ -274,6 +275,17 @@ class Hooks {
 		foreach ( self::$frontend_footer_buffer as $line ) {
 			echo $line;
 		}
+	}
+
+	/**
+	 * Fires when scripts and styles are enqueued.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+	 */
+	static public function wp_enqueue_scripts(): void {
+		// Hide the Facet JS
+		wp_dequeue_script( 'Solr_Facet' );
+		wp_dequeue_style( 'Solr_Facet' );
 	}
 
 	/**

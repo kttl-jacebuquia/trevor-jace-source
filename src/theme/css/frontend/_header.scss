@@ -1,5 +1,5 @@
 :root {
-  --top-bar-height: #{rem-calc(4px)};
+  --top-bar-height: #{rem-calc(54px)};
   --top-nav-height: 8.5rem;
   --top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h));
 
@@ -27,7 +27,7 @@
   @apply static top-0 z-30;
   border-bottom: rem-calc(4px) solid theme('colors.orange.DEFAULT');
   height: var(--top-bar-height);
-  @apply max-h-0;
+  max-height: rem-calc(54px);
 
   .top-bar-inner {
 	@apply flex mx-auto hidden items-center h-full;
@@ -73,7 +73,6 @@
 	  }
 	}
   }
-
 
   @screen lg {
 	border-bottom-width: rem-calc(6px);

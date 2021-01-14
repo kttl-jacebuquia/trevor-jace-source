@@ -19,7 +19,7 @@ class Environment {
 
 		$env = new Twig\Environment( $loader, [
 			'debug' => WP_DEBUG,
-			'cache' => self::get_cache_folder(),
+//			'cache' => self::get_cache_folder(),
 		] );
 
 		# Core Extension

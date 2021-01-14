@@ -9,6 +9,7 @@ class Content_Length {
 	const OPTION_SHORT = 'short';
 	const OPTION_MEDIUM = 'medium';
 	const OPTION_LONG = 'long';
+	const OPTION_HIDDEN = 'hidden';
 
 	/* Settings */
 	const SETTINGS = [
@@ -16,6 +17,7 @@ class Content_Length {
 		self::OPTION_SHORT  => [ 'name' => 'Short' ],
 		self::OPTION_MEDIUM => [ 'name' => 'Medium' ],
 		self::OPTION_LONG   => [ 'name' => 'Long' ],
+		self::OPTION_HIDDEN => [ 'name' => 'Hidden' ],
 	];
 
 	/* Defaults */
@@ -47,6 +49,10 @@ class Content_Length {
 
 		if ( ! array_key_exists( $val, self::SETTINGS ) ) {
 			$val = self::DEFAULT_OPTION;
+		}
+
+		if ( $val == self::OPTION_HIDDEN ) {
+			return '';
 		}
 
 		if ( $val != self::OPTION_AUTO ) {

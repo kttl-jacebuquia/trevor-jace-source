@@ -33,7 +33,7 @@
 						  sizing: farthest-corner,
 				  ),
 						  (// Stack of radial-gradient points
-								  ("at": 0% 0%, "color": rgba(64, 0, 156, 1)),
+								  ("at": 0% 0%, "color": rgba(64, 0, 156, 1), "spread": 20%),
 								  ("at": 15% 15%, "color": rgba(107, 93, 246, 1)),
 								  ("at": 51% 14%, "color": rgba(157, 145, 255, 1), "spread": 35%),
 								  ("at": 89% 22%, "color": rgba(107, 93, 246, 1)),

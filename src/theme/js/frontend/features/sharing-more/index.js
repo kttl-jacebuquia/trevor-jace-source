@@ -33,6 +33,11 @@ export default function sharingMore(button, content) {
 					break;
 				case 'clipboard':
 					copyToClipboard(canonicalURL);
+					const $elem = $(content).find('[data-row="clipboard"] > td:nth-child(2)');
+					const copiedCB = $elem.data('copiedCB');
+					copiedCB && clearTimeout(copiedCB);
+					$elem.data('copiedCB', setTimeout(() => $elem.text('Copy Link'), 2000));
+					$elem.text('Link Copied!');
 					break;
 				case 'email':
 					window.location = `mailto:?body=${canonicalURL}`;

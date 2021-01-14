@@ -1,5 +1,5 @@
 .post-share-more-content {
-  @apply bg-white opacity-90 text-indigo;
+  @apply bg-white opacity-90 text-indigo text-left;
   @apply rounded-px10;
 }
 
@@ -19,7 +19,7 @@
 	}
 
 	&:last-child {
-	  @apply pr-16;
+	  min-width: 10rem;
 	  @apply font-semibold text-base leading-px24;
 	}
   }
@@ -36,9 +36,19 @@
 	}
   }
 
-
   tr > td:first-child {
-	width: 3rem;
+	width: 3.25rem;
+  }
+
+  tr[data-row="email"] {
+	& > td:first-child {
+	  padding-top: rem-calc(10px);
+	}
+  }
+
+  .trevor-ti-mail {
+	display: block;
+	margin-top: rem-calc(-2px);
   }
 }
 
