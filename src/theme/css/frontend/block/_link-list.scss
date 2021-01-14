@@ -49,9 +49,8 @@
 	}
   }
 
-  @screen md {
-	margin-left: initial;
-	width: 100%;
+  @screen sm {
+	@apply mx-auto w-full;
 	@apply rounded-px10;
 	padding: rem-calc(40px);
 

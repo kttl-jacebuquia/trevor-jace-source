@@ -107,7 +107,7 @@ class Card {
 				<?php } ?>
 
 				<?php if ( ! empty( $desc ) ) { ?>
-					<div class="post-desc"><?= esc_html( wp_trim_words( $desc, $options['num_words'] ) ) ?></div>
+					<div class="post-desc"><?= esc_html( wp_trim_words( strip_tags( $desc ), $options['num_words'] ) ) ?></div>
 				<?php } else { ?>
 					<div class="flex-1"></div>
 				<?php } ?>

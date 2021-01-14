@@ -23,7 +23,7 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			sm: px2rem(414),
+			sm: px2rem(500),
 			md: px2rem(768),
 			lg: px2rem(1440),
 			xl: px2rem(1600),
@@ -124,6 +124,8 @@ module.exports = {
 				px40: px2rem(40),
 				px44: px2rem(44),
 				px46: px2rem(46),
+				px48: px2rem(48),
+				px50: px2rem(50),
 				px52: px2rem(52),
 				px60: px2rem(60),
 				px70: px2rem(70),
@@ -147,7 +149,9 @@ module.exports = {
 				px50: px2rem(50),
 				px54: px2rem(54),
 				px56: px2rem(56),
+				px60: px2rem(60),
 				px62: px2rem(62),
+				px68: px2rem(68),
 				px70: px2rem(70),
 				px80: px2rem(80),
 			},
@@ -157,6 +161,7 @@ module.exports = {
 				em002: '0.02em',
 				em_001: '-0.01em', // todo: convert to tailwind negative
 				px05: px2rem(.5),
+				px_02: px2rem(-2),
 			},
 			zIndex: {
 				'1': '1',

@@ -150,7 +150,7 @@ class Post_Header {
 
 		/* Blogs doesn't have excerpt */
 		if ( ! in_array( $post->post_type, Main::BLOG_POST_TYPES ) ) {
-			$title_btm = nl2br( esc_html( $post->post_excerpt ) );
+			$title_btm = nl2br( strip_tags( $post->post_excerpt /* Remove any <tilt> */ ) );
 		}
 
 		# Mid Row

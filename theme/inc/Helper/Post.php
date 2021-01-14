@@ -147,7 +147,7 @@ class Post {
 	 */
 	protected static function _render_bottom_categories( \WP_Post $post ): ?string {
 		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
-		$terms    = get_terms( [
+		$terms            = get_terms( [
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
 				'orderby'    => 'include',
 				'include'    => $featured_cat_ids,
@@ -177,7 +177,27 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_content_bottom_recirculation( \WP_Post $post ): ?string {
-		return null;
+		$cards = Meta\Post::get_recirculation_cards( $post->ID );
+		if ( empty( $cards ) ) {
+			return null;
+		}
+
+		ob_start();
+		?>
+		<div class="circulation-cards">
+			<?php foreach ( $cards as $card ) {
+				$method = "render_{$card}";
+				if ( ! method_exists( Circulation_Card::class, $method ) ) {
+					continue;
+				}
+
+				?>
+				<div class="circulation-card-wrap">
+					<?= Circulation_Card::$method(); ?>
+				</div>
+			<?php } ?>
+		</div>
+		<?php return ob_get_clean();
 	}
 
 	public static function render_content_footer( \WP_Post $post ): string {

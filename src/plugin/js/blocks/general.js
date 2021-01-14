@@ -20,6 +20,7 @@ const META_KEY_MAP = {
 	headerBgColor: metaKeys.KEY_HEADER_BG_CLR,
 	lengthInd: metaKeys.KEY_LENGTH_IND,
 	showShare: metaKeys.KEY_HEADER_SNOW_SHARE,
+	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
 };
 const BG_COLOR_HEX_2_NAME_MAP = (() => {
 	const out = {};
@@ -33,6 +34,7 @@ class PostSidebar extends React.Component {
 	handleHeaderBgColor = (colorHex) => {
 		this.props.updatePostMeta('headerBgColor', BG_COLOR_HEX_2_NAME_MAP[colorHex] || null);
 	}
+	handleReRecirculationCardsChange = (newVal) => this.props.updatePostMeta('reRecirculationCards', newVal);
 	handleLengthIndChange = (newVal) => this.props.updatePostMeta('lengthInd', newVal);
 	handleSlugChange = (slug) => this.props.editPost({slug});
 
@@ -56,6 +58,15 @@ class PostSidebar extends React.Component {
 
 					return {value: key, label: config.name};
 				})
+			})(),
+			reRecirculationCards: (() => {
+				const {settings} = editorBlocksData[META_KEY_MAP.reRecirculationCards];
+
+				return Object.keys(settings).map(key => {
+					const config = settings[key];
+
+					return {value: key, label: config.name};
+				})
 			})()
 		};
 	}
@@ -68,7 +79,10 @@ class PostSidebar extends React.Component {
 			postType,
 			showShare,
 			slug,
+			reRecirculationCards,
 		} = this.props;
+
+		console.log({reRecirculationCards})
 
 		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
 
@@ -119,6 +133,12 @@ class PostSidebar extends React.Component {
 					options={this.selectOptions.contentLength}
 					onChange={this.handleLengthIndChange}
 				/>
+				<SelectControl label="Recirculation Cards"
+							   value={reRecirculationCards}
+							   options={this.selectOptions.reRecirculationCards}
+							   onChange={this.handleReRecirculationCardsChange}
+							   help="You may use CTRL-Click (Windows) or CMD-Click (Mac) to de/select"
+							   multiple/>
 			</PluginDocumentSettingPanel>
 		</>
 	}

@@ -1,0 +1,90 @@
+.circulation-card {
+  @apply flex flex-col text-center items-center;
+  @apply py-20 px-10;
+  @apply rounded-px10;
+
+  .circulation-card-title {
+	@apply font-bold text-px32 leading-px42 m-0 mb-2;
+
+	tilt {
+	  @apply text-px50 leading-px60 tracking-px_02 mr-2;
+	}
+  }
+
+  .circulation-card-desc {
+	@apply my-4;
+	@apply font-medium text-px18 leading-px28 tracking-em001;
+  }
+
+  .circulation-card-cta {
+	@apply inline-block rounded-px10 bg-indigo text-white no-underline;
+	@apply mt-4 py-4 px-8;
+	@apply font-bold text-base leading-px22 tracking-em001;
+
+  }
+
+  &.type-rc {
+	@apply text-white;
+
+	.circulation-card-cta {
+	  @apply text-indigo bg-white;
+	}
+
+  }
+
+  &.type-trevorspace {
+	@apply text-indigo;
+
+	.circulation-card-cta {
+	  @apply text-white bg-indigo;
+	}
+  }
+
+  &.type-get_help {
+	@apply text-indigo;
+
+	.circulation-card-cta {
+	  @apply text-white bg-orange;
+	}
+  }
+
+  @screen md {
+	& > .inner {
+	  max-width: 75%;
+	}
+
+	.circulation-card-title {
+	  @apply tracking-em005;
+
+	  tilt {
+		@apply text-px48 leading-px68;
+	  }
+	}
+
+	.circulation-card-desc {
+	  @apply text-px14 leading-px18 tracking-em005;
+	  @apply mt-10;
+	}
+  }
+
+  @screen lg {
+	.circulation-card-title {
+	  @apply text-px52 leading-px62;
+
+	  tilt {
+		@apply text-px70 leading-px80;
+	  }
+	}
+
+	.circulation-card-desc {
+	  @apply text-px26 leading-px36 tracking-em005;
+	}
+
+	.circulation-card-cta {
+	  @apply mt-6;
+	  @apply text-px20 leading-px26 tracking-px05;
+	}
+  }
+}
+
+

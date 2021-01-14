@@ -39,6 +39,9 @@ class Post {
 	# Main Category
 	const KEY_MAIN_CATEGORY = Main::META_KEY_PREFIX . 'main_category';
 
+	# Recirculation Cards
+	const KEY_RECIRCULATION_CARDS = Main::META_KEY_PREFIX . 'recirculation_cards';
+
 	# Misc
 	const FILE_ENABLED_POST_TYPES = [
 		CPT\RC\Guide::POST_TYPE,
@@ -58,18 +61,28 @@ class Post {
 		// Posts
 		foreach (
 			[
-				self::KEY_HEADER_TYPE       => [
+				self::KEY_HEADER_TYPE         => [
 					'sanitize_callback' => [ self::class, 'sanitize_post_header_types' ],
 					'default'           => Theme\Helper\Post_Header::DEFAULT_TYPE,
 					'object_subtype'
 				],
-				self::KEY_HEADER_BG_CLR     => [ 'default' => Theme\Helper\Post_Header::DEFAULT_BG_COLOR ],
-				self::KEY_HEADER_SNOW_SHARE => [ 'type' => 'boolean', 'default' => true ],
-				self::KEY_LENGTH_IND        => [ 'default' => Theme\Helper\Content_Length::DEFAULT_OPTION ],
-				self::KEY_IMAGE_SQUARE      => [],
-				self::KEY_IMAGE_HORIZONTAL  => [],
-				self::KEY_HIGHLIGHTS        => [ 'type' => 'array', 'default' => [], 'show_in_rest' => false ],
-				self::KEY_MAIN_CATEGORY     => [ 'type' => 'integer', 'default' => 0 ],
+				self::KEY_HEADER_BG_CLR       => [ 'default' => Theme\Helper\Post_Header::DEFAULT_BG_COLOR ],
+				self::KEY_HEADER_SNOW_SHARE   => [ 'type' => 'boolean', 'default' => true ],
+				self::KEY_LENGTH_IND          => [ 'default' => Theme\Helper\Content_Length::DEFAULT_OPTION ],
+				self::KEY_IMAGE_SQUARE        => [],
+				self::KEY_IMAGE_HORIZONTAL    => [],
+				self::KEY_HIGHLIGHTS          => [ 'type' => 'array', 'default' => [], 'show_in_rest' => false ],
+				self::KEY_MAIN_CATEGORY       => [ 'type' => 'integer', 'default' => 0 ],
+				self::KEY_RECIRCULATION_CARDS => [
+					'default'      => [],
+					'type'         => 'array',
+					'show_in_rest' => [
+						'schema' => [
+							'type'  => 'array',
+							'items' => [ 'type' => 'string' ],
+						],
+					],
+				]
 			] as $meta_key => $args
 		) {
 			foreach ( Tools::get_public_post_types() as $post_type ) {
@@ -151,6 +164,12 @@ class Post {
 			$config[ self::KEY_LENGTH_IND ] = [
 				'settings' => Theme\Helper\Content_Length::SETTINGS,
 			];
+
+			# ReCirculation Cards
+			$config[ self::KEY_RECIRCULATION_CARDS ] = [
+				'settings' => Theme\Helper\Circulation_Card::SETTINGS,
+			];
+
 		}
 
 		return $config;
@@ -253,5 +272,14 @@ class Post {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return array
+	 */
+	public static function get_recirculation_cards( int $post_id ): array {
+		return (array) get_post_meta( $post_id, self::KEY_RECIRCULATION_CARDS, true );
 	}
 }

@@ -71,8 +71,9 @@ $featured_word = Helper\Posts::get_one_from_list(
 				</h2>
 				<h1>
 					<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>
-					<span class="block text-white font-caveat transform font-bold text-px44 leading-px54 tracking-em005 -mt-4 md:mt-0 lg:text-px70 lg:leading-px80"
-						  style="--tw-rotate: -1deg;">with knowledge.</span>
+					<tilt class="block text-white font-bold text-px44 leading-px54 tracking-em005 -mt-4 md:mt-0 lg:text-px70 lg:leading-px80">
+						with knowledge.
+					</tilt>
 				</h1>
 
 				<div class="my-8 mx-auto md:px-8 md:my-6 lg:w-9/12 lg:px-0">
@@ -132,7 +133,7 @@ if ( $featured_guide ) {
 		<a class="text-px14 leading-px18 tracking-em002 font-semibold capitalize mb-5 lg:text-px18 lg:leading-px22 z-10"
 		   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
 	<?php } ?>
-	<h2 class="text-px32 leading-px42 font-semibold mb-5 lg:text-60 lg:leading-70"><?= get_the_title( $featured_guide ); ?></h2>
+	<h2 class="text-px32 leading-px42 font-semibold mb-5 lg:text-60 lg:leading-70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
 	<a class="stretched-link underline font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
 	   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
 	<?php $context = ob_get_clean();

@@ -1,5 +1,5 @@
 tilt {
-  --tw-rotate: -1deg;
   @apply inline-block;
-  @apply font-caveat transform
+  @apply font-caveat transform;
+  --tw-rotate: -1deg;
 }
