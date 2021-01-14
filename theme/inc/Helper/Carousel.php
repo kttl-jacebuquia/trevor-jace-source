@@ -80,12 +80,9 @@ class Carousel {
 				'768'  => [
 						'spaceBetween' => 20,
 				],
-				'1400' => [
+				'1440' => [
 						'spaceBetween' => 30,
-				],
-				'1600' => [
-						'spaceBetween' => 30,
-				],
+				]
 		];
 
 		// Merge breakpoints

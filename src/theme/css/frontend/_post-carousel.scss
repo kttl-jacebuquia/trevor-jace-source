@@ -26,7 +26,13 @@
 
 	  .carousel-container,
 	  .carousel-full-width-wrap {
-		@apply m-0 p-0 w-full;
+		width: theme('postCard.width.DEFAULT');
+	  }
+
+	  .carousel-container,
+	  .carousel-full-width-wrap {
+		@apply m-0 p-0;
+		margin: 0 auto;
 	  }
 
 	  .swiper-wrapper {
@@ -54,17 +60,30 @@
 		  max-width: none;
 
 		  .swiper-wrapper {
-			width: rem-calc(1240px) !important;
 			margin: 0 auto;
 		  }
 		}
 
 		.swiper-wrapper {
-		  @apply grid grid-cols-3 gap-x-7;
+		  @apply flex flex-row justify-center;
 		}
 
 		.swiper-pagination {
 		  @apply hidden;
+		}
+
+		.swiper-slide {
+		  width: theme('postCard.width.md');
+		  margin: 0 rem-calc(10px);
+		}
+	  }
+	}
+
+	@screen lg {
+	  .carousel-full-width-wrap {
+		.swiper-slide {
+		  width: theme('postCard.width.lg');
+		  margin: 0 rem-calc(15px);
 		}
 	  }
 	}
@@ -72,11 +91,11 @@
 	// Swiper Active
 	@media screen and (min-width: theme('carousel.w3Card.minWidth')) and (max-width: theme('carousel.w3Card.maxWidth')) {
 	  .card-post {
-		width: theme('postCard.width.lg');
+		width: theme('postCard.width.md');
 	  }
 
 	  .carousel-container {
-		width: theme('postCard.width.lg');
+		width: theme('postCard.width.md');
 	  }
 	}
   }
