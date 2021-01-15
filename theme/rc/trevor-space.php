@@ -12,7 +12,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 		<div class="container mx-auto text-center site-content-inner">
 			<h5 class="text-px16 leading-px24 mb-2 text-indigo md:mb-4">180 members currently online</h5>
 			<h1 class="heading-lg-tilted text-indigo mb-4"><?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_TITLE ) ?></h1>
-			<p class="text-px18 mb-7 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-5 lg:text-px26 lg:leading-px36 lg:mb-14 lg:mx-52"><?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_DESC ) ?></p>
+			<p class="text-px18 mb-7 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-5 lg:text-px26 lg:leading-px36 lg:mb-14 lg:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_DESC ) ?></p>
 
 			<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_JOIN_URL ) ?>"
 			   rel="noreferrer noopener"
