@@ -51,20 +51,38 @@ class Resource_Center extends Abstract_Customizer {
 	const SETTING_GET_HELP_TEXT_TITLE = self::SETTING_GET_HELP_PREFIX . 'text_title';
 	const SETTING_GET_HELP_TEXT_DESC = self::SETTING_GET_HELP_PREFIX . 'text_desc';
 	const SETTING_GET_HELP_TEXT_CTA = self::SETTING_GET_HELP_PREFIX . 'text_cta';
+	const SETTING_GET_HELP_TEXT_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'text_cta_Action';
 	const SETTING_GET_HELP_TEXT_IMG = self::SETTING_GET_HELP_PREFIX . 'text_img';
 	const SETTING_GET_HELP_TEXT_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'text_btn_cta';
+	const SETTING_GET_HELP_TEXT_STEP1 = self::SETTING_GET_HELP_PREFIX . 'text_step1';
+	const SETTING_GET_HELP_TEXT_STEP2 = self::SETTING_GET_HELP_PREFIX . 'text_step2';
+	const SETTING_GET_HELP_TEXT_STEP3 = self::SETTING_GET_HELP_PREFIX . 'text_step3';
+	const SETTING_GET_HELP_TEXT_TERMS = self::SETTING_GET_HELP_PREFIX . 'text_terms';
+
 	/* * * Call */
 	const SETTING_GET_HELP_CALL_TITLE = self::SETTING_GET_HELP_PREFIX . 'call_title';
 	const SETTING_GET_HELP_CALL_DESC = self::SETTING_GET_HELP_PREFIX . 'call_desc';
 	const SETTING_GET_HELP_CALL_CTA = self::SETTING_GET_HELP_PREFIX . 'call_cta';
+	const SETTING_GET_HELP_CALL_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'call_cta_action';
 	const SETTING_GET_HELP_CALL_IMG = self::SETTING_GET_HELP_PREFIX . 'call_img';
 	const SETTING_GET_HELP_CALL_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'call_btn_cta';
+	const SETTING_GET_HELP_CALL_STEP1 = self::SETTING_GET_HELP_PREFIX . 'call_step1';
+	const SETTING_GET_HELP_CALL_STEP2 = self::SETTING_GET_HELP_PREFIX . 'call_step2';
+	const SETTING_GET_HELP_CALL_STEP3 = self::SETTING_GET_HELP_PREFIX . 'call_step3';
+	const SETTING_GET_HELP_CALL_TERMS = self::SETTING_GET_HELP_PREFIX . 'call_terms';
+
 	/* * * Chat */
 	const SETTING_GET_HELP_CHAT_TITLE = self::SETTING_GET_HELP_PREFIX . 'chat_title';
 	const SETTING_GET_HELP_CHAT_DESC = self::SETTING_GET_HELP_PREFIX . 'chat_desc';
 	const SETTING_GET_HELP_CHAT_CTA = self::SETTING_GET_HELP_PREFIX . 'chat_cta';
+	const SETTING_GET_HELP_CHAT_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'chat_cta_action';
 	const SETTING_GET_HELP_CHAT_IMG = self::SETTING_GET_HELP_PREFIX . 'chat_img';
 	const SETTING_GET_HELP_CHAT_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'chat_btn_cta';
+	const SETTING_GET_HELP_CHAT_STEP1 = self::SETTING_GET_HELP_PREFIX . 'chat_step1';
+	const SETTING_GET_HELP_CHAT_STEP2 = self::SETTING_GET_HELP_PREFIX . 'chat_step2';
+	const SETTING_GET_HELP_CHAT_STEP3 = self::SETTING_GET_HELP_PREFIX . 'chat_step3';
+	const SETTING_GET_HELP_CHAT_TERMS = self::SETTING_GET_HELP_PREFIX . 'chat_terms';
+
 	/* * * Notification */
 	const SETTING_GET_HELP_NOTIFICATION_TXT = self::SETTING_GET_HELP_PREFIX . 'notification_txt';
 	const SETTING_GET_HELP_NOTIFICATION_URL = self::SETTING_GET_HELP_PREFIX . 'notification_url';
@@ -78,6 +96,9 @@ class Resource_Center extends Abstract_Customizer {
 
 	/* * TrevorSpace */
 	const SETTING_TREVORSPACE_PREFIX = self::SECTION_TREVORSPACE . '_';
+	const SETTING_TREVORSPACE_ONLINE_TXT = self::SETTING_TREVORSPACE_PREFIX . 'online_txt';
+	const SETTING_TREVORSPACE_ONLINE_THRESHOLD = self::SETTING_TREVORSPACE_PREFIX . 'online_threshold';
+	const SETTING_TREVORSPACE_REG_USER_COUNT = self::SETTING_TREVORSPACE_PREFIX . 'reg_user_count';
 	const SETTING_TREVORSPACE_TITLE = self::SETTING_TREVORSPACE_PREFIX . 'title';
 	const SETTING_TREVORSPACE_DESC = self::SETTING_TREVORSPACE_PREFIX . 'desc';
 	const SETTING_TREVORSPACE_JOIN_CTA = self::SETTING_TREVORSPACE_PREFIX . 'join_cta';
@@ -118,17 +139,32 @@ class Resource_Center extends Abstract_Customizer {
 		self::SETTING_GET_HELP_TEXT_TITLE           => 'Text us from anywhere, anytime.',
 		self::SETTING_GET_HELP_TEXT_DESC            => 'Standard text messaging rates may apply.',
 		self::SETTING_GET_HELP_TEXT_CTA             => 'Text ‘START’ to 678-678',
+		self::SETTING_GET_HELP_TEXT_CTA_ACTION      => 'sms://678678',
 		self::SETTING_GET_HELP_TEXT_BTN_CTA         => 'Text Us',
+		self::SETTING_GET_HELP_TEXT_STEP1           => 'Get started by texting ‘START’ to <a href="sms://678678">678-678</a>.',
+		self::SETTING_GET_HELP_TEXT_STEP2           => 'You’ll be connected to a Trevor counselor who is understanding of LGBTQ+ issues and won’t judge you. All of your messages are anonymous, and you can share as much or as little as you like.',
+		self::SETTING_GET_HELP_TEXT_STEP3           => 'If you end up waiting, try a few calming exercises to help you breathe and focus. Or check out the LGBTQ Resource Center for helpful articles and information.',
+		self::SETTING_GET_HELP_TEXT_TERMS           => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque cursus mi. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque. Rhoncus dolor est nunc odio.',
 		/* * * Call */
 		self::SETTING_GET_HELP_CALL_TITLE           => 'Reach out to hear a live voice on the line.',
 		self::SETTING_GET_HELP_CALL_DESC            => '',
 		self::SETTING_GET_HELP_CALL_CTA             => 'Call us at 1-866-488-7336',
+		self::SETTING_GET_HELP_CALL_CTA_ACTION      => 'tel://+18664887336',
 		self::SETTING_GET_HELP_CALL_BTN_CTA         => 'Call Us',
+		self::SETTING_GET_HELP_CALL_STEP1           => '',
+		self::SETTING_GET_HELP_CALL_STEP2           => '',
+		self::SETTING_GET_HELP_CALL_STEP3           => '',
+		self::SETTING_GET_HELP_CALL_TERMS           => '',
 		/* * * Chat */
 		self::SETTING_GET_HELP_CHAT_TITLE           => 'At your computer? Send us a message.',
 		self::SETTING_GET_HELP_CHAT_DESC            => '',
 		self::SETTING_GET_HELP_CHAT_CTA             => 'Start Chat',
+		self::SETTING_GET_HELP_CHAT_CTA_ACTION      => 'https://trevorproject.secure.force.com/apex/TrevorChatPreChatForm?endpoint=https%3A%2F%2Ftrevorproject.secure.force.com%2Fapex%2FTrevorChatWaitingScreen%3Flanguage%3D%23deployment_id%3D57241000000LPlc%26org_id%3D00D410000005OLz%26button_id%3D57341000000LTDX%26session_id%3DPqsgR6fpRXo4IQ==',
 		self::SETTING_GET_HELP_CHAT_BTN_CTA         => 'Chat With Us',
+		self::SETTING_GET_HELP_CHAT_STEP1           => '',
+		self::SETTING_GET_HELP_CHAT_STEP2           => '',
+		self::SETTING_GET_HELP_CHAT_STEP3           => '',
+		self::SETTING_GET_HELP_CHAT_TERMS           => '',
 		/* * * Notification */
 		self::SETTING_GET_HELP_NOTIFICATION_TXT     => 'In very specific instances of abuse or a clear concern of an in-progress or imminent suicide, Trevor counselors may need to contact a child welfare agency or emergency service.',
 		self::SETTING_GET_HELP_NOTIFICATION_URL     => '',
@@ -141,6 +177,9 @@ class Resource_Center extends Abstract_Customizer {
 		self::SETTING_GET_HELP_CIRCULATION_DESC     => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
 
 		/* * TrevorSpace */
+		self::SETTING_TREVORSPACE_ONLINE_TXT        => '%s members currently online',
+		self::SETTING_TREVORSPACE_ONLINE_THRESHOLD  => 30,
+		self::SETTING_TREVORSPACE_REG_USER_COUNT    => '100,000',
 		self::SETTING_TREVORSPACE_TITLE             => 'Find your <tilt>community</tilt> at TrevorSpace.',
 		self::SETTING_TREVORSPACE_DESC              => 'Get advice and support within an international community for LGBTQ young people ages 13–24. Sign up and start a conversation now.',
 		self::SETTING_TREVORSPACE_JOIN_CTA          => 'Join Now',
@@ -384,6 +423,30 @@ class Resource_Center extends Abstract_Customizer {
 			'label'   => '[Text] Button CTA',
 			'type'    => 'text',
 		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP1, [
+			'setting' => self::SETTING_GET_HELP_TEXT_STEP1,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Text] Step 1 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP2, [
+			'setting' => self::SETTING_GET_HELP_TEXT_STEP2,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Text] Step 2 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP3, [
+			'setting' => self::SETTING_GET_HELP_TEXT_STEP3,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Text] Step 3 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_TERMS, [
+			'setting' => self::SETTING_GET_HELP_TEXT_TERMS,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Text] Terms - What to Expect',
+			'type'    => 'textarea',
+		] );
 
 		## Call
 		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_TITLE, [
@@ -416,6 +479,30 @@ class Resource_Center extends Abstract_Customizer {
 			'label'   => '[Call] Button CTA',
 			'type'    => 'text',
 		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP1, [
+			'setting' => self::SETTING_GET_HELP_CALL_STEP1,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Call] Step 1 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP2, [
+			'setting' => self::SETTING_GET_HELP_CALL_STEP2,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Call] Step 2 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP3, [
+			'setting' => self::SETTING_GET_HELP_CALL_STEP3,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Call] Step 3 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_TERMS, [
+			'setting' => self::SETTING_GET_HELP_CALL_TERMS,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Call] Terms - What to Expect',
+			'type'    => 'textarea',
+		] );
 
 		## Chat
 		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_TITLE, [
@@ -447,6 +534,30 @@ class Resource_Center extends Abstract_Customizer {
 			'section' => self::SECTION_GET_HELP,
 			'label'   => '[Chat] Button CTA',
 			'type'    => 'text',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP1, [
+			'setting' => self::SETTING_GET_HELP_CHAT_STEP1,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Chat] Step 1 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP2, [
+			'setting' => self::SETTING_GET_HELP_CHAT_STEP2,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Chat] Step 2 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP3, [
+			'setting' => self::SETTING_GET_HELP_CHAT_STEP3,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Chat] Step 3 - What to Expect',
+			'type'    => 'textarea',
+		] );
+		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_TERMS, [
+			'setting' => self::SETTING_GET_HELP_CHAT_TERMS,
+			'section' => self::SECTION_GET_HELP,
+			'label'   => '[Chat] Terms - What to Expect',
+			'type'    => 'textarea',
 		] );
 
 		## Notification

@@ -1,0 +1,23 @@
+.heading-lg-tilted {
+  @apply font-manrope font-bold text-px30 leading-px50 tracking-em005;
+
+  & > tilt {
+	@apply inline-block font-bold text-px44 leading-px54 tracking-em005 -mt-4;
+  }
+
+  @screen md {
+	@apply text-px32 leading-px42;
+
+	& > tilt {
+	  @apply mt-0;
+	}
+  }
+
+  @screen lg {
+	@apply text-px52 leading-px62 tracking-normal;
+
+	& > tilt {
+	  @apply text-px70 leading-px80;
+	}
+  }
+}

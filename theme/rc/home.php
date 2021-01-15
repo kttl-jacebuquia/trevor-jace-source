@@ -69,11 +69,8 @@ $featured_word = Helper\Posts::get_one_from_list(
 				<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 					RESOURCE CENTER
 				</h2>
-				<h1>
-					<span class="text-white font-manrope font-bold text-px30 leading-px50 tracking-em005 md:text-px32 md:leading-px42 lg:text-px52 lg:leading-px62 lg:tracking-normal">Connection starts</span>
-					<tilt class="block text-white font-bold text-px44 leading-px54 tracking-em005 -mt-4 md:mt-0 lg:text-px70 lg:leading-px80">
-						with knowledge.
-					</tilt>
+				<h1 class="heading-lg-tilted text-violet">
+					<span>Connection starts</span> <tilt>with knowledge.</tilt>
 				</h1>
 
 				<div class="my-8 mx-auto md:px-8 md:my-6 lg:w-9/12 lg:px-0">

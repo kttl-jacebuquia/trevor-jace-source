@@ -900,5 +900,7 @@ class Tools {
 		if ( in_array( get_post_type( $post ), CPT\RC\RC_Object::$PUBLIC_POST_TYPES ) ) {
 			return CPT\RC\RC_Object::TAXONOMY_SEARCH_KEY;
 		}
+
+		return null;
 	}
 }

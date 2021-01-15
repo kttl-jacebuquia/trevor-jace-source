@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use TrevorWP\Theme\Util\Is;
+
 /**
  * Main Header Helper
  */
@@ -8,6 +10,7 @@ class Main_Header {
 
 	/**
 	 * @return string
+	 * // TODO: Maybe we should use css variables for this?
 	 */
 	public static function get_text_color(): string {
 		if ( is_singular( \TrevorWP\Util\Tools::get_public_post_types() ) && ( $queried_object = get_queried_object() ) instanceof \WP_Post ) {
@@ -17,6 +20,8 @@ class Main_Header {
 
 				return $txt_color;
 			}
+		} elseif ( Is::trevorspace() || Is::get_help() ) {
+			return Post_Header::CLR_INDIGO;
 		}
 
 		return self::DEFAULT_TEXT_COLOR;

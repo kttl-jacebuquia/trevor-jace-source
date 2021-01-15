@@ -117,7 +117,7 @@ class Circulation_Card {
 	static public function render_get_help(): string {
 		// TODO: Get variables from the theme customizer
 		return ( new self( [
-				'type'     => 'rc',
+				'type'     => 'get_help',
 				'title'    => 'We’re here <tilt>for you.</tilt>',
 				'desc'     => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
 				'cta_text' => 'Reach a Counselor',

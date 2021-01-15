@@ -43,4 +43,22 @@ class Is {
 
 		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) );
 	}
+
+	/**
+	 * @return bool
+	 */
+	public static function trevorspace(): bool {
+		global $wp_query;
+
+		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function get_help(): bool {
+		global $wp_query;
+
+		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) );
+	}
 }

@@ -1,0 +1,60 @@
+.what-to-expect-modal-content {
+  @apply flex flex-col h-full;
+  @apply text-indigo;
+
+  .step-list {
+	@apply flex-1;
+	@apply py-4;
+
+	.step-row {
+	  @apply flex flex-row;
+	  @apply mb-3;
+	}
+
+	.step-num-wrap {
+	  @apply pr-4;
+	}
+
+	.step-num {
+	  @apply border border-indigo rounded-full;
+	  @apply inline-block text-center;
+	  @apply p-1;
+	  width: 1.5em;
+	  height: 1.5em;
+	  line-height: 1;
+	}
+  }
+
+  .step-list-title {
+	@apply font-bold text-px32 leading-px42 tracking-em001;
+  }
+
+  .step-list-info {
+	@apply font-medium text-px18 leading-px24;
+	@apply py-4;
+  }
+
+  .terms-wrap {
+	@apply bg-gray-light text-indigo;
+	@apply py-4;
+
+	.terms-title {
+	  @apply text-base leading-px22 font-bold;
+	  @apply mb-4;
+	}
+
+	.terms-content {
+	  @apply text-px14 leading-px18;
+	}
+  }
+
+  @screen md {
+	.step-row {
+	  @apply flex flex-col;
+	}
+  }
+
+  @screen lg {
+
+  }
+}

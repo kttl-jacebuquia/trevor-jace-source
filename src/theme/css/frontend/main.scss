@@ -20,6 +20,8 @@ body {
 @import "./grid";
 @import "./misc/index";
 @import "./tilt-txt";
+@import "./modal/index";
+@import "./headings";
 @import "./circulation-card";
 @import "./bg-gradients";
 @import "./header";
@@ -35,19 +37,3 @@ body {
 // Resources Center
 @import "./rc";
 
-
-.hl-test-item {
-  b {
-	background: rgba(#FFFF00, .5);
-  }
-
-  .title {
-	font-weight: bold;
-	font-size: 12px;
-  }
-
-  .content {
-	font-weight: lighter;
-	font-size: 9px;
-  }
-}

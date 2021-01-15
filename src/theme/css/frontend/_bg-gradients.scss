@@ -50,13 +50,17 @@
 
 // Type: Get Help
 .gradient-type-get_help {
-  background-color: tan; // temp
+  background: url("/wp-content/themes/trevor/static/media/gradient_2.png");
+  background-size: 100% 100%;
+  backdrop-filter: blur(12px);
   //@include create-gradient();
 }
 
 // Type: Trevorspace
 .gradient-type-trevorspace {
-  background-color: yellow; // temp
+  background: url("/wp-content/themes/trevor/static/media/gradient_1.png");
+  background-size: 100% 100%;
+  backdrop-filter: blur(12px);
   //@include create-gradient();
 }
 
