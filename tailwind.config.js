@@ -120,6 +120,7 @@ module.exports = {
 				px28: px2rem(28),
 				px30: px2rem(30),
 				px32: px2rem(32),
+				px34: px2rem(34),
 				px36: px2rem(36),
 				px38: px2rem(38),
 				px40: px2rem(40),

@@ -101,7 +101,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			<h3 class="text-px32 leading-px42 tracking-px05 font-semibold mb-5 lg:text-px46 lg:leading-px56"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_TITLE ) ?></h3>
 			<p class="text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ) ?></p>
 
-			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-4 lg:max-w-none">
+			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none">
 				<?= Circulation_Card::render_trevorspace(); ?>
 				<?= Circulation_Card::render_rc(); ?>
 			</div>

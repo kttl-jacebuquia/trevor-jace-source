@@ -1,60 +1,103 @@
 .what-to-expect-modal-content {
-  @apply flex flex-col h-full;
-  @apply text-indigo;
+	@apply flex flex-col h-full;
+	@apply text-indigo;
 
-  .step-list {
-	@apply flex-1;
-	@apply py-4;
+	.step-list {
+		@apply flex-1;
+		@apply py-4;
 
-	.step-row {
-	  @apply flex flex-row;
-	  @apply mb-3;
+		.step-row {
+			@apply flex flex-row;
+			@apply mb-3;
+		}
+
+		.step-num-wrap {
+			@apply pr-4;
+		}
+
+		.step-num {
+			@apply border border-indigo rounded-full;
+			@apply inline-block text-center;
+			@apply p-1;
+			width: 1.5em;
+			height: 1.5em;
+			line-height: 1;
+		}
 	}
 
-	.step-num-wrap {
-	  @apply pr-4;
+	.step-content a {
+		@apply font-semibold border-b-2 pb-0.5;
 	}
 
-	.step-num {
-	  @apply border border-indigo rounded-full;
-	  @apply inline-block text-center;
-	  @apply p-1;
-	  width: 1.5em;
-	  height: 1.5em;
-	  line-height: 1;
-	}
-  }
-
-  .step-list-title {
-	@apply font-bold text-px32 leading-px42 tracking-em001;
-  }
-
-  .step-list-info {
-	@apply font-medium text-px18 leading-px24;
-	@apply py-4;
-  }
-
-  .terms-wrap {
-	@apply bg-gray-light text-indigo;
-	@apply py-4;
-
-	.terms-title {
-	  @apply text-base leading-px22 font-bold;
-	  @apply mb-4;
+	.step-list-title {
+		@apply font-bold text-px32 leading-px42 tracking-em001;
 	}
 
-	.terms-content {
-	  @apply text-px14 leading-px18;
+	.step-list-info {
+		@apply font-medium text-px18 leading-px24;
+		@apply py-4;
 	}
-  }
 
-  @screen md {
-	.step-row {
-	  @apply flex flex-col;
+	.terms-wrap {
+		@apply bg-gray-light text-indigo;
+		@apply py-9;
+
+		.terms-title {
+			@apply text-base leading-px22 font-bold;
+			@apply mb-2;
+		}
+
+		.terms-content {
+			@apply text-px14 leading-px18;
+		}
 	}
-  }
 
-  @screen lg {
+	@screen md {
+		@apply text-center;
+		.step-list {
+			.step-row {
+				@apply flex flex-col mb-9;
+			}
+			.step-num-wrap {
+				@apply pr-0 mb-3;
+			}
+		}
+		.step-list-info {
+			@apply mx-12;
+		}
+		.terms-wrap {
+			.terms-title {
+				@apply mb-1;
+			}
+		}
+	}
 
-  }
+	@screen lg {
+		.step-list-title {
+			@apply text-px30 leading-px40;
+		}
+		.step-list-info {
+			@apply pb-11;
+		}
+		.step-list {
+			@apply flex flex-row space-x-12 pb-20;
+			.step-num-wrap {
+				@apply mb-4;
+			}
+			.step-row {
+				@apply flex-1 m-0;
+			}
+			.step-num {
+				@apply font-bold text-px24 border-2;
+			}
+		}
+		.terms-wrap {
+			.terms-title {
+				@apply text-px18 leading-px24 mb-2.5;
+			}
+			.terms-content {
+				@apply mx-28;
+			}
+		}
+	}
 }
