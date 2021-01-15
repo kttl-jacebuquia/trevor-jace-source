@@ -69,7 +69,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 					RESOURCE CENTER
 				</h2>
-				<h1 class="heading-lg-tilted text-violet">
+				<h1 class="heading-lg-tilted text-indigo">
 					<span>Connection starts</span> <tilt>with knowledge.</tilt>
 				</h1>
 
