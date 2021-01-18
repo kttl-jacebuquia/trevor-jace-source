@@ -49,8 +49,8 @@ class Carousel {
 		ob_start(); ?>
 		<div class="container mx-auto mt-5 mb-20 lg:mb-48 <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<h2 class="mb-4 text-white font-extrabold text-px32 leading-px40 md:font-bold md:leading-px42 lg:text-px46 lg:leading-px56 lg:-tracking-em001 <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-			<p class="mb-12 text-white text-left mb-5 text-px20 leading-px26 md:text-px22 md:leading-px32 md:mb-14 <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			<h2 class="mb-4 text-white text-center font-extrabold text-px32 leading-px40 md:text-left md:font-bold md:leading-px42 lg:text-px46 lg:leading-px56 lg:-tracking-em001 <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+			<p class="mb-12 text-white text-center mb-5 text-px20 leading-px26 md:text-left md:text-px22 md:leading-px32 md:mb-14 <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
 
 			<div class="carousel-full-width-wrap">
 				<div class="carousel-container">
