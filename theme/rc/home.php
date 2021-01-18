@@ -137,7 +137,7 @@ if ( $featured_guide ) {
 		   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
 	<?php } ?>
 	<h2 class="text-px32 leading-px42 font-semibold mb-5 lg:text-60 lg:leading-70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
-	<a class="stretched-link underline font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
+	<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
 	   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
 	<?php $context = ob_get_clean();
 	echo Helper\Hero::img_bg( Helper\Thumbnail::get_post_imgs(
