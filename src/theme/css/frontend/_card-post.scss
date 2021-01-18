@@ -14,8 +14,14 @@
 	img {
 	  @apply h-full;
 	  @apply object-center object-cover;
+	  @apply transition-transform duration-300;
 	}
   }
+
+  &:hover .post-thumbnail-wrap img {
+	@apply transform scale-105 delay-100;
+  }
+
 
   .title-top {
 	@apply font-semibold text-px14 leading-px18 tracking-px05;

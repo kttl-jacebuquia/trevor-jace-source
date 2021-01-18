@@ -13,6 +13,24 @@
 	.carousel-container {
 	  width: theme('postCard.width.lg');
 	}
+
+	// Hide arrows if there are only 3 cards
+	&.card-count-3 {
+	  .swiper-button-next,
+	  .swiper-button-prev {
+		@apply hidden;
+	  }
+	}
+  }
+
+  @screen xl {
+	// Hide arrows if there are only 4 cards
+	&.card-count-4 {
+	  .swiper-button-next,
+	  .swiper-button-prev {
+		@apply hidden;
+	  }
+	}
   }
 
   // Only Md fixes

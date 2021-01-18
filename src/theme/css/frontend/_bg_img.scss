@@ -1,0 +1,5 @@
+.bg-img-wrap {
+  > img {
+	@apply object-cover h-full w-full;
+  }
+}

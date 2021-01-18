@@ -2,4 +2,8 @@ tilt {
   @apply inline-block;
   @apply font-caveat transform;
   --tw-rotate: -1deg;
+
+  .has-block-tilt & {
+	@apply block;
+  }
 }

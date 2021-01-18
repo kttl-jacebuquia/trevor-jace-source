@@ -17,9 +17,10 @@ class Carousel {
 				'subtitle',
 				'class'
 		], null ), [
-				'title_cls' => '',
-				'print_js'  => true,
-				'swiper'    => [], // swiper options
+				'title_cls'        => '',
+				'print_js'         => true,
+				'hide_cat_eyebrow' => false,
+				'swiper'           => [], // swiper options
 		], $options );
 
 		# ID check
@@ -37,13 +38,16 @@ class Carousel {
 		}
 
 		# Extra Classes
-		$ext_cls = [ 'post-carousel' ];
+		$ext_cls = [
+				'post-carousel',
+				( "card-count-" . count( $posts ) ),
+		];
 		if ( ! empty( $options['onlyMd'] ) ) {
 			$ext_cls[] = 'only-md';
 		}
 
 		ob_start(); ?>
-		<div class="container mx-auto mt-5 mb-20 posts-carousel lg:mb-48 <?= implode( ' ', $ext_cls ) ?>"
+		<div class="container mx-auto mt-5 mb-20 lg:mb-48 <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
 			<h2 class="mb-4 text-white font-extrabold text-px32 leading-px40 md:font-bold md:leading-px42 lg:text-px46 lg:leading-px56 lg:-tracking-em001 <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
 			<p class="mb-12 text-white text-left mb-5 text-px20 leading-px26 md:text-px22 md:leading-px32 md:mb-14 <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
@@ -53,7 +57,9 @@ class Carousel {
 					<div class="swiper-wrapper">
 						<?php foreach ( $posts as $post ) { ?>
 							<div class="swiper-slide">
-								<?= Card::post( $post ) ?>
+								<?= Card::post( $post, [
+										'hide_cat_eyebrow' => $options['hide_cat_eyebrow']
+								] ) ?>
 							</div>
 						<?php } ?>
 					</div>

@@ -19,9 +19,10 @@ body {
 @import "./root";
 @import "./grid";
 @import "./misc/index";
-@import "./tilt-txt";
 @import "./modal/index";
 @import "./headings";
+@import "./tilt-txt";
+@import "./bg_img";
 @import "./circulation-card";
 @import "./bg-gradients";
 @import "./header";
@@ -37,5 +38,5 @@ body {
 // Resources Center
 @import "./rc";
 // Page specific
-@import "./trevor-space"
+@import "./trevor-space";
 

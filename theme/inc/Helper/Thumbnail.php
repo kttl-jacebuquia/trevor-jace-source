@@ -56,6 +56,104 @@ class Thumbnail {
 	 * @return array|null
 	 */
 	public static function post_image( int $post_id, ...$variants ): ?array {
+		$found_images = self::get_post_imgs( $post_id, ...$variants );
+
+		return self::render_img_variants( $found_images );
+	}
+
+	/**
+	 * @param $a
+	 * @param $b
+	 *
+	 * @return int
+	 */
+	protected static function _order_variant( $a, $b ): int {
+		list( $screen_a ) = $a;
+		list( $screen_b ) = $b;
+
+		$idx_a = self::_SCREEN_ORDER[ $screen_a ];
+		$idx_b = self::_SCREEN_ORDER[ $screen_b ];
+
+		return $idx_a <=> $idx_b;
+	}
+
+	/**
+	 * Generates a image variant.
+	 *
+	 * @param string $screen
+	 * @param string $type
+	 * @param string $size
+	 * @param string[] $attr
+	 *
+	 * @return array [$screen, $type, $size, $attr]
+	 */
+	public static function variant( $screen = self::_DEFAULT_SCREEN, $type = self::_DEFAULT_TYPE, $size = self::_DEFAULT_SIZE, array $attr = [] ): array {
+		return [ $screen, $type, $size, $attr ];
+	}
+
+	/**
+	 * @param array $images_data
+	 *
+	 * @return array
+	 */
+	public static function render_img_variants( array $images_data ): array {
+		$images_data = array_filter( $images_data, function ( $img_data ): bool {
+			// Filter missing, or non-img entries
+			list( $img_id ) = $img_data;
+
+			if ( ! wp_attachment_is_image( $img_id ) ) {
+				return false;
+			}
+
+			return true;
+		} );
+		$images_data = array_values( $images_data ); // reset numeric index, we'll use it below
+		$img_count   = count( $images_data );
+		$out         = [];
+
+		foreach ( $images_data as $idx => $img_data ) {
+			list( $img_id, $variant ) = $img_data;
+			list( $screen, , $size, $attr ) = $variant;
+
+
+			$prev_count = count( $out );
+			$prev       = $prev_count > 0 ? $out[ $prev_count - 1 ] : null;
+			$next       = $idx + 1 < $img_count ? $images_data[ $idx + 1 ] : null;
+
+			# Class
+			if ( empty( $attr['class'] ) ) {
+				$attr['class'] = [];
+			} else if ( ! is_array( $attr['class'] ) ) {
+				$attr['class'] = explode( ' ', $attr['class'] );
+			}
+			$class = &$attr['class'];
+
+			if ( $next ) {
+				list( , list( $next_screen ) ) = $next;
+				$class[] = $next_screen . ( empty( $next_screen ) ? '' : ':' ) . 'hidden';
+			}
+
+			if ( $prev ) {
+				$class[] = 'hidden'; // tailwindcss md:hidden lg:hidden md:block lg:block
+				$class[] = $screen . ( empty( $screen ) ? '' : ':' ) . 'block';
+			}
+
+			$class = implode( ' ', $class );
+			if ( ! empty( $html = wp_get_attachment_image( $img_id, $size, false, $attr ) ) ) {
+				$out[] = [ $html, $variant ];
+			}
+		}
+
+		return $out;
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param mixed ...$variants
+	 *
+	 * @return array
+	 */
+	public static function get_post_imgs( int $post_id, ...$variants ): array {
 		$found_images = [];
 
 		# Check variants
@@ -96,72 +194,6 @@ class Thumbnail {
 			}
 		}
 
-		$img_count = count( $found_images );
-		$out       = [];
-		foreach ( $found_images as $idx => $img_data ) {
-			list( $img_id, $variant ) = $img_data;
-			list( $screen, , $size, $attr ) = $variant;
-			$prev_count = count( $out );
-			$prev       = $prev_count > 0 ? $out[ $prev_count - 1 ] : null;
-			$next       = $idx + 1 < $img_count ? $found_images[ $idx + 1 ] : null;
-
-			# Class
-			if ( empty( $attr['class'] ) ) {
-				$attr['class'] = [];
-			} else if ( ! is_array( $attr['class'] ) ) {
-				$attr['class'] = explode( ' ', $attr['class'] );
-			}
-			$class = &$attr['class'];
-
-			if ( $next ) {
-				list( , list( $next_screen ) ) = $next;
-				$class[] = $next_screen . ( empty( $next_screen ) ? '' : ':' ) . 'hidden';
-			}
-
-			if ( $prev ) {
-				$class[] = 'hidden'; // tailwindcss md:hidden lg:hidden md:block lg:block
-				$class[] = $screen . ( empty( $screen ) ? '' : ':' ) . 'block';
-			}
-
-			$class = implode( ' ', $class );
-			if ( ! empty( $html = wp_get_attachment_image( $img_id, $size, false, $attr ) ) ) {
-				$out[] = [ $html, $variant ];
-			}
-		}
-
-		return $out;
+		return $found_images;
 	}
-
-	/**
-	 * @param $a
-	 * @param $b
-	 *
-	 * @return int
-	 */
-	protected static function _order_variant( $a, $b ): int {
-		list( $screen_a ) = $a;
-		list( $screen_b ) = $b;
-
-		$idx_a = self::_SCREEN_ORDER[ $screen_a ];
-		$idx_b = self::_SCREEN_ORDER[ $screen_b ];
-
-		return $idx_a <=> $idx_b;
-	}
-
-	/**
-	 * Generates a image variant.
-	 *
-	 * @param string $screen
-	 * @param string $type
-	 * @param string $size
-	 * @param string[] $attr
-	 *
-	 * @return array [$screen, $type, $size, $attr]
-	 */
-	public static function variant( $screen = self::_DEFAULT_SCREEN, $type = self::_DEFAULT_TYPE, $size = self::_DEFAULT_SIZE, array $attr = [] ): array {
-		return [ $screen, $type, $size, $attr ];
-	}
-
-
-	// TODO: FIND a way for variant <-> multiple image variations, it is important for the RC home heros
 }

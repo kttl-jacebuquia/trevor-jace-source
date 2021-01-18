@@ -4,6 +4,11 @@
   @apply bg-violet-light;
   @apply cursor-pointer;
   @apply rounded-full;
+  @apply transition-colors;
+
+  &:hover {
+	@apply bg-violet-lighter;
+  }
 
   &.ellipsis {
 	@apply bg-violet bg-opacity-60;

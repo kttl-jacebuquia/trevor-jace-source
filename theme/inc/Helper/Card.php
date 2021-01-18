@@ -8,8 +8,9 @@ class Card {
 	public static function post( $post, array $options = [] ): string {
 		$post          = get_post( $post );
 		$options       = array_merge( [
-				'class'     => [], // Additional classes
-				'num_words' => 100, // for description
+				'class'            => [], // Additional classes
+				'num_words'        => 100, // for description
+				'hide_cat_eyebrow' => false,
 		], $options );
 		$post_type     = get_post_type( $post );
 		$has_thumbnail = has_post_thumbnail( $post );
@@ -38,9 +39,11 @@ class Card {
 			$desc       = $post->post_excerpt;
 			$is_bg_full = true;
 		} elseif ( $post_type == CPT\RC\Article::POST_TYPE ) {
-			$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
-			$first_cat  = empty( $categories ) ? null : reset( $categories );
-			$title_top  = $first_cat ? $first_cat->name : null;
+			if ( ! $options['hide_cat_eyebrow'] ) {
+				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
+				$first_cat  = empty( $categories ) ? null : reset( $categories );
+				$title_top  = $first_cat ? $first_cat->name : null;
+			}
 
 			$desc = $post->post_excerpt;
 
