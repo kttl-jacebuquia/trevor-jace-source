@@ -82,7 +82,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 					</form>
 				</div>
 
-				<p class="text-white md:mt-8 md:mb-5">Browse a topic or check out what’s trending.</p>
+				<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px20 lg:tracking-px05 lg:mb-6">Browse a topic or check out what’s trending.</p>
 
 				<div class="flex flex-wrap justify-center mt-4 -mx-8 md:mx-auto">
 					<?php foreach ( $featured_cats as $cat ) { ?>
