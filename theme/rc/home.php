@@ -125,10 +125,13 @@ if ( $featured_guide ) {
 	$root_cls = [
 			'text-white',
 			'h-px600',
-			'my-10',
+			'mt-10',
+			'mb-24',
+			'mb-32',
 			'md:h-px490',
 			'md:justify-center',
 			'lg:h-px737',
+			'lg:mb-48',
 	];
 
 	ob_start(); ?>
