@@ -30,7 +30,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			</div>
 
 			<div class="mt-12 text-center animate-bounce lg:mt-px60">
-				<i class="trevor-ti-chevron-down text-4xl text-center lg:text-5xl"></i>
+				<i class="trevor-ti-chevron-down text-indigo text-4xl text-center lg:text-5xl"></i>
 			</div>
 
 			<div class="mt-7 mb-14 text-center text-indigo md:mb-20 lg:mt-32 lg:mx-52">
