@@ -4,6 +4,10 @@
 	margin-left: calc((100vw - 100%) / -2);
   }
 
+  > figcaption {
+	color: theme('colors.indigo.DEFAULT') !important;
+  }
+
   @screen md {
 	@apply rounded-px10;
 
