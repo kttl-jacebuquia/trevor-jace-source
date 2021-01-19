@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\CPT\RC;
 
+use Solarium\QueryType\Update\Query\Document\Document as SolariumDocument;
 use TrevorWP\Block\Glossary_Entry;
 use TrevorWP\Main;
 use TrevorWP\Theme\Customizer\Resource_Center;
@@ -86,6 +87,8 @@ abstract class RC_Object {
 		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
 		add_filter( 'posts_request', [ self::class, 'posts_request' ], 8 /* Must be lower than the Solr's hook */, 2 );
 		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
+		add_filter( 'the_posts', [ self::class, 'the_posts' ], 12 /* Must be higher than the Solr's hook */, 2 );
 	}
 
 	/**
@@ -534,5 +537,51 @@ abstract class RC_Object {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * @param SolariumDocument $doc Generated Solr document.
+	 * @param \WP_Post $post_info Original post object.
+	 *
+	 * @see \SolrPower_Sync::build_document()
+	 */
+	public static function solr_build_document( SolariumDocument $doc, \WP_Post $post_info ): SolariumDocument {
+		if ( $post_info->post_type == Glossary::POST_TYPE ) {
+			// Remove them for glossary items, we want it to match with only title.
+			$doc->removeField( 'post_content' );
+			$doc->removeField( 'post_excerpt' );
+
+			// Add them as suffixed, so we'll swap back on return
+			$doc->addField( 'post_content_t', $post_info->post_content );
+			$doc->addField( 'post_excerpt_t', $post_info->post_excerpt );
+		}
+
+		return $doc;
+	}
+
+	/**
+	 * Filters the array of retrieved posts after they’ve been fetched and internally processed.
+	 *
+	 * @param \WP_Post[] $posts
+	 * @param \WP_Query $query
+	 *
+	 * @return \WP_Post[]
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/the_posts/
+	 * @see solr_build_document()
+	 * @see \SolrPower_WP_Query::the_posts()
+	 * @see \SolrPower_WP_Query::setup()
+	 */
+	public static function the_posts( array $posts, \WP_Query $query ): array {
+		if ( $query->is_search() && ! empty( $query->query_vars[ self::QV_RESOURCES_LP ] ) ) {
+			foreach ( $posts as $post ) {
+				if ( $post->post_type == Glossary::POST_TYPE ) {
+					$post->post_content = @$post->post_content_t;
+					$post->post_excerpt = @$post->post_excerpt_t;
+				}
+			}
+		}
+
+		return $posts;
 	}
 }
