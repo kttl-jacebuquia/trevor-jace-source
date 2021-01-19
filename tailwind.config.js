@@ -70,6 +70,9 @@ module.exports = {
 			},
 			highlight: {
 				DEFAULT: '#FDE6BC',
+			},
+			teal: {
+				dark: '#003A48'
 			}
 		},
 		// Custom
