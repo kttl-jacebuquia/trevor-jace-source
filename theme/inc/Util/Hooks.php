@@ -333,13 +333,16 @@ class Hooks {
 				if ( $wp_query->is_search() ) {
 					$template = locate_template( 'rc/search.php', false );
 				}
-			} else # RC: Get Help
-				if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
-					$template = locate_template( 'rc/get-help.php', false );
-				} else # RC: Trevor Space
-					if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) ) ) {
-						$template = locate_template( 'rc/trevor-space.php', false );
-					}
+			}
+		} # RC: Get Help
+		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
+			$template = locate_template( 'rc/get-help.php', false );
+		} # RC: Trevor Space
+		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) ) ) {
+			$template = locate_template( 'rc/trevor-space.php', false );
+		} # Get Involved: Ending Conversion Therapy
+		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ECT ) ) ) {
+			$template = locate_template( 'get-involved/ending-conversion-therapy.php', false );
 		}
 
 		return $template;

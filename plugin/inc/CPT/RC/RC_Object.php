@@ -63,7 +63,7 @@ abstract class RC_Object {
 	abstract static function register_post_type(): void;
 
 	/**
-	 * @see \TrevorWP\Util\Hooks::init()
+	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	final public static function construct(): void {
 		# Init All

@@ -98,6 +98,9 @@ class Hooks {
 		# Resource Center
 		CPT\RC\RC_Object::construct();
 
+		# Get Involved
+		CPT\Get_Involved\Get_Involved_Object::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 
