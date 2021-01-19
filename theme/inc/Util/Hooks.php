@@ -116,7 +116,7 @@ class Hooks {
 				self::NAME_PREFIX . 'theme-admin-main',
 				TREVOR_THEME_STATIC_URL . '/js/admin.js',
 				[ 'jquery' ],
-				\TrevorWP\Theme\VERSION,
+				$GLOBALS['trevor_theme_static_ver'],
 				true
 		);
 
@@ -126,7 +126,7 @@ class Hooks {
 					self::NAME_PREFIX . 'theme-admin-css',
 					TREVOR_THEME_STATIC_URL . '/css/admin.js',
 					[ StaticFiles::NAME_JS_RUNTIME ],
-					\TrevorWP\Theme\VERSION,
+					$GLOBALS['trevor_theme_static_ver'],
 					false
 			);
 		} else {
@@ -134,7 +134,7 @@ class Hooks {
 					self::NAME_PREFIX . 'theme-admin',
 					TREVOR_THEME_STATIC_URL . '/css/admin.css',
 					[],
-					\TrevorWP\Theme\VERSION,
+					$GLOBALS['trevor_theme_static_ver'],
 					'all'
 			);
 		}
@@ -326,19 +326,8 @@ class Hooks {
 	public static function template_include( string $template ): string {
 		global $wp_query;
 
-		# Resources Center
-		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) ) ) {
-			# RC: Home
-			if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
-				$template = locate_template( 'rc/home.php', false );
-
-				# Search
-				if ( $wp_query->is_search() ) {
-					$template = locate_template( 'rc/search.php', false );
-				}
-			}
-		} # RC: Get Help
-		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
+		# RC: Get Help
+		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
 			$template = locate_template( 'rc/get-help.php', false );
 		} # RC: Trevor Space
 		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) ) ) {
@@ -349,6 +338,17 @@ class Hooks {
 		} # Get Involved: Volunteer
 		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER ) ) ) {
 			$template = locate_template( 'get-involved/volunteer.php', false );
+		} # Resources Center
+		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) ) ) {
+			# RC: Home
+			if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
+				$template = locate_template( 'rc/home.php', false );
+
+				# Search
+				if ( $wp_query->is_search() ) {
+					$template = locate_template( 'rc/search.php', false );
+				}
+			}
 		}
 
 		return $template;
