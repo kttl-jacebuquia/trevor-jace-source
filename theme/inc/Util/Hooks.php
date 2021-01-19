@@ -343,6 +343,9 @@ class Hooks {
 		} # Get Involved: Ending Conversion Therapy
 		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ECT ) ) ) {
 			$template = locate_template( 'get-involved/ending-conversion-therapy.php', false );
+		} # Get Involved: Volunteer
+		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER ) ) ) {
+			$template = locate_template( 'get-involved/volunteer.php', false );
 		}
 
 		return $template;

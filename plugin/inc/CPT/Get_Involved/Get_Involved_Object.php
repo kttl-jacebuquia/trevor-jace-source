@@ -11,10 +11,12 @@ abstract class Get_Involved_Object {
 	const QV_BASE = Main::QV_PREFIX . 'gi';
 	const QV_MAIN_LP = self::QV_BASE . '_main_lp';
 	const QV_ECT = self::QV_BASE . '_ect'; // Ending Conversion Therapy
+	const QV_VOLUNTEER = self::QV_BASE . '_volunteer'; // Ending Conversion Therapy
 
 	/* Permalinks */
 	const PERMALINK_BASE = 'get-involved';
 	const PERMALINK_ECT = self::PERMALINK_BASE . '/' . 'ending-conversion-therapy';
+	const PERMALINK_VOLUNTEER = self::PERMALINK_BASE . '/' . 'volunteer';
 
 	/* Collections */
 	const _ALL_ = [];
@@ -48,6 +50,12 @@ abstract class Get_Involved_Object {
 				self::QV_ECT  => 1,
 			] ), 'top' );
 
+		## Volunteer
+		add_rewrite_rule( self::PERMALINK_VOLUNTEER . '/?$', 'index.php?' . http_build_query( [
+				self::QV_BASE      => 1,
+				self::QV_VOLUNTEER => 1,
+			] ), 'top' );
+
 		## Main Page
 		add_rewrite_rule(
 			self::PERMALINK_BASE . '/?$',
@@ -74,6 +82,7 @@ abstract class Get_Involved_Object {
 			self::QV_BASE,
 			self::QV_MAIN_LP,
 			self::QV_ECT,
+			self::QV_VOLUNTEER,
 		] );
 	}
 
