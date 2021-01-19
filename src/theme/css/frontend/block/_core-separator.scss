@@ -2,9 +2,7 @@
   &, /* To catch the default, if default changes, remove this */
   &.is-style-wave {
 	@apply border-none;
-	border-image-source: url("/wp-content/themes/trevor/static/media/h-divider-wave.svg");
-	border-bottom: rem-calc(10px) solid theme('colors.indigo.DEFAULT');
-	border-image-slice: 12; // 12 and up
-	border-image-repeat: repeat;
+	background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 8px 0;
+	height: 12px;
   }
 }
