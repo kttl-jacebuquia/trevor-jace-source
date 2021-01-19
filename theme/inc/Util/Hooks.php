@@ -66,12 +66,15 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
 	 */
 	public static function wp_enqueue_scripts(): void {
+		// FIXME: This should change only on deployments
+		$GLOBALS['trevor_theme_static_ver'] = WP_DEBUG ? uniqid( \TrevorWP\Theme\VERSION . '-' ) : \TrevorWP\Theme\VERSION;
+
 		# Theme's frontend JS package
 		wp_enqueue_script(
 				self::NAME_PREFIX . 'theme-frontend-main',
 				TREVOR_THEME_STATIC_URL . '/js/frontend.js',
 				[ 'jquery' ],
-				\TrevorWP\Theme\VERSION,
+				$GLOBALS['trevor_theme_static_ver'],
 				true
 		);
 
@@ -88,7 +91,7 @@ class Hooks {
 					self::NAME_PREFIX . 'theme-frontend-css',
 					TREVOR_THEME_STATIC_URL . '/css/frontend.js',
 					[ StaticFiles::NAME_JS_RUNTIME ],
-					\TrevorWP\Theme\VERSION,
+					$GLOBALS['trevor_theme_static_ver'],
 					false
 			);
 		} else {
@@ -96,7 +99,7 @@ class Hooks {
 					self::NAME_PREFIX . 'theme-frontend',
 					TREVOR_THEME_STATIC_URL . '/css/frontend.css',
 					[],
-					\TrevorWP\Theme\VERSION,
+					$GLOBALS['trevor_theme_static_ver'],
 					'all'
 			);
 		}
