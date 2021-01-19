@@ -53,7 +53,7 @@ $is_rc = Is::rc();
 <div id="top-bar" class="top-bar">
 	<div class="top-bar-inner container">
 		<div class="logo-icon">
-			<a href="<?= esc_attr( home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ) ?>">
+			<a href="<?= home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>">
 				<i class="trevor-ti-logo-icon"></i>
 			</a>
 		</div>
@@ -79,7 +79,7 @@ $is_rc = Is::rc();
 	<input id="top-nav-open" type="checkbox" class="hidden">
 	<div class="top-nav-inner container <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
-			<a href="<?= esc_attr( get_home_url() ) ?>" class="logo" rel="home">
+			<a href="<?= home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>
 				<i class="logo-icon trevor-ti-logo-icon"></i>
 			</a>

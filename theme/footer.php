@@ -1,6 +1,7 @@
 <?php wp_footer();
 
 use \TrevorWP\Theme\Customizer;
+use \TrevorWP\Theme\Util\Is;
 
 ?>
 
@@ -8,7 +9,9 @@ use \TrevorWP\Theme\Customizer;
 	<div class="container mx-auto site-content-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">
-				<a href="<?= esc_attr( get_home_url() ) ?>" class="logo" rel="home">
+				<a href="<?= home_url( Is::rc() ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>"
+				   class="logo"
+				   rel="home">
 					<i class="logo-text trevor-ti-logo-text"></i>
 					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
