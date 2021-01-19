@@ -126,8 +126,9 @@ abstract class RC_Object {
 		## Tag
 		$tag_post_types = array_diff( self::$PUBLIC_POST_TYPES, [ External::POST_TYPE ] );
 		register_taxonomy( self::TAXONOMY_TAG, $tag_post_types, [
-			'public'            => true,
+			'public'            => false,
 			'hierarchical'      => false,
+			'show_ui'           => true,
 			'show_in_rest'      => true,
 			'show_tagcloud'     => false,
 			'show_admin_column' => true,
@@ -165,7 +166,7 @@ abstract class RC_Object {
 		# Rewrites
 
 		## Taxonomy
-		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
+//		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
 		add_filter(
 			self::TAXONOMY_CATEGORY . '_rewrite_rules',
 			[ self::class, 'rewrite_rules_category' ],
@@ -250,6 +251,7 @@ abstract class RC_Object {
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/permastructname_rewrite_rules/
 	 * @see construct()
+	 * @deprecated
 	 */
 	public static function rewrite_rules_tag(): array {
 		global $wp_rewrite;

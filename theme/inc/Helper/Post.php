@@ -132,7 +132,8 @@ class Post {
 			<hr class="wp-block-separator is-style-wave hr-top">
 			<div class="list-container">
 				<?php foreach ( $terms as $term ) { ?>
-					<a href="<?= esc_attr( get_term_link( $term ) ) ?>" rel="tag"><?= esc_attr( $term->name ) ?></a>
+					<a href="<?= RC_Object::get_search_url( $term->name ) ?>"
+					   rel="tag"><?= esc_attr( $term->name ) ?></a>
 				<?php } ?>
 			</div>
 			<hr class="wp-block-separator is-style-wave hr-btm">
