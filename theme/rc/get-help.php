@@ -46,19 +46,19 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_DESC ) ?></p>
 					</div>
 					<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA_ACTION ) ?>"
-					   class="btn block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
+					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-text">What to expect +</a>
 				</div>
 			</div>
 			<div class="flex flex-col mb-px72 md:flex-row-reverse lg:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1"></div>
-				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
+				<div class="text-center text-indigo md:px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-12">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
+					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-call">What to expect +</a>
 				</div>
 			</div>
@@ -70,7 +70,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
+					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-chat">What to expect +</a>
 				</div>
 			</div>
