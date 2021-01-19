@@ -10,6 +10,17 @@ use TrevorWP\Util\StaticFiles;
 class Hooks {
 	const NAME_PREFIX = 'trevor_';
 
+	const SINGLE_PAGE_FILES = [
+			[ CPT\RC\RC_Object::QV_GET_HELP, 'rc/get-help.php' ],
+			[ CPT\RC\RC_Object::QV_TREVORSPACE, 'rc/trevor-space.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_ECT, 'get-involved/ending-conversion-therapy.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER, 'get-involved/volunteer.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_PARTNER_W_US, 'get-involved/partner-with-us.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_CORP_PARTNERSHIPS, 'get-involved/corporate-partnerships.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ],
+			[ CPT\Get_Involved\Get_Involved_Object::QV_EVENTS, 'get-involved/events.php' ],
+	];
+
 	/**
 	 * Registers all hooks
 	 */
@@ -326,27 +337,29 @@ class Hooks {
 	public static function template_include( string $template ): string {
 		global $wp_query;
 
-		# RC: Get Help
-		if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
-			$template = locate_template( 'rc/get-help.php', false );
-		} # RC: Trevor Space
-		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_TREVORSPACE ) ) ) {
-			$template = locate_template( 'rc/trevor-space.php', false );
-		} # Get Involved: Ending Conversion Therapy
-		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ECT ) ) ) {
-			$template = locate_template( 'get-involved/ending-conversion-therapy.php', false );
-		} # Get Involved: Volunteer
-		else if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER ) ) ) {
-			$template = locate_template( 'get-involved/volunteer.php', false );
-		} # Resources Center
-		else if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) ) ) {
-			# RC: Home
-			if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
-				$template = locate_template( 'rc/home.php', false );
+		$is_single = false;
 
-				# Search
-				if ( $wp_query->is_search() ) {
-					$template = locate_template( 'rc/search.php', false );
+		# Single Pages
+		foreach ( self::SINGLE_PAGE_FILES as list( $qv, $path ) ) {
+			if ( ! empty( $wp_query->get( $qv ) ) ) {
+				$template  = locate_template( $path, false );
+				$is_single = true;
+				break;
+			}
+		}
+
+		# More specific pages
+		if ( ! $is_single ) {
+			# Resources Center
+			if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) ) ) {
+				# RC: Home
+				if ( ! empty( $wp_query->get( CPT\RC\RC_Object::QV_RESOURCES_LP ) ) ) {
+					$template = locate_template( 'rc/home.php', false );
+
+					# Search
+					if ( $wp_query->is_search() ) {
+						$template = locate_template( 'rc/search.php', false );
+					}
 				}
 			}
 		}
