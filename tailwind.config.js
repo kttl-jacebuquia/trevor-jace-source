@@ -72,7 +72,8 @@ module.exports = {
 				DEFAULT: '#FDE6BC',
 			},
 			teal: {
-				dark: '#003A48'
+				dark: '#003A48',
+				tint: '#D9E2E4'
 			}
 		},
 		// Custom
