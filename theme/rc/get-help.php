@@ -4,6 +4,9 @@
 
 use TrevorWP\Theme\Customizer\Resource_Center;
 use \TrevorWP\Theme\Helper\Circulation_Card;
+use TrevorWP\Theme\Helper\Thumbnail;
+use TrevorWP\Theme\Customizer;
+use TrevorWP\Theme\Helper;
 
 ?>
 <main id="site-content" role="main" class="site-content">
@@ -39,7 +42,20 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			</div>
 
 			<div class="flex flex-col mb-px72 md:flex-row lg:mx-px106 lg:mb-28">
-				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1"></div>
+				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
+					<?= Thumbnail::print_img_variants( [
+							[
+									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_GET_HELP_TEXT_IMG ) ),
+									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
+											'class' => [
+													'object-center',
+													'object-cover',
+													'rounded-px10',
+											]
+									] ),
+							],
+					] ) ?>
+				</div>
 				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_TITLE ) ?></h3>
@@ -51,7 +67,20 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 				</div>
 			</div>
 			<div class="flex flex-col mb-px72 md:flex-row-reverse lg:mx-px106 lg:mb-28">
-				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1"></div>
+				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
+					<?= Thumbnail::print_img_variants( [
+							[
+									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_GET_HELP_CALL_IMG ) ),
+									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
+											'class' => [
+													'object-center',
+													'object-cover',
+													'rounded-px10',
+											]
+									] ),
+							],
+					] ) ?>
+				</div>
 				<div class="text-center text-indigo md:px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-12">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_TITLE ) ?></h3>
@@ -63,7 +92,20 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 				</div>
 			</div>
 			<div class="flex flex-col mb-20 md:flex-row lg:mx-px106 lg:mb-28">
-				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1"></div>
+				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
+					<?= Thumbnail::print_img_variants( [
+							[
+									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_GET_HELP_CHAT_IMG ) ),
+									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
+											'class' => [
+													'object-center',
+													'object-cover',
+													'rounded-px10',
+											]
+									] ),
+							],
+					] ) ?>
+				</div>
 				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_TITLE ) ?></h3>

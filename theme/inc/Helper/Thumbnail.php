@@ -83,7 +83,7 @@ class Thumbnail {
 	 * @param string $screen
 	 * @param string $type
 	 * @param string $size
-	 * @param string[] $attr
+	 * @param array $attr
 	 *
 	 * @return array [$screen, $type, $size, $attr]
 	 */
@@ -195,5 +195,11 @@ class Thumbnail {
 		}
 
 		return $found_images;
+	}
+
+	public static function print_img_variants( array $images_data ): string {
+		$rendered = self::render_img_variants( $images_data );
+
+		return implode( "\n", wp_list_pluck( $rendered, 0 ) );
 	}
 }
