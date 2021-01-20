@@ -10,12 +10,16 @@ class Circulation_Card {
 	const TYPE_TREVORSPACE = 'trevorspace';
 	const TYPE_RC = 'rc';
 	const TYPE_GET_HELP = 'get_help';
+	const TYPE_DONATION = 'donation';
+	const TYPE_FUNDRAISER = 'fundraiser';
 
 	/* Settings */
 	const SETTINGS = [
 			self::TYPE_TREVORSPACE => [ 'name' => 'TrevorSpace' ],
 			self::TYPE_RC          => [ 'name' => 'Resources Center' ],
 			self::TYPE_GET_HELP    => [ 'name' => 'Get Help' ],
+			self::TYPE_DONATION    => [ 'name' => 'Donation' ],
+			self::TYPE_FUNDRAISER  => [ 'name' => 'Fundraiser' ],
 	];
 
 	/**
@@ -83,7 +87,7 @@ class Circulation_Card {
 	static public function render_trevorspace(): string {
 		// TODO: Get variables from the theme customizer
 		return ( new self( [
-				'type'     => 'trevorspace',
+				'type'     => self::TYPE_TREVORSPACE,
 				'title'    => 'Meet new LGBTQ <tilt>friends</tilt> in TrevorSpace.',
 				'desc'     => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
 				'cta_text' => 'Check It Out',
@@ -100,7 +104,7 @@ class Circulation_Card {
 	static public function render_rc(): string {
 		// TODO: Get variables from the theme customizer
 		return ( new self( [
-				'type'     => 'rc',
+				'type'     => self::TYPE_RC,
 				'title'    => 'Get answers for <tilt>everything</tilt> LGBTQ',
 				'desc'     => 'Is there something you want to learn more about? Find topics you’re interested in here.',
 				'cta_text' => 'Find Answers',
@@ -117,12 +121,42 @@ class Circulation_Card {
 	static public function render_get_help(): string {
 		// TODO: Get variables from the theme customizer
 		return ( new self( [
-				'type'     => 'get_help',
+				'type'     => self::TYPE_GET_HELP,
 				'title'    => 'We’re here <tilt>for you.</tilt>',
 				'desc'     => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
 				'cta_text' => 'Reach a Counselor',
 				'cta_url'  => home_url( RC_Object::PERMALINK_GET_HELP ),
 				'bg'       => 'gradient-type-get_help',
+		] ) )->render();
+	}
+
+	/**
+	 * @return string
+	 */
+	static public function render_donation(): string {
+		// TODO: Get variables from the theme customizer
+		return ( new self( [
+				'type'     => self::TYPE_DONATION,
+				'title'    => 'Your donation can <tilt>save lives.</tilt>',
+				'desc'     => 'Every day, LGBTQ young people in crisis reach out. It is vital we make sure our volunteers can continue to offer that support.',
+				'cta_text' => 'Donate Now',
+				'cta_url'  => home_url( \TrevorWP\Main::PERMALINK_DONATE ),
+				'bg'       => 'gradient-type-get_help', // todo: fix gradient
+		] ) )->render();
+	}
+
+	/**
+	 * @return string
+	 */
+	static public function render_fundraiser(): string {
+		// TODO: Get variables from the theme customizer
+		return ( new self( [
+				'type'     => self::TYPE_FUNDRAISER,
+				'title'    => 'Make an <tilt>impact.</tilt> Be a fundraiser.',
+				'desc'     => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
+				'cta_text' => 'Fundraise Now',
+				'cta_url'  => '#', // todo: fix url
+				'bg'       => 'gradient-type-get_help', // todo: fix gradient
 		] ) )->render();
 	}
 }
