@@ -23,10 +23,11 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			sm: px2rem(500),
-			md: px2rem(768),
-			lg: px2rem(1440),
-			xl: px2rem(1600),
+			'sm': px2rem(375),
+			'md': px2rem(768),
+			'lg': px2rem(1024),
+			'xl': px2rem(1440),
+			'2xl': px2rem(1600),
 			dark: {'raw': '(prefers-color-scheme: dark)'},
 		},
 		colors: {
