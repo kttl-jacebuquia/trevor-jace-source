@@ -38,7 +38,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			</div>
 		</div>
 		<div class="h-px600 bg-white relative flex lg:w-4/6 lg:flex-auto">
-			<div class="pt-2 px-7 pb-3 bg-teal-tint flex self-start w-full">
+			<div class="pt-2 px-7 pb-3 bg-teal-tint flex self-start w-full flex-nowrap">
 				<a href="#" class="text-px14 leading-px18 rounded-full text-white bg-teal-dark font-bold py-2 px-3.5 mr-0.5">Passed</a>
 				<a href="#" class="text-px14 leading-px18 rounded-full text-teal-dark py-2 px-3.5 mr-0.5">Pending</a>
 				<a href="#" class="text-px14 leading-px18 rounded-full text-teal-dark py-2 px-3.5 mr-0.5">Regulations & Executive Orders</a>

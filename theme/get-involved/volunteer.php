@@ -94,7 +94,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 	<div class="pt-20 pb-24 text-white lg:pt-24">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5">Reasons  to volunteer</h2>
-			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px26 lg:leading-px36 lg:mb-px60 lg:mx-44">We don’t have to tell you that becoming a Trevor counselor is  a rewarding experience. But we will anyway.</p>
+			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px26 lg:leading-px36 lg:mb-px60 lg:mx-44">We don’t have to tell you that becoming a Trevor counselor is  a rewarding experience. But  we will anyway.</p>
 
 			<div class="grid grid-cols-2 gap-y-12 gap-x-3 md:mx-20 lg:grid-cols-4">
 				<div>
