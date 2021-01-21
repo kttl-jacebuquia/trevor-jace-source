@@ -180,6 +180,7 @@ class Hooks {
 		new Customizer\External_Scripts( $manager );
 		new Customizer\Resource_Center( $manager );
 		new Customizer\Posts( $manager );
+		new Customizer\Advocacy( $manager );
 	}
 
 	/**
