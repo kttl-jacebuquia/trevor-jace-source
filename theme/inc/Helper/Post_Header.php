@@ -142,6 +142,8 @@ class Post_Header {
 		} elseif ( $post->post_type == CPT\RC\External::POST_TYPE ) {
 			$hide_tags    = true;
 			$external_url = CPT\RC\External::obj_get_url( $post->ID );
+		} elseif ( $post->post_type == CPT\Get_Involved\Bill::POST_TYPE ) {
+			$title_top = Meta\Post::get_bill_id( $post->ID );
 		}
 
 		if ( empty( $title_top ) && ! empty( $main_cat = Meta\Post::get_main_category( $post ) ) ) {

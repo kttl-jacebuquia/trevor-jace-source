@@ -21,6 +21,7 @@ const META_KEY_MAP = {
 	lengthInd: metaKeys.KEY_LENGTH_IND,
 	showShare: metaKeys.KEY_HEADER_SNOW_SHARE,
 	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
+	billId: metaKeys.KEY_BILL_ID,
 };
 const BG_COLOR_HEX_2_NAME_MAP = (() => {
 	const out = {};
@@ -37,6 +38,7 @@ class PostSidebar extends React.Component {
 	handleReRecirculationCardsChange = (newVal) => this.props.updatePostMeta('reRecirculationCards', newVal);
 	handleLengthIndChange = (newVal) => this.props.updatePostMeta('lengthInd', newVal);
 	handleSlugChange = (slug) => this.props.editPost({slug});
+	handleBillIdChange = (billId) => this.props.updatePostMeta('billId', billId);
 
 	constructor(...args) {
 		super(...args);
@@ -80,9 +82,8 @@ class PostSidebar extends React.Component {
 			showShare,
 			slug,
 			reRecirculationCards,
+			billId,
 		} = this.props;
-
-		console.log({reRecirculationCards})
 
 		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
 
@@ -92,53 +93,69 @@ class PostSidebar extends React.Component {
 				<TextControl label="Slug" value={slug} onChange={this.handleSlugChange}/>
 
 				{/* File */}
-				{-1 !== editorBlocksData.collections.fileEnabled.indexOf(postType) &&
+				{-1 !== editorBlocksData.metaKeysByPostType[metaKeys.KEY_FILE].indexOf(postType) &&
 				<FileFiled
 					key="fileInput"
 					metaKey={TrevorWP.screen.editorBlocksData.metaKeys['KEY_FILE']}
 					label="PDF Version"
 					allowedTypes={['application/pdf']}
 				/>}
+
+				{/* Bill Id */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.billId].indexOf(postType) &&
+				<TextControl label="Bill ID" value={billId} onChange={this.handleBillIdChange}/>
+				}
 			</PluginDocumentSettingPanel>
 			<PluginDocumentSettingPanel name="trevor-entry-header" icon="store" title="Header">
 				{/* Header Type */}
-				<SelectControl
-					label="Header Type"
-					value={headerType}
-					options={this.selectOptions.headerTypes}
-					onChange={this.handleHeaderTypeChange}
-				/>
-				{/* Header BG Color */}
-				{-1 !== headerSupports.indexOf('bg-color') &&
-				<BaseControl label="Background Color">
-					<ColorPalette
-						colors={Object.values(BG_COLOR_DATA.colors)}
-						clearable={false}
-						value={(BG_COLOR_DATA.colors[headerBgColor] || {color: BG_COLOR_DATA.colors[BG_COLOR_DATA.default]}).color}
-						disableCustomColors={true}
-						onChange={this.handleHeaderBgColor}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.headerType].indexOf(postType) &&
+				<>
+					<SelectControl
+						label="Header Type"
+						value={headerType}
+						options={this.selectOptions.headerTypes}
+						onChange={this.handleHeaderTypeChange}
 					/>
-				</BaseControl>
+					{/* Header BG Color */}
+					{-1 !== headerSupports.indexOf('bg-color') &&
+					<BaseControl label="Background Color">
+						<ColorPalette
+							colors={Object.values(BG_COLOR_DATA.colors)}
+							clearable={false}
+							value={(BG_COLOR_DATA.colors[headerBgColor] || {color: BG_COLOR_DATA.colors[BG_COLOR_DATA.default]}).color}
+							disableCustomColors={true}
+							onChange={this.handleHeaderBgColor}
+						/>
+					</BaseControl>
+					}
+				</>
 				}
 
 				{/* Sharing Box */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showShare].indexOf(postType) &&
 				<CheckboxControl label="Show Sharing"
 								 checked={showShare}
 								 onChange={this.handleShowShare}/>
+				}
 
 				{/* Content Length */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.lengthInd].indexOf(postType) &&
 				<SelectControl
 					label="Content Length"
 					value={lengthInd}
 					options={this.selectOptions.contentLength}
 					onChange={this.handleLengthIndChange}
 				/>
+				}
+				{/* Recirculation Cards */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.reRecirculationCards].indexOf(postType) &&
 				<SelectControl label="Recirculation Cards"
 							   value={reRecirculationCards}
 							   options={this.selectOptions.reRecirculationCards}
 							   onChange={this.handleReRecirculationCardsChange}
 							   help="You may use CTRL-Click (Windows) or CMD-Click (Mac) to de/select"
 							   multiple/>
+				}
 			</PluginDocumentSettingPanel>
 		</>
 	}

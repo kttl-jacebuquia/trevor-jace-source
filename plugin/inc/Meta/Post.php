@@ -42,20 +42,40 @@ class Post {
 	# Recirculation Cards
 	const KEY_RECIRCULATION_CARDS = Main::META_KEY_PREFIX . 'recirculation_cards';
 
+	# Bill
+	const KEY_BILL_ID = Main::META_KEY_PREFIX . 'bill_id';
+
 	# Misc
+
+	/**
+	 * @deprecated
+	 */
 	const FILE_ENABLED_POST_TYPES = [
 		CPT\RC\Guide::POST_TYPE,
 	];
+	/**
+	 * @deprecated
+	 */
+	const BILL_ID_ENABLED_POST_TYPES = [
+		CPT\Get_Involved\Bill::POST_TYPE,
+	];
+
+	public static $KEYS_BY_POST_TYPE = [];
+	public static $ARGS_BY_KEY = [];
 
 	/**
 	 * Registers all registered post meta.
 	 */
 	public static function register_all(): void {
+		$rc_ppt = CPT\RC\RC_Object::$PUBLIC_POST_TYPES;
+		$ppt    = Tools::get_public_post_types();
+
 		$default = [
 			'show_in_rest'  => true,
 			'single'        => true,
 			'type'          => 'string',
-			'auth_callback' => [ self::class, 'auth_check_editors' ]
+			'auth_callback' => [ self::class, 'auth_check_editors' ],
+			'post_types'    => $ppt,
 		];
 
 		// Posts
@@ -64,15 +84,37 @@ class Post {
 				self::KEY_HEADER_TYPE         => [
 					'sanitize_callback' => [ self::class, 'sanitize_post_header_types' ],
 					'default'           => Theme\Helper\Post_Header::DEFAULT_TYPE,
-					'object_subtype'
+					'post_types'        => $rc_ppt,
 				],
-				self::KEY_HEADER_BG_CLR       => [ 'default' => Theme\Helper\Post_Header::DEFAULT_BG_COLOR ],
-				self::KEY_HEADER_SNOW_SHARE   => [ 'type' => 'boolean', 'default' => true ],
-				self::KEY_LENGTH_IND          => [ 'default' => Theme\Helper\Content_Length::DEFAULT_OPTION ],
-				self::KEY_IMAGE_SQUARE        => [],
-				self::KEY_IMAGE_HORIZONTAL    => [],
-				self::KEY_HIGHLIGHTS          => [ 'type' => 'array', 'default' => [], 'show_in_rest' => false ],
-				self::KEY_MAIN_CATEGORY       => [ 'type' => 'integer', 'default' => 0 ],
+				self::KEY_HEADER_BG_CLR       => [
+					'default'    => Theme\Helper\Post_Header::DEFAULT_BG_COLOR,
+					'post_types' => $rc_ppt,
+				],
+				self::KEY_HEADER_SNOW_SHARE   => [
+					'type'       => 'boolean',
+					'default'    => true,
+					'post_types' => $rc_ppt,
+				],
+				self::KEY_LENGTH_IND          => [
+					'default'    => Theme\Helper\Content_Length::DEFAULT_OPTION,
+					'post_types' => $rc_ppt,
+				],
+				self::KEY_IMAGE_SQUARE        => [
+					'post_types' => $rc_ppt,
+				],
+				self::KEY_IMAGE_HORIZONTAL    => [
+					'post_types' => $rc_ppt,
+				],
+				self::KEY_HIGHLIGHTS          => [
+					'type'         => 'array',
+					'default'      => [],
+					'show_in_rest' => false,
+				],
+				self::KEY_MAIN_CATEGORY       => [
+					'type'       => 'integer',
+					'default'    => 0,
+					'post_types' => $rc_ppt,
+				],
 				self::KEY_RECIRCULATION_CARDS => [
 					'default'      => [],
 					'type'         => 'array',
@@ -82,17 +124,28 @@ class Post {
 							'items' => [ 'type' => 'string' ],
 						],
 					],
+					'post_types'   => $rc_ppt,
+				],
+				self::KEY_FILE                => [
+					'post_types' => [
+						CPT\RC\Guide::POST_TYPE,
+					],
+				],
+				self::KEY_BILL_ID             => [
+					'post_types' => [
+						CPT\Get_Involved\Bill::POST_TYPE,
+					],
 				]
 			] as $meta_key => $args
 		) {
-			foreach ( Tools::get_public_post_types() as $post_type ) {
-				register_post_meta( $post_type, $meta_key, array_merge( $default, $args ) );
-			}
-		}
+			$args = array_merge( $default, $args );
 
-		# File Enabled
-		foreach ( self::FILE_ENABLED_POST_TYPES as $post_type ) {
-			register_post_meta( $post_type, self::KEY_FILE, $default );
+			self::$ARGS_BY_KEY[ $meta_key ]       = $args;
+			self::$KEYS_BY_POST_TYPE[ $meta_key ] = $args['post_types'];
+
+			foreach ( $args['post_types'] as $post_type ) {
+				register_post_meta( $post_type, $meta_key, $args );
+			}
 		}
 	}
 
@@ -135,10 +188,8 @@ class Post {
 	public static function get_editor_config( \WP_Post $post ): array {
 		$ppt    = Tools::get_public_post_types();
 		$config = [
-			'metaKeys'    => [],
-			'collections' => [
-				'fileEnabled' => self::FILE_ENABLED_POST_TYPES
-			]
+			'metaKeys'           => [],
+			'metaKeysByPostType' => Post::$KEYS_BY_POST_TYPE,
 		];
 
 		# Collect Meta Keys
@@ -281,5 +332,14 @@ class Post {
 	 */
 	public static function get_recirculation_cards( int $post_id ): array {
 		return (array) get_post_meta( $post_id, self::KEY_RECIRCULATION_CARDS, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_bill_id( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::KEY_BILL_ID, true );
 	}
 }

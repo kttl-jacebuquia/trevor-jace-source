@@ -25,7 +25,7 @@ class Post {
 		}
 
 		# File
-		if ( is_singular( Meta\Post::FILE_ENABLED_POST_TYPES ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
+		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
 			$out['file_button'] = self::_render_file_button( $file_id );
 		}
 
@@ -147,6 +147,10 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_bottom_categories( \WP_Post $post ): ?string {
+		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) ) {
+			return null;
+		}
+
 		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
 		$terms            = get_terms( [
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,

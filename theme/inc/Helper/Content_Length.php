@@ -42,9 +42,13 @@ class Content_Length {
 	/**
 	 * @param \WP_Post $post
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	public static function post( \WP_Post $post ): string {
+	public static function post( \WP_Post $post ): ?string {
+		if ( ! in_array( $post->post_type, \TrevorWP\Meta\Post::$KEYS_BY_POST_TYPE ) ) {
+			return null;
+		}
+
 		$val = \TrevorWP\Meta\Post::get_content_length_indicator( $post->ID );
 
 		if ( ! array_key_exists( $val, self::SETTINGS ) ) {
@@ -52,7 +56,7 @@ class Content_Length {
 		}
 
 		if ( $val == self::OPTION_HIDDEN ) {
-			return '';
+			return null;
 		}
 
 		if ( $val != self::OPTION_AUTO ) {

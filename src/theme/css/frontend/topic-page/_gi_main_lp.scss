@@ -1,0 +1,114 @@
+.gi_main_lp {
+  // Hero
+  &-hero {
+	@apply container mx-auto;
+
+	&-inner {
+	  @apply flex flex-col;
+	  @apply max-h-full;
+	}
+
+	&-content-wrap {
+	  @apply text-white text-center;
+	  @apply pb-2;
+	}
+
+	&-img-wrap {
+	  margin-right: calc((100vw - 100%) / -2);
+	  @apply max-h-full;
+	}
+
+	&-title {
+	  @apply text-white has-block-tilt;
+	}
+
+	&-desc {
+	  @apply py-8 text-base leading-px24 font-normal;
+	}
+
+	&-cta {
+	  @apply inline-block text-teal-dark bg-white rounded-px10 py-3 px-8 text-base font-bold leading-px22;
+	}
+
+	@screen md {
+	  &-inner {
+		@apply flex-row;
+	  }
+
+	  &-content-wrap {
+		@apply text-left;
+		@apply w-7/12;
+		@apply pb-6;
+	  }
+
+	  &-img-wrap {
+		max-width: 50vw;
+	  }
+
+	  &-desc {
+		@apply text-px14 leading-px20;
+	  }
+
+	  &-cta {
+		@apply px-6;
+	  }
+	}
+
+	@screen lg {
+	  @apply mt-12;
+	  max-height: rem-calc(550px);
+
+	  &-desc {
+		@apply text-px22 leading-px32 tracking-px05;
+	  }
+
+	  &-cta {
+		@apply py-5 px-10;
+	  }
+
+	  &-content-wrap {
+		@apply pb-10;
+	  }
+	}
+  }
+
+  // Main Content Wrap
+  &-main-content {
+	@apply flex-1;
+  }
+
+  // Carousel
+  &-carousel {
+	&-title {
+
+	}
+
+	&-wrap {
+
+	}
+  }
+
+  // Our Work
+  &-our-work {
+	&-title {
+	}
+
+	&-desc {
+	}
+
+	&-grid {
+	}
+  }
+
+  // Quote
+  &-quote {
+
+  }
+
+  // Posts
+  &-posts {
+
+  }
+
+
+}

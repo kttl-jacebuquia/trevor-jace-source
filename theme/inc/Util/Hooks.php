@@ -181,6 +181,8 @@ class Hooks {
 		new Customizer\Resource_Center( $manager );
 		new Customizer\Posts( $manager );
 		new Customizer\Advocacy( $manager );
+		new Customizer\Volunteer( $manager );
+		new Customizer\ECT( $manager );
 	}
 
 	/**

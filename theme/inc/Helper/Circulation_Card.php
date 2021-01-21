@@ -12,6 +12,7 @@ class Circulation_Card {
 	const TYPE_GET_HELP = 'get_help';
 	const TYPE_DONATION = 'donation';
 	const TYPE_FUNDRAISER = 'fundraiser';
+	const TYPE_COUNSELOR = 'counselor';
 
 	/* Settings */
 	const SETTINGS = [
@@ -20,6 +21,7 @@ class Circulation_Card {
 			self::TYPE_GET_HELP    => [ 'name' => 'Get Help' ],
 			self::TYPE_DONATION    => [ 'name' => 'Donation' ],
 			self::TYPE_FUNDRAISER  => [ 'name' => 'Fundraiser' ],
+			self::TYPE_COUNSELOR   => [ 'name' => 'Counselor' ],
 	];
 
 	/**
@@ -166,7 +168,7 @@ class Circulation_Card {
 	static public function render_counselor(): string {
 		// TODO: Get variables from the theme customizer
 		return ( new self( [
-				'type'     => self::TYPE_FUNDRAISER,
+				'type'     => self::TYPE_COUNSELOR,
 				'title'    => 'Train to be a <tilt>counselor.</tilt>',
 				'desc'     => 'One volunteer can help support over 100 young people that wouldn’t be supported otherwise.',
 				'cta_text' => 'Volunteer Now',
