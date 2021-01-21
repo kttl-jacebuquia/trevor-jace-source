@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\CPT\Get_Involved;
 
 
+use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
 
 /**
@@ -24,6 +25,18 @@ abstract class Get_Involved_Object {
 	const QV_CORP_PARTNERSHIPS = self::QV_BASE . 'corp_partnerships';
 	const QV_INSTITUTIONAL_GRANTS = self::QV_BASE . 'institutional_grants';
 	const QV_EVENTS = self::QV_BASE . 'events';
+	const _QV_ALL = [
+		self::QV_BASE,
+		self::QV_MAIN_LP,
+		self::QV_ECT,
+		self::QV_VOLUNTEER,
+		self::QV_BILL,
+		self::QV_LETTER,
+		self::QV_PARTNER_W_US,
+		self::QV_CORP_PARTNERSHIPS,
+		self::QV_INSTITUTIONAL_GRANTS,
+		self::QV_EVENTS,
+	];
 
 	/* Permalinks */
 	const PERMALINK_BASE = 'get-involved';
@@ -35,7 +48,20 @@ abstract class Get_Involved_Object {
 	const PERMALINK_EVENTS = self::PERMALINK_BASE . '/' . 'events';
 
 	/* Collections */
-	const _ALL_ = [];
+	const _ALL_ = [
+		Bill::class,
+		Letter::class,
+	];
+
+	/**
+	 * @var string[]
+	 */
+	static $ALL_POST_TYPES = [];
+
+	/**
+	 * @var string[]
+	 */
+	static $PUBLIC_POST_TYPES = [];
 
 	/**
 	 * @see construct()
@@ -46,9 +72,21 @@ abstract class Get_Involved_Object {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	final public static function construct(): void {
+		# Init All
+		/** @var RC_Object $cls */
+		foreach ( self::_ALL_ as $cls ) {
+			# Fill post types
+			self::$ALL_POST_TYPES[] = $cls::POST_TYPE;
+
+			if ( $cls::IS_PUBLIC ) {
+				self::$PUBLIC_POST_TYPES[] = $cls::POST_TYPE;
+			}
+		}
+
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
 		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
 		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
+		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
 	}
 
 	/**
@@ -59,6 +97,12 @@ abstract class Get_Involved_Object {
 	 * @see construct()
 	 */
 	public static function init(): void {
+		# Post Types
+		foreach ( self::_ALL_ as $cls ) {
+			/** @var RC_Object $cls */
+			$cls::register_post_type();
+		}
+
 		# Rewrites
 		## Single Pages
 		foreach (
@@ -101,18 +145,7 @@ abstract class Get_Involved_Object {
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, [
-			self::QV_BASE,
-			self::QV_MAIN_LP,
-			self::QV_ECT,
-			self::QV_VOLUNTEER,
-			self::QV_BILL,
-			self::QV_LETTER,
-			self::QV_PARTNER_W_US,
-			self::QV_CORP_PARTNERSHIPS,
-			self::QV_INSTITUTIONAL_GRANTS,
-			self::QV_EVENTS,
-		] );
+		return array_merge( $vars, self::_QV_ALL );
 	}
 
 	/**
@@ -136,5 +169,24 @@ abstract class Get_Involved_Object {
 			$query->is_post_type_archive = true;
 			$query->set( 'name', null );
 		}
+	}
+
+	/**
+	 * Filters the list of CSS body class names for the current post or page.
+	 *
+	 * @param array $classes An array of body class names.
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/body_class/
+	 */
+	public static function body_class( array $classes ): array {
+		foreach ( self::_QV_ALL as $qv ) {
+			if ( get_query_var( $qv ) ) {
+				$classes[] = 'is-' . substr( $qv, strlen( Main::QV_PREFIX ) );
+			}
+		}
+
+		return $classes;
 	}
 }
