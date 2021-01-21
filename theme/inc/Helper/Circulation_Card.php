@@ -159,4 +159,19 @@ class Circulation_Card {
 				'bg'       => 'gradient-type-get_help', // todo: fix gradient
 		] ) )->render();
 	}
+
+	/**
+	 * @return string
+	 */
+	static public function render_counselor(): string {
+		// TODO: Get variables from the theme customizer
+		return ( new self( [
+				'type'     => self::TYPE_FUNDRAISER,
+				'title'    => 'Train to be a <tilt>counselor.</tilt>',
+				'desc'     => 'One volunteer can help support over 100 young people that wouldn’t be supported otherwise.',
+				'cta_text' => 'Volunteer Now',
+				'cta_url'  => '#', // todo: fix url
+				'bg'       => 'gradient-type-get_help', // todo: fix gradient
+		] ) )->render();
+	}
 }
