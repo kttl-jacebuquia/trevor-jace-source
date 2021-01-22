@@ -7,6 +7,7 @@ use TrevorWP\Theme\Customizer\Resource_Center;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Log;
 use TrevorWP\CPT;
+use TrevorWP\Util\Tools;
 
 /**
  * Abstract Resource Center Object
@@ -140,20 +141,8 @@ abstract class RC_Object {
 		] );
 
 		## Search Key
-		$name_sk = 'Search Key';
 		register_taxonomy( self::TAXONOMY_SEARCH_KEY, self::$PUBLIC_POST_TYPES, [
-			'labels'            => [
-				'name'          => "{$name_sk}s",
-				'singular_name' => $name_sk,
-				'search_items'  => "{$name_sk}s",
-				'popular_items' => "Popular {$name_sk}",
-				'all_items'     => "All {$name_sk}",
-				'edit_item'     => "Edit {$name_sk}",
-				'view_item'     => "View {$name_sk}",
-				'update_item'   => "Update {$name_sk}",
-				'add_new_item'  => "Add New {$name_sk}",
-				'new_item_name' => "New {$name_sk}",
-			],
+			'labels'            => Tools::gen_tax_labels( 'Search Key' ),
 			'public'            => false,
 			'hierarchical'      => false,
 			'show_ui'           => true,

@@ -1,7 +1,7 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
 use TrevorWP\CPT\Get_Involved\Bill;
-use TrevorWP\CPT\Get_Involved\Corp_Partner;
+use TrevorWP\CPT\Get_Involved\Partner;
 use TrevorWP\CPT\Get_Involved\Letter;
 
 /**
@@ -197,7 +197,7 @@ class Advocacy extends Abstract_Customizer {
 			'section'     => self::SECTION_HOME_GENERAL,
 			'allow_order' => true,
 			'label'       => 'Featured Partners',
-			'post_type'   => Corp_Partner::POST_TYPE,
+			'post_type'   => Partner::POST_TYPE,
 		] ) );
 
 		# Featured

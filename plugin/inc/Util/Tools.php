@@ -907,4 +907,27 @@ class Tools {
 
 		return null;
 	}
+
+
+	/**
+	 * Generates taxonomy labels for the given name.
+	 *
+	 * @param string $name
+	 *
+	 * @return array
+	 */
+	public static function gen_tax_labels( string $name ): array {
+		return [
+			'name'          => "{$name}s",
+			'singular_name' => $name,
+			'search_items'  => "{$name}s",
+			'popular_items' => "Popular {$name}",
+			'all_items'     => "All {$name}",
+			'edit_item'     => "Edit {$name}",
+			'view_item'     => "View {$name}",
+			'update_item'   => "Update {$name}",
+			'add_new_item'  => "Add New {$name}",
+			'new_item_name' => "New {$name}",
+		];
+	}
 }

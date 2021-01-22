@@ -3,6 +3,7 @@
 
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
+use TrevorWP\Util\Tools;
 
 /**
  * Abstract Get Involved Object
@@ -13,6 +14,11 @@ abstract class Get_Involved_Object {
 
 	/* Post Types */
 	const POST_TYPE_PREFIX = Main::POST_TYPE_PREFIX . 'gi_';
+
+	/* Taxonomies */
+	const TAXONOMY_PREFIX = self::POST_TYPE_PREFIX;
+	const TAXONOMY_PARTNER_TIER = self::TAXONOMY_PREFIX . 'partner_tier';
+	const TAXONOMY_GRANT_TIER = self::TAXONOMY_PREFIX . 'grant_tier';
 
 	/* Query Vars */
 	const QV_BASE = Main::QV_PREFIX . 'gi';
@@ -51,6 +57,15 @@ abstract class Get_Involved_Object {
 	const _ALL_ = [
 		Bill::class,
 		Letter::class,
+		Partner::class,
+		Grant::class,
+	];
+
+	/* Misc */
+	const LOGO_SIZES = [
+		'text'   => [ 'name' => 'Text' ],
+		'normal' => [ 'name' => 'Normal' ],
+		'big'    => [ 'name' => 'Big' ],
 	];
 
 	/**
@@ -102,6 +117,29 @@ abstract class Get_Involved_Object {
 			/** @var RC_Object $cls */
 			$cls::register_post_type();
 		}
+
+		# Taxonomies
+		## Partner Tier
+		register_taxonomy( self::TAXONOMY_PARTNER_TIER, [ Partner::POST_TYPE ], [
+			'public'            => false,
+			'hierarchical'      => false,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'show_tagcloud'     => false,
+			'show_admin_column' => true,
+			'labels'            => Tools::gen_tax_labels( 'Partner Tier' ),
+		] );
+
+		## Grant Tier
+		register_taxonomy( self::TAXONOMY_GRANT_TIER, [ Grant::POST_TYPE ], [
+			'public'            => false,
+			'hierarchical'      => false,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'show_tagcloud'     => false,
+			'show_admin_column' => true,
+			'labels'            => Tools::gen_tax_labels( 'Grant Tier' ),
+		] );
 
 		# Rewrites
 		## Single Pages
