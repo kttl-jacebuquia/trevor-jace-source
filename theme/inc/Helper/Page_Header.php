@@ -24,6 +24,7 @@ class Page_Header {
 	 */
 	public static function split_img( array $options ): string {
 		$options = array_merge( array_fill_keys( [
+				'title_top',
 				'title',
 				'desc',
 				'img_id',
@@ -35,6 +36,7 @@ class Page_Header {
 		<div class="page-header type-split-img">
 			<div class="page-header-inner">
 				<div class="page-header-content-wrap">
+					<div class="page-header-title-top"></div>
 					<h1 class="heading-lg-tilted page-header-title">
 						<?= $options['title'] ?>
 					</h1>
@@ -49,10 +51,7 @@ class Page_Header {
 										intval( $options['img_id'] ),
 										Thumbnail::variant( Thumbnail::SCREEN_SM, null, Thumbnail::SIZE_MD, [
 												'class' => [
-														'object-right-bottom',
-														'object-cover',
-														'w-full',
-														'h-full',
+														'page-header-img',
 												],
 										] ),
 								],

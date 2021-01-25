@@ -43,6 +43,7 @@ class Carousel {
 		$ext_cls = [
 				'post-carousel',
 				( "card-count-" . count( $posts ) ),
+				$options['class'],
 		];
 		if ( ! empty( $options['onlyMd'] ) ) {
 			$ext_cls[] = 'only-md';

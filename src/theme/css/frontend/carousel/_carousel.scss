@@ -1,14 +1,14 @@
 .carousel {
   &-wrap {
-	@apply container mx-auto mt-5 mb-20;
+	@apply container mx-auto my-20;
   }
 
   &-title {
-	@apply mb-4 text-white text-center font-extrabold text-px32 leading-px40;
+	@apply mb-4 text-center font-extrabold text-px32 leading-px40;
   }
 
   &-subtitle {
-	@apply mb-12 text-white text-center mb-5 text-px20 leading-px26;
+	@apply mb-12 text-center mb-5 text-px20 leading-px26;
   }
 
   @screen md {
