@@ -141,6 +141,7 @@ module.exports = {
 				px50: px2rem(50),
 				px52: px2rem(52),
 				px60: px2rem(60),
+				px64: px2rem(64),
 				px70: px2rem(70),
 			},
 			lineHeight: {
