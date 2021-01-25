@@ -82,7 +82,7 @@
 
 	@screen lg {
 		.circulation-card-title {
-			@apply text-px52 leading-px62;
+			@apply text-px46 leading-px62;
 
 			tilt {
 				@apply text-px70 leading-px80;
@@ -101,7 +101,7 @@
 
 		&.type-rc {
 			.circulation-card-title {
-				@apply text-px52 leading-px62;
+				@apply text-px46 leading-px62;
 			}
 		}
 	}

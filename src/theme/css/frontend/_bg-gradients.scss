@@ -51,7 +51,8 @@
 // Type: Get Help
 .gradient-type-get_help {
   background: url("/wp-content/themes/trevor/static/media/gradient_2.png");
-  background-size: 100% 100%;
+  background-size: 200% 200%;
+  background-position: 0% 90%;
   backdrop-filter: blur(12px);
   //@include create-gradient();
 }
