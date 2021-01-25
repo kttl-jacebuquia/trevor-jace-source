@@ -12,13 +12,13 @@
   }
 
   .modal-container {
-	@apply bg-white w-full h-full z-50 overflow-y-auto relative;
+	@apply bg-white w-full h-full z-50 overflow-y-auto relative flex flex-col;
 	padding-top: var(--top-nav-top-margin);
   }
 
   .modal-close {
-	top: calc(var(--top-nav-top-margin) - 2.5rem);
-	@apply absolute right-4 py-2 px-3 rounded-px10;
+	top: Max(calc(var(--top-nav-top-margin) - 2.5rem), 0px);
+	@apply right-4 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
 	@apply bg-indigo text-white;
   }
 
@@ -28,11 +28,11 @@
 
   @screen md {
 	.modal-close {
-	  @apply top-5;
+	  @apply mt-0 mr-7;
 	}
 
 	.modal-container {
-	  @apply w-auto h-auto pt-10;
+	  @apply w-auto h-auto pt-7;
 	  max-width: 75%;
 	  max-height: 75%;
 	  @apply shadow-lg rounded-px10 mx-auto;
@@ -41,6 +41,10 @@
 
   @screen lg {
 	.modal-container {
+		@apply pt-5;
+	}
+	.modal-close {
+		@apply mr-5 -mb-4;
 	}
   }
 }
