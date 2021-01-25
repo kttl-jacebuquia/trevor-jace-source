@@ -110,6 +110,9 @@ module.exports = {
 			borderRadius: {
 				px10: px2rem(10)
 			},
+			maxWidth: {
+				px1240: px2rem(1240)
+			},
 			height: {
 				px737: px2rem(737),
 				px600: px2rem(600),
