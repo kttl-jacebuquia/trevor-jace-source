@@ -47,6 +47,12 @@
 		@apply mr-5 -mb-4;
 	}
   }
+
+  @screen xl {
+  	.modal-container {
+  		@apply max-w-5xl;
+  	}
+  }
 }
 
 body.modal-active {
