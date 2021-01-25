@@ -74,8 +74,13 @@ foreach ( $tiers as $tier ) {
 		<a href="#" target="_blank" class="funders__partner inline-block mx-auto flex-grow-0 flex-shrink-0">Become a Partner</a>
 	</div>
 
-	<? //= Circulation_Card::render_donation(); ?>
-	<? //= Circulation_Card::render_fundraiser(); ?>
+	<div class="cards">
+		<div class="cards__container container mx-auto flex flex-row flex-wrap">
+			<h3 class="cards__title font-bold text-px32 lg:text-46 leading-px42 lg:leading-56 text-center w-full">There are other ways to help.</h3>
+			<?= Circulation_Card::render_donation(); ?>
+			<?= Circulation_Card::render_fundraiser(); ?>
+		</div>
+	</div>
 
 </main>
 <?php get_footer(); ?>

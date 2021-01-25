@@ -201,4 +201,49 @@
       }
     }
   }
+
+  .cards {
+    background-color: theme('colors.gray.light');
+
+    &__title {
+      color: theme('colors.teal.dark');
+      margin: 80px 0 60px;
+
+      @screen md {
+        margin: 60px 0 64px;
+      }
+
+      @screen lg {
+        margin: 120px 0 90px;
+        flex-basis: 100%;
+      }
+    }
+
+    &__container {
+      gap: 20px;
+      padding-bottom: 100px;
+
+      @screen md {
+        padding-bottom: 80px;
+        justify-content: space-around;
+      }
+
+      @screen xl {
+        padding-bottom: 120px;
+        justify-content: space-between;
+      }
+
+      .circulation-card {
+        flex: 0 0 100%;
+
+        @screen md {
+          flex-basis: calc(492 / 768 * 100%);
+        }
+
+        @screen lg {
+          flex-basis: calc(606 / 1240 * 100%);
+        }
+      }
+    }
+  }
 }
