@@ -113,6 +113,7 @@ module.exports = {
 				px737: px2rem(737),
 				px600: px2rem(600),
 				px490: px2rem(490),
+				px546: px2rem(546),
 			},
 			fontSize: {
 				px14: px2rem(14),
@@ -182,11 +183,15 @@ module.exports = {
 			},
 			spacing: {
 				px30: px2rem(30),
+				px40: px2rem(40),
 				px50: px2rem(50),
 				px60: px2rem(60),
 				px72: px2rem(72),
+				px80: px2rem(80),
 				px88: px2rem(88),
+				px100: px2rem(100),
 				px106: px2rem(106),
+				px120: px2rem(120),
 			}
 		},
 	},

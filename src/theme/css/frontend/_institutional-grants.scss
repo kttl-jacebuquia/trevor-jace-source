@@ -1,0 +1,249 @@
+.institutional-grants {
+  .hero {
+    &__description {
+      width: 319px;
+
+      @screen md {
+        width: 426px;
+      }
+
+      @screen lg {
+        width: 647px;
+      }
+    }
+
+    &__btn-1 {
+      color: theme('colors.teal.dark');
+    }
+
+    &__btn-2 {
+      background-color: #FF5A3D;
+      border-radius: 100px;
+      box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
+      margin-top: 152px;
+      letter-spacing: 0.5px;
+
+      @screen lg {
+        margin-top: 72px;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .funders {
+    &__title {
+      color: theme('colors.teal.dark');
+    }
+
+    .table-container {
+      
+      @screen md {
+        @apply container;
+        @apply mx-auto;
+      }
+    }
+
+    table {
+      @apply w-full;
+      color: theme('colors.teal.dark');
+      width: 100%;
+
+      @screen md {
+        // width: calc(688 / 768 * 100%);
+        margin: auto;
+        border-collapse: collapse;
+        border-radius: 10px;
+        border-style: hidden;
+        box-shadow: 0 0 0 2px rgba(0, 58, 72, 0.2);
+
+        tr:first-child th,
+        tr:first-child td {
+          border-top-left-radius: 10px;
+        }
+
+        tr:last-child th,
+        tr:first-child td {
+          border-bottom-left-radius: 10px;
+        }
+      }
+
+      tr {
+        &:first-child {
+          border-top: 2px solid rgba(0, 58, 72, 0.2);
+        }
+
+        &:last-child {
+          border-bottom: 2px solid rgba(0, 58, 72, 0.2);
+        }
+
+        @screen md {
+          &:first-child {
+            border-top: none;
+          }
+  
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+
+      tr + tr {
+        border-top: 2px solid rgba(0, 58, 72, 0.2);
+      }
+
+      th,
+      td {
+        a {
+          position: relative;
+          display: inline-block;
+          @apply text-px20;
+          @apply leading-px26;
+          @apply font-bold;
+
+          &:after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: theme('colors.teal.dark');
+          }
+        }
+      }
+
+      th {
+        background-color: #F3F3F7;
+        @apply py-6;
+
+        @screen md {
+          flex: 0 0 174px;
+          padding: 30px 0 0 0;
+        }
+
+        @screen lg {
+          flex: 0 0 194px;
+          padding: 70px 0 0 0;
+        }
+
+        & > * {
+          width: 297px;
+          @apply mx-auto;
+          
+          @screen md {
+            width: auto;
+          }
+        }
+
+        .tier-name {
+          margin-bottom: 4px;
+
+        }
+
+        .tier-name,
+        .tier-value {
+          @screen md {
+            padding: 0 24px;
+          }
+        }
+      }
+
+      td {
+        @apply mx-auto;
+        @apply pt-10;
+        @apply items-center;
+        padding-bottom: 44px;
+        width: 297px;
+        a + a {
+          margin-top: 34px;
+        }
+
+        @screen md {
+          width: 100%;
+          padding-left: 30px;
+          padding-right: 50px;
+          flex-wrap: wrap;
+          padding-top: 30px;
+          padding-bottom: 80px;
+          gap: 20px;
+
+          a + a {
+            margin-top: 0;
+          }
+        }
+
+        @screen lg {
+          padding-top: 70px;
+          padding-bottom: 100px;
+          gap: 40px;
+        }
+      }
+    }
+
+    &__partner {
+      @apply text-white;
+      @apply text-px16;
+      @apply mb-px100;
+      @apply mt-px60;
+
+      background-color: theme('colors.teal.dark');
+      padding: 12px 32px;
+      border-radius: 10px;
+
+      @screen md {
+        @apply mt-px40;
+        @apply mb-px80;
+      }
+
+      @screen lg {
+        @apply mt-px60;
+        @apply mb-px120;
+      }
+    }
+  }
+
+  .cards {
+    background-color: theme('colors.gray.light');
+
+    &__title {
+      color: theme('colors.teal.dark');
+      margin: 80px 0 60px;
+
+      @screen md {
+        margin: 60px 0 64px;
+      }
+
+      @screen lg {
+        margin: 120px 0 90px;
+        flex-basis: 100%;
+      }
+    }
+
+    &__container {
+      gap: 20px;
+      padding-bottom: 100px;
+
+      @screen md {
+        padding-bottom: 80px;
+        justify-content: space-around;
+      }
+
+      @screen xl {
+        padding-bottom: 120px;
+        justify-content: space-between;
+      }
+
+      .circulation-card {
+        flex: 0 0 100%;
+
+        @screen md {
+          flex-basis: calc(492 / 768 * 100%);
+        }
+
+        @screen lg {
+          flex-basis: calc(606 / 1240 * 100%);
+        }
+      }
+    }
+  }
+}
