@@ -138,7 +138,7 @@ class Resource_Center extends Abstract_Customizer {
 		self::SETTING_GET_HELP_2_DESC               => 'They will listen, reflect back, and will not judge you. All of your conversations are anonymous, and you can share as much or as little as you’d like.',
 		/* * * Text */
 		self::SETTING_GET_HELP_TEXT_TITLE           => 'Text us from anywhere, anytime.',
-		self::SETTING_GET_HELP_TEXT_DESC            => 'Standard text messaging rates may apply.',
+		self::SETTING_GET_HELP_TEXT_DESC            => 'Standard text messaging <br/>rates may apply.',
 		self::SETTING_GET_HELP_TEXT_CTA             => 'Text ‘START’ to 678-678',
 		self::SETTING_GET_HELP_TEXT_CTA_ACTION      => 'sms://678678',
 		self::SETTING_GET_HELP_TEXT_BTN_CTA         => 'Text Us',
