@@ -13,8 +13,8 @@ use TrevorWP\Theme\Helper;
 	<div>
 		<div class="container mx-auto text-center site-content-inner">
 			<h1 class="heading-lg-tilted text-indigo mb-4"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_1_TITLE ) ?></h1>
-			<p class="text-px18 mx-4 mb-10 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-12 lg:text-px26 lg:leading-px36 lg:mb-14 lg:mx-52"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_1_DESC ) ?></p>
-			<div class="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-6 md:mx-px60 lg:mx-80">
+			<p class="text-px18 mx-4 mb-10 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-12 lg:text-px26 lg:leading-px36 lg:mb-14 xl:mx-52"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_1_DESC ) ?></p>
+			<div class="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-6 md:mx-px60 xl:mx-80">
 				<a href="#"
 				   class="btn flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
 					<i class="trevor-ti-chat text-white text-px52 my-2"></i>
@@ -36,12 +36,12 @@ use TrevorWP\Theme\Helper;
 				<i class="trevor-ti-chevron-down text-indigo text-4xl text-center lg:text-5xl"></i>
 			</div>
 
-			<div class="mt-7 mb-14 text-center text-indigo md:mb-20 lg:mt-32 lg:mx-52">
+			<div class="mt-7 mb-14 text-center text-indigo md:mb-20 lg:mt-32 xl:mx-52">
 				<h2 class="font-bold text-px28 leading-px38 tracking-px_015 mb-4 md:text-px32 md:leading-px42 lg:text-px46 lg:leading-px56"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_2_TITLE ) ?></h2>
 				<p class="text-px20 leading-px30 md:mx-6 lg:text-px26 lg:leading-px36 lg:mx-0"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_2_DESC ) ?></p>
 			</div>
 
-			<div class="flex flex-col mb-px72 md:flex-row lg:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-px72 md:flex-row xl:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= Thumbnail::print_img_variants( [
 							[
@@ -56,17 +56,17 @@ use TrevorWP\Theme\Helper;
 							],
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
+				<div class="text-center text-indigo px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_DESC ) ?></p>
 					</div>
 					<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA_ACTION ) ?>"
-					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-text">What to expect +</a>
+					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-text">What to expect +</a>
 				</div>
 			</div>
-			<div class="flex flex-col mb-px72 md:flex-row-reverse lg:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-px72 md:flex-row-reverse xl:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= Thumbnail::print_img_variants( [
 							[
@@ -81,17 +81,17 @@ use TrevorWP\Theme\Helper;
 							],
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo md:px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
+				<div class="text-center text-indigo md:px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-12">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-call">What to expect +</a>
+					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-call">What to expect +</a>
 				</div>
 			</div>
-			<div class="flex flex-col mb-20 md:flex-row lg:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-20 md:flex-row xl:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= Thumbnail::print_img_variants( [
 							[
@@ -106,20 +106,20 @@ use TrevorWP\Theme\Helper;
 							],
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
+				<div class="text-center text-indigo px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
 						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn inline-block text-center text-px18 leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24" id="modal-btn-chat">What to expect +</a>
+					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-chat">What to expect +</a>
 				</div>
 			</div>
 
-			<div class="flex flex-col items-center bg-white rounded-px10 mb-20 py-14 px-7 text-indigo md:py-12 md:px-10 md:mb-px88 lg:mx-px106 lg:px-px106 lg:py-px72 lg:mb-28">
+			<div class="flex flex-col items-center bg-white rounded-px10 mb-20 py-14 px-7 text-indigo md:py-12 md:px-10 md:mb-px88 xl:mx-px106 lg:px-px106 lg:py-px72 lg:mb-28">
 				<p class="text-px18 leading-px22 tracking-px05 mb-6 md:text-px20 md:leading-px30 md:mb-7 lg:text-px24 lg:leading-px36"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_NOTIFICATION_TXT ) ?></p>
-				<a href="#" class="btn-link text-px18 leading-px24 lg:text-px22 lg:leading-px26">Learn more</a>
+				<a href="#" class="btn-link text-px18 leading-px24 self-center lg:text-px22 lg:leading-px26">Learn more</a>
 			</div>
 		</div>
 	</div>
@@ -141,7 +141,7 @@ use TrevorWP\Theme\Helper;
 	<div class="bg-white">
 		<div class="container mx-auto text-center text-indigo site-content-inner pt-20 pb-16 lg:pt-36 lg:pb-28">
 			<h3 class="text-px32 leading-px42 tracking-px05 font-semibold mb-5 lg:text-px46 lg:leading-px56"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_TITLE ) ?></h3>
-			<p class="text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ) ?></p>
+			<p class="text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px26 lg:leading-px36 lg:mb-20 xl:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ) ?></p>
 
 			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none">
 				<?= Circulation_Card::render_trevorspace(); ?>
