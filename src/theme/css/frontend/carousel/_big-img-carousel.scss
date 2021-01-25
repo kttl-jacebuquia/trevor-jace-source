@@ -1,0 +1,56 @@
+.big-img-carousel {
+  .carousel-title {
+	@apply text-center;
+  }
+
+  .carousel-full-width-wrap {
+	padding-left: 0;
+  }
+
+  .swiper-slide {
+	@apply text-center;
+
+	figure {
+
+	}
+
+	.img-wrap {
+	  height: rem-calc(319px);
+
+	  img {
+		@apply rounded-px10;
+		@apply w-full h-full;
+		@apply object-cover object-center;
+	  }
+	}
+
+	figcaption {
+	  @apply text-white text-px18 leading-px26;
+	  @apply mt-4;
+	}
+  }
+
+  @screen md {
+	.swiper-slide {
+	  figcaption {
+		@apply text-px14 leading-px20;
+	  }
+
+	  .img-wrap {
+		height: rem-calc(409px);
+	  }
+	}
+  }
+
+  @screen lg {
+	.swiper-slide {
+	  figcaption {
+		@apply text-px18 leading-px26 tracking-em005 mx-20;
+	  }
+
+	  .img-wrap {
+		height: rem-calc(500px);
+	  }
+	}
+  }
+}

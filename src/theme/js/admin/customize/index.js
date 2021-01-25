@@ -2,9 +2,11 @@ import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ObjectSelector from './object-selector';
+import CustomList from './custom-list';
 
 const CLASS_OBJ_MAP = {
 	object_selector: ObjectSelector,
+	custom_list: CustomList,
 };
 
 if (wp && wp.customize) {

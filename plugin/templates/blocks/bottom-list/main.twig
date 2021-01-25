@@ -1,0 +1,9 @@
+<div class="trevor-block trevor-block-bottom-list">
+	{% if title %}
+		<h3 class="list-title">{{ title }}</h3>
+	{% endif %}
+
+	<ul class="list">
+		{{ content|raw }}
+	</ul>
+</div>

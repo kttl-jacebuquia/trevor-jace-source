@@ -1,15 +1,9 @@
 import React from 'react';
-import {NAME as childName} from './list-item';
-import {InnerBlocks, InspectorControls} from '@wordpress/block-editor'
+import {InnerBlocks, InspectorControls} from '@wordpress/block-editor';
 import {TextControl} from '@wordpress/components';
-
-const ALLOWED_BLOCKS = [
-	childName
-];
 
 export default class extends React.Component {
 	handleTitleChange = (title) => this.props.setAttributes({title});
-	handleCaptionChange = (caption) => this.props.setAttributes({caption});
 
 	render() {
 		const {isSelected, className, attributes: {title}} = this.props;
@@ -41,9 +35,9 @@ export default class extends React.Component {
 						<strong>{title || <em>No title</em>}</strong>
 					</>
 				}
-				<InnerBlocks allowedBlocks={ALLOWED_BLOCKS}
-							 template={[[childName, {}], [childName, {}]]}
-							 templateLock={false}/>
+				<InnerBlocks allowedBlocks={['core/list']}
+							 template={[['core/list', {}]]}
+							 templateLock={true}/>
 			</div>
 		</>
 	}

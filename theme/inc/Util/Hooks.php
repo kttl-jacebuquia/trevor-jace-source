@@ -366,7 +366,7 @@ class Hooks {
 				}
 			} # Get Involved
 			elseif ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_BASE ) ) ) {
-				if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_MAIN_LP ) ) ) {
+				if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ADVOCACY ) ) ) {
 					$template = locate_template( 'get-involved/advocate.php', false );
 				}
 			}

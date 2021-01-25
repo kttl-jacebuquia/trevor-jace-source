@@ -35,7 +35,11 @@ abstract class RC_Object {
 	/* Permalinks */
 	const PERMALINK_BASE = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
-	const PERMALINK_BASE_TAX_TAG = self::PERMALINK_BASE . '/tag';
+	const PERMALINK_BLOG = self::PERMALINK_BASE . '/blog';
+	const PERMALINK_GUIDE = self::PERMALINK_BASE . '/guide';
+	const PERMALINK_ARTICLE = self::PERMALINK_BASE . '/article';
+	const PERMALINK_EXTERNAL = self::PERMALINK_BASE . '/external';
+
 	const PERMALINK_GET_HELP = 'get-help';
 	const PERMALINK_TREVORSPACE = 'trevorspace';
 
@@ -133,11 +137,7 @@ abstract class RC_Object {
 			'show_in_rest'      => true,
 			'show_tagcloud'     => false,
 			'show_admin_column' => true,
-			'rewrite'           => [
-				'slug'         => self::PERMALINK_BASE_TAX_TAG,
-				'hierarchical' => false,
-				'with_front'   => false,
-			]
+			'rewrite'           => false,
 		] );
 
 		## Search Key
@@ -155,7 +155,6 @@ abstract class RC_Object {
 		# Rewrites
 
 		## Taxonomy
-//		add_filter( self::TAXONOMY_TAG . '_rewrite_rules', [ self::class, 'rewrite_rules_tag' ], PHP_INT_MAX, 0 );
 		add_filter(
 			self::TAXONOMY_CATEGORY . '_rewrite_rules',
 			[ self::class, 'rewrite_rules_category' ],
@@ -193,11 +192,51 @@ abstract class RC_Object {
 			'top'
 		);
 
-		## Catch All
-		add_rewrite_rule( self::PERMALINK_BASE . "/(\d+)-([^/]+)/?$", "index.php?" . http_build_query( [
-				self::QV_BASE               => 1,
-				self::QV_RESOURCES_NON_BLOG => 1
-			] ) . "&p=\$matches[1]", 'top' );
+		## Post Types
+		$catch_all_q = [
+			self::QV_BASE               => 1,
+			self::QV_RESOURCES_NON_BLOG => 1
+		];
+
+		### Blog
+		add_rewrite_rule(
+			self::PERMALINK_BLOG . "/([^/]+)/?$",
+			"index.php?" . http_build_query( [
+				self::QV_BASE => 1,
+				'post_type'   => [
+					Post::POST_TYPE,
+					CPT\Post::POST_TYPE,
+				],
+			] ) . "&name=\$matches[1]",
+			'top'
+		);
+
+		### Article
+		add_rewrite_rule(
+			self::PERMALINK_ARTICLE . "/([^/]+)/?$",
+			"index.php?" . http_build_query( array_merge( $catch_all_q, [
+				'post_type' => Article::POST_TYPE,
+			] ) ) . "&name=\$matches[1]",
+			'top'
+		);
+
+		### Guide
+		add_rewrite_rule(
+			self::PERMALINK_GUIDE . "/([^/]+)/?$",
+			"index.php?" . http_build_query( array_merge( $catch_all_q, [
+				'post_type' => Guide::POST_TYPE,
+			] ) ) . "&name=\$matches[1]",
+			'top'
+		);
+
+		### External
+		add_rewrite_rule(
+			self::PERMALINK_EXTERNAL . "/([^/]+)/?$",
+			"index.php?" . http_build_query( array_merge( $catch_all_q, [
+				'post_type' => External::POST_TYPE,
+			] ) ) . "&name=\$matches[1]",
+			'top'
+		);
 	}
 
 	/**
@@ -214,9 +253,23 @@ abstract class RC_Object {
 	public static function post_type_link( string $post_link, \WP_Post $post ): string {
 		switch ( $post->post_type ) {
 			case CPT\RC\Article::POST_TYPE:
+				return trailingslashit( home_url( implode( '/', [
+					'',
+					self::PERMALINK_ARTICLE,
+					$post->post_name
+				] ) ) );
 			case CPT\RC\Guide::POST_TYPE:
+				return trailingslashit( home_url( implode( '/', [
+					'',
+					self::PERMALINK_GUIDE,
+					$post->post_name
+				] ) ) );
 			case CPT\RC\External::POST_TYPE:
-				return trailingslashit( home_url( static::PERMALINK_BASE . "/{$post->ID}-{$post->post_name}" ) );
+				return trailingslashit( home_url( implode( '/', [
+					'',
+					self::PERMALINK_EXTERNAL,
+					$post->post_name
+				] ) ) );
 			case CPT\Post::POST_TYPE:
 			case CPT\RC\Post::POST_TYPE:
 				if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX /* TODO: We need a qVar flag to force it */ ) ) {
@@ -225,30 +278,12 @@ abstract class RC_Object {
 					$is_support = Is::rc();
 				}
 
-				$base = $is_support ? CPT\RC\Post::PERMALINK_BASE : CPT\Post::PERMALINK_BASE;
+				$base = $is_support ? CPT\RC\Post::PERMALINK_BLOG : CPT\Post::PERMALINK_BASE;
 
-				return trailingslashit( home_url( "{$base}/{$post->ID}-{$post->post_name}" ) );
+				return trailingslashit( home_url( "{$base}/{$post->post_name}" ) );
 			default:
 				return $post_link;
 		}
-	}
-
-	/**
-	 * Filters rewrite rules used for individual permastructs.
-	 *
-	 * @return string[]
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/permastructname_rewrite_rules/
-	 * @see construct()
-	 * @deprecated
-	 */
-	public static function rewrite_rules_tag(): array {
-		global $wp_rewrite;
-
-		return [
-			self::PERMALINK_BASE_TAX_TAG . "/([^/]+)/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$" => 'index.php?' . self::TAXONOMY_TAG . '=$matches[1]&paged=$matches[2]',
-			self::PERMALINK_BASE_TAX_TAG . '/([^/]+)/?$'                                             => 'index.php?' . self::TAXONOMY_TAG . '=$matches[1]'
-		];
 	}
 
 	/**
@@ -421,15 +456,8 @@ abstract class RC_Object {
 			 */
 			$wp->query_vars['post_type'] = null;
 			$wp->query_vars['name']      = '';
-		}
-
-		if (
-			( $p = intval( $wp->query_vars['p'] ?? 0 ) ) > 0 &&
-			( $post = get_post( $p ) ) &&
-			in_array( $post_type = get_post_type( $post ), self::$PUBLIC_POST_TYPES )
-		) {
-			$wp->query_vars['post_type']        = $post->post_type;
-			$wp->query_vars[ $post->post_type ] = $post->post_name;
+		} elseif ( ! empty( $post_type = @$wp->query_vars['post_type'] ) && in_array( $post_type, self::$PUBLIC_POST_TYPES ) ) {
+			$wp->query_vars[ $post_type ] = $wp->query_vars['name'];
 
 			if ( $post_type === Post::POST_TYPE ) {
 				// Mark the it as RC blog post

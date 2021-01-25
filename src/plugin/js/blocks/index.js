@@ -11,5 +11,4 @@ import './main-category';
 // Editor Blocks
 import './block-glossary_entry';
 import './link-list';
-
-
+import './bottom-list';

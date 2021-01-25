@@ -14,6 +14,7 @@ module.exports = {
 			'./theme/*.php',
 			'./theme/inc/**/*.php',
 			'./theme/rc/**/*.php',
+			'./theme/get-involved/**/*.php',
 			'./theme/template-parts/**/*.php',
 			'./plugin/templates/blocks/**/*.twig',
 		]

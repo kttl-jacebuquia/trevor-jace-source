@@ -97,6 +97,13 @@
 	  }
 	}
 
+	@screen md {
+	  .carousel-title,
+	  .carousel-subtitle {
+		@apply text-center;
+	  }
+	}
+
 	@screen lg {
 	  .carousel-full-width-wrap {
 		.swiper-slide {
@@ -117,5 +124,4 @@
 	  }
 	}
   }
-
 }

@@ -18,6 +18,7 @@ body {
 @import "./general";
 @import "./fonts";
 @import "./root";
+@import "./container";
 @import "./grid";
 @import "./misc/index";
 @import "./modal/index";
@@ -26,7 +27,8 @@ body {
 @import "./bg_img";
 @import "./circulation-card";
 @import "./bg-gradients";
-@import "./header";
+@import "./site-header";
+@import "./page-header";
 @import "./site-content";
 @import "./footer";
 @import "./button";
@@ -35,7 +37,8 @@ body {
 @import "./single/index";
 @import "./block/index";
 @import "./pagination";
-@import "./post-carousel";
+@import "./carousel/index";
+@import "./tile";
 @import "./topic-page/index";
 @import "./accordion";
 // Resources Center

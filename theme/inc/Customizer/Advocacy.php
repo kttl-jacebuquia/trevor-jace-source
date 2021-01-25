@@ -29,7 +29,7 @@ class Advocacy extends Abstract_Customizer {
 	const SETTING_HOME_OUR_WORK_TITLE = self::SETTING_HOME_PREFIX . 'our_work_title';
 	const SETTING_HOME_OUR_WORK_DESC = self::SETTING_HOME_PREFIX . 'our_work_desc';
 	const SETTING_HOME_QUOTE_BG = self::SETTING_HOME_PREFIX . 'quote_bg';
-	const SETTING_HOME_QUOTE_DATA = self::SETTING_HOME_PREFIX . 'quote_data'; //
+	const SETTING_HOME_QUOTE_DATA = self::SETTING_HOME_PREFIX . 'quote_data';
 	const SETTING_HOME_BILL_TITLE = self::SETTING_HOME_PREFIX . 'bill_title';
 	const SETTING_HOME_BILL_DESC = self::SETTING_HOME_PREFIX . 'bill_desc';
 	const SETTING_HOME_LETTER_TITLE = self::SETTING_HOME_PREFIX . 'letter_title';
@@ -117,8 +117,12 @@ class Advocacy extends Abstract_Customizer {
 			'type'    => 'text',
 		] );
 
-		// TODO: SETTING_HOME_CAROUSEL_DATA
-
+		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_CAROUSEL_DATA, [
+			'setting' => self::SETTING_HOME_CAROUSEL_DATA,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Carousel Data',
+			'fields'  => Control\Custom_List::FIELDSET_CAROUSEL,
+		] ) );
 
 		$this->_manager->add_control( self::SETTING_HOME_OUR_WORK_TITLE, [
 			'setting' => self::SETTING_HOME_OUR_WORK_TITLE,
@@ -141,7 +145,12 @@ class Advocacy extends Abstract_Customizer {
 			'mime_type' => 'image',
 		] ) );
 
-		// TODO: SETTING_HOME_QUOTE_DATA
+		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_QUOTE_DATA, [
+			'setting' => self::SETTING_HOME_QUOTE_DATA,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Quotes',
+			'fields'  => Control\Custom_List::FIELDSET_QUOTE,
+		] ) );
 
 		$this->_manager->add_control( self::SETTING_HOME_BILL_TITLE, [
 			'setting' => self::SETTING_HOME_BILL_TITLE,

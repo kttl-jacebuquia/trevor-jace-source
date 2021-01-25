@@ -1,0 +1,39 @@
+.carousel {
+  &-wrap {
+	@apply container mx-auto mt-5 mb-20;
+  }
+
+  &-title {
+	@apply mb-4 text-white text-center font-extrabold text-px32 leading-px40;
+  }
+
+  &-subtitle {
+	@apply mb-12 text-white text-center mb-5 text-px20 leading-px26;
+  }
+
+  @screen md {
+	&-title {
+	  @apply text-left font-bold leading-px42
+	}
+
+	&-subtitle {
+	  @apply text-left text-px22 leading-px32 mb-14;
+	}
+  }
+
+  @screen lg {
+	&-wrap {
+	  @apply mb-48;
+	}
+
+	&-title {
+	  @apply text-px46 leading-px56 tracking-em_001;
+	}
+
+	&-subtitle {
+	}
+  }
+}
+
+
+

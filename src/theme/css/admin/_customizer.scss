@@ -21,8 +21,84 @@
 	font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-
   .del-link {
 	text-decoration: none;
+  }
+}
+
+.customize-control-custom_list {
+  .new-item-wrap {
+
+  }
+
+  .item-list {
+	margin-top: 10px;
+  }
+
+  .list-item {
+	cursor: pointer;
+	padding: 5px 5px;
+	margin: 5px -5px;
+	background: #eeeeee;
+	border: 2px dashed #fafafa;
+	border-right-color: #dddddd;
+	border-bottom-color: #dddddd;
+
+	& + .list-item {
+	  margin-top: 10px;
+	}
+  }
+
+  .toggle-item-list {
+	float: right;
+  }
+
+  .new-item-wrap {
+	border: 1px dotted #dddddd;
+	padding: 5px 5px;
+	margin: 5px -5px;
+	background: lighten(#eeeeee, 3%);
+  }
+
+  .field-row {
+	margin-bottom: 10px;
+  }
+
+  .fields-wrap {
+	margin-bottom: 24px;
+  }
+
+  .btm-line {
+	margin: 20px 0;
+  }
+
+  .rendered-item-label {
+	font-weight: bold;
+  }
+
+  .ui-sortable-placeholder {
+	min-height: 10px;
+	background: rgba(255, 255, 0, .5);
+	visibility: visible;
+  }
+
+  .ui-sortable-helper {
+	opacity: .8;
+  }
+
+  .button {
+	margin-right: 8px;
+  }
+
+  .remove-button {
+	float: left;
+  }
+
+  .form-footer {
+	text-align: right;
+
+	.button {
+	  margin-left: 8px;
+	}
   }
 }

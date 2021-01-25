@@ -1,23 +1,24 @@
 <?php namespace TrevorWP\CPT\Get_Involved;
 
+
 /**
- * Corporate Partner
+ * Partnership
  */
-class Partner extends Get_Involved_Object {
+class Partnership extends Get_Involved_Object {
 	/* Flags */
 	const IS_PUBLIC = false;
 
 	/* Post Types */
-	const POST_TYPE = self::POST_TYPE_PREFIX . 'partner';
+	const POST_TYPE = self::POST_TYPE_PREFIX . 'prtnrshp'; // length limit
 
 	/** @inheritDoc */
-	static function register_post_type(): void {
+	public static function register_post_type(): void {
 		# Post Type
 		register_post_type( self::POST_TYPE, [
 			'labels'              => [
-				'name'          => 'Partners',
-				'singular_name' => 'Partner',
-				'add_new'       => 'Add New Partner'
+				'name'          => 'Partnerships',
+				'singular_name' => 'Partnership',
+				'add_new'       => 'Add New Partnership'
 			],
 			'public'              => false,
 			'hierarchical'        => false,

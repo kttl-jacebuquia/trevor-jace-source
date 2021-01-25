@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\CPT\Get_Involved;
 
-
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
 use TrevorWP\Util\Tools;
@@ -22,9 +21,9 @@ abstract class Get_Involved_Object {
 
 	/* Query Vars */
 	const QV_BASE = Main::QV_PREFIX . 'gi';
-	const QV_MAIN_LP = self::QV_BASE . '_main_lp';
+	const QV_ADVOCACY = self::QV_BASE . '_advocacy';
 	const QV_ECT = self::QV_BASE . '_ect'; // Ending Conversion Therapy
-	const QV_VOLUNTEER = self::QV_BASE . '_volunteer'; // Ending Conversion Therapy
+	const QV_VOLUNTEER = self::QV_BASE . '_volunteer';
 	const QV_BILL = self::QV_BASE . '_bill';
 	const QV_LETTER = self::QV_BASE . '_letter';
 	const QV_PARTNER_W_US = self::QV_BASE . 'partner_w_us';
@@ -33,7 +32,7 @@ abstract class Get_Involved_Object {
 	const QV_EVENTS = self::QV_BASE . 'events';
 	const _QV_ALL = [
 		self::QV_BASE,
-		self::QV_MAIN_LP,
+		self::QV_ADVOCACY,
 		self::QV_ECT,
 		self::QV_VOLUNTEER,
 		self::QV_BILL,
@@ -45,13 +44,15 @@ abstract class Get_Involved_Object {
 	];
 
 	/* Permalinks */
-	const PERMALINK_BASE = 'get-involved';
-	const PERMALINK_ECT = self::PERMALINK_BASE . '/' . 'ending-conversion-therapy';
-	const PERMALINK_VOLUNTEER = self::PERMALINK_BASE . '/' . 'volunteer';
-	const PERMALINK_PARTNER_W_US = self::PERMALINK_BASE . '/' . 'partner-with-us';
-	const PERMALINK_CORP_PARTNERSHIPS = self::PERMALINK_BASE . '/' . 'corporate-partnerships';
-	const PERMALINK_INSTITUTIONAL_GRANTS = self::PERMALINK_BASE . '/' . 'institutional-grants';
-	const PERMALINK_EVENTS = self::PERMALINK_BASE . '/' . 'events';
+	const PERMALINK_ADVOCACY = 'advocacy';
+	const PERMALINK_ECT = 'ending-conversion-therapy';
+	const PERMALINK_VOLUNTEER = 'volunteer';
+	const PERMALINK_PARTNER_W_US = 'partner-with-us';
+	const PERMALINK_CORP_PARTNERSHIPS = 'corporate-partnerships';
+	const PERMALINK_INSTITUTIONAL_GRANTS = 'institutional-grants';
+	const PERMALINK_EVENTS = 'events';
+	const PERMALINK_BILL = self::PERMALINK_ADVOCACY . '/bill';
+	const PERMALINK_LETTER = self::PERMALINK_ADVOCACY . '/letter';
 
 	/* Collections */
 	const _ALL_ = [
@@ -59,6 +60,7 @@ abstract class Get_Involved_Object {
 		Letter::class,
 		Partner::class,
 		Grant::class,
+		Partnership::class,
 	];
 
 	/* Misc */
@@ -151,6 +153,7 @@ abstract class Get_Involved_Object {
 				[ self::PERMALINK_CORP_PARTNERSHIPS, self::QV_CORP_PARTNERSHIPS ],
 				[ self::PERMALINK_INSTITUTIONAL_GRANTS, self::QV_INSTITUTIONAL_GRANTS ],
 				[ self::PERMALINK_EVENTS, self::QV_EVENTS ],
+				[ self::PERMALINK_ADVOCACY, self::QV_ADVOCACY ],
 			] as list(
 			$regex, $qv
 		)
@@ -160,16 +163,6 @@ abstract class Get_Involved_Object {
 					$qv           => 1,
 				] ), 'top' );
 		}
-
-		## Main Page
-		add_rewrite_rule(
-			self::PERMALINK_BASE . '/?$',
-			"index.php?" . http_build_query( array_merge( [
-				self::QV_BASE    => 1,
-				self::QV_MAIN_LP => 1
-			], array_fill_keys( self::_ALL_, 1 ) ) ),
-			'top'
-		);
 	}
 
 	/**
@@ -199,14 +192,14 @@ abstract class Get_Involved_Object {
 		}
 
 		# Fix Resources LP
-		$is_main_lp = ! empty( $query->get( self::QV_MAIN_LP ) );
-		if ( $is_main_lp ) {
-			$query->is_single            = false;
-			$query->is_singular          = false;
-			$query->is_posts_page        = true;
-			$query->is_post_type_archive = true;
-			$query->set( 'name', null );
-		}
+//		$is_main_lp = ! empty( $query->get( self::QV_ADVOCACY ) );
+//		if ( $is_main_lp ) {
+//			$query->is_single            = false;
+//			$query->is_singular          = false;
+//			$query->is_posts_page        = true;
+//			$query->is_post_type_archive = true;
+//			$query->set( 'name', null );
+//		}
 	}
 
 	/**

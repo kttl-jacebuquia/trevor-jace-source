@@ -5,6 +5,8 @@
  */
 class Carousel {
 	/**
+	 * Posts carousel.
+	 *
 	 * @param array $posts
 	 * @param array $options
 	 *
@@ -47,10 +49,10 @@ class Carousel {
 		}
 
 		ob_start(); ?>
-		<div class="container mx-auto mt-5 mb-20 lg:mb-48 <?= implode( ' ', $ext_cls ) ?>"
+		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<h2 class="mb-4 text-white text-center font-extrabold text-px32 leading-px40 md:text-left md:font-bold md:leading-px42 lg:text-px46 lg:leading-px56 lg:-tracking-em001 <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-			<p class="mb-12 text-white text-center mb-5 text-px20 leading-px26 md:text-left md:text-px22 md:leading-px32 md:mb-14 <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+			<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
 
 			<div class="carousel-full-width-wrap">
 				<div class="carousel-container">
@@ -78,26 +80,90 @@ class Carousel {
 	}
 
 	/**
+	 * Big image carousel.
+	 *
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function big_img( array $data, array $options = [] ): string {
+		$options = array_merge( array_fill_keys( [
+				'id', // Main wrapper DOM id
+				'title',
+				'subtitle',
+				'class'
+		], null ), [
+				'title_cls' => '',
+				'print_js'  => true,
+				'swiper'    => [], // swiper options
+		], $options );
+
+		# ID check
+		$id = &$options['id'];
+		if ( empty( $id ) ) {
+			$id = uniqid( 'big-img-carousel-' );
+		}
+
+		if ( $options['print_js'] ) {
+			add_action( 'wp_footer', function () use ( $options ) {
+				self::print_js( "#{$options['id']}", array_merge( [], $options['swiper'] ) );
+			}, PHP_INT_MAX >> 2, 0 );
+		}
+
+		# Extra Classes
+		$ext_cls = [
+				'big-img-carousel',
+				( "card-count-" . count( $data ) ),
+		];
+
+		ob_start(); ?>
+		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
+			 id="<?= esc_attr( $id ) ?>">
+			<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+			<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+
+			<div class="carousel-full-width-wrap">
+				<div class="container carousel-container">
+					<div class="swiper-wrapper">
+						<?php
+
+						foreach ( $data as $entry ) {
+							if ( empty( $entry['img'] ) || empty( $entry['img']['id'] ) || ! wp_attachment_is_image( $entry['img']['id'] ) ) {
+								continue;
+							}
+							?>
+							<div class="swiper-slide">
+								<figure>
+									<div class="img-wrap">
+										<?= wp_get_attachment_image( $entry['img']['id'], 'large' ) ?>
+									</div>
+									<?php if ( ! empty( $entry['caption'] ) ) { ?>
+										<figcaption><?= $entry['caption'] ?></figcaption>
+									<?php } ?>
+								</figure>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+				<div class="swiper-button-prev">
+					<i class="trevor-ti-arrow-left"></i>
+				</div>
+				<div class="swiper-button-next">
+					<i class="trevor-ti-arrow-right"></i>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * @param string $base_selector
 	 * @param array $options
 	 */
 	public static function print_js( string $base_selector, array $options = [] ): void {
-		$breakpoints = [
-				'768'  => [
-						'spaceBetween' => 20,
-				],
-				'1440' => [
-						'spaceBetween' => 30,
-				]
-		];
-
-		// Merge breakpoints
-		if ( ! empty( $options['breakpoints'] ) ) {
-			foreach ( $options['breakpoints'] as $br_point => $br_options ) {
-				$breakpoints[ $br_point ] = $br_options;
-			}
-		}
-
 		$options = array_merge( [
 				'slidesPerView' => 1,
 				'spaceBetween'  => 20,
@@ -111,10 +177,7 @@ class Carousel {
 						'prevEl' => "{$base_selector} .swiper-button-prev",
 				],
 				'on'            => new \stdClass()
-		],
-				$options,
-				[ 'breakpoints' => $breakpoints ],
-		);
+		], $options );
 		?>
 		<script><?php /* TODO: Instead of printing this for each carousel, create a controller & use that. */ ?>
 			(function () {
@@ -133,11 +196,9 @@ class Carousel {
 				}
 
 				<?php if(! empty( $options['onlyMd'] )){ ?>
-				jQuery(function () {
-					trevorWP.matchMedia.carouselWith3Cards(init, function () {
-						swiper && swiper.destroy();
-					});
-				})
+				trevorWP.matchMedia.carouselWith3Cards(init, function () {
+					swiper && swiper.destroy();
+				});
 				<?php }else{ ?>
 				init();
 				<?php } ?>

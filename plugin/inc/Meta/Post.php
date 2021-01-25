@@ -42,6 +42,9 @@ class Post {
 	# Recirculation Cards
 	const KEY_RECIRCULATION_CARDS = Main::META_KEY_PREFIX . 'recirculation_cards';
 
+	# Partner
+	const PARTNER_URL = Main::META_KEY_PREFIX . 'partner_url';
+
 	# Bill
 	const KEY_BILL_ID = Main::META_KEY_PREFIX . 'bill_id';
 
@@ -341,5 +344,14 @@ class Post {
 	 */
 	public static function get_bill_id( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::KEY_BILL_ID, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_partner_url( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::PARTNER_URL, true );
 	}
 }

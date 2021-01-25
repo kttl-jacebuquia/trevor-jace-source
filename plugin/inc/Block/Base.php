@@ -8,6 +8,7 @@ abstract class Base {
 	const _ALL_ = [
 		Glossary_Entry::class,
 		Link_List::class,
+		Bottom_List::class,
 	];
 
 	/**

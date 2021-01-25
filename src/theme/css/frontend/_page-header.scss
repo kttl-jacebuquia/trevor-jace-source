@@ -1,0 +1,104 @@
+.page-header {
+  @apply container mx-auto;
+
+  &-inner {
+	@apply flex flex-col;
+	@apply max-h-full;
+  }
+
+  &-content-wrap {
+	@apply text-white text-center;
+	@apply pb-2;
+  }
+
+  &-title {
+	@apply text-white has-block-tilt;
+  }
+
+  &-desc {
+	@apply py-8 text-base leading-px24 font-normal;
+  }
+
+  &-cta {
+	@apply inline-block text-teal-dark bg-white rounded-px10 py-3 px-8 text-base font-bold leading-px22;
+  }
+
+
+  @screen md {
+	&-inner {
+	  @apply flex-row;
+	}
+
+	&-content-wrap {
+	  @apply text-left;
+	  @apply w-7/12;
+	  @apply pb-6;
+	}
+
+	&-desc {
+	  @apply text-px14 leading-px20;
+	}
+
+	&-cta {
+	  @apply px-6;
+	}
+  }
+
+  @screen lg {
+	@apply mt-12;
+
+	&-desc {
+	  @apply text-px22 leading-px32 tracking-px05;
+	}
+
+	&-cta {
+	  @apply py-5 px-10;
+	}
+
+	&-content-wrap {
+	  @apply pb-10;
+	}
+  }
+
+
+  // - Types
+  // - - Split Image
+  &.type-split-img {
+	.page-header-img-inner {
+	  height: 100%;
+	  width: 100%;
+	}
+
+
+	.page-header-img-wrap {
+	  margin-right: calc((100vw - 100%) / -2);
+	  @apply max-h-full;
+	}
+
+	@screen md {
+	  .page-header-img-wrap {
+	  }
+	}
+
+	@screen lg {
+	  .page-header-img-wrap img {
+		@apply object-none;
+	  }
+	}
+  }
+
+  // - - Text
+  &.type-text {
+
+  }
+
+  // - - Img BG
+  &.type-img-bg {
+
+  }
+
+  // - - Split Carousel
+  &.type-split-carousel {
+
+  }
+}
