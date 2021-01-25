@@ -58,7 +58,7 @@ use TrevorWP\Theme\Helper;
 				</div>
 				<div class="text-center text-indigo px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
-						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_TITLE ) ?></h3>
+						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px32 lg:leading-px40"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_DESC ) ?></p>
 					</div>
 					<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA_ACTION ) ?>"
@@ -83,7 +83,7 @@ use TrevorWP\Theme\Helper;
 				</div>
 				<div class="text-center text-indigo md:px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-12">
-						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_TITLE ) ?></h3>
+						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px32 lg:leading-px40"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_DESC ) ?></p>
 					</div>
 					<a href="#"
@@ -108,7 +108,7 @@ use TrevorWP\Theme\Helper;
 				</div>
 				<div class="text-center text-indigo px-5 flex flex-col md:flex-1 md:justify-center md:items-center">
 					<div class="mx-4 lg:mx-14">
-						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px40 lg:leading-px48"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_TITLE ) ?></h3>
+						<h3 class="font-semibold text-px24 leading-px28 mb-5 md:text-px28 md:leading-px38 lg:text-px32 lg:leading-px40"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_TITLE ) ?></h3>
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_DESC ) ?></p>
 					</div>
 					<a href="#"
