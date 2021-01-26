@@ -7,7 +7,7 @@
   }
 
   &-title {
-	@apply font-semibold text-px32 leading-px42 mb-3.5 tracking-em_001;
+	@apply font-semibold text-px32 leading-px42 mb-16 tracking-em_001;
   }
 
   &-desc {
@@ -38,11 +38,11 @@
 	}
 
 	&-desc {
-	  @apply mx-20 mb-20;
+	  @apply w-3/4 mx-auto my-10;
 	}
 
 	&-container {
-	  @apply grid-cols-2 gap-7 px-px50;
+	  @apply grid-cols-2 gap-4;
 	}
   }
 
@@ -54,11 +54,11 @@
 	}
 
 	&-desc {
-	  @apply text-px26 leading-px36 mb-20 mx-56;
+	  @apply text-px26 leading-px36 mb-20 w-1/2;
 	}
 
 	&-container {
-	  @apply grid-cols-3 px-px100;
+	  @apply grid-cols-3;
 	}
   }
 }
