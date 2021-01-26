@@ -109,7 +109,9 @@ class Page_Header {
 				<h1 class="heading-lg-tilted page-header-title">
 					<?= $options['title'] ?>
 				</h1>
-				<p class="page-header-desc"><?= $options['desc'] ?></p>
+				<?php if ( $options['desc'] ) { ?>
+					<p class="page-header-desc"><?= $options['desc'] ?></p>
+				<?php } ?>
 				<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
 					<a href="<?= $options['cta_url'] ?>"
 					   class="page-header-cta">

@@ -42,7 +42,7 @@
 	}
 
 	&-container {
-	  @apply grid-cols-2 gap-7;
+	  @apply grid-cols-2 gap-7 px-px50;
 	}
   }
 
@@ -58,7 +58,7 @@
 	}
 
 	&-container {
-	  @apply grid-cols-3;
+	  @apply grid-cols-3 px-px100;
 	}
   }
 }

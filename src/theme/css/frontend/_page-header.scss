@@ -25,7 +25,7 @@
   }
 
   &-cta {
-	@apply inline-block text-teal-dark bg-white rounded-px10 py-3 px-8 text-base font-bold leading-px22;
+	@apply inline-block text-teal-dark bg-white rounded-px10 py-3 px-8 text-base font-bold leading-px22 mt-10;
   }
 
 
@@ -137,15 +137,16 @@
   &.type-img-bg {
 	@apply relative;
 	@apply w-screen max-w-none;
-	--neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
+	// --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
 	padding-top: var(--neg-top-margin);
-	margin-top: calc(-1 * var(--neg-top-margin));
+	margin-top: calc(-1 * var(--top-nav-height));
 	margin-left: calc(-1 * ((100vw - 100%) / 2));
-	@apply h-px600 md:h-px490 lg:h-px737 flex items-center text-white pt-0;
+	@apply h-px737 md:h-px490 lg:h-px737 flex items-center text-white pt-0;
 
 	.page-header-img-wrap {
 	  @apply absolute w-full h-full top-0 left-0;
-	  margin-top: calc(var(--top-nav-top-margin) - 4px); //FIXME: Why -4px?
+	  // margin-top: calc(var(--top-nav-top-margin) - 4px); //FIXME: Why -4px?
+	  margin-top: -4px; //FIXME: Why -4px?
 
 	  img {
 		@apply object-cover object-center;
