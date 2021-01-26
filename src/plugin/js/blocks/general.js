@@ -20,6 +20,7 @@ const META_KEY_MAP = {
 	headerBgColor: metaKeys.KEY_HEADER_BG_CLR,
 	lengthInd: metaKeys.KEY_LENGTH_IND,
 	showShare: metaKeys.KEY_HEADER_SNOW_SHARE,
+	showDate: metaKeys.KEY_HEADER_SHOW_DATE,
 	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
 	billId: metaKeys.KEY_BILL_ID,
 };
@@ -32,6 +33,7 @@ const BG_COLOR_HEX_2_NAME_MAP = (() => {
 class PostSidebar extends React.Component {
 	handleHeaderTypeChange = (newVal) => this.props.updatePostMeta('headerType', newVal);
 	handleShowShare = (newVal) => this.props.updatePostMeta('showShare', newVal);
+	handleShowDate = (newVal) => this.props.updatePostMeta('showDate', newVal);
 	handleHeaderBgColor = (colorHex) => {
 		this.props.updatePostMeta('headerBgColor', BG_COLOR_HEX_2_NAME_MAP[colorHex] || null);
 	}
@@ -80,6 +82,7 @@ class PostSidebar extends React.Component {
 			lengthInd,
 			postType,
 			showShare,
+			showDate,
 			slug,
 			reRecirculationCards,
 			billId,
@@ -134,8 +137,15 @@ class PostSidebar extends React.Component {
 				{/* Sharing Box */}
 				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showShare].indexOf(postType) &&
 				<CheckboxControl label="Show Sharing"
-								 checked={showShare}
-								 onChange={this.handleShowShare}/>
+					checked={showShare}
+					onChange={this.handleShowShare}/>
+				}
+
+				{/** Show Date Box */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showDate].indexOf(postType) &&
+				<CheckboxControl label="Show Date"
+					checked={showDate}
+					onChange={this.handleShowDate}/>
 				}
 
 				{/* Content Length */}
