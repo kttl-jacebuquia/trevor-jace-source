@@ -3,3 +3,23 @@
 	@apply object-cover h-full w-full;
   }
 }
+.volunteer-icon {
+	@apply pt-32;
+
+	&-1 {
+		background: transparent url("/wp-content/themes/trevor/static/media/community-network_2x.png") no-repeat 50% 20px;
+		background-size: 97px auto;
+	}
+	&-2 {
+		background: transparent url("/wp-content/themes/trevor/static/media/soft-skills_2x.png") no-repeat 50% 0px;
+		background-size: 72px auto;
+	}
+	&-3 {
+		background: transparent url("/wp-content/themes/trevor/static/media/world-class-training_2x.png") no-repeat 50% 10px;
+		background-size: 72px auto;
+	}
+	&-4 {
+		background: transparent url("/wp-content/themes/trevor/static/media/perks_2x.png") no-repeat 50% 10px;
+		background-size: 72px auto;
+	}
+}

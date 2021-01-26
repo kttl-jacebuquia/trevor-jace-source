@@ -103,14 +103,14 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 			</p>
 
 			<div class="mx-auto grid grid-cols-1 gap-y-7 gap-x-8 md:w-3/4 lg:w-full lg:grid-cols-2 xl:w-3/4">
-				<div class="bg-white rounded-px10 pt-9 px-7 pb-14 text-teal-dark md:text-left md:p-9 lg:p-12">
-					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40">
+				<div class="bg-white rounded-px10 pt-9 px-7 pb-14 text-teal-dark md:text-left md:p-9 lg:p-12 flex flex-col">
+					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40 font-semibold mx-12 md:mx-0">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_TITLE ) ?>
 					</h3>
 					<p class="text-px16 leading-px24 mb-7 lg:text-px18 lg:leading-px26">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_DESC ) ?>
 					</p>
-					<ul class="mb-6 text-left list-decimal">
+					<ul class="mb-6 text-left list-check">
 						<li class="text-px14 leading-px20 mb-3.5 lg:text-px18 lg:leading-px26">
 							Minimum one year committment
 						</li>
@@ -124,11 +124,11 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 							Access to a personal computer with broadband connection
 						</li>
 					</ul>
-					<a href="#" class="text-px20 leading-px26 border-b border-teal-dark">See Details</a>
+					<a href="#" class="text-px20 leading-px26 border-b border-teal-dark mt-7 self-center font-bold md:self-start md:mt-0">See Details</a>
 				</div>
 
 				<div class="bg-white rounded-px10 pt-9 px-7 pb-7 text-teal-dark md:text-left md:p-9 lg:p-12">
-					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40">
+					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40 font-semibold">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_APPLY_TITLE ) ?>
 					</h3>
 					<p class="text-px16 leading-px24 mb-7 lg:text-px18 lg:leading-px26">
@@ -174,22 +174,22 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 			<div class="grid grid-cols-2 gap-y-12 gap-x-3 md:mx-20 lg:grid-cols-4">
 				<div>
-					<p class="text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-1 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_1 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-2 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_2 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-3 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_3 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-4 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_4 ) ?>
 					</p>
 				</div>
