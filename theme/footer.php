@@ -33,9 +33,7 @@ use \TrevorWP\Theme\Util\Is;
 			<ul class="site-links">
 				<li><a href="#">Contact us</a></li>
 				<li><a href="#">Blog</a></li>
-				<li>
-					<a href="<?= home_url( \TrevorWP\CPT\Get_Involved\Get_Involved_Object::PERMALINK_EVENTS ) ?>">Events</a>
-				</li>
+				<li><a href="#">Events</a></li>
 				<li><a href="#">Press</a></li>
 				<li><a href="#">Careers</a></li>
 				<li><a href="#">Terms of Service</a></li>

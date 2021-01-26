@@ -29,7 +29,6 @@ abstract class Get_Involved_Object {
 	const QV_PARTNER_W_US = self::QV_BASE . 'partner_w_us';
 	const QV_CORP_PARTNERSHIPS = self::QV_BASE . 'corp_partnerships';
 	const QV_INSTITUTIONAL_GRANTS = self::QV_BASE . 'institutional_grants';
-	const QV_EVENTS = self::QV_BASE . 'events';
 	const _QV_ALL = [
 		self::QV_BASE,
 		self::QV_ADVOCACY,
@@ -40,7 +39,6 @@ abstract class Get_Involved_Object {
 		self::QV_PARTNER_W_US,
 		self::QV_CORP_PARTNERSHIPS,
 		self::QV_INSTITUTIONAL_GRANTS,
-		self::QV_EVENTS,
 	];
 
 	/* Permalinks */
@@ -50,7 +48,6 @@ abstract class Get_Involved_Object {
 	const PERMALINK_PARTNER_W_US = 'partner-with-us';
 	const PERMALINK_CORP_PARTNERSHIPS = 'corporate-partnerships';
 	const PERMALINK_INSTITUTIONAL_GRANTS = 'institutional-grants';
-	const PERMALINK_EVENTS = 'events';
 	const PERMALINK_BILL = self::PERMALINK_ADVOCACY . '/bill';
 	const PERMALINK_LETTER = self::PERMALINK_ADVOCACY . '/letter';
 
@@ -101,7 +98,6 @@ abstract class Get_Involved_Object {
 		}
 
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
 		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
 		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
 	}
@@ -152,7 +148,6 @@ abstract class Get_Involved_Object {
 				[ self::PERMALINK_PARTNER_W_US, self::QV_PARTNER_W_US ],
 				[ self::PERMALINK_CORP_PARTNERSHIPS, self::QV_CORP_PARTNERSHIPS ],
 				[ self::PERMALINK_INSTITUTIONAL_GRANTS, self::QV_INSTITUTIONAL_GRANTS ],
-				[ self::PERMALINK_EVENTS, self::QV_EVENTS ],
 				[ self::PERMALINK_ADVOCACY, self::QV_ADVOCACY ],
 			] as list(
 			$regex, $qv
@@ -177,29 +172,6 @@ abstract class Get_Involved_Object {
 	 */
 	public static function query_vars( array $vars ): array {
 		return array_merge( $vars, self::_QV_ALL );
-	}
-
-	/**
-	 * Fires after the main query vars have been parsed.
-	 *
-	 * @param \WP_Query $query
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/parse_query/
-	 */
-	public static function parse_query( \WP_Query $query ): void {
-		if ( ! $query->is_main_query() ) {
-			return;
-		}
-
-		# Fix Resources LP
-//		$is_main_lp = ! empty( $query->get( self::QV_ADVOCACY ) );
-//		if ( $is_main_lp ) {
-//			$query->is_single            = false;
-//			$query->is_singular          = false;
-//			$query->is_posts_page        = true;
-//			$query->is_post_type_archive = true;
-//			$query->set( 'name', null );
-//		}
 	}
 
 	/**

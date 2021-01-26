@@ -110,6 +110,9 @@ class Hooks {
 		# Get Involved
 		CPT\Get_Involved\Get_Involved_Object::construct();
 
+		# Donate
+		CPT\Donate\Donate_Object::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 

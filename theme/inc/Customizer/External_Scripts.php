@@ -12,13 +12,6 @@ class External_Scripts extends Abstract_Customizer {
 	const SETTING_BODY_TOP = self::SETTING_PREFIX . 'body_top';
 	const SETTING_BODY_BTM = self::SETTING_PREFIX . 'body_btm';
 
-	const ALL_SETTINGS = [
-		self::SETTING_HEAD_TOP,
-		self::SETTING_HEAD_BTM,
-		self::SETTING_BODY_TOP,
-		self::SETTING_BODY_BTM,
-	];
-
 	/** @inheritDoc */
 	protected function _register_sections(): void {
 		$this->_manager->add_section( self::SECTION_ID, [
