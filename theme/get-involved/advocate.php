@@ -62,7 +62,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'desc'        => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_DESC ),
 			'smAccordion' => true,
 			'tileClass'   => [ 'text-teal-dark' ],
-			'class'       => [ 'text-white' ]
+			'class'       => [ 'text-white', 'md:container', 'mx-auto' ]
 	] ) ?>
 
 	<div class="h-px737 bg-canary lg:h-px600 lg:flex lg:items-center">
@@ -83,19 +83,21 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_DESC ),
 			'tileClass' => [ 'text-teal-dark' ],
-			'class'     => [ 'text-white' ]
+			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
-	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center"
-	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Bill::POST_TYPE ) ?>">View All</a>
+	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center -mt-10 md:-mt-14 lg:-mt-36"
+	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Bill::POST_TYPE ) ?>">
+		View All
+	</a>
 
 	<?= Helper\Tile_Grid::posts( $featured_letters, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_DESC ),
 			'tileClass' => [ 'text-teal-dark' ],
-			'class'     => [ 'text-white' ]
+			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
 
-	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center"
+	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center -mt-10 md:-mt-14 lg:-mt-36"
 	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Letter::POST_TYPE ) ?>">View All</a>
 
 	<div class="py-10 text-center">

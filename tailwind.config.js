@@ -91,6 +91,11 @@ module.exports = {
 			w3Card: {
 				minWidth: px2rem(500),
 				maxWidth: px2rem(1275),
+			},
+			bigImg: {
+				height: px2rem(319),
+				heightMD: px2rem(409),
+				heightLG: px2rem(500),
 			}
 		},
 		// Extend
