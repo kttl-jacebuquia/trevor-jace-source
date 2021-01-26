@@ -5,7 +5,7 @@ $no_results = empty( $wp_query->found_posts );
 ?>
 <main id="site-content" role="main" class="site-content">
 	<div class="container mx-auto site-content-inner">
-		<div class="search-input-wrap mb-10 mt-5 md:mb-12 md:mt-10 md:w-2/3 lg:w-1/2 lg:my-10">
+		<div class="search-input-wrap md:mx-auto mb-10 md:mb-12 lg:mb-20 mt-5 md:mb-12 md:mt-10 md:w-2/3 lg:w-1/2 lg:my-10">
 			<form role="search" method="get" class="search-form"
 				  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
 				<?= \TrevorWP\Theme\Helper\Search_Input::render_rc() ?>
@@ -13,7 +13,7 @@ $no_results = empty( $wp_query->found_posts );
 		</div>
 
 		<div class="search-results-container flex flex-col flex-1">
-			<h1 class="search-results-list-title text-white text-base mb-5 md:mb-10 lg:mb-14">
+			<h1 class="search-results-list-title text-white text-center text-base mb-5 md:mb-10 lg:mb-10">
 				<?php if ( $no_results ) { ?>
 					<span class="leading-px20 font-medium md:font-light md:text-px18 md:leading-px26 lg:font-normal lg:text-px22 lg:leading-px32 lg:tracking-px05">
 						There are no results for “<?= get_search_query() ?>”

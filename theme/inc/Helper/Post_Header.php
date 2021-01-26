@@ -163,6 +163,18 @@ class Post_Header {
 			$mid_row[] = '<div class="length-indicator"> ' . ( $post->post_type == CPT\RC\Guide::POST_TYPE ? 'Guide' : 'Article' ) . ' Length: ' . esc_html( $len_ind ) . "</div>";
 		}
 
+		## Date Box
+		if ( Meta\Post::can_show_date_box( $post->ID ) ) {
+			$dateTime = new \DateTime( $post->post_date );
+			ob_start(); ?>
+
+				<div class="date-box">
+					<time class="font-semibold text-px14 leading-px18" datetime="<?= $post->post_date ?>"><?= $dateTime->format('M. j, Y') ?></time>
+				</div>
+
+			<?php $mid_row[] = ob_get_clean();
+		}
+
 		## Sharing Box
 		if ( Meta\Post::can_show_share_box( $post->ID ) ) {
 			ob_start(); ?>
