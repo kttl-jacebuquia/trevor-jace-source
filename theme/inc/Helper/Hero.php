@@ -61,4 +61,8 @@ class Hero {
 		</div>
 		<?php return ob_get_clean();
 	}
+
+	public static function quote( array $data, array $options = [] ): ?string {
+
+	}
 }

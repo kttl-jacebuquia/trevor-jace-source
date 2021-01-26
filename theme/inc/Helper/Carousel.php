@@ -116,6 +116,7 @@ class Carousel {
 		$ext_cls = [
 				'big-img-carousel',
 				( "card-count-" . count( $data ) ),
+				$options['class'],
 		];
 
 		ob_start(); ?>
@@ -158,6 +159,61 @@ class Carousel {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Testimonials carousel
+	 *
+	 * @param array|null $data
+	 * @param array $options
+	 *
+	 * @return string|null
+	 */
+	public static function testimonials( array $data = null, array $options = [] ): ?string {
+		if ( empty( $data ) ) {
+			return null;
+		}
+
+		// TODO: Show all entries within the carousel
+		$entry = array_rand( $data, 1 );
+
+		ob_start(); ?>
+		<div class="fullwidth-carousel carousel-testimonials">
+			<div class="slide md:flex md:flex-row">
+				<div class="bg-white md:flex-1" data-aspectRatio="1:1">
+					<?php if ( ! empty( $entry['img'] ) ) { ?>
+						<?= Thumbnail::print_img_variants( [
+								[
+										$entry['img'],
+										Thumbnail::variant( Thumbnail::SCREEN_MD, null, Thumbnail::SIZE_MD, [
+												'class' => [
+														'object-center',
+														'object-cover',
+														'rounded-px10',
+												]
+										] ),
+								],
+						] ) ?>
+					<?php } ?>
+				</div>
+				<figure class="bg-canary pt-12 pb-28 container text-center text-teal-dark md:flex-1 md:pt-12 md:pb-20 lg:pt-36">
+					<div class="flex flex-row justify-center md:mb-8 lg:mb-5">
+						<i class="trevor-ti-quote-open -mt-2 mr-0.5 lg:text-px28 lg:mr-2"></i>
+						<i class="trevor-ti-quote-close lg:text-px28"></i>
+					</div>
+					<blockquote
+							class="font-bold text-3xl my-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
+						<?= $entry['quote'] ?>
+					</blockquote>
+					<?php if ( ! empty( $entry['cite'] ) ) { ?>
+						<figcaption class="text-px18 leading-px26 lg:text-px22 lg:leading-px32">
+							<?= $entry['cite'] ?>
+						</figcaption>
+					<?php } ?>
+				</figure>
+			</div>
+		</div>
+		<?php return ob_get_clean();
 	}
 
 	/**

@@ -135,7 +135,27 @@
 
   // - - Img BG
   &.type-img-bg {
+	@apply relative;
+	@apply w-screen max-w-none;
+	--neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
+	padding-top: var(--neg-top-margin);
+	margin-top: calc(-1 * var(--neg-top-margin));
+	margin-left: calc(-1 * ((100vw - 100%) / 2));
+	@apply h-px600 md:h-px490 lg:h-px737 flex items-center text-white pt-0;
 
+	.page-header-img-wrap {
+	  @apply absolute w-full h-full top-0 left-0;
+	  margin-top: calc(var(--top-nav-top-margin) - 4px); //FIXME: Why -4px?
+
+	  img {
+		@apply object-cover object-center;
+		@apply w-full h-full;
+	  }
+	}
+
+	.page-header-content-wrap {
+	  @apply container mx-auto text-center items-center z-1;
+	}
   }
 
   // - - Split Carousel

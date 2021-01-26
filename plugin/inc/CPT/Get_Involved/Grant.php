@@ -23,8 +23,6 @@ class Grant extends Get_Involved_Object {
 			'show_in_rest' => true,
 			'supports'     => [
 				'title',
-				'custom-fields',
-				'thumbnail',
 			],
 			'has_archive'  => false,
 			'rewrite'      => false,

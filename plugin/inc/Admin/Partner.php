@@ -15,6 +15,7 @@ class Partner {
 	public static function register_hooks(): void {
 		add_action( 'add_meta_boxes', [ self::class, 'add_meta_boxes' ], 10, 1 );
 		add_action( 'save_post_' . \TrevorWP\CPT\Get_Involved\Partner::POST_TYPE, [ self::class, 'save_post' ], 10, 1 );
+		add_action( 'save_post_' . \TrevorWP\CPT\Get_Involved\Grant::POST_TYPE, [ self::class, 'save_post' ], 10, 1 );
 	}
 
 	/**
@@ -25,7 +26,10 @@ class Partner {
 	 * @link https://developer.wordpress.org/reference/hooks/add_meta_boxes/
 	 */
 	public static function add_meta_boxes( string $post_type ): void {
-		if ( $post_type == \TrevorWP\CPT\Get_Involved\Partner::POST_TYPE ) {
+		if ( in_array( $post_type, [
+				\TrevorWP\CPT\Get_Involved\Partner::POST_TYPE,
+				\TrevorWP\CPT\Get_Involved\Grant::POST_TYPE
+		] ) ) {
 			add_meta_box(
 					'partner_url',
 					'Partner URL',

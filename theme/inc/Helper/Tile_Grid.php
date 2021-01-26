@@ -11,7 +11,9 @@ class Tile_Grid {
 	 * @return string
 	 */
 	public static function posts( array $posts, array $options = [] ): string {
+		$options['tileMethod'] = 'post';
 
+		return self::custom( $posts, $options );
 	}
 
 	/**
@@ -24,13 +26,25 @@ class Tile_Grid {
 		$options = array_merge( array_fill_keys( [
 				'title',
 				'desc',
-				'class'
-		], null ), $options );
+				'class',
+				'tileClass',
+		], null ), [
+				'smAccordion' => false,
+				'tileMethod'  => 'custom',
+		], $options );
 
 		# class
 		$cls = [ 'tile-grid' ];
-		if ( ! empty( $data['class'] ) ) {
-			$cls = array_merge( $cls, $data['class'] );
+		if ( ! empty( $options['class'] ) ) {
+			$cls = array_merge( $cls, $options['class'] );
+		}
+
+		$tile_options = [ 'accordion' => false, 'class' => $options['tileClass'] ];
+
+		if ( $options['smAccordion'] ) {
+			$tile_options['accordion'] = true;
+
+			$cls[] = 'sm-accordion';
 		}
 
 		ob_start(); ?>
@@ -44,7 +58,8 @@ class Tile_Grid {
 				</div>
 				<div class="tile-grid-container">
 					<?php foreach ( $data as $entry ) {
-						echo Tile::custom( $entry, [] );
+						$tile_method = $options['tileMethod'];
+						echo Tile::$tile_method( $entry, $tile_options );
 					} ?>
 				</div>
 			</div>

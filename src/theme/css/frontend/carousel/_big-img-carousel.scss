@@ -4,7 +4,7 @@
   }
 
   .carousel-full-width-wrap {
-	padding-left: 0;
+	@apply pl-0;
   }
 
   .swiper-slide {
@@ -51,6 +51,24 @@
 	  .img-wrap {
 		height: rem-calc(500px);
 	  }
+	}
+
+	.carousel-container {
+	  @apply grid grid-cols-12 container mx-auto;
+	}
+
+	.swiper-wrapper {
+	  @apply col-span-10 col-start-2;
+
+	  .swiper-slide {
+		@apply max-w-full;
+	  }
+	}
+  }
+
+  @screen xl {
+	.swiper-wrapper {
+	  @apply col-span-8 col-start-3;
 	}
   }
 }

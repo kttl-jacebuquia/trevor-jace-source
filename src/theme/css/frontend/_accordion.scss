@@ -1,39 +1,43 @@
+.tile-accordion-item {
+  @apply md:rounded-px10 md:bg-white md:shadow-md;
+}
+
+
 .accordion-button {
+  &:after {
+	@extend .trevor-ti-chevron-down:before;
+	@apply mt-2 text-px14 font-bold;
+  }
 
+  &:not(.collapsed) {
+
+	&::after {
+	  @apply mt-0;
+	  transform: rotate(180deg);
+	}
+  }
+
+  @screen md {
 	&:after {
-		@extend .trevor-ti-chevron-down:before;
-		@apply mt-2 text-px14 font-bold;
+	  @apply hidden;
 	}
-
-	&:not(.collapsed) {
-
-		&::after {
-			@apply mt-0;
-			transform: rotate(180deg);
-		}
-	}
-
-	@screen md {
-		&:after {
-			@apply hidden;
-		}
-	}
+  }
 }
 
 .collapse {
-	.accordion-body {
-		@apply border-b border-blue_green border-opacity-20;
+  .accordion-body {
+	@apply border-b border-blue_green border-opacity-20;
 
-		@screen md {
-			@apply border-0;
-		}
+	@screen md {
+	  @apply border-0;
 	}
+  }
 
-	&:not(.show) {
-		@apply hidden;
+  &:not(.show) {
+	@apply hidden;
 
-		@screen md {
-			@apply flex;
-		}
+	@screen md {
+	  @apply flex;
 	}
+  }
 }
