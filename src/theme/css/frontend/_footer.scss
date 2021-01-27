@@ -76,19 +76,19 @@ footer {
 		@apply mb-14;
 
 		li {
-				@apply mb-5;
+			@apply mb-5;
 
-				&:last-child {
-						@apply mb-0;
-				}
+			&:last-child {
+				@apply mb-0;
+			}
 
-				a {
-						@apply text-px18 leading-px22 uppercase;
-				}
+			a {
+				@apply text-px18 leading-px22 uppercase;
+			}
 
-				i {
-						font-size: 1.4rem;
-				}
+			i {
+				font-size: 1.4rem;
+			}
 		}
 
 		&.site-links {
@@ -110,11 +110,21 @@ footer {
 		}
 
 		&.social-links {
-				@apply mb-0 flex flex-row;
+			@apply mb-0 flex flex-row;
 
+			li {
+				@apply flex-auto mr-7;
+			}
+		}
+	}
+
+	@screen md {
+		ul {
+			&.social-links {
 				li {
-						@apply flex-1;
+					@apply flex-initial;
 				}
+			}
 		}
 	}
 

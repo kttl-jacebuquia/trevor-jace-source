@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "1e38e7cdeea417da96932f7b9944b3fe3b0581cdd2db4ed8b7153791b287e880",
-    "current": "1e38e7cdeea417da96932f7b9944b3fe3b0581cdd2db4ed8b7153791b287e880"
+    "previous": "a298fbc092136f574c4e290ae793cbce1a1a2ba861c2f493021572f3b793a2f1",
+    "current": "a298fbc092136f574c4e290ae793cbce1a1a2ba861c2f493021572f3b793a2f1"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_1e38e7cdeea417da96932f7b9944b3fe.ttf",
-    "../../theme/static/icon-font/trevor-ti_1e38e7cdeea417da96932f7b9944b3fe.svg",
-    "../../theme/static/icon-font/trevor-ti_1e38e7cdeea417da96932f7b9944b3fe.woff",
-    "../../theme/static/icon-font/trevor-ti_1e38e7cdeea417da96932f7b9944b3fe.eot",
-    "../../theme/static/icon-font/trevor-ti_1e38e7cdeea417da96932f7b9944b3fe.woff2"
+    "../../theme/static/icon-font/trevor-ti_a298fbc092136f574c4e290ae793cbce.ttf",
+    "../../theme/static/icon-font/trevor-ti_a298fbc092136f574c4e290ae793cbce.svg",
+    "../../theme/static/icon-font/trevor-ti_a298fbc092136f574c4e290ae793cbce.woff",
+    "../../theme/static/icon-font/trevor-ti_a298fbc092136f574c4e290ae793cbce.eot",
+    "../../theme/static/icon-font/trevor-ti_a298fbc092136f574c4e290ae793cbce.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -59,6 +59,10 @@
       "codepoint": 61702,
       "source": "./vectors/hamburger-menu.svg"
     },
+    "instagram": {
+      "codepoint": 61721,
+      "source": "./vectors/instagram.svg"
+    },
     "link": {
       "codepoint": 61712,
       "source": "./vectors/link.svg"
@@ -66,6 +70,10 @@
     "link-out": {
       "codepoint": 61703,
       "source": "./vectors/link-out.svg"
+    },
+    "linkedin": {
+      "codepoint": 61722,
+      "source": "./vectors/linkedin.svg"
     },
     "logo-icon": {
       "codepoint": 61704,
@@ -103,9 +111,17 @@
       "codepoint": 61716,
       "source": "./vectors/smartphone.svg"
     },
+    "tiktok": {
+      "codepoint": 61723,
+      "source": "./vectors/tiktok.svg"
+    },
     "twitter": {
       "codepoint": 61710,
       "source": "./vectors/twitter.svg"
+    },
+    "youtube": {
+      "codepoint": 61724,
+      "source": "./vectors/youtube.svg"
     }
   },
   "options": {
