@@ -6,8 +6,12 @@
 	@apply container mx-auto text-center;
   }
 
+  &-header {
+  	@apply container;
+  }
+
   &-title {
-	@apply font-semibold text-px32 leading-px42 mb-16 tracking-em_001;
+	@apply font-semibold text-px32 leading-px42 mb-3.5 tracking-em_001;
   }
 
   &-desc {
@@ -38,7 +42,7 @@
 	}
 
 	&-desc {
-	  @apply w-3/4 mx-auto my-10;
+	  @apply w-3/4 mx-auto mb-10;
 	}
 
 	&-container {
@@ -113,4 +117,14 @@
 
 	}
   }
+}
+
+.tile-fixed {
+	.tile {
+		height: rem-calc(370px);
+
+		@screen lg {
+			height: rem-calc(402px);
+		}
+	}
 }

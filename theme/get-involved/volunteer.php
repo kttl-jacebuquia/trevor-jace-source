@@ -202,7 +202,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20">
 				There are other ways to help.</h2>
 
-			<div class="mx-auto grid grid-cols-1 gap-y-7 gap-x-8 md:w-3/4 lg:w-full lg:grid-cols-2 xl:w-3/4">
+			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 				<?= Helper\Circulation_Card::render_donation(); ?>
 				<?= Helper\Circulation_Card::render_fundraiser(); ?>
 			</div>
