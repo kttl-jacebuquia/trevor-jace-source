@@ -592,21 +592,15 @@ abstract class RC_Object {
 	 * @see \SolrPower_WP_Query::setup()
 	 */
 	public static function the_posts( array $posts, \WP_Query $query ): array {
-		$glossary_posts = [];
-		$other_posts = [];
-
 		if ( $query->is_search() && ! empty( $query->query_vars[ self::QV_RESOURCES_LP ] ) ) {
 			foreach ( $posts as $post ) {
 				if ( $post->post_type == Glossary::POST_TYPE ) {
 					$post->post_content = @$post->post_content_t;
 					$post->post_excerpt = @$post->post_excerpt_t;
-					array_push($glossary_posts, $post);
-				} else {
-					array_push($other_posts, $post);
 				}
 			}
 		}
 
-		return array_merge($glossary_posts, $other_posts);
+		return $posts;
 	}
 }
