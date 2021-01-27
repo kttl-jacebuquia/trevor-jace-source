@@ -99,9 +99,9 @@ class Post {
 					'default'    => true,
 					'post_types' => $rc_ppt,
 				],
-				self::KEY_HEADER_SHOW_DATE 		=> [
-					'type'			 => 'boolean',
-					'default'		 => true,
+				self::KEY_HEADER_SHOW_DATE    => [
+					'type'       => 'boolean',
+					'default'    => true,
 					'post_types' => $rc_ppt,
 				],
 				self::KEY_LENGTH_IND          => [
@@ -280,10 +280,10 @@ class Post {
 
 	/**
 	 * @param int $post_id
-	 * 
+	 *
 	 * @return bool
 	 */
-	public static function can_show_date_box( int $post_id ) : bool {
+	public static function can_show_date_box( int $post_id ): bool {
 		return ! empty( get_post_meta( $post_id, self::KEY_HEADER_SHOW_DATE, true ) );
 	}
 
@@ -349,7 +349,12 @@ class Post {
 	 * @return array
 	 */
 	public static function get_recirculation_cards( int $post_id ): array {
-		return (array) get_post_meta( $post_id, self::KEY_RECIRCULATION_CARDS, true );
+		$posts = get_post_meta( $post_id, self::KEY_RECIRCULATION_CARDS, true );
+		if ( empty( $posts ) || ! is_array( $posts ) ) {
+			return [];
+		}
+
+		return $posts;
 	}
 
 	/**

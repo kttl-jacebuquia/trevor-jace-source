@@ -4,7 +4,7 @@ import {copyToClipboard} from 'plugin/js/main/utils';
 
 const hasNavigatorShare = !!navigator.share;
 
-export default function sharingMore(button, content) {
+export default function sharingMore(button, content, tippyOptions = {}) {
 	// Use native sharing if available
 	if (hasNavigatorShare) {
 		$(button).on('click', () => navigator.share({
@@ -12,19 +12,19 @@ export default function sharingMore(button, content) {
 		}));
 	} else {
 		// Init tippy
-		tippy(button, {
+		tippy(button, Object.assign({
 			content,
 			interactive: true,
 			placement: 'right',
 			appendTo: 'parent',
 			arrow: roundArrow,
-		});
+		}, tippyOptions));
 
 		// Event Handlers
 		$(content).find('tr[data-row]').on('click', (e) => {
 			e.preventDefault;
 			const type = $(e.currentTarget).attr('data-row');
-			const canonicalURL = document.querySelector('link[rel="canonical"]').href;
+			const canonicalURL = $(content).attr('data-url') || document.querySelector('link[rel="canonical"]').href;
 
 			switch (type) {
 				case 'facebook':

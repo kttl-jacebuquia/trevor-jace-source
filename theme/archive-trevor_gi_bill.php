@@ -9,7 +9,7 @@
 ] ) ?>
 
 <main id="site-content" role="main" class="bg-white">
-	<div class="container mx-auto py-20">
+	<div class="container mx-auto">
 		<?= \TrevorWP\Theme\Helper\Tile_Grid::posts( $wp_query->posts ) ?>
 	</div>
 </main> <!-- #site-content -->

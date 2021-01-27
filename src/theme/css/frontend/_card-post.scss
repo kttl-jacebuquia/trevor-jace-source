@@ -2,7 +2,7 @@
   @apply flex flex-col relative;
   @apply overflow-hidden;
   @apply shadow-lg rounded-px10;
-  @apply text-indigo;
+  @apply text-teal-dark;
   height: rem-calc(503px);
 
   // Thumbnail
@@ -140,6 +140,14 @@
   .icon-wrap {
 	@apply absolute top-6 right-5;
 	font-size: 1.5rem;
+  }
+
+  body.is-rc & {
+	@apply text-indigo;
+
+	&.bg-full {
+	  @apply text-white;
+	}
   }
 
   @screen md {

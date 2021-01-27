@@ -1,6 +1,10 @@
 .post-share-more-content {
-  @apply bg-white opacity-90 text-indigo text-left;
+  @apply bg-white opacity-90 text-teal-dark text-left;
   @apply rounded-px10;
+
+  body.is-rc & {
+	@apply text-indigo;
+  }
 }
 
 .post-share-more-title {

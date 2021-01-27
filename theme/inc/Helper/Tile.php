@@ -2,8 +2,15 @@
 
 
 use TrevorWP\CPT;
+use TrevorWP\Util\Tools;
 
 class Tile {
+	/**
+	 * @param \WP_Post $post
+	 * @param array $options
+	 *
+	 * @return string
+	 */
 	public static function post( \WP_Post $post, array $options = [] ): string {
 		$data = [
 				'title'   => $post->post_title,
@@ -16,9 +23,37 @@ class Tile {
 			$data['title_top'] = \TrevorWP\Meta\Post::get_bill_id( $post->ID );
 		}
 
+		if ( in_array( $post->post_type, [ CPT\Get_Involved\Bill::POST_TYPE, CPT\Get_Involved\Letter::POST_TYPE ] ) ) {
+			$id            = uniqid( 'post-' );
+			$options['id'] = $id;
+
+			echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Get_Involved\Bill::render_modal( $post ), [
+					'target' => "#{$id} a",
+					'id'     => "{$id}-content"
+			] ) )->render();
+
+			add_action( 'wp_footer', function () use ( $id ) {
+				?>
+				<script>jQuery(function () {
+						trevorWP.features.sharingMore(
+								document.querySelector('#<?= $id ?>-content .post-share-more-btn'),
+								document.querySelector('#<?= $id ?>-content .post-share-more-content'),
+								{appendTo: document.querySelector('#<?= $id ?>-content')}
+						);
+					})</script>
+				<?php
+			}, 10, 0 );
+		}
+
 		return self::custom( $data, $options );
 	}
 
+	/**
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string
+	 */
 	public static function accordion( array $data, array $options = [] ): string {
 		$options = array_merge( array_fill_keys( [
 				'class'
@@ -58,13 +93,20 @@ class Tile {
 		<?php return ob_get_clean();
 	}
 
+	/**
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string
+	 */
 	public static function custom( array $data, array $options = [] ): string {
 		if ( $options['accordion'] ) {
 			return self::accordion( $data, $options );
 		}
 
 		$options = array_merge( array_fill_keys( [
-				'class'
+				'class',
+				'attr'
 		], null ), $options );
 
 		# class
@@ -73,9 +115,15 @@ class Tile {
 			$cls = array_merge( $cls, $options['class'] );
 		}
 
+		$attr          = (array) $options['attr'];
+		$attr['class'] = implode( ' ', $cls );
+		if ( ! empty( $options['id'] ) ) {
+			$attr['id'] = $options['id'];
+		}
+
 		ob_start();
 		?>
-		<div class="<?= implode( ' ', $cls ) ?>">
+		<div <?= Tools::flat_attr( $attr ) ?>>
 			<div class="tile-inner">
 				<?php if ( ! empty( $data['title_top'] ) ) { ?>
 					<div class="tile-title-top"><?= $data['title_top'] ?></div>

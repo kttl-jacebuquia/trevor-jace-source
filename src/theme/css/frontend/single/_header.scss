@@ -13,6 +13,7 @@
   height: auto;
   min-height: 530px;
   max-height: 1040px;
+  @apply bg-teal-dark;
 }
 
 .post-header-inner {
@@ -147,6 +148,16 @@
   --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
   padding-top: var(--neg-top-margin);
   margin-top: calc(-1 * var(--neg-top-margin));
+
+  // Resources Center
+  body.is-rc & {
+	@apply bg-purple;
+  }
+
+  // By Post Type
+  body.single-trevor_rc_article & {
+	@apply bg-violet-alt;
+  }
 
   // Purple bg
   &:not(.type-text_only):not(.type-full) {
@@ -305,7 +316,7 @@
 	/* Split & Square */
 	&.type-split,
 	&.type-square {
-	  max-height: rem-calc(800px);
+	  max-height: rem-calc(840px);
 
 	  .post-header-content {
 		@apply mt-8;

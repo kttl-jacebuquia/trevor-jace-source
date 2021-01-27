@@ -7,8 +7,12 @@
   @apply bg-white;
   @apply prose;
   /* Should be after the prose */
-  @apply max-w-none text-indigo;
+  @apply max-w-none text-teal-dark;
   // TODO: Fix this on tailwind config
+
+  body.is-rc & {
+	@apply text-indigo;
+  }
 
   h1, h2, h3, h4, h5 {
 	color: inherit;

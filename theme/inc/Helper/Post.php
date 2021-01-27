@@ -217,7 +217,13 @@ class Post {
 				self::_render_bottom_categories( $post ),
 		];
 
-		$inner = implode( "\n", array_filter( $out ) );
+		$rows = array_filter( $out );
+
+		if ( empty( $rows ) ) {
+			return '';
+		}
+
+		$inner = implode( "\n", $rows );
 
 		return "<div class='post-content-footer'>{$inner}</div>";
 	}

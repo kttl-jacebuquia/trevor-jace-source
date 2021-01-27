@@ -19,11 +19,17 @@
   .modal-close {
 	top: Max(calc(var(--top-nav-top-margin) - 2.5rem), 0px);
 	@apply right-4 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
-	@apply bg-indigo text-white;
+	@apply bg-teal-dark text-white;
   }
 
   .modal-content-wrap {
 	@apply h-full;
+  }
+
+  body.is-rc & {
+	.modal-close {
+	  @apply bg-indigo;
+	}
   }
 
   @screen md {
@@ -41,17 +47,18 @@
 
   @screen lg {
 	.modal-container {
-		@apply pt-5;
+	  @apply pt-5;
 	}
+
 	.modal-close {
-		@apply mr-5 -mb-4;
+	  @apply mr-5 -mb-4;
 	}
   }
 
   @screen xl {
-  	.modal-container {
-  		@apply max-w-5xl;
-  	}
+	.modal-container {
+	  @apply max-w-5xl;
+	}
   }
 }
 

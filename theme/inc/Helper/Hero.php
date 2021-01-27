@@ -62,7 +62,50 @@ class Hero {
 		<?php return ob_get_clean();
 	}
 
+	/**
+	 * Quote hero.
+	 *
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string|null
+	 */
 	public static function quote( array $data, array $options = [] ): ?string {
+		ob_start(); ?>
+		<div class="hero h-px737 lg:h-px600 lg:flex lg:items-center">
+			<figure class="container text-left text-teal-dark pt-10 md:flex-1 lg:p-0 lg:w-4/5 lg:flex-initial z-1">
+				<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
+					<i class="trevor-ti-quote-open -mt-2 mr-0.5 md:text-px26 lg:text-px32 lg:mr-2"></i>
+					<i class="trevor-ti-quote-close md:text-px26 lg:text-px32"></i>
+				</div>
+				<blockquote
+						class="font-bold text-3xl my-4 md:text-px30 md:leading-px40 md:mr-24 lg:text-px40 lg:leading-px48 lg:font-semibold">
+					<?= @$data['quote'] ?>
+				</blockquote>
+				<?php if ( ! empty( $data['cite'] ) ) { ?>
+					<figcaption class="text-px18 leading-px26 lg:text-px22 lg:leading-px32">
+						<?= $data['cite'] ?>
+					</figcaption>
+				<?php } ?>
+			</figure>
 
+			<?php
+			if ( ! empty( $data['img'] ) && ! empty( $data['img']['id'] ) ) {
+				echo wp_get_attachment_image( $data['img']['id'], 'medium', false, [
+						'class' => implode( ' ', [
+								'absolute',
+								'bottom-0',
+								'right-0',
+								'h-3/5',
+								'w-auto'
+						] )
+				] );
+			}
+			?>
+
+		</div>
+		<?php return self::img_bg( [
+				[ $options['img_id'] ]
+		], ob_get_clean(), $options );
 	}
 }

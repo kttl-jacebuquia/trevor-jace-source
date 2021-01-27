@@ -133,39 +133,31 @@ foreach ( $tiers as $tier ) {
 		</div>
 	</div> <!-- .partners -->
 
+
+
+
 	<div class="partnership-showcase">
 		<div class="partnership-showcase__container container mx-auto">
-			<h3 class="partnership-showcase__title font-bold text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48">Partnership Showcase</h3>
-			<?php
-				$cards = [
+			<?= \TrevorWP\Theme\Helper\Tile_Grid::custom([
 					[
-						'title' => 'Sed tellus eu eget dictum id. Gravida et.',
-						'description' => 'Urna dolor cras congue velit. A quis eu turpis blandit arcu in odio neque quis. Sed sed augue turpis.',
-						'file'	=> '#',
+							'title'   => 'Sed tellus eu eget dictum id. Gravida et.',
+							'desc'    => 'Urna dolor cras congue velit. A quis eu turpis blandit arcu in odio neque quis. Sed sed augue turpis.',
+							'cta_txt' => 'Download',
+							'cta_url' => '#',
 					],
 					[
-						'title'	=> 'Fames feugiat non luctus sed imperdiet.',
-						'description' => 'Enim, ipsum etiam id mi consectetur adipiscing sed sagittis, pellentesque. Leo.',
-						'file'	=> '#',
+							'title'   => 'Fames feugiat non luctus sed imperdiet.',
+							'desc'    => 'Enim, ipsum etiam id mi consectetur adipiscing sed sagittis, pellentesque. Leo.',
+							'cta_txt' => 'Download',
+							'cta_url' => '#',
 					],
 					[
-						'title'	=> 'Ut platea blandit et eu justo et commodo.',
-						'description' => 'Elit dui ultrices rhoncus quis quam pellentesque elit. Justo, nunc varius arcu pellentesque morbi. ',
-						'file' => '#',
+							'title'   => 'Ut platea blandit et eu justo et commodo.',
+							'desc'    => 'Elit dui ultrices rhoncus quis quam pellentesque elit. Justo, nunc varius arcu pellentesque morbi. ',
+							'cta_txt' => 'Download',
+							'cta_url' => '#',
 					],
-				];
-			?>
-			<div class="partnership-showcase__cards flex flex-col md:flex-row flex-wrap">
-				<?php
-					foreach ( $cards as $card ) :
-				?>
-					<div class="partnership-showcase__card single-card">
-						<h4 class="partnership-showcase__card-title"><?= $card['title'] ?></h4>
-						<p class="partnership-showcase__card-description"><?= $card['description'] ?></p>
-						<a href="<?= $card['file'] ?>" class="partnership-showcase__card-download" download>Download</a>
-					</div>
-				<?php endforeach ?>
-			</div>
+			], ['title'=>'Partnership Showcase']) ?>
 
 			<a href="#" class="partnership-showcase__partner mx-auto flex-grow-0 flex-shrink-0" target="_blank">Become a Partner</a>
 		</div>

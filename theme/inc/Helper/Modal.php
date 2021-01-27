@@ -7,14 +7,14 @@ class Modal {
 	protected $_options = [];
 
 	public function __construct( string $content, array $options = [] ) {
-		# Id?
-		$this->_id = empty( $this->_options['id'] ) ? uniqid( 'modal' ) : $this->_options['id'];
-		unset( $this->_options['id'] );
-
 		$this->_content = $content;
 		$this->_options = array_merge( [
 
 		], $options );
+
+		# Id?
+		$this->_id = empty( $this->_options['id'] ) ? uniqid( 'modal' ) : $this->_options['id'];
+		unset( $this->_options['id'] );
 	}
 
 	public function render(): string {

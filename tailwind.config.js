@@ -46,6 +46,7 @@ module.exports = {
 			},
 			violet: {
 				DEFAULT: '#6B5DF6',
+				alt: '#7155FF',
 				light: '#EDEDFB',
 				lighter: '#DBD5FF',
 			},

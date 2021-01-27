@@ -1,0 +1,25 @@
+.trevor-block-bottom-list {
+  @apply bg-gray-light;
+  @apply px-10 py-5;
+
+
+  .modal-content-wrap & {
+	margin: 0 calc(-1 * theme('container.padding.DEFAULT'));
+	padding: 1rem theme('container.padding.DEFAULT') 2rem theme('container.padding.DEFAULT');
+
+	@screen md {
+	  margin: 0 calc(-1 * theme('container.padding.md'));
+	  padding: 1rem theme('container.padding.md') 2rem theme('container.padding.md');
+	}
+
+	@screen lg {
+	  margin: 0 calc(-1 * theme('container.padding.lg'));
+	  padding: 1rem theme('container.padding.lg') 2rem theme('container.padding.lg');
+	}
+
+	ul,
+	ul > li:last-child {
+	  margin-bottom: 0;
+	}
+  }
+}

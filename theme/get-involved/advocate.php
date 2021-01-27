@@ -65,19 +65,13 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'class'       => [ 'text-white', 'md:container', 'mx-auto' ]
 	] ) ?>
 
-	<div class="h-px737 bg-canary lg:h-px600 lg:flex lg:items-center">
-		<figure class="pt-20 pb-28 container text-left text-teal-dark md:flex-1 md:px-24 md:pt-24 md:pb-20 lg:ml-56 lg:p-0 lg:w-5/12 lg:flex-initial">
-			<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
-				<i class="trevor-ti-quote-open -mt-2 mr-0.5 md:text-px26 lg:text-px32 lg:mr-2"></i>
-				<i class="trevor-ti-quote-close md:text-px26 lg:text-px32"></i>
-			</div>
-			<blockquote
-					class="font-bold text-3xl my-4 md:text-px30 md:leading-px40 md:mr-24 lg:text-px40 lg:leading-px48 lg:font-semibold">
-				Thank you for everything you do for our community and humans around the world.
-			</blockquote>
-			<figcaption class="text-px18 leading-px26 lg:text-px22 lg:leading-px32">@itsannawalker</figcaption>
-		</figure>
-	</div>
+	<?php
+	$quotes = (array) Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_DATA );
+	if ( ! empty( $quotes ) ) {
+		$quote = $quotes[ array_rand( $quotes, 1 ) ];
+		echo Helper\Hero::quote( $quote, [ 'img_id' => Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_BG ) ] );
+	}
+	?>
 
 	<?= Helper\Tile_Grid::posts( $featured_bills, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
