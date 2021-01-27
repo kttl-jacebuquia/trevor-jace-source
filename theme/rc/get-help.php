@@ -16,17 +16,17 @@ use TrevorWP\Theme\Helper;
 			<p class="text-px18 mx-4 mb-10 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-12 lg:text-px26 lg:leading-px36 lg:mb-14 xl:mx-52"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_1_DESC ) ?></p>
 			<div class="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-6 md:mx-px60 xl:mx-80">
 				<a href="#"
-				   class="btn flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
+				   class="btn bg-orange text-white flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
 					<i class="trevor-ti-chat text-white text-px52 my-2 lg:text-px64 lg:mb-4"></i>
 					<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_BTN_CTA ) ?>
 				</a>
 				<a href="#"
-				   class="btn flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
+				   class="btn bg-orange text-white flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
 					<i class="trevor-ti-call text-white text-px42 my-2 lg:text-px64 lg:mb-4"></i>
 					<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_BTN_CTA ) ?>
 				</a>
 				<a href="#"
-				   class="btn flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
+				   class="btn bg-orange text-white flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
 					<i class="trevor-ti-smartphone text-white text-px46 my-2 lg:text-px64 lg:mb-4"></i>
 					<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_BTN_CTA ) ?>
 				</a>

@@ -18,6 +18,8 @@ class Tools {
 			} else if ( get_query_var( RC_Object::QV_TREVORSPACE ) ) {
 				$type = 'trevorspace';
 			}
+		} else {
+			$type = 'default';
 		}
 
 		return $type;
