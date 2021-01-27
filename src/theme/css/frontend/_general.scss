@@ -1,9 +1,9 @@
 .browserupgrade {
-  padding: 40px;
-  background: #fff4e6;
-  color: #5a3700;
-  font-size: 1.1rem;
-  text-align: center;
+	padding: 40px;
+	background: #fff4e6;
+	color: #5a3700;
+	font-size: 1.1rem;
+	text-align: center;
 }
 
 .list {
@@ -29,6 +29,16 @@
 				@apply rounded-full border-2 border-teal-dark text-px14 font-bold w-8 h-8 items-center justify-center mr-4;
 				content: counter(counter) ". ";
 			}
+		}
+	}
+}
+
+.card-fixed {
+	.card {
+		height: rem-calc(370px);
+
+		@screen lg {
+			height: rem-calc(402px);
 		}
 	}
 }

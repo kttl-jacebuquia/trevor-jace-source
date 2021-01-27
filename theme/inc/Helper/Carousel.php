@@ -145,11 +145,13 @@ class Carousel {
 										<?= wp_get_attachment_image( $entry['img']['id'], 'large' ) ?>
 									</div>
 									<?php if ( ! empty( $entry['caption'] ) ) { ?>
-										<figcaption><?= $entry['caption'] ?></figcaption>
+										<figcaption>
+											<?= $entry['caption'] ?>
+											<?php if ( !empty( $entry['cta_txt'] ) && !empty( $entry['cta_url'] ) ): ?>
+												<a href="<?= $entry['cta_url'] ?>"><?= $entry['cta_txt'] ?></a>
+											<?php endif; ?>
+										</figcaption>
 									<?php } ?>
-									<?php if ( !empty( $entry['cta_txt'] ) && !empty( $entry['cta_url'] ) ): ?>
-										<figcaption><a href="<?= $entry['cta_url'] ?>"><?= $entry['cta_txt'] ?></a></figcaption>
-									<?php endif; ?>
 								</figure>
 							</div>
 						<?php } ?>

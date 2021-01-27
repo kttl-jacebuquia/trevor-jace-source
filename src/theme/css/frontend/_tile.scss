@@ -118,13 +118,3 @@
 	}
   }
 }
-
-.tile-fixed {
-	.tile {
-		height: rem-calc(370px);
-
-		@screen lg {
-			height: rem-calc(402px);
-		}
-	}
-}
