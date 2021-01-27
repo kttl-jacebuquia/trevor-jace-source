@@ -134,9 +134,9 @@
 
 
 // Dark green and Yellow
-.fourth-gradient {
+.gradient-type-dark-green {
   @include create-gradient(
-				  rgba(38, 88, 99, 1),
+				  rgb(38, 88, 99),
 				  (// if not specified in below, these are the defaults
 						  type: circle,
 						  spread: 40%,
