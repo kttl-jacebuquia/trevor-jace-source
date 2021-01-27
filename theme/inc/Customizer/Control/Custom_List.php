@@ -25,6 +25,14 @@ class Custom_List extends \WP_Customize_Control {
 			'type'  => self::FIELD_TYPE_TEXTAREA,
 			'label' => 'Description'
 		],
+		'cta_txt' => [
+			'type'  => self::FIELD_TYPE_INPUT,
+			'label' => 'CTA Text'
+		],
+		'cta_url' => [
+			'type'  => self::FIELD_TYPE_INPUT,
+			'label' => 'CTA Url'
+		],
 	];
 
 	const FIELDSET_QUOTE = [

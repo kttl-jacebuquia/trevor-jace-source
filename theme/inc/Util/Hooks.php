@@ -182,6 +182,7 @@ class Hooks {
 		new Customizer\Posts( $manager );
 		new Customizer\Advocacy( $manager );
 		new Customizer\Volunteer( $manager );
+		new Customizer\PWU( $manager );
 		new Customizer\ECT( $manager );
 		new Customizer\Donate( $manager );
 	}

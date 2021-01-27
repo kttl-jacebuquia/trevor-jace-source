@@ -122,8 +122,12 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-			<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			<?php if ( ! empty( $options['title'] ) ) { ?>
+				<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+			<?php } ?>
+			<?php if ( ! empty( $options['subtitle'] ) ) { ?>
+				<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			<?php } ?>
 
 			<div class="carousel-full-width-wrap">
 				<div class="container carousel-container">
@@ -143,6 +147,9 @@ class Carousel {
 									<?php if ( ! empty( $entry['caption'] ) ) { ?>
 										<figcaption><?= $entry['caption'] ?></figcaption>
 									<?php } ?>
+									<?php if ( !empty( $entry['cta_txt'] ) && !empty( $entry['cta_url'] ) ): ?>
+										<figcaption><a href="<?= $entry['cta_url'] ?>"><?= $entry['cta_txt'] ?></a></figcaption>
+									<?php endif; ?>
 								</figure>
 							</div>
 						<?php } ?>

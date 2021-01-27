@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use \TrevorWP\Theme\Helper;
+
 /**
  * Page Header Helpers
  */
@@ -134,7 +136,35 @@ class Page_Header {
 		<?php return ob_get_clean();
 	}
 
-	public static function split_carousel() {
-
+	public static function split_carousel( array $options ): string {
+		$options = array_merge( array_fill_keys( [
+				'title',
+				'desc',
+				'cta_txt',
+				'cta_url',
+				'carousel_data',
+		], null ), [], $options );
+		ob_start();
+		?>
+		<div class="page-header type-split-carousel">
+			<div class="page-header-inner">
+				<div class="page-header-content-wrap">
+					<div class="page-header-title-top"></div>
+					<h1 class="heading-lg-tilted page-header-title">
+						<?= $options['title'] ?>
+					</h1>
+					<p class="page-header-desc"><?= $options['desc'] ?></p>
+					<a href="<?= $options['cta_url'] ?>"
+					   class="page-header-cta"><?= $options['cta_txt'] ?></a>
+				</div>
+				<div class="page-header-img-wrap">
+					<?= Helper\Carousel::big_img( $options['carousel_data'], [
+						'class' => 'text-white',
+					] ) ?>
+				</div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }

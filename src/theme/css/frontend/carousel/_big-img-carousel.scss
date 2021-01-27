@@ -29,6 +29,11 @@
 	figcaption {
 	  @apply text-white text-px18 leading-px26;
 	  @apply mt-4;
+
+	  a {
+	  	@apply text-px18 leading-px24 tracking-em001;
+	  	@apply border-b-2;
+	  }
 	}
   }
 
