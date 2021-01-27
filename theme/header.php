@@ -70,7 +70,7 @@ $is_rc = Is::rc();
 		<div class="cta-wrap">
 			<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>"
 			   class="btn bg-orange text-white">Reach a Counselor</a>
-			<a href="<?= esc_attr( home_url( \TrevorWP\Main::PERMALINK_DONATE ) ) ?>"
+			<a href="<?= esc_attr( home_url( TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ) ?>"
 			   class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
 		</div>
 	</div>

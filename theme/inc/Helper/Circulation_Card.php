@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use TrevorWP\CPT\Donate\Donate_Object;
 use TrevorWP\CPT\RC\RC_Object;
 
 /**
@@ -142,7 +143,7 @@ class Circulation_Card {
 				'title'    => 'Your donation can <tilt>save lives.</tilt>',
 				'desc'     => 'Every day, LGBTQ young people in crisis reach out. It is vital we make sure our volunteers can continue to offer that support.',
 				'cta_text' => 'Donate Now',
-				'cta_url'  => home_url( \TrevorWP\Main::PERMALINK_DONATE ),
+				'cta_url'  => home_url( Donate_Object::PERMALINK_DONATE ),
 				'bg'       => 'gradient-type-get_help', // todo: fix gradient
 		] ) )->render();
 	}
