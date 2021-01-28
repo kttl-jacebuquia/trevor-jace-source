@@ -75,6 +75,7 @@ module.exports = {
 				DEFAULT: '#FDE6BC',
 			},
 			teal: {
+				lighter: 'rgba(0, 58, 72, 0.2)',
 				dark: '#003A48',
 				tint: '#D9E2E4'
 			}

@@ -21,7 +21,7 @@
         border-collapse: collapse;
         border-radius: 10px;
         border-style: hidden;
-        box-shadow: 0 0 0 2px theme('colors.teal.dark');
+        box-shadow: 0 0 0 2px theme('colors.teal.lighter');
 
         tr:first-child th,
         tr:first-child td {
@@ -36,11 +36,11 @@
 
       tr {
         &:first-child {
-          border-top: 2px solid theme('colors.teal.dark');
+          border-top: 2px solid theme('colors.teal.lighter');
         }
 
         &:last-child {
-          border-bottom: 2px solid theme('colors.teal.dark');
+          border-bottom: 2px solid theme('colors.teal.lighter');
         }
 
         @screen md {
