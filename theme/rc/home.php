@@ -131,18 +131,17 @@ $featured_word = Helper\Posts::get_one_from_list(
 				'pt-20',
 				'md:h-px490',
 				'md:justify-center',
-				'lg:h-px737',
-				'lg:mb-48',
-				'lg:mb-48',
+				'xl:h-px737',
+				'lg:mb-20',
 		];
 
 		ob_start(); ?>
 		<div class="mx-auto lg:w-3/4">
 			<?php if ( ! empty( $main_cat = \TrevorWP\Meta\Post::get_main_category( $featured_guide ) ) ) { ?>
-				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase mb-5 lg:text-px18 lg:leading-px22 z-10"
+				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase lg:text-px18 lg:leading-px22 z-10"
 				   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
 			<?php } ?>
-			<h2 class="text-px32 leading-px42 font-semibold my-5 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
+			<h2 class="text-px32 leading-px42 font-semibold my-3 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
 			<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
 			   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
 		</div>

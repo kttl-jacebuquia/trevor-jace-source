@@ -8,12 +8,12 @@
   }
 
   &-subtitle {
-	@apply mb-12 text-center mb-5 text-px20 leading-px26;
+	@apply mb-10 text-center text-px20 leading-px26;
   }
 
   @screen md {
 	&-title {
-	  @apply text-left font-bold leading-px42
+	  @apply font-bold leading-px42
 	}
 
 	&-subtitle {
