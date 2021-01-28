@@ -1,35 +1,4 @@
 .corporate-parnerships {
-  .hero {
-    &__description {
-      width: 319px;
-
-      @screen md {
-        width: 426px;
-      }
-
-      @screen lg {
-        width: 647px;
-      }
-    }
-
-    &__btn-1 {
-      color: theme('colors.teal.dark');
-    }
-
-    &__btn-2 {
-      background-color: #FF5A3D;
-      border-radius: 100px;
-      box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
-      margin-top: 152px;
-      letter-spacing: 0.5px;
-
-      @screen lg {
-        margin-top: 72px;
-        align-self: flex-end;
-      }
-    }
-  }
-
   .partners {
     &__title {
       color: theme('colors.teal.dark');
@@ -51,10 +20,8 @@
     table {
       @apply w-full;
       color: theme('colors.teal.dark');
-      width: 100%;
 
       @screen md {
-        // width: calc(688 / 768 * 100%);
         margin: auto;
         border-collapse: collapse;
         border-radius: 10px;
@@ -142,139 +109,91 @@
 
         .tier-name {
           margin-bottom: 4px;
-
         }
 
         .tier-name,
         .tier-value {
           @screen md {
-            padding: 0 24px;
+            @apply py-0 px-6;
           }
         }
       }
 
       td {
-        @apply mx-auto;
-        padding-top: 65px;
-        padding-bottom: 80px;
-        @apply items-center;
-        width: 320px;
+        @apply mx-auto items-center px-10 pt-px65 pb-px80 w-full;
 
         @screen md {
-          width: 100%;
-          padding-left: 30px;
-          padding-right: 30px;
-          flex-wrap: wrap;
-          padding-top: 30px;
-          padding-bottom: 80px;
-          justify-content: space-around;
-
+          @apply px-px30 pt-px30 pb-px80 content-around;
           a + a {
             margin-top: 0;
           }
         }
 
         @screen lg {
-          padding-top: 70px;
-          padding-bottom: 100px;
-          padding-left: 55px;
-          padding-right: 60px;
+          @apply pt-px70 pb-px100 pl-px55 pr-px60;
           gap: 40px;
         }
 
 
         &.logo-size-text {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          grid-template-areas: 'leftMobile leftMobile leftMobile rightMobile rightMobile rightMobile';
-          grid-gap: 12px;
-          align-items: flex-start;
+          @apply grid grid-cols-6 gap-x-3 gap-y-5 items-start grid-flow-col;
 
           .left-mobile {
-            grid-area: leftMobile;
+            grid-column: 1 / span 3;
           }
 
           .right-mobile {
-            grid-area: rightMobile;
+            grid-column: 4 / span 3;
           }
-          
 
           a {
-            width: 100%;
-            font-size: 14px;
-            line-height: 20px;
+            @apply text-sm w-full;
 
             @screen md {
-              font-size: 16px;
-              line-height: 24px;
+              @apply text-base;
             }
 
             @screen lg {
-              font-size: 20px;
-              line-height: 24px;
+              @apply text-xl;
             }
           }
 
-          a + a {
-            margin-top: 18px;
-          }
 
           @screen md {
-            grid-gap: 30px;
+            @apply gap-px30;
           }
 
           @screen lg {
-            grid-template-columns: repeat(9, 1fr);
-            grid-template-areas: 'leftDesktop leftDesktop leftDesktop midDesktop midDesktop midDesktop rightDesktop rightDesktop rightDesktop';
-            grid-gap: 28px;
-          }
+            @apply grid-cols-9 gap-y-px28 gap-x-px30;
 
-          .left-desktop {
-            grid-area: leftDesktop;
-          }
+            .left-desktop {
+              grid-column: 1 / span 3;
+            }
 
-          .mid-desktop {
-            grid-area: midDesktop;
-          }
+            .mid-desktop {
+              grid-column: 4 / span 3;
+            }
 
-          .right-desktop {
-            grid-area: rightDesktop;
+            .right-desktop {
+              grid-column: 7 / span 3;
+            }
           }
         }
 
         &.logo-size-big {
-          padding-top: 80px;
-          padding-bottom: 80px;
-          margin-top: -100px;
-
-          a {
-            margin-top: 100px;
-          }
+          @apply grid grid-cols-1 gap-y-px120 py-20;
 
           @screen md {
-            padding-top: 32px;
-            padding-bottom: 32px;
-            justify-content: flex-start;
-            align-items: center;
-            margin: -50px 0 0 -40px;
-
-            a {
-              margin: 50px 0 0 40px;
-            }
+            @apply py-8 grid-cols-3 gap-x-16 gap-y-7 items-center content-start;
           }
 
-          @screen xl {
-            padding-top: 90px;
-            padding-bottom: 90px;
-            margin: -110px 0 0 -108px;
-
-            a {
-              margin: 110px 0 0 108px;
-            }
+          @screen lg {
+            @apply py-px90 gap-x-px100 gap-y-px110;
           }
 
           img {
             max-width: 170px;
+            @apply mx-auto;
 
             @screen md {
               max-width: 118px;
@@ -291,33 +210,19 @@
         }
 
         &.logo-size-normal {
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          align-items: center;
-          align-content: space-between;
-          min-height: 385px;
+          @apply grid grid-cols-3 gap-x-5 gap-y-16 grid-flow-row;
           
-
-
           @screen md {
-            padding-top: 50px;
-            padding-bottom: 50px;
-            min-height: 0;
-            justify-content: flex-start;
-            margin: -50px 0 0 -35px;
-            a {
-              margin: 50px 0 0 35px;
-            }
+            @apply grid-cols-4 py-12 gap-x-7 gap-y-24;
           }
 
           @screen lg {
-            padding-top: 100px;
-            padding-bottom: 100px;
+            @apply py-px100 grid-cols-5 gap-x-px60 gap-y-px110;
           }
 
           img {
             max-width: 85px;
+            @apply mx-auto;
 
             @screen md {
               max-width: 78px;
@@ -336,146 +241,33 @@
     }
   }
 
-  .partnership-showcase {
-    background-color: theme('colors.teal.tint');
-    color: theme('colors.teal.dark');
-
-    &__container {
-      display: flex;
-      flex-wrap: wrap;
-      
-    }
-
-    &__title {
-      width: 100%;
-      text-align: center;
-      margin-top: 80px;
-
-      @screen md {
-        margin-top: 60px;
-      }
-
-      @screen lg {
-        margin-top: 120px;
-      }
-    }
-
-    &__cards {
-      margin-top: 40px;
-
-      @screen md {
-        margin-top: 50px;
-      }
-
-      @screen lg {
-        margin-top: 60px;
-      }
-    }
-
-    &__card {
-      padding: 38px 30px;
-      background-color: white;
-      height: 370px;
-
-      @screen md {
-        height: 400px;
-      }
-      
-
-      &-title {
-        font-size: 24px;
-        line-height: 28px;
-        font-weight: 600;
-
-        @screen lg {
-          font-size: 30px;
-          line-height: 40px;
-          font-weight: 700;
-        }
-      }
-
-      &-description {
-        font-size: 16px;
-        line-height: 24px;
-        margin-top: 14px;
-
-        @screen lg {
-          font-size: 20px;
-          line-height: 28px;
-        }
-      }
-
-      &-download {
-        font-size: 18px;
-        line-height: 24px;
-        font-weight: 700;
-        margin-top: 18px;
-        display: inline-block;
-
-        @screen lg {
-          font-size: 20px;
-          line-height: 26px;
-        }
-      }
-    }
-
-    .single-card + .single-card {
-      margin-top: 28px;
-    }
-
-    &__partner {
-      @apply text-white;
-      @apply text-px16;
-      @apply mb-px80;
-      @apply mt-px50;
-
-      background-color: theme('colors.teal.dark');
-      padding: 12px 32px;
-      border-radius: 10px;
-      display: inline-block;
-
-      @screen md {
-        @apply mt-px40;
-        @apply mb-px80;
-      }
-
-      @screen lg {
-        @apply mt-px60;
-        @apply mb-px120;
-      }
-    }
-
-  }
-
   .cards {
     background-color: theme('colors.gray.light');
 
     &__title {
       color: theme('colors.teal.dark');
-      margin: 80px 0 60px;
+      @apply mt-px80 mx-0 mb-px60;
 
       @screen md {
-        margin: 60px 0 64px;
+        @apply mt-px60 mx-0 mb-px65;
       }
 
       @screen lg {
-        margin: 120px 0 90px;
         flex-basis: 100%;
+        @apply mt-px120 mx-0 mb-px90;
       }
     }
 
     &__container {
       gap: 20px;
-      padding-bottom: 100px;
+      @apply pb-px100;
 
       @screen md {
-        padding-bottom: 80px;
-        justify-content: space-around;
+        @apply pb-px80 content-around;
       }
 
       @screen xl {
-        padding-bottom: 120px;
-        justify-content: space-between;
+        @apply pb-px120 content-between;
       }
 
       .circulation-card {
