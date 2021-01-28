@@ -26,7 +26,7 @@
         border-collapse: collapse;
         border-radius: 10px;
         border-style: hidden;
-        box-shadow: 0 0 0 2px rgba(0, 58, 72, 0.2);
+        box-shadow: 0 0 0 2px theme('colors.teal.dark');
 
         tr:first-child th,
         tr:first-child td {
@@ -41,11 +41,11 @@
 
       tr {
         &:first-child {
-          border-top: 2px solid rgba(0, 58, 72, 0.2);
+          border-top: 2px solid theme('colors.teal.dark');
         }
 
         &:last-child {
-          border-bottom: 2px solid rgba(0, 58, 72, 0.2);
+          border-bottom: 2px solid theme('colors.teal.dark');
         }
 
         @screen md {
