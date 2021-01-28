@@ -62,7 +62,7 @@ class Bill extends Get_Involved_Object {
 
 		ob_start();
 		?>
-		<div class="container mx-auto text-teal-dark text-left">
+		<div class="container mx-auto text-teal-dark text-left md:px-10 lg:pl-px60 lg:pr-px120">
 			<?php if ( ! empty( $bill_id ) ) { ?>
 				<div class="text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5 text-teal-light"><?= $bill_id ?></div>
 			<?php } ?>
@@ -95,7 +95,7 @@ class Bill extends Get_Involved_Object {
 						</div>
 					</span>
 			</h2>
-			<div class="prose">
+			<div class="prose prose-teal-dark">
 				<?= apply_filters( 'the_content', get_the_content( null, false, $post ) ); ?>
 			</div>
 		</div>

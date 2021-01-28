@@ -22,4 +22,18 @@
 	  margin-bottom: 0;
 	}
   }
+
+  .list-title {
+  	@apply text-px16 leading-px22 lg:text-px18 lg:leading-px26 font-normal;
+  }
+
+  .is-gi .modal-content-wrap & {
+  	@screen md {
+  		@apply -mx-10;
+  	}
+  	@screen lg {
+  		margin: 0 rem-calc(-128px) 0 rem-calc(-60px);
+  		@apply pt-4 pr-px120 pb-12 pl-px60;
+  	}
+  }
 }

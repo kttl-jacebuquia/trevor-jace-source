@@ -5,6 +5,8 @@ const px2rem = (px, root = 16) => {
 	return String(+remVal.toFixed(2)) + 'rem'
 }
 
+const DARK_TEAL = '#003A48';
+
 module.exports = {
 	purge: {
 		preserveHtmlElements: true,
@@ -75,7 +77,7 @@ module.exports = {
 				DEFAULT: '#FDE6BC',
 			},
 			teal: {
-				dark: '#003A48',
+				dark: DARK_TEAL,
 				tint: '#D9E2E4'
 			}
 		},
@@ -206,6 +208,19 @@ module.exports = {
 				px100: px2rem(100),
 				px106: px2rem(106),
 				px120: px2rem(120),
+			},
+			typography: {
+				'teal-dark': {
+					css: {
+						color: DARK_TEAL,
+						h3: {
+							color: DARK_TEAL
+						},
+						'ul > li::before': {
+							backgroundColor: DARK_TEAL
+						}
+					}
+				}
 			}
 		},
 	},
