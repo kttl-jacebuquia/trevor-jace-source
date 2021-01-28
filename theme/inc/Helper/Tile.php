@@ -135,7 +135,7 @@ class Tile {
 
 				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
 					<div class="tile-cta-wrap">
-						<a href="<?= @$data['cta_url'] ?>" class="tile-cta">
+						<a href="<?= @$data['cta_url'] ?>" class="tile-cta stretched-link">
 							<span><?= $data['cta_txt'] ?></span>
 						</a>
 					</div>
