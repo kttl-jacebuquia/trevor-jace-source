@@ -62,7 +62,7 @@ use TrevorWP\Theme\Helper;
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_DESC ) ?></p>
 					</div>
 					<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA_ACTION ) ?>"
-					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
+					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-text">What to expect +</a>
 				</div>
 			</div>
@@ -87,7 +87,7 @@ use TrevorWP\Theme\Helper;
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
+					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-call">What to expect +</a>
 				</div>
 			</div>
@@ -112,7 +112,7 @@ use TrevorWP\Theme\Helper;
 						<p class="text-px18 leading-px24 mb-6 md:text-px16 lg:text-px22 lg:leading-px32 lg:mx-10"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_DESC ) ?></p>
 					</div>
 					<a href="#"
-					   class="btn inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
+					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
 					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-chat">What to expect +</a>
 				</div>
 			</div>
