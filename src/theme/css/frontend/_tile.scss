@@ -70,7 +70,7 @@
 .tile {
   @apply bg-white rounded-px10;
   @apply mx-auto px-7 pt-7 pb-16 w-full;
-  @apply text-teal-dark text-left border border-teal-dark;
+  @apply text-teal-dark text-left;
   max-width: theme('postCard.width.DEFAULT');
 
   &-title-top {
