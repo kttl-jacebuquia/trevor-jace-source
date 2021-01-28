@@ -71,8 +71,10 @@ class Hero {
 	 * @return string|null
 	 */
 	public static function quote( array $data, array $options = [] ): ?string {
+		# image class
+		$img_cls = empty( $options['img_class'] ) ? ['absolute', 'bottom-0', 'right-0', 'h-3/5', 'w-auto'] : (array) $options['img_class'];
 		ob_start(); ?>
-		<div class="hero h-px737 lg:h-px600 lg:flex lg:items-center">
+		<div class="hero h-px737 lg:h-px546 lg:flex lg:items-center">
 			<figure class="container text-left text-teal-dark pt-10 md:flex-1 lg:p-0 lg:w-4/5 lg:flex-initial z-1">
 				<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
 					<i class="trevor-ti-quote-open -mt-2 mr-0.5 md:text-px26 lg:text-px32 lg:mr-2"></i>
@@ -92,13 +94,7 @@ class Hero {
 			<?php
 			if ( ! empty( $data['img'] ) && ! empty( $data['img']['id'] ) ) {
 				echo wp_get_attachment_image( $data['img']['id'], 'medium', false, [
-						'class' => implode( ' ', [
-								'absolute',
-								'bottom-0',
-								'right-0',
-								'h-3/5',
-								'w-auto'
-						] )
+						'class' => implode( ' ', array_unique( $img_cls ) )
 				] );
 			}
 			?>
