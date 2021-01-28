@@ -5,6 +5,11 @@
   body.is-rc & {
 	@apply text-indigo;
   }
+
+  .is-gi & {
+  	@apply bg-teal-dark bg-opacity-10 opacity-100 ml-3.5;
+  	backdrop-filter: blur(20px);
+  }
 }
 
 .post-share-more-title {
@@ -37,6 +42,9 @@
 
 	td {
 	  @apply bg-violet bg-opacity-20;
+	  .is-gi & {
+	  	@apply bg-teal-dark bg-opacity-100 text-white;
+	  }
 	}
   }
 

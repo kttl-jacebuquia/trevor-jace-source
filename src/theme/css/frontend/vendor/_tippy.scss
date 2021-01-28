@@ -1,9 +1,16 @@
 @import '~tippy.js/dist/svg-arrow.css';
 
 .tippy-svg-arrow {
-  svg {
-	path {
-	  fill: rgba(255, 255, 255, 0.90);
+	svg {
+		path {
+			fill: rgba(255, 255, 255, 0.90);
+		}
 	}
-  }
+
+	.is-gi & {
+		@apply ml-3.5;
+		svg path {
+			fill: rgba(0, 58, 72, 0.10);
+		}
+	}
 }
