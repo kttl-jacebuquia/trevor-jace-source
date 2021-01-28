@@ -70,9 +70,9 @@ class Bill extends Get_Involved_Object {
 				<?= $post->post_title ?>
 
 				<span class="text-white bg-teal-dark rounded-full cursor-pointer ml-3 hidden md:inline-flex w-9 h-9 items-center justify-center">
-					<a href="#" class="post-share-more-btn" aria-expanded="true">
+					<button class="post-share-more-btn" aria-expanded="true">
 						<i class="share-icon trevor-ti-share-others md:text-px14 lg:text-px16 flex"></i>
-					</a>
+					</button>
 
 				</span>
 				<span class="hidden">
