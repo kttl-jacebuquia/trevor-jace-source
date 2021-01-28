@@ -67,7 +67,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 <?php if ( ! is_paged() ) { ?>
 <main id="site-content" role="main" class="site-content">
 	<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
-		<div class="mx-auto mb-10 md:mt-10 lg:w-4/6 lg:mt-16">
+		<div class="mx-auto mb-10 md:mt-10 lg:w-3/4 lg:mt-16">
 			<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 				RESOURCE CENTER
 			</h2>
@@ -76,7 +76,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				<tilt>with knowledge.</tilt>
 			</h1>
 
-			<div class="my-8 mx-auto md:px-8 md:my-6 lg:w-9/12 lg:px-0">
+			<div class="my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4">
 				<form role="search" method="get" class="search-form"
 					  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
 					<?= Helper\Search_Input::render_rc(); ?>
@@ -86,7 +86,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px20 lg:tracking-px05 lg:mb-6">
 				Browse a topic or check out what’s trending.</p>
 
-			<div class="flex flex-wrap justify-center mt-4 -mx-8 md:mx-auto">
+			<div class="flex flex-wrap justify-center mt-4 -mx-8 md:mx-auto lg:w-3/4">
 				<?php foreach ( $featured_cats as $cat ) { ?>
 					<a href="<?= get_term_link( $cat ) ?>"
 					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 text-white md:px-5">
@@ -119,11 +119,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 		echo $cat_carousel;
 	} ?>
 
-
-
-
 	<?php # Guide
-
 	if ( $featured_guide ) {
 		$root_cls = [
 				'text-white',
@@ -131,20 +127,25 @@ $featured_word = Helper\Posts::get_one_from_list(
 				'mt-10',
 				'mb-24',
 				'mb-32',
+				'text-center',
+				'pt-20',
 				'md:h-px490',
 				'md:justify-center',
 				'lg:h-px737',
 				'lg:mb-48',
+				'lg:mb-48',
 		];
 
 		ob_start(); ?>
-		<?php if ( ! empty( $main_cat = \TrevorWP\Meta\Post::get_main_category( $featured_guide ) ) ) { ?>
-			<a class="text-px14 leading-px18 tracking-em002 font-semibold capitalize mb-5 lg:text-px18 lg:leading-px22 z-10"
-			   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
-		<?php } ?>
-		<h2 class="text-px32 leading-px42 font-semibold mb-5 lg:text-60 lg:leading-70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
-		<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
-		   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
+		<div class="mx-auto lg:w-3/4">
+			<?php if ( ! empty( $main_cat = \TrevorWP\Meta\Post::get_main_category( $featured_guide ) ) ) { ?>
+				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase mb-5 lg:text-px18 lg:leading-px22 z-10"
+				   href="<?= esc_url( get_term_link( $main_cat ) ) ?>"><?= esc_html( $main_cat->name ) ?></a>
+			<?php } ?>
+			<h2 class="text-px32 leading-px42 font-semibold my-5 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?= strip_tags( $featured_guide->post_excerpt, '<tilt>' ); ?></h2>
+			<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26"
+			   href="<?= get_the_permalink( $featured_guide ) ?>">Read Guide</a>
+		</div>
 		<?php $context = ob_get_clean();
 		echo Helper\Hero::img_bg( Helper\Thumbnail::get_post_imgs(
 				$featured_guide->ID,
@@ -191,10 +192,6 @@ $featured_word = Helper\Posts::get_one_from_list(
 		<?php $context = ob_get_clean();
 		echo Helper\Hero::img_bg(
 				[
-						[
-								intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_GLOSSARY_BG_IMG_V ) ),
-								Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_SM, Helper\Thumbnail::TYPE_VERTICAL ),
-						],
 						[
 								intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_GLOSSARY_BG_IMG ) ),
 								Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_LG, Helper\Thumbnail::TYPE_HORIZONTAL ),

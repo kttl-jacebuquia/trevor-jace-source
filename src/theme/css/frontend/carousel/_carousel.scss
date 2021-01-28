@@ -1,6 +1,6 @@
 .carousel {
   &-wrap {
-	@apply container mx-auto my-20;
+	@apply container mx-auto my-10;
   }
 
   &-title {
@@ -17,11 +17,20 @@
 	}
 
 	&-subtitle {
-	  @apply text-left text-px22 leading-px32 mb-14;
+	  @apply text-px22 leading-px32 mb-14;
 	}
   }
 
   @screen lg {
+	&-title {
+	  @apply text-px40 leading-px50;
+	}
+
+	&-title,
+	&-subtitle {
+	  @apply text-left;
+	}
+
 	&-wrap {
 	  @apply mb-48;
 	}
@@ -31,6 +40,12 @@
 	}
 
 	&-subtitle {
+	}
+  }
+
+  @screen xl {
+	&-title {
+	  @apply text-px46 leading-px56;
 	}
   }
 }

@@ -147,7 +147,7 @@ class Carousel {
 									<?php if ( ! empty( $entry['caption'] ) ) { ?>
 										<figcaption>
 											<?= $entry['caption'] ?>
-											<?php if ( !empty( $entry['cta_txt'] ) && !empty( $entry['cta_url'] ) ): ?>
+											<?php if ( ! empty( $entry['cta_txt'] ) && ! empty( $entry['cta_url'] ) ): ?>
 												<a href="<?= $entry['cta_url'] ?>"><?= $entry['cta_txt'] ?></a>
 											<?php endif; ?>
 										</figcaption>
@@ -237,6 +237,10 @@ class Carousel {
 				'pagination'    => [
 						'el'        => "{$base_selector} .swiper-pagination",
 						'clickable' => true,
+				],
+				'breakpoints'   => [
+						768  => [ 'spaceBetween' => 30 ],
+						1024  => [ 'spaceBetween' => 27 ],
 				],
 				'navigation'    => [
 						'nextEl' => "{$base_selector} .swiper-button-next",

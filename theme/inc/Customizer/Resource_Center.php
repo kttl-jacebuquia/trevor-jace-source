@@ -33,6 +33,7 @@ class Resource_Center extends Abstract_Customizer {
 	const SETTING_HOME_GUIDES = self::SETTING_HOME_PREFIX . 'guides';
 	const SETTING_HOME_GLOSSARY = self::SETTING_HOME_PREFIX . 'glossary';
 	const SETTING_HOME_GLOSSARY_BG_IMG = self::SETTING_HOME_PREFIX . 'glossary_bg_img';
+	const SETTING_HOME_GLOSSARY_IMG = self::SETTING_HOME_PREFIX . 'glossary_img';
 	const SETTING_HOME_GLOSSARY_BG_IMG_V = self::SETTING_HOME_PREFIX . 'glossary_bg_img_v';
 	const SETTING_HOME_CARD_NUM = self::SETTING_HOME_PREFIX . 'card_num';
 	const PREFIX_SETTING_HOME_CAT_POSTS = self::SETTING_HOME_PREFIX . 'cat_posts_';
@@ -339,10 +340,10 @@ class Resource_Center extends Abstract_Customizer {
 			'mime_type' => 'image',
 		] ) );
 
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_BG_IMG_V, [
-			'setting'   => self::SETTING_HOME_GLOSSARY_BG_IMG_V,
+		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_IMG, [
+			'setting'   => self::SETTING_HOME_GLOSSARY_IMG,
 			'section'   => self::SETTING_HOME_GLOSSARY,
-			'label'     => 'Background Image (Vertical)',
+			'label'     => 'Image',
 			'mime_type' => 'image',
 		] ) );
 

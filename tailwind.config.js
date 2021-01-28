@@ -90,7 +90,7 @@ module.exports = {
 		},
 		carousel: {
 			w3Card: {
-				minWidth: px2rem(500),
+				minWidth: px2rem(415),
 				maxWidth: px2rem(1275),
 			},
 			bigImg: {
@@ -149,6 +149,7 @@ module.exports = {
 				px60: px2rem(60),
 				px64: px2rem(64),
 				px70: px2rem(70),
+				px90: px2rem(90),
 			},
 			lineHeight: {
 				px18: px2rem(18),
@@ -174,6 +175,7 @@ module.exports = {
 				px68: px2rem(68),
 				px70: px2rem(70),
 				px80: px2rem(80),
+				px100: px2rem(100),
 			},
 			letterSpacing: {
 				em005: '0.005em',
