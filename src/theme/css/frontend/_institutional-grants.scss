@@ -1,35 +1,4 @@
 .institutional-grants {
-  .hero {
-    &__description {
-      width: 319px;
-
-      @screen md {
-        width: 426px;
-      }
-
-      @screen lg {
-        width: 647px;
-      }
-    }
-
-    &__btn-1 {
-      color: theme('colors.teal.dark');
-    }
-
-    &__btn-2 {
-      background-color: #FF5A3D;
-      border-radius: 100px;
-      box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
-      margin-top: 152px;
-      letter-spacing: 0.5px;
-
-      @screen lg {
-        margin-top: 72px;
-        align-self: flex-end;
-      }
-    }
-  }
-
   .funders {
     &__title {
       color: theme('colors.teal.dark');
@@ -46,10 +15,8 @@
     table {
       @apply w-full;
       color: theme('colors.teal.dark');
-      width: 100%;
 
       @screen md {
-        // width: calc(688 / 768 * 100%);
         margin: auto;
         border-collapse: collapse;
         border-radius: 10px;
@@ -94,9 +61,7 @@
       th,
       td {
         a {
-          position: relative;
-          display: inline-block;
-          @apply text-px20;
+          @apply text-px20 relative inline-block;
           @apply leading-px26;
           @apply font-bold;
 
@@ -149,33 +114,34 @@
       }
 
       td {
-        @apply mx-auto;
-        @apply pt-10;
-        @apply items-center;
-        padding-bottom: 44px;
-        width: 297px;
+        @apply mx-auto pt-10 pb-11 items-center w-full;
+        
         a + a {
-          margin-top: 34px;
+          @apply mt-px34;
         }
 
         @screen md {
-          width: 100%;
-          padding-left: 30px;
-          padding-right: 50px;
-          flex-wrap: wrap;
-          padding-top: 30px;
-          padding-bottom: 80px;
-          gap: 20px;
+          @apply pl-px30 pr-px30 flex-wrap pt-px30 pb-px80 -mt-px20 mr-0 mb-0 -ml-px20;
+
+          a {
+            @apply mt-px20 mr-0 mb-0 ml-px20;
+          }
 
           a + a {
-            margin-top: 0;
+            @apply mt-px20;
           }
         }
 
         @screen lg {
-          padding-top: 70px;
-          padding-bottom: 100px;
-          gap: 40px;
+          @apply pt-px70 pb-px100 -mt-px40 mr-0 mb-0 -ml-px40;
+          
+          a {
+            @apply mt-px40 mr-0 mb-0 ml-px40;
+          }
+
+          a + a {
+            @apply mt-px40;
+          }
         }
       }
     }
@@ -207,30 +173,28 @@
 
     &__title {
       color: theme('colors.teal.dark');
-      margin: 80px 0 60px;
+      @apply mt-px80 mx-0 mb-px60;
 
       @screen md {
-        margin: 60px 0 64px;
+        @apply mt-px60 mx-0 mb-px65;
       }
 
       @screen lg {
-        margin: 120px 0 90px;
         flex-basis: 100%;
+        @apply mt-px120 mx-0 mb-px90;
       }
     }
 
     &__container {
       gap: 20px;
-      padding-bottom: 100px;
+      @apply pb-px100;
 
       @screen md {
-        padding-bottom: 80px;
-        justify-content: space-around;
+        @apply pb-px80 justify-around;
       }
 
       @screen xl {
-        padding-bottom: 120px;
-        justify-content: space-between;
+        @apply pb-px120 justify-between;
       }
 
       .circulation-card {

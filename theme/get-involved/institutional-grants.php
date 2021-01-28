@@ -15,11 +15,12 @@ $tiers = ( new \WP_Term_Query( [
 	'meta_key'   => Meta\Taxonomy::KEY_PARTNER_TIER_VALUE,
 ] ) )->terms;
 
-
 /** @var \WP_Term $tier */
 foreach ( $tiers as $tier ) {
 	$tier->posts     = get_posts( [
+			'numberposts'	=> -1,
 			'orderby'    => 'name',
+			'order'			 => 'ASC',
 			'post_type'  => Grant::POST_TYPE,
 			'tax_query'  => [
 					[
