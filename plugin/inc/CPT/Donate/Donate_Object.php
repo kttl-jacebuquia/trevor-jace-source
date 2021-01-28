@@ -1,7 +1,7 @@
 <?php namespace TrevorWP\CPT\Donate;
 
-use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
+use TrevorWP\Meta\Post;
 
 abstract class Donate_Object {
 	/* Post Types */
@@ -23,8 +23,16 @@ abstract class Donate_Object {
 	/* Permalinks */
 	const PERMALINK_DONATE = 'donate';
 	const PERMALINK_FUNDRAISE = 'fundraise';
-	const PERMALINK_PROD_PARTNERSHIPS = 'product-partners';
+	const PERMALINK_PROD_PARTNERS = 'product-partners';
 	const PERMALINK_PROD_PARTNERS_SHOP = 'product-partners/shop';
+
+	/**
+	 * @var string[]
+	 */
+	static $ALL_POST_TYPES = [
+		Prod_Partner::POST_TYPE,
+		Partner_Prod::POST_TYPE,
+	];
 
 	/**
 	 * @see construct()
@@ -38,11 +46,14 @@ abstract class Donate_Object {
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
 		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
 		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+
+		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
 	}
 
 	public static function init(): void {
 		# Post Types
 		Prod_Partner::register_post_type();
+		Partner_Prod::register_post_type();
 
 		# Rewrites
 		## Single Pages
@@ -55,7 +66,7 @@ abstract class Donate_Object {
 		)
 		) {
 			add_rewrite_rule( $regex . '/?$', 'index.php?' . http_build_query( [
-					$qv           => 1,
+					$qv => 1,
 				] ), 'top' );
 		}
 	}
@@ -91,5 +102,25 @@ abstract class Donate_Object {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Fires before determining which template to load.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/template_redirect/
+	 */
+	public static function template_redirect(): void {
+		global $wp_query;
+		if ( is_singular( Prod_Partner::POST_TYPE ) ) {
+			$store_url = filter_var( $url = Post::get_store_url( get_the_ID() ), FILTER_VALIDATE_URL );
+
+			if ( empty( $store_url ) ) {
+				$wp_query->set_404();
+				status_header( 404 );
+			} else {
+				wp_redirect( $store_url, 302 );
+				exit;
+			}
+		}
 	}
 }

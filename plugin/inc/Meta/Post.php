@@ -46,23 +46,13 @@ class Post {
 	# Partner
 	const PARTNER_URL = Main::META_KEY_PREFIX . 'partner_url';
 
+	# Product Partner
+	const STORE_IMG = Main::META_KEY_PREFIX . 'store_img';
+	const STORE_URL = Main::META_KEY_PREFIX . 'store_url';
+
 	# Bill
 	const KEY_BILL_ID = Main::META_KEY_PREFIX . 'bill_id';
 
-	# Misc
-
-	/**
-	 * @deprecated
-	 */
-	const FILE_ENABLED_POST_TYPES = [
-		CPT\RC\Guide::POST_TYPE,
-	];
-	/**
-	 * @deprecated
-	 */
-	const BILL_ID_ENABLED_POST_TYPES = [
-		CPT\Get_Involved\Bill::POST_TYPE,
-	];
 
 	public static $KEYS_BY_POST_TYPE = [];
 	public static $ARGS_BY_KEY = [];
@@ -144,7 +134,17 @@ class Post {
 					'post_types' => [
 						CPT\Get_Involved\Bill::POST_TYPE,
 					],
-				]
+				],
+				self::STORE_IMG               => [
+					'post_types' => [
+						CPT\Donate\Prod_Partner::POST_TYPE,
+					],
+				],
+				self::STORE_URL               => [
+					'post_types' => [
+						CPT\Donate\Prod_Partner::POST_TYPE,
+					],
+				],
 			] as $meta_key => $args
 		) {
 			$args = array_merge( $default, $args );
@@ -373,5 +373,23 @@ class Post {
 	 */
 	public static function get_partner_url( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::PARTNER_URL, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_store_url( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::STORE_URL, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_store_img_id( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::STORE_IMG, true );
 	}
 }

@@ -96,6 +96,9 @@ class Hooks {
 
 			# Partnership
 			Admin\Partnership::register_hooks();
+
+			# Product Partner
+			Admin\Prod_Partner::register_hooks();
 		}
 
 		# Custom Hooks
@@ -263,6 +266,7 @@ class Hooks {
 				array_merge(
 						CPT\RC\RC_Object::$ALL_POST_TYPES,
 						CPT\Get_Involved\Get_Involved_Object::$ALL_POST_TYPES,
+						CPT\Donate\Donate_Object::$ALL_POST_TYPES,
 						[
 								'post',
 								'page'
