@@ -259,7 +259,15 @@ class Hooks {
 	 */
 	public static function init(): void {
 		# Disable solr on rest api queries
-		foreach ( array_merge( CPT\RC\RC_Object::$ALL_POST_TYPES, [ 'post', 'page' ] ) as $post_type ) {
+		foreach (
+				array_merge(
+						CPT\RC\RC_Object::$ALL_POST_TYPES,
+						CPT\Get_Involved\Get_Involved_Object::$ALL_POST_TYPES,
+						[
+								'post',
+								'page'
+						] ) as $post_type
+		) {
 			add_filter( "rest_{$post_type}_query", [ self::class, 'rest_post_type_query' ], 1, 1 );
 		}
 	}
