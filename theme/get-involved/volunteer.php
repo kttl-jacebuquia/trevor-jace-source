@@ -17,7 +17,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56">Trevor
 				counselors save lives everyday.</h2>
-			<p class="text-px18 leading-px26 mb-px60 md:mx-9 md:mb-20 lg:text-px26 lg:leading-px36 lg:mb-px120 lg:mx-44">As
+			<p class="text-px18 leading-px26 mb-px60 font-normal md:mx-9 md:mb-20 lg:text-px24 lg:leading-px36 lg:mb-px120 lg:mx-44">As
 				a volunteer you are on the front lines. working one on one with LGBTQ young people to help them navigate
 				tough times, and prevent suicide.</p>
 
