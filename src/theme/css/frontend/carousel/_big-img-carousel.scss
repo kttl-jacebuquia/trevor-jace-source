@@ -28,11 +28,17 @@
 
 		figcaption {
 			@apply text-white text-px18 leading-px26 flex flex-col;
-			@apply mt-4;
+			@apply mt-4 opacity-0 transition-opacity;
 
 			a {
 				@apply text-px18 leading-px24 tracking-em001 mt-4 self-center;
 				@apply border-b-2;
+			}
+		}
+
+		&-active {
+			figcaption {
+				@apply opacity-100;
 			}
 		}
 	}
