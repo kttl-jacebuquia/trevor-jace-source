@@ -90,7 +90,7 @@
 	}
 
 	&-cta {
-		@apply font-bold text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark;
+		@apply font-bold capitalize text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark;
 		&:hover {
 			@apply border-none pb-2;
 			background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 1px 100%;
