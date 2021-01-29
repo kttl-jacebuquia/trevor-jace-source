@@ -52,8 +52,10 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-			<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			<div class="carousel-header">
+				<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+				<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+			</div>
 
 			<div class="carousel-full-width-wrap">
 				<div class="carousel-container">
@@ -122,12 +124,14 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<?php if ( ! empty( $options['title'] ) ) { ?>
-				<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-			<?php } ?>
-			<?php if ( ! empty( $options['subtitle'] ) ) { ?>
-				<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
-			<?php } ?>
+			<div class="carousel-header">
+				<?php if ( ! empty( $options['title'] ) ) { ?>
+					<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+				<?php } ?>
+				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
+					<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+				<?php } ?>
+			</div>
 
 			<div class="carousel-full-width-wrap">
 				<div class="container carousel-container">

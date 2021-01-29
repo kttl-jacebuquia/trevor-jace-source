@@ -6,12 +6,16 @@
 		@apply mx-auto text-center;
 	}
 
+	&-header {
+		@apply mb-px50;
+	}
+
 	&-title {
 		@apply font-semibold text-px32 leading-px42 mb-3.5 tracking-em_001;
 	}
 
 	&-desc {
-		@apply text-px18 leading-px26 mb-px50;
+		@apply text-px18 leading-px26;
 		max-width: rem-calc(822px);
 	}
 
@@ -38,12 +42,16 @@
 			@apply px-0;
 		}
 
+		&-header {
+			@apply mb-10;
+		}
+
 		&-title {
 			@apply mx-40;
 		}
 
 		&-desc {
-			@apply w-3/4 mx-auto mb-10;
+			@apply w-3/4 mx-auto;
 		}
 
 		&-container {
@@ -54,12 +62,16 @@
 	@screen lg {
 		@apply pt-28 pb-48;
 
+		&-header {
+			@apply mb-20;
+		}
+
 		&-title {
 			@apply text-px46 leading-px56;
 		}
 
 		&-desc {
-			@apply text-px26 leading-px36 mb-20;
+			@apply text-px26 leading-px36;
 		}
 
 		&-container {

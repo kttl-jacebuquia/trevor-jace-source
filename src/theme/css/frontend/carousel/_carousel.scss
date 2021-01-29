@@ -3,6 +3,10 @@
 	@apply container mx-auto my-10;
   }
 
+  &-header {
+  	@apply mb-10;
+  }
+
   &-title {
 	@apply mb-4 text-center font-extrabold text-px32 leading-px40;
   }
@@ -12,6 +16,11 @@
   }
 
   @screen md {
+
+	&-header {
+		@apply mb-px50;
+	}
+
 	&-title {
 	  @apply font-bold leading-px42
 	}
@@ -24,6 +33,10 @@
   @screen lg {
 	&-title {
 	  @apply text-px40 leading-px50;
+	}
+
+	&-header {
+		@apply mb-px60;
 	}
 
 	&-title,
