@@ -17,6 +17,10 @@ class Volunteer extends Abstract_Customizer {
 	const SETTING_HOME_HERO_TITLE = self::SETTING_HOME_PREFIX . 'hero_title';
 	const SETTING_HOME_HERO_CTA = self::SETTING_HOME_PREFIX . 'hero_cta';
 
+	/* * * Header */
+	const SETTING_HOME_TITLE = self::SETTING_HOME_PREFIX . 'header_title';
+	const SETTING_HOME_DESC = self::SETTING_HOME_PREFIX . 'header_desc';
+
 	/* * * 1 */
 	const SETTING_HOME_1_IMG = self::SETTING_HOME_PREFIX . '1_img';
 	const SETTING_HOME_1_DESC = self::SETTING_HOME_PREFIX . '1_desc';
@@ -57,6 +61,8 @@ class Volunteer extends Abstract_Customizer {
 	const DEFAULTS = [
 		self::SETTING_HOME_HERO_TITLE            => '<tilt>Hope</tilt> starts with a volunteer',
 		self::SETTING_HOME_HERO_CTA              => 'Apply Today',
+		self::SETTING_HOME_TITLE                 => 'Trevor counselors save lives everyday.',
+		self::SETTING_HOME_DESC                  => 'As a volunteer you are on the front lines. Working one on one with LGBTQ young people to help them navigate tough times, and prevent suicide.',
 		self::SETTING_HOME_1_DESC                => 'LGBTQ young people with one accepting adult in their life were 40% less likely to attempt suicide.',
 		self::SETTING_HOME_2_DESC                => 'One volunteer can help support over 100 young people that wouldn’t be supported otherwise.',
 		self::SETTING_HOME_3_DESC                => 'In 2019, volunteers helped us answer almost 100,000 calls, chats and texts.',
@@ -109,6 +115,19 @@ class Volunteer extends Abstract_Customizer {
 			'section' => self::SECTION_HOME_GENERAL,
 			'label'   => 'Hero CTA',
 			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_TITLE, [
+			'setting' => self::SETTING_HOME_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Title',
+			'type'    => 'text',
+		] );
+		$this->_manager->add_control( self::SETTING_HOME_DESC, [
+			'setting' => self::SETTING_HOME_DESC,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Description',
+			'type'    => 'textarea',
 		] );
 
 		## 1

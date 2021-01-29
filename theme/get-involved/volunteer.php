@@ -15,11 +15,8 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 	<div class="pt-20 pb-24 text-white lg:pt-28 lg:pb-48">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56">Trevor
-				counselors save lives everyday.</h2>
-			<p class="text-px18 leading-px26 mb-px60 font-normal md:mx-9 md:mb-20 lg:text-px24 lg:leading-px36 lg:mb-px120 lg:mx-44">As
-				a volunteer you are on the front lines. working one on one with LGBTQ young people to help them navigate
-				tough times, and prevent suicide.</p>
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56"><?= Volunteer::get_val( Volunteer::SETTING_HOME_TITLE ); ?></h2>
+			<p class="text-px18 leading-px26 mb-px60 font-normal md:mx-9 md:mb-20 lg:text-px24 lg:leading-px36 lg:mb-px120 lg:mx-44"><?= Volunteer::get_val( Volunteer::SETTING_HOME_DESC ); ?></p>
 
 			<div class="flex flex-col lg:container mb-px72 md:mb-20 md:flex-row lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0 lg:max-w-px500" data-aspectRatio="1:1">
