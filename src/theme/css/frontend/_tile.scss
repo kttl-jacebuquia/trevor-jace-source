@@ -3,11 +3,11 @@
 	@apply pt-20 pb-px60 w-full;
 
 	&-inner {
-		@apply container mx-auto text-center;
+		@apply mx-auto text-center;
 	}
 
 	&-header {
-		@apply container;
+		@apply mb-px50;
 	}
 
 	&-title {
@@ -15,7 +15,8 @@
 	}
 
 	&-desc {
-		@apply text-px18 leading-px26 mb-px50;
+		@apply text-px18 leading-px26;
+		max-width: rem-calc(822px);
 	}
 
 	&-container {
@@ -25,6 +26,10 @@
 	&.sm-accordion {
 		.tile-grid-inner {
 			@apply px-0;
+		}
+
+		.tile-grid-header {
+			@apply container;
 		}
 
 		.tile-grid-container {
@@ -37,12 +42,16 @@
 			@apply px-0;
 		}
 
+		&-header {
+			@apply mb-10;
+		}
+
 		&-title {
 			@apply mx-40;
 		}
 
 		&-desc {
-			@apply w-3/4 mx-auto mb-10;
+			@apply w-3/4 mx-auto;
 		}
 
 		&-container {
@@ -53,12 +62,16 @@
 	@screen lg {
 		@apply pt-28 pb-48;
 
+		&-header {
+			@apply mb-20;
+		}
+
 		&-title {
 			@apply text-px46 leading-px56;
 		}
 
 		&-desc {
-			@apply text-px26 leading-px36 mb-20 w-1/2;
+			@apply text-px26 leading-px36;
 		}
 
 		&-container {
@@ -72,6 +85,7 @@
 	@apply mx-auto px-7 pt-7 pb-16 w-full;
 	@apply text-teal-dark text-left;
 	max-width: theme('postCard.width.DEFAULT');
+	height: rem-calc(370px);
 
 	&:hover {
 		@apply bg-gray-light transition-colors;
@@ -90,7 +104,7 @@
 	}
 
 	&-cta {
-		@apply font-bold text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark;
+		@apply font-bold capitalize text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark;
 		&:hover {
 			@apply border-none pb-2;
 			background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 1px 100%;
@@ -115,6 +129,7 @@
 
 	@screen lg {
 		max-width: theme('postCard.width.lg');
+		height: rem-calc(402px);
 
 		&-title {
 		}

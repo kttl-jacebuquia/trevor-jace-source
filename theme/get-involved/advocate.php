@@ -98,9 +98,9 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center -mt-10 md:-mt-14 lg:-mt-36"
 	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Letter::POST_TYPE ) ?>">View All</a>
 
-	<div class="py-10 text-center">
+	<div class="py-10 text-center mb-20 lg:mb-px120">
 		<a href="#"
-		   class="inline-block font-bold text-indigo bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10 self-center">
+		   class="inline-block font-bold text-teal-dark bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10 self-center">
 			<?= Advocacy::get_val( Advocacy::SETTING_HOME_TAN_CTA ) ?>
 		</a>
 	</div>
