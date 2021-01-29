@@ -1,100 +1,95 @@
 .post-single {
-  @apply flex flex-col flex-1;
+	@apply flex flex-col flex-1;
 }
 
 .post-content-wrap {
-  @apply flex flex-col flex-1;
-  @apply bg-white;
-  @apply prose;
-  /* Should be after the prose */
-  @apply max-w-none text-teal-dark;
-  // TODO: Fix this on tailwind config
+	@apply flex flex-col flex-1;
+	@apply bg-white;
+	@apply prose prose-teal-dark;
+	/* Should be after the prose */
+	@apply max-w-none text-teal-dark;
+	// TODO: Fix this on tailwind config
 
-  body.is-rc & {
-	@apply text-indigo;
-  }
+	body.is-rc & {
+		@apply text-indigo;
+	}
 
-  h1, h2, h3, h4, h5 {
-	color: inherit;
-  }
+	h1, h2, h3, h4, h5 {
+		color: inherit;
+	}
 }
 
 .post-content-grid {
-  @apply mx-auto flex-1;
-  @apply flex flex-col flex-col-reverse;
-  @apply pb-4;
-}
-
-.post-content {
-  @apply pb-10;
+	@apply mx-auto flex-1;
+	@apply flex flex-col flex-col-reverse;
 }
 
 .post-content-sidebar {
-  @apply py-10;
+	@apply py-10;
 
-  &.empty {
-	@apply pb-0;
-  }
+	&.empty {
+		@apply pb-0;
+	}
 }
 
 .post-content-sidebar > * + * {
-  @apply mt-10;
+	@apply mt-10;
 }
 
 .post-content {
-  > :first-child {
-	@apply mt-0;
-  }
+	> :first-child {
+		@apply mt-0;
+	}
 }
 
 @screen md {
-  .post-content {
-	@apply pb-12;
-  }
+	.post-content {
+		@apply pb-12;
+	}
 
-  .post-content-sidebar {
-	@apply py-12;
-  }
+	.post-content-sidebar {
+		@apply py-12;
+	}
 
-  .post-content-sidebar > * + * {
-	@apply mt-12;
-  }
+	.post-content-sidebar > * + * {
+		@apply mt-12;
+	}
 
-  .post-content-grid {
-	@apply pb-14;
-  }
+	.post-content-grid {
+		@apply pb-14;
+	}
 
-  .post-content {
-	width: percentage(7/8);
-  }
+	// .post-content {
+	//   width: percentage(7/8);
+	// }
 
-  .post-content-sidebar {
-	width: percentage(5/8);
-  }
+	.post-content-sidebar {
+		width: percentage(5/8);
+	}
 }
 
 @screen lg {
-  .post-content,
-  .post-content-sidebar {
-	@apply py-14;
-  }
+	.post-content,
+	.post-content-sidebar {
+		@apply py-14;
+	}
 
-  .post-content-sidebar > * + * {
-	@apply mt-14;
-  }
+	.post-content-sidebar > * + * {
+		@apply mt-14;
+	}
 
-  .post-content-grid {
-	@apply flex-none grid grid-cols-12;
-	@apply pb-14;
-  }
+	.post-content-grid {
+		@apply flex-none grid grid-cols-12;
+		@apply pb-14;
+	}
 
-  .post-content {
-	@apply w-auto;
-	@apply col-start-2 col-span-7;
-  }
+	.post-content {
+		@apply w-auto;
+		@apply col-start-2 col-span-7;
+	}
 
-  .post-content-sidebar {
-	@apply w-auto;
-	@apply col-start-10 col-span-3;
-  }
+	.post-content-sidebar {
+		@apply w-auto;
+		@apply col-start-10 col-span-3;
+	}
 }

@@ -19,6 +19,7 @@
 .post-header-inner {
   @apply mx-auto;
   @apply grid grid-cols-1 gap-4;
+  max-width: rem-calc(1018px);
 
   // Thumbnail Wrap
   .thumbnail-wrap {
@@ -44,7 +45,7 @@
   }
 
   .title-btm {
-	@apply text-px18 leading-px24 font-normal;
+	@apply text-px18 leading-px26 font-normal;
   }
 
   // Mid Row
@@ -195,6 +196,7 @@
   &.type-text_only {
 	@apply flex flex-col justify-around;
 	min-height: rem-calc(500px);
+	box-sizing: content-box;
 
 	.post-header-inner {
 	  margin-top: -10%;
@@ -251,6 +253,8 @@
 
 	  .post-header-inner {
 		margin-top: -5%;
+		max-width: rem-calc(500px);
+		box-sizing: content-box;
 	  }
 	}
 
@@ -368,6 +372,7 @@
 
 	  .post-header-inner {
 		margin-top: 0;
+		max-width: rem-calc(818px);
 	  }
 
 	  .post-header-content {
