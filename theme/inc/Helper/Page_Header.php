@@ -68,11 +68,15 @@ class Page_Header {
 		<div class="page-header type-split-img">
 			<div class="page-header-inner">
 				<div class="page-header-content-wrap">
-					<div class="page-header-title-top"></div>
+					<?php if ( ! empty( $options['title_top'] ) ) { ?>
+						<div class="page-header-title-top"><?= $options['title_top'] ?></div>
+					<?php } ?>
 					<h1 class="heading-lg-tilted page-header-title">
 						<?= $options['title'] ?>
 					</h1>
-					<p class="page-header-desc"><?= $options['desc'] ?></p>
+					<?php if ( ! empty( $options['desc'] ) ) { ?>
+						<p class="page-header-desc"><?= $options['desc'] ?></p>
+					<?php } ?>
 					<a href="<?= $options['cta_url'] ?>"
 					   class="page-header-cta"><?= $options['cta_txt'] ?></a>
 				</div>
