@@ -87,7 +87,7 @@
 	max-width: theme('postCard.width.DEFAULT');
 	height: rem-calc(370px);
 
-	&:hover {
+	[data-whatintent='mouse'] &:hover {
 		@apply bg-gray-light transition-colors;
 	}
 
@@ -105,7 +105,7 @@
 
 	&-cta {
 		@apply font-bold capitalize text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark;
-		&:hover {
+		[data-whatintent='mouse'] &:hover {
 			@apply border-none pb-2;
 			background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 1px 100%;
 			background-size: 14.5px 6px;

@@ -7,7 +7,7 @@
 		.tile-cta {
 			@include stretched-link;
 		}
-		&:hover {
+		[data-whatintent='mouse'] &:hover {
 			@apply bg-gray-light transition-colors;
 			.tile-cta {
 				@apply border-none pb-2;
