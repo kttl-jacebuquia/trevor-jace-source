@@ -50,6 +50,27 @@
 			</li>
 		</ul>
 
+		<hr class="my-10">
+
+		<ul class="my-20">
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ) ?>">Donate</a>
+			</li>
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_FUNDRAISE ) ) ?>">Fundraise</a>
+			</li>
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_PROD_PARTNERSHIPS ) ) ?>">Product Partnerships</a>
+			</li>
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_PROD_PARTNERS ) ) ?>">Shop or Product Partners</a>
+			</li>
+		</ul>
+
 	</div>
 </main> <!-- #site-content -->
 
