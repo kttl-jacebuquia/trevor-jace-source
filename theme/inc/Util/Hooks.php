@@ -388,7 +388,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_footer/
 	 */
 	public static function wp_footer(): void {
-		if ( Is::rc() ) { ?>
+		if ( Is::rc() && empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) { ?>
 			<div class="floating-crisis-btn-wrap">
 				<a class="btn floating-crisis-btn"
 				   href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>">
