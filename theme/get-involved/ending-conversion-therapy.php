@@ -137,17 +137,17 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					</div>
 				</div>
 				<div class="flex flex-row full-w relative mb-8">
-					<input id="checkbox-1" type="checkbox"
-						   class="appearance-none checked:bg-teal-tint mr-5 w-7 h-7 border-0 rounded"/>
+					<input id="checkbox-1" type="checkbox" checked
+						   class="mr-5 w-7 h-7 border-0 rounded"/>
 					<label for="checkbox-1"
-						   class="text-px16 leading-px24 text-white text-left mt-0.5 lg:text-px18 lg:leading-px26">Send
+						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">Send
 						me emails about this campaign.</label>
 				</div>
 				<div class="flex flex-row full-w relative mb-px50">
-					<input id="checkbox-1" type="checkbox"
-						   class="appearance-none checked:bg-teal-tint mr-5 w-7 h-7 border-0 rounded"/>
-					<label for="checkbox-1"
-						   class="text-px16 leading-px24 text-white text-left mt-0.5 lg:text-px18 lg:leading-px26">Send
+					<input id="checkbox-2" type="checkbox" checked
+						   class="mr-5 w-7 h-7 border-0 rounded"/>
+					<label for="checkbox-2"
+						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">Send
 						me text messages about this campaign.</label>
 				</div>
 

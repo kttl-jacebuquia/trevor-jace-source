@@ -232,6 +232,11 @@ module.exports = {
 			}
 		},
 	},
+	variants: {
+		extend: {
+			backgroundColor: ['checked']
+		}
+	},
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
