@@ -163,7 +163,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 		</div>
 	</div>
 
-	<div class="pt-20 pb-24 text-white lg:pt-24">
+	<div class="pt-20 pb-24 text-white lg:pt-24 bg-teal-dark">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5">
 				<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TITLE ) ?>
