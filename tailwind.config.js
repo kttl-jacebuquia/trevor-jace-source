@@ -77,6 +77,7 @@ module.exports = {
 				DEFAULT: '#FDE6BC',
 			},
 			teal: {
+				lighter: 'rgba(0, 58, 72, 0.2)',
 				dark: DARK_TEAL,
 				tint: '#D9E2E4'
 			}
@@ -198,16 +199,26 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
+				px10: px2rem(10),
+				px20: px2rem(20),
+				px28: px2rem(28),
 				px30: px2rem(30),
+				px34: px2rem(34),
 				px40: px2rem(40),
 				px50: px2rem(50),
+				px55: px2rem(55),
 				px60: px2rem(60),
+				px65: px2rem(65),
+				px70: px2rem(70),
 				px72: px2rem(72),
 				px80: px2rem(80),
 				px88: px2rem(88),
+				px90: px2rem(90),
 				px100: px2rem(100),
 				px106: px2rem(106),
+				px110: px2rem(110),
 				px120: px2rem(120),
+				px140: px2rem(140),
 			},
 			typography: {
 				'teal-dark': {

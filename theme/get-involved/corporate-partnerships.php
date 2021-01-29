@@ -55,7 +55,7 @@ foreach ( $tiers as $tier ) {
 								<div class="tier-value font-normal text-px20 leading-px26"><?= esc_html( get_term_meta( $tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?></div>
 
 							</th>
-							<td class="logo-size-<?= $tier->logo_size ?> flex flex-col md:flex-row">
+							<td class="logo-size-<?= $tier->logo_size ?> flex">
 								<?php
 									/** @var \WP_Post $post */
 									if ( $tier->logo_size != 'text' ) :
@@ -71,59 +71,38 @@ foreach ( $tiers as $tier ) {
 										<?php endforeach ?>
 
 									<?php else : ?>
-
 										<?php
+											$count = 0;
 											$num_posts = count( $tier->posts );
 											$mobile_length = ceil( $num_posts / 2 );
 											$desktop_length = ceil( $num_posts / 3 );
-											$left_items_mobile = array_slice( $tier->posts, 0,  $mobile_length);
-											$right_items_mobile = array_slice( $tier->posts, $mobile_length, $mobile_length );
-											$left_items_desktop = array_slice( $tier->posts, 0, $desktop_length );
-											$mid_items_desktop = array_slice( $tier->posts, $desktop_length, $desktop_length );
-											$right_items_desktop = array_slice( $tier->posts, ceil( $num_posts * 2 / 3 ), $desktop_length );
+											
 
-											function render_text_links ( object $post ) : string {
-												ob_start();
-											?>
-												<a href="#"
-													rel="nofollow noreferrer noopener"
-													target="_blank"
-													title="<?= esc_attr( $post->post_title ) ?>"
-												>
-													<?= $post->post_title ?>
-												</a>
-											<?php return ob_get_clean();
-											}
+											foreach ( $tier->posts as $post ) :
+												$classes = '';
+												++$count;
+												if ( $count <= $mobile_length ) {
+													$classes .= 'left-mobile';
+												} else if ( $count > $mobile_length && $count <= $num_posts ) {
+													$classes .= ' right-mobile';
+												}
+												
+												if ( $count <= $desktop_length ) {
+													$classes .= ' left-desktop';
+												} else if ( $count > ceil( $num_posts * 2 / 3 ) ) {
+													$classes .= ' right-desktop';
+												} else {
+													$classes .= ' mid-desktop';
+												}
 										?>
 
-											<div class="left-mobile lg:hidden">
-												<?php foreach ( $left_items_mobile as $post ) : ?>
-													<?= render_text_links( $post ); ?>
-												<?php endforeach ?>
-											</div>
-											<div class="right-mobile lg:hidden">
-												<?php foreach ( $right_items_mobile as $post ) : ?>
-													<?= render_text_links( $post ); ?>
-													<?php endforeach ?>
-											</div>
+											<a href="#"
+												rel="nofollow noreferrer noopener"
+												target="_blank"
+												title="<?= esc_attr( $post->post_title ) ?>"
+												class="<?= $classes ?>"><?= $post->post_title ?></a>
 
-											<div class="left-desktop hidden lg:block">
-												<?php foreach ( $left_items_desktop as $post ) : ?>
-													<?= render_text_links( $post ); ?>
-												<?php endforeach ?>
-											</div>
-
-											<div class="mid-desktop hidden lg:block">
-												<?php foreach ( $mid_items_desktop as $post ) : ?>
-													<?= render_text_links( $post ); ?>
-												<?php endforeach ?>
-											</div>
-
-											<div class="right-desktop hidden lg:block">
-												<?php foreach ( $right_items_desktop as $post ) : ?>
-													<?= render_text_links( $post ); ?>
-												<?php endforeach ?>
-											</div>
+										<?php endforeach ?>
 									<?php endif ?>
 							</td>
 						</tr>
@@ -132,36 +111,6 @@ foreach ( $tiers as $tier ) {
 			</table>
 		</div>
 	</div> <!-- .partners -->
-
-
-
-
-	<div class="partnership-showcase">
-		<div class="partnership-showcase__container container mx-auto">
-			<?= \TrevorWP\Theme\Helper\Tile_Grid::custom([
-					[
-							'title'   => 'Sed tellus eu eget dictum id. Gravida et.',
-							'desc'    => 'Urna dolor cras congue velit. A quis eu turpis blandit arcu in odio neque quis. Sed sed augue turpis.',
-							'cta_txt' => 'Download',
-							'cta_url' => '#',
-					],
-					[
-							'title'   => 'Fames feugiat non luctus sed imperdiet.',
-							'desc'    => 'Enim, ipsum etiam id mi consectetur adipiscing sed sagittis, pellentesque. Leo.',
-							'cta_txt' => 'Download',
-							'cta_url' => '#',
-					],
-					[
-							'title'   => 'Ut platea blandit et eu justo et commodo.',
-							'desc'    => 'Elit dui ultrices rhoncus quis quam pellentesque elit. Justo, nunc varius arcu pellentesque morbi. ',
-							'cta_txt' => 'Download',
-							'cta_url' => '#',
-					],
-			], ['title'=>'Partnership Showcase']) ?>
-
-			<a href="#" class="partnership-showcase__partner mx-auto flex-grow-0 flex-shrink-0" target="_blank">Become a Partner</a>
-		</div>
-	</div> <!-- .parnership-showcase -->
 
 	<div class="cards">
 		<div class="cards__container container mx-auto flex flex-row flex-wrap">
