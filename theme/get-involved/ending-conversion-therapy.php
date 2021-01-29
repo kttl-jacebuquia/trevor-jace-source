@@ -114,25 +114,25 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="fullname" class="sr-only">Full Name*</label>
 						<input id="fullname"
-							   class="bg-white rounded-px10 text-blue_green py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Full Name*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="email" class="sr-only">Email*</label>
 						<input id="email"
-							   class="bg-white rounded-px10 text-blue_green py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Email*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="mobilephone" class="sr-only">Mobile Phone</label>
 						<input id="mobilephone"
-							   class="bg-white rounded-px10 text-blue_green py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Mobile Phone"/>
 					</div>
 					<div class="flex full-w relative mb-12 md:mb-0">
 						<label for="zipcode" class="sr-only">Zip Code*</label>
 						<input id="zipcode"
-							   class="bg-white rounded-px10 text-blue_green py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Zip Code*"/>
 					</div>
 				</div>
