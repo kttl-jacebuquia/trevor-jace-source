@@ -1,0 +1,5 @@
+[type='checkbox']:checked {
+	@apply appearance-none checked:bg-teal-tint focus:outline-none focus:text-teal-tint hover:text-teal-tint;
+	background-image: url("data:image/svg+xml,%3Csvg width='20' height='14' viewBox='0 0 20 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.69669 10.2916L2.23629 4.83116L0.496094 6.63296L7.69669 13.7742L19.5019 1.96896L17.7617 0.226562L7.69669 10.2916Z' fill='%23003A48'/%3E%3C/svg%3E%0A");
+	background-size: 20px auto;
+}
