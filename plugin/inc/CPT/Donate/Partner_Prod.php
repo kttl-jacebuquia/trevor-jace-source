@@ -1,21 +1,21 @@
 <?php namespace TrevorWP\CPT\Donate;
 
 /**
- * Product Partner
+ * Partner Product
  */
-class Prod_Partner extends Donate_Object {
-	const POST_TYPE = self::POST_TYPE_PREFIX . 'prod_prtnr';
+class Partner_Prod extends Donate_Object {
+	const POST_TYPE = self::POST_TYPE_PREFIX . 'prtnr_prod';
 
 	/** @inheritDoc */
 	static function register_post_type(): void {
 		# Post Type
 		register_post_type( self::POST_TYPE, [
 			'labels'              => [
-				'name'          => 'Product Partners',
-				'singular_name' => 'Product Partner',
-				'add_new'       => 'Add New Product Partner'
+				'name'          => 'Products',
+				'singular_name' => 'Product',
+				'add_new'       => 'Add New Product'
 			],
-			'public'              => true,
+			'public'              => false,
 			'hierarchical'        => false,
 			'exclude_from_search' => true,
 			'show_in_rest'        => true,
@@ -24,9 +24,9 @@ class Prod_Partner extends Donate_Object {
 				'title',
 				'thumbnail',
 			],
-			'has_archive'         => true,
+			'has_archive'         => false,
 			'rewrite'             => [
-				'slug'       => self::PERMALINK_PROD_PARTNERS,
+				'slug'       => self::PERMALINK_PROD_PARTNERS_SHOP,
 				'with_front' => false,
 				'feeds'      => false,
 			],

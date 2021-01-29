@@ -5,6 +5,8 @@ const px2rem = (px, root = 16) => {
 	return String(+remVal.toFixed(2)) + 'rem'
 }
 
+const DARK_TEAL = '#003A48';
+
 module.exports = {
 	purge: {
 		preserveHtmlElements: true,
@@ -76,7 +78,7 @@ module.exports = {
 			},
 			teal: {
 				lighter: 'rgba(0, 58, 72, 0.2)',
-				dark: '#003A48',
+				dark: DARK_TEAL,
 				tint: '#D9E2E4'
 			}
 		},
@@ -91,7 +93,7 @@ module.exports = {
 		},
 		carousel: {
 			w3Card: {
-				minWidth: px2rem(500),
+				minWidth: px2rem(415),
 				maxWidth: px2rem(1275),
 			},
 			bigImg: {
@@ -150,6 +152,7 @@ module.exports = {
 				px60: px2rem(60),
 				px64: px2rem(64),
 				px70: px2rem(70),
+				px90: px2rem(90),
 			},
 			lineHeight: {
 				px18: px2rem(18),
@@ -168,6 +171,7 @@ module.exports = {
 				px46: px2rem(46),
 				px48: px2rem(48),
 				px50: px2rem(50),
+				px52: px2rem(52),
 				px54: px2rem(54),
 				px56: px2rem(56),
 				px60: px2rem(60),
@@ -175,6 +179,7 @@ module.exports = {
 				px68: px2rem(68),
 				px70: px2rem(70),
 				px80: px2rem(80),
+				px100: px2rem(100),
 			},
 			letterSpacing: {
 				em005: '0.005em',
@@ -214,6 +219,19 @@ module.exports = {
 				px110: px2rem(110),
 				px120: px2rem(120),
 				px140: px2rem(140),
+			},
+			typography: {
+				'teal-dark': {
+					css: {
+						color: DARK_TEAL,
+						h3: {
+							color: DARK_TEAL
+						},
+						'ul > li::before': {
+							backgroundColor: DARK_TEAL
+						}
+					}
+				}
 			}
 		},
 	},

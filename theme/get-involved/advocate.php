@@ -61,7 +61,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'title'       => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_TITLE ),
 			'desc'        => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_DESC ),
 			'smAccordion' => true,
-			'tileClass'   => [ 'text-teal-dark' ],
+			'tileClass'   => [ 'text-teal-dark', 'relative' ],
 			'class'       => [ 'text-white', 'md:container', 'mx-auto' ]
 	] ) ?>
 
@@ -69,14 +69,18 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	$quotes = (array) Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_DATA );
 	if ( ! empty( $quotes ) ) {
 		$quote = $quotes[ array_rand( $quotes, 1 ) ];
-		echo Helper\Hero::quote( $quote, [ 'img_id' => Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_BG ) ] );
+		echo Helper\Hero::quote( $quote, [
+			'img_id' => Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_BG ),
+			'img_class' => ['absolute', 'bottom-0', 'right-0', 'w-auto', 'max-w-none', 'h-1/2', 'right-1/2', 'transform', 'translate-x-1/2', 'md:transform-none', 'md:right-0', 'md:h-3/5', 'lg:h-4/5'],
+			'root_cls' => ['lg:py-0']
+		] );
 	}
 	?>
 
 	<?= Helper\Tile_Grid::posts( $featured_bills, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_DESC ),
-			'tileClass' => [ 'text-teal-dark' ],
+			'tileClass' => [ 'text-teal-dark', 'relative' ],
 			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
 	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center -mt-10 md:-mt-14 lg:-mt-36"
@@ -87,7 +91,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	<?= Helper\Tile_Grid::posts( $featured_letters, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_DESC ),
-			'tileClass' => [ 'text-teal-dark' ],
+			'tileClass' => [ 'text-teal-dark', 'relative' ],
 			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
 

@@ -1,9 +1,27 @@
-tilt {
+tilt, tiltb {
   @apply inline-block;
   @apply font-caveat transform;
   --tw-rotate: -1deg;
 
   .has-block-tilt & {
 	@apply block;
+  }
+}
+
+tiltb {
+  @apply block;
+}
+
+
+.text-px32 tilt {
+  @apply text-px46 leading-px54 tracking-em001;
+  @apply mr-2;
+
+  @screen lg {
+	@apply text-px60 leading-px70;
+  }
+
+  @screen xl {
+	@apply text-px90 leading-px100;
   }
 }

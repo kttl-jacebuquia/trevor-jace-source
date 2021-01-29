@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Admin;
 
+use TrevorWP\CPT;
 use TrevorWP\Meta;
 
 /**
@@ -9,36 +10,37 @@ class Partner {
 	/* Field Names */
 	const FIELD_NAME_URL = 'partner_url';
 
+	const POST_TYPES = [
+			CPT\Get_Involved\Partner::POST_TYPE,
+			CPT\Get_Involved\Grant::POST_TYPE,
+	];
+
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function register_hooks(): void {
-		add_action( 'add_meta_boxes', [ self::class, 'add_meta_boxes' ], 10, 1 );
-		add_action( 'save_post_' . \TrevorWP\CPT\Get_Involved\Partner::POST_TYPE, [ self::class, 'save_post' ], 10, 1 );
-		add_action( 'save_post_' . \TrevorWP\CPT\Get_Involved\Grant::POST_TYPE, [ self::class, 'save_post' ], 10, 1 );
+		foreach ( self::POST_TYPES as $pt ) {
+			add_action( "add_meta_boxes_{$pt}", [ self::class, 'add_meta_boxes' ], 10, 1 );
+			add_action( "save_post_{$pt}", [ self::class, 'save_post' ], 10, 1 );
+		}
 	}
 
 	/**
-	 * Fires after all built-in meta boxes have been added.
+	 * Fires after all built-in meta boxes have been added, contextually for the given post type.
 	 *
-	 * @param string $post_type
+	 * @param \WP_Post $post
 	 *
-	 * @link https://developer.wordpress.org/reference/hooks/add_meta_boxes/
+	 * @link https://developer.wordpress.org/reference/hooks/add_meta_boxes_post_type/
 	 */
-	public static function add_meta_boxes( string $post_type ): void {
-		if ( in_array( $post_type, [
-				\TrevorWP\CPT\Get_Involved\Partner::POST_TYPE,
-				\TrevorWP\CPT\Get_Involved\Grant::POST_TYPE
-		] ) ) {
-			add_meta_box(
-					'partner_url',
-					'Partner URL',
-					[ self::class, 'render_url_input' ],
-					$post_type,
-					'normal',
-					'high'
-			);
-		}
+	public static function add_meta_boxes( \WP_Post $post ): void {
+		add_meta_box(
+				'partner_url',
+				'Partner URL',
+				[ self::class, 'render_url_input' ],
+				$post->post_type,
+				'normal',
+				'high'
+		);
 	}
 
 	/**

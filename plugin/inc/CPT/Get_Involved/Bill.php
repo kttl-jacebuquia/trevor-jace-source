@@ -62,17 +62,17 @@ class Bill extends Get_Involved_Object {
 
 		ob_start();
 		?>
-		<div class="container mx-auto text-teal-dark text-left">
+		<div class="container mx-auto text-teal-dark text-left md:px-10 lg:pl-px60 lg:pr-px120">
 			<?php if ( ! empty( $bill_id ) ) { ?>
 				<div class="text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5 text-teal-light"><?= $bill_id ?></div>
 			<?php } ?>
-			<h2 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3">
+			<h2 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px40 lg:leading-px48 flex flex-row items-center">
 				<?= $post->post_title ?>
 
-				<span class="text-white bg-teal-dark rounded-full px-2 py-1 cursor-pointer ml-3">
-					<a href="#" class="post-share-more-btn" aria-expanded="true">
-						<i class="share-icon trevor-ti-share-others"></i>
-					</a>
+				<span class="text-white bg-teal-dark rounded-full cursor-pointer ml-3 hidden md:inline-flex w-9 h-9 items-center justify-center">
+					<button class="post-share-more-btn" aria-expanded="true">
+						<i class="share-icon trevor-ti-share-others md:text-px14 lg:text-px16 flex"></i>
+					</button>
 
 				</span>
 				<span class="hidden">
@@ -95,7 +95,7 @@ class Bill extends Get_Involved_Object {
 						</div>
 					</span>
 			</h2>
-			<div class="prose">
+			<div class="prose prose-teal-dark">
 				<?= apply_filters( 'the_content', get_the_content( null, false, $post ) ); ?>
 			</div>
 		</div>

@@ -91,13 +91,17 @@
 		}
 
 		.swiper-slide {
-		  width: theme('postCard.width.md');
+		  //width: theme('postCard.width.md');
 		  margin: 0 rem-calc(10px);
 		}
 	  }
 	}
 
 	@screen md {
+	  .swiper-slide {
+		width: theme('postCard.width.md');
+	  }
+
 	  .carousel-title,
 	  .carousel-subtitle {
 		@apply text-center;
@@ -105,23 +109,10 @@
 	}
 
 	@screen lg {
-	  .carousel-full-width-wrap {
-		.swiper-slide {
-		  width: theme('postCard.width.lg');
-		  margin: 0 rem-calc(15px);
-		}
+	  .swiper-slide {
+		width: theme('postCard.width.lg');
 	  }
 	}
 
-	// Swiper Active
-	@media screen and (min-width: theme('carousel.w3Card.minWidth')) and (max-width: theme('carousel.w3Card.maxWidth')) {
-	  .card-post {
-		width: theme('postCard.width.md');
-	  }
-
-	  .carousel-container {
-		width: theme('postCard.width.md');
-	  }
-	}
   }
 }

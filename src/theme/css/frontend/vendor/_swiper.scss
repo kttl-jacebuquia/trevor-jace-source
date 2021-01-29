@@ -25,6 +25,13 @@
   &.swiper-button-disabled {
 	@apply opacity-0;
   }
+
+  .is-gi_advocacy & {
+  	@apply bg-white bg-opacity-80 text-teal-dark;
+	  &:hover {
+			@apply bg-opacity-90;
+	  }
+  }
 }
 
 .swiper-button-prev {
