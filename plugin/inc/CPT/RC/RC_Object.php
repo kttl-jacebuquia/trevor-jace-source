@@ -592,8 +592,8 @@ abstract class RC_Object {
 	 * @see \SolrPower_WP_Query::setup()
 	 */
 	public static function the_posts( array $posts, \WP_Query $query ): array {
-		
-		if ( $query->is_search() && ! empty( $query->query_vars[ self::QV_RESOURCES_LP ] ) ) {
+
+		if ( $query->is_search() ) {
 			$glossary_key = null;
 			foreach ( $posts as $key => $post ) {
 				if ( $post->post_type == Glossary::POST_TYPE ) {
@@ -601,19 +601,18 @@ abstract class RC_Object {
 					$post->post_excerpt = @$post->post_excerpt_t;
 
 					// Get key of first glossary item in posts.
-					if ( is_null($glossary_key) ) {
+					if ( is_null( $glossary_key ) ) {
 						$glossary_key = $key;
 					}
 				}
 			}
-			
-			if ( ! is_null($glossary_key) && $glossary_key > 0 ) {
+
+			if ( ! is_null( $glossary_key ) && $glossary_key > 0 ) {
 				// Take first glossary item then prepend it to posts.
-				$glossary = $posts[$glossary_key];
-				unset($posts[$glossary_key]);
-				array_unshift($posts, $glossary);
+				$glossary = $posts[ $glossary_key ];
+				unset( $posts[ $glossary_key ] );
+				array_unshift( $posts, $glossary );
 			}
-			
 		}
 
 		return $posts;
