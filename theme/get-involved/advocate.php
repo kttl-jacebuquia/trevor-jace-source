@@ -72,7 +72,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 		echo Helper\Hero::quote( $quote, [
 			'img_id' => Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_BG ),
 			'img_class' => ['absolute', 'bottom-0', 'right-0', 'w-auto', 'max-w-none', 'h-1/2', 'right-1/2', 'transform', 'translate-x-1/2', 'md:transform-none', 'md:right-0', 'md:h-3/5', 'lg:h-4/5'],
-			'root_cls' => ['lg:py-0']
+			'root_cls' => ['lg:py-0', 'overflow-x-hidden']
 		] );
 	}
 	?>
