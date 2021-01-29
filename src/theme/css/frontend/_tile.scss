@@ -3,11 +3,7 @@
 	@apply pt-20 pb-px60 w-full;
 
 	&-inner {
-		@apply container mx-auto text-center;
-	}
-
-	&-header {
-		@apply container;
+		@apply mx-auto text-center;
 	}
 
 	&-title {
@@ -26,6 +22,10 @@
 	&.sm-accordion {
 		.tile-grid-inner {
 			@apply px-0;
+		}
+
+		.tile-grid-header {
+			@apply container;
 		}
 
 		.tile-grid-container {
@@ -73,6 +73,7 @@
 	@apply mx-auto px-7 pt-7 pb-16 w-full;
 	@apply text-teal-dark text-left;
 	max-width: theme('postCard.width.DEFAULT');
+	height: rem-calc(370px);
 
 	&:hover {
 		@apply bg-gray-light transition-colors;
@@ -116,6 +117,7 @@
 
 	@screen lg {
 		max-width: theme('postCard.width.lg');
+		height: rem-calc(402px);
 
 		&-title {
 		}

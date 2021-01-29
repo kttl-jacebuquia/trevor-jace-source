@@ -2,6 +2,8 @@
 	@apply md:rounded-px10 md:bg-white md:shadow-md border-teal-dark;
 
 	@screen md {
+		height: rem-calc(370px);
+
 		.tile-cta {
 			@include stretched-link;
 		}
@@ -13,6 +15,10 @@
 				background-size: 14.5px 6px;
 			}
 		}
+	}
+
+	@screen lg {
+		height: rem-calc(402px);
 	}
 }
 
