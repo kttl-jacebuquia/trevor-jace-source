@@ -117,6 +117,7 @@ module.exports = {
 				px10: px2rem(10)
 			},
 			maxWidth: {
+				px500: px2rem(500),
 				px1240: px2rem(1240)
 			},
 			height: {
