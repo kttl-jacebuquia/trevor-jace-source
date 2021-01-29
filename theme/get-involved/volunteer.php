@@ -156,7 +156,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 			<div class="justify-center py-10">
 				<a href="#"
-				   class="inline-block font-bold text-indigo bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10">
+				   class="inline-block font-bold text-teal-dark bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10">
 					<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_CTA ) ?>
 				</a>
 			</div>
