@@ -2,7 +2,7 @@
 	--img-height: theme('carousel.bigImg.height');
 
 	.carousel-title {
-		@apply text-center;
+		@apply text-center text-px28 leading-px32 font-bold;
 	}
 
 	.carousel-full-width-wrap {
@@ -40,6 +40,10 @@
 	@screen md {
 		--img-height: theme('carousel.bigImg.heightMD');
 
+		.carousel-title {
+			@apply text-px32 leading-px42;
+		}
+
 		.swiper-slide {
 			figcaption {
 				@apply text-px14 leading-px20;
@@ -60,6 +64,10 @@
 	@screen lg {
 		--img-height: theme('carousel.bigImg.heightLG');
 		@apply mb-20;
+
+		.carousel-title {
+			@apply text-px40 leading-px50;
+		}
 
 		.swiper-slide {
 			figcaption {
