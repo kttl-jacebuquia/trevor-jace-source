@@ -23,32 +23,33 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 		</div>
 	</div>
 
-	<div class="pt-20 pb-20 text-white md:pt-24 lg:pt-36 lg:pb-px120">
-		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56"><?= PWU::get_val( PWU::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_TITLE ) ?></h2>
-			<p class="text-px18 leading-px26 mb-px50 md:mx-9 md:mb-px50 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-44"><?= PWU::get_val( PWU::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_DESC ) ?></p>
-
-			<div class="card-fixed grid grid-cols-1 gap-y-7 md:grid-cols-2 md:gap-7 lg:grid-cols-3">
-				<div class="card bg-white text-teal-dark rounded-px10 text-left px-7 pt-7 pb-16 md:shadow-md">
-					<h3 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px26 lg:leading-px36">Corporate Partnerships</h3>
-					<p class="text-px16 leading-px24 mb-4 lg:text-px18 lg:leading-px26">Our partnerships are customized to align with our corporate partners’ priorities.</p>
-					<a class="font-bold text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark lg:text-px20 lg:leading-px26" href="#">Learn more</a>
-				</div>
-				<div class="card bg-white text-teal-dark rounded-px10 text-left px-7 pt-7 pb-16 md:shadow-md">
-					<h3 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px26 lg:leading-px36">Product Partnerships</h3>
-					<p class="text-px16 leading-px24 mb-4 lg:text-px18 lg:leading-px26">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor pellentesque id amet consectetur.</p>
-					<a class="font-bold text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark lg:text-px20 lg:leading-px26" href="#">Learn more</a>
-				</div>
-				<div class="card bg-white text-teal-dark rounded-px10 text-left px-7 pt-7 pb-16 md:shadow-md">
-					<h3 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px26 lg:leading-px36">Institutional Grants</h3>
-					<p class="text-px16 leading-px24 mb-4 lg:text-px18 lg:leading-px26">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor pellentesque id amet consectetur.</p>
-					<a class="font-bold text-px18 leading-px24 tracking-em001 border-b-2 border-teal-dark lg:text-px20 lg:leading-px26" href="#">Learn more</a>
-				</div>
-			</div>
-
-			<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 mt-px50 rounded-px10 self-center md:mt-px60 md:px-6 lg:mt-px50 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10" href="#">Become a Partner</a>
-		</div>
-	</div>
+	<?= Helper\Tile_Grid::custom( [
+			[
+					'title'   => 'Corporate Partnerships',
+					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
+					'cta_txt' => 'Read more',
+					'cta_url' => '#'
+			],
+			[
+					'title'   => 'Product Partnerships',
+					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
+					'cta_txt' => 'Learn more',
+					'cta_url' => '#'
+			],
+			[
+					'title'   => 'Institutional Grants',
+					'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor pellentesque id amet consectetur.',
+					'cta_txt' => 'Learn more',
+					'cta_url' => '#'
+			],
+	], [
+			'title'       => PWU::get_val( PWU::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_TITLE ),
+			'desc'        => PWU::get_val( PWU::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_DESC ),
+			'smAccordion' => false,
+			'tileClass'   => [ 'text-teal-dark' ],
+			'class'       => [ 'text-white', 'container', 'mx-auto', 'md:pb-2' ]
+	] ) ?>
+	<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 rounded-px10 self-center -mt-10 mb-20 md:mt-0 md:mb-px60 lg:mb-px120 md:px-6 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10" href="#">Become a Partner</a>
 
 	<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24">
 		<div class="container mx-auto site-content-inner text-center">
