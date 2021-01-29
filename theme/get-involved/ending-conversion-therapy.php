@@ -16,12 +16,12 @@ use \TrevorWP\Theme\Helper\Page_Header;
 			'cta_url'   => '#',
 	] ) ?>
 
-	<div class="py-14 text-blue_green bg-white md:py-20 lg:py-28">
+	<div class="py-14 text-teal-dark bg-white md:py-20 lg:py-28">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-bold text-px32 leading-px42 mb-3.5 mx-6 md:mx-0 lg:text-px46 lg:leading-px56">
 				<?= ECT::get_val( ECT::SETTING_HOME_1_TITLE ) ?>
 			</h2>
-			<p class="mx-auto text-px18 leading-px26 lg:text-px26 lg:leading-px36 lg:w-5/6">
+			<p class="mx-auto text-px18 leading-px26 lg:text-px22 lg:leading-px32 lg:w-5/6">
 				<?= ECT::get_val( ECT::SETTING_HOME_1_DESC ) ?>
 			</p>
 		</div>
