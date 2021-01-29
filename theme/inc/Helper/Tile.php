@@ -110,7 +110,7 @@ class Tile {
 		], null ), $options );
 
 		# class
-		$cls = [ 'tile' ];
+		$cls = [ 'tile', 'relative' ];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}

@@ -61,7 +61,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'title'       => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_TITLE ),
 			'desc'        => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_DESC ),
 			'smAccordion' => true,
-			'tileClass'   => [ 'text-teal-dark', 'relative' ],
+			'tileClass'   => [ 'text-teal-dark' ],
 			'class'       => [ 'text-white', 'md:container', 'mx-auto' ]
 	] ) ?>
 
@@ -80,7 +80,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	<?= Helper\Tile_Grid::posts( $featured_bills, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_DESC ),
-			'tileClass' => [ 'text-teal-dark', 'relative' ],
+			'tileClass' => [ 'text-teal-dark' ],
 			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
 	<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-white text-white mb-10 self-center -mt-10 md:-mt-14 lg:-mt-36"
@@ -91,7 +91,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	<?= Helper\Tile_Grid::posts( $featured_letters, [
 			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_TITLE ),
 			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_DESC ),
-			'tileClass' => [ 'text-teal-dark', 'relative' ],
+			'tileClass' => [ 'text-teal-dark' ],
 			'class'     => [ 'text-white', 'container', 'mx-auto' ]
 	] ) ?>
 
