@@ -25,11 +25,7 @@ class Partner_Prod extends Donate_Object {
 				'thumbnail',
 			],
 			'has_archive'         => false,
-			'rewrite'             => [
-				'slug'       => self::PERMALINK_PROD_PARTNERS_SHOP,
-				'with_front' => false,
-				'feeds'      => false,
-			],
+			'rewrite'             => false,
 		] );
 	}
 }

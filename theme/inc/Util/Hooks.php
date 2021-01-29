@@ -20,6 +20,7 @@ class Hooks {
 			[ CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ],
 			[ CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ],
 			[ CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ],
+			[ CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ]
 	];
 
 	/**

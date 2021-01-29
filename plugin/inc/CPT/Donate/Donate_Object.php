@@ -11,20 +11,18 @@ abstract class Donate_Object {
 	const QV_DONATE = Main::QV_PREFIX . 'donate';
 	const QV_FUNDRAISE = Main::QV_PREFIX . 'fundraise';
 	const QV_PROD_PARTNERSHIPS = Main::QV_PREFIX . 'prod_partnerships';
-	const QV_PROD_PARTNERS_SHOP = Main::QV_PREFIX . 'prod_partners_shop';
 
 	const _QV_ALL = [
 		self::QV_DONATE,
 		self::QV_FUNDRAISE,
 		self::QV_PROD_PARTNERSHIPS,
-		self::QV_PROD_PARTNERS_SHOP,
 	];
 
 	/* Permalinks */
 	const PERMALINK_DONATE = 'donate';
 	const PERMALINK_FUNDRAISE = 'fundraise';
 	const PERMALINK_PROD_PARTNERS = 'product-partners';
-	const PERMALINK_PROD_PARTNERS_SHOP = 'product-partners/shop';
+	const PERMALINK_PROD_PARTNERSHIPS = 'product-partnerships';
 
 	/**
 	 * @var string[]
@@ -61,6 +59,7 @@ abstract class Donate_Object {
 			[
 				[ self::PERMALINK_DONATE, self::QV_DONATE ],
 				[ self::PERMALINK_FUNDRAISE, self::QV_FUNDRAISE ],
+				[ self::PERMALINK_PROD_PARTNERSHIPS, self::QV_PROD_PARTNERSHIPS ],
 			] as list(
 			$regex, $qv
 		)
