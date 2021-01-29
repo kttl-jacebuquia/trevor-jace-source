@@ -13,13 +13,10 @@ module.exports = {
 		content: [
 			'./src/theme/**/*.js',
 			'./src/theme/**/*.scss',
-			'./theme/*.php',
-			'./theme/inc/**/*.php',
-			'./theme/rc/**/*.php',
-			'./theme/get-involved/**/*.php',
-			'./theme/template-parts/**/*.php',
+			'./theme/**/*.php',
+			'./plugin/inc/**/*.php',
 			'./plugin/templates/blocks/**/*.twig',
-		]
+		],
 	},
 	prefix: '',
 	important: false,
