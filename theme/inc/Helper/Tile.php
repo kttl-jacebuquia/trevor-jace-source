@@ -60,7 +60,7 @@ class Tile {
 		], null ), $options );
 
 		# class
-		$cls = [ 'tile-accordion-item' ];
+		$cls = [ 'tile-accordion-item', 'relative' ];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}
