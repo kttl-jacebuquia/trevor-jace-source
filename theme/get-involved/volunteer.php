@@ -37,7 +37,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 					] ) ?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-10">
+					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_1_DESC ) ?>
 					</p>
 				</div>
@@ -58,7 +58,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 					] ) ?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-10">
+					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_2_DESC ) ?>
 					</p>
 				</div>
@@ -79,7 +79,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 					] ) ?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-10">
+					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_3_DESC ) ?>
 					</p>
 				</div>
