@@ -1,6 +1,6 @@
 .modal {
   @apply transition-all;
-  @apply fixed w-full h-full top-0 left-0 flex items-center justify-center z-50;
+  @apply fixed w-screen h-full top-0 left-0 flex items-center justify-center z-50;
   @apply opacity-0 pointer-events-none;
 
   &.is-active {
@@ -33,6 +33,8 @@
   }
 
   @screen md {
+  	@apply w-full;
+
 	.modal-close {
 	  @apply mt-0 mr-7;
 	}

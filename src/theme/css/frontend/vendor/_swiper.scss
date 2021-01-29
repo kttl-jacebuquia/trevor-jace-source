@@ -26,7 +26,7 @@
 		@apply opacity-0;
 	}
 
-	.is-gi & {
+	.post-carousel & {
 		@apply bg-teal-dark bg-opacity-100 text-white;
 	}
 
@@ -94,7 +94,7 @@
 	height: rem-calc(10px);
 	@apply block bg-white opacity-20 rounded-full;
 
-	.is-gi & {
+	.post-carousel & {
 		@apply bg-teal-dark opacity-30;
 	}
 }
@@ -106,7 +106,7 @@
 .swiper-pagination-bullet-active {
 	opacity: 1;
 
-	.is-gi & {
+	.post-carousel & {
 		@apply opacity-100;
 	}
 }
