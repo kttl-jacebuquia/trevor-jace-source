@@ -1,6 +1,6 @@
 .carousel {
   &-wrap {
-	@apply container mx-auto my-10;
+	@apply container mx-auto mt-20 mb-10;
   }
 
   &-header {
@@ -45,7 +45,7 @@
 	}
 
 	&-wrap {
-	  @apply mb-48;
+	  @apply mb-48 mt-px120;
 	}
 
 	&-title {

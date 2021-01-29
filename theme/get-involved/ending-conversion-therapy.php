@@ -94,7 +94,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 				'subtitle' => ECT::get_val( ECT::SETTING_HOME_CAROUSEL_DESC ),
 		] ) ?>
 
-		<div class="text-center mx-auto -mt-10 pb-20 lg:pb-28 lg:-mt-28">
+		<div class="text-center mx-auto pb-20 lg:pb-28">
 			<a href="<?= \TrevorWP\CPT\RC\RC_Object::get_search_url( $search_term ) ?>"
 			   class="font-bold text-px24 leading-px34 border-b-2 border-teal-dark lg:text-px26 lg:leading-px36">
 				View All Results

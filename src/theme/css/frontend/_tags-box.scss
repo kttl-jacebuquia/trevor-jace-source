@@ -1,17 +1,25 @@
 .tag-box {
-  @apply text-indigo font-medium text-px14 leading-px18 tracking-px05;
-  @apply px-5 py-2;
-  @apply bg-violet-light;
-  @apply cursor-pointer;
-  @apply rounded-full;
-  @apply transition-colors;
+	@apply text-indigo font-medium text-px14 leading-px18 tracking-px05;
+	@apply px-5 py-2;
+	@apply bg-violet-light;
+	@apply cursor-pointer;
+	@apply rounded-full;
+	@apply transition-colors;
 
-  &:hover {
-	@apply bg-violet-lighter;
-  }
+	&:hover {
+		@apply bg-violet-lighter;
+	}
 
-  &.ellipsis {
-	@apply bg-violet bg-opacity-60;
-	@apply text-white;
-  }
+	&.ellipsis {
+		@apply bg-violet bg-opacity-60;
+		@apply text-white;
+	}
+
+	.is-gi & {
+		@apply bg-gray-light text-teal-dark;
+
+		&.ellipsis {
+			@apply bg-blue_green text-white;
+		}
+	}
 }
