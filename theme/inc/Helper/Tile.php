@@ -11,7 +11,7 @@ class Tile {
 	 *
 	 * @return string
 	 */
-	public static function post( \WP_Post $post, array $options = [] ): string {
+	public static function post( \WP_Post $post, int $key, array $options = [] ): string {
 		$data = [
 				'title'   => $post->post_title,
 				'desc'    => $post->post_excerpt,
@@ -45,7 +45,7 @@ class Tile {
 			}, 10, 0 );
 		}
 
-		return self::custom( $data, $options );
+		return self::custom( $data, $key, $options );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Tile {
 	 *
 	 * @return string
 	 */
-	public static function accordion( array $data, array $options = [] ): string {
+	public static function accordion( array $data, int $key, array $options = [] ): string {
 		$options = array_merge( array_fill_keys( [
 				'class'
 		], null ), $options );
@@ -67,16 +67,13 @@ class Tile {
 
 		ob_start();
 		?>
-		<div class="<?= implode( ' ', $cls ) ?>">
-			<h2 class="accordion-header" id="headingOne">
-				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28"
-						type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-						aria-controls="collapseOne">
+		<div class="js-accordion <?= implode( ' ', $cls ) ?>">
+			<h2 class="accordion-header" id="heading-<?= $key ?>">
+				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28" type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
 					<?= $data['title'] ?>
 				</button>
 			</h2>
-			<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-				 data-bs-parent="#accordionExample">
+			<div id="collapse-<?= $key ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $key ?>">
 				<div class="accordion-body px-7 pt-5 pb-9 bg-gray-light md:bg-transparent md:pb-36">
 					<p class="text-px18 leading-px28 mb-6 md:text-px16 md:leading-px24">
 						<?= $data['desc'] ?>
@@ -99,9 +96,9 @@ class Tile {
 	 *
 	 * @return string
 	 */
-	public static function custom( array $data, array $options = [] ): string {
+	public static function custom( array $data, int $key, array $options = [] ): string {
 		if ( $options['accordion'] ) {
-			return self::accordion( $data, $options );
+			return self::accordion( $data, $key, $options );
 		}
 
 		$options = array_merge( array_fill_keys( [

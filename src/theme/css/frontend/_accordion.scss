@@ -26,14 +26,15 @@
 .accordion-button {
 	&:after {
 		@extend .trevor-ti-chevron-down:before;
-		@apply mt-2 text-px14 font-bold;
+		@apply -mt-2 text-px14 font-bold;
+		transform: rotate(180deg);
 	}
 
-	&:not(.collapsed) {
+	.js-accordion:not(.show) & {
 
 		&::after {
-			@apply mt-0;
-			transform: rotate(180deg);
+			@apply mt-2;
+			transform: rotate(0deg);
 		}
 	}
 
@@ -53,7 +54,7 @@
 		}
 	}
 
-	&:not(.show) {
+	.js-accordion:not(.show) & {
 		@apply hidden;
 
 		@screen md {

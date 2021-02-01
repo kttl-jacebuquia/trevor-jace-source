@@ -57,9 +57,9 @@ class Tile_Grid {
 					<?php } ?>
 				</div>
 				<div class="tile-grid-container">
-					<?php foreach ( $data as $entry ) {
+					<?php foreach ( $data as $key => $entry ) {
 						$tile_method = $options['tileMethod'];
-						echo Tile::$tile_method( $entry, $tile_options );
+						echo Tile::$tile_method( $entry, $key, $tile_options );
 					} ?>
 				</div>
 			</div>

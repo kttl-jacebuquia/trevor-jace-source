@@ -43,4 +43,6 @@ isGetHelp && console.log('Get-Help page');
 // Trevorspace
 isTrevorspace && console.log('Trevorspace page');
 
-features.modal($('.modal'), {}, $('.modal-open'))
+features.modal($('.modal'), {}, $('.modal-open'));
+
+features.collapsible($('.js-accordion'), {});
