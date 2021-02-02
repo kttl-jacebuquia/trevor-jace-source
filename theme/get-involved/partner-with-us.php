@@ -14,6 +14,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			'cta_txt' => PWU::get_val( PWU::SETTING_HOME_HERO_CTA ),
 			'cta_url' => '#',
 			'carousel_data' => PWU::get_val( PWU::SETTING_HOME_HERO_CAROUSEL_DATA ),
+			'swiper' => [ 'centeredSlides' => true, 'slidesPerView' => 'auto' ]
 	] ) ?>
 
 	<div class="bg-teal-tint text-teal-dark py-px120">

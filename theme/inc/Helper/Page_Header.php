@@ -147,6 +147,7 @@ class Page_Header {
 				'cta_txt',
 				'cta_url',
 				'carousel_data',
+				'swiper'
 		], null ), [], $options );
 		ob_start();
 		?>
@@ -164,6 +165,7 @@ class Page_Header {
 				<div class="page-header-img-wrap">
 					<?= Helper\Carousel::big_img( $options['carousel_data'], [
 						'class' => 'text-white',
+						'swiper' => $options['swiper']
 					] ) ?>
 				</div>
 			</div>

@@ -266,6 +266,7 @@ class Carousel {
 				function init() {
 					if (!swiper || swiper.destroyed) {
 						swiper = new trevorWP.vendors.Swiper('<?= esc_js( $base_selector )?> .carousel-container', options);
+						console.log(swiper);
 					}
 				}
 
