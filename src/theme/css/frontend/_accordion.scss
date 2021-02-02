@@ -25,16 +25,16 @@
 
 .accordion-button {
 	&:after {
-		@extend .trevor-ti-chevron-down:before;
-		@apply -mt-2 text-px14 font-bold;
-		transform: rotate(180deg);
+		@extend .trevor-ti-minus:before;
+		@apply mt-3 font-bold;
+		font-size: rem-calc(17px);
 	}
 
 	.js-accordion:not(.show) & {
 
 		&::after {
-			@apply mt-2;
-			transform: rotate(0deg);
+			@apply mt-0 text-px20;
+			@extend .trevor-ti-plus:before;
 		}
 	}
 
