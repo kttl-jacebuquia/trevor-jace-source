@@ -69,7 +69,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					<?= ECT::get_val( ECT::SETTING_HOME_2_DESC ) ?>
 				</p>
 			</div>
-			<picture class="rounded-px10">
+			<picture class="rounded-px10 img-square">
 				<?php if ( ! empty( $img_id = ECT::get_val( ECT::SETTING_HOME_2_IMG ) ) ) { ?>
 					<?= wp_get_attachment_image( $img_id, 'large', false, [
 							'class' => implode( ' ', [

@@ -42,3 +42,11 @@
 		}
 	}
 }
+
+.img-square img {
+	height: calc(100vw - (theme('container.padding.DEFAULT') * 2));
+
+	@screen md {
+		height: auto;
+	}
+}
