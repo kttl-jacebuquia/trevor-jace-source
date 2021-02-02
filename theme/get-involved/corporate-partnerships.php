@@ -72,27 +72,26 @@ foreach ( $tiers as $tier ) {
 
 									<?php else : ?>
 										<?php
-											$count = 0;
-											$num_posts = count( $tier->posts );
-											$mobile_length = ceil( $num_posts / 2 );
-											$desktop_length = ceil( $num_posts / 3 );
-											
+                                                                                        $post_count = count( $tier->posts );
+                                                                                        $two_column_split = $post_count / 2;
+                                                                                        $three_column_split_1 = $post_count / 3;
+                                                                                        $three_column_split_2 = $three_column_split_1 * 2;
 
-											foreach ( $tier->posts as $post ) :
-												$classes = '';
-												++$count;
-												if ( $count <= $mobile_length ) {
-													$classes .= 'left-mobile';
-												} else if ( $count > $mobile_length && $count <= $num_posts ) {
-													$classes .= ' right-mobile';
-												}
-												
-												if ( $count <= $desktop_length ) {
-													$classes .= ' left-desktop';
-												} else if ( $count > ceil( $num_posts * 2 / 3 ) ) {
-													$classes .= ' right-desktop';
+											foreach ( $tier->posts as $i => $post ) :
+												$classes = [];
+
+												if ( $i < $two_column_split ) {
+													$classes[] = 'left-mobile';
 												} else {
-													$classes .= ' mid-desktop';
+													$classes[] = 'right-mobile';
+												}
+
+												if ( $i < $three_column_split_1 ) {
+													$classes[] = 'left-desktop';
+												} elseif ( $i < $three_column_split_2 ) {
+													$classes[] = 'mid-desktop';
+												} else {
+													$classes[] = 'right-desktop';
 												}
 										?>
 
@@ -100,7 +99,7 @@ foreach ( $tiers as $tier ) {
 												rel="nofollow noreferrer noopener"
 												target="_blank"
 												title="<?= esc_attr( $post->post_title ) ?>"
-												class="<?= $classes ?>"><?= $post->post_title ?></a>
+												class="<?= implode(' ', $classes) ?>"><?= $post->post_title ?></a>
 
 										<?php endforeach ?>
 									<?php endif ?>
