@@ -1,0 +1,40 @@
+.carousel-testimonials {
+  &-inner {
+	@apply flex flex-col;
+  }
+
+  &-img-wrap {
+	@apply bg-white;
+	@apply w-full;
+  }
+
+  &-txt-wrap {
+	@apply px-4;
+	@apply bg-canary;
+  }
+
+  @screen md {
+	&-inner {
+	  @apply flex-row items-stretch;
+	}
+
+	&-img-wrap {
+	  width: rem-calc(312px);
+	}
+
+	&-txt-wrap {
+	  @apply flex flex-col flex-1 justify-center;
+	  @apply px-12;
+	}
+  }
+
+  @screen xl {
+	@apply container mx-auto;
+
+	&-img-wrap {
+	  width: rem-calc(600px);
+	}
+  }
+}
+
+
