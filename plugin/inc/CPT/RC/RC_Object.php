@@ -456,12 +456,28 @@ abstract class RC_Object {
 			 */
 			$wp->query_vars['post_type'] = null;
 			$wp->query_vars['name']      = '';
-		} elseif ( ! empty( $post_type = @$wp->query_vars['post_type'] ) && in_array( $post_type, self::$PUBLIC_POST_TYPES ) ) {
-			$wp->query_vars[ $post_type ] = $wp->query_vars['name'];
+		} elseif ( ! empty( $post_type = @$wp->query_vars['post_type'] ) ) {
+			$blog_pts = [ Post::POST_TYPE, CPT\Post::POST_TYPE ];
+			if (
+				( is_array( $post_type ) && ! empty( array_intersect( $post_type, $blog_pts ) ) )
+				|| in_array( $post_type, $blog_pts )
+			) {
+				$posts = get_posts( [
+					'post_type'     => $blog_pts,
+					'numberposts'   => 1,
+					'post_name__in' => [ $wp->query_vars['name'] ]
+				] );
 
-			if ( $post_type === Post::POST_TYPE ) {
-				// Mark the it as RC blog post
-				$wp->query_vars[ Post::QV_BLOG ] = 1;
+				if ( ! empty( $posts ) ) {
+					$first_post = reset( $posts );
+					if ( $first_post->post_type == Post::POST_TYPE ) {
+						$wp->post_type                            = $first_post->post_type;
+						$wp->query_vars[ $first_post->post_type ] = $wp->query_vars['name'];
+
+						// Mark the it as RC blog post
+						$wp->query_vars[ Post::QV_BLOG ] = 1;
+					}
+				}
 			}
 		}
 	}
