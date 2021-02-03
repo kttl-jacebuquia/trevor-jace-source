@@ -7,10 +7,6 @@
 
   @screen md {
 	@apply text-px32 leading-px42;
-
-	& > tilt {
-	  @apply mt-0;
-	}
   }
 
   @screen lg {

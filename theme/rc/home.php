@@ -68,7 +68,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 
 <main id="site-content" role="main" class="site-content">
 	<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
-		<div class="mx-auto mb-10 md:mt-10 lg:w-3/4 lg:mt-16">
+		<div class="mx-auto mb-10 lg:w-3/4">
 			<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:text-px16 lg:leading-px20">
 				RESOURCE CENTER
 			</h2>
@@ -90,7 +90,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			<div class="flex flex-wrap justify-center mt-4 -mx-8 md:mx-auto lg:w-3/4">
 				<?php foreach ( $featured_cats as $cat ) { ?>
 					<a href="<?= get_term_link( $cat ) ?>"
-					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 text-white md:px-5">
+					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5">
 						<?= esc_html( $cat->name ); ?>
 					</a>
 				<?php } ?>
