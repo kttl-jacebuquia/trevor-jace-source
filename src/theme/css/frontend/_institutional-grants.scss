@@ -87,7 +87,7 @@
         }
 
         @screen lg {
-          flex: 0 0 194px;
+          flex: 0 0 289px;
           padding: 70px 0 0 0;
         }
 
@@ -102,7 +102,6 @@
 
         .tier-name {
           margin-bottom: 4px;
-
         }
 
         .tier-name,
@@ -147,23 +146,20 @@
     }
 
     &__partner {
-      @apply text-white;
-      @apply text-px16;
-      @apply mb-px100;
-      @apply mt-px60;
-
+      @apply text-white font-bold text-px16 leading-px22 lg:text-px20 lg:leading-px26 mb-px100 mt-px60 py-3 px-8 rounded-px10;
       background-color: theme('colors.teal.dark');
-      padding: 12px 32px;
-      border-radius: 10px;
+
 
       @screen md {
         @apply mt-px40;
         @apply mb-px80;
+        @apply py-4 px-8;
       }
 
       @screen lg {
         @apply mt-px60;
         @apply mb-px120;
+        @apply py-5 px-10;
       }
     }
   }

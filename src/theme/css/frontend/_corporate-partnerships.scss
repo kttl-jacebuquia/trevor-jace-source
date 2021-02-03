@@ -94,7 +94,7 @@
         }
 
         @screen lg {
-          flex: 0 0 194px;
+          flex: 0 0 289px;
           padding: 70px 0 0 0;
         }
 
@@ -109,6 +109,11 @@
 
         .tier-name {
           margin-bottom: 4px;
+          @apply font-semibold text-px20 leading-px26 md:leading-px24 lg:text-px26 lg:leading-px36;
+        }
+
+        .tier-value {
+          @apply font-normal text-px20 leading-px26 lg:text-px22 lg:leading-px32;
         }
 
         .tier-name,
@@ -136,7 +141,7 @@
 
 
         &.logo-size-text {
-          @apply grid grid-cols-6 gap-x-3 gap-y-5 items-start grid-flow-col;
+          @apply grid grid-cols-6 gap-x-3 gap-y-5 items-start grid-flow-col px-px28;
 
           .left-mobile {
             grid-column: 1 / span 3;
@@ -147,7 +152,7 @@
           }
 
           a {
-            @apply text-sm w-full;
+            @apply text-sm font-semibold w-full;
 
             @screen md {
               @apply text-base;
@@ -160,11 +165,11 @@
 
 
           @screen md {
-            @apply gap-px30;
+            @apply gap-px30 text-left px-px30;;
           }
 
           @screen lg {
-            @apply grid-cols-9 gap-y-px28 gap-x-px30;
+            @apply grid-cols-9 gap-y-px28 gap-x-px30 px-px60;
 
             .left-desktop {
               grid-column: 1 / span 3;
@@ -263,11 +268,11 @@
       @apply pb-px100;
 
       @screen md {
-        @apply pb-px80 content-around;
+        @apply pb-px80 justify-center;
       }
 
       @screen xl {
-        @apply pb-px120 content-between;
+        @apply pb-px120 justify-between;
       }
 
       .circulation-card {

@@ -43,7 +43,7 @@ foreach ( $tiers as $tier ) {
 	] ) ?>
 
 	<div class="partners bg-white flex flex-col">
-		<h2 class="partners__title text-px32 leading-px40 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">Current partners</h2>
+		<h2 class="partners__title text-px32 leading-px42 md:leading-px40 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">Current partners</h2>
 		<div class="table-container">
 			<table>
 				<tbody>
@@ -51,8 +51,8 @@ foreach ( $tiers as $tier ) {
 					?>
 						<tr class="flex flex-col md:flex-row text-center">
 							<th>
-								<div class="tier-name text-px20 leading-px26 font-semibold lg:mb-0"><?= $tier->name ?></div>
-								<div class="tier-value font-normal text-px20 leading-px26"><?= esc_html( get_term_meta( $tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?></div>
+								<div class="tier-name text-px20 leading-px26 font-semibold md:text-left lg:mb-0"><?= $tier->name ?></div>
+								<div class="tier-value font-normal text-px20 md:text-left leading-px26"><?= esc_html( get_term_meta( $tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?></div>
 
 							</th>
 							<td class="logo-size-<?= $tier->logo_size ?> flex">
@@ -113,7 +113,7 @@ foreach ( $tiers as $tier ) {
 
 	<div class="cards">
 		<div class="cards__container container mx-auto flex flex-row flex-wrap">
-			<h3 class="cards__title font-bold text-px32 lg:text-46 leading-px42 lg:leading-56 text-center w-full">There are other ways to help.</h3>
+			<h3 class="cards__title font-bold text-px32 leading-px42 lg:text-px46 lg:leading-px56 text-center w-full">There are other ways to help.</h3>
 			<?= Circulation_Card::render_donation(); ?>
 			<?= Circulation_Card::render_counselor(); ?>
 		</div>
