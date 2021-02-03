@@ -258,7 +258,7 @@
 			}
 			.page-header-content-wrap {
 				@apply ml-px100 w-2/5;
-				padding-bottom: 10%;
+				padding-bottom: 15%;
 			}
 			.big-img-carousel {
 				--img-height: theme('carousel.bigImg.heightLG');
@@ -268,10 +268,16 @@
 			}
 			.big-img-carousel .swiper-pagination {
 				@apply flex;
-				@apply pl-0 ml-0 mr-px100;
+				@apply pl-0 ml-auto mr-36;
 				width: var(--img-height);
 			}
-			.swiper-slide {
+			.big-img-carousel .swiper-button-prev {
+				left: calc(50% + 1rem);
+			}
+			.big-img-carousel .swiper-button-next {
+				@apply right-24;
+			}
+			.big-img-carousel .swiper-slide {
 				figcaption {
 					@apply text-px18 leading-px26;
 					a {
