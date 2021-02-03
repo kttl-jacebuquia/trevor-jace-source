@@ -201,14 +201,19 @@
 				@apply flex flex-row relative pb-20;
 			}
 			.page-header-content-wrap {
-				@apply absolute top-1/2 -translate-y-1/2 transform z-10 w-1/2 text-center items-center flex flex-col ml-px50 mr-0;
+				@apply text-left items-start;
+				@apply absolute top-1/2 -translate-y-1/2 transform z-10 flex flex-col ml-px50 mr-0;
 				padding-bottom: 25%;
+				width: calc(50% - #{rem-calc(50px)});
 			}
 			.page-header-img-wrap {
 				@apply self-end max-w-full ml-auto;
 			}
 			.carousel-wrap {
 				@apply mb-0 mt-2 w-auto;
+			}
+			.big-img-carousel {
+				--img-height: theme('carousel.bigImg.height');
 			}
 			.big-img-carousel,
 			.big-img-carousel .carousel-container,
@@ -217,7 +222,10 @@
 				@apply m-0 p-0;
 			}
 			.big-img-carousel .swiper-wrapper {
-				margin-right: calc(-1.5 * var(--img-height));
+				@apply ml-40;
+			}
+			.big-img-carousel .swiper-pagination {
+				@apply pl-80;
 			}
 			.big-img-carousel .swiper-slide {
 				@apply opacity-50;
@@ -252,11 +260,18 @@
 				@apply ml-px100 w-2/5;
 				padding-bottom: 10%;
 			}
+			.big-img-carousel {
+				--img-height: theme('carousel.bigImg.heightLG');
+			}
+			.big-img-carousel .swiper-wrapper {
+				@apply ml-20;
+			}
+			.big-img-carousel .swiper-pagination {
+				@apply flex;
+				@apply pl-0 ml-0 mr-px100;
+				width: var(--img-height);
+			}
 			.swiper-slide {
-				@apply opacity-50;
-				&-active {
-					@apply opacity-100;
-				}
 				figcaption {
 					@apply text-px18 leading-px26;
 					a {
