@@ -65,13 +65,15 @@
 	}
 
 	// Buttons
+	.swiper-button-next .swiper-button-wrapper,
+	.swiper-button-prev .swiper-button-wrapper {
+		top: calc(var(--img-height) / 2 - 2rem);
+	}
 	.swiper-button-next,
 	.swiper-button-prev {
-	  top: calc(var(--img-height) / 2 - 2rem);
-
-	  &:not(.swiper-button-disabled) {
-		display: flex;
-	  }
+		&:not(.swiper-button-disabled) {
+			display: flex;
+		}
 	}
   }
 
@@ -89,8 +91,9 @@
 	  }
 	}
 
-	.swiper-button-next {
-	  right: calc(50% - #{theme('screens.lg')} / 2 * (5 / 6) + 2rem);
+	.swiper-button-next,
+	.swiper-button-prev {
+		width: calc(50% - #{theme('screens.lg')} / 2 * (5 / 6) + 2rem);
 	}
 
 	.carousel-container {
@@ -111,8 +114,9 @@
 	  @apply col-span-8 col-start-3;
 	}
 
-	.swiper-button-next {
-	  right: calc(50% - #{theme('screens.xl')} / 2 * (2 / 3) - 2rem);
+	.swiper-button-next,
+	.swiper-button-prev {
+		width: calc(50% - #{theme('screens.xl')} / 2 * (2 / 3) + 3rem);
 	}
   }
 }

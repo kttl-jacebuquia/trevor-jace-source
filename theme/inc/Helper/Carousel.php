@@ -69,11 +69,15 @@ class Carousel {
 						<?php } ?>
 					</div>
 				</div>
-				<div class="swiper-button-prev">
-					<i class="trevor-ti-arrow-left"></i>
+				<div class="swiper-button swiper-button-prev">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-left"></i>
+					</div>
 				</div>
-				<div class="swiper-button-next">
-					<i class="trevor-ti-arrow-right"></i>
+				<div class="swiper-button swiper-button-next">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-right"></i>
+					</div>
 				</div>
 				<div class="swiper-pagination"></div>
 			</div>
@@ -162,11 +166,15 @@ class Carousel {
 						<?php } ?>
 					</div>
 				</div>
-				<div class="swiper-button-prev">
-					<i class="trevor-ti-arrow-left"></i>
+				<div class="swiper-button swiper-button-prev">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-left"></i>
+					</div>
 				</div>
-				<div class="swiper-button-next">
-					<i class="trevor-ti-arrow-right"></i>
+				<div class="swiper-button swiper-button-next">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-right"></i>
+					</div>
 				</div>
 				<div class="swiper-pagination"></div>
 			</div>

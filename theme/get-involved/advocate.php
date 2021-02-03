@@ -24,6 +24,9 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	<?= Helper\Carousel::big_img( Advocacy::get_val( Advocacy::SETTING_HOME_CAROUSEL_DATA ), [
 			'title' => Advocacy::get_val( Advocacy::SETTING_HOME_CAROUSEL_TITLE ),
 			'class' => 'text-white',
+			'swiper' => [
+				'centeredSlides' => true
+			]
 	] ) ?>
 
 	<?= Helper\Tile_Grid::custom( [
