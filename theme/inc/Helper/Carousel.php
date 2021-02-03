@@ -122,7 +122,6 @@ class Carousel {
 		];
 
 		ob_start(); ?>
-		
 
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
@@ -261,10 +260,6 @@ class Carousel {
 					</div>
 				</div>
 			</div>
-			<?php endforeach; ?>
-			</div>
-
-			<div class="swiper-pagination"></div>
 		</div>
 		<?php return ob_get_clean();
 	}
@@ -293,8 +288,8 @@ class Carousel {
 				'on'            => new \stdClass()
 		], $options );
 		?>
-		<script><?php /* TODO: Instead of printing this for each carousel, create a controller & use that. */ ?>
-			/*(function () {
+		<script>
+			(function () {
 				var swiper;
 				var options = <?= json_encode( $options )?>;
 				options.on.init = function () {
@@ -316,7 +311,7 @@ class Carousel {
 				<?php }else{ ?>
 				init();
 				<?php } ?>
-			})();*/
+			})();
 		</script>
 		<?php
 	}
