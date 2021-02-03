@@ -47,8 +47,14 @@ class Post {
 	const PARTNER_URL = Main::META_KEY_PREFIX . 'partner_url';
 
 	# Product Partner
-	const STORE_IMG = Main::META_KEY_PREFIX . 'store_img';
+	const STORE_IMG = self::KEY_FILE;
 	const STORE_URL = Main::META_KEY_PREFIX . 'store_url';
+	const ITEM_NAME = Main::META_KEY_PREFIX . 'item_name';
+
+	# Products
+	const PROD_ITEM_IMG = self::KEY_FILE;
+	const PROD_ITEM_URL = Main::META_KEY_PREFIX . 'prod_item_url';
+	const PROD_PARTNER_ID = Main::META_KEY_PREFIX . 'prod_partner_id';
 
 	# Bill
 	const KEY_BILL_ID = Main::META_KEY_PREFIX . 'bill_id';
@@ -143,6 +149,26 @@ class Post {
 				self::STORE_URL               => [
 					'post_types' => [
 						CPT\Donate\Prod_Partner::POST_TYPE,
+					],
+				],
+				self::ITEM_NAME               => [
+					'post_types' => [
+						CPT\Donate\Prod_Partner::POST_TYPE,
+					],
+				],
+				self::PROD_ITEM_IMG 					=> [
+					'post_types' => [
+						CPT\Donate\Partner_Prod::POST_TYPE,
+					],
+				],
+				self::PROD_ITEM_URL 					=> [
+					'post_types' => [
+						CPT\Donate\Partner_Prod::POST_TYPE,
+					],
+				],
+				self::PROD_PARTNER_ID 			=> [
+					'post_types' => [
+						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
 			] as $meta_key => $args
@@ -391,5 +417,41 @@ class Post {
 	 */
 	public static function get_store_img_id( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::STORE_IMG, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 * 
+	 * @return string|null
+	 */
+	public static function get_item_name( int $post_id): ?string {
+		return get_post_meta( $post_id, self::ITEM_NAME, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 * 
+	 * @return int|null
+	 */
+	public static function get_partner_id( int $post_id): int {
+		return (int) get_post_meta( $post_id, self::PROD_PARTNER_ID, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_item_url( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::PROD_ITEM_URL, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_item_img_id( int $post_id ): ?string {	
+		return get_post_meta( $post_id, self::PROD_ITEM_IMG, true );
 	}
 }

@@ -49,7 +49,7 @@ class Prod_Partner {
 			'Store URL',
 			[ self::class, 'render_url_input' ],
 			$post->post_type,
-			'normal',
+			'advanced',
 			'high'
 		);
 	}
@@ -60,15 +60,15 @@ class Prod_Partner {
 	 * @see Partner::add_meta_boxes()
 	 */
 	public static function render_url_input( \WP_Post $post ): void {
-		$url = Meta\Post::get_store_url( $post->ID )
+		$url = Meta\Post::get_store_url( $post->ID );
 		?>
 		<input name="<?= esc_attr( self::FIELD_URL ) ?>"
-		       value="<?= esc_attr( $url ) ?>"
-		       placeholder="https://"
-		       autocomplete="off"
-		       type="url"
-		       class="widefat"
-		       required>
+					value="<?= esc_attr( $url ) ?>"
+					placeholder="https://"
+					autocomplete="off"
+					type="url"
+					class="widefat"
+					required>
 		<?php
 	}
 
@@ -86,7 +86,7 @@ class Prod_Partner {
 		if ( 'attachment' != get_post_type( $file_id ) ) {
 			$file_id = null;
 		}
-
+		
 		update_post_meta( $post_id, Meta\Post::STORE_IMG, $file_id );
 
 		# URL

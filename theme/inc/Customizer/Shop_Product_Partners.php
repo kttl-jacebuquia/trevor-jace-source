@@ -97,7 +97,7 @@ class Shop_Product_Partners extends Abstract_Customizer {
 			'section'     => self::SECTION_HOME_GENERAL,
 			'allow_order' => true,
 			'label'       => 'Featured',
-			'post_type'   => Prod_Partner::POST_TYPE,
+			'post_type'   => Partner_Prod::POST_TYPE,
 		] ) );
 
 		// Items

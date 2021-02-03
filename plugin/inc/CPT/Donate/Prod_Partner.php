@@ -23,6 +23,7 @@ class Prod_Partner extends Donate_Object {
 			'supports'            => [
 				'title',
 				'thumbnail',
+				'excerpt',
 			],
 			'has_archive'         => true,
 			'rewrite'             => [

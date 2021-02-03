@@ -99,6 +99,9 @@ class Hooks {
 
 			# Product Partner
 			Admin\Prod_Partner::register_hooks();
+
+			# Partner Prodct
+			Admin\Partner_Prod::register_hooks();
 		}
 
 		# Custom Hooks
@@ -137,6 +140,24 @@ class Hooks {
 		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
 		add_action( 'wp_ajax_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
 		add_action( 'wp_ajax_nopriv_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
+		add_action( 'wp_ajax_partner-name-autocomplete', [self::class, 'partner_name_autocomplete'], 10, 0 );
+		add_action( 'wp_ajax_nopriv_partner-name-autocomplete', [self::class, 'partner_name_autocomplete'], 10, 0 );
+	}
+
+	public static function partner_name_autocomplete(): void {
+		$term = (string) @$_GET['term'];
+		global $wpdb;
+		$partner_post_type = CPT\Donate\Prod_Partner::POST_TYPE;
+		$prepared_statements = $wpdb->prepare( "SELECT ID, post_title FROM {$wpdb->posts} 
+		WHERE post_type = %s 
+		AND post_status = 'publish' 
+		AND post_title LIKE %s", $partner_post_type, $wpdb->esc_like( $term ) . '%');
+		$results = $wpdb->get_results( $prepared_statements, ARRAY_A );
+
+		// echo JSON to page  and exit.
+		$response = $_GET["callback"]."(". json_encode($results) .")";  
+		echo $response;  
+		exit;
 	}
 
 	public static function highlight_search(): void {

@@ -14,17 +14,21 @@ trait Meta_Box_File {
 	public static function render_meta_box( \WP_Post $post, array $args = [], string $type = 'media' ): void {
 		global $post;
 
+		
 		$meta_box_id = $args['id'];
+		$meta_key = Meta\Post::KEY_FILE;
+
 		list( $field_name ) = $args['args'];
 		$upload_link = esc_url( get_upload_iframe_src( $type, $post->ID ) );
-		$your_img_id = get_post_meta( $post->ID, Meta\Post::KEY_FILE, true );
-		$url         = wp_get_attachment_url( $your_img_id );
+		$your_img_id = get_post_meta( $post->ID, $meta_key, true );
+		$url         = wp_attachment_is_image( $your_img_id ) ? wp_get_attachment_image( $your_img_id ) : esc_html( wp_get_attachment_url( $your_img_id ) );
+
 		$has_file    = ! empty( $url );
 		?>
 
 		<div class="custom-img-container">
 			<?php if ( $has_file ) : ?>
-				<a href="<?= esc_url( $url ) ?>" title="Download file"><?= esc_html( $url ) ?></a>
+				<a href="<?= esc_url( $url ) ?>" title="Download file"><?= $url ?></a>
 			<?php endif; ?>
 		</div>
 

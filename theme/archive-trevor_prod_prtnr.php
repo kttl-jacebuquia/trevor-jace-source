@@ -6,7 +6,7 @@ use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 
 ?>
-	<main id="site-content" role="main" class="site-content">
+	<main id="site-content" role="main" class="site-content product-partner">
 		<?php /* Header */ ?>
 		<?= Helper\Page_Header::text( [
 				'title_top' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE_TOP ),
@@ -14,42 +14,111 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				'desc'      => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_DESC ),
 		] ) ?>
 
-		<?php /* Feature Collections */ ?>
+		<?php
+			/**
+			 * Feature Collections
+			 * 
+			 * Product Items should go here...
+			 * (e.g.
+			 * 	Bryton Sneaker In Rainbow Canvas of Dolce Vita,
+			 * 	Face Masks of Abercrombie & Fitch,
+			 * 	PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+			 * )
+			 *
+			 */
+		?>
 		<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
-			if ( ! empty( $shop_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES ) ) ) {
-				echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-						'post__in'  => $shop_ids,
-						'post_type' => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
-				] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
-			}
-		} ?>
-
-		<?php /* Some of our favorite items */ ?>
-		<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
-			if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS ) ) ) {
-				echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-						'post__in'  => $item_ids,
+			if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES ) ) ) {
+			?>
+			<div class="featured-collections">
+				<?php
+					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+						'post__in'  => explode( ",", $item_ids ),
 						'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-				] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ) ] );
-			}
+					] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
+				?>
+			</div>
+			
+			<?php }
 		} ?>
 
-		<?php /* Current Partners */ ?>
-		<?php if ( have_posts() ) : ?>
-			<div class="partners-list">
-				<?= Helper\Tile_Grid::posts( $wp_query->posts ) ?>
+		<div class="bg-white">
+			<?php
+				/**
+				 * Some of our favorite items
+				 * 
+				 * Product Items should go here
+				 * (e.g.
+				 * 	Bryton Sneaker In Rainbow Canvas of Dolce Vita,
+				 * 	Face Masks of Abercrombie & Fitch,
+				 * 	PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+				 * )
+				 * 
+				 *
+				 */
+			?>
+			<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
+				if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS ) ) ) {
+					?>
+					<div class="favorite-items">
+						<?php
+							echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+								'post__in'  => explode( ",", $item_ids ),
+								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+							] ) )->posts, 
+							[ 
+								'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
+								'tileClass'	=> ['clickable-card'],
+							] );
+						?>
+					</div>
+				<?php }
+			} ?>
 
-				<div class="trevor-pagination-default">
-					<?php get_template_part( 'template-parts/pagination' ); ?>
+			<?php /* Current Partners */ 
+				/**
+				 * Current Partners
+				 * 
+				 * Product Partners should go here
+				 * (e.g. 
+				 * 	Dolce Vita,
+				 * 	Abercrombie & Fitch
+				 * 	Chubbies, etc...
+				 * )
+				 */
+			?>
+			<?php if ( have_posts() ) : ?>
+				<div class="partners-list">
+					<h3 class="title">Current Partners</h3>
+					<?php echo Helper\Tile_Grid::posts( $wp_query->posts ) ?>
+					<div class="trevor-pagination-default">
+						<?php get_template_part( 'template-parts/pagination' ); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<?php 
+				$banner_title = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_TITLE );
+				$banner_desc  = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_DESC );
+				$banner_cta  = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_CTA );
+			?>
+
+			<div class="banner">
+				<div class="banner__inner">
+					<h3 class="banner__title"><?= esc_attr( $banner_title ) ?></h3>
+					<p class="banner__description"><?= esc_attr( $banner_desc ) ?></p>
+					<a href="<?= esc_url( $banner_cta ) ?>" class="banner__cta" target="_blank">Learn More</a>
 				</div>
 			</div>
-		<?php endif; ?>
+		</div>
 
-
-		<?php /* Recirculation */ ?>
-		<?php $circulation_title = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ); ?>
-		<?= Helper\Circulation_Card::render_fundraiser(); ?>
-		<?= Helper\Circulation_Card::render_counselor(); ?>
+		<div class="cards">
+		<div class="cards__container container mx-auto flex flex-row flex-wrap">
+			<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">There are other ways to help.</h3>
+			<?= Helper\Circulation_Card::render_fundraiser(); ?>
+			<?= Helper\Circulation_Card::render_counselor(); ?>
+		</div>
+	</div>
 	</main>
 
 <?php get_footer();
