@@ -1,0 +1,25 @@
+.testimonials {
+  position: relative;
+
+  .swiper-pagination {
+    position: absolute;
+    bottom: 70px;
+    z-index: 9999;
+    width:  100%;
+
+    @screen md {
+      right: 0;
+      bottom: 40px;
+      width: 50%;
+      display: flex;
+    }
+
+    span {
+      background: rgba(0, 58, 72, 0.3);
+
+      &.swiper-pagination-bullet-active {
+        background: theme("colors.teal.dark");
+      }
+    }
+  }
+}

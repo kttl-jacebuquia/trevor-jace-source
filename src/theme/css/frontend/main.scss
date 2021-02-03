@@ -13,15 +13,15 @@ body {
 
 @import "./what-input";
 @import "../utils/index";
-@import "./vendor/index";
+@import "./vendor/index"; 
 // Our Components
-@import "./general";
+@import "./general"; 
 @import "./fonts";
 @import "./root";
 @import "./container";
 @import "./grid";
 @import "./misc/index";
-@import "./modal/index";
+@import "./modal/index"; 
 @import "./headings";
 @import "./form";
 @import "./tilt-txt";
@@ -48,6 +48,7 @@ body {
 @import "./trevor-space";
 @import "./institutional-grants";
 @import "./corporate-partnerships";
+@import "./donate-page/index";
 @import "./product-partner";
 @import "./product-partnerships";
 

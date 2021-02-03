@@ -1,0 +1,81 @@
+.card-collection {
+  @apply pb-60 pt-px80;
+
+  @screen md {
+    @apply pt-px100;
+  }
+
+  @screen lg {
+    @apply pb-px90 pt-px120;
+  }
+
+  h3 {
+    color: white;
+    @apply mt-px40 text-px32 leading-px40 font-bold;
+
+    @screen md { 
+      @apply mt-px50;
+    }
+
+    @screen lg {
+      @apply mt-px80 text-px46 leading-px56;
+    }
+  }
+
+  .tile-grid-container {
+    @screen mobile {
+      row-gap: 0;
+    }
+  }
+
+  .tile-grid {
+    @apply pt-0 pb-0;
+
+    @screen mobile {
+      margin-left: rem-calc(-28px);
+      margin-right: rem-calc(-28px);
+      width: calc(100% + 58px);
+      
+      .tile {
+        max-width: 100%;
+        border-radius: 0;
+        height: auto;
+        border: 1px solid rgba(0, 94, 103, 0.2);
+        @apply pb-px30 pt-px30;
+
+        .tile-desc,
+        .tile-cta-wrap {
+          display: none;
+        }
+
+        .tile-title { 
+          margin-bottom: 0; 
+          
+          &:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: right;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M10 0C9.44771 0 9 0.447715 9 1V9H1C0.447715 9 0 9.44771 0 10C0 10.5523 0.447715 11 1 11H9V19C9 19.5523 9.44771 20 10 20C10.5523 20 11 19.5523 11 19V11H19C19.5523 11 20 10.5523 20 10C20 9.44771 19.5523 9 19 9H11V1C11 0.447715 10.5523 0 10 0Z' fill='%23003A48'/%3E%3C/svg%3E%0A");
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        }
+        
+        &.is-open {
+          .tile-desc,
+          .tile-cta-wrap {
+            display: block;
+          }
+
+          .tile-title {
+            &:after {
+              background-image: url("data:image/svg+xml,%3Csvg width='21' height='4' viewBox='0 0 21 4' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M20.8423 1.53072C20.8422 2.35915 20.1707 3.03073 19.3422 3.03074L1.84441 3.03101C1.01598 3.03102 0.344418 2.35946 0.344431 1.53103C0.344443 0.702604 1.01602 0.0310213 1.84445 0.0310086L19.3423 0.0307426C20.1707 0.0307306 20.8423 0.702293 20.8423 1.53072Z' fill='%23003A48'/%3E%3C/svg%3E%0A");
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,4 +20,6 @@
 			@apply text-px20 leading-px20 tracking-px05;
 		}
 	}
+
+	body.is-rc & { display: none; }
 }

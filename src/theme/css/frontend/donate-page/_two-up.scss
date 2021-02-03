@@ -1,0 +1,23 @@
+.other-ways {
+  background-color: theme('colors.gray.light');
+  @apply pb-px100;
+  @apply pt-px80;
+
+  @screen md {
+    @apply pb-px80
+  }
+
+  @screen lg {
+    @apply pb-px120;
+    @apply pt-px120;
+  }
+
+  h3 {
+    font-size: rem-calc( 32px );
+
+    @screen lg {
+      font-size: rem-calc( 46px );
+    }
+
+  }
+}

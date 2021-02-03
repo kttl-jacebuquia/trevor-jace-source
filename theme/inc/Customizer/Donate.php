@@ -17,7 +17,13 @@ class Donate extends Abstract_Customizer {
 	const SETTING_HOME_HERO_IMG = self::SETTING_HOME_PREFIX . 'hero_img';
 	const SETTING_HOME_HERO_TITLE = self::SETTING_HOME_PREFIX . 'hero_title';
 	const SETTING_HOME_HERO_DESC = self::SETTING_HOME_PREFIX . 'hero_desc';
+	const SETTING_HOME_HERO_CTA = self::SETTING_HOME_PREFIX . 'hero_cta';
+	const SETTING_HOME_HERO_LINK = self::SETTING_HOME_PREFIX . 'hero_link';
 
+	const SETTING_DONATE_IMG = self::SETTING_HOME_PREFIX . 'donate_img';
+	const SETTING_DONATE_HEADING = self::SETTING_HOME_PREFIX . 'donate_heading';
+	const SETTING_DONATE_INTRO = self::SETTING_HOME_PREFIX . 'donate_intro';
+	
 	const SETTING_HOME_1_TITLE = self::SETTING_HOME_PREFIX . '1_title';
 	const SETTING_HOME_1_DATA = self::SETTING_HOME_PREFIX . '1_data';
 
@@ -39,6 +45,10 @@ class Donate extends Abstract_Customizer {
 	const DEFAULTS = [
 		self::SETTING_HOME_HERO_TITLE        => 'Your donation can <tilt>save lives.</tilt>',
 		self::SETTING_HOME_HERO_DESC         => 'Every day, LGBTQ young people in crisis reach out hoping to receive the support of a warm community. It is vital we make sure our volunteers can continue to offer that support.',
+		self::SETTING_HOME_HERO_CTA         => 'Reach a Counselor',
+		self::SETTING_HOME_HERO_LINK         => '/counselor',
+		self::SETTING_DONATE_HEADING         => 'Help us reach every single one.',
+		self::SETTING_DONATE_INTRO         => 'Together, we can make sure that all LGBTQ young people countrywide, know that they are not alone.',
 		self::SETTING_HOME_1_TITLE           => 'How your money is used',
 		self::SETTING_HOME_1_DATA            => [
 			[ 'desc' => 'We plan to train a record number of crisis counselors. Every counselor can reach over 100 LGBTQ young people.' ],
@@ -103,6 +113,42 @@ class Donate extends Abstract_Customizer {
 			'setting' => self::SETTING_HOME_HERO_DESC,
 			'section' => self::SECTION_HOME_GENERAL,
 			'label'   => 'Hero Description',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_HERO_CTA, [
+			'setting' => self::SETTING_HOME_HERO_CTA,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Hero CTA',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_HERO_LINK, [
+			'setting' => self::SETTING_HOME_HERO_LINK,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Hero CTA',
+			'type'    => 'text',
+		] );
+
+		## DONATE FORM
+		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_DONATE_IMG, [
+			'setting'   => self::SETTING_DONATE_IMG,
+			'section'   => self::SECTION_HOME_GENERAL,
+			'label'     => 'Form Image',
+			'mime_type' => 'image',
+		] ) );
+
+		$this->_manager->add_control( self::SETTING_DONATE_HEADING, [
+			'setting' => self::SETTING_DONATE_HEADING,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Heading',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_DONATE_INTRO, [
+			'setting' => self::SETTING_DONATE_INTRO,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Intro',
 			'type'    => 'text',
 		] );
 

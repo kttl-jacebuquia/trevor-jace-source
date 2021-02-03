@@ -1,0 +1,28 @@
+.is-donate {
+  .page-header {
+    &-inner {
+      position: relative;
+    }
+
+    &-content {
+      &-wrap {
+        a {
+          background-color: theme('colors.orange.DEFAULT');
+          color: white;
+
+          position: absolute;
+          bottom: rem-calc( 35px );
+          left: 0;
+          right: 0;
+          @apply mx-auto;
+          
+          @screen md {
+            left: auto;
+            right: 0; 
+            bottom: rem-calc(80px);
+          }
+        }
+      }
+    }
+  }
+}

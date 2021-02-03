@@ -65,6 +65,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 ?>
 
 <?php if ( ! is_paged() ) { ?>
+
 <main id="site-content" role="main" class="site-content">
 	<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
 		<div class="mx-auto mb-10 md:mt-10 lg:w-3/4 lg:mt-16">

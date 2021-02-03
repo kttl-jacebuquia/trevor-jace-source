@@ -122,6 +122,8 @@ class Carousel {
 		];
 
 		ob_start(); ?>
+		
+
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
 			<div class="carousel-header">
@@ -259,6 +261,10 @@ class Carousel {
 					</div>
 				</div>
 			</div>
+			<?php endforeach; ?>
+			</div>
+
+			<div class="swiper-pagination"></div>
 		</div>
 		<?php return ob_get_clean();
 	}
@@ -288,11 +294,11 @@ class Carousel {
 		], $options );
 		?>
 		<script><?php /* TODO: Instead of printing this for each carousel, create a controller & use that. */ ?>
-			(function () {
+			/*(function () {
 				var swiper;
 				var options = <?= json_encode( $options )?>;
 				options.on.init = function () {
-					document.querySelectorAll('<?= esc_js( $base_selector )?> .card-post').forEach(elem => {
+					document.querySelectorAll('.carousel-testimonials .card-post').forEach(elem => {
 						elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
 					});
 				}
@@ -300,7 +306,6 @@ class Carousel {
 				function init() {
 					if (!swiper || swiper.destroyed) {
 						swiper = new trevorWP.vendors.Swiper('<?= esc_js( $base_selector )?> .carousel-container', options);
-						console.log(swiper);
 					}
 				}
 
@@ -311,7 +316,7 @@ class Carousel {
 				<?php }else{ ?>
 				init();
 				<?php } ?>
-			})();
+			})();*/
 		</script>
 		<?php
 	}
