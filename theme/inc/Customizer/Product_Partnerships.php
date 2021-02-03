@@ -65,12 +65,61 @@ class Product_Partnerships extends Abstract_Customizer {
 			'type'    => 'text',
 		] );
 
+		$this->_manager->add_control( self::SETTING_HOME_HERO_TITLE, [
+			'setting' => self::SETTING_HOME_HERO_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Hero Title',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_HERO_DESC, [
+			'setting' => self::SETTING_HOME_HERO_DESC,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Hero Title Description',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_STORIES_TITLE, [
+			'setting' => self::SETTING_HOME_STORIES_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Featured Title',
+			'type'    => 'text',
+		] );
+
 		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_HOME_STORIES, [
 			'setting'     => self::SETTING_HOME_STORIES,
 			'section'     => self::SECTION_HOME_GENERAL,
 			'allow_order' => true,
-			'label'       => 'Featured Bills',
+			'label'       => 'Featured Stories',
 			'post_type'   => Prod_Partner::POST_TYPE,
 		] ) );
+
+		$this->_manager->add_control( self::SETTING_HOME_CURRENTS_TITLE, [
+			'setting' => self::SETTING_HOME_CURRENTS_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Partners Title',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_SHOP_TITLE, [
+			'setting' => self::SETTING_HOME_SHOP_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Shop Title',
+			'type'    => 'text',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_SHOP_DESC, [
+			'setting' => self::SETTING_HOME_SHOP_DESC,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Shop Description',
+			'type'    => 'textarea',
+		] );
+
+		$this->_manager->add_control( self::SETTING_HOME_SHOP_CTA, [
+			'setting' => self::SETTING_HOME_SHOP_CTA,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Shop CTA',
+			'type'    => 'text',
+		] );
 	}
 }

@@ -203,6 +203,7 @@ module.exports = {
 			spacing: {
 				px10: px2rem(10),
 				px20: px2rem(20),
+				px22: px2rem(22),
         px27: px2rem(27),
 				px28: px2rem(28),
 				px30: px2rem(30),
@@ -231,6 +232,8 @@ module.exports = {
 				px110: px2rem(110),
 				px120: px2rem(120),
 				px140: px2rem(140),
+				px150: px2rem(150),
+				px168: px2rem(168),
 			},
 			typography: {
 				'teal-dark': {
