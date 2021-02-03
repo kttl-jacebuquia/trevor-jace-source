@@ -1,52 +1,54 @@
 .browserupgrade {
-	padding: 40px;
-	background: #fff4e6;
-	color: #5a3700;
-	font-size: 1.1rem;
-	text-align: center;
+  padding: 40px;
+  background: #fff4e6;
+  color: #5a3700;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 .list {
-	&-check {
-		li {
-			@apply flex flex-row items-center;
-			&:before {
-				@apply text-px46 mr-6;
-				@extend .trevor-ti-checkmark:before;
-				line-height: 0;
-			}
-		}
+  &-check {
+	li {
+	  @apply flex flex-row items-center;
+	  &:before {
+		@apply text-px46 mr-6;
+		@extend .trevor-ti-checkmark:before;
+		line-height: 0;
+	  }
 	}
+  }
 
-	&-decimal {
-		list-style: none;
-		counter-reset: counter;
-		li {
-			@apply flex flex-row items-start;
-			counter-increment: counter;
-			&:before {
-				@apply flex flex-none;
-				@apply rounded-full border-2 border-teal-dark text-px14 font-bold w-8 h-8 items-center justify-center mr-4;
-				content: counter(counter) ". ";
-			}
-		}
+  &-decimal {
+	list-style: none;
+	counter-reset: counter;
+
+	li {
+	  @apply flex flex-row items-start;
+	  counter-increment: counter;
+
+	  &:before {
+		@apply flex flex-none;
+		@apply rounded-full border-2 border-teal-dark text-px14 font-bold w-8 h-8 items-center justify-center mr-4;
+		content: counter(counter) ". ";
+	  }
 	}
+  }
 }
 
 .card-fixed {
-	.card {
-		height: rem-calc(370px);
+  .card {
+	height: rem-calc(370px);
 
-		@screen lg {
-			height: rem-calc(402px);
-		}
+	@screen lg {
+	  height: rem-calc(402px);
 	}
+  }
 }
 
 .img-square img {
-	height: calc(100vw - (theme('container.padding.DEFAULT') * 2));
+  height: calc(100vw - (theme('container.padding.DEFAULT') * 2));
 
-	@screen md {
-		height: auto;
-	}
+  @screen md {
+	height: auto;
+  }
 }

@@ -21,13 +21,13 @@ class Google {
 	 */
 	public static function register(): void {
 		add_menu_page(
-			'Google API',
-			'Google API',
-			'update_core',
-			self::MENU_SLUG,
-			[ self::class, 'render' ],
-			'none',
-			102
+				'Google API',
+				'Google API',
+				'update_core',
+				self::MENU_SLUG,
+				[ self::class, 'render' ],
+				'none',
+				102
 		);
 	}
 
@@ -47,18 +47,18 @@ class Google {
 		}
 
 		$options = [
-			'auth'      => [
-				'has_token' => $has_token,
-				'auth_url'  => $auth_url
-			],
-			'analytics' => [
-				'view_id'           => get_option( Options\Google::KEY_GA_VIEW_ID, '' ),
-				'page_view_timeout' => get_option( Options\Google::KEY_GA_PAGE_VIEW_TO, Options\Google::DEFAULTS[ Options\Google::KEY_GA_PAGE_VIEW_TO ] ),
-			],
-			'page'      => [
-				'form_action' => admin_url( 'admin.php?page=' . self::MENU_SLUG ),
-				'nonce'       => Tools::create_nonce( self::NONCE_KEY )
-			]
+				'auth'      => [
+						'has_token' => $has_token,
+						'auth_url'  => $auth_url
+				],
+				'analytics' => [
+						'view_id'           => get_option( Options\Google::KEY_GA_VIEW_ID, '' ),
+						'page_view_timeout' => get_option( Options\Google::KEY_GA_PAGE_VIEW_TO, Options\Google::DEFAULTS[ Options\Google::KEY_GA_PAGE_VIEW_TO ] ),
+				],
+				'page'      => [
+						'form_action' => admin_url( 'admin.php?page=' . self::MENU_SLUG ),
+						'nonce'       => Tools::create_nonce( self::NONCE_KEY )
+				]
 		];
 
 		?>
@@ -119,13 +119,13 @@ class Google {
 	 */
 	protected static function _save_analytics_form(): void {
 		$data = filter_input_array( INPUT_POST, [
-			'view_id'           => FILTER_SANITIZE_STRING,
-			'page_view_timeout' => FILTER_SANITIZE_NUMBER_INT
+				'view_id'           => FILTER_SANITIZE_STRING,
+				'page_view_timeout' => FILTER_SANITIZE_NUMBER_INT
 		], true );
 
 		update_option( Options\Google::KEY_GA_VIEW_ID, $data['view_id'], true );
 		update_option( Options\Google::KEY_GA_PAGE_VIEW_TO, $data['page_view_timeout'], true );
 
-		Tools::add_update_msg('Analytics Settings saved.');
+		Tools::add_update_msg( 'Analytics Settings saved.' );
 	}
 }

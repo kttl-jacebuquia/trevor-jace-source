@@ -1,36 +1,36 @@
 .is-trevorspace {
+  .heading-lg-tilted {
+	@apply flex flex-col;
+	tilt {
+	  @apply -mb-2.5;
+	}
+  }
+
+  @screen md {
 	.heading-lg-tilted {
-		@apply flex flex-col;
-		tilt {
-			@apply -mb-2.5;
-		}
+	  @apply inline-block text-px36 leading-px46 mx-40;
 	}
 
-	@screen md {
-		.heading-lg-tilted {
-			@apply inline-block text-px36 leading-px46 mx-40;
-		}
+	.circulation-card {
 
-		.circulation-card {
+	  .circulation-card-desc {
+		@apply text-px18 leading-px24;
+	  }
+	}
+  }
 
-			.circulation-card-desc {
-				@apply text-px18 leading-px24;
-			}
-		}
+  @screen lg {
+	.heading-lg-tilted {
+	  @apply text-px50 leading-px60 mx-80;
 	}
 
-	@screen lg {
-		.heading-lg-tilted {
-			@apply text-px50 leading-px60 mx-80;
-		}
+	.circulation-card {
 
-		.circulation-card {
-
-			.circulation-card-desc {
-				@apply text-px26 leading-px36;
-			}
-
-		}
+	  .circulation-card-desc {
+		@apply text-px26 leading-px36;
+	  }
 
 	}
+
+  }
 }

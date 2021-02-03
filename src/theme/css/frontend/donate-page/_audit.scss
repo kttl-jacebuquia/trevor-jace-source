@@ -3,88 +3,88 @@
   @apply pt-px100 pb-px40;
 
   @screen md {
-    @apply pt-px80;
+	@apply pt-px80;
   }
 
   @screen lg {
-    @apply pt-px140 pb-px140;
+	@apply pt-px140 pb-px140;
   }
 
   h3 {
-    @apply text-px32 leading-px40 font-bold mb-px80;
-    color: white;
+	@apply text-px32 leading-px40 font-bold mb-px80;
+	color: white;
 
-    @screen md {
-      @apply text-px32 leading-px40 mb-px70;
-    }
+	@screen md {
+	  @apply text-px32 leading-px40 mb-px70;
+	}
 
-    @screen lg {
-      @apply text-px32 leading-px40 mb-px90;
-    }
+	@screen lg {
+	  @apply text-px32 leading-px40 mb-px90;
+	}
   }
 
   &--card {
 
-    & > .audit--card__item { 
-      display: none;
+	& > .audit--card__item {
+	  display: none;
 
-      @screen lg {
-        display: block;
-      }
-    }
+	  @screen lg {
+		display: block;
+	  }
+	}
 
-    img {
-      @apply mb-px42 mx-auto;
-      display: block;
+	img {
+	  @apply mb-px42 mx-auto;
+	  display: block;
 
-      @screen md {
-        @apply mb-px41;
-      }
+	  @screen md {
+		@apply mb-px41;
+	  }
 
-      @screen lg {
-        @apply mb-px37;
-      }
-    }
+	  @screen lg {
+		@apply mb-px37;
+	  }
+	}
 
-    p {
-      color: white;
-      @apply font-medium text-px20 leading-px30;
+	p {
+	  color: white;
+	  @apply font-medium text-px20 leading-px30;
 
-      @screen md {
-        @apply font-normal text-px18 leading-px22;
-      }
+	  @screen md {
+		@apply font-normal text-px18 leading-px22;
+	  }
 
-      @screen lg {
-        @apply text-px22 leading-px32;
-      }
+	  @screen lg {
+		@apply text-px22 leading-px32;
+	  }
 
-    }
+	}
   }
 
   &-holder,
   &-container {
-    @screen lg {
-      display: none;
-    }
+	@screen lg {
+	  display: none;
+	}
   }
 
   .swiper-pagination {
-    width:  100%;
+	width: 100%;
 
-    @screen md {
-      display: flex;
-    }
+	@screen md {
+	  display: flex;
+	}
 
-    @screen lg {
-      display: none;
-    }
+	@screen lg {
+	  display: none;
+	}
 
-    span {
-      background: rgba(255, 255, 255, 0.3);
+	span {
+	  background: rgba(255, 255, 255, 0.3);
 
-      &.swiper-pagination-bullet-active {
-        background: white;
-      }
-    }
+	  &.swiper-pagination-bullet-active {
+		background: white;
+	  }
+	}
   }
 }

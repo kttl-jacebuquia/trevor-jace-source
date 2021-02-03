@@ -168,9 +168,10 @@ class Post_Header {
 			$dateTime = new \DateTime( $post->post_date );
 			ob_start(); ?>
 
-				<div class="date-box">
-					<time class="font-semibold text-px14 leading-px18" datetime="<?= $post->post_date ?>"><?= $dateTime->format('M. j, Y') ?></time>
-				</div>
+			<div class="date-box">
+				<time class="font-semibold text-px14 leading-px18"
+					  datetime="<?= $post->post_date ?>"><?= $dateTime->format( 'M. j, Y' ) ?></time>
+			</div>
 
 			<?php $mid_row[] = ob_get_clean();
 		}

@@ -23,7 +23,7 @@ class Donate extends Abstract_Customizer {
 	const SETTING_DONATE_IMG = self::SETTING_HOME_PREFIX . 'donate_img';
 	const SETTING_DONATE_HEADING = self::SETTING_HOME_PREFIX . 'donate_heading';
 	const SETTING_DONATE_INTRO = self::SETTING_HOME_PREFIX . 'donate_intro';
-	
+
 	const SETTING_HOME_1_TITLE = self::SETTING_HOME_PREFIX . '1_title';
 	const SETTING_HOME_1_DATA = self::SETTING_HOME_PREFIX . '1_data';
 
@@ -45,10 +45,10 @@ class Donate extends Abstract_Customizer {
 	const DEFAULTS = [
 		self::SETTING_HOME_HERO_TITLE        => 'Your donation can <tilt>save lives.</tilt>',
 		self::SETTING_HOME_HERO_DESC         => 'Every day, LGBTQ young people in crisis reach out hoping to receive the support of a warm community. It is vital we make sure our volunteers can continue to offer that support.',
-		self::SETTING_HOME_HERO_CTA         => 'Reach a Counselor',
+		self::SETTING_HOME_HERO_CTA          => 'Reach a Counselor',
 		self::SETTING_HOME_HERO_LINK         => '/counselor',
 		self::SETTING_DONATE_HEADING         => 'Help us reach every single one.',
-		self::SETTING_DONATE_INTRO         => 'Together, we can make sure that all LGBTQ young people countrywide, know that they are not alone.',
+		self::SETTING_DONATE_INTRO           => 'Together, we can make sure that all LGBTQ young people countrywide, know that they are not alone.',
 		self::SETTING_HOME_1_TITLE           => 'How your money is used',
 		self::SETTING_HOME_1_DATA            => [
 			[ 'desc' => 'We plan to train a record number of crisis counselors. Every counselor can reach over 100 LGBTQ young people.' ],

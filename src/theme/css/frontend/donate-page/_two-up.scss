@@ -4,20 +4,20 @@
   @apply pt-px80;
 
   @screen md {
-    @apply pb-px80
+	@apply pb-px80
   }
 
   @screen lg {
-    @apply pb-px120;
-    @apply pt-px120;
+	@apply pb-px120;
+	@apply pt-px120;
   }
 
   h3 {
-    font-size: rem-calc( 32px );
+	font-size: rem-calc(32px);
 
-    @screen lg {
-      font-size: rem-calc( 46px );
-    }
+	@screen lg {
+	  font-size: rem-calc(46px);
+	}
 
   }
 }

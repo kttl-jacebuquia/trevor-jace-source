@@ -1,221 +1,221 @@
 .product-partnerships {
 
   .featured-stories {
-    background-color: theme('colors.gray.light'); 
+	background-color: theme('colors.gray.light');
 
-    @apply pt-px60 pb-px100;
+	@apply pt-px60 pb-px100;
 
-    @screen md {
-      @apply py-px80;
-    }
+	@screen md {
+	  @apply py-px80;
+	}
 
-    @screen lg {
-      @apply py-px140;
-    }
+	@screen lg {
+	  @apply py-px140;
+	}
 
-    .tile-grid{
-      @apply py-0;
-    }
+	.tile-grid {
+	  @apply py-0;
+	}
 
-    .tile-grid-title {
-      @apply mb-px50;
+	.tile-grid-title {
+	  @apply mb-px50;
 
-      @screen lg {
-        @apply mb-px86;
-      }
-    }
+	  @screen lg {
+		@apply mb-px86;
+	  }
+	}
   }
 
   .tile-grid {
-    @apply pt-px72 pb-px100;
+	@apply pt-px72 pb-px100;
 
-    @screen md {
-      @apply py-20;
-    }
+	@screen md {
+	  @apply py-20;
+	}
 
-    &-inner {
+	&-inner {
 
-      @screen md {
-        @apply px-px50;
-      }
+	  @screen md {
+		@apply px-px50;
+	  }
 
-      @screen lg {
-        @apply px-px100;
-      }
-    }
+	  @screen lg {
+		@apply px-px100;
+	  }
+	}
 
-    &-header {
-      @apply px-0;
-    }
+	&-header {
+	  @apply px-0;
+	}
 
-    &-container {
-      @apply mb-0;
+	&-container {
+	  @apply mb-0;
 
-      @screen md {
-        @apply gap-px30;
-      }
+	  @screen md {
+		@apply gap-px30;
+	  }
 
-      @screen lg {
-        @apply flex flex-row flex-wrap justify-center -mt-14 mr-0 mb-0 -ml-px27;
-        gap: unset;
-      }
-    }
+	  @screen lg {
+		@apply flex flex-row flex-wrap justify-center -mt-14 mr-0 mb-0 -ml-px27;
+		gap: unset;
+	  }
+	}
 
-    .tile {
-      box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
-      @apply px-6 pb-12 h-auto;
+	.tile {
+	  box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
+	  @apply px-6 pb-12 h-auto;
 
 
-      @screen lg {
-        flex: 0 0 theme('postCard.width.lg');
-        @apply mt-14 mr-0 mb-0 ml-px27;
-      }
-  
-      &-title {
-        @apply font-bold text-px24 leading-px28 mb-4 mt-8 md:mt-7;
-      }
+	  @screen lg {
+		flex: 0 0 theme('postCard.width.lg');
+		@apply mt-14 mr-0 mb-0 ml-px27;
+	  }
 
-      &-desc {
-        @apply font-normal text-px16 leading-px22 mb-6;
-      }
-    }
+	  &-title {
+		@apply font-bold text-px24 leading-px28 mb-4 mt-8 md:mt-7;
+	  }
 
-    .tile-image {
-      @apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
+	  &-desc {
+		@apply font-normal text-px16 leading-px22 mb-6;
+	  }
+	}
 
-      @screen lg {
-        @apply w-px395;
-      }
-    }
+	.tile-image {
+	  @apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
+
+	  @screen lg {
+		@apply w-px395;
+	  }
+	}
   }
 
   .current-partners {
-    @apply pt-px88 pb-px100 md:py-px100 lg:pt-px168 lg:pb-px140;
+	@apply pt-px88 pb-px100 md:py-px100 lg:pt-px168 lg:pb-px140;
 
-    &__title {
-      @apply text-px32 leading-px40 md:leading-px42 text-px40 leading-px48 text-center font-bold;
-      color: theme('colors.teal.dark');
-    }
+	&__title {
+	  @apply text-px32 leading-px40 md:leading-px42 text-px40 leading-px48 text-center font-bold;
+	  color: theme('colors.teal.dark');
+	}
 
-    &__container {
-      @apply grid grid-cols-2 gap-x-px40 gap-y-px100 mt-px90;
+	&__container {
+	  @apply grid grid-cols-2 gap-x-px40 gap-y-px100 mt-px90;
 
-      @screen md {
-        @apply grid-cols-4 gap-x-px50 gap-y-px100 mt-px100;
-      }
+	  @screen md {
+		@apply grid-cols-4 gap-x-px50 gap-y-px100 mt-px100;
+	  }
 
-      @screen lg {
-        @apply mt-px140;
-      }
-    }
+	  @screen lg {
+		@apply mt-px140;
+	  }
+	}
 
-    .partner-thumbnail {
-      @apply mx-auto self-center justify-self-center;
-    }
+	.partner-thumbnail {
+	  @apply mx-auto self-center justify-self-center;
+	}
   }
 
 
   .banner {
-    @apply max-w-px319 mx-auto py-px100 text-white text-center;
+	@apply max-w-px319 mx-auto py-px100 text-white text-center;
 
-    @screen md {
-      @apply max-w-px550;
-    }
+	@screen md {
+	  @apply max-w-px550;
+	}
 
-    @screen lg {
-      @apply max-w-px1028;
-    }
+	@screen lg {
+	  @apply max-w-px1028;
+	}
 
-    &__inner {
-      @apply px-7 pt-px127 pb-px120 rounded-px10;
-      background-color: theme('colors.blue_green.DEFAULT');
+	&__inner {
+	  @apply px-7 pt-px127 pb-px120 rounded-px10;
+	  background-color: theme('colors.blue_green.DEFAULT');
 
-      @screen md {
-        @apply px-px117 pt-32 pb-px117;
-      }
+	  @screen md {
+		@apply px-px117 pt-32 pb-px117;
+	  }
 
-      @screen lg {
-        @apply px-64 py-44;
-      }
-    }
+	  @screen lg {
+		@apply px-64 py-44;
+	  }
+	}
 
-    &__title {
-      @apply font-bold text-px30 leading-px40;
+	&__title {
+	  @apply font-bold text-px30 leading-px40;
 
-      @screen md {
-        @apply text-px32 leading-px42;
-      }
+	  @screen md {
+		@apply text-px32 leading-px42;
+	  }
 
-      @screen lg {
-        @apply text-px46 leading-px56;
-      }
-    }
+	  @screen lg {
+		@apply text-px46 leading-px56;
+	  }
+	}
 
-    &__description {
-      @apply font-normal text-px18 leading-px22 mt-5;
+	&__description {
+	  @apply font-normal text-px18 leading-px22 mt-5;
 
-      @screen lg {
-        @apply text-px20 leading-px30 mt-px30;
-      }
-    }
+	  @screen lg {
+		@apply text-px20 leading-px30 mt-px30;
+	  }
+	}
 
-    &__cta {
-      @apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
-      color: theme('colors.teal.dark');
-      
-      @screen md {
-        @apply px-8;
-      }
+	&__cta {
+	  @apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
+	  color: theme('colors.teal.dark');
 
-      @screen lg {
-        @apply py-5 p-20 text-px20 leading-px26;
-      }
-    }
+	  @screen md {
+		@apply px-8;
+	  }
+
+	  @screen lg {
+		@apply py-5 p-20 text-px20 leading-px26;
+	  }
+	}
   }
 
   .cards {
-    background-color: theme('colors.gray.light');
+	background-color: theme('colors.gray.light');
 
-    &__title {
-      color: theme('colors.teal.dark');
-      @apply mt-px80 mx-0 mb-px60;
+	&__title {
+	  color: theme('colors.teal.dark');
+	  @apply mt-px80 mx-0 mb-px60;
 
-      @screen md {
-        @apply mt-px60 mb-px64;
-      }
+	  @screen md {
+		@apply mt-px60 mb-px64;
+	  }
 
-      @screen lg {
-        @apply mt-px120 mb-px90;
-        flex-basis: 100%;
-      }
-    }
+	  @screen lg {
+		@apply mt-px120 mb-px90;
+		flex-basis: 100%;
+	  }
+	}
 
-    &__container {
-      gap: 20px 0;
-      padding-bottom: 100px;
-      @apply pb-px100;
+	&__container {
+	  gap: 20px 0;
+	  padding-bottom: 100px;
+	  @apply pb-px100;
 
-      @screen md {
-        @apply pb-px80;
-        justify-content: space-around;
-      }
+	  @screen md {
+		@apply pb-px80;
+		justify-content: space-around;
+	  }
 
-      @screen lg {
-        @apply pb-px120;
-        justify-content: space-between;
-      }
+	  @screen lg {
+		@apply pb-px120;
+		justify-content: space-between;
+	  }
 
-      .circulation-card {
-        flex: 0 0 100%;
+	  .circulation-card {
+		flex: 0 0 100%;
 
-        @screen md {
-          flex-basis: calc(492 / 768 * 100%);
-        }
+		@screen md {
+		  flex-basis: calc(492 / 768 * 100%);
+		}
 
-        @screen lg {
-          flex-basis: calc(606 / 1240 * 100%);
-        }
-      }
-    }
+		@screen lg {
+		  flex-basis: calc(606 / 1240 * 100%);
+		}
+	  }
+	}
   }
 }

@@ -9,6 +9,6 @@ export default class Textarea extends BaseField {
 	}
 
 	static renderValue(field, value) {
-		return value|| <em>N/A</em>;
+		return value || <em>N/A</em>;
 	}
 }

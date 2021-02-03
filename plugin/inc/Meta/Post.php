@@ -156,17 +156,17 @@ class Post {
 						CPT\Donate\Prod_Partner::POST_TYPE,
 					],
 				],
-				self::PROD_ITEM_IMG 					=> [
+				self::PROD_ITEM_IMG           => [
 					'post_types' => [
 						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
-				self::PROD_ITEM_URL 					=> [
+				self::PROD_ITEM_URL           => [
 					'post_types' => [
 						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
-				self::PROD_PARTNER_ID 			=> [
+				self::PROD_PARTNER_ID         => [
 					'post_types' => [
 						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
@@ -421,19 +421,19 @@ class Post {
 
 	/**
 	 * @param int $post_id
-	 * 
+	 *
 	 * @return string|null
 	 */
-	public static function get_item_name( int $post_id): ?string {
+	public static function get_item_name( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::ITEM_NAME, true );
 	}
 
 	/**
 	 * @param int $post_id
-	 * 
+	 *
 	 * @return int|null
 	 */
-	public static function get_partner_id( int $post_id): int {
+	public static function get_partner_id( int $post_id ): int {
 		return (int) get_post_meta( $post_id, self::PROD_PARTNER_ID, true );
 	}
 
@@ -451,7 +451,7 @@ class Post {
 	 *
 	 * @return string|null
 	 */
-	public static function get_item_img_id( int $post_id ): ?string {	
+	public static function get_item_img_id( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::PROD_ITEM_IMG, true );
 	}
 }

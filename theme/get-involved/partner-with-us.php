@@ -9,14 +9,14 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 ?>
 <main id="site-content" role="main" class="site-content">
 	<?= Helper\Page_Header::split_carousel( [
-			'title'   => PWU::get_val( PWU::SETTING_HOME_HERO_TITLE ),
-			'desc'    => PWU::get_val( PWU::SETTING_HOME_HERO_DESC ),
-			'cta_txt' => PWU::get_val( PWU::SETTING_HOME_HERO_CTA ),
-			'cta_url' => '#',
+			'title'         => PWU::get_val( PWU::SETTING_HOME_HERO_TITLE ),
+			'desc'          => PWU::get_val( PWU::SETTING_HOME_HERO_DESC ),
+			'cta_txt'       => PWU::get_val( PWU::SETTING_HOME_HERO_CTA ),
+			'cta_url'       => '#',
 			'carousel_data' => PWU::get_val( PWU::SETTING_HOME_HERO_CAROUSEL_DATA ),
-			'swiper' => [
-				'centeredSlides' => true,
-				'slidesPerView' => 'auto'
+			'swiper'        => [
+					'centeredSlides' => true,
+					'slidesPerView'  => 'auto'
 			]
 	] ) ?>
 
@@ -53,11 +53,13 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			'tileClass'   => [ 'text-teal-dark' ],
 			'class'       => [ 'text-white', 'container', 'mx-auto', 'md:pb-2' ]
 	] ) ?>
-	<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 rounded-px10 self-center -mt-10 mb-20 md:mt-0 md:mb-px60 lg:mb-px120 md:px-6 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10" href="#">Become a Partner</a>
+	<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 rounded-px10 self-center -mt-10 mb-20 md:mt-0 md:mb-px60 lg:mb-px120 md:px-6 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10"
+	   href="#">Become a Partner</a>
 
 	<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 lg:pb-40">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20">There are other ways to help.</h2>
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20">
+				There are other ways to help.</h2>
 
 			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 				<?= Circulation_Card::render_donation(); ?>

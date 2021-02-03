@@ -18,12 +18,12 @@ class Prod_Partner {
 	 */
 	public static function register_hooks(): void {
 		add_action( 'add_meta_boxes_' . \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE, [
-			self::class,
-			'add_meta_boxes'
+				self::class,
+				'add_meta_boxes'
 		], 10, 2 );
 		add_action( 'save_post_' . \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE, [
-			self::class,
-			'save_post'
+				self::class,
+				'save_post'
 		], 10, 1 );
 	}
 
@@ -36,21 +36,21 @@ class Prod_Partner {
 	 */
 	public static function add_meta_boxes( \WP_Post $post ): void {
 		add_meta_box(
-			'store_img',
-			'Store Image',
-			[ self::class, 'render_file_meta_box' ],
-			$post->post_type,
-			'normal',
-			'high',
-			[ self::FIELD_FILE_ID ]
+				'store_img',
+				'Store Image',
+				[ self::class, 'render_file_meta_box' ],
+				$post->post_type,
+				'normal',
+				'high',
+				[ self::FIELD_FILE_ID ]
 		);
 		add_meta_box(
-			'store_url',
-			'Store URL',
-			[ self::class, 'render_url_input' ],
-			$post->post_type,
-			'advanced',
-			'high'
+				'store_url',
+				'Store URL',
+				[ self::class, 'render_url_input' ],
+				$post->post_type,
+				'advanced',
+				'high'
 		);
 	}
 
@@ -63,12 +63,12 @@ class Prod_Partner {
 		$url = Meta\Post::get_store_url( $post->ID );
 		?>
 		<input name="<?= esc_attr( self::FIELD_URL ) ?>"
-					value="<?= esc_attr( $url ) ?>"
-					placeholder="https://"
-					autocomplete="off"
-					type="url"
-					class="widefat"
-					required>
+			   value="<?= esc_attr( $url ) ?>"
+			   placeholder="https://"
+			   autocomplete="off"
+			   type="url"
+			   class="widefat"
+			   required>
 		<?php
 	}
 
@@ -86,7 +86,7 @@ class Prod_Partner {
 		if ( 'attachment' != get_post_type( $file_id ) ) {
 			$file_id = null;
 		}
-		
+
 		update_post_meta( $post_id, Meta\Post::STORE_IMG, $file_id );
 
 		# URL

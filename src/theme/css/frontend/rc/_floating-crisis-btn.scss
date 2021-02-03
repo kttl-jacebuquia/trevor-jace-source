@@ -1,25 +1,27 @@
 .floating-crisis-btn-wrap {
-	@apply fixed z-10 bottom-10 left-1/2;
-	@apply transform transition-transform -translate-x-1/2;
-	--tw-translate-y: 125%;
+  @apply fixed z-10 bottom-10 left-1/2;
+  @apply transform transition-transform -translate-x-1/2;
+  --tw-translate-y: 125%;
+
+  .floating-crisis-btn {
+	@apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
+	@apply text-white font-bold text-px22 leading-px22 tracking-em001;
+	@apply whitespace-nowrap;
+  }
+
+  .is-not-scrolling & {
+	@apply -translate-y-1/2;
+  }
+
+  @screen md {
+	@apply right-10 left-auto transform-none;
 
 	.floating-crisis-btn {
-		@apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
-		@apply text-white font-bold text-px22 leading-px22 tracking-em001;
-		@apply whitespace-nowrap;
+	  @apply text-px20 leading-px20 tracking-px05;
 	}
+  }
 
-	.is-not-scrolling & {
-		@apply -translate-y-1/2;
-	}
-
-	@screen md {
-		@apply right-10 left-auto transform-none;
-
-		.floating-crisis-btn {
-			@apply text-px20 leading-px20 tracking-px05;
-		}
-	}
-
-	body.is-rc & { display: none; }
+  body.is-rc & {
+	display: none;
+  }
 }

@@ -63,7 +63,8 @@ use TrevorWP\Theme\Helper;
 					</div>
 					<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA_ACTION ) ?>"
 					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_TEXT_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-text">What to expect +</a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-text">What to expect
+						+</a>
 				</div>
 			</div>
 			<div class="flex flex-col mb-px72 md:flex-row-reverse xl:mx-px106 lg:mb-28">
@@ -88,7 +89,8 @@ use TrevorWP\Theme\Helper;
 					</div>
 					<a href="#"
 					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-call">What to expect +</a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-call">What to expect
+						+</a>
 				</div>
 			</div>
 			<div class="flex flex-col mb-20 md:flex-row xl:mx-px106 lg:mb-28">
@@ -113,13 +115,15 @@ use TrevorWP\Theme\Helper;
 					</div>
 					<a href="#"
 					   class="btn bg-orange text-white inline-block text-center text-px18 self-center leading-px24 mb-4 md:text-px16 md:leading-px22"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_CTA ) ?></a>
-					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-chat">What to expect +</a>
+					<a href="#" class="btn-link text-px18 leading-px24 self-center" id="modal-btn-chat">What to expect
+						+</a>
 				</div>
 			</div>
 
 			<div class="flex flex-col items-center bg-white rounded-px10 mb-20 py-14 px-7 text-indigo md:py-12 md:px-10 md:mb-px88 xl:mx-px106 lg:px-px106 lg:py-px72 lg:mb-28">
 				<p class="text-px18 leading-px22 tracking-px05 mb-6 md:text-px20 md:leading-px30 md:mb-7 lg:text-px24 lg:leading-px36"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_NOTIFICATION_TXT ) ?></p>
-				<a href="#" class="btn-link text-px18 leading-px24 self-center lg:text-px22 lg:leading-px26">Learn more</a>
+				<a href="#" class="btn-link text-px18 leading-px24 self-center lg:text-px22 lg:leading-px26">Learn
+					more</a>
 			</div>
 		</div>
 	</div>

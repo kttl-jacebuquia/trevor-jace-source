@@ -2,133 +2,133 @@
 
 .swiper-button-prev,
 .swiper-button-next {
-	width: 3rem;
-	height: 4rem;
-	@apply absolute z-10;
-	@apply inset-y-1/2;
-	@apply text-xl text-indigo;
-	@apply cursor-pointer;
-	@apply flex items-center justify-center;
-	@apply bg-violet-lighter bg-opacity-80;
-	@apply opacity-100;
-	border-radius: 100px;
-	transition: all 150ms, opacity 400ms;
+  width: 3rem;
+  height: 4rem;
+  @apply absolute z-10;
+  @apply inset-y-1/2;
+  @apply text-xl text-indigo;
+  @apply cursor-pointer;
+  @apply flex items-center justify-center;
+  @apply bg-violet-lighter bg-opacity-80;
+  @apply opacity-100;
+  border-radius: 100px;
+  transition: all 150ms, opacity 400ms;
 
-	i {
-		font-size: 1.4rem;
-	}
+  i {
+	font-size: 1.4rem;
+  }
 
+  &:hover {
+	@apply bg-opacity-100;
+  }
+
+  &.swiper-button-disabled {
+	@apply opacity-0;
+  }
+
+  .post-carousel & {
+	@apply bg-teal-dark bg-opacity-100 text-white;
+  }
+
+  .is-gi_advocacy & {
+	@apply bg-white bg-opacity-80 text-teal-dark;
 	&:hover {
-		@apply bg-opacity-100;
+	  @apply bg-opacity-90;
 	}
-
-	&.swiper-button-disabled {
-		@apply opacity-0;
-	}
-
-	.post-carousel & {
-		@apply bg-teal-dark bg-opacity-100 text-white;
-	}
-
-	.is-gi_advocacy & {
-		@apply bg-white bg-opacity-80 text-teal-dark;
-		&:hover {
-			@apply bg-opacity-90;
-		}
-	}
+  }
 }
 
 .swiper-button-prev {
-	@apply left-0;
-	@apply rounded-l-none;
+  @apply left-0;
+  @apply rounded-l-none;
 }
 
 .swiper-button-next {
-	@apply right-0;
-	@apply rounded-r-none;
+  @apply right-0;
+  @apply rounded-r-none;
 }
 
 @screen lg {
-	.swiper-button-prev,
-	.swiper-button-next {
-		@apply rounded-full;
-		width: 5rem;
-	}
+  .swiper-button-prev,
+  .swiper-button-next {
+	@apply rounded-full;
+	width: 5rem;
+  }
 
-	.swiper-button-prev {
-		@apply left-8;
-	}
+  .swiper-button-prev {
+	@apply left-8;
+  }
 
-	.swiper-button-next {
-		@apply right-8;
-	}
+  .swiper-button-next {
+	@apply right-8;
+  }
 }
 
 .carousel-container {
-	list-style: none;
-	z-index: 1; /* Fix of Webkit flickering */
+  list-style: none;
+  z-index: 1; /* Fix of Webkit flickering */
 }
 
 .carousel-full-width-wrap {
-	--v-padding-full: calc((100vw - 100%) / 2);
-	margin-left: calc(-1 * var(--v-padding-full));
-	padding-left: var(--v-padding-full);
-	width: 100vw;
-	position: relative;
-	overflow: hidden;
+  --v-padding-full: calc((100vw - 100%) / 2);
+  margin-left: calc(-1 * var(--v-padding-full));
+  padding-left: var(--v-padding-full);
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
 }
 
 
 /* Bullets */
 .swiper-pagination {
-	@apply flex justify-center;
-	@apply mt-10;
+  @apply flex justify-center;
+  @apply mt-10;
 
-	@screen lg {
-		@apply hidden;
-	}
+  @screen lg {
+	@apply hidden;
+  }
 }
 
 .swiper-pagination-bullet {
-	width: rem-calc(10px);
-	height: rem-calc(10px);
-	@apply block bg-white opacity-20 rounded-full;
+  width: rem-calc(10px);
+  height: rem-calc(10px);
+  @apply block bg-white opacity-20 rounded-full;
 
-	.post-carousel & {
-		@apply bg-teal-dark opacity-30;
-	}
+  .post-carousel & {
+	@apply bg-teal-dark opacity-30;
+  }
 }
 
 .swiper-pagination-clickable .swiper-pagination-bullet {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .swiper-pagination-bullet-active {
-	opacity: 1;
+  opacity: 1;
 
-	.post-carousel & {
-		@apply opacity-100;
-	}
+  .post-carousel & {
+	@apply opacity-100;
+  }
 }
 
 .swiper-pagination-bullets .swiper-pagination-bullet {
-	margin: 0 rem-calc(4px);
+  margin: 0 rem-calc(4px);
 }
 
 
 /* Hide Single Pagination Dot */
 .swiper-pagination-lock {
-	@apply hidden;
+  @apply hidden;
 }
 
 /* Hide the swiper buttons hidden by default */
 .swiper-button-prev,
 .swiper-button-next {
-	@apply hidden;
+  @apply hidden;
 
-	.swiper-container-initialized ~ & {
-		@screen lg {
-			@apply flex;
-		}
+  .swiper-container-initialized ~ & {
+	@screen lg {
+	  @apply flex;
 	}
+  }
 }

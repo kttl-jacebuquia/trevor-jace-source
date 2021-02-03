@@ -12,7 +12,7 @@ class Tile {
 	 *
 	 * @return string
 	 */
-public static function post( \WP_Post $post, array $options = [] ): string {
+	public static function post( \WP_Post $post, array $options = [] ): string {
 		$attachment_id = '';
 		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
 			$attachment_id = Meta\Post::get_item_img_id( $post->ID );
@@ -22,36 +22,36 @@ public static function post( \WP_Post $post, array $options = [] ): string {
 
 		if ( ! empty( $attachment_id ) ) {
 			$img = wp_get_attachment_image( $attachment_id, 'medium', false, [
-				'class' => implode( " ", [
-					'object-center',
-					'object-cover',
-					'tile-image',
-				]),
+					'class' => implode( " ", [
+							'object-center',
+							'object-cover',
+							'tile-image',
+					] ),
 			] );
 		}
 
 		$data = [
-				'title'		=> $post->post_title,
+				'title'   => $post->post_title,
 				'desc'    => $post->post_excerpt,
-				'img'			=> $img,
+				'img'     => $img,
 				'cta_txt' => 'Read More',
 				'cta_url' => get_permalink( $post )
 		];
 
-		
+
 		if ( $post->post_type == CPT\Get_Involved\Bill::POST_TYPE ) {
 			$data['title_top'] = \TrevorWP\Meta\Post::get_bill_id( $post->ID );
 		}
 
-		if ( $post->post_type ==  CPT\Donate\Partner_Prod::POST_TYPE ) {
+		if ( $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE ) {
 			$data['title_top'] = get_the_title( Meta\Post::get_partner_id( $post->ID ) );
 		}
 
-		if ( $post->post_type ==  CPT\Donate\Prod_Partner::POST_TYPE ) {
+		if ( $post->post_type == CPT\Donate\Prod_Partner::POST_TYPE ) {
 			$data['title_top'] = '';
 		}
-		
-		if ( $post->post_type ==  CPT\Donate\Prod_Partner::POST_TYPE || $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE) {
+
+		if ( $post->post_type == CPT\Donate\Prod_Partner::POST_TYPE || $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE ) {
 			$data['cta_txt'] = 'Check It Out';
 			$data['cta_url'] = Meta\Post::get_store_url( $post->ID ) | Meta\Post::get_item_url( $post->ID );
 		}
@@ -102,7 +102,8 @@ public static function post( \WP_Post $post, array $options = [] ): string {
 		?>
 		<div class="js-accordion <?= implode( ' ', $cls ) ?>">
 			<h2 class="accordion-header" id="heading-<?= $key ?>">
-				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28" type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
+				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28"
+						type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
 					<?= $data['title'] ?>
 				</button>
 			</h2>
@@ -154,31 +155,31 @@ public static function post( \WP_Post $post, array $options = [] ): string {
 
 		ob_start();
 		?>
-			<div <?= Tools::flat_attr( $attr ) ?>>
-				<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
-					<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
+		<div <?= Tools::flat_attr( $attr ) ?>>
+			<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
+				<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
+			<?php } ?>
+			<div class="tile-inner">
+				<?php if ( ! empty ( $data['img'] ) ) { ?>
+					<?= $data['img'] ?>
 				<?php } ?>
-				<div class="tile-inner">
-					<?php if ( ! empty ( $data['img'] ) ) { ?>
-						<?= $data['img'] ?>
-					<?php } ?>
-					<?php if ( ! empty( $data['title_top'] ) ) { ?>
-						<div class="tile-title-top"><?= $data['title_top'] ?></div>
-					<?php } ?>
-					<div class="tile-title"><?= $data['title'] ?></div>
-					<?php if ( ! empty( $data['desc'] ) ) { ?>
-						<div class="tile-desc"><?= $data['desc'] ?></div>
-					<?php } ?>
+				<?php if ( ! empty( $data['title_top'] ) ) { ?>
+					<div class="tile-title-top"><?= $data['title_top'] ?></div>
+				<?php } ?>
+				<div class="tile-title"><?= $data['title'] ?></div>
+				<?php if ( ! empty( $data['desc'] ) ) { ?>
+					<div class="tile-desc"><?= $data['desc'] ?></div>
+				<?php } ?>
 
-					<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
-						<div class="tile-cta-wrap">
-							<a href="<?= @$data['cta_url'] ?>" class="tile-cta stretched-link relative">
-								<span><?= $data['cta_txt'] ?></span>
-							</a>
-						</div>
-					<?php } ?>
-				</div>
+				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
+					<div class="tile-cta-wrap">
+						<a href="<?= @$data['cta_url'] ?>" class="tile-cta stretched-link relative">
+							<span><?= $data['cta_txt'] ?></span>
+						</a>
+					</div>
+				<?php } ?>
 			</div>
+		</div>
 		<?php
 		return ob_get_clean();
 	}

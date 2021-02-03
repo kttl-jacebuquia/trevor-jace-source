@@ -121,7 +121,9 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 							Access to a personal computer with broadband connection
 						</li>
 					</ul>
-					<a href="#" class="text-px20 leading-px26 border-b border-teal-dark mt-7 self-center font-bold md:self-start md:mt-0">See Details</a>
+					<a href="#"
+					   class="text-px20 leading-px26 border-b border-teal-dark mt-7 self-center font-bold md:self-start md:mt-0">See
+						Details</a>
 				</div>
 
 				<div class="bg-white rounded-px10 pt-9 px-7 pb-7 text-teal-dark md:text-left md:p-9 lg:p-12">

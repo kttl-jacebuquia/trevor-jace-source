@@ -2,190 +2,190 @@
   background: white;
 
   @screen lg {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
   }
 
   &__content {
-    @apply px-px28 pt-px80 pb-px80;
+	@apply px-px28 pt-px80 pb-px80;
 
-    @screen md {
-      @apply pt-px100;
-    }
+	@screen md {
+	  @apply pt-px100;
+	}
 
-    @screen lg {
-      flex: 1 1 auto;
-      display: flex;
-      justify-content: flex-end;
-      @apply pt-0;
-    } 
+	@screen lg {
+	  flex: 1 1 auto;
+	  display: flex;
+	  justify-content: flex-end;
+	  @apply pt-0;
+	}
 
-    &-wrapper {
-      @screen lg {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 72%;
-        margin-right: 16%;
-      }
+	&-wrapper {
+	  @screen lg {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 72%;
+		margin-right: 16%;
+	  }
 
-      h2 {
-        color: theme('colors.teal.dark');
-        @apply font-bold text-px32 leading-px40 mb-px20;
+	  h2 {
+		color: theme('colors.teal.dark');
+		@apply font-bold text-px32 leading-px40 mb-px20;
 
-        @screen md {
-          @apply leading-px42 mb-px8;
-        }
+		@screen md {
+		  @apply leading-px42 mb-px8;
+		}
 
-        @screen lg {
-          @apply text-px40 leading-px48 mb-px20;
-        }
-      }
+		@screen lg {
+		  @apply text-px40 leading-px48 mb-px20;
+		}
+	  }
 
-      p {
-        color: theme('colors.teal.dark');
-        @apply font-normal text-px20 leading-px26 mb-px40;
+	  p {
+		color: theme('colors.teal.dark');
+		@apply font-normal text-px20 leading-px26 mb-px40;
 
-        @screen md {
-          @apply text-px18 leading-px24 mb-px50;
-        }
+		@screen md {
+		  @apply text-px18 leading-px24 mb-px50;
+		}
 
-        @screen lg {
-          @apply text-px20 leading-px28 mb-px68;
-        }
-      }
+		@screen lg {
+		  @apply text-px20 leading-px28 mb-px68;
+		}
+	  }
 
-      form {
-        input:not([type="submit"]) {
-          opacity: 0;
-          visibility: hidden;
-          height: 0;
-          overflow: hidden;
-        }
+	  form {
+		input:not([type="submit"]) {
+		  opacity: 0;
+		  visibility: hidden;
+		  height: 0;
+		  overflow: hidden;
+		}
 
-        input[type="text"] {
-          display: block;
-          visibility: visible;
-          opacity: 1;
-          border: 1px solid rgba(0, 58, 72, 0.5);
-          border-radius: 10px;
-          height: rem-calc(68px);
-          width: 100%;
-          box-sizing: border-box;
-          @apply px-px35;
+		input[type="text"] {
+		  display: block;
+		  visibility: visible;
+		  opacity: 1;
+		  border: 1px solid rgba(0, 58, 72, 0.5);
+		  border-radius: 10px;
+		  height: rem-calc(68px);
+		  width: 100%;
+		  box-sizing: border-box;
+		  @apply px-px35;
 
-          @screen md {
-            height: rem-calc(72px);
-          }
-        }
+		  @screen md {
+			height: rem-calc(72px);
+		  }
+		}
 
-        .frequency--choice {
-          display: flex;
-          @apply mb-px30;
+		.frequency--choice {
+		  display: flex;
+		  @apply mb-px30;
 
-          @screen lg {
-            @apply mb-px40;
-          }
+		  @screen lg {
+			@apply mb-px40;
+		  }
 
-          label {
-            background: white;
-            border: 1px solid rgba(0, 58, 72, 0.5);
-            box-sizing: border-box;
-            border-radius: 10px 0 0 10px;
-            @apply py-px17 font-medium text-px18 leading-px24;
-            width: 214px;
-            cursor: pointer;
+		  label {
+			background: white;
+			border: 1px solid rgba(0, 58, 72, 0.5);
+			box-sizing: border-box;
+			border-radius: 10px 0 0 10px;
+			@apply py-px17 font-medium text-px18 leading-px24;
+			width: 214px;
+			cursor: pointer;
 
-            @screen lg {
-              @apply text-px18 leading-px26;
-            }
+			@screen lg {
+			  @apply text-px18 leading-px26;
+			}
 
-            &.selected {
-              background-color: theme('colors.teal.dark');
-              color: white;
-              border-right: 0;
-            }
+			&.selected {
+			  background-color: theme('colors.teal.dark');
+			  color: white;
+			  border-right: 0;
+			}
 
-            & + label {
-              border-radius: 0 10px 10px 0;
-            }
-          }
-        }
+			& + label {
+			  border-radius: 0 10px 10px 0;
+			}
+		  }
+		}
 
-        .amount {
-          @apply mb-px40;
+		.amount {
+		  @apply mb-px40;
 
-          @screen lg {
-            @apply mb-px50;
-          }
+		  @screen lg {
+			@apply mb-px50;
+		  }
 
-          &-choice {
-            @apply font-medium text-px16 leading-px20 mb-px30;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+		  &-choice {
+			@apply font-medium text-px16 leading-px20 mb-px30;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
 
 
-            label {
-              flex: 0 0 49%;
-              text-align: center;
-              @apply py-px22 font-medium text-px16 leading-px20 mb-px14;
-              border: 1px solid rgba(0, 58, 72, 0.5);
-              border-radius: 10px;
+			label {
+			  flex: 0 0 49%;
+			  text-align: center;
+			  @apply py-px22 font-medium text-px16 leading-px20 mb-px14;
+			  border: 1px solid rgba(0, 58, 72, 0.5);
+			  border-radius: 10px;
 
-              &.selected {
-                background-color: theme('colors.teal.dark');
-                color: white;
-              }
-            }
+			  &.selected {
+				background-color: theme('colors.teal.dark');
+				color: white;
+			  }
+			}
 
-            @screen md {
-             @apply text-px18 leading-px24; 
+			@screen md {
+			  @apply text-px18 leading-px24;
 
-             label {
-                flex: 0 0 23%;
-                @apply py-px30 text-px18 leading-px24 mb-0;
-             }
-            }
+			  label {
+				flex: 0 0 23%;
+				@apply py-px30 text-px18 leading-px24 mb-0;
+			  }
+			}
 
-            @screen lg {
-              @apply leading-px24; 
+			@screen lg {
+			  @apply leading-px24;
 
-              label {
-                @apply py-px30 text-px18 leading-px26;
-               }
-             }
-          }
-        }
+			  label {
+				@apply py-px30 text-px18 leading-px26;
+			  }
+			}
+		  }
+		}
 
-        .submit {
-          input[type="submit"] {
-            background-color: theme('colors.teal.dark');
-            color: white;
-            border-radius: 10px; 
-            @apply py-px18 font-bold text-px16 leading-px22;
-            width: 100%;
-            text-align: center;
+		.submit {
+		  input[type="submit"] {
+			background-color: theme('colors.teal.dark');
+			color: white;
+			border-radius: 10px;
+			@apply py-px18 font-bold text-px16 leading-px22;
+			width: 100%;
+			text-align: center;
 
-            @screen md {
-              width: 233px;
-            }
-          }
-        }
-      }
-    }
+			@screen md {
+			  width: 233px;
+			}
+		  }
+		}
+	  }
+	}
   }
-  
-  &__image {
-    @screen lg {
-      flex: 0 0 42%;
-    }
 
-    img {
-      max-height: 892px;
-      width: 100%;
-      object-fit: cover;
-    }
+  &__image {
+	@screen lg {
+	  flex: 0 0 42%;
+	}
+
+	img {
+	  max-height: 892px;
+	  width: 100%;
+	  object-fit: cover;
+	}
   }
 }

@@ -20,7 +20,7 @@ class Collapsible {
 		this.$button = e.currentTarget;
 		this.$container = this.$button.closest(`.${this.constructor.collapseContainer}`);
 		this.$body = this.$container.querySelector(`.${this.constructor.collapseBody}`);
-		if ( this.isActive() ) {
+		if (this.isActive()) {
 			// close collapse
 			this.$container.classList.remove(this.constructor.collapseActiveClass);
 			this.$button.setAttribute('aria-expanded', false);

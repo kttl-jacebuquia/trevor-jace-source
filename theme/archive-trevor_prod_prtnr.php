@@ -15,77 +15,77 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		] ) ?>
 
 		<?php
-			/**
-			 * Feature Collections
-			 * 
-			 * Product Items should go here...
-			 * (e.g.
-			 * 	Bryton Sneaker In Rainbow Canvas of Dolce Vita,
-			 * 	Face Masks of Abercrombie & Fitch,
-			 * 	PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
-			 * )
-			 *
-			 */
+		/**
+		 * Feature Collections
+		 *
+		 * Product Items should go here...
+		 * (e.g.
+		 *    Bryton Sneaker In Rainbow Canvas of Dolce Vita,
+		 *    Face Masks of Abercrombie & Fitch,
+		 *    PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+		 * )
+		 *
+		 */
 		?>
 		<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
 			if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES ) ) ) {
-			?>
-			<div class="featured-collections">
-				<?php
-					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-						'post__in'  => explode( ",", $item_ids ),
-						'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-					] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
 				?>
-			</div>
-			
+				<div class="featured-collections">
+					<?php
+					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+							'post__in'  => explode( ",", $item_ids ),
+							'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+					] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
+					?>
+				</div>
+
 			<?php }
 		} ?>
 
 		<div class="bg-white">
 			<?php
-				/**
-				 * Some of our favorite items
-				 * 
-				 * Product Items should go here
-				 * (e.g.
-				 * 	Bryton Sneaker In Rainbow Canvas of Dolce Vita,
-				 * 	Face Masks of Abercrombie & Fitch,
-				 * 	PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
-				 * )
-				 * 
-				 *
-				 */
+			/**
+			 * Some of our favorite items
+			 *
+			 * Product Items should go here
+			 * (e.g.
+			 *    Bryton Sneaker In Rainbow Canvas of Dolce Vita,
+			 *    Face Masks of Abercrombie & Fitch,
+			 *    PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+			 * )
+			 *
+			 *
+			 */
 			?>
 			<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
 				if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS ) ) ) {
 					?>
 					<div class="favorite-items">
 						<?php
-							echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+						echo Helper\Tile_Grid::posts( ( new \WP_Query( [
 								'post__in'  => explode( ",", $item_ids ),
 								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-							] ) )->posts, 
-							[ 
-								'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
-								'tileClass'	=> ['clickable-card'],
-							] );
+						] ) )->posts,
+								[
+										'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
+										'tileClass' => [ 'clickable-card' ],
+								] );
 						?>
 					</div>
 				<?php }
 			} ?>
 
-			<?php /* Current Partners */ 
-				/**
-				 * Current Partners
-				 * 
-				 * Product Partners should go here
-				 * (e.g. 
-				 * 	Dolce Vita,
-				 * 	Abercrombie & Fitch
-				 * 	Chubbies, etc...
-				 * )
-				 */
+			<?php /* Current Partners */
+			/**
+			 * Current Partners
+			 *
+			 * Product Partners should go here
+			 * (e.g.
+			 *    Dolce Vita,
+			 *    Abercrombie & Fitch
+			 *    Chubbies, etc...
+			 * )
+			 */
 			?>
 			<?php if ( have_posts() ) : ?>
 				<div class="partners-list">
@@ -97,10 +97,10 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				</div>
 			<?php endif; ?>
 
-			<?php 
-				$banner_title = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_TITLE );
-				$banner_desc  = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_DESC );
-				$banner_cta  = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_CTA );
+			<?php
+			$banner_title = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_TITLE );
+			$banner_desc  = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_DESC );
+			$banner_cta   = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_CTA );
 			?>
 
 			<div class="banner">
@@ -113,12 +113,13 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		</div>
 
 		<div class="cards">
-		<div class="cards__container container mx-auto flex flex-row flex-wrap">
-			<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">There are other ways to help.</h3>
-			<?= Helper\Circulation_Card::render_fundraiser(); ?>
-			<?= Helper\Circulation_Card::render_counselor(); ?>
+			<div class="cards__container container mx-auto flex flex-row flex-wrap">
+				<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">
+					There are other ways to help.</h3>
+				<?= Helper\Circulation_Card::render_fundraiser(); ?>
+				<?= Helper\Circulation_Card::render_counselor(); ?>
+			</div>
 		</div>
-	</div>
 	</main>
 
 <?php get_footer();

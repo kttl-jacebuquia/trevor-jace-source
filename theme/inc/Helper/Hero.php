@@ -72,7 +72,13 @@ class Hero {
 	 */
 	public static function quote( array $data, array $options = [] ): ?string {
 		# image class
-		$img_cls = empty( $options['img_class'] ) ? ['absolute', 'bottom-0', 'right-0', 'h-3/5', 'w-auto'] : (array) $options['img_class'];
+		$img_cls = empty( $options['img_class'] ) ? [
+				'absolute',
+				'bottom-0',
+				'right-0',
+				'h-3/5',
+				'w-auto'
+		] : (array) $options['img_class'];
 		ob_start(); ?>
 		<div class="hero h-px737 lg:h-px546 lg:flex lg:items-center">
 			<figure class="container text-left text-teal-dark pt-10 md:flex-1 lg:p-0 lg:w-4/5 lg:flex-initial z-1">

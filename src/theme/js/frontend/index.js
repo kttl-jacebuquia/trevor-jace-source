@@ -52,54 +52,54 @@ isGetHelp && console.log('Get-Help page');
 isTrevorspace && console.log('Trevorspace page');
 
 // If FAQ is Present
-if( isFAQPresent ) {
-	faqTrigger.on('click', function(e){
+if (isFAQPresent) {
+	faqTrigger.on('click', function (e) {
 		e.preventDefault();
-		features.faqToggle( $(this) );
+		features.faqToggle($(this));
 	});
 }
 
-if( isDonate ) {
+if (isDonate) {
 	const _frequency = $('.frequency--choice label');
 	const _amount = $('.amount-choice label');
 
-	_frequency.on('click', function(e){
+	_frequency.on('click', function (e) {
 		e.preventDefault();
-		features.toggleFrequency( $(this) );
+		features.toggleFrequency($(this));
 	});
 
-	_amount.on('click', function(e){
+	_amount.on('click', function (e) {
 		e.preventDefault();
-		features.toggleAmount( $(this) );
+		features.toggleAmount($(this));
 	});
 }
 
-if( carouselTestimonial ) {
-	carouselTestimonial.forEach( _el => {
-		features.carousel( _el.getAttribute('id') );
+if (carouselTestimonial) {
+	carouselTestimonial.forEach(_el => {
+		features.carousel(_el.getAttribute('id'));
 	});
 }
 
-if( isNavigator ) {
-	isNavigator.forEach( _el => {
+if (isNavigator) {
+	isNavigator.forEach(_el => {
 		let _element = `#${_el.getAttribute('id')}`;
-		features.carouselNavigator( _element );
+		features.carouselNavigator(_element);
 	});
 }
 
-if( auditSlider ) {
-	auditSlider.forEach( _el => {
+if (auditSlider) {
+	auditSlider.forEach(_el => {
 		let _element = `#${_el.getAttribute('id')}`;
-		features.carouselNavigator( _element );
+		features.carouselNavigator(_element);
 	});
 }
 
-if( isCardPresent ) {
+if (isCardPresent) {
 	let cardTrigger = $('.tile-title');
 
-	cardTrigger.on('click', function(e){
+	cardTrigger.on('click', function (e) {
 		e.preventDefault();
-		features.cardToggle( $(this) );
+		features.cardToggle($(this));
 	});
 }
 

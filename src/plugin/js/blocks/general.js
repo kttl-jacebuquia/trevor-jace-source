@@ -137,15 +137,15 @@ class PostSidebar extends React.Component {
 				{/* Sharing Box */}
 				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showShare].indexOf(postType) &&
 				<CheckboxControl label="Show Sharing"
-					checked={showShare}
-					onChange={this.handleShowShare}/>
+								 checked={showShare}
+								 onChange={this.handleShowShare}/>
 				}
 
 				{/** Show Date Box */}
 				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showDate].indexOf(postType) &&
 				<CheckboxControl label="Show Date"
-					checked={showDate}
-					onChange={this.handleShowDate}/>
+								 checked={showDate}
+								 onChange={this.handleShowDate}/>
 				}
 
 				{/* Content Length */}
