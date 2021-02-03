@@ -41,7 +41,7 @@
 
   @screen md {
 	&:after {
-	  @apply hidden;
+	  display: none!important;
 	}
   }
 }
