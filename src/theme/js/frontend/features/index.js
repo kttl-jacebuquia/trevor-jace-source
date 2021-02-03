@@ -5,3 +5,4 @@ export sharingMore from './sharing-more';
 export sharingPopUp from './sharing-popup';
 export modal from './modal';
 export collapsible from './collapsible';
+export testimonialsCarousel from './testimonials-carousel';

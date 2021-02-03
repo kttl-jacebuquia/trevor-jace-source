@@ -1,21 +1,38 @@
 .carousel-testimonials {
+  max-width: 100vw;
+
   &-inner {
 	@apply flex flex-col;
+	@apply overflow-hidden;
+	@apply max-w-full;
+	@apply bg-canary;
   }
 
   &-img-wrap {
 	@apply bg-white;
 	@apply w-full;
+	@apply flex-1;
   }
 
   &-txt-wrap {
-	@apply px-4;
-	@apply bg-canary;
+	@apply max-w-full;
+
+	.swiper-pagination {
+	  @apply flex;
+	  @apply -mt-8;
+	  @apply pb-8;
+	  @apply z-2;
+
+	  .swiper-pagination-bullet {
+		@apply bg-teal-dark;
+		@apply z-2;
+	  }
+	}
   }
 
   @screen md {
 	&-inner {
-	  @apply flex-row items-stretch;
+	  @apply flex-row;
 	}
 
 	&-img-wrap {
@@ -23,8 +40,17 @@
 	}
 
 	&-txt-wrap {
-	  @apply flex flex-col flex-1 justify-center;
-	  @apply px-12;
+	  width: calc(100% - #{rem-calc(312px)})
+	}
+  }
+
+  @screen lg {
+	&-img-wrap {
+	  width: rem-calc(450px);
+	}
+
+	&-txt-wrap {
+	  width: calc(100% - #{rem-calc(450px)})
 	}
   }
 
@@ -33,6 +59,10 @@
 
 	&-img-wrap {
 	  width: rem-calc(600px);
+	}
+
+	&-txt-wrap {
+	  width: calc(100% - #{rem-calc(600px)});
 	}
   }
 }
