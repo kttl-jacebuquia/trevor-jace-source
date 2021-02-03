@@ -8,11 +8,12 @@ use \TrevorWP\Meta;
 class Tile {
 	/**
 	 * @param \WP_Post $post
+	 * @param mixed $key
 	 * @param array $options
 	 *
 	 * @return string
 	 */
-	public static function post( \WP_Post $post, int $key, array $options = [] ): string {
+	public static function post( \WP_Post $post, $key, array $options = [] ): string {
 		$attachment_id = '';
 		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
 			$attachment_id = Meta\Post::get_item_img_id( $post->ID );
