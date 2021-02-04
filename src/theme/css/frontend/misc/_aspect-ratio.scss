@@ -2,6 +2,10 @@
   --aspect-ratio: 1;
 }
 
+[data-aspectRatio="2:1"] {
+  --aspect-ratio: 1.5;
+}
+
 [data-aspectRatio="4:3"] {
   --aspect-ratio: .75;
 }

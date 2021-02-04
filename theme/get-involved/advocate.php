@@ -22,10 +22,10 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	] ) ?>
 
 	<?= Helper\Carousel::big_img( Advocacy::get_val( Advocacy::SETTING_HOME_CAROUSEL_DATA ), [
-			'title' => Advocacy::get_val( Advocacy::SETTING_HOME_CAROUSEL_TITLE ),
-			'class' => 'text-white',
+			'title'  => Advocacy::get_val( Advocacy::SETTING_HOME_CAROUSEL_TITLE ),
+			'class'  => 'text-white',
 			'swiper' => [
-				'centeredSlides' => true
+					'centeredSlides' => true
 			]
 	] ) ?>
 
@@ -122,67 +122,44 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 		</a>
 	</div>
 
-	<!--		<div class="pt-20 pb-20 text-teal-dark bg-white lg:pt-28 lg:pb-48">-->
-	<!--			<div class="container mx-auto site-content-inner text-center">-->
-	<!--				<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-0 lg:text-px46 lg:leading-px56">-->
-	<? //= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_TITLE ) ?><!--</h2>-->
-	<!--				<p class="text-px18 leading-px26 mb-px50 md:mx-20 md:mb-4 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-44">-->
-	<? //= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_DESC ) ?><!--</p>-->
-	<!---->
-	<!--				<div class="flex flex-row flex-wrap space-y-4 mb-px72 md:justify-center md:space-y-16 lg:mx-52">-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4 md:mt-16">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/152x29" media="(min-width: 1440px)">-->
-	<!--							<source srcset="http://placehold.it/130x25" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/128x24" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/97x87" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/81x80" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<img class="mx-auto" src="http://placehold.it/119x59" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/130x39" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/136x40" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/106x110" media="(min-width: 1440px)">-->
-	<!--							<source srcset="http://placehold.it/90x93" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/103x108" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/155x53" media="(min-width: 1440px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/134x46" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/114x45" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/104x42" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--					<div class="flex justify-center items-center flex-initial w-1/2 md:w-1/3 lg:w-1/4">-->
-	<!--						<picture>-->
-	<!--							<source srcset="http://placehold.it/138x53" media="(min-width: 768px)">-->
-	<!--							<img class="mx-auto" src="http://placehold.it/138x53" alt=""/>-->
-	<!--						</picture>-->
-	<!--					</div>-->
-	<!--				</div>-->
-	<!---->
-	<!--				<a class="font-bold text-px24 leading-px34 tracking-em001 border-b-2 border-teal-dark text-teal-dark mb-px50 self-center"-->
-	<!--				   href="#">Load More</a>-->
-	<!--			</div>-->
+	<div class="pt-20 pb-20 text-teal-dark bg-white lg:pt-28 lg:pb-48">
+		<div class="container mx-auto site-content-inner text-center">
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-0 lg:text-px46 lg:leading-px56">
+				<?= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_TITLE ) ?></h2>
+			<p class="text-px18 leading-px26 mb-px50 md:mx-20 md:mb-4 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-44">
+				<?= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_DESC ) ?></p>
+
+			<div class="w-full flex flex-row flex-wrap mb-px72 mx-auto md:justify-center lg:w-3/4">
+				<?php if (
+						! empty( $partner_ids = Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_LIST ) ) &&
+						! empty( $partner_ids = wp_parse_id_list( $partner_ids ) )
+				) {
+					foreach (
+							get_posts( [
+									'post__in'    => $partner_ids,
+									'post_type'   => \TrevorWP\CPT\Get_Involved\Partner::POST_TYPE,
+									'numberposts' => - 1,
+									'orderby'     => 'post__in',
+									'order'       => 'DESC',
+							] ) as $partner
+					) {
+						if ( has_post_thumbnail( $partner ) ) { ?>
+							<div class="w-1/2 md:w-1/3 lg:w-1/4 py-2" data-aspectRatio="2:1">
+								<div class="w-3/4 mx-auto flex items-center content-center">
+									<?= wp_get_attachment_image( get_post_thumbnail_id( $partner ), 'medium', false, [
+											'class' => implode( ' ', [
+													'mx-auto',
+													'object-center',
+													'object-contain'
+											] )
+									] ) ?>
+								</div>
+							</div>
+							<?php
+						}
+					}
+				} ?>
+			</div>
+		</div>
 </main>
 <?php get_footer(); ?>
