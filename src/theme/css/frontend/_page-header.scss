@@ -97,9 +97,8 @@
 	  }
 
 	  .page-header-img-inner {
-		width: calc(100% + #{rem-calc(50px)});
-		@apply inset-x-auto mx-0;
-		min-height: rem-calc(340px);
+		width: calc(100% - #{rem-calc(50px)});
+		@apply inset-x-auto mr-0 ml-auto h-auto;
 	  }
 	  .page-header-desc {
 		@apply text-px18 leading-px26;
@@ -114,7 +113,6 @@
 	  .page-header-img-wrap {
 		@apply flex-1 mt-0;
 		flex-grow: 2;
-		min-height: rem-calc(340px);
 	  }
 	}
 
