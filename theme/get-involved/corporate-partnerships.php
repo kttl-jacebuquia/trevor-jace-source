@@ -62,10 +62,10 @@ foreach ( $tiers as $tier ) {
 							if ( $tier->logo_size != 'text' ) :
 								foreach ( $tier->posts as $post ) :
 									?>
-									<a href="#"
-									   rel="nofollow noreferrer noopener"
-									   target="_blank"
-									   title="<?= esc_attr( $post->post_title ) ?>"
+									<a href="<?= Meta\Post::get_partner_url( $post->ID ) ?>"
+										rel="nofollow noreferrer noopener"
+										target="_blank"
+										title="<?= esc_attr( $post->post_title ) ?>"
 									>
 										<?= get_the_post_thumbnail( $post, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD, [ 'class' => 'partner-logo' ] ) ?>
 									</a>
