@@ -11,6 +11,7 @@ class Jobs {
 	const NAME_PROCESS_POST_STATS_PAGE = self::NAME_PREFIX . 'process_post_stats_page';
 	const NAME_UPDATE_POST_RANKS = self::NAME_PREFIX . 'update_post_ranks';
 	const NAME_UPDATE_TAXONOMY_RANKS = self::NAME_PREFIX . 'update_taxonomy_ranks';
+	const NAME_UPDATE_TREVORSPACE_ACTIVE_COUNT = self::NAME_PREFIX . 'update_trevorspace_active_count';
 
 	/**
 	 * @var array[] Recurring event jobs.
@@ -19,6 +20,7 @@ class Jobs {
 	 */
 	static $RECURRING = [
 		self::NAME_UPDATE_POST_STATS => [ [ GA_Results::class, 'update_post_stats' ], 'daily' ],
+		self::NAME_UPDATE_TREVORSPACE_ACTIVE_COUNT=>[ [ Trevorspace::class, 'update_active_count' ], 'daily' ],
 	];
 
 	/**

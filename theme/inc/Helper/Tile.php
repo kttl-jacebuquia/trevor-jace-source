@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-
 use TrevorWP\CPT;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Meta;
@@ -146,7 +145,6 @@ class Tile {
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}
-
 
 		$attr          = (array) $options['attr'];
 		$attr['class'] = implode( ' ', $cls );

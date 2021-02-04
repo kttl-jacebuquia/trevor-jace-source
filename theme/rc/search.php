@@ -12,7 +12,7 @@ $no_results = empty( $wp_query->found_posts );
 			</form>
 		</div>
 
-		<div class="search-results-container flex flex-col flex-1">
+		<div class="search-results-container flex flex-col flex-1 trevor-grid-default-container">
 			<h1 class="search-results-list-title text-white text-center text-base mb-5 md:mb-10 lg:mb-10">
 				<?php if ( $no_results ) { ?>
 					<span class="leading-px20 font-medium md:font-light md:text-px18 md:leading-px26 lg:font-normal lg:text-px22 lg:leading-px32 lg:tracking-px05">

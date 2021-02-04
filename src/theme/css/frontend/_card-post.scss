@@ -14,12 +14,12 @@
 	img {
 	  @apply h-full;
 	  @apply object-center object-cover;
-	  @apply transition-transform duration-300;
+	  @apply transition-transform duration-500;
 	}
   }
 
   &:hover .post-thumbnail-wrap img {
-	@apply transform scale-105 delay-100;
+	@apply transform scale-105;
   }
 
 

@@ -17,6 +17,7 @@ class Main {
 	 */
 	const OPTION_KEY_PREFIX = 'trevor__';
 	const OPTION_KEY_VERSION = self::OPTION_KEY_PREFIX . 'version';
+	const OPTION_KEY_TREVORSPACE_ACTIVE_COUNT = self::OPTION_KEY_PREFIX . 'trevorspace_active_count';
 
 	/*
 	 * Post Types

@@ -217,7 +217,7 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-testimonials" id="<?= esc_attr( $id ) ?>">
 			<div class="carousel-testimonials-inner">
-				<div class="carousel-testimonials-img-wrap">
+				<div class="carousel-testimonials-img-wrap" data-aspectRatio="1:1">
 					<div class="swiper-container h-full">
 						<div class="swiper-wrapper">
 							<?php foreach ( $data as $entry ): ?>
@@ -229,6 +229,8 @@ class Carousel {
 												'class' => implode( ' ', [
 														'object-center',
 														'object-cover',
+														'w-full',
+														'h-full',
 												] )
 										] ) ?>
 									<?php } ?>
@@ -243,7 +245,7 @@ class Carousel {
 							<?php foreach ( $data as $entry ): ?>
 								<div class="swiper-slide px-4 pt-8 pb-12 lg:px-8">
 									<figure class="text-center text-teal-dark flex flex-col justify-center h-full md:w-3/4 md:mx-auto">
-										<div class="flex flex-row justify-center md:mb-8 lg:mb-5">
+										<div class="flex flex-row justify-center md:mb-5">
 											<i class="trevor-ti-quote-open -mt-2 mr-0.5 lg:text-px28 lg:mr-2"></i>
 											<i class="trevor-ti-quote-close lg:text-px28"></i>
 										</div>

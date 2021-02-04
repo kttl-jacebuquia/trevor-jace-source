@@ -16,10 +16,11 @@
 
   &-txt-wrap {
 	@apply max-w-full;
+	@apply py-4;
 
 	.swiper-pagination {
 	  @apply flex;
-	  @apply -mt-8;
+	  @apply -mt-4;
 	  @apply pb-8;
 	  @apply z-2;
 
@@ -36,16 +37,24 @@
 	}
 
 	&-img-wrap {
+	  height: rem-calc(312px);
 	  width: rem-calc(312px);
 	}
 
 	&-txt-wrap {
-	  width: calc(100% - #{rem-calc(312px)})
+	  width: calc(100% - #{rem-calc(312px)});
+	  @apply py-0;
+
+	  .swiper-container {
+		@apply relative top-1/2 left-1/2;
+		transform: translate(-50%, -50%);
+	  }
 	}
   }
 
   @screen lg {
 	&-img-wrap {
+	  height: rem-calc(450px);
 	  width: rem-calc(450px);
 	}
 
@@ -58,6 +67,7 @@
 	@apply container mx-auto;
 
 	&-img-wrap {
+	  height: rem-calc(600px);
 	  width: rem-calc(600px);
 	}
 

@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main id="site-content" role="main">
-	<div class="container mx-auto">
+	<div class="container trevor-grid-default-container">
 		<div class="flex flex-col items-center text-white mb-8 md:items-start">
 			<?php
 			/** @var \WP_Term $term */

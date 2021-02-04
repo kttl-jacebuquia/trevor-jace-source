@@ -8,13 +8,19 @@ use TrevorWP\Theme\Helper\Thumbnail;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper;
 
+$user_count       = get_option( \TrevorWP\Main::OPTION_KEY_TREVORSPACE_ACTIVE_COUNT, 0 );
+$user_threshold   = 30;
+$online_count_txt = $user_count > $user_threshold
+		? sprintf( '%d members currently online', $user_count )
+		: '';
+
 ?>
 
 <main id="site-content" role="main" class="site-content">
 	<div>
 		<div class="container mx-auto text-center site-content-inner">
 			<h5 class="text-px16 leading-px24 mb-2 text-indigo md:mb-4">
-				<i class="trevor-ti-online mr-2"></i> 180 members currently online
+				<i class="trevor-ti-online mr-2"></i> <?= $online_count_txt ?>
 			</h5>
 			<h1 class="heading-lg-tilted text-indigo mb-4"><?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_TITLE ) ?></h1>
 			<p class="text-px18 mb-7 text-indigo md:text-px20 md:leading-px30 md:mx-px88 md:mb-5 lg:text-px26 lg:leading-px36 lg:mb-14 lg:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_DESC ) ?></p>
@@ -35,17 +41,12 @@ use TrevorWP\Theme\Helper;
 
 			<div class="flex flex-col mb-14 md:flex-row-reverse lg:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
-					<?= Thumbnail::print_img_variants( [
-							[
-									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_1_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
+					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_1_IMG ), 'medium', false, [
+							'class' => implode( ' ', [
+									'object-center',
+									'object-cover',
+									'rounded-px10',
+							] )
 					] ) ?>
 				</div>
 				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
@@ -64,17 +65,12 @@ use TrevorWP\Theme\Helper;
 			</div>
 			<div class="flex flex-col mb-14 md:flex-row lg:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
-					<?= Thumbnail::print_img_variants( [
-							[
-									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_2_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
+					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_2_IMG ), 'medium', false, [
+							'class' => implode( ' ', [
+									'object-center',
+									'object-cover',
+									'rounded-px10',
+							] )
 					] ) ?>
 				</div>
 				<div class="text-center text-indigo md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
@@ -93,17 +89,12 @@ use TrevorWP\Theme\Helper;
 			</div>
 			<div class="flex flex-col mb-20 md:flex-row-reverse md:mb-28 lg:mx-px106">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
-					<?= Thumbnail::print_img_variants( [
-							[
-									intval( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_3_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
+					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_3_IMG ), 'medium', false, [
+							'class' => implode( ' ', [
+									'object-center',
+									'object-cover',
+									'rounded-px10',
+							] )
 					] ) ?>
 				</div>
 				<div class="text-center text-indigo md:flex-1 md:flex md:flex-col md:justify-center md:items-center">

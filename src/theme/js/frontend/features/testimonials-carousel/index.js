@@ -13,11 +13,11 @@ export default function testimonialsCarousel(id) {
 	const imgSwiper = new Swiper(imgWrap.querySelector('.swiper-container'), {
 		slidesPerView: 1,
 		effect: 'fade',
-		autoHeight: true,
 	});
 	const txtSwiper = new Swiper(txtWrap.querySelector('.swiper-container'), {
 		slidesPerView: 1,
 		autoHeight: true,
+		autoplay: true,
 		pagination: {
 			el: txtWrap.querySelector('.swiper-pagination'),
 			clickable: true,

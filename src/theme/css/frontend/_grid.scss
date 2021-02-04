@@ -1,11 +1,40 @@
 .trevor-grid-default {
   @apply grid grid-cols-1 gap-px28;
 
+  &, &-container {
+	@apply mx-auto;
+	max-width: theme('postCard.width.DEFAULT');
+  }
+
   @screen md {
-	@apply grid-cols-2 gap-px30;
+	@apply grid-cols-2;
+	&, &-container {
+	  @apply max-w-none;
+	}
   }
 
   @screen lg {
+	&, &-container {
+	  max-width: rem-calc(738px);
+	}
+  }
+
+  @screen lg2 {
 	@apply grid-cols-3 gap-px28;
+	&, &-container {
+	  @apply max-w-none;
+	}
+  }
+
+  @screen xl {
+	&, &-container {
+	  @apply max-w-screen-lg2;
+	}
+  }
+
+  @screen 2xl {
+	&, &-container {
+	  @apply max-w-screen-lg2;
+	}
   }
 }

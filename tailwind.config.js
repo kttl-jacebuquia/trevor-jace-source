@@ -23,10 +23,11 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			'mobile': {'max': '767px'},
+			'mobile': {'max': px2rem(767)},
 			'sm': px2rem(375),
 			'md': px2rem(768),
 			'lg': px2rem(1024),
+			'lg2': px2rem(1280),
 			'xl': px2rem(1440),
 			'2xl': px2rem(1600),
 			dark: {'raw': '(prefers-color-scheme: dark)'},
@@ -85,8 +86,9 @@ module.exports = {
 			width: {
 				DEFAULT: px2rem(319),
 				md: px2rem(319),
-				lg: px2rem(395),
-				xl: px2rem(395),
+				lg: px2rem(355),
+				lg2:px2rem(355),
+				xl: px2rem(355),
 			}
 		},
 		carousel: {
@@ -110,25 +112,27 @@ module.exports = {
 				padding: {
 					DEFAULT: px2rem(28),
 					md: px2rem(50),
-					lg: px2rem(100),
+					lg: px2rem(50),
+					lg2: px2rem(80),
 					xl: px2rem(100),
+					'2xl': px2rem(100),
 				},
 			},
 			borderRadius: {
 				px10: px2rem(10)
 			},
 			maxWidth: {
-				px1240: px2rem(1240),
 				px319: px2rem(319),
+				px500: px2rem(500),
 				px550: px2rem(550),
 				px1028: px2rem(1028),
-				px500: px2rem(500),
+				px1240: px2rem(1240),
 			},
 			height: {
-				px737: px2rem(737),
-				px600: px2rem(600),
 				px490: px2rem(490),
 				px546: px2rem(546),
+				px600: px2rem(600),
+				px737: px2rem(737),
 			},
 			fontSize: {
 				px14: px2rem(14),
@@ -209,7 +213,7 @@ module.exports = {
 				px18: px2rem(18),
 				px20: px2rem(20),
 				px22: px2rem(22),
-        px27: px2rem(27),
+				px27: px2rem(27),
 				px28: px2rem(28),
 				px30: px2rem(30),
 				px34: px2rem(34),
@@ -236,19 +240,17 @@ module.exports = {
 				px90: px2rem(90),
 				px100: px2rem(100),
 				px106: px2rem(106),
+				px110: px2rem(110),
 				px117: px2rem(117),
 				px120: px2rem(120),
 				px127: px2rem(127),
-				px140: px2rem(140),
-				px292: px2rem(292),
-				px319: px2rem(319),
-				px395: px2rem(395),
-				px110: px2rem(110),
-				px120: px2rem(120),
 				px135: px2rem(135),
 				px140: px2rem(140),
 				px150: px2rem(150),
 				px168: px2rem(168),
+				px292: px2rem(292),
+				px319: px2rem(319),
+				px395: px2rem(395),
 			},
 			typography: {
 				'teal-dark': {
