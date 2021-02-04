@@ -20,7 +20,7 @@ use TrevorWP\Theme\Helper;
 					<i class="trevor-ti-chat text-white text-px52 my-2 lg:text-px64 lg:mb-4"></i>
 					<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CHAT_BTN_CTA ) ?>
 				</a>
-				<a href="#"
+				<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_CTA_ACTION ) ?>"
 				   class="btn bg-orange text-white flex flex-col text-px20 leading-px22 pt-4 pb-5 px-4 flex-1 justify-center md:p-8">
 					<i class="trevor-ti-call text-white text-px42 my-2 lg:text-px64 lg:mb-4"></i>
 					<?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CALL_BTN_CTA ) ?>
