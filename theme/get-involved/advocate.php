@@ -145,7 +145,10 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 					) {
 						if ( has_post_thumbnail( $partner ) ) { ?>
 							<div class="w-1/2 md:w-1/3 lg:w-1/4 py-2" data-aspectRatio="2:1">
-								<div class="w-3/4 mx-auto flex items-center content-center">
+								<?php $has_url = ! empty( $partner_url = \TrevorWP\Meta\Post::get_partner_url( $partner->ID ) ); ?>
+								<a class="w-3/4 mx-auto flex items-center content-center"
+								   rel="nofollow noreferrer noopener"
+								   target="_blank" href="<?= $has_url ? esc_attr( $partner_url ) : '#' ?>">
 									<?= wp_get_attachment_image( get_post_thumbnail_id( $partner ), 'medium', false, [
 											'class' => implode( ' ', [
 													'mx-auto',
@@ -153,7 +156,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 													'object-contain'
 											] )
 									] ) ?>
-								</div>
+								</a>
 							</div>
 							<?php
 						}
