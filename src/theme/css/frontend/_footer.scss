@@ -1,5 +1,5 @@
 footer {
-  @apply bg-indigo text-white;
+  @apply bg-teal-dark text-white;
   @apply pt-20 pb-14;
 
   // Logo
@@ -55,12 +55,12 @@ footer {
   }
 
   input[type] {
-	@apply py-5 px-7 rounded-px10 placeholder-indigo text-indigo;
+	@apply py-5 px-7 rounded-px10 placeholder-teal-dark text-teal-dark;
 	@apply flex-grow;
   }
 
   .btn {
-	@apply bg-white text-indigo;
+	@apply bg-white text-teal-dark;
 
 	@screen md {
 	  @apply flex-auto;
@@ -69,6 +69,17 @@ footer {
 
 	@screen lg {
 	  @apply flex-grow-0;
+	}
+  }
+
+  .is-rc & {
+  	@apply bg-indigo;
+
+	input[type] {
+		@apply placeholder-indigo text-indigo;
+	}
+	.btn {
+		@apply text-indigo;
 	}
   }
 
