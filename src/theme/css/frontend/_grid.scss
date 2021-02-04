@@ -15,6 +15,7 @@
 
   @screen lg {
 	&, &-container {
+	  width: 100%;
 	  max-width: rem-calc(738px);
 	}
   }
@@ -22,7 +23,7 @@
   @screen lg2 {
 	@apply grid-cols-3 gap-px28;
 	&, &-container {
-	  @apply max-w-screen-lg2;
+	  @apply max-w-screen-lg;
 	}
   }
 
