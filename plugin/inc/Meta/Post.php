@@ -171,6 +171,12 @@ class Post {
 						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
+				self::PARTNER_URL 						=> [
+					'post_types' => [
+						CPT\Get_Involved\Partner::POST_TYPE,
+						CPT\Get_Involved\Grant::POST_TYPE,
+					],
+				],
 			] as $meta_key => $args
 		) {
 			$args = array_merge( $default, $args );

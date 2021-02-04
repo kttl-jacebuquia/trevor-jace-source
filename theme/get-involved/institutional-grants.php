@@ -60,7 +60,7 @@ foreach ( $tiers as $tier ) {
 							/** @var \WP_Post $post */
 							foreach ( $tier->posts as $post ) :
 								?>
-								<a href="$" rel="nofollow noreferrer noopener" target="_blank"
+								<a href="<?= Meta\Post::get_partner_url( $post->ID ) ?>" rel="nofollow noreferrer noopener" target="_blank"
 								   title="<?= esc_attr( $post->title ) ?>">
 									<?= $post->post_title ?>
 								</a>
