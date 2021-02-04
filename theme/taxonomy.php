@@ -11,8 +11,7 @@
 				<?php if ( ! empty( $term->description ) ) { ?>
 					<p class="font-normal text-px20 leading-px26 text-center mb-8 md:text-left md:text-px22 md:leading-px32 md:tracking-em005 lg:text-px26 lg:leading-px36"><?= esc_html( $term->description ) ?></p>
 				<?php } ?>
-			<?php }
-			?>
+			<?php } ?>
 		</div>
 		<div class="trevor-grid-default">
 			<?php while ( have_posts() ) {
