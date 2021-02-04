@@ -9,7 +9,7 @@
   @screen md {
 	@apply grid-cols-2;
 	&, &-container {
-	  @apply max-w-none;
+	  @apply max-w-screen-md;
 	}
   }
 
@@ -22,7 +22,7 @@
   @screen lg2 {
 	@apply grid-cols-3 gap-px28;
 	&, &-container {
-	  @apply max-w-none;
+	  @apply max-w-screen-lg2;
 	}
   }
 

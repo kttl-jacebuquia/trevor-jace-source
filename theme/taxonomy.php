@@ -2,7 +2,7 @@
 
 <main id="site-content" role="main">
 	<div class="container trevor-grid-default-container">
-		<div class="flex flex-col items-center text-white mb-8 md:items-start">
+		<div class="flex flex-col text-center items-center text-white mb-8 md:items-start md:text-left">
 			<?php
 			/** @var \WP_Term $term */
 			$term = get_queried_object();
