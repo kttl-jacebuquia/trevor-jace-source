@@ -52,3 +52,14 @@
 	height: auto;
   }
 }
+
+#rc-search-main::-webkit-search-cancel-button {
+  @apply w-px30 h-px30;
+  background: url('/wp-content/themes/trevor/static/media/x.svg');
+  background-size: contain;
+  appearance: none;
+
+  @screen lg {
+    @apply w-px40 h-px40;
+  }
+}
