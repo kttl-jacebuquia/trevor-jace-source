@@ -16,8 +16,8 @@
 				<li class="label">
 					<button>Sort By: Newest to Oldest</button>
 					<ul class="dropdown">
-						<li class="active" data-sort="asc">Sort By: Newest to Oldest</li>
-						<li data-sort="desc">Sort By: Oldest to Newest</li>
+						<li class="active">Sort By: Newest to Oldest</li>
+						<li>Sort By: Oldest to Newest</li>
 					</ul>
 				</li>
 			</ul>

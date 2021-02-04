@@ -50,16 +50,12 @@ class Tile_Grid {
 		ob_start(); ?>
 		<div class="<?= implode( ' ', $cls ) ?>">
 			<div class="tile-grid-inner">
-				<?php if ( !empty( $options['title']) && !empty( $options['desc'] ) ) { ?>
 				<div class="tile-grid-header">
-					<?php if ( ! empty( $options['title'] ) ) { ?>
-						<h2 class="tile-grid-title"><?= $options['title'] ?></h2>
-					<?php } ?>
+					<h2 class="tile-grid-title"><?= $options['title'] ?></h2>
 					<?php if ( ! empty( $options['desc'] ) ) { ?>
 						<p class="tile-grid-desc"><?= $options['desc'] ?></p>
 					<?php } ?>
 				</div>
-				<?php } ?>
 				<div class="tile-grid-container">
 					<?php foreach ( $data as $key => $entry ) {
 						$tile_method = $options['tileMethod'];

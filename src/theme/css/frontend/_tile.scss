@@ -2,10 +2,6 @@
 .tile-grid {
   @apply pt-20 pb-px60 w-full;
 
-  .post-type-archive & {
-  	@apply pt-9;
-  }
-
   &-inner {
 	@apply mx-auto text-center;
   }
@@ -42,7 +38,6 @@
   }
 
   @screen md {
-
 	.tile-grid-inner {
 	  @apply px-0;
 	}
@@ -66,10 +61,6 @@
 
   @screen lg {
 	@apply pt-28 pb-48;
-
-	.post-type-archive & {
-		@apply pt-px50;
-	}
 
 	&-header {
 	  @apply mb-20;

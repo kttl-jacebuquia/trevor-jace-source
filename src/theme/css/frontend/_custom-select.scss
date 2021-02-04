@@ -1,13 +1,12 @@
 .custom-select {
 	@apply flex justify-center;
-	@apply relative z-10;
 	.label {
 		@apply relative pb-2.5;
 		&:after {
 			@extend .trevor-ti-chevron-down:before;
 			@apply text-teal-dark font-bold text-px14 mt-3 ml-2;
 		}
-		// &:hover,
+		&:hover,
 		&.show {
 			&:after {
 				transform: rotate(180deg);
@@ -33,7 +32,7 @@
 		width: calc(100vw - 30px);
 		left: rem-calc(-36px);
 		li {
-			@apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
+			@apply font-semibold text-px20 leading-px30 text-teal-dark;
 			@apply py-5 px-12;
 			@apply cursor-pointer;
 			&:hover,
