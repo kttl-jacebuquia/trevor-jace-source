@@ -110,7 +110,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				'title'     => 'Trending',
 				'subtitle'  => 'Explore the latest articles, resources, and guides.',
 				'title_cls' => 'text-center',
-				'onlyMd'    => true,
+				'onlyMd'    => false,
 				'class'     => 'text-white',
 		] );
 	} ?>
