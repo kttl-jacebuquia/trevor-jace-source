@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "4d8750f9329e6713f5c351c54240f2e168fa443c8361f4bf4518f92d31ffbb67",
-    "current": "4d8750f9329e6713f5c351c54240f2e168fa443c8361f4bf4518f92d31ffbb67"
+    "previous": "b53e024eb86a3714a60bbe2c5d3415cbaecb190d07c61cfb13fa77b545e50c4f",
+    "current": "b53e024eb86a3714a60bbe2c5d3415cbaecb190d07c61cfb13fa77b545e50c4f"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_4d8750f9329e6713f5c351c54240f2e1.ttf",
-    "../../theme/static/icon-font/trevor-ti_4d8750f9329e6713f5c351c54240f2e1.svg",
-    "../../theme/static/icon-font/trevor-ti_4d8750f9329e6713f5c351c54240f2e1.woff",
-    "../../theme/static/icon-font/trevor-ti_4d8750f9329e6713f5c351c54240f2e1.eot",
-    "../../theme/static/icon-font/trevor-ti_4d8750f9329e6713f5c351c54240f2e1.woff2"
+    "../../theme/static/icon-font/trevor-ti_b53e024eb86a3714a60bbe2c5d3415cb.ttf",
+    "../../theme/static/icon-font/trevor-ti_b53e024eb86a3714a60bbe2c5d3415cb.svg",
+    "../../theme/static/icon-font/trevor-ti_b53e024eb86a3714a60bbe2c5d3415cb.woff",
+    "../../theme/static/icon-font/trevor-ti_b53e024eb86a3714a60bbe2c5d3415cb.eot",
+    "../../theme/static/icon-font/trevor-ti_b53e024eb86a3714a60bbe2c5d3415cb.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -126,6 +126,10 @@
     "twitter": {
       "codepoint": 61710,
       "source": "./vectors/twitter.svg"
+    },
+    "x": {
+      "codepoint": 61727,
+      "source": "./vectors/x.svg"
     },
     "youtube": {
       "codepoint": 61724,
