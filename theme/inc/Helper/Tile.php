@@ -35,7 +35,8 @@ class Tile {
 				'desc'    => $post->post_excerpt,
 				'img'     => $img,
 				'cta_txt' => 'Read More',
-				'cta_url' => get_permalink( $post )
+				'cta_url' => get_permalink( $post ),
+				'date'    => $post->post_date
 		];
 
 
@@ -154,7 +155,7 @@ class Tile {
 
 		ob_start();
 		?>
-		<div <?= Tools::flat_attr( $attr ) ?>>
+		<div <?= Tools::flat_attr( $attr ) ?> data-date="<?= $data['date'] ?>">
 			<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
 				<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
 			<?php } ?>

@@ -10,3 +10,4 @@ export {toggleFrequency, toggleAmount} from './donate';
 export {carousel, carouselNavigator} from './carousel';
 export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
+export customSelect from './custom-select';
