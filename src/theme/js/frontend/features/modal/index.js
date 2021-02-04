@@ -21,6 +21,8 @@ class Modal {
 		this.$overlay.on('click', this.close);
 		this.$content.addClass('is-active');
 		document.body.classList.add(this.constructor.bodyActiveClass);
+
+		this.$blurFilter = $('<svg width="0" height="0" style="position:absolute"><filter id="blur3px"><feGaussianBlur in="SourceGraphic" stdDeviation="3"></feGaussianBlur></filter></svg>').prependTo('.site-content');
 	}
 
 	close = (e) => {
@@ -29,6 +31,8 @@ class Modal {
 		this.$overlay.off('click', this.close);
 		this.$content.removeClass('is-active');
 		document.body.classList.remove(this.constructor.bodyActiveClass);
+
+		$('#blur3px').parent().remove();
 	}
 
 	_handleKeyDown = (e) => {

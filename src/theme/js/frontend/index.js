@@ -103,6 +103,6 @@ if (isCardPresent) {
 	});
 }
 
-features.modal($('.modal'), {}, $('.modal-open'));
+// features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});
 features.customSelect($('.custom-select'));
