@@ -87,7 +87,7 @@ module.exports = {
 				DEFAULT: px2rem(319),
 				md: px2rem(319),
 				lg: px2rem(355),
-				lg2:px2rem(355),
+				lg2: px2rem(355),
 				xl: px2rem(355),
 			}
 		},
@@ -101,6 +101,9 @@ module.exports = {
 				heightMD: px2rem(409),
 				heightLG: px2rem(500),
 			}
+		},
+		paths: {
+			themeGradients: '/wp-content/themes/trevor/static/media/gradients',
 		},
 		// Extend
 		extend: {
@@ -264,7 +267,15 @@ module.exports = {
 						}
 					}
 				}
-			}
+			},
+			backgroundImage: theme => ({
+				'gradient-default': `url('${theme('paths.themeGradients')}/default.png')`,
+				'gradient-rc': `url('${theme('paths.themeGradients')}/rc.png')`,
+				'gradient-darkgreen': `url('${theme('paths.themeGradients')}/darkgreen.png')`,
+				'gradient-darkgreen-flip': `url('${theme('paths.themeGradients')}/darkgreen-flip.png')`,
+				'gradient-trevorspace': `url('${theme('paths.themeGradients')}/trevorspace.png')`,
+				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
+			}),
 		},
 	},
 	variants: {

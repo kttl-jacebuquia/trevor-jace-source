@@ -7,10 +7,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: theme('colors.white.DEFAULT');
-}
-
 @import "./what-input";
 @import "../utils/index";
 @import "./vendor/index";

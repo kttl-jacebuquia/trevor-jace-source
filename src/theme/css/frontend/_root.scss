@@ -13,11 +13,7 @@ body {
   @apply font-manrope;
   @apply w-full;
   min-height: calc(100vh - var(--tr-wp-admin-bar-h));
-  @apply bg-teal-dark;
-
-  &.is-rc {
-	@apply bg-violet;
-  }
+  @apply bg-white;
 
   > main {
 	flex: 1 0 auto;

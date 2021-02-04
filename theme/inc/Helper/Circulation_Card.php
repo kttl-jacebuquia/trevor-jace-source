@@ -88,7 +88,7 @@ class Circulation_Card {
 				'desc'         => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
 				'cta_text'     => 'Check It Out',
 				'cta_url'      => home_url( RC_Object::PERMALINK_TREVORSPACE ),
-				'bg-inner-cls' => 'gradient-type-trevorspace',
+				'bg-inner-cls' => 'bg-gradient-trevorspace',
 		] ) )->render();
 	}
 
@@ -106,7 +106,7 @@ class Circulation_Card {
 				'cta_text'     => 'Find Answers',
 				'cta_url'      => home_url( RC_Object::PERMALINK_BASE ),
 				'cls'          => [ 'bg-purple' ],
-				'bg-inner-cls' => 'gradient-type-rc',
+				'bg-inner-cls' => 'bg-gradient-rc',
 		] ) )->render();
 	}
 
@@ -123,7 +123,7 @@ class Circulation_Card {
 				'desc'         => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
 				'cta_text'     => 'Reach a Counselor',
 				'cta_url'      => home_url( RC_Object::PERMALINK_GET_HELP ),
-				'bg-inner-cls' => 'gradient-type-get_help',
+				'bg-inner-cls' => 'bg-gradient-gethelp',
 		] ) )->render();
 	}
 
@@ -139,7 +139,7 @@ class Circulation_Card {
 				'cta_text'     => 'Donate Now',
 				'cta_url'      => home_url( Donate_Object::PERMALINK_DONATE ),
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'gradient-type-dark-green',
+				'bg-inner-cls' => 'bg-gradient-darkgreen-flip',
 		] ) )->render();
 	}
 
@@ -155,7 +155,7 @@ class Circulation_Card {
 				'cta_text'     => 'Fundraise Now',
 				'cta_url'      => '#', // todo: fix url
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'gradient-type-dark-green',
+				'bg-inner-cls' => 'bg-gradient-darkgreen',
 		] ) )->render();
 	}
 
@@ -171,7 +171,7 @@ class Circulation_Card {
 				'cta_text'     => 'Volunteer Now',
 				'cta_url'      => '#', // todo: fix url
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'gradient-type-dark-green',
+				'bg-inner-cls' => 'bg-gradient-darkgreen',
 		] ) )->render();
 	}
 }
