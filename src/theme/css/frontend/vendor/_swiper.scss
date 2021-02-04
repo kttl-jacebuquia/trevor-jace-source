@@ -2,51 +2,52 @@
 
 .swiper-button-prev,
 .swiper-button-next {
-	@apply absolute z-10 h-full top-0;
-	@apply flex;
-	@apply cursor-pointer;
+  @apply absolute z-10 h-full top-0;
+  @apply flex;
+  @apply cursor-pointer;
 
-	&.swiper-button-disabled {
-		@apply opacity-0;
-	}
+  &.swiper-button-disabled {
+	@apply opacity-0;
+  }
 }
+
 .swiper-button-wrapper {
-	width: 3rem;
-	height: 4rem;
-	@apply text-xl text-indigo;
-	@apply flex items-center justify-center;
-	@apply bg-violet-lighter bg-opacity-80;
-	@apply opacity-100;
-	@apply absolute top-1/2 transform -translate-y-1/2;
-	border-radius: 100px;
-	transition: all 150ms, opacity 400ms;
+  width: 3rem;
+  height: 4rem;
+  @apply text-xl text-indigo;
+  @apply flex items-center justify-center;
+  @apply bg-violet-lighter bg-opacity-80;
+  @apply opacity-100;
+  @apply absolute top-1/2 transform -translate-y-1/2;
+  border-radius: 100px;
+  transition: all 150ms, opacity 400ms;
 
-	i {
-		font-size: 1.4rem;
-	}
+  i {
+	font-size: 1.4rem;
+  }
 
-	.swiper-button:hover & {
-		@apply bg-opacity-100;
-	}
+  .swiper-button:hover & {
+	@apply bg-opacity-100;
+  }
 
-	.post-carousel & {
-		@apply bg-teal-dark bg-opacity-100 text-white;
-	}
+  .post-carousel & {
+	@apply bg-teal-dark bg-opacity-100 text-white;
+  }
 
-	.is-gi_advocacy & {
-		@apply bg-white bg-opacity-80 text-teal-dark;
-		&:hover {
-			@apply bg-opacity-90;
-		}
+  .is-gi_advocacy & {
+	@apply bg-white bg-opacity-80 text-teal-dark;
+	&:hover {
+	  @apply bg-opacity-90;
 	}
+  }
 }
 
 .swiper-button-prev {
-	@apply left-0;
-	@apply rounded-l-none;
-	.swiper-button-wrapper{
-		@apply right-0;
-	}
+  @apply left-0;
+  @apply rounded-l-none;
+  .swiper-button-wrapper {
+	@apply right-0;
+  }
 }
 
 .swiper-button-next {
@@ -55,10 +56,10 @@
 }
 
 @screen lg {
-	.swiper-button-wrapper {
-		@apply rounded-full;
-		width: 5rem;
-	}
+  .swiper-button-wrapper {
+	@apply rounded-full;
+	width: 5rem;
+  }
 }
 
 .carousel-container {
@@ -87,13 +88,9 @@
 }
 
 .swiper-pagination-bullet {
+  @apply bg-white opacity-20 block rounded-full;
   width: rem-calc(10px);
   height: rem-calc(10px);
-  @apply block bg-white opacity-20 rounded-full;
-
-  .post-carousel & {
-	@apply bg-teal-dark opacity-30;
-  }
 }
 
 .swiper-pagination-clickable .swiper-pagination-bullet {

@@ -3,6 +3,14 @@
 	width: theme('postCard.width.DEFAULT');
   }
 
+  body:not(.is-rc) & .swiper-pagination-bullet {
+	@apply bg-teal-dark opacity-30;
+
+	&.swiper-pagination-bullet-active {
+	  @apply opacity-100;
+	}
+  }
+
   @screen md {
 	.carousel-container {
 	  width: theme('postCard.width.md');
