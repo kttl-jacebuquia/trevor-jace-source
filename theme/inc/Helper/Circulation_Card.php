@@ -139,7 +139,7 @@ class Circulation_Card {
 				'cta_text'     => 'Donate Now',
 				'cta_url'      => home_url( Donate_Object::PERMALINK_DONATE ),
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'bg-gradient-darkgreen-flip',
+				'bg-inner-cls' => 'gradient-type-dark-green',
 		] ) )->render();
 	}
 
@@ -155,7 +155,7 @@ class Circulation_Card {
 				'cta_text'     => 'Fundraise Now',
 				'cta_url'      => '#', // todo: fix url
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'bg-gradient-darkgreen',
+				'bg-inner-cls' => 'gradient-type-dark-green',
 		] ) )->render();
 	}
 

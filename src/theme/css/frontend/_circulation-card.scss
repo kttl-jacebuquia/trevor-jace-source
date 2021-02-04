@@ -1,6 +1,7 @@
 .circulation-card {
   @apply relative flex flex-col text-center text-white items-center justify-center;
   @apply py-20 px-6 rounded-px10;
+  min-height: rem-calc(503px);
 
   .inner {
 	@apply z-1;
@@ -62,7 +63,26 @@
 	}
   }
 
+  // Type: Donation
+  &.type-donation {
+  	.bg-inner {
+  		background-size: 250% auto;
+  		background-position: 100% 100%;
+  		transform: rotate(180deg);
+  	}
+  }
+
+  // Type: Fundraiser
+  &.type-fundraiser {
+  	.bg-inner {
+  		background-size: 250% auto;
+  		background-position: 100% 100%;
+  	}
+  }
+
   @screen md {
+  	min-height: rem-calc(451px);
+
 	& > .inner {
 	  max-width: 75%;
 	}
@@ -92,6 +112,8 @@
   }
 
   @screen lg {
+  	min-height: rem-calc(706px);
+
 	.circulation-card-title {
 	  @apply text-px46 leading-px62;
 
