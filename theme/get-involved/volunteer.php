@@ -164,31 +164,31 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 	<div class="pt-20 pb-24 text-white lg:pt-24 bg-teal-dark">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5">
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
 				<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TITLE ) ?>
 			</h2>
-			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px26 lg:leading-px36 lg:mb-px60 lg:mx-44">
+			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px24 lg:leading-px34 lg:mb-px86 lg:mx-44">
 				<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_DESC ) ?>
 			</p>
 
 			<div class="grid grid-cols-2 gap-y-12 gap-x-3 md:mx-20 lg:grid-cols-4">
 				<div>
-					<p class="volunteer-icon volunteer-icon-1 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-1 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_1 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="volunteer-icon volunteer-icon-2 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-2 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_2 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="volunteer-icon volunteer-icon-3 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-3 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_3 ) ?>
 					</p>
 				</div>
 				<div>
-					<p class="volunteer-icon volunteer-icon-4 text-px20 leading-px30 lg:text-px22 lg:leading-px32px">
+					<p class="volunteer-icon volunteer-icon-4 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
 						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_4 ) ?>
 					</p>
 				</div>
