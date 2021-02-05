@@ -153,10 +153,10 @@
 	@apply relative;
 	@apply w-screen max-w-none;
 	// --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
-	padding-top: var(--neg-top-margin);
+	padding-top: var(--top-nav-top-margin);
 	margin-top: calc(-1 * var(--top-nav-height));
 	margin-left: calc(-1 * ((100vw - 100%) / 2));
-	@apply h-px737 md:h-px490 lg:h-px737 flex items-center text-white pt-0;
+	@apply h-px737 md:h-px490 lg:h-px737 flex items-center text-white;
 
 	.page-header-img-wrap {
 	  @apply absolute w-full h-full top-0 left-0;

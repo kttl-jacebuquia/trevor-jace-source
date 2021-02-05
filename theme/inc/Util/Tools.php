@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT\RC\RC_Object;
+use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 
 class Tools {
 	/**
@@ -8,6 +9,10 @@ class Tools {
 	 */
 	public static function get_body_gradient_type(): ?string {
 		$type = null;
+
+		if ( get_query_var( Get_Involved_Object::QV_VOLUNTEER ) ) {
+			return null;
+		}
 
 		$is_rc = Is::rc();
 		if ( $is_rc ) {
@@ -21,6 +26,8 @@ class Tools {
 		} else {
 			$type = 'default';
 		}
+
+		echo '<pre>' . var_dump($type) . '</pre>';
 
 		return $type;
 	}
