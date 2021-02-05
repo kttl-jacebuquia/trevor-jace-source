@@ -87,7 +87,7 @@ class Hero {
 					<i class="trevor-ti-quote-close md:text-px26 lg:text-px32"></i>
 				</div>
 				<blockquote
-						class="font-bold text-3xl my-4 md:text-px30 md:leading-px40 md:mr-24 lg:text-px40 lg:leading-px48 lg:font-semibold">
+						class="font-bold text-3xl my-4 md:text-px30 md:leading-px40 md:mr-24 lg:text-px32 lg:leading-px42 lg:font-semibold">
 					<?= @$data['quote'] ?>
 				</blockquote>
 				<?php if ( ! empty( $data['cite'] ) ) { ?>
