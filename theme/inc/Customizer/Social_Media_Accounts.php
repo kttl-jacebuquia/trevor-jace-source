@@ -53,10 +53,10 @@ class Social_Media_Accounts extends Abstract_Customizer
         'placeholder' => 'https://',
       ],
     ] );
-    $this->_manager->add_control( self::SETTING_HOME_LINKEDIN_URL, [
-      'setting' => self::SETTING_HOME_LINKEDIN_URL,
+    $this->_manager->add_control( self::SETTING_HOME_INSTAGRAM_URL, [
+      'setting' => self::SETTING_HOME_INSTAGRAM_URL,
 			'section' => self::SECTION_HOME_GENERAL,
-			'label'   => 'LinkedIn URL',
+			'label'   => 'Instagram URL',
       'type'    => 'url',
       'input_attrs' => [
         'placeholder' => 'https://',
@@ -80,10 +80,10 @@ class Social_Media_Accounts extends Abstract_Customizer
         'placeholder' => 'https://',
       ],
     ] );
-    $this->_manager->add_control( self::SETTING_HOME_INSTAGRAM_URL, [
-      'setting' => self::SETTING_HOME_INSTAGRAM_URL,
+    $this->_manager->add_control( self::SETTING_HOME_LINKEDIN_URL, [
+      'setting' => self::SETTING_HOME_LINKEDIN_URL,
 			'section' => self::SECTION_HOME_GENERAL,
-			'label'   => 'Instagram URL',
+			'label'   => 'LinkedIn URL',
       'type'    => 'url',
       'input_attrs' => [
         'placeholder' => 'https://',
