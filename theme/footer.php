@@ -40,12 +40,12 @@ use \TrevorWP\Theme\Util\Is;
 				<li><a href="#">Privacy Policy</a></li>
 			</ul>
 			<ul class="social-links">
-				<li><a href="#"><i class="trevor-ti-facebook text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-twitter text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-instagram text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-tiktok text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-youtube text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-linkedin text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_FACEBOOK_URL ) ?>"><i class="trevor-ti-facebook text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_TWITTER_URL ) ?>"><i class="trevor-ti-twitter text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_LINKEDIN_URL ) ?>"><i class="trevor-ti-instagram text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_TIKTOK_URL ) ?>"><i class="trevor-ti-tiktok text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_YOUTUBE_URL ) ?>"><i class="trevor-ti-youtube text-white"></i></a></li>
+				<li><a href="<?= Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_INSTAGRAM_URL ) ?>"><i class="trevor-ti-linkedin text-white"></i></a></li>
 			</ul>
 		</div>
 	</div>
