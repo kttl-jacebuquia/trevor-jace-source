@@ -95,7 +95,9 @@
 	  }
 
 	  .step-num {
-		@apply font-bold text-px24 border-2;
+		@apply font-semibold text-px18 border-2 p-2.5;
+		width: 2.5em;
+		height: 2.5em;
 	  }
 	}
 
