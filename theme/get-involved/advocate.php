@@ -117,7 +117,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 
 	<div class="py-10 text-center mb-20 lg:mb-px120">
 		<a href="#"
-		   class="inline-block font-bold text-teal-dark bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10 self-center">
+		   class="inline-block font-bold text-teal-dark bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10 self-center">
 			<?= Advocacy::get_val( Advocacy::SETTING_HOME_TAN_CTA ) ?>
 		</a>
 	</div>

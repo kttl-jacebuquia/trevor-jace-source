@@ -53,7 +53,7 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 			'tileClass'   => [ 'text-teal-dark' ],
 			'class'       => [ 'text-white', 'container', 'mx-auto', 'md:pb-2' ]
 	] ) ?>
-	<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 rounded-px10 self-center -mt-10 mb-20 md:mt-0 md:mb-px60 lg:mb-px120 md:px-6 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10"
+	<a class="font-bold text-px16 leading-px22 tracking-em001 text-teal-dark bg-white py-3 px-8 rounded-px10 self-center -mt-10 mb-20 md:mt-0 md:mb-px60 lg:mb-px120 md:px-6 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10"
 	   href="#">Become a Partner</a>
 
 	<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 lg:pb-40">

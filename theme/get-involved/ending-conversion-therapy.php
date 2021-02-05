@@ -152,7 +152,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 				</div>
 
 				<button type="submit"
-						class="block w-full font-bold text-teal-dark bg-white py-5 px-8 rounded-px10 md:py-4 md:px-20 lg:text-px20 lg:leading-px26 lg:py-5 md:w-auto">
+						class="block w-full font-bold text-teal-dark bg-white py-5 px-8 rounded-px10 md:py-4 md:px-20 lg:text-px18 lg:leading-px26 lg:py-5 md:w-auto">
 					Submit
 				</button>
 			</form>

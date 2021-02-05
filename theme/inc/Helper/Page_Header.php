@@ -37,7 +37,7 @@ class Page_Header {
 
 				<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
 					<a href="<?= empty( $options['cta_url'] ) ? '#' : $options['cta_url'] ?>"
-					   class="hero__btn-1 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px20 lg:leading-px26 lg:py-5 lg:px-10">
+					   class="hero__btn-1 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
 						<?= $options['cta_txt'] ?>
 					</a>
 				<?php } ?>
