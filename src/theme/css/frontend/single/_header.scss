@@ -368,7 +368,8 @@
 
 	/* Text Only */
 	&.type-text_only {
-	  min-height: rem-calc(640px);
+		min-height: rem-calc(800px);
+		box-sizing: border-box;
 
 	  .post-header-inner {
 		margin-top: 0;
