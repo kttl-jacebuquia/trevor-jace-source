@@ -62,7 +62,7 @@ foreach ( $tiers as $tier ) {
 								?>
 								<a href="<?= Meta\Post::get_partner_url( $post->ID ) ?>" rel="nofollow noreferrer noopener" target="_blank"
 								   title="<?= esc_attr( $post->title ) ?>">
-									<?= $post->post_title ?>
+									<span><?= $post->post_title ?></span>
 								</a>
 							<?php endforeach ?>
 						</td>

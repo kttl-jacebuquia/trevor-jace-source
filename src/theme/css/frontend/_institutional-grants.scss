@@ -61,19 +61,13 @@
 	  th,
 	  td {
 		a {
-		  @apply text-px20 relative inline-block;
+		  @apply text-px20 relative inline-block md:text-px16 lg:text-px20;
 		  @apply leading-px26;
 		  @apply font-bold;
 
-		  &:after {
-			content: "";
-			position: absolute;
-			bottom: -4px;
-			left: 0;
-			width: 100%;
-			height: 1px;
-			background-color: theme('colors.teal.dark');
-		  }
+			span {
+				border-bottom: solid 1px theme('colors.teal.dark');
+			}
 		}
 	  }
 
@@ -113,7 +107,7 @@
 	  }
 
 	  td {
-		@apply mx-auto pt-10 pb-11 items-center w-full;
+		@apply mx-auto pt-10 pb-11 items-center w-full px-px32;
 
 		a + a {
 		  @apply mt-px34;
