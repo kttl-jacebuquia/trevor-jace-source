@@ -190,6 +190,7 @@ class Hooks {
 		new Customizer\Product_Partnerships( $manager );
 		new Customizer\Shop_Product_Partners( $manager );
 		new Customizer\Fundraise( $manager );
+		new Customizer\Social_Media_Accounts( $manager );
 	}
 
 	/**

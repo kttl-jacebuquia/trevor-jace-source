@@ -9,9 +9,9 @@ use \TrevorWP\Theme\Util\Is;
 	<div class="container mx-auto site-content-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">
-				<a href="<?= home_url( Is::rc() ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>"
-				   class="logo"
-				   rel="home">
+				<a href="<?php echo home_url( Is::rc() ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ); ?>"
+					class="logo"
+					rel="home">
 					<i class="logo-text trevor-ti-logo-text"></i>
 					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
@@ -40,17 +40,54 @@ use \TrevorWP\Theme\Util\Is;
 				<li><a href="#">Privacy Policy</a></li>
 			</ul>
 			<ul class="social-links">
-				<li><a href="#"><i class="trevor-ti-facebook text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-twitter text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-instagram text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-tiktok text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-youtube text-white"></i></a></li>
-				<li><a href="#"><i class="trevor-ti-linkedin text-white"></i></a></li>
+				<?php
+					$facebook_url  = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_FACEBOOK_URL );
+					$twitter_url   = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_TWITTER_URL );
+					$instagram_url = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_INSTAGRAM_URL );
+					$tiktok_url    = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_TIKTOK_URL );
+					$youtube_url   = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_YOUTUBE_URL );
+					$linkedin_url  = Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_HOME_LINKEDIN_URL );
+
+					$social_media_accounts = array(
+						array(
+							'url'  => $facebook_url,
+							'icon' => 'trevor-ti-facebook',
+						),
+						array(
+							'url'  => $twitter_url,
+							'icon' => 'trevor-ti-twitter',
+						),
+						array(
+							'url'  => $instagram_url,
+							'icon' => 'trevor-ti-instagram',
+						),
+						array(
+							'url'  => $tiktok_url,
+							'icon' => 'trevor-ti-tiktok',
+						),
+						array(
+							'url'  => $youtube_url,
+							'icon' => 'trevor-ti-youtube',
+						),
+						array(
+							'url'  => $linkedin_url,
+							'icon' => 'trevor-ti-linkedin',
+						),
+					);
+
+					foreach ( $social_media_accounts as $account ) {
+						if ( ! empty( $account['url'] ) ) {
+							?>
+							<li><a href="<?php echo esc_url( $account['url'] ); ?>"><i class="<?php echo implode( ' ', array( esc_attr( $account['icon'] ), 'text-white' ) ); ?>"></i></a></li>
+							<?php
+						}
+					}
+					?>
 			</ul>
 		</div>
 	</div>
 </footer>
 
-<?= Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_BODY_BTM ) ?>
+<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_BODY_BTM ); ?>
 </body>
 </html>
