@@ -102,19 +102,19 @@ class Tile {
 		?>
 		<div class="js-accordion <?= implode( ' ', $cls ) ?>">
 			<h2 class="accordion-header" id="heading-<?= $key ?>">
-				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28"
+				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28 lg:text-px26 lg:leading-px36"
 						type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
 					<?= $data['title'] ?>
 				</button>
 			</h2>
 			<div id="collapse-<?= $key ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $key ?>">
-				<div class="accordion-body px-7 pt-5 pb-9 bg-gray-light md:bg-transparent md:pb-36">
-					<p class="text-px18 leading-px28 mb-6 md:text-px16 md:leading-px24">
+				<div class="accordion-body px-7 pt-5 pb-9 bg-gray-light md:bg-transparent md:pb-36 lg:pt-0">
+					<p class="text-px18 leading-px28 mb-6 md:text-px16 md:leading-px24 lg:text-px18 lg:leading-px26">
 						<?= $data['desc'] ?>
 					</p>
 					<div class="tile-cta-wrap">
 						<a href="<?= @$data['cta_url'] ?>"
-						   class="tile-cta font-bold text-px18 leading-px28 border-b-2 border-teal-dark">
+						   class="tile-cta font-bold text-px18 leading-px28 border-b-2 border-teal-dark lg:text-px20">
 							<span><?= $data['cta_txt'] ?></span>
 						</a>
 					</div>

@@ -147,14 +147,24 @@
 	max-width: theme('postCard.width.lg');
 	height: rem-calc(402px);
 
+	&-title-top {
+		@apply text-px18 leading-px24 mb-3;
+	}
+
 	&-title {
+		@apply text-px26 leading-px36 mb-3;
 	}
 
 	&-desc {
+		@apply text-px18 leading-px26 mb-4;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;  
+		overflow: hidden;
 	}
 
 	&-cta-wrap {
-
+		@apply text-px20 leading-px26;
 	}
   }
 }
