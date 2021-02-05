@@ -28,7 +28,7 @@ $online_count_txt = $user_count > $user_threshold
 			<a href="<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_JOIN_URL ) ?>"
 			   rel="noreferrer noopener"
 			   target="_blank"
-			   class="block text-white font-bold text-px18 leading-px24 bg-indigo py-4 px-8 rounded-px10 mx-auto md:text-px16 md:leading-px22">
+			   class="block text-white font-bold text-px18 leading-px24 bg-indigo py-4 px-8 rounded-px10 mx-auto md:text-px16 md:leading-px22 lg:mb-9 lg:text-px22 lg:leading-px22 lg:px-20 lg:py-6">
 				<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_JOIN_CTA ) ?>
 			</a>
 			<div class="login-row mt-5 mb-20 text-indigo md:mb-28 lg:mb-40">
@@ -39,7 +39,7 @@ $online_count_txt = $user_count > $user_threshold
 				</a>
 			</div>
 
-			<div class="flex flex-col mb-14 md:flex-row-reverse lg:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-14 md:flex-row lg:flex-row-reverse lg:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_1_IMG ), 'medium', false, [
 							'class' => implode( ' ', [
@@ -49,21 +49,19 @@ $online_count_txt = $user_count > $user_threshold
 							] )
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<div class="md:mx-6 lg:mx-10">
-						<div class="text-indigo font-semibold text-base leading-px24 tracking-px05 mb-2 md:leading-px20 md:tracking-em001 lg:text-px18 lg:leading-px24">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE_TOP ) ?>
-						</div>
-						<h3 class="font-semibold text-px34 leading-px40 mb-5 md:text-px32 md:leading-px42 md:mb-4 lg:text-px46 lg:leading-px56 lg:mx-6">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE ) ?>
-						</h3>
-						<p class="text-px20 leading-px30 md:text-px18 lg:text-px22 lg:leading-px32 lg:mx-10">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_DESC ) ?>
-						</p>
+				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:text-left md:pl-11 md:pr-0 lg:pl-0 lg:pr-16">
+					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE_TOP ) ?>
 					</div>
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px40 lg:leading-px50">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE ) ?>
+					</h3>
+					<p class="text-px20 leading-px30 md:text-px18 lg:text-10 lg:text-px22 lg:leading-px32">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_DESC ) ?>
+					</p>
 				</div>
 			</div>
-			<div class="flex flex-col mb-14 md:flex-row lg:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-14 md:flex-row-reverse lg:flex-row lg:mx-px106 lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_2_IMG ), 'medium', false, [
 							'class' => implode( ' ', [
@@ -73,21 +71,19 @@ $online_count_txt = $user_count > $user_threshold
 							] )
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<div class="md:mx-6 lg:mx-12">
-						<div class="text-indigo font-semibold text-base leading-px24 tracking-px05 mb-2 md:leading-px20 md:tracking-em001 lg:text-px18 lg:leading-px24">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE_TOP ) ?>
-						</div>
-						<h3 class="font-semibold text-px34 leading-px40 mb-5 md:text-px32 md:leading-px42 md:mb-4 lg:text-px46 lg:leading-px56">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE ) ?>
-						</h3>
-						<p class="text-px20 leading-px30 mb-6 px-5 md:text-px18 lg:text-px22 lg:leading-px32 lg:mx-10">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_DESC ) ?>
-						</p>
+				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:text-left md:pl-0 md:pr-11 lg:pl-16 lg:pr-0">
+					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE_TOP ) ?>
 					</div>
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px40 lg:leading-px50">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE ) ?>
+					</h3>
+					<p class="text-px20 leading-px30 mb-6 md:leading-px32 lg:text-px22 lg:leading-px32">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_DESC ) ?>
+					</p>
 				</div>
 			</div>
-			<div class="flex flex-col mb-20 md:flex-row-reverse md:mb-28 lg:mx-px106">
+			<div class="flex flex-col mb-20 md:flex-row md:mb-28 lg:flex-row-reverse lg:mx-px106">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?= wp_get_attachment_image( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_TREVORSPACE_3_IMG ), 'medium', false, [
 							'class' => implode( ' ', [
@@ -97,18 +93,16 @@ $online_count_txt = $user_count > $user_threshold
 							] )
 					] ) ?>
 				</div>
-				<div class="text-center text-indigo md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
-					<div class="md:mx-6 lg:mx-14">
-						<div class="text-indigo font-semibold text-base leading-px24 tracking-px05 mb-2 md:leading-px20 md:tracking-em001 lg:text-px18 lg:leading-px24">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE_TOP ) ?>
-						</div>
-						<h3 class="font-semibold text-px34 leading-px40 mb-5 md:text-px32 md:leading-px42 md:mb-4 lg:text-px46 lg:leading-px56">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE ) ?>
-						</h3>
-						<p class="text-px20 leading-px30 mb-6 md:text-px18 lg:text-px22 lg:leading-px32 lg:mx-10">
-							<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_DESC ) ?>
-						</p>
+				<div class="text-center text-indigo px-5 md:flex-1 md:flex md:flex-col md:justify-center md:text-left md:pl-11 md:pr-0 lg:pr-16 lg:pl-0">
+					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE_TOP ) ?>
 					</div>
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px40 lg:leading-px50">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE ) ?>
+					</h3>
+					<p class="text-px20 leading-px30 mb-6 md:text-px18 lg:text-px22 lg:leading-px32">
+						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_DESC ) ?>
+					</p>
 				</div>
 			</div>
 		</div>
