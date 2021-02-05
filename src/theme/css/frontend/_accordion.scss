@@ -29,13 +29,13 @@
   &:after {
 	@extend .trevor-ti-minus:before;
 	@apply mt-3 font-bold;
-	font-size: rem-calc(17px);
+	font-size: rem-calc(15px);
   }
 
   .js-accordion:not(.show) & {
 
 	&::after {
-	  @apply mt-0 text-px20;
+	  @apply mt-0 text-px18;
 	  @extend .trevor-ti-plus:before;
 	}
   }
