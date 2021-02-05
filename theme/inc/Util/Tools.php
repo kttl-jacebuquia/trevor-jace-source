@@ -27,8 +27,6 @@ class Tools {
 			$type = 'default';
 		}
 
-		echo '<pre>' . var_dump($type) . '</pre>';
-
 		return $type;
 	}
 }
