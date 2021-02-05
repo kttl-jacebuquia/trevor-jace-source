@@ -100,6 +100,11 @@
 		width: calc(100% - #{rem-calc(50px)});
 		@apply inset-x-auto mr-0 ml-auto h-auto;
 	  }
+
+	  .page-header-img {
+	  	@apply rounded-px10;
+	  }
+
 	  .page-header-desc {
 		@apply text-px18 leading-px26;
 	  }
