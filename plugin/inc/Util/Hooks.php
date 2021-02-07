@@ -100,7 +100,7 @@ class Hooks {
 			# Product Partner
 			Admin\Prod_Partner::register_hooks();
 
-			# Partner Prodct
+			# Partner Product
 			Admin\Partner_Prod::register_hooks();
 		}
 
@@ -109,6 +109,9 @@ class Hooks {
 
 		# Solr Index
 		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
+
+		# Org
+		CPT\Org\Org_Object::construct();
 
 		# Resource Center
 		CPT\RC\RC_Object::construct();

@@ -1,0 +1,41 @@
+.post-bottom-recirculation {
+  @apply container mx-auto py-12;
+
+
+  &-title {
+	@apply text-white mb-11;
+  }
+
+  &-title-top {
+	@apply font-medium text-px28 leading-px38;
+  }
+
+  &-title-name {
+	@apply font-bold text-px32 leading-px42 tracking-em001;
+  }
+
+  &-grid {
+	@apply grid grid-cols-1 gap-y-7;
+  }
+
+  @screen md {
+	@apply py-24;
+
+	&-title-top {
+	  @apply text-px24 leading-px34;
+	}
+
+	&-grid {
+	  @apply gap-x-7 grid-cols-2;
+	}
+  }
+
+  @screen lg {
+	@apply py-28;
+
+	&-inner {
+	  @apply mx-auto;
+	  max-width: rem-calc(820px);
+	}
+  }
+}

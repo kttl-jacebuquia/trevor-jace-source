@@ -87,7 +87,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px20 lg:tracking-px05 lg:mb-6">
 				Browse a topic or check out what’s trending.</p>
 
-			<div class="flex flex-wrap justify-center mt-4 -mx-8 md:mx-auto lg:w-3/4">
+			<div class="flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto lg:w-3/4 xl:w-3/5">
 				<?php foreach ( $featured_cats as $cat ) { ?>
 					<a href="<?= get_term_link( $cat ) ?>"
 					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5">
@@ -111,7 +111,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				'subtitle'  => 'Explore the latest articles, resources, and guides.',
 				'title_cls' => 'text-center',
 				'onlyMd'    => false,
-				'class'     => 'text-white',
+				'class'     => 'text-white md:mt-12 lg:mt-18',
 		] );
 	} ?>
 

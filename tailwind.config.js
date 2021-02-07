@@ -102,6 +102,11 @@ module.exports = {
 				heightLG: px2rem(500),
 			}
 		},
+		header: {
+			overflow: {
+				xl: '-1.25rem'
+			}
+		},
 		paths: {
 			themeGradients: '/wp-content/themes/trevor/static/media/gradients',
 		},

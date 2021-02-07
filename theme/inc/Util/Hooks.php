@@ -20,7 +20,8 @@ class Hooks {
 			[ CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ],
 			[ CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ],
 			[ CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ],
-			[ CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ]
+			[ CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ],
+			[ CPT\Org\Org_Object::PERMALINK_ORG_LP, 'home.php' ],
 	];
 
 	/**
@@ -59,6 +60,9 @@ class Hooks {
 
 		# Footer
 		add_action( 'wp_footer', [ self::class, 'wp_footer' ], 10, 0 );
+
+		# Redirects
+		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
 	}
 
 	/**
@@ -396,6 +400,18 @@ class Hooks {
 					Reach a Counselor</a>
 			</div>
 			<?php
+		}
+	}
+
+	/**
+	 * Fires before determining which template to load.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/template_redirect/
+	 */
+	public static function template_redirect(): void {
+		if ( '/' === $_SERVER['REQUEST_URI'] ) {
+			wp_redirect( home_url( CPT\RC\RC_Object::PERMALINK_BASE ), 301 );
+			exit;
 		}
 	}
 }

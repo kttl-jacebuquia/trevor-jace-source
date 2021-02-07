@@ -53,7 +53,7 @@ $is_rc = Is::rc();
 <div id="top-bar" class="top-bar">
 	<div class="top-bar-inner container">
 		<div class="logo-icon">
-			<a href="<?= home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>">
+			<a href="<?= \TrevorWP\Theme\Util\Tools::get_relative_home_url() ?>">
 				<i class="trevor-ti-logo-icon"></i>
 			</a>
 		</div>
@@ -63,7 +63,7 @@ $is_rc = Is::rc();
 				   class="<?= $is_rc ? 'active' : '' ?>">Find Support</a>
 			</li>
 			<li>
-				<a href="<?= esc_attr( home_url() ) ?>"
+				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ) ?>"
 				   class="<?= $is_rc ? '' : 'active' ?>">Explore The Organization</a>
 			</li>
 		</ul>
@@ -79,7 +79,7 @@ $is_rc = Is::rc();
 	<input id="top-nav-open" type="checkbox" class="hidden">
 	<div class="top-nav-inner container <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
-			<a href="<?= home_url( $is_rc ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : '' ) ?>" class="logo" rel="home">
+			<a href="<?= \TrevorWP\Theme\Util\Tools::get_relative_home_url() ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>
 				<i class="logo-icon trevor-ti-logo-icon"></i>
 			</a>

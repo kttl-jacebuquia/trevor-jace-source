@@ -1,131 +1,101 @@
-<?php 
-/**
- * @file
- * Creates the customizer for the Social Media Accounts URLs
- */
-namespace TrevorWP\Theme\Customizer;
-
+<?php namespace TrevorWP\Theme\Customizer;
 
 /**
- * Child customizer class for the Social Media Accounts URLs
+ * Social Media Accounts Customizer
  */
-class Social_Media_Accounts extends Abstract_Customizer
-{
-    /** 
-     * Panels
-    */
-    const PANEL_ID = self::ID_PREFIX . 'social_media_accounts';
+class Social_Media_Accounts extends Abstract_Customizer {
+	/**
+	 * Sections
+	 */
+	const SECTION_ID = self::ID_PREFIX . 'social_urls';
 
-    /** 
-     * Sections
-    */
-    const SECTION_HOME_PREFIX = self::PANEL_ID . '_home';
-    const SECTION_HOME_GENERAL = self::SECTION_HOME_PREFIX . '_general';
+	/**
+	 * Settings
+	 */
+	const SETTING_PREFIX = self::SECTION_ID . '_';
+	const SETTING_FACEBOOK_URL = self::SETTING_PREFIX . 'facebook';
+	const SETTING_TWITTER_URL = self::SETTING_PREFIX . 'twitter';
+	const SETTING_LINKEDIN_URL = self::SETTING_PREFIX . 'linkedin';
+	const SETTING_TIKTOK_URL = self::SETTING_PREFIX . 'tiktok';
+	const SETTING_YOUTUBE_URL = self::SETTING_PREFIX . 'youtube';
+	const SETTING_INSTAGRAM_URL = self::SETTING_PREFIX . 'instagram';
 
-    /** 
-     * Settings
-    */
-    const SETTING_HOME_PREFIX = self::SECTION_HOME_PREFIX . '_';
-    const SETTING_HOME_FACEBOOK_URL = self::SETTING_HOME_PREFIX . 'facebook_url';
-    const SETTING_HOME_TWITTER_URL = self::SETTING_HOME_PREFIX . 'twitter_url';
-    const SETTING_HOME_LINKEDIN_URL = self::SETTING_HOME_PREFIX . 'linkedin_url';
-    const SETTING_HOME_TIKTOK_URL = self::SETTING_HOME_PREFIX . 'tiktok_url';
-    const SETTING_HOME_YOUTUBE_URL = self::SETTING_HOME_PREFIX. 'youtube_url';
-    const SETTING_HOME_INSTAGRAM_URL = self::SETTING_HOME_PREFIX . 'instagram_url';
+	/** @inheritDoc */
+	protected function _register_sections(): void {
+		$this->_manager->add_section(
+			self::SECTION_ID, [
+				'title' => 'Social Media Accounts',
+			]
+		);
+	}
 
-    /** 
-     * @inheritDoc
-     */
-    protected function _register_panels(): void
-    {
-        $this->_manager->add_panel(self::PANEL_ID, [ 'title' => 'Social Media Accounts' ]);
-    }
-
-    /** 
-     * @inheritDoc
-     */
-    protected function _register_sections(): void
-    {
-        // Home
-        // General
-        $this->_manager->add_section(
-            self::SECTION_HOME_GENERAL, [
-            'panel' => self::PANEL_ID,
-            'title' => '[Home] General',
-             ] 
-        );
-    }
-
-    /** 
-     * @inheritDoc
-     */
-    protected function _register_controls(): void
-    {
-        $this->_manager->add_control(
-            self::SETTING_HOME_FACEBOOK_URL, [
-            'setting' => self::SETTING_HOME_FACEBOOK_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'Facebook URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-        $this->_manager->add_control(
-            self::SETTING_HOME_TWITTER_URL, [
-            'setting' => self::SETTING_HOME_TWITTER_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'Twitter URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-        $this->_manager->add_control(
-            self::SETTING_HOME_INSTAGRAM_URL, [
-            'setting' => self::SETTING_HOME_INSTAGRAM_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'Instagram URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-        $this->_manager->add_control(
-            self::SETTING_HOME_TIKTOK_URL, [
-            'setting' => self::SETTING_HOME_TIKTOK_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'TikTok URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-        $this->_manager->add_control(
-            self::SETTING_HOME_YOUTUBE_URL, [
-            'setting' => self::SETTING_HOME_YOUTUBE_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'YouTube URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-        $this->_manager->add_control(
-            self::SETTING_HOME_LINKEDIN_URL, [
-            'setting' => self::SETTING_HOME_LINKEDIN_URL,
-            'section' => self::SECTION_HOME_GENERAL,
-            'label'   => 'LinkedIn URL',
-            'type'    => 'url',
-            'input_attrs' => [
-            'placeholder' => 'https://',
-            ],
-            ] 
-        );
-    }
+	/** @inheritDoc */
+	protected function _register_controls(): void {
+		$this->_manager->add_control(
+			self::SETTING_FACEBOOK_URL, [
+				'setting'     => self::SETTING_FACEBOOK_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'Facebook URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+		$this->_manager->add_control(
+			self::SETTING_TWITTER_URL, [
+				'setting'     => self::SETTING_TWITTER_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'Twitter URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+		$this->_manager->add_control(
+			self::SETTING_INSTAGRAM_URL, [
+				'setting'     => self::SETTING_INSTAGRAM_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'Instagram URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+		$this->_manager->add_control(
+			self::SETTING_TIKTOK_URL, [
+				'setting'     => self::SETTING_TIKTOK_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'TikTok URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+		$this->_manager->add_control(
+			self::SETTING_YOUTUBE_URL, [
+				'setting'     => self::SETTING_YOUTUBE_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'YouTube URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+		$this->_manager->add_control(
+			self::SETTING_LINKEDIN_URL, [
+				'setting'     => self::SETTING_LINKEDIN_URL,
+				'section'     => self::SECTION_ID,
+				'label'       => 'LinkedIn URL',
+				'type'        => 'url',
+				'input_attrs' => [
+					'placeholder' => 'https://',
+				],
+			]
+		);
+	}
 }

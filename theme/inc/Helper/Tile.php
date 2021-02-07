@@ -60,12 +60,11 @@ class Tile {
 			$id            = uniqid( 'post-' );
 			$options['id'] = $id;
 
-			echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Get_Involved\Bill::render_modal( $post ), [
-					'target' => "#{$id} a",
-					'id'     => "{$id}-content"
-			] ) )->render();
-
-			add_action( 'wp_footer', function () use ( $id ) {
+			add_action( 'wp_footer', function () use ( $id, $post ) {
+				echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Get_Involved\Bill::render_modal( $post ), [
+						'target' => "#{$id} a",
+						'id'     => "{$id}-content"
+				] ) )->render();
 				?>
 				<script>jQuery(function () {
 						trevorWP.features.sharingMore(

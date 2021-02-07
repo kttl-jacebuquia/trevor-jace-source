@@ -18,6 +18,8 @@
   }
 
   @screen lg {
+	@apply mb-24;
+
 	.carousel-container {
 	  width: theme('postCard.width.lg');
 	}

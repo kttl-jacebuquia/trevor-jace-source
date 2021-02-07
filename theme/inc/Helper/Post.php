@@ -101,14 +101,14 @@ class Post {
 		}
 
 		ob_start(); ?>
-		<div class="container mx-auto py-12 md:py-24 lg:py-28">
-			<div class="lg:w-8/12 lg:mx-auto">
-				<h3 class="text-white mb-11">
-					<span class="font-medium text-px28 leading-px38 md:text-px24 md:leading-px34">Learn more about</span>
+		<div class="post-bottom-recirculation">
+			<div class="post-bottom-recirculation-inner ">
+				<h3 class="post-bottom-recirculation-title">
+					<span class="post-bottom-recirculation-title-top">Learn more about</span>
 					<br>
-					<span class="font-bold text-px32 leading-px42 tracking-em001"><?= $main_cat->name ?></span>
+					<span class="post-bottom-recirculation-title-name"><?= $main_cat->name ?></span>
 				</h3>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-y-7 md:gap-x-7">
+				<div class="post-bottom-recirculation-grid">
 					<?php foreach ( $posts as $post ) {
 						echo Card::post( $post );
 					}

@@ -4,6 +4,8 @@
   @apply shadow-lg rounded-px10;
   @apply text-teal-dark;
   height: rem-calc(503px);
+  max-width: rem-calc(395px);
+  @apply mx-auto;
 
   // Thumbnail
   .post-thumbnail-wrap {

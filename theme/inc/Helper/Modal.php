@@ -18,7 +18,6 @@ class Modal {
 	}
 
 	public function render(): string {
-		add_action( 'wp_footer', [ $this, 'print_js' ] );
 		ob_start();
 		?>
 		<div class="modal" id="<?= esc_attr( $this->_id ) ?>">
@@ -31,6 +30,7 @@ class Modal {
 				</div>
 			</div>
 		</div>
+		<?php $this->print_js() ?>
 		<?php return ob_get_clean();
 	}
 

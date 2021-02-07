@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\Util;
 
+use TrevorWP\CPT\Org\Org_Object;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 
@@ -28,5 +29,12 @@ class Tools {
 		}
 
 		return $type;
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_relative_home_url(): string {
+		return trailingslashit( home_url( Is::rc() ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : Org_Object::PERMALINK_ORG_LP ) );
 	}
 }
