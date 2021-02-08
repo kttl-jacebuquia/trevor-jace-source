@@ -1,0 +1,24 @@
+.questions {
+  @apply pt-px102 pb-px72;
+  background-color: theme('colors.teal.dark');
+
+  @screen md {
+    @apply pt-px100 pb-px100;
+  }
+
+  @screen lg {
+    @apply pt-px140 pb-px140;
+  }
+
+  .one-up-card {
+    @apply pt-px130 pb-px130;
+
+    @screen md {
+      @apply pt-px80 pb-px80;
+    }
+
+    @screen lg {
+      @apply pt-px120 pb-px130;
+    }
+  }
+}

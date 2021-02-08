@@ -8,7 +8,7 @@
 @tailwind utilities;
 
 @import "./what-input";
-@import "../utils/index";
+@import "../utils/index"; 
 @import "./vendor/index";
 // Our Components
 @import "./general";
@@ -37,7 +37,6 @@
 @import "./carousel/index";
 @import "./tile";
 @import "./topic-page/index";
-@import "./accordion";
 @import "./custom-select";
 // Resources Center
 @import "./rc";
@@ -48,6 +47,7 @@
 @import "./donate-page/index";
 @import "./product-partner";
 @import "./product-partnerships";
+@import "./fundraise/index";
 
 
  

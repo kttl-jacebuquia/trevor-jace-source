@@ -1,0 +1,69 @@
+.one-up-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @apply rounded-px10;
+
+  &.light {
+    background: white;
+
+    h3,
+    p {
+      color: theme('colors.teal.dark');
+    }
+
+    h3 {
+
+      @screen lg {
+        width: rem-calc(606px);
+      }
+    }
+    
+    p {
+      @screen lg {
+        width: rem-calc(408px);
+      }
+    }
+
+    .btn {
+      background: theme('colors.teal.dark');
+    }
+  }
+
+  h3 {
+    @apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
+
+    @screen md {
+      @apply mx-auto;
+    }
+
+    @screen lg {
+      @apply text-px46 leading-px56 mb-px20;
+    }
+  }
+
+  p {
+    @apply font-normal text-px18 leading-px22 ml-px28 mr-px28;
+
+    @screen md {
+      @apply ml-px59 mr-px59;
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px30 mx-auto;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    color: white;
+  
+    @apply text-px16 leading-px22 pt-px12 pb-px12 pl-px24 pr-px24 mt-px40;
+
+    @screen lg {
+      @apply text-px20 leading-px26 pt-px20 pb-px20 pl-px80 pr-px80;
+    }
+  }
+}
