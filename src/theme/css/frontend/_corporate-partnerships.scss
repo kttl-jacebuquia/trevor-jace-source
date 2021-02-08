@@ -109,7 +109,7 @@
 
 		.tier-name {
 		  margin-bottom: 4px;
-		  @apply font-semibold text-px20 leading-px26 md:leading-px24 lg:text-px26 lg:leading-px36;
+		  @apply font-semibold text-px20 leading-px26 md:leading-px24 lg:text-px24 lg:leading-px36;
 		}
 
 		.tier-value {
@@ -141,47 +141,30 @@
 
 
 		&.logo-size-text {
-		  @apply grid grid-cols-6 gap-x-3 gap-y-5 items-start grid-flow-col px-px28;
-
-		  .left-mobile {
-			grid-column: 1 / span 3;
-		  }
-
-		  .right-mobile {
-			grid-column: 4 / span 3;
-		  }
+			@apply px-px28 gap-x-3 -mt-px30;
+			column-count: 2;
+			display: block;
 
 		  a {
-			@apply text-sm font-semibold w-full;
+				@apply text-sm font-semibold w-full mt-px30;
 
-			@screen md {
-			  @apply text-base;
-			}
+				@screen md {
+					@apply text-base;
+				}
 
-			@screen lg {
-			  @apply text-xl;
-			}
+				@screen lg {
+					@apply text-xl;
+				}
 		  }
 
 
 		  @screen md {
-			@apply gap-px30 text-left px-px30;;
+				@apply gap-px30 text-left px-px30;
 		  }
 
 		  @screen lg {
-			@apply grid-cols-9 gap-y-px28 gap-x-px30 px-px60;
-
-			.left-desktop {
-			  grid-column: 1 / span 3;
-			}
-
-			.mid-desktop {
-			  grid-column: 4 / span 3;
-			}
-
-			.right-desktop {
-			  grid-column: 7 / span 3;
-			}
+			@apply gap-x-px30 px-px60;
+			column-count: 3;
 		  }
 		}
 

@@ -78,29 +78,14 @@ foreach ( $tiers as $tier ) {
 								$three_column_split_1 = $post_count / 3;
 								$three_column_split_2 = $three_column_split_1 * 2;
 
+
 								foreach ( $tier->posts as $i => $post ) :
-									$classes = [];
-
-									if ( $i < $two_column_split ) {
-										$classes[] = 'left-mobile';
-									} else {
-										$classes[] = 'right-mobile';
-									}
-
-									if ( $i < $three_column_split_1 ) {
-										$classes[] = 'left-desktop';
-									} elseif ( $i < $three_column_split_2 ) {
-										$classes[] = 'mid-desktop';
-									} else {
-										$classes[] = 'right-desktop';
-									}
 									?>
 
 									<a href="#"
-									   rel="nofollow noreferrer noopener"
-									   target="_blank"
-									   title="<?= esc_attr( $post->post_title ) ?>"
-									   class="<?= implode( ' ', $classes ) ?>"><?= $post->post_title ?></a>
+											rel="nofollow noreferrer noopener"
+											target="_blank"
+											title="<?= esc_attr( $post->post_title ) ?>"><?= $post->post_title ?></a>
 
 								<?php endforeach ?>
 							<?php endif ?>
