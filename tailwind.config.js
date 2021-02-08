@@ -34,7 +34,7 @@ module.exports = {
 		},
 		colors: {
 			transparent: 'transparent',
-			current: 'currentColor',
+			current: 'currentColor', 
 			black: {
 				DEFAULT: '#000',
 			},
