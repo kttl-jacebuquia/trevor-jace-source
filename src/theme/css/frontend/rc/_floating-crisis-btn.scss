@@ -20,4 +20,9 @@
 	  @apply text-px20 leading-px20 tracking-px05;
 	}
   }
+
+  .scroll-near-bottom & {
+    @apply absolute;
+    @apply translate-y-0;
+  }
 }

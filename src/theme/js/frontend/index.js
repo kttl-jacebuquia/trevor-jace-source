@@ -5,6 +5,7 @@ import * as features from './features';
 import * as vendors from './vendors';
 import * as matchMedia from './match-media';
 import './nav';
+import debounce from 'lodash/debounce';
 
 window.trevorWP = {features, vendors, matchMedia};
 
@@ -105,3 +106,35 @@ if (isCardPresent) {
 
 // features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});
+
+window.onload = function () {
+	const footer = document.querySelector('footer');
+	const crisisButton = $('.floating-crisis-btn-wrap');
+	const distanceFromFooter = 40;
+	let footerHeight = footer ? footer.offsetHeight : 0;
+
+	
+
+	let options = {
+		root: null,
+		rootMargin: '0px',
+		threshold: 0
+	}
+	let callback = (entries, observer) => {
+		entries.forEach(entry => {
+			$(window).resize(() => {
+				footerHeight = footer.offsetHeight;
+			});
+			if (entry.isIntersecting) {
+				$body.addClass('scroll-near-bottom');
+				crisisButton.css('bottom', `${footerHeight+12+distanceFromFooter}px`);
+			} else {
+				$body.removeClass('scroll-near-bottom');
+				crisisButton.removeAttr('style');
+			}
+		});
+	}
+
+	let observer = new IntersectionObserver(callback, options);
+	observer.observe(footer);
+}
