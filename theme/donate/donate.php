@@ -12,9 +12,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<?= Helper\Page_Header::split_img( [
 				'title'   => Donate::get_val( Donate::SETTING_HOME_HERO_TITLE ),
 				'desc'    => Donate::get_val( Donate::SETTING_HOME_HERO_DESC ),
-				'img_id'  => Donate::get_val( Donate::SETTING_HOME_HERO_IMG ),
-				'cta_txt' => Donate::get_val( Donate::SETTING_HOME_HERO_CTA ),
-				'cta_url' => Donate::get_val( Donate::SETTING_HOME_HERO_LINK ),
+				'img_id'  => Donate::get_val( Donate::SETTING_HOME_HERO_IMG )
 		] ) ?>
 
 
@@ -70,7 +68,6 @@ use \TrevorWP\Theme\Customizer\Donate;
 				<?php if ( $image_attributes ) : ?>
 					<img src="<?php echo $image_attributes[0]; ?>"/>
 				<?php endif; ?>
-
 			</div>
 		</div>
 
@@ -175,7 +172,10 @@ use \TrevorWP\Theme\Customizer\Donate;
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
 									<div class="navigator-data__item swiper-slide text-center">
-										<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?><">
+										<?php if( $navigator['img'] ): ?>
+											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
+										<?php endif; ?>
+										
 										<h2><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>
