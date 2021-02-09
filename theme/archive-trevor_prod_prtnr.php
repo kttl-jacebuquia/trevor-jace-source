@@ -8,11 +8,16 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 ?>
 	<main id="site-content" role="main" class="site-content product-partner">
 		<?php /* Header */ ?>
-		<?= Helper\Page_Header::text( [
+		<?= Helper\Page_Header::split_carousel( [
 				'title_top' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE_TOP ),
 				'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE ),
 				'desc'      => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_DESC ),
-		] ) ?>
+				'carousel_data' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_CAROUSEL ),
+				'swiper'        => [
+						'centeredSlides' => true,
+						'slidesPerView'  => 'auto'
+				]
+		] ); ?>
 
 		<?php
 		/**
@@ -22,7 +27,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		 * (e.g.
 		 *    Bryton Sneaker In Rainbow Canvas of Dolce Vita,
 		 *    Face Masks of Abercrombie & Fitch,
-		 *    PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+		 *    PRISM Exfoliating Glow Serum & Facial of HERBIVORE
 		 * )
 		 *
 		 */
@@ -51,7 +56,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			 * (e.g.
 			 *    Bryton Sneaker In Rainbow Canvas of Dolce Vita,
 			 *    Face Masks of Abercrombie & Fitch,
-			 *    PRISM Exfoliating  Glow Serum & Facial of HERBIVORE
+			 *    PRISM Exfoliating Glow Serum & Facial of HERBIVORE
 			 * )
 			 *
 			 *

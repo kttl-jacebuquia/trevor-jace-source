@@ -19,6 +19,7 @@ class Shop_Product_Partners extends Abstract_Customizer {
 	const SETTING_HOME_HERO_TITLE_TOP = self::SETTING_HOME_PREFIX . 'hero_title_top';
 	const SETTING_HOME_HERO_TITLE = self::SETTING_HOME_PREFIX . 'hero_title';
 	const SETTING_HOME_HERO_DESC = self::SETTING_HOME_PREFIX . 'hero_desc';
+	const SETTING_HOME_HERO_CAROUSEL = self::SETTING_HOME_PREFIX . 'hero_carousel';
 
 	const SETTING_HOME_STORIES_TITLE = self::SETTING_HOME_PREFIX . 'stories_title';
 	const SETTING_HOME_STORIES = self::SETTING_HOME_PREFIX . 'stories';
@@ -83,6 +84,12 @@ class Shop_Product_Partners extends Abstract_Customizer {
 			'label'   => 'Hero Title Desc',
 			'type'    => 'textarea',
 		] );
+		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_HERO_CAROUSEL, [
+			'setting' => self::SETTING_HOME_HERO_CAROUSEL,
+			'section'	=> self::SECTION_HOME_GENERAL,
+			'label'		=> 'Hero Carousel Data',
+			'fields'	=> Control\Custom_List::FIELDSET_CAROUSEL,
+		] ) );
 
 		// Featured
 		$this->_manager->add_control( self::SETTING_HOME_STORIES_TITLE, [

@@ -155,12 +155,19 @@ class Page_Header {
 			<div class="page-header-inner">
 				<div class="page-header-content-wrap">
 					<div class="page-header-title-top"></div>
+					<?php if ( ! empty( $options['title_top'] ) ) { ?>
+						<p class="page-header-title-top uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
+					<?php } ?>
 					<h1 class="heading-lg-tilted page-header-title">
 						<?= $options['title'] ?>
 					</h1>
 					<p class="page-header-desc"><?= $options['desc'] ?></p>
-					<a href="<?= $options['cta_url'] ?>"
-					   class="page-header-cta"><?= $options['cta_txt'] ?></a>
+					<?php if ( ! empty( $options['cta_url'] ) )  {
+						?>
+						<a href="<?= $options['cta_url'] ?>"
+							class="page-header-cta"><?= $options['cta_txt'] ?></a>
+					<?php
+						} ?>
 				</div>
 				<div class="page-header-img-wrap">
 					<?= Helper\Carousel::big_img( $options['carousel_data'], [

@@ -267,6 +267,7 @@ module.exports = {
 				px168: px2rem(168),
 				px292: px2rem(292),
 				px319: px2rem(319),
+				px355: px2rem(355),
 				px395: px2rem(395),
 			},
 			typography: {
