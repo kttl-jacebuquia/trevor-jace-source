@@ -1,0 +1,37 @@
+.featured-text {
+  background-color: theme('colors.blue_green.DEFAULT');
+  @apply pt-px120 pb-px120;
+
+  @screen lg {
+    @apply pt-px135 pb-px135;
+  }
+
+  h3,
+  p {
+    color: white;
+  }
+
+  h3 {
+    @apply mb-px14 text-px16 leading-px24;
+    text-transform: uppercase;
+
+    @screen md {
+      @apply mb-px18 text-px18 leading-px26;
+    }
+  }
+
+  p {
+    @apply text-px24 leading-px28;
+
+    @screen md {
+      @apply text-px26 leading-px36;
+    }
+
+    @screen lg {
+      max-width: rem-calc(718px);
+      @apply mx-auto;
+    }
+  }
+
+
+}
