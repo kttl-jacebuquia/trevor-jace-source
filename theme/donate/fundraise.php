@@ -7,6 +7,24 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
 	<main id="site-content" role="main" class="site-content">
+    
+		<?php /* ONE COLUMN */ ?>
+		<?php $content = Fundraise::get_val( Fundraise::SETTING_ONE_DATA ); ?>
+		<div class="one-column featured-content">
+			<div class="container mx-auto text-center">
+
+				<?php foreach( $content as $col ): ?>
+					<div class="one-column__content featured-content__item text-center">
+						<h3><?= $col['title'] ?></h3>
+						<p><?= $col['desc'] ?></p>
+						<?php if( $col['img'] ): ?>
+							<img src="<?= $col['img']['url'] ?>" alt="<?= $col['title'] ?>">
+						<?php endif ?>
+						<a href="<?= $col['cta_link'] ?>" class="btn"><?= $col['cta_label'] ?></a>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>	
 
 		<?php /* GROUPED BLOCKS */ ?>
 		<div class="grouped--block gradient-type-dark-green">
