@@ -24,7 +24,7 @@ class Categories {
 
 		ob_start();
 		?>
-		<div class="bg-gray-light text-violet">
+		<div class="bg-white text-violet">
 			<div class="container mx-auto my-20 flex flex-col items-center">
 				<p class="font-medium text-base leading-px22 tracking-px05 mb-5 md:text-px18 md:leading-px22 md:tracking-em001 lg:text-px20 lg:leading-px24 md:tracking-px05">
 					Browse trending content below or choose a topic category to explore.</p>
