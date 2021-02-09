@@ -21,7 +21,7 @@ export function carousel($element, $option) {
 
 
 export function carouselNavigator($element, $option) {
-	console.log('Inside', $element)
+
 	let desktop = window.matchMedia('(min-width: 1025px)');
 
 	const swiper = new Swiper($element, {

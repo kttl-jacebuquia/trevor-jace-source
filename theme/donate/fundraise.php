@@ -7,7 +7,46 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
 	<main id="site-content" role="main" class="site-content">
-    
+	
+		<?php /* How your Money is Used */ ?>
+		<?php $title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ); ?>
+		<?php $audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ); ?>
+		<div class="audit">
+			<div class="container mx-auto">
+				<h3 class="text-center"><?= $title ?></h3>
+
+				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
+
+					<div class="audit-holder mobile-only">
+						<div class="audit-container swiper-container" id="audit-<?= uniqid() ?>">
+							<div class="audit-wrapper swiper-wrapper">
+								<?php foreach ( $audit_data as $audit ): ?>
+									<div class="audit--card__item swiper-slide text-center">
+										<?php if ( $audit['img'] ): ?>
+											<img src="<?= $audit['img']['url'] ?>" alt="<?= $audit['desc'] ?>">
+										<?php endif; ?>
+
+										<p><?= $audit['desc'] ?></p>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+
+					<?php foreach ( $audit_data as $audit ): ?>
+						<div class="audit--card__item swipe-slide text-center">
+							<?php if ( $audit['img'] ): ?>
+								<img src="<?= $audit['img']['url'] ?>" alt="<?= $audit['desc'] ?>">
+							<?php endif; ?>
+
+							<p><?= $audit['desc'] ?></p>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+
 		<?php /* ONE COLUMN */ ?>
 		<?php $content = Fundraise::get_val( Fundraise::SETTING_ONE_DATA ); ?>
 		<div class="one-column featured-content">
