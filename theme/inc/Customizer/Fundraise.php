@@ -77,9 +77,9 @@ class Fundraise extends Abstract_Customizer {
 	/* * Questions */
   const SETTING_QUESTIONS_PREFIX = self::SECTION_QUESTIONS . '_';
   const SETTING_QUESTIONS_TITLE = self::SETTING_QUESTIONS_PREFIX . 'link_title';
-  const SETTING_QUESTIONS_DESC = self::SETTING_PARTNER_PREFIX . 'link_desc';
-  const SETTING_QUESTIONS_CTA = self::SETTING_PARTNER_PREFIX . 'link_cta';
-  const SETTING_QUESTIONS_CTA_LINK = self::SETTING_PARTNER_PREFIX . 'link_url';
+  const SETTING_QUESTIONS_DESC = self::SETTING_QUESTIONS_PREFIX . 'link_desc';
+  const SETTING_QUESTIONS_CTA = self::SETTING_QUESTIONS_PREFIX . 'link_cta';
+  const SETTING_QUESTIONS_CTA_LINK = self::SETTING_QUESTIONS_PREFIX . 'link_url';
 
 	/* * Other Ways */
   const SETTING_OTHER_PREFIX = self::SECTION_OTHER . '_';
@@ -129,7 +129,7 @@ class Fundraise extends Abstract_Customizer {
       ['label' => 'Helpful Links', 'link' => '#' ],
 		],
 
-		self::SETTING_PARTNER_TITLE => '<span>Become</span> a corporate partner.',
+		self::SETTING_PARTNER_TITLE => '<span>Become</span>&nbsp;&nbsp;a<br>corporate partner.',
 		self::SETTING_PARTNER_DESC => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ  young people every year.',
 		self::SETTING_PARTNER_CTA => 'Learn More',
 		self::SETTING_PARTNER_CTA_LINK => '#',

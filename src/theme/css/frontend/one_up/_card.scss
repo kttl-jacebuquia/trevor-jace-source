@@ -32,6 +32,34 @@
     }
   }
 
+  &.dark {
+    background: theme('colors.teal.dark');
+
+    h3,
+    p {
+      color: white;
+    }
+
+    h3 {
+
+      @screen lg {
+        width: rem-calc(408px);
+        @apply mb-px30;
+      }
+    }
+    
+    p {
+      @screen lg {
+        width: rem-calc(510px);
+      }
+    }
+
+    .btn {
+      background: white;
+      color: theme('colors.teal.dark');
+    }
+  }
+
   h3 {
     @apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
 
@@ -42,6 +70,15 @@
     @screen lg {
       @apply text-px46 leading-px56 mb-px20;
     }
+    
+    span {
+      @apply font-caveat text-px44 leading-px54;
+
+      @screen lg {
+        @apply text-px70 leading-px80;
+      }
+    }
+
   }
 
   p {

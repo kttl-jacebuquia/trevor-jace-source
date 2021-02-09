@@ -7,6 +7,25 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
 	<main id="site-content" role="main" class="site-content">
+		<?php /* GROUPED BLOCKS */ ?>
+		<div class="grouped--block gradient-type-dark-green">
+			<div class="container">
+				<?php /* BECOME A PARTNER */ ?>
+				<?php $partner_title = Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?>
+				<?php $partner_desc = Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ); ?>
+				<?php $partner_cta = Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA ); ?>
+				<?php $partner_cta_link = Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA_LINK ); ?>
+				<div class="partner">
+					<div class="mx-auto text-center">
+						<div class="one-up-card dark my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-center">
+							<h3><?= $partner_title ?></h3>	
+							<p><?= $partner_desc ?></p>
+							<div><a href="<?= $partner_cta_link ?>" class="btn"><?= $partner_cta ?></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<?php /* QUESTIONS */ ?>
 		<?php $questions_title = Fundraise::get_val( Fundraise::SETTING_QUESTIONS_TITLE ); ?>
