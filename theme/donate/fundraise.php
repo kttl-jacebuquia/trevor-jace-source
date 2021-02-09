@@ -7,9 +7,33 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
 	<main id="site-content" role="main" class="site-content">
+
 		<?php /* GROUPED BLOCKS */ ?>
 		<div class="grouped--block gradient-type-dark-green">
-			<div class="container">
+			<div class="container mx-auto">
+				<?php /* FEATURED LINKS */ ?>
+				<?php $link_title = Fundraise::get_val( Fundraise::SETTING_LINK_TITLE ); ?>
+				<?php $link_desc = Fundraise::get_val( Fundraise::SETTING_LINK_DESC ); ?>
+				<?php $link_cta = Fundraise::get_val( Fundraise::SETTING_LINK_DATA ); ?>
+
+				<div class="links">
+					<div class="mx-auto text-center">
+						<div class="links-wrapper my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-left">
+							<div class="links-content">
+								<h3><?= $link_title ?></h3>	
+								<p><?= $link_desc ?></p>
+								<?php if( $link_cta ): ?>
+									<ul>
+										<?php foreach( $link_cta as $cta ): ?>
+										<li><a href="<?= $cta["link"] ?>"><?= $cta['label'] ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<?php /* BECOME A PARTNER */ ?>
 				<?php $partner_title = Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?>
 				<?php $partner_desc = Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ); ?>

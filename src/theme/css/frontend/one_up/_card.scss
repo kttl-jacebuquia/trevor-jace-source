@@ -63,14 +63,6 @@
   h3 {
     @apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
 
-    @screen md {
-      @apply mx-auto;
-    }
-
-    @screen lg {
-      @apply text-px46 leading-px56 mb-px20;
-    }
-    
     span {
       @apply font-caveat text-px44 leading-px54;
 
@@ -79,6 +71,13 @@
       }
     }
 
+    @screen md {
+      @apply mx-auto;
+    }
+
+    @screen lg {
+      @apply text-px46 leading-px56 mb-px20;
+    }
   }
 
   p {
