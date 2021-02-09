@@ -38,14 +38,14 @@ $no_results = empty( $wp_query->found_posts );
 						</div>
 					</div>
 				<?php } else if ( $no_results ) { ?>
-					<div class="search-results-popular-wrap flex-1 text-white">
+					<div class="search-results-popular-wrap text-center flex-1 text-white">
 						<h2 class="font-semibold text-px26 leading-px32 -tracking-px05 mb-2 md:text-px32 md:leading-px42 md:tracking-em_001 lg:text-px46 lg:leading-px56">
 							Popular Searches
 						</h2>
-						<p class="text-px18 leading-px24 -tracking-em005 mb-7 md:tracking-em001 lg:text-px26 lg:leading-px36 lg:mb-10">
+						<p class="mx-auto text-px18 leading-px24 -tracking-em005 mb-7 md:w-7/12 lg:w-full md:tracking-em001 lg:text-px26 lg:leading-px36 lg:mb-10">
 							Here’s some popular search terms other people have been exploring:
 						</p>
-						<div class="flex flex-wrap mb-20 lg:mb-40">
+						<div class="flex flex-wrap justify-center mb-20 lg:mb-40 lg:w-3/6 lg:mx-auto">
 							<?php foreach (
 									[
 											'Arbitrary Data',
