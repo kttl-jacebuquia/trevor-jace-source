@@ -21,7 +21,7 @@ class Search_Input {
 					placeholder="What do you want to learn about?"
 					autocomplete="off"
 					value="<?= get_search_query( true ) ?>" name="s"/>
-			<div id="input-suggestions"></div>
+			<div id="input-suggestions" class="w-full"></div>
 		</label>
 		<?php return ob_get_clean();
 	}
