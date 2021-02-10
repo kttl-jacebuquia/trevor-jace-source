@@ -95,13 +95,15 @@
 
   // Medium
   @screen md {
+	@apply pt-px20;
 	.title-top {
 	  @apply font-semibold;
+		@apply pb-px12;
 	}
 
 	.title {
 	  @apply text-px38 leading-px42 font-bold;
-	  @apply my-2;
+	  @apply my-2 pb-px12;
 	}
 
 	.title-btm {
