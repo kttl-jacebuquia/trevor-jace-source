@@ -214,6 +214,8 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
+				px4: px2rem(4),
+				px6: px2rem(6),
 				px8: px2rem(8),
 				px10: px2rem(10),
 				px12: px2rem(12),
@@ -256,6 +258,7 @@ module.exports = {
 				px100: px2rem(100),
 				px102: px2rem(102),
 				px106: px2rem(106),
+				px108: px2rem(108),
 				px110: px2rem(110),
 				px117: px2rem(117),
 				px120: px2rem(120),
@@ -266,6 +269,9 @@ module.exports = {
 				px150: px2rem(150),
 				px160: px2rem(160),
 				px168: px2rem(168),
+				px188: px2rem(188),
+				px200: px2rem(200),
+				px210: px2rem(210),
 				px292: px2rem(292),
 				px319: px2rem(319),
 				px355: px2rem(355),
@@ -283,6 +289,11 @@ module.exports = {
 						}
 					}
 				}
+			},
+			boxShadow: {
+				'indigo-md': '0px 6px 8px rgba(16, 16, 102, 0.08)',
+				'indigo-lg': '0px 8px 6px rgba(16, 16, 102, 0.1)',
+				none: 'none',
 			},
 			backgroundImage: theme => ({
 				'gradient-default': `url('${theme('paths.themeGradients')}/default.png')`,

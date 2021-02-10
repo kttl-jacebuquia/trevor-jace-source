@@ -19,6 +19,7 @@ const isCardPresent = $('.card-collection');
 const carouselTestimonial = document.querySelectorAll('.carousel-testimonials');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
+const inputSearchField = $("#rc-search-main");
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -138,3 +139,40 @@ window.onload = function () {
 	let observer = new IntersectionObserver(callback, options);
 	observer.observe(footer);
 }
+
+$(() => {
+	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary', 'McCafe'];
+	inputSearchField
+	.autocomplete({
+		source: function (request, response) {
+			const results = $.ui.autocomplete.filter(terms, request.term);
+			response(results.slice(0, 5)); // Limit the results to five.
+		},
+		minLength: 0,
+		appendTo: "#input-suggestions",
+		open: function() {
+			/**
+			 * The results will automatically show without a header
+			 * when the user starts to type anything on the search bar.
+			 */
+			if ($(this).val() == '') {
+				$('ul.ui-autocomplete').prepend('<li class="list-header"><h3>Popular Searches</h3></li>');
+			}
+		},
+	})
+	/**
+	 * Immediately open the jQuery autocomplete 
+	 * when the user focuses the search bar
+	 * even before they start typing anyting.
+	 */
+	.focus(function () {
+		$(this).autocomplete('search', $(this).val());
+	})
+	// .on("keyup", function (event) {
+	// 	if (!inputSearchField.val()) {
+	// 		inputSearchField.removeClass('has-value');
+	// 	} else {
+	// 		inputSearchField.addClass('has-value');
+	// 	}
+	// });
+});

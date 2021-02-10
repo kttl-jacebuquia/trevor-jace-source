@@ -63,3 +63,50 @@
     @apply w-px40 h-px40;
   }
 }
+
+.search-form {
+
+	// .search-field {
+	// 	@apply text-left lg:pl-px140;
+	// 	&.has-value {
+	// 		@apply text-center pl-4;
+	// 	}
+	// }
+
+	#input-suggestions {
+		@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6;
+		z-index: 5;
+		color: theme('colors.indigo.DEFAULT');
+
+		@screen md {
+			box-shadow: theme('boxShadow.indigo-md');
+		}
+
+		@screen lg {
+			box-shadow: theme('boxShadow.indigo-lg');
+		}
+
+		.list-header {
+			@apply font-semibold text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
+		}
+
+		.ui-autocomplete {
+			@apply rounded-px10 pt-px24 mx-auto;
+			left: 0 !important;
+			width: 100% !important;
+		}
+
+		.ui-menu-item {
+			@apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6;
+			color: theme('colors.indigo.DEFAULT');
+		}
+
+		.ui-state-focus {
+			font-weight: 400;
+			background: none;
+			border: none;
+			margin: 0;
+			color: theme('colors.indigo.DEFAULT');
+		}
+	}
+}
