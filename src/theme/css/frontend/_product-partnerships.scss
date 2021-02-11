@@ -84,7 +84,7 @@
 	  @apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
 
 	  @screen lg {
-		@apply w-px395;
+		@apply w-px355;
 	  }
 	}
   }
@@ -98,19 +98,7 @@
 	}
 
 	&__container {
-	  @apply grid grid-cols-2 gap-x-px40 gap-y-px100 mt-px90;
-
-	  @screen md {
-		@apply grid-cols-4 gap-x-px50 gap-y-px100 mt-px100;
-	  }
-
-	  @screen lg {
-		@apply mt-px140;
-	  }
-	}
-
-	.partner-thumbnail {
-	  @apply mx-auto self-center justify-self-center;
+		@apply pt-px90 md:pt-px100;
 	}
   }
 
