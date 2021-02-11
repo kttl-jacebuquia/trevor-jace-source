@@ -54,24 +54,51 @@
 }
 
 #rc-search-main::-webkit-search-cancel-button {
-  @apply w-px30 h-px30;
-  background: url('/wp-content/themes/trevor/static/media/x.svg');
-  background-size: contain;
   appearance: none;
-
-  @screen lg {
-    @apply w-px40 h-px40;
-  }
 }
 
 .search-form {
 
-	// .search-field {
-	// 	@apply text-left lg:pl-px140;
-	// 	&.has-value {
-	// 		@apply text-center pl-4;
-	// 	}
-	// }
+	.input-wrap {
+		&.input-has-value {
+			@apply justify-center;
+
+			.search-field {
+				@apply w-auto text-center;
+			}
+
+			.icon-wrap {
+				@apply pl-0;
+			}
+
+			.icon-search-cancel {
+				@apply flex;
+			}
+		}
+	}
+
+	.search-field {
+		border: none;
+		@apply text-left;
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
+
+	.trevor-ti-search,
+	.trevor-ti-x {
+		color: theme('colors.violet.DEFAULT');
+	}
+
+	.trevor-ti-x {
+		@apply text-px30;
+
+		@screen lg {
+			@apply text-px32;
+		}
+	}
 
 	#input-suggestions {
 		@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6;
@@ -87,7 +114,7 @@
 		}
 
 		.list-header {
-			@apply font-semibold text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
+			@apply font-semibold text-center text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
 		}
 
 		.ui-autocomplete {
@@ -107,6 +134,7 @@
 			border: none;
 			margin: 0;
 			color: theme('colors.indigo.DEFAULT');
+			cursor: pointer;
 		}
 	}
 }

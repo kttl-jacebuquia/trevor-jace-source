@@ -142,6 +142,13 @@ window.onload = function () {
 
 $(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary', 'McCafe'];
+	const searchCancelIcon = $('.icon-search-cancel');
+	
+	if (inputSearchField.val()) {
+		inputSearchField.parent().addClass('input-has-value');
+		resizeInputField(inputSearchField);
+	}
+
 	inputSearchField
 	.autocomplete({
 		source: function (request, response) {
@@ -159,6 +166,11 @@ $(() => {
 				$('ul.ui-autocomplete').prepend('<li class="list-header"><h3>Popular Searches</h3></li>');
 			}
 		},
+		select: function(event, ui) {
+			$(this).addClass('has-value');
+			$(this).parent().addClass('input-has-value');
+			resizeInputField($(this), ui.item.value.length);
+		},
 	})
 	/**
 	 * Immediately open the jQuery autocomplete 
@@ -168,11 +180,25 @@ $(() => {
 	.focus(function () {
 		$(this).autocomplete('search', $(this).val());
 	})
-	// .on("keyup", function (event) {
-	// 	if (!inputSearchField.val()) {
-	// 		inputSearchField.removeClass('has-value');
-	// 	} else {
-	// 		inputSearchField.addClass('has-value');
-	// 	}
-	// });
+	.on("keyup", function (event) {
+		if (!inputSearchField.val()) {
+			$(this).parent().removeClass('input-has-value');
+		} else {
+			$(this).parent().addClass('input-has-value');
+		}
+		resizeInputField($(this));
+	});
+
+	searchCancelIcon.on("click", function (e) {
+		inputSearchField.val("");
+		inputSearchField.parent().removeClass('input-has-value');
+	});
+
+	function resizeInputField (inputField, inputSize = 0) {
+		const maxSize = 30;
+		const minSize = 1;
+		const length = inputSize | inputField.val().length;
+		const chars = length + 1;
+		inputField.attr('size', Math.min(Math.max(chars, minSize), maxSize));
+	}
 });
