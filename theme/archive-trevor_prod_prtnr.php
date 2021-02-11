@@ -94,8 +94,11 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			?>
 			<?php if ( have_posts() ) : ?>
 				<div class="partners-list">
-					<h3 class="title">Current Partners</h3>
-					<?php echo Helper\Tile_Grid::posts( $wp_query->posts ) ?>
+					<?php echo Helper\Tile_Grid::posts( $wp_query->posts,
+						[
+							'title' =>	Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
+						] );
+					?>
 					<div class="trevor-pagination-default">
 						<?php get_template_part( 'template-parts/pagination' ); ?>
 					</div>

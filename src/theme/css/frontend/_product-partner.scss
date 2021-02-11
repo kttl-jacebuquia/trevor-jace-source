@@ -18,6 +18,7 @@
 				@apply md:pb-px60;
 
 				@screen lg {
+
 					padding-bottom: 10%;
 				}
 			}
@@ -202,20 +203,16 @@
 	  }
 	}
 
-	.title {
-	  @apply px-7 font-bold text-px32 leading-px40 mb-px50 text-center;
-
-	  @screen md {
-		@apply px-px50;
-	  }
-
-	  @screen lg {
-		@apply px-px100;
-	  }
-	}
-
 	.tile-grid {
 	  @apply pt-0;
+
+		&-header {
+			@apply px-7 md:px-px50 lg:px-px100 mb-px50 text-center;
+		}
+
+		&-title {
+			@apply mx-auto font-bold text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48;
+		}
 	}
   }
 
