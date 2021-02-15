@@ -134,6 +134,9 @@ window.onload = function () {
 	observer.observe(footer);
 }
 
+/**
+ * Search bar autocomplete function
+ */
 $(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
 	const searchCancelIcon = $('.icon-search-cancel');
@@ -194,5 +197,35 @@ $(() => {
 		const length = inputSize | inputField.val().length;
 		const chars = length + 1;
 		inputField.attr('size', Math.min(Math.max(chars, minSize), maxSize));
+	}
+});
+
+/**
+ * Bouncing Arrow function
+ */
+$(() => {
+	const bouncingArrow = $('.bouncing-arrow');
+
+	if (bouncingArrow.length) {
+		bouncingArrow.on('click', () => {
+			let parentElement = bouncingArrow.parent();
+			let parentsNextSibling = parentElement.next();
+			
+			/**
+			 * Find the parent container with
+			 * immediate following sibling.
+			 */
+			while (!parentsNextSibling.length) {
+				parentsNextSibling = parentElement.next();
+				parentElement = parentElement.parent();
+			}
+
+			if  (parentsNextSibling.length) {
+				parentsNextSibling[0].scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			}
+		});
 	}
 });

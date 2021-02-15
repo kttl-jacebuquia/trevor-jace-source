@@ -32,9 +32,9 @@ use TrevorWP\Theme\Helper;
 				</a>
 			</div>
 
-			<div class="mt-12 text-center animate-bounce lg:mt-px60">
-				<i class="trevor-ti-chevron-down text-indigo text-4xl text-center lg:text-5xl"></i>
-			</div>
+				<div class="mt-12 text-center animate-bounce lg:mt-px60">
+					<i class="trevor-ti-chevron-down text-indigo text-4xl text-center lg:text-5xl bouncing-arrow cursor-pointer"></i>
+				</div>
 
 			<div class="mt-7 mb-14 text-center text-indigo md:mb-20 lg:mt-32 xl:mx-52">
 				<h2 class="font-bold text-px28 leading-px38 tracking-px_015 mb-4 md:text-px32 md:leading-px42 lg:text-px32 lg:leading-px56"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_2_TITLE ) ?></h2>

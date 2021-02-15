@@ -97,7 +97,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			</div>
 
 			<div class="mt-8 animate-bounce hidden md:block">
-				<i class="trevor-ti-chevron-down text-4xl text-white"></i>
+				<i class="trevor-ti-chevron-down text-4xl text-white bouncing-arrow cursor-pointer"></i>
 			</div>
 		</div>
 	</div>
