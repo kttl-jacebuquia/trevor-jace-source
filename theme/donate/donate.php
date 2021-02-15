@@ -31,8 +31,6 @@ use \TrevorWP\Theme\Customizer\Donate;
 						<div class="frequency">
 							<input type="radio" name="donation-frequency" value="once" id="once" checked="checked">
 							<input type="radio" name="donation-frequency" value="monthly" id="monthly">
-							<input type="hidden" name="first" value="Ervim"/>
-							<input type="hidden" name="last" value="Cabuk"/>
 
 							<input type="radio" name="amount" value="30" id="amount-30">
 							<input type="radio" name="amount" value="60" id="amount-60">
@@ -66,7 +64,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 			<div class="donation-form__image">
 				<?php $image_attributes = wp_get_attachment_image_src( $attachment_id = $form_img, 'full' ); ?>
 				<?php if ( $image_attributes ) : ?>
-					<img src="<?php echo $image_attributes[0]; ?>"/>
+					<div class="image-wrapper"><img src="<?php echo $image_attributes[0]; ?>"/></div>
 				<?php endif; ?>
 			</div>
 		</div>

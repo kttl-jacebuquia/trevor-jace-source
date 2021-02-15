@@ -55,7 +55,7 @@
     }
 
     img {
-      @apply rounded-px10 mb-px40;
+      @apply rounded-px10 mb-px40 mr-auto ml-auto;
 
       @screen lg {
         @apply mb-px60;

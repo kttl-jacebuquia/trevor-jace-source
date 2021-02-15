@@ -2,190 +2,186 @@
   background: white;
 
   @screen lg {
-	display: flex;
-	justify-content: space-between;
-	align-items: stretch;
+		@apply flex justify-between items-stretch;
   }
 
   &__content {
-	@apply px-px28 pt-px80 pb-px80;
-
-	@screen md {
-	  @apply pt-px100;
-	}
-
-	@screen lg {
-	  flex: 1 1 auto;
-	  display: flex;
-	  justify-content: flex-end;
-	  @apply pt-0;
-	}
-
-	&-wrapper {
-	  @screen lg {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		width: 72%;
-		margin-right: 16%;
-	  }
-
-	  h2 {
-		color: theme('colors.teal.dark');
-		@apply font-bold text-px32 leading-px40 mb-px20;
+		@apply px-px28 pt-px80 pb-px80;
 
 		@screen md {
-		  @apply leading-px42 mb-px8;
+			@apply pt-px100;
 		}
 
 		@screen lg {
-		  @apply text-px40 leading-px48 mb-px20;
-		}
-	  }
-
-	  p {
-		color: theme('colors.teal.dark');
-		@apply font-normal text-px20 leading-px26 mb-px40;
-
-		@screen md {
-		  @apply text-px18 leading-px24 mb-px50;
+			@apply pt-0 flex flex-auto justify-end ;
 		}
 
-		@screen lg {
-		  @apply text-px20 leading-px28 mb-px68;
-		}
-	  }
-
-	  form {
-		input:not([type="submit"]) {
-		  opacity: 0;
-		  visibility: hidden;
-		  height: 0;
-		  overflow: hidden;
-		}
-
-		input[type="text"] {
-		  display: block;
-		  visibility: visible;
-		  opacity: 1;
-		  border: 1px solid rgba(0, 58, 72, 0.5);
-		  border-radius: 10px;
-		  height: rem-calc(68px);
-		  width: 100%;
-		  box-sizing: border-box;
-		  @apply px-px35;
-
-		  @screen md {
-			height: rem-calc(72px);
-		  }
-		}
-
-		.frequency--choice {
-		  display: flex;
-		  @apply mb-px30;
-
-		  @screen lg {
-			@apply mb-px40;
-		  }
-
-		  label {
-			background: white;
-			border: 1px solid rgba(0, 58, 72, 0.5);
-			box-sizing: border-box;
-			border-radius: 10px 0 0 10px;
-			@apply py-px17 font-medium text-px18 leading-px24;
-			width: 214px;
-			cursor: pointer;
+		&-wrapper {
+			@apply mr-auto ml-auto max-w-px493;
 
 			@screen lg {
-			  @apply text-px18 leading-px26;
+				width: 72%;
+				margin-right: 16%;
+				@apply flex flex-col justify-center max-w-none;
 			}
 
-			&.selected {
-			  background-color: theme('colors.teal.dark');
-			  color: white;
-			  border-right: 0;
+			h2 {
+				color: theme('colors.teal.dark');
+				@apply font-bold text-px32 leading-px40 mb-px20;
+
+				@screen md {
+					@apply leading-px42 mb-px8;
+				}
+
+				@screen lg {
+					@apply text-px40 leading-px48 mb-px20;
+				}
 			}
 
-			& + label {
-			  border-radius: 0 10px 10px 0;
+			p {
+				color: theme('colors.teal.dark');
+				@apply font-normal text-px20 leading-px26 mb-px40;
+
+				@screen md {
+					@apply text-px18 leading-px24 mb-px50;
+				}
+
+				@screen lg {
+					@apply text-px20 leading-px28 mb-px68;
+				}
 			}
-		  }
+
+			form {
+			input:not([type="submit"]) {
+				height: 0;
+				@apply invisible overflow-hidden opacity-0; 
+			}
+
+			input[type="text"] {
+				border: 1px solid rgba(0, 58, 72, 0.5);
+				height: rem-calc(68px);
+				width: 100%;
+				@apply block visible  rounded-px10 box-border px-px35;
+				opacity: 1;
+				
+				@screen md {
+					height: rem-calc(72px);
+				}
+			}
+
+			.frequency--choice {
+				@apply flex mb-px30;
+
+				@screen lg {
+					@apply mb-px40;
+				}
+
+				label {
+					background: white;
+					@apply py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer;
+					width: rem-calc(214px);
+
+					@screen lg {
+						@apply text-px18 leading-px26;
+					}
+
+					&.selected {
+						background-color: theme('colors.teal.dark');
+						color: white;
+						@apply border-r-0;
+					}
+
+					& + label {
+						@apply rounded-none rounded-tr-px10 rounded-br-px10;
+					}
+				}
+			}
+
+			.amount {
+				@apply mb-px40;
+
+				@screen lg {
+					@apply mb-px50;
+				}
+
+				&-choice {
+					@apply flex justify-between flex-wrap font-medium text-px16 leading-px20 mb-px30;
+
+
+					label {
+						flex: 0 0 49%;
+						@apply py-px22 font-medium text-px16 leading-px20 mb-px14 rounded-px10 text-center;
+						border: 1px solid rgba(0, 58, 72, 0.5);
+
+						&.selected {
+							background-color: theme('colors.teal.dark');
+							color: white;
+						}
+					}
+
+					@screen md {
+						@apply text-px18 leading-px24;
+
+						label {
+							flex: 0 0 23%;
+							@apply py-px30 text-px18 leading-px24 mb-0;
+						}
+					}
+
+					@screen lg {
+						@apply leading-px24;
+
+						label {
+							@apply py-px30 text-px18 leading-px26;
+						}
+					}
+				}
+			}
+
+			.submit {
+				input[type="submit"] {
+					background-color: theme('colors.teal.dark');
+					color: white;
+					@apply py-px18 font-bold text-px16 leading-px22 rounded-px10 text-center;
+					width: 100%;
+
+					@screen md {
+						width: rem-calc( 233px );
+					}
+				}
+			}
+			}
 		}
-
-		.amount {
-		  @apply mb-px40;
-
-		  @screen lg {
-			@apply mb-px50;
-		  }
-
-		  &-choice {
-			@apply font-medium text-px16 leading-px20 mb-px30;
-			display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
-
-
-			label {
-			  flex: 0 0 49%;
-			  text-align: center;
-			  @apply py-px22 font-medium text-px16 leading-px20 mb-px14;
-			  border: 1px solid rgba(0, 58, 72, 0.5);
-			  border-radius: 10px;
-
-			  &.selected {
-				background-color: theme('colors.teal.dark');
-				color: white;
-			  }
-			}
-
-			@screen md {
-			  @apply text-px18 leading-px24;
-
-			  label {
-				flex: 0 0 23%;
-				@apply py-px30 text-px18 leading-px24 mb-0;
-			  }
-			}
-
-			@screen lg {
-			  @apply leading-px24;
-
-			  label {
-				@apply py-px30 text-px18 leading-px26;
-			  }
-			}
-		  }
-		}
-
-		.submit {
-		  input[type="submit"] {
-			background-color: theme('colors.teal.dark');
-			color: white;
-			border-radius: 10px;
-			@apply py-px18 font-bold text-px16 leading-px22;
-			width: 100%;
-			text-align: center;
-
-			@screen md {
-			  width: 233px;
-			}
-		  }
-		}
-	  }
-	}
   }
 
   &__image {
-	@screen lg {
-	  flex: 0 0 42%;
-	}
+		@screen lg {
+			flex: 0 0 42%;
+		}
 
-	img {
-	  max-height: 892px;
-	  width: 100%;
-	  object-fit: cover;
-	}
+		.image-wrapper {
+			width: 100%;
+			height: auto;
+			padding-top: calc((1/1)*100%);
+			@apply block relative overflow-hidden;
+
+			@screen md {
+				padding-top: calc((450/768)*100%);
+			}
+
+			@screen lg {
+				height: rem-calc( 892px );
+				padding-top: calc((892/600)*100%);
+			}
+			
+
+			img {
+				width: 100%;
+				height: 100%;
+
+				@apply block absolute top-0 bottom-0 left-0 right-0 object-cover;
+			}
+		}
+
   }
 }

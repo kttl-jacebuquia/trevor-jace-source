@@ -135,6 +135,7 @@ module.exports = {
 				px550: px2rem(550),
 				px1028: px2rem(1028),
 				px1240: px2rem(1240),
+				px493: px2rem(493),
 				'4/5': '80%',
 			},
 			maxHeight: {
