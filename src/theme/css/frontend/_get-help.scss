@@ -1,0 +1,18 @@
+.get-help {
+
+  .circulation-card {
+    &.type-trevorspace  {
+      .circulation-card-title {
+        @screen lg {
+          @apply text-px32 font-bold;
+        }
+
+        tilt {
+          @screen lg {
+            @apply text-px42;
+          }
+        }
+      }
+    }
+  }
+}
