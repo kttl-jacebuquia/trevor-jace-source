@@ -25,14 +25,6 @@
 
   &--card {
 
-	& > .audit--card__item {
-	  display: none;
-
-	  @screen lg {
-		display: block;
-	  }
-	}
-
 	img {
 	  @apply mb-px42 mx-auto;
 	  display: block;

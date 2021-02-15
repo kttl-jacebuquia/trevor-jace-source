@@ -76,12 +76,6 @@ if (isDonate) {
 	});
 }
 
-if (carouselTestimonial) {
-	carouselTestimonial.forEach(_el => {
-		features.carousel(_el.getAttribute('id'));
-	});
-}
-
 if (isNavigator) {
 	isNavigator.forEach(_el => {
 		let _element = `#${_el.getAttribute('id')}`;
