@@ -20,17 +20,22 @@
   }
 
   @screen lg {
-	.heading-lg-tilted {
-	  @apply text-px50 leading-px60 mx-80;
-	}
+		.heading-lg-tilted {
+		@apply text-px38 leading-px60 mx-80;
+		}
 
-	.circulation-card {
+		.circulation-card {
+			.circulation-card-title {
+			@apply text-px32 font-bold;
 
-	  .circulation-card-desc {
-		@apply text-px26 leading-px36;
-	  }
+			tilt {
+				@apply text-px42;
+			}
+			}
 
-	}
-
+			.circulation-card-desc {
+			@apply text-px20 leading-px36 font-normal;
+			}
+		}
   }
 }
