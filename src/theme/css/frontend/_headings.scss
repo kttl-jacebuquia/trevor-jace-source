@@ -10,10 +10,10 @@
   }
 
   @screen lg {
-	@apply text-px52 leading-px62 tracking-normal;
+	@apply text-px38 leading-px50 tracking-normal;
 
 	& > tilt {
-	  @apply text-px70 leading-px80;
+	  @apply text-px48 leading-px70;
 	}
   }
 }

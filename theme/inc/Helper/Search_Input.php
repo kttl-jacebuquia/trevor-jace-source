@@ -13,7 +13,7 @@ class Search_Input {
 		<label class="relative block">
 			<span class="sr-only">Search for:</span>
 			<div class="input-wrap bg-white rounded-px10 w-full flex justify-start items-center overflow-hidden">
-				<div class="icon-wrap inline h-full top-0 left-0 pl-8 md:pl-16 xl:pl-px108 pr-px12 md:pr-px14 lg:pr-px18">
+				<div class="icon-wrap inline h-full top-0 left-0 pl-8 md:pl-16 lg:pl-px108 pr-px12 md:pr-px14 lg:pr-px18">
 					<i class="trevor-ti-search lg:text-xl"></i>
 				</div>
 				<input type="search"

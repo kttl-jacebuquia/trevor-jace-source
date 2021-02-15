@@ -135,7 +135,7 @@ window.onload = function () {
 }
 
 $(() => {
-	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary', 'McCafe'];
+	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
 	const searchCancelIcon = $('.icon-search-cancel');
 	
 	if (inputSearchField.val()) {

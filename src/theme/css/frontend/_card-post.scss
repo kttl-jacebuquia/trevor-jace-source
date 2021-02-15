@@ -62,7 +62,7 @@
   }
 
   .post-desc {
-	@apply flex-1;
+	@apply flex-1 font-normal;
 	overflow: hidden;
 	text-overflow: ellipsis;
   }
@@ -180,4 +180,10 @@
 	  }
 	}
   }
+
+	.carousel--resource-landing-page & {
+		.post-title {
+			@apply text-px22;
+		}
+	}
 }
