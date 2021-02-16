@@ -11,8 +11,11 @@
   }
 
   &.ellipsis {
-	@apply bg-violet bg-opacity-60;
+	@apply bg-violet-tint;
 	@apply text-white;
+  &:hover {
+    @apply bg-violet;
+    }
   }
 
   .is-gi & {

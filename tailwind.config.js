@@ -50,6 +50,7 @@ module.exports = {
 				alt: '#7155FF',
 				light: '#EDEDFB',
 				lighter: '#DBD5FF',
+				tint: '#897DF8'
 			},
 			orange: {
 				DEFAULT: '#FF5A3D',
