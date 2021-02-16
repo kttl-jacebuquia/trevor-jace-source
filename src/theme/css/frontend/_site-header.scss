@@ -82,7 +82,7 @@
   @screen lg {
 	border-bottom-width: rem-calc(6px);
 	max-height: unset;
-	@apply sticky;
+	@apply sticky pt-px2 top-pxn2;
 
 	.top-bar-inner {
 	  @apply flex;

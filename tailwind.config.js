@@ -225,6 +225,8 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
+				pxn2: px2rem(-2),
+				px2: px2rem(2),
 				px4: px2rem(4),
 				px6: px2rem(6),
 				px8: px2rem(8),
