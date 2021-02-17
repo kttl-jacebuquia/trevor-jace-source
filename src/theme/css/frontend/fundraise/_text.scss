@@ -12,8 +12,7 @@
   }
 
   h3 {
-    @apply mb-px14 text-px16 leading-px24;
-    text-transform: uppercase;
+    @apply mb-px14 text-px16 leading-px24 uppercase;
 
     @screen md {
       @apply mb-px18 text-px18 leading-px26;
@@ -28,8 +27,7 @@
     }
 
     @screen lg {
-      max-width: rem-calc(718px);
-      @apply mx-auto;
+      @apply mx-auto max-w-px718;
     }
   }
 

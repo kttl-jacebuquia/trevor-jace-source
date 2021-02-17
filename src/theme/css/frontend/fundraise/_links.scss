@@ -32,8 +32,7 @@
     }
 
     @screen lg {
-      max-width: 490px;
-      @apply ml-px58;
+      @apply ml-px58 max-w-px490;
     }
 
     h3 {
@@ -58,20 +57,16 @@
 
     ul {
       li {
-        display: block;
-        @apply mb-px24;
+        @apply mb-px24 block;
 
         @screen md {
-          display: inline-block;
-          @apply mb-px30 mr-px30;
+          @apply mb-px30 mr-px30 inline-block;
         }
       }
 
       a {
-        display: inline-block;
-        position: relative;
         color: theme('colors.teal.dark');
-        @apply font-bold text-px18 leading-px24;
+        @apply font-bold text-px18 leading-px24 inline-block relative;
 
         @screen lg {
           @apply text-px20 leading-px26;
@@ -79,11 +74,9 @@
 
         &:after {
           content: '';
-          position: absolute;
-          left: 0;
-          bottom: 0;
           width: 100%;
           border-bottom: 1px solid theme('colors.teal.dark');
+          @apply absolute left-0 bottom-0;
         }
       }
     }

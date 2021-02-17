@@ -229,3 +229,11 @@ $(() => {
 		});
 	}
 });
+
+// Simple Masking 
+$("#mobilephone").blur(function(){
+	var _input = $(this).val();
+	var x = _input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+	var _newValue = !x[2] ? x[1] : '+1 (' + x[1] + ')-' + x[2] + (x[3] ? '-' + x[3] : '');
+	$(this).val( _newValue );
+});

@@ -35,8 +35,7 @@
       @apply text-px18 leading-px22 mb-px40;
 
       @screen lg {
-        max-width: rem-calc(894px);
-        @apply text-px26 leading-px36 mb-px60 mx-auto;
+        @apply text-px26 leading-px36 mb-px60 mx-auto max-w-px894;
       }
     }
 

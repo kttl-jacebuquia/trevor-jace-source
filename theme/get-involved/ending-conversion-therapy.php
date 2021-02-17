@@ -114,12 +114,15 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="fullname" class="sr-only">Full Name*</label>
 						<input id="fullname"
+								 required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Full Name*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="email" class="sr-only">Email*</label>
 						<input id="email"
+								 type="email"
+								 required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Email*"/>
 					</div>
@@ -132,6 +135,8 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					<div class="flex full-w relative mb-12 md:mb-0">
 						<label for="zipcode" class="sr-only">Zip Code*</label>
 						<input id="zipcode"
+								 maxlength="5"
+								 required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Zip Code*"/>
 					</div>
