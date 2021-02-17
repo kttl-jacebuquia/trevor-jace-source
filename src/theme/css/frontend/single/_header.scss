@@ -267,6 +267,12 @@
 	  }
 	}
 
+	&.type-split {
+		.post-header-content {
+		@apply xl:w-px500 xl:ml-0 xl:mr-auto;
+		}
+	}
+
 	/* Split */
 	&.type-split {
 	  .thumbnail-wrap {
