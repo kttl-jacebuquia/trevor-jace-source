@@ -36,7 +36,11 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 					const $elem = $(content).find('[data-row="clipboard"] > td:nth-child(2)');
 					const copiedCB = $elem.data('copiedCB');
 					copiedCB && clearTimeout(copiedCB);
+					$elem.css({'color': 'rgba(16, 16, 102, 0.8)'});
 					$elem.data('copiedCB', setTimeout(() => $elem.text('Copy Link'), 2000));
+					setTimeout( () => {
+						$elem.css({ 'color': 'inherit' });
+					}, 2000);
 					$elem.text('Link Copied!');
 					break;
 				case 'email':
