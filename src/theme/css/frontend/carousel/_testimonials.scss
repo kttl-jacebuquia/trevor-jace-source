@@ -74,6 +74,63 @@
 	  width: calc(100% - #{rem-calc(600px)});
 	}
   }
+
+	.panes-container {
+		&.is-mobile-breakpoint {
+			@apply hidden;
+		}
+	}
+
+	.carousel-left-arrow-pane,
+	.carousel-right-arrow-pane {
+		@apply cursor-pointer lg:z-10;
+
+		.swiper-button-wrapper {
+			@apply flex;
+			top: unset;
+			background-color: theme('colors.teal.dark');
+
+			i {
+				@apply text-white;
+			}
+		}
+
+		&.swiper-button-disabled {
+			@apply pointer-events-none cursor-default;
+		}
+
+		&.swiper-button-disabled .swiper-button-wrapper {
+			@apply opacity-0;
+		}
+	}
+
+	.carousel-left-arrow-pane {
+		@apply left-0 top-0;
+	}
+
+	.carousel-right-arrow-pane {
+		@apply right-0 top-0;
+	}
+
+	blockquote {
+		@apply overflow-hidden overflow-ellipsis lg:text-px28 mx-auto md:h-px104 lg:h-px160;
+		@screen md {
+			/**
+			 * 442px = width of the blockquote's container at tablet breakpoint
+			 * 370px = target width of the blockquote at tablet breakpoint
+			*/
+			width: calc(370 / 442 * 100%);
+			display: -webkit-box;
+			-webkit-line-clamp: 4; /* number of lines to show */
+			-webkit-box-orient: vertical;
+		}
+
+		@screen lg {
+			@apply w-px500;
+		}
+	}
+
+	figcaption {
+		@apply lg:text-px20;
+	}
 }
-
-

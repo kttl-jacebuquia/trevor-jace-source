@@ -6,7 +6,7 @@ use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\Volunteer;
 
 ?>
-<main id="site-content" role="main" class="site-content">
+<main id="site-content" role="main" class="site-content volunteer">
 	<?= Helper\Page_Header::img_bg( [
 			'title'   => Volunteer::get_val( Volunteer::SETTING_HOME_HERO_TITLE ),
 			'cta_txt' => Volunteer::get_val( Volunteer::SETTING_HOME_HERO_CTA ),

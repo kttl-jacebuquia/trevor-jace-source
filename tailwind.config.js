@@ -141,17 +141,23 @@ module.exports = {
 			},
 			maxHeight: {
 				px100: px2rem(100),
+				px160: px2rem(160),
 			},
 			minWidth: {
 				px50: px2rem(50),
 			},
 			height: {
 				px100: px2rem(100),
+				px104: px2rem(104),
 				px140: px2rem(140),
+				px160: px2rem(160),
 				px490: px2rem(490),
 				px546: px2rem(546),
 				px600: px2rem(600),
 				px737: px2rem(737),
+			},
+			width: {
+				px500: px2rem(500),
 			},
 			fontSize: {
 				px14: px2rem(14),

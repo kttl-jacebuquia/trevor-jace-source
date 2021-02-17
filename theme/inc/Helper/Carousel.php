@@ -239,18 +239,22 @@ class Carousel {
 						</div>
 					</div>
 				</div>
-				<div class="carousel-testimonials-txt-wrap">
+				<div class="carousel-testimonials-txt-wrap relative">
+					<div class="panes-container flex justify-between absolute h-full w-full">
+						<div class="carousel-left-arrow-pane h-full w-1/6 px-4 relative" data-direction="left" aria-label="Previous Slide" role="button"></div>
+						<div class="carousel-right-arrow-pane h-full w-1/6 px-4 relative" data-direction='right' aria-label="Next Slide" role="button"></div>
+					</div>
 					<div class="swiper-container h-full">
 						<div class="swiper-wrapper">
 							<?php foreach ( $data as $entry ): ?>
 								<div class="swiper-slide px-4 pt-8 pb-12 lg:px-8">
-									<figure class="text-center text-teal-dark flex flex-col justify-center h-full md:w-3/4 md:mx-auto">
+									<figure class="text-center text-teal-dark flex flex-col justify-center h-full md:w-full md:mx-auto">
 										<div class="flex flex-row justify-center md:mb-5">
 											<i class="trevor-ti-quote-open -mt-2 mr-0.5 lg:text-px28 lg:mr-2"></i>
 											<i class="trevor-ti-quote-close lg:text-px28"></i>
 										</div>
 										<blockquote
-												class="font-bold text-3xl my-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
+												class="font-bold text-3xl mb-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
 											<?= $entry['quote'] ?>
 										</blockquote>
 										<?php if ( ! empty( $entry['cite'] ) ) { ?>
