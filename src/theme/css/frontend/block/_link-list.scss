@@ -1,6 +1,7 @@
 .trevor-block-link-list {
   @apply bg-gray-light;
   @apply text-indigo;
+	@apply mt-px60;
   padding: rem-calc(40px) rem-calc(28px);
   width: 100vw;
   margin-left: calc(-1 * theme('container.padding.DEFAULT')); // TODO: https://github.com/postcss/postcss-calc
