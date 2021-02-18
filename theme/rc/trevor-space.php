@@ -53,7 +53,7 @@ $online_count_txt = $user_count > $user_threshold
 					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE_TOP ) ?>
 					</div>
-					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50">
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50 xl:text-px34 xl:leading-px44">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_1_TITLE ) ?>
 					</h3>
 					<p class="text-px20 leading-px30 md:text-px18 lg:text-10 lg:text-px22 lg:leading-px32 font-normal">
@@ -75,7 +75,7 @@ $online_count_txt = $user_count > $user_threshold
 					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE_TOP ) ?>
 					</div>
-					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50">
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50 xl:text-px34 xl:leading-px44">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_2_TITLE ) ?>
 					</h3>
 					<p class="text-px20 leading-px30 mb-6 md:leading-px32 lg:text-px22 lg:leading-px32 font-normal">
@@ -97,7 +97,7 @@ $online_count_txt = $user_count > $user_threshold
 					<div class="text-indigo font-bold text-px14 leading-px18 tracking-px05 mb-2 md:tracking-em001 uppercase lg:mb-4">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE_TOP ) ?>
 					</div>
-					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50">
+					<h3 class="font-bold text-px34 leading-px40 mb-5 md:text-px30 md:leading-px40 md:mb-4 lg:text-px32 lg:leading-px50 xl:text-px34 xl:leading-px44">
 						<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_3_TITLE ) ?>
 					</h3>
 					<p class="text-px20 leading-px30 mb-6 md:text-px18 lg:text-px22 lg:leading-px32 font-normal">
@@ -110,10 +110,10 @@ $online_count_txt = $user_count > $user_threshold
 
 	<div class="bg-white">
 		<div class="container mx-auto text-center text-indigo site-content-inner pt-20 pb-16 lg:pt-36 lg:pb-28">
-			<h3 class="text-px40 leading-px52 tracking-px_015 font-semibold mb-4 md:text-px32 md:leading-px42 lg:text-px32 lg:leading-px56">
+			<h3 class="text-px40 leading-px52 tracking-px_015 font-semibold mb-4 md:text-px32 md:leading-px42 lg:text-px32 lg:leading-px56 xl:text-px36 xl:font-bold xl:leading-px46">
 				<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_CIRCULATION_TITLE ) ?>
 			</h3>
-			<p class="font-normal text-px20 leading-px30 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 lg:mx-64">
+			<p class="font-normal text-px20 leading-px30 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 lg:mx-64 xl:text-px24 xl:leading-px34">
 				<?= Resource_Center::get_val( Resource_Center::SETTING_TREVORSPACE_CIRCULATION_DESC ) ?>
 			</p>
 

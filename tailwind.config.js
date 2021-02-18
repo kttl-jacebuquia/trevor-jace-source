@@ -205,6 +205,7 @@ module.exports = {
 				px38: px2rem(38),
 				px40: px2rem(40),
 				px42: px2rem(42),
+				px44: px2rem(44),
 				px46: px2rem(46),
 				px48: px2rem(48),
 				px50: px2rem(50),

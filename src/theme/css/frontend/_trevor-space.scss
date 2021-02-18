@@ -38,4 +38,28 @@
 			}
 		}
   }
+
+	@screen xl {
+		.heading-lg-tilted {
+			@apply text-px42;
+
+			tilt {
+				@apply text-px52;
+			}
+		}
+
+		.circulation-card {
+			.circulation-card-title {
+				@apply text-px42;
+
+				tilt {
+					@apply text-px52;
+				}
+			}
+
+			.circulation-card-desc {
+				@apply text-px24;
+			}
+		}
+	}
 }
