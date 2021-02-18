@@ -78,15 +78,15 @@ use \TrevorWP\Theme\Customizer\Donate;
 				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 
 					<div class="audit-holder mobile-only">
-						<div class="audit-container swiper-container" id="audit-<?= uniqid() ?>">
+						<div class="audit-container swiper-container" id="audit-<?php echo esc_attr( uniqid() ); ?>">
 							<div class="audit-wrapper swiper-wrapper">
-								<?php foreach ( $_1_data as $audit ): ?>
-									<div class="audit--card__item swipe-slide text-center">
-										<?php if ( $audit['img'] ): ?>
-											<img src="<?= $audit['img']['url'] ?>" alt="<?= $audit['desc'] ?>">
+								<?php foreach ( $_1_data as $audit ) : ?>
+									<div class="audit--card__item swiper-slide text-center">
+										<?php if ( $audit['img'] ) : ?>
+											<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
 										<?php endif; ?>
 
-										<p><?= $audit['desc'] ?></p>
+										<p><?php echo esc_html( $audit['desc'] ); ?></p>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -94,13 +94,13 @@ use \TrevorWP\Theme\Customizer\Donate;
 						</div>
 					</div>
 
-					<?php foreach ( $_1_data as $audit ): ?>
-						<div class="audit--card__item swipe-slide text-center flex flex-col justify-between">
-							<?php if ( $audit['img'] ): ?>
-								<img src="<?= $audit['img']['url'] ?>" alt="<?= $audit['desc'] ?>">
+					<?php foreach ( $_1_data as $audit ) : ?>
+						<div class="audit--card__item swipe-slide text-center flex flex-col justify-between hidden lg:flex">
+							<?php if ( $audit['img'] ) : ?>
+								<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
 							<?php endif; ?>
 
-							<p><?= $audit['desc'] ?></p>
+							<p><?php echo esc_html( $audit['desc'] ); ?></p>
 						</div>
 					<?php endforeach; ?>
 				</div>

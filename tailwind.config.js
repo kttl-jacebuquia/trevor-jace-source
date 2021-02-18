@@ -152,6 +152,10 @@ module.exports = {
 			width: {
 				px500: px2rem(500),
 			},
+			minHeight: {
+				px108: px2rem(108),
+				px128: px2rem(128),
+			},
 			height: {
 				px100: px2rem(100),
 				px104: px2rem(104),

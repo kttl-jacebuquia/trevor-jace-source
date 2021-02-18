@@ -58,7 +58,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					</div>
 
 					<?php foreach ( $audit_data as $audit ) : ?>
-						<div class="audit--card__item swipe-slide text-center">
+						<div class="audit--card__item swipe-slide text-center flex flex-col justify-between hidden lg:flex">
 							<?php if ( $audit['img'] ) : ?>
 								<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
 							<?php endif; ?>

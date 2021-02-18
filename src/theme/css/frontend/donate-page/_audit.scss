@@ -45,8 +45,8 @@
 				@apply font-normal text-px18 leading-px22;
 			}
 
-			@screen lg {
-				@apply text-px22 leading-px32;
+			@screen lg { 
+				@apply text-px22 leading-px32 min-h-px128;
 			}
 
 		}
