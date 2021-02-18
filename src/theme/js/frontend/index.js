@@ -231,9 +231,9 @@ $(() => {
 });
 
 // Simple Masking 
-$("#mobilephone").blur(function(){
-	var _input = $(this).val();
-	var x = _input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-	var _newValue = !x[2] ? x[1] : '+1 (' + x[1] + ')-' + x[2] + (x[3] ? '-' + x[3] : '');
+$(".phone-number-format").blur(function(){
+	const _input = $(this).val();
+	const _phoneNumberParts = _input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+	const _newValue = !_phoneNumberParts[2] ? _phoneNumberParts[1] : '+1 (' + _phoneNumberParts[1] + ')-' + _phoneNumberParts[2] + (_phoneNumberParts[3] ? '-' + _phoneNumberParts[3] : '');
 	$(this).val( _newValue );
 });
