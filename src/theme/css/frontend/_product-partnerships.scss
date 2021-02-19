@@ -162,7 +162,7 @@
   }
 
   .cards {
-	background-color: theme('colors.gray.light');
+	@apply bg-white;
 
 	&__title {
 	  color: theme('colors.teal.dark');
