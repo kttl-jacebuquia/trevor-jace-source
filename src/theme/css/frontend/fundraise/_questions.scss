@@ -1,6 +1,6 @@
 .questions {
   @apply pt-px102 pb-px72;
-  background-color: theme('colors.teal.dark');
+  background-color: theme('colors.teal.tint');
 
   @screen md {
     @apply pt-px100 pb-px100;

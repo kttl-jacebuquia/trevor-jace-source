@@ -2,6 +2,10 @@
   background-color: theme('colors.teal.dark');
   @apply pt-px100 pb-px40;
 
+	&.audit-fundraise { 
+		 background-color: theme('colors.blue_green.DEFAULT');
+	}
+
   @screen md {
 		@apply pt-px80;
   }

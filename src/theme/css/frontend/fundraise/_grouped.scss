@@ -1,12 +1,12 @@
 .grouped--block {
-  @apply pt-px100 pb-px100;
+  @apply pt-0 pb-px100;
 
   @screen md {
-    @apply pt-px80 pb-px80;
+    @apply pt-0 pb-px80;
   }
 
   @screen lg {
-    @apply pt-px160 pb-px160;
+    @apply pt-0 pb-px160;
   }
 
   .one-up-card {

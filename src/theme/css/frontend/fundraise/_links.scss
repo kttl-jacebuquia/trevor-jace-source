@@ -11,7 +11,7 @@
 
   &-wrapper {
     @apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28;
-    background: white;
+    background: theme('colors.gray.light');
 
     @screen md {
       @apply pt-px80 pb-px80;

@@ -34,7 +34,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		<?php /* How your Money is Used */ ?>
 		<?php $title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ); ?>
 		<?php $audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ); ?>
-		<div class="audit">
+		<div class="audit audit-fundraise">
 			<div class="container mx-auto">
 				<h3 class="text-center"><?php echo esc_html( $title ); ?></h3>
 
@@ -89,7 +89,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		</div>	
 
 		<?php /** GROUPED BLOCKS */ ?>
-		<div class="grouped--block gradient-type-dark-green">
+		<div class="grouped--block bg-white	">
 			<div class="container mx-auto">
 				<?php /** FEATURED LINKS */ ?>
 				<?php $link_title = Fundraise::get_val( Fundraise::SETTING_LINK_TITLE ); ?>
