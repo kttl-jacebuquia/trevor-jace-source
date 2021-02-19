@@ -85,7 +85,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="text-teal-dark bg-teal-tint bg-white">
+	<div class="text-teal-dark bg-teal-tint bg-white pb-px40 md:pb-0">
 		<?= \TrevorWP\Theme\Helper\Carousel::posts( ( new WP_Query() )->query( [
 				's'         => $search_term = ECT::get_val( ECT::SETTING_HOME_CAROUSEL_TERMS ),
 				'post_type' => array_merge( \TrevorWP\CPT\RC\RC_Object::$PUBLIC_POST_TYPES, [ \TrevorWP\CPT\RC\Glossary::POST_TYPE ] ),
@@ -102,7 +102,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
+	<div class="campaign-form pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">Join The
 				Campaign</h2>

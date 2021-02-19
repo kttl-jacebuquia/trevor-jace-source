@@ -102,36 +102,67 @@ if (isCardPresent) {
 // features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});
 
+/**
+ * Crisis Button docking
+ */
 window.onload = function () {
+	const campaignForm = document.querySelector('.campaign-form');
 	const footer = document.querySelector('footer');
 	const crisisButton = $('.floating-crisis-btn-wrap');
-	const distanceFromFooter = 40;
-	let footerHeight = footer ? footer.offsetHeight : 0;
-
-	
+	const distanceFromElement = 40;
+	const btnVerticalPadding = 24;
+	let intersectedElement = undefined;
+	let intersectingY = undefined;
+	let leavingY = undefined;
 
 	let options = {
 		root: null,
 		rootMargin: '0px',
 		threshold: 0
 	}
+
 	let callback = (entries, observer) => {
 		entries.forEach(entry => {
-			$(window).resize(() => {
-				footerHeight = footer.offsetHeight;
-			});
 			if (entry.isIntersecting) {
-				$body.addClass('scroll-near-bottom');
-				crisisButton.css('bottom', `${footerHeight+12+distanceFromFooter}px`);
-			} else {
-				$body.removeClass('scroll-near-bottom');
-				crisisButton.removeAttr('style');
+				intersectingY = entry.boundingClientRect.y;
+				if (typeof intersectedElement === 'undefined') {
+					intersectedElement = entry.target;
+				}
+
+				if (entry.target === intersectedElement) {
+					const targetRect = intersectedElement.getBoundingClientRect();
+					const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+					$body.addClass('scroll-near-bottom');
+					crisisButton.offset({
+						top: (targetRect.top + scrollTop) - (distanceFromElement + btnVerticalPadding),
+					});
+				}
+			} 
+			else {
+				leavingY = entry.boundingClientRect.y;
+				/**
+				 * Reset the crisis button if the user is scrolling up
+				 * AND leaves the intersected element.
+				 */
+				if (leavingY > intersectingY && entry.target === intersectedElement) {
+					$body.removeClass('scroll-near-bottom');
+					crisisButton.removeAttr('style');
+				}
 			}
 		});
 	}
 
 	let observer = new IntersectionObserver(callback, options);
-	observer.observe(footer);
+	/**
+	 * Intersection Observer runs asynchronously
+	 * so you can just add an item in the array (i.e., [footer, element1, elment2, ...]).
+	 * The crisis button will dock on the first element it intersects based on the DOM structure.
+	 */
+	[footer, campaignForm].forEach(target => {
+		if (target) observer.observe(target);
+	});
+
+
 }
 
 /**
