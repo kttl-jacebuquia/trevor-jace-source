@@ -1,0 +1,9 @@
+.is-gi_advocacy {
+  .tile-grid-container {
+    @apply gap-7;
+  }
+
+  .tile {
+    @apply max-w-full;
+  }
+}
