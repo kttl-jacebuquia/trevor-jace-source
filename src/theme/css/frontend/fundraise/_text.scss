@@ -2,6 +2,12 @@
   background-color: theme('colors.teal.tint');
   @apply pt-px120 pb-px120;
 
+  &.donate {
+    background-color: theme('colors.blue_green.DEFAULT');
+
+    p { color: theme('colors.white.DEFAULT'); }
+  }
+
   @screen lg {
     @apply pt-px135 pb-px135;
   }

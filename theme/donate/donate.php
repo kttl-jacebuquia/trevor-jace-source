@@ -9,12 +9,21 @@ use \TrevorWP\Theme\Customizer\Donate;
 	<main id="site-content" role="main" class="site-content">
 		<?php /* Header */ ?>
 
-		<?= Helper\Page_Header::split_img( [
+		<?= Helper\Page_Header::img_bg( [
 				'title'   => Donate::get_val( Donate::SETTING_HOME_HERO_TITLE ),
 				'desc'    => Donate::get_val( Donate::SETTING_HOME_HERO_DESC ),
 				'img_id'  => Donate::get_val( Donate::SETTING_HOME_HERO_IMG )
 		] ) ?>
 
+		<?php /** Featured Text */ ?>
+		<?php $desc = Donate::get_val( Donate::SETTING_HOME_TEXT ); ?>
+		<?php if( $desc ): ?>
+		<div class="featured-text donate">
+			<div class="container mx-auto text-center">
+				<p><?php echo $desc; ?></p>
+			</div>
+		</div>
+		<?php endif; ?>
 
 		<?php /* Donation Form */ ?>
 		<?php $form_heading = Donate::get_val( Donate::SETTING_DONATE_HEADING ); ?>

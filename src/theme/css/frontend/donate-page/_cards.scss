@@ -1,6 +1,8 @@
 .card-collection {
   @apply pb-60 pt-px80;
 
+	.is-donate & { background-color: theme('colors.blue_green.DEFAULT'); }
+
   @screen md {
 	@apply pt-px100;
   }

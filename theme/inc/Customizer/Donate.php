@@ -20,6 +20,8 @@ class Donate extends Abstract_Customizer {
 	const SETTING_HOME_HERO_CTA = self::SETTING_HOME_PREFIX . 'hero_cta';
 	const SETTING_HOME_HERO_LINK = self::SETTING_HOME_PREFIX . 'hero_link';
 
+	const SETTING_HOME_TEXT = self::SETTING_HOME_PREFIX . 'home_text';
+
 	const SETTING_DONATE_IMG = self::SETTING_HOME_PREFIX . 'donate_img';
 	const SETTING_DONATE_HEADING = self::SETTING_HOME_PREFIX . 'donate_heading';
 	const SETTING_DONATE_INTRO = self::SETTING_HOME_PREFIX . 'donate_intro';
@@ -55,6 +57,7 @@ class Donate extends Abstract_Customizer {
 			[ 'desc' => 'Help us to continue to provide all of our crisis services 24/7 and free of cost. Lorem ipsm dolor set. Vitae id accumsan.' ],
 			[ 'desc' => 'Assist us in expanding our research and advocacy efforts. Et vehicula viverra facilisi nunc aliquet nunc eu quam. Etiam et.' ],
 		],
+		self::SETTING_HOME_TEXT							 => 'Every day, LGBTQ young people in crisis reach out hoping to receive the support of a warm community. It is vital we make sure our volunteers can continue to offer that support.',
 		self::SETTING_HOME_2_TITLE           => 'More ways to give',
 		self::SETTING_HOME_NAVIGATOR_TITLE   => 'Charity Navigator',
 		self::SETTING_HOME_NAVIGATOR_DESC    => 'The Trevor Project is a 4-star rated charity.',
@@ -127,6 +130,14 @@ class Donate extends Abstract_Customizer {
 			'setting' => self::SETTING_HOME_HERO_LINK,
 			'section' => self::SECTION_HOME_GENERAL,
 			'label'   => 'Hero CTA',
+			'type'    => 'text',
+		] );
+
+		## FEATURED TEXT
+		$this->_manager->add_control( self::SETTING_HOME_TEXT, [
+			'setting' => self::SETTING_HOME_TEXT,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Featured Text',
 			'type'    => 'text',
 		] );
 
