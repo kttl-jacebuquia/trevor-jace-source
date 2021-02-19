@@ -179,11 +179,19 @@
 		@apply font-bold text-px40 leading-px48;
 	  }
 	}
-  }
 
-	.carousel--resource-landing-page & {
+	.rc-landing-page & {
 		.post-title {
 			@apply text-px22;
+		}
+	}
+  }
+
+	@screen xl {
+		.rc-landing-page & {
+			.post-title {
+				@apply text-px26;
+			}
 		}
 	}
 }

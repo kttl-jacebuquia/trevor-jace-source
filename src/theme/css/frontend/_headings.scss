@@ -16,4 +16,12 @@
 	  @apply text-px48 leading-px70;
 	}
   }
+
+  @screen xl {
+    @apply text-px52 leading-px62;
+
+    & > tilt {
+      @apply text-px70 leading-px80;
+    }
+  }
 }

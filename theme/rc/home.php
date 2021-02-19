@@ -66,7 +66,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 
 <?php if ( ! is_paged() ) { ?>
 
-<main id="site-content" role="main" class="site-content">
+<main id="site-content" role="main" class="site-content rc-landing-page">
 	<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
 		<div class="mx-auto mb-10 lg:w-3/4">
 			<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">
@@ -84,7 +84,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				</form>
 			</div>
 
-			<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px18 lg:tracking-px05 lg:mb-6">
+			<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px18 lg:tracking-px05 xl:text-px20 xl:leading-px24 lg:mb-6">
 				Browse a topic or check out what’s trending.</p>
 
 			<div class="flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto lg:w-3/4 xl:w-3/5">
@@ -111,7 +111,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 				'subtitle'  => 'Explore the latest articles, resources, and guides.',
 				'title_cls' => 'text-center',
 				'onlyMd'    => false,
-				'class'     => 'text-white md:mt-12 lg:mt-18 carousel--resource-landing-page',
+				'class'     => 'text-white md:mt-12 lg:mt-18',
 		] );
 	} ?>
 
