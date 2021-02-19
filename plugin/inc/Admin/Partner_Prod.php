@@ -135,6 +135,6 @@ class Partner_Prod {
 
 		# PARTNER NAME
 		$partner_name = filter_input( INPUT_POST, self::FIELD_PARTNER_NAME, FILTER_SANITIZE_STRING );
-		update_post_meta( $post_id, Meta\Post::PROD_PARTNER_NAME, $partner_name );
+		update_post_meta( $post_id, Meta\Post::PROD_PARTNER_ID, $partner_name );
 	}
 }
