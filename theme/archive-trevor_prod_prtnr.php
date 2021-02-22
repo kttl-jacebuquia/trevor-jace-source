@@ -38,6 +38,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				<div class="featured-collections">
 					<?php
 					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+							'orderby'		=> 'title',
+							'order'			=> 'ASC',
 							'post__in'  => explode( ",", $item_ids ),
 							'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
 					] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
@@ -68,6 +70,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 					<div class="favorite-items">
 						<?php
 						echo Helper\Tile_Grid::posts( ( new \WP_Query( [
+								'orderby'		=> 'title',
+								'order'			=> 'ASC',
 								'post__in'  => explode( ",", $item_ids ),
 								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
 						] ) )->posts,
@@ -92,9 +96,21 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			 * )
 			 */
 			?>
+
+			<?php
+				$partners = get_posts(
+					array(
+						'numberposts' => - 1,
+						'orderby'     => 'name',
+						'order'       => 'ASC',
+						'post_type'   => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
+
+					)
+				);
+			?>
 			<?php if ( have_posts() ) : ?>
 				<div class="partners-list">
-					<?php echo Helper\Tile_Grid::posts( $wp_query->posts,
+					<?php echo Helper\Tile_Grid::posts( $partners,
 						[
 							'title' =>	Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
 						] );
