@@ -177,18 +177,22 @@ $featured_word = Helper\Posts::get_one_from_list(
 		];
 
 		ob_start(); ?>
-		<h2 class="text-px14 leading-px20 font-semibold capitalize tracking-px05 mb-5 lg:leading-px18">
-			WORD OF THE DAY
-		</h2>
-		<strong class="stretched-link text-px32 leading-px42 font-semibold mb-5 md:text-px40 md:leading-px50 lg:text-px46 lg:leading-px56 lg:tracking-em_001">
-			<?= get_the_title( $featured_word ) ?>
-		</strong>
-		<div class="font-normal text-px14 leading-px20 tracking-px05 mb-5 lg:text-px22 lg:leading-px32 lg:tracing-px05">
-			<?= nl2br( esc_html( $featured_word->post_excerpt ) ) ?>
+		<div class="word-of-the-day">
+
+			<h2 class="text-px14 leading-px20 font-semibold capitalize tracking-px05 mb-5 lg:leading-px18">
+				WORD OF THE DAY
+			</h2>
+			<strong class="stretched-link text-px32 leading-px42 font-semibold mb-5 md:text-px40 md:leading-px50 lg:text-px46 lg:leading-px56 lg:tracking-em_001">
+				<?= get_the_title( $featured_word ) ?>
+			</strong>
+			<div class="font-normal text-px14 leading-px20 tracking-px05 mb-5 lg:text-px22 lg:leading-px32 lg:tracing-px05">
+				<?= nl2br( esc_html( $featured_word->post_excerpt ) ) ?>
+			</div>
+			<p class="font-medium text-px18 leading-px24 tracking-em001 lg:text-px26 lg:leading-px36 lg:tracing-em005">
+				<?= nl2br( esc_html( $featured_word->post_content ) ) ?>
+			</p>
+			
 		</div>
-		<p class="font-medium text-px18 leading-px24 tracking-em001 lg:text-px26 lg:leading-px36 lg:tracing-em005">
-			<?= nl2br( esc_html( $featured_word->post_content ) ) ?>
-		</p>
 		<?php $context = ob_get_clean();
 		echo Helper\Hero::img_bg(
 				[
