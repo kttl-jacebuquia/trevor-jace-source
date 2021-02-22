@@ -40,7 +40,7 @@
 
 			h4 {
 				color: theme('colors.teal.dark');
-				@apply text-px14 leading-px26;
+				@apply text-px14 leading-px26 tracking-px05;
 
 				@screen md {
 					@apply text-px20;
@@ -51,13 +51,11 @@
 				}
 
 				svg {
-					transform: translateY(50%);
-					@apply block float-right;
+					@apply block float-right mr-px20 translate-y-2/4;
 				}
 
 				.minus {
-					@apply hidden;
-					transform: translateY(4px);
+					@apply hidden translate-y-10;
 				}
 			}
 
@@ -77,6 +75,7 @@
 			&__content {
 				background-color: theme('colors.gray.light');
 				color: theme('colors.teal.dark');
+				border-bottom: 1px solid rgba(149, 163, 167, 0.4);
 				@apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22;
 
 				@screen md {
@@ -115,8 +114,7 @@
 					&:after {
 						content: '';
 						border-bottom: 1px solid theme('colors.teal.dark');
-						width: rem-calc(127px);
-						@apply absolute bottom-0 left-0 right-0 mx-auto;
+						@apply absolute bottom-0 left-0 right-0 mx-auto w-px127;
 					}
 
 					@screen lg {
