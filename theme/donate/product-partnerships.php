@@ -98,7 +98,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 				<div class="banner__inner">
 					<h3 class="banner__title"><?php echo esc_attr( $shop_title ); ?></h3>
 					<p class="banner__description"><?php echo esc_attr( $shop_description ); ?></p>
-					<a href="<?php echo esc_url( $shop_cta ); ?>" class="banner__cta" target="_blank">Shop Now</a>
+					<a href="<?php echo esc_url( $shop_cta ); ?>" class="banner__cta font-bold" target="_blank">Shop Now</a>
 				</div>
 			</div>
 		</div>

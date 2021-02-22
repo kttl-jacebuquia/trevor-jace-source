@@ -115,7 +115,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				<div class="banner__inner">
 					<h3 class="banner__title"><?= esc_attr( $banner_title ) ?></h3>
 					<p class="banner__description"><?= esc_attr( $banner_desc ) ?></p>
-					<a href="<?= esc_url( $banner_cta ) ?>" class="banner__cta" target="_blank">Learn More</a>
+					<a href="<?= esc_url( $banner_cta ) ?>" class="banner__cta font-bold" target="_blank">Learn More</a>
 				</div>
 			</div>
 		</div>
