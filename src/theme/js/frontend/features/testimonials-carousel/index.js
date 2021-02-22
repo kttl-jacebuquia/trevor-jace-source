@@ -12,6 +12,8 @@ export default function testimonialsCarousel(id) {
 	const leftPaneSelector = '.carousel-left-arrow-pane';
 	const rightPaneSelector = '.carousel-right-arrow-pane';
 	const panesContainer = $('.panes-container', eBase);
+	const iconTopOffset = 10;
+	const iconLeftOffset = 37;
 	let iconWrapper = undefined;
 
 	const imgWrap = eBase.querySelector('.carousel-testimonials-img-wrap');
@@ -60,6 +62,7 @@ export default function testimonialsCarousel(id) {
 	document.addEventListener('mousemove', e => {
 		const leftPaneRect = eBase.querySelector(leftPaneSelector).getBoundingClientRect();
 		const rightPaneRect = eBase.querySelector(rightPaneSelector).getBoundingClientRect();
+	
 		/**
 		 * if the mouse is inside the left pane,
 		 * generate and animate the swiper button.
@@ -117,8 +120,8 @@ export default function testimonialsCarousel(id) {
 		iconWrapper.appendChild(icon);
 		pane.appendChild(iconWrapper);
 		$('.swiper-button-wrapper', pane).offset({
-			top: event.pageY - 10,
-			left: event.pageX - 37,
+			top: event.pageY - iconTopOffset,
+			left: event.pageX - iconLeftOffset,
 		});
 	}
 
@@ -135,8 +138,8 @@ export default function testimonialsCarousel(id) {
 		if (whatInput.ask('intent') === 'mouse') {
 			panesContainer.removeClass('is-mobile-breakpoint');
 			$('.swiper-button-wrapper', pane).offset({
-				top: event.pageY - 10,
-				left: event.pageX - 37,
+				top: event.pageY - iconTopOffset,
+				left: event.pageX - iconLeftOffset,
 			});
 		} else {
 			panesContainer.addClass('is-mobile-breakpoint');
