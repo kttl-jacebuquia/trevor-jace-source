@@ -268,3 +268,29 @@ $(".phone-number-format").blur(function(){
 	const _newValue = !_phoneNumberParts[2] ? _phoneNumberParts[1] : '+1 (' + _phoneNumberParts[1] + ')-' + _phoneNumberParts[2] + (_phoneNumberParts[3] ? '-' + _phoneNumberParts[3] : '');
 	$(this).val( _newValue );
 });
+
+/**
+ * Varying squiggly line breakers on post bottom tags.
+ */
+$(() => {
+	const tagsWaveSeparators = $(".post-bottom-tags .wp-block-separator.is-style-wave");
+
+	// set the width on load.
+	setTagsSeparatorsWidth(tagsWaveSeparators);
+
+	// set the width on resize
+	$(window).on("resize", () => {
+		setTagsSeparatorsWidth(tagsWaveSeparators);
+	});
+
+	function setTagsSeparatorsWidth (separators = []) {
+		if (!separators.length) {
+			return;
+		}
+		
+		const listContainerWidth = $(".post-bottom-tags .list-container").length ? $(".post-bottom-tags .list-container").width() + 'px' : '100%';
+		$.each(separators, (index, el) => {
+			el.style.width = listContainerWidth;
+		});
+	}
+});

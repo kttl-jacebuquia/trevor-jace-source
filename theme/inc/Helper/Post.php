@@ -130,7 +130,7 @@ class Post {
 		ob_start(); ?>
 		<div class="post-bottom-tags">
 			<hr class="wp-block-separator is-style-wave hr-top">
-			<div class="list-container">
+			<div class="list-container inline">
 				<?php foreach ( $terms as $term ) { ?>
 					<a href="<?= RC_Object::get_search_url( $term->name ) ?>"
 					   rel="tag"><?= esc_attr( $term->name ) ?></a>
