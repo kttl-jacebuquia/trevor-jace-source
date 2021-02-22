@@ -75,6 +75,11 @@
 	}
   }
 
+	.trevor-ti-quote-open,
+	.trevor-ti-quote-close {
+		color: theme('colors.teal.dark');
+	}
+
 	.swiper-slide {
 		@screen md {
 			@apply self-stretch inline-block align-top whitespace-normal;
