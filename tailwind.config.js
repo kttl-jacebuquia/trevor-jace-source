@@ -152,6 +152,7 @@ module.exports = {
 				px50: px2rem(50),
 			},
 			width: {
+				px20: px2rem(20),
 				px500: px2rem(500),
 			},
 			minHeight: {
@@ -160,6 +161,7 @@ module.exports = {
 				px724: px2rem(724),
 			},
 			height: {
+				px20: px2rem(20),
 				px100: px2rem(100),
 				px104: px2rem(104),
 				px140: px2rem(140),
@@ -245,6 +247,7 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
+				pxn28: px2rem(-28),
 				pxn2: px2rem(-2),
 				px2: px2rem(2),
 				px4: px2rem(4),
