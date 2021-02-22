@@ -50,7 +50,11 @@ class Posts extends Abstract_Customizer {
 			}
 
 			$setting_id = self::PREFIX_SETTING_HEADER_CONTENT_LENGTH . $key;
-			$this->_manager->add_setting( $setting_id, [ 'default' => self::DEFAULTS[ $setting_id ] ] );
+			$this->_manager->add_setting( $setting_id, [
+				'default' => isset( self::DEFAULTS[ $setting_id ] )
+					? self::DEFAULTS[ $setting_id ]
+					: null
+			] );
 
 			$this->_manager->add_control( $setting_id, [
 				'setting'     => $setting_id,
