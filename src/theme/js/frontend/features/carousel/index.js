@@ -26,9 +26,11 @@ export function carouselNavigator($element, $option) {
 
 	const swiper = new Swiper($element, {
 		// Optional parameters
+		initialSlide: 1,
 		slidesPerView: 1,
 		direction: 'horizontal',
 		loop: true,
+		centeredSlides: true,
 		// If we need pagination
 		pagination: {
 			el: '.swiper-pagination',
@@ -39,5 +41,11 @@ export function carouselNavigator($element, $option) {
 	if (desktop.matches) {
 		swiper.destroy();
 	}
+
+	$(window).on("resize", () => {
+		if (desktop.matches) {
+			swiper.destroy();
+		}
+	});
 
 }

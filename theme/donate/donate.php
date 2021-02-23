@@ -178,9 +178,11 @@ use \TrevorWP\Theme\Customizer\Donate;
 						<div class="navigator-container swiper-container" id="nav-<?= uniqid(); ?>">
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
-									<div class="navigator-data__item swiper-slide text-center">
+									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
 										<?php if( $navigator['img'] ): ?>
 											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
+										<?php else: ?>	
+											<div class="image-placeholder"></div>
 										<?php endif; ?>
 										
 										<h2><?= $navigator['name'] ?></h2>
