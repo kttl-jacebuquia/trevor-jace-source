@@ -1,29 +1,8 @@
 .testimonials {
   position: relative;
-	
-	.carousel-testimonials-txt-wrap .swiper-container {
-		@screen lg {
-			@apply pb-px50;
-		}
-	}
 
   .swiper-pagination {
-		position: absolute;
-		bottom: calc-rem(70px);
-		z-index: 9999;
-		width: 100%;
-
-		@screen md {
-			right: 0;
-			bottom: calc-rem(40px);
-			width: 50%;
-			display: flex;
-		}
-
-		@screen lg {
-			width: 100%;
-			bottom: calc-rem(-60px);
-		}
+		@apply flex flex-row justify-center w-full;
 
 		span {
 			background: rgba(0, 58, 72, 0.3);

@@ -21,7 +21,7 @@
 	.swiper-pagination {
 	  @apply flex;
 	  @apply -mt-4;
-	  @apply pb-8;
+	  @apply pb-8 lg:pb-0;
 	  @apply z-2;
 
 	  .swiper-pagination-bullet {
