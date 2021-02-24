@@ -8,7 +8,7 @@
 
   h3 {
 		color: theme('colors.teal.dark');
-		@apply mb-px50 text-center text-px32 leading-px42 font-normal;
+		@apply mb-px50 text-center text-px32 leading-px42 font-bold;
 
 		@screen md {
 			@apply mb-px30 text-left text-px30 leading-px40;
@@ -16,7 +16,7 @@
 		}
 
 		@screen lg {
-			@apply mb-px40 text-px40 leading-px48;
+			@apply mb-px40 text-px40 leading-px28;
 		}
   }
 
@@ -31,45 +31,45 @@
 			}
 
 			&__heading {
-			@apply pt-px28 pb-px28 pl-px20 pr-px20 cursor-pointer;
-			border-bottom: 1px solid rgba(149, 163, 167, 0.4);
-
-			@screen md {
-				@apply pt-px40 pb-px40 pl-0 pr-0;
-			}
-
-			h4 {
-				color: theme('colors.teal.dark');
-				@apply text-px14 leading-px26 tracking-px05;
+				@apply pt-px28 pb-px28 pl-px20 pr-px20 cursor-pointer;
+				border-bottom: 1px solid rgba(149, 163, 167, 0.4);
 
 				@screen md {
-					@apply text-px20;
+					@apply pt-px40 pb-px40 pl-0 pr-0;
 				}
 
-				@screen lg {
-					@apply text-px26 leading-px36;
-				}
-
-				svg {
-					@apply block float-right mr-px20 translate-y-2/4;
-				}
-
-				.minus {
-					@apply hidden translate-y-10;
-				}
-			}
-
-			&.is-open {
 				h4 {
-					.plus {
-						@apply hidden;
+					color: theme('colors.teal.dark');
+					@apply text-px14 leading-px26 tracking-px05 font-bold;
+
+					@screen md {
+						@apply text-px20;
+					}
+
+					@screen lg {
+						@apply text-px26 leading-px36;
+					}
+
+					svg {
+						@apply block float-right mr-px20 translate-y-2/4;
 					}
 
 					.minus {
-						@apply block;
+						@apply hidden translate-y-10;
 					}
 				}
-			}
+
+				&.is-open {
+					h4 {
+						.plus {
+							@apply hidden;
+						}
+
+						.minus {
+							@apply block;
+						}
+					}
+				}
 			}
 
 			&__content {
@@ -108,7 +108,7 @@
 				}
 
 				a {
-					@apply relative block mt-px20 font-bold;
+					@apply relative block mt-px20 font-bold ml-px10;
 					color: theme('colors.teal.dark');
 
 					&:after {
