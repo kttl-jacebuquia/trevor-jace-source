@@ -20,6 +20,7 @@ const carouselTestimonial = document.querySelectorAll('.carousel-testimonials');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
+const bigImageCarousels = $('.big-img-carousel');
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -98,6 +99,19 @@ if (isCardPresent) {
 		features.cardToggle($(this));
 	});
 }
+
+$(() => {
+	if (bigImageCarousels.length) {
+		$.each(bigImageCarousels, (index, element) => {
+			const swiper = $('.carousel-container.swiper-container-initialized', element);
+			if (swiper.length) {
+				const leftPaneSelector = '.swiper-button-prev';
+				const rightPaneSelector = '.swiper-button-next';
+				features.generateSwiperArrows(leftPaneSelector, rightPaneSelector, element);
+			}
+		});
+	}
+});
 
 // features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});

@@ -98,37 +98,6 @@
 		}
 	}
 
-	.carousel-left-arrow-pane,
-	.carousel-right-arrow-pane {
-		@apply cursor-pointer lg:z-10;
-
-		.swiper-button-wrapper {
-			@apply flex;
-			top: unset;
-			background-color: theme('colors.teal.dark');
-
-			i {
-				@apply text-white;
-			}
-		}
-
-		&.swiper-button-disabled {
-			@apply pointer-events-none cursor-default;
-		}
-
-		&.swiper-button-disabled .swiper-button-wrapper {
-			@apply opacity-0;
-		}
-	}
-
-	.carousel-left-arrow-pane {
-		@apply left-0 top-0;
-	}
-
-	.carousel-right-arrow-pane {
-		@apply right-0 top-0;
-	}
-
 	blockquote {
 		@apply overflow-hidden overflow-ellipsis lg:text-px28 mx-auto;
 		@screen md {
