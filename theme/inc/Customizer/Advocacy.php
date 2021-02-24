@@ -28,7 +28,6 @@ class Advocacy extends Abstract_Customizer {
 	const SETTING_HOME_CAROUSEL_DATA = self::SETTING_HOME_PREFIX . 'carousel_data';
 	const SETTING_HOME_OUR_WORK_TITLE = self::SETTING_HOME_PREFIX . 'our_work_title';
 	const SETTING_HOME_OUR_WORK_DESC = self::SETTING_HOME_PREFIX . 'our_work_desc';
-	const SETTING_HOME_QUOTE_BG = self::SETTING_HOME_PREFIX . 'quote_bg';
 	const SETTING_HOME_QUOTE_DATA = self::SETTING_HOME_PREFIX . 'quote_data';
 	const SETTING_HOME_BILL_TITLE = self::SETTING_HOME_PREFIX . 'bill_title';
 	const SETTING_HOME_BILL_DESC = self::SETTING_HOME_PREFIX . 'bill_desc';
@@ -137,13 +136,6 @@ class Advocacy extends Abstract_Customizer {
 			'label'   => 'Our Work Description',
 			'type'    => 'text',
 		] );
-
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_QUOTE_BG, [
-			'setting'   => self::SETTING_HOME_QUOTE_BG,
-			'section'   => self::SECTION_HOME_GENERAL,
-			'label'     => 'Quote BG',
-			'mime_type' => 'image',
-		] ) );
 
 		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_QUOTE_DATA, [
 			'setting' => self::SETTING_HOME_QUOTE_DATA,

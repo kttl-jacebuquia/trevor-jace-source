@@ -331,6 +331,7 @@ module.exports = {
 			boxShadow: {
 				'indigo-md': '0px 6px 8px rgba(16, 16, 102, 0.08)',
 				'indigo-lg': '0px 8px 6px rgba(16, 16, 102, 0.1)',
+				'light': '0px 0px 16px rgba(0, 58, 72, 0.2)',
 				none: 'none',
 			},
 			backgroundImage: theme => ({
