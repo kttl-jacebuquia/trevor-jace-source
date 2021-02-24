@@ -40,8 +40,8 @@
   }
 
   .title {
-	@apply text-px32 leading-px40 tracking-em001 font-semibold;
-	@apply my-3.5;
+		@apply text-px32 leading-px40 tracking-em001 font-semibold;
+		@apply my-3.5;
   }
 
   .title-btm {
@@ -129,18 +129,38 @@
 	}
 
 	.title {
-	  @apply text-px46 leading-px56 tracking-em_001;
+	  @apply text-px38 leading-px56 tracking-em_001;
 	  @apply my-4;
 	}
 
 	.title-btm {
-	  @apply text-px24 leading-px36 tracking-em005;
+	  @apply text-px20 leading-px36 tracking-em005;
 	}
 
 	.length-indicator {
 	  @apply tracking-px05 font-semibold;
 	}
   }
+
+	@screen lg2 {
+		.title {
+			@apply text-px40;
+		}
+
+		.title-btm {
+			@apply text-px22;
+		}
+	}
+
+	@screen xl {
+		.title {
+			@apply text-px42;
+		}
+
+		.title-btm {
+			@apply text-px24;
+		}
+	}
 }
 
 // Content Wrap
