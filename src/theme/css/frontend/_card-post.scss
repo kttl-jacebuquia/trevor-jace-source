@@ -1,7 +1,7 @@
 .card-post {
   @apply flex flex-col relative;
   @apply overflow-hidden;
-  @apply shadow-lg rounded-px10;
+  @apply shadow-light rounded-px10;
   @apply text-teal-dark;
   height: rem-calc(503px);
   max-width: rem-calc(395px);
@@ -36,7 +36,7 @@
 
   .card-content {
 	@apply bg-white;
-	@apply px-6 py-5;
+	@apply px-6 py-5 pt-px38;
 	@apply flex flex-col flex-1;
 	@apply overflow-hidden;
   }
@@ -100,6 +100,10 @@
 	.tag-box {
 	  @apply inline-block;
 	  @apply mr-2 mb-2;
+
+		&:hover {
+			background-color: theme('colors.moss.DEFAULT');
+		}
 	}
 
 	.ellipsis {
@@ -111,6 +115,10 @@
 		@apply flex items-center;
 		content: '+';
 	  }
+
+		&:hover {
+			background-color: theme('colors.moss.dark');
+		}
 	}
   }
 

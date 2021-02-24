@@ -80,6 +80,10 @@ module.exports = {
 				lighter: 'rgba(0, 58, 72, 0.2)',
 				dark: DARK_TEAL,
 				tint: '#D9E2E4'
+			},
+			moss: {
+				DEFAULT: '#E1E8E9',
+				dark: '#08535A'
 			}
 		},
 		// Custom
