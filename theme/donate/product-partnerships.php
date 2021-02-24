@@ -77,6 +77,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 													'max-h-px100',
 													'w-auto',
 													'max-w-4/5',
+													'lg:max-w-3/5',
 												)
 											),
 										)
