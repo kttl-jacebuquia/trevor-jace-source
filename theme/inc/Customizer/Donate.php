@@ -57,7 +57,7 @@ class Donate extends Abstract_Customizer {
 			[ 'desc' => 'Help us to continue to provide all of our crisis services 24/7 and free of cost. Lorem ipsm dolor set. Vitae id accumsan.' ],
 			[ 'desc' => 'Assist us in expanding our research and advocacy efforts. Et vehicula viverra facilisi nunc aliquet nunc eu quam. Etiam et.' ],
 		],
-		self::SETTING_HOME_TEXT							 => 'Every day, LGBTQ young people in crisis reach out hoping to receive the support of a warm community. It is vital we make sure our volunteers can continue to offer that support.',
+		self::SETTING_HOME_TEXT              => 'Every day, LGBTQ young people in crisis reach out hoping to receive the support of a warm community. It is vital we make sure our volunteers can continue to offer that support.',
 		self::SETTING_HOME_2_TITLE           => 'More ways to give',
 		self::SETTING_HOME_NAVIGATOR_TITLE   => 'Charity Navigator',
 		self::SETTING_HOME_NAVIGATOR_DESC    => 'The Trevor Project is a 4-star rated charity.',

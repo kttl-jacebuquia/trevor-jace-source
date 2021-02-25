@@ -1,16 +1,16 @@
 .carousel {
 
-	&--resource-landing-page &-title {
-		@screen lg {
-			@apply text-px38;
-		}
+  &--resource-landing-page &-title {
+	@screen lg {
+	  @apply text-px38;
 	}
+  }
 
-	&--resource-landing-page &-subtitle {
-		@screen lg {
-			@apply text-px22 font-medium;
-		}
+  &--resource-landing-page &-subtitle {
+	@screen lg {
+	  @apply text-px22 font-medium;
 	}
+  }
 
   &-wrap {
 	@apply container mx-auto mt-20 mb-10;

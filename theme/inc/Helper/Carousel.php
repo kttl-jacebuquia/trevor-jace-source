@@ -235,8 +235,10 @@ class Carousel {
 				</div>
 				<div class="carousel-testimonials-txt-wrap relative">
 					<div class="panes-container flex justify-between absolute h-full w-full">
-						<div class="carousel-left-arrow-pane h-full w-1/6 px-4 relative" data-direction="left" aria-label="Previous Slide" role="button"></div>
-						<div class="carousel-right-arrow-pane h-full w-1/6 px-4 relative" data-direction='right' aria-label="Next Slide" role="button"></div>
+						<div class="carousel-left-arrow-pane h-full w-1/6 px-4 relative" data-direction="left"
+							 aria-label="Previous Slide" role="button"></div>
+						<div class="carousel-right-arrow-pane h-full w-1/6 px-4 relative" data-direction='right'
+							 aria-label="Next Slide" role="button"></div>
 					</div>
 					<div class="swiper-container h-full">
 						<div class="flex flex-row justify-center w-full mt-px40 lg:mt-0">

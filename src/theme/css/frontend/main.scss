@@ -8,7 +8,7 @@
 @tailwind utilities;
 
 @import "./what-input";
-@import "../utils/index"; 
+@import "../utils/index";
 @import "./vendor/index";
 // Our Components
 @import "./general";
@@ -37,16 +37,16 @@
 @import "./carousel/index";
 @import "./tile";
 @import "./topic-page/index";
-@import "./accordion"; 
+@import "./accordion";
 @import './one_up/card';
 @import "./custom-select";
 // Resources Center
 @import "./rc";
 // Page specific
-@import "./trevor-space";  
-@import "./institutional-grants"; 
+@import "./trevor-space";
+@import "./institutional-grants";
 @import "./corporate-partnerships";
-@import "./donate-page/index"; 
+@import "./donate-page/index";
 @import "./product-partner";
 @import "./product-partnerships";
 @import "./fundraise/index";

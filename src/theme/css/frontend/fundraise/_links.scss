@@ -2,83 +2,83 @@
   @apply mb-px28;
 
   @screen md {
-    @apply mb-px60;
+	@apply mb-px60;
   }
 
   @screen lg {
-    @apply mb-px100;
+	@apply mb-px100;
   }
 
   &-wrapper {
-    @apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28;
-    background: theme('colors.gray.light');
+	@apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28;
+	background: theme('colors.gray.light');
 
-    @screen md {
-      @apply pt-px80 pb-px80;
-    }
-  
-    @screen lg {
-      @apply pt-px68 pb-px100 pl-0 pr-0;
-    } 
-  
+	@screen md {
+	  @apply pt-px80 pb-px80;
+	}
+
+	@screen lg {
+	  @apply pt-px68 pb-px100 pl-0 pr-0;
+	}
+
   }
 
   &-content {
-    color: theme('colors.teal.dark');
+	color: theme('colors.teal.dark');
 
-    @screen md {
-      max-width: 403px;
-      @apply mx-auto;
-    }
+	@screen md {
+	  max-width: 403px;
+	  @apply mx-auto;
+	}
 
-    @screen lg {
-      @apply ml-px58 max-w-px490;
-    }
+	@screen lg {
+	  @apply ml-px58 max-w-px490;
+	}
 
-    h3 {
-      @apply font-bold text-px32 leading-px40 mb-px10;
+	h3 {
+	  @apply font-bold text-px32 leading-px40 mb-px10;
 
-      @screen md {
-        @pply mt-px15;
-      }
+	  @screen md {
+		@pply mt-px15;
+	  }
 
-      @screen lg {
-        @pply text-px30 mb-px16 ;
-      }
-    }
+	  @screen lg {
+		@pply text-px30 mb-px16 ;
+	  }
+	}
 
-    p {
-     @apply mb-px30 text-px18 leading-px26;
-     
-     @screen md {
-       @apply mb-px50;
-     }
-    }
+	p {
+	  @apply mb-px30 text-px18 leading-px26;
 
-    ul {
-      li {
-        @apply mb-px24 block;
+	  @screen md {
+		@apply mb-px50;
+	  }
+	}
 
-        @screen md {
-          @apply mb-px30 mr-px30 inline-block;
-        }
-      }
+	ul {
+	  li {
+		@apply mb-px24 block;
 
-      a {
-        color: theme('colors.teal.dark');
-        @apply font-bold text-px18 leading-px24 inline-block relative;
+		@screen md {
+		  @apply mb-px30 mr-px30 inline-block;
+		}
+	  }
 
-        @screen lg {
-          @apply text-px20 leading-px26;
-        }
+	  a {
+		color: theme('colors.teal.dark');
+		@apply font-bold text-px18 leading-px24 inline-block relative;
 
-        &:after {
-          content: '';
-          width: 100%;
-          border-bottom: 1px solid theme('colors.teal.dark');
-          @apply absolute left-0 bottom-0;
-        }
-      }
-    }
+		@screen lg {
+		  @apply text-px20 leading-px26;
+		}
+
+		&:after {
+		  content: '';
+		  width: 100%;
+		  border-bottom: 1px solid theme('colors.teal.dark');
+		  @apply absolute left-0 bottom-0;
+		}
+	  }
+	}
   }
 }

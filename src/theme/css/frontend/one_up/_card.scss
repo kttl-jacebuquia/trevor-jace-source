@@ -7,99 +7,99 @@
   @apply rounded-px10;
 
   &.light {
-    background: white;
+	background: white;
 
-    h3,
-    p {
-      color: theme('colors.teal.dark');
-    }
+	h3,
+	p {
+	  color: theme('colors.teal.dark');
+	}
 
-    h3 {
+	h3 {
 
-      @screen lg {
-        width: rem-calc(606px);
-      }
-    }
-    
-    p {
-      @screen lg {
-        width: rem-calc(408px);
-      }
-    }
+	  @screen lg {
+		width: rem-calc(606px);
+	  }
+	}
 
-    .btn {
-      background: theme('colors.teal.dark');
-    }
+	p {
+	  @screen lg {
+		width: rem-calc(408px);
+	  }
+	}
+
+	.btn {
+	  background: theme('colors.teal.dark');
+	}
   }
 
   &.dark {
-    background: theme('colors.teal.dark');
+	background: theme('colors.teal.dark');
 
-    h3,
-    p {
-      color: white;
-    }
+	h3,
+	p {
+	  color: white;
+	}
 
-    h3 {
+	h3 {
 
-      @screen lg {
-        width: rem-calc(408px);
-        @apply mb-px30;
-      }
-    }
-    
-    p {
-      @screen lg {
-        width: rem-calc(510px);
-      }
-    }
+	  @screen lg {
+		width: rem-calc(408px);
+		@apply mb-px30;
+	  }
+	}
 
-    .btn {
-      background: white;
-      color: theme('colors.teal.dark');
-    }
+	p {
+	  @screen lg {
+		width: rem-calc(510px);
+	  }
+	}
+
+	.btn {
+	  background: white;
+	  color: theme('colors.teal.dark');
+	}
   }
 
   h3 {
-    @apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
+	@apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
 
-    span {
-      @apply font-caveat text-px44 leading-px54;
+	span {
+	  @apply font-caveat text-px44 leading-px54;
 
-      @screen lg {
-        @apply text-px70 leading-px80;
-      }
-    }
+	  @screen lg {
+		@apply text-px70 leading-px80;
+	  }
+	}
 
-    @screen md {
-      @apply mx-auto;
-    }
+	@screen md {
+	  @apply mx-auto;
+	}
 
-    @screen lg {
-      @apply text-px46 leading-px56 mb-px20;
-    }
+	@screen lg {
+	  @apply text-px46 leading-px56 mb-px20;
+	}
   }
 
   p {
-    @apply font-normal text-px18 leading-px22 ml-px28 mr-px28;
+	@apply font-normal text-px18 leading-px22 ml-px28 mr-px28;
 
-    @screen md {
-      @apply ml-px59 mr-px59;
-    }
+	@screen md {
+	  @apply ml-px59 mr-px59;
+	}
 
-    @screen lg {
-      @apply text-px20 leading-px30 mx-auto;
-    }
+	@screen lg {
+	  @apply text-px20 leading-px30 mx-auto;
+	}
   }
 
   .btn {
-    display: inline-block;
-    color: white;
-  
-    @apply text-px16 leading-px22 pt-px12 pb-px12 pl-px24 pr-px24 mt-px40;
+	display: inline-block;
+	color: white;
 
-    @screen lg {
-      @apply text-px20 leading-px26 pt-px20 pb-px20 pl-px80 pr-px80;
-    }
+	@apply text-px16 leading-px22 pt-px12 pb-px12 pl-px24 pr-px24 mt-px40;
+
+	@screen lg {
+	  @apply text-px20 leading-px26 pt-px20 pb-px20 pl-px80 pr-px80;
+	}
   }
 }

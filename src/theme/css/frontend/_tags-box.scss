@@ -13,9 +13,9 @@
   &.ellipsis {
 	@apply bg-violet-tint;
 	@apply text-white;
-  &:hover {
-    @apply bg-violet;
-    }
+	&:hover {
+	  @apply bg-violet;
+	}
   }
 
   .is-gi & {

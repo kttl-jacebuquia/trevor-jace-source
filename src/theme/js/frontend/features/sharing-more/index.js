@@ -38,8 +38,8 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 					copiedCB && clearTimeout(copiedCB);
 					$elem.css({'color': 'rgba(16, 16, 102, 0.8)'});
 					$elem.data('copiedCB', setTimeout(() => $elem.text('Copy Link'), 2000));
-					setTimeout( () => {
-						$elem.css({ 'color': 'inherit' });
+					setTimeout(() => {
+						$elem.css({'color': 'inherit'});
 					}, 2000);
 					$elem.text('Link Copied!');
 					break;

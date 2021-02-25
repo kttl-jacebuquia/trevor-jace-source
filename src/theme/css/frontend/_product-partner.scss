@@ -1,30 +1,30 @@
 .product-partner {
 
-	.page-header {
-		&-title-top {
-			@apply text-px16 leading-px24 md:text-px14 md:leading-px18 lg:text-px16 lg:leading-px22;
-		}
-
-		&-title {
-			@apply text-px32 leading-px40 md:leading-px42 lg:text-px46 lg:leading-px56;
-		}
-
-		&.type-split-carousel {
-			.page-header-desc {
-				@apply text-px18 leading-px26 md:text-px16 md:leading-px22 lg:text-px24 lg:leading-px34;
-			}
-
-			.page-header-content-wrap {
-				@apply md:pb-px60;
-
-				@screen lg {
-
-					padding-bottom: 10%;
-				}
-			}
-		}
+  .page-header {
+	&-title-top {
+	  @apply text-px16 leading-px24 md:text-px14 md:leading-px18 lg:text-px16 lg:leading-px22;
 	}
-	
+
+	&-title {
+	  @apply text-px32 leading-px40 md:leading-px42 lg:text-px46 lg:leading-px56;
+	}
+
+	&.type-split-carousel {
+	  .page-header-desc {
+		@apply text-px18 leading-px26 md:text-px16 md:leading-px22 lg:text-px24 lg:leading-px34;
+	  }
+
+	  .page-header-content-wrap {
+		@apply md:pb-px60;
+
+		@screen lg {
+
+		  padding-bottom: 10%;
+		}
+	  }
+	}
+  }
+
 
   .featured-collections {
 	background-color: theme('colors.teal.tint');
@@ -108,13 +108,13 @@
 	  }
 	}
 
-		.tile-image {
-			@apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
+	.tile-image {
+	  @apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
 
-			@screen lg {
-			@apply w-px355;
-			}
-		}
+	  @screen lg {
+		@apply w-px355;
+	  }
+	}
   }
 
   .favorite-items {
@@ -206,13 +206,13 @@
 	.tile-grid {
 	  @apply pt-0;
 
-		&-header {
-			@apply px-7 md:px-px50 lg:px-px100 mb-px50 text-center;
-		}
+	  &-header {
+		@apply px-7 md:px-px50 lg:px-px100 mb-px50 text-center;
+	  }
 
-		&-title {
-			@apply mx-auto font-bold text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48;
-		}
+	  &-title {
+		@apply mx-auto font-bold text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48;
+	  }
 	}
   }
 

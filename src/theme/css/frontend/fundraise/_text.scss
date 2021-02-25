@@ -3,38 +3,40 @@
   @apply pt-px120 pb-px120;
 
   &.donate {
-    background-color: theme('colors.blue_green.DEFAULT');
+	background-color: theme('colors.blue_green.DEFAULT');
 
-    p { color: theme('colors.white.DEFAULT'); }
+	p {
+	  color: theme('colors.white.DEFAULT');
+	}
   }
 
   @screen lg {
-    @apply pt-px135 pb-px135;
+	@apply pt-px135 pb-px135;
   }
 
   h3,
   p {
-    color: theme('colors.teal.dark');
+	color: theme('colors.teal.dark');
   }
 
   h3 {
-    @apply mb-px14 text-px16 leading-px24 uppercase;
+	@apply mb-px14 text-px16 leading-px24 uppercase;
 
-    @screen md {
-      @apply mb-px18 text-px18 leading-px26;
-    }
+	@screen md {
+	  @apply mb-px18 text-px18 leading-px26;
+	}
   }
 
   p {
-    @apply text-px24 leading-px28;
+	@apply text-px24 leading-px28;
 
-    @screen md {
-      @apply text-px26 leading-px36;
-    }
+	@screen md {
+	  @apply text-px26 leading-px36;
+	}
 
-    @screen lg {
-      @apply mx-auto max-w-px718;
-    }
+	@screen lg {
+	  @apply mx-auto max-w-px718;
+	}
   }
 
 

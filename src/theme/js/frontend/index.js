@@ -151,8 +151,7 @@ window.onload = function () {
 						top: (targetRect.top + scrollTop) - (distanceFromElement + btnVerticalPadding),
 					});
 				}
-			} 
-			else {
+			} else {
 				leavingY = entry.boundingClientRect.y;
 				/**
 				 * Reset the crisis button if the user is scrolling up
@@ -185,58 +184,58 @@ window.onload = function () {
 $(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
 	const searchCancelIcon = $('.icon-search-cancel');
-	
+
 	if (inputSearchField.val()) {
 		inputSearchField.parent().addClass('input-has-value');
 		resizeInputField(inputSearchField);
 	}
 
 	inputSearchField
-	.autocomplete({
-		source: function (request, response) {
-			const results = $.ui.autocomplete.filter(terms, request.term);
-			response(results.slice(0, 5)); // Limit the results to five.
-		},
-		minLength: 0,
-		appendTo: "#input-suggestions",
-		open: function() {
-			/**
-			 * The results will automatically show without a header
-			 * when the user starts to type anything on the search bar.
-			 */
-			if ($(this).val() == '') {
-				$('ul.ui-autocomplete').prepend('<li class="list-header"><h3>Popular Searches</h3></li>');
+		.autocomplete({
+			source: function (request, response) {
+				const results = $.ui.autocomplete.filter(terms, request.term);
+				response(results.slice(0, 5)); // Limit the results to five.
+			},
+			minLength: 0,
+			appendTo: "#input-suggestions",
+			open: function () {
+				/**
+				 * The results will automatically show without a header
+				 * when the user starts to type anything on the search bar.
+				 */
+				if ($(this).val() == '') {
+					$('ul.ui-autocomplete').prepend('<li class="list-header"><h3>Popular Searches</h3></li>');
+				}
+			},
+			select: function (event, ui) {
+				$(this).addClass('has-value');
+				$(this).parent().addClass('input-has-value');
+				resizeInputField($(this), ui.item.value.length);
+			},
+		})
+		/**
+		 * Immediately open the jQuery autocomplete
+		 * when the user focuses the search bar
+		 * even before they start typing anyting.
+		 */
+		.focus(function () {
+			$(this).autocomplete('search', $(this).val());
+		})
+		.on("keyup", function (event) {
+			if (!inputSearchField.val()) {
+				$(this).parent().removeClass('input-has-value');
+			} else {
+				$(this).parent().addClass('input-has-value');
 			}
-		},
-		select: function(event, ui) {
-			$(this).addClass('has-value');
-			$(this).parent().addClass('input-has-value');
-			resizeInputField($(this), ui.item.value.length);
-		},
-	})
-	/**
-	 * Immediately open the jQuery autocomplete 
-	 * when the user focuses the search bar
-	 * even before they start typing anyting.
-	 */
-	.focus(function () {
-		$(this).autocomplete('search', $(this).val());
-	})
-	.on("keyup", function (event) {
-		if (!inputSearchField.val()) {
-			$(this).parent().removeClass('input-has-value');
-		} else {
-			$(this).parent().addClass('input-has-value');
-		}
-		resizeInputField($(this));
-	});
+			resizeInputField($(this));
+		});
 
 	searchCancelIcon.on("click", function (e) {
 		inputSearchField.val("");
 		inputSearchField.parent().removeClass('input-has-value');
 	});
 
-	function resizeInputField (inputField, inputSize = 0) {
+	function resizeInputField(inputField, inputSize = 0) {
 		const maxSize = 30;
 		const minSize = 1;
 		const length = inputSize | inputField.val().length;
@@ -255,7 +254,7 @@ $(() => {
 		bouncingArrow.on('click', () => {
 			let parentElement = bouncingArrow.parent();
 			let parentsNextSibling = parentElement.next();
-			
+
 			/**
 			 * Find the parent container with
 			 * immediate following sibling.
@@ -265,7 +264,7 @@ $(() => {
 				parentElement = parentElement.parent();
 			}
 
-			if  (parentsNextSibling.length) {
+			if (parentsNextSibling.length) {
 				parentsNextSibling[0].scrollIntoView({
 					behavior: "smooth",
 					block: "start",
@@ -275,12 +274,12 @@ $(() => {
 	}
 });
 
-// Simple Masking 
-$(".phone-number-format").blur(function(){
+// Simple Masking
+$(".phone-number-format").blur(function () {
 	const _input = $(this).val();
 	const _phoneNumberParts = _input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
 	const _newValue = !_phoneNumberParts[2] ? _phoneNumberParts[1] : '+1 (' + _phoneNumberParts[1] + ')-' + _phoneNumberParts[2] + (_phoneNumberParts[3] ? '-' + _phoneNumberParts[3] : '');
-	$(this).val( _newValue );
+	$(this).val(_newValue);
 });
 
 /**
@@ -297,11 +296,11 @@ $(() => {
 		setTagsSeparatorsWidth(tagsWaveSeparators);
 	});
 
-	function setTagsSeparatorsWidth (separators = []) {
+	function setTagsSeparatorsWidth(separators = []) {
 		if (!separators.length) {
 			return;
 		}
-		
+
 		const listContainerWidth = $(".post-bottom-tags .list-container").length ? $(".post-bottom-tags .list-container").width() + 'px' : '100%';
 		$.each(separators, (index, el) => {
 			el.style.width = listContainerWidth;

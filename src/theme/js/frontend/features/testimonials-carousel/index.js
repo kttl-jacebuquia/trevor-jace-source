@@ -12,7 +12,7 @@ export default function testimonialsCarousel(id) {
 	const leftPaneSelector = '.carousel-left-arrow-pane';
 	const rightPaneSelector = '.carousel-right-arrow-pane';
 	const panesContainer = $('.panes-container', eBase);
-	
+
 
 	const imgWrap = eBase.querySelector('.carousel-testimonials-img-wrap');
 	const txtWrap = eBase.querySelector('.carousel-testimonials-txt-wrap');
@@ -43,7 +43,7 @@ export default function testimonialsCarousel(id) {
 		}
 	});
 
-	function checkArrow () {
+	function checkArrow() {
 		let desktop = window.matchMedia('(min-width: 1024px)');
 		if (desktop.matches) {
 			panesContainer.removeClass('is-mobile-breakpoint');

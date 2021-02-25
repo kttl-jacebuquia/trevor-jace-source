@@ -19,8 +19,8 @@ class Jobs {
 	 *  [1]: Recurrence
 	 */
 	static $RECURRING = [
-		self::NAME_UPDATE_POST_STATS => [ [ GA_Results::class, 'update_post_stats' ], 'daily' ],
-		self::NAME_UPDATE_TREVORSPACE_ACTIVE_COUNT=>[ [ Trevorspace::class, 'update_active_count' ], 'daily' ],
+		self::NAME_UPDATE_POST_STATS               => [ [ GA_Results::class, 'update_post_stats' ], 'daily' ],
+		self::NAME_UPDATE_TREVORSPACE_ACTIVE_COUNT => [ [ Trevorspace::class, 'update_active_count' ], 'daily' ],
 	];
 
 	/**

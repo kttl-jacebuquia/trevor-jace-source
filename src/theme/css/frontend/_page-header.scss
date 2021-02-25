@@ -92,8 +92,8 @@
 	@screen md {
 	  .page-header-inner {
 		@apply items-center;
-	  	@apply mt-0;
-	  	margin-bottom: rem-calc(114px);
+		@apply mt-0;
+		margin-bottom: rem-calc(114px);
 	  }
 
 	  .page-header-img-inner {
@@ -102,7 +102,7 @@
 	  }
 
 	  .page-header-img {
-	  	@apply rounded-px10;
+		@apply rounded-px10;
 	  }
 
 	  .page-header-desc {
@@ -123,7 +123,7 @@
 
 	@screen lg {
 	  .page-header-inner {
-	  	@apply mb-14;
+		@apply mb-14;
 	  }
 
 	  .page-header-img-inner {
@@ -131,7 +131,7 @@
 	  }
 
 	  .page-header-img-wrap {
-	  	@apply items-center justify-end flex;
+		@apply items-center justify-end flex;
 		min-height: rem-calc(500px);
 	  }
 	}

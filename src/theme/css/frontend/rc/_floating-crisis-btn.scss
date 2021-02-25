@@ -22,8 +22,8 @@
   }
 
   .scroll-near-bottom & {
-    @apply absolute;
-    @apply translate-y-0;
-    bottom: unset;
+	@apply absolute;
+	@apply translate-y-0;
+	bottom: unset;
   }
 }

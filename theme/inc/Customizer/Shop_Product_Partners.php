@@ -86,9 +86,9 @@ class Shop_Product_Partners extends Abstract_Customizer {
 		] );
 		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_HERO_CAROUSEL, [
 			'setting' => self::SETTING_HOME_HERO_CAROUSEL,
-			'section'	=> self::SECTION_HOME_GENERAL,
-			'label'		=> 'Hero Carousel Data',
-			'fields'	=> Control\Custom_List::FIELDSET_CAROUSEL,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Hero Carousel Data',
+			'fields'  => Control\Custom_List::FIELDSET_CAROUSEL,
 		] ) );
 
 		// Featured

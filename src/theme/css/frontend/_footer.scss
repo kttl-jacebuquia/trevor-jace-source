@@ -73,13 +73,14 @@ footer {
   }
 
   .is-rc & {
-  	@apply bg-indigo;
+	@apply bg-indigo;
 
 	input[type] {
-		@apply placeholder-indigo text-indigo;
+	  @apply placeholder-indigo text-indigo;
 	}
+
 	.btn {
-		@apply text-indigo;
+	  @apply text-indigo;
 	}
   }
 

@@ -67,7 +67,8 @@
 body.modal-active {
   overflow-x: hidden;
   overflow-y: visible !important;
+
   .site-content {
-  	filter: url('#blur3px');
+	filter: url('#blur3px');
   }
 }

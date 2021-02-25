@@ -75,45 +75,45 @@
 	}
   }
 
-	.trevor-ti-quote-open,
-	.trevor-ti-quote-close {
-		color: theme('colors.teal.dark');
+  .trevor-ti-quote-open,
+  .trevor-ti-quote-close {
+	color: theme('colors.teal.dark');
+  }
+
+  .swiper-slide {
+	@screen md {
+	  @apply self-stretch inline-block align-top whitespace-normal;
 	}
 
-	.swiper-slide {
-		@screen md {
-			@apply self-stretch inline-block align-top whitespace-normal;
-		}
+	figure {
+	  @screen md {
+		@apply flex items-center justify-center;
+	  }
+	}
+  }
 
-		figure {
-			@screen md {
-				@apply flex items-center justify-center;
-			}
-		}
+  .panes-container {
+	&.is-mobile-breakpoint {
+	  @apply hidden;
+	}
+  }
+
+  blockquote {
+	@apply overflow-hidden overflow-ellipsis lg:text-px28 mx-auto;
+	@screen md {
+	  /**
+	   * 442px = width of the blockquote's container at tablet breakpoint
+	   * 370px = target width of the blockquote at tablet breakpoint
+	  */
+	  width: calc(370 / 442 * 100%);
 	}
 
-	.panes-container {
-		&.is-mobile-breakpoint {
-			@apply hidden;
-		}
+	@screen lg {
+	  @apply w-px500;
 	}
+  }
 
-	blockquote {
-		@apply overflow-hidden overflow-ellipsis lg:text-px28 mx-auto;
-		@screen md {
-			/**
-			 * 442px = width of the blockquote's container at tablet breakpoint
-			 * 370px = target width of the blockquote at tablet breakpoint
-			*/
-			width: calc(370 / 442 * 100%);
-		}
-
-		@screen lg {
-			@apply w-px500;
-		}
-	}
-
-	figcaption {
-		@apply lg:text-px20;
-	}
+  figcaption {
+	@apply lg:text-px20;
+  }
 }

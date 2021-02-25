@@ -59,86 +59,86 @@
 
 .search-form {
 
-	.input-wrap {
-		&.input-has-value {
-			@apply justify-center;
+  .input-wrap {
+	&.input-has-value {
+	  @apply justify-center;
 
-			.search-field {
-				@apply w-auto text-center;
-			}
+	  .search-field {
+		@apply w-auto text-center;
+	  }
 
-			.icon-wrap {
-				@apply pl-0;
-			}
+	  .icon-wrap {
+		@apply pl-0;
+	  }
 
-			.icon-search-cancel {
-				@apply flex;
-			}
-		}
+	  .icon-search-cancel {
+		@apply flex;
+	  }
+	}
+  }
+
+  .search-field {
+	border: none;
+	@apply text-left;
+
+	&:focus {
+	  outline: none;
+	  box-shadow: none;
+	}
+  }
+
+  .trevor-ti-search,
+  .trevor-ti-x {
+	color: theme('colors.violet.DEFAULT');
+  }
+
+  .trevor-ti-x {
+	@apply text-px30;
+
+	@screen lg {
+	  @apply text-px32;
+	}
+  }
+
+  #input-suggestions {
+	@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6;
+	z-index: 5;
+	color: theme('colors.indigo.DEFAULT');
+
+	@screen md {
+	  box-shadow: theme('boxShadow.indigo-md');
 	}
 
-	.search-field {
-		border: none;
-		@apply text-left;
-
-		&:focus {
-			outline: none;
-			box-shadow: none;
-		}
+	@screen lg {
+	  box-shadow: theme('boxShadow.indigo-lg');
 	}
 
-	.trevor-ti-search,
-	.trevor-ti-x {
-		color: theme('colors.violet.DEFAULT');
+	.list-header {
+	  @apply font-semibold text-center text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
 	}
 
-	.trevor-ti-x {
-		@apply text-px30;
-
-		@screen lg {
-			@apply text-px32;
-		}
+	.ui-autocomplete {
+	  @apply rounded-px10 pt-px24 mx-auto;
+	  left: 0 !important;
+	  width: 100% !important;
 	}
 
-	#input-suggestions {
-		@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6;
-		z-index: 5;
-		color: theme('colors.indigo.DEFAULT');
-
-		@screen md {
-			box-shadow: theme('boxShadow.indigo-md');
-		}
-
-		@screen lg {
-			box-shadow: theme('boxShadow.indigo-lg');
-		}
-
-		.list-header {
-			@apply font-semibold text-center text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
-		}
-
-		.ui-autocomplete {
-			@apply rounded-px10 pt-px24 mx-auto;
-			left: 0 !important;
-			width: 100% !important;
-		}
-
-		.ui-menu-item {
-			@apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6;
-			color: theme('colors.indigo.DEFAULT');
-		}
-
-		.ui-state-focus {
-			font-weight: 400;
-			background: none;
-			border: none;
-			margin: 0;
-			color: theme('colors.indigo.DEFAULT');
-			cursor: pointer;
-		}
+	.ui-menu-item {
+	  @apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6;
+	  color: theme('colors.indigo.DEFAULT');
 	}
+
+	.ui-state-focus {
+	  font-weight: 400;
+	  background: none;
+	  border: none;
+	  margin: 0;
+	  color: theme('colors.indigo.DEFAULT');
+	  cursor: pointer;
+	}
+  }
 }
 
 .word-of-the-day {
-	@apply max-w-px606;
+  @apply max-w-px606;
 }

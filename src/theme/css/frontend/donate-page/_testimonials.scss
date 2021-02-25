@@ -2,14 +2,14 @@
   position: relative;
 
   .swiper-pagination {
-		@apply flex flex-row justify-center w-full;
+	@apply flex flex-row justify-center w-full;
 
-		span {
-			background: rgba(0, 58, 72, 0.3);
+	span {
+	  background: rgba(0, 58, 72, 0.3);
 
-			&.swiper-pagination-bullet-active {
-			background: theme("colors.teal.dark");
-			}
-		}
+	  &.swiper-pagination-bullet-active {
+		background: theme("colors.teal.dark");
+	  }
+	}
   }
 }
