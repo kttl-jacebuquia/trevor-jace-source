@@ -20,11 +20,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 			'cta_url' => '#',
 	] ) ?>
 
-	<?php
-		$hero_desc = Advocacy::get_val( Advocacy::SETTING_HOME_HERO_DESC );
-
-		if (!empty($hero_desc)) {
-	?>
+	<?php if ( ! empty( $hero_desc = Advocacy::get_val( Advocacy::SETTING_HOME_HERO_DESC ) ) ) { ?>
 		<p class="hero-description"><?= $hero_desc ?></p>
 	<?php } ?>
 
@@ -78,36 +74,35 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 	</div>
 
 	<?php
+	// TODO: Create a helper from it and use on RC Home
 	$quotes = (array) Advocacy::get_val( Advocacy::SETTING_HOME_QUOTE_DATA );
 	if ( ! empty( $quotes ) ) :
 		$quote = $quotes[ array_rand( $quotes, 1 ) ];
-	?>
-
-	<div class="quote-breaker bg-gold relative">
-		<figure class="container mx-auto text-left text-teal-dark">
-			<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
-				<i class="trevor-ti-quote-open -mt-2 mr-0.5 md:text-px26 lg:text-px32 lg:mr-2"></i>
-				<i class="trevor-ti-quote-close md:text-px26 lg:text-px32"></i>
-			</div>
-			<blockquote class="font-bold">
-				<?= $quote['quote'] ?>
-			</blockquote>
-			<?php if ( ! empty( $quote['cite'] ) ) { ?>
-				<figcaption>
-					<?= $quote['cite'] ?>
-				</figcaption>
-			<?php } ?>
-		</figure>
-
-		<?php
-			if ( ! empty( $quote['img'] ) && ! empty( $quote['img']['id'] ) ) {
-				echo wp_get_attachment_image( $quote['img']['id'], 'medium', false, [
-					'class' => implode( ' ', array_unique( $img_class ) )
-				] );
-			}
 		?>
 
-	</div>
+		<div class="quote-breaker bg-gold relative">
+			<figure class="container mx-auto text-left text-teal-dark">
+				<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
+					<i class="trevor-ti-quote-open -mt-2 mr-0.5 md:text-px26 lg:text-px32 lg:mr-2"></i>
+					<i class="trevor-ti-quote-close md:text-px26 lg:text-px32"></i>
+				</div>
+				<blockquote class="font-bold">
+					<?= $quote['quote'] ?>
+				</blockquote>
+				<?php if ( ! empty( $quote['cite'] ) ) { ?>
+					<figcaption>
+						<?= $quote['cite'] ?>
+					</figcaption>
+				<?php } ?>
+			</figure>
+
+			<?php
+			if ( ! empty( $quote['img'] ) && ! empty( $quote['img']['id'] ) ) {
+				echo wp_get_attachment_image( $quote['img']['id'], 'medium' );
+			}
+			?>
+
+		</div>
 
 	<?php endif; ?>
 
