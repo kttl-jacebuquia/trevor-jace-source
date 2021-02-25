@@ -12,7 +12,7 @@
   }
 
   .modal-container {
-	@apply bg-white w-full h-full z-50 overflow-y-auto relative flex flex-col;
+	@apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
 	padding-top: var(--top-nav-top-margin);
   }
 
