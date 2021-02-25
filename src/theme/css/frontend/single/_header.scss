@@ -36,7 +36,11 @@
   @apply z-2;
 
   .title-top {
-	@apply text-px14 leading-px18 tracking-px05 font-medium uppercase;
+		@apply text-px14 leading-px18 tracking-px05 font-medium uppercase;
+
+		@screen md {
+			@apply pt-px30;
+		}
   }
 
   .title {
