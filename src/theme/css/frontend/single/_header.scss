@@ -183,10 +183,13 @@
 	@apply bg-purple;
   }
 
-  // By Post Type
-  body.single-trevor_rc_article & {
+	// By Post Type
+	body.single-trevor_rc_article &.type-text_only,
+	body.single-trevor_rc_article &.type-full,
+	body.single-trevor_rc_article &.type-split,
+	body.single-trevor_rc_article &.type-horizontal, {
 	@apply bg-violet-alt;
-  }
+	}
 
   // Purple bg
   &:not(.type-text_only):not(.type-full) {
