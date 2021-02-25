@@ -101,7 +101,7 @@ class Tile {
 		?>
 		<div class="js-accordion <?= implode( ' ', $cls ) ?>">
 			<h2 class="accordion-header" id="heading-<?= $key ?>">
-				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-3 md:border-0 md:pb-0 md:text-px24 md:leading-px28 lg:text-px26 lg:leading-px36"
+				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-px6 md:border-0 md:pb-0 md:text-px24 md:leading-px28 lg:text-px26 lg:leading-px36"
 						type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
 					<?= $data['title'] ?>
 				</button>
