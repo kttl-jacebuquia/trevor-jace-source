@@ -1,6 +1,15 @@
+.recirculation-section {
+	@apply bg-violet;
+}
 .post-bottom-recirculation {
   @apply container mx-auto py-12;
 
+	.card-post.bg-full {
+		.post-thumbnail-wrap,
+		.card-content {
+			@apply z-0;
+		}
+	}
 
   &-title {
 	@apply text-white mb-11;

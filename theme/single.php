@@ -21,7 +21,9 @@
 			</div><!-- .post-content-wrap -->
 			<?= \TrevorWP\Theme\Helper\Post::render_bottom_blocks( $post ) ?>
 		</article><!-- .post -->
-		<?= \TrevorWP\Theme\Helper\Post::render_after_post( $post ); ?>
+		<div class="recirculation-section">
+			<?= \TrevorWP\Theme\Helper\Post::render_after_post( $post ); ?>
+		</div>
 	</div>
 </main> <!-- #site-content -->
 
