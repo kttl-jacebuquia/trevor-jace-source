@@ -80,6 +80,11 @@ class Card {
 		ob_start();
 		?>
 		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
+			<div class="hover-hit-area">
+				<?php if ( $title_link ) { ?>
+					<a href="<?= get_the_permalink( $post ) ?>"></a>
+				<?php } ?>
+			</div>
 			<?php if ( $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
 					<?= $thumb ?>
@@ -97,7 +102,7 @@ class Card {
 
 				<h3 class="post-title">
 					<?php if ( $title_link ) { ?>
-						<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
+						<a href="<?= get_the_permalink( $post ) ?>">
 							<?= get_the_title( $post ); ?>
 						</a>
 					<?php } else { ?>

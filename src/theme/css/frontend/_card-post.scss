@@ -17,13 +17,21 @@
 	  @apply h-full;
 	  @apply object-center object-cover;
 	  @apply transition-transform duration-500;
+		@apply rounded-t-px10;
 	}
   }
 
-  &:hover .post-thumbnail-wrap img {
-	@apply transform scale-105;
-  }
+	.hover-hit-area {
+		@apply absolute z-1 w-full cursor-pointer h-5/6;
 
+		&:hover + .post-thumbnail-wrap img {
+			@apply transform scale-105;
+		}
+
+		a {
+			@apply h-full w-full block;
+		}
+	}
 
   .title-top {
 	@apply font-semibold text-px14 leading-px18 tracking-px05;
