@@ -31,7 +31,7 @@ $social_media_accounts = [
 
 ?>
 
-<footer class="w-full flex flex-col justify-center">
+<footer class="w-full flex flex-col justify-center sticky-cta-anchor">
 	<div class="container mx-auto site-content-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">

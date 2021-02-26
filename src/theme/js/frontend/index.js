@@ -120,8 +120,7 @@ features.collapsible($('.js-accordion'), {});
  * Crisis Button docking
  */
 window.onload = function () {
-	const campaignForm = document.querySelector('.campaign-form');
-	const footer = document.querySelector('footer');
+	const stickyAnchors = $('.sticky-cta-anchor');
 	const crisisButton = $('.floating-crisis-btn-wrap');
 	const distanceFromElement = 40;
 	const btnVerticalPadding = 24;
@@ -168,14 +167,14 @@ window.onload = function () {
 	let observer = new IntersectionObserver(callback, options);
 	/**
 	 * Intersection Observer runs asynchronously
-	 * so you can just add an item in the array (i.e., [footer, element1, elment2, ...]).
+	 * so you can just add an item in the array (i.e., [element1, elment2, ...]).
 	 * The crisis button will dock on the first element it intersects based on the DOM structure.
 	 */
-	[footer, campaignForm].forEach(target => {
-		if (target) observer.observe(target);
-	});
-
-
+	if (stickyAnchors.length) {
+		$.each(stickyAnchors, (index, element) => {
+			if (element) observer.observe(element);
+		});
+	}
 }
 
 /**

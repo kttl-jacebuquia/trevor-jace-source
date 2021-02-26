@@ -102,7 +102,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="campaign-form pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
+	<div class="sticky-cta-anchor pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">Join The
 				Campaign</h2>
