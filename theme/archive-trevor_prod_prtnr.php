@@ -42,7 +42,10 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 							'order'			=> 'ASC',
 							'post__in'  => explode( ",", $item_ids ),
 							'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-					] ) )->posts, [ 'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ) ] );
+					] ) )->posts, [ 
+						'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ), 
+						'tileClass'	=> ['product-card'],
+					] );
 					?>
 				</div>
 
@@ -77,7 +80,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 						] ) )->posts,
 								[
 										'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
-										'tileClass' => [ 'clickable-card' ],
+										'tileClass' => [ 'clickable-card' , 'product-card'],
 								] );
 						?>
 					</div>
@@ -113,6 +116,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 					<?php echo Helper\Tile_Grid::posts( $partners,
 						[
 							'title' =>	Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
+							'tileClass'	=> ['product-card'],
 						] );
 					?>
 					<div class="trevor-pagination-default">

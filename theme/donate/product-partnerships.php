@@ -30,7 +30,10 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 							'post_type' => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
 						)
 					) )->posts,
-					array( 'title' => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ) )
+					array( 
+						'title' => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ),
+						'tileClass'	=> ['product-card'],
+					)
 				);
 				?>
 			</div>

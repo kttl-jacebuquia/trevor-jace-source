@@ -49,116 +49,116 @@
 	}
 
 	&-container {
-	  @apply mb-0;
+		@apply mb-0;
 
-	  @screen md {
+		@screen md {
+		grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+		@apply justify-center;
 		@apply gap-px30;
-	  }
+		}
 
-	  @screen lg {
-		@apply flex flex-row flex-wrap justify-center -mt-14 mr-0 mb-0 -ml-px27;
-		gap: unset;
-	  }
+		@screen lg {
+			grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
+		}
+
+		@screen lg2 {
+			grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
+			@apply justify-center;
+		}
 	}
 
 	.tile {
-	  box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
-	  @apply px-6 pb-12 h-auto;
+		box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
+		@apply h-auto p-0;
 
+		@screen lg {
+			width: theme('postCard.width.lg');
+		}
 
-	  @screen lg {
-		flex: 0 0 theme('postCard.width.lg');
-		@apply mt-14 mr-0 mb-0 ml-px27;
-	  }
+		&-inner {
+			@apply px-6 pb-12;
+		}
 
-	  &-title {
-		@apply font-bold text-px24 leading-px28 mb-4 mt-8 md:mt-7;
-	  }
+		&-title {
+			@apply font-bold text-px24 leading-px28 mb-4 mt-8 md:mt-7;
+		}
 
-	  &-desc {
-		@apply font-normal text-px16 leading-px22 mb-6;
-	  }
+		&-desc {
+			@apply font-normal text-px16 leading-px22 mb-6;
+		}
 	}
 
 	.tile-image {
-	  @apply h-60 w-px319 max-w-none -mx-6 -mt-7 rounded-t-px10;
-
-	  @screen lg {
-		@apply w-px355;
-	  }
-	}
+			@apply h-60 w-full max-w-none rounded-t-px10;
+		}
   }
 
   .current-partners {
-	@apply pt-px88 pb-px100 md:py-px100 lg:pt-px168 lg:pb-px140;
+		@apply pt-px88 pb-px100 md:py-px100 lg:pt-px168 lg:pb-px140;
 
-	&__title {
-	  @apply text-px32 leading-px40 md:leading-px42 text-px40 leading-px48 text-center font-bold;
-	  color: theme('colors.teal.dark');
-	}
-
-	&__container {
-	  @apply pt-px90 md:pt-px100;
-	}
+		&__title {
+			@apply text-px32 leading-px40 md:leading-px42 text-px40 leading-px48 text-center font-bold mb-px90 md:mb-px90 lg:mb-px60 xl:mb-0;
+			color: theme('colors.teal.dark');
+		}
   }
 
 
   .banner {
-	@apply max-w-px319 mx-auto py-px100 text-white text-center;
+		@apply max-w-px319 mx-auto py-px100 text-white text-center;
 
-	@screen md {
-	  @apply max-w-px550;
-	}
+		@screen md {
+			@apply max-w-px550;
+		}
 
-	@screen lg {
-	  @apply max-w-px1028;
-	}
+		@screen lg {
+			@apply max-w-px1028;
+		}
 
-	&__inner {
-	  @apply px-7 pt-px127 pb-px120 rounded-px10;
-	  background-color: theme('colors.blue_green.DEFAULT');
+		&__inner {
+			@apply px-7 pt-px127 pb-px120 rounded-px10;
+			background-color: theme('colors.blue_green.DEFAULT');
 
-	  @screen md {
-		@apply px-px117 pt-32 pb-px117;
-	  }
+			@screen md {
+			@apply px-px117 pt-32 pb-px117;
+			}
 
-	  @screen lg {
-		@apply px-64 py-44;
-	  }
-	}
+			@screen lg {
+			@apply px-64 py-44;
+			}
+		}
 
-	&__title {
-	  @apply font-bold text-px30 leading-px40;
+		&__title {
+			@apply font-bold text-px30 leading-px40;
 
-	  @screen md {
-		@apply text-px32 leading-px42;
-	  }
+			@screen md {
+			@apply text-px32 leading-px42;
+			}
 
-	  @screen lg {
-		@apply text-px46 leading-px56;
-	  }
-	}
+			@screen lg {
+			@apply text-px46 leading-px56;
+			}
+		}
 
-	&__description {
-	  @apply font-normal text-px18 leading-px22 mt-5;
+		&__description {
+			@apply font-normal text-px18 leading-px22 mt-5;
 
-	  @screen lg {
-		@apply text-px20 leading-px30 mt-px30;
-	  }
-	}
+			@screen lg {
+			@apply text-px20 leading-px30 mt-px30;
+			}
+		}
 
-	&__cta {
-	  @apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
-	  color: theme('colors.teal.dark');
+		&__cta {
+			@apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
+			color: theme('colors.teal.dark');
 
-	  @screen md {
-		@apply px-8;
-	  }
+			@screen md {
+			@apply px-8;
+			}
 
-	  @screen lg {
-		@apply py-5 p-20 text-px20 leading-px26;
-	  }
-	}
+			@screen lg {
+			@apply py-5 p-20 text-px20 leading-px26;
+			}
+		}
   }
 
   .cards {

@@ -157,8 +157,12 @@ class Tile {
 			<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
 				<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
+
+			<?php if ( in_array( 'product-card', $cls ) && ! empty ( $data['img'] ) ) {?>
+				<?= $data['img'] ?>
+			<?php } ?>
 			<div class="tile-inner">
-				<?php if ( ! empty ( $data['img'] ) ) { ?>
+				<?php if ( ! empty ( $data['img'] ) && ! in_array( 'product-card', $cls ) ) { ?>
 					<?= $data['img'] ?>
 				<?php } ?>
 				<?php if ( ! empty( $data['title_top'] ) ) { ?>
