@@ -1,19 +1,15 @@
-// Vendors
 import 'what-input';
 import $ from 'jquery';
 import * as features from './features';
 import * as vendors from './vendors';
 import * as matchMedia from './match-media';
 import './nav';
-import debounce from 'lodash/debounce';
+import singlePages from './single-pages';
 
 window.trevorWP = {features, vendors, matchMedia};
 
 const $body = $('body');
 const isSingle = $body.hasClass('single');
-const isGetHelp = !isSingle && $body.hasClass('is-get-help');
-const isDonate = !isSingle && $body.hasClass('is-donate');
-const isTrevorspace = !isSingle && $body.hasClass('is-trevorspace');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
 const carouselTestimonial = document.querySelectorAll('.carousel-testimonials');
@@ -46,34 +42,15 @@ if (isSingle) {
 
 	// Open social media sharing pages in a popup
 	features.sharingPopUp($('.post-social-share-btn'));
+} else {
+	singlePages(); // Handle single page scripts
 }
-
-// Get Help
-isGetHelp && console.log('Get-Help page');
-
-// Trevorspace
-isTrevorspace && console.log('Trevorspace page');
 
 // If FAQ is Present
 if (isFAQPresent) {
 	faqTrigger.on('click', function (e) {
 		e.preventDefault();
 		features.faqToggle($(this));
-	});
-}
-
-if (isDonate) {
-	const _frequency = $('.frequency--choice label');
-	const _amount = $('.amount-choice label');
-
-	_frequency.on('click', function (e) {
-		e.preventDefault();
-		features.toggleFrequency($(this));
-	});
-
-	_amount.on('click', function (e) {
-		e.preventDefault();
-		features.toggleAmount($(this));
 	});
 }
 
@@ -118,6 +95,7 @@ features.collapsible($('.js-accordion'), {});
 
 /**
  * Crisis Button docking
+ * @fixme: window.onload binding
  */
 window.onload = function () {
 	const stickyAnchors = $('.sticky-cta-anchor');
@@ -179,6 +157,7 @@ window.onload = function () {
 
 /**
  * Search bar autocomplete function
+ * @todo: move under is-rc
  */
 $(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
@@ -285,6 +264,7 @@ $(".phone-number-format").blur(function () {
  * Varying squiggly line breakers on post bottom tags.
  */
 $(() => {
+	// fixme: overselecting
 	const tagsWaveSeparators = $(".post-bottom-tags .wp-block-separator.is-style-wave");
 
 	// set the width on load.

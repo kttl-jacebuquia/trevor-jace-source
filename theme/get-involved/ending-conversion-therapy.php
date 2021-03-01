@@ -28,30 +28,12 @@ use \TrevorWP\Theme\Helper\Page_Header;
 	</div>
 
 	<div class="flex flex-col lg:flex-row">
-		<div class="pt-px72 pb-px60 text-white bg-blue_green md:pt-10 lg:py-0 lg:flex-1 lg:flex lg:items-center lg:w-2/6 lg:flex-auto">
-			<div class="container mx-auto site-content-inner text-center lg:px-20">
-				<h2 class="font-bold text-px32 leading-px42 mb-3.5 mx-6 md:mx-40 md:text-px24 md:leading-px28 md:mx-54 lg:text-px32 lg:leading-px42 lg:mx-0">
-					Where we’re making an impact</h2>
-				<p class="text-px18 leading-px26 mb-7 md:mx-54 lg:text-px20 lg:leading-px26 lg:mx-0 lg:mb-px50">Track
-					our progress through this interactive map.</p>
-
-				<form>
-					<label for="search" class="sr-only">Search</label>
-					<div class="flex full-w relative md:w-80 md:mx-auto lg:mx-0 lg:w-full">
-						<input id="search" class="bg-white rounded-px10 text-blue_green py-5 px-7 flex-1"/>
-						<button type="submit" class="absolute inset-0"><i
-									class="trevor-ti-search text-px20 mx-7 lg:text-px28 text-blue_green"></i></button>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="h-px600 bg-gray relative flex lg:w-4/6 lg:flex-auto">
-			<div class="pt-2 px-7 pb-3 bg-teal-tint flex self-start w-full flex-nowrap">
-				<a href="#"
-				   class="text-px14 leading-px18 rounded-full text-white bg-teal-dark font-bold py-2 px-3.5 mr-0.5">Passed</a>
-				<a href="#" class="text-px14 leading-px18 rounded-full text-teal-dark py-2 px-3.5 mr-0.5">Pending</a>
-				<a href="#" class="text-px14 leading-px18 rounded-full text-teal-dark py-2 px-3.5 mr-0.5">Regulations &
-					Executive Orders</a>
+		<div class="h-px600 bg-gray relative flex lg:w-4/6 lg:flex-auto" id="container">
+			<div id="mapLegend">
+				<div id="container">
+					<div class="loading">	<i class="icon-spinner icon-spin icon-large"></i>
+						Loading data...</div>
+				</div>
 			</div>
 			<a href="#"
 			   class="text-white text-px16 leading-px22 rounded-full py-3 px-7 bg-teal-dark absolute bottom-10 md:right-px50">Download

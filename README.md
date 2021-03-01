@@ -319,6 +319,7 @@ To apply changes, re-start lando : `lando restart`.
 ### License Attributions
 
 - [FontAwesome](https://fontawesome.com/license)
+- [HighCharts](https://www.highcharts.com/)
 
 ---
 
