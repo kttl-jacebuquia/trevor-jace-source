@@ -97,7 +97,7 @@ class Fundraise extends Abstract_Customizer {
 	/** All Defaults */
 	const DEFAULTS = array(
 		self::SETTING_HOME_HERO_TITLE    => 'Start a fundraiser. <tilt>Change the world.</tilt>',
-		self::SETTING_HOME_HERO_DESC     => 'Join our amazing community of online  fundraisers, and start saving young  LGBTQ lives today.',
+		self::SETTING_HOME_HERO_DESC     => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
 		self::SETTING_HOME_HERO_CTA      => 'Become a Fundraiser',
 		self::SETTING_HOME_HERO_CTA_LINK => '#',
 
@@ -152,12 +152,12 @@ class Fundraise extends Abstract_Customizer {
 		),
 
 		self::SETTING_PARTNER_TITLE    => '<span>Become</span>&nbsp;&nbsp;a<br>corporate partner.',
-		self::SETTING_PARTNER_DESC     => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ  young people every year.',
+		self::SETTING_PARTNER_DESC     => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ young people every year.',
 		self::SETTING_PARTNER_CTA      => 'Learn More',
 		self::SETTING_PARTNER_CTA_LINK => '#',
 
 		self::SETTING_QUESTIONS_TITLE    => 'Have questions?',
-		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our  Development team will get back to you.',
+		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',
 		self::SETTING_QUESTIONS_CTA      => 'Reach Out',
 		self::SETTING_QUESTIONS_CTA_LINK => '#',
 

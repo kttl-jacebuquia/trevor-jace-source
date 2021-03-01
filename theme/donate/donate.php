@@ -131,13 +131,13 @@ use \TrevorWP\Theme\Customizer\Donate;
 								'cta_url' => '#',
 						],
 						[
-								'title'   => 'Workplace Giving &  Match Gifts',
+								'title'   => 'Workplace Giving & Match Gifts',
 								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
 								'cta_txt' => 'Donate Now',
 								'cta_url' => '#',
 						],
 						[
-								'title'   => 'Memorial / In Memory  / Tribute',
+								'title'   => 'Memorial / In Memory / Tribute',
 								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
 								'cta_txt' => 'Donate Now',
 								'cta_url' => '#',
@@ -181,10 +181,10 @@ use \TrevorWP\Theme\Customizer\Donate;
 									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
 										<?php if( $navigator['img'] ): ?>
 											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
-										<?php else: ?>	
+										<?php else: ?>
 											<div class="image-placeholder"></div>
 										<?php endif; ?>
-										
+
 										<h2><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>
@@ -216,7 +216,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 											  d="M10 0C9.44771 0 9 0.447715 9 1V9H1C0.447715 9 0 9.44771 0 10C0 10.5523 0.447715 11 1 11H9V19C9 19.5523 9.44771 20 10 20C10.5523 20 11 19.5523 11 19V11H19C19.5523 11 20 10.5523 20 10C20 9.44771 19.5523 9 19 9H11V1C11 0.447715 10.5523 0 10 0Z"
 											  fill="#003A48"/>
 									</svg>
-									
+
 									<svg class="minus" width="20" height="20" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" clip-rule="evenodd" d="M25.1108 13.0378C25.1108 13.8662 24.4392 14.5378 23.6108 14.5378L2.6134 14.5381C1.78497 14.5382 1.11341 13.8666 1.11342 13.0382C1.11343 12.2097 1.78502 11.5382 2.61344 11.5381L23.6108 11.5378C24.4393 11.5378 25.1108 12.2094 25.1108 13.0378Z" fill="#003A48"/>
 									</svg>

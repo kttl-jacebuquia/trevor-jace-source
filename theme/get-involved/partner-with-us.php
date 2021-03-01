@@ -30,13 +30,13 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 	<?= Helper\Tile_Grid::custom( [
 			[
 					'title'   => 'Corporate Partnerships',
-					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
+					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
 					'cta_txt' => 'Read more',
 					'cta_url' => '#'
 			],
 			[
 					'title'   => 'Product Partnerships',
-					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
+					'desc'    => 'Our partnerships are customized to align with our corporate partners’ priorities.',
 					'cta_txt' => 'Learn more',
 					'cta_url' => '#'
 			],

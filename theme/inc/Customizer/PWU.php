@@ -30,7 +30,7 @@ class PWU extends Abstract_Customizer {
 		self::SETTING_HOME_HERO_DESC                       => 'We have a sophisticated partnership model that is unique, impactful, and customizable to meet our business and cause goals.',
 		self::SETTING_HOME_HERO_CTA                        => 'Join Us',
 		self::SETTING_HOME_OUR_PHILOSOPHY_TITLE            => 'Our Philosophy',
-		self::SETTING_HOME_OUR_PHILOSOPHY_DESC             => 'Corporate partnerships empower us to serve every LGBTQ young person that needs our support.',
+		self::SETTING_HOME_OUR_PHILOSOPHY_DESC             => 'Corporate partnerships empower us to serve every LGBTQ young person that needs our support.',
 		self::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_TITLE => 'Our Partnership Offerings',
 		self::SETTING_HOME_OUR_PARTNERSHIP_OFFERINGS_DESC  => 'These are many ways we can work together to save young LGBTQ lives.',
 	];
