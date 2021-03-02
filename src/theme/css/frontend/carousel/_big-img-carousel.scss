@@ -68,6 +68,7 @@
 	.swiper-button-next .swiper-button-wrapper,
 	.swiper-button-prev .swiper-button-wrapper {
 	  top: calc(var(--img-height) / 2 - 2rem);
+		right: 0;
 	}
 
 	.swiper-button-next,
@@ -98,7 +99,17 @@
 	}
 
 	.carousel-container {
-	  @apply grid grid-cols-12 container mx-auto;
+	  @apply grid grid-cols-12 mx-auto container px-0;
+	}
+
+	&.body-carousel {
+		.carousel-container {
+			max-width: rem-calc(770px);
+		}
+
+		.swiper-wrapper {
+			@apply col-span-12;
+		}
 	}
 
 	.swiper-wrapper {
@@ -108,9 +119,21 @@
 		@apply max-w-full;
 	  }
 	}
+
   }
 
   @screen xl {
+	&.body-carousel {
+		.carousel-container {
+			max-width: rem-calc(818px);
+			@apply px-0;
+		}
+
+		.swiper-wrapper {
+			@apply col-span-12;
+		}
+	}
+
 	.swiper-wrapper {
 	  @apply col-span-8 col-start-3;
 	}

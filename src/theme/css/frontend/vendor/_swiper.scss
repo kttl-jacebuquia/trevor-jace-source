@@ -75,6 +75,10 @@
   position: relative;
   overflow: hidden;
   @apply pb-px20;
+
+	@screen lg {
+		margin-left: unset;
+	}
 }
 
 

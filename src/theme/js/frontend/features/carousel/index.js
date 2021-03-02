@@ -52,12 +52,14 @@ export function carouselNavigator($element, $option) {
 }
 
 export function generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase) {
-	const panesContainer = $('.panes-container', eBase);
+	const panesContainer = $(leftPaneSelector, eBase).parent();
 	const iconTopOffset = 10;
 	const iconLeftOffset = 37;
 	let iconWrapper = undefined;
 	const leftPane = eBase.querySelector(leftPaneSelector);
 	const rightPane = eBase.querySelector(rightPaneSelector);
+	leftPane.innerHTML = '';
+	rightPane.innerHTML = '';
 
 	/**
 	 * set the direction if not defined
@@ -109,8 +111,8 @@ export function generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase)
 		 * reset the values.
 		 */
 		else {
-			$(leftPaneSelector).html('');
-			$(rightPaneSelector).html('');
+			leftPane.innerHTML = '';
+			rightPane.innerHTML = '';
 			iconWrapper = undefined;
 		}
 	});
@@ -160,4 +162,13 @@ export function generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase)
 			panesContainer.addClass('is-mobile-breakpoint');
 		}
 	}
+
+	window.addEventListener('resize', e => {
+		let desktop = window.matchMedia('(min-width: 1024px)');
+		if (desktop.matches) {
+			panesContainer.removeClass('is-mobile-breakpoint');
+		} else {
+			panesContainer.addClass('is-mobile-breakpoint');
+		}
+	});
 }

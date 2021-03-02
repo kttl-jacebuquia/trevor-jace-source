@@ -16,7 +16,7 @@ const carouselTestimonial = document.querySelectorAll('.carousel-testimonials');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
-const bigImageCarousels = $('.big-img-carousel');
+const bigImageCarousels = $('.big-img-carousel.body-carousel');
 
 let faqTrigger = $('.faq-list__heading');
 

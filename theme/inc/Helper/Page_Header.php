@@ -172,7 +172,7 @@ class Page_Header {
 				<div class="page-header-img-wrap">
 					<?php if ( ! empty( $options['carousel_data'] ) ) { ?>
 						<?= Helper\Carousel::big_img( $options['carousel_data'], [
-								'class'  => 'text-white',
+								'class'  => ['text-white', 'header-carousel'],
 								'swiper' => $options['swiper']
 						] ) ?>
 					<?php } ?>

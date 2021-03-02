@@ -1,12 +1,13 @@
 .carousel-left-arrow-pane,
 .carousel-right-arrow-pane,
-.big-img-carousel .swiper-button-prev,
-.big-img-carousel .swiper-button-next {
+.big-img-carousel.body-carousel .swiper-button-prev,
+.big-img-carousel.body-carousel .swiper-button-next {
   @apply cursor-pointer lg:z-10;
 
   .swiper-button-wrapper {
 	@apply flex;
 	top: unset;
+	right: unset;
 	background-color: theme('colors.teal.dark');
 
 	i {
@@ -29,4 +30,11 @@
 
 .carousel-right-arrow-pane {
   @apply right-0 top-0;
+}
+
+.panes-container,
+.carousel-full-width-wrap {
+	&.is-mobile-breakpoint > .swiper-button {
+		@apply hidden;
+	}
 }

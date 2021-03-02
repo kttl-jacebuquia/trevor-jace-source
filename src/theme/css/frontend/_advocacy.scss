@@ -32,10 +32,14 @@
   }
 
   .carousel-wrap.big-img-carousel {
-	@apply bg-white my-0 py-px80;
+	@apply bg-white my-0 py-px80 px-0;
 
 	max-width: unset;
 	color: theme('colors.teal.dark');
+
+	.carousel-full-width-wrap {
+		width: 100%;
+	}
 
 	figcaption {
 	  color: theme('colors.teal.dark');

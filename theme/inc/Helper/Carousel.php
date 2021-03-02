@@ -122,21 +122,23 @@ class Carousel {
 		$ext_cls = [
 				'big-img-carousel',
 				( "card-count-" . count( $data ) ),
-				$options['class'],
+				implode(' ', $options['class']),
 		];
 
 		ob_start(); ?>
 
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<div class="carousel-header">
-				<?php if ( ! empty( $options['title'] ) ) { ?>
-					<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-				<?php } ?>
-				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
-					<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
-				<?php } ?>
-			</div>
+			 <?php if ( ! empty( $options['title'] || ! empty( $options['subtitle'] ) ) ) { ?>
+				<div class="carousel-header">
+					<?php if ( ! empty( $options['title'] ) ) { ?>
+						<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+					<?php } ?>
+					<?php if ( ! empty( $options['subtitle'] ) ) { ?>
+						<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+					<?php } ?>
+				</div>
+			<?php } ?>
 
 			<div class="carousel-full-width-wrap">
 				<div class="container carousel-container">
@@ -167,8 +169,14 @@ class Carousel {
 					</div>
 				</div>
 				<div class="swiper-button swiper-button-prev">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-left"></i>
+					</div>
 				</div>
 				<div class="swiper-button swiper-button-next">
+					<div class="swiper-button-wrapper">
+						<i class="trevor-ti-arrow-right"></i>
+					</div>
 				</div>
 				<div class="swiper-pagination"></div>
 			</div>
@@ -235,9 +243,9 @@ class Carousel {
 				</div>
 				<div class="carousel-testimonials-txt-wrap relative">
 					<div class="panes-container flex justify-between absolute h-full w-full">
-						<div class="carousel-left-arrow-pane h-full w-1/6 px-4 relative" data-direction="left"
+						<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative" data-direction="left"
 							 aria-label="Previous Slide" role="button"></div>
-						<div class="carousel-right-arrow-pane h-full w-1/6 px-4 relative" data-direction='right'
+						<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative" data-direction='right'
 							 aria-label="Next Slide" role="button"></div>
 					</div>
 					<div class="swiper-container h-full">
@@ -282,7 +290,7 @@ class Carousel {
 		$options = array_merge( [
 				'slidesPerView' => 1,
 				'spaceBetween'  => 20,
-				'observer'      => true,
+				'centerSlides'	=> true,
 				'pagination'    => [
 						'el'        => "{$base_selector} .swiper-pagination",
 						'clickable' => true,
