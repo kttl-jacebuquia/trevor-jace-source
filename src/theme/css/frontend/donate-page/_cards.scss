@@ -76,6 +76,10 @@
   }
 
   .tile-grid-container {
+	@screen mobile {
+		gap: 0;
+	}
+
 	gap: rem-calc(28px);
 	@apply max-w-px1240 mx-auto;
 

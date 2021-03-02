@@ -9,6 +9,22 @@
 	@apply pt-px140 pb-px140;
   }
 
+	&-container {
+		@apply hidden;
+
+		@screen lg { 
+			@apply block;
+		}
+		
+		&.mobile-only {
+			@apply block;
+			
+			@screen lg {
+				@apply hidden;
+			}
+		}
+	}
+
   &--wrapper {
 	@apply pt-px80 pb-px80 rounded-px10;
 	background-color: theme('colors.teal.tint');
@@ -37,14 +53,14 @@
   }
 
   &-data {
-	@apply mx-auto mt-px50 max-w-px319;
+	@apply mt-px50;
 
 	@screen md {
 	  max-width: unset;
 	}
 
 	@screen lg {
-	  @apply mt-px80 max-w-px1028 flex flex-row justify-between items-stretch min-h-full;
+	  @apply mx-auto mt-px80 max-w-px1028 flex flex-row justify-between items-stretch min-h-full;
 	}
 
 	&__item {

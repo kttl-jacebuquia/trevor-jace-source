@@ -169,8 +169,11 @@ module.exports = {
 			},
 			height: {
 				px20: px2rem(20),
+				px68: px2rem(68),
+				px72: px2rem(72),
 				px100: px2rem(100),
 				px104: px2rem(104),
+				px128: px2rem(138),
 				px140: px2rem(140),
 				px160: px2rem(160),
 				px490: px2rem(490),

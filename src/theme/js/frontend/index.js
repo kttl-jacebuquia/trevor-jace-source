@@ -53,6 +53,21 @@ if (isFAQPresent) {
 	});
 }
 
+if (isDonate) {
+	const _frequency = $('.frequency--choice label');
+	const _amount = $('.amount-choice label');
+
+	_frequency.click(function(){
+		_frequency.removeClass('is-selected');
+		$(this).toggleClass('is-selected');
+	});
+
+	_amount.click(function(){
+		_amount.removeClass('is-selected');
+		$(this).toggleClass('is-selected');
+	});
+}
+
 if (isNavigator) {
 	isNavigator.forEach(_el => {
 		let _element = `#${_el.getAttribute('id')}`;

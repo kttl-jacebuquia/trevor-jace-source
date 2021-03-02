@@ -38,8 +38,8 @@ use \TrevorWP\Theme\Customizer\Donate;
 
 					<form action="https://give.thetrevorproject.org/give/63307" method="get">
 						<div class="frequency">
-							<input type="radio" name="donation-frequency" value="once" id="once" checked="checked">
-							<input type="radio" name="donation-frequency" value="monthly" id="monthly">
+							<input type="radio" name="recurring" value="0" id="once" selected>
+							<input type="radio" name="recurring" value="1" id="monthly">
 
 							<input type="radio" name="amount" value="30" id="amount-30">
 							<input type="radio" name="amount" value="60" id="amount-60">
@@ -47,7 +47,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 							<input type="radio" name="amount" value="250" id="amount-250">
 
 							<div class="frequency--choice">
-								<label for="once" class="selected text-center">Give Once</label>
+								<label for="once" class="is-selected text-center">Give Once</label>
 								<label for="monthly" class="text-center">Give Monthly</label>
 							</div>
 
@@ -59,7 +59,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 									<label for="amount-250">$250</label>
 								</div>
 								<div class="amount-custom">
-									<input type="text" name="amount-custom" placeholder="$ Custom amount">
+									<input type="text" name="custom" placeholder="$ Custom amount">
 								</div>
 							</div>
 
@@ -175,7 +175,24 @@ use \TrevorWP\Theme\Customizer\Donate;
 					<h3><?= $nav_title ?></h3>
 					<p><?= $nav_desc ?></p>
 					<div>
-						<div class="navigator-container swiper-container" id="nav-<?= uniqid(); ?>">
+						<div class="navigator-container swiper-container mobile-only" id="nav-<?= uniqid(); ?>">
+							<div class="navigator-data swiper-wrapper">
+								<?php foreach ( $nav_data as $navigator ): ?>
+									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
+										<?php if( $navigator['img'] ): ?>
+											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
+										<?php else: ?>	
+											<div class="image-placeholder"></div>
+										<?php endif; ?>
+										
+										<h2><?= $navigator['name'] ?></h2>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+						
+						<div class="navigator-container swiper-container">
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
 									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
