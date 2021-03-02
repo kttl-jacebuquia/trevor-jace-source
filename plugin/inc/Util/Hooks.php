@@ -138,6 +138,9 @@ class Hooks {
 		add_filter( 'block_categories', [ self::class, 'block_categories' ], 10, 2 );
 		add_action( 'init', [ Block\Base::class, 'register_all' ] );
 
+		# Cron
+		add_filter( 'cron_schedules', [ self::class, 'cron_schedules' ], 10, 1 );
+
 		# TODO: Remove search demo hooks
 		add_action( 'wp_ajax_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
 		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
@@ -593,5 +596,25 @@ class Hooks {
 		}
 
 		return $categories;
+	}
+
+	/**
+	 * Filters the non-default cron schedules.
+	 *
+	 * @param array $new_schedules An array of non-default cron schedules.
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/cron_schedules/
+	 */
+	public static function cron_schedules( array $new_schedules ): array {
+		if ( ! isset( $new_schedules['30min'] ) ) {
+			$new_schedules['30min'] = array(
+					'interval' => 30 * 60,
+					'display'  => __( 'Once every 30 minutes' )
+			);
+		}
+
+		return $new_schedules;
 	}
 }

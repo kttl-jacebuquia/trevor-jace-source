@@ -185,6 +185,7 @@ class Hooks {
 		# Panels
 		new Customizer\External_Scripts( $manager );
 		new Customizer\Resource_Center( $manager );
+		new Customizer\Trevorspace( $manager );
 		new Customizer\Posts( $manager );
 		new Customizer\Advocacy( $manager );
 		new Customizer\Volunteer( $manager );

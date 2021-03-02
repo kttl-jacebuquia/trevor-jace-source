@@ -21,8 +21,6 @@ class Resource_Center extends Abstract_Customizer {
 	const SECTION_PAGINATION = self::PANEL_ID . '_page';
 	/* * Get Help */
 	const SECTION_GET_HELP = self::PANEL_ID . '_get_help';
-	/* * TrevorSpace */
-	const SECTION_TREVORSPACE = self::PANEL_ID . '_trevorspace';
 
 
 	/* Settings */
@@ -96,113 +94,56 @@ class Resource_Center extends Abstract_Customizer {
 	const SETTING_GET_HELP_CIRCULATION_TITLE = self::SETTING_GET_HELP_PREFIX . 'circulation_title';
 	const SETTING_GET_HELP_CIRCULATION_DESC = self::SETTING_GET_HELP_PREFIX . 'circulation_desc';
 
-	/* * TrevorSpace */
-	const SETTING_TREVORSPACE_PREFIX = self::SECTION_TREVORSPACE . '_';
-	const SETTING_TREVORSPACE_ONLINE_TXT = self::SETTING_TREVORSPACE_PREFIX . 'online_txt';
-	const SETTING_TREVORSPACE_ONLINE_THRESHOLD = self::SETTING_TREVORSPACE_PREFIX . 'online_threshold';
-	const SETTING_TREVORSPACE_REG_USER_COUNT = self::SETTING_TREVORSPACE_PREFIX . 'reg_user_count';
-	const SETTING_TREVORSPACE_TITLE = self::SETTING_TREVORSPACE_PREFIX . 'title';
-	const SETTING_TREVORSPACE_DESC = self::SETTING_TREVORSPACE_PREFIX . 'desc';
-	const SETTING_TREVORSPACE_JOIN_CTA = self::SETTING_TREVORSPACE_PREFIX . 'join_cta';
-	const SETTING_TREVORSPACE_JOIN_URL = self::SETTING_TREVORSPACE_PREFIX . 'join_url';
-	const SETTING_TREVORSPACE_LOGIN_CTA = self::SETTING_TREVORSPACE_PREFIX . 'login_cta';
-	const SETTING_TREVORSPACE_LOGIN_URL = self::SETTING_TREVORSPACE_PREFIX . 'login_url';
-	/* * * 1 */
-	const SETTING_TREVORSPACE_1_TITLE_TOP = self::SETTING_TREVORSPACE_PREFIX . '1_title_top';
-	const SETTING_TREVORSPACE_1_TITLE = self::SETTING_TREVORSPACE_PREFIX . '1_title';
-	const SETTING_TREVORSPACE_1_DESC = self::SETTING_TREVORSPACE_PREFIX . '1_desc';
-	const SETTING_TREVORSPACE_1_IMG = self::SETTING_TREVORSPACE_PREFIX . '1_img';
-	/* * * 2 */
-	const SETTING_TREVORSPACE_2_TITLE_TOP = self::SETTING_TREVORSPACE_PREFIX . '2_title_top';
-	const SETTING_TREVORSPACE_2_TITLE = self::SETTING_TREVORSPACE_PREFIX . '2_title';
-	const SETTING_TREVORSPACE_2_DESC = self::SETTING_TREVORSPACE_PREFIX . '2_desc';
-	const SETTING_TREVORSPACE_2_IMG = self::SETTING_TREVORSPACE_PREFIX . '2_img';
-	/* * * 3 */
-	const SETTING_TREVORSPACE_3_TITLE_TOP = self::SETTING_TREVORSPACE_PREFIX . '3_title_top';
-	const SETTING_TREVORSPACE_3_TITLE = self::SETTING_TREVORSPACE_PREFIX . '3_title';
-	const SETTING_TREVORSPACE_3_DESC = self::SETTING_TREVORSPACE_PREFIX . '3_desc';
-	const SETTING_TREVORSPACE_3_IMG = self::SETTING_TREVORSPACE_PREFIX . '3_img';
-	/* * * Circulation */
-	const SETTING_TREVORSPACE_CIRCULATION_TITLE = self::SETTING_TREVORSPACE_PREFIX . 'circulation_title';
-	const SETTING_TREVORSPACE_CIRCULATION_DESC = self::SETTING_TREVORSPACE_PREFIX . 'circulation_desc';
-
-
 	/* All Defaults */
 	const DEFAULTS = [
-		self::SETTING_HOME_CARD_NUM                 => 10,
-		self::SETTING_PAGINATION_TAX_ARCHIVE        => 6,
-		self::SETTING_PAGINATION_SEARCH_RESULTS     => 6,
+		self::SETTING_HOME_CARD_NUM              => 10,
+		self::SETTING_PAGINATION_TAX_ARCHIVE     => 6,
+		self::SETTING_PAGINATION_SEARCH_RESULTS  => 6,
 		/* * Get Help */
-		self::SETTING_GET_HELP_1_TITLE              => 'We’re here <tilt>for you.</tilt>',
-		self::SETTING_GET_HELP_1_DESC               => 'If you are thinking about harming yourself — get immediate support. Connect to a Trevor counselor 24/7, 365 days a year, from anywhere in the U.S. It is 100% confidential, and 100% free.',
-		self::SETTING_GET_HELP_2_TITLE              => 'Our trained counselors understand the challenges LGBTQ young people face.',
-		self::SETTING_GET_HELP_2_DESC               => 'They will listen, reflect back, and will not judge you. All of your conversations are anonymous, and you can share as much or as little as you’d like.',
+		self::SETTING_GET_HELP_1_TITLE           => 'We’re here <tilt>for you.</tilt>',
+		self::SETTING_GET_HELP_1_DESC            => 'If you are thinking about harming yourself — get immediate support. Connect to a Trevor counselor 24/7, 365 days a year, from anywhere in the U.S. It is 100% confidential, and 100% free.',
+		self::SETTING_GET_HELP_2_TITLE           => 'Our trained counselors understand the challenges LGBTQ young people face.',
+		self::SETTING_GET_HELP_2_DESC            => 'They will listen, reflect back, and will not judge you. All of your conversations are anonymous, and you can share as much or as little as you’d like.',
 		/* * * Text */
-		self::SETTING_GET_HELP_TEXT_TITLE           => 'Text us from anywhere, anytime.',
-		self::SETTING_GET_HELP_TEXT_DESC            => 'Standard text messaging <br/>rates may apply.',
-		self::SETTING_GET_HELP_TEXT_CTA             => 'Text ‘START’ to 678-678',
-		self::SETTING_GET_HELP_TEXT_CTA_ACTION      => 'sms://678678',
-		self::SETTING_GET_HELP_TEXT_BTN_CTA         => 'Text Us',
-		self::SETTING_GET_HELP_TEXT_STEP1           => 'Get started by texting ‘START’ to <a href="sms://678678">678-678</a>.',
-		self::SETTING_GET_HELP_TEXT_STEP2           => 'You’ll be connected to a Trevor counselor who is understanding of LGBTQ+ issues and won’t judge you. All of your messages are anonymous, and you can share as much or as little as you like.',
-		self::SETTING_GET_HELP_TEXT_STEP3           => 'If you end up waiting, try a few calming exercises to help you breathe and focus. Or check out the LGBTQ Resource Center for helpful articles and information.',
-		self::SETTING_GET_HELP_TEXT_TERMS           => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque cursus mi. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque. Rhoncus dolor est nunc odio.',
+		self::SETTING_GET_HELP_TEXT_TITLE        => 'Text us from anywhere, anytime.',
+		self::SETTING_GET_HELP_TEXT_DESC         => 'Standard text messaging <br/>rates may apply.',
+		self::SETTING_GET_HELP_TEXT_CTA          => 'Text ‘START’ to 678-678',
+		self::SETTING_GET_HELP_TEXT_CTA_ACTION   => 'sms://678678',
+		self::SETTING_GET_HELP_TEXT_BTN_CTA      => 'Text Us',
+		self::SETTING_GET_HELP_TEXT_STEP1        => 'Get started by texting ‘START’ to <a href="sms://678678">678-678</a>.',
+		self::SETTING_GET_HELP_TEXT_STEP2        => 'You’ll be connected to a Trevor counselor who is understanding of LGBTQ+ issues and won’t judge you. All of your messages are anonymous, and you can share as much or as little as you like.',
+		self::SETTING_GET_HELP_TEXT_STEP3        => 'If you end up waiting, try a few calming exercises to help you breathe and focus. Or check out the LGBTQ Resource Center for helpful articles and information.',
+		self::SETTING_GET_HELP_TEXT_TERMS        => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque cursus mi. Rhoncus dolor est nunc odio quis faucibus. Interdum sit quisque. Rhoncus dolor est nunc odio.',
 		/* * * Call */
-		self::SETTING_GET_HELP_CALL_TITLE           => 'Reach out to hear a live voice on the line.',
-		self::SETTING_GET_HELP_CALL_DESC            => '',
-		self::SETTING_GET_HELP_CALL_CTA             => 'Call us at 1-866-488-7336',
-		self::SETTING_GET_HELP_CALL_CTA_ACTION      => 'tel://+18664887336',
-		self::SETTING_GET_HELP_CALL_BTN_CTA         => 'Call Us',
-		self::SETTING_GET_HELP_CALL_STEP1           => '',
-		self::SETTING_GET_HELP_CALL_STEP2           => '',
-		self::SETTING_GET_HELP_CALL_STEP3           => '',
-		self::SETTING_GET_HELP_CALL_TERMS           => '',
+		self::SETTING_GET_HELP_CALL_TITLE        => 'Reach out to hear a live voice on the line.',
+		self::SETTING_GET_HELP_CALL_DESC         => '',
+		self::SETTING_GET_HELP_CALL_CTA          => 'Call us at 1-866-488-7336',
+		self::SETTING_GET_HELP_CALL_CTA_ACTION   => 'tel://+18664887336',
+		self::SETTING_GET_HELP_CALL_BTN_CTA      => 'Call Us',
+		self::SETTING_GET_HELP_CALL_STEP1        => '',
+		self::SETTING_GET_HELP_CALL_STEP2        => '',
+		self::SETTING_GET_HELP_CALL_STEP3        => '',
+		self::SETTING_GET_HELP_CALL_TERMS        => '',
 		/* * * Chat */
-		self::SETTING_GET_HELP_CHAT_TITLE           => 'At your computer? Send us a message.',
-		self::SETTING_GET_HELP_CHAT_DESC            => '',
-		self::SETTING_GET_HELP_CHAT_CTA             => 'Start Chat',
-		self::SETTING_GET_HELP_CHAT_CTA_ACTION      => 'https://trevorproject.secure.force.com/apex/TrevorChatPreChatForm?endpoint=https%3A%2F%2Ftrevorproject.secure.force.com%2Fapex%2FTrevorChatWaitingScreen%3Flanguage%3D%23deployment_id%3D57241000000LPlc%26org_id%3D00D410000005OLz%26button_id%3D57341000000LTDX%26session_id%3DPqsgR6fpRXo4IQ==',
-		self::SETTING_GET_HELP_CHAT_BTN_CTA         => 'Chat With Us',
-		self::SETTING_GET_HELP_CHAT_STEP1           => '',
-		self::SETTING_GET_HELP_CHAT_STEP2           => '',
-		self::SETTING_GET_HELP_CHAT_STEP3           => '',
-		self::SETTING_GET_HELP_CHAT_TERMS           => '',
+		self::SETTING_GET_HELP_CHAT_TITLE        => 'At your computer? Send us a message.',
+		self::SETTING_GET_HELP_CHAT_DESC         => '',
+		self::SETTING_GET_HELP_CHAT_CTA          => 'Start Chat',
+		self::SETTING_GET_HELP_CHAT_CTA_ACTION   => 'https://trevorproject.secure.force.com/apex/TrevorChatPreChatForm?endpoint=https%3A%2F%2Ftrevorproject.secure.force.com%2Fapex%2FTrevorChatWaitingScreen%3Flanguage%3D%23deployment_id%3D57241000000LPlc%26org_id%3D00D410000005OLz%26button_id%3D57341000000LTDX%26session_id%3DPqsgR6fpRXo4IQ==',
+		self::SETTING_GET_HELP_CHAT_BTN_CTA      => 'Chat With Us',
+		self::SETTING_GET_HELP_CHAT_STEP1        => '',
+		self::SETTING_GET_HELP_CHAT_STEP2        => '',
+		self::SETTING_GET_HELP_CHAT_STEP3        => '',
+		self::SETTING_GET_HELP_CHAT_TERMS        => '',
 		/* * * Notification */
-		self::SETTING_GET_HELP_NOTIFICATION_TXT     => 'In very specific instances of abuse or a clear concern of an in-progress or imminent suicide, Trevor counselors may need to contact a child welfare agency or emergency service.',
-		self::SETTING_GET_HELP_NOTIFICATION_URL     => '',
+		self::SETTING_GET_HELP_NOTIFICATION_TXT  => 'In very specific instances of abuse or a clear concern of an in-progress or imminent suicide, Trevor counselors may need to contact a child welfare agency or emergency service.',
+		self::SETTING_GET_HELP_NOTIFICATION_URL  => '',
 		/* * * Exercise */
-		self::SETTING_GET_HELP_EXERCISE_TITLE       => 'Not ready to talk?',
-		self::SETTING_GET_HELP_EXERCISE_DESC        => 'It’s not easy to say how you’re feeling. Try a few of these calming exercises that will help you relax and focus.',
-		self::SETTING_GET_HELP_EXERCISE_CTA         => 'Start ',
+		self::SETTING_GET_HELP_EXERCISE_TITLE    => 'Not ready to talk?',
+		self::SETTING_GET_HELP_EXERCISE_DESC     => 'It’s not easy to say how you’re feeling. Try a few of these calming exercises that will help you relax and focus.',
+		self::SETTING_GET_HELP_EXERCISE_CTA      => 'Start ',
 		/* * * Circulation */
-		self::SETTING_GET_HELP_CIRCULATION_TITLE    => 'Looking for another kind of support?',
-		self::SETTING_GET_HELP_CIRCULATION_DESC     => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
-
-		/* * TrevorSpace */
-		self::SETTING_TREVORSPACE_ONLINE_TXT        => '%s members currently online',
-		self::SETTING_TREVORSPACE_ONLINE_THRESHOLD  => 30,
-		self::SETTING_TREVORSPACE_REG_USER_COUNT    => '100,000',
-		self::SETTING_TREVORSPACE_TITLE             => 'Find your <tilt>community</tilt> at TrevorSpace.',
-		self::SETTING_TREVORSPACE_DESC              => 'Get advice and support within an international community for LGBTQ young people ages 13–24. Sign up and start a conversation now.',
-		self::SETTING_TREVORSPACE_JOIN_CTA          => 'Join Now',
-		self::SETTING_TREVORSPACE_JOIN_URL          => 'https://www.trevorspace.org/register/',
-		self::SETTING_TREVORSPACE_LOGIN_CTA         => 'Log In',
-		self::SETTING_TREVORSPACE_LOGIN_URL         => 'https://www.trevorspace.org/login/',
-		/* * * 1 */
-		self::SETTING_TREVORSPACE_1_TITLE_TOP       => 'An Understanding Community',
-		self::SETTING_TREVORSPACE_1_TITLE           => 'Say what’s on your mind.',
-		self::SETTING_TREVORSPACE_1_DESC            => 'Coming out, family challenges, relationships, and more. Start a conversation about what’s happening in your life right now.',
-		/* * * 2 */
-		self::SETTING_TREVORSPACE_2_TITLE_TOP       => 'Start a Conversation',
-		self::SETTING_TREVORSPACE_2_TITLE           => 'Talk to someone who understands.',
-		self::SETTING_TREVORSPACE_2_DESC            => 'Get advice and support from other members in similar situations. And make some new friends along the way!',
-		/* * * 3 */
-		self::SETTING_TREVORSPACE_3_TITLE_TOP       => 'Secure Space',
-		self::SETTING_TREVORSPACE_3_TITLE           => 'Your safety is our top priority.',
-		self::SETTING_TREVORSPACE_3_DESC            => 'This is a members-only, moderated, and affirming space for LGBTQ young people.',
-		/* * * Circulation */
-		self::SETTING_TREVORSPACE_CIRCULATION_TITLE => 'Looking for another kind of support?',
-		self::SETTING_TREVORSPACE_CIRCULATION_DESC  => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
+		self::SETTING_GET_HELP_CIRCULATION_TITLE => 'Looking for another kind of support?',
+		self::SETTING_GET_HELP_CIRCULATION_DESC  => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
 	];
 
 	/** @inheritDoc */
@@ -253,12 +194,6 @@ class Resource_Center extends Abstract_Customizer {
 		$this->_manager->add_section( self::SECTION_GET_HELP, [
 			'panel' => self::PANEL_ID,
 			'title' => 'Get Help',
-		] );
-
-		# Trevorspace
-		$this->_manager->add_section( self::SECTION_TREVORSPACE, [
-			'panel' => self::PANEL_ID,
-			'title' => 'Trevorspace',
 		] );
 	}
 
@@ -613,137 +548,6 @@ class Resource_Center extends Abstract_Customizer {
 		$this->_manager->add_control( self::SETTING_GET_HELP_CIRCULATION_DESC, [
 			'setting' => self::SETTING_GET_HELP_CIRCULATION_DESC,
 			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Circulation] Description',
-			'type'    => 'textarea',
-		] );
-
-
-		# TrevorSpace
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_TITLE, [
-			'setting' => self::SETTING_TREVORSPACE_TITLE,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_DESC, [
-			'setting' => self::SETTING_TREVORSPACE_DESC,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_JOIN_CTA, [
-			'setting' => self::SETTING_TREVORSPACE_JOIN_CTA,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Join CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_JOIN_URL, [
-			'setting' => self::SETTING_TREVORSPACE_JOIN_URL,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Join Url',
-			'type'    => 'url',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_LOGIN_CTA, [
-			'setting' => self::SETTING_TREVORSPACE_LOGIN_CTA,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Login CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_LOGIN_URL, [
-			'setting' => self::SETTING_TREVORSPACE_LOGIN_URL,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => 'Login Url',
-			'type'    => 'url',
-		] );
-
-		## 1
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_1_TITLE_TOP, [
-			'setting' => self::SETTING_TREVORSPACE_1_TITLE_TOP,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[1] Title Top',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_1_TITLE, [
-			'setting' => self::SETTING_TREVORSPACE_1_TITLE,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[1] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_1_DESC, [
-			'setting' => self::SETTING_TREVORSPACE_1_DESC,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[1] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_TREVORSPACE_1_IMG, [
-			'setting'   => self::SETTING_TREVORSPACE_1_IMG,
-			'section'   => self::SECTION_TREVORSPACE,
-			'label'     => '[1] Image',
-			'mime_type' => 'image',
-		] ) );
-
-		## 2
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_2_TITLE_TOP, [
-			'setting' => self::SETTING_TREVORSPACE_2_TITLE_TOP,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[2] Title Top',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_2_TITLE, [
-			'setting' => self::SETTING_TREVORSPACE_2_TITLE,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[2] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_2_DESC, [
-			'setting' => self::SETTING_TREVORSPACE_2_DESC,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[2] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_TREVORSPACE_2_IMG, [
-			'setting'   => self::SETTING_TREVORSPACE_2_IMG,
-			'section'   => self::SECTION_TREVORSPACE,
-			'label'     => '[2] Image',
-			'mime_type' => 'image',
-		] ) );
-
-		## 3
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_3_TITLE_TOP, [
-			'setting' => self::SETTING_TREVORSPACE_3_TITLE_TOP,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[3] Title Top',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_3_TITLE, [
-			'setting' => self::SETTING_TREVORSPACE_3_TITLE,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[3] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_3_DESC, [
-			'setting' => self::SETTING_TREVORSPACE_3_DESC,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[3] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_TREVORSPACE_3_IMG, [
-			'setting'   => self::SETTING_TREVORSPACE_3_IMG,
-			'section'   => self::SECTION_TREVORSPACE,
-			'label'     => '[3] Image',
-			'mime_type' => 'image',
-		] ) );
-
-		## Circulation
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_CIRCULATION_TITLE, [
-			'setting' => self::SETTING_TREVORSPACE_CIRCULATION_TITLE,
-			'section' => self::SECTION_TREVORSPACE,
-			'label'   => '[Circulation] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_TREVORSPACE_CIRCULATION_DESC, [
-			'setting' => self::SETTING_TREVORSPACE_CIRCULATION_DESC,
-			'section' => self::SECTION_TREVORSPACE,
 			'label'   => '[Circulation] Description',
 			'type'    => 'textarea',
 		] );
