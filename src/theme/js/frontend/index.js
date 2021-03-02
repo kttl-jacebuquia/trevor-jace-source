@@ -12,6 +12,7 @@ const $body = $('body');
 const isSingle = $body.hasClass('single');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
+const isDonate = !isSingle && $body.hasClass('is-donate');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
