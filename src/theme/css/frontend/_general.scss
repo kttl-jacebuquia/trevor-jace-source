@@ -53,8 +53,21 @@
   }
 }
 
-#rc-search-main::-webkit-search-cancel-button {
-  appearance: none;
+#rc-search-main {
+	cursor: text;
+
+	&::-webkit-search-cancel-button {
+		appearance: none;
+	}
+
+	&[placeholder]::before {
+		content: attr(placeholder);
+		color: theme('colors.violet.DEFAULT');
+	}
+
+	&[placeholder]:not(:empty)::before {
+		content: "";
+	}
 }
 
 .search-form {

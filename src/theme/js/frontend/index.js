@@ -12,7 +12,6 @@ const $body = $('body');
 const isSingle = $body.hasClass('single');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
-const carouselTestimonial = document.querySelectorAll('.carousel-testimonials');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
@@ -162,10 +161,13 @@ window.onload = function () {
 $(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
 	const searchCancelIcon = $('.icon-search-cancel');
+	const maxInputSize = 35;
+	const form = $('.search-form');
+	const hiddenInputField = $("input[name='s']", form);
 
-	if (inputSearchField.val()) {
+	if (hiddenInputField.val()) {
 		inputSearchField.parent().addClass('input-has-value');
-		resizeInputField(inputSearchField);
+		inputSearchField.html(hiddenInputField.val());
 	}
 
 	inputSearchField
@@ -188,7 +190,7 @@ $(() => {
 			select: function (event, ui) {
 				$(this).addClass('has-value');
 				$(this).parent().addClass('input-has-value');
-				resizeInputField($(this), ui.item.value.length);
+				hiddenInputField.val(ui.item.value);
 			},
 		})
 		/**
@@ -200,26 +202,31 @@ $(() => {
 			$(this).autocomplete('search', $(this).val());
 		})
 		.on("keyup", function (event) {
-			if (!inputSearchField.val()) {
+			const inputText = $(this).html();
+			if (!inputText) {
 				$(this).parent().removeClass('input-has-value');
+				hiddenInputField.val('');
 			} else {
 				$(this).parent().addClass('input-has-value');
+				hiddenInputField.val(inputText);
 			}
-			resizeInputField($(this));
+		})
+		.on("keypress", function (event) {
+			if (event.keyCode === 13) {
+				form.submit();
+				return false;
+			}
+			if ($(this).html().length >= maxInputSize) {
+				event.preventDefault();
+				return false;
+			}
 		});
 
 	searchCancelIcon.on("click", function (e) {
-		inputSearchField.val("");
+		inputSearchField.html("");
 		inputSearchField.parent().removeClass('input-has-value');
+		inputSearchField.focus();
 	});
-
-	function resizeInputField(inputField, inputSize = 0) {
-		const maxSize = 30;
-		const minSize = 1;
-		const length = inputSize | inputField.val().length;
-		const chars = length + 1;
-		inputField.attr('size', Math.min(Math.max(chars, minSize), maxSize));
-	}
 });
 
 /**
