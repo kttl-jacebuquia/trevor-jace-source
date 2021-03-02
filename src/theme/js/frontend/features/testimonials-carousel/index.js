@@ -1,6 +1,7 @@
 import Swiper from 'theme/js/frontend/vendors/swiper';
 import {generateSwiperArrows} from '../carousel/index';
 import $ from 'jquery';
+import debounce from 'lodash/debounce';
 
 export default function testimonialsCarousel(id) {
 	const eBase = document.getElementById(id);
@@ -17,31 +18,58 @@ export default function testimonialsCarousel(id) {
 	const imgWrap = eBase.querySelector('.carousel-testimonials-img-wrap');
 	const txtWrap = eBase.querySelector('.carousel-testimonials-txt-wrap');
 
-	const imgSwiper = new Swiper(imgWrap.querySelector('.swiper-container'), {
-		slidesPerView: 1,
-		effect: 'fade',
-	});
-	const txtSwiper = new Swiper(txtWrap.querySelector('.swiper-container'), {
-		slidesPerView: 1,
-		autoHeight: true,
-		autoplay: true,
-		pagination: {
-			el: txtWrap.querySelector('.swiper-pagination'),
-			clickable: true,
+	let imgSwiper = initImageSwiper();
+	let textSwiper = initTextSwiper();
+	let currentSlide = 0;
+
+	/**
+	 * reinitialize the swiper on resize
+	 */
+	$(window).on('resize', debounce(
+		() => {
+			currentSlide = textSwiper.activeIndex;
+			imgSwiper.destroy(true, true);
+			imgSwiper = initImageSwiper();
+			textSwiper.destroy(true, true);
+			textSwiper = initTextSwiper();
+			imgSwiper.controller.control = textSwiper;
+			textSwiper.controller.control = imgSwiper;
+			textSwiper.slideTo(currentSlide, 300, false);
 		},
-		navigation: {
-			nextEl: '.carousel-right-arrow-pane',
-			prevEl: '.carousel-left-arrow-pane',
-		},
-		on: {
-			init: () => {
-				checkArrow();
+		500
+	));
+
+	function initImageSwiper () {
+		return new Swiper(imgWrap.querySelector('.swiper-container'), {
+			slidesPerView: 1,
+			effect: 'fade',
+		});
+	}
+
+	function initTextSwiper () {
+		return new Swiper(txtWrap.querySelector('.swiper-container'), {
+			slidesPerView: 1,
+			autoHeight: true,
+			autoplay: true,
+			updateOnWindowResize: true,
+			pagination: {
+				el: txtWrap.querySelector('.swiper-pagination'),
+				clickable: true,
 			},
-			resize: () => {
-				checkArrow();
+			navigation: {
+				nextEl: '.carousel-right-arrow-pane',
+				prevEl: '.carousel-left-arrow-pane',
+			},
+			on: {
+				init: () => {
+					checkArrow();
+				},
+				resize: () => {
+					checkArrow();
+				}
 			}
-		}
-	});
+		});
+	}
 
 	function checkArrow() {
 		let desktop = window.matchMedia('(min-width: 1024px)');
@@ -57,6 +85,6 @@ export default function testimonialsCarousel(id) {
 	 */
 	generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase);
 
-	imgSwiper.controller.control = txtSwiper;
-	txtSwiper.controller.control = imgSwiper;
+	imgSwiper.controller.control = textSwiper;
+	textSwiper.controller.control = imgSwiper;
 }
