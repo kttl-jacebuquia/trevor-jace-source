@@ -204,6 +204,18 @@
 	  @apply mx-7;
 	}
 
+	.big-img-carousel {
+		.swiper-wrapper {
+			width: var(--img-height);
+		}
+
+		.img-wrap {
+			height: var(--img-height);
+			width: var(--img-height);
+			@apply mx-auto;
+		}
+	}
+
 	@screen md {
 	  .page-header-inner {
 		@apply flex flex-row relative pb-20;
@@ -213,20 +225,16 @@
 		@apply text-left items-start;
 		@apply absolute top-1/2 -translate-y-1/2 transform z-10 flex flex-col mr-0;
 		padding-bottom: 25%;
-		width: calc(50% - #{rem-calc(50px)});
+		width: calc(319 / 768 * 100%);
 		margin-left: calc(((100vw - 768px) / 2) + 50px );
 	  }
 
 	  .page-header-img-wrap {
-		@apply self-end max-w-full ml-auto;
+		@apply self-end w-full ml-0;
 	  }
 
 	  .carousel-wrap {
 		@apply mb-0 mt-2 w-auto;
-	  }
-
-	  .big-img-carousel {
-		--img-height: theme('carousel.bigImg.height');
 	  }
 
 	  .big-img-carousel,
@@ -236,39 +244,52 @@
 		@apply m-0 p-0;
 	  }
 
-	  .big-img-carousel .swiper-wrapper {
-		@apply ml-40;
-	  }
 
-	  .big-img-carousel .swiper-pagination {
-		@apply pl-80;
-	  }
+	.big-img-carousel {
+		--img-height: theme('carousel.bigImg.height');
+			@apply w-full;
+			max-width: unset;
 
-	  .big-img-carousel .swiper-slide {
-		@apply opacity-50;
-		width: var(--img-height);
+			.carousel-container {
+				width: 100%;
+				max-width: unset;
+			}
 
-		figcaption {
-		  @apply text-px16 leading-px24;
+			.swiper-wrapper {
+				@apply w-full;
+				margin-left: calc((100% / 2) - (319px / 2) - 48.5px);
+			}
+
+			.swiper-pagination {
+				@apply pl-80;
+			}
+
+			.swiper-button-wrapper {
+				@apply hidden;
+			}
+
+			.swiper-slide {
+				@apply opacity-50;
+				width: var(--img-height);
+
+				figcaption {
+					@apply text-px16 leading-px24;
+				}
+
+				img {
+					height: var(--img-height);
+					width: var(--img-height);
+				}
+
+				&-active {
+					@apply opacity-100;
+				}
+			}
 		}
-
-		img {
-		  height: var(--img-height);
-		  width: var(--img-height);
-		}
-
-		&-active {
-		  @apply opacity-100;
-		}
-	  }
 	}
 
 	@screen lg {
 	  @apply mt-0;
-
-		.big-img-carousel .carousel-full-width-wrap {
-			width: 100%;
-		}
 
 	  .page-header-desc {
 		@apply text-px26 leading-px36;
@@ -289,46 +310,106 @@
 	  }
 
 	  .big-img-carousel {
-		--img-height: theme('carousel.bigImg.heightLG');
-	  }
+			--img-height: theme('carousel.bigImg.heightMD');
 
-	  .big-img-carousel .swiper-wrapper {
-		@apply ml-20;
-	  }
+			.carousel-full-width-wrap {
+				@apply w-full;
+			}
 
-	  .big-img-carousel .swiper-pagination {
-		@apply flex;
-		@apply pl-0 ml-auto mr-36;
-		width: var(--img-height);
-	  }
+			.swiper-wrapper {
+				margin-left: calc((100% / 2) - (409px / 2) - 132px);
+			}
 
-	  .big-img-carousel .swiper-button-prev {
-		left: calc(50% + 1rem);
-	  }
+			.swiper-pagination {
+				@apply flex;
+				@apply pl-0 ml-auto mr-36;
+				width: var(--img-height);
+			}
 
-	  .big-img-carousel .swiper-button-next {
-		@apply right-24;
-	  }
+			.swiper-button-wrapper {
+				@apply flex;
+			}
 
-	  .big-img-carousel .swiper-slide {
-		figcaption {
-		  @apply text-px18 leading-px26;
-		  a {
-			@apply text-px20 leading-px26;
-		  }
+			.swiper-button-prev {
+				left: unset;
+				right: rem-calc(510px);
+				width: rem-calc(120px);
+			}
+
+			.swiper-button-next {
+				width: rem-calc(120px);
+				right: rem-calc(82px);
+
+				.swiper-button-wrapper {
+					@apply right-0;
+				}
+			}
+
+			.swiper-slide {
+				figcaption {
+					@apply text-px18 leading-px26;
+					a {
+					@apply text-px20 leading-px26;
+					}
+				}
+			}
 		}
-	  }
 	}
 
 	@screen lg2 {
 		.page-header-content-wrap {
 			margin-left: calc(((100vw - 1280px) / 2) + 80px);
 		}
+
+		.big-img-carousel {
+			--img-height: theme('carousel.bigImg.heightLG');
+
+			.swiper-button-prev {
+				right: rem-calc(555px);
+				width: rem-calc(245px);
+
+				.swiper-button-wrapper {
+					left: unset;
+					right: 0;
+				}
+			}
+
+			.swiper-button-next {
+				right: rem-calc(40px);
+				width: rem-calc(245px);
+			}
+		}
+	}
+
+	@screen xl {
+		.big-img-carousel {
+			.swiper-button-prev {
+				right: rem-calc(552px);
+			}
+			.swiper-button-next {
+				right: rem-calc(40px);
+			}
+		}
 	}
 
 	@screen 2xl {
 		.page-header-content-wrap {
 			margin-left: calc(((100vw - 1600px) / 2) + 100px);
+		}
+
+		.big-img-carousel {
+
+			.swiper-button-prev {
+				right: rem-calc(550px);
+			}
+
+			.swiper-button-next {
+				right: 0;
+
+				.swiper-button-wrapper {
+					right: rem-calc(40px);
+				}
+			}
 		}
 	}
   }

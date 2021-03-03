@@ -296,8 +296,7 @@ class Carousel {
 						'clickable' => true,
 				],
 				'breakpoints'   => [
-						768  => [ 'spaceBetween' => 30 ],
-						1024 => [ 'spaceBetween' => 27 ],
+						768  => [ 'spaceBetween' => 28 ],
 				],
 				'navigation'    => [
 						'nextEl' => "{$base_selector} .swiper-button-next",

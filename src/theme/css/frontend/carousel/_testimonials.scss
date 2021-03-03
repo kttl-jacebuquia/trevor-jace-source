@@ -37,7 +37,6 @@
 	}
 
 	&-img-wrap {
-	  height: rem-calc(312px);
 	  width: rem-calc(312px);
 	}
 
@@ -54,7 +53,6 @@
 
   @screen lg {
 	&-img-wrap {
-	  height: rem-calc(450px);
 	  width: rem-calc(450px);
 	}
 
@@ -66,7 +64,6 @@
   @screen xl {
 
 	&-img-wrap {
-	  height: rem-calc(600px);
 	  width: rem-calc(600px);
 	}
 
