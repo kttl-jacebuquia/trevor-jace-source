@@ -11,3 +11,4 @@ export {carousel, carouselNavigator, generateSwiperArrows} from './carousel';
 export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
 export ectMap from './ect-map';
+export ajaxPagination from './ajax-pagination';

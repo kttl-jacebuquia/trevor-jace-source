@@ -22,3 +22,17 @@
 	@apply col-span-3;
   }
 }
+
+//
+// Ajax Pagination
+.ajax-pagination {
+  .pagination-wrap {
+	// Hide for js
+	@apply hidden;
+
+	html.no-js & {
+	  // Display pagination links for no-js
+	  @apply block;
+	}
+  }
+}

@@ -23,6 +23,9 @@ let faqTrigger = $('.faq-list__heading');
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
 
+// Ajax Pagination
+features.ajaxPagination();
+
 // Single (Detail) Page
 if (isSingle) {
 	// Floating Blocks

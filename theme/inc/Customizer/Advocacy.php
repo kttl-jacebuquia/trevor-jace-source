@@ -16,6 +16,7 @@ class Advocacy extends Abstract_Customizer {
 	const SECTION_HOME_PREFIX = self::PANEL_ID . '_home';
 	const SECTION_HOME_GENERAL = self::SECTION_HOME_PREFIX . '_general';
 	const SECTION_HOME_FEATURED_POSTS = self::SECTION_HOME_PREFIX . '_featured_posts';
+	const SECTION_PAGINATION = self::PANEL_ID . '_page';
 
 	/* Settings */
 	/* * Home */
@@ -40,6 +41,11 @@ class Advocacy extends Abstract_Customizer {
 	const SETTING_HOME_FEATURED_BILLS = self::SETTING_HOME_PREFIX . 'featured_bills';
 	const SETTING_HOME_FEATURED_LETTERS = self::SETTING_HOME_PREFIX . 'featured_letters';
 
+	/* * Pagination */
+	const SETTING_PAGINATION_PREFIX = self::SECTION_PAGINATION . '_';
+	const SETTING_PAGINATION_BILLS = self::SETTING_PAGINATION_PREFIX . 'bills';
+	const SETTING_PAGINATION_LETTERS = self::SETTING_PAGINATION_PREFIX . 'letters';
+
 	/* All Defaults */
 	const DEFAULTS = [
 		self::SETTING_HOME_HERO_TITLE        => 'Creating a more <tilt>inclusive world.</tilt>',
@@ -54,8 +60,9 @@ class Advocacy extends Abstract_Customizer {
 		self::SETTING_HOME_TAN_CTA           => 'Take Action Now',
 		self::SETTING_HOME_PARTNER_ORG_TITLE => 'Our Partner Organizations',
 		self::SETTING_HOME_PARTNER_ORG_DESC  => 'The Trevor Project works with the following organizations to further suicide prevention efforts among LGBTQ young people across the country.',
+		self::SETTING_PAGINATION_BILLS       => 12,
+		self::SETTING_PAGINATION_LETTERS     => 12,
 	];
-
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
@@ -75,6 +82,12 @@ class Advocacy extends Abstract_Customizer {
 		$this->_manager->add_section( self::SECTION_HOME_FEATURED_POSTS, [
 			'panel' => self::PANEL_ID,
 			'title' => '[Home] Featured Bills & Letters',
+		] );
+
+		# Pagination
+		$this->_manager->add_section( self::SECTION_PAGINATION, [
+			'panel' => self::PANEL_ID,
+			'title' => 'Pagination',
 		] );
 	}
 
@@ -217,5 +230,22 @@ class Advocacy extends Abstract_Customizer {
 			'label'       => 'Featured Letters',
 			'post_type'   => Letter::POST_TYPE,
 		] ) );
+
+		## Pagination
+		$this->_manager->add_control( self::SETTING_PAGINATION_BILLS, [
+			'setting'     => self::SETTING_PAGINATION_BILLS,
+			'section'     => self::SECTION_PAGINATION,
+			'label'       => 'Bill Pages',
+			'type'        => 'number',
+			'description' => 'Posts per page.'
+		] );
+
+		$this->_manager->add_control( self::SETTING_PAGINATION_LETTERS, [
+			'setting'     => self::SETTING_PAGINATION_LETTERS,
+			'section'     => self::SECTION_PAGINATION,
+			'label'       => 'Letter Pages',
+			'type'        => 'number',
+			'description' => 'Posts per page.'
+		] );
 	}
 }
