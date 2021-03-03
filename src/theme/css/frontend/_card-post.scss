@@ -3,13 +3,13 @@
   @apply overflow-hidden;
   @apply shadow-light rounded-px10;
   @apply text-teal-dark;
-  height: rem-calc(503px);
-  max-width: rem-calc(395px);
+  @apply h-px503; 
+  @apply max-w-full;
   @apply mx-auto;
 
   // Thumbnail
   .post-thumbnail-wrap {
-	height: rem-calc(240px);
+	@aaply h-px240; 
 	@apply overflow-hidden;
 	@apply flex-shrink-0;
 	@apply rounded-t-px10;
