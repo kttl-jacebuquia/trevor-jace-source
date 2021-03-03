@@ -4,9 +4,17 @@ use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
 use TrevorWP\Util\Log;
 
+/**
+ * Trevorspace related jobs
+ */
 class Trevorspace {
+	/**
+	 * Gets the latest active count.
+	 *
+	 * @return int
+	 */
 	public static function update_active_count(): int {
-		$resp = wp_remote_get( 'https://www.trevorspace.org/active-count/' );
+		$resp = wp_remote_get( \TrevorWP\Theme\Customizer\Trevorspace::get_val( \TrevorWP\Theme\Customizer\Trevorspace::SETTING_COUNTER_URL ) );
 
 		if ( $resp['response']['code'] == 200 ) {
 			$count = intval( $resp['body'] );
