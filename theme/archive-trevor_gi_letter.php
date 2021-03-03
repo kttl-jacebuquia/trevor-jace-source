@@ -13,6 +13,8 @@
 		<?= \TrevorWP\Theme\Helper\Tile_Grid::posts( $wp_query->posts, [
 				'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ]
 		] ) ?>
+
+		<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
 	</div>
 </main> <!-- #site-content -->
 

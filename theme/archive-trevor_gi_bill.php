@@ -42,18 +42,7 @@ $links   = paginate_links( [
 				'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ]
 		] ) ?>
 
-		<div class="ajax-pagination">
-			<?php if ( $current < $total ) { ?>
-				<div class="next-wrap text-center">
-					<?= array_pop( $links ); /* Last one is the next link */ ?>
-				</div>
-			<?php } ?>
-			<div class="pagination-wrap">
-				<?php if ( ! empty( $links ) ) {
-					echo implode( "\n", $links );
-				} ?>
-			</div>
-		</div>
+		<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
 	</div>
 </main> <!-- #site-content -->
 

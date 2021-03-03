@@ -9,9 +9,9 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 	<main id="site-content" role="main" class="site-content product-partner">
 		<?php /* Header */ ?>
 		<?= Helper\Page_Header::split_carousel( [
-				'title_top' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE_TOP ),
-				'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE ),
-				'desc'      => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_DESC ),
+				'title_top'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE_TOP ),
+				'title'         => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE ),
+				'desc'          => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_DESC ),
 				'carousel_data' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_CAROUSEL ),
 				'swiper'        => [
 						'centeredSlides' => true,
@@ -38,13 +38,13 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				<div class="featured-collections">
 					<?php
 					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-							'orderby'		=> 'title',
-							'order'			=> 'ASC',
+							'orderby'   => 'title',
+							'order'     => 'ASC',
 							'post__in'  => explode( ",", $item_ids ),
 							'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-					] ) )->posts, [ 
-						'title' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ), 
-						'tileClass'	=> ['product-card'],
+					] ) )->posts, [
+							'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ),
+							'tileClass' => [ 'product-card' ],
 					] );
 					?>
 				</div>
@@ -73,14 +73,14 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 					<div class="favorite-items">
 						<?php
 						echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-								'orderby'		=> 'title',
-								'order'			=> 'ASC',
+								'orderby'   => 'title',
+								'order'     => 'ASC',
 								'post__in'  => explode( ",", $item_ids ),
 								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
 						] ) )->posts,
 								[
 										'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
-										'tileClass' => [ 'clickable-card' , 'product-card'],
+										'tileClass' => [ 'clickable-card', 'product-card' ],
 								] );
 						?>
 					</div>
@@ -100,24 +100,13 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			 */
 			?>
 
-			<?php
-				$partners = get_posts(
-					array(
-						'numberposts' => - 1,
-						'orderby'     => 'name',
-						'order'       => 'ASC',
-						'post_type'   => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
-
-					)
-				);
-			?>
 			<?php if ( have_posts() ) : ?>
 				<div class="partners-list">
-					<?php echo Helper\Tile_Grid::posts( $partners,
-						[
-							'title' =>	Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
-							'tileClass'	=> ['product-card'],
-						] );
+					<?php echo Helper\Tile_Grid::posts( $wp_query->posts,
+							[
+									'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
+									'tileClass' => [ 'product-card' ],
+							] );
 					?>
 					<div class="trevor-pagination-default">
 						<?php get_template_part( 'template-parts/pagination' ); ?>
@@ -143,7 +132,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		<div class="cards">
 			<div class="cards__container container mx-auto flex flex-row flex-wrap">
 				<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">
-					There are other ways to help.</h3>
+					<?= Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ) ?>
+				</h3>
 				<?= Helper\Circulation_Card::render_fundraiser(); ?>
 				<?= Helper\Circulation_Card::render_counselor(); ?>
 			</div>

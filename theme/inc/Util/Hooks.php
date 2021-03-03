@@ -432,6 +432,8 @@ class Hooks {
 				$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS ) );
 			} elseif ( is_post_type_archive( CPT\Get_Involved\Letter::POST_TYPE ) ) {
 				$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS ) );
+			}else if (is_post_type_archive(CPT\Donate\Prod_Partner::POST_TYPE)){
+				$query->set('posts_per_page', (int) Customizer\Shop_Product_Partners::get_val());
 			}
 		}
 	}

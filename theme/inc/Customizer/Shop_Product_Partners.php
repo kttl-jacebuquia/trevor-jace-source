@@ -1,8 +1,6 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
-
 use TrevorWP\CPT\Donate\Partner_Prod;
-use TrevorWP\CPT\Donate\Prod_Partner;
 
 class Shop_Product_Partners extends Abstract_Customizer {
 	/* Panels */
@@ -28,6 +26,7 @@ class Shop_Product_Partners extends Abstract_Customizer {
 	const SETTING_HOME_ITEMS = self::SETTING_HOME_PREFIX . 'items';
 
 	const SETTING_HOME_LIST_TITLE = self::SETTING_HOME_PREFIX . 'list_title';
+	const SETTING_HOME_LIST_PER_PAGE = self::SETTING_HOME_PREFIX . 'list_per_page';
 
 	const SETTING_HOME_BANNER_TITLE = self::SETTING_HOME_PREFIX . 'banner_title';
 	const SETTING_HOME_BANNER_DESC = self::SETTING_HOME_PREFIX . 'banner_desc';
@@ -37,15 +36,17 @@ class Shop_Product_Partners extends Abstract_Customizer {
 	const SETTING_HOME_CIRCULATION_TITLE = self::SETTING_HOME_PREFIX . 'circulation_title';
 
 	const DEFAULTS = [
-		self::SETTING_HOME_HERO_TITLE_TOP => 'PARTNER WITH US',
-		self::SETTING_HOME_HERO_TITLE     => 'Buy a product. Help the mission.',
-		self::SETTING_HOME_HERO_DESC      => 'We work with incredible brands to develop products that help celebrate LGBTQ pride and support our mission of ending suicide for LGBTQ young people all year long.',
-		self::SETTING_HOME_STORIES_TITLE  => 'Feature Collections',
-		self::SETTING_HOME_ITEMS_TITLE    => 'Some of our favorite items',
-		self::SETTING_HOME_LIST_TITLE     => 'Current Partners',
-		self::SETTING_HOME_BANNER_TITLE   => 'Join our family of product partners.',
-		self::SETTING_HOME_BANNER_DESC    => 'Want to learn more about how to create a product with The Trevor Project?  See all of our current partners and how you can be one of them.',
-		self::SETTING_HOME_BANNER_CTA     => 'Learn More',
+		self::SETTING_HOME_HERO_TITLE_TOP    => 'PARTNER WITH US',
+		self::SETTING_HOME_HERO_TITLE        => 'Buy a product. Help the mission.',
+		self::SETTING_HOME_HERO_DESC         => 'We work with incredible brands to develop products that help celebrate LGBTQ pride and support our mission of ending suicide for LGBTQ young people all year long.',
+		self::SETTING_HOME_STORIES_TITLE     => 'Feature Collections',
+		self::SETTING_HOME_ITEMS_TITLE       => 'Some of our favorite items',
+		self::SETTING_HOME_LIST_TITLE        => 'Current Partners',
+		self::SETTING_HOME_LIST_PER_PAGE     => 6,
+		self::SETTING_HOME_BANNER_TITLE      => 'Join our family of product partners.',
+		self::SETTING_HOME_BANNER_DESC       => 'Want to learn more about how to create a product with The Trevor Project?  See all of our current partners and how you can be one of them.',
+		self::SETTING_HOME_BANNER_CTA        => 'Learn More',
+		self::SETTING_HOME_CIRCULATION_TITLE => 'There are other ways to help.',
 	];
 
 	/** @inheritDoc */
@@ -148,6 +149,14 @@ class Shop_Product_Partners extends Abstract_Customizer {
 			'setting' => self::SETTING_HOME_BANNER_CTA,
 			'section' => self::SECTION_HOME_GENERAL,
 			'label'   => 'Banner CTA',
+			'type'    => 'text',
+		] );
+
+		// Recirculation
+		$this->_manager->add_control( self::SETTING_HOME_CIRCULATION_TITLE, [
+			'setting' => self::SETTING_HOME_CIRCULATION_TITLE,
+			'section' => self::SECTION_HOME_GENERAL,
+			'label'   => 'Circulation Title',
 			'type'    => 'text',
 		] );
 	}
