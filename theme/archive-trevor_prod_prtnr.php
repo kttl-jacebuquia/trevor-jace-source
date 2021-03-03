@@ -108,9 +108,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 									'tileClass' => [ 'product-card' ],
 							] );
 					?>
-					<div class="trevor-pagination-default">
-						<?php get_template_part( 'template-parts/pagination' ); ?>
-					</div>
+
+					<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
 				</div>
 			<?php endif; ?>
 

@@ -427,13 +427,17 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
-		if ( is_post_type_archive( [ CPT\Get_Involved\Bill::POST_TYPE, CPT\Get_Involved\Letter::POST_TYPE ] ) ) {
-			if ( is_post_type_archive( CPT\Get_Involved\Bill::POST_TYPE ) ) {
-				$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS ) );
-			} elseif ( is_post_type_archive( CPT\Get_Involved\Letter::POST_TYPE ) ) {
-				$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS ) );
-			}else if (is_post_type_archive(CPT\Donate\Prod_Partner::POST_TYPE)){
-				$query->set('posts_per_page', (int) Customizer\Shop_Product_Partners::get_val());
+		if ( is_post_type_archive() ) {
+			switch ( $query->get( 'post_type' ) ) {
+				case CPT\Get_Involved\Bill::POST_TYPE:
+					$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS ) );
+					break;
+				case CPT\Get_Involved\Letter::POST_TYPE:
+					$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS ) );
+					break;
+				case CPT\Donate\Prod_Partner::POST_TYPE:
+					$query->set( 'posts_per_page', (int) Customizer\Shop_Product_Partners::get_val( Customizer\Shop_Product_Partners::SETTING_HOME_LIST_PER_PAGE ) );
+					break;
 			}
 		}
 	}

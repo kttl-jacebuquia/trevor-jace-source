@@ -21,7 +21,7 @@ export default (args = {}) => {
 
 			const $newSiteContent = $(data).filter(options.siteContentSelector);
 
-			$newSiteContent.find(options.containerSelector).insertBefore($container);
+			$newSiteContent.find(options.containerSelector).children().appendTo($container);
 
 			const $newNextLink = $newSiteContent.find(options.paginatorSelector).find('a.next');
 
