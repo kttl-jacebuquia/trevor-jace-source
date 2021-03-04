@@ -165,8 +165,8 @@ class Fundraise extends Abstract_Customizer {
 		self::SETTING_PARTNER_CTA_LINK => '#',
 
 		/** Success Stories */
-		self::SETTING_SUCCESS_STORIES_TITLE => 'Featured Fundraisers',
-		self::SETTING_SUCCESS_STORIES_DESC  => 'Check out some other notable fundraisers that have helped us save lives. ',
+		self::SETTING_SUCCESS_STORIES_TITLE => 'Fundraiser Success Stories',
+		self::SETTING_SUCCESS_STORIES_DESC  => 'These fundraisers made a huge impact on our ability to provide life-saving services.',
 
 		self::SETTING_QUESTIONS_TITLE    => 'Have questions?',
 		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',

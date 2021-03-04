@@ -17,11 +17,11 @@ class CredentialsForm extends React.Component {
 				<tbody>
 				<tr>
 					<th scope="row">
-						<label htmlFor="client_id">Client Id</label>
+						<label htmlFor="clientId">Client Id</label>
 					</th>
 					<td>
-						<input name="client_id"
-							   id="client_id"
+						<input name="clientId"
+							   id="clientId"
 							   defaultValue={clientId}
 							   ref={this.refInputClientId}
 							   type="text"
