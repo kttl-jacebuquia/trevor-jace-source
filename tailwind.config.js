@@ -299,6 +299,7 @@ module.exports = {
 				px70: px2rem(70),
 				px72: px2rem(72),
 				px74: px2rem(74),
+				px76: px2rem(76),
 				px80: px2rem(80),
 				px86: px2rem(86),
 				px88: px2rem(88),
