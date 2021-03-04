@@ -26,14 +26,11 @@ export function carouselNavigator($element, $option) {
 
 	const swiper = new Swiper($element, {
 		// Optional parameters
-		direction: 'horizontal',
-		loop: true,
-		cssMode: true,
-		// If we need pagination
+		slidesPerView: 1,
 		pagination: {
 			el: '.swiper-pagination',
 			clickable: true,
-		}
+		},
 	});
 
 }

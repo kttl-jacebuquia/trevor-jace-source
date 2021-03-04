@@ -56,7 +56,8 @@
 		  @apply invisible overflow-hidden opacity-0 h-0;
 		}
 
-		input[type="text"] {
+		input[type="text"],
+		input[type="number"] {
 		  border: 1px solid rgba(0, 58, 72, 0.5);
 		  @apply h-px68 w-full block visible  rounded-px10 box-border px-px35;
 		  opacity: 1;
@@ -80,7 +81,7 @@
 		  }
 		}
 
-		.frequency--choice {
+		.frequency--choices {
 		  @apply flex mb-px30;
 
 		  @screen lg {
@@ -90,7 +91,7 @@
 		  label {
 			background: white;
 			border: 1px solid rgba(0, 58, 72, 0.5);
-			@apply py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0;
+			@apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0;
 			border: 1px solid rgba(0, 58, 72, 0.5);
 			width: rem-calc(214px);
 
@@ -117,7 +118,7 @@
 			@apply mb-px50;
 		  }
 
-		  &-choice {
+		  &-choices {
 			@apply flex justify-between flex-wrap font-medium text-px16 leading-px20 mb-px30;
 
 

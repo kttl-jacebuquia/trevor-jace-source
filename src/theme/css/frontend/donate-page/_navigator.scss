@@ -1,5 +1,9 @@
 .navigator {
-  @apply pt-px80 pb-px80;
+  @apply pt-0 pb-0;
+
+	@screen mobile {
+		background: theme('colors.teal.tint');
+	}
 
   @screen md {
 	@apply pt-px100 pb-px100;

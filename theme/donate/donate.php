@@ -36,30 +36,30 @@ use \TrevorWP\Theme\Customizer\Donate;
 					<h2><?= $form_heading ?></h2>
 					<p><?= $form_intro ?></p>
 
-					<form action="https://give.thetrevorproject.org/give/63307" method="get">
+					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form">
 						<div class="frequency">
-							<input type="radio" name="recurring" value="0" id="once" selected>
-							<input type="radio" name="recurring" value="1" id="monthly">
+							<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
+							<input type="radio" name="recurring" value="1" id="monthly" class="donation-frequency">
 
-							<input type="radio" name="amount" value="30" id="amount-30">
-							<input type="radio" name="amount" value="60" id="amount-60">
-							<input type="radio" name="amount" value="120" id="amount-120">
-							<input type="radio" name="amount" value="250" id="amount-250">
+							<input type="radio" name="amount" value="30" id="amount-30" class="fixed-amount">
+							<input type="radio" name="amount" value="60" id="amount-60" class="fixed-amount">
+							<input type="radio" name="amount" value="120" id="amount-120" class="fixed-amount">
+							<input type="radio" name="amount" value="250" id="amount-250" class="fixed-amount">
 
-							<div class="frequency--choice">
+							<div class="frequency--choices">
 								<label for="once" class="is-selected text-center">Give Once</label>
 								<label for="monthly" class="text-center">Give Monthly</label>
 							</div>
 
 							<div class="amount">
-								<div class="amount-choice">
+								<div class="amount-choices">
 									<label for="amount-30" class="selected">$30</label>
 									<label for="amount-60">$60</label>
 									<label for="amount-120">$120</label>
 									<label for="amount-250">$250</label>
 								</div>
 								<div class="amount-custom">
-									<input type="text" name="custom" placeholder="$ Custom amount">
+									<input type="number" name="custom" class="custom-amount" placeholder="$ Custom amount">
 								</div>
 							</div>
 
