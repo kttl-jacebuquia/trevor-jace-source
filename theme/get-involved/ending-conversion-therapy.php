@@ -31,8 +31,9 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		<div class="h-px600 bg-gray relative flex lg:w-4/6 lg:flex-auto" id="container">
 			<div id="mapLegend">
 				<div id="container">
-					<div class="loading">	<i class="icon-spinner icon-spin icon-large"></i>
-						Loading data...</div>
+					<div class="loading"><i class="icon-spinner icon-spin icon-large"></i>
+						Loading data...
+					</div>
 				</div>
 			</div>
 			<a href="#"
@@ -86,57 +87,59 @@ use \TrevorWP\Theme\Helper\Page_Header;
 
 	<div class="sticky-cta-anchor pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">Join The
-				Campaign</h2>
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
+				Join The Campaign
+			</h2>
 			<p class="text-px18 leading-px26 mb-px50 md:text-px22 md:leading-px32 lg:text-px22 lg:leading-px32 lg:mb-px72">
-				Enter your information to take action.</p>
+				Enter your information to take action.
+			</p>
 
 			<form class="mx-auto lg:w-3/4">
 				<div class="md:flex md:grid md:grid-cols-2 md:gap-7 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="fullname" class="sr-only">Full Name*</label>
 						<input id="fullname"
-								 required="required"
+							   required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Full Name*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="email" class="sr-only">Email*</label>
 						<input id="email"
-								 type="email"
-								 required="required"
+							   type="email"
+							   required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Email*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="mobilephone" class="sr-only">Mobile Phone</label>
 						<input id="mobilephone"
-								 maxlength="10"
+							   maxlength="10"
 							   class="phone-number-format bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Mobile Phone"/>
 					</div>
 					<div class="flex full-w relative mb-12 md:mb-0">
 						<label for="zipcode" class="sr-only">Zip Code*</label>
 						<input id="zipcode"
-								 maxlength="5"
-								 required="required"
+							   maxlength="5"
+							   required="required"
 							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Zip Code*"/>
 					</div>
 				</div>
 				<div class="flex flex-row full-w relative mb-8">
-					<input id="checkbox-1" type="checkbox" checked
-						   class="mr-5 w-7 h-7 border-0 rounded"/>
+					<input id="checkbox-1" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
 					<label for="checkbox-1"
-						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">Send
-						me emails about this campaign.</label>
+						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">
+						Send me emails about this campaign.
+					</label>
 				</div>
 				<div class="flex flex-row full-w relative mb-px50">
-					<input id="checkbox-2" type="checkbox" checked
-						   class="mr-5 w-7 h-7 border-0 rounded"/>
+					<input id="checkbox-2" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
 					<label for="checkbox-2"
-						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">Send
-						me text messages about this campaign.</label>
+						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">
+						Send me text messages about this campaign.
+					</label>
 				</div>
 
 				<button type="submit"

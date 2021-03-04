@@ -23,6 +23,7 @@ abstract class Donate_Object {
 	const PERMALINK_FUNDRAISE = 'fundraise';
 	const PERMALINK_PROD_PARTNERS = 'product-partners';
 	const PERMALINK_PROD_PARTNERSHIPS = 'product-partnerships';
+	const PERMALINK_FUND_STORY = 'fundraise/success-stories';
 
 	/**
 	 * @var string[]
@@ -30,6 +31,7 @@ abstract class Donate_Object {
 	static $ALL_POST_TYPES = [
 		Prod_Partner::POST_TYPE,
 		Partner_Prod::POST_TYPE,
+		Fundraiser_Stories::PERMALINK_FUND_STORY,
 	];
 
 	/**
@@ -52,6 +54,7 @@ abstract class Donate_Object {
 		# Post Types
 		Prod_Partner::register_post_type();
 		Partner_Prod::register_post_type();
+		Fundraiser_Stories::register_post_type();
 
 		# Rewrites
 		## Single Pages

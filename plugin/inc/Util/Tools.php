@@ -844,7 +844,10 @@ class Tools {
 	 */
 	public static function get_public_post_types(): array {
 		return array_merge(
-			[ \TrevorWP\CPT\Post::POST_TYPE ],
+			[
+				\TrevorWP\CPT\Post::POST_TYPE,
+				CPT\Donate\Fundraiser_Stories::POST_TYPE,
+			],
 			CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
 			CPT\Get_Involved\Get_Involved_Object::$PUBLIC_POST_TYPES,
 		);

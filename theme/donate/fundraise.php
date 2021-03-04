@@ -86,7 +86,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					</div>
 				<?php endforeach; ?>
 			</div>
-		</div>	
+		</div>
 
 		<?php /** GROUPED BLOCKS */ ?>
 		<div class="grouped--block bg-white	">
@@ -100,7 +100,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					<div class="mx-auto text-center">
 						<div class="links-wrapper my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-left">
 							<div class="links-content">
-								<h3><?php echo esc_html( $link_title ); ?></h3>	
+								<h3><?php echo esc_html( $link_title ); ?></h3>
 								<p><?php echo esc_html( $link_desc ); ?></p>
 								<?php if ( $link_cta ) : ?>
 									<ul>
@@ -113,7 +113,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /** BECOME A PARTNER */ ?>
 				<?php $partner_title = Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?>
 				<?php $partner_desc = Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ); ?>
@@ -122,13 +122,28 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 				<div class="partner">
 					<div class="mx-auto text-center">
 						<div class="one-up-card dark my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-center">
-							<h3><?php echo $partner_title; ?></h3>	
+							<h3><?php echo $partner_title; ?></h3>
 							<p><?php echo esc_html( $partner_desc ); ?></p>
 							<div><a href="<?php echo esc_url( $partner_cta_link ); ?>" class="btn"><?php echo esc_attr( $partner_cta ); ?></a></div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<?php /** Fundraiser Success Stories */ ?>
+		<div class="text-teal-dark bg-teal-tint bg-white pb-px40 md:pb-0">
+			<?= \TrevorWP\Theme\Helper\Carousel::posts( ( new WP_Query() )->query( [
+					'post_type'      => \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE,
+					'posts_per_page' => - 1,
+					'post_status'    => 'publish'
+
+			] ), [
+					'title'    => Fundraise::get_val( Fundraise::SETTING_SUCCESS_STORIES_TITLE ),
+					'subtitle' => Fundraise::get_val( Fundraise::SETTING_SUCCESS_STORIES_DESC ),
+			] ) ?>
+
+			<? /* TODO: Add Button: Become A Fundraiser */ ?>
 		</div>
 
 		<?php /** QUESTIONS */ ?>
@@ -139,7 +154,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		<div class="questions">
 			<div class="container mx-auto text-center">
 				<div class="one-up-card light my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-center">
-					<h3><?php echo esc_html( $questions_title ); ?></h3>	
+					<h3><?php echo esc_html( $questions_title ); ?></h3>
 					<p><?php echo esc_html( $questions_desc ); ?></p>
 					<div><a href="<?php echo esc_url( $questions_cta_link ); ?>" class="btn"><?php echo esc_html( $questions_cta ); ?></a></div>
 				</div>

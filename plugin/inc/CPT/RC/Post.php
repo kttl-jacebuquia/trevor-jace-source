@@ -61,6 +61,7 @@ class Post extends RC_Object {
 			] );
 
 		## Posts
+		// todo: check this, why it still have (\d+)?
 		add_rewrite_rule( self::PERMALINK_BASE_BLOG . "/(\d+)-([^/]+)/?$", $q_prefix . "&p=\$matches[1]", 'top' );
 	}
 

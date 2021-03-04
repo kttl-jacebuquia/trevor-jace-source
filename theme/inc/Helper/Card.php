@@ -38,6 +38,8 @@ class Card {
 			$title_top  = 'Guide';
 			$desc       = $post->post_excerpt;
 			$is_bg_full = true;
+		} elseif ( $post_type == CPT\Donate\Fundraiser_Stories::POST_TYPE ) {
+			$title_top = 'Fundraiser Story';
 		} elseif ( $post_type == CPT\RC\Article::POST_TYPE ) {
 			if ( ! $options['hide_cat_eyebrow'] ) {
 				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );

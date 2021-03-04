@@ -29,6 +29,9 @@ class Fundraise extends Abstract_Customizer {
 	/** Become a Partner */
 	const SECTION_PARTNER = self::PANEL_ID . '_partner';
 
+	/** Success Stories */
+	const SECTION_SUCCESS_STORIES = self::PANEL_ID . '_success_stories';
+
 	/** QUESTIONS */
 	const SECTION_QUESTIONS = self::PANEL_ID . '_question';
 
@@ -75,6 +78,11 @@ class Fundraise extends Abstract_Customizer {
 	const SETTING_PARTNER_DESC = self::SETTING_PARTNER_PREFIX . 'link_desc';
 	const SETTING_PARTNER_CTA = self::SETTING_PARTNER_PREFIX . 'link_cta';
 	const SETTING_PARTNER_CTA_LINK = self::SETTING_PARTNER_PREFIX . 'link_url';
+
+	/** Success Stories */
+	const SETTING_SUCCESS_STORIES_PREFIX = self::SECTION_SUCCESS_STORIES . '_';
+	const SETTING_SUCCESS_STORIES_TITLE = self::SETTING_SUCCESS_STORIES_PREFIX . 'title';
+	const SETTING_SUCCESS_STORIES_DESC = self::SETTING_SUCCESS_STORIES_PREFIX . 'desc';
 
 	/** Questions */
 	const SETTING_QUESTIONS_PREFIX = self::SECTION_QUESTIONS . '_';
@@ -155,6 +163,10 @@ class Fundraise extends Abstract_Customizer {
 		self::SETTING_PARTNER_DESC     => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ young people every year.',
 		self::SETTING_PARTNER_CTA      => 'Learn More',
 		self::SETTING_PARTNER_CTA_LINK => '#',
+
+		/** Success Stories */
+		self::SETTING_SUCCESS_STORIES_TITLE => 'Featured Fundraisers',
+		self::SETTING_SUCCESS_STORIES_DESC  => 'Check out some other notable fundraisers that have helped us save lives. ',
 
 		self::SETTING_QUESTIONS_TITLE    => 'Have questions?',
 		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',

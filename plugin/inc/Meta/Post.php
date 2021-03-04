@@ -84,7 +84,7 @@ class Post {
 				self::KEY_HEADER_TYPE         => [
 					'sanitize_callback' => [ self::class, 'sanitize_post_header_types' ],
 					'default'           => Theme\Helper\Post_Header::DEFAULT_TYPE,
-					'post_types'        => $rc_ppt,
+					'post_types'        => array_merge( $rc_ppt, [ CPT\Donate\Fundraiser_Stories::POST_TYPE ] ),
 				],
 				self::KEY_HEADER_BG_CLR       => [
 					'default'    => Theme\Helper\Post_Header::DEFAULT_BG_COLOR,
@@ -134,16 +134,14 @@ class Post {
 				self::KEY_FILE                => [
 					'post_types' => [
 						CPT\RC\Guide::POST_TYPE,
+						/* These two sharing the same key */
+						CPT\Donate\Prod_Partner::POST_TYPE,
+						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
 				self::KEY_BILL_ID             => [
 					'post_types' => [
 						CPT\Get_Involved\Bill::POST_TYPE,
-					],
-				],
-				self::STORE_IMG               => [
-					'post_types' => [
-						CPT\Donate\Prod_Partner::POST_TYPE,
 					],
 				],
 				self::STORE_URL               => [
@@ -154,11 +152,6 @@ class Post {
 				self::ITEM_NAME               => [
 					'post_types' => [
 						CPT\Donate\Prod_Partner::POST_TYPE,
-					],
-				],
-				self::PROD_ITEM_IMG           => [
-					'post_types' => [
-						CPT\Donate\Partner_Prod::POST_TYPE,
 					],
 				],
 				self::PROD_ITEM_URL           => [
