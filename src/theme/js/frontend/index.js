@@ -246,6 +246,7 @@ $(() => {
 				$(this).addClass('has-value');
 				$(this).parent().addClass('input-has-value');
 				hiddenInputField.val(ui.item.value);
+				moveCursorToEnd($(this)[0]);
 			},
 		})
 		/**
@@ -282,6 +283,20 @@ $(() => {
 		inputSearchField.parent().removeClass('input-has-value');
 		inputSearchField.focus();
 	});
+
+	function moveCursorToEnd (el) {
+		setTimeout(() => {
+			if (el.innerText && document.createRange) {
+				let selection = document.getSelection();
+				let range = document.createRange();
+
+				range.setStart(el.childNodes[0],el.innerText.length);
+				range.collapse(true);
+				selection.removeAllRanges();
+				selection.addRange(range);
+			}
+		}, 100);
+	}
 });
 
 /**
