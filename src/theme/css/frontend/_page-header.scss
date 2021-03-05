@@ -197,7 +197,7 @@
   &.type-split-carousel {
 	@apply px-0 max-w-none overflow-hidden;
 	.carousel-wrap {
-	  @apply mt-px60;
+	  @apply mt-0;
 	}
 
 	.page-header-content-wrap {
@@ -261,7 +261,9 @@
 			}
 
 			.swiper-pagination {
-				@apply pl-80;
+				@apply flex;
+				@apply pl-0 ml-auto mr-px50;
+				width: var(--img-height);
 			}
 
 			.swiper-button-wrapper {
@@ -310,19 +312,19 @@
 	  }
 
 	  .big-img-carousel {
-			--img-height: theme('carousel.bigImg.heightMD');
+			--img-height: theme('carousel.bigImg.height');
 
 			.carousel-full-width-wrap {
 				@apply w-full;
 			}
 
 			.swiper-wrapper {
-				margin-left: calc((100% / 2) - (409px / 2) - 132px);
+				margin-left: calc((100% / 2) - (319px / 2) - 67px);
 			}
 
 			.swiper-pagination {
 				@apply flex;
-				@apply pl-0 ml-auto mr-36;
+				@apply pl-0 ml-auto mr-px80;
 				width: var(--img-height);
 			}
 
@@ -332,13 +334,13 @@
 
 			.swiper-button-prev {
 				left: unset;
-				right: rem-calc(510px);
+				right: rem-calc(350px);
 				width: rem-calc(120px);
 			}
 
 			.swiper-button-next {
 				width: rem-calc(120px);
-				right: rem-calc(82px);
+				right: rem-calc(20px);
 
 				.swiper-button-wrapper {
 					@apply right-0;
@@ -364,6 +366,10 @@
 		.big-img-carousel {
 			--img-height: theme('carousel.bigImg.heightLG');
 
+			.swiper-wrapper {
+				margin-left: calc((100% / 2) - (500px / 2) - 87px);
+			}
+
 			.swiper-button-prev {
 				right: rem-calc(555px);
 				width: rem-calc(245px);
@@ -378,16 +384,33 @@
 				right: rem-calc(40px);
 				width: rem-calc(245px);
 			}
+
+			.swiper-pagination {
+				@apply mr-px90;
+			}
 		}
 	}
 
 	@screen xl {
+		.page-header-content-wrap {
+			margin-left: calc((100vw - 1240px) / 2);
+			width: calc(500 / 1440 * 100%);
+		}
+
 		.big-img-carousel {
+			.swiper-wrapper {
+				margin-left: calc((100% / 2) - (500px / 2) - 194px);
+			}
+
 			.swiper-button-prev {
-				right: rem-calc(552px);
+				right: rem-calc(660px);
 			}
 			.swiper-button-next {
-				right: rem-calc(40px);
+				right: rem-calc(150px);
+			}
+
+			.swiper-pagination {
+				margin-right: rem-calc(200px);
 			}
 		}
 	}
@@ -400,11 +423,11 @@
 		.big-img-carousel {
 
 			.swiper-button-prev {
-				right: rem-calc(550px);
+				right: rem-calc(660px);
 			}
 
 			.swiper-button-next {
-				right: 0;
+				right: rem-calc(110px);
 
 				.swiper-button-wrapper {
 					right: rem-calc(40px);

@@ -30,7 +30,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 							'post_type' => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
 						)
 					) )->posts,
-					array( 
+					array(
 						'title' => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ),
 						'tileClass'	=> ['product-card'],
 					)
@@ -57,7 +57,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 				<div class="current-partners__title"> <?php echo esc_html( Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_CURRENTS_TITLE ) ); ?></div>
 				<div class="current-partners__container container mx-auto flex justify-center flex-wrap -mt-px100 lg:mt-0">
 					<?php foreach ( $partners as $partner ) { ?>
-						<div class="image-container w-1/2 md:w-1/4 lg:w-1/4 flex items-center content-center mt-px100 lg:mt-0" data-aspectRatio="2:1">
+						<div class="image-container w-1/2 md:w-1/4 lg:w-1/4 flex items-center content-center mt-px65 md:mt-px80 lg:mt-0" data-aspectRatio="2:1">
 							<?php
 								$partner_url = \TrevorWP\Meta\Post::get_store_url( $partner->ID );
 								$has_url     = ! empty( $partner_url );

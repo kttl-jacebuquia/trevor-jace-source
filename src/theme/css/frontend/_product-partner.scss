@@ -1,46 +1,89 @@
 .product-partner {
 
   .page-header {
-	&-title-top {
-	  @apply text-px16 leading-px24 md:text-px14 md:leading-px18 lg:text-px16 lg:leading-px22;
-	}
+		@apply mt-px20;
 
-	&-title {
-	  @apply text-px32 leading-px40 md:leading-px42 lg:text-px46 lg:leading-px56;
-	}
-
-	&.type-split-carousel {
-	  .page-header-desc {
-		@apply text-px18 leading-px26 md:text-px16 md:leading-px22 lg:text-px24 lg:leading-px34;
-	  }
-
-	  .page-header-content-wrap {
-		@apply md:pb-px60;
-
-		@screen lg {
-
-		  padding-bottom: 10%;
+		@screen md {
+			@apply mt-0;
 		}
-	  }
-	}
+
+		@screen xl {
+			@apply mt-px18;
+		}
+
+		&-title-top {
+			@apply text-px16 leading-px24 md:text-px14 md:leading-px18 lg2:text-px16 lg2:leading-px22;
+		}
+
+		&-title {
+			@apply text-px32 leading-px40 md:leading-px42 lg2:text-px46 lg2:leading-px56;
+			letter-spacing: rem-calc(1px);
+		}
+
+		&.type-split-carousel{
+
+			.page-header {
+				&-inner {
+					@screen md {
+						@apply pb-0;
+					}
+				}
+
+				&-desc {
+					@apply text-px18 leading-px26 md:text-px16 md:leading-px22 lg2:text-px24 lg2:leading-px34 py-0 mt-px16 mb-px50;
+				}
+
+				&-content-wrap {
+					@apply py-0;
+
+					@screen md {
+						@apply pb-0 transform-none;
+						top: rem-calc(44px);
+					}
+
+					@screen xl {
+
+						top: rem-calc(97px);
+					}
+				}
+			}
+
+			.carousel {
+				&-wrap {
+					@apply mb-px80;
+				}
+
+				&-full-width-wrap {
+					@apply py-0;
+				}
+			}
+
+			.swiper-pagination {
+				@apply mt-px20;
+			}
+		}
   }
 
 
   .featured-collections {
-	background-color: theme('colors.teal.tint');
-	@apply pt-px60 pb-px100;
+		background-color: theme('colors.teal.tint');
+		@apply pt-px60 pb-px100;
 
-	@screen md {
-	  @apply py-px80;
-	}
+		@screen md {
+			@apply py-px80;
+		}
 
-	@screen lg {
-	  @apply py-px140;
-	}
+		@screen lg {
+			@apply py-px140;
+		}
 
-	.tile-grid {
-	  @apply py-0;
-	}
+		.tile-grid {
+			@apply py-0;
+
+			&-title {
+				@apply font-bold text-px32 leading-px40 md:text-px32 md:leading-px42 xl:text-px40 xl:leading-px48 max-w-none;
+			}
+		}
 
   }
 
@@ -67,7 +110,13 @@
 		}
 
 		&-title {
-			@apply m-0;
+			@apply m-0 mx-auto;
+			max-width: rem-calc(319px);
+			letter-spacing: rem-calc(1px);
+
+			@screen md {
+				@apply max-w-none;
+			}
 		}
 
 		&-container {
@@ -80,14 +129,17 @@
 			}
 
 			@screen lg {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
+				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
 			}
 
 			@screen lg2 {
-				// grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
-				// @apply justify-center;
-				@apply flex flex-row flex-wrap justify-center;
+				grid-template-columns: repeat(3, minmax(0, rem-calc(319px)));
+			}
+
+			@screen xl {
 				gap: unset;
+				max-width: rem-calc(1240px);
+				@apply flex flex-row flex-wrap justify-center mx-auto;
 			}
 		}
 
@@ -96,12 +148,17 @@
 			@apply h-auto p-0;
 
 			@screen lg {
-			flex: 0 0 theme('postCard.width.lg');
+				max-width: theme('postCard.width.md');
 			}
 
 			@screen lg2 {
-				@apply mx-px14;
 				margin-top: rem-calc(56px);
+			}
+
+			@screen xl {
+				max-width: rem-calc(395px);
+				max-width: calc((100% / 3) - 29px);
+				@apply mx-px14;
 			}
 
 			&-inner {
@@ -299,19 +356,22 @@
 	  @apply mt-px80 mx-0 mb-px60;
 
 	  @screen md {
-		@apply mt-px60 mb-px64;
+		@apply mt-px60 mb-px20;
 	  }
 
 	  @screen lg {
 		@apply mt-px120 mb-px90;
 		flex-basis: 100%;
 	  }
+
+		@screen xl {
+			@apply mb-px70;
+		}
 	}
 
 	&__container {
-	  gap: 20px 0;
 	  padding-bottom: 100px;
-	  @apply pb-px100;
+	  @apply pb-px100 space-y-px20;
 
 	  @screen md {
 		@apply pb-px80;
@@ -327,7 +387,7 @@
 		flex: 0 0 100%;
 
 		@screen md {
-		  flex-basis: calc(492 / 768 * 100%);
+		  flex-basis: calc(492 / 668 * 100%);
 		}
 
 		@screen lg {

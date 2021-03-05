@@ -24,7 +24,7 @@ class Page_Header {
 		ob_start();
 		?>
 		<div class="hero h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
-			<div class="container mx-auto text-center site-content-inner items-center w-full">
+			<div class="container hero--inner mx-auto text-center site-content-inner items-center w-full">
 				<?php if ( ! empty( $options['title_top'] ) ) { ?>
 					<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
 				<?php } ?>
@@ -154,7 +154,6 @@ class Page_Header {
 		<div class="page-header type-split-carousel">
 			<div class="page-header-inner">
 				<div class="page-header-content-wrap">
-					<div class="page-header-title-top"></div>
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
 						<p class="page-header-title-top uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
 					<?php } ?>

@@ -2,7 +2,8 @@
   --img-height: theme('carousel.bigImg.height');
 
   .carousel-title {
-	@apply text-center text-px28 leading-px32 font-bold;
+	@apply text-center text-px32 leading-px40 font-bold mx-auto;
+	width: calc(319 / 375 * 100%);
   }
 
   .carousel-full-width-wrap {

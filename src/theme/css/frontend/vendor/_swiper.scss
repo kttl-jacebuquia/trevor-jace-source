@@ -76,8 +76,10 @@
   overflow: hidden;
   @apply pb-px20;
 
-	@screen lg {
-		margin-left: unset;
+	@screen md {
+		body:not(.is-rc) & {
+			margin-left: unset;
+		}
 	}
 }
 
