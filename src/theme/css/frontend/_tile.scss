@@ -2,6 +2,14 @@
 .tile-grid {
   @apply pt-20 pb-px60 w-full;
 
+	.post-type-archive-trevor_gi_bill & {
+		@apply py-0;
+	}
+
+	.post-type-archive-trevor_gi_letter & {
+		@apply pb-0;
+	}
+
   &-inner {
 	@apply mx-auto text-center;
   }
@@ -20,7 +28,7 @@
   }
 
   &-container {
-	@apply grid grid-cols-1 gap-y-7 mb-10;
+	@apply grid grid-cols-1 gap-y-7;
   }
 
   &.sm-accordion {
@@ -75,7 +83,7 @@
 	}
 
 	&-container {
-	  @apply grid-cols-3;
+		grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
 	}
   }
 }

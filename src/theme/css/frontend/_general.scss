@@ -155,3 +155,7 @@
 .word-of-the-day {
   @apply max-w-px606;
 }
+
+.take-action-cta {
+	@apply py-px12 px-px32 xl:py-px20 xl:px-px40 rounded-px10;
+}

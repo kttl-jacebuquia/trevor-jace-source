@@ -31,12 +31,13 @@
 	@apply absolute top-full hidden;
 	@apply rounded-px10 overflow-hidden;
 	@apply flex-col;
+	@apply z-2;
 	box-shadow: 0px 0px #{rem-calc(8px)} #{rem-calc(2px)} rgba(0, 58, 72, 0.14);
 	width: calc(100vw - 30px);
 	left: rem-calc(-36px);
 
 	li {
-	  @apply font-semibold text-px20 leading-px30 text-teal-dark;
+	  @apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
 	  @apply py-5 px-12;
 	  @apply cursor-pointer;
 	  &:hover,

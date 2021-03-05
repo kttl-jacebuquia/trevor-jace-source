@@ -15,6 +15,9 @@
 		] ) ?>
 
 		<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
+		<div class="anchor-container text-center w-full mb-px120 md:mb-px80 xl:mb-px100">
+			<a href="#!" class="take-action-cta inline-block bg-teal-dark text-white text-px16 leading-px22 xl:text-px18 xl:leading-px26 font-bold text-center">Take Action Now</a>
+		</div>
 	</div>
 </main> <!-- #site-content -->
 
