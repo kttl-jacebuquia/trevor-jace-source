@@ -137,12 +137,15 @@ module.exports = {
 			maxWidth: {
 				px289: px2rem(289),
 				px319: px2rem(319),
+				px394: px2rem(394),
+				px422: px2rem(422),
 				px450: px2rem(450),
 				px490: px2rem(490),
 				px500: px2rem(500),
 				px550: px2rem(550),
 				px606: px2rem(606),
 				px718: px2rem(718),
+				px818: px2rem(818),
 				px894: px2rem(894),
 				px1028: px2rem(1028),
 				px1240: px2rem(1240),
@@ -160,6 +163,9 @@ module.exports = {
 			width: {
         px20: px2rem(20),
 				px127: px2rem(127),
+				px319: px2rem(319),
+				px422: px2rem(422),
+				px394: px2rem(394),
 				px500: px2rem(500),
 			},
 			minHeight: {
@@ -207,6 +213,7 @@ module.exports = {
 				px48: px2rem(48),
 				px50: px2rem(50),
 				px52: px2rem(52),
+				px56: px2rem(56),
 				px60: px2rem(60),
 				px64: px2rem(64),
 				px70: px2rem(70),

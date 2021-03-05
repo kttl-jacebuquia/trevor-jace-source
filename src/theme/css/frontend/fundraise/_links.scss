@@ -10,7 +10,7 @@
   }
 
   &-wrapper {
-	@apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28;
+	@apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28 max-w-px818 mx-auto;
 	background: theme('colors.gray.light');
 
 	@screen md {

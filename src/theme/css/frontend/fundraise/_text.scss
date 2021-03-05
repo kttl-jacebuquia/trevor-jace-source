@@ -28,10 +28,12 @@
   }
 
   p {
-	@apply text-px24 leading-px28;
+	@apply text-px24 leading-px28 font-semibold;
 
 	@screen md {
-	  @apply text-px26 leading-px36;
+	  @apply text-px26 leading-px36 font-normal;
+
+		b { @apply font-semibold; }
 	}
 
 	@screen lg {

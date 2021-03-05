@@ -43,18 +43,18 @@
 
 	p {
 	  color: theme('colors.white.DEFAULT');
-	  @apply font-medium text-px20 leading-px30 tracking-px05;
+	  @apply font-medium text-px20 leading-px30 tracking-px05 mx-auto max-w-px319;
 
 	  @screen md {
-		@apply font-normal text-px18 leading-px22;
+		@apply font-normal text-px18 leading-px22 max-w-px422; 
 	  }
 
 	  @screen lg {
-		@apply text-px20 leading-px32 h-px128;
+		@apply text-px20 leading-px32 h-px128 max-w-px394 pl-px30 pr-px30;
 	  }
 
 	}
-  }
+  } 
 
   &-holder,
   &-container {

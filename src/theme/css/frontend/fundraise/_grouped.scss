@@ -10,7 +10,7 @@
   }
 
   .one-up-card {
-	@apply pt-px130 pb-px130;
+	@apply hidden pt-px130 pb-px130 max-w-px818 mx-auto; 
 
 	@screen md {
 	  @apply pt-px80 pb-px80;
@@ -20,4 +20,8 @@
 	  @apply pt-px120 pb-px130;
 	}
   }
+
+	.partner {
+		@apply max-w-px818 mx-auto;
+	}
 }
