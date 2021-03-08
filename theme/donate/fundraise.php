@@ -162,11 +162,18 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		</div>
 
 		<?php /** Recirculation */ ?>
-		<?php $circulation_title = Fundraise::get_val( Fundraise::SETTING_OTHER_TITLE ); ?>
+		<?php $circulation_title = Fundraise::get_val( Fundraise::SETTING_TREVORSPACE_CIRCULATION_TITLE ); ?>
+		<?php $circulation_desc  = Fundraise::get_val( Fundraise::SETTING_TREVORSPACE_CIRCULATION_DESC ); ?>
+
 		<?php /** Two Up: Other Ways to Help   */ ?>
 		<div class="other-ways">
 			<div class="container mx-auto text-center">
 				<h3 class="mb-px60 md:mb-px40 lg:mb-px90"><?php echo esc_html( $circulation_title ); ?></h3>
+				<?php if( $circulation_desc ): ?>
+					<p class="font-normal text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 xl:mx-64">
+						<?php echo esc_html( $circulation_desc ); ?>
+					</p>
+				<?php endif; ?>
 				<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 					<?php echo Helper\Circulation_Card::render_fundraiser(); ?>
 					<?php echo Helper\Circulation_Card::render_counselor(); ?>

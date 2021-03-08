@@ -91,14 +91,11 @@ class Fundraise extends Abstract_Customizer {
 	const SETTING_QUESTIONS_CTA = self::SETTING_QUESTIONS_PREFIX . 'link_cta';
 	const SETTING_QUESTIONS_CTA_LINK = self::SETTING_QUESTIONS_PREFIX . 'link_url';
 
-	/** Other Ways */
-	const SETTING_OTHER_PREFIX = self::SECTION_OTHER . '_';
-	const SETTING_OTHER_TITLE = self::SETTING_OTHER_PREFIX . 'link_title';
-
 	/** TrevorSpace */
 	const SETTING_TREVORSPACE_PREFIX = self::SECTION_TREVORSPACE . '_';
-
+	
 	/** Circulation */
+	const SETTING_OTHER_PREFIX = self::SECTION_OTHER . '_';
 	const SETTING_TREVORSPACE_CIRCULATION_TITLE = self::SETTING_TREVORSPACE_PREFIX . 'circulation_title';
 	const SETTING_TREVORSPACE_CIRCULATION_DESC = self::SETTING_TREVORSPACE_PREFIX . 'circulation_desc';
 
@@ -159,7 +156,7 @@ class Fundraise extends Abstract_Customizer {
 			),
 		),
 
-		self::SETTING_PARTNER_TITLE    => '<span>Become</span>&nbsp;&nbsp;a<br>corporate partner.',
+		self::SETTING_PARTNER_TITLE    => '<tilt>Become</tilt>&nbsp;&nbsp;a<br>corporate partner.',
 		self::SETTING_PARTNER_DESC     => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ young people every year.',
 		self::SETTING_PARTNER_CTA      => 'Learn More',
 		self::SETTING_PARTNER_CTA_LINK => '#',
@@ -173,7 +170,7 @@ class Fundraise extends Abstract_Customizer {
 		self::SETTING_QUESTIONS_CTA      => 'Reach Out',
 		self::SETTING_QUESTIONS_CTA_LINK => '#',
 
-		self::SETTING_OTHER_TITLE => 'Other ways to help',
+		self::SETTING_TREVORSPACE_CIRCULATION_TITLE => 'Other ways to help',
 
 
 	);
@@ -518,13 +515,25 @@ class Fundraise extends Abstract_Customizer {
 
 		// Circulation
 		$this->_manager->add_control(
-			self::SETTING_OTHER_TITLE,
+			self::SETTING_TREVORSPACE_CIRCULATION_TITLE,
 			array(
-				'setting' => self::SETTING_OTHER_TITLE,
+				'setting' => self::SETTING_TREVORSPACE_CIRCULATION_TITLE,
 				'section' => self::SECTION_OTHER,
 				'label'   => 'Title',
 				'type'    => 'text',
 			)
 		);
+
+		$this->_manager->add_control(
+			self::SETTING_TREVORSPACE_CIRCULATION_DESC,
+			array(
+				'setting' => self::SETTING_TREVORSPACE_CIRCULATION_DESC,
+				'section' => self::SECTION_OTHER,
+				'label'   => 'Description',
+				'type'    => 'text',
+			)
+		);
+
+		
 	}
 }
