@@ -4,6 +4,10 @@
   color: #5a3700;
   font-size: 1.1rem;
   text-align: center;
+
+  a {
+	@apply underline;
+  }
 }
 
 .list {
