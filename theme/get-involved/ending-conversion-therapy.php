@@ -27,18 +27,11 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="flex flex-col lg:flex-row">
-		<div class="h-px600 bg-gray relative flex lg:w-4/6 lg:flex-auto" id="container">
-			<div id="mapLegend">
-				<div id="container">
-					<div class="loading"><i class="icon-spinner icon-spin icon-large"></i>
-						Loading data...
-					</div>
-				</div>
+	<div class="h-px600 bg-gray-light relative flex justify-center">
+		<div class="w-11/12" id="container">
+			<div class="w-full h-full flex justify-center items-center">
+				<div class="text-blue_green">Loading data...</div>
 			</div>
-			<a href="#"
-			   class="text-white text-px16 leading-px22 rounded-full py-3 px-7 bg-teal-dark absolute bottom-10 md:right-px50">Download
-				Map <i class="trevor-ti-download text-px16 ml-2 text-white"></i></a>
 		</div>
 	</div>
 

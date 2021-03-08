@@ -20,18 +20,20 @@ export default function () {
 	const introducedPattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNq01ssOwiAQBdBCWttqXFgf0YX//1kuXPhKNDGpj1qCEE21BCiFmbtkcXIDyQyEcx4Zci1v+/MlckuaJOvFnFLSnFA4d/bvGmkvV6U09P1Zhbsa+lXX2+Mp3FVp4W52BxC3RcO6IjHgu2laY7iSRnIljeSKxhTJFY0pkmubIYFuN+3tdtAhro0OdI10uKunQVwNDeWqNKDbomHdHw3ufmkMV66CPB2I/4PjkHpUPTYyYYyB9/3cBLH8nrzd8TBfFpMYw11NC6eh6ud2073cUZY1rshbgAEADd+9Bu55XrUAAAAASUVORK5CYII=';
 	let updatedDate, data1 = [],
 		data2 = [], data3 = [], chart,
-		align, verticalAlign, floating, layout;
+		align, verticalAlign, floating, layout, tooltipW;
 
 	if ($(window).width() > 560) {
 		align = 'left';
 		verticalAlign = 'bottom';
 		floating = true;
 		layout = 'vertical';
+		tooltipW = 550;
 	} else {
 		align = 'center';
 		verticalAlign = 'top';
 		floating = false;
 		layout = 'horizontal';
+		tooltipW = $(window).width() - 60;
 	}
 
 	const statesData = Highcharts.data({
@@ -184,6 +186,8 @@ export default function () {
 					color: {
 						pattern: {
 							image: regulationPattern,
+							width: 6,
+							height: 6
 						},
 					},
 				}, {
@@ -193,6 +197,8 @@ export default function () {
 					color: {
 						pattern: {
 							image: introducedPattern,
+							width: 6,
+							height: 6
 						},
 					},
 				}, {
@@ -212,7 +218,7 @@ export default function () {
 					fontSize: "16px",
 					color: "white",
 					zIndex: 10,
-					width: 550,
+					width: tooltipW,
 				},
 				useHTML: true,
 			},
