@@ -77,7 +77,7 @@
   @apply pb-px20;
 
 	@screen md {
-		body:not(.is-rc) & {
+		.big-img-carousel & {
 			margin-left: unset;
 		}
 	}
