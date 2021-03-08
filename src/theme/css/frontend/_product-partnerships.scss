@@ -101,7 +101,7 @@
 	}
 
 	.tile-grid-title {
-	  @apply mb-0 font-bold;
+	  @apply mb-0 font-bold text-teal-dark;
 
 	  @screen lg {
 		@apply mb-px86;
@@ -170,6 +170,10 @@
 		@screen xl {
 			width: rem-calc(395px);
 			max-width: none;
+		}
+
+		[data-whatintent='mouse'] &:hover {
+			@apply bg-white;
 		}
 
 		&-inner {
