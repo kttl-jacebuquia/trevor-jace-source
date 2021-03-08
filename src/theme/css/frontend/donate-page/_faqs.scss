@@ -40,7 +40,7 @@
 
 		h4 {
 		  color: theme('colors.teal.dark');
-		  @apply text-px14 leading-px26 tracking-px05 font-bold;
+		  @apply text-px14 leading-px26 tracking-px05 font-semibold;
 
 		  @screen md {
 			@apply text-px20;
@@ -83,7 +83,7 @@
 		}
 
 		@screen lg {
-		  @apply pt-px50 pr-px48 pb-px58 pl-px38 text-px20 leading-px24;
+		  @apply pt-px50 pr-px48 pb-px58 pl-px38 text-px20 leading-px28;
 		}
 
 		&.is-open {
