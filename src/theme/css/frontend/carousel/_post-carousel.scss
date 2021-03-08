@@ -33,16 +33,6 @@
 	}
   }
 
-  @screen xl {
-	// Hide arrows if there are only 4 cards
-	&.card-count-4 {
-	  .swiper-button-next,
-	  .swiper-button-prev {
-		@apply hidden;
-	  }
-	}
-  }
-
   // Only Md fixes
   &.only-md {
 	// Small
