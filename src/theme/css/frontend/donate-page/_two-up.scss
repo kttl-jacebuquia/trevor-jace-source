@@ -1,5 +1,5 @@
 .other-ways {
-  background-color: theme('colors.gray.light');
+  background-color: theme('colors.white.DEFAULT');
   @apply pb-px100;
   @apply pt-px80;
 
@@ -19,5 +19,12 @@
 	  font-size: rem-calc(46px);
 	}
 
+  }
+
+  .container {
+    & > h3,
+    & > p {
+      color: theme('colors.teal.dark');
+    }
   }
 }
