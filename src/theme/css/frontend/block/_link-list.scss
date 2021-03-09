@@ -31,17 +31,7 @@
 	  @apply border-b-2 border-indigo pb-0.5;
 	  @apply transition;
 
-	  &:hover {
-		@apply border-none;
-		//text-decoration-line: underline;
-		//text-decoration-style: wavy;
-		//text-decoration-color: theme('colors.indigo.DEFAULT');
-
-		border-bottom: rem-calc(10px) solid theme('colors.indigo.DEFAULT');
-		border-image-source: url("/wp-content/themes/trevor/static/media/h-divider-wave.svg");
-		border-image-slice: 14; // 12 and up
-		border-image-repeat: repeat;
-	  }
+		@include wave-underline;
 	}
 
 	.icon-external {

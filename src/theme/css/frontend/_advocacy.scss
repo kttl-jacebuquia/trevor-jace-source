@@ -150,6 +150,8 @@
   .view-all-cta {
 	color: theme('colors.teal.dark');
 	border-color: theme('colors.teal.dark');
+
+	@include wave-underline;
   }
 
   .action-cta {
