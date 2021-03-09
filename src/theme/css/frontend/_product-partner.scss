@@ -66,7 +66,7 @@
 
 
   .featured-collections {
-		background-color: theme('colors.teal.tint');
+		background-color: theme('colors.gray.light');
 		@apply pt-px60 pb-px100;
 
 		@screen md {
@@ -85,6 +85,11 @@
 			}
 		}
 
+		.tile {
+			[data-whatintent='mouse'] &:hover {
+				@apply bg-white;
+			}
+		}
   }
 
   .tile-grid {
@@ -110,7 +115,7 @@
 		}
 
 		&-title {
-			@apply m-0 mx-auto;
+			@apply m-0 mx-auto text-teal-dark;
 			max-width: rem-calc(319px);
 			letter-spacing: rem-calc(1px);
 
@@ -133,7 +138,9 @@
 			}
 
 			@screen lg2 {
-				grid-template-columns: repeat(3, minmax(0, rem-calc(319px)));
+				gap: unset;
+				max-width: rem-calc(1080px);
+				@apply flex flex-row flex-wrap justify-center mx-auto;
 			}
 
 			@screen xl {
@@ -153,10 +160,11 @@
 
 			@screen lg2 {
 				margin-top: rem-calc(56px);
+				max-width: calc((100% / 3) - 29px);
+				@apply mx-px14;
 			}
 
 			@screen xl {
-				max-width: rem-calc(395px);
 				max-width: calc((100% / 3) - 29px);
 				@apply mx-px14;
 			}
@@ -333,7 +341,7 @@
   }
 
   .cards {
-	background-color: theme('colors.gray.light');
+	@apply bg-white;
 
 	&__title {
 	  color: theme('colors.teal.dark');
