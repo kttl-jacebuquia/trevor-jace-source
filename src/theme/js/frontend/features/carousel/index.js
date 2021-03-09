@@ -37,8 +37,8 @@ export function carouselNavigator($element, $option) {
 
 export function generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase) {
 	const panesContainer = $(leftPaneSelector, eBase).parent();
-	const iconTopOffset = 10;
-	const iconLeftOffset = 37;
+	const iconTopOffset = 5;
+	const iconLeftOffset = 25;
 	let iconWrapper = undefined;
 	const leftPane = eBase.querySelector(leftPaneSelector);
 	const rightPane = eBase.querySelector(rightPaneSelector);

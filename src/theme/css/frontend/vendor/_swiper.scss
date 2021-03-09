@@ -40,6 +40,14 @@
 	  @apply bg-opacity-90;
 	}
   }
+
+	:is(.big-img-carousel.body-carousel, .carousel-testimonials) & {
+		@screen lg {
+			width: 4.5rem;
+			height: 3.5rem;
+			transition: none;
+		}
+	}
 }
 
 .swiper-button-prev {
