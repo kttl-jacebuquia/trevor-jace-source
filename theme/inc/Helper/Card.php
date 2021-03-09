@@ -10,6 +10,7 @@ class Card {
 		$post          = get_post( $post );
 		$options       = array_merge( [
 				'class'            => [], // Additional classes
+				'num_words'        => 100, // for description
 				'hide_cat_eyebrow' => false,
 		], $options );
 		$post_type     = get_post_type( $post );
@@ -79,6 +80,13 @@ class Card {
 			$_class[] = 'no-thumbnail';
 		}
 
+		// Process Desc
+		if ( $post_type == CPT\RC\Glossary::POST_TYPE ) {
+			$desc = ( new Parsedown() )->text( strip_tags( $desc ) );
+		} else {
+			$desc = esc_html( wp_trim_words( strip_tags( $desc ), $options['num_words'] ) );
+		}
+
 		ob_start();
 		?>
 		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
@@ -117,7 +125,7 @@ class Card {
 				<?php } ?>
 
 				<?php if ( ! empty( $desc ) ) { ?>
-					<div class="post-desc"><?= ( new Parsedown() )->text( strip_tags( $desc ) ) ?></div>
+					<div class="post-desc"><?= $desc /* Sanitized above */ ?></div>
 				<?php } else { ?>
 					<div class="flex-1"></div>
 				<?php } ?>
