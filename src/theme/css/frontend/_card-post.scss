@@ -38,6 +38,10 @@
 	}
   }
 
+	body.is-rc &.type-trevor_rc_glossary .hover-hit-area {
+		@apply hidden;
+	}
+
   .title-top {
 	@apply font-semibold text-px14 leading-px18 tracking-px05;
 	margin-bottom: rem-calc(10px);
@@ -117,6 +121,15 @@
 	  &:hover {
 		background-color: theme('colors.moss.DEFAULT');
 	  }
+
+
+		body.is-rc &:hover {
+			@apply bg-violet-lighter;
+		}
+
+		body.is-rc &.ellipsis:hover {
+			@apply bg-violet;
+		}
 	}
 
 	.ellipsis {
