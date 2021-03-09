@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use TrevorWP\Parsedown\Parsedown;
 use \TrevorWP\Ranks;
 use TrevorWP\CPT;
 use TrevorWP\CPT\RC\RC_Object;
@@ -9,7 +10,6 @@ class Card {
 		$post          = get_post( $post );
 		$options       = array_merge( [
 				'class'            => [], // Additional classes
-				'num_words'        => 100, // for description
 				'hide_cat_eyebrow' => false,
 		], $options );
 		$post_type     = get_post_type( $post );
@@ -117,7 +117,7 @@ class Card {
 				<?php } ?>
 
 				<?php if ( ! empty( $desc ) ) { ?>
-					<div class="post-desc"><?= esc_html( wp_trim_words( strip_tags( $desc ), $options['num_words'] ) ) ?></div>
+					<div class="post-desc"><?= ( new Parsedown() )->text( strip_tags( $desc ) ) ?></div>
 				<?php } else { ?>
 					<div class="flex-1"></div>
 				<?php } ?>

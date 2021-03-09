@@ -911,7 +911,6 @@ class Tools {
 		return null;
 	}
 
-
 	/**
 	 * Generates taxonomy labels for the given name.
 	 *

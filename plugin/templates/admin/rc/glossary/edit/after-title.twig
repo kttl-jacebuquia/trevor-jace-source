@@ -1,7 +1,7 @@
 <table class="form-table" role="presentation">
 	<tbody>
 	<tr>
-		<th scope="row"><label for="trevor-caption">Caption</label></th>
+		<th scope="row"><label for="trevor-caption">Part of speech</label></th>
 		<td>
 			<input id="trevor-caption"
 				   class="large-text"
@@ -10,7 +10,7 @@
 				   value="{{ post.post_excerpt|esc_attr }}"
 				   autocomplete="off"
 				   required>
-			<p class="description">Phonetic pronunciation.</p>
+			<p class="description">i.e noun, adj., etc.</p>
 		</td>
 	</tr>
 	<tr>
@@ -21,6 +21,29 @@
 					  name="post_content"
 					  rows="10"
 					  required>{{ post.post_content|esc_textarea }}</textarea>
+			<p class="description">
+				Markdown is allowed here.
+			</p>
+			<hr>
+			<p class="description">
+				<strong><code>wp://</code> protocol</strong><br>
+			<ul>
+				<li>
+					RC Search
+					<ul>
+						<li><code>[Gay](wp://rc/search/?s=Gay)</code></li>
+					</ul>
+				</li>
+				<li>
+					Post Link <small><a href="https://developer.wordpress.org/reference/classes/wp_query/"
+										target="_blank" rel="noreferrer noopener">Other Query Parameters</a></small>
+					<ul>
+						<li><code>[With ID](wp://POST_TYPE/?p=123)</code></li>
+						<li><code>[With Slug](wp://POST_TYPE/?name=post-slug)</code></li>
+					</ul>
+				</li>
+			</ul>
+			</p>
 		</td>
 	</tr>
 	</tbody>

@@ -5,7 +5,8 @@
     "require": {
         "twig/twig": "^3.0",
         "monolog/monolog": "^2.1",
-        "google/apiclient": "^2.7"
+        "google/apiclient": "^2.7",
+        "erusev/parsedown": "^1.7"
     },
     "config": {
         "vendor-dir": "lib",
