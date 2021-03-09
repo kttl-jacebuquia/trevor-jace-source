@@ -1,0 +1,9 @@
+.is-gipartner_w_us  {
+	.partnership-offerings {
+		.tile {
+			[data-whatintent='mouse'] &:hover {
+				@apply bg-white;
+			}
+		}
+	}
+}

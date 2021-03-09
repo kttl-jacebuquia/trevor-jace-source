@@ -161,3 +161,19 @@
 	}
   }
 }
+
+:is(.post-type-archive-trevor_gi_letter, .post-type-archive-trevor_gi_bill) {
+	.custom-select {
+		@screen lg {
+			margin-left: rem-calc(92px);
+		}
+
+		@screen lg2 {
+			margin-left: rem-calc(190px);
+		}
+
+		@screen xl {
+			@apply ml-0;
+		}
+	}
+}
