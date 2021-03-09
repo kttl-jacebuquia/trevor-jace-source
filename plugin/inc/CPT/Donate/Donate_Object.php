@@ -21,14 +21,14 @@ abstract class Donate_Object {
 	/* Permalinks */
 	const PERMALINK_DONATE = 'donate';
 	const PERMALINK_FUNDRAISE = 'fundraise';
-	const PERMALINK_PROD_PARTNERS = 'product-partners';
+	const PERMALINK_PROD_PARTNERS = 'shop-products';
 	const PERMALINK_PROD_PARTNERSHIPS = 'product-partnerships';
 	const PERMALINK_FUND_STORY = 'fundraise/success-stories';
 
 	/**
 	 * @var string[]
 	 */
-	static $ALL_POST_TYPES = [
+	static array $ALL_POST_TYPES = [
 		Prod_Partner::POST_TYPE,
 		Partner_Prod::POST_TYPE,
 		Fundraiser_Stories::PERMALINK_FUND_STORY,
