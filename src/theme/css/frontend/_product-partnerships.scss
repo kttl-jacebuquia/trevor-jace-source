@@ -197,6 +197,13 @@
   .current-partners {
 		@apply mt-px88 mb-px150 md:mt-px100 md:mb-px127 xl:mt-px168 xl:mb-px140;
 
+		&__container {
+			@screen xl {
+				padding-left: rem-calc(206px);
+				padding-right: rem-calc(206px);
+			}
+		}
+
 		&__title {
 			@apply text-px32 leading-px40 md:leading-px42 xl:text-px40 xl:leading-px48 text-center font-bold mb-px90 md:mb-px90 lg:mb-px60 xl:mb-px40;
 			color: theme('colors.teal.dark');
