@@ -2,6 +2,7 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Theme\Customizer;
+use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Util\StaticFiles;
 
 /**
@@ -427,17 +428,29 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
+		$updates = [];
+
+		# Post type archive
 		if ( is_post_type_archive() ) {
 			switch ( $query->get( 'post_type' ) ) {
 				case CPT\Get_Involved\Bill::POST_TYPE:
-					$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS ) );
+					$updates['posts_per_page'] = (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS );
+					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
 					break;
 				case CPT\Get_Involved\Letter::POST_TYPE:
-					$query->set( 'posts_per_page', (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS ) );
+					$updates['posts_per_page'] = (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS );
+					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
 					break;
 				case CPT\Donate\Prod_Partner::POST_TYPE:
-					$query->set( 'posts_per_page', (int) Customizer\Shop_Product_Partners::get_val( Customizer\Shop_Product_Partners::SETTING_HOME_LIST_PER_PAGE ) );
+					$updates['posts_per_page'] = (int) Customizer\Shop_Product_Partners::get_val( Customizer\Shop_Product_Partners::SETTING_HOME_LIST_PER_PAGE );
 					break;
+			}
+		}
+
+		# Apply updates
+		if ( ! empty( $updates ) ) {
+			foreach ( $updates as $key => $val ) {
+				$query->set( $key, $val );
 			}
 		}
 	}
