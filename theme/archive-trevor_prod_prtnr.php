@@ -109,7 +109,9 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 							] );
 					?>
 
-					<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
+					<?php get_template_part( 'template-parts/ajax-pagination', null, [
+							'data-containerSelector' => '.partners-list .tile-grid-container'
+					] ); ?>
 				</div>
 			<?php endif; ?>
 

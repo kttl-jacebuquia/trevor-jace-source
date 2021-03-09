@@ -1,37 +1,46 @@
 import $ from 'jquery';
 
-export default (args = {}) => {
-	const options = Object.assign({
+export default (_args = {}) => {
+	const args = Object.assign({
 		containerSelector: '.tile-grid-container',
 		siteContentSelector: '#site-content',
 		paginatorSelector: '.ajax-pagination',
-	}, args);
-	const $container = $(options.siteContentSelector).find(options.containerSelector);
-	const $ajaxPagination = $(options.paginatorSelector);
+	}, _args);
 
-	$ajaxPagination.find('a.next').on('click', (e) => {
-		e.preventDefault();
+	$(args.paginatorSelector).each((idx, elem) => {
+		const $elem = $(elem);
 
-		const $nextLink = $(e.target);
+		$elem.find('a.next').on('click', (e) => {
+			e.preventDefault();
 
-		$nextLink.removeClass('loading').addClass('loading');
+			// get data attrs
+			let options = {
+				containerSelector: $elem.data('containerselector') || args.containerSelector,
+				siteContentSelector: $elem.data('sitecontentselector') || args.siteContentSelector,
+			};
 
-		$.get($nextLink.attr('href'), {ajax_pagination: 1}, data => {
-			$nextLink.removeClass('loading');
+			const $container = $(options.siteContentSelector).find(options.containerSelector);
+			const $nextLink = $(e.target);
 
-			const $newSiteContent = $(data).filter(options.siteContentSelector);
+			$nextLink.removeClass('loading').addClass('loading');
 
-			$newSiteContent.find(options.containerSelector).children().appendTo($container);
+			$.get($nextLink.attr('href'), {ajax_pagination: 1}, data => {
+				$nextLink.removeClass('loading');
 
-			const $newNextLink = $newSiteContent.find(options.paginatorSelector).find('a.next');
+				const $newSiteContent = $(data).filter(options.siteContentSelector);
 
-			if ($newNextLink.length === 0) {
-				// No more pages, hide
-				$nextLink.hide();
-			} else {
-				// Replace new page link
-				$nextLink.attr('href', $newNextLink.attr('href'));
-			}
-		}, 'html');
+				$newSiteContent.find(options.containerSelector).children().appendTo($container);
+
+				const $newNextLink = $newSiteContent.find(options.paginatorSelector).find('a.next');
+
+				if ($newNextLink.length === 0) {
+					// No more pages, hide
+					$nextLink.hide();
+				} else {
+					// Replace new page link
+					$nextLink.attr('href', $newNextLink.attr('href'));
+				}
+			}, 'html');
+		});
 	});
 }
