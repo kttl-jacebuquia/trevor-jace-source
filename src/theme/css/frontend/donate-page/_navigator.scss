@@ -48,10 +48,10 @@
 
 	p {
 	  color: theme('colors.teal.dark');
-	  @apply font-normal text-px22 leading-px32;
+	  @apply font-normal text-px22 leading-px32 tracking-px05 text-center;
 
 	  @screen lg {
-		@apply text-px26 leading-px36;
+		@apply text-px24 leading-px34;
 	  }
 	}
   }
@@ -104,7 +104,7 @@
 
 	  h2 {
 		color: theme('colors.teal.dark');
-		@apply mx-auto max-w-px319;
+		@apply mx-auto max-w-px319 text-px22 leading-px32 tracking-px05 text-center font-normal text-center;
 	  }
 	}
   }
