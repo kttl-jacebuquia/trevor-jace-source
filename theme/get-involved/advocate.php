@@ -106,32 +106,34 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 
 	<?php endif; ?>
 
-	<?= Helper\Tile_Grid::posts( $featured_bills, [
-			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
-			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_DESC ),
-			'tileClass' => [ 'text-teal-dark' ],
-			'class'     => [ 'text-white', 'container', 'mx-auto', 'tile-grid-cards' ]
-	] ) ?>
-	<a class="view-all-cta font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-white self-center -mt-10 md:-mt-14 lg:-mt-36"
-	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Bill::POST_TYPE ) ?>">
-		View All
-	</a>
-
-	<?= Helper\Tile_Grid::posts( $featured_letters, [
-			'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_TITLE ),
-			'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_DESC ),
-			'tileClass' => [ 'text-teal-dark' ],
-			'class'     => [ 'text-white', 'container', 'mx-auto', 'tile-grid-cards' ]
-	] ) ?>
-
-	<a class="view-all-cta font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-white self-center -mt-10 md:-mt-14 lg:-mt-36"
-	   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Letter::POST_TYPE ) ?>">View All</a>
-
-	<div class="text-center lg:mb-px120 action-cta">
-		<a href="#"
-		   class="inline-block font-bold text-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10 self-center">
-			<?= Advocacy::get_val( Advocacy::SETTING_HOME_TAN_CTA ) ?>
+	<div class="bg-white flex flex-col w-full">
+		<?= Helper\Tile_Grid::posts( $featured_bills, [
+				'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_TITLE ),
+				'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_BILL_DESC ),
+				'tileClass' => [ 'text-teal-dark' ],
+				'class'     => [ 'text-white', 'container', 'mx-auto', 'tile-grid-cards' ]
+		] ) ?>
+		<a class="view-all-cta font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-white self-center -mt-10 md:-mt-14 lg:-mt-36"
+			href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Bill::POST_TYPE ) ?>">
+			View All
 		</a>
+
+		<?= Helper\Tile_Grid::posts( $featured_letters, [
+				'title'     => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_TITLE ),
+				'desc'      => Advocacy::get_val( Advocacy::SETTING_HOME_LETTER_DESC ),
+				'tileClass' => [ 'text-teal-dark' ],
+				'class'     => [ 'text-white', 'container', 'mx-auto', 'tile-grid-cards' ]
+		] ) ?>
+
+		<a class="view-all-cta font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-white self-center -mt-10 md:-mt-14 lg:-mt-36"
+			href="<?= get_post_type_archive_link( \TrevorWP\CPT\Get_Involved\Letter::POST_TYPE ) ?>">View All</a>
+
+		<div class="text-center lg:mb-px120 action-cta">
+			<a href="#"
+				class="inline-block font-bold text-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10 self-center">
+				<?= Advocacy::get_val( Advocacy::SETTING_HOME_TAN_CTA ) ?>
+			</a>
+		</div>
 	</div>
 
 	<div class="pt-20 pb-20 text-teal-dark bg-white lg:pt-28 lg:pb-48">

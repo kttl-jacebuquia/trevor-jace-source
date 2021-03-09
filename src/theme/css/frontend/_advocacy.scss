@@ -130,7 +130,7 @@
 	}
 
 	&-cards {
-	  background-color: theme('colors.gray.light');
+	  @apply bg-white;
 
 	  .tile-grid-header {
 		color: theme('colors.teal.dark');
@@ -153,8 +153,7 @@
   }
 
   .action-cta {
-	background-color: theme('colors.gray.light');
-	@apply pt-10 md:pt-12 lg:pt-16 mb-20 lg:mb-24 xl:mb-36;
+	@apply pt-10 md:pt-12 lg:pt-16 mb-20 lg:mb-24 xl:mb-36 bg-white;
 
 	a {
 	  background-color: theme('colors.teal.dark');
