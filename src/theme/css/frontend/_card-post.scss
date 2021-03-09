@@ -201,7 +201,7 @@
 	  }
 	}
 
-	.rc-landing-page & {
+	.is-rc & {
 	  .post-title {
 		@apply text-px22;
 	  }
@@ -209,7 +209,7 @@
   }
 
   @screen xl {
-	.rc-landing-page & {
+	.is-rc & {
 	  .post-title {
 		@apply text-px26;
 	  }
