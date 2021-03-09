@@ -95,6 +95,14 @@
 			border: 1px solid rgba(0, 58, 72, 0.5);
 			width: rem-calc(214px);
 
+			&:first-child {
+			@apply border-r-0;
+			}
+
+			&:last-child {
+			@apply border-l-0;
+			}
+
 			@screen lg {
 			  @apply text-px18 leading-px26;
 			}
