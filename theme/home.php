@@ -67,7 +67,7 @@
 			</li>
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_PROD_PARTNERS ) ) ?>">Shop or Product Partners</a>
+				   href="<?= esc_attr( home_url( \TrevorWP\CPT\Donate\Donate_Object::PERMALINK_PROD_PARTNERS ) ) ?>">Shop our Product Partners</a>
 			</li>
 		</ul>
 
