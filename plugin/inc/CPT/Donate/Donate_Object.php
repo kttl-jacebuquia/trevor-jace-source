@@ -28,7 +28,7 @@ abstract class Donate_Object {
 	/**
 	 * @var string[]
 	 */
-	static array $ALL_POST_TYPES = [
+	static $ALL_POST_TYPES = [
 		Prod_Partner::POST_TYPE,
 		Partner_Prod::POST_TYPE,
 		Fundraiser_Stories::PERMALINK_FUND_STORY,
