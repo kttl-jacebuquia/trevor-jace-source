@@ -266,6 +266,7 @@ module.exports = {
 				'md': px2rem(28),
 			},
 			spacing: {
+				pxn5: px2rem(-5),
 				pxn28: px2rem(-28),
 				pxn2: px2rem(-2),
 				px2: px2rem(2),
