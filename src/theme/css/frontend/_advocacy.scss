@@ -165,8 +165,15 @@
 
 :is(.post-type-archive-trevor_gi_letter, .post-type-archive-trevor_gi_bill) {
 	.custom-select {
+		@apply mb-px30;
+
+		@screen md {
+			@apply mb-px40;
+		}
+
 		@screen lg {
 			margin-left: rem-calc(92px);
+			@apply mb-px50;
 		}
 
 		@screen lg2 {
@@ -174,7 +181,11 @@
 		}
 
 		@screen xl {
-			@apply ml-0;
+			@apply ml-0 mb-px30;
+		}
+
+		@screen 2xl {
+			margin-left: rem-calc(90px);
 		}
 	}
 }
