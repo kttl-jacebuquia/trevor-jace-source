@@ -183,13 +183,15 @@
 	@apply bg-purple;
   }
 
-  // By Post Type
-  body.single-trevor_rc_article &.type-text_only,
-  body.single-trevor_rc_article &.type-full,
-  body.single-trevor_rc_article &.type-split,
-  body.single-trevor_rc_article &.type-horizontal, {
-	@apply bg-violet-alt;
-  }
+  // Article
+	body.single-trevor_rc_article :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
+		@apply bg-violet-alt;
+	}
+
+	// Blog
+	body.single-trevor_rc_post :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
+		@apply bg-purple;
+	}
 
   // Purple bg
   &:not(.type-text_only):not(.type-full) {
