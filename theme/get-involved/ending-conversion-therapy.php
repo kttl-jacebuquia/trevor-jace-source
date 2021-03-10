@@ -107,7 +107,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="mobilephone" class="sr-only">Mobile Phone</label>
 						<input id="mobilephone"
-							   maxlength="10"
+							   maxlength="16"
 							   class="phone-number-format bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Mobile Phone"/>
 					</div>

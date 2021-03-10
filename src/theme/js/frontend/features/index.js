@@ -1,3 +1,5 @@
+import { phoneFormat } from './contact-form';
+
 export tagBoxEllipsis from './tag-box-ellipsis';
 export floatingBlock from './floating-block';
 export articleHighlights from './article-highlights';
@@ -12,4 +14,5 @@ export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
 export ectMap from './ect-map';
 export ajaxPagination from './ajax-pagination';
+export phoneFormat from './contact-form';
 export stickyAnchor from './sticky-anchor';

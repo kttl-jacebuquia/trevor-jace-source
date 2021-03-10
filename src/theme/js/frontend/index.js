@@ -17,6 +17,7 @@ const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
 const bigImageCarousels = $('.big-img-carousel.body-carousel');
+const isPhoneField = $(".phone-number-format") ? true : false;
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -271,13 +272,9 @@ $(() => {
 	}
 });
 
-// Simple Masking
-$(".phone-number-format").blur(function () {
-	const _input = $(this).val();
-	const _phoneNumberParts = _input.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-	const _newValue = !_phoneNumberParts[2] ? _phoneNumberParts[1] : '+1 (' + _phoneNumberParts[1] + ')-' + _phoneNumberParts[2] + (_phoneNumberParts[3] ? '-' + _phoneNumberParts[3] : '');
-	$(this).val(_newValue);
-});
+if( isPhoneField ) {
+	features.phoneFormat($(".phone-number-format"));
+}
 
 /**
  * Varying squiggly line breakers on post bottom tags.
