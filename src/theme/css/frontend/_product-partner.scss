@@ -159,13 +159,14 @@
 			}
 
 			@screen lg2 {
+				--combinedHorizontalMargin: 1.75rem; //28px
 				margin-top: rem-calc(56px);
-				max-width: calc((100% / 3) - 29px);
+				max-width: calc((100% / 3) - var(--combinedHorizontalMargin));
 				@apply mx-px14;
 			}
 
 			@screen xl {
-				max-width: calc((100% / 3) - 29px);
+				max-width: calc((100% / 3) - var(--combinedHorizontalMargin));
 				@apply mx-px14;
 			}
 
