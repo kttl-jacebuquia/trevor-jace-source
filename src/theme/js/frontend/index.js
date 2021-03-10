@@ -26,6 +26,9 @@ features.tagBoxEllipsis($('.card-post'));
 // Ajax Pagination
 features.ajaxPagination();
 
+// Sticky Anchor
+features.stickyAnchor();
+
 // Single (Detail) Page
 if (isSingle) {
 	// Floating Blocks
@@ -61,7 +64,7 @@ if (isDonate) {
 	const _frequency = $('.frequency--choices label');
 	const _amount = $('.amount-choices label');
 	const _donateForm = $('#donate-form');
-	const _customAmount = $('.custom-amount', _donateForm); 
+	const _customAmount = $('.custom-amount', _donateForm);
 	const _fixedAmount = $('.fixed-amount');
 
 
@@ -78,7 +81,7 @@ if (isDonate) {
 
 	_customAmount.bind('keyup', function () {
 		_amount.removeClass('is-selected');
-		_fixedAmount.prop('checked', false);        
+		_fixedAmount.prop('checked', false);
 	});
 
 	_donateForm.submit( function(e){
@@ -98,7 +101,7 @@ if (isDonate) {
 			}
 
 			_donateForm.attr( 'action', _url  );
-		} 
+		}
 
 		e.currentTarget.submit();
 
@@ -147,67 +150,6 @@ $(() => {
 // features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});
 
-/**
- * Crisis Button docking
- * @fixme: window.onload binding
- */
-window.onload = function () {
-	const stickyAnchors = $('.sticky-cta-anchor');
-	const crisisButton = $('.floating-crisis-btn-wrap');
-	const distanceFromElement = 40;
-	const btnVerticalPadding = 24;
-	let intersectedElement = undefined;
-	let intersectingY = undefined;
-	let leavingY = undefined;
-
-	let options = {
-		root: null,
-		rootMargin: '0px',
-		threshold: 0
-	}
-
-	let callback = (entries, observer) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				intersectingY = entry.boundingClientRect.y;
-				if (typeof intersectedElement === 'undefined') {
-					intersectedElement = entry.target;
-				}
-
-				if (entry.target === intersectedElement) {
-					const targetRect = intersectedElement.getBoundingClientRect();
-					const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-					$body.addClass('scroll-near-bottom');
-					crisisButton.offset({
-						top: (targetRect.top + scrollTop) - (distanceFromElement + btnVerticalPadding),
-					});
-				}
-			} else {
-				leavingY = entry.boundingClientRect.y;
-				/**
-				 * Reset the crisis button if the user is scrolling up
-				 * AND leaves the intersected element.
-				 */
-				if (leavingY > intersectingY && entry.target === intersectedElement) {
-					$body.removeClass('scroll-near-bottom');
-					crisisButton.removeAttr('style');
-				}
-			}
-		});
-	}
-
-	let observer = new IntersectionObserver(callback, options);
-	/**
-	 * Intersection Observer runs asynchronously
-	 * so you can just add an item in the array (i.e., [element1, elment2, ...]).
-	 * The crisis button will dock on the first element it intersects based on the DOM structure.
-	 */
-	if (stickyAnchors.length) {
-		$.each(stickyAnchors, (index, element) => {
-			if (element) observer.observe(element);
-		});
-	}
-}
 
 /**
  * Search bar autocomplete function
