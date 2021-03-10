@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <?= TrevorWP\Theme\Helper\Page_Header::text( [
+		// todo: get from theme customizer
 		'title_top' => 'ADVOCATE FOR CHANGE',
 		'title'     => 'Our State Priorities',
 		'desc'      => 'Letters that The Trevor Project sent to lawmakers in support of or opposition to bills federal and state.',
