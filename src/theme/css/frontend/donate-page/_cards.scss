@@ -15,10 +15,10 @@
 
   h3 {
 	color: white;
-	@apply mt-px40 text-px32 leading-px40 font-bold;
+	@apply mt-px40 text-px32 leading-px40 font-bold mb-px70;
 
 	@screen md {
-	  @apply mt-px50;
+	  @apply mt-px50 mb-px80;
 	}
 
 	@screen lg {
