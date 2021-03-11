@@ -176,8 +176,11 @@
 	@screen md {
 
 	  .page-header-title {
-		@apply has-inline-tilt;
-	  }
+		@apply has-inline-tilt text-px36 leading-px46;
+		tilt {
+			@apply text-px46 leading-px56; 
+		}
+	  } 
 
 	  .page-header-content-wrap {
 		@apply px-0;
