@@ -60,6 +60,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 								</div>
 								<div class="amount-custom">
 									<input type="number" name="custom" class="custom-amount" placeholder="$ Custom amount">
+									<input type="text" name="currency-field" class="display-amount" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
 								</div>
 							</div>
 

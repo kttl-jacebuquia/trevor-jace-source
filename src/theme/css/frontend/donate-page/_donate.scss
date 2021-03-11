@@ -173,6 +173,10 @@
 			}
 		  }
 		}
+
+		input[type="number"].custom-amount {
+			@apply overflow-hidden invisible h-0 my-0 py-0;
+		}
 	  }
 	}
   }

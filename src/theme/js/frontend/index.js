@@ -62,54 +62,10 @@ if (isFAQPresent) {
 }
 
 if (isDonate) {
-	const _frequency = $('.frequency--choices label');
-	const _amount = $('.amount-choices label');
-	const _donateForm = $('#donate-form');
-	const _customAmount = $('.custom-amount', _donateForm);
-	const _fixedAmount = $('.fixed-amount');
-
-
-	_frequency.click(function(){
-		_frequency.removeClass('is-selected');
-		$(this).toggleClass('is-selected');
-	});
-
-	_amount.click(function(){
-		_amount.removeClass('is-selected');
-		$(this).toggleClass('is-selected');
-		_customAmount.val('');
-	});
-
-	_customAmount.bind('keyup', function () {
-		_amount.removeClass('is-selected');
-		_fixedAmount.prop('checked', false);
-	});
-
-	_donateForm.submit( function(e){
-		e.preventDefault();
-		var _newCustomAmount = _customAmount.val();
-		var _isRecurring = $('.donation-frequency:checked');
-		_customAmount.prop('disabled', true);
-
-
-
-		if( _newCustomAmount !== '' ) {
-			$('.donation-frequency').prop('disabled', true);
-			var _url = 'https://give.thetrevorproject.org/give/63307/#!/donation/checkout?amount=' + _newCustomAmount;
-
-			if( _isRecurring.val() == 1 ) {
-				_url += '&recurring=1';
-			}
-
-			_donateForm.attr( 'action', _url  );
-		}
-
-		e.currentTarget.submit();
-
-
-	});
-
-
+	features.toggleFrequency();
+	features.toggleAmount();
+	features.displayAmountAction();
+	features.displayCurrency();
 }
 
 if (isNavigator) {

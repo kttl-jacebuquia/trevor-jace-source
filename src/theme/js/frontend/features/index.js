@@ -8,7 +8,7 @@ export sharingPopUp from './sharing-popup';
 export modal from './modal';
 export faqToggle from './faqs';
 export cardToggle from './cards';
-export {toggleFrequency, toggleAmount} from './donate';
+export {toggleFrequency, toggleAmount, displayAmountAction, displayCurrency} from './donate';
 export {carousel, carouselNavigator, generateSwiperArrows} from './carousel';
 export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
