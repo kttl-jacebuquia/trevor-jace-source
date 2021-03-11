@@ -160,7 +160,7 @@ module.exports = {
 			minWidth: {
 				px50: px2rem(50),
 				px319: px2rem(319),
-				px395: px2rem(355),
+				px355: px2rem(355),
 			},
 			width: {
         px20: px2rem(20),
@@ -190,9 +190,6 @@ module.exports = {
 				px546: px2rem(546),
 				px600: px2rem(600),
 				px737: px2rem(737),
-			},
-			width: {
-				px500: px2rem(500),
 			},
 			fontSize: {
 				px14: px2rem(14),
