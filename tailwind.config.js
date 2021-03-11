@@ -34,7 +34,7 @@ module.exports = {
 		},
 		colors: {
 			transparent: 'transparent',
-			current: 'currentColor', 
+			current: 'currentColor',
 			black: {
 				DEFAULT: '#000',
 			},
@@ -350,6 +350,7 @@ module.exports = {
 				'indigo-md': '0px 6px 8px rgba(16, 16, 102, 0.08)',
 				'indigo-lg': '0px 8px 6px rgba(16, 16, 102, 0.1)',
 				'light': '0px 0px 16px rgba(0, 58, 72, 0.2)',
+				'darkGreen': '0px 6px 12px 0px rgb(0, 58, 72, 0.1)',
 				none: 'none',
 			},
 			backgroundImage: theme => ({

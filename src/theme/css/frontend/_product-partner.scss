@@ -63,8 +63,6 @@
 			}
 		}
   }
-
-
   .featured-collections {
 		background-color: theme('colors.gray.light');
 		@apply pt-px60 pb-px100;
@@ -78,7 +76,6 @@
 		}
 
 		.tile-grid {
-			@apply py-0;
 
 			&-title {
 				@apply font-bold text-px32 leading-px40 md:text-px32 md:leading-px42 xl:text-px40 xl:leading-px48 max-w-none;
@@ -89,106 +86,6 @@
 			[data-whatintent='mouse'] &:hover {
 				@apply bg-white;
 			}
-		}
-  }
-
-  .tile-grid {
-		@apply pt-px72 pb-px100;
-
-		@screen md {
-			@apply py-20;
-		}
-
-		&-inner {
-
-			@screen md {
-			@apply px-px50;
-			}
-
-			@screen lg {
-			@apply px-px100;
-			}
-		}
-
-		&-header {
-			@apply px-0 mb-px50 lg2:mb-px30;
-		}
-
-		&-title {
-			@apply m-0 mx-auto text-teal-dark;
-			max-width: rem-calc(319px);
-			letter-spacing: rem-calc(1px);
-
-			@screen md {
-				@apply max-w-none;
-			}
-		}
-
-		&-container {
-			@apply mb-0;
-
-			@screen md {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
-				@apply justify-center;
-				@apply gap-px30;
-			}
-
-			@screen lg {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
-			}
-
-			@screen lg2 {
-				gap: unset;
-				max-width: rem-calc(1080px);
-				@apply flex flex-row flex-wrap justify-center mx-auto;
-			}
-
-			@screen xl {
-				gap: unset;
-				max-width: rem-calc(1240px);
-				@apply flex flex-row flex-wrap justify-center mx-auto;
-			}
-		}
-
-		.tile {
-			box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
-			@apply h-auto p-0;
-
-			@screen lg {
-				max-width: theme('postCard.width.md');
-			}
-
-			@screen lg2 {
-				--combinedHorizontalMargin: 1.75rem; //28px
-				margin-top: rem-calc(56px);
-				max-width: calc((100% / 3) - var(--combinedHorizontalMargin));
-				@apply mx-px14;
-			}
-
-			@screen xl {
-				max-width: calc((100% / 3) - var(--combinedHorizontalMargin));
-				@apply mx-px14;
-			}
-
-			&-inner {
-				@apply px-6 pb-12;
-			}
-
-			&-title-top {
-			@apply font-semibold text-px14 leading-px18 mt-7 mb-3;
-			}
-
-			&-title {
-			@apply font-bold text-px24 leading-px28 mb-4;
-			}
-
-			&-desc {
-			@apply font-normal text-px16 leading-px22 mb-6;
-			}
-		}
-
-		.tile-image {
-			@apply h-60 w-full max-w-none rounded-t-px10;
 		}
   }
 
@@ -231,9 +128,6 @@
 	  }
 	}
 
-	.tile-grid {
-	  @apply py-0;
-	}
 
 	.tile-desc,
 	.tile-cta-wrap {
@@ -388,5 +282,99 @@
 		}
 	  }
 	}
+  }
+
+	.tile-grid {
+		@apply py-0;
+
+		@screen md {
+			@apply py-20;
+		}
+
+		&-inner {
+
+			@screen md {
+			@apply px-px50;
+			}
+
+			@screen lg {
+			@apply px-px100;
+			}
+		}
+
+		&-header {
+			@apply px-0 mb-px50 lg2:mb-px30;
+		}
+
+		&-title {
+			@apply m-0 mx-auto text-teal-dark;
+			max-width: rem-calc(319px);
+			letter-spacing: rem-calc(1px);
+
+			@screen md {
+				@apply max-w-none;
+			}
+		}
+
+		&-container {
+			@apply mb-0;
+
+			@screen md {
+				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+				@apply justify-center;
+				@apply gap-px30;
+			}
+
+			@screen lg {
+				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+			}
+
+			@screen lg2 {
+				gap: unset;
+				max-width: rem-calc(1080px);
+				@apply flex flex-row flex-wrap justify-center mx-auto;
+			}
+
+			@screen xl {
+				gap: unset;
+				max-width: rem-calc(1240px);
+				@apply flex flex-row flex-wrap justify-center mx-auto;
+			}
+		}
+
+		.tile {
+			@apply h-auto p-0 shadow-darkGreen;
+			$combinedHorizontalMargin: rem-calc(29px);
+			@screen lg {
+				max-width: theme('postCard.width.md');
+			}
+
+			@screen lg2 {
+				margin-top: rem-calc(56px);
+				max-width: calc((100% / 3) - #{$combinedHorizontalMargin});
+				@apply mx-px14;
+			}
+
+			@screen xl {
+				max-width: calc((100% / 3) - #{$combinedHorizontalMargin});
+				@apply mx-px14;
+			}
+
+			&-inner {
+				@apply px-6 pb-12;
+			}
+
+			&-title-top {
+			@apply text-px14 leading-px18 mt-7 mb-3;
+			}
+
+			&-desc {
+			@apply font-normal text-px16 leading-px22 mb-6;
+			}
+		}
+
+		.tile-image {
+			@apply h-60 w-full max-w-none rounded-t-px10;
+		}
   }
 }
