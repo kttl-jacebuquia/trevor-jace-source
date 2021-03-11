@@ -59,11 +59,19 @@ foreach ( $tiers as $tier ) {
 							<?php
 							/** @var \WP_Post $post */
 							foreach ( $tier->posts as $post ) :
+
+								if ( ! empty( Meta\Post::get_partner_url( $post->ID ) ) ) {
 								?>
-								<a href="<?= Meta\Post::get_partner_url( $post->ID ) ?>" rel="nofollow noreferrer noopener" target="_blank"
-								   title="<?= esc_attr( $post->title ) ?>">
-									<span><?= $post->post_title ?></span>
-								</a>
+									<a href="<?php echo Meta\Post::get_partner_url( $post->ID ); ?>" class="funder-name" rel="nofollow noreferrer noopener" target="_blank"
+										title="<?php echo esc_attr( $post->title ); ?>">
+										<span><?php echo esc_html( $post->post_title ); ?></span>
+									</a>
+								<?php
+								}
+								else {
+								?>
+									<div class="funder-name"><?php echo esc_html( $post->post_title ); ?></div>
+								<?php } ?>
 							<?php endforeach ?>
 						</td>
 					</tr>

@@ -56,8 +56,7 @@ class Partner {
 			   placeholder="https://"
 			   autocomplete="off"
 			   type="url"
-			   class="widefat"
-			   required>
+			   class="widefat">
 		<?php
 	}
 

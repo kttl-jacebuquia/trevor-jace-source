@@ -60,7 +60,7 @@
 
 	  th,
 	  td {
-		a {
+		.funder-name {
 		  @apply text-px20 relative inline-block md:text-px16 lg:text-px20;
 		  @apply leading-px26;
 		  @apply font-bold;
@@ -68,6 +68,10 @@
 		  span {
 			border-bottom: solid 1px theme('colors.teal.dark');
 		  }
+		}
+
+		div.funder-name {
+			border-bottom: solid 1px theme('colors.teal.dark');
 		}
 	  }
 
@@ -109,18 +113,18 @@
 	  td {
 		@apply mx-auto pt-10 pb-11 items-center w-full px-px32;
 
-		a + a {
+		.funder-name + .funder-name {
 		  @apply mt-px34;
 		}
 
 		@screen md {
 		  @apply pl-px30 pr-px30 flex-wrap pt-px30 pb-px80 -mt-px20 mr-0 mb-0 -ml-px20;
 
-		  a {
+		  .funder-name {
 			@apply mt-px20 mr-0 mb-0 ml-px20;
 		  }
 
-		  a + a {
+		  .funder-name + .funder-name {
 			@apply mt-px20;
 		  }
 		}
@@ -128,11 +132,11 @@
 		@screen lg {
 		  @apply pt-px70 pb-px100 -mt-px40 mr-0 mb-0 -ml-px40;
 
-		  a {
+		  .funder-name {
 			@apply mt-px40 mr-0 mb-0 ml-px40;
 		  }
 
-		  a + a {
+		  .funder-name + .funder-name  {
 			@apply mt-px40;
 		  }
 		}
