@@ -93,7 +93,9 @@ use \TrevorWP\Theme\Customizer\Donate;
 								<?php foreach ( $_1_data as $audit ) : ?>
 									<div class="audit--card__item swiper-slide text-center">
 										<?php if ( $audit['img'] ) : ?>
-											<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
+											<div class="audit--card__image">
+												<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
+											</div>
 										<?php endif; ?>
 
 										<p><?php echo esc_html( $audit['desc'] ); ?></p>

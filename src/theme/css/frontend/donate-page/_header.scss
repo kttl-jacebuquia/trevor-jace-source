@@ -1,7 +1,10 @@
+body.is-donate {
+  @apply overflow-x-hidden;
+}
 .is-donate {
   .page-header {
 	&-inner {
-	  position: relative;
+    @apply relative;
 	}
   }
 
@@ -10,10 +13,10 @@
   }
 
   .page-header.type-split-img .page-header-img-wrap {
-	align-items: flex-end;
+  @apply items-end;
   }
 
   .page-header-cta {
-	display: none;
+  @apply hidden;
   }
 }

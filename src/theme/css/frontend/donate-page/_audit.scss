@@ -69,6 +69,14 @@
 	}
   }
 
+	&-holder {
+		&.mobile-only {
+			.audit--card__item.swiper-slide {
+				@apply h-auto flex justify-between flex-col; 
+			}
+		}
+	}
+
   .swiper-pagination {
 	width: 100%;
 
