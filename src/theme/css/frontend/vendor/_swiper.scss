@@ -89,6 +89,16 @@
 			margin-left: unset;
 		}
 	}
+
+	.post-carousel & {
+		@screen md {
+			@apply pl-px50;
+		}
+
+		@screen lg {
+			padding-left: var(--v-padding-full);
+		}
+	}
 }
 
 

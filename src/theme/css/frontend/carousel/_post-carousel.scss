@@ -21,7 +21,7 @@
 	@apply mb-24;
 
 	.carousel-container {
-	  width: theme('postCard.width.lg');
+	  width: rem-calc(395px);
 	}
 
 	// Hide arrows if there are only 3 cards
@@ -32,6 +32,18 @@
 	  }
 	}
   }
+
+	@screen lg2 {
+		.carousel-container {
+			width: rem-calc(355px);
+		}
+	}
+
+	@screen xl {
+		.carousel-container {
+			width: rem-calc(395px);
+		}
+	}
 
   // Only Md fixes
   &.only-md {

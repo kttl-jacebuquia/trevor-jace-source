@@ -6,11 +6,8 @@
   @apply h-px503;
   @apply max-w-full;
   @apply mx-auto;
-	@apply min-w-px319;
+	@apply w-full;
 
-	@screen md {
-		@apply min-w-px355;
-	}
 
   // Thumbnail
   .post-thumbnail-wrap {
