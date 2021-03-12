@@ -30,7 +30,7 @@
 	}
 
   &--wrapper {
-	@apply pt-px80 pb-px80 rounded-px10;
+	@apply pt-px80 pb-px80 rounded-px10 pl-px30 pr-px30;
 	background-color: theme('colors.teal.tint');
 
 	@screen lg {
