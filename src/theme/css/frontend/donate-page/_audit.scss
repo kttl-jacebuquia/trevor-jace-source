@@ -1,6 +1,6 @@
 .audit {
   background-color: theme('colors.teal.dark');
-  @apply pt-px100 pb-px40;
+  @apply pt-px100 pb-px80;
 
   &.audit-fundraise {
 	background-color: theme('colors.blue_green.DEFAULT');
@@ -78,14 +78,14 @@
 	}
 
   .swiper-pagination {
-	width: 100%;
+	@apply w-full mt-px70;
 
 	@screen md {
-	  @apply flex;
+	  @apply flex mt-px50;
 	}
 
 	@screen lg {
-	  @apply hidden;
+	  @apply hidden; 
 	}
 
 	span {
