@@ -12,6 +12,8 @@
 	@apply pt-px120;
   }
 
+  h2 { color: theme('colors.teal.dark'); }
+
   h3 {
 	font-size: rem-calc(32px);
 

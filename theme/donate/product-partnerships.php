@@ -107,13 +107,18 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 			</div>
 		</div>
 
-		<div class="cards">
-			<div class="cards__container container mx-auto flex flex-row flex-wrap">
-				<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">
-					There are other ways to help.</h3>
-				<?php echo Helper\Circulation_Card::render_fundraiser(); ?>
-				<?php echo Helper\Circulation_Card::render_counselor(); ?>
-			</div>
+		<?php /* Recirculation */ ?>
+		<?= Helper\Circulation_Card::render_circulation( 
+			'There are other ways to help.', 
+			null, 
+			[ 
+				'fundraiser', 
+				'counselor' 
+			], 
+			[
+				'container' => 'cards',
+			] 
+		); ?>
 	</main>
 <?php
 get_footer();

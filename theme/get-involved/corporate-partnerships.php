@@ -6,6 +6,8 @@ use \TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 use \TrevorWP\CPT\Get_Involved\Partner;
 use \TrevorWP\Meta;
 use \TrevorWP\Theme\Helper\Circulation_Card;
+use \TrevorWP\Theme\Helper;
+
 
 $tiers = ( new \WP_Term_Query( [
 		'taxonomy'   => Get_Involved_Object::TAXONOMY_PARTNER_TIER,
@@ -97,14 +99,18 @@ foreach ( $tiers as $tier ) {
 		</div>
 	</div> <!-- .partners -->
 
-	<div class="cards">
-		<div class="cards__container container mx-auto flex flex-row flex-wrap">
-			<h3 class="cards__title font-bold text-px32 leading-px42 lg:text-px46 lg:leading-px56 text-center w-full">
-				There are other ways to help.</h3>
-			<?= Circulation_Card::render_donation(); ?>
-			<?= Circulation_Card::render_counselor(); ?>
-		</div>
-	</div>
+	<?php /* Recirculation */ ?>
+	<?= Helper\Circulation_Card::render_circulation( 
+		'There are other ways to help.', 
+		null, 
+		[ 
+			'donation', 
+			'counselor' 
+		], 
+		[
+			'container' => 'cards',
+		] 
+	); ?>
 
 </main>
 <?php get_footer(); ?>

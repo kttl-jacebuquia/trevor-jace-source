@@ -129,16 +129,19 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				</div>
 			</div>
 		</div>
-
-		<div class="cards">
-			<div class="cards__container container mx-auto flex flex-row flex-wrap">
-				<h3 class="cards__title font-bold text-px32 lg:text-px46 leading-px42 lg:leading-px56 text-center w-full">
-					<?= Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ) ?>
-				</h3>
-				<?= Helper\Circulation_Card::render_fundraiser(); ?>
-				<?= Helper\Circulation_Card::render_counselor(); ?>
-			</div>
-		</div>
+		
+		<?php /* Recirculation */ ?>
+		<?= Helper\Circulation_Card::render_circulation( 
+			Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ), 
+			null, 
+			[ 
+				'fundraiser', 
+				'counselor' 
+			], 
+			[
+				'container' => 'cards',
+			] 
+		); ?>
 	</main>
 
 <?php get_footer();

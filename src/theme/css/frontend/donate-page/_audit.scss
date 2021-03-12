@@ -6,6 +6,12 @@
 	background-color: theme('colors.blue_green.DEFAULT');
   }
 
+	&-holder.mobile-only {
+		.swiper-slide {
+			@apply flex flex-col justify-between h-auto;
+		}
+	}
+
   @screen md {
 	@apply pt-px80;
   }

@@ -63,6 +63,7 @@ class Circulation_Card {
 		], $this->_args['cls'] ) );
 
 		ob_start(); ?>
+
 		<div class="<?= esc_attr( $class ) ?>">
 			<div class="bg-inner <?= $this->_args['bg-inner-cls'] ?>"></div>
 			<div class="inner">
@@ -73,6 +74,44 @@ class Circulation_Card {
 			</div>
 		</div>
 		<?php return ob_get_clean();
+	}
+
+	/**
+	 * Renders Circulation Block
+	 *
+	 * @param string $title
+	 * @param string|null $desc
+	 * @param array $cards
+	 * @param array|null $options
+	 *
+	 * @return string
+	 */
+	static public function render_circulation( string $title, ?string $desc, array $cards, ?array $options ): string {
+		$container_class = $options['container'] ? $options['container'] : null;
+		$wrapper_class   = $options['wrapper'] ? $options['wrapper'] : null;
+		$option_class    = $options['title'] ? $options['title'] : null;
+		ob_start(); ?>
+		<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 <?= $container_class ?>">
+			<div class="container mx-auto site-content-inner text-center <?= $wrapper_class ?>">
+				<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20 <?= $option_class ?>">
+					<?php echo $title; ?>
+				</h2>
+
+				<?php if ( ! empty( $desc ) ): ?>
+					<p class="font-normal text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 xl:mx-64">
+						<?= $desc ?>
+					</p>
+				<?php endif; ?>
+
+				<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
+					<?php foreach ( $cards as $card ) {
+						echo call_user_func( [ self::class, "render_{$card}" ] );
+					} ?>
+				</div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -139,7 +178,7 @@ class Circulation_Card {
 				'cta_text'     => 'Donate Now',
 				'cta_url'      => home_url( Donate_Object::PERMALINK_DONATE ),
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'gradient-type-dark-green',
+				'bg-inner-cls' => 'bg-gradient-darkgreen-flip',
 		] ) )->render();
 	}
 
@@ -155,7 +194,7 @@ class Circulation_Card {
 				'cta_text'     => 'Fundraise Now',
 				'cta_url'      => '#', // todo: fix url
 				'cls'          => [ 'bg-teal-dark' ],
-				'bg-inner-cls' => 'gradient-type-dark-green',
+				'bg-inner-cls' => 'bg-gradient-darkgreen',
 		] ) )->render();
 	}
 

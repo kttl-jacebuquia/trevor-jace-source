@@ -128,31 +128,18 @@ use TrevorWP\Theme\Helper;
 		</div>
 	</div>
 
-	<!--	<div class="bg-violet-lighter">-->
-	<!--		<div class="container mx-auto text-center text-indigo site-content-inner">-->
-	<!--			<div class="flex flex-col items-center py-64 md:py-72 lg:py-64">-->
-	<!--				<h4 class="font-semibold text-px38 leading-px48 mb-4 md:text-px32 md:leading-px42 lg:text-px46 lg:leading-px56">-->
-	<? //= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_EXERCISE_TITLE ) ?><!--</h4>-->
-	<!--				<p class="text-px20 leading-px30 mb-10 md:text-px16 md:leading-px22 md:mb-px30 md:mx-12 lg:text-px22 lg:leading-px34 lg:mx-80 lg:mb-10">-->
-	<? //= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_EXERCISE_DESC ) ?><!--</p>-->
-	<!--				<a href="#"-->
-	<!--				   class="btn btn-secondary inline-flex text-px18 leading-px24 md:text-px16 md:leading-px22">-->
-	<? //= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_EXERCISE_CTA ) ?><!--</a>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
+	<?= Helper\Circulation_Card::render_circulation( 
+		Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_TITLE ), 
+		Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ), 
+		[
+			'trevorspace',
+			'rc'
+		], 
+		[
+			'wrapper' => 'text-indigo'
+		]
+	); ?>
 
-	<div class="bg-white">
-		<div class="container mx-auto text-center text-indigo site-content-inner pt-20 pb-16 lg:pt-36 lg:pb-28">
-			<h3 class="text-px32 leading-px42 tracking-px05 font-semibold mb-5"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_TITLE ) ?></h3>
-			<p class="font-normal text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 xl:mx-64"><?= Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ) ?></p>
-
-			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
-				<?= Circulation_Card::render_trevorspace(); ?>
-				<?= Circulation_Card::render_rc(); ?>
-			</div>
-		</div>
-	</div>
 </main>
 <?php foreach ( [ 'TEXT', 'CALL', 'CHAT' ] as $k ) { ?>
 	<?php ob_start(); ?>
