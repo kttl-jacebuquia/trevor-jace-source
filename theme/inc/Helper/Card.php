@@ -7,15 +7,14 @@ use TrevorWP\CPT\RC\RC_Object;
 
 class Card {
 	public static function post( $post, array $options = [] ): string {
-		$post          = get_post( $post );
-		$options       = array_merge( [
+		$post      = get_post( $post );
+		$options   = array_merge( [
 				'class'            => [], // Additional classes
 				'num_words'        => 100, // for description
 				'hide_cat_eyebrow' => false,
 		], $options );
-		$post_type     = get_post_type( $post );
-		$has_thumbnail = has_post_thumbnail( $post );
-		$_class        = &$options['class'];
+		$post_type = get_post_type( $post );
+		$_class    = &$options['class'];
 
 		# Default class
 		$_class[] = 'card-post';
@@ -142,6 +141,61 @@ class Card {
 		</article>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function fundraiser( array $data, array $options = [] ): string {
+		static $currency_formatter;
+		$logo_url = @$data['logo_url'];
+		if ( empty( $logo_url ) && ! empty( $options['placeholder_logo_id'] ) ) {
+			$logo_url = wp_get_attachment_image_url( $options['placeholder_logo_id'], 'medium' );
+		}
+
+		$title           = isset( $data['title'] ) ? $data['title'] : @$data['name'];
+		$total_raised    = empty( $data['total_raised'] ) ? .0 : floatval( $data['total_raised'] );
+		$percent_to_goal = empty( $data['percent_to_goal'] ) ? .0 : floatval( $data['percent_to_goal'] );
+		$canonical_url   = empty( $data['canonical_url'] ) ? '#' : $data['canonical_url'];
+		if ( $percent_to_goal > 100.0 ) {
+			$percent_to_goal = 100.0;
+		}
+
+		if ( empty( $currency_formatter ) ) {
+			$currency_formatter = new \NumberFormatter( "en-US", \NumberFormatter::CURRENCY );
+			$currency_formatter->setAttribute( \NumberFormatter::MAX_FRACTION_DIGITS, 0 );
+		}
+
+		ob_start(); ?>
+		<div class="card-post fundraiser">
+			<div class="post-thumbnail-wrap">
+				<img class="fundraiser-logo" src="<?= esc_url( $logo_url ) ?>" alt="Logo">
+			</div>
+
+			<div class="card-content">
+				<div class="title-top uppercase">Individual donor</div>
+
+				<h3 class="post-title"
+					title="<?= esc_attr( $clean_title = wp_filter_nohtml_kses( $title ) ) ?>">
+					<a href="<?= esc_url( $canonical_url ) ?>"
+					   class="title stretched-link" target="_blank"
+					   rel="noopener nofollow noreferrer"><?= $clean_title ?></a>
+				</h3>
+
+				<div class="fundraiser-progress-wrap">
+					<div class="fundraiser-progress-bar"
+						 style="<?= sprintf( "width: %.0f%%;", $percent_to_goal ) ?>"></div>
+				</div>
+				<div class="fundraiser-btm-wrap">
+					<div class="fundraiser-total"><?= $currency_formatter->format( $total_raised ) ?> raised</div>
+					<div class="fundraiser-percent"><?= sprintf( "%.0f%%", $percent_to_goal ) ?></div>
+				</div>
+			</div>
+		</div>
+		<?php return ob_get_clean();
 	}
 
 	/**

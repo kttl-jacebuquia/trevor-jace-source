@@ -11,36 +11,16 @@ class Fundraise extends Abstract_Customizer {
 
 	/** Sections */
 
-	/** Header */
 	const SECTION_HEADER = self::PANEL_ID . '_header';
-
-	/** Featured Text */
 	const SECTION_FEATURED_TEXT = self::PANEL_ID . '_featured_text';
-
-	/** Three Column */
 	const SECTION_THREE = self::PANEL_ID . '_three_column';
-
-	/** One Column */
 	const SECTION_ONE = self::PANEL_ID . '_one_column';
-
-	/** Featured Links */
 	const SECTION_LINK = self::PANEL_ID . '_links';
-
-	/** Become a Partner */
 	const SECTION_PARTNER = self::PANEL_ID . '_partner';
-
-	/** Success Stories */
 	const SECTION_SUCCESS_STORIES = self::PANEL_ID . '_success_stories';
-
-	/** QUESTIONS */
+	const SECTION_TOP_LIST = self::PANEL_ID . '_top_list';
 	const SECTION_QUESTIONS = self::PANEL_ID . '_question';
-
-	/** OTHER WAYS */
 	const SECTION_OTHER = self::PANEL_ID . '_other';
-
-	/** TrevorSpace */
-	const SECTION_TREVORSPACE = self::PANEL_ID . '_trevorspace';
-
 
 	/** Settings */
 
@@ -53,51 +33,56 @@ class Fundraise extends Abstract_Customizer {
 	const SETTING_HOME_HERO_CTA_LINK = self::SETTING_HEADER_PREFIX . 'hero_cta_link';
 
 	/** Featured Text */
-	const SETTING_FEATURED_TEXT_PREFIX = self::SECTION_FEATURED_TEXT . '_';
-	const SETTING_FEATURED_TEXT_TITLE = self::SETTING_FEATURED_TEXT_PREFIX . 'featured_title';
-	const SETTING_FEATURED_TEXT_DESC = self::SETTING_FEATURED_TEXT_PREFIX . 'featured_desc';
+	const PREFIX_SETTING_FEATURED_TEXT = self::SECTION_FEATURED_TEXT . '_';
+	const SETTING_FEATURED_TEXT_TITLE = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_title';
+	const SETTING_FEATURED_TEXT_DESC = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_desc';
 
 	/** Three Column Text */
-	const SETTING_THREE_PREFIX = self::SECTION_THREE . '_';
-	const SETTING_THREE_TITLE = self::SETTING_THREE_PREFIX . 'three_title';
-	const SETTING_THREE_DATA = self::SETTING_THREE_PREFIX . 'three_data';
+	const PREFIX_SETTING_THREE = self::SECTION_THREE . '_';
+	const SETTING_THREE_TITLE = self::PREFIX_SETTING_THREE . 'three_title';
+	const SETTING_THREE_DATA = self::PREFIX_SETTING_THREE . 'three_data';
 
 	/** One Column Text */
-	const SETTING_ONE_PREFIX = self::SECTION_ONE . '_';
-	const SETTING_ONE_DATA = self::SETTING_ONE_PREFIX . 'one_data';
+	const PREFIX_SETTING_ONE = self::SECTION_ONE . '_';
+	const SETTING_ONE_DATA = self::PREFIX_SETTING_ONE . 'one_data';
 
 	/** Three Column Text */
-	const SETTING_LINKS_PREFIX = self::SECTION_LINK . '_';
-	const SETTING_LINK_TITLE = self::SETTING_LINKS_PREFIX . 'link_title';
-	const SETTING_LINK_DESC = self::SETTING_LINKS_PREFIX . 'link_desc';
-	const SETTING_LINK_DATA = self::SETTING_THREE_PREFIX . 'link_data';
+	const PREFIX_SETTING_LINKS = self::SECTION_LINK . '_';
+	const SETTING_LINK_TITLE = self::PREFIX_SETTING_LINKS . 'link_title';
+	const SETTING_LINK_DESC = self::PREFIX_SETTING_LINKS . 'link_desc';
+	const SETTING_LINK_DATA = self::PREFIX_SETTING_THREE . 'link_data';
 
 	/** Become a Partner */
-	const SETTING_PARTNER_PREFIX = self::SECTION_PARTNER . '_';
-	const SETTING_PARTNER_TITLE = self::SETTING_PARTNER_PREFIX . 'link_title';
-	const SETTING_PARTNER_DESC = self::SETTING_PARTNER_PREFIX . 'link_desc';
-	const SETTING_PARTNER_CTA = self::SETTING_PARTNER_PREFIX . 'link_cta';
-	const SETTING_PARTNER_CTA_LINK = self::SETTING_PARTNER_PREFIX . 'link_url';
+	const PREFIX_SETTING_PARTNER = self::SECTION_PARTNER . '_';
+	const SETTING_PARTNER_TITLE = self::PREFIX_SETTING_PARTNER . 'link_title';
+	const SETTING_PARTNER_DESC = self::PREFIX_SETTING_PARTNER . 'link_desc';
+	const SETTING_PARTNER_CTA = self::PREFIX_SETTING_PARTNER . 'link_cta';
+	const SETTING_PARTNER_CTA_LINK = self::PREFIX_SETTING_PARTNER . 'link_url';
 
 	/** Success Stories */
-	const SETTING_SUCCESS_STORIES_PREFIX = self::SECTION_SUCCESS_STORIES . '_';
-	const SETTING_SUCCESS_STORIES_TITLE = self::SETTING_SUCCESS_STORIES_PREFIX . 'title';
-	const SETTING_SUCCESS_STORIES_DESC = self::SETTING_SUCCESS_STORIES_PREFIX . 'desc';
+	const PREFIX_SUCCESS_STORIES = self::SECTION_SUCCESS_STORIES . '_';
+	const SETTING_SUCCESS_STORIES_TITLE = self::PREFIX_SUCCESS_STORIES . 'title';
+	const SETTING_SUCCESS_STORIES_DESC = self::PREFIX_SUCCESS_STORIES . 'desc';
+
+	/** Top List */
+	const PREFIX_TOP_LIST = self::SECTION_TOP_LIST . '_';
+	const SETTING_TOP_LIST_TITLE = self::PREFIX_TOP_LIST . 'title';
+	const SETTING_TOP_LIST_DESC = self::PREFIX_TOP_LIST . 'desc';
+	const SETTING_TOP_LIST_CAMPAIGN_ID = self::PREFIX_TOP_LIST . 'campaign_id';
+	const SETTING_TOP_LIST_COUNT = self::PREFIX_TOP_LIST . 'count';
+	const SETTING_TOP_LIST_PLACEHOLDER_LOGO = self::PREFIX_TOP_LIST . 'placeholder_logo';
 
 	/** Questions */
-	const SETTING_QUESTIONS_PREFIX = self::SECTION_QUESTIONS . '_';
-	const SETTING_QUESTIONS_TITLE = self::SETTING_QUESTIONS_PREFIX . 'link_title';
-	const SETTING_QUESTIONS_DESC = self::SETTING_QUESTIONS_PREFIX . 'link_desc';
-	const SETTING_QUESTIONS_CTA = self::SETTING_QUESTIONS_PREFIX . 'link_cta';
-	const SETTING_QUESTIONS_CTA_LINK = self::SETTING_QUESTIONS_PREFIX . 'link_url';
+	const PREFIX_QUESTIONS = self::SECTION_QUESTIONS . '_';
+	const SETTING_QUESTIONS_TITLE = self::PREFIX_QUESTIONS . 'link_title';
+	const SETTING_QUESTIONS_DESC = self::PREFIX_QUESTIONS . 'link_desc';
+	const SETTING_QUESTIONS_CTA = self::PREFIX_QUESTIONS . 'link_cta';
+	const SETTING_QUESTIONS_CTA_LINK = self::PREFIX_QUESTIONS . 'link_url';
 
-	/** TrevorSpace */
-	const SETTING_TREVORSPACE_PREFIX = self::SECTION_TREVORSPACE . '_';
-	
 	/** Circulation */
-	const SETTING_OTHER_PREFIX = self::SECTION_OTHER . '_';
-	const SETTING_TREVORSPACE_CIRCULATION_TITLE = self::SETTING_TREVORSPACE_PREFIX . 'circulation_title';
-	const SETTING_TREVORSPACE_CIRCULATION_DESC = self::SETTING_TREVORSPACE_PREFIX . 'circulation_desc';
+	const PREFIX_CIRCULATION = self::SECTION_OTHER . '_';
+	const SETTING_CIRCULATION_TITLE = self::PREFIX_CIRCULATION . 'title';
+	const SETTING_CIRCULATION_DESC = self::PREFIX_CIRCULATION . 'desc';
 
 	/** All Defaults */
 	const DEFAULTS = array(
@@ -156,21 +141,27 @@ class Fundraise extends Abstract_Customizer {
 			),
 		),
 
-		self::SETTING_PARTNER_TITLE    => '<tilt>Become</tilt>&nbsp;&nbsp;a<br>corporate partner.',
-		self::SETTING_PARTNER_DESC     => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ young people every year.',
-		self::SETTING_PARTNER_CTA      => 'Learn More',
-		self::SETTING_PARTNER_CTA_LINK => '#',
+		self::SETTING_PARTNER_TITLE         => '<tilt>Become</tilt>&nbsp;&nbsp;a<br>corporate partner.',
+		self::SETTING_PARTNER_DESC          => 'Our corporate partners help us create lasting change at scale and reach out to more and more LGBTQ young people every year.',
+		self::SETTING_PARTNER_CTA           => 'Learn More',
+		self::SETTING_PARTNER_CTA_LINK      => '#',
 
-		/** Success Stories */
+		/* Success Stories */
 		self::SETTING_SUCCESS_STORIES_TITLE => 'Fundraiser Success Stories',
 		self::SETTING_SUCCESS_STORIES_DESC  => 'These fundraisers made a huge impact on our ability to provide life-saving services.',
+
+		/* Top List */
+		self::SETTING_TOP_LIST_TITLE        => 'Featured Fundraisers',
+		self::SETTING_TOP_LIST_DESC         => 'Check out some other notable fundraisers that have helped us save lives.',
+		self::SETTING_TOP_LIST_CAMPAIGN_ID  => '24399',
+		self::SETTING_TOP_LIST_COUNT        => 10,
 
 		self::SETTING_QUESTIONS_TITLE    => 'Have questions?',
 		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',
 		self::SETTING_QUESTIONS_CTA      => 'Reach Out',
 		self::SETTING_QUESTIONS_CTA_LINK => '#',
 
-		self::SETTING_TREVORSPACE_CIRCULATION_TITLE => 'Other ways to help',
+		self::SETTING_CIRCULATION_TITLE => 'Other ways to help',
 
 
 	);
@@ -202,7 +193,7 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		// Three Column text
+		// How your Money is Used
 		$this->_manager->add_section(
 			self::SECTION_THREE,
 			array(
@@ -211,7 +202,7 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		// Three Column text
+		// Featured Content
 		$this->_manager->add_section(
 			self::SECTION_ONE,
 			array(
@@ -238,7 +229,25 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		// Become a Partner
+		// Fundraiser Success Stories
+		$this->_manager->add_section(
+			self::SECTION_SUCCESS_STORIES,
+			[
+				'panel' => self::PANEL_ID,
+				'title' => 'Success Stories',
+			]
+		);
+
+		// Featured Fundraisers
+		$this->_manager->add_section(
+			self::SECTION_TOP_LIST,
+			[
+				'panel' => self::PANEL_ID,
+				'title' => 'Featured Fundraisers'
+			]
+		);
+
+		// Questions
 		$this->_manager->add_section(
 			self::SECTION_QUESTIONS,
 			array(
@@ -270,7 +279,7 @@ class Fundraise extends Abstract_Customizer {
 				array(
 					'setting'   => self::SETTING_HOME_HERO_IMG,
 					'section'   => self::SECTION_HEADER,
-					'label'     => 'Hero Image',
+					'label'     => 'Image',
 					'mime_type' => 'image',
 				)
 			)
@@ -281,7 +290,7 @@ class Fundraise extends Abstract_Customizer {
 			array(
 				'setting' => self::SETTING_HOME_HERO_TITLE,
 				'section' => self::SECTION_HEADER,
-				'label'   => 'Hero Title',
+				'label'   => 'Title',
 				'type'    => 'text',
 			)
 		);
@@ -291,7 +300,7 @@ class Fundraise extends Abstract_Customizer {
 			array(
 				'setting' => self::SETTING_HOME_HERO_DESC,
 				'section' => self::SECTION_HEADER,
-				'label'   => 'Hero Description',
+				'label'   => 'Description',
 				'type'    => 'text',
 			)
 		);
@@ -303,7 +312,7 @@ class Fundraise extends Abstract_Customizer {
 			array(
 				'setting' => self::SETTING_FEATURED_TEXT_TITLE,
 				'section' => self::SECTION_FEATURED_TEXT,
-				'label'   => 'Featured Title',
+				'label'   => 'Title',
 				'type'    => 'text',
 			)
 		);
@@ -313,18 +322,18 @@ class Fundraise extends Abstract_Customizer {
 			array(
 				'setting' => self::SETTING_FEATURED_TEXT_DESC,
 				'section' => self::SECTION_FEATURED_TEXT,
-				'label'   => 'Featured Description',
+				'label'   => 'Description',
 				'type'    => 'text',
 			)
 		);
 
-		// THREE COLUMNS
+		// How your money is used
 		$this->_manager->add_control(
 			self::SETTING_THREE_TITLE,
 			array(
 				'setting' => self::SETTING_THREE_TITLE,
 				'section' => self::SECTION_THREE,
-				'label'   => '[1] Title',
+				'label'   => 'Title',
 				'type'    => 'text',
 			)
 		);
@@ -336,7 +345,7 @@ class Fundraise extends Abstract_Customizer {
 				array(
 					'setting' => self::SETTING_THREE_DATA,
 					'section' => self::SECTION_THREE,
-					'label'   => '[1] Data',
+					'label'   => 'Entries',
 					'fields'  => array(
 						'img'  => array(
 							'type'      => Control\Custom_List::FIELD_TYPE_MEDIA,
@@ -352,7 +361,7 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		// ONE COLUMN
+		// Fundraiser Calls
 		$this->_manager->add_control(
 			new Control\Custom_List(
 				$this->_manager,
@@ -360,7 +369,7 @@ class Fundraise extends Abstract_Customizer {
 				array(
 					'setting' => self::SETTING_ONE_DATA,
 					'section' => self::SECTION_ONE,
-					'label'   => '[1] Data',
+					'label'   => 'Entries',
 					'fields'  => array(
 						'img'       => array(
 							'type'      => Control\Custom_List::FIELD_TYPE_MEDIA,
@@ -388,7 +397,7 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		// FEATURED LINKS
+		// Fundraiser Links
 		$this->_manager->add_control(
 			self::SETTING_LINK_TITLE,
 			array(
@@ -472,6 +481,75 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
+		// Success Stories
+		$this->_manager->add_control(
+			self::SETTING_SUCCESS_STORIES_TITLE,
+			array(
+				'setting' => self::SETTING_SUCCESS_STORIES_TITLE,
+				'section' => self::SECTION_SUCCESS_STORIES,
+				'label'   => 'Title',
+				'type'    => 'text',
+			)
+		);
+
+		$this->_manager->add_control(
+			self::SETTING_SUCCESS_STORIES_DESC,
+			array(
+				'setting' => self::SETTING_SUCCESS_STORIES_DESC,
+				'section' => self::SECTION_SUCCESS_STORIES,
+				'label'   => 'Description',
+				'type'    => 'textarea',
+			)
+		);
+
+		// Top List
+		$this->_manager->add_control(
+			self::SETTING_TOP_LIST_TITLE,
+			array(
+				'setting' => self::SETTING_TOP_LIST_TITLE,
+				'section' => self::SECTION_TOP_LIST,
+				'label'   => 'Title',
+				'type'    => 'text',
+			)
+		);
+
+		$this->_manager->add_control(
+			self::SETTING_TOP_LIST_DESC,
+			array(
+				'setting' => self::SETTING_TOP_LIST_DESC,
+				'section' => self::SECTION_TOP_LIST,
+				'label'   => 'Description',
+				'type'    => 'textarea',
+			)
+		);
+
+		$this->_manager->add_control(
+			self::SETTING_TOP_LIST_CAMPAIGN_ID,
+			array(
+				'setting' => self::SETTING_TOP_LIST_CAMPAIGN_ID,
+				'section' => self::SECTION_TOP_LIST,
+				'label'   => 'Campaign Id',
+				'type'    => 'text',
+			)
+		);
+
+		$this->_manager->add_control(
+			self::SETTING_TOP_LIST_COUNT,
+			array(
+				'setting' => self::SETTING_TOP_LIST_COUNT,
+				'section' => self::SECTION_TOP_LIST,
+				'label'   => 'Count',
+				'type'    => 'number',
+			)
+		);
+
+		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_TOP_LIST_PLACEHOLDER_LOGO, [
+			'setting'   => self::SETTING_TOP_LIST_PLACEHOLDER_LOGO,
+			'section'   => self::SECTION_TOP_LIST,
+			'label'     => 'Placeholder Logo',
+			'mime_type' => 'image',
+		] ) );
+
 		// Questions
 		$this->_manager->add_control(
 			self::SETTING_QUESTIONS_TITLE,
@@ -515,9 +593,9 @@ class Fundraise extends Abstract_Customizer {
 
 		// Circulation
 		$this->_manager->add_control(
-			self::SETTING_TREVORSPACE_CIRCULATION_TITLE,
+			self::SETTING_CIRCULATION_TITLE,
 			array(
-				'setting' => self::SETTING_TREVORSPACE_CIRCULATION_TITLE,
+				'setting' => self::SETTING_CIRCULATION_TITLE,
 				'section' => self::SECTION_OTHER,
 				'label'   => 'Title',
 				'type'    => 'text',
@@ -525,15 +603,15 @@ class Fundraise extends Abstract_Customizer {
 		);
 
 		$this->_manager->add_control(
-			self::SETTING_TREVORSPACE_CIRCULATION_DESC,
+			self::SETTING_CIRCULATION_DESC,
 			array(
-				'setting' => self::SETTING_TREVORSPACE_CIRCULATION_DESC,
+				'setting' => self::SETTING_CIRCULATION_DESC,
 				'section' => self::SECTION_OTHER,
 				'label'   => 'Description',
 				'type'    => 'text',
 			)
 		);
 
-		
+
 	}
 }

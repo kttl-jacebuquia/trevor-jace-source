@@ -146,6 +146,60 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 			<? /* TODO: Add Button: Become A Fundraiser */ ?>
 		</div>
 
+		<?php /** Top Lists */ ?>
+		<div class="top-lists bg-white py-24 text-teal-dark">
+			<div class="text-center w-3/4 mx-auto">
+				<h2 class="font-semibold text-px32 leading-px42 mb-4 lg:text-px46 lg:leading-px56 lg:mb-8">
+					<?= Fundraise::get_val( Fundraise::SETTING_TOP_LIST_TITLE ) ?>
+				</h2>
+				<?php if ( ! empty( $desc = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_DESC ) ) ) { ?>
+					<p class="font-normal text-px18 leading-px22 tracking-px05 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36">
+						<?= $desc ?>
+					</p>
+				<?php } ?>
+			</div>
+
+			<?php /** Top Individuals */ ?>
+			<?= \TrevorWP\Theme\Helper\Carousel::fundraisers( \TrevorWP\Classy\Content::get_fundraisers(
+					$individual_camp_id = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_CAMPAIGN_ID ),
+					Fundraise::get_val( Fundraise::SETTING_TOP_LIST_COUNT ),
+					true
+			), [
+					'title'  => 'Top Individuals',
+					'card_options' => [
+							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
+					],
+			] ) ?>
+			<div class="text-center -mt-8">
+				<a href="<?= esc_url( "https://give.thetrevorproject.org/campaign/fundraise-for-trevor/c{$individual_camp_id}/search?type=individual" ) ?>"
+				   class="font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
+				   target="_blank"
+				   rel="noopener nofollow noreferrer">
+					View All
+				</a>
+			</div>
+
+			<?php /** Top Teams */ ?>
+			<?= \TrevorWP\Theme\Helper\Carousel::fundraisers( \TrevorWP\Classy\Content::get_fundraising_teams(
+					Fundraise::get_val( Fundraise::SETTING_TOP_LIST_CAMPAIGN_ID ),
+					Fundraise::get_val( Fundraise::SETTING_TOP_LIST_COUNT ),
+					true
+			), [
+					'title'        => 'Top Teams',
+					'card_options' => [
+							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
+					],
+			] ) ?>
+			<div class="text-center -mt-8">
+				<a href="<?= esc_url( "https://give.thetrevorproject.org/campaign/fundraise-for-trevor/c{$individual_camp_id}/search?type=team" ) ?>"
+				   class="font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
+				   target="_blank"
+				   rel="noopener nofollow noreferrer">
+					View All
+				</a>
+			</div>
+		</div>
+
 		<?php /** QUESTIONS */ ?>
 		<?php $questions_title = Fundraise::get_val( Fundraise::SETTING_QUESTIONS_TITLE ); ?>
 		<?php $questions_desc = Fundraise::get_val( Fundraise::SETTING_QUESTIONS_DESC ); ?>
@@ -162,16 +216,16 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 			</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation( 
-			Fundraise::get_val( Fundraise::SETTING_TREVORSPACE_CIRCULATION_TITLE ), 
-			Fundraise::get_val( Fundraise::SETTING_TREVORSPACE_CIRCULATION_DESC ), 
-			[ 
-				'fundraiser', 
-				'counselor' 
-			], 
+		<?= Helper\Circulation_Card::render_circulation(
+			Fundraise::get_val( Fundraise::SETTING_CIRCULATION_TITLE ),
+			Fundraise::get_val( Fundraise::SETTING_CIRCULATION_DESC ),
+			[
+				'fundraiser',
+				'counselor'
+			],
 			[
 				'container' => 'other-ways',
-			] 
+			]
 		); ?>
 	</main>
 

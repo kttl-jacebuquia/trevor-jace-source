@@ -35,18 +35,35 @@ class Classy {
 			self::_handle_save();
 		}
 
+		list( $client_id, $client_secret ) = APIClient::get_credentials();
+
 		?>
 		<div class="wrap">
 			<h1>Classy.org</h1>
 			<form class="app-wrap" method="post" action="<?= admin_url( 'admin.php?page=' . self::MENU_SLUG ) ?>">
-				<div id="app-root"></div>
+				<input type="hidden" name="nonce" value="<?= Tools::create_nonce( self::NONCE_KEY ) ?>">
+				<table class="form-table">
+					<tbody>
+					<tr>
+						<th scope="row"><label for="client_id">Client Id</label></th>
+						<td><input name="client_id" id="client_id" type="text" class="regular-text"
+								   value="<?= esc_attr( $client_id ) ?>"></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="client_secret">Client Secret</label></th>
+						<td><input name="client_secret" id="client_secret" type="text" class="regular-text"
+								   value="<?= esc_attr( $client_secret ) ?>">
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="submit">
+					<button type="submit" name="submit" id="submit" class="button button-primary">
+						Save Credentials
+					</button>
+				</p>
 			</form>
 		</div>
-		<script>
-			jQuery(function () {
-				TrevorWP.adminApps.classy(document.getElementById('app-root'));
-			});
-		</script>
 		<?php
 	}
 
@@ -63,12 +80,16 @@ class Classy {
 		}
 
 		$data = filter_input_array( INPUT_POST, [
-				'clientId'     => FILTER_SANITIZE_STRING,
-				'clientSecret' => FILTER_SANITIZE_STRING
+				'client_id'     => FILTER_UNSAFE_RAW,
+				'client_secret' => FILTER_UNSAFE_RAW
 		], true );
 
-		$test_instance = APIClient::getInstance( $data['clientId'], $data['clientSecret'] );
+		//todo: test before save
+//		$test_instance = new APIClient( $data['client_id'], $data['client_secret'] );
 
-		// TODO: Complete here...
+		APIClient::$instance = null; // Clear previous instance
+		APIClient::set_credentials( $data['client_id'], $data['client_secret'] );
+
+		Tools::add_update_msg( "Credentials updated." );
 	}
 }

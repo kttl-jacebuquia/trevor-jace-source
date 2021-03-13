@@ -174,6 +174,42 @@
 	}
   }
 
+  // Fundraise
+  &.fundraiser {
+	.fundraiser-logo {
+	  @apply w-full;
+	}
+
+	.post-title {
+	  @apply flex-1;
+
+	  .title {
+		@apply line-clamp-2;
+	  }
+	}
+
+	.fundraiser-progress-wrap {
+	  @apply w-full h-4 my-2;
+	  @apply bg-teal-tint rounded-px10 overflow-hidden;
+	}
+
+	.fundraiser-progress-bar {
+	  @apply bg-blue_green;
+	  @apply h-full;
+	}
+
+	.fundraiser-btm-wrap {
+	  @apply flex flex-row;
+	  @apply py-2;
+	  @apply self-end w-full;
+	  @apply font-semibold text-base leading-px20 tracking-px05;
+	}
+
+	.fundraiser-total {
+	  @apply flex-1;
+	}
+  }
+
   // Icon
   .icon-wrap {
 	@apply absolute top-6 right-5;
@@ -193,6 +229,14 @@
 	  .title_top + & {
 		@apply leading-px28;
 	  }
+	}
+
+	.fundraiser-btm-wrap {
+	  @apply text-px18 leading-px26;
+	}
+
+	.fundraiser-progress-wrap {
+	  @apply h-px18;
 	}
   }
 
@@ -220,6 +264,10 @@
 	  .post-title {
 		@apply text-px22;
 	  }
+	}
+
+	.fundraiser-progress-wrap {
+	  @apply h-px20;
 	}
   }
 

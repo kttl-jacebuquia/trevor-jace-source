@@ -44,8 +44,10 @@ foreach ( $featured_cats as $cat ) {
 			'id'               => "cat-{$cat->slug}",
 			'title'            => '<a href="' . get_term_link( $cat ) . '">' . esc_html( $cat->name ) . '</a>',
 			'subtitle'         => $cat->description,
-			'hide_cat_eyebrow' => true,
 			'class'            => 'text-white',
+			'card_options' => [
+					'hide_cat_eyebrow' => true,
+			]
 	] );
 	$used_post_ids = array_merge( $used_post_ids, wp_list_pluck( $cat_posts, 'ID' ) );
 }

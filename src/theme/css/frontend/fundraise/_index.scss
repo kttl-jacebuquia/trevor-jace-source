@@ -5,3 +5,12 @@
 @import './text';
 @import './page-header';
 @import '../one_up/card';
+
+body.is-fundraise {
+  .top-lists {
+	.swiper-pagination {
+	  @apply flex;
+	  margin-left: calc(-2 * var(--v-padding-full)); // center pagination
+	}
+  }
+}

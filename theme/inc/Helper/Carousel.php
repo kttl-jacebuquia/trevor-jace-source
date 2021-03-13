@@ -19,10 +19,11 @@ class Carousel {
 				'subtitle',
 				'class'
 		], null ), [
-				'title_cls'        => '',
-				'print_js'         => true,
-				'hide_cat_eyebrow' => false,
-				'swiper'           => [], // swiper options
+				'title_cls'     => '',
+				'print_js'      => true,
+				'card_options'  => [],
+				'swiper'        => [], // swiper options
+				'card_renderer' => [ Card::class, 'post' ],
 		], $options );
 
 		# ID check
@@ -62,9 +63,7 @@ class Carousel {
 					<div class="swiper-wrapper">
 						<?php foreach ( $posts as $post ) { ?>
 							<div class="swiper-slide">
-								<?= Card::post( $post, [
-										'hide_cat_eyebrow' => $options['hide_cat_eyebrow']
-								] ) ?>
+								<?= call_user_func( $options['card_renderer'], $post, $options['card_options'] ) ?>
 							</div>
 						<?php } ?>
 					</div>
@@ -122,14 +121,14 @@ class Carousel {
 		$ext_cls = [
 				'big-img-carousel',
 				( "card-count-" . count( $data ) ),
-				implode(' ', $options['class']),
+				implode( ' ', $options['class'] ),
 		];
 
 		ob_start(); ?>
 
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			 <?php if ( ! empty( $options['title'] || ! empty( $options['subtitle'] ) ) ) { ?>
+			<?php if ( ! empty( $options['title'] || ! empty( $options['subtitle'] ) ) ) { ?>
 				<div class="carousel-header">
 					<?php if ( ! empty( $options['title'] ) ) { ?>
 						<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
@@ -243,9 +242,11 @@ class Carousel {
 				</div>
 				<div class="carousel-testimonials-txt-wrap relative">
 					<div class="panes-container flex justify-between absolute h-full w-full">
-						<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative" data-direction="left"
+						<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative"
+							 data-direction="left"
 							 aria-label="Previous Slide" role="button"></div>
-						<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative" data-direction='right'
+						<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative"
+							 data-direction='right'
 							 aria-label="Next Slide" role="button"></div>
 					</div>
 					<div class="swiper-container h-full">
@@ -283,6 +284,16 @@ class Carousel {
 	}
 
 	/**
+	 * @param array|null $data
+	 * @param array $options
+	 *
+	 * @return string|null
+	 */
+	public static function fundraisers( array $data = null, array $options = [] ): ?string {
+		return self::posts( $data, array_merge( $options, [ 'card_renderer' => [ Card::class, 'fundraiser' ] ] ) );
+	}
+
+	/**
 	 * @param string $base_selector
 	 * @param array $options
 	 */
@@ -290,13 +301,13 @@ class Carousel {
 		$options = array_merge( [
 				'slidesPerView' => 1,
 				'spaceBetween'  => 20,
-				'centerSlides'	=> true,
+				'centerSlides'  => true,
 				'pagination'    => [
 						'el'        => "{$base_selector} .swiper-pagination",
 						'clickable' => true,
 				],
 				'breakpoints'   => [
-						768  => [ 'spaceBetween' => 28 ],
+						768 => [ 'spaceBetween' => 28 ],
 				],
 				'navigation'    => [
 						'nextEl' => "{$base_selector} .swiper-button-next",

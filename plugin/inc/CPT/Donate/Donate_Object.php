@@ -31,7 +31,7 @@ abstract class Donate_Object {
 	static $ALL_POST_TYPES = [
 		Prod_Partner::POST_TYPE,
 		Partner_Prod::POST_TYPE,
-		Fundraiser_Stories::PERMALINK_FUND_STORY,
+		Fundraiser_Stories::POST_TYPE,
 	];
 
 	/**
