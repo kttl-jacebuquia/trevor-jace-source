@@ -47,6 +47,10 @@ class Content {
 
 	public static function get_campaign_data( string $campaign_id, string $endpoint, array $params = [] ): ?array {
 		$client = APIClient::get_instance();
+		if(empty($client)){
+			return null;
+		}
+
 		$teams  = $client->request( '/campaigns/' . $campaign_id . $endpoint, 'GET', array_merge( [
 			'aggregates' => 'true',
 			'sort'       => 'total_raised:desc',

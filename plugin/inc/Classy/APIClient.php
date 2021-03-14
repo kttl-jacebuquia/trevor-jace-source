@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Classy;
 
 use TrevorWP\Main;
+use TrevorWP\Util\Log;
 
 /**
  * Classy APIClient
@@ -61,9 +62,16 @@ class APIClient {
 	 *
 	 * @return APIClient
 	 */
-	public static function get_instance(): APIClient {
+	public static function get_instance(): ?APIClient {
 		if ( empty( self::$instance ) ) {
 			list( $client_id, $client_secret ) = self::get_credentials();
+
+			if ( empty( $client_id ) || empty( $client_secret ) ) {
+				Log::alert( 'Classy API credentials are missing.' );
+
+				return null;
+			}
+
 			self::$instance = new APIClient( $client_id, $client_secret );
 		}
 
@@ -77,7 +85,7 @@ class APIClient {
 	 *
 	 * @return mixed
 	 */
-	public function get_access_token( bool $use_cache = true ): string {
+	public function get_access_token( bool $use_cache = true ): ?string {
 		$cache_key = Main::CACHE_GROUP_PREFIX . 'ACCESS_TOKEN_' . $this->client_id;
 		$token     = $use_cache ? get_transient( $cache_key ) : null;
 
@@ -94,7 +102,7 @@ class APIClient {
 				if ( $use_cache ) {
 					delete_transient( $cache_key );
 				}
-				$token = false;
+				$token = null;
 				// TODO: LOG
 			} else {
 				$token = json_decode( $result['body'], true );
@@ -118,7 +126,7 @@ class APIClient {
 	 *
 	 * @return string Content response
 	 */
-	public function request( string $url, $method = 'GET', $params = [] ): string {
+	public function request( string $url, $method = 'GET', $params = [] ): ?string {
 		$url = self::CLASSY_API_BASEURL
 		       . '/' . self::CLASSY_API_VERSION
 		       . '/' . $url
@@ -134,11 +142,8 @@ class APIClient {
 			]
 		];
 
-		$context  = stream_context_create( $options );
-		$response = @file_get_contents( $url, false, $context );
+		$context = stream_context_create( $options );
 
-		// FIXME: Error handle
-
-		return $response;
+		return @file_get_contents( $url, false, $context );
 	}
 }
