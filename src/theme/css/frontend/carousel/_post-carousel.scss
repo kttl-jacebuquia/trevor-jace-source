@@ -11,6 +11,9 @@
 	}
   }
 
+  .carousel-full-width-wrap {
+	@apply overflow-visible;
+  }
   @screen md {
 	.carousel-container {
 	  width: theme('postCard.width.md');
