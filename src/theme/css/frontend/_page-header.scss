@@ -134,6 +134,10 @@
 		@apply items-center justify-end flex;
 		min-height: rem-calc(500px);
 	  }
+
+	  .page-header-desc {
+		@apply text-px24 leading-px34 tracking-px05;
+		}
 	}
 
 	@screen xl {
