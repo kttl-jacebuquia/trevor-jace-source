@@ -102,9 +102,20 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			 */
 			?>
 
-			<?php if ( have_posts() ) : ?>
+			<?php
+				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+				$query = new WP_Query( [
+					'post_type'   		=> \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
+					'orderby'					=> 'ID',
+					'order'						=> 'ASC',
+					'posts_per_page'	=> 6,
+					'paged'						=> $paged,
+				] );
+			?>
+
+			<?php if ( $query->have_posts() ) : ?>
 				<div class="partners-list">
-					<?php echo Helper\Tile_Grid::posts( $wp_query->posts,
+					<?php echo Helper\Tile_Grid::posts( $query->posts,
 							[
 									'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
 									'tileClass' => [ 'product-card' ],

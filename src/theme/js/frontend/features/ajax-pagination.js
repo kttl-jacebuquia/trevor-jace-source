@@ -31,7 +31,7 @@ export default (_args = {}) => {
 
 				$newSiteContent.find(options.containerSelector).children().appendTo($container);
 
-				const $newNextLink = $newSiteContent.find(options.paginatorSelector).find('a.next');
+				const $newNextLink = $newSiteContent.find(args.paginatorSelector).find('a.next');
 
 				if ($newNextLink.length === 0) {
 					// No more pages, hide
