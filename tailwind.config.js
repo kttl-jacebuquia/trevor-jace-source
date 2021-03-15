@@ -166,6 +166,7 @@ module.exports = {
 			width: {
 				px20: px2rem(20),
 				px127: px2rem(127),
+				px214: px2rem(214),
 				px319: px2rem(319),
 				px422: px2rem(422),
 				px394: px2rem(394),

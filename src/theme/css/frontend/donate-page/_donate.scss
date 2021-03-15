@@ -95,11 +95,9 @@
 		  }
 
 		  label {
-			background: white;
 			border: 1px solid rgba(0, 58, 72, 0.5);
-			@apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0;
+			@apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0 bg-white text-teal-dark w-px214;
 			border: 1px solid rgba(0, 58, 72, 0.5);
-			width: rem-calc(214px);
 
 			&:first-child {
 			@apply border-r-0;
