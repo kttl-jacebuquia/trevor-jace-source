@@ -79,7 +79,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 													'object-contain',
 													'max-h-px100',
 													'w-auto',
-													'max-w-4/5',
+													'max-w-7/10',
 													'lg:max-w-3/5',
 												)
 											),
