@@ -176,26 +176,26 @@
 
 
   .banner {
-		@apply max-w-px319 mx-auto mb-px100 xl:mb-px140 text-white text-center;
+		@apply mx-auto mb-px100 xl:mb-px140 text-white text-center;
 
 		@screen md {
-			@apply max-w-px550;
+			@apply max-w-px550 px-0;
 		}
 
-		@screen lg {
+		@screen lg2 {
 			@apply max-w-px1028;
 		}
 
 		&__inner {
-			@apply px-7 pt-px127 pb-px120 rounded-px10;
+			@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto;
 			background-color: theme('colors.blue_green.DEFAULT');
 
 			@screen md {
-			@apply px-px117 pb-px117;
+			@apply px-px117 pb-px117 max-w-none;
 			padding-top: rem-calc(133px);
 			}
 
-			@screen lg {
+			@screen lg2 {
 			@apply px-64 py-44;
 			}
 		}
@@ -208,7 +208,7 @@
 			letter-spacing: rem-calc(0.5px);
 			}
 
-			@screen lg {
+			@screen lg2 {
 			@apply text-px46 leading-px56;
 			}
 
@@ -226,7 +226,7 @@
 				@apply text-px18 leading-px24;
 			}
 
-			@screen lg {
+			@screen lg2 {
 			@apply text-px20 leading-px30 mt-px30;
 			}
 		}
@@ -239,7 +239,7 @@
 			@apply px-8 mt-px32;
 			}
 
-			@screen lg {
+			@screen lg2 {
 			@apply py-5 p-20 text-px20 leading-px26;
 			}
 

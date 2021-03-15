@@ -135,7 +135,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			$banner_cta   = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_BANNER_CTA );
 			?>
 
-			<div class="banner">
+			<div class="banner container">
 				<div class="banner__inner">
 					<h3 class="banner__title"><?= esc_attr( $banner_title ) ?></h3>
 					<p class="banner__description"><?= esc_attr( $banner_desc ) ?></p>

@@ -99,7 +99,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 			$shop_cta         = Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_SHOP_CTA );
 			?>
 
-			<div class="banner">
+			<div class="banner container">
 				<div class="banner__inner">
 					<h3 class="banner__title"><?php echo esc_attr( $shop_title ); ?></h3>
 					<p class="banner__description"><?php echo esc_attr( $shop_description ); ?></p>

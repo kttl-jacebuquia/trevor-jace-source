@@ -178,25 +178,25 @@
   }
 
   .banner {
-	@apply max-w-px319 mx-auto py-px100 text-white text-center;
+	@apply mx-auto py-px100 text-white text-center;
 
 	@screen md {
-	  @apply max-w-px550;
+	  @apply max-w-px550 px-0;
 	}
 
-	@screen lg {
+	@screen lg2 {
 	  @apply max-w-px1028;
 	}
 
 	&__inner {
-		@apply px-7 pt-px127 pb-px120 rounded-px10;
+		@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto;
 		background-color: theme('colors.teal.dark');
 
 		@screen md {
-		@apply px-px117 pt-32 pb-px117;
+		@apply px-px117 pt-32 pb-px117 max-w-none;
 		}
 
-		@screen lg {
+		@screen lg2 {
 		@apply px-64 py-44;
 		}
 	}
@@ -208,7 +208,7 @@
 		@apply text-px32 leading-px42;
 	  }
 
-	  @screen lg {
+	  @screen lg2 {
 		@apply text-px46 leading-px56;
 	  }
 	}
@@ -216,7 +216,7 @@
 	&__description {
 	  @apply font-normal text-px16 leading-px22 mt-5 md:text-px18 md:leading-px24;
 
-	  @screen lg {
+	  @screen lg2 {
 		@apply text-px20 leading-px30 mt-px30;
 	  }
 	}
@@ -229,7 +229,7 @@
 		@apply px-8;
 	  }
 
-	  @screen lg {
+	  @screen lg2 {
 		@apply py-5 p-20 text-px20 leading-px26;
 	  }
 	}
