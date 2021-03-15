@@ -1,3 +1,7 @@
+body.is-fundraise {
+	@apply overflow-x-hidden;
+}
+
 .is-fundraise {
   .page-header {
 	@screen md {
