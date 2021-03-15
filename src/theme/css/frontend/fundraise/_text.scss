@@ -6,7 +6,19 @@
 	background-color: theme('colors.blue_green.DEFAULT');
 
 	p {
-	  color: theme('colors.white.DEFAULT');
+	  @apply text-white font-normal text-px20 leading-px26;
+	}
+
+	@screen md {
+		p {
+			@apply text-px18 leading-px24 tracking-px05;
+		}
+	}
+
+	@screen lg {
+		p {
+			@apply text-px26 leading-px36;
+		}
 	}
   }
 
