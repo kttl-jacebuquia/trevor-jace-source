@@ -69,6 +69,7 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 				'desc'        => Advocacy::get_val( Advocacy::SETTING_HOME_OUR_WORK_DESC ),
 				'smAccordion' => true,
 				'tileClass'   => [ 'text-teal-dark' ],
+				'title_cls'   => 'text-white',
 				'class'       => [ 'text-white', 'md:container', 'mx-auto' ]
 		] ) ?>
 	</div>
@@ -143,9 +144,9 @@ $featured_letters    = Helper\Posts::get_from_list( $featured_letter_ids, 6 );
 
 	<div class="pt-20 pb-20 text-teal-dark bg-white lg:pt-28 lg:pb-48">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-0 lg:text-px46 lg:leading-px56">
+			<h2 class="page-sub-title centered">
 				<?= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_TITLE ) ?></h2>
-			<p class="text-px18 leading-px26 mb-px50 md:mx-20 md:mb-4 lg:text-px26 lg:leading-px36 lg:mb-20 lg:mx-44">
+			<p class="page-sub-title-desc centered">
 				<?= Advocacy::get_val( Advocacy::SETTING_HOME_PARTNER_ORG_DESC ) ?></p>
 
 			<div class="w-full flex flex-row flex-wrap mb-px72 mx-auto md:justify-center lg:w-3/4">

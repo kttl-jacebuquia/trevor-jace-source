@@ -93,16 +93,17 @@ class Circulation_Card {
 		ob_start(); ?>
 		<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 <?= $container_class ?>">
 			<div class="container mx-auto site-content-inner text-center <?= $wrapper_class ?>">
-				<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20 <?= $option_class ?>">
-					<?php echo $title; ?>
-				</h2>
+				<div class="w-full mb-px60 md:mb-px50 lg:mb-px80 ">
+					<h2 class="page-sub-title centered mb-0 <?= $option_class ?>">
+						<?php echo $title; ?>
+					</h2>
 
-				<?php if ( ! empty( $desc ) ): ?>
-					<p class="font-normal text-px22 leading-px34 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 xl:mx-64">
-						<?= $desc ?>
-					</p>
-				<?php endif; ?>
-
+					<?php if ( ! empty( $desc ) ): ?>
+						<p class="page-sub-title-desc centered mb-0 mt-px20 md:mt-px18 lg:mt-px20">
+							<?= $desc ?>
+						</p>
+					<?php endif; ?>
+				</div>
 				<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 					<?php foreach ( $cards as $card ) {
 						echo call_user_func( [ self::class, "render_{$card}" ] );

@@ -54,8 +54,12 @@ class Carousel {
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
 			<div class="carousel-header">
-				<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
-				<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+				<h2 class="page-sub-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
+					<p class="page-sub-title-desc <?= $options['title_cls'] ?>">
+						<?= esc_html( $options['subtitle'] ) ?>
+					</p>
+				<?php } ?>
 			</div>
 
 			<div class="carousel-full-width-wrap">
@@ -131,10 +135,10 @@ class Carousel {
 			<?php if ( ! empty( $options['title'] || ! empty( $options['subtitle'] ) ) ) { ?>
 				<div class="carousel-header">
 					<?php if ( ! empty( $options['title'] ) ) { ?>
-						<h2 class="carousel-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+						<h2 class="page-sub-title centered <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
 					<?php } ?>
 					<?php if ( ! empty( $options['subtitle'] ) ) { ?>
-						<p class="carousel-subtitle <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
+						<p class="page-sub-title-desc centered <?= $options['title_cls']; ?>"><?= esc_html( $options['subtitle'] ) ?></p>
 					<?php } ?>
 				</div>
 			<?php } ?>
@@ -289,7 +293,7 @@ class Carousel {
 	 *
 	 * @return string|null
 	 */
-	public static function fundraisers( array $data = null, array $options = [] ): ?string {
+	public static function fundraisers( array $data, array $options = [] ): ?string {
 		return self::posts( $data, array_merge( $options, [ 'card_renderer' => [ Card::class, 'fundraiser' ] ] ) );
 	}
 

@@ -111,7 +111,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 		echo Helper\Carousel::posts( $trending_posts, [
 				'title'     => 'Trending',
 				'subtitle'  => 'Explore the latest articles, resources, and guides.',
-				'title_cls' => 'text-center',
+				'title_cls' => 'centered',
 				'onlyMd'    => false,
 				'class'     => 'text-white md:mt-12 lg:mt-18',
 		] );

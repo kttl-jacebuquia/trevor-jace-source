@@ -36,7 +36,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		<?php $audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ); ?>
 		<div class="audit audit-fundraise">
 			<div class="container mx-auto">
-				<h3 class="text-center"><?php echo esc_html( $title ); ?></h3>
+				<h2 class="page-sub-title centered text-white mb-px80 md:mb-px70 lg:mb-px90"><?= esc_html( $title ); ?></h2>
 
 				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 
@@ -77,8 +77,8 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 				<?php foreach ( $content as $col ) : ?>
 					<div class="one-column__content featured-content__item text-center">
-						<h3><?php echo esc_html( $col['title'] ); ?></h3>
-						<p><?php echo esc_html( $col['desc'] ); ?></p>
+						<h2 class="page-sub-title centered"><?= esc_html( $col['title'] ); ?></h2>
+						<p class="page-sub-title-desc centered"><?php echo esc_html( $col['desc'] ); ?></p>
 						<?php if ( $col['img'] ) : ?>
 							<img src="<?php echo esc_url( $col['img']['url'] ); ?>" alt="<?php echo esc_attr( $col['title'] ); ?>">
 						<?php endif ?>
@@ -115,16 +115,12 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 				</div>
 
 				<?php /** BECOME A PARTNER */ ?>
-				<?php $partner_title = Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?>
-				<?php $partner_desc = Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ); ?>
-				<?php $partner_cta = Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA ); ?>
-				<?php $partner_cta_link = Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA_LINK ); ?>
 				<div class="partner">
 					<div class="mx-auto text-center">
-						<div class="one-up-card dark my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-center">
-							<h3><?php echo $partner_title; ?></h3>
-							<p><?php echo esc_html( $partner_desc ); ?></p>
-							<div><a href="<?php echo esc_url( $partner_cta_link ); ?>" class="btn"><?php echo esc_attr( $partner_cta ); ?></a></div>
+						<div class="one-up-card dark my-8 mx-auto md:w-3/4 md:my-6 lg:w-full text-center">
+							<h3><?= Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?></h3>
+							<p><?= wp_filter_kses( Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ) ); ?></p>
+							<div><a href="<?= esc_url( Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA_LINK ) ); ?>" class="btn"><?= esc_html( Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA ) ); ?></a></div>
 						</div>
 					</div>
 				</div>
@@ -148,16 +144,12 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 		<?php /** Top Lists */ ?>
 		<div class="top-lists bg-white py-24 text-teal-dark">
-			<div class="text-center w-3/4 mx-auto">
-				<h2 class="font-semibold text-px32 leading-px42 mb-4 lg:text-px46 lg:leading-px56 lg:mb-8">
-					<?= Fundraise::get_val( Fundraise::SETTING_TOP_LIST_TITLE ) ?>
-				</h2>
-				<?php if ( ! empty( $desc = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_DESC ) ) ) { ?>
-					<p class="font-normal text-px18 leading-px22 tracking-px05 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36">
-						<?= $desc ?>
-					</p>
-				<?php } ?>
-			</div>
+			<h2 class="page-sub-title centered">
+				<?= Fundraise::get_val( Fundraise::SETTING_TOP_LIST_TITLE ) ?>
+			</h2>
+			<?php if ( ! empty( $desc = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_DESC ) ) ) { ?>
+				<p class="page-sub-title-desc centered"><?= $desc ?></p>
+			<?php } ?>
 
 			<?php /** Top Individuals */ ?>
 			<?= \TrevorWP\Theme\Helper\Carousel::fundraisers( \TrevorWP\Classy\Content::get_fundraisers(

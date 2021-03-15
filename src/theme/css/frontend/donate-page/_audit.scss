@@ -20,19 +20,6 @@
 	@apply pt-px140 pb-px140;
   }
 
-  h3 {
-	@apply text-px32 leading-px40 font-bold mb-px80;
-	color: white;
-
-	@screen md {
-	  @apply text-px32 leading-px40 mb-px70;
-	}
-
-	@screen lg {
-	  @apply text-px32 leading-px40 mb-px90;
-	}
-  }
-
   &--card {
 
 	img {

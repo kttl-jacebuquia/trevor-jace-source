@@ -25,3 +25,43 @@
 	}
   }
 }
+
+//
+// Page Sub Title
+//
+.page-sub-title,
+.page-sub-title-desc {
+  @apply mb-3.5 w-3/4;
+
+  &.centered {
+	@apply mx-auto text-center;
+  }
+
+  @screen md {
+	@apply mb-2;
+  }
+
+  @screen xl {
+	@apply mb-3.5;
+  }
+}
+
+.page-sub-title {
+  @apply font-bold text-px32 leading-px40;
+
+  @screen md {
+	@apply leading-px42;
+  }
+
+  @screen xl {
+	@apply text-px46 leading-px56 tracking-em_001;
+  }
+}
+
+.page-sub-title-desc {
+  @apply font-normal text-px18 leading-px24 tracking-px05;
+
+  @screen xl {
+	@apply text-px24 leading-px34;
+  }
+}

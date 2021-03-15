@@ -14,6 +14,14 @@
   .carousel-full-width-wrap {
 	@apply overflow-visible;
   }
+
+  body.is-rc & {
+	.page-sub-title,
+	.page-sub-title-desc {
+	  @apply text-white;
+	}
+  }
+
   @screen md {
 	.carousel-container {
 	  width: theme('postCard.width.md');

@@ -52,9 +52,9 @@ class Tile_Grid {
 			<div class="tile-grid-inner">
 				<?php if ( ! empty( $options['title'] ) ) { ?>
 					<div class="tile-grid-header">
-						<h2 class="tile-grid-title"><?= $options['title'] ?></h2>
+						<h2 class="page-sub-title centered <?= $options['title_cls'] ?>"><?= $options['title'] ?></h2>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
-							<p class="tile-grid-desc"><?= $options['desc'] ?></p>
+							<p class="page-sub-title-desc centered"><?= $options['desc'] ?></p>
 						<?php } ?>
 					</div>
 				<?php } ?>
