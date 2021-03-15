@@ -168,7 +168,7 @@
 			@apply pt-0;
 
 			&-header {
-				@apply px-7 md:px-px50 lg:px-px100 mb-px50 lg2:mb-px30 text-center;
+				@apply px-7 md:px-px50 lg:px-px100 text-center;
 			}
 
 			&-title {
@@ -214,7 +214,7 @@
 	}
 
 	&__description {
-	  @apply font-normal text-px18 leading-px22 mt-5;
+	  @apply font-normal text-px16 leading-px22 mt-5 md:text-px18 md:leading-px24;
 
 	  @screen lg {
 		@apply text-px20 leading-px30 mt-px30;
@@ -303,7 +303,7 @@
 		}
 
 		&-header {
-			@apply px-0 mb-px50 lg2:mb-px30;
+			@apply px-0 mb-px50 lg2:mb-px4;
 		}
 
 		&-title {
@@ -319,16 +319,6 @@
 		&-container {
 			@apply mb-0;
 
-			@screen md {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
-				@apply justify-center;
-				@apply gap-px30;
-			}
-
-			@screen lg {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
-			}
-
 			@screen lg2 {
 				gap: unset;
 				max-width: rem-calc(1080px);
@@ -343,11 +333,8 @@
 		}
 
 		.tile {
-			@apply h-auto p-0 shadow-darkGreen;
+			@apply h-auto p-0;
 			$combinedHorizontalMargin: rem-calc(29px);
-			@screen lg {
-				max-width: theme('postCard.width.md');
-			}
 
 			@screen lg2 {
 				margin-top: rem-calc(56px);
@@ -361,21 +348,11 @@
 			}
 
 			&-inner {
-				@apply px-6 pb-12;
+				@apply px-6 pb-12 xl:pb-14;
+				@screen md {
+					padding-bottom: rem-calc(52px);
+				}
 			}
-
-			&-title-top {
-			@apply text-px14 leading-px18 mt-7 mb-3 uppercase text-left;
-			letter-spacing: rem-calc(0.5px);
-			}
-
-			&-desc {
-			@apply font-normal text-px16 leading-px22 mb-6;
-			}
-		}
-
-		.tile-image {
-			@apply h-60 w-full max-w-none rounded-t-px10;
 		}
   }
 }

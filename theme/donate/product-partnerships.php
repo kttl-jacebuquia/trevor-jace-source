@@ -33,6 +33,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 					array(
 						'title' => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ),
 						'tileClass'	=> ['product-card'],
+						'class'	=> ['product-grid'],
 					)
 				);
 				?>

@@ -14,9 +14,9 @@
 .swiper-button-wrapper {
   width: 3rem;
   height: 4rem;
-  @apply text-xl text-indigo;
+  @apply text-xl text-white;
   @apply flex items-center justify-center;
-  @apply bg-violet-lighter bg-opacity-80;
+  @apply bg-teal-dark;
   @apply opacity-100;
   @apply absolute top-1/2 transform -translate-y-1/2;
   border-radius: 100px;

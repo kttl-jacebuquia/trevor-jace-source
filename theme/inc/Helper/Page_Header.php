@@ -31,7 +31,7 @@ class Page_Header {
 				<h1 class="text-px32 leading-px40 md:leading-px42 mb-2.5 md:mb-5 lg:mb-7 flex flex-col font-bold md:inline-block md:mb-px20 lg:text-px46 lg:leading-px56">
 					<?= $options['title'] ?>
 				</h1>
-				<p class="hero__description text-px18 mb-9 md:mb-px30 lg:text-px26 lg:leading-px36 lg:max-w-2xl">
+				<p class="hero__description text-px18 leading-px26 md:text-px16 md:leading-px22 mb-9 md:mb-px30 lg:text-px22 lg:leading-px32 lg:max-w-2xl">
 					<?= $options['desc'] ?>
 				</p>
 

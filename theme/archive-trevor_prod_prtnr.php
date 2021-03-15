@@ -45,6 +45,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 					] ) )->posts, [
 							'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ),
 							'tileClass' => [ 'product-card' ],
+							'class'	=> ['product-grid'],
 					] );
 					?>
 				</div>
@@ -81,6 +82,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 								[
 										'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
 										'tileClass' => [ 'clickable-card', 'product-card' ],
+										'class'	=> ['product-grid'],
 								] );
 						?>
 					</div>
@@ -106,6 +108,7 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 							[
 									'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
 									'tileClass' => [ 'product-card' ],
+									'class'	=> ['product-grid'],
 							] );
 					?>
 

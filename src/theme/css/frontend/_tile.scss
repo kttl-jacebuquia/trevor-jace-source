@@ -10,6 +10,12 @@
 		@apply pb-0;
 	}
 
+	&.product-grid {
+		.page-sub-title {
+			@apply mb-0 text-teal-dark text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48;
+		}
+	}
+
   &-inner {
 	@apply mx-auto text-center;
   }
@@ -72,7 +78,9 @@
 	}
 
 	&-container {
-	  @apply grid-cols-2 gap-4;
+		@apply justify-center;
+		@apply gap-px28;
+		grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
 	}
   }
 
@@ -96,6 +104,11 @@
 		grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
 	}
   }
+
+	@screen lg2 {
+		grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
+		@apply justify-center;
+	}
 
 	@screen xl {
 		&-container {
@@ -136,6 +149,30 @@
 	  background-size: 15.5px 12.5px;
 	}
   }
+
+	&.product-card &-title-top {
+		@apply text-px14 leading-px18 mt-7 uppercase text-left mb-3 tracking-px05;
+	}
+
+	&.product-card &-title {
+		@apply mb-4 font-semibold text-px24 leading-px28 mt-8 md:mt-7 xl:text-px26 xl:leading-px36;
+	}
+
+	&.product-card &-desc {
+		@apply font-normal text-px16 leading-px22 md:leading-px24 mb-6 xl:text-px18 xl:leading-px26 line-clamp-5;
+	}
+
+	&.product-card &-cta-wrap {
+		@apply text-px20 leading-px26 tracking-px05;
+	}
+
+	&.product-card {
+		@apply shadow-darkGreen;
+
+		.tile-image {
+			@apply h-60 w-full max-w-none rounded-t-px10;
+		}
+	}
 
   &.clickable-card {
 	position: relative;
