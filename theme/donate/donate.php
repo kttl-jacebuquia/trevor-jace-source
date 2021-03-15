@@ -38,14 +38,16 @@ use \TrevorWP\Theme\Customizer\Donate;
 
 					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form">
 						<div class="frequency">
-							<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
-							<input type="radio" name="recurring" value="1" id="monthly" class="donation-frequency">
+							<div class="visually-hidden">
+								<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
+								<input type="radio" name="recurring" value="1" id="monthly" class="donation-frequency">
 
-							<input type="radio" name="amount" value="30" id="amount-30" class="fixed-amount">
-							<input type="radio" name="amount" value="60" id="amount-60" class="fixed-amount">
-							<input type="radio" name="amount" value="120" id="amount-120" class="fixed-amount">
-							<input type="radio" name="amount" value="250" id="amount-250" class="fixed-amount">
-
+								<input type="radio" name="amount" value="30" id="amount-30" class="fixed-amount">
+								<input type="radio" name="amount" value="60" id="amount-60" class="fixed-amount">
+								<input type="radio" name="amount" value="120" id="amount-120" class="fixed-amount">
+								<input type="radio" name="amount" value="250" id="amount-250" class="fixed-amount">
+							</div>
+							
 							<div class="frequency--choices">
 								<label for="once" class="is-selected text-center">Give Once</label>
 								<label for="monthly" class="text-center">Give Monthly</label>

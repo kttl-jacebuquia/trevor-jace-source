@@ -81,6 +81,12 @@
 		  }
 		}
 
+		.frequency {
+			.visually-hidden {
+				@apply overflow-hidden h-0;
+			}
+		}
+
 		.frequency--choices {
 		  @apply flex mb-px30;
 
