@@ -1,25 +1,13 @@
 <?php /** Donate: Fundraise */ ?>
 <?php get_header(); ?>
 <?php
-
-use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
 	<main id="site-content" role="main" class="site-content">
 
-	<?php /** Page Header */ ?>
-	<?php
-	echo Helper\Page_Header::split_img(
-		array(
-			'title'   => Fundraise::get_val( Fundraise::SETTING_HOME_HERO_TITLE ),
-			'desc'    => Fundraise::get_val( Fundraise::SETTING_HOME_HERO_DESC ),
-			'img_id'  => Fundraise::get_val( Fundraise::SETTING_HOME_HERO_IMG ),
-			'cta_txt' => Fundraise::get_val( Fundraise::SETTING_HOME_HERO_CTA ),
-			'cta_url' => Fundraise::get_val( Fundraise::SETTING_HOME_HERO_CTA_LINK ),
-		)
-	)
-	?>
+		<?php /** Page Header */ ?>
+		<?= Fundraise::get_component( Fundraise::SECTION_HEADER )->render() ?>
 
 		<?php /** Featured Text */ ?>
 		<?php $title = Fundraise::get_val( Fundraise::SETTING_FEATURED_TEXT_TITLE ); ?>
@@ -208,17 +196,17 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 			</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation(
-			Fundraise::get_val( Fundraise::SETTING_CIRCULATION_TITLE ),
-			Fundraise::get_val( Fundraise::SETTING_CIRCULATION_DESC ),
-			[
-				'fundraiser',
-				'counselor'
-			],
-			[
-				'container' => 'other-ways',
-			]
-		); ?>
+		<?= Fundraise::get_component( Fundraise::SECTION_OTHER )->render(
+				[
+						'cards'   => [
+								'fundraiser',
+								'counselor'
+						],
+						'options' => [
+								'container' => 'other-ways',
+						]
+				]
+		) ?>
 	</main>
 
 <?php get_footer(); ?>

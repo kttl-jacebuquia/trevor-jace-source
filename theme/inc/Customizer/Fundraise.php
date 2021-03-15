@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
-use TrevorWP\CPT;
+use TrevorWP\Theme\Customizer\Component\Circulation;
+use TrevorWP\Theme\Customizer\Component\Header;
 
 /**
  * Fundraise  Settings
@@ -86,11 +87,6 @@ class Fundraise extends Abstract_Customizer {
 
 	/** All Defaults */
 	const DEFAULTS = array(
-		self::SETTING_HOME_HERO_TITLE    => 'Start a fundraiser. <tilt>Change the world.</tilt>',
-		self::SETTING_HOME_HERO_DESC     => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
-		self::SETTING_HOME_HERO_CTA      => 'Become a Fundraiser',
-		self::SETTING_HOME_HERO_CTA_LINK => '#',
-
 		self::SETTING_FEATURED_TEXT_TITLE => 'THE POWER OF FUNDRAISING',
 		self::SETTING_FEATURED_TEXT_DESC  => 'The impact of fundraising has raised <b>$100,000</b> by individuals and <b>$200,000</b> by teams since <b>20XX.</b>',
 
@@ -160,11 +156,30 @@ class Fundraise extends Abstract_Customizer {
 		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',
 		self::SETTING_QUESTIONS_CTA      => 'Reach Out',
 		self::SETTING_QUESTIONS_CTA_LINK => '#',
-
-		self::SETTING_CIRCULATION_TITLE => 'Other ways to help',
-
-
 	);
+
+	/** @inheritdoc */
+	protected static $_section_components = [
+		self::SECTION_HEADER => [
+			Component\Header::class,
+			[
+				'options'  => [ 'type' => Header::TYPE_SPLIT_IMG ],
+				'defaults' => [
+					Component\Header::SETTING_TITLE   => 'Start a fundraiser. <tilt>Change the world.</tilt>',
+					Component\Header::SETTING_DESC    => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
+					Component\Header::SETTING_CTA_TXT => 'Become a Fundraiser',
+				]
+			]
+		],
+		self::SECTION_OTHER  => [
+			Component\Circulation::class,
+			[
+				'defaults' => [
+					Component\Circulation::SETTING_TITLE => 'Other ways to help',
+				]
+			]
+		]
+	];
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
@@ -173,16 +188,8 @@ class Fundraise extends Abstract_Customizer {
 
 	/** @inheritDoc */
 	protected function _register_sections(): void {
-		// Home
-
 		// Header
-		$this->_manager->add_section(
-			self::SECTION_HEADER,
-			array(
-				'panel' => self::PANEL_ID,
-				'title' => 'Header',
-			)
-		);
+		$this->get_component( static::SECTION_HEADER )->register_section();
 
 		// Featured text
 		$this->_manager->add_section(
@@ -257,56 +264,15 @@ class Fundraise extends Abstract_Customizer {
 		);
 
 		// Other Ways to Help
-		$this->_manager->add_section(
-			self::SECTION_OTHER,
-			array(
-				'panel' => self::PANEL_ID,
-				'title' => 'Circulation',
-			)
-		);
-
+		$this->get_component( static::SECTION_OTHER )->register_section();
 	}
 
 	/** @inheritDoc */
 	protected function _register_controls(): void {
-		// Home
-
-		// HEADER
-		$this->_manager->add_control(
-			new \WP_Customize_Media_Control(
-				$this->_manager,
-				self::SETTING_HOME_HERO_IMG,
-				array(
-					'setting'   => self::SETTING_HOME_HERO_IMG,
-					'section'   => self::SECTION_HEADER,
-					'label'     => 'Image',
-					'mime_type' => 'image',
-				)
-			)
-		);
-
-		$this->_manager->add_control(
-			self::SETTING_HOME_HERO_TITLE,
-			array(
-				'setting' => self::SETTING_HOME_HERO_TITLE,
-				'section' => self::SECTION_HEADER,
-				'label'   => 'Title',
-				'type'    => 'text',
-			)
-		);
-
-		$this->_manager->add_control(
-			self::SETTING_HOME_HERO_DESC,
-			array(
-				'setting' => self::SETTING_HOME_HERO_DESC,
-				'section' => self::SECTION_HEADER,
-				'label'   => 'Description',
-				'type'    => 'text',
-			)
-		);
+		# Header
+		$this->get_component( static::SECTION_HEADER )->register_controls();
 
 		// FEATURED TEXT
-
 		$this->_manager->add_control(
 			self::SETTING_FEATURED_TEXT_TITLE,
 			array(
@@ -592,26 +558,6 @@ class Fundraise extends Abstract_Customizer {
 		);
 
 		// Circulation
-		$this->_manager->add_control(
-			self::SETTING_CIRCULATION_TITLE,
-			array(
-				'setting' => self::SETTING_CIRCULATION_TITLE,
-				'section' => self::SECTION_OTHER,
-				'label'   => 'Title',
-				'type'    => 'text',
-			)
-		);
-
-		$this->_manager->add_control(
-			self::SETTING_CIRCULATION_DESC,
-			array(
-				'setting' => self::SETTING_CIRCULATION_DESC,
-				'section' => self::SECTION_OTHER,
-				'label'   => 'Description',
-				'type'    => 'text',
-			)
-		);
-
-
+		$this->get_component( static::SECTION_OTHER )->register_controls();
 	}
 }

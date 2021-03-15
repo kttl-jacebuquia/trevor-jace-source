@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\Customizer\Control;
 
+include_once ABSPATH . 'wp-includes/class-wp-customize-control.php';
+
 /**
  * Custom List Controller
  */

@@ -1,5 +1,8 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
+use TrevorWP\Exception\Internal;
+use TrevorWP\Theme\Customizer\Component\Abstract_Component;
+
 /**
  * Abstract Customizer
  */
@@ -14,14 +17,18 @@ abstract class Abstract_Customizer {
 
 	/**
 	 * @var array
-	 * @deprecated
 	 */
-	const ALL_SETTINGS = [];
+	const DEFAULTS = [];
 
 	/**
 	 * @var array
 	 */
-	const DEFAULTS = [];
+	protected static $_section_components = [];
+
+	/**
+	 * @var Component\Abstract_Component[]
+	 */
+	protected static $_section_component_objs = [];
 
 	/**
 	 * Abstract_Customizer constructor.
@@ -30,6 +37,10 @@ abstract class Abstract_Customizer {
 	 */
 	public function __construct( \WP_Customize_Manager $manager ) {
 		$this->_manager = $manager;
+
+		foreach ( array_keys( static::$_section_components ) as $section_id ) {
+			static::get_component( $section_id )->set_customizer( $this );// Add itself to all
+		}
 
 		$this->_register_all();
 	}
@@ -60,12 +71,19 @@ abstract class Abstract_Customizer {
 	 * Registers settings.
 	 */
 	protected function _register_settings(): void {
+		# Own settings
 		foreach ( ( new \ReflectionClass( $this ) )->getConstants() as $constant => $key ) {
 			if ( strpos( $constant, 'SETTING_' ) !== 0 ) {
 				continue;
 			}
 
 			$this->_manager->add_setting( $key, [ 'default' => static::get_default( $key ) ] );
+		}
+
+		# Section component settings
+		foreach ( static::$_section_component_objs as $section_component ) {
+			/** @var Abstract_Component $section_component */
+			$section_component->register_settings();
 		}
 	}
 
@@ -81,7 +99,7 @@ abstract class Abstract_Customizer {
 	 * @return mixed
 	 */
 	static public function get_val( string $name ) {
-		return get_theme_mod( $name, self::get_default( $name ) );
+		return get_theme_mod( $name, static::get_default( $name ) );
 	}
 
 	/**
@@ -93,5 +111,42 @@ abstract class Abstract_Customizer {
 	 */
 	static public function get_default( string $name ) {
 		return static::DEFAULTS[ $name ] ?? null;
+	}
+
+	/**
+	 * @return string
+	 */
+	static public function get_panel_id(): string {
+		return static::PANEL_ID;
+	}
+
+	/**
+	 * @return \WP_Customize_Manager
+	 */
+	public function get_manager(): \WP_Customize_Manager {
+		return $this->_manager;
+	}
+
+	/**
+	 * @param string $section
+	 *
+	 * @return Abstract_Component|null
+	 * @throws Internal
+	 */
+	public static function get_component( string $section ): ?Abstract_Component {
+		if ( ! array_key_exists( $section, static::$_section_component_objs ) ) {
+			if ( ! array_key_exists( $section, static::$_section_components ) ) {
+				throw new Internal( 'Section component settings does not exist.' );
+			}
+
+			list( $class, $settings ) = static::$_section_components[ $section ];
+			if ( ! is_subclass_of( $class, Abstract_Component::class ) ) {
+				throw new Internal( 'Provided class is not a child of the Abstract_Component.' );
+			}
+
+			static::$_section_component_objs[ $section ] = new $class( static::get_panel_id(), $section, $settings );
+		}
+
+		return static::$_section_component_objs[ $section ];
 	}
 }

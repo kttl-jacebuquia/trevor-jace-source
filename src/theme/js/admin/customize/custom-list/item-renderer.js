@@ -46,7 +46,7 @@ export default class ItemRenderer extends React.Component {
 			renderedValue = fieldComponents[type].renderValue(fieldData, data[fieldKey]);
 		}
 
-		return <div className="rendered-item-wrap">
+		return <div className="rendered-item-wrap" key={fieldKey}>
 			<div className="rendered-item-label">{label}</div>
 			<div className="rendered-item-value">{renderedValue}</div>
 		</div>
