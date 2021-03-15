@@ -86,7 +86,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<?php $_1_data = Donate::get_val( Donate::SETTING_HOME_1_DATA ); ?>
 		<div class="audit">
 			<div class="container mx-auto">
-				<h3 class="text-center"><?= $_1_title ?></h3>
+				<h3 class="page-sub-title centered text-white mb-px80 md:mb-px70 lg:mb-px90"><?= $_1_title ?></h3>
 				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 
 					<div class="audit-holder mobile-only">

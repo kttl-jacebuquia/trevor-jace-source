@@ -77,7 +77,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 
 				<?php foreach ( $content as $col ) : ?>
 					<div class="one-column__content featured-content__item text-center">
-						<h2 class="page-sub-title centered"><?= esc_html( $col['title'] ); ?></h2>
+						<h2 class="page-sub-title centered text-teal-dark"><?= esc_html( $col['title'] ); ?></h2>
 						<p class="page-sub-title-desc centered"><?php echo esc_html( $col['desc'] ); ?></p>
 						<?php if ( $col['img'] ) : ?>
 							<img src="<?php echo esc_url( $col['img']['url'] ); ?>" alt="<?php echo esc_attr( $col['title'] ); ?>">
