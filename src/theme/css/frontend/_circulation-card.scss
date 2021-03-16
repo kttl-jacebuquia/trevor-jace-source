@@ -79,8 +79,8 @@
 	}
 
 	.circulation-card-desc {
-	  @apply text-px14 leading-px18 tracking-em005;
 	  @apply mt-6;
+	  @apply font-normal text-px18 leading-px24 tracking-px05;  
 	}
 
 	.circulation-card-cta {

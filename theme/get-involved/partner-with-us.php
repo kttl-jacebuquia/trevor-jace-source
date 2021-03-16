@@ -58,17 +58,15 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 		href="#">Become a Partner</a>
 	</div>
 
-	<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 lg:pb-40">
-		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 mb-px60 mx-4 md:mx-20 md:mb-10 lg:text-px46 lg:leading-px56 lg:mb-20">
-				There are other ways to help.</h2>
-
-			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
-				<?= Circulation_Card::render_donation(); ?>
-				<?= Circulation_Card::render_counselor(); ?>
-			</div>
-
-		</div>
-	</div>
+	<?php /* Recirculation */ ?>
+	<?= Helper\Circulation_Card::render_circulation( 
+		$title = 'There are other ways to help.', 
+		$subtitle = null, 
+		$cards = [ 
+			'donation', 
+			'counselor' 
+		], 
+		$class = null 
+	); ?>
 </main>
 <?php get_footer(); ?>
