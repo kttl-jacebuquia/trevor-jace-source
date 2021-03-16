@@ -1,0 +1,105 @@
+body.is-fundraise {
+	.success-stories {
+		.post-carousel {
+			@apply mt-px100 mb-px50 md:mt-px80 lg:mb-px60 lg:mt-px140;
+		}
+
+		.carousel-header {
+			@apply mb-px28 md:mb-px48 lg:mb-px68;
+		}
+
+		.page-sub-title{
+			letter-spacing: rem-calc(1px);
+
+			@screen lg2 {
+				@apply text-px46 leading-px56;
+			}
+		}
+
+		.page-sub-title-desc {
+			@screen lg2 {
+				@apply text-px26 leading-px36;
+			}
+		}
+	}
+
+	:is(.top-individuals, .top-teams, .success-stories) {
+		:is(.page-sub-title, .page-sub-title-desc) {
+			@apply text-center w-full;
+
+			@screen lg {
+				@apply text-left;
+			}
+		}
+	}
+
+	.top-lists {
+		@apply py-px100;
+
+		@screen lg {
+			padding-top: rem-calc(140px);
+			padding-bottom: rem-calc(144px);
+		}
+
+		:is(.page-sub-title, .page-sub-title-desc) {
+			@apply w-full;
+		}
+
+		.carousel-header {
+			@apply mb-px18;
+		}
+
+		&__title {
+			@screen lg2 {
+				@apply text-px46 leading-px56;
+			}
+		}
+
+		&__desc {
+			@screen md {
+				@apply mx-auto text-px22 leading-px32;
+				max-width: rem-calc(494px);
+			}
+
+			@screen lg {
+				max-width: rem-calc(730px);
+			}
+
+			@screen lg2 {
+				@apply text-px26 leading-px36;
+			}
+		}
+	}
+
+	.top-individuals {
+		@apply mt-px60 lg:mt-px110 lg:mb-px50;
+	}
+
+	.top-teams {
+		@apply mt-px60 md:mt-px80 lg:mb-px60;
+
+		@screen lg {
+			margin-top: rem-calc(132px);
+		}
+	}
+
+	:is(.top-individuals, .top-teams) {
+		.page-sub-title {
+			@apply text-px26 leading-px36 lg2:text-px32 lg2:leading-px42;
+		}
+	}
+}
+
+// .post-carousel {
+// 	.swiper-button {
+// 		width: rem-calc(100px);
+
+// 		&-prev {
+// 			left: rem-calc(45px);
+// 		}
+
+// 		&-next {
+// 			right: rem-calc(25px);
+// 		}
+// 	}
+// }

@@ -86,7 +86,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		</div>
 
 		<?php /** Fundraiser Success Stories */ ?>
-		<div class="text-teal-dark bg-teal-tint bg-white pb-px40 md:pb-0">
+		<div class="text-teal-dark bg-teal-tint bg-white pb-px100 lg:pb-px120 success-stories">
 			<?= \TrevorWP\Theme\Helper\Carousel::posts( ( new WP_Query() )->query( [
 					'post_type'      => \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE,
 					'posts_per_page' => - 1,
@@ -97,17 +97,22 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					'subtitle' => Fundraise::get_val( Fundraise::SETTING_SUCCESS_STORIES_DESC ),
 			] ) ?>
 
-			<? /* TODO: Add Button: Become A Fundraiser */ ?>
+			<div class="text-center">
+			<a href="#!"
+					class="inline-block rounded-px10 py-px12 px-px32 md:px-px24 lg:py-px20 lg:px-px40 capitalize text-white bg-teal-dark text-center font-bold text-px16 leading-px22 md:leading-px20 lg:text-px20">Become A Fundraiser</a>
+			</div>
 		</div>
 
 		<?php /** Top Lists */ ?>
-		<div class="top-lists bg-white py-24 text-teal-dark">
-			<h2 class="page-sub-title centered">
-				<?= Fundraise::get_val( Fundraise::SETTING_TOP_LIST_TITLE ) ?>
-			</h2>
-			<?php if ( ! empty( $desc = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_DESC ) ) ) { ?>
-				<p class="page-sub-title-desc centered"><?= $desc ?></p>
-			<?php } ?>
+		<div class="top-lists bg-white text-teal-dark">
+			<div class="container mx-auto">
+				<h2 class="page-sub-title centered top-lists__title">
+					<?= Fundraise::get_val( Fundraise::SETTING_TOP_LIST_TITLE ) ?>
+				</h2>
+				<?php if ( ! empty( $desc = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_DESC ) ) ) { ?>
+					<p class="page-sub-title-desc centered top-lists__desc"><?= $desc ?></p>
+				<?php } ?>
+			</div>
 
 			<?php /** Top Individuals */ ?>
 			<?= \TrevorWP\Theme\Helper\Carousel::fundraisers( \TrevorWP\Classy\Content::get_fundraisers(
@@ -119,10 +124,11 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					'card_options' => [
 							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
 					],
+					'class'					=> 'top-individuals',
 			] ) ?>
-			<div class="text-center -mt-8">
+			<div class="text-center view-all">
 				<a href="<?= esc_url( "https://give.thetrevorproject.org/campaign/fundraise-for-trevor/c{$individual_camp_id}/search?type=individual" ) ?>"
-				   class="font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
+				   class="wave-underline font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
 				   target="_blank"
 				   rel="noopener nofollow noreferrer">
 					View All
@@ -139,10 +145,11 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					'card_options' => [
 							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
 					],
+					'class'					=> 'top-teams',
 			] ) ?>
-			<div class="text-center -mt-8">
+			<div class="text-center view-all">
 				<a href="<?= esc_url( "https://give.thetrevorproject.org/campaign/fundraise-for-trevor/c{$individual_camp_id}/search?type=team" ) ?>"
-				   class="font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
+				   class="wave-underline font-bold text-px24 leading-px34 tracking-px05 border-b-2 border-teal-dark md:text-px18 lg:text-px20 lg:leading-px24 lg:tracking-em005"
 				   target="_blank"
 				   rel="noopener nofollow noreferrer">
 					View All
