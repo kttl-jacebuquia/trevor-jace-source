@@ -1,6 +1,8 @@
 <?php /** Donate: Fundraise */ ?>
 <?php get_header(); ?>
 <?php
+
+use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\Fundraise;
 
 ?>
