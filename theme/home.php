@@ -71,6 +71,15 @@
 			</li>
 		</ul>
 
+		<hr class="my-10">
+
+		<ul class="my-20">
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Single_Page\Public_Education::get_permalink() ?>">Public Education</a>
+			</li>
+		</ul>
+
 	</div>
 </main> <!-- #site-content -->
 

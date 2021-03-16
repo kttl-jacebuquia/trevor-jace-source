@@ -7,6 +7,8 @@ use TrevorWP\Theme\Customizer\Component\Abstract_Component;
  * Abstract Customizer
  */
 abstract class Abstract_Customizer {
+	const PANEL_ID = '';
+
 	/* Prefixes */
 	const ID_PREFIX = 'trevor_';
 

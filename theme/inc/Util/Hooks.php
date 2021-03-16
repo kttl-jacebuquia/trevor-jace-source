@@ -3,6 +3,7 @@
 use TrevorWP\CPT;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
+use TrevorWP\Theme\Single_Page;
 use TrevorWP\Util\StaticFiles;
 
 /**
@@ -11,6 +12,9 @@ use TrevorWP\Util\StaticFiles;
 class Hooks {
 	const NAME_PREFIX = 'trevor_';
 
+	/**
+	 * @deprecated
+	 */
 	const SINGLE_PAGE_FILES = [
 			[ CPT\RC\RC_Object::QV_GET_HELP, 'rc/get-help.php' ],
 			[ CPT\RC\RC_Object::QV_TREVORSPACE, 'rc/trevor-space.php' ],
@@ -57,7 +61,7 @@ class Hooks {
 		add_filter( 'excerpt_length', [ self::class, 'excerpt_length' ], 10, 1 );
 
 		# Template Load Fixes
-		add_filter( 'template_include', [ self::class, 'template_include' ], PHP_INT_MAX >> 1, 1 );
+		add_filter( 'template_include', [ self::class, 'template_include' ], PHP_INT_MAX >> 2, 1 );
 
 		# Footer
 		add_action( 'wp_footer', [ self::class, 'wp_footer' ], 10, 0 );
@@ -67,6 +71,9 @@ class Hooks {
 
 		# Pre Get Posts
 		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+
+		# Single Pages
+		Single_Page\Abstract_Single_Page::init_all();
 	}
 
 	/**
@@ -200,6 +207,12 @@ class Hooks {
 		new Customizer\Shop_Product_Partners( $manager );
 		new Customizer\Fundraise( $manager );
 		new Customizer\Social_Media_Accounts( $manager );
+
+		# Single Pages
+		/** @var Single_Page\Abstract_Single_Page $cls */
+		foreach ( Single_Page\Abstract_Single_Page::ALL as $cls ) {
+			new $cls( $manager );
+		}
 	}
 
 	/**

@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\Theme\Customizer;
 
-use TrevorWP\Theme\Customizer\Component\Circulation;
 use TrevorWP\Theme\Customizer\Component\Header;
 
 /**
@@ -11,7 +10,6 @@ class Fundraise extends Abstract_Customizer {
 	const PANEL_ID = self::ID_PREFIX . 'fundraise';
 
 	/** Sections */
-
 	const SECTION_HEADER = self::PANEL_ID . '_header';
 	const SECTION_FEATURED_TEXT = self::PANEL_ID . '_featured_text';
 	const SECTION_THREE = self::PANEL_ID . '_three_column';
@@ -24,14 +22,6 @@ class Fundraise extends Abstract_Customizer {
 	const SECTION_OTHER = self::PANEL_ID . '_other';
 
 	/** Settings */
-
-	/** Header */
-	const SETTING_HEADER_PREFIX = self::SECTION_HEADER . '_';
-	const SETTING_HOME_HERO_IMG = self::SETTING_HEADER_PREFIX . 'hero_img';
-	const SETTING_HOME_HERO_TITLE = self::SETTING_HEADER_PREFIX . 'hero_title';
-	const SETTING_HOME_HERO_DESC = self::SETTING_HEADER_PREFIX . 'hero_desc';
-	const SETTING_HOME_HERO_CTA = self::SETTING_HEADER_PREFIX . 'hero_cta';
-	const SETTING_HOME_HERO_CTA_LINK = self::SETTING_HEADER_PREFIX . 'hero_cta_link';
 
 	/** Featured Text */
 	const PREFIX_SETTING_FEATURED_TEXT = self::SECTION_FEATURED_TEXT . '_';
@@ -79,11 +69,6 @@ class Fundraise extends Abstract_Customizer {
 	const SETTING_QUESTIONS_DESC = self::PREFIX_QUESTIONS . 'link_desc';
 	const SETTING_QUESTIONS_CTA = self::PREFIX_QUESTIONS . 'link_cta';
 	const SETTING_QUESTIONS_CTA_LINK = self::PREFIX_QUESTIONS . 'link_url';
-
-	/** Circulation */
-	const PREFIX_CIRCULATION = self::SECTION_OTHER . '_';
-	const SETTING_CIRCULATION_TITLE = self::PREFIX_CIRCULATION . 'title';
-	const SETTING_CIRCULATION_DESC = self::PREFIX_CIRCULATION . 'desc';
 
 	/** All Defaults */
 	const DEFAULTS = array(
