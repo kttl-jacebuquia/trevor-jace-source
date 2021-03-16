@@ -10,8 +10,7 @@
   }
 
   &-wrapper {
-	@apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28 max-w-px818 mx-auto;
-	background: theme('colors.gray.light');
+	@apply rounded-px10 pt-px58 pb-px80 pl-px28 pr-px28 max-w-px818 mx-auto bg-gray-light;
 
 	@screen md {
 	  @apply pt-px80 pb-px80;
@@ -24,11 +23,10 @@
   }
 
   &-content {
-	color: theme('colors.teal.dark');
+	@apply text-teal-dark;
 
 	@screen md {
-	  max-width: 403px;
-	  @apply mx-auto;
+	  @apply mx-auto max-w-px403;
 	}
 
 	@screen lg {
@@ -39,11 +37,11 @@
 	  @apply font-bold text-px32 leading-px40 mb-px10;
 
 	  @screen md {
-		@pply mt-px15;
+		@apply mt-px15;
 	  }
 
 	  @screen lg {
-		@pply text-px30 mb-px16 ;
+		@apply text-px30 mb-px16 ;
 	  }
 	}
 
@@ -65,8 +63,7 @@
 	  }
 
 	  a {
-		color: theme('colors.teal.dark');
-		@apply font-bold text-px18 leading-px24 inline-block relative;
+		@apply font-bold text-px18 leading-px24 inline-block relative text-teal-dark;
 
 		@screen lg {
 		  @apply text-px20 leading-px26;
@@ -74,9 +71,8 @@
 
 		&:after {
 		  content: '';
-		  width: 100%;
 		  border-bottom: 1px solid theme('colors.teal.dark');
-		  @apply absolute left-0 bottom-0;
+		  @apply absolute left-0 bottom-0 w-full;
 		}
 	  }
 	}
