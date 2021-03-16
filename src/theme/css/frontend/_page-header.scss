@@ -21,7 +21,7 @@
   }
 
   &-desc {
-	@apply pt-3.5 pb-8 text-base leading-px24 font-normal;
+	@apply pt-3.5 pb-8 text-px16 leading-px24 font-normal;
 	& + .page-header-cta {
 	  @apply mt-0;
 	}
@@ -106,7 +106,7 @@
 	  }
 
 	  .page-header-desc {
-		@apply text-px18 leading-px26;
+		@apply text-px16 leading-px26;
 	  }
 
 	  .page-header-content-wrap {
