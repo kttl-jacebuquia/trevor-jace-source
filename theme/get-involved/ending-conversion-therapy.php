@@ -78,22 +78,22 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="sticky-cta-anchor pt-14 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
+	<div class="sticky-cta-anchor pt-14 md:pt-px110 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
+			<h2 class="font-semibold md:font-bold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
 				Join The Campaign
 			</h2>
-			<p class="text-px18 leading-px26 mb-px50 md:text-px22 md:leading-px32 lg:text-px22 lg:leading-px32 lg:mb-px72">
+			<p class="text-px18 leading-px26 mb-px50 md:text-px20 md:leading-px24 lg:text-px22 lg:leading-px32 lg:mb-px72">
 				Enter your information to take action.
 			</p>
 
-			<form class="mx-auto lg:w-3/4">
-				<div class="md:flex md:grid md:grid-cols-2 md:gap-7 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
+			<form class="mx-auto w-full lg:max-w-px818">
+				<div class="md:flex md:grid md:grid-cols-2 md:gap-x-7 md:gap-y-5 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="fullname" class="sr-only">Full Name*</label>
 						<input id="fullname"
 							   required="required"
-							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Full Name*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
@@ -101,14 +101,14 @@ use \TrevorWP\Theme\Helper\Page_Header;
 						<input id="email"
 							   type="email"
 							   required="required"
-							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Email*"/>
 					</div>
 					<div class="flex full-w relative mb-7 md:mb-0">
 						<label for="mobilephone" class="sr-only">Mobile Phone</label>
 						<input id="mobilephone"
 							   maxlength="16"
-							   class="phone-number-format bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="phone-number-format bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Mobile Phone"/>
 					</div>
 					<div class="flex full-w relative mb-12 md:mb-0">
@@ -116,11 +116,11 @@ use \TrevorWP\Theme\Helper\Page_Header;
 						<input id="zipcode"
 							   maxlength="5"
 							   required="required"
-							   class="bg-white rounded-px10 text-teal-dark py-5 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+							   class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 							   placeholder="Zip Code*"/>
 					</div>
 				</div>
-				<div class="flex flex-row full-w relative mb-8">
+				<div class="flex flex-row full-w relative mb-7 md:mb-6 lg:mb-7">
 					<input id="checkbox-1" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
 					<label for="checkbox-1"
 						   class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">
