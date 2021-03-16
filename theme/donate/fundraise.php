@@ -20,43 +20,11 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		</div>
 
 		<?php /* How your Money is Used */ ?>
-		<?php $title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ); ?>
-		<?php $audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ); ?>
-		<div class="audit audit-fundraise">
-			<div class="container mx-auto">
-				<h2 class="page-sub-title centered text-white mb-px80 md:mb-px70 lg:mb-px90"><?= esc_html( $title ); ?></h2>
-
-				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
-
-					<div class="audit-holder mobile-only">
-						<div class="audit-container swiper-container" id="audit-<?php echo esc_attr( uniqid() ); ?>">
-							<div class="audit-wrapper swiper-wrapper">
-								<?php foreach ( $audit_data as $audit ) : ?>
-									<div class="audit--card__item swiper-slide text-center">
-										<?php if ( $audit['img'] ) : ?>
-											<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
-										<?php endif; ?>
-
-										<p><?php echo esc_html( $audit['desc'] ); ?></p>
-									</div>
-								<?php endforeach; ?>
-							</div>
-							<div class="swiper-pagination"></div>
-						</div>
-					</div>
-
-					<?php foreach ( $audit_data as $audit ) : ?>
-						<div class="audit--card__item swipe-slide text-center flex flex-col justify-between hidden lg:flex">
-							<?php if ( $audit['img'] ) : ?>
-								<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
-							<?php endif; ?>
-
-							<p><?php echo esc_html( $audit['desc'] ); ?></p>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</div>
+		<?= Helper\Audit_Block::render( 
+			$title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ), 
+			$audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ), 
+			$custom_class = 'audit-fundraise' ); 
+		?>
 
 		<?php /* ONE COLUMN */ ?>
 		<?php $content = Fundraise::get_val( Fundraise::SETTING_ONE_DATA ); ?>

@@ -82,46 +82,12 @@ use \TrevorWP\Theme\Customizer\Donate;
 		</div>
 
 		<?php /* How your Money is Used */ ?>
-		<?php $_1_title = Donate::get_val( Donate::SETTING_HOME_1_TITLE ); ?>
-		<?php $_1_data = Donate::get_val( Donate::SETTING_HOME_1_DATA ); ?>
-		<div class="audit">
-			<div class="container mx-auto">
-				<h3 class="page-sub-title centered text-white mb-px80 md:mb-px70 lg:mb-px90"><?= $_1_title ?></h3>
-				<div class="audit--card text-center grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-3 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
-
-					<div class="audit-holder mobile-only">
-						<div class="audit-container swiper-container" id="audit-<?php echo esc_attr( uniqid() ); ?>">
-							<div class="audit-wrapper swiper-wrapper">
-								<?php foreach ( $_1_data as $audit ) : ?>
-									<div class="audit--card__item swiper-slide text-center">
-										<?php if ( $audit['img'] ) : ?>
-											<div class="audit--card__image">
-												<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
-											</div>
-										<?php endif; ?>
-
-										<p><?php echo esc_html( $audit['desc'] ); ?></p>
-									</div>
-								<?php endforeach; ?>
-							</div>
-							<div class="swiper-pagination"></div>
-						</div>
-					</div>
-
-					<?php foreach ( $_1_data as $audit ) : ?>
-						<div class="audit--card__item swipe-slide text-center flex flex-col justify-between hidden lg:flex">
-							<?php if ( $audit['img'] ) : ?>
-								<img src="<?php echo esc_url( $audit['img']['url'] ); ?>" alt="<?php echo esc_attr( $audit['desc'] ); ?>">
-							<?php endif; ?>
-
-							<p><?php echo esc_html( $audit['desc'] ); ?></p>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</div>
-
-
+		<?= Helper\Audit_Block::render( 
+			$_1_title = Donate::get_val( Donate::SETTING_HOME_1_TITLE ), 
+			$_1_data = Donate::get_val( Donate::SETTING_HOME_1_DATA ), 
+			$custom_class = null 
+		); ?>
+		
 		<?php /* More Ways to Give */ ?>
 		<?php $_2_title = Donate::get_val( Donate::SETTING_HOME_2_TITLE ); ?>
 		<div class="card-collection">

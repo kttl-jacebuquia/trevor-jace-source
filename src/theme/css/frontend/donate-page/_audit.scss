@@ -20,6 +20,18 @@
 	@apply pt-px140 pb-px140;
   }
 
+	.page-sub-title {
+		@apply mb-px80;
+
+		@screen md {
+			@apply mb-px70;
+		}
+
+		@screen lg {
+			@apply mb-px90;
+		}
+	}
+
   &--card {
 
 	img {
