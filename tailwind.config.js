@@ -218,6 +218,7 @@ module.exports = {
 				px60: px2rem(60),
 				px64: px2rem(64),
 				px70: px2rem(70),
+				px82: px2rem(82),
 				px90: px2rem(90),
 			},
 			lineHeight: {
@@ -243,9 +244,11 @@ module.exports = {
 				px56: px2rem(56),
 				px60: px2rem(60),
 				px62: px2rem(62),
+				px66: px2rem(66),
 				px68: px2rem(68),
 				px70: px2rem(70),
 				px80: px2rem(80),
+				px92: px2rem(92),
 				px100: px2rem(100),
 			},
 			letterSpacing: {

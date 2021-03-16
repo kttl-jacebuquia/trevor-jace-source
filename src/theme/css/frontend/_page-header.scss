@@ -177,12 +177,19 @@
 	  @apply container mx-auto text-center items-center z-1;
 	}
 
+	.page-header-title {
+		@apply has-inline-tilt text-px32 leading-px40;
+		tilt {
+			@apply text-px44 leading-px54; 
+		}
+	} 
+
 	@screen md {
 
 	  .page-header-title {
-		@apply has-inline-tilt text-px36 leading-px46;
+		@apply has-inline-tilt text-px32 leading-px42;
 		tilt {
-			@apply text-px46 leading-px56; 
+			@apply text-px44 leading-px54; 
 		}
 	  } 
 
@@ -197,6 +204,13 @@
 	  .page-header-content-wrap {
 		@apply max-w-md;
 	  }
+
+		.page-header-title {
+			@apply has-inline-tilt text-px56 leading-px66;
+			tilt {
+				@apply text-px82 leading-px92; 
+			}
+		} 
 	}
   }
 
