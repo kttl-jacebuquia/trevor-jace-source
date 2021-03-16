@@ -1,30 +1,29 @@
 .card-collection {
-  @apply pb-60 pt-px80;
+  @apply pt-px80 pb-px80;
 
   .is-donate & {
-	background-color: theme('colors.blue_green.DEFAULT');
+	@apply bg-blue_green;
   }
 
   @screen md {
-	@apply pt-px100;
+	@apply pt-px80 pt-px100;
   }
 
   @screen lg {
-	@apply pb-px90 pt-px120;
+	@apply pb-px130 pt-px120;
   }
 
   h3 {
-	color: white;
-	@apply mt-px40 text-px32 leading-px40 font-bold mb-px70;
+	@apply mt-0 text-px32 leading-px40 font-bold mb-px60 text-white;
 
-	@screen md {
-	  @apply mt-px50 mb-px80;
+	@screen md { 
+	  @apply mb-px80; 
 	}
 
 	@screen lg {
-	  @apply mt-px80 text-px46 leading-px56;
+	  @apply text-px46 leading-px56;
 	}
-  }
+  } 
 
   .tile-grid-container {
 	@screen mobile {
@@ -50,7 +49,7 @@
 		}
 
 		.tile-title {
-			@apply mb-px20;
+			@apply mb-px20 text-px20 font-semibold leading-px26;
 
 		  &:after {
 			content: '';
