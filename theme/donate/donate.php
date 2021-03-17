@@ -139,23 +139,24 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<?php $nav_title = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_TITLE ); ?>
 		<?php $nav_desc = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_DESC ); ?>
 		<?php $nav_data = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_DATA ); ?>
+		<?php $nav_img  = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_IMAGE ); ?>
 
 		<div class="navigator">
 			<div class="container mx-auto">
 				<div class="navigator--wrapper text-center">
 					<h3><?= $nav_title ?></h3>
 					<p><?= $nav_desc ?></p>
+
+					<?php if( $nav_img ): ?>
+						<div class="text-center mt-px50 block">
+							<img src="<?php echo esc_url( wp_get_attachment_url( $nav_img ) ); ?>" class="block mx-auto" alt="<?php echo esc_attr( $nav_title ); ?>">
+						</div>
+					<?php endif; ?>
 					<div>
 						<div class="navigator-container swiper-container mobile-only" id="nav-<?= uniqid(); ?>">
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
-									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
-										<?php if( $navigator['img'] ): ?>
-											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
-										<?php else: ?>	
-											<div class="image-placeholder"></div>
-										<?php endif; ?>
-										
+									<div class="navigator-data__item swiper-slide text-center">
 										<h2><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>
@@ -166,13 +167,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 						<div class="navigator-container swiper-container">
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
-									<div class="navigator-data__item swiper-slide text-center <?php echo empty($navigator['img']) ? 'no-image' : '' ?>">
-										<?php if( $navigator['img'] ): ?>
-											<img src="<?= $navigator['img']["url"] ?>" alt="<?= $navigator['name'] ?>">
-										<?php else: ?>
-											<div class="image-placeholder"></div>
-										<?php endif; ?>
-
+									<div class="navigator-data__item swiper-slide text-center ">
 										<h2><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>

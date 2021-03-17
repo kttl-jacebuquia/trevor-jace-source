@@ -36,6 +36,7 @@ class Donate extends Abstract_Customizer {
 	const SETTING_HOME_NAVIGATOR_TITLE = self::SETTING_HOME_PREFIX . 'nav_title';
 	const SETTING_HOME_NAVIGATOR_DESC = self::SETTING_HOME_PREFIX . 'nav_desc';
 	const SETTING_HOME_NAVIGATOR_DATA = self::SETTING_HOME_PREFIX . 'nav_data';
+	const SETTING_HOME_NAVIGATOR_IMAGE = self::SETTING_HOME_PREFIX . 'nav_image';
 
 	const SETTING_HOME_FAQ_TITLE = self::SETTING_HOME_PREFIX . 'faq_title';
 	const SETTING_HOME_FAQ_DATA = self::SETTING_HOME_PREFIX . 'faq_data';
@@ -219,16 +220,18 @@ class Donate extends Abstract_Customizer {
 			'type'    => 'textarea',
 		] );
 
+		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_NAVIGATOR_IMAGE, [
+			'setting'   => self::SETTING_HOME_NAVIGATOR_IMAGE,
+			'section'   => self::SECTION_HOME_GENERAL,
+			'label'     => 'Navigator Image',
+			'mime_type' => 'image',
+		] ) );
+
 		$this->_manager->add_control( new Control\Custom_List( $this->_manager, self::SETTING_HOME_NAVIGATOR_DATA, [
 			'setting' => self::SETTING_HOME_NAVIGATOR_DATA,
 			'section' => self::SECTION_HOME_GENERAL,
 			'label'   => 'Navigator Data',
 			'fields'  => [
-				'img'  => [
-					'type'      => Control\Custom_List::FIELD_TYPE_MEDIA,
-					'label'     => 'Media',
-					'mime_type' => 'image',
-				],
 				'name' => [
 					'type'  => Control\Custom_List::FIELD_TYPE_INPUT,
 					'label' => 'Name'
