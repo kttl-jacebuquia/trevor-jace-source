@@ -34,6 +34,10 @@
 	@apply bg-teal-dark bg-opacity-100 text-white;
   }
 
+	body.is-rc .post-carousel & {
+		@apply bg-violet-lighter bg-opacity-80 text-indigo;
+	}
+
   .is-gi_advocacy & {
 	@apply bg-white bg-opacity-80 text-teal-dark;
 	&:hover {

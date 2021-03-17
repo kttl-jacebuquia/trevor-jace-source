@@ -322,12 +322,26 @@ class Carousel {
 		?>
 		<script>
 			(function () {
-				var swiper;
-				var options = <?= json_encode( $options )?>;
+				let swiper;
+				let options = <?= json_encode( $options )?>;
 				options.on.init = function () {
 					document.querySelectorAll('.carousel-testimonials .card-post').forEach(elem => {
 						elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
 					});
+				}
+
+				options.on.activeIndexChange = function (swiper) {
+					let nextButton = swiper.navigation.nextEl;
+					let carouselParentContainer = swiper.$el[0].parentElement.parentElement;
+
+					// only apply hide the next button on 2nd to the last index on post-carousels
+					if (Array.from(carouselParentContainer.classList).includes('post-carousel')) {
+						if (swiper.activeIndex === swiper.slides.length - 2) {
+							nextButton.classList.add('should-hide');
+						} else {
+							nextButton.classList.remove('should-hide');
+						}
+					}
 				}
 
 				function init() {

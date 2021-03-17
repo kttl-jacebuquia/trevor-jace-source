@@ -22,6 +22,74 @@
 	}
   }
 
+	.swiper-button {
+		@apply w-px100;
+
+		&-prev {
+			@apply hidden;
+
+			.swiper-button-wrapper {
+				right: unset;
+				left: 0;
+			}
+
+			@screen lg {
+				@apply flex;
+				$left-padding: calc( ( ( 100vw - 924px ) / 2 ) - 2.8rem );
+				left: $left-padding;
+			}
+
+			@screen lg2 {
+				$left-padding: calc( ( ( 100vw - 1120px ) / 2 ) - 2.8rem );
+				left: $left-padding;
+			}
+
+			@screen xl {
+				$left-padding: calc( ( ( 100vw - 1240px ) / 2 ) - 2.8rem );
+				left: $left-padding;
+			}
+
+			@screen 2xl {
+				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) - 2.8rem );
+				left: $left-padding;
+			}
+		}
+
+		&-next {
+			&.should-hide {
+				@apply hidden;
+			}
+
+			right: unset;
+			@apply hidden;
+
+			@screen lg {
+				$left-padding: calc( ( ( 100vw - 924px ) / 2 ) );
+				$card-size: rem-calc(395px);
+				@apply flex;
+				left: calc( #{$left-padding} + ( 2 * #{$card-size} ) );
+			}
+
+			@screen lg2 {
+				$left-padding: calc( ( ( 100vw - 1120px ) / 2 ) );
+				$card-size: rem-calc(355px);
+				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+			}
+
+			@screen xl {
+				$left-padding: calc( ( ( 100vw - 1240px ) / 2 ) );
+				$card-size: rem-calc(395px);
+				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+			}
+
+			@screen 2xl {
+				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) );
+				$card-size: rem-calc(395px);
+				left: calc( ( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+			}
+		}
+	}
+
   @screen md {
 	.carousel-container {
 	  width: theme('postCard.width.md');
