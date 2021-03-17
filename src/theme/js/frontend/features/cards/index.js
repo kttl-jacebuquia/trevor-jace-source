@@ -1,6 +1,10 @@
 import $ from 'jquery';
 
 export default function cardToggle($btn) {
-	console.log('Parent', $btn.parent().parent());
-	$btn.parent().parent().toggleClass('is-open');
+	const _parent = $btn.parent().parent();
+	const slideDuration = 50;
+
+
+	_parent.toggleClass('is-open');
+	$('.tile-desc, .tile-cta-wrap', _parent).slideToggle( slideDuration );
 }
