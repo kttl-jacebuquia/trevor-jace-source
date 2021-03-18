@@ -13,7 +13,8 @@
   }
 
   &-wrap {
-	@apply container mx-auto mt-20 mb-10;
+	@apply mx-auto mt-20 mb-10;
+	@apply w-full;
   }
 
   &-header {

@@ -95,12 +95,32 @@
 	}
 
 	.post-carousel & {
+		@apply pl-px28;
+		@apply w-full ml-0;
+
 		@screen md {
-			@apply pl-px50;
+			$content-max-width: rem-calc(768px);
+			padding-left: calc( 50px + ( ( 100vw - #{$content-max-width} ) / 2 ) );
 		}
 
 		@screen lg {
-			padding-left: var(--v-padding-full);
+			$content-max-width: rem-calc(924px);
+			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
+		}
+
+		@screen lg2 {
+			$content-max-width: rem-calc(1120px);
+			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
+		}
+
+		@screen xl {
+			$content-max-width: rem-calc(1240px);
+			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
+		}
+
+		@screen 2xl {
+			$content-max-width: rem-calc(1400px);
+			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
 		}
 	}
 }

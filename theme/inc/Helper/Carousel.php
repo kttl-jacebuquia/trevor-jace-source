@@ -53,7 +53,7 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<div class="carousel-header">
+			<div class="carousel-header container mx-auto">
 				<h2 class="page-sub-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
 				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
 					<p class="page-sub-title-desc <?= $options['title_cls'] ?>">
