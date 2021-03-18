@@ -163,3 +163,7 @@
 .take-action-cta {
 	@apply py-px12 px-px32 xl:py-px20 xl:px-px40 rounded-px10;
 }
+
+.carousel-wrap {
+	@apply overflow-x-hidden;
+} 

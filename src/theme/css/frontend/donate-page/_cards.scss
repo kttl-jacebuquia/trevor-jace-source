@@ -1,5 +1,5 @@
 .card-collection {
-  @apply pt-px80 pb-px80;
+  @apply pt-px80 pb-px80 overflow-x-hidden;
 
   .is-donate & {
 	@apply bg-blue_green;
