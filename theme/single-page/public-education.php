@@ -20,3 +20,5 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 	<?php # Circulation ?>
 	<?= Page::get_component( Page::SECTION_CIRCULATION )->render( [ 'cards' => [ 'donation', 'fundraiser' ] ] ) ?>
 </main>
+
+<?php get_footer();
