@@ -1,0 +1,70 @@
+.ch2 {
+	body.is-rc &-theme-bar.ch2-style-light &-dialog {
+		@apply bg-indigo;
+
+		&-actions {
+			.ch2-btn:nth-child(2) {
+				@apply bg-indigo;
+			}
+		}
+	}
+
+	&-theme-bar.ch2-style-light &-dialog {
+		@apply bg-blue_green;
+		@apply font-manrope;
+		@apply pt-px30 pb-px40 md:pt-px40 pl-px28 md:pl-px50 lg2:px-px80;
+		@apply md:flex md:flex-col lg2:flex-row;
+
+		&-content {
+			@apply text-white;
+			width: calc(265 / 317 * 100%);
+
+			@screen md {
+				width: calc(558 / 688 * 100%);
+			}
+
+			@screen lg2 {
+				@apply w-1/2 pr-px15;
+			}
+
+			p {
+				color: inherit;
+				@apply mb-px10;
+
+				strong {
+					color: inherit;
+					@apply text-px18 leading-px24 md:text-px20 md:leading-px26;
+				}
+			}
+
+			:is(p:nth-child(2), a) {
+				@apply text-px14 leading-px20 md:text-px18 md:leading-px24 font-normal;
+			}
+
+			a {
+				color: inherit;
+			}
+		}
+
+		&-actions {
+			@apply mt-px28 md:ml-0 lg2:mt-px6 items-start flex flex-col md:flex-row flex-wrap text-px16 md:text-px18 lg2:text-px20 font-bold;
+
+			.ch2-btn {
+				width: rem-calc(233px);
+				@apply m-0 px-0 py-px16 text-indigo bg-white rounded-full;
+
+				&:nth-child(2) {
+					@apply mt-px16 md:mt-0 md:ml-px14 bg-blue_green text-white border-2 border-solid border-white;
+				}
+
+				@screen md {
+					width: rem-calc(251px);
+				}
+
+				@screen lg2 {
+					width: rem-calc(253px);
+				}
+			}
+		}
+	}
+}
