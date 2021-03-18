@@ -77,11 +77,14 @@ class Page_Header {
 					<?php if ( ! empty( $options['desc'] ) ) { ?>
 						<p class="page-header-desc"><?= $options['desc'] ?></p>
 					<?php } ?>
+					<?php if( $options['cta_url'] && $options['cta_txt'] ): ?>
 					<a href="<?= $options['cta_url'] ?>"
 					   class="page-header-cta"><?= $options['cta_txt'] ?></a>
+					<?php endif; ?>
 				</div>
 				<div class="page-header-img-wrap">
 					<div class="page-header-img-inner">
+						<div class="page-header-img-inner__wrapper" data-aspectRatio="1:1">
 						<?= Thumbnail::print_img_variants( [
 								[
 										intval( $options['img_id'] ),
@@ -92,6 +95,7 @@ class Page_Header {
 										] ),
 								],
 						] ) ?>
+						</div>
 					</div>
 				</div>
 			</div>

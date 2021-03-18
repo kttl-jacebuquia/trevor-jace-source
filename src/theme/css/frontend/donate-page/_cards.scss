@@ -5,6 +5,10 @@
 	@apply bg-blue_green;
   }
 
+	@screen md {
+		@apply pb-px100;
+	}
+
   @screen lg {
 	@apply pb-px130 pt-px120;
   }

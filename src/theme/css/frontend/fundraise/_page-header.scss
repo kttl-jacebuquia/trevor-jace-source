@@ -1,11 +1,3 @@
-.is-fundraise {
-  .page-header {
-	@screen md {
-	  @apply pb-px100;
-	}
-
-	@screen lg {
-	  @apply pb-px120;
-	}
-  }
+body.is-fundraise {
+	@apply overflow-x-hidden;
 }

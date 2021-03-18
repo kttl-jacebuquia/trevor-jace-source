@@ -1,7 +1,8 @@
 .heading-lg-tilted {
   @apply font-manrope font-bold text-px30 leading-px50 tracking-em005;
 
-  & > tilt {
+  & > tilt,
+  & > tiltb {
 	@apply inline-block font-bold text-px44 leading-px54 tracking-em005 -mt-4;
   }
 
@@ -12,7 +13,8 @@
   @screen lg {
 	@apply text-px38 leading-px50 tracking-normal;
 
-	& > tilt {
+	& > tilt,
+  & > tiltb {
 	  @apply text-px48 leading-px70;
 	}
   }
@@ -20,7 +22,8 @@
   @screen xl {
 	@apply text-px52 leading-px62;
 
-	& > tilt {
+	& > tilt,
+  & > tiltb {
 	  @apply text-px70 leading-px80;
 	}
   }

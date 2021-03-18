@@ -136,6 +136,7 @@ module.exports = {
 			},
 			maxWidth: {
 				px289: px2rem(289),
+				px318: px2rem(318),
 				px319: px2rem(319),
 				px394: px2rem(394),
 				px403: px2rem(403),
@@ -151,6 +152,7 @@ module.exports = {
 				px1028: px2rem(1028),
 				px1240: px2rem(1240),
 				px493: px2rem(493),
+				px500: px2rem(500),
 				'7/10': '70%',
 				'4/5': '80%',
 				'3/5': '60%',
@@ -320,6 +322,7 @@ module.exports = {
 				px90: px2rem(90),
 				px100: px2rem(100),
 				px102: px2rem(102),
+				px104: px2rem(104),
 				px106: px2rem(106),
 				px108: px2rem(108),
 				px110: px2rem(110),

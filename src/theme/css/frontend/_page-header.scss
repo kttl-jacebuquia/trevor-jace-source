@@ -1,5 +1,5 @@
 .page-header {
-  @apply container mx-auto mb-pxn5; 
+  @apply container mx-auto;
 
   &-inner {
 	@apply flex flex-col;
@@ -17,7 +17,15 @@
   }
 
   &-title {
-	@apply text-white has-block-tilt;
+	@apply text-white;
+
+	tilt {
+		@apply inline-block;
+	}
+
+	tiltb {
+		@apply block;
+	}
   }
 
   &-desc {
@@ -74,7 +82,7 @@
   // - - Split Image
   &.type-split-img {
 	.page-header-img {
-	  @apply object-right-bottom object-contain;
+	  @apply object-center object-cover;
 	  @apply w-full h-full;
 	}
 
@@ -89,16 +97,23 @@
 	  @apply relative mt-px60;
 	}
 
+	.page-header-content-wrap {
+		@apply pb-0;
+	}
+
+	.page-header-desc {
+		@apply pb-0;
+	}
+
 	@screen md {
 	  .page-header-inner {
 		@apply items-center;
-		@apply mt-0;
-		margin-bottom: rem-calc(114px);
+		@apply mt-0 mb-px104;
 	  }
 
 	  .page-header-img-inner {
 		width: calc(100% - #{rem-calc(50px)});
-		@apply inset-x-auto mr-0 ml-auto h-auto;
+		@apply inset-x-auto mr-0 ml-auto h-auto max-w-px318;
 	  }
 
 	  .page-header-img {
@@ -106,7 +121,7 @@
 	  }
 
 	  .page-header-desc {
-		@apply text-px16 leading-px26;
+		@apply text-px16 leading-px26 pb-px32;
 	  }
 
 	  .page-header-content-wrap {
@@ -123,11 +138,11 @@
 
 	@screen lg {
 	  .page-header-inner {
-		@apply mb-14;
+		@apply mb-px80;
 	  }
 
 	  .page-header-img-inner {
-		@apply w-auto h-auto;
+		@apply w-full h-auto max-w-px500;
 	  }
 
 	  .page-header-img-wrap {
@@ -154,7 +169,7 @@
 
   // - - Img BG
   &.type-img-bg {
-	@apply relative;
+	@apply relative mb-pxn5;
 	@apply w-full max-w-none;
 	// --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
 	padding-top: var(--top-nav-top-margin);
@@ -179,8 +194,13 @@
 
 	.page-header-title {
 		@apply has-inline-tilt text-px34 leading-px40;
-		tilt {
+		tilt,
+		tiltb {
 			@apply text-px44 leading-px54; 
+		}
+
+		tiltb {
+			@apply block;
 		}
 	} 
 
@@ -188,8 +208,13 @@
 
 	  .page-header-title {
 		@apply has-inline-tilt text-px32 leading-px42;
-		tilt {
+		tilt,
+		tiltb {
 			@apply text-px44 leading-px54; 
+		}
+
+		tiltb {
+			@apply block;
 		}
 	  } 
 
@@ -207,8 +232,13 @@
 
 		.page-header-title {
 			@apply has-inline-tilt text-px56 leading-px66;
-			tilt {
+			tilt,
+			tiltb {
 				@apply text-px82 leading-px92; 
+			}
+
+			tiltb {
+				@apply block;
 			}
 		} 
 	}
