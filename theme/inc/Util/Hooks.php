@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT;
+use TrevorWP\Main;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Single_Page;
@@ -71,6 +72,10 @@ class Hooks {
 
 		# Pre Get Posts
 		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+
+		# Google OAuth Return
+		add_action( 'wp_ajax_trevor-site-banners', [ self::class, 'ajax_site_banners' ], 10, 0 );
+		add_action( 'wp_ajax_nopriv_trevor-site-banners', [ self::class, 'ajax_site_banners' ], 10, 0 );
 
 		# Single Pages
 		Single_Page\Abstract_Single_Page::init_all();
@@ -195,6 +200,7 @@ class Hooks {
 	public static function customize_register( \WP_Customize_Manager $manager ): void {
 		# Panels
 		new Customizer\External_Scripts( $manager );
+		new Customizer\Site_Banners( $manager );
 		new Customizer\Resource_Center( $manager );
 		new Customizer\Trevorspace( $manager );
 		new Customizer\Posts( $manager );
@@ -466,5 +472,53 @@ class Hooks {
 				$query->set( $key, $val );
 			}
 		}
+	}
+
+	/**
+	 * Site banners ajax handler.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/wp_ajax_action/
+	 * @link https://developer.wordpress.org/reference/hooks/wp_ajax_nopriv_action/
+	 */
+	public static function ajax_site_banners(): void {
+		$banners = [];
+
+		# Long waiting banner
+		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, true );
+		if ( Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_FORCE ) ) {
+			$is_long_wait = true;
+		}
+
+		if ( $is_long_wait ) {
+			$banners[] = [
+					'title' => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_TITLE ),
+					'desc'  => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_DESC ),
+			];
+		}
+
+		# Custom banners
+		$custom = Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_CUSTOM_DATA );
+		foreach ( $custom as $banner_data ) {
+			if ( empty( $banner_data['active'] ) ) {
+				continue;
+			}
+
+			$banners[] = [
+					'title' => (string) @$banner_data['title'],
+					'desc'  => (string) @$banner_data['desc'],
+			];
+		}
+
+		# Add their signatures
+		foreach ( $banners as &$banner ) {
+			$banner['id'] = substr( \TrevorWP\Util\Tools::get_obj_signature( $banner ), 3, 6 );
+		}
+
+		// TODO: Set appropriate cache headers here
+
+		wp_send_json( [
+				'success' => true,
+				'banners' => $banners,
+		] );
 	}
 }

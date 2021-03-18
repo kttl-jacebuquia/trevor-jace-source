@@ -932,4 +932,13 @@ class Tools {
 			'new_item_name' => "New {$name}",
 		];
 	}
+
+	/**
+	 * @param mixed $val
+	 *
+	 * @return string
+	 */
+	public static function get_obj_signature( $val ): string {
+		return md5( serialize( $val ) );
+	}
 }

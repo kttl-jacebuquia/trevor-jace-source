@@ -23,6 +23,7 @@ class Jobs {
 		self::NAME_UPDATE_POST_STATS               => [ [ GA_Results::class, 'update_post_stats' ], 'daily' ],
 		self::NAME_UPDATE_TREVORSPACE_ACTIVE_COUNT => [ [ Trevorspace::class, 'update_active_count' ], '30min' ],
 		self::NAME_UPDATE_FUNDRAISER_TOP_LISTS     => [ [ Classy::class, 'update_top_fundraise' ], 'twicedaily' ],
+		self::NAME_UPDATE_FUNDRAISER_TOP_LISTS     => [ [ Long_Wait::class, 'update' ], '10min' ],
 	];
 
 	/**

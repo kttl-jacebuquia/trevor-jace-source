@@ -3,12 +3,19 @@ import BaseField from './base';
 
 export default class Input extends BaseField {
 	render() {
-		const {inputType = 'text', value = ''} = this.props;
+		const {input_type = 'text', value = ''} = this.props;
 
-		return <input type={inputType} defaultValue={value} onChange={this.handleChange} ref={this.fieldRef}/>
+		return <input type={input_type} defaultValue={['checkbox', 'radio'].indexOf(input_type) === -1 ? value : 1}
+					  onChange={this.handleChange} ref={this.fieldRef}/>
 	}
 
 	static renderValue(field, value) {
+		const {input_type = 'text'} = field;
+
+		if (['checkbox', 'radio'].indexOf(input_type) !== -1) {
+			return value ? 'True' : 'False';
+		}
+
 		return value || <em>N/A</em>;
 	}
 }

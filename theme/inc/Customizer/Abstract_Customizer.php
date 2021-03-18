@@ -143,7 +143,7 @@ abstract class Abstract_Customizer {
 
 			list( $class, $settings ) = static::$_section_components[ $section ];
 			if ( ! is_subclass_of( $class, Abstract_Component::class ) ) {
-				throw new Internal( 'Provided class is not a child of the Abstract_Component.' );
+				throw new Internal( 'Provided class is not a child of the Abstract_Component.', compact( 'class', 'section' ) );
 			}
 
 			static::$_section_component_objs[ $section ] = new $class( static::get_panel_id(), $section, $settings );

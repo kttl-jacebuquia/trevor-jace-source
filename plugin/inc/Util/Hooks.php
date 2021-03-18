@@ -615,6 +615,13 @@ class Hooks {
 			);
 		}
 
+		if ( ! isset( $new_schedules['10min'] ) ) {
+			$new_schedules['10min'] = array(
+					'interval' => 10 * 60,
+					'display'  => __( 'Once every 10 minutes' )
+			);
+		}
+
 		return $new_schedules;
 	}
 }
