@@ -1,7 +1,7 @@
 .institutional-grants {
   .funders {
 	&__title {
-	  color: theme('colors.teal.dark');
+		@apply text-teal-dark;
 	}
 
 	.table-container {
@@ -13,13 +13,11 @@
 	}
 
 	table {
-	  @apply w-full;
-	  color: theme('colors.teal.dark');
+	  @apply w-full text-teal-dark;
 
 	  @screen md {
-		margin: auto;
+		@apply m-auto rounded-px10;
 		border-collapse: collapse;
-		border-radius: 10px;
 		border-style: hidden;
 		box-shadow: 0 0 0 2px theme('colors.teal.lighter');
 
@@ -144,9 +142,7 @@
 	}
 
 	&__partner {
-	  @apply text-white font-bold text-px16 leading-px22 lg:text-px20 lg:leading-px26 mb-px100 mt-px60 py-3 px-8 rounded-px10;
-	  background-color: theme('colors.teal.dark');
-
+	  @apply text-white font-bold text-px16 leading-px22 lg:text-px20 lg:leading-px26 mb-px100 mt-px60 py-3 px-8 rounded-px10 bg-teal-dark;
 
 	  @screen md {
 		@apply mt-px40;
@@ -165,8 +161,7 @@
   .cards {
 
 	&__title {
-	  color: theme('colors.teal.dark');
-	  @apply mt-px80 mx-0 mb-px60;
+	  @apply mt-px80 mx-0 mb-px60 text-teal-dark;
 
 	  @screen md {
 		@apply mt-px60 mx-0 mb-px65;

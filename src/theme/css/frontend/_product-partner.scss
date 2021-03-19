@@ -64,8 +64,7 @@
 		}
   }
   .featured-collections {
-		background-color: theme('colors.gray.light');
-		@apply pt-px60 pb-px100;
+		@apply pt-px60 pb-px100 bg-gray-light;
 
 		@screen md {
 			@apply py-px80;
@@ -189,8 +188,7 @@
 	}
 
 	&__inner {
-		@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto;
-		background-color: theme('colors.teal.dark');
+		@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto bg-teal-dark;
 
 		@screen md {
 		@apply px-px117 pt-32 pb-px117 max-w-none;
@@ -222,8 +220,7 @@
 	}
 
 	&__cta {
-	  @apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
-	  color: theme('colors.teal.dark');
+	  @apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22 text-teal-dark;
 
 	  @screen md {
 		@apply px-8;
@@ -239,8 +236,7 @@
 	@apply bg-white;
 
 	&__title {
-	  color: theme('colors.teal.dark');
-	  @apply mt-px80 mx-0 mb-px60;
+	  @apply mt-px80 mx-0 mb-px60 text-teal-dark;
 
 	  @screen md {
 		@apply mt-px60 mb-px20;
@@ -307,8 +303,7 @@
 		}
 
 		&-title {
-			@apply m-0 mx-auto text-teal-dark;
-			max-width: rem-calc(319px);
+			@apply m-0 mx-auto text-teal-dark max-w-px319;
 			letter-spacing: rem-calc(1px);
 
 			@screen md {
@@ -321,14 +316,12 @@
 
 			@screen lg2 {
 				gap: unset;
-				max-width: rem-calc(1080px);
-				@apply flex flex-row flex-wrap justify-center mx-auto;
+				@apply flex flex-row flex-wrap justify-center mx-auto max-w-px1080;
 			}
 
 			@screen xl {
 				gap: unset;
-				max-width: rem-calc(1240px);
-				@apply flex flex-row flex-wrap justify-center mx-auto;
+				@apply flex flex-row flex-wrap justify-center mx-auto max-w-px1240;
 			}
 		}
 

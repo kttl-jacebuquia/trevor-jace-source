@@ -5,10 +5,9 @@
   @apply cursor-pointer lg:z-10;
 
   .swiper-button-wrapper {
-	@apply flex;
+	@apply flex bg-teal-dark;
 	top: unset;
 	right: unset;
-	background-color: theme('colors.teal.dark');
 
 	i {
 	  @apply text-white;

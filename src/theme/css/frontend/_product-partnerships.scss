@@ -76,9 +76,7 @@
 		}
 	}
   .featured-stories {
-	background-color: theme('colors.gray.light');
-
-	@apply pt-px70 pb-px100;
+	@apply pt-px70 pb-px100 bg-gray-light;
 
 	@screen md {
 	  @apply py-px80;
@@ -169,8 +167,7 @@
 		}
 
 		&__title {
-			@apply text-px32 leading-px40 md:leading-px42 xl:text-px40 xl:leading-px48 text-center font-bold mb-px90 md:mb-px90 lg:mb-px60 xl:mb-px40;
-			color: theme('colors.teal.dark');
+			@apply text-px32 leading-px40 md:leading-px42 xl:text-px40 xl:leading-px48 text-center font-bold mb-px90 md:mb-px90 lg:mb-px60 xl:mb-px40 text-teal-dark;
 		}
   }
 
@@ -187,8 +184,7 @@
 		}
 
 		&__inner {
-			@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto;
-			background-color: theme('colors.blue_green.DEFAULT');
+			@apply px-7 pt-px127 pb-px120 rounded-px10 max-w-lg mx-auto bg-blue_green;
 
 			@screen md {
 			@apply px-px117 pb-px117 max-w-none;
@@ -232,8 +228,7 @@
 		}
 
 		&__cta {
-			@apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22;
-			color: theme('colors.teal.dark');
+			@apply inline-block py-3 px-6 bg-white rounded-px10 mt-px40 text-px16 leading-px22 text-teal-dark;
 
 			@screen md {
 			@apply px-8 mt-px32;
@@ -253,8 +248,7 @@
 	@apply bg-white;
 
 	&__title {
-	  color: theme('colors.teal.dark');
-	  @apply mt-px80 mx-0 mb-px40;
+	  @apply mt-px80 mx-0 mb-px40 text-teal-dark;
 
 	  @screen md {
 		@apply mb-px20;

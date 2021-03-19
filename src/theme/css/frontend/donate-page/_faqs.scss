@@ -1,14 +1,12 @@
 .faqs {
-  background: white;
-  @apply pb-px80 pt-px80;
+  @apply pb-px80 pt-px80 bg-white;
 
   @screen lg {
 	@apply pb-px120 pt-px120;
   }
 
-  h3 {
-	color: theme('colors.teal.dark');
-	@apply mb-px50 text-center text-px32 leading-px42 font-bold;
+  &-heading {
+	@apply mb-px50 text-center text-px32 leading-px42 font-bold text-teal-dark;
 
 	@screen md {
 	  @apply mb-px30 text-left text-px30 leading-px40;
@@ -23,8 +21,7 @@
   .faq {
 	&-list {
 	  border-top: 1px solid theme('colors.teal.dark');
-	  margin-left: rem-calc(-25px);
-	  margin-right: rem-calc(-25px);
+	  @apply mr-pxn25 ml-pxn25;
 
 	  @screen md {
 		@apply mr-auto ml-auto;
@@ -38,9 +35,8 @@
 		  @apply pt-px40 pb-px40 pl-0 pr-0;
 		}
 
-		h4 {
-		  color: theme('colors.teal.dark');
-		  @apply text-px18 leading-px26 tracking-px05 font-semibold;
+		&-headline {
+		  @apply text-px18 leading-px26 tracking-px05 font-semibold text-teal-dark;
  
 		  @screen md {
 			@apply text-px20;
@@ -73,10 +69,8 @@
 	  }
 
 	  &__content {
-		background-color: theme('colors.gray.light');
-		color: theme('colors.teal.dark');
 		border-bottom: 1px solid rgba(149, 163, 167, 0.4);
-		@apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22;
+		@apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22 text-teal-dark bg-gray-light;
 
 		@screen md {
 		  @apply pt-px40 pr-px30 pb-px40 pl-px30 text-px18 leading-px26;
@@ -100,16 +94,14 @@
 	  }
 
 	  p {
-		color: theme('colors.teal.dark');
-		@apply text-center text-px18 leading-px26;
+		@apply text-center text-px18 leading-px26 text-teal-dark;
 
 		@screen lg {
 		  @apply text-left;
 		}
 
 		a {
-		  @apply relative block mt-px20 font-bold ml-px10;
-		  color: theme('colors.teal.dark');
+		  @apply relative block mt-px20 font-bold ml-px10 text-teal-dark;
 
 		  &:after {
 			content: '';

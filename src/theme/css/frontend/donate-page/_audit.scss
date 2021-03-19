@@ -1,9 +1,8 @@
 .audit {
-  background-color: theme('colors.teal.dark');
-  @apply pt-px100 pb-px80;
+  @apply pt-px100 pb-px80 bg-teal-dark;
 
   &.audit-fundraise {
-	background-color: theme('colors.blue_green.DEFAULT');
+	@apply bg-blue_green;
   }
 
 	&-holder.mobile-only {
@@ -47,8 +46,7 @@
 	}
 
 	p {
-	  color: theme('colors.white.DEFAULT');
-	  @apply font-medium text-px20 leading-px30 tracking-px05 mx-auto max-w-px319;
+	  @apply font-medium text-px20 leading-px30 tracking-px05 mx-auto max-w-px319 text-white;
 
 	  @screen md {
 		@apply font-normal text-px18 leading-px22 max-w-px422; 

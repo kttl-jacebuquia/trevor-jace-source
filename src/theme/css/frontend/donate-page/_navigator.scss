@@ -2,7 +2,7 @@
   @apply pt-0 pb-0;
 
 	@screen mobile {
-		background: theme('colors.teal.tint');
+		@apply bg-teal-tint;
 	}
 
   @screen md {
@@ -30,16 +30,14 @@
 	}
 
   &--wrapper {
-	@apply pt-px80 pb-px80 rounded-px10 pl-px30 pr-px30;
-	background-color: theme('colors.teal.tint');
+	@apply pt-px80 pb-px80 rounded-px10 pl-px30 pr-px30 bg-teal-tint;
 
 	@screen lg {
 	  @apply pb-px90 pt-px90;
 	}
 
-	h3 {
-	  color: theme('colors.teal.dark');
-	  @apply font-bold text-px32 leading-px40 mb-px10;
+	.navigator--heading {
+	  @apply font-bold text-px32 leading-px40 mb-px10 text-teal-dark;
 
 	  @screen lg {
 		@apply text-px46 leading-px56 mb-px20;
@@ -47,8 +45,7 @@
 	}
 
 	p {
-	  color: theme('colors.teal.dark');
-	  @apply font-normal text-px22 leading-px32 tracking-px05 text-center;
+	  @apply font-normal text-px22 leading-px32 tracking-px05 text-center text-teal-dark;
 
 	  @screen lg {
 		@apply text-px24 leading-px34;
@@ -103,29 +100,28 @@
 		@apply mb-px60 mb-px55 mb-px80;
 	  }
 
-	  h2 {
-		color: theme('colors.teal.dark');
-		@apply mx-auto max-w-px319 text-px22 leading-px32 tracking-px05 text-center font-normal text-center;
+	  &--heading {
+		@apply mx-auto max-w-px319 text-px22 leading-px32 tracking-px05 text-center font-normal text-center text-teal-dark;
 	  }
 	}
   }
 
   .swiper-pagination {
-	width: 100%;
+	@apply w-full;
 
 	@screen md {
-	  display: flex;
+	  @apply flex;
 	}
 
 	@screen lg {
-	  display: none;
+	  @apply hidden;
 	}
 
 	span {
 	  background: rgba(0, 58, 72, 0.3);
 
 	  &.swiper-pagination-bullet-active {
-		background: theme("colors.teal.dark");
+		@apply bg-teal-dark;
 	  }
 	}
   }

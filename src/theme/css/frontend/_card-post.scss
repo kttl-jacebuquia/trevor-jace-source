@@ -85,8 +85,7 @@
 	}
 
   .title-top {
-	@apply font-semibold text-px14 leading-px18 tracking-px05;
-	margin-bottom: rem-calc(10px);
+	@apply font-semibold text-px14 leading-px18 tracking-px05 mb-px10;
   }
 
   .title-btm {
@@ -162,10 +161,10 @@
 	@apply flex flex-row flex-wrap;
 	@apply overflow-y-hidden;
 	@apply z-1;
+	@apply h-px34;
 	@apply mt-auto;
 	@apply mx-6;
 	@apply mb-5;
-	height: rem-calc(34px);
 
 	&.show-all {
 	  height: auto !important;
@@ -196,7 +195,7 @@
 	  @apply mr-2 mb-2;
 
 	  &:hover {
-		background-color: theme('colors.moss.DEFAULT');
+		@apply bg-moss;
 	  }
 
 
@@ -220,7 +219,7 @@
 	  }
 
 	  &:hover {
-		background-color: theme('colors.moss.dark');
+		@apply bg-moss-dark;
 	  }
 	}
   }

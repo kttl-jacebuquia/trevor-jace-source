@@ -1,6 +1,5 @@
 .featured-content {
-  background: white;
-  @apply pt-px100 pb-px100;
+  @apply pt-px100 pb-px100 bg-white;
 
   @screen lg {
 	@apply pt-px160 pb-px160;
@@ -17,9 +16,8 @@
 	  @apply mt-0;
 	}
 
-	h3 {
-	  color: theme('colors.teal.dark');
-	  @apply font-bold text-px32 leading-px40 mb-px14;
+	.page-sub-title {
+	  @apply font-bold text-px32 leading-px40 mb-px14 text-teal-dark;
 
 	  @screen md {
 		@apply leading-px42;
@@ -31,8 +29,7 @@
 	}
 
 	p {
-	  color: theme('colors.teal.dark');
-	  @apply text-px18 leading-px22 mb-px40;
+	  @apply text-px18 leading-px22 mb-px40 text-teal-dark;
 
 	  @screen lg {
 		@apply text-px26 leading-px36 mb-px60 mx-auto max-w-px894;
@@ -40,9 +37,7 @@
 	}
 
 	.btn {
-	  color: white;
-	  background-color: theme('colors.teal.dark');
-	  @apply font-bold pt-px12 pl-px32 pb-px12 pr-px32 text-px16 leading-px22;
+	  @apply font-bold pt-px12 pl-px32 pb-px12 pr-px32 text-px16 leading-px22 bg-teal-dark text-white;
 
 	  @screen md {
 		@apply leading-px20 pl-px24 pr-px24;

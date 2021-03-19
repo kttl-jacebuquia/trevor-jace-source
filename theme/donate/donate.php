@@ -92,7 +92,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<?php $_2_title = Donate::get_val( Donate::SETTING_HOME_2_TITLE ); ?>
 		<div class="card-collection">
 			<div class="container mx-auto">
-				<h3 class="text-center"><?= $_2_title ?></h3>
+				<h3 class="heading text-center"><?= $_2_title ?></h3> 
 
 				<?= Helper\Tile_Grid::custom( [
 						[
@@ -144,7 +144,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<div class="navigator">
 			<div class="container mx-auto">
 				<div class="navigator--wrapper text-center">
-					<h3><?= $nav_title ?></h3>
+					<h3 class="navigator--heading"><?= $nav_title ?></h3>
 					<p><?= $nav_desc ?></p>
 
 					<?php if( $nav_img ): ?>
@@ -157,7 +157,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
 									<div class="navigator-data__item swiper-slide text-center">
-										<h2><?= $navigator['name'] ?></h2>
+										<h2 class="navigator-data__item--heading"><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -168,7 +168,7 @@ use \TrevorWP\Theme\Customizer\Donate;
 							<div class="navigator-data swiper-wrapper">
 								<?php foreach ( $nav_data as $navigator ): ?>
 									<div class="navigator-data__item swiper-slide text-center ">
-										<h2><?= $navigator['name'] ?></h2>
+										<h2 class="navigator-data__item--heading"><?= $navigator['name'] ?></h2>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -186,13 +186,13 @@ use \TrevorWP\Theme\Customizer\Donate;
 
 		<div class="faqs">
 			<div class="container mx-auto">
-				<h3><?= $faq_title ?></h3>
+				<h3 class="faqs-heading"><?= $faq_title ?></h3>
 
 				<div class="faq-list">
 					<?php foreach ( $faq_data as $faq ): ?>
 						<div class="faq-list__item">
 							<div class="faq-list__heading">
-								<h4>
+								<h4 class="faq-list__heading-headline">
 									<svg class="plus" width="20" height="20" viewBox="0 0 20 20" fill="none"
 										 xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" clip-rule="evenodd"

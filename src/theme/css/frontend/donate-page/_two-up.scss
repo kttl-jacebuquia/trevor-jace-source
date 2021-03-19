@@ -1,32 +1,3 @@
 .other-ways {
-  background-color: theme('colors.white.DEFAULT');
-  @apply pb-px100;
-  @apply pt-px80;
-
-  @screen md {
-	@apply pb-px80
-  }
-
-  @screen lg {
-	@apply pb-px120;
-	@apply pt-px120;
-  }
-
-  h2 { color: theme('colors.teal.dark'); }
-
-  h3 {
-	font-size: rem-calc(32px);
-
-	@screen lg {
-	  font-size: rem-calc(46px);
-	}
-
-  }
-
-  .container {
-    & > h3,
-    & > p {
-      color: theme('colors.teal.dark');
-    }
-  }
+  @apply bg-white;
 }

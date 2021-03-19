@@ -16,7 +16,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		<?php $desc = Fundraise::get_val( Fundraise::SETTING_FEATURED_TEXT_DESC ); ?>
 		<div class="featured-text">
 			<div class="container mx-auto text-center">
-				<h3><?php echo esc_html( $title ); ?></h3>
+				<h3 class="heading"><?php echo esc_html( $title ); ?></h3>
 				<p><?php echo $desc; ?></p>
 			</div>
 		</div>
@@ -58,7 +58,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 					<div class="mx-auto text-center">
 						<div class="links-wrapper my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-left">
 							<div class="links-content">
-								<h3><?php echo esc_html( $link_title ); ?></h3>
+								<h3 class="heading"><?php echo esc_html( $link_title ); ?></h3>
 								<p><?php echo esc_html( $link_desc ); ?></p>
 								<?php if ( $link_cta ) : ?>
 									<ul>
@@ -76,7 +76,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 				<div class="partner">
 					<div class="mx-auto text-center">
 						<div class="one-up-card dark my-8 mx-auto md:w-3/4 md:my-6 lg:w-full text-center">
-							<h3><?= Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?></h3>
+							<h3 class="heading"><?= Fundraise::get_val( Fundraise::SETTING_PARTNER_TITLE ); ?></h3>
 							<p><?= wp_filter_kses( Fundraise::get_val( Fundraise::SETTING_PARTNER_DESC ) ); ?></p>
 							<div><a href="<?= esc_url( Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA_LINK ) ); ?>" class="btn"><?= esc_html( Fundraise::get_val( Fundraise::SETTING_PARTNER_CTA ) ); ?></a></div>
 						</div>
@@ -165,7 +165,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		<div class="questions">
 			<div class="container mx-auto text-center">
 				<div class="one-up-card light my-8 mx-auto md:w-3/4 md:my-6 lg:w-full xl:w-3/4 text-center">
-					<h3><?php echo esc_html( $questions_title ); ?></h3>
+					<h3 class="heading"><?php echo esc_html( $questions_title ); ?></h3>
 					<p><?php echo esc_html( $questions_desc ); ?></p>
 					<div><a href="<?php echo esc_url( $questions_cta_link ); ?>" class="btn"><?php echo esc_html( $questions_cta ); ?></a></div>
 				</div>

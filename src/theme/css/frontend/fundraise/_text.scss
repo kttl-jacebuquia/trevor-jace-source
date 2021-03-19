@@ -1,9 +1,8 @@
 .featured-text {
-  background-color: theme('colors.teal.tint');
-  @apply pt-px120 pb-px120;
+  @apply pt-px120 pb-px120 bg-teal-tint;
 
   &.donate {
-	background-color: theme('colors.blue_green.DEFAULT');
+	@apply bg-blue_green;
 
 	p {
 	  @apply text-white font-normal text-px20 leading-px26;
@@ -26,12 +25,12 @@
 	@apply pt-px135 pb-px135;
   }
 
-  h3,
+  .heading,
   p {
-	color: theme('colors.teal.dark');
+	@apply text-teal-dark;
   }
 
-  h3 {
+  .heading {
 	@apply mb-px14 text-px16 leading-px24 uppercase;
 
 	@screen md {

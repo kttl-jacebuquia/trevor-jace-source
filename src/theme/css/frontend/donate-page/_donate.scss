@@ -1,5 +1,5 @@
 .donation-form {
-  background: white;
+  @apply bg-white;
 
   @screen lg {
 	@apply flex justify-between items-stretch;
@@ -26,8 +26,7 @@
 	  }
 
 	  h2 {
-		color: theme('colors.teal.dark');
-		@apply font-bold text-px32 leading-px40 mb-px20;
+		@apply font-bold text-px32 leading-px40 mb-px20 text-teal-dark;
 
 		@screen md {
 		  @apply leading-px42 mb-px8;
@@ -39,8 +38,7 @@
 	  }
 
 	  p {
-		color: theme('colors.teal.dark');
-		@apply font-normal text-px20 leading-px26 mb-px40;
+		@apply font-normal text-px20 leading-px26 mb-px40 text-teal-dark;
 
 		@screen md {
 		  @apply text-px18 leading-px24 mb-px50;
@@ -59,21 +57,20 @@
 		input[type="text"],
 		input[type="number"] {
 		  border: 1px solid rgba(0, 58, 72, 0.5);
-		  @apply h-px68 w-full block visible  rounded-px10 box-border px-px35;
+		  @apply h-px68 w-full block visible  rounded-px10 box-border px-px35 text-teal-dark;
 		  opacity: 1;
-			color: theme('colors.teal.dark');
 
 			&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-				color: theme('colors.teal.dark');
+				@apply text-teal-dark;
 				opacity: 1; /* Firefox */
 			}
 			
 			&:-ms-input-placeholder { /* Internet Explorer 10-11 */
-				color: theme('colors.teal.dark');
+				@apply text-teal-dark;
 			}
 			
 			&::-ms-input-placeholder { /* Microsoft Edge */
-				color: theme('colors.teal.dark');
+				@apply text-teal-dark;
 			}
 
 		  @screen md {
@@ -112,9 +109,7 @@
 			}
 
 			&.is-selected {
-			  background-color: theme('colors.teal.dark');
-			  color: white;
-			  @apply border-r-0;
+			  @apply border-r-0 text-white bg-teal-dark;
 			}
 
 			& + label {
@@ -136,13 +131,11 @@
 
 			label {
 			  flex: 0 0 49%;
-				color: theme('colors.teal.dark');
-			  @apply py-px22 font-normal text-px16 leading-px20 mb-px14 rounded-px10 text-center cursor-pointer;
+			  @apply py-px22 font-normal text-px16 leading-px20 mb-px14 rounded-px10 text-center cursor-pointer text-teal-dark;
 			  border: 1px solid rgba(0, 58, 72, 0.5);
 
 			  &.is-selected {
-				background-color: theme('colors.teal.dark');
-				color: white;
+				@apply bg-teal-dark text-white;
 			  }
 			}
 
@@ -167,10 +160,7 @@
 
 		.submit {
 		  input[type="submit"] {
-			background-color: theme('colors.teal.dark');
-			color: white;
-			@apply py-px18 font-bold text-px16 leading-px22 rounded-px10 text-center cursor-pointer;
-			width: 100%;
+			@apply py-px18 font-bold text-px16 leading-px22 rounded-px10 text-center cursor-pointer text-white bg-teal-dark w-full;
 
 			@screen md {
 			  width: rem-calc(233px);
@@ -191,10 +181,8 @@
 	}
 
 	.image-wrapper {
-	  width: 100%;
-	  height: auto;
 	  padding-top: calc((1 / 1) * 100%);
-	  @apply block relative overflow-hidden;
+	  @apply block relative overflow-hidden w-full h-auto;
 
 	  @screen md {
 		padding-top: calc((450 / 768) * 100%);
@@ -207,10 +195,7 @@
 
 
 	  img {
-		width: 100%;
-		height: 100%;
-
-		@apply block absolute top-0 bottom-0 left-0 right-0 object-cover;
+		@apply block absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full;
 	  }
 	}
 

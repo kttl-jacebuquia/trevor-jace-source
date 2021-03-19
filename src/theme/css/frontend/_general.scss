@@ -66,7 +66,7 @@
 
 	&[placeholder]::before {
 		content: attr(placeholder);
-		color: theme('colors.violet.DEFAULT');
+		@apply text-violet;
 	}
 
 	&[placeholder]:not(:empty)::before {
@@ -106,7 +106,7 @@
 
   .trevor-ti-search,
   .trevor-ti-x {
-	color: theme('colors.violet.DEFAULT');
+	@apply text-violet;
   }
 
   .trevor-ti-x {
@@ -118,9 +118,8 @@
   }
 
   #input-suggestions {
-	@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6;
+	@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6 text-indigo;
 	z-index: 5;
-	color: theme('colors.indigo.DEFAULT');
 
 	@screen md {
 	  box-shadow: theme('boxShadow.indigo-md');
@@ -141,17 +140,12 @@
 	}
 
 	.ui-menu-item {
-	  @apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6;
-	  color: theme('colors.indigo.DEFAULT');
+	  @apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6 text-indigo;
 	}
 
 	.ui-state-focus {
-	  font-weight: 400;
+	  @apply text-indigo cursor-pointer font-normal m-0 border-0;
 	  background: none;
-	  border: none;
-	  margin: 0;
-	  color: theme('colors.indigo.DEFAULT');
-	  cursor: pointer;
 	}
   }
 }

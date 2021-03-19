@@ -1,7 +1,7 @@
 .corporate-parnerships {
   .partners {
 	&__title {
-	  color: theme('colors.teal.dark');
+	  @apply text-teal-dark;
 	}
 
 	.table-container {
@@ -82,8 +82,7 @@
 	  }
 
 	  th {
-		background-color: #F3F3F7;
-		@apply py-6;
+		@apply py-6 bg-gray-light;
 
 		@screen md {
 		  flex: 0 0 rem-calc(174px);
@@ -174,22 +173,18 @@
 		  }
 
 		  img {
-				max-width: rem-calc(170px);
-				@apply mx-auto;
+				@apply mx-auto max-w-px170;
 
 				@screen md {
-					@apply w-auto max-w-full;
-					max-height: rem-calc(62px);
+					@apply w-auto max-w-full max-h-px62;
 				}
 
 				@screen lg {
-					@apply w-full;
-					max-height: none;
+					@apply w-full max-h-none;
 				}
 
 				@screen xl {
-					@apply w-auto max-w-full;
-					max-height: rem-calc(120px);
+					@apply w-auto max-w-full max-h-px120;
 				}
 		  }
 		}
@@ -228,8 +223,7 @@
   .cards {
 
 	&__title {
-	  color: theme('colors.teal.dark');
-	  @apply mt-px80 mx-0 mb-px60;
+	  @apply mt-px80 mx-0 mb-px60 text-teal-dark;
 
 	  @screen md {
 		@apply mt-px60 mx-0 mb-px65;

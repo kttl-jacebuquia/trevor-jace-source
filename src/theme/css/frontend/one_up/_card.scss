@@ -1,20 +1,16 @@
 .one-up-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
+  @apply flex flex-col items-center content-center;
   @apply rounded-px10;
 
   &.light {
-	background: white;
+	@apply bg-white;
 
-	h3,
+	.heading,
 	p {
-	  color: theme('colors.teal.dark');
+	  @apply text-teal-dark;
 	}
 
-	h3 {
+	.heading {
 
 	  @screen lg {
 		width: rem-calc(606px);
@@ -28,19 +24,19 @@
 	}
 
 	.btn {
-	  background: theme('colors.teal.dark');
+	  @apply bg-teal-dark;
 	}
   }
 
   &.dark {
-	background: theme('colors.teal.dark');
+	@apply bg-teal-dark;
 
-	h3,
+	.heading,
 	p {
-	  color: white;
+	  @apply text-white;
 	}
 
-	h3 {
+	.heading {
 
 	  @screen lg {
 		width: rem-calc(408px);
@@ -55,12 +51,11 @@
 	}
 
 	.btn {
-	  background: white;
-	  color: theme('colors.teal.dark');
+	  @apply bg-white text-teal-dark;
 	}
   }
 
-  h3 {
+  .heading {
 	@apply font-manrope font-bold text-px32 leading-px40 mb-px14 ml-px28 mr-px28;
 
 	span {
@@ -93,10 +88,7 @@
   }
 
   .btn {
-	display: inline-block;
-	color: white;
-
-	@apply text-px16 leading-px22 pt-px12 pb-px12 pl-px24 pr-px24 mt-px40;
+	@apply text-px16 leading-px22 pt-px12 pb-px12 pl-px24 pr-px24 mt-px40 inline-block text-white;
 
 	@screen lg {
 	  @apply text-px20 leading-px26 pt-px20 pb-px20 pl-px80 pr-px80;

@@ -1,11 +1,11 @@
 .wp-block-image {
   &.is-style-full {
-	width: 100vw;
+	@apply w-screen;
 	margin-left: calc((100vw - 100%) / -2);
   }
 
   > figcaption {
-	color: theme('colors.indigo.DEFAULT') !important;
+	@apply text-indigo #{!important}
   }
 
   @screen md {

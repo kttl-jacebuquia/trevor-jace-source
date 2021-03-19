@@ -75,7 +75,7 @@
 
   .trevor-ti-quote-open,
   .trevor-ti-quote-close {
-	color: theme('colors.teal.dark');
+	@apply text-teal-dark;
   }
 
   .swiper-slide {
