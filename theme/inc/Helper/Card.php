@@ -89,45 +89,50 @@ class Card {
 		ob_start();
 		?>
 		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
-			<div class="hover-hit-area">
-				<?php if ( $title_link ) { ?>
-					<a href="<?= get_the_permalink( $post ) ?>"></a>
-				<?php } ?>
-			</div>
-			<?php if ( $has_thumbnail ) { ?>
+			<?php if ( in_array( 'bg-full', $_class ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<?= $thumb ?>
+					<a href="<?= get_the_permalink( $post ) ?>">
+						<?= $thumb ?>
+					</a>
 				</div>
 			<?php } ?>
 
 			<div class="card-content">
-				<?php if ( ! empty( $icon_cls ) ) { ?>
-					<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
-				<?php } ?>
-
-				<?php if ( ! empty( $title_top ) ) { ?>
-					<div class="title-top uppercase"><?= $title_top ?></div>
-				<?php } ?>
-
-				<h3 class="post-title">
-					<?php if ( $title_link ) { ?>
-						<a href="<?= get_the_permalink( $post ) ?>">
-							<?= get_the_title( $post ); ?>
-						</a>
-					<?php } else { ?>
-						<?= get_the_title( $post ); ?>
+				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
+					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class ) ) { ?>
+						<div class="post-thumbnail-wrap">
+							<a href="<?= get_the_permalink( $post ) ?>">
+								<?= $thumb ?>
+							</a>
+						</div>
 					<?php } ?>
-				</h3>
 
-				<?php if ( ! empty( $title_btm ) ) { ?>
-					<div class="title-btm"><?= esc_html( $title_btm ) ?></div>
-				<?php } ?>
+					<?php if ( ! empty( $icon_cls ) ) { ?>
+						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+					<?php } ?>
 
-				<?php if ( ! empty( $desc ) ) { ?>
-					<div class="post-desc"><?= $desc /* Sanitized above */ ?></div>
-				<?php } else { ?>
-					<div class="flex-1"></div>
-				<?php } ?>
+					<?php if ( ! empty( $title_top ) ) { ?>
+						<div class="title-top uppercase"><?= $title_top ?></div>
+					<?php } ?>
+
+					<h3 class="post-title">
+						<?php if ( $title_link ) { ?>
+							<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
+								<?= get_the_title( $post ); ?>
+							</a>
+						<?php } else { ?>
+							<?= get_the_title( $post ); ?>
+						<?php } ?>
+					</h3>
+
+					<?php if ( ! empty( $title_btm ) ) { ?>
+						<div class="title-btm"><?= esc_html( $title_btm ) ?></div>
+					<?php } ?>
+
+					<?php if ( ! empty( $desc ) ) { ?>
+						<div class="post-desc"><span><?= $desc /* Sanitized above */ ?></span></div>
+					<?php } ?>
+				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
 					<div class="tags-box">

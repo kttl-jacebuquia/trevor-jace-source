@@ -91,9 +91,9 @@ module.exports = {
 			width: {
 				DEFAULT: px2rem(319),
 				md: px2rem(319),
-				lg: px2rem(355),
+				lg: px2rem(395),
 				lg2: px2rem(355),
-				xl: px2rem(355),
+				xl: px2rem(395),
 			}
 		},
 		carousel: {

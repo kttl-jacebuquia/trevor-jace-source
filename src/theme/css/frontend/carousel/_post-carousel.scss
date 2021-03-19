@@ -114,13 +114,13 @@
 
 	@screen lg2 {
 		.carousel-container {
-			width: rem-calc(355px);
+			width: theme('postCard.width.lg2');
 		}
 	}
 
 	@screen xl {
 		.carousel-container {
-			width: rem-calc(395px);
+			width: theme('postCard.width.xl');
 		}
 	}
 
