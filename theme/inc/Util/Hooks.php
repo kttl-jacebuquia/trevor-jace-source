@@ -493,6 +493,7 @@ class Hooks {
 			$banners[] = [
 					'title' => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_TITLE ),
 					'desc'  => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_DESC ),
+					'type'  => 'long_wait',
 			];
 		}
 
@@ -506,6 +507,7 @@ class Hooks {
 			$banners[] = [
 					'title' => (string) @$banner_data['title'],
 					'desc'  => (string) @$banner_data['desc'],
+					'type'  => 'custom',
 			];
 		}
 
