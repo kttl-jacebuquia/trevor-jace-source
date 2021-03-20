@@ -48,9 +48,13 @@ abstract class Abstract_Component {
 
 	/**
 	 * @param Abstract_Customizer $customizer
+	 *
+	 * @return $this
 	 */
-	public function set_customizer( Abstract_Customizer $customizer ): void {
+	public function set_customizer( Abstract_Customizer $customizer ): Abstract_Component {
 		$this->_customizer = $customizer;
+
+		return $this;
 	}
 
 	/**

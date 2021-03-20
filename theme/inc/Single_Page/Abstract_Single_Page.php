@@ -19,6 +19,7 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	 */
 	const ALL = [
 		Public_Education::class,
+		Ally_Training::class,
 	];
 
 	/**

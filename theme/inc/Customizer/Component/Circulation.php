@@ -49,11 +49,11 @@ class Circulation extends Abstract_Component {
 	}
 
 	/** @inheritDoc */
-	function render( array $ext_options = [] ): ?string {
+	public function render( array $ext_options = [] ): ?string {
 		return Circulation_Card::render_circulation(
 			$this->get_val( self::SETTING_TITLE ),
 			$this->get_val( self::SETTING_DESC ),
-			$ext_options['cards'] ?? [],
+			$ext_options['cards'] ?? $this->get_option( 'cards' ),
 			$ext_options['options'] ?? []
 		);
 	}
