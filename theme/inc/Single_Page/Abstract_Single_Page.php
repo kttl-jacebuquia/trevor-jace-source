@@ -7,12 +7,12 @@ use TrevorWP\Theme\Customizer\Abstract_Customizer;
  * Abstract Single Page
  */
 abstract class Abstract_Single_Page extends Abstract_Customizer {
-	/* Sections */
-	const SECTION_GENERAL = self::PANEL_ID . '_general';
-	const SECTION_HEADER = self::PANEL_ID . '_header';
-
-	const PREFIX_GENERAL = self::SECTION_GENERAL . '_';
-	const SETTING_GENERAL_SLUG = self::PREFIX_GENERAL . 'slug';
+	/* Names */
+	/* * Sections */
+	const NAME_SECTION_GENERAL = 'general';
+	const NAME_SECTION_HEADER = 'header';
+	/* * Setting */
+	const NAME_SETTING_GENERAL_SLUG = 'slug';
 
 	/**
 	 * All Single Pages
@@ -20,6 +20,7 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	const ALL = [
 		Public_Education::class,
 		Ally_Training::class,
+		Strategic_Plan::class,
 	];
 
 	/**
@@ -126,13 +127,13 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	/** @inheritdoc */
 	protected function _register_sections(): void {
 		# General Section
-		$this->get_manager()->add_section( static::SECTION_GENERAL, [
+		$this->get_manager()->add_section( $general_id = static::get_section_id( static::NAME_SECTION_GENERAL ), [
 			'panel' => static::PANEL_ID,
 			'title' => 'General',
 		] );
 
 		# Header
-		$this->get_component( static::SECTION_HEADER )->register_section();
+		$this->get_component( static::get_section_id( static::NAME_SECTION_HEADER ) )->register_section();
 
 		parent::_register_sections();
 	}
@@ -147,10 +148,10 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 		# General
 		## Slug
 		$this->get_manager()->add_control(
-			static::SETTING_GENERAL_SLUG,
+			$slug_id = static::get_setting_id( static::NAME_SECTION_GENERAL, static::NAME_SETTING_GENERAL_SLUG ),
 			[
-				'setting' => self::SETTING_GENERAL_SLUG,
-				'section' => self::SECTION_GENERAL,
+				'setting' => $slug_id,
+				'section' => static::get_section_id( static::NAME_SECTION_GENERAL ),
 				'label'   => 'Slug',
 				'type'    => 'text',
 			]
@@ -164,14 +165,14 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 		parent::_register_settings();
 
 		# Set default slug
-		$this->get_manager()->get_setting( static::SETTING_GENERAL_SLUG )->default = static::get_default_slug();
+		$this->get_manager()->get_setting( static::get_setting_id( static::NAME_SECTION_GENERAL, static::NAME_SETTING_GENERAL_SLUG ) )->default = static::get_default_slug();
 	}
 
 	/**
 	 * @return string
 	 */
 	static public function get_slug(): string {
-		$slug = static::get_val( static::SETTING_GENERAL_SLUG );
+		$slug = static::get_val( static::get_setting_id( static::NAME_SECTION_GENERAL, static::NAME_SETTING_GENERAL_SLUG ) );
 		if ( empty( $slug ) ) {
 			$slug = static::get_default_slug();
 		}
@@ -206,5 +207,28 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	 */
 	static public function get_template_file(): string {
 		return 'single-page/' . static::get_default_slug() . '.php';
+	}
+
+	/**
+	 * Converts section name to id.
+	 *
+	 * @param string $section_name
+	 *
+	 * @return string
+	 */
+	static public function get_section_id( string $section_name ): string {
+		return static::get_panel_id() . '_' . $section_name;
+	}
+
+	/**
+	 * Converts setting name to id.
+	 *
+	 * @param string $section_name
+	 * @param string $setting_name
+	 *
+	 * @return string
+	 */
+	static public function get_setting_id( string $section_name, string $setting_name ): string {
+		return static::get_section_id( $section_name ) . '_' . $setting_name;
 	}
 }

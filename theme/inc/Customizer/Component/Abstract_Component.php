@@ -126,7 +126,9 @@ abstract class Abstract_Component {
 	 * @return string
 	 */
 	public function get_setting_id( string $name ): string {
-		return $this->get_section_id() . '_' . $name;
+		$name_prefix = $this->get_option( 'name_prefix' );
+
+		return $this->get_section_id() . ( empty( $name_prefix ) ? '' : "_{$name_prefix}" ) . "_{$name}";
 	}
 
 	/**

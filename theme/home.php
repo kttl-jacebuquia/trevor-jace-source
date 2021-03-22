@@ -83,6 +83,11 @@
 				<a class="text-xl font-bold text-white"
 				   href="<?= TrevorWP\Theme\Single_Page\Ally_Training::get_permalink() ?>">Ally Training</a>
 			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Single_Page\Strategic_Plan::get_permalink() ?>">Strategic Plan</a>
+			</li>
 		</ul>
 
 	</div>

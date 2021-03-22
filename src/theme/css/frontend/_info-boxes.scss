@@ -33,6 +33,7 @@
   }
 
   &.break-grid-1-2-2,
+  &.break-grid-1-2-3,
   &.break-grid-1-2-4 {
 	.info-box {
 	  @apply col-span-6;
@@ -56,9 +57,16 @@
 	  }
 	}
 
-	&.break-grid-1-2-2 {
+	&.break-grid-1-2-2,
+	&.break-grid-1-2-3 {
 	  .info-box {
 		@apply col-span-4;
+	  }
+	}
+
+	.info-boxes-container {
+	  > :last-child {
+		@apply col-start-3;
 	  }
 	}
 
@@ -115,6 +123,18 @@
 
 		> :nth-child(even) {
 		  @apply col-start-7;
+		}
+	  }
+	}
+
+	&.break-grid-1-2-3 {
+	  .info-box {
+		@apply col-span-4;
+	  }
+
+	  .info-boxes-container {
+		> :last-child {
+		  @apply col-start-auto;
 		}
 	  }
 	}

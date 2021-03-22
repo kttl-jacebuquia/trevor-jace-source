@@ -1,0 +1,32 @@
+/* Calculates distance from the sides of a container to the side of the screen. */
+
+// You can add .absolute-side-parent to overwrite other class names.
+
+:root {
+  --absolute-side-distance: calc(-1 * #{theme('container.padding.DEFAULT')});
+}
+
+$prev-screen-width: theme('screens.sm');
+
+@each $screen in md, lg, xl {
+  @media (min-width: #{theme('screens.' + $screen)}) {
+	:root {
+	  --absolute-side-distance: calc(((100vw - #{$prev-screen-width}) / 2) + #{rem-calc(20px)});
+	}
+  }
+
+  $prev-screen-width: theme('screens.' + $screen);
+}
+
+@each $direction in (left, right) {
+  @each $screen in sm, md, lg, xl {
+	@screen #{$screen} {
+	  .#{$screen}\:absolute-#{$direction} {
+		&, .absolute-side-parent > & {
+		  margin-#{$direction}: calc(-1 * var(--absolute-side-distance));
+		  width: calc(100% + var(--absolute-side-distance));
+		}
+	  }
+	}
+  }
+}

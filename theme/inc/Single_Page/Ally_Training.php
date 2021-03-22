@@ -7,6 +7,7 @@ class Ally_Training extends Abstract_Single_Page {
 	const PANEL_ID = self::ID_PREFIX . 'ally_training';
 
 	/* Sections */
+	const SECTION_HEADER = self::PANEL_ID . '_' . self::NAME_SECTION_HEADER;
 	const SECTION_INFO_BOXES = self::PANEL_ID . '_info_boxes';
 	const SECTION_INFO_BOXES_2 = self::SECTION_INFO_BOXES . '_2';
 	const SECTION_OTHER_TRAINING = self::PANEL_ID . '_other_training';
@@ -41,19 +42,19 @@ class Ally_Training extends Abstract_Single_Page {
 					Component\Info_Boxes::SETTING_DESC  => 'In addition to the audiences below, Ally training has been presented to adults within the foster care system, those working with adjudicated, homeless or runaway youth, with spiritual or faith leaders, and many more.',
 					Component\Info_Boxes::SETTING_DATA  => [
 						[
-							'text' => 'K-12 school staff and educators',
+							'txt'  => 'K-12 school staff and educators',
 							'desc' => 'Interdum congue nunc vitae dis lectus bibendum. Integer facilisi consectetur.'
 						],
 						[
-							'text' => 'Healthcare providers',
+							'txt'  => 'Healthcare providers',
 							'desc' => 'Interdum congue nunc vitae dis lectus bibendum. Integer facilisi consectetur.'
 						],
 						[
-							'text' => 'Higher education staff',
+							'txt'  => 'Higher education staff',
 							'desc' => 'Interdum congue nunc vitae dis lectus bibendum. Integer facilisi consectetur.'
 						],
 						[
-							'text' => 'Adults working with high-risk youth',
+							'txt'  => 'Adults working with high-risk youth',
 							'desc' => 'Interdum congue nunc vitae dis lectus bibendum. Integer facilisi consectetur.'
 						],
 					]

@@ -85,7 +85,7 @@
 			@screen 2xl {
 				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) );
 				$card-size: rem-calc(395px);
-				left: calc( ( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
 			}
 		}
 	}

@@ -100,7 +100,7 @@ abstract class Abstract_Customizer {
 
 		# Sub Component settings
 		foreach ( array_keys( static::$_sub_components ) as $sub_component_name ) {
-			static::get_sub_component( $sub_component_name )->set_customizer($this)->register_settings();
+			static::get_sub_component( $sub_component_name )->set_customizer( $this )->register_settings();
 		}
 	}
 
@@ -184,6 +184,12 @@ abstract class Abstract_Customizer {
 			if ( ! is_subclass_of( $class, Abstract_Component::class ) ) {
 				throw new Internal( 'Provided class is not a child of the Abstract_Component.', compact( 'class', 'name' ) );
 			}
+
+			if ( empty( $settings['options'] ) ) {
+				$settings['options'] = [];
+			}
+
+			$settings['options']['name_prefix'] = $name;
 
 			static::$_sub_component_objs[ $name ] = new $class( static::get_panel_id(), $section, $settings );
 		}

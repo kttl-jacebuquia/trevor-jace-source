@@ -26,7 +26,7 @@ class Info_Boxes {
 	 * @return string
 	 */
 	public static function render_box_text( array $box, array $options = [] ): string {
-		$text = (string) @$box['text'];
+		$text = (string) @$box['txt'];
 		$desc = (string) @$box['desc'];
 		$cls  = array_merge( [ 'info-box-text' ], (array) @$options['box_text_cls'] );
 		ob_start(); ?>

@@ -10,6 +10,7 @@ class Public_Education extends Abstract_Single_Page {
 	const PANEL_ID = self::ID_PREFIX . 'public_education';
 
 	/* Sections */
+	const SECTION_HEADER = self::PANEL_ID . '_' . self::NAME_SECTION_HEADER;
 	const SECTION_INFO_BOXES = self::PANEL_ID . '_info_boxes';
 	const SECTION_OFFERINGS = self::PANEL_ID . '_offerings';
 	const SECTION_TESTIMONIALS = self::PANEL_ID . '_testimonials';
@@ -52,15 +53,15 @@ class Public_Education extends Abstract_Single_Page {
 					Component\Info_Boxes::SETTING_DESC  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum scelerisque nulla et amet aliquam venenatis velit diam.',
 					Component\Info_Boxes::SETTING_DATA  => [
 						[
-							'text' => '250',
+							'txt' => '250',
 							'desc' => 'Volunteers have been trained within the last year.'
 						],
 						[
-							'text' => '14,000',
+							'txt' => '14,000',
 							'desc' => 'Youth and youth-serving reached through our Care, ALLY, and Lifeguard workshops.'
 						],
 						[
-							'text' => '1st',
+							'txt' => '1st',
 							'desc' => 'In the nation to launch a partnership with the NY Department of Education.'
 						],
 					]
