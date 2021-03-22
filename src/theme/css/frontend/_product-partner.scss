@@ -11,15 +11,6 @@
 			@apply mt-px18;
 		}
 
-		&-title-top {
-			@apply text-px16 leading-px24 md:text-px14 md:leading-px18 lg2:text-px16 lg2:leading-px22;
-		}
-
-		&-title {
-			@apply text-px32 leading-px40 md:leading-px42 lg2:text-px46 lg2:leading-px56;
-			letter-spacing: rem-calc(1px);
-		}
-
 		&.type-split-carousel{
 
 			.page-header {
