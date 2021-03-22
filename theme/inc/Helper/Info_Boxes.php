@@ -45,7 +45,7 @@ class Info_Boxes {
 	 * @return string
 	 */
 	public static function render_box_img( array $box, array $options = [] ): string {
-		$img_id = (int) @$box['img_id'];
+		$img_id = empty( $box['img'] ) ? 0 : (int) @$box['img']['id'];
 		$desc   = (string) @$box['desc'];
 		$cls    = array_merge( [ 'info-box-img' ], (array) @$options['box_text_cls'] );
 		ob_start(); ?>

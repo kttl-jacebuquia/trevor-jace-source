@@ -35,7 +35,7 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 					<p class="page-sub-title-desc centered mb-0 mb:mb-0 xl:mb-0"><?= wp_filter_kses( $offerings_desc ) ?></p>
 				<?php } ?>
 
-				<div class="grid grid-cols-6 my-14 max-w-px319 md:grid-cols-8 md:my-14 md:max-w-screen-md xl:grid-cols-12 xl:my-16 xl:max-w-screen-xl">
+				<div class="grid grid-cols-6 my-14 max-w-px319 gap-7 md:grid-cols-8 md:my-14 md:max-w-screen-md xl:grid-cols-12 xl:my-16 xl:max-w-screen-xl">
 					<?= Page::get_sub_component( Page::SUB_COMPONENT_OFFERINGS_CARD_ALY )->render( [
 							'btn_href'  => \TrevorWP\Theme\Single_Page\Ally_Training::get_permalink(),
 							'cls'       => [

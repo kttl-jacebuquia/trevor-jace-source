@@ -159,22 +159,22 @@ class Public_Education extends Abstract_Single_Page {
 
 		$this->_manager->add_control(
 			static::SETTING_OFFERINGS_TITLE,
-			array(
+			[
 				'setting' => static::SETTING_OFFERINGS_TITLE,
 				'section' => static::SECTION_OFFERINGS,
 				'label'   => 'Title',
 				'type'    => 'text',
-			)
+			]
 		);
 
 		$this->_manager->add_control(
 			static::SETTING_OFFERINGS_DESC,
-			array(
+			[
 				'setting' => static::SETTING_OFFERINGS_DESC,
 				'section' => static::SECTION_OFFERINGS,
 				'label'   => 'Description',
 				'type'    => 'text',
-			)
+			]
 		);
 
 		static::get_sub_component( static::SUB_COMPONENT_OFFERINGS_CARD_ALY )->set_customizer( $this )->register_controls();
