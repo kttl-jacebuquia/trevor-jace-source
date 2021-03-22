@@ -6,38 +6,53 @@ use TrevorWP\Exception\Internal;
  * Info Boxes
  */
 class Info_Boxes {
+	/* Box Type */
+	const BOX_TYPE_IMG = 'img';
+	const BOX_TYPE_TEXT = 'text';
+
+	/* Break Behaviour */
+	const BREAK_BEHAVIOUR_GRID_1_2_2 = 'grid-1-2-2';
+	const BREAK_BEHAVIOUR_GRID_1_2_3 = 'grid-1-2-3';
+	const BREAK_BEHAVIOUR_GRID_1_2_4 = 'grid-1-2-4';
+	const BREAK_BEHAVIOUR_GRID_2_2_4 = 'grid-2-2-4';
+	const BREAK_BEHAVIOUR_CAROUSEL = 'carousel';
+
 	/**
 	 * @param array $box
 	 *  title: string
 	 *  desc: string
+	 * @param array $options
 	 *
 	 * @return string
 	 */
-	public static function render_box_text( array $box ): string {
-		$title = (string) @$box['title'];
-		$desc  = (string) @$box['desc'];
+	public static function render_box_text( array $box, array $options = [] ): string {
+		$text = (string) @$box['text'];
+		$desc = (string) @$box['desc'];
+		$cls  = array_merge( [ 'info-box-text' ], (array) @$options['box_text_cls'] );
 		ob_start(); ?>
-		<div class="info-box-title">
-			<?= esc_html( $title ) ?>
+		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
+			<?= esc_html( $text ) ?>
 		</div>
-		<?php return self::_render_box( 'text', ob_get_clean(), $desc );
+		<?php return self::_render_box( 'text', ob_get_clean(), $desc, $options );
 	}
 
 	/**
 	 * @param array $box
-	 *  img: int Img id
+	 *  title: string
 	 *  desc: string
+	 * @param array $options
 	 *
 	 * @return string
 	 */
-	public static function render_box_img( array $box ): string {
-		$img_id = (int) @$box['img_id'];
+	public static function render_box_img( array $box, array $options = [] ): string {
+		$img_id = empty( $box['img'] ) ? 0 : (int) @$box['img']['id'];
 		$desc   = (string) @$box['desc'];
+		$cls    = array_merge( [ 'info-box-img' ], (array) @$options['box_text_cls'] );
 		ob_start(); ?>
-		<div class="info-box-img">
+		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<?= wp_get_attachment_image( $img_id, 'medium' ) ?>
 		</div>
-		<?php return self::_render_box( 'text', ob_get_clean(), $desc );
+		<?php return self::_render_box( 'text', ob_get_clean(), $desc, $options );
 	}
 
 	/**
@@ -49,9 +64,14 @@ class Info_Boxes {
 	 *
 	 * @return false|string
 	 */
-	protected static function _render_box( string $type, string $top_container, string $desc ) {
+	protected static function _render_box( string $type, string $top_container, string $desc, array $options = [] ) {
+		$cls = array_merge( [
+				'info-box',
+				"type-{$type}",
+		], (array) @$options['box_cls'] );
+
 		ob_start(); ?>
-		<div class="info-box <?= esc_attr( "type-{$type}" ) ?>">
+		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<div class="info-box-top">
 				<?= $top_container ?>
 			</div>
@@ -66,9 +86,8 @@ class Info_Boxes {
 	 *  $box_type string Required. text|img
 	 *   text: A big text with description.
 	 *   img: An image with description.
-	 *  $break_behaviour Required. col|tile|carousel
-	 *   col: Returns to column on sm
-	 *   tile: Returns to tile on md
+	 *  $break_behaviour Required. carousel|grid
+	 *   grid-(sm-col)-(md-col)-(xl-col):
 	 *   carousel: Returns to carousel on md
 	 *
 	 * @return string
@@ -81,33 +100,59 @@ class Info_Boxes {
 				'box_type',
 				'break_behaviour',
 		], null ), [
-				'ext_cls' => [],
+				'ext_cls'       => [],
+				'container_cls' => [],
+				'box_cls'       => [],
+				'box_top_cls'   => [],
+				'box_desc_cls'  => [],
 		], $options );
 
-		$renderer = "render_box_{$options['box_type']}";
-
-		if ( ! method_exists( self::class, $renderer ) ) {
+		# Check the box renderer
+		if ( ! method_exists( self::class, $renderer = "render_box_{$options['box_type']}" ) ) {
 			throw new Internal( 'Unknown type provided.' );
 		}
 
+		# Main classes
 		$cls = array_merge( [
 				'info-boxes',
 				"box-type-{$options['box_type']}",
 				"break-{$options['break_behaviour']}",
 		], $options['ext_cls'] );
 
+		# Container classes
+		$container_cls = array_merge( [
+				'info-boxes-container',
+		], $options['container_cls'] );
+
+		# Carousel
+		if ( $is_carousel = $options['break_behaviour'] == 'carousel' ) { // if carousel
+			$options['box_cls'][] = 'swiper-slide';
+			$container_cls[]      = 'swiper-wrapper';
+			$cls[]                = 'swiper-container';
+		} else {
+			$cls[] = 'break-grid';
+		}
+
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
-			<h2 class="page-sub-title centered"><?= esc_html( $options['title'] ) ?></h2>
+			<h2 class="info-boxes-title"><?= esc_html( $options['title'] ) ?></h2>
 			<?php if ( ! empty( $options['desc'] ) ) { ?>
-				<p class="page-sub-title-desc"><?= esc_html( $options['desc'] ) ?></p>
+				<p class="info-boxes-desc"><?= esc_html( $options['desc'] ) ?></p>
 			<?php } ?>
 
-			<div class="info-boxes-container">
+			<div class="<?= esc_attr( implode( ' ', $container_cls ) ) ?>">
 				<?php foreach ( $boxes as $box ) {
-					echo call_user_func( [ self::class, $renderer ], $box );
+					echo call_user_func( [ self::class, $renderer ], $box, [
+							'box_cls'      => $options['box_cls'],
+							'box_text_cls' => $options['box_text_cls'],
+							'box_desc_cls' => $options['box_desc_cls'],
+					] );
 				} ?>
 			</div>
+
+			<?php if ( $is_carousel ) { ?>
+				<div class="swiper-pagination"></div>
+			<?php } ?>
 		</div>
 		<?php return ob_get_clean();
 	}

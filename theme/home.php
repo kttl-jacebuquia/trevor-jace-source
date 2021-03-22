@@ -78,6 +78,11 @@
 				<a class="text-xl font-bold text-white"
 				   href="<?= TrevorWP\Theme\Single_Page\Public_Education::get_permalink() ?>">Public Education</a>
 			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Single_Page\Ally_Training::get_permalink() ?>">Ally Training</a>
+			</li>
 		</ul>
 
 	</div>

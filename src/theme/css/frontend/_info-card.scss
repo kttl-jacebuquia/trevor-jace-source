@@ -1,0 +1,27 @@
+.info-card {
+  @apply mx-auto;
+  @apply flex flex-col text-center;
+  @apply py-20 px-6;
+  @apply bg-white rounded-px10;
+
+  &-title {
+	@apply mb-2;
+  }
+
+  &-btn-wrap {
+	@apply my-8;
+  }
+
+  @screen md {
+	&-title {
+	  @apply mb-3.5;
+	}
+
+  }
+
+  @screen xl {
+	&-title {
+	  @apply mb-3;
+	}
+  }
+}

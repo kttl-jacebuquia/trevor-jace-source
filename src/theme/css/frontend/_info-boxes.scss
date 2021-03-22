@@ -1,0 +1,157 @@
+.info-boxes {
+  &-title {
+	@extend .page-sub-title;
+	@extend .page-sub-title.centered;
+  }
+
+  &-desc {
+	@extend .page-sub-title-desc;
+	@extend .page-sub-title-desc.centered;
+	@apply mb-0;
+  }
+
+  &-container {
+	@apply mt-14;
+  }
+
+  //
+  .info-box-img {
+	@apply h-40;
+	@apply flex flex-col justify-center;
+  }
+
+  .info-box-desc {
+	@apply mx-auto;
+	max-width: 75%;
+  }
+
+  // Grid
+  &.break-grid {
+	.info-boxes-container {
+	  @apply grid grid-cols-6 gap-y-12;
+	}
+  }
+
+  &.break-grid-1-2-2,
+  &.break-grid-1-2-4 {
+	.info-box {
+	  @apply col-span-6;
+	}
+  }
+
+  .swiper-pagination-bullet {
+	@apply bg-teal-dark;
+  }
+
+  @screen md {
+	&-container {
+	  @apply mt-12;
+	}
+
+
+	// Grid
+	&.break-grid {
+	  .info-boxes-container {
+		@apply grid-cols-8 gap-y-14;
+	  }
+	}
+
+	&.break-grid-1-2-2 {
+	  .info-box {
+		@apply col-span-4;
+	  }
+	}
+
+	&.break-grid-1-2-4 {
+	  .info-box {
+		@apply col-span-3
+	  }
+
+	  .info-boxes-container {
+		> :nth-child(odd) {
+		  @apply col-start-2;
+		}
+
+		> :nth-child(even) {
+		  @apply col-start-5;
+		}
+	  }
+	}
+  }
+
+  @screen lg {
+	.info-box-desc {
+	  max-width: 65%;
+	}
+  }
+
+
+  @screen xl {
+	&-container {
+	  @apply mt-20;
+	}
+
+	&.break-carousel {
+	  .info-boxes-container {
+		@apply grid grid-flow-col grid-cols-3 gap-10;
+	  }
+	}
+
+	&.break-grid {
+	  .info-boxes-container {
+		@apply grid-cols-12 gap-y-12;
+	  }
+	}
+
+	&.break-grid-1-2-2 {
+	  .info-box {
+		@apply col-span-5;
+	  }
+
+	  .info-boxes-container {
+		> :nth-child(odd) {
+		  @apply col-start-2;
+		}
+
+		> :nth-child(even) {
+		  @apply col-start-7;
+		}
+	  }
+	}
+
+	&.break-grid-1-2-4 {
+	  .info-box {
+		@apply col-span-3;
+		grid-column-start: auto !important;
+	  }
+	}
+  }
+}
+
+.info-box {
+  @apply w-full;
+
+  &-top {
+	@apply flex justify-center items-center;
+
+	.info-boxes.box-type-text {
+	  @apply items-end;
+	}
+
+	.info-boxes.box-type-img {
+	  min-height: 10rem;
+	}
+  }
+
+  &-text {
+	@apply text-center
+  }
+
+  &-img {
+
+  }
+
+  &-desc {
+	@apply text-center
+  }
+}

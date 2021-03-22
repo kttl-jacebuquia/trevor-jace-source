@@ -33,6 +33,16 @@ abstract class Abstract_Customizer {
 	protected static $_section_component_objs = [];
 
 	/**
+	 * @var string[]
+	 */
+	protected static $_sub_components = [];
+
+	/**
+	 * @var Component\Abstract_Component[]
+	 */
+	protected static $_sub_component_objs = [];
+
+	/**
 	 * Abstract_Customizer constructor.
 	 *
 	 * @param \WP_Customize_Manager $manager
@@ -86,6 +96,11 @@ abstract class Abstract_Customizer {
 		foreach ( static::$_section_component_objs as $section_component ) {
 			/** @var Abstract_Component $section_component */
 			$section_component->register_settings();
+		}
+
+		# Sub Component settings
+		foreach ( array_keys( static::$_sub_components ) as $sub_component_name ) {
+			static::get_sub_component( $sub_component_name )->set_customizer($this)->register_settings();
 		}
 	}
 
@@ -150,5 +165,38 @@ abstract class Abstract_Customizer {
 		}
 
 		return static::$_section_component_objs[ $section ];
+	}
+
+	/**
+	 * @param string $name
+	 *
+	 * @return Abstract_Component
+	 * @throws Internal
+	 */
+	public static function get_sub_component( string $name ) {
+		if ( ! array_key_exists( $name, static::$_sub_component_objs ) ) {
+			if ( ! array_key_exists( $name, static::$_sub_components ) ) {
+				throw new Internal( 'Sub component settings does not exist.' );
+			}
+
+			list( $class, $section, $settings ) = static::$_sub_components[ $name ];
+
+			if ( ! is_subclass_of( $class, Abstract_Component::class ) ) {
+				throw new Internal( 'Provided class is not a child of the Abstract_Component.', compact( 'class', 'name' ) );
+			}
+
+			static::$_sub_component_objs[ $name ] = new $class( static::get_panel_id(), $section, $settings );
+		}
+
+		return static::$_sub_component_objs[ $name ];
+	}
+
+	/**
+	 * @param string $section
+	 *
+	 * @return Abstract_Component|null
+	 */
+	public static function get_section_component_obj( string $section ): ?Abstract_Component {
+		return @static::$_section_component_objs[ $section ];
 	}
 }

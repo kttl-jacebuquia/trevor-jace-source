@@ -1,10 +1,10 @@
 import $ from 'jquery';
 
 export default () => {
+	// fixme: this function should work when executed, wrap with event listeners at the above
 	$(() => {
 		/**
 		 * Crisis Button docking
-		 * @fixme: window.onload binding
 		 */
 		const $body = $('body');
 		const stickyAnchors = $('.sticky-cta-anchor');
