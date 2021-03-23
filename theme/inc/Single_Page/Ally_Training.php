@@ -27,6 +27,9 @@ class Ally_Training extends Abstract_Single_Page {
 				'defaults' => [
 					Component\Header::SETTING_TITLE => 'Ally Training',
 					Component\Header::SETTING_DESC  => 'This training is designed to create dialogue around being an adult ally for LGBTQ youth by informing participants about common terminology, the “coming out” process, and challenges at home, in school, and the community.',
+					Component\Header::SETTING_CTA_TXT => 'Contact Our Training Team',
+					Component\Header::SETTING_CTA_URL => '#',
+
 				]
 			]
 		],

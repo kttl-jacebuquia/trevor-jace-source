@@ -11,7 +11,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
 
 		<?php # Info Boxes ?>
-		<div class="bg-gray-light py-20 lx:py-36">
+		<div class="bg-gray-light py-16 md:py-20 xl:py-24">
 			<div class="container mx-auto text-teal-dark">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES )->render( [
 					'box_text_cls' => [
@@ -26,6 +26,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 						'xl:tracking-em005',
 					],
 					'box_desc_cls' => [
+						'mt-2.5',
 						'font-normal',
 						'text-px18',
 						'leading-px26',
@@ -40,21 +41,29 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 		</div>
 
 		<?php # Info Boxes 2 ?>
-		<div class="bg-blue_green py-20 lx:py-36">
+		<div class="bg-blue_green py-20 xl:py-32">
 			<div class="container mx-auto text-white">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES_2 )->render( [
-					'box_img_cls'  => [
-
+					'container_cls' => [
+							'xl:w-10/12 xl:mx-auto'
 					],
 					'box_desc_cls' => [
-
-					],
+							'font-medium',
+							'font-px18',
+							'leading-px24',
+							'tracking-px05',
+							'md:leading-px22',
+							'md:tracking-em005',
+							'xl:font-px20',
+							'xl:leading-px26',
+							'xl:tracking-px05',
+					]
 				] ) ?>
 			</div>
 		</div>
 
 		<?php # Other Training  ?>
-		<div class="bg-gray-light py-20 lx:py-36 text-teal-dark">
+		<div class="bg-gray-light py-20 xl:py-32 text-teal-dark">
 			<div class="container mx-auto">
 				<div class="grid grid-cols-6 gap-7 md:grid-cols-8 xl:grid-cols-12">
 					<div
@@ -74,7 +83,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 						<?php if ( ! empty( $desc = $contact_comp->get_val( \TrevorWP\Theme\Customizer\Component\Info_Card::SETTING_DESC ) ) ): ?>
 							<p class="page-sub-title-desc mx-auto text-center xl:text-left xl:ml-0"><?= $desc ?></p>
 						<?php endif; ?>
-						<div class="mt-4">
+						<div class="mt-6">
 							<a href="#" class="page-btn primary"><?= esc_html( @$button['label'] ) ?></a>
 						</div>
 					</div>

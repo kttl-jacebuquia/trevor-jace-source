@@ -13,10 +13,11 @@ use \TrevorWP\Theme\Single_Page\Strategic_Plan as Page;
 		] ) ?>
 
 		<?php # Info Boxes ?>
-		<div class="bg-gray-light py-20 lx:py-36">
+		<div class="bg-gray-light py-6 md:py-20 xl:py-36">
 			<div class="container mx-auto text-teal-dark">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES )->render( [
 						'box_text_cls' => [
+								'mb-2.5',
 								'font-bold',
 								'text-px28',
 								'leading-px34',
@@ -43,7 +44,7 @@ use \TrevorWP\Theme\Single_Page\Strategic_Plan as Page;
 		</div>
 
 
-		<div class="bg-white text-teal-dark py-20 lx:py-36">
+		<div class="bg-white text-teal-dark py-20 xl:py-36">
 			<div class="container mx-auto">
 				<?php # Key Programs ?>
 				<div class="flex flex-col xl:flex-none xl:grid xl:grid-cols-12 xl:gap-8 absolute-side-parent">
@@ -78,12 +79,12 @@ use \TrevorWP\Theme\Single_Page\Strategic_Plan as Page;
 						<?php if ( $desc = Page::get_val( Page::SETTING_PRINCIPLES_DESC ) ): ?>
 							<p class="page-sub-title-desc centered xl:no-centered"><?= $desc ?></p>
 						<?php endif; ?>
-						<div class="flex flex-col md:flex-row md:w-3/4 md:mx-auto md:justify-center md:flex-wrap xl:justify-start xl:ml-0">
+						<div class="flex flex-col mt-8 md:flex-row md:w-3/4 md:mx-auto md:justify-center md:flex-wrap xl:justify-start xl:ml-0">
 							<?php foreach ( Page::get_val( Page::SETTING_PRINCIPLES_DATA ) as $item ): ?>
-								<div class="mb-2 text-center font-bold text-px22 leading-px28 tracking-em005 md:text-left md:mb-7 md:mr-7"><?= esc_html( @$item['name'] ) ?></div>
+								<div class="mb-5 text-center font-bold text-px22 leading-px28 tracking-em005 md:text-left md:mb-7 md:mr-7"><?= esc_html( @$item['name'] ) ?></div>
 							<?php endforeach; ?>
 						</div>
-						<div class="text-center xl:text-left">
+						<div class="mt-4 text-center xl:text-left">
 							<a class="page-btn primary"
 							   href="<?= wp_get_attachment_url( Page::get_val( Page::SETTING_HEADER_STRATEGIC_PLAN_FILE ) ) ?>">
 								<?= Page::get_component( Page::SECTION_HEADER )->get_val( \TrevorWP\Theme\Customizer\Component\Header::SETTING_CTA_TXT ) ?>

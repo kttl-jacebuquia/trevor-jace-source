@@ -11,7 +11,7 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
 
 		<?php # Info Boxes ?>
-		<div class="bg-gray-light py-20 lx:py-36">
+		<div class="bg-gray-light py-20 xl:py-36">
 			<div class="container mx-auto text-teal-dark">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES )->render( [
 						'box_text_cls' => [ 'font-bold', 'text-px80', 'leading-px90', 'tracking-em_001' ],
@@ -28,7 +28,7 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 		</div>
 
 		<?php # Offerings ?>
-		<div class="bg-gray py-20 lx:py-36 text-teal-dark">
+		<div class="bg-gray py-20 xl:py-36 text-teal-dark">
 			<div class="container mx-auto flex flex-col items-center">
 				<h2 class="page-sub-title centered"><?= Page::get_val( Page::SETTING_OFFERINGS_TITLE ) ?></h2>
 				<?php if ( $offerings_desc = Page::get_val( Page::SETTING_OFFERINGS_DESC ) ) { ?>

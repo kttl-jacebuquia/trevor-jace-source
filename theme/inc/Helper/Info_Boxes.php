@@ -47,7 +47,7 @@ class Info_Boxes {
 	public static function render_box_img( array $box, array $options = [] ): string {
 		$img_id = empty( $box['img'] ) ? 0 : (int) @$box['img']['id'];
 		$desc   = (string) @$box['desc'];
-		$cls    = array_merge( [ 'info-box-img' ], (array) @$options['box_text_cls'] );
+		$cls    = array_merge( [ 'info-box-img' ], (array) @$options['box_img_cls'] );
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<?= wp_get_attachment_image( $img_id, 'medium' ) ?>
@@ -70,12 +70,14 @@ class Info_Boxes {
 				"type-{$type}",
 		], (array) @$options['box_cls'] );
 
+		$desc_cls = array_merge( [ 'info-box-desc' ], (array) @$options['box_desc_cls'] );
+
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<div class="info-box-top">
 				<?= $top_container ?>
 			</div>
-			<p class="info-box-desc"><?= esc_html( $desc ) ?></p>
+			<p class="<?= esc_attr( implode( ' ', $desc_cls ) ) ?>"><?= esc_html( $desc ) ?></p>
 		</div>
 		<?php return ob_get_clean();
 	}
