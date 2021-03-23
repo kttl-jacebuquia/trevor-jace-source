@@ -64,9 +64,11 @@
 	  }
 	}
 
-	.info-boxes-container {
-	  > :last-child {
-		@apply col-start-3;
+	&.break-grid-1-2-3 {
+	  .info-boxes-container {
+		> :last-child {
+		  @apply col-start-3;
+		}
 	  }
 	}
 
