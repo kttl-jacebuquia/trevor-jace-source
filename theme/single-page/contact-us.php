@@ -1,4 +1,4 @@
-<?php /* Public Education */
+<?php /* Contact Us */
 
 use \TrevorWP\Theme\Single_Page\Contact_Us as Page;
 
