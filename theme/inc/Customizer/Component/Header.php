@@ -12,6 +12,9 @@ class Header extends Abstract_Component {
 	const SETTING_TITLE = 'title';
 	const SETTING_DESC = 'desc';
 	const SETTING_CTA_TXT = 'cta_txt';
+	const SETTING_CTA_URL = 'cta_url';
+	const SETTING_CTA2_TXT = 'cta2_txt';
+	const SETTING_CTA2_URL = 'cta2_url';
 	const SETTING_IMG = 'img';
 	const SETTING_CAROUSEL = 'carousel';
 
@@ -19,6 +22,7 @@ class Header extends Abstract_Component {
 	const TYPE_IMG_BG = 'img_bg';
 	const TYPE_CAROUSEL = 'split_carousel';
 	const TYPE_TEXT = 'text';
+	const TYPE_HORIZONTAL = 'horizontal';
 
 	const FIELDSET_CUSTOM_LIST_CAROUSEL = [
 		'img'     => [
@@ -57,49 +61,81 @@ class Header extends Abstract_Component {
 		$sec_id  = $this->get_section_id();
 		$type    = @$this->_options['type'];
 
-
 		# Title top
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_TITLE_TOP ),
-			array(
+			[
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Title Top',
 				'type'    => 'text',
-			)
+			]
 		);
 
 		# Title
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_TITLE ),
-			array(
+			[
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Title',
 				'type'    => 'text',
-			)
+			]
 		);
 
 		# Description
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_DESC ),
-			array(
+			[
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Description',
 				'type'    => 'text',
-			)
+			]
 		);
 
-		# CTA Text
+		# CTA1 Text
 		$manager->add_control(
 			$setting_cta_txt = $this->get_setting_id( self::SETTING_CTA_TXT ),
-			array(
+			[
 				'setting' => $setting_cta_txt,
 				'section' => $sec_id,
-				'label'   => 'CTA Text',
+				'label'   => 'CTA1 Text',
 				'type'    => 'text',
-			)
+			]
+		);
+
+		# CTA1 URL
+		$manager->add_control(
+			$setting_cta_url = $this->get_setting_id( self::SETTING_CTA_URL ),
+			[
+				'setting' => $setting_cta_url,
+				'section' => $sec_id,
+				'label'   => 'CTA1 URL',
+				'type'    => 'url',
+			]
+		);
+
+		# CTA2 Text
+		$manager->add_control(
+			$setting_cta2_txt = $this->get_setting_id( self::SETTING_CTA2_TXT ),
+			[
+				'setting' => $setting_cta2_txt,
+				'section' => $sec_id,
+				'label'   => 'CTA2 Text',
+				'type'    => 'text',
+			]
+		);
+
+		# CTA2 URL
+		$manager->add_control(
+			$setting_cta2_url = $this->get_setting_id( self::SETTING_CTA2_URL ),
+			[
+				'setting' => $setting_cta2_url,
+				'section' => $sec_id,
+				'label'   => 'CTA2 URL',
+				'type'    => 'url',
+			]
 		);
 
 		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG ) {
@@ -135,6 +171,9 @@ class Header extends Abstract_Component {
 			'desc'      => $this->get_val( static::SETTING_DESC ),
 			'img_id'    => $this->get_val( static::SETTING_IMG ),
 			'cta_txt'   => $this->get_val( static::SETTING_CTA_TXT ),
+			'cta_url'   => $this->get_val( static::SETTING_CTA_URL ),
+			'cta2_txt'  => $this->get_val( static::SETTING_CTA2_TXT ),
+			'cta2_url'  => $this->get_val( static::SETTING_CTA2_URL ),
 		], $ext_options );
 
 		switch ( $type = $this->get_option( 'type' ) ) {

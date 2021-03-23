@@ -21,6 +21,7 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 		Public_Education::class,
 		Ally_Training::class,
 		Strategic_Plan::class,
+		Contact_Us::class,
 	];
 
 	/**

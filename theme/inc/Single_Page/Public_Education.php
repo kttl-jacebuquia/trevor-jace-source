@@ -88,9 +88,7 @@ class Public_Education extends Abstract_Single_Page {
 		]
 	];
 
-	/**
-	 * @var array[]
-	 */
+	/** @inheritdoc */
 	protected static $_sub_components = [
 		self::SUB_COMPONENT_OFFERINGS_CARD_ALY  => [
 			Component\Info_Card::class,
