@@ -56,7 +56,7 @@ use \TrevorWP\Theme\Single_Page\Strategic_Plan as Page;
 						<?php if ( $desc = Page::get_val( Page::SETTING_KEY_PROGRAMS_DESC ) ): ?>
 							<p class="page-sub-title-desc centered xl:no-centered"><?= $desc ?></p>
 						<?php endif; ?>
-						<div class="flex flex-col md:flex-row md:flex-wrap md:justify-center">
+						<div class="flex flex-col md:flex-row md:flex-wrap md:justify-center xl:justify-start">
 							<?php foreach ( Page::get_val( Page::SETTING_KEY_PROGRAMS_DATA ) as $item ): ?>
 								<div class="text-center my-4 md:my-6 md:w-1/2 xl:text-left">
 									<a href="<?= esc_attr( @$item['href'] ) ?>"
