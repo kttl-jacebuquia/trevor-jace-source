@@ -1,0 +1,52 @@
+.site-banner {
+
+	&__container {
+		@apply container mx-auto relative;
+		@apply flex flex-col md:flex-row justify-start;
+		@apply py-px20 md:items-center;
+	}
+
+	&__custom {
+		@apply bg-canary;
+
+		&.active {
+			@apply block;
+		}
+	}
+
+	&__long_wait {
+		@apply bg-gray-light;
+
+		&.active {
+			@apply block;
+		}
+	}
+
+	&__warning {
+		background-image: url("data:image/svg+xml,%3Csvg width='27' height='25' viewBox='0 0 27 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25.5883 18.935L15.9583 2.64498C15.3283 1.60998 14.2483 0.97998 13.0333 0.97998C11.8183 0.97998 10.7383 1.60998 10.1083 2.64498L0.478281 18.935C-0.151719 19.97 -0.151719 21.275 0.433281 22.31C1.06328 23.39 2.14328 24.02 3.35828 24.02H22.6633C23.8783 24.02 25.0033 23.39 25.5883 22.31C26.2183 21.275 26.2183 19.97 25.5883 18.935ZM24.4633 21.635C24.1033 22.265 23.4283 22.67 22.7083 22.67H3.35828C2.63828 22.67 1.96328 22.31 1.60328 21.635C1.24328 21.005 1.24328 20.24 1.60328 19.61L11.2783 3.31998C11.6383 2.68998 12.3133 2.32998 13.0333 2.32998C13.7533 2.32998 14.4283 2.68998 14.7883 3.31998L24.4633 19.61C24.8233 20.24 24.8233 21.005 24.4633 21.635Z' fill='%23101066'/%3E%3Ccircle cx='13' cy='19' r='1' fill='%23101066'/%3E%3Cpath d='M13 7C12.45 7 12 7.405 12 7.9V15.1C12 15.595 12.45 16 13 16C13.55 16 14 15.595 14 15.1V7.9C14 7.405 13.55 7 13 7Z' fill='%23101066'/%3E%3C/svg%3E%0A");
+		background-repeat: no-repeat;
+		width: rem-calc(30px);
+		height: rem-calc(25px);
+		@apply mb-px15 md:mb-0 md:mr-px20;
+	}
+
+	:is(&__title, &__description) {
+		@apply font-normal text-px14 leading-px20 lg:text-px16 lg:leading-px22;
+	}
+
+	&__title {
+		@apply font-bold block lg:inline;
+	}
+
+	&__description {
+		@apply block lg:inline;
+	}
+
+	&__close-btn {
+		@apply absolute right-px20 top-px20 text-px30 font-bold flex;
+
+		i {
+			@apply flex;
+		}
+	}
+}

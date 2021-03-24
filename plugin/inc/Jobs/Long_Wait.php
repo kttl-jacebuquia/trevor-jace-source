@@ -29,7 +29,7 @@ class Long_Wait {
 			return null;
 		}
 
-		update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, $val = empty( $resp['isLongWait'] ) ? 1 : 0 );
+		update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, $val = empty( $resp['isLongWait'] ) ? 0 : 1 );
 
 		return boolval( $val );
 	}

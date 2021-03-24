@@ -20,6 +20,7 @@ module.exports = {
     // - Theme
     themeJSAdmin: resolveApp('src/theme/js/admin'),
     themeJSFrontEnd: resolveApp('src/theme/js/frontend'),
+    themeJSFSiteBanners: resolveApp('src/theme/js/site-banners'),
     themeCSSFrontend: resolveApp('src/theme/css/frontend/main.scss'),
     themeCSSDevFrontend: resolveApp('src/theme/css-dev/frontend.js'),
     themeCSSAdmin: resolveApp('src/theme/css/admin/main.scss'),

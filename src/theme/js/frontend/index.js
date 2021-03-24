@@ -6,7 +6,10 @@ import * as matchMedia from './match-media';
 import './nav';
 import singlePages from './single-pages';
 
-window.trevorWP = {features, vendors, matchMedia};
+Object.assign(
+	window.trevorWP = window.trevorWP || {},
+	{features, vendors, matchMedia}
+);
 
 const $body = $('body');
 const isSingle = $body.hasClass('single');
@@ -29,6 +32,7 @@ features.ajaxPagination();
 
 // Sticky Anchor
 features.stickyAnchor();
+
 
 // Single (Detail) Page
 if (isSingle) {

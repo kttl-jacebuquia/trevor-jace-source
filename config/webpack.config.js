@@ -102,6 +102,7 @@ module.exports = function (webpackEnv) {
 		// - Theme
 		'theme/js/admin': paths.themeJSAdmin,
 		'theme/js/frontend': paths.themeJSFrontEnd,
+		'theme/js/site-banners': paths.themeJSFSiteBanners,
 	};
 
 	if (isEnvDevelopment) {

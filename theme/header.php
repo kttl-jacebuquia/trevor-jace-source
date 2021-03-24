@@ -38,6 +38,7 @@ $is_rc = Is::rc();
 	<?= Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ) ?>
 </head>
 <body <?php body_class(); ?>>
+
 <?php if ( ! empty( $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type() ) ) { ?>
 	<div id="bg-wrap">
 		<div id="bg-gradient" class="gradient-type-<?= esc_attr( $gradient_type ) ?>"></div>
@@ -50,6 +51,8 @@ $is_rc = Is::rc();
 	Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.
 </p>
 <![endif]-->
+<div class="site-banner" id="siteBannerContainer"></div>
+<script>window.trevorWP.siteBanners()</script>
 <div id="top-bar" class="top-bar">
 	<div class="top-bar-inner container">
 		<div class="logo-icon">

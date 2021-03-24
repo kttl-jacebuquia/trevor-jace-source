@@ -111,6 +111,15 @@ class Hooks {
 				true
 		);
 
+		# Site Banners JS
+		wp_enqueue_script(
+				self::NAME_PREFIX . 'theme-site-banners',
+				TREVOR_THEME_STATIC_URL . '/js/site-banners.js',
+				[ 'jquery' ],
+				$GLOBALS['trevor_theme_static_ver'],
+				false
+		);
+
 		// Auto-complete test
 		// wp_enqueue_style( 'jquery-ui-theme', 'https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
