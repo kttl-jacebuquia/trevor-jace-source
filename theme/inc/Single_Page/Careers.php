@@ -25,7 +25,7 @@ class Careers extends Abstract_Single_Page {
 		self::SECTION_HEADER      => [
 			Component\Header::class,
 			[
-				'options'  => [ 'type' => Component\Header::TYPE_SPLIT_IMG ],
+				'options'  => [ 'type' => Component\Header::TYPE_HORIZONTAL ],
 				'defaults' => [
 					Component\Header::SETTING_TITLE => 'Wake up every day <tiltb>with purpose.</tiltb>',
 					Component\Header::SETTING_DESC  => 'If you’re looking for the opportunity to work with a talented team that is dedicated to lifting up LGBTQ young people, look no further. ',

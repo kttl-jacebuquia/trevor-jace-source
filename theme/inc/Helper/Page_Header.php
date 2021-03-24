@@ -185,4 +185,41 @@ class Page_Header {
 		<?php
 		return ob_get_clean();
 	}
+
+	public static function horizontal( array $options ): string {
+		$options = array_merge( array_fill_keys( [
+				'title',
+				'desc',
+				'img_id',
+		], null ), [], $options );
+		ob_start();
+		?>
+		<div class="page-header type-horizontal">
+			<div class="page-header-inner">
+				<?php if ( ! empty( $options['title'] ) || ! empty( $options['desc'] ) ) { ?>
+					<div class="page-header-content-wrap">
+						<?php if ( ! empty( $options['title'] ) ) { ?>
+							<h1 class="heading-lg-tilted page-header-title"><?php echo $options['title']; ?></h1>
+						<?php } ?>
+						<?php if ( ! empty( $options['desc'] ) ) { ?>
+							<p class="page-header-desc"><?php echo $options['desc']; ?></p>
+						<?php } ?>
+					</div>
+				<?php } ?>
+				<?php if ( ! empty( $options['img_id'] ) ) { ?>
+					<div class="page-header-image">
+						<?php echo wp_get_attachment_image( $options['img_id'], 'full', false, [
+							'class' => implode(' ', [
+								'object-center',
+								'object-cover',
+								'w-full',
+							]),
+						] ); ?>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 }

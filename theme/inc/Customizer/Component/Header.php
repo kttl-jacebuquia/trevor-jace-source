@@ -138,7 +138,7 @@ class Header extends Abstract_Component {
 			]
 		);
 
-		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG ) {
+		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG || $type == self::TYPE_HORIZONTAL) {
 			# Image
 			$manager->add_control(
 				new \WP_Customize_Media_Control(
@@ -185,6 +185,8 @@ class Header extends Abstract_Component {
 				return Page_Header::img_bg( $options );
 			case static::TYPE_CAROUSEL:
 				return Page_Header::split_carousel( $options );
+			case static::TYPE_HORIZONTAL:
+				return Page_Header::horizontal( $options );
 			default:
 				throw new Internal( 'Unknown type provided', compact( 'type' ) );
 		}
