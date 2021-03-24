@@ -36,7 +36,7 @@ class Careers extends Abstract_Single_Page {
 			Component\Info_Boxes::class,
 			[
 				'options'  => [
-					'box_type'        => Helper\Info_Boxes::BOX_TYPE_IMG,
+					'box_type'        => Helper\Info_Boxes::BOX_TYPE_BOTH,
 					'break_behaviour' => Helper\Info_Boxes::BREAK_BEHAVIOUR_GRID_1_2_3,
 				],
 				'defaults' => [

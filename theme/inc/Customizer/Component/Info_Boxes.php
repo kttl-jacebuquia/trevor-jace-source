@@ -51,27 +51,21 @@ class Info_Boxes extends Abstract_Component {
 		);
 
 		# Data Fields
-		switch ( $this->get_option( 'box_type' ) ) {
-			case Helper\Info_Boxes::BOX_TYPE_TEXT:
-				$data_fields = [
-					'txt' => [
-						'type'       => Control\Custom_List::FIELD_TYPE_INPUT,
-						'input_type' => 'text',
-						'label'      => 'Hero Text'
-					]
-				];
-				break;
-			case Helper\Info_Boxes::BOX_TYPE_IMG:
-				$data_fields = [
-					'img' => [
-						'type'      => Control\Custom_List::FIELD_TYPE_MEDIA,
-						'label'     => 'Image',
-						'mime_type' => 'image',
-					]
-				];
-				break;
-			default:
-				throw new Internal( 'Unknown box type.' );
+		$box_type    = $this->get_option( 'box_type' );
+		$data_fields = [];
+		if ( $box_type == Helper\Info_Boxes::BOX_TYPE_IMG || $box_type == Helper\Info_Boxes::BOX_TYPE_BOTH ) {
+			$data_fields['img'] = [
+				'type'      => Control\Custom_List::FIELD_TYPE_MEDIA,
+				'label'     => 'Image',
+				'mime_type' => 'image',
+			];
+		}
+		if ( $box_type == Helper\Info_Boxes::BOX_TYPE_TEXT || $box_type == Helper\Info_Boxes::BOX_TYPE_BOTH ) {
+			$data_fields['txt'] = [
+				'type'       => Control\Custom_List::FIELD_TYPE_INPUT,
+				'input_type' => 'text',
+				'label'      => 'Hero Text'
+			];
 		}
 
 		$data_fields['desc'] = [

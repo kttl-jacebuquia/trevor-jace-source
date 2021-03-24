@@ -16,8 +16,12 @@
 
   //
   .info-box-img {
-	@apply h-40;
 	@apply flex flex-col justify-center;
+
+	img {
+	  @apply object-center object-contain;
+	  @apply w-full h-full;
+	}
   }
 
   .info-box-desc {
@@ -153,15 +157,17 @@
 .info-box {
   @apply w-full;
 
+  &.type-both {
+	.info-box-top {
+	  @apply flex flex-col justify-center;
+	}
+  }
+
   &-top {
 	@apply flex justify-center items-center;
 
 	.info-boxes.box-type-text {
 	  @apply items-end;
-	}
-
-	.info-boxes.box-type-img {
-	  min-height: 10rem;
 	}
   }
 

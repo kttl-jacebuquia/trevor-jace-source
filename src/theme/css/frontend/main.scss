@@ -10,6 +10,7 @@
 @import "./what-input";
 @import "../utils/index";
 @import "./vendor/index";
+
 // Our Components
 @import "./general";
 @import "./fonts";
@@ -45,10 +46,10 @@
 @import "./info-card";
 @import "./page-btn";
 @import "./absolute-shift";
-@import "./single-page/index";
-// Resources Center
-@import "./rc";
+
 // Page specific
+@import "./rc"; // Resources Center
+@import "./single-page/index";
 @import "./trevor-space";
 @import "./institutional-grants";
 @import "./corporate-partnerships";

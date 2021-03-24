@@ -9,6 +9,7 @@ class Info_Boxes {
 	/* Box Type */
 	const BOX_TYPE_IMG = 'img';
 	const BOX_TYPE_TEXT = 'text';
+	const BOX_TYPE_BOTH = 'both';
 
 	/* Break Behaviour */
 	const BREAK_BEHAVIOUR_GRID_1_2_2 = 'grid-1-2-2';
@@ -19,67 +20,44 @@ class Info_Boxes {
 
 	/**
 	 * @param array $box
-	 *  title: string
-	 *  desc: string
 	 * @param array $options
 	 *
 	 * @return string
 	 */
 	public static function render_box_text( array $box, array $options = [] ): string {
 		$text = (string) @$box['txt'];
-		$desc = (string) @$box['desc'];
 		$cls  = array_merge( [ 'info-box-text' ], (array) @$options['box_text_cls'] );
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<?= esc_html( $text ) ?>
 		</div>
-		<?php return self::_render_box( 'text', ob_get_clean(), $desc, $options );
+		<?php return ob_get_clean();
 	}
 
 	/**
 	 * @param array $box
-	 *  title: string
-	 *  desc: string
 	 * @param array $options
 	 *
 	 * @return string
 	 */
 	public static function render_box_img( array $box, array $options = [] ): string {
 		$img_id = empty( $box['img'] ) ? 0 : (int) @$box['img']['id'];
-		$desc   = (string) @$box['desc'];
 		$cls    = array_merge( [ 'info-box-img' ], (array) @$options['box_img_cls'] );
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<?= wp_get_attachment_image( $img_id, 'medium' ) ?>
 		</div>
-		<?php return self::_render_box( 'text', ob_get_clean(), $desc, $options );
+		<?php return ob_get_clean();
 	}
 
 	/**
-	 * Renders a single box.
+	 * @param array $box
+	 * @param array $options
 	 *
-	 * @param string $type img|text
-	 * @param string $top_container Rendered top part.
-	 * @param string $desc Description text.
-	 *
-	 * @return false|string
+	 * @return string
 	 */
-	protected static function _render_box( string $type, string $top_container, string $desc, array $options = [] ) {
-		$cls = array_merge( [
-				'info-box',
-				"type-{$type}",
-		], (array) @$options['box_cls'] );
-
-		$desc_cls = array_merge( [ 'info-box-desc' ], (array) @$options['box_desc_cls'] );
-
-		ob_start(); ?>
-		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
-			<div class="info-box-top">
-				<?= $top_container ?>
-			</div>
-			<p class="<?= esc_attr( implode( ' ', $desc_cls ) ) ?>"><?= esc_html( $desc ) ?></p>
-		</div>
-		<?php return ob_get_clean();
+	public static function render_box_both( array $box, array $options = [] ) {
+		return static::render_box_img( $box, $options ) . static::render_box_text( $box, $options );
 	}
 
 	/**
@@ -135,6 +113,13 @@ class Info_Boxes {
 			$cls[] = 'break-grid';
 		}
 
+		$box_cls = array_merge( [
+				'info-box',
+				"type-{$options['box_type']}",
+		], (array) @$options['box_cls'] );
+
+		$desc_cls = array_merge( [ 'info-box-desc' ], (array) @$options['box_desc_cls'] );
+
 		ob_start(); ?>
 		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
 			<h2 class="info-boxes-title"><?= esc_html( $options['title'] ) ?></h2>
@@ -143,13 +128,19 @@ class Info_Boxes {
 			<?php } ?>
 
 			<div class="<?= esc_attr( implode( ' ', $container_cls ) ) ?>">
-				<?php foreach ( $boxes as $box ) {
-					echo call_user_func( [ self::class, $renderer ], $box, [
-							'box_cls'      => $options['box_cls'],
-							'box_text_cls' => $options['box_text_cls'],
-							'box_desc_cls' => $options['box_desc_cls'],
-					] );
-				} ?>
+				<?php foreach ( $boxes as $box ) { ?>
+					<div class="<?= esc_attr( implode( ' ', $box_cls ) ) ?>">
+						<div class="info-box-top">
+							<?= call_user_func( [ self::class, $renderer ], $box, [
+									'box_cls'      => $options['box_cls'],
+									'box_img_cls'  => $options['box_img_cls'],
+									'box_text_cls' => $options['box_text_cls'],
+									'box_desc_cls' => $options['box_desc_cls'],
+							] ); ?>
+						</div>
+						<p class="<?= esc_attr( implode( ' ', $desc_cls ) ) ?>"><?= esc_html( @$box['desc'] ) ?></p>
+					</div>
+				<?php } ?>
 			</div>
 
 			<?php if ( $is_carousel ) { ?>

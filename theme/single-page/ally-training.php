@@ -44,6 +44,9 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 		<div class="bg-blue_green py-20 xl:py-32">
 			<div class="container mx-auto text-white">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES_2 )->render( [
+					'box_img_cls' => [
+							'h-40',
+					],
 					'container_cls' => [
 							'xl:w-10/12 xl:mx-auto'
 					],
