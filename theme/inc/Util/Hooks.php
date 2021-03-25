@@ -73,9 +73,8 @@ class Hooks {
 		# Pre Get Posts
 		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
 
-		# Google OAuth Return
-		add_action( 'wp_ajax_trevor-site-banners', [ self::class, 'ajax_site_banners' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_trevor-site-banners', [ self::class, 'ajax_site_banners' ], 10, 0 );
+		# REST API
+		add_action( 'rest_api_init', [ self::class, 'rest_api_init' ], 10, 0 );
 
 		# Single Pages
 		Single_Page\Abstract_Single_Page::init_all();
@@ -484,12 +483,19 @@ class Hooks {
 	}
 
 	/**
-	 * Site banners ajax handler.
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/wp_ajax_action/
-	 * @link https://developer.wordpress.org/reference/hooks/wp_ajax_nopriv_action/
+	 * Fires when preparing to serve a REST API request.
 	 */
-	public static function ajax_site_banners(): void {
+	public static function rest_api_init(): void {
+		register_rest_route( 'trevor/v1', '/site-banners', array(
+				'methods'  => 'GET',
+				'callback' => [ self::class, 'ajax_site_banners' ],
+		) );
+	}
+
+	/**
+	 * Site banners ajax handler.
+	 */
+	public static function ajax_site_banners() {
 		$banners = [];
 
 		# Long waiting banner
@@ -525,11 +531,16 @@ class Hooks {
 			$banner['id'] = substr( \TrevorWP\Util\Tools::get_obj_signature( $banner ), 3, 6 );
 		}
 
-		// TODO: Set appropriate cache headers here
-
-		wp_send_json( [
+		$resp = new \WP_REST_Response( [
 				'success' => true,
 				'banners' => $banners,
-		] );
+		], 200 );
+
+		// Cache timeouts
+		$browser_to = 5 * 60; # 5 min
+		$proxy_to   = 10; # 10 sec
+		$resp->header( 'Cache-Control', sprintf( 'public, max-age=%d, s-maxage=%d', $browser_to, $proxy_to ) );
+
+		return $resp;
 	}
 }
