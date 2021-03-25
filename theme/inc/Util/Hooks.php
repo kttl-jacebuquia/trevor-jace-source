@@ -35,7 +35,6 @@ class Hooks {
 	 */
 	public static function register_all() {
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'init', [ Customizer\Search::class, 'handle_init' ], 10, 0 );
 
 		# Media
 		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], 10, 0 );
@@ -79,6 +78,9 @@ class Hooks {
 
 		# Single Pages
 		Single_Page\Abstract_Single_Page::init_all();
+
+		# Search
+		Customizer\Search::init_all();
 	}
 
 	/**

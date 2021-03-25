@@ -148,6 +148,16 @@ class Search extends Abstract_Customizer {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 * @see Hooks::register_all()
 	 */
+	public static function init_all(): void {
+		add_action( 'init', [ static::class, 'handle_init' ] );
+		add_action( 'pre_get_posts', [ static::class, 'pre_get_posts' ] );
+		add_filter( 'query_vars', [ self::class, 'query_vars' ], 10, 1 );
+		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+	}
+
+	/**
+	 * @link https://developer.wordpress.org/reference/hooks/init/
+	 */
 	public static function handle_init(): void {
 		global $wp_rewrite;
 		$main_page_query = 'index.php?' . http_build_query( [
@@ -155,9 +165,6 @@ class Search extends Abstract_Customizer {
 				] );
 
 		$base = trailingslashit( static::get_val( static::SETTING_GENERAL_SLUG ) );
-
-		# Pre Get Posts
-		add_action( 'pre_get_posts', [ static::class, 'pre_get_posts' ] );
 
 		# First page
 		add_rewrite_rule( $base . '?$', $main_page_query, 'top' );
@@ -177,8 +184,6 @@ class Search extends Abstract_Customizer {
 				$main_page_query . '&' . self::QV_SEARCH_SCOPE . '=$matches[1]&paged=$matches[2]',
 				'top'
 		);
-
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], 10, 1 );
 	}
 
 	/**
@@ -298,5 +303,18 @@ class Search extends Abstract_Customizer {
 		return array_key_exists( $val, self::SCOPES )
 				? $val
 				: 'all';
+	}
+
+	/**
+	 * Filters the list of CSS body class names for the current post or page.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/body_class/
+	 */
+	public static function body_class( array $classes ): array {
+		if ( is_search() && ! Is::rc() ) {
+			$classes[] = 'is-site-search';
+		}
+
+		return $classes;
 	}
 }
