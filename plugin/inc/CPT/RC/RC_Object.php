@@ -609,7 +609,7 @@ abstract class RC_Object {
 	 */
 	public static function the_posts( array $posts, \WP_Query $query ): array {
 
-		if ( $query->is_search() ) {
+		if ( Is::rc() && $query->is_search() ) {
 			$glossary_key = null;
 			foreach ( $posts as $key => $post ) {
 				if ( $post->post_type == Glossary::POST_TYPE ) {

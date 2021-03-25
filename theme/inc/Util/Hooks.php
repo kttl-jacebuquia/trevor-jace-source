@@ -35,6 +35,7 @@ class Hooks {
 	 */
 	public static function register_all() {
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'init', [ Customizer\Search::class, 'handle_init' ], 10, 0 );
 
 		# Media
 		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], 10, 0 );
@@ -207,6 +208,7 @@ class Hooks {
 	 */
 	public static function customize_register( \WP_Customize_Manager $manager ): void {
 		# Panels
+		new Customizer\Search( $manager );
 		new Customizer\External_Scripts( $manager );
 		new Customizer\Site_Banners( $manager );
 		new Customizer\Resource_Center( $manager );
@@ -413,6 +415,8 @@ class Hooks {
 				if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ADVOCACY ) ) ) {
 					$template = locate_template( 'get-involved/advocate.php', false );
 				}
+			} elseif ( ! empty( $wp_query->get( Customizer\Search::QV_SEARCH ) ) ) {
+				$template = locate_template( 'search.php', false );
 			}
 		}
 

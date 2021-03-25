@@ -100,6 +100,14 @@
 			</li>
 		</ul>
 
+		<hr class="my-10">
+
+		<ul class="my-20">
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Customizer\Search::get_permalink() ?>">Site-Wide Search</a>
+			</li>
+		</ul>
 	</div>
 </main> <!-- #site-content -->
 
