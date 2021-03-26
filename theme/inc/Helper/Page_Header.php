@@ -23,8 +23,8 @@ class Page_Header {
 		], null ), [], $options );
 		ob_start();
 		?>
-		<div class="hero h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
-			<div class="container hero--inner mx-auto text-center site-content-inner items-center w-full">
+		<div class="hero page-header type-text h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
+			<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 				<?php if ( ! empty( $options['title_top'] ) ) { ?>
 					<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
 				<?php } ?>
@@ -35,11 +35,21 @@ class Page_Header {
 					<?= $options['desc'] ?>
 				</p>
 
-				<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
-					<a href="<?= empty( $options['cta_url'] ) ? '#' : $options['cta_url'] ?>"
-					   class="hero__btn-1 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
-						<?= $options['cta_txt'] ?>
-					</a>
+				<?php if ( ! empty( $options['cta_txt'] ) || ! empty( $options['cta2_txt'] ) ) { ?>
+					<div class="flex flex-col md:flex-row justify-start md:justify-center <?php echo ( ! empty( $options['cta_txt'] ) && ! empty( $options['cta2_txt'] ) ) ? 'two-cta' : '' ?>">
+						<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
+							<a href="<?= empty( $options['cta_url'] ) ? '#' : $options['cta_url'] ?>"
+								class="hero__btn-1 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
+								<?= $options['cta_txt'] ?>
+							</a>
+						<?php } ?>
+						<?php if ( ! empty( $options['cta2_txt'] ) ) { ?>
+							<a href="<?= empty( $options['cta2_url'] ) ? '#' : $options['cta2_url'] ?>"
+								class="hero__btn-2 mt-px20 md:mt-0 md:ml-px20 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
+								<?= $options['cta2_txt'] ?>
+							</a>
+						<?php } ?>
+					</div>
 				<?php } ?>
 			</div>
 		</div>

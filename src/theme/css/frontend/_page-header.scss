@@ -164,7 +164,11 @@
 
   // - - Text
   &.type-text {
-
+		.two-cta {
+			a {
+				@apply bg-teal-dark text-white border-2 border-white;
+			}
+		}
   }
 
   // - - Img BG
