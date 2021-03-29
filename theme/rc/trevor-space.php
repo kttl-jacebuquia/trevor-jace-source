@@ -2,6 +2,7 @@
 <?php get_header(); ?>
 <?php
 
+use \TrevorWP\Theme\Helper;
 use TrevorWP\Theme\Customizer\Trevorspace;
 use TrevorWP\Theme\Helper\Circulation_Card;
 
@@ -118,21 +119,16 @@ $page_data        = Trevorspace::get_val( Trevorspace::SETTING_HOME_DATA );
 		</div>
 	</div>
 
-	<div class="bg-white">
-		<div class="container mx-auto text-center text-indigo site-content-inner pt-20 pb-16 lg:pt-36 lg:pb-28">
-			<h3 class="text-px40 leading-px52 tracking-px_015 font-semibold mb-4 md:text-px32 md:leading-px42 lg:text-px32 lg:leading-px56 xl:text-px36 xl:font-bold xl:leading-px46">
-				<?= Trevorspace::get_val( Trevorspace::SETTING_HOME_CIRCULATION_TITLE ) ?>
-			</h3>
-			<p class="font-normal text-px20 leading-px30 tracking-em005 mb-14 md:text-px16 md:leading-px22 md:mb-px50 md:mx-24 lg:text-px22 lg:leading-px36 lg:mb-20 lg:mx-64 xl:text-px24 xl:leading-px34">
-				<?= Trevorspace::get_val( Trevorspace::SETTING_HOME_CIRCULATION_DESC ) ?>
-			</p>
-
-			<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none">
-				<?= Circulation_Card::render_get_help(); ?>
-				<?= Circulation_Card::render_rc(); ?>
-			</div>
-		</div>
-	</div>
+	<?php /* Recirculation */ ?>
+		<?= Helper\Circulation_Card::render_circulation(
+			Trevorspace::get_val( Trevorspace::SETTING_HOME_CIRCULATION_TITLE ),
+			Trevorspace::get_val( Trevorspace::SETTING_HOME_CIRCULATION_DESC ),
+			[
+				'get_help',
+				'rc'
+			],
+			null,
+		); ?>
 </main>
 
 <?php get_footer(); ?>
