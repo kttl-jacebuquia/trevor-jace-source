@@ -39,6 +39,7 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 					<?= Page::get_sub_component( Page::SUB_COMPONENT_OFFERINGS_CARD_ALY )->render( [
 							'btn_href'  => \TrevorWP\Theme\Single_Page\Ally_Training::get_permalink(),
 							'cls'       => [
+									'bg-white',
 									'col-span-6',
 									'md:col-start-2',
 									'xl:col-span-5',
@@ -69,7 +70,13 @@ use \TrevorWP\Theme\Single_Page\Public_Education as Page;
 							]
 					] ) ?>
 					<?= Page::get_sub_component( Page::SUB_COMPONENT_OFFERINGS_CARD_CARE )->render( [
-							'cls'       => [ 'col-span-6', 'md:col-start-2', 'xl:col-span-5', 'xl:col-start-7' ],
+							'cls'       => [
+									'bg-white',
+									'col-span-6',
+									'md:col-start-2',
+									'xl:col-span-5',
+									'xl:col-start-7'
+							],
 							'title_cls' => $title_cls,
 							'desc_cls'  => $desc_cls,
 							'btn_cls'   => $btn_cls,

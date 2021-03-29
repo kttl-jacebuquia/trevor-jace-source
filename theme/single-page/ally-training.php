@@ -91,6 +91,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 					</div>
 					<div class="col-span-6 md:col-span-6 md:col-start-2 xl:col-span-5 xl:col-start-8">
 						<?= Page::get_sub_component( Page::SUB_COMPONENT_OTHER_TRAINING_CARE )->render( [
+								'cls'       => [ 'bg-white' ],
 								'title_cls' => $title_cls = [
 										'font-bold',
 										'text-px30',

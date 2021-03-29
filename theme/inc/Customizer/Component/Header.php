@@ -45,13 +45,13 @@ class Header extends Abstract_Component {
 	];
 
 	/** @inheritDoc */
-	public function register_section(): void {
+	public function register_section( array $args = [] ): void {
 		$this->get_manager()->add_section(
 			$this->get_section_id(),
-			[
+			array_merge( [
 				'panel' => $this->get_panel_id(),
 				'title' => 'Header',
-			]
+			], $args )
 		);
 	}
 
@@ -138,18 +138,18 @@ class Header extends Abstract_Component {
 			]
 		);
 
-		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG || $type == self::TYPE_HORIZONTAL) {
+		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG || $type == self::TYPE_HORIZONTAL ) {
 			# Image
 			$manager->add_control(
 				new \WP_Customize_Media_Control(
 					$manager,
 					$img_id = $this->get_setting_id( self::SETTING_IMG ),
-					array(
+					[
 						'setting'   => $img_id,
 						'section'   => $sec_id,
 						'label'     => 'Image',
 						'mime_type' => 'image',
-					)
+					]
 				)
 			);
 		} else if ( $type == self::TYPE_CAROUSEL ) {

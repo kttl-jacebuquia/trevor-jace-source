@@ -197,7 +197,7 @@
 	}
 
 	.page-header-title {
-		@apply has-inline-tilt text-px34 leading-px40;
+		@apply text-px34 leading-px40;
 		tilt,
 		tiltb {
 			@apply text-px44 leading-px54;
@@ -211,7 +211,7 @@
 	@screen md {
 
 	  .page-header-title {
-		@apply has-inline-tilt text-px36 leading-px42;
+		@apply text-px36 leading-px42;
 		tilt,
 		tiltb {
 			@apply text-px46 leading-px54;
@@ -235,7 +235,7 @@
 	  }
 
 		.page-header-title {
-			@apply has-inline-tilt text-px56 leading-px66;
+			@apply text-px56 leading-px66;
 			tilt,
 			tiltb {
 				@apply text-px82 leading-px92;

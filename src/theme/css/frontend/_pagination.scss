@@ -33,7 +33,7 @@
 	}
 
 	a {
-		@apply relative font-bold text-px24 leading-px34 xl:text-px20 xl:leading-px24 xl:font-semibold border-b-2 stretched-link text-teal-dark;
+		@apply relative font-bold text-px24 leading-px34 xl:text-px20 xl:leading-px24 xl:font-semibold border-b-2 text-teal-dark;
 
 		[data-whatintent='mouse'] &:hover {
 			@apply border-none pb-2;

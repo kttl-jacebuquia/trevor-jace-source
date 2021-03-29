@@ -10,13 +10,13 @@ class Testimonials_Carousel extends Abstract_Component {
 	const SETTING_DATA = 'data';
 
 	/** @inheritDoc */
-	public function register_section(): void {
+	public function register_section( array $args = [] ): void {
 		$this->get_manager()->add_section(
 			$this->get_section_id(),
-			[
+			array_merge( [
 				'panel' => $this->get_panel_id(),
 				'title' => 'Testimonials Carousel',
-			]
+			], $args )
 		);
 	}
 

@@ -91,6 +91,11 @@
 
 			<li>
 				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Single_Page\Meet_Our_Partners::get_permalink() ?>">Meet Our Partners</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
 				   href="<?= TrevorWP\Theme\Single_Page\Careers::get_permalink() ?>">Careers</a>
 			</li>
 

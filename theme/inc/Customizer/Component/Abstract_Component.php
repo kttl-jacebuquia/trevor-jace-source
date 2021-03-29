@@ -73,8 +73,10 @@ abstract class Abstract_Component {
 
 	/**
 	 * Registers the section.
+	 *
+	 * @param array $args
 	 */
-	abstract public function register_section(): void;
+	abstract public function register_section( array $args = [] ): void;
 
 	/**
 	 * Registers the settings.

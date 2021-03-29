@@ -1,54 +1,25 @@
 <?php namespace TrevorWP\Theme\Customizer\Component;
 
-use TrevorWP\Exception\Internal;
 use TrevorWP\Theme\Customizer\Control;
 use \TrevorWP\Theme\Helper;
 
 /**
  * Info Boxes Customizer
  */
-class Info_Boxes extends Abstract_Component {
+class Info_Boxes extends Section {
 	const SETTING_DATA = 'data';
-	const SETTING_TITLE = 'title';
-	const SETTING_DESC = 'desc';
 
 	/** @inheritDoc */
-	public function register_section(): void {
-		$this->get_manager()->add_section(
-			$this->get_section_id(),
-			[
-				'panel' => $this->get_panel_id(),
-				'title' => 'Info Boxes',
-			]
-		);
+	public function register_section( array $args = [] ): void {
+		parent::register_section( array_merge( [ 'title' => 'Info Boxes' ], $args ) );
 	}
 
 	/** @inheritDoc */
 	public function register_controls(): void {
+		parent::register_controls();
+
 		$manager = $this->get_manager();
 		$sec_id  = $this->get_section_id();
-
-		# Title
-		$manager->add_control(
-			$setting_title = $this->get_setting_id( self::SETTING_TITLE ),
-			array(
-				'setting' => $setting_title,
-				'section' => $sec_id,
-				'label'   => 'Title',
-				'type'    => 'text',
-			)
-		);
-
-		# Desc
-		$manager->add_control(
-			$setting_desc = $this->get_setting_id( self::SETTING_DESC ),
-			array(
-				'setting' => $setting_desc,
-				'section' => $sec_id,
-				'label'   => 'Description',
-				'type'    => 'text',
-			)
-		);
 
 		# Data Fields
 		$box_type    = $this->get_option( 'box_type' );
@@ -83,7 +54,7 @@ class Info_Boxes extends Abstract_Component {
 	}
 
 	/** @inheritDoc */
-	function render( array $ext_options = [] ): ?string {
+	function render( array $ext_options = [] ): string {
 		$boxes = (array) static::get_val( static::SETTING_DATA );
 
 		return Helper\Info_Boxes::render( $boxes, array_merge(

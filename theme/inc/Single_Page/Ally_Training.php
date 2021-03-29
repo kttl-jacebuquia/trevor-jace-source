@@ -25,8 +25,8 @@ class Ally_Training extends Abstract_Single_Page {
 			[
 				'options'  => [ 'type' => Component\Header::TYPE_TEXT ],
 				'defaults' => [
-					Component\Header::SETTING_TITLE => 'Ally Training',
-					Component\Header::SETTING_DESC  => 'This training is designed to create dialogue around being an adult ally for LGBTQ youth by informing participants about common terminology, the “coming out” process, and challenges at home, in school, and the community.',
+					Component\Header::SETTING_TITLE   => 'Ally Training',
+					Component\Header::SETTING_DESC    => 'This training is designed to create dialogue around being an adult ally for LGBTQ youth by informing participants about common terminology, the “coming out” process, and challenges at home, in school, and the community.',
 					Component\Header::SETTING_CTA_TXT => 'Contact Our Training Team',
 					Component\Header::SETTING_CTA_URL => '#',
 
@@ -149,7 +149,7 @@ class Ally_Training extends Abstract_Single_Page {
 	protected function _register_panels(): void {
 		parent::_register_panels();
 
-		$this->_manager->add_panel( static::get_panel_id(), array( 'title' => 'Ally Training' ) );
+		$this->_manager->add_panel( static::get_panel_id(), [ 'title' => 'Ally Training' ] );
 	}
 
 	/** @inheritDoc */
@@ -166,10 +166,10 @@ class Ally_Training extends Abstract_Single_Page {
 		# Other Training
 		$this->_manager->add_section(
 			static::SECTION_OTHER_TRAINING,
-			array(
+			[
 				'panel' => static::get_panel_id(),
 				'title' => 'Other Training',
-			)
+			]
 		);
 
 		# Testimonials

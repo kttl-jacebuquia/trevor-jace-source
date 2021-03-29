@@ -1,0 +1,40 @@
+.cta-box {
+  @apply w-full;
+  @apply flex flex-col text-center;
+  @apply rounded-px10;
+  @apply py-32 px-7;
+  @apply bg-teal-dark text-white;
+
+  &-title {
+	@apply font-bold text-px30 leading-px40 tracking-em005;
+	@apply mb-5;
+  }
+
+  &-desc {
+	@apply font-normal text-base leading-px22 tracking-px05;
+  }
+
+  &-btn-wrap {
+	@apply mt-7;
+  }
+
+  &-btn {
+	@extend .page-btn.secondary;
+  }
+
+  @screen md {
+	@apply px-28;
+
+	&-title {
+	  @apply text-px32 leading-px42 tracking-normal;
+	}
+
+	&-desc {
+	  @apply text-px18 leading-px24;
+	}
+  }
+
+  @screen xl {
+	@apply px-64 py-48;
+  }
+}

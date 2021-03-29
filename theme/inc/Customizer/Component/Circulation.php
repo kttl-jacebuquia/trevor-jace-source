@@ -10,14 +10,14 @@ class Circulation extends Abstract_Component {
 	const SETTING_DESC = 'desc';
 
 	/** @inheritDoc */
-	public function register_section(): void {
+	public function register_section( array $args = [] ): void {
 		// Other Ways to Help
 		$this->get_customizer()->get_manager()->add_section(
 			$this->get_section_id(),
-			array(
+			array_merge( [
 				'panel' => $this->get_panel_id(),
 				'title' => 'Circulation',
-			)
+			], $args )
 		);
 	}
 
@@ -29,22 +29,22 @@ class Circulation extends Abstract_Component {
 		// Circulation
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_TITLE ),
-			array(
+			[
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Title',
 				'type'    => 'text',
-			)
+			]
 		);
 
 		$manager->add_control(
 			$setting_desc = $this->get_setting_id( self::SETTING_DESC ),
-			array(
+			[
 				'setting' => $setting_desc,
 				'section' => $sec_id,
 				'label'   => 'Description',
 				'type'    => 'text',
-			)
+			]
 		);
 	}
 

@@ -2,7 +2,7 @@
   @apply mx-auto;
   @apply flex flex-col text-center;
   @apply py-32 md:py-20 lg:py-28 px-7 md:px-px88;
-  @apply bg-gray-light rounded-px10;
+  @apply rounded-px10;
 
   &-title {
 	@apply mb-px20 font-bold text-px32 leading-px40 md:leading-px42 md:mb-px15 lg:mb-px24;
@@ -20,7 +20,6 @@
 	&-title {
 	  @apply mb-3.5;
 	}
-
   }
 
   @screen xl {

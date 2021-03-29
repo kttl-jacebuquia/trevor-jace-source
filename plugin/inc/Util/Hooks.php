@@ -122,6 +122,9 @@ class Hooks {
 		# Donate
 		CPT\Donate\Donate_Object::construct();
 
+		# Team
+		CPT\Team::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 
