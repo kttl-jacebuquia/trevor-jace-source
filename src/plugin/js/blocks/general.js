@@ -14,7 +14,7 @@ import FileFiled from "./fields/file";
 
 const {editorBlocksData} = TrevorWP.screen;
 const {metaKeys} = editorBlocksData;
-const {[metaKeys.KEY_HEADER_BG_CLR]: BG_COLOR_DATA} = editorBlocksData;
+const {[metaKeys.KEY_HEADER_BG_CLR]: BG_COLOR_DATA = {}} = editorBlocksData;
 const META_KEY_MAP = {
 	headerType: metaKeys.KEY_HEADER_TYPE,
 	headerBgColor: metaKeys.KEY_HEADER_BG_CLR,
@@ -23,10 +23,11 @@ const META_KEY_MAP = {
 	showDate: metaKeys.KEY_HEADER_SHOW_DATE,
 	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
 	billId: metaKeys.KEY_BILL_ID,
+	pronouns: metaKeys.KEY_PRONOUNS,
 };
 const BG_COLOR_HEX_2_NAME_MAP = (() => {
 	const out = {};
-	Object.keys(BG_COLOR_DATA.colors).forEach(key => out[BG_COLOR_DATA.colors[key].color] = key);
+	Object.keys(BG_COLOR_DATA.colors || {}).forEach(key => out[BG_COLOR_DATA.colors[key].color] = key);
 	return out;
 })();
 
@@ -41,13 +42,14 @@ class PostSidebar extends React.Component {
 	handleLengthIndChange = (newVal) => this.props.updatePostMeta('lengthInd', newVal);
 	handleSlugChange = (slug) => this.props.editPost({slug});
 	handleBillIdChange = (billId) => this.props.updatePostMeta('billId', billId);
+	handlePronounsChange = (pronouns) => this.props.updatePostMeta('pronouns', pronouns);
 
 	constructor(...args) {
 		super(...args);
 
 		this.selectOptions = {
 			headerTypes: (() => {
-				const {types} = editorBlocksData[META_KEY_MAP.headerType];
+				const {types = {}} = editorBlocksData[META_KEY_MAP.headerType] || {};
 
 				return Object.keys(types).map(key => {
 					const config = types[key];
@@ -55,7 +57,7 @@ class PostSidebar extends React.Component {
 				})
 			})(),
 			contentLength: (() => {
-				const {settings} = editorBlocksData[META_KEY_MAP.lengthInd];
+				const {settings = {}} = editorBlocksData[META_KEY_MAP.lengthInd] || {};
 
 				return Object.keys(settings).map(key => {
 					const config = settings[key];
@@ -64,7 +66,7 @@ class PostSidebar extends React.Component {
 				})
 			})(),
 			reRecirculationCards: (() => {
-				const {settings} = editorBlocksData[META_KEY_MAP.reRecirculationCards];
+				const {settings = {}} = editorBlocksData[META_KEY_MAP.reRecirculationCards] || {};
 
 				return Object.keys(settings).map(key => {
 					const config = settings[key];
@@ -86,9 +88,10 @@ class PostSidebar extends React.Component {
 			slug,
 			reRecirculationCards,
 			billId,
+			pronouns,
 		} = this.props;
 
-		const {supports: headerSupports = []} = editorBlocksData[META_KEY_MAP.headerType].types[headerType] || {};
+		const {supports: headerSupports = []} = ((editorBlocksData[META_KEY_MAP.headerType] || {}).types || {})[headerType] || {};
 
 		return <>
 			<PluginDocumentSettingPanel name="trevor-entry-general" icon="admin-settings" title="General">
@@ -108,6 +111,10 @@ class PostSidebar extends React.Component {
 				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.billId].indexOf(postType) &&
 				<TextControl label="Bill ID" value={billId} onChange={this.handleBillIdChange}/>
 				}
+
+				{/* Team: Pronouns */}
+				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.pronouns].indexOf(postType) &&
+				<TextControl label="Pronouns" value={pronouns} onChange={this.handlePronounsChange}/>}
 			</PluginDocumentSettingPanel>
 			<PluginDocumentSettingPanel name="trevor-entry-header" icon="store" title="Header">
 				{/* Header Type */}
@@ -177,7 +184,7 @@ registerPlugin('trevor-article-custom', {
 		withSelect(select => {
 			const {getEditedPostAttribute, getCurrentPostType, getEditedPostSlug} = select('core/editor');
 			const postID = getEditedPostAttribute('id');
-			const metaData = getEditedPostAttribute('meta');
+			const metaData = getEditedPostAttribute('meta') || {};
 			const slug = getEditedPostSlug();
 			const normalTitle = getEditedPostAttribute('title');
 			const template = getEditedPostAttribute('template');

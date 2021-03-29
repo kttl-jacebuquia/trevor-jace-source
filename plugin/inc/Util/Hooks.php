@@ -297,6 +297,7 @@ class Hooks {
 						CPT\RC\RC_Object::$ALL_POST_TYPES,
 						CPT\Get_Involved\Get_Involved_Object::$ALL_POST_TYPES,
 						CPT\Donate\Donate_Object::$ALL_POST_TYPES,
+						[ CPT\Team::POST_TYPE ],
 						[
 								'post',
 								'page'
@@ -353,7 +354,7 @@ class Hooks {
 	public static function admin_head(): void {
 		$screen = get_current_screen();
 
-		if ( $screen->is_block_editor && in_array( $screen->post_type, Tools::get_public_post_types() ) ) { ?>
+		if ( $screen->is_block_editor && in_array( $screen->post_type, array_merge( Tools::get_public_post_types(), [ CPT\Team::POST_TYPE ] ) ) ) { ?>
 			<script>
 				Object.assign(window.TrevorWP.screen, {editorBlocksData: <?=json_encode( apply_filters( 'trevor_editor_blocks_data', [] ) )?>})
 			</script>
@@ -612,17 +613,17 @@ class Hooks {
 	 */
 	public static function cron_schedules( array $new_schedules ): array {
 		if ( ! isset( $new_schedules['30min'] ) ) {
-			$new_schedules['30min'] = array(
+			$new_schedules['30min'] = [
 					'interval' => 30 * 60,
 					'display'  => __( 'Once every 30 minutes' )
-			);
+			];
 		}
 
 		if ( ! isset( $new_schedules['10min'] ) ) {
-			$new_schedules['10min'] = array(
+			$new_schedules['10min'] = [
 					'interval' => 10 * 60,
 					'display'  => __( 'Once every 10 minutes' )
-			);
+			];
 		}
 
 		return $new_schedules;

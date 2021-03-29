@@ -1,10 +1,12 @@
 <?php namespace TrevorWP\CPT;
 
-
 use TrevorWP\Main;
+use TrevorWP\Util\Tools;
 
 class Team {
 	const POST_TYPE = Main::POST_TYPE_PREFIX . 'team';
+
+	const TAXONOMY_GROUP = self::POST_TYPE . '_group';
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()
@@ -26,13 +28,29 @@ class Team {
 			'publicly_queryable'  => false,
 			'show_ui'             => true,
 			'show_in_rest'        => true,
+			'has_archive'         => false,
+			'rewrite'             => false,
 			'supports'            => [
 				'title',
 				'editor',
 				'thumbnail',
+				'custom-fields',
 			],
-			'has_archive'         => false,
-			'rewrite'             => false,
+			'labels'              => [
+				'name'          => 'Team',
+				'singular_name' => 'Team Member',
+			],
+		] );
+
+		# Taxonomies
+		register_taxonomy( self::TAXONOMY_GROUP, [ self::POST_TYPE ], [
+			'public'            => false,
+			'hierarchical'      => false,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'show_tagcloud'     => false,
+			'show_admin_column' => true,
+			'labels'            => Tools::gen_tax_labels( 'Group' ),
 		] );
 	}
 }

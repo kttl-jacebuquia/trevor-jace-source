@@ -16,7 +16,7 @@ const FileField = compose(
 	withSelect((select, {metaKey}) => {
 		const {getMedia} = select('core');
 		const {getEditedPostAttribute, getCurrentPostId} = select("core/editor");
-		const metaData = getEditedPostAttribute("meta");
+		const metaData = getEditedPostAttribute("meta") || {};
 
 		let value = metaData[metaKey] || null;
 		value = parseInt(value);

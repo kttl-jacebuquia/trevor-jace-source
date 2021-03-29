@@ -59,6 +59,8 @@ class Post {
 	# Bill
 	const KEY_BILL_ID = Main::META_KEY_PREFIX . 'bill_id';
 
+	# Team
+	const KEY_PRONOUNS = Main::META_KEY_PREFIX . 'pronouns';
 
 	public static $KEYS_BY_POST_TYPE = [];
 	public static $ARGS_BY_KEY = [];
@@ -169,6 +171,11 @@ class Post {
 						CPT\Get_Involved\Partner::POST_TYPE,
 						CPT\Get_Involved\Grant::POST_TYPE,
 					],
+				],
+				self::KEY_PRONOUNS            => [
+					'post_types' => [
+						CPT\Team::POST_TYPE,
+					]
 				],
 			] as $meta_key => $args
 		) {
@@ -452,5 +459,14 @@ class Post {
 	 */
 	public static function get_item_img_id( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::PROD_ITEM_IMG, true );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return string|null
+	 */
+	public static function get_pronounces( int $post_id ): ?string {
+		return get_post_meta( $post_id, self::KEY_PRONOUNS, true );
 	}
 }
