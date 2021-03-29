@@ -17,6 +17,8 @@ class Team extends Abstract_Single_Page {
 	const SECTION_STAFF = self::PANEL_ID . '_staff';
 
 	/* Settings */
+	/* * General */
+	const SETTING_GENERAL_PLACEHOLDER_IMG = self::PANEL_ID . '_' . self::NAME_SECTION_GENERAL . '_placeholder_img';
 	/* * History */
 	const SETTING_HISTORY_VIDEO = self::SECTION_HISTORY . '_video';
 	/* * Founders */
@@ -25,7 +27,6 @@ class Team extends Abstract_Single_Page {
 	const SETTING_BOARD_LIST = self::SECTION_BOARD . '_list';
 	/* * Staff */
 	const SETTING_STAFF_LIST = self::SECTION_STAFF . '_list';
-
 
 	/** @inheritdoc */
 	protected static $_section_components = [
@@ -94,9 +95,18 @@ class Team extends Abstract_Single_Page {
 	/** @inheritdoc */
 	protected function _register_controls(): void {
 		parent::_register_controls();
+		$manager = $this->get_manager();
+
+		# General
+		$manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_GENERAL_PLACEHOLDER_IMG, [
+			'setting'   => self::SETTING_GENERAL_PLACEHOLDER_IMG,
+			'section'   => static::get_section_id( static::NAME_SECTION_GENERAL ),
+			'label'     => 'Placeholder Image',
+			'mime_type' => 'image',
+		] ) );
 
 		# History
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HISTORY_VIDEO, [
+		$manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HISTORY_VIDEO, [
 			'setting'   => self::SETTING_HISTORY_VIDEO,
 			'section'   => self::SECTION_HISTORY,
 			'label'     => 'Video',
@@ -104,7 +114,7 @@ class Team extends Abstract_Single_Page {
 		] ) );
 
 		# Founders
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_FOUNDERS_LIST, [
+		$manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_FOUNDERS_LIST, [
 			'setting'     => self::SETTING_FOUNDERS_LIST,
 			'section'     => self::SECTION_FOUNDERS,
 			'allow_order' => false,
@@ -114,7 +124,7 @@ class Team extends Abstract_Single_Page {
 		] ) );
 
 		# Board
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_BOARD_LIST, [
+		$manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_BOARD_LIST, [
 			'setting'     => self::SETTING_BOARD_LIST,
 			'section'     => self::SECTION_BOARD,
 			'allow_order' => false,
@@ -124,7 +134,7 @@ class Team extends Abstract_Single_Page {
 		] ) );
 
 		# Staff
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_STAFF_LIST, [
+		$manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_STAFF_LIST, [
 			'setting'     => self::SETTING_STAFF_LIST,
 			'section'     => self::SECTION_STAFF,
 			'allow_order' => false,

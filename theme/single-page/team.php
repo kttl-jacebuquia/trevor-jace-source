@@ -11,6 +11,8 @@ $staff_ids      = $staff_featured + ( new WP_Query( [
 				'post__not_in' => array_merge( $staff_featured, $founder_ids, $board_ids ),
 				'fields'       => 'ids',
 		] ) )->posts;
+
+$placeholder_img = Page::get_val( Page::SETTING_GENERAL_PLACEHOLDER_IMG );
 ?>
 
 <?php get_header(); ?>
