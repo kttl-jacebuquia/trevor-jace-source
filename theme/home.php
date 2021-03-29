@@ -91,6 +91,16 @@
 
 			<li>
 				<a class="text-xl font-bold text-white"
+				   href="<?= TrevorWP\Theme\Single_Page\Research::get_permalink() ?>">Research</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Research::POST_TYPE ) ?>">Research Briefs</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
 				   href="<?= TrevorWP\Theme\Single_Page\Meet_Our_Partners::get_permalink() ?>">Meet Our Partners</a>
 			</li>
 

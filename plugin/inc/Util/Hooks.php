@@ -125,6 +125,9 @@ class Hooks {
 		# Team
 		CPT\Team::construct();
 
+		# Research
+		CPT\Research::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 

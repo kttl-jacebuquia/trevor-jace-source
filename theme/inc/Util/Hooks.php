@@ -225,6 +225,7 @@ class Hooks {
 		new Customizer\Shop_Product_Partners( $manager );
 		new Customizer\Fundraise( $manager );
 		new Customizer\Social_Media_Accounts( $manager );
+		new Customizer\Research_Briefs( $manager );
 
 		# Single Pages
 		/** @var Single_Page\Abstract_Single_Page $cls */
