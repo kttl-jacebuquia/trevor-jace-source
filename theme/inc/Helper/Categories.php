@@ -31,7 +31,7 @@ class Categories {
 				<div class="flex flex-wrap justify-center">
 					<?php foreach ( $featured_cats as $cat ) { ?>
 						<a href="<?= get_term_link( $cat ) ?>"
-						   class="rounded-full py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?= $cat->name ?></a>
+						   class="rounded-full hover:bg-persian_blue-lighter py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?= $cat->name ?></a>
 					<?php } ?>
 				</div>
 			</div>

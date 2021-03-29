@@ -185,7 +185,7 @@ class Post_Header {
 				   class="post-social-share-btn"
 				   data-type="facebook"
 				   href="https://www.facebook.com/sharer.php?<?= http_build_query( [ 'u' => get_permalink() ] ) ?>">
-					<i class="share-icon trevor-ti-facebook"></i>
+					<i class="share-icon trevor-ti-facebook hover:text-melrose"></i>
 				</a>
 				<a target="_blank"
 				   rel="noopener noreferrer nofollow"
@@ -195,11 +195,11 @@ class Post_Header {
 						   'text' => get_the_title( $post ),
 						   'url'  => get_permalink( $post )
 				   ] ) ?>">
-					<i class="share-icon trevor-ti-twitter"></i>
+					<i class="share-icon trevor-ti-twitter hover:text-melrose"></i>
 				</a>
 				<span>
 					<a href="#" class="post-share-more-btn" aria-expanded="true">
-						<i class="share-icon trevor-ti-share-others"></i>
+						<i class="share-icon trevor-ti-share-others hover:text-melrose"></i>
 					</a>
 					<span class="hidden">
 						<div class="post-share-more-content">

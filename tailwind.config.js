@@ -84,6 +84,13 @@ module.exports = {
 			moss: {
 				DEFAULT: '#E1E8E9',
 				dark: '#08535A'
+			},
+			persian_blue: {
+				DEFAULT: '#3626D9',
+				lighter: 'rgba(54, 38, 217, 0.9)',
+			},
+			melrose: {
+				DEFAULT: '#CAC5FC',
 			}
 		},
 		// Custom

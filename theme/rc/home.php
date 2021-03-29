@@ -92,7 +92,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			<div class="flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto lg:w-3/4 xl:w-3/5">
 				<?php foreach ( $featured_cats as $cat ) { ?>
 					<a href="<?= get_term_link( $cat ) ?>"
-					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5">
+					   class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5 hover:bg-persian_blue-lighter">
 						<?= esc_html( $cat->name ); ?>
 					</a>
 				<?php } ?>
