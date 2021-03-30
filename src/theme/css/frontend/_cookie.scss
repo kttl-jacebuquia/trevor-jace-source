@@ -33,7 +33,7 @@
 
 			p {
 				color: inherit;
-				@apply mb-px10;
+				margin-bottom: rem-calc(10px) !important;
 
 				strong {
 					color: inherit;
@@ -55,7 +55,7 @@
 
 			.ch2-btn {
 				font-size: inherit;
-				@apply w-auto h-auto m-0 px-px40 md:px-px40 lg2:px-px32 py-px16 text-blue_green bg-white rounded-full;
+				@apply capitalize w-auto h-auto m-0 px-px40 md:px-px40 lg2:px-px32 py-px16 text-blue_green bg-white rounded-full;
 
 				&:nth-child(2) {
 					@apply mt-px16 px-px50 md:px-px40 md:mt-0 md:ml-px14 bg-blue_green text-white border-2 border-solid border-white;
