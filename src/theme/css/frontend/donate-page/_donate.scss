@@ -64,11 +64,11 @@
 				@apply text-teal-dark;
 				opacity: 1; /* Firefox */
 			}
-			
+
 			&:-ms-input-placeholder { /* Internet Explorer 10-11 */
 				@apply text-teal-dark;
 			}
-			
+
 			&::-ms-input-placeholder { /* Microsoft Edge */
 				@apply text-teal-dark;
 			}
@@ -76,6 +76,12 @@
 		  @screen md {
 			@apply h-px72;
 		  }
+		}
+
+		input[type="text"] {
+			&:focus {
+				@apply ring-1 ring-offset-0 ring-teal-dark ring-offset-transparent;
+			}
 		}
 
 		.frequency {
