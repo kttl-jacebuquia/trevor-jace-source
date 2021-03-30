@@ -1,7 +1,8 @@
 :root {
+  --site-banner-height: 0px;
   --top-bar-height: #{rem-calc(4px)};
   --top-nav-height: 8.5rem;
-  --top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h));
+  --top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h) + var(--site-banner-height));
 
   // fixes anchor link connections
   * {

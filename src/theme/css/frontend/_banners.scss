@@ -1,9 +1,14 @@
 .site-banner {
+	@apply z-1;
 
 	&__container {
 		@apply container mx-auto relative;
 		@apply flex flex-col md:flex-row justify-start;
 		@apply py-px20 md:items-center;
+
+		@screen xl {
+			@apply pl-20;
+		}
 	}
 
 	&__custom {
@@ -35,7 +40,7 @@
 	}
 
 	&__title {
-		@apply font-bold block lg:inline;
+		@apply font-semibold block lg:inline;
 	}
 
 	&__description {

@@ -6,6 +6,7 @@ export default class SiteBanner {
 		this.$banner = null;
 		this.bannerObj = bannerObj;
 		this.sessionName = `sessionBannerObj-${this.bannerObj.id}`;
+		this.containerHeight = 0;
 
 		if (!this.isClosed()) {
 			this.build();
@@ -14,11 +15,14 @@ export default class SiteBanner {
 	}
 
 	insert() {
+
 		if (this.$banner.data('type') === 'custom') {
 			this.$banner.prependTo(this.$container);
 		} else {
 			this.$banner.appendTo(this.$container);
 		}
+
+		this.updateSiteBannerCSSvariable();
 	}
 
 	build() {
@@ -50,7 +54,7 @@ export default class SiteBanner {
 		}).appendTo($text);
 
 		$("<button role='button' class='site-banner__close-btn'>" +
-			"<i class='trevor-ti-x'></i>" +
+			"<i class='trevor-ti-x text-indigo'></i>" +
 			"</button>")
 			.on('click', this.handleCloseClick)
 			.appendTo($container);
@@ -61,6 +65,7 @@ export default class SiteBanner {
 
 		sessionStorage.setItem(this.sessionName, Date.now());
 		this.remove();
+		this.updateSiteBannerCSSvariable();
 	}
 
 	isClosed() {
@@ -69,5 +74,11 @@ export default class SiteBanner {
 
 	remove() {
 		this.$banner.remove();
+	}
+
+	updateSiteBannerCSSvariable() {
+		const root = document.documentElement;
+		this.containerHeight = this.$container.height();
+		root.style.setProperty('--site-banner-height', `${this.containerHeight}px`);
 	}
 }
