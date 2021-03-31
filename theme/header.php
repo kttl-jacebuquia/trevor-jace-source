@@ -60,25 +60,41 @@ $is_rc = Is::rc();
 				<i class="trevor-ti-logo-icon"></i>
 			</a>
 		</div>
-		<ul class="switcher">
-			<li>
-				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>"
-				   class="<?= $is_rc ? 'active' : '' ?>">Find Support</a>
-			</li>
-			<li>
-				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ) ?>"
-				   class="<?= $is_rc ? '' : 'active' ?>">Explore The Organization</a>
-			</li>
-		</ul>
+		<div class="switcher-wrap">
+			<ul class="switcher">
+				<li>
+					<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ) ?>"
+					   class="switcher-link-rc <?= $is_rc ? 'active' : '' ?>">Find Support</a>
+				</li>
+				<li>
+					<a href="<?= esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ) ?>"
+					   class="<?= $is_rc ? '' : 'active' ?>">Explore The Organization</a>
+				</li>
+			</ul>
+		</div>
 		<div class="cta-wrap">
-			<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>"
-			   class="btn bg-orange text-white">Reach a Counselor</a>
-			<a href="<?= esc_attr( home_url( TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ) ?>"
-			   class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
+			<div class="cta-links">
+				<a href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>"
+				   class="btn bg-orange text-white">Reach a Counselor</a>
+				<a href="<?= esc_attr( home_url( TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ) ?>"
+				   class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
+				</div>
+		</div>
+		<div class="topbar-nav-wrap">
+			<?php /* Will contain menu for desktop, for seamless transition */ ?>
+		</div>
+		<div class="topbar-controls">
+			<button class="topbar-control-search">
+				<i class="trevor-ti-search"></i>
+			</button>
+			<button class="topbar-control-opener">
+				<i class="trevor-ti-hamburger-menu"></i>
+				<i class="trevor-ti-nav-close"></i>
+			</button>
 		</div>
 	</div>
 </div>
-<header id="top-nav" class="top-nav">
+<header id="top-nav" class="top-nav <?= $is_rc ? 'is_rc' : '' ?>">
 	<input id="top-nav-open" type="checkbox" class="hidden">
 	<div class="top-nav-inner container <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
@@ -89,19 +105,28 @@ $is_rc = Is::rc();
 		</div>
 
 		<div class="opener-wrap">
-			<div class="opener"><i class="trevor-ti-hamburger-menu"></i></div>
+			<button type="button" class="opener"><i class="trevor-ti-hamburger-menu"></i></button>
 		</div>
 
-		<div class="menu-wrap flex pt-4 items-start lg:pt-0">
+		<div class="menu-wrap flex items-start">
+			<button type="button" class="back-to-tier1">BACK</button>
+
 			<?php wp_nav_menu( [
 					'menu_class'      => 'main-menu',
-					'container_class' => 'main-menu-container',
-					'theme_location'  => $is_rc ? 'header-support' : 'header-organization'
+					'container_class' => 'main-menu-container main-menu-container-resources',
+					'theme_location'  => 'header-support'
 			] ); ?>
 
-			<button class="search-button w-10 h-10 ml-5 mb-2 rounded-full bg-blue-dark hidden md:block">
+			<?php wp_nav_menu( [
+					'menu_class'      => 'main-menu',
+					'container_class' => 'main-menu-container main-menu-container-organization',
+					'theme_location'  => 'header-organization'
+			] ); ?>
+
+			<button class="search-button">
 				<i class="trevor-ti-search"></i>
 			</button>
+
 		</div>
 	</div>
 </header>

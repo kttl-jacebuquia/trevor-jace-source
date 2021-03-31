@@ -336,7 +336,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/nav_menu_item_title/
 	 */
 	public static function nav_menu_item_title( string $title, \WP_Post $item, \stdClass $args, int $depth ): string {
-		$title = "<span class='title-wrap'>{$title}</span>";
+		$title = "<div class='menu-link-text'><span class='title-wrap'>{$title}</span>";
 		if ( $depth == 0 ) {
 			$title .= '<span class="submenu-icon trevor-ti-caret-down"></span>';
 		} elseif ( $depth == 1 ) {
@@ -346,6 +346,8 @@ class Hooks {
 				$title .= '<div class="subtitle">' . esc_html( $subtitle ) . '</div>';
 			}
 		}
+
+		$title .= "</div>"; // Closing .menu-link-text
 
 		return $title;
 	}

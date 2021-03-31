@@ -9,6 +9,7 @@ const DARK_TEAL = '#003A48';
 
 module.exports = {
 	purge: {
+		enabled: true,
 		preserveHtmlElements: true,
 		content: [
 			'./src/theme/**/*.js',
@@ -24,6 +25,7 @@ module.exports = {
 	theme: {
 		screens: {
 			'mobile': {'max': px2rem(767)},
+			'md-max': {'max': px2rem(1023)},
 			'sm': px2rem(375),
 			'md': px2rem(768),
 			'lg': px2rem(1024),
@@ -141,6 +143,14 @@ module.exports = {
 			borderRadius: {
 				px10: px2rem(10)
 			},
+			borderWidth: {
+				px1: px2rem(1),
+				px4: px2rem(4),
+				px6: px2rem(6),
+				px9: px2rem(9),
+				px10: px2rem(10),
+				px12: px2rem(12)
+			},
 			maxWidth: {
 				unset: 'unset',
 				px170: px2rem(170),
@@ -175,16 +185,21 @@ module.exports = {
 			},
 			minWidth: {
 				px50: px2rem(50),
+				px145: px2rem(145),
 				px319: px2rem(319),
 				px355: px2rem(355),
 			},
 			width: {
+				px13: px2rem(13),
 				px20: px2rem(20),
+				px40: px2rem(40),
+				px45: px2rem(45),
 				px127: px2rem(127),
 				px214: px2rem(214),
 				px319: px2rem(319),
-				px422: px2rem(422),
+				px370: px2rem(370),
 				px394: px2rem(394),
+				px422: px2rem(422),
 				px500: px2rem(500),
 			},
 			minHeight: {
@@ -193,13 +208,22 @@ module.exports = {
 				px724: px2rem(724),
 			},
 			height: {
+				px13: px2rem(13),
 				px20: px2rem(20),
 				px34: px2rem(34),
+				px45: px2rem(45),
+				px48: px2rem(48),
+				px52: px2rem(52),
 				px68: px2rem(68),
 				px72: px2rem(72),
+				px78: px2rem(78),
+				px84: px2rem(84),
 				px100: px2rem(100),
 				px104: px2rem(104),
-				px128: px2rem(138),
+				px106: px2rem(106),
+				px128: px2rem(128),
+				px133: px2rem(133),
+				px138: px2rem(138),
 				px140: px2rem(140),
 				px160: px2rem(160),
 				px240: px2rem(240),
@@ -217,6 +241,7 @@ module.exports = {
 				px737: px2rem(737),
 			},
 			fontSize: {
+				px12: px2rem(12),
 				px14: px2rem(14),
 				px16: px2rem(16),
 				px18: px2rem(18),
@@ -247,6 +272,7 @@ module.exports = {
 				px90: px2rem(90),
 			},
 			lineHeight: {
+				px16: px2rem(16),
 				px18: px2rem(18),
 				px20: px2rem(20),
 				px22: px2rem(22),
@@ -289,20 +315,27 @@ module.exports = {
 				'1': '1',
 				'2': '2',
 				'-1': '-1',
+				30: 30,
+				31: 31
 			},
 			gap: {
 				'sm': px2rem(12),
 				'md': px2rem(28),
 			},
 			spacing: {
+				full: '100%',
+				double: '100%',
 				pxn5: px2rem(-5),
 				pxn25: px2rem(-25),
 				pxn28: px2rem(-28),
 				pxn2: px2rem(-2),
 				px2: px2rem(2),
 				px4: px2rem(4),
+				px5: px2rem(5),
 				px6: px2rem(6),
+				px7: px2rem(7),
 				px8: px2rem(8),
+				px9: px2rem(9),
 				px10: px2rem(10),
 				px12: px2rem(12),
 				px14: px2rem(14),
@@ -325,6 +358,7 @@ module.exports = {
 				px40: px2rem(40),
 				px41: px2rem(41),
 				px42: px2rem(42),
+				px43: px2rem(43),
 				px45: px2rem(45),
 				px48: px2rem(48),
 				px50: px2rem(50),
@@ -340,6 +374,7 @@ module.exports = {
 				px74: px2rem(74),
 				px76: px2rem(76),
 				px80: px2rem(80),
+				px84: px2rem(84),
 				px86: px2rem(86),
 				px88: px2rem(88),
 				px90: px2rem(90),

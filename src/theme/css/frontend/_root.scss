@@ -15,6 +15,14 @@ body {
   min-height: calc(100vh - var(--tr-wp-admin-bar-h));
   @apply bg-white;
 
+  // Fixed content when nav is expanded for mobile/tablet
+  &.is-fixed {
+  	@screen md-max {
+  		@apply fixed;
+	  	top: var(--fixed-body-top);
+  	}
+  }
+
   > main {
 	flex: 1 0 auto;
   }
@@ -25,6 +33,7 @@ body {
 }
 
 :root {
+  --fixed-body-top: 0px;
   --tr-screen-br-sm: theme('screens.sm');
   --tr-screen-br-md: theme('screens.md');
   --tr-screen-br-lg: theme('screens.lg');
