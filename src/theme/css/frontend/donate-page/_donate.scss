@@ -9,11 +9,11 @@
 	@apply px-px28 pt-px80 pb-px80;
 
 	@screen md {
-	  @apply pt-px100;
+	  @apply px-0;
 	}
 
 	@screen lg {
-	  @apply pt-0 flex flex-auto justify-end ;
+	  @apply pt-0 pb-px30 px-0 flex flex-auto justify-end ;
 	}
 
 	&-wrapper {
@@ -21,7 +21,8 @@
 
 	  @screen lg {
 		width: 72%;
-		margin-right: 16%;
+		margin-left: rem-calc(100px);
+		@apply mr-auto;
 		@apply flex flex-col justify-center max-w-none;
 	  }
 
