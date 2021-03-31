@@ -54,8 +54,8 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 				)
 			);
 			?>
-			<div class="current-partners">
-				<div class="current-partners__title"> <?php echo esc_html( Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_CURRENTS_TITLE ) ); ?></div>
+			<div class="current-partners partners-grid">
+				<h2 class="current-partners__title page-sub-title centered"><?php echo esc_html( Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_CURRENTS_TITLE ) ); ?></h2>
 				<div class="current-partners__container container mx-auto flex justify-center flex-wrap -mt-px100 lg:mt-0">
 					<?php foreach ( $partners as $partner ) { ?>
 						<div class="image-container w-1/2 md:w-1/4 lg:w-1/4 flex items-center content-center mt-px65 md:mt-px80 lg:mt-0" data-aspectRatio="2:1">
@@ -109,16 +109,16 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 		</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation( 
-			'There are other ways to help.', 
-			null, 
-			[ 
-				'fundraiser', 
-				'counselor' 
-			], 
+		<?= Helper\Circulation_Card::render_circulation(
+			'There are other ways to help.',
+			null,
+			[
+				'fundraiser',
+				'counselor'
+			],
 			[
 				'container' => 'cards',
-			] 
+			]
 		); ?>
 	</main>
 <?php
