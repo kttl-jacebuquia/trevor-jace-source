@@ -2,6 +2,15 @@
   &-title {
 	@extend .page-sub-title;
 	@extend .page-sub-title.centered;
+	@apply w-full;
+
+	@screen md {
+		max-width: rem-calc(620px);
+	}
+
+	@screen lg {
+		max-width: rem-calc(1028px);
+	}
   }
 
   &-desc {
@@ -26,7 +35,7 @@
 
   .info-box-desc {
 	@apply mx-auto;
-	max-width: 75%;
+	max-width: rem-calc(300px);
   }
 
   // Grid
@@ -78,7 +87,15 @@
 
 	&.break-grid-1-2-4 {
 	  .info-box {
-		@apply col-span-3
+		@apply col-span-3;
+
+		&.type-img {
+			.info-box-desc {
+				@screen xl {
+					max-width: rem-calc(249px);
+				}
+			}
+		}
 	  }
 
 	  .info-boxes-container {
@@ -95,7 +112,7 @@
 
   @screen lg {
 	.info-box-desc {
-	  max-width: 65%;
+	  max-width: rem-calc(500px);
 	}
   }
 

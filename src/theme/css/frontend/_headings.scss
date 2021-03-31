@@ -67,6 +67,10 @@
 
   @screen xl {
 	@apply text-px46 leading-px56 tracking-em_001;
+
+	.is-single-page & {
+		@apply text-px42 leading-px52 tracking-em_001;
+	}
   }
 }
 

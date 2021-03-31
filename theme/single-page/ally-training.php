@@ -11,7 +11,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
 
 		<?php # Info Boxes ?>
-		<div class="bg-gray-light py-16 md:py-20 xl:py-24">
+		<div class="bg-white py-16 md:py-20 xl:py-24">
 			<div class="container mx-auto text-teal-dark">
 				<?= Page::get_component( Page::SECTION_INFO_BOXES )->render( [
 						'box_text_cls' => [
@@ -52,12 +52,12 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 						],
 						'box_desc_cls'  => [
 								'font-medium',
-								'font-px18',
+								'text-px18',
 								'leading-px24',
 								'tracking-px05',
 								'md:leading-px22',
 								'md:tracking-em005',
-								'xl:font-px20',
+								'xl:text-px20',
 								'xl:leading-px26',
 								'xl:tracking-px05',
 						]
@@ -66,7 +66,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 		</div>
 
 		<?php # Other Training  ?>
-		<div class="bg-gray-light py-20 xl:py-32 text-teal-dark">
+		<div class="other-training bg-gray-light py-20 xl:py-32 text-teal-dark">
 			<div class="container mx-auto">
 				<div class="grid grid-cols-6 gap-7 md:grid-cols-8 xl:grid-cols-12">
 					<div class="col-span-6 text-center md:col-span-6 md:col-start-2 xl:col-span-6 xl:text-left xl:flex xl:flex-col xl:justify-center">
@@ -83,7 +83,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 							<?= $contact_comp->get_val( \TrevorWP\Theme\Customizer\Component\Info_Card::SETTING_TITLE ) ?>
 						</h2>
 						<?php if ( ! empty( $desc = $contact_comp->get_val( \TrevorWP\Theme\Customizer\Component\Info_Card::SETTING_DESC ) ) ): ?>
-							<p class="page-sub-title-desc mx-auto text-center xl:text-left xl:ml-0"><?= $desc ?></p>
+							<p class="page-sub-title-desc mx-auto text-center xl:text-left xl:ml-0 xl:max-w-px605"><?= $desc ?></p>
 						<?php endif; ?>
 						<div class="mt-6">
 							<a href="#" class="page-btn primary"><?= esc_html( @$button['label'] ) ?></a>
