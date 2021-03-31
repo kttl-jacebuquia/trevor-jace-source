@@ -82,7 +82,7 @@ $featured_word = Helper\Posts::get_one_from_list(
 			<div class="my-8 mx-auto md:w-3/5 md:my-6 lg:w-3/4 xl:w-4/6">
 				<form role="search" method="get" class="search-form"
 					  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
-					<?= Helper\Search_Input::render_rc(); ?>
+					<?= Helper\Search_Input::render_rc("What do you want to learn about?"); ?>
 				</form>
 			</div>
 

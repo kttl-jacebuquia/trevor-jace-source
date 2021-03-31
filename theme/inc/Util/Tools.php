@@ -3,6 +3,7 @@
 use TrevorWP\CPT\Org\Org_Object;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
+use TrevorWP\Theme\Customizer\Search;
 
 class Tools {
 	/**
@@ -24,6 +25,8 @@ class Tools {
 			} else if ( get_query_var( RC_Object::QV_TREVORSPACE ) ) {
 				$type = 'trevorspace';
 			}
+		} else if ( get_query_var( Search::QV_SEARCH ) ) {
+			$type = 'search';
 		} else {
 			$type = 'default';
 		}

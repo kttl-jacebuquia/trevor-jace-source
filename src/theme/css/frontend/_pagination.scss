@@ -3,6 +3,19 @@
   @apply flex flex-row justify-center items-center;
   @apply my-10;
 
+	.is-site-search & {
+		@apply text-indigo mt-px40 mb-px60 md:mt-px50 md:mb-px100;
+
+		.page-numbers {
+			color: inherit;
+
+			&.current {
+				@apply bg-indigo text-white;
+			}
+		}
+
+	}
+
   .page-numbers {
 	@apply text-white;
 	@apply mx-2;
@@ -22,6 +35,7 @@
 	@apply col-span-3;
   }
 }
+
 
 //
 // Ajax Pagination

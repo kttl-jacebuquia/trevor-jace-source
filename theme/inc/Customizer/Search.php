@@ -5,6 +5,10 @@ use TrevorWP\Main;
 use TrevorWP\Theme\Util\Hooks;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Tools;
+use TrevorWP\CPT\RC\RC_Object;
+use \TrevorWP\Ranks;
+use TrevorWP\Theme\Helper\Thumbnail;
+use TrevorWP\Theme\Helper\Taxonomy;
 
 class Search extends Abstract_Customizer {
 	/* Query Values */
@@ -31,7 +35,7 @@ class Search extends Abstract_Customizer {
 			'blogs'     => [
 					'name'      => 'Blogs',
 					'post_type' => [
-//							CPT\Post::POST_TYPE,
+							// CPT\Post::POST_TYPE,
 							CPT\RC\Post::POST_TYPE,
 					]
 			]
@@ -221,15 +225,96 @@ class Search extends Abstract_Customizer {
 	 */
 	public static function render_post( \WP_Post $post ): ?string {
 		$_class = [
-				'py-2',
-				'border-b border-b-1',
+				'pb-10',
+				'lg:pb-px50',
+				'border-b',
+				'border-b-1',
+				'border-indigo',
+				'border-opacity-20',
 		];
 
+		$title_top = $desc = $img = null;
+
+		switch ( $post->post_type ) {
+			case CPT\RC\External::POST_TYPE :
+				$title_top = 'Resource';
+				$icon_cls   = 'trevor-ti-link-out';
+				break;
+			case CPT\RC\Guide::POST_TYPE :
+				$title_top = 'Guide';
+				break;
+			case CPT\Donate\Fundraiser_Stories::POST_TYPE :
+				$title_top = 'Fundraiser Story';
+				break;
+			case CPT\RC\Article::POST_TYPE :
+				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
+				$first_cat  = empty( $categories ) ? null : reset( $categories );
+				$title_top  = $first_cat ? $first_cat->name : null;
+				break;
+			case CPT\RC\Post::POST_TYPE :
+				$title_top = 'Blog';
+
+				break;
+			case CPT\Post::POST_TYPE :
+				$title_top = 'Blog';
+				break;
+			}
+
+		# Thumbnail variants
+		$thumb_variants   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];
+		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb         = Thumbnail::post( $post, ...$thumb_variants );
+		$has_thumbnail = ! empty( $thumb );
+
+		if ( ! $has_thumbnail ) {
+			$_class[] = 'no-thumbnail';
+		}
+
+		# Tags
+		$tags = Taxonomy::get_post_tags_distinctive( $post, [ 'filter_count_1' => false ] );
+
 		ob_start(); ?>
-		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
-			<h3 class="w-full xl:w-3/4">
-				<a href="<?= get_the_permalink( $post ) ?>"><?= $post->post_title ?></a>
-			</h3>
+		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?> flex flex-row flex-wrap search-result-item text-indigo">
+			<?php if ( $has_thumbnail ) { ?>
+				<div class="thumbnail-wrap" data-aspectRatio="1:1">
+					<a href="<?= get_the_permalink( $post ) ?>">
+						<?php echo $thumb; ?>
+					</a>
+				</div>
+			<?php } ?>
+			<div class="text-content">
+				<div class="eyebrow text-indigo uppercase mb-px23">
+					<p>
+						<strong class="pr-px12"><?php echo $title_top; ?></strong>
+						<?php if ( in_array( $post->post_type, [ CPT\RC\Post::POST_TYPE, CPT\Post::POST_TYPE ] ) ) { ?>
+							<time class="pl-px12" datetime="<?php echo $post->post_date ?>"><?php echo date("F j, Y", strtotime($post->post_date)) ?></time>
+						<?php } ?>
+					</p>
+				</div>
+
+				<div class="relative">
+					<?php if ( ! empty( $icon_cls ) ) { ?>
+						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+					<?php } ?>
+					<h3 class="w-full text-px24 leading-px30 lg:text-px30 lg:leading-px40">
+						<a href="<?= get_the_permalink( $post ) ?>"><?= $post->post_title ?></a>
+					</h3>
+				</div>
+
+				<?php if ( ! $has_thumbnail ) { ?>
+					<p><?php echo $post->post_excerpt ?></p>
+				<?php } ?>
+
+				<?php if ( ! empty( $tags ) ) { ?>
+					<div class="tags-box">
+						<?php foreach ( $tags as $tag ) { ?>
+							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>"
+									class="tag-box"><?= $tag->name ?></a>
+						<?php } ?>
+					</div>
+				<?php } ?>
+			</div>
 		</article>
 		<?php return ob_get_clean();
 	}
@@ -259,20 +344,20 @@ class Search extends Abstract_Customizer {
 		$all_pts = self::get_scope_post_types( 'all' );
 
 		$all = [
-					   'all' => [
-							   'name'      => 'All Results',
-							   'post_type' => $all_pts,
-					   ],
-			   ] + self::SCOPES;
+						'all' => [
+								'name'      => 'All Results',
+								'post_type' => $all_pts,
+						],
+				] + self::SCOPES;
 
 		//todo:  check from facets and hide if empty
 
 		ob_start(); ?>
-		<div>
+		<div class="scope flex flex-row mb-10 mt-12 md:mt-16 lg:mt-14 text-indigo">
 			<?php foreach ( $all as $id => $detail ) { ?>
 				<div>
 					<a href="<?= esc_url( self::get_permalink( get_search_query( false ), $id == 'all' ? 'all' : $id ) ) ?>"
-					   class="scope-link <?= $id == $current ? 'font-bold' : '' ?>">
+					   class="scope-link <?= $id == $current ? 'font-bold current' : '' ?>">
 						<?= $detail['name']; ?>
 					</a>
 				</div>
@@ -311,10 +396,24 @@ class Search extends Abstract_Customizer {
 	 * @link https://developer.wordpress.org/reference/hooks/body_class/
 	 */
 	public static function body_class( array $classes ): array {
-		if ( is_search() && ! Is::rc() ) {
+		if ( ( is_search() || get_query_var( self::QV_SEARCH ) ) && ! Is::rc() ) {
 			$classes[] = 'is-site-search';
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return array
+	 */
+	protected static function _get_thumb_var( string $type ): array {
+		return Thumbnail::variant(
+				Thumbnail::SCREEN_SM,
+				$type,
+				Thumbnail::SIZE_MD,
+				[ 'class' => 'post-header-bg' ]
+		);
 	}
 }

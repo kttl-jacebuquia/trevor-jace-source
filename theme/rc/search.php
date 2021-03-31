@@ -8,7 +8,7 @@ $no_results = empty( $wp_query->found_posts );
 		<div class="search-input-wrap md:mx-auto mb-10 md:mb-12 lg:mb-20 mt-5 md:mb-12 md:mt-10 md:w-2/3 lg:w-1/2 lg:my-10">
 			<form role="search" method="get" class="search-form"
 				  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
-				<?= \TrevorWP\Theme\Helper\Search_Input::render_rc() ?>
+				<?= \TrevorWP\Theme\Helper\Search_Input::render_rc("What do you want to learn about?") ?>
 			</form>
 		</div>
 
