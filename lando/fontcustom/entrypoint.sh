@@ -2,6 +2,9 @@
 
 ENVIRONMENT=${2:-"development"}
 
+# Init RBENV
+eval "$(rbenv init -)"
+
 compile_() {
 	PACKAGE=$1
 
