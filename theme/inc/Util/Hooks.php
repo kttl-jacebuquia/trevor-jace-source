@@ -2,6 +2,7 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Main;
+use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Single_Page;
@@ -81,6 +82,9 @@ class Hooks {
 
 		# Search
 		Customizer\Search::init_all();
+
+		# ACF
+		ACF::construct();
 	}
 
 	/**
@@ -394,7 +398,7 @@ class Hooks {
 		$is_single = false;
 
 		# Single Pages
-		foreach ( self::SINGLE_PAGE_FILES as list( $qv, $path ) ) {
+		foreach ( self::SINGLE_PAGE_FILES as [$qv, $path] ) {
 			if ( ! empty( $wp_query->get( $qv ) ) ) {
 				$template  = locate_template( $path, false );
 				$is_single = true;
@@ -495,10 +499,10 @@ class Hooks {
 	 * Fires when preparing to serve a REST API request.
 	 */
 	public static function rest_api_init(): void {
-		register_rest_route( 'trevor/v1', '/site-banners', array(
+		register_rest_route( 'trevor/v1', '/site-banners', [
 				'methods'  => 'GET',
 				'callback' => [ self::class, 'ajax_site_banners' ],
-		) );
+		] );
 	}
 
 	/**

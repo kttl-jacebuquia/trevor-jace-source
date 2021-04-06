@@ -12,8 +12,8 @@ import {
 } from "@wordpress/components";
 import FileFiled from "./fields/file";
 
-const {editorBlocksData} = TrevorWP.screen;
-const {metaKeys} = editorBlocksData;
+const {editorBlocksData = {}} = TrevorWP.screen;
+const {metaKeys = {}} = editorBlocksData;
 const {[metaKeys.KEY_HEADER_BG_CLR]: BG_COLOR_DATA = {}} = editorBlocksData;
 const META_KEY_MAP = {
 	headerType: metaKeys.KEY_HEADER_TYPE,
@@ -77,12 +77,22 @@ class PostSidebar extends React.Component {
 		};
 	}
 
+	canRenderField(metaKey) {
+		const {
+			postType,
+		} = this.props;
+
+		if (!editorBlocksData.metaKeysByPostType || !editorBlocksData.metaKeysByPostType[metaKey])
+			return false;
+
+		return -1 !== editorBlocksData.metaKeysByPostType[metaKey].indexOf(postType);
+	}
+
 	render() {
 		const {
 			headerType,
 			headerBgColor,
 			lengthInd,
-			postType,
 			showShare,
 			showDate,
 			slug,
@@ -99,7 +109,7 @@ class PostSidebar extends React.Component {
 				<TextControl label="Slug" value={slug} onChange={this.handleSlugChange}/>
 
 				{/* File */}
-				{-1 !== editorBlocksData.metaKeysByPostType[metaKeys.KEY_FILE].indexOf(postType) &&
+				{this.canRenderField(metaKeys.KEY_FILE) &&
 				<FileFiled
 					key="fileInput"
 					metaKey={TrevorWP.screen.editorBlocksData.metaKeys['KEY_FILE']}
@@ -108,17 +118,17 @@ class PostSidebar extends React.Component {
 				/>}
 
 				{/* Bill Id */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.billId].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.billId) &&
 				<TextControl label="Bill ID" value={billId} onChange={this.handleBillIdChange}/>
 				}
 
 				{/* Team: Pronouns */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.pronouns].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.pronouns) &&
 				<TextControl label="Pronouns" value={pronouns} onChange={this.handlePronounsChange}/>}
 			</PluginDocumentSettingPanel>
 			<PluginDocumentSettingPanel name="trevor-entry-header" icon="store" title="Header">
 				{/* Header Type */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.headerType].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.headerType) &&
 				<>
 					<SelectControl
 						label="Header Type"
@@ -142,21 +152,21 @@ class PostSidebar extends React.Component {
 				}
 
 				{/* Sharing Box */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showShare].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.showShare) &&
 				<CheckboxControl label="Show Sharing"
 								 checked={showShare}
 								 onChange={this.handleShowShare}/>
 				}
 
 				{/** Show Date Box */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.showDate].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.showDate) &&
 				<CheckboxControl label="Show Date"
 								 checked={showDate}
 								 onChange={this.handleShowDate}/>
 				}
 
 				{/* Content Length */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.lengthInd].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.lengthInd) &&
 				<SelectControl
 					label="Content Length"
 					value={lengthInd}
@@ -165,7 +175,7 @@ class PostSidebar extends React.Component {
 				/>
 				}
 				{/* Recirculation Cards */}
-				{-1 !== editorBlocksData.metaKeysByPostType[META_KEY_MAP.reRecirculationCards].indexOf(postType) &&
+				{this.canRenderField(META_KEY_MAP.reRecirculationCards) &&
 				<SelectControl label="Recirculation Cards"
 							   value={reRecirculationCards}
 							   options={this.selectOptions.reRecirculationCards}

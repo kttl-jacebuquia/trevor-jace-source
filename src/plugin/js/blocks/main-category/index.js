@@ -5,8 +5,8 @@ import {compose} from "@wordpress/compose";
 import {withDispatch, withSelect} from "@wordpress/data";
 import {htmlDecode} from 'plugin/js/main/utils';
 
-const {editorBlocksData} = TrevorWP.screen;
-const {metaKeys, catTax} = editorBlocksData;
+const {editorBlocksData = {}} = TrevorWP.screen;
+const {metaKeys = {}, catTax} = editorBlocksData;
 const {KEY_MAIN_CATEGORY: MAIN_CAT_META_KEY} = metaKeys;
 let fCatCache = null;
 
