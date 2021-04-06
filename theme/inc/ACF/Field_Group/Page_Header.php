@@ -56,9 +56,21 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			],
 			parent::_get_fields(), [
 			static::FIELD_CAROUSEL => Carousel_Data::clone( [
-				'key'          => $carousel,
-				'name'         => static::FIELD_CAROUSEL,
-				'prefix_label' => 1,
+				'key'               => $carousel,
+				'name'              => static::FIELD_CAROUSEL,
+				'label'             => 'Carousel',
+				'prefix_label'      => 1,
+				'display'           => 'group',
+				'layout'            => 'row',
+				'conditional_logic' => [
+					[
+						[
+							'field'    => $type,
+							'operator' => '==',
+							'value'    => 'split_carousel',
+						],
+					],
+				],
 			] )
 		] );
 	}
