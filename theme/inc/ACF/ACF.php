@@ -9,6 +9,7 @@ class ACF {
 		Field_Group\Carousel_Data::class,
 		// Blocks
 		Field_Group\Page_Section::class,
+		Field_Group\Testimonials_Carousel::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 	];
