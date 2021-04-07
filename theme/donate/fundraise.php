@@ -9,7 +9,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 	<main id="site-content" role="main" class="site-content">
 
 		<?php /** Page Header */ ?>
-		<?= Fundraise::get_component( Fundraise::SECTION_HEADER )->render() ?>
+		<?= Fundraise::get_component( Fundraise::SECTION_HEADER )->render([ 'bg'	=> 'teal-dark' ]) ?>
 
 		<?php /** Featured Text */ ?>
 		<?php $title = Fundraise::get_val( Fundraise::SETTING_FEATURED_TEXT_TITLE ); ?>
@@ -22,10 +22,10 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 		</div>
 
 		<?php /* How your Money is Used */ ?>
-		<?= Helper\Audit_Block::render( 
-			$title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ), 
-			$audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ), 
-			$custom_class = 'audit-fundraise' ); 
+		<?= Helper\Audit_Block::render(
+			$title = Fundraise::get_val( Fundraise::SETTING_THREE_TITLE ),
+			$audit_data = Fundraise::get_val( Fundraise::SETTING_THREE_DATA ),
+			$custom_class = 'audit-fundraise' );
 		?>
 
 		<?php /* ONE COLUMN */ ?>

@@ -8,7 +8,7 @@ use \TrevorWP\Theme\Single_Page\Ally_Training as Page;
 
 	<main id="site-content" role="main" class="site-content">
 		<?php # Header ?>
-		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
+		<?= Page::get_component( Page::SECTION_HEADER )->render([ 'bg'  => 'teal-dark' ]) ?>
 
 		<?php # Info Boxes ?>
 		<div class="bg-white py-16 md:py-20 xl:py-24">

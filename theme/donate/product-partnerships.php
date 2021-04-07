@@ -14,6 +14,7 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 				'title'     => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_HERO_TITLE ),
 				'desc'      => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_HERO_DESC ),
 				'cta_txt'   => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_HERO_CTA ),
+				'bg'        => 'teal-dark',
 			)
 		)
 		?>

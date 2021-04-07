@@ -9,7 +9,8 @@ use \TrevorWP\Theme\Single_Page\Strategic_Plan as Page;
 	<main id="site-content" role="main" class="site-content">
 		<?php # Header ?>
 		<?= Page::get_component( Page::SECTION_HEADER )->render( [
-				'cta_url' => wp_get_attachment_url( Page::get_val( Page::SETTING_HEADER_STRATEGIC_PLAN_FILE ) )
+				'cta_url' => wp_get_attachment_url( Page::get_val( Page::SETTING_HEADER_STRATEGIC_PLAN_FILE ) ),
+				'bg'      => 'teal-dark',
 		] ) ?>
 
 		<?php # Info Boxes ?>

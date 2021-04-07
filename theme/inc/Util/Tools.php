@@ -3,6 +3,7 @@
 use TrevorWP\CPT\Org\Org_Object;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
+use TrevorWP\Theme\Single_Page;
 use TrevorWP\Theme\Customizer\Search;
 
 class Tools {

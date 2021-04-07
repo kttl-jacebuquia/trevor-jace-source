@@ -8,7 +8,7 @@ use \TrevorWP\Theme\Single_Page\Contact_Us as Page;
 
 	<main id="site-content" role="main" class="site-content">
 		<?php # Header ?>
-		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
+		<?= Page::get_component( Page::SECTION_HEADER )->render([ 'bg'  => 'teal-dark' ]) ?>
 
 		<div class="bg-white text-teal-dark">
 			<div class="container mx-auto">
@@ -38,6 +38,7 @@ use \TrevorWP\Theme\Single_Page\Contact_Us as Page;
 
 				<?php # Info Box ?>
 				<?= Page::get_sub_component( Page::SUB_COMPONENT_INFO_CARD )->render( [
+						'cls'				=> [ 'bg-gray-light' ],
 						'title_cls' => [],
 						'desc_cls'  => [],
 						'btn_cls'   => [ 'page-btn', 'primary' ],

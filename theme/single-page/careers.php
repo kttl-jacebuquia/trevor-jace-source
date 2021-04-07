@@ -8,7 +8,7 @@ use \TrevorWP\Theme\Single_Page\Careers as Page;
 
 	<main id="site-content" role="main" class="site-content">
 		<?php # Header ?>
-		<?= Page::get_component( Page::SECTION_HEADER )->render() ?>
+		<?= Page::get_component( Page::SECTION_HEADER )->render([ 'bg'  => 'teal-dark' ]) ?>
 
 		<div class="bg-white text-teal-dark">
 			<div class="mx-auto md:container">

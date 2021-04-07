@@ -16,7 +16,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				'swiper'        => [
 						'centeredSlides' => true,
 						'slidesPerView'  => 'auto'
-				]
+				],
+				'bg'            => 'blue_green',
 		] ); ?>
 
 		<?php
@@ -143,18 +144,18 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 				</div>
 			</div>
 		</div>
-		
+
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation( 
-			Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ), 
-			null, 
-			[ 
-				'fundraiser', 
-				'counselor' 
-			], 
+		<?= Helper\Circulation_Card::render_circulation(
+			Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ),
+			null,
+			[
+				'fundraiser',
+				'counselor'
+			],
 			[
 				'container' => 'cards',
-			] 
+			]
 		); ?>
 	</main>
 

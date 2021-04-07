@@ -1,5 +1,11 @@
+.header-container {
+	--neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
+	padding-top: var(--neg-top-margin);
+	margin-top: calc(-1 * var(--neg-top-margin));
+}
+
 .page-header {
-  @apply container mx-auto;
+	@apply container mx-auto;
 
   &-inner {
 	@apply flex flex-col;
@@ -31,7 +37,7 @@
   &-desc {
 	@apply pt-3.5 pb-8 text-px16 leading-px24 font-normal;
 	& + .page-header-cta {
-	  @apply mt-0;
+		@apply mt-0;
 	}
   }
 
