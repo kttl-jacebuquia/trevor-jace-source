@@ -40,7 +40,6 @@
 	  @apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
 	  @apply py-5 px-12;
 	  @apply cursor-pointer;
-	  &:hover,
 	  &.active {
 		@apply bg-gray-light;
 	  }
