@@ -3,11 +3,12 @@
 use TrevorWP\CPT;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Meta;
+use \TrevorWP\Theme\Single_Page;
 
 class Tile {
 	/**
 	 * @param \WP_Post $post
-	 * @param mixed $key
+	 * @param int $key
 	 * @param array $options
 	 *
 	 * @return string
@@ -82,6 +83,7 @@ class Tile {
 
 	/**
 	 * @param array $data
+	 * @param int $key
 	 * @param array $options
 	 *
 	 * @return string
@@ -125,6 +127,7 @@ class Tile {
 
 	/**
 	 * @param array $data
+	 * @param int $key
 	 * @param array $options
 	 *
 	 * @return string
@@ -184,5 +187,65 @@ class Tile {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 * @param int $key
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function staff ( \WP_Post $post, int $key, array $options = [] ) :string {
+		$_class = [ 'card-post', 'staff', ];
+		$post = get_post( $post );
+		$name = get_the_title( $post );
+		$pronoun = Meta\Post::get_pronounces( $post->ID );
+		$group = array_pop( get_the_terms( $post, CPT\Team::TAXONOMY_GROUP ) )->name;
+		$thumbnail_variants = [
+			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
+			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
+			self::_get_thumb_var( Thumbnail::TYPE_SQUARE ),
+		];
+		$thumbnail = Thumbnail::post( $post, $thumbnail_variants );
+
+		if ( empty( $thumbnail ) ) {
+			$_class[] = 'placeholder-thumbnail';
+			$placeholder_img_id = Single_Page\Team::get_val( Single_Page\Team::SETTING_GENERAL_PLACEHOLDER_IMG );
+			$thumbnail = wp_get_attachment_image( $placeholder_img_id );
+		} else {
+			$_class[] = 'with-thumbnail';
+		}
+
+		ob_start();
+	?>
+		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
+			<div class="post-thumbnail-wrap bg-gray-light">
+				<?php echo $thumbnail; ?>
+			</div>
+			<div class="information text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px35">
+				<p class="information__name font-semibold text-px18 leading-px26 xl:text-px22 xl:leading-px32"><?php echo esc_html( $name ); ?></p>
+				<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
+					<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
+					<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
+				</div>
+			</div>
+		</article>
+	<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return array
+	 */
+	protected static function _get_thumb_var( string $type ): array {
+		return Thumbnail::variant(
+				Thumbnail::SCREEN_SM,
+				$type,
+				Thumbnail::SIZE_MD,
+				[ 'class' => 'post-header-bg' ]
+		);
 	}
 }

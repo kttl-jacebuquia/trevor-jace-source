@@ -10,6 +10,10 @@
 		@apply pb-0;
 	}
 
+	&.research-tile-grid {
+		@apply pt-px50 pb-px40 xl:pb-px50 xl:pt-px80;
+	}
+
 	&.product-grid {
 		.page-sub-title {
 			@apply mb-0 text-teal-dark text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48;
@@ -172,6 +176,19 @@
 		.tile-image {
 			@apply h-60 w-full max-w-none rounded-t-px10;
 		}
+	}
+
+	&.research-card {
+		@apply shadow-none border-blue_green border-opacity-50;
+		border-width: 1px;
+
+		@screen md {
+			height: rem-calc(400px);
+		}
+	}
+
+	&.research-card &-desc {
+		@apply line-clamp-5;
 	}
 
   &.clickable-card {

@@ -1,7 +1,7 @@
 .info-card {
   @apply mx-auto;
   @apply flex flex-col text-center;
-  @apply pt-px80 pb-px55 md:pt-px90 md:pb-px86 lg:pt-px80 px-7 md:px-px88;
+  @apply py-32 md:py-20 lg:py-28 px-7 md:px-px88 mb-px80 md:mb-px100 xl:mb-px120;
   @apply rounded-px10;
 
   &-title {
@@ -10,11 +10,24 @@
 
 	&-desc {
 		@apply font-normal text-px18 leading-px26 tracking-px05 md:leading-px24 lg:text-px20 lg:leading-px26;
+
+		@screen xl {
+			@apply mx-auto;
+			max-width: rem-calc(818px);
+		}
 	}
 
   &-btn-wrap {
-	@apply mt-px40 md:mt-px30 lg:mt-px50;
+	@apply mt-px50 md:mt-px50 lg:mt-px40;
+	@apply flex flex-col md:flex-row flex-wrap items-center md:justify-center;
   }
+
+	&-btn {
+
+		& + & {
+			@apply mt-px20 md:mt-0 md:ml-px20 xl:ml-px18;
+		}
+	}
 
   @screen md {
 	&-title {

@@ -65,30 +65,36 @@
 
 			@screen lg {
 				$left-padding: calc( ( ( 100vw - 924px ) / 2 ) );
-				$card-size: rem-calc(395px);
+				--carousel-card-size: theme('postCard.width.lg');
+				--number-of-cards: 2;
 				@apply flex;
-				left: calc( #{$left-padding} + ( 2 * #{$card-size} ) );
+				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) );
 			}
 
 			@screen lg2 {
 				$left-padding: calc( ( ( 100vw - 1120px ) / 2 ) );
-				$card-size: rem-calc(355px);
-				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+				--carousel-card-size: theme('postCard.width.lg2');
+				--number-of-cards: 3;
+				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
 			}
 
 			@screen xl {
 				$left-padding: calc( ( ( 100vw - 1240px ) / 2 ) );
-				$card-size: rem-calc(395px);
-				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+				--carousel-card-size: theme('postCard.width.xl');
+				--number-of-cards: 3;
+				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
 			}
 
 			@screen 2xl {
 				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) );
-				$card-size: rem-calc(395px);
-				left: calc( #{$left-padding} + ( 3 * #{$card-size} ) + 1.875rem );
+				--carousel-card-size: theme('postCard.width.xl');
+				--number-of-cards: 3;
+				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
 			}
 		}
 	}
+
+
 
   @screen md {
 	.carousel-container {
@@ -206,4 +212,29 @@
 	}
 
   }
+
+	&--staff {
+		.carousel-container {
+			width: theme('staffCard.width.DEFAULT');
+
+			@screen xl {
+				width: theme('staffCard.width.xl');
+			}
+		}
+
+		.swiper-button {
+			@apply hidden;
+			&-next {
+				@screen lg {
+					--carousel-card-size: theme('staffCard.width.DEFAULT');
+					--number-of-cards: 3;
+				}
+
+				@screen xl {
+					--carousel-card-size: theme('staffCard.width.xl');
+					--number-of-cards: 3;
+				}
+			}
+		}
+	}
 }

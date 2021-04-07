@@ -76,6 +76,10 @@ class Research extends Abstract_Single_Page {
 		self::SECTION_STAFF       => [
 			Component\Post_Carousel::class,
 			[
+				'options'  => [
+					'card_renderer'          => [ Helper\Tile::class, 'staff' ],
+					'class'                  => 'post-carousel--staff',
+				],
 				'defaults' => [
 					Component\Post_Carousel::SETTING_TITLE => 'Research Staff',
 					Component\Post_Carousel::SETTING_DESC  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum scelerisque lorem ipsum.',

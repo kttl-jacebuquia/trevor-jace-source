@@ -6,7 +6,7 @@ use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\Research_Briefs as Page;
 
 ?>
-	<main id="site-content" role="main" class="site-content product-partner">
+	<main id="site-content" role="main" class="site-content">
 		<?php /* Header */ ?>
 		<?= Helper\Page_Header::text( [
 				'title' => Page::get_val( Page::SETTING_HEADER_TITLE ),
@@ -18,13 +18,13 @@ use \TrevorWP\Theme\Customizer\Research_Briefs as Page;
 				<?php if ( $page_sorter = \TrevorWP\Theme\Helper\Sorter::get_page_sorter() ) { ?>
 					<?= $page_sorter->render(); ?>
 				<?php } ?>
-
-				<?= \TrevorWP\Theme\Helper\Tile_Grid::posts( $wp_query->posts, [
-						'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ]
-				] ) ?>
-
-				<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
 			</div>
+			<?= \TrevorWP\Theme\Helper\Tile_Grid::posts( $wp_query->posts, [
+				'tileClass' => [ 'text-teal-dark', 'research-card' ],
+				'class'     => [ 'text-white', 'container', 'mx-auto', 'research-tile-grid' ],
+			] ) ?>
+
+			<?php get_template_part( 'template-parts/ajax-pagination' ); ?>
 		</main> <!-- #site-content -->
 
 	</main>

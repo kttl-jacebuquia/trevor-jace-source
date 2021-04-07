@@ -39,6 +39,7 @@ class Research {
 				'editor',
 				'thumbnail',
 				'custom-fields',
+				'excerpt',
 			],
 			'labels'              => [
 				'name'          => 'Research',

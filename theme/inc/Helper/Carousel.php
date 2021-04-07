@@ -26,6 +26,10 @@ class Carousel {
 				'card_renderer' => [ Card::class, 'post' ],
 		], $options );
 
+		if ( ! is_array( $options['title_cls'] ) ) {
+			$options['title_cls'] = explode( ' ', $options['title_cls'] );
+		}
+
 		# ID check
 		$id = &$options['id'];
 		if ( empty( $id ) ) {
@@ -54,9 +58,9 @@ class Carousel {
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
 			<div class="carousel-header container mx-auto">
-				<h2 class="page-sub-title <?= $options['title_cls']; ?>"><?= $options['title'] ?></h2>
+				<h2 class="page-sub-title <?= implode( ' ', $options['title_cls'] ); ?>"><?= $options['title'] ?></h2>
 				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
-					<p class="page-sub-title-desc <?= $options['title_cls'] ?>">
+					<p class="page-sub-title-desc <?= implode( ' ', $options['title_cls'] ); ?>">
 						<?= esc_html( $options['subtitle'] ) ?>
 					</p>
 				<?php } ?>
@@ -65,9 +69,9 @@ class Carousel {
 			<div class="carousel-full-width-wrap">
 				<div class="carousel-container">
 					<div class="swiper-wrapper">
-						<?php foreach ( $posts as $post ) { ?>
+						<?php foreach ( $posts as $key => $post ) { ?>
 							<div class="swiper-slide">
-								<?= call_user_func( $options['card_renderer'], $post, $options['card_options'] ) ?>
+								<?= call_user_func( $options['card_renderer'], $post, $key, $options['card_options'] ) ?>
 							</div>
 						<?php } ?>
 					</div>

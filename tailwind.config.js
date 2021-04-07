@@ -125,6 +125,12 @@ module.exports = {
 		paths: {
 			themeGradients: '/wp-content/themes/trevor/static/media/gradients',
 		},
+		staffCard: {
+			width: {
+				DEFAULT: px2rem(264),
+				xl: px2rem(289),
+			}
+		},
 		// Extend
 		extend: {
 			fontFamily: {

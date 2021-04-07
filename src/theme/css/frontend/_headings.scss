@@ -39,14 +39,14 @@
 //
 .page-sub-title,
 .page-sub-title-desc {
-  @apply mb-3.5 w-3/4;
+  @apply mb-3.5;
 
   &.centered {
 	@apply mx-auto text-center;
   }
 
   @screen md {
-	@apply mb-2;
+	@apply mb-2 w-3/4;
   }
 
   @screen xl {

@@ -46,6 +46,10 @@
 		margin-bottom: rem-calc(54px);
 	}
 
+	.post-type-archive-trevor_research & {
+		@apply mt-0 mb-32 md:mb-px100 xl:mb-32;
+	}
+
 	a {
 		@apply relative font-bold text-px24 leading-px34 xl:text-px20 xl:leading-px24 xl:font-semibold border-b-2 text-teal-dark;
 
