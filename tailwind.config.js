@@ -26,6 +26,7 @@ module.exports = {
 		screens: {
 			'mobile': {'max': px2rem(767)},
 			'md-max': {'max': px2rem(1023)},
+			'lg-max': {'max': px2rem(1279)},
 			'sm': px2rem(375),
 			'md': px2rem(768),
 			'lg': px2rem(1024),
@@ -260,6 +261,7 @@ module.exports = {
 				px40: px2rem(40),
 				px42: px2rem(42),
 				px44: px2rem(44),
+				px45: px2rem(45),
 				px46: px2rem(46),
 				px48: px2rem(48),
 				px50: px2rem(50),
@@ -348,6 +350,7 @@ module.exports = {
 				px22: px2rem(22),
 				px23: px2rem(23),
 				px24: px2rem(24),
+				px26: px2rem(26),
 				px27: px2rem(27),
 				px28: px2rem(28),
 				px30: px2rem(30),

@@ -68,7 +68,7 @@ $is_rc = Is::rc();
 				</li>
 				<li>
 					<a href="<?= esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ) ?>"
-					   class="<?= $is_rc ? '' : 'active' ?>">Explore The Organization</a>
+					   class="<?= $is_rc ? '' : 'active' ?>">Explore Trevor</a>
 				</li>
 			</ul>
 		</div>

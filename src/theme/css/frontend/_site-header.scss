@@ -1,8 +1,8 @@
 $top--bar-height-mobile: rem-calc(84px);
-$top--bar-height-tablet: rem-calc(100px);
+$top--bar-height-tablet: rem-calc(106px);
 
 :root {
-  --site-banner-height: 0px;
+  	--site-banner-height: 0px;
 	--top-bar-height: #{$top--bar-height-mobile};
 	--top-nav-height: 8.5rem;
 	--top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h) + var(--site-banner-height));
@@ -16,23 +16,23 @@ $top--bar-height-tablet: rem-calc(100px);
 
 	// fixes anchor link connections
 	* {
-	scroll-margin-top: var(--tr-wp-admin-bar-h);
+		scroll-margin-top: var(--tr-wp-admin-bar-h);
 	}
 
 	@screen md {
-	--top-bar-height: #{$top--bar-height-tablet};
-	--top-nav-height: 9rem;
-	--nav-menu-width: #{rem-calc(370px)};
+		--top-bar-height: #{$top--bar-height-tablet};
+		--top-nav-height: 9rem;
+		--nav-menu-width: #{rem-calc(370px)};
 	}
 
 	@screen lg2 {
-	--top-bar-height: #{rem-calc(78px)};
-	--top-nav-height: 11rem;
+		--top-bar-height: #{rem-calc(78px)};
+		--top-nav-height: 11rem;
 
-	// fixes anchor link connections
-	* {
-		scroll-margin-top: var(--top-nav-top-margin);
-	}
+		// fixes anchor link connections
+		* {
+			scroll-margin-top: var(--top-nav-top-margin);
+		}
 	}
 }
 
@@ -51,7 +51,7 @@ $top--bar-height-tablet: rem-calc(100px);
 
 	@screen lg2 {
 		@apply sticky mt-0 pt-0 top-0;
-		@apply h-px78 max-h-none;
+		@apply h-px80 max-h-none;
 		@apply border-b-px6 border-orange;
 		@apply translate-y-0;
 	}
@@ -78,7 +78,8 @@ $top--bar-height-tablet: rem-calc(100px);
 		}
 
 		@screen lg2 {
-			@apply relative px-0;
+			@apply relative px-0 m-auto;
+			width: calc(100% - 80px);
 		}
 	}
 
@@ -94,16 +95,13 @@ $top--bar-height-tablet: rem-calc(100px);
 		}
 
 		@screen lg2 {
-			@apply w-px38 h-px38 overflow-hidden mr-px18;
+			@apply w-px42 h-px42 overflow-hidden mr-px28;
 		}
 
 		> a {
 			@apply flex items-center transition-transform duration-300 ease-out;
+			@apply w-full h-full;
 			@apply transform-gpu;
-
-			@screen md {
-				@apply text-px50;
-			}
 
 			@screen lg2 {
 				@apply -translate-x-full text-px38;
@@ -111,7 +109,16 @@ $top--bar-height-tablet: rem-calc(100px);
 		}
 
 		.trevor-ti-logo-icon {
+			@apply flex items-center justify-center w-full h-full text-px45;
 			@apply overflow-hidden;
+
+			@screen md {
+				@apply text-px50;
+			}
+
+			@screen lg2 {
+				@apply text-px42;
+			}
 		}
 	}
 
@@ -120,12 +127,14 @@ $top--bar-height-tablet: rem-calc(100px);
 
 		@screen lg2 {
 			@apply block overflow-visible;
+			@apply transition-all duration-300 ease-out;
+			@apply opacity-0 invisible;
 		}
 	}
 
 	.main-menu-container {
 		@screen lg2 {
-			@apply pb-0 h-full;
+			@apply pb-0 h-full text-indigo;
 		}
 
 		> .main-menu > .menu-item {
@@ -313,12 +322,12 @@ $top--bar-height-tablet: rem-calc(100px);
 	height: rem-calc(133px);
 
 	@screen md {
-		@apply top-px100;
+		@apply top-px106;
 	}
 
 	@screen lg2 {
 		@apply static w-auto h-auto top-0 mr-auto pointer-events-auto;
-		@apply -translate-x-px58;
+		@apply -translate-x-px70;
 	}
 
 	.switcher {
@@ -344,7 +353,7 @@ $top--bar-height-tablet: rem-calc(100px);
 
 			&:not(:first-child) {
 				@screen lg2 {
-					@apply ml-px28;
+					@apply ml-px18;
 				}
 			}
 
@@ -357,6 +366,7 @@ $top--bar-height-tablet: rem-calc(100px);
 
 				@screen lg2 {
 					@apply px-0 bg-transparent;
+					@apply text-px16 leading-px20;
 				}
 
 				&.active {
@@ -405,27 +415,27 @@ $top--bar-height-tablet: rem-calc(100px);
 
 	// Dropdowns
 	@screen lg2 {
-	@apply pb-4;
-	$general-transition: 280ms all 120ms ease-out;
+		@apply pb-4;
+		$general-transition: 280ms all 120ms ease-out;
 
-	// Convert lists to grid
-	ul {
-		@apply flex items-center;
-		@apply list-none m-0 p-0;
+		// Convert lists to grid
+		ul {
+			@apply flex items-center;
+			@apply list-none m-0 p-0;
+
+			li {
+				@apply p-0;
+			}
+		}
 
 		li {
-		@apply p-0;
+			@apply block;
+			@apply cursor-pointer;
 		}
-	}
 
-	li {
-		@apply block;
-		@apply cursor-pointer;
-	}
-
-	.logo-wrap {
-		@apply block;
-	}
+		.logo-wrap {
+			@apply block;
+		}
 
 	}
 }
@@ -502,10 +512,14 @@ $top--bar-height-tablet: rem-calc(100px);
 		}
 
 		> a {
-		@apply flex justify-between py-px14 px-px24;
-		@apply transition-all duration-300 ease-out;
-		@apply transform-gpu translate-y-0 translate-x-0;
-		@apply font-bold text-px24 leading-px30 tracking-em001;
+			@apply flex justify-between py-px14 px-px24;
+			@apply transition-all duration-300 ease-out;
+			@apply transform-gpu translate-y-0 translate-x-0;
+			@apply font-bold text-px24 leading-px30 tracking-em001;
+
+			@screen md {
+				@apply text-px26 leading-px32 tracking-em001;
+			}
 
 			// Chevron icon
 			&::after {
@@ -537,6 +551,10 @@ $top--bar-height-tablet: rem-calc(100px);
 			top: rem-calc(128px);
 			height: calc(100% - #{rem-calc(128px)});
 
+			@screen md {
+				@apply top-px106;
+			}
+
 			@screen lg2 {
 				@apply h-auto top-full w-auto p-0 overflow-visible;
 				@apply left-1/2 -translate-x-1/2 mt-px18;
@@ -557,7 +575,7 @@ $top--bar-height-tablet: rem-calc(100px);
 			// Tier-2 menu link
 			> .menu-item {
 				&:not(:first-child) {
-					@screen mobile {
+					@screen lg-max {
 						@apply mt-px22;
 					}
 				}
@@ -566,7 +584,7 @@ $top--bar-height-tablet: rem-calc(100px);
 					@apply font-bold text-px20 leading-px26 tracking-em005;
 
 					@screen lg2 {
-						@apply flex items-center;
+						@apply flex items-center text-px18 leading-px24;
 						@apply whitespace-nowrap;
 					}
 
@@ -587,6 +605,14 @@ $top--bar-height-tablet: rem-calc(100px);
 			.sub-menu {
 				@apply mt-px22;
 
+				@screen md {
+					@apply mt-px26;
+				}
+
+				@screen lg2 {
+					@apply mt-px22;
+				}
+
 				@screen lg2 {
 					@apply relative;
 				}
@@ -605,7 +631,11 @@ $top--bar-height-tablet: rem-calc(100px);
 					}
 
 					.title-wrap {
-						@apply whitespace-nowrap text-px20 leading-px26;
+						@apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
+
+						@screen md {
+							@apply whitespace-nowrap text-px18 leading-px24 tracking-em001;
+						}
 					}
 				}
 			}
@@ -616,11 +646,15 @@ $top--bar-height-tablet: rem-calc(100px);
 	> .menu-item.active {
 		// Accounting for up to 5 sub-menu
 		// Animating into the same position
-		@screen md-max {
+		@screen lg-max {
 			@for $i from 1 through 5 {
 				&:nth-child(#{$i}) > a {
 					@apply translate-x-full opacity-100 visible;
-				--tw-translate-y: calc(#{($i - 1) * -100%} + 50px);
+					--tw-translate-y: calc(#{($i - 1) * -100%} + 50px);
+
+					@screen md {
+						--tw-translate-y: calc(#{($i - 1) * -100%} + 38px);
+					}
 				}
 			}
 
@@ -640,7 +674,7 @@ $top--bar-height-tablet: rem-calc(100px);
 	@apply z-20;
 
 	// Background blur and fill, for mobile/tablet
-	@screen md-max {
+	@screen lg-max {
 		&::before {
 			@apply fixed top-0 left-0 w-full h-full bg-white;
 			@apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
@@ -661,7 +695,7 @@ $top--bar-height-tablet: rem-calc(100px);
 
 	// Tier-2 submenu state, for mobile/tablet
 	&.tier-two-visible {
-		@screen md-max {
+		@screen lg-max {
 			.back-to-tier1 {
 				@apply opacity-100 visible;
 			}
@@ -695,7 +729,7 @@ $top--bar-height-tablet: rem-calc(100px);
 	.back-to-tier1 {
 		@apply transition-all opacity-0 invisible;
 		@apply flex items-center absolute top-px28 left-px24;
-		@apply font-bold text-px12 leading-px20;
+		@apply font-bold text-px12 leading-px20 tracking-em001;
 
 		@screen lg2 {
 			@apply hidden;
@@ -743,6 +777,10 @@ $top--bar-height-tablet: rem-calc(100px);
 			// Tier 1 menu
 			> .menu-item {
 				@apply pr-px10;
+
+				&:not(:first-child) {
+					@apply ml-px38;
+				}
 			}
 
 			// Chevron
@@ -773,7 +811,7 @@ $top--bar-height-tablet: rem-calc(100px);
 
 	// Resources/Support menu, for mobile/tablet
 	&.is_rc {
-		@screen md-max {
+		@screen lg-max {
 			.main-menu-container-resources {
 				@apply visible opacity-100 pointer-events-auto;
 			}
@@ -805,10 +843,10 @@ $top--bar-height-tablet: rem-calc(100px);
 	}
 
 	.logo-icon {
-	@apply block absolute;
-	font-size: 1.25rem;
-	top: -.75rem;
-	right: -.25rem;
+		@apply absolute;
+		font-size: 1.25rem;
+		top: -.75rem;
+		right: -.25rem;
 	}
 
 	// Opener
@@ -887,7 +925,11 @@ body:not(.on-top) {
 		}
 
 		.logo-icon {
-		--tw-translate-y: var(--top-bar-height);
+			--tw-translate-y: #{$top--bar-height-mobile};
+
+			@screen md {
+				--tw-translate-y: #{$top--bar-height-tablet};
+			}
 
 			@screen lg2 {
 				@apply translate-y-0;
@@ -897,6 +939,12 @@ body:not(.on-top) {
 				@screen lg2 {
 					@apply translate-x-0;
 				}
+			}
+		}
+
+		.topbar-nav-wrap {
+			@screen lg2 {
+				@apply visible opacity-100;
 			}
 		}
 
@@ -925,7 +973,7 @@ body:not(.on-top) {
 		}
 
 		.topbar-controls {
-		--tw-translate-y: var(--top-bar-height);
+			--tw-translate-y: var(--top-bar-height);
 
 			@screen lg2 {
 				@apply translate-y-0;
@@ -958,13 +1006,13 @@ body:not(.on-top) {
 body.is-navigation-open {
 	#top-bar {
 		&::before {
-			@screen md-max {
+			@screen lg-max {
 				@apply opacity-0;
 			}
 		}
 
 		.logo-icon {
-			@screen md-max {
+			@screen lg-max {
 				@apply opacity-0 invisible;
 			}
 		}
@@ -974,36 +1022,36 @@ body.is-navigation-open {
 		 	@apply translate-x-px22 translate-y-px84;
 		 }
 
-		 @screen md-max {
-		 	@apply translate-y-px88 translate-x-px38;
+		 @screen md {
+		 	@apply translate-y-px88 translate-x-px32;
 		 }
 
 			.trevor-ti-hamburger-menu {
-				@screen md-max {
+				@screen lg-max {
 					@apply invisible opacity-0;
 				}
 			}
 			.trevor-ti-nav-close {
-				@screen md-max {
+				@screen lg-max {
 					@apply visible opacity-100;
 				}
 			}
 		}
 
 		.topbar-control-search {
-			@screen md-max {
+			@screen lg-max {
 				@apply visible opacity-100 translate-y-0;
 			}
 		}
 
 		.switcher-wrap {
-			@screen md-max {
+			@screen lg-max {
 				@apply pointer-events-auto;
 			}
 		}
 
 		.switcher {
-			@screen md-max {
+			@screen lg-max {
 				@apply transform translate-x-0;
 				@apply visible opacity-100;
 			}
@@ -1015,7 +1063,7 @@ body.is-navigation-open {
 	}
 
 	#top-nav {
-		@screen md-max {
+		@screen lg-max {
 			// Blur
 			&::before {
 				@apply opacity-100 visible delay-300;
@@ -1028,19 +1076,19 @@ body.is-navigation-open {
 	}
 
 	.cta-wrap {
-		@screen md-max {
+		@screen lg-max {
 			@apply opacity-100 visible;
 		}
 	}
 
 	.cta-links {
-		@screen md-max {
+		@screen lg-max {
 			@apply translate-x-0;
 		}
 	}
 
 	.menu-wrap {
-		@screen md-max {
+		@screen lg-max {
 			@apply translate-x-0 visible opacity-100;
 		}
 	}
@@ -1068,13 +1116,13 @@ body.admin-bar {
 	margin-top: var(--tr-wp-admin-bar-h);
 
 	#top-bar {
-	top: var(--tr-wp-admin-bar-h);
+		top: var(--tr-wp-admin-bar-h);
 	}
 }
 
 @media screen and (max-width: 600px) {
 	#wpadminbar {
-	position: fixed !important; // Reverse
-	top: 0;
+		position: fixed !important; // Reverse
+		top: 0;
 	}
 }
