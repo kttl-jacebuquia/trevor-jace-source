@@ -3,6 +3,7 @@
 
 class DOM_Attr extends A_Field_Group {
 	const FIELD_CLASS = 'class';
+	const FIELD_ACCORDION = 'accordion';
 	const FIELD_ATTRIBUTES = 'attributes';
 	const FIELD_ATTR_KEY = 'attr_key';
 	const FIELD_ATTR_VAL = 'attr_val';
@@ -17,16 +18,21 @@ class DOM_Attr extends A_Field_Group {
 		return [
 			'title'  => 'DOM Attr',
 			'fields' => [
-				static::FIELD_CLASS      => [
+				static::FIELD_CLASS              => [
 					'key'   => $class,
 					'name'  => static::FIELD_CLASS,
 					'label' => 'Class',
 					'type'  => 'text',
 				],
-				static::FIELD_ATTRIBUTES => [
+				static::FIELD_ACCORDION          => [
+					'name'  => static::FIELD_ACCORDION,
+					'key'   => static::gen_field_key( static::FIELD_ACCORDION ),
+					'type'  => 'accordion',
+					'label' => 'Attributes'
+				],
+				static::FIELD_ATTRIBUTES         => [
 					'key'        => $attributes,
 					'name'       => static::FIELD_ATTRIBUTES,
-					'label'      => 'Attributes',
 					'type'       => 'repeater',
 					'layout'     => 'table',
 					'collapsed'  => $attr_key,
@@ -46,28 +52,28 @@ class DOM_Attr extends A_Field_Group {
 						],
 					],
 				],
+				static::FIELD_ACCORDION . '_end' => [
+					'name'     => static::FIELD_ACCORDION . '_end',
+					'key'      => static::gen_field_key( static::FIELD_ACCORDION ) . '_end',
+					'type'     => 'accordion',
+					'endpoint' => 1,
+				],
 			],
 		];
 	}
 
-	/**
-	 * @param array $args
-	 *
-	 * @return array
-	 */
+	/** @inheritdoc */
 	public static function clone( array $args = [] ): array {
 		return parent::clone( array_merge( [
-			'label'        => 'Attributes',
-			'name'         => 'attr',
-			'display'      => 'group',
-			'layout'       => 'row',
-			'prefix_label' => 1,
-			'prefix_name'  => 1,
+			'label'   => 'Attributes',
+			'name'    => 'attr',
+			'display' => 'seamless',
 		], $args ) );
 	}
 
 	/**
 	 * @param array $value
+	 * @param array $default_class
 	 *
 	 * @return string
 	 */

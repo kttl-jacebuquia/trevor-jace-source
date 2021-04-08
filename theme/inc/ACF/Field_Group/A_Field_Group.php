@@ -8,6 +8,7 @@ use TrevorWP\Util\Tools;
 abstract class A_Field_Group {
 	const KEY_PREFIX = 'trvr--';
 	const KEY = '';
+	const FIELD_PREFIX_TAB = 'tab_';
 
 	/**
 	 * @param string $suffix
@@ -180,5 +181,39 @@ abstract class A_Field_Group {
 		}
 
 		return Tools::flat_attr( [ 'class' => implode( ' ', $class ) ] + $attributes );
+	}
+
+	/**
+	 * @param string $label
+	 * @param array $args
+	 * @arg $args['name'] Can be defined. Otherwise produces one from the label.
+	 *
+	 * @return array
+	 */
+	protected static function _gen_tab_field( string $label, array $args = [] ): array {
+		$name = empty( $args['name'] )
+			? acf_slugify( $label, '-' )
+			: $args['name'];
+
+
+		$field_name = static::FIELD_PREFIX_TAB . $name;
+
+		return [
+			$field_name => array_merge( [
+				'key'   => static::gen_field_key( $field_name ),
+				'type'  => 'tab',
+				'label' => $label,
+			], $args ),
+		];
+	}
+
+	/**
+	 * @param string $name
+	 * @param array $args
+	 *
+	 * @return array
+	 */
+	protected static function _gen_tab_end_field( string $name = 'end', array $args = [] ): array {
+		return static::_gen_tab_field( '', array_merge( [ 'endpoint' => 1, 'label' => '', 'name' => $name ], $args ) );
 	}
 }

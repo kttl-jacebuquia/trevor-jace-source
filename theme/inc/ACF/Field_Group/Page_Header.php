@@ -18,8 +18,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
 
 		return array_merge(
+			static::_gen_tab_field( 'General' ),
 			[
-				static::FIELD_TYPE           => [
+				static::FIELD_TYPE => [
 					'key'           => $type,
 					'name'          => static::FIELD_TYPE,
 					'label'         => 'Type',
@@ -34,6 +35,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'horizontal'     => 'Horizontal',
 					],
 				],
+			],
+			static::_gen_tab_field( 'Title Top' ),
+			[
 				static::FIELD_TITLE_TOP      => [
 					'key'   => $title_top,
 					'name'  => static::FIELD_TITLE_TOP,
@@ -43,7 +47,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				static::FIELD_TITLE_TOP_ATTR => DOM_Attr::clone( [
 					'key'               => $title_top_attr,
 					'name'              => static::FIELD_TITLE_TOP_ATTR,
-					'label'             => 'Title Top Attributes',
 					'conditional_logic' => [
 						[
 							[

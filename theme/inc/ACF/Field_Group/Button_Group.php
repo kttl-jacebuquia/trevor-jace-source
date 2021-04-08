@@ -2,7 +2,7 @@
 
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
-class Button_Group extends A_Field_Group implements I_Block {
+class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	const FIELD_BUTTONS = 'buttons';
 	const FIELD_BUTTON = 'button';
 	const FIELD_ATTR = 'attr';
@@ -16,14 +16,10 @@ class Button_Group extends A_Field_Group implements I_Block {
 		return [
 				'title'  => 'Button Group',
 				'fields' => [
-						static::FIELD_ATTR    => DOM_Attr::clone( [
-								'key'  => $attr,
-								'name' => static::FIELD_ATTR,
-						] ),
 						static::FIELD_BUTTONS => [
 								'key'        => $buttons,
 								'name'       => static::FIELD_BUTTONS,
-								'label'      => 'Buttons',
+								'label'      => '',
 								'type'       => 'repeater',
 								'layout'     => 'table',
 								'sub_fields' => [
@@ -38,6 +34,11 @@ class Button_Group extends A_Field_Group implements I_Block {
 										),
 								],
 						],
+						static::FIELD_ATTR    => DOM_Attr::clone( [
+								'key'   => $attr,
+								'name'  => static::FIELD_ATTR,
+								'label' => '',
+						] ),
 				],
 		];
 	}
@@ -54,14 +55,33 @@ class Button_Group extends A_Field_Group implements I_Block {
 	}
 
 	/** @inheritdoc */
-	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		$buttons = static::get_val( static::FIELD_BUTTONS );
-		?>
-		<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ) ) ?>>
+	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
+		$val = new Field_Val_Getter( static::class, $post, $data );
+
+		// Do not render if there is no button
+		if ( empty( $buttons = $val->get( static::FIELD_BUTTONS ) ) ) {
+			return null;
+		}
+
+		ob_start(); ?>
+		<div <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ) ) ?>>
 			<?php foreach ( $buttons as $button_data ): ?>
 				<?= Button::render( null, @$button_data[ static::FIELD_BUTTON ] ); ?>
 			<?php endforeach; ?>
 		</div>
-		<?php
+		<?php return ob_get_clean();
+	}
+
+	/** @inheritdoc */
+	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
+		echo static::render( $post_id, null, compact( 'is_preview' ) );
+	}
+
+	/** @inheritdoc */
+	public static function clone( array $args = [] ): array {
+		return parent::clone( array_merge( [
+				'display'      => 'seamless',
+				'prefix_label' => 1,
+		], $args ) );
 	}
 }

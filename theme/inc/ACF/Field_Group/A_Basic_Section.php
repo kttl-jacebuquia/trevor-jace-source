@@ -8,6 +8,7 @@ abstract class A_Basic_Section extends A_Field_Group {
 	const FIELD_TITLE_ATTR = 'title_attr';
 	const FIELD_DESC = 'desc';
 	const FIELD_DESC_ATTR = 'desc_attr';
+	const FIELD_INNER_ATTR = 'inner_attr';
 	const FIELD_BUTTONS = 'buttons';
 
 	/**
@@ -18,49 +19,66 @@ abstract class A_Basic_Section extends A_Field_Group {
 		$title_attr = static::gen_field_key( static::FIELD_TITLE_ATTR );
 		$desc       = static::gen_field_key( static::FIELD_DESC );
 		$desc_attr  = static::gen_field_key( static::FIELD_DESC_ATTR );
+		$inner_attr = static::gen_field_key( static::FIELD_INNER_ATTR );
 		$buttons    = static::gen_field_key( static::FIELD_BUTTONS );
 
-		return [
-				static::FIELD_TITLE      => [
-						'key'      => $title,
-						'name'     => static::FIELD_TITLE,
-						'label'    => 'Title',
-						'type'     => 'text',
-						'required' => 1,
+		return array_merge(
+				static::_gen_tab_field( 'Title' ),
+				[
+						static::FIELD_TITLE      => [
+								'key'      => $title,
+								'name'     => static::FIELD_TITLE,
+								'label'    => 'Title',
+								'type'     => 'text',
+								'required' => 1,
+						],
+						static::FIELD_TITLE_ATTR => DOM_Attr::clone( [
+								'key'   => $title_attr,
+								'name'  => static::FIELD_TITLE_ATTR,
+								'label' => 'Title',
+						] ),
 				],
-				static::FIELD_TITLE_ATTR => DOM_Attr::clone( [
-						'key'   => $title_attr,
-						'name'  => static::FIELD_TITLE_ATTR,
-						'label' => 'Title Attributes',
-				] ),
-				static::FIELD_DESC       => [
-						'key'   => $desc,
-						'name'  => static::FIELD_DESC,
-						'label' => 'Description',
-						'type'  => 'textarea',
-				],
-				static::FIELD_DESC_ATTR  => DOM_Attr::clone( [
-						'key'               => $desc_attr,
-						'name'              => static::FIELD_DESC_ATTR,
-						'label'             => 'Desc. Attributes',
-						'conditional_logic' => [
-								[
+				static::_gen_tab_field( 'Description' ),
+				[
+						static::FIELD_DESC      => [
+								'key'   => $desc,
+								'name'  => static::FIELD_DESC,
+								'label' => 'Description',
+								'type'  => 'textarea',
+						],
+						static::FIELD_DESC_ATTR => DOM_Attr::clone( [
+								'key'               => $desc_attr,
+								'name'              => static::FIELD_DESC_ATTR,
+								'label'             => 'Desc.',
+								'conditional_logic' => [
 										[
-												'field'    => $desc,
-												'operator' => '!=empty',
+												[
+														'field'    => $desc,
+														'operator' => '!=empty',
+												],
 										],
 								],
-						],
-				] ),
-				static::FIELD_BUTTONS    => Button_Group::clone( [
-						'key'          => $buttons,
-						'name'         => static::FIELD_BUTTONS,
-						'label'        => 'Button Group',
-						'display'      => 'group',
-						'layout'       => 'row',
-						'prefix_label' => 1,
-				] ),
-		];
+						] ),
+				],
+				static::_gen_tab_field( 'Inner' ),
+				[
+						static::FIELD_INNER_ATTR => DOM_Attr::clone( [
+								'key'   => $inner_attr,
+								'name'  => static::FIELD_INNER_ATTR,
+								'label' => 'Inner'
+						] ),
+				],
+				static::_gen_tab_field( 'Buttons' ),
+				[
+						static::FIELD_BUTTONS => Button_Group::clone( [
+								'key'     => $buttons,
+								'name'    => static::FIELD_BUTTONS,
+								'display' => 'seamless',
+								'layout'  => 'block',
+								'label'   => ''
+						] ),
+				],
+		);
 	}
 
 	/** @inheritdoc */
@@ -111,19 +129,27 @@ abstract class A_Basic_Section extends A_Field_Group {
 	}
 
 	public static function render_block_part_buttons( array $cls = [] ): void {
-		//todo: render buttons
+		echo Button_Group::render( false, static::get_val( static::FIELD_INNER_ATTR ), $cls );
 	}
 
+	/**
+	 * @param $block
+	 * @param $content
+	 * @param array $classes
+	 */
 	public static function render_block_wrapper( $block, $content, array $classes = [] ): void {
 		$wrap_cls  = $classes['wrap_cls'] ?? [];
+		$inner_cls = $classes['inner_cls'] ?? [];
 		$title_cls = $classes['title_cls'] ?? [];
 		$desc_cls  = $classes['desc_cls'] ?? [];
 
 		ob_start();
+		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner_cls ) . '>';
 		static::render_block_part_title( $title_cls );
 		static::render_block_part_desc( $desc_cls );
 		echo $content;
 		static::render_block_part_buttons();
+		echo '</div>';
 		static::render_block_part_wrap( $block, $wrap_cls, ob_get_clean() );
 	}
 }
