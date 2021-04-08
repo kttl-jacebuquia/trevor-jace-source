@@ -5,7 +5,7 @@ class Carousel_Data extends A_Field_Group {
 	const FIELD_TYPE = 'type';
 	const FIELD_DATA = 'data';
 	const FIELD_DATA_IMG = 'data_img';
-	const FIELD_DATA_TITLE = 'data_tile';
+	const FIELD_DATA_TITLE = 'data_title';
 	const FIELD_DATA_SUBTITLE = 'data_subtitle';
 	const FIELD_POSTS = 'posts';
 
@@ -21,7 +21,7 @@ class Carousel_Data extends A_Field_Group {
 		return [
 			'title'  => 'Carousel Data',
 			'fields' => [
-				static::FIELD_TYPE => [
+				static::FIELD_TYPE  => [
 					'key'           => $type,
 					'name'          => static::FIELD_TYPE,
 					'label'         => 'Type',
@@ -33,7 +33,7 @@ class Carousel_Data extends A_Field_Group {
 					'default_value' => 'custom',
 					'return_format' => 'value',
 				],
-				static::FIELD_DATA => [
+				static::FIELD_DATA  => [
 					'key'               => $data,
 					'name'              => static::FIELD_DATA,
 					'label'             => 'Data',
@@ -74,10 +74,10 @@ class Carousel_Data extends A_Field_Group {
 						],
 					],
 				],
-				[
+				static::FIELD_POSTS => [
 					'key'               => $data_posts,
+					'name'              => static::FIELD_POSTS,
 					'label'             => 'Posts',
-					'name'              => 'posts',
 					'type'              => 'relationship',
 					'required'          => 1,
 					'return_format'     => 'object',

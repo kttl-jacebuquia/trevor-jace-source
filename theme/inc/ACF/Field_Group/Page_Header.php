@@ -5,7 +5,7 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
-	const FIELD_TYPE = 'type';
+	const FIELD_TYPE = 'header_type';
 	const FIELD_TITLE_TOP = 'title_top';
 	const FIELD_TITLE_TOP_ATTR = 'title_top_attr';
 	const FIELD_CAROUSEL = 'carousel';
@@ -116,13 +116,43 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Buttons
 		$buttons = $val->get( static::FIELD_BUTTONS );
 		if ( ! empty( $buttons ) ) {
-			// todo: add buttons
+			#todo
 		}
 
-		# todo: Add image for Split,Full,Horizontal types. (Post's featured image)
+		# Featured Image for Split Image, Horizontal, and Full
+		if ( in_array( $val->get( static::FIELD_TYPE ), [ 'split_img', 'horizontal', 'img_bg' ] ) ) {
+			$args['img_id'] = get_post_thumbnail_id();
+		}
 
-		# todo: Carousel
-		$carousel = $val->get( static::FIELD_CAROUSEL );
+
+		# Split Carousel
+		if ( $val->get( static::FIELD_TYPE ) === 'split_carousel' ) {
+			$carousel_arr = $val->get( static::FIELD_CAROUSEL );
+			$carousel_data = [];
+
+			if ( $carousel_arr[ 'type' ] === 'custom' ) {
+				foreach ( $carousel_arr[ 'data' ] as $item ) {
+					$carousel_data[] = [
+						'img'      => $item['data_img'],
+						'caption'  => $item['data_title'],
+						'subtitle' => $item['data_subtitle'],
+					];
+				}
+			} else {
+				foreach ( $carousel_arr[ 'posts' ] as $post_item ) {
+					$carousel_data[] = [
+						'img'      => [ 'id' => get_post_thumbnail_id($post_item) ],
+						'caption'  => $post_item->post_title,
+					];
+				}
+			}
+
+			$args['carousel_data'] = $carousel_data;
+			$args['swiper'] = [
+				'centeredSlides' => true,
+				'slidesPerView'  => 'auto',
+			];
+		}
 
 		return Helper\Page_Header::$type( $args );
 	}
