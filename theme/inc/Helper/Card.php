@@ -7,7 +7,7 @@ use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post as PostMeta;
 
 class Card {
-	public static function post( $post, $key, array $options = [] ): string {
+	public static function post( $post, $key = 0, array $options = [] ): string {
 		$post      = get_post( $post );
 		$options   = array_merge( [
 				'class'            => [], // Additional classes
@@ -156,7 +156,7 @@ class Card {
 	 *
 	 * @return string
 	 */
-	public static function fundraiser( array $data, int $key, array $options = [] ): string {
+	public static function fundraiser( array $data, int $key = 0, array $options = [] ): string {
 		static $currency_formatter;
 		$logo_url = @$data['logo_url'];
 		if ( empty( $logo_url ) && ! empty( $options['placeholder_logo_id'] ) ) {

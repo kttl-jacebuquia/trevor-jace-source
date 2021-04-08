@@ -1,9 +1,6 @@
 .browserupgrade {
-  padding: 40px;
-  background: #fff4e6;
-  color: #5a3700;
+	@apply bg-gray-light text-indigo text-center p-px40;
   font-size: 1.1rem;
-  text-align: center;
 
   a {
 	@apply underline;
@@ -160,4 +157,4 @@
 
 .carousel-wrap {
 	@apply overflow-x-hidden;
-} 
+}
