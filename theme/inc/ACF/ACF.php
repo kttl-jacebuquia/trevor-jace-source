@@ -7,11 +7,18 @@ class ACF {
 		Field_Group\Button::class,
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
+		Field_Group\Page_Circulation_Cards::class,
 		// Blocks
 		Field_Group\Page_Section::class,
 		Field_Group\Testimonials_Carousel::class,
+		Field_Group\Page_Circulation::class,
+		Field_Group\Info_Boxes::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
+	];
+
+	const ALL_OPTIONS_PAGES = [
+		Options_Page\Page_Circulation_Options::class,
 	];
 
 	public static function construct() {
@@ -30,6 +37,13 @@ class ACF {
 			if ( $group::is_block() ) {
 				$group::register_block();
 			}
+		}
+
+		# Options Pages
+		/** @var Options_Page\A_Options_Page $options_page */
+		foreach ( static::ALL_OPTIONS_PAGES as $options_page ) {
+			$options_page::register(); // Field group
+			$options_page::register_page(); // Page
 		}
 	}
 }

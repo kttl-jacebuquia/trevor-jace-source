@@ -89,6 +89,11 @@ abstract class A_Basic_Section extends A_Field_Group {
 		];
 	}
 
+	/**
+	 * @param $block
+	 * @param array $cls
+	 * @param $content
+	 */
 	public static function render_block_part_wrap( $block, array $cls = [], $content ): void {
 		# Add block's classnames
 		if ( ! empty( $block['className'] ) ) {
@@ -111,6 +116,9 @@ abstract class A_Basic_Section extends A_Field_Group {
 		<?php
 	}
 
+	/**
+	 * @param array $cls
+	 */
 	public static function render_block_part_title( array $cls = [] ): void {
 		?>
 		<h2 <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_TITLE_ATTR ), $cls ) ?>>
@@ -119,6 +127,9 @@ abstract class A_Basic_Section extends A_Field_Group {
 		<?php
 	}
 
+	/**
+	 * @param array $cls
+	 */
 	public static function render_block_part_desc( array $cls = [] ): void {
 		if ( ! empty( $desc = static::get_val( static::FIELD_DESC ) ) ) { ?>
 			<p <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_DESC_ATTR ), $cls ) ?>>
@@ -128,6 +139,9 @@ abstract class A_Basic_Section extends A_Field_Group {
 		}
 	}
 
+	/**
+	 * @param array $cls
+	 */
 	public static function render_block_part_buttons( array $cls = [] ): void {
 		echo Button_Group::render( false, static::get_val( static::FIELD_INNER_ATTR ), $cls );
 	}

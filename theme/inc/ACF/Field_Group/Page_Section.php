@@ -1,17 +1,24 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Field;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Page_Section extends A_Basic_Section implements I_Block {
 	const FIELD_WRAPPER_ATTR = 'wrapper_attr';
 	const FIELD_TEXT_CLR = 'text_clr';
 	const FIELD_BG_CLR = 'bg_clr';
+	const FIELD_TITLE_ALIGN = 'title_align';
+
+	const TITLE_ALIGN_CENTERED = 'centered';
+	const TITLE_ALIGN_LEFT = 'left';
+	const TITLE_ALIGN_CENTERED_XL_LEFT = 'centered_xl_left';
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
-		$wrapper  = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
-		$text_clr = static::gen_field_key( static::FIELD_TEXT_CLR );
-		$bg_clr   = static::gen_field_key( static::FIELD_BG_CLR );
+		$wrapper     = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
+		$text_clr    = static::gen_field_key( static::FIELD_TEXT_CLR );
+		$bg_clr      = static::gen_field_key( static::FIELD_BG_CLR );
+		$title_align = static::gen_field_key( static::FIELD_TITLE_ALIGN );
 
 		return array_merge(
 			parent::_get_fields(),
@@ -25,16 +32,28 @@ class Page_Section extends A_Basic_Section implements I_Block {
 			],
 			static::_gen_tab_field( 'Styling' ),
 			[
-				static::FIELD_TEXT_CLR => Field\Color::gen_args(
+				static::FIELD_TEXT_CLR    => Field\Color::gen_args(
 					$text_clr,
 					static::FIELD_TEXT_CLR,
-					[ 'label' => 'Text Color' ]
+					[ 'label' => 'Text Color', 'default' => 'teal-dark' ]
 				),
-				static::FIELD_BG_CLR   => Field\Color::gen_args(
+				static::FIELD_BG_CLR      => Field\Color::gen_args(
 					$bg_clr,
 					static::FIELD_BG_CLR,
-					[ 'label' => 'BG Color' ]
+					[ 'label' => 'BG Color', 'default' => 'white' ]
 				),
+				static::FIELD_TITLE_ALIGN => [
+					'name'    => static::FIELD_TITLE_ALIGN,
+					'key'     => $title_align,
+					'label'   => 'Title Align',
+					'type'    => 'select',
+					'default' => static::TITLE_ALIGN_CENTERED,
+					'choices' => [
+						static::TITLE_ALIGN_CENTERED         => 'Centered',
+						static::TITLE_ALIGN_LEFT             => 'Left',
+						static::TITLE_ALIGN_CENTERED_XL_LEFT => 'Centered, XL:Left'
+					]
+				],
 			]
 		);
 	}
@@ -53,10 +72,23 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 	/** @inheritDoc */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
+		$data      = (array) @$block['data'];
+		$val       = new Field_Val_Getter( static::class, $post_id, $data );
+		$title_cls = [ 'page-sub-title' ];
+		$desc_cls  = [ 'page-sub-title-desc' ];
+
+		# Title align
+		$title_align = $val->get( static::FIELD_TITLE_ALIGN );
+		if ( static::TITLE_ALIGN_CENTERED == $title_align ) {
+			$title_cls[] = $desc_cls[] = 'centered';
+		} elseif ( static::TITLE_ALIGN_CENTERED_XL_LEFT == $title_align ) {
+			$title_cls[] = $desc_cls[] = 'centered'; // todo: add XL:left
+		}
+
 		static::render_block_wrapper( $block, '<InnerBlocks/>', [
 			'wrap_cls'  => [ 'page-section' ],
-			'title_cls' => [ 'page-sub-title' ],
-			'desc_cls'  => [ 'page-sub-title-desc' ],
+			'title_cls' => $title_cls,
+			'desc_cls'  => $desc_cls,
 			'inner_cls' => [ 'container mx-auto' ]
 		] );
 	}

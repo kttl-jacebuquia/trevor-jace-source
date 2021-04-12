@@ -39,4 +39,13 @@ class Field_Val_Getter {
 			? $this->data[ $name ]
 			: null;
 	}
+
+	/**
+	 * @param mixed ...$fields
+	 *
+	 * @return mixed|null
+	 */
+	public function get_sub( ...$fields ) {
+		return $this->get( implode( '_', $fields ) );
+	}
 }

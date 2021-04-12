@@ -1,12 +1,13 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Theme\ACF\Options_Page\A_Options_Page;
 use TrevorWP\Util\Tools;
 
 /**
  * Field Group
  */
 abstract class A_Field_Group {
-	const KEY_PREFIX = 'trvr--';
+	const KEY_PREFIX = 'trvr-';
 	const KEY = '';
 	const FIELD_PREFIX_TAB = 'tab_';
 
@@ -70,6 +71,12 @@ abstract class A_Field_Group {
 					'operator' => '==',
 					'value'    => 'acf/' . $args['key'],
 				];
+			} elseif ( static::is_options_page() ) {
+				$and_rules[] = [
+					'param'    => 'options_page',
+					'operator' => '==',
+					'value'    => static::gen_page_slug(),
+				];
 			}
 
 			$cache[ static::class ] = $args;
@@ -110,9 +117,7 @@ abstract class A_Field_Group {
 	 * @return bool
 	 */
 	public static function register(): bool {
-		$args = static::get_register_args();
-
-		return acf_add_local_field_group( $args );
+		return acf_add_local_field_group( static::get_register_args() );
 	}
 
 	/**
@@ -166,6 +171,13 @@ abstract class A_Field_Group {
 	 */
 	public static function is_block(): bool {
 		return is_subclass_of( static::class, I_Block::class, true );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function is_options_page(): bool {
+		return is_subclass_of( static::class, A_Options_Page::class, true );
 	}
 
 	/**

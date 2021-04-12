@@ -65,9 +65,10 @@ class DOM_Attr extends A_Field_Group {
 	/** @inheritdoc */
 	public static function clone( array $args = [] ): array {
 		return parent::clone( array_merge( [
-			'label'   => 'Attributes',
-			'name'    => 'attr',
-			'display' => 'seamless',
+			'label'       => 'Attributes',
+			'name'        => 'attr',
+			'display'     => 'seamless',
+			'prefix_name' => 1,
 		], $args ) );
 	}
 
