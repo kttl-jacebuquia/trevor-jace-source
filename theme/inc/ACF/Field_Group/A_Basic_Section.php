@@ -10,6 +10,7 @@ abstract class A_Basic_Section extends A_Field_Group {
 	const FIELD_DESC_ATTR = 'desc_attr';
 	const FIELD_INNER_ATTR = 'inner_attr';
 	const FIELD_BUTTONS = 'buttons';
+	const FIELD_WRAPPER_ATTR = 'wrapper_attr';
 
 	/**
 	 * @return array
@@ -20,6 +21,7 @@ abstract class A_Basic_Section extends A_Field_Group {
 		$desc       = static::gen_field_key( static::FIELD_DESC );
 		$desc_attr  = static::gen_field_key( static::FIELD_DESC_ATTR );
 		$inner_attr = static::gen_field_key( static::FIELD_INNER_ATTR );
+		$wrapper    = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
 		$buttons    = static::gen_field_key( static::FIELD_BUTTONS );
 
 		return array_merge(
@@ -68,6 +70,14 @@ abstract class A_Basic_Section extends A_Field_Group {
 								'label' => 'Inner'
 						] ),
 				],
+				static::_gen_tab_field( 'Wrapper' ),
+				[
+						static::FIELD_WRAPPER_ATTR => DOM_Attr::clone( [
+								'key'   => $wrapper,
+								'name'  => static::FIELD_WRAPPER_ATTR,
+								'label' => 'Wrapper'
+						] ),
+				],
 				static::_gen_tab_field( 'Buttons' ),
 				[
 						static::FIELD_BUTTONS => Button_Group::clone( [
@@ -98,16 +108,6 @@ abstract class A_Basic_Section extends A_Field_Group {
 		# Add block's classnames
 		if ( ! empty( $block['className'] ) ) {
 			$cls[] = $block['className'];
-		}
-
-		# Text color
-		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
-			$cls[] = "text-{$txt_color}";
-		}
-
-		# BG Color
-		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
-			$cls[] = "bg-{$bg_color}";
 		}
 		?>
 		<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_WRAPPER_ATTR ), $cls ) ?>>

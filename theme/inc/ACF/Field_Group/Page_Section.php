@@ -4,7 +4,6 @@ use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Page_Section extends A_Basic_Section implements I_Block {
-	const FIELD_WRAPPER_ATTR = 'wrapper_attr';
 	const FIELD_TEXT_CLR = 'text_clr';
 	const FIELD_BG_CLR = 'bg_clr';
 	const FIELD_TITLE_ALIGN = 'title_align';
@@ -15,21 +14,13 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
-		$wrapper     = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
 		$text_clr    = static::gen_field_key( static::FIELD_TEXT_CLR );
 		$bg_clr      = static::gen_field_key( static::FIELD_BG_CLR );
 		$title_align = static::gen_field_key( static::FIELD_TITLE_ALIGN );
 
 		return array_merge(
 			parent::_get_fields(),
-			static::_gen_tab_field( 'Wrapper' ),
-			[
-				static::FIELD_WRAPPER_ATTR => DOM_Attr::clone( [
-					'key'   => $wrapper,
-					'name'  => static::FIELD_WRAPPER_ATTR,
-					'label' => 'Wrapper'
-				] ),
-			],
+
 			static::_gen_tab_field( 'Styling' ),
 			[
 				static::FIELD_TEXT_CLR    => Field\Color::gen_args(
@@ -74,8 +65,19 @@ class Page_Section extends A_Basic_Section implements I_Block {
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
 		$data      = (array) @$block['data'];
 		$val       = new Field_Val_Getter( static::class, $post_id, $data );
+		$wrap_cls  = [ 'page-section' ];
 		$title_cls = [ 'page-sub-title' ];
 		$desc_cls  = [ 'page-sub-title-desc' ];
+
+		# Text color
+		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
+			$wrap_cls[] = "text-{$txt_color}";
+		}
+
+		# BG Color
+		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
+			$wrap_cls[] = "bg-{$bg_color}";
+		}
 
 		# Title align
 		$title_align = $val->get( static::FIELD_TITLE_ALIGN );
@@ -86,7 +88,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		}
 
 		static::render_block_wrapper( $block, '<InnerBlocks/>', [
-			'wrap_cls'  => [ 'page-section' ],
+			'wrap_cls'  => $wrap_cls,
 			'title_cls' => $title_cls,
 			'desc_cls'  => $desc_cls,
 			'inner_cls' => [ 'container mx-auto' ]

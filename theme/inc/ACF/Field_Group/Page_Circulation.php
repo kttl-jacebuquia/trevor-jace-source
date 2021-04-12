@@ -1,6 +1,8 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Options_Page\Page_Circulation_Options;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Util\Tools;
 
 class Page_Circulation extends A_Basic_Section implements I_Block {
 	const FIELD_CARDS = 'cards';
@@ -10,31 +12,53 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 		$cards = static::gen_field_key( static::FIELD_CARDS );
 
 		return array_merge(
-			parent::_get_fields(),
-			static::_gen_tab_field( 'Cards' ),
-			[
-				static::FIELD_CARDS => [
-					'key'     => $cards,
-					'name'    => static::FIELD_CARDS,
-					'label'   => 'Cards',
-					'type'    => 'select',
-					'choices' => array_keys( Page_Circulation_Options::get_cards() )
+				parent::_get_fields(),
+				static::_gen_tab_field( 'Cards' ),
+				[
+						static::FIELD_CARDS => [
+								'key'      => $cards,
+								'name'     => static::FIELD_CARDS,
+								'label'    => 'Cards',
+								'type'     => 'select',
+								'multiple' => true,
+								'choices'  => Tools::pluck( Page_Circulation_Options::get_cards(), Page_Circulation_Cards::FIELD_CARD_KEY, [], true ),
+						],
 				],
-			],
 		);
 	}
 
 	/** @inheritDoc */
 	public static function get_block_args(): array {
 		return array_merge( parent::get_block_args(), [
-			'name'       => static::get_key(),
-			'title'      => 'Page Circulation',
-			'post_types' => [ 'page' ],
+				'name'       => static::get_key(),
+				'title'      => 'Page Circulation',
+				'post_types' => [ 'page' ],
 		] );
 	}
 
 	/** @inheritDoc */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
+		$data = (array) @$block['data'];
+		$val  = new Field_Val_Getter( static::class, $post_id, $data );
+
+		# Prepare cards
+		$card_ids  = (array) $val->get( static::FIELD_CARDS );
+		$all_cards = Page_Circulation_Options::get_cards();
+		$cards     = array_intersect_key( $all_cards, array_flip( $card_ids ) );
+		$cards     = array_slice( $cards, 0, 2 );
+
 		// TODO: Implement render_block() method.
+
+		ob_start(); ?>
+		<div>
+			<?php foreach ( $cards as $card ): ?>
+			<?php endforeach; ?>
+		</div>
+		<?php static::render_block_wrapper( $block, ob_get_clean(), [
+				'wrap_cls'  => [ 'page-section page-circulation bg-white text-teal-dark' ],
+				'title_cls' => [ 'page-sub-title centered' ],
+				'desc_cls'  => [ 'page-sub-title-desc centered' ],
+				'inner_cls' => [ 'container mx-auto' ]
+		] );
 	}
 }
