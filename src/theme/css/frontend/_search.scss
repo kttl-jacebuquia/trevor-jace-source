@@ -30,6 +30,10 @@
 
 		&-link {
 			@apply px-px14 md:px-px20 text-px18 leading-px26 lg:text-px20 lg:leading-px26;
+
+			&--first {
+				@apply pl-0;
+			}
 		}
 
 		&-link:not(.current) {

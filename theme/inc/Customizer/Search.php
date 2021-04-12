@@ -357,7 +357,7 @@ class Search extends Abstract_Customizer {
 			<?php foreach ( $all as $id => $detail ) { ?>
 				<div>
 					<a href="<?= esc_url( self::get_permalink( get_search_query( false ), $id == 'all' ? 'all' : $id ) ) ?>"
-					   class="scope-link <?= $id == $current ? 'font-bold current' : '' ?>">
+					  class="scope-link <?= $id == $current ? 'font-bold current' : '' ?> <?= $id == 'all' ? 'scope-link--first' : '' ?>">
 						<?= $detail['name']; ?>
 					</a>
 				</div>
