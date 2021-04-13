@@ -20,6 +20,7 @@
 
   &-btn {
 	@extend .page-btn.secondary;
+	@apply inline-flex;
   }
 
   @screen md {
