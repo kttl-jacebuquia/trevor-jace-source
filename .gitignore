@@ -17,3 +17,6 @@ composer.phar
 # Icon Fonts
 /src/plugin/css/icon-font
 /src/theme/css/icon-font
+
+# Artifacts
+/theme/data/tailwind.config.json

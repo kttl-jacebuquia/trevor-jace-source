@@ -14,9 +14,11 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
+const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+const resolveConfig = require('tailwindcss/resolveConfig');
 const clearConsole = require('react-dev-utils/clearConsole');
 const {
 	choosePort,
@@ -92,6 +94,9 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
 
 		console.log(chalk.cyan('Starting the development server...\n'));
 		openBrowser(urls.localUrlForBrowser);
+
+		// Write Tailwind's config to a JSON file
+		fs.writeFileSync(paths.tailwindConfJSONOut, JSON.stringify(resolveConfig(require(paths.tailwindCssConf))));
 	});
 
 	['SIGINT', 'SIGTERM'].forEach(function (sig) {

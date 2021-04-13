@@ -1,8 +1,12 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Theme\Tailwind\Config;
 
 class DOM_Attr extends A_Field_Group {
 	const FIELD_CLASS = 'class';
+	const FIELD_STYLE_CLASS = 'style_class';
+	const FIELD_STYLE_CLASS_SCREEN = 'style_class_screen';
+	const FIELD_STYLE_CLASS_DATA = 'style_class_data';
 	const FIELD_ACCORDION = 'accordion';
 	const FIELD_ATTRIBUTES = 'attributes';
 	const FIELD_ATTR_KEY = 'attr_key';
@@ -18,23 +22,34 @@ class DOM_Attr extends A_Field_Group {
 		return [
 			'title'  => 'DOM Attr',
 			'fields' => [
-				static::FIELD_CLASS              => [
-					'key'   => $class,
-					'name'  => static::FIELD_CLASS,
-					'label' => 'Class',
-					'type'  => 'text',
-				],
 				static::FIELD_ACCORDION          => [
 					'name'  => static::FIELD_ACCORDION,
 					'key'   => static::gen_field_key( static::FIELD_ACCORDION ),
 					'type'  => 'accordion',
 					'label' => 'Attributes'
 				],
+				static::FIELD_STYLE_CLASS        => [
+					'name'         => static::FIELD_STYLE_CLASS,
+					'key'          => static::gen_field_key( static::FIELD_STYLE_CLASS ),
+					'label'        => 'Style Classes',
+					'type'         => 'repeater',
+					'display'      => 'group',
+					'button_label' => 'New Screen',
+					'collapsed'    => static::FIELD_STYLE_CLASS_SCREEN,
+					'sub_fields'   => static::_prepare_style_subfields(),
+				],
+				static::FIELD_CLASS              => [
+					'key'   => $class,
+					'name'  => static::FIELD_CLASS,
+					'label' => 'Class',
+					'type'  => 'text',
+				],
 				static::FIELD_ATTRIBUTES         => [
 					'key'        => $attributes,
 					'name'       => static::FIELD_ATTRIBUTES,
 					'type'       => 'repeater',
 					'layout'     => 'table',
+					'label'      => 'Custom',
 					'collapsed'  => $attr_key,
 					'sub_fields' => [
 						static::FIELD_ATTR_KEY => [
@@ -74,27 +89,84 @@ class DOM_Attr extends A_Field_Group {
 
 	/**
 	 * @param array $value
-	 * @param array $default_class
+	 * @param array $default_cls
 	 *
 	 * @return string
 	 */
-	public static function render_attrs_of( $value = null, array $default_class = [] ): string {
+	public static function render_attrs_of( $value = null, array $default_cls = [] ): string {
 		if ( ! is_array( $value ) ) {
 			$value = [];
 		}
 
-		$class           = empty( $value[ static::FIELD_CLASS ] )
+		# Style classes
+		$style_cls = empty( $value[ static::FIELD_STYLE_CLASS ] )
+			? []
+			: array_map( function ( $data ) {
+				$screen = (string) @$data[ static::FIELD_STYLE_CLASS_SCREEN ];
+
+				return implode( ' ', array_map( function ( $data ) use ( $screen ) {
+					return ( empty( $screen ) ? '' : "{$screen}:" ) .
+					       $data['acf_fc_layout'] .
+					       ( ( ! isset( $data['value'] ) || '' == $data['value'] ) ? '' : "-{$data['value']}" );
+				}, (array) @$data[ static::FIELD_STYLE_CLASS_DATA ] ) );
+			}, $value[ static::FIELD_STYLE_CLASS ] );
+
+		# Extra classes
+		$extra_cls = empty( $value[ static::FIELD_CLASS ] )
 			? []
 			: explode( ' ', $value[ static::FIELD_CLASS ] );
+
+		# Attributes
+		$attributes      = [];
 		$attributes_data = empty( $value[ static::FIELD_ATTRIBUTES ] )
 			? []
 			: $value[ static::FIELD_ATTRIBUTES ];
-
-		$attributes = [];
 		foreach ( $attributes_data as $attribute ) {
 			$attributes[ $attribute[ DOM_Attr::FIELD_ATTR_KEY ] ] = $attribute[ DOM_Attr::FIELD_ATTR_VAL ];
 		}
 
-		return parent::render_attrs( array_merge( $default_class, $class ), $attributes );
+		return parent::render_attrs( array_merge( $default_cls, $style_cls, $extra_cls ), $attributes );
+	}
+
+	/**
+	 * @return array
+	 */
+	protected static function _prepare_style_subfields(): array {
+		$option_layouts = [];
+		foreach ( Config::collect_options() as $key => $choices ) {
+			$layout_key                    = static::gen_field_key( static::FIELD_STYLE_CLASS . '-option-' . $key );
+			$option_layouts[ $layout_key ] = [
+				'key'        => $layout_key,
+				'name'       => $key,
+				'label'      => $key,
+				'sub_fields' => [
+					'value' => [
+						'key'     => $layout_key . '-value',
+						'name'    => 'value',
+						'type'    => 'select',
+						'choices' => $choices
+					],
+				]
+			];
+		}
+
+		return [
+			static::FIELD_STYLE_CLASS_SCREEN => [
+				'key'     => static::gen_field_key( static::FIELD_STYLE_CLASS_SCREEN ),
+				'name'    => static::FIELD_STYLE_CLASS_SCREEN,
+				'label'   => 'Screen',
+				'type'    => 'select',
+				'choices' => Config::collect_screens(),
+			],
+			static::FIELD_STYLE_CLASS_DATA   => [
+				'key'          => static::gen_field_key( static::FIELD_STYLE_CLASS_DATA ),
+				'name'         => static::FIELD_STYLE_CLASS_DATA,
+				'label'        => 'Values',
+				'type'         => 'flexible_content',
+				'display'      => 'group',
+				'layouts'      => $option_layouts,
+				'button_label' => 'Add New',
+			],
+		];
 	}
 }

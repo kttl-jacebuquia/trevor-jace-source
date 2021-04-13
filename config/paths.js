@@ -11,6 +11,7 @@ module.exports = {
     src: resolveApp('src'),
     build: resolveApp('build'),
 	tailwindCssConf: resolveApp('tailwind.config.js'),
+	tailwindConfJSONOut: resolveApp('theme/data/tailwind.config.json'),
     // - Plugin
     pluginJSMain: resolveApp('src/plugin/js/main'),
     pluginJSBlocks: resolveApp('src/plugin/js/blocks'),

@@ -100,14 +100,16 @@ class Button extends A_Field_Group implements I_Renderable {
 						static::_gen_tab_field( 'Attributes' ),
 						[
 								static::FIELD_BUTTON_ATTR => DOM_Attr::clone( [
-										'key'   => $button_attr,
-										'name'  => static::FIELD_BUTTON_ATTR,
-										'label' => 'Button',
+										'key'     => $button_attr,
+										'name'    => static::FIELD_BUTTON_ATTR,
+										'label'   => 'Button',
+										'display' => 'group',
 								] ),
 								static::FIELD_LABEL_ATTR  => DOM_Attr::clone( [
-										'key'   => $label_attr,
-										'name'  => static::FIELD_LABEL_ATTR,
-										'label' => 'Label',
+										'key'     => $label_attr,
+										'name'    => static::FIELD_LABEL_ATTR,
+										'label'   => 'Label',
+										'display' => 'group',
 								] ),
 						],
 				),

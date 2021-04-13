@@ -18,6 +18,13 @@ module.exports = {
 			'./plugin/inc/**/*.php',
 			'./plugin/templates/blocks/**/*.twig',
 		],
+		safelist: {
+			standard: [
+				/m([tblryx])?-px\d+$/,
+				/p([tblryx])?-px\d+$/,
+				/(text|font|tracking|leading)-\w+$/,
+			]
+		}
 	},
 	prefix: '',
 	important: false,

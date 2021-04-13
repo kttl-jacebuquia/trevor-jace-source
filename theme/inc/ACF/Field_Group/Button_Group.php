@@ -17,12 +17,13 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 				'title'  => 'Button Group',
 				'fields' => [
 						static::FIELD_BUTTONS => [
-								'key'        => $buttons,
-								'name'       => static::FIELD_BUTTONS,
-								'label'      => '',
-								'type'       => 'repeater',
-								'layout'     => 'table',
-								'sub_fields' => [
+								'key'          => $buttons,
+								'name'         => static::FIELD_BUTTONS,
+								'label'        => '',
+								'type'         => 'repeater',
+								'layout'       => 'table',
+								'button_label' => 'Add Button',
+								'sub_fields'   => [
 										static::FIELD_BUTTON => Button::clone(
 												[
 														'key'     => $button,

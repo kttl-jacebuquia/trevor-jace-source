@@ -17,7 +17,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$title_top_attr = static::gen_key( static::FIELD_TITLE_TOP_ATTR );
 		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
 
-		return array_merge(
+		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
 			[
 				static::FIELD_TYPE => [
@@ -76,6 +76,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				],
 			] )
 		] );
+
+		$return[ static::FIELD_TITLE ]['instructions'] = 'Leave empty to use Post`s title.';
+
+		return $return;
 	}
 
 	/** @inheritdoc */
@@ -130,11 +134,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		# Split Carousel
 		if ( $val->get( static::FIELD_TYPE ) === 'split_carousel' ) {
-			$carousel_arr = $val->get( static::FIELD_CAROUSEL );
+			$carousel_arr  = $val->get( static::FIELD_CAROUSEL );
 			$carousel_data = [];
 
-			if ( $carousel_arr[ 'type' ] === 'custom' ) {
-				foreach ( $carousel_arr[ 'data' ] as $item ) {
+			if ( $carousel_arr['type'] === 'custom' ) {
+				foreach ( $carousel_arr['data'] as $item ) {
 					$carousel_data[] = [
 						'img'      => $item['data_img'],
 						'caption'  => $item['data_title'],
@@ -142,16 +146,16 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					];
 				}
 			} else {
-				foreach ( $carousel_arr[ 'posts' ] as $post_item ) {
+				foreach ( $carousel_arr['posts'] as $post_item ) {
 					$carousel_data[] = [
-						'img'      => [ 'id' => get_post_thumbnail_id($post_item) ],
-						'caption'  => $post_item->post_title,
+						'img'     => [ 'id' => get_post_thumbnail_id( $post_item ) ],
+						'caption' => $post_item->post_title,
 					];
 				}
 			}
 
 			$args['carousel_data'] = $carousel_data;
-			$args['swiper'] = [
+			$args['swiper']        = [
 				'centeredSlides' => true,
 				'slidesPerView'  => 'auto',
 			];
