@@ -465,6 +465,9 @@ module.exports = {
 				'gradient-trevorspace': `url('${theme('paths.themeGradients')}/trevorspace.png')`,
 				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
 			}),
+			opacity: {
+				'86': '0.86',
+			}
 		},
 	},
 	variants: {

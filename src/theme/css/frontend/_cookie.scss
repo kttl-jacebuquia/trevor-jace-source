@@ -13,6 +13,18 @@
 		}
 	}
 
+	&-theme-bar {
+		.ch2-dialog.ch2-dialog-bottom {
+			@apply transform-gpu translate-y-full transition-transform duration-300 ease-out;
+			bottom: 0 !important;
+
+			&.ch2-visible {
+				@apply bottom-0 translate-y-0;
+			}
+		}
+	}
+	
+
 	&-theme-bar.ch2-style-light &-dialog {
 		@apply bg-blue_green;
 		@apply font-manrope;
