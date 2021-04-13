@@ -1,11 +1,8 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Page_Section extends A_Basic_Section implements I_Block {
-	const FIELD_TEXT_CLR = 'text_clr';
-	const FIELD_BG_CLR = 'bg_clr';
 	const FIELD_TITLE_ALIGN = 'title_align';
 
 	const TITLE_ALIGN_CENTERED = 'centered';
@@ -14,25 +11,12 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
-		$text_clr    = static::gen_field_key( static::FIELD_TEXT_CLR );
-		$bg_clr      = static::gen_field_key( static::FIELD_BG_CLR );
 		$title_align = static::gen_field_key( static::FIELD_TITLE_ALIGN );
 
 		return array_merge(
 			parent::_get_fields(),
-
 			static::_gen_tab_field( 'Styling' ),
 			[
-				static::FIELD_TEXT_CLR    => Field\Color::gen_args(
-					$text_clr,
-					static::FIELD_TEXT_CLR,
-					[ 'label' => 'Text Color', 'default' => 'teal-dark' ]
-				),
-				static::FIELD_BG_CLR      => Field\Color::gen_args(
-					$bg_clr,
-					static::FIELD_BG_CLR,
-					[ 'label' => 'BG Color', 'default' => 'white' ]
-				),
 				static::FIELD_TITLE_ALIGN => [
 					'name'    => static::FIELD_TITLE_ALIGN,
 					'key'     => $title_align,
@@ -68,16 +52,6 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		$wrap_cls  = [ 'page-section' ];
 		$title_cls = [ 'page-sub-title' ];
 		$desc_cls  = [ 'page-sub-title-desc' ];
-
-		# Text color
-		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
-			$wrap_cls[] = "text-{$txt_color}";
-		}
-
-		# BG Color
-		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
-			$wrap_cls[] = "bg-{$bg_color}";
-		}
 
 		# Title align
 		$title_align = $val->get( static::FIELD_TITLE_ALIGN );

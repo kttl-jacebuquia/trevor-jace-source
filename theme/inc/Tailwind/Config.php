@@ -71,7 +71,7 @@ class Config {
 		$options['leading']  = static::option_walker( $theme['lineHeight'] );
 		$options['tracking'] = static::option_walker( $theme['letterSpacing'] );
 
-		static::collect_screens();
+		ksort($options);
 
 		return $options;
 	}

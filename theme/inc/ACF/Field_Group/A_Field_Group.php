@@ -181,6 +181,13 @@ abstract class A_Field_Group {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public static function has_patterns(): bool {
+		return is_subclass_of( static::class, I_Pattern::class, true );
+	}
+
+	/**
 	 * @param array $class
 	 * @param array $attributes
 	 *
@@ -192,7 +199,12 @@ abstract class A_Field_Group {
 			unset( $attributes['class'] );
 		}
 
-		return Tools::flat_attr( [ 'class' => implode( ' ', $class ) ] + $attributes );
+		$attr_top = []; // prints them first
+		if ( ! empty( $class ) ) {
+			$attr_top['class'] = implode( ' ', $class );
+		}
+
+		return Tools::flat_attr( $attr_top + $attributes );
 	}
 
 	/**
@@ -227,5 +239,23 @@ abstract class A_Field_Group {
 	 */
 	protected static function _gen_tab_end_field( string $name = 'end', array $args = [] ): array {
 		return static::_gen_tab_field( '', array_merge( [ 'endpoint' => 1, 'label' => '', 'name' => $name ], $args ) );
+	}
+
+	/**
+	 * Registers block patterns
+	 */
+	public static function register_patterns(): void {
+		if ( static::has_patterns() ) {
+			$category = static::get_key();
+			register_block_pattern_category( $category, [
+				'label' => str_replace( '_', ' ', ( new \ReflectionClass( static::class ) )->getShortName() ),
+			] );
+
+			foreach ( static::get_patterns() as $key => $args ) {
+				register_block_pattern( "trevor/{$key}", array_merge( [
+					'categories' => [ $category ],
+				], $args ) );
+			}
+		}
 	}
 }

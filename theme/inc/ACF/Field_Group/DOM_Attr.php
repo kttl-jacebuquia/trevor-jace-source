@@ -5,8 +5,8 @@ use TrevorWP\Theme\Tailwind\Config;
 class DOM_Attr extends A_Field_Group {
 	const FIELD_CLASS = 'class';
 	const FIELD_STYLE_CLASS = 'style_class';
-	const FIELD_STYLE_CLASS_SCREEN = 'style_class_screen';
-	const FIELD_STYLE_CLASS_DATA = 'style_class_data';
+	const FIELD_STYLE_CLASS_SCREEN = 'screen';
+	const FIELD_STYLE_CLASS_DATA = 'data';
 	const FIELD_ACCORDION = 'accordion';
 	const FIELD_ATTRIBUTES = 'attributes';
 	const FIELD_ATTR_KEY = 'attr_key';

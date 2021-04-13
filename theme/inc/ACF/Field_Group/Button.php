@@ -119,8 +119,11 @@ class Button extends A_Field_Group implements I_Renderable {
 	/** @inheritdoc */
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
 		$val       = new Field_Val_Getter( static::class, $post, $data );
-		$btn_cls   = [ 'page-btn' ];
-		$label_cls = [ 'page-btn-label' ];
+		$btn_cls   = [ 'page-btn' ] + ( $options['btn_cls'] ?? [] );
+		$label_cls = [ 'page-btn-label' ] + ( $options['label_cls'] ?? [] );
+
+		$type      = $val->get( static::FIELD_TYPE );
+		$btn_cls[] = $type;
 
 		ob_start(); ?>
 		<button <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_BUTTON_ATTR ), $btn_cls ) ?>>

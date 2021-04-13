@@ -13,6 +13,8 @@ class ACF {
 		Field_Group\Testimonials_Carousel::class,
 		Field_Group\Page_Circulation::class,
 		Field_Group\Info_Boxes::class,
+		Field_Group\Info_Card::class,
+		Field_Group\Info_Card_Grid::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 	];
@@ -34,8 +36,14 @@ class ACF {
 		foreach ( static::ALL_GROUPS as $group ) {
 			$group::register();
 
+			# Block
 			if ( $group::is_block() ) {
 				$group::register_block();
+
+				# Block Patterns
+				if ( $group::has_patterns() ) {
+					$group::register_patterns();
+				}
 			}
 		}
 

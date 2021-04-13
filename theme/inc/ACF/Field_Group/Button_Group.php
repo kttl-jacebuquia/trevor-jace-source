@@ -59,17 +59,20 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
 		$val          = new Field_Val_Getter( static::class, $post, $data );
 		$buttons_data = $val->get( static::FIELD_BUTTONS );
-		$buttons      = empty( $buttons_data ) ? [] : $buttons_data[ static::FIELD_BUTTONS ];
 
 		// Do not render if there is no button
-		if ( empty( $buttons ) ) {
+		if ( empty( $buttons_data ) ) {
 			return null;
 		}
 
+		$wrap_cls  = $options['wrap_cls'] ?? [];
+		$btn_cls   = $options['btn_cls'] ?? [];
+		$label_cls = $options['label_cls'] ?? [];
+
 		ob_start(); ?>
-		<div <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ) ) ?>>
-			<?php foreach ( $buttons as $button_data ): ?>
-				<?= Button::render( null, (array) @$button_data[ static::FIELD_BUTTON ] ); ?>
+		<div <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ), $wrap_cls ) ?>>
+			<?php foreach ( $buttons_data as $button_data ): ?>
+				<?= Button::render( null, (array) @$button_data[ static::FIELD_BUTTON ], compact( 'btn_cls', 'label_cls' ) ); ?>
 			<?php endforeach; ?>
 		</div>
 		<?php return ob_get_clean();
@@ -85,6 +88,7 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 		return parent::clone( array_merge( [
 				'display'      => 'seamless',
 				'prefix_label' => 1,
+				'prefix_name'  => 1,
 		], $args ) );
 	}
 }

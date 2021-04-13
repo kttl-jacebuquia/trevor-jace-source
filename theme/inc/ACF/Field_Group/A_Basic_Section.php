@@ -28,11 +28,10 @@ abstract class A_Basic_Section extends A_Field_Group {
 				static::_gen_tab_field( 'Title' ),
 				[
 						static::FIELD_TITLE      => [
-								'key'      => $title,
-								'name'     => static::FIELD_TITLE,
-								'label'    => 'Title',
-								'type'     => 'text',
-								'required' => 1,
+								'key'   => $title,
+								'name'  => static::FIELD_TITLE,
+								'label' => 'Title',
+								'type'  => 'text',
 						],
 						static::FIELD_TITLE_ATTR => DOM_Attr::clone( [
 								'key'   => $title_attr,
@@ -120,9 +119,11 @@ abstract class A_Basic_Section extends A_Field_Group {
 	 * @param array $cls
 	 */
 	public static function render_block_part_title( array $cls = [] ): void {
-		?>
+		if ( empty( $title = static::get_val( static::FIELD_TITLE ) ) ) {
+			return;
+		} ?>
 		<h2 <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_TITLE_ATTR ), $cls ) ?>>
-			<?= static::get_val( static::FIELD_TITLE ) ?: '<em>Empty Title</em>' ?>
+			<?= $title ?>
 		</h2>
 		<?php
 	}
@@ -131,39 +132,41 @@ abstract class A_Basic_Section extends A_Field_Group {
 	 * @param array $cls
 	 */
 	public static function render_block_part_desc( array $cls = [] ): void {
-		if ( ! empty( $desc = static::get_val( static::FIELD_DESC ) ) ) { ?>
-			<p <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_DESC_ATTR ), $cls ) ?>>
-				<?= $desc ?>
-			</p>
-			<?php
-		}
+		if ( empty( $desc = static::get_val( static::FIELD_DESC ) ) ) {
+			return;
+		} ?>
+		<p <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_DESC_ATTR ), $cls ) ?>>
+			<?= $desc ?>
+		</p>
+		<?php
 	}
 
 	/**
-	 * @param array $cls
+	 * @param array $options
 	 */
-	public static function render_block_part_buttons( array $cls = [] ): void {
-		echo Button_Group::render( false, static::get_val( static::FIELD_INNER_ATTR ), $cls );
+	public static function render_block_part_buttons( array $options = [] ): void {
+		echo Button_Group::render( false, static::get_val( static::FIELD_BUTTONS ), $options );
 	}
 
 	/**
 	 * @param $block
 	 * @param $content
-	 * @param array $classes
+	 * @param array $options
 	 */
-	public static function render_block_wrapper( $block, $content, array $classes = [] ): void {
-		$wrap_cls  = $classes['wrap_cls'] ?? [];
-		$inner_cls = $classes['inner_cls'] ?? [];
-		$title_cls = $classes['title_cls'] ?? [];
-		$desc_cls  = $classes['desc_cls'] ?? [];
+	public static function render_block_wrapper( $block, $content, array $options = [] ): void {
+		$wrap  = $options['wrap_cls'] ?? [];
+		$inner = $options['inner_cls'] ?? [];
+		$title = $options['title_cls'] ?? [];
+		$desc  = $options['desc_cls'] ?? [];
+		$btn   = $options['btn_cls'] ?? [];
 
 		ob_start();
-		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner_cls ) . '>';
-		static::render_block_part_title( $title_cls );
-		static::render_block_part_desc( $desc_cls );
+		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner ) . '>';
+		static::render_block_part_title( $title );
+		static::render_block_part_desc( $desc );
 		echo $content;
-		static::render_block_part_buttons();
+		static::render_block_part_buttons( $btn );
 		echo '</div>';
-		static::render_block_part_wrap( $block, $wrap_cls, ob_get_clean() );
+		static::render_block_part_wrap( $block, $wrap, ob_get_clean() );
 	}
 }
