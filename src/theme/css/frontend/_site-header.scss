@@ -240,6 +240,10 @@ $top--bar-height-tablet: rem-calc(106px);
 			@apply bg-transparent text-indigo;
 			@apply mr-0 ml-px24;
 		}
+
+		.trevor-ti-search {
+			color: inherit;
+		}
 	}
 
 	.topbar-control-opener {
@@ -996,7 +1000,7 @@ body:not(.on-top) {
 	#top-nav {
 		.menu-wrap {
 			@screen lg2 {
-				@apply -translate-y-double invisible opacity-0;
+				@apply -translate-y-full invisible opacity-0;
 			}
 		}
 	}
@@ -1066,7 +1070,7 @@ body.is-navigation-open {
 		@screen lg-max {
 			// Blur
 			&::before {
-				@apply opacity-100 visible delay-300;
+				@apply opacity-100 visible;
 			}
 			// White background
 			&::after {

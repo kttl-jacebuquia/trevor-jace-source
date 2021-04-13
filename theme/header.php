@@ -84,9 +84,9 @@ $is_rc = Is::rc();
 			<?php /* Will contain menu for desktop, for seamless transition */ ?>
 		</div>
 		<div class="topbar-controls">
-			<button class="topbar-control-search">
+			<a class="topbar-control-search" href="<?= get_search_link() ?>">
 				<i class="trevor-ti-search"></i>
-			</button>
+			</a>
 			<button class="topbar-control-opener">
 				<i class="trevor-ti-hamburger-menu"></i>
 				<i class="trevor-ti-nav-close"></i>
@@ -123,9 +123,9 @@ $is_rc = Is::rc();
 					'theme_location'  => 'header-organization'
 			] ); ?>
 
-			<button class="search-button">
+			<a class="search-button" href="<?= get_search_link() ?>">
 				<i class="trevor-ti-search"></i>
-			</button>
+			</a>
 
 		</div>
 	</div>
