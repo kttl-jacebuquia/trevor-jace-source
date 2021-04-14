@@ -49,9 +49,9 @@ class Page_Section extends A_Basic_Section implements I_Block {
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
 		$data      = (array) @$block['data'];
 		$val       = new Field_Val_Getter( static::class, $post_id, $data );
-		$wrap_cls  = [ 'page-section' ];
-		$title_cls = [ 'page-sub-title' ];
-		$desc_cls  = [ 'page-sub-title-desc' ];
+		$wrap_cls  = [ 'page-section', 'py-20 xl:py-24' ];
+		$title_cls = [ 'page-sub-title', 'page-section-title' ];
+		$desc_cls  = [ 'page-sub-title-desc', 'page-section-title-desc' ];
 
 		# Title align
 		$title_align = $val->get( static::FIELD_TITLE_ALIGN );

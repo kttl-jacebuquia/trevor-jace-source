@@ -20,3 +20,4 @@ composer.phar
 
 # Artifacts
 /theme/data/tailwind.config.json
+/theme/data/tailwind.safelist.txt

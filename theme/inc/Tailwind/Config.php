@@ -71,7 +71,7 @@ class Config {
 		$options['leading']  = static::option_walker( $theme['lineHeight'] );
 		$options['tracking'] = static::option_walker( $theme['letterSpacing'] );
 
-		ksort($options);
+		ksort( $options );
 
 		return $options;
 	}
@@ -80,6 +80,9 @@ class Config {
 	 * @return string[]
 	 */
 	public static function collect_screens(): array {
-		return static::DEFAULT_OPTION + static::option_walker( static::get_config()['theme']['screens'], '', 0 );
+		return array_intersect_key(
+			static::DEFAULT_OPTION + static::option_walker( static::get_config()['theme']['screens'], '', 0 ),
+			array_flip( [ '', 'md', 'xl' ] )
+		);
 	}
 }

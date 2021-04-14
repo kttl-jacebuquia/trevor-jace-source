@@ -12,6 +12,7 @@ module.exports = {
     build: resolveApp('build'),
 	tailwindCssConf: resolveApp('tailwind.config.js'),
 	tailwindConfJSONOut: resolveApp('theme/data/tailwind.config.json'),
+	tailwindSafeListOut: resolveApp('theme/data/tailwind.safelist.txt'),
     // - Plugin
     pluginJSMain: resolveApp('src/plugin/js/main'),
     pluginJSBlocks: resolveApp('src/plugin/js/blocks'),

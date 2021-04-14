@@ -9,22 +9,15 @@ const DARK_TEAL = '#003A48';
 
 module.exports = {
 	purge: {
-		enabled: true,
 		preserveHtmlElements: true,
 		content: [
 			'./src/theme/**/*.js',
 			'./src/theme/**/*.scss',
+			'./theme/data/tailwind.safelist.txt',
 			'./theme/**/*.php',
 			'./plugin/inc/**/*.php',
 			'./plugin/templates/blocks/**/*.twig',
 		],
-		safelist: {
-			standard: [
-				/m([tblryx])?-px\d+$/,
-				/p([tblryx])?-px\d+$/,
-				/(text|font|tracking|leading)-\w+$/,
-			]
-		}
 	},
 	prefix: '',
 	important: false,
@@ -206,7 +199,7 @@ module.exports = {
 			minWidth: {
 				px50: px2rem(50),
 				px145: px2rem(145),
-        px190: px2rem(190),
+				px190: px2rem(190),
 				px315: px2rem(315),
 				px319: px2rem(319),
 				px355: px2rem(355),
@@ -385,7 +378,7 @@ module.exports = {
 				px40: px2rem(40),
 				px41: px2rem(41),
 				px42: px2rem(42),
-        px43: px2rem(43),
+				px43: px2rem(43),
 				px44: px2rem(44),
 				px45: px2rem(45),
 				px46: px2rem(46),
