@@ -374,7 +374,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 			> a {
 				@apply flex justify-center items-center h-full whitespace-nowrap;
-				@apply font-manrope font-light text-px14 leading-px16 tracking-em002;
+				@apply font-manrope font-light text-px16 leading-px16 tracking-em002;
 				@apply text-indigo;
 				@apply px-2;
 				background-color: rgba(16, 16, 102, 0.04);
@@ -535,10 +535,10 @@ $top--bar-height-tablet: rem-calc(106px);
 			@apply transition-all duration-300 ease-out;
 			@apply transform-gpu translate-y-0 translate-x-0;
 			@apply font-bold text-px24 leading-px30 tracking-em001;
-
-			@screen md {
-				@apply text-px26 leading-px32 tracking-em001;
-			}
+			// md
+			@apply md:text-px26 md:leading-px32 md:tracking-em001;
+			// lg2
+			@apply pointer-events-none;
 
 			// Chevron icon
 			&::after {
@@ -577,7 +577,7 @@ $top--bar-height-tablet: rem-calc(106px);
 			@screen lg2 {
 				@apply h-auto top-full w-auto p-0 overflow-visible;
 				@apply left-1/2 -translate-x-1/2 mt-px18;
-				@apply bg-white rounded-px10 p-px24;
+				@apply bg-white rounded-px10 p-px24 pr-px32;
 
 				// submenu caret
 				&::before {
@@ -607,9 +607,10 @@ $top--bar-height-tablet: rem-calc(106px);
 						@apply whitespace-nowrap;
 					}
 
+					// Chevron
 					&::after {
-						@apply transform inline-block ml-px14;
-						font-size: rem-calc(14px);
+						@apply transform inline-block ml-px14 text-px14;
+						@apply lg2:text-px10 lg2:ml-px11;
 						font-family: "trevor-ti";
 						content: $font-trevor-ti-chevron-thick-right;
 					}
@@ -617,6 +618,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 				> a .subtitle {
 					@apply text-px14 leading-px20 tracking-em001 mt-px6;
+					@apply lg2:min-w-px200;
 				}
 			}
 
@@ -651,10 +653,8 @@ $top--bar-height-tablet: rem-calc(106px);
 
 					.title-wrap {
 						@apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
-
-						@screen md {
-							@apply whitespace-nowrap text-px18 leading-px24 tracking-em001;
-						}
+						@apply md:whitespace-nowrap md:text-px18 md:leading-px24 md:tracking-em001;
+						@apply lg2:text-px16 lg2:font-semibold;
 					}
 				}
 			}
@@ -695,12 +695,11 @@ $top--bar-height-tablet: rem-calc(106px);
 	// Background blur and fill, for mobile/tablet
 	@screen lg-max {
 		&::before {
-			@apply fixed top-0 left-0 w-full h-full bg-white;
+			@apply fixed top-0 left-0 w-full h-full bg-white z-20;
 			@apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
 			content: '';
 			background-color: rgba(16, 16, 102, 0.2);
 			backdrop-filter: blur(4px);
-			z-index: var(--z-index-nav-blur);
 		}
 
 		&::after {
@@ -710,6 +709,13 @@ $top--bar-height-tablet: rem-calc(106px);
 			content: '';
 			z-index: var(--z-index-nav-white-bg);
 		}
+	}
+
+	// Underlay
+	.top-nav__underlay {
+		@apply absolute top-0 left-0 w-full h-full z-21;
+		@apply transition-all opacity-0 invisible duration-300 ease-out;
+		@apply lg2:hidden;
 	}
 
 	// Tier-2 submenu state, for mobile/tablet
@@ -748,7 +754,7 @@ $top--bar-height-tablet: rem-calc(106px);
 	.back-to-tier1 {
 		@apply transition-all opacity-0 invisible;
 		@apply flex items-center absolute top-px28 left-px24;
-		@apply font-bold text-px12 leading-px20 tracking-em001;
+		@apply font-bold text-px14 leading-px20 tracking-em001;
 
 		@screen lg2 {
 			@apply hidden;
@@ -804,7 +810,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 			// Chevron
 			> .menu-item > a::after {
-				@apply rotate-90;
+				@apply rotate-90 text-white text-opacity-44;
 			}
 
 			// Hover/Focus state
@@ -813,7 +819,7 @@ $top--bar-height-tablet: rem-calc(106px);
 				// Rotate chevron
 				> a::after {
 					@screen lg2 {
-						@apply -rotate-90;
+						@apply -rotate-90 text-opacity-100;
 					}
 				}
 			}
@@ -1097,6 +1103,10 @@ body.is-navigation-open {
 			&::after {
 				@apply translate-x-0;
 			}
+		}
+
+		.top-nav__underlay {
+			@apply lg-max:visible lg-max:opacity-100;
 		}
 	}
 

@@ -140,9 +140,16 @@ const resetNavState = () => {
 	$topNav.removeClass('tier-two-visible');
 	$currentActiveMenuItem.removeClass('active');
 }
+// Adds click-to-close for nav background blur
+const navBlur = () => {
+	const $navBlur = $(`<div class="top-nav__underlay"></div>`);
+	$navBlur.prependTo($topNav);
+	$navBlur.on('click', onBurgerClick);
+}
 
 $(isBodyOnTop); // On load
 $(isScrolling); // On load
+$(navBlur);
 // $body.addClass('is-not-scrolling');
 $(window).on('scroll', isBodyOnTop); // On scroll
 $(window).on('scroll', isScrolling); // On scroll

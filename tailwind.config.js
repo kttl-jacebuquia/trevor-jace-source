@@ -199,7 +199,8 @@ module.exports = {
 			minWidth: {
 				px50: px2rem(50),
 				px145: px2rem(145),
-				px190: px2rem(190),
+        px190: px2rem(190),
+				px200: px2rem(200),
 				px315: px2rem(315),
 				px319: px2rem(319),
 				px355: px2rem(355),
@@ -258,6 +259,7 @@ module.exports = {
 				px737: px2rem(737),
 			},
 			fontSize: {
+				px10: px2rem(10),
 				px12: px2rem(12),
 				px14: px2rem(14),
 				px16: px2rem(16),
@@ -333,6 +335,7 @@ module.exports = {
 				'1': '1',
 				'2': '2',
 				'-1': '-1',
+				21: 21,
 				30: 30,
 				31: 31
 			},
@@ -355,6 +358,7 @@ module.exports = {
 				px8: px2rem(8),
 				px9: px2rem(9),
 				px10: px2rem(10),
+				px11: px2rem(11),
 				px12: px2rem(12),
 				px14: px2rem(14),
 				px15: px2rem(15),
@@ -466,6 +470,7 @@ module.exports = {
 				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
 			}),
 			opacity: {
+				'44': '0.44',
 				'86': '0.86',
 			}
 		},
