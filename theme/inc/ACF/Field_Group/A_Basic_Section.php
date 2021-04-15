@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Util\Tools;
+
 /**
  * Basic
  */
@@ -154,16 +156,19 @@ abstract class A_Basic_Section extends A_Field_Group {
 	 * @param array $options
 	 */
 	public static function render_block_wrapper( $block, $content, array $options = [] ): void {
-		$wrap  = $options['wrap_cls'] ?? [];
-		$inner = $options['inner_cls'] ?? [];
-		$title = $options['title_cls'] ?? [];
-		$desc  = $options['desc_cls'] ?? [];
-		$btn   = $options['btn_cls'] ?? [];
+		$wrap       = $options['wrap_cls'] ?? [];
+		$inner      = $options['inner_cls'] ?? [];
+		$title_wrap = $options['title_wrap_cls'] ?? [];
+		$title      = $options['title_cls'] ?? [];
+		$desc       = $options['desc_cls'] ?? [];
+		$btn        = $options['btn_cls'] ?? [];
 
 		ob_start();
 		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner ) . '>';
+		echo '<div ' . Tools::flat_attr( array_filter( [ 'class' => implode( ' ', $title_wrap ) ] ) ) . '>';
 		static::render_block_part_title( $title );
 		static::render_block_part_desc( $desc );
+		echo '</div>';
 		echo $content;
 		static::render_block_part_buttons( $btn );
 		echo '</div>';

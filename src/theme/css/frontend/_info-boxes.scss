@@ -5,11 +5,11 @@
 	@apply w-full;
 
 	@screen md {
-		max-width: rem-calc(620px);
+	  max-width: rem-calc(620px);
 	}
 
 	@screen lg {
-		max-width: rem-calc(1028px);
+	  max-width: rem-calc(1028px);
 	}
   }
 
@@ -90,11 +90,11 @@
 		@apply col-span-3;
 
 		&.type-img {
-			.info-box-desc {
-				@screen xl {
-					max-width: rem-calc(249px);
-				}
+		  .info-box-desc {
+			@screen xl {
+			  max-width: rem-calc(249px);
 			}
+		  }
 		}
 	  }
 

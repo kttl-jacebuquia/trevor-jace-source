@@ -70,6 +70,8 @@ class Config {
 		$options['font']     = array_merge( static::option_walker( $theme['fontWeight'] ), static::option_walker( $theme['fontFamily'], '', 0 ) );
 		$options['leading']  = static::option_walker( $theme['lineHeight'] );
 		$options['tracking'] = static::option_walker( $theme['letterSpacing'] );
+		$options['w']        = static::option_walker( $theme['width'] );
+		$options['h']        = static::option_walker( $theme['height'] );
 
 		ksort( $options );
 

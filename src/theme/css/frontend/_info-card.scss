@@ -11,6 +11,7 @@
   @apply flex flex-col text-center;
   @apply py-32 md:py-20 lg:py-28 px-7 md:px-px88;
   @apply rounded-px10;
+  max-width: rem-calc(500px);
 
   &-inner {
 	@apply h-full w-full;
