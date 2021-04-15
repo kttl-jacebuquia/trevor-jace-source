@@ -36,6 +36,7 @@ class Hooks {
 	 */
 	public static function register_all() {
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'admin_init', [ self::class, 'admin_init' ], 10, 0 );
 
 		# Media
 		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], 10, 0 );
@@ -100,11 +101,36 @@ class Hooks {
 	}
 
 	/**
+	 * Fires as an admin screen or script is being initialized.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/admin_init/
+	 */
+	public static function admin_init(): void {
+		$current_screen = get_current_screen();
+		if ( TREVOR_ON_DEV ) {
+			add_action( 'enqueue_block_editor_assets', function () {
+				# Block Editor Styles
+				wp_enqueue_script(
+						self::NAME_PREFIX . 'theme-editor-main',
+						TREVOR_THEME_STATIC_URL . '/css/editor.js',
+						[ 'jquery' ],
+						$GLOBALS['trevor_theme_static_ver'],
+						true
+				);
+			}, 10, 0 );
+		} else {
+			add_editor_style( TREVOR_THEME_STATIC_URL . '/css/editor.css' );
+		}
+	}
+
+	/**
 	 * Fires when scripts and styles are enqueued.
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
 	 */
 	public static function wp_enqueue_scripts(): void {
+		wp_enqueue_script( 'jquery-ui-autocomplete' );
+
 		// FIXME: This should change only on deployments
 		$GLOBALS['trevor_theme_static_ver'] = WP_DEBUG ? uniqid( \TrevorWP\Theme\VERSION . '-' ) : \TrevorWP\Theme\VERSION;
 
@@ -125,13 +151,6 @@ class Hooks {
 				$GLOBALS['trevor_theme_static_ver'],
 				false
 		);
-
-		// Auto-complete test
-		// wp_enqueue_style( 'jquery-ui-theme', 'https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css' );
-		wp_enqueue_script( 'jquery-ui-autocomplete' );
-
-		// wp_enqueue_script( 'algoliasearch', 'https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js' );
-		// wp_enqueue_script( 'autocomplete.js', 'https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js' );
 
 		# Frontend style
 		if ( TREVOR_ON_DEV ) {
@@ -197,6 +216,7 @@ class Hooks {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'html5' );
+		add_theme_support( 'editor-styles' );
 		add_theme_support( 'admin-bar', [ 'callback' => '__return_false' ] );
 
 		register_nav_menus( [

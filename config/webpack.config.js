@@ -115,12 +115,14 @@ module.exports = function (webpackEnv) {
 		// - Theme
 		entry['theme/css/admin'] = paths.themeCSSDevAdmin;
 		entry['theme/css/frontend'] = paths.themeCSSDevFrontend;
+		entry['theme/css/editor'] = paths.themeCSSDevEditor;
 	} else {
 		// - Plugin
 		entry['plugin/css/main'] = paths.pluginCSSMain;
 		// - Theme
 		entry['theme/css/admin'] = paths.themeCSSAdmin;
 		entry['theme/css/frontend'] = paths.themeCSSFrontend;
+		entry['theme/css/editor'] = paths.themeCSSEditor;
 	}
 
 	return {

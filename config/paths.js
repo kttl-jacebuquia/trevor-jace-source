@@ -27,5 +27,7 @@ module.exports = {
     themeCSSDevFrontend: resolveApp('src/theme/css-dev/frontend.js'),
     themeCSSAdmin: resolveApp('src/theme/css/admin/main.scss'),
     themeCSSDevAdmin: resolveApp('src/theme/css-dev/admin.js'),
+    themeCSSEditor: resolveApp('src/theme/css/editor/main.scss'),
+    themeCSSDevEditor: resolveApp('src/theme/css-dev/editor.js'),
 	themePHP: resolveApp('theme'),
 };

@@ -1,0 +1,21 @@
+$base-border-clr: #CCCCCC;
+
+.wp-block.block-editor-default-block-appender {
+  border: 1px dashed darken($base-border-clr, 25%);
+  padding: 2px;
+}
+
+.wp-block[data-type^="acf/trvr-"],
+{
+  border: 1px dashed $base-border-clr;
+  padding: 2px;
+
+  & & {
+	border-color: lighten($base-border-clr, 10%);
+  }
+
+  &.is-selected {
+	border: 2px solid darken($base-border-clr, 10%);
+	padding: 1px;
+  }
+}

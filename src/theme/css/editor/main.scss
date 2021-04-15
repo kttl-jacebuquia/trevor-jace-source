@@ -1,0 +1,17 @@
+@import "./indicators";
+
+// Icon Fonts
+@import "../icon-font/trevor-ti";
+@import "../icon-font/vars";
+
+// Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../frontend/fonts";
+@import "../frontend/headings";
+@import "../frontend/button";
+@import "../frontend/info-boxes";
+@import "../frontend/info-card";
+@import "../frontend/page-btn";
