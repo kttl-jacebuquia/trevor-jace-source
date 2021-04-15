@@ -94,7 +94,11 @@ abstract class A_Options_Page extends A_Field_Group {
 	 * @return mixed
 	 */
 	public static function get_option( $field_name ) {
-		$ss = static::gen_field_key( $field_name );
-		return get_field($ss , 'option' );
+		return get_field( static::gen_field_key( $field_name ), 'option' );
+	}
+
+	/** @inheritdoc */
+	public static function have_rows( string $field_name, $post_id = 'option' ): bool {
+		return parent::have_rows( $field_name, $post_id );
 	}
 }

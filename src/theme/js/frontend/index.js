@@ -5,6 +5,7 @@ import * as vendors from './vendors';
 import * as matchMedia from './match-media';
 import './nav';
 import singlePages from './single-pages';
+import {infoBoxesCarousel} from "./features";
 
 Object.assign(
 	window.trevorWP = window.trevorWP || {},
@@ -13,6 +14,7 @@ Object.assign(
 
 const $body = $('body');
 const isSingle = $body.hasClass('single');
+const isPage = $body.hasClass('page');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
 const isDonate = !isSingle && $body.hasClass('is-donate');
@@ -53,6 +55,8 @@ if (isSingle) {
 
 	// Open social media sharing pages in a popup
 	features.sharingPopUp($('.post-social-share-btn'));
+} else if (isPage) {
+	infoBoxesCarousel();
 } else {
 	singlePages(); // Handle single page scripts
 }
@@ -187,13 +191,13 @@ $(() => {
 		inputSearchField.focus();
 	});
 
-	function moveCursorToEnd (el) {
+	function moveCursorToEnd(el) {
 		setTimeout(() => {
 			if (el.innerText && document.createRange) {
 				let selection = document.getSelection();
 				let range = document.createRange();
 
-				range.setStart(el.childNodes[0],el.innerText.length);
+				range.setStart(el.childNodes[0], el.innerText.length);
 				range.collapse(true);
 				selection.removeAllRanges();
 				selection.addRange(range);
@@ -232,7 +236,7 @@ $(() => {
 	}
 });
 
-if( isPhoneField ) {
+if (isPhoneField) {
 	features.phoneFormat($(".phone-number-format"));
 }
 

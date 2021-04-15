@@ -2,6 +2,7 @@
 
 use TrevorWP\Theme\ACF\Options_Page\Page_Circulation_Options;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Helper\Circulation_Card;
 use TrevorWP\Util\Tools;
 
 class Page_Circulation extends A_Basic_Section implements I_Block {
@@ -21,7 +22,9 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 								'label'    => 'Cards',
 								'type'     => 'select',
 								'multiple' => true,
-								'choices'  => Tools::pluck( Page_Circulation_Options::get_cards(), Page_Circulation_Cards::FIELD_CARD_KEY, [], true ),
+								'choices'  => array_map( function ( $card ) {
+									return $card['name'];
+								}, Circulation_Card::SETTINGS ),
 						],
 				],
 		);
@@ -42,23 +45,21 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 		$val  = new Field_Val_Getter( static::class, $post_id, $data );
 
 		# Prepare cards
-		$card_ids  = (array) $val->get( static::FIELD_CARDS );
-		$all_cards = Page_Circulation_Options::get_cards();
-		$cards     = array_intersect_key( $all_cards, array_flip( $card_ids ) );
-		$cards     = array_slice( $cards, 0, 2 );
+		$cards = array_slice( (array) $val->get( static::FIELD_CARDS ), 0, 2 );
 
 		// TODO: Implement render_block() method.
 
 		ob_start(); ?>
-		<div>
+		<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 			<?php foreach ( $cards as $card ): ?>
+				<?= call_user_func( [ Circulation_Card::class, "render_{$card}" ] ) ?>
 			<?php endforeach; ?>
 		</div>
 		<?php static::render_block_wrapper( $block, ob_get_clean(), [
-				'wrap_cls'  => [ 'page-section page-circulation bg-white text-teal-dark' ],
+				'wrap_cls'  => [ 'page-section page-circulation bg-white text-teal-dark', 'pt-20 pb-24 lg:pt-24' ],
+				'inner_cls' => [ 'container mx-auto' ],
 				'title_cls' => [ 'page-sub-title centered' ],
 				'desc_cls'  => [ 'page-sub-title-desc centered' ],
-				'inner_cls' => [ 'container mx-auto' ]
 		] );
 	}
 }

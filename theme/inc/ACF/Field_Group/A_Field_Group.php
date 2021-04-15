@@ -258,4 +258,30 @@ abstract class A_Field_Group {
 			}
 		}
 	}
+
+	/**
+	 * @param string $field_name
+	 * @param false $post_id
+	 *
+	 * @return bool
+	 */
+	public static function have_rows( string $field_name, $post_id = false ): bool {
+		return have_rows( static::gen_field_key( $field_name ), $post_id );
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function get_all_fields(): array {
+		$constants = [];
+
+		# Collect Meta Keys
+		foreach ( ( new \ReflectionClass( static::class ) )->getConstants() as $constant => $key ) {
+			if ( strpos( $constant, 'FIELD_' ) === 0 ) {
+				$constants[ $constant ] = $key;
+			}
+		}
+
+		return $constants;
+	}
 }
