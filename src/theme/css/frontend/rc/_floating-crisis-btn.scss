@@ -18,6 +18,8 @@
 
 	.floating-crisis-btn {
 	  @apply text-px20 leading-px20 tracking-px05;
+    // lg2
+    @apply lg2:transition-all duration-300 lg2:hover:bg-orange-light lg2:hover:border-orange-light;
 	}
   }
 
