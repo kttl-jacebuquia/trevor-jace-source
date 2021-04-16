@@ -538,7 +538,7 @@ $top--bar-height-tablet: rem-calc(106px);
 			// md
 			@apply md:text-px26 md:leading-px32 md:tracking-em001;
 			// lg2
-			@apply pointer-events-none;
+			@apply lg2:pointer-events-none;
 
 			// Chevron icon
 			&::after {
