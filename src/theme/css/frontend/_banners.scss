@@ -4,10 +4,18 @@
 	&__container {
 		@apply container mx-auto relative;
 		@apply flex flex-col md:flex-row justify-start;
-		@apply py-px20 md:items-center;
+		@apply py-px20 md:items-center max-w-none;
 
-		@screen xl {
-			@apply pl-20;
+		@screen md {
+			@apply max-w-px768;
+		}
+
+		@screen lg {
+			@apply max-w-px1024;
+		}
+
+		@screen lg2 {
+			@apply pl-px50 max-w-none;
 		}
 	}
 

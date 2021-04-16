@@ -831,6 +831,11 @@ $top--bar-height-tablet: rem-calc(106px);
 			> .menu-item > a {
 				@apply p-0 text-white;
 			}
+
+			// Tier 1 submenu
+			> .menu-item > .sub-menu {
+				@apply pt-px24 pb-px32;
+			}
 		}
 	}
 
