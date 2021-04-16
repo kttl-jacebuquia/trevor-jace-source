@@ -57,6 +57,7 @@ module.exports = {
 			},
 			orange: {
 				DEFAULT: '#FF5A3D',
+				light: '#FF5A3D', //fixme?
 			},
 			indigo: {
 				DEFAULT: '#101066',
@@ -147,10 +148,6 @@ module.exports = {
 					'2xl': px2rem(100),
 				},
 			},
-			borderWidth: {
-				px1: px2rem(1),
-				px2: px2rem(2),
-			},
 			borderRadius: {
 				px10: px2rem(10)
 			},
@@ -199,7 +196,7 @@ module.exports = {
 			minWidth: {
 				px50: px2rem(50),
 				px145: px2rem(145),
-        px190: px2rem(190),
+				px190: px2rem(190),
 				px200: px2rem(200),
 				px315: px2rem(315),
 				px319: px2rem(319),

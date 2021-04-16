@@ -7,11 +7,11 @@
 		@apply py-px20 md:items-center max-w-none;
 
 		@screen md {
-			@apply max-w-px768;
+			@apply max-w-screen-md;
 		}
 
 		@screen lg {
-			@apply max-w-px1024;
+			@apply max-w-screen-lg;
 		}
 
 		@screen lg2 {
