@@ -1,5 +1,9 @@
 .is-site-search {
 
+	h3 {
+		@apply font-semibold;
+	}
+
 	.top-nav-inner {
 		@apply text-indigo;
 
@@ -72,7 +76,9 @@
 			@apply absolute right-0 -top-px50 md:-right-px30 md:top-0;
 		}
 
-
+		.eyebrow {
+			@apply lg:text-px14;
+		}
 
 		time {
 			border-left: 1px solid rgba(16, 16, 102, 0.16);
