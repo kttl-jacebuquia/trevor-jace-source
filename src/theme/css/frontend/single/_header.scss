@@ -370,7 +370,7 @@
 
 	/* Split */
 	&.type-split {
-	  @include neg-img-btm-margin(rem-calc(-130px));
+	  @include neg-img-btm-margin(rem-calc(-90px));
 
 	  .thumbnail-wrap {
 		max-height: rem-calc(647px);
@@ -423,5 +423,16 @@
 	// Overflow left
 	margin-left: theme('header.overflow.xl');
 	width: calc(100% - theme('header.overflow.xl'));
+  }
+
+  @screen 2xl {
+	  /* Split */
+	&.type-split {
+		@include neg-img-btm-margin(rem-calc(-93px));
+  
+		.thumbnail-wrap {
+		  max-height: rem-calc(650px);
+		}
+	  }
   }
 }
