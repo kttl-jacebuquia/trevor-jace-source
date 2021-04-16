@@ -17,6 +17,10 @@ class Tools {
 			return null;
 		}
 
+		if ( is_page() ) {
+			return null;
+		}
+
 		$is_rc = Is::rc();
 		if ( $is_rc ) {
 			$type = 'rc';

@@ -10,7 +10,7 @@ function optionWalker(root, prefix = '', walk = 2) {
 	Object.keys(root).forEach(key => {
 		const val = root[key];
 		if ('object' === typeof val && walk > 0) {
-			return optionWalker(val, prefix + ((prefix && key) ? "-" : '') + key, walk - 1)
+			return Object.assign(out, optionWalker(val, prefix + ((prefix && key) ? "-" : '') + key, walk - 1));
 		}
 
 		if ('DEFAULT' === key) {
@@ -40,7 +40,9 @@ options['leading'] = optionWalker(theme.lineHeight);
 options['tracking'] = optionWalker(theme.letterSpacing);
 options['w'] = optionWalker(theme.width);
 options['h'] = optionWalker(theme.height);
-
+options['rounded'] = optionWalker(theme.borderRadius);
+options['max-w'] = optionWalker(theme.maxWidth);
+options['container'] = {'': ''};
 
 const fileContent = [];
 

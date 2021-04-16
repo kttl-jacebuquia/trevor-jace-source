@@ -43,7 +43,7 @@ class Config {
 
 			$key = $prefix . ( ( $prefix && $key ) ? "-" : '' ) . $key;
 
-			$collection[ $key ] = $key . ': ' . ( is_scalar( $val ) ? $val : json_encode( $val ) );
+			$collection[ $key ] = ( $key ? "{$key}: " : '' ) . ( is_scalar( $val ) ? $val : json_encode( $val ) );
 		}
 
 		return $collection;
@@ -66,12 +66,15 @@ class Config {
 
 		$options['bg'] = static::option_walker( $theme['backgroundColor'] );
 
-		$options['text']     = array_merge( static::option_walker( $theme['textColor'] ), static::option_walker( $theme['fontSize'] ) );
-		$options['font']     = array_merge( static::option_walker( $theme['fontWeight'] ), static::option_walker( $theme['fontFamily'], '', 0 ) );
-		$options['leading']  = static::option_walker( $theme['lineHeight'] );
-		$options['tracking'] = static::option_walker( $theme['letterSpacing'] );
-		$options['w']        = static::option_walker( $theme['width'] );
-		$options['h']        = static::option_walker( $theme['height'] );
+		$options['text']      = array_merge( static::option_walker( $theme['textColor'] ), static::option_walker( $theme['fontSize'] ) );
+		$options['font']      = array_merge( static::option_walker( $theme['fontWeight'] ), static::option_walker( $theme['fontFamily'], '', 0 ) );
+		$options['leading']   = static::option_walker( $theme['lineHeight'] );
+		$options['tracking']  = static::option_walker( $theme['letterSpacing'] );
+		$options['w']         = static::option_walker( $theme['width'] );
+		$options['h']         = static::option_walker( $theme['height'] );
+		$options['rounded']   = static::option_walker( $theme['borderRadius'] );
+		$options['max-w']     = static::option_walker( $theme['maxWidth'] );
+		$options['container'] = static::option_walker( [ '' => 'Container' ] );
 
 		ksort( $options );
 

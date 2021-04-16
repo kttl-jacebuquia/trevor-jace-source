@@ -241,7 +241,8 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 								<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_IMG_ATTR ), $cls_box_img ) ?>>
 									<?= wp_get_attachment_image( $box[ static::FIELD_BOX_IMG ], 'medium' ) ?>
 								</div>
-							<?php elseif ( $type != static::BOX_TYPE_IMG ): ?>
+							<?php endif; ?>
+							<?php if ( $type != static::BOX_TYPE_IMG ): ?>
 								<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_TEXT_ATTR ), $cls_box_text ) ?>>
 									<?= $box[ static::FIELD_BOX_TEXT ] ?>
 								</div>
