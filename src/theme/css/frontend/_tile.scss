@@ -1,6 +1,6 @@
 // Tile Grid
 .tile-grid {
-  @apply pt-20 pb-px60 w-full;
+  @apply py-0 w-full;
 
 	.post-type-archive-trevor_gi_bill & {
 		@apply py-0;
@@ -21,71 +21,105 @@
 	}
 
   &-inner {
-	@apply mx-auto text-center;
+		@apply mx-auto text-center;
   }
 
   &-header {
-	@apply mb-px50;
+		@apply mb-px50 px-0 lg2:mb-px4;
   }
 
   &-title {
-	@apply font-semibold text-px32 leading-px42 mb-3.5 tracking-em_001;
+		@apply font-semibold text-px32 leading-px42 mb-3.5 tracking-em_001;
   }
 
   &-desc {
-	@apply text-px18 leading-px26;
-	max-width: rem-calc(822px);
+		@apply text-px18 leading-px26;
+		max-width: rem-calc(822px);
   }
 
   &-container {
-	@apply grid grid-cols-1 gap-y-7;
+		@apply grid grid-cols-1 gap-y-7 auto-rows-fr;
+
+		.staff {
+			@apply shadow-darkGreen h-auto p-0;
+
+			.post-thumbnail-wrap {
+				height: rem-calc(180px);
+				@apply flex rounded-t-px10;
+			}
+
+			img {
+				max-height: rem-calc(80px);
+				@apply w-auto m-auto rounded-t-px10;
+			}
+
+			&.with-thumbnail {
+				img {
+					@apply w-full h-full max-h-none object-cover object-center;
+				}
+			}
+
+			.information {
+				@apply rounded-b-px10;
+				&__pronoun {
+					border-left-width: 1px;
+					@apply border-blue_green border-opacity-40;
+				}
+			}
+		}
   }
 
   &.sm-accordion {
-	.tile-grid-inner {
-	  @apply px-0;
-	}
-
-	.tile-grid-header {
-	  @apply container;
-	}
-
-	.tile-grid-container {
-	  @apply text-left gap-y-0 bg-white md:grid md:grid-cols-2 md:gap-7 md:bg-transparent;
-		@apply justify-center;
-
-		@screen lg {
-			grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
+		.tile-grid-inner {
+			@apply px-0;
 		}
 
-		@screen xl {
-			grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
+		.tile-grid-header {
+			@apply container;
 		}
-	}
+
+		.tile-grid-container {
+			@apply text-left gap-y-0 bg-white md:grid md:grid-cols-2 md:gap-7 md:bg-transparent;
+			@apply justify-center;
+
+			@screen lg {
+				grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
+			}
+
+			@screen xl {
+				grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
+			}
+		}
   }
 
   @screen md {
-	.tile-grid-inner {
-	  @apply px-0;
-	}
+		@apply py-20;
 
-	&-header {
-	  @apply mb-10;
-	}
+		.tile-grid-inner {
+			@apply px-0;
+		}
 
-	&-title {
-	  @apply mx-40;
-	}
+		&-header {
+			@apply mb-10;
+		}
 
-	&-desc {
-	  @apply w-3/4 mx-auto;
-	}
+		&-title {
+			@apply mx-40 max-w-none;
+		}
 
-	&-container {
-		@apply justify-center;
-		@apply gap-px28;
-		grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
-	}
+		&-desc {
+			@apply w-3/4 mx-auto;
+		}
+
+		&-inner {
+			@apply px-px50;
+		}
+
+		&-container {
+			@apply justify-center;
+			@apply gap-px28;
+			grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+		}
   }
 
   @screen lg {
@@ -103,6 +137,10 @@
 	  @apply text-px26 leading-px36;
 	}
 
+	&-inner {
+		@apply px-px100;
+	}
+
 	&-container {
 		@apply justify-center;
 		grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
@@ -110,13 +148,47 @@
   }
 
 	@screen lg2 {
-		grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
-		@apply justify-center;
+		&-container {
+			@apply justify-center;
+
+
+			&.desktop-autofit-columns {
+				grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(355px)));
+			}
+
+			&.desktop-3-columns {
+				grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
+			}
+
+			&.desktop-4-columns {
+				grid-template-columns: repeat(4, minmax(0, rem-calc(355px)));
+			}
+		}
 	}
 
 	@screen xl {
 		&-container {
-			grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
+			&.desktop-autofit-columns {
+				grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(395px)));
+			}
+
+			&.desktop-3-columns {
+				grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
+
+				.staff {
+					.post-thumbnail-wrap {
+						height: rem-calc(245px);
+					}
+				}
+			}
+
+			&.desktop-4-columns {
+				.staff {
+					.post-thumbnail-wrap {
+						height: rem-calc(200px);
+					}
+				}
+			}
 		}
 	}
 }
@@ -126,7 +198,7 @@
   @apply mx-auto px-7 pt-7 pb-16 w-full;
   @apply text-teal-dark text-left;
   max-width: theme('postCard.width.DEFAULT');
-  height: rem-calc(370px);
+	@apply h-auto;
 
   [data-whatintent='mouse'] &:hover {
 	@apply bg-gray-light transition-colors;
@@ -171,10 +243,17 @@
 	}
 
 	&.product-card {
-		@apply shadow-darkGreen;
+		@apply shadow-darkGreen p-0;
 
 		.tile-image {
 			@apply h-60 w-full max-w-none rounded-t-px10;
+		}
+
+		.tile-inner {
+			@apply px-6 pb-12 xl:pb-14;
+			@screen md {
+				padding-bottom: rem-calc(52px);
+			}
 		}
 	}
 
@@ -223,7 +302,6 @@
 
   @screen lg {
 	max-width: theme('postCard.width.lg');
-	height: rem-calc(402px);
 
 	&-title-top {
 	  @apply text-px18 leading-px24 mb-3;

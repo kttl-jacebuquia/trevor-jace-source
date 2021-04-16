@@ -21,11 +21,12 @@ class Page_Header {
 				'desc',
 				'cta_txt',
 				'cta_url',
+				'styles',
 		], null ), [], $options );
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo ! empty( $options['bg'] ) ? "bg-{$options['bg']}" : ''; ?>">
+		<div class="header-container w-full <?php echo implode( ' ', $options['styles'] ) ?>">
 			<div class="hero page-header type-text h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
@@ -76,10 +77,11 @@ class Page_Header {
 				'img_id',
 				'cta_txt',
 				'cta_url',
+				'styles',
 		], null ), [], $options );
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo ! empty( $options['bg'] ) ? "bg-{$options['bg']}" : ''; ?>">
+		<div class="header-container w-full <?php echo implode( ' ', $options['styles'] ) ?>">
 			<div class="page-header type-split-img">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -167,11 +169,12 @@ class Page_Header {
 				'cta_txt',
 				'cta_url',
 				'carousel_data',
-				'swiper'
+				'swiper',
+				'styles',
 		], null ), [], $options );
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo ! empty( $options['bg'] ) ? "bg-{$options['bg']}" : ''; ?>">
+		<div class="header-container w-full <?php echo implode( ' ', $options['styles'] ) ?>">
 			<div class="page-header type-split-carousel">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -209,10 +212,11 @@ class Page_Header {
 				'title',
 				'desc',
 				'img_id',
+				'styles',
 		], null ), [], $options );
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo ! empty( $options['bg'] ) ? "bg-{$options['bg']}" : ''; ?>">
+		<div class="header-container w-full horizontal-header <?php echo implode( ' ', $options['styles'] ) ?>">
 			<div class="page-header type-horizontal">
 				<div class="page-header-inner">
 					<?php if ( ! empty( $options['title'] ) || ! empty( $options['desc'] ) ) { ?>

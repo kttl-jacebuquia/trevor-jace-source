@@ -244,6 +244,7 @@ module.exports = {
 				px138: px2rem(138),
 				px140: px2rem(140),
 				px160: px2rem(160),
+				px200: px2rem(200),
 				px240: px2rem(240),
 				px302: px2rem(302),
 				px375: px2rem(375),

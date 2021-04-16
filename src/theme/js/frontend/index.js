@@ -23,6 +23,7 @@ const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
 const bigImageCarousels = $('.big-img-carousel.body-carousel');
 const isPhoneField = $(".phone-number-format") ? true : false;
+const $showAllTilesBtn = $(".tile-grid-container + .view-all-container .view-all-cta");
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -34,6 +35,8 @@ features.ajaxPagination();
 
 // Sticky Anchor
 features.stickyAnchor();
+
+features.showAllTiles($showAllTilesBtn);
 
 
 // Single (Detail) Page

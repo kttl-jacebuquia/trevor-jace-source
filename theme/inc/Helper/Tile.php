@@ -31,14 +31,14 @@ class Tile {
 			] );
 		}
 
-		$data = [
-				'title'   => $post->post_title,
-				'desc'    => $post->post_excerpt,
-				'img'     => $img,
-				'cta_txt' => 'Read More',
-				'cta_url' => get_permalink( $post )
-		];
 
+		$data = [
+				'title'     => $post->post_title,
+				'desc'      => $post->post_excerpt,
+				'img'       => $img,
+				'cta_txt'   => 'Read More',
+				'cta_url'   => get_permalink( $post ),
+		];
 
 		if ( $post->post_type == CPT\Get_Involved\Bill::POST_TYPE ) {
 			$data['title_top'] = \TrevorWP\Meta\Post::get_bill_id( $post->ID );
@@ -55,11 +55,14 @@ class Tile {
 		if ( $post->post_type == CPT\Donate\Prod_Partner::POST_TYPE || $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE ) {
 			$data['cta_txt'] = 'Check It Out';
 			$data['cta_url'] = Meta\Post::get_store_url( $post->ID ) | Meta\Post::get_item_url( $post->ID );
+			$options['class'][] = 'product-card';
+			$options['card_type'] = 'product';
 		}
 
 		if ( in_array( $post->post_type, [ CPT\Get_Involved\Bill::POST_TYPE, CPT\Get_Involved\Letter::POST_TYPE ] ) ) {
 			$id            = uniqid( 'post-' );
 			$options['id'] = $id;
+			$options['class'][] = 'bill-letter-card';
 
 			add_action( 'wp_footer', function () use ( $id, $post ) {
 				echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Get_Involved\Bill::render_modal( $post ), [
@@ -137,15 +140,22 @@ class Tile {
 			return self::accordion( $data, $key, $options );
 		}
 
+
 		$options = array_merge( array_fill_keys( [
 				'class',
-				'attr'
+				'attr',
+				'card_type',
+				'hidden',
 		], null ), $options );
 
 		# class
 		$cls = [ 'tile', 'relative' ];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
+		}
+
+		if ( $options['hidden'] ) {
+			$cls[] = 'hidden';
 		}
 
 		$attr          = (array) $options['attr'];
@@ -161,11 +171,11 @@ class Tile {
 				<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
 
-			<?php if ( in_array( 'product-card', $cls ) && ! empty ( $data['img'] ) ) {?>
+			<?php if ( $options['card_type'] === 'product' && ! empty ( $data['img'] ) ) {?>
 				<?= $data['img'] ?>
 			<?php } ?>
 			<div class="tile-inner">
-				<?php if ( ! empty ( $data['img'] ) && ! in_array( 'product-card', $cls ) ) { ?>
+				<?php if ( ! empty ( $data['img'] ) && $options['card_type'] !== 'product' ) { ?>
 					<?= $data['img'] ?>
 				<?php } ?>
 				<?php if ( ! empty( $data['title_top'] ) ) { ?>
@@ -197,39 +207,81 @@ class Tile {
 	 * @return string
 	 */
 	public static function staff ( \WP_Post $post, int $key, array $options = [] ) :string {
-		$_class = [ 'card-post', 'staff', ];
+		$_class = [ 'tile', 'staff', 'relative', ];
 		$post = get_post( $post );
 		$name = get_the_title( $post );
 		$pronoun = Meta\Post::get_pronounces( $post->ID );
-		$group = array_pop( get_the_terms( $post, CPT\Team::TAXONOMY_GROUP ) )->name;
+		$group_terms = get_the_terms( $post, CPT\Team::TAXONOMY_GROUP );
+		$group = array_pop( $group_terms )->name;
 		$thumbnail_variants = [
 			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
 			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
 			self::_get_thumb_var( Thumbnail::TYPE_SQUARE ),
 		];
 		$thumbnail = Thumbnail::post( $post, $thumbnail_variants );
+		$is_placeholder_thumbnail = false;
+
+		$options = array_merge( array_fill_keys( [
+			'placeholder_image',
+			'class',
+			'hidden',
+		], [] ), $options );
+
+
 
 		if ( empty( $thumbnail ) ) {
 			$_class[] = 'placeholder-thumbnail';
-			$placeholder_img_id = Single_Page\Team::get_val( Single_Page\Team::SETTING_GENERAL_PLACEHOLDER_IMG );
+			$placeholder_img_id = $options[ 'placeholder_image' ];
 			$thumbnail = wp_get_attachment_image( $placeholder_img_id );
+			$is_placeholder_thumbnail = true;
 		} else {
 			$_class[] = 'with-thumbnail';
 		}
 
+		// Merge all HTML classes
+		$_class = array_merge( $_class, $options[ 'class' ] );
+
+		if ( $options['hidden'] ) {
+			$_class[] = 'hidden';
+		}
+
+		/**
+		 * @todo: use AJAX
+		 */
+		$id = \uniqid( 'team-member-' );
+		add_action( 'wp_footer', function () use ( $id, $post, $thumbnail, $is_placeholder_thumbnail ) {
+
+			echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Team::render_modal( $post,  compact( 'thumbnail', 'is_placeholder_thumbnail', ) ), [
+					'target' => "#{$id} a",
+					'id'     => "{$id}-content"
+			] ) )->render();
+		}, 10, 0 );
+
+		$attr          = (array) $options['attr'];
+		$attr['class'] = implode( ' ', $_class );
+		$attr['id'] = $id;
+
 		ob_start();
 	?>
-		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
-			<div class="post-thumbnail-wrap bg-gray-light">
-				<?php echo $thumbnail; ?>
-			</div>
-			<div class="information text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px35">
-				<p class="information__name font-semibold text-px18 leading-px26 xl:text-px22 xl:leading-px32"><?php echo esc_html( $name ); ?></p>
-				<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
-					<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
-					<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
+		<article <?php echo Tools::flat_attr( $attr ); ?>>
+			<a href="<?php echo get_permalink( $post )  ?>">
+				<div class="post-thumbnail-wrap bg-gray-light">
+					<?php echo $thumbnail; ?>
 				</div>
-			</div>
+				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px35">
+					<p class="information__name font-semibold text-px18 leading-px26 xl:text-px22 xl:leading-px32 <?php echo ( strtolower( $group ) === 'founder' ) ? 'text-center' : '' ?>">
+						<?php echo esc_html( $name ); ?>
+					</p>
+					<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
+						<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
+							<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
+						<?php } ?>
+						<?php if ( ! empty( $pronoun ) ) { ?>
+							<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
+						<?php } ?>
+					</div>
+				</div>
+			</a>
 		</article>
 	<?php
 		return ob_get_clean();

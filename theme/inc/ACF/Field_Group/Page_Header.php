@@ -3,12 +3,15 @@
 use TrevorWP\Exception;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper;
+use TrevorWP\Theme\ACF\Field;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TYPE = 'header_type';
 	const FIELD_TITLE_TOP = 'title_top';
 	const FIELD_TITLE_TOP_ATTR = 'title_top_attr';
 	const FIELD_CAROUSEL = 'carousel';
+	const FIELD_BG_CLR = 'bg_clr';
+	const FIELD_TEXT_CLR = 'text_clr';
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
@@ -16,6 +19,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$title_top      = static::gen_key( static::FIELD_TITLE_TOP );
 		$title_top_attr = static::gen_key( static::FIELD_TITLE_TOP_ATTR );
 		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
+		$text_clr       = static::gen_field_key( static::FIELD_TEXT_CLR );
+		$bg_clr         = static::gen_field_key( static::FIELD_BG_CLR );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -57,25 +62,40 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					],
 				] ),
 			],
-			parent::_get_fields(), [
-			static::FIELD_CAROUSEL => Carousel_Data::clone( [
-				'key'               => $carousel,
-				'name'              => static::FIELD_CAROUSEL,
-				'label'             => 'Carousel',
-				'prefix_label'      => 1,
-				'display'           => 'group',
-				'layout'            => 'row',
-				'conditional_logic' => [
-					[
+			parent::_get_fields(),
+			[
+				static::FIELD_CAROUSEL => Carousel_Data::clone( [
+					'key'               => $carousel,
+					'name'              => static::FIELD_CAROUSEL,
+					'label'             => 'Carousel',
+					'prefix_label'      => 1,
+					'display'           => 'group',
+					'layout'            => 'row',
+					'conditional_logic' => [
 						[
-							'field'    => $type,
-							'operator' => '==',
-							'value'    => 'split_carousel',
+							[
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'split_carousel',
+							],
 						],
 					],
-				],
-			] )
-		] );
+				] )
+			],
+			static::_gen_tab_field( 'Styling' ),
+			[
+				static::FIELD_TEXT_CLR      =>	Field\Color::gen_args(
+					$text_clr,
+					static::FIELD_TEXT_CLR,
+					[ 'label'	=>	'Text Color',	'default'	=>	'teal-dark', ]
+				),
+				static::FIELD_BG_CLR        =>	Field\Color::gen_args(
+					$bg_clr,
+					static::FIELD_BG_CLR,
+					[ 'label'	=>	'BG Color',	'default' =>	'white', ]
+				),
+			]
+		);
 
 		$return[ static::FIELD_TITLE ]['instructions'] = 'Leave empty to use Post`s title.';
 
@@ -108,6 +128,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$val = new Field_Val_Getter( static::class, $post, $data );
 
 		$type = $val->get( static::FIELD_TYPE );
+		$wrap_cls	=	[];
 
 		# Check renderer
 		if ( ! ( new \ReflectionClass( Helper\Page_Header::class ) )->hasMethod( $type ) ) {
@@ -119,6 +140,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			'title'     => $val->get( static::FIELD_TITLE ) ?: get_the_title( $post ), // fallback to post's title
 			'desc'      => $val->get( static::FIELD_DESC ),
 		];
+
+		$args[ 'styles' ]	= [];
+		# Text color
+		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
+			$args[ 'styles' ][] = "text-{$txt_color}";
+		}
+
+		# BG Color
+		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
+			$args[ 'styles' ][] = "bg-{$bg_color}";
+		}
 
 		# Buttons
 		$buttons = $val->get( static::FIELD_BUTTONS );

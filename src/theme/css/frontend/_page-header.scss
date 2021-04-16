@@ -2,6 +2,20 @@
 	--neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
 	padding-top: var(--neg-top-margin);
 	margin-top: calc(-1 * var(--neg-top-margin));
+
+	&.horizontal-header + main > div:first-child {
+		@screen md {
+			padding-top: rem-calc(165px);
+		}
+
+		@screen lg2 {
+			padding-top: rem-calc(500px);
+		}
+
+		@screen xl {
+			padding-top: rem-calc(409px);
+		}
+	}
 }
 
 .page-header {
@@ -13,7 +27,7 @@
   }
 
   &-content-wrap {
-	@apply text-white text-center;
+	@apply text-center;
 	@apply pb-2;
 	@apply z-1;
   }
@@ -23,7 +37,6 @@
   }
 
   &-title {
-	@apply text-white;
 
 	tilt {
 		@apply inline-block;
@@ -544,11 +557,15 @@
 			@screen md {
 				@apply w-full ml-0 z-10;
 
-				margin-bottom: rem-calc(-142px);
+				margin-bottom: rem-calc(-85px);
 			}
 
 			@screen lg2 {
 				margin-bottom: rem-calc(-403px);
+			}
+
+			@screen xl {
+				margin-bottom: rem-calc(-290px);
 			}
 
 			img {

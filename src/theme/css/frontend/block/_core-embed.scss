@@ -1,0 +1,26 @@
+.wp-block-embed {
+
+	&-youtube {
+		@apply mx-auto mt-px40 md:mt-px50 xl:mt-px60;
+
+		@screen lg {
+			max-width: 817px / 1225px * 100%;
+		}
+	}
+
+	&-youtube &__wrapper {
+		padding-top: 204px / 319px * 100%;
+
+		@screen md {
+			padding-top: 409px / 668px * 100%;
+		}
+
+		@screen xl {
+			padding-top: 500px / 817px * 100%;
+		}
+
+		iframe {
+			@apply w-full h-full absolute top-0 left-0;
+		}
+	}
+}

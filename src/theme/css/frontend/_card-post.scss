@@ -80,50 +80,17 @@
 		}
 	}
 
-	&.staff {
-		@apply shadow-darkGreen;
-		height: rem-calc(280px);
+	// &.staff {
+	// 	@apply shadow-darkGreen;
+	// 	height: rem-calc(280px);
 
-		@screen xl {
-			height: rem-calc(322px);
-		}
+	// 	@screen xl {
+	// 		// height: rem-calc(322px);
+	// 		height: auto;
+	// 	}
 
-		&.with-thumbnail {
-			.post-thumbnail-wrap {
 
-				img {
-					@apply max-w-full max-h-full;
-				}
-			}
-		}
-
-		&.placeholder-thumbnail {
-			.post-thumbnail-wrap {
-				@apply flex justify-center items-center;
-				height: rem-calc(180px);
-
-				@screen xl {
-					height: rem-calc(200px);
-				}
-
-				img {
-					@apply mx-auto h-auto;
-					max-width: rem-calc(60px);
-
-					@screen xl {
-						max-width: rem-calc(75px);
-					}
-				}
-			}
-		}
-
-		.information {
-			&__pronoun {
-				border-left-width: 1px;
-				@apply border-blue_green border-opacity-40;
-			}
-		}
-	}
+	// }
 
 	&.tile {
 		@apply max-w-none;

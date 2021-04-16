@@ -13,6 +13,7 @@ class Color extends A_Field {
 				'teal-dark'  => 'Teal - Dark',
 				'gray'       => 'Gray',
 				'gray-light' => 'Gray - Light',
+				'orange'     => 'Orange',
 			]
 		], parent::gen_args( $key, $name, $ext_args ) );
 	}

@@ -15,3 +15,4 @@ export ajaxPagination from './ajax-pagination';
 export phoneFormat from './contact-form';
 export stickyAnchor from './sticky-anchor';
 export infoBoxesCarousel from './info-boxes-carousel';
+export showAllTiles from './tiles';
