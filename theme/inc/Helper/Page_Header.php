@@ -26,7 +26,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo implode( ' ', $options['styles'] ) ?>">
+		<div class="header-container w-full <?= implode( ' ', (array) $options['styles'] ) ?>">
 			<div class="hero page-header type-text h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>

@@ -128,6 +128,9 @@ class Hooks {
 		# Research
 		CPT\Research::construct();
 
+		# Financial Reports
+		CPT\Financial_Report::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 

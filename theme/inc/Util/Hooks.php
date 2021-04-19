@@ -3,6 +3,7 @@
 use TrevorWP\CPT;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
+use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Single_Page;
@@ -491,19 +492,18 @@ class Hooks {
 		$updates = [];
 
 		# Post type archive
-		if ( is_post_type_archive() ) {
-			switch ( $query->get( 'post_type' ) ) {
-				case CPT\Get_Involved\Bill::POST_TYPE:
-					$updates['posts_per_page'] = (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_BILLS );
-					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
-					break;
-				case CPT\Get_Involved\Letter::POST_TYPE:
-					$updates['posts_per_page'] = (int) Customizer\Advocacy::get_val( Customizer\Advocacy::SETTING_PAGINATION_LETTERS );
-					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
-					break;
-				case CPT\Donate\Prod_Partner::POST_TYPE:
-					$updates['posts_per_page'] = (int) Customizer\Shop_Product_Partners::get_val( Customizer\Shop_Product_Partners::SETTING_HOME_LIST_PER_PAGE );
-					break;
+		if ( $query->is_post_type_archive && $query->is_main_query() ) {
+			$pt = $query->get_queried_object()->name;
+
+			# Pagination
+			$per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP );
+			if ( $per_page ) {
+				$updates['posts_per_page'] = $per_page;
+			}
+
+			# Init Sorter
+			if ( A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_SORTER_ACTIVE ) ) {
+				new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
 			}
 		}
 

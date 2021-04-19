@@ -9,6 +9,9 @@ class ACF {
 		Field_Group\Carousel_Data::class,
 		// Options
 		Options_Page\Page_Circulation_Options::class,
+		// - Post Type Options
+		Options_Page\Post_Type\Financial_Report::class,
+		Options_Page\Post_Type\Research::class,
 		// Misc
 		Field_Group\Page_Circulation_Card::class,
 		// Blocks
@@ -23,7 +26,6 @@ class ACF {
 		Field_Group\Page_Header::class,
 		Field_Group\Team_Member::class,
 	];
-
 
 	public static function construct() {
 		add_action( 'acf/init', [ self::class, 'acf_init' ], 10, 0 );
@@ -48,7 +50,9 @@ class ACF {
 				}
 			} elseif ( $group::is_options_page() ) {
 				# Options Page
-				$group::register_page();
+				/* acf_init is at init:5,
+				   we should wait until init:10 to get post types to be registered */
+				add_action( 'init', [ $group, 'register_page' ], 10, 0 );
 			}
 		}
 	}
