@@ -328,6 +328,7 @@ module.exports = {
 				px05: px2rem(.5),
 				px_015: px2rem(-1.5),
 				px_02: px2rem(-2),
+				px_05: px2rem(-.5),
 			},
 			zIndex: {
 				'1': '1',
