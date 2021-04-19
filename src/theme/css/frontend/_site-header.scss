@@ -591,6 +591,13 @@ $top--bar-height-tablet: rem-calc(106px);
 				}
 			}
 
+			// Empty or not configured links should not
+			// be clickable on desktop
+			& a[href="#"],
+			a[href=""] {
+				@apply lg2:pointer-events-none lg2:inline-block;
+			}
+
 			// Tier-2 menu link
 			> .menu-item {
 				&:not(:first-child) {

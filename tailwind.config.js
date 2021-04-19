@@ -57,7 +57,7 @@ module.exports = {
 			},
 			orange: {
 				DEFAULT: '#FF5A3D',
-				light: '#FF5A3D', //fixme?
+				light: '#FF674D', //fixme?
 			},
 			indigo: {
 				DEFAULT: '#101066',
