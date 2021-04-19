@@ -495,15 +495,16 @@ class Hooks {
 		if ( $query->is_post_type_archive && $query->is_main_query() ) {
 			$pt = $query->get_queried_object()->name;
 
-			# Pagination
-			$per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP );
-			if ( $per_page ) {
-				$updates['posts_per_page'] = $per_page;
-			}
+			if ( $pt ) {
+				# Pagination
+				if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
+					$updates['posts_per_page'] = $per_page;
+				}
 
-			# Init Sorter
-			if ( A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_SORTER_ACTIVE ) ) {
-				new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
+				# Init Sorter
+				if ( A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_SORTER_ACTIVE ) ) {
+					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
+				}
 			}
 		}
 

@@ -10,6 +10,7 @@ class Financial_Report {
 	 */
 	public static function construct(): void {
 		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
 	}
 
 	/**
@@ -19,12 +20,12 @@ class Financial_Report {
 	 */
 	public static function init(): void {
 		register_post_type( self::POST_TYPE, [
-			'public'              => true,
+			'public'              => false,
 			'hierarchical'        => false,
 			'exclude_from_search' => true,
 			'publicly_queryable'  => true,
 			'show_ui'             => true,
-			'show_in_rest'        => true,
+			'show_in_rest'        => false,
 			'has_archive'         => true,
 			'rewrite'             => [
 				'slug'       => 'financial-reports',
@@ -39,5 +40,17 @@ class Financial_Report {
 				'singular_name' => 'Financial Report',
 			],
 		] );
+	}
+
+	/**
+	 * Fires before determining which template to load.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/template_redirect/
+	 */
+	public static function template_redirect(): void {
+		if ( is_singular( static::POST_TYPE ) ) {
+			wp_redirect( home_url(), 301 );
+			exit;
+		}
 	}
 }
