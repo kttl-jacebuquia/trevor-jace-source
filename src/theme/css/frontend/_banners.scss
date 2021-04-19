@@ -1,5 +1,6 @@
 .site-banner {
 	@apply z-1;
+	@apply text-indigo;
 
 	&__container {
 		@apply container mx-auto relative;
