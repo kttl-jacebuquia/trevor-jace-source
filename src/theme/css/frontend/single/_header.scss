@@ -353,8 +353,7 @@
 
   // Large
   @screen lg {
-	/* Split & Square */
-	&.type-split,
+	/* Square */
 	&.type-square {
 	  max-height: rem-calc(840px);
 	  @apply pb-0;
@@ -371,6 +370,12 @@
 	/* Split */
 	&.type-split {
 	  @include neg-img-btm-margin(rem-calc(-90px));
+	  @apply pb-0;
+	  max-height: none;
+
+	  .post-header-content {
+		  @apply pb-px40;
+	  }
 
 	  .thumbnail-wrap {
 		max-height: rem-calc(647px);
