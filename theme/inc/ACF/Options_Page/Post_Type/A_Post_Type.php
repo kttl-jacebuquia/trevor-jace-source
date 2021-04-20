@@ -23,6 +23,7 @@ abstract class A_Post_Type extends A_Options_Page {
 	const FIELD_ARCHIVE_CONTENT_TOP = 'arc_content_top';
 	const FIELD_ARCHIVE_CONTENT_BTM = 'arc_content_btm';
 	const FIELD_ARCHIVE_CTA = 'arc_cta';
+	// todo: add slug
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {

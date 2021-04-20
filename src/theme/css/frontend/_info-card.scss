@@ -2,8 +2,18 @@
   &-grid {
 	@apply flex flex-col items-center mx-auto max-w-px319 my-14 md:max-w-screen-md xl:flex-row xl:my-16 xl:max-w-screen-xl;
 
-	& > * + * {
-	  @apply mt-7 xl:mt-0 xl:ml-7;
+	& > .info-card {
+	  &:first-child {
+		@apply xl:mr-7;
+	  }
+
+	  &:last-child {
+		@apply xl:ml-7;
+	  }
+
+	  &:nth-child(2) {
+		@apply mt-7 xl:mt-0;
+	  }
 	}
   }
 

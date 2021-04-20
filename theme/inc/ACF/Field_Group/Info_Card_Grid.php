@@ -40,7 +40,7 @@ class Info_Card_Grid extends A_Field_Group implements I_Block {
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
 		$cls            = [ 'info-card-grid' ];
 		$allowed_blocks = [
-				'acf/trvr-info-card',
+				'acf/' . Info_Card::get_key(),
 		];
 		?>
 		<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ), $cls ) ?>>
