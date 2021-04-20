@@ -106,7 +106,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 				'title_wrap_cls' => $title_wrap_cls,
 				'inner_cls'      => $inner_cls,
 				'btn_cls'        => $btn_cls,
-				'is_btn_inside'  => $type == static::TYPE_HORIZONTAL,
+				'btn_inside'     => $type == static::TYPE_HORIZONTAL,
 		] );
 	}
 }

@@ -156,25 +156,25 @@ abstract class A_Basic_Section extends A_Field_Group {
 	 * @param array $options
 	 */
 	public static function render_block_wrapper( $block, $content, array $options = [] ): void {
-		$wrap      	   = $options['wrap_cls'] ?? [];
-		$inner     	   = $options['inner_cls'] ?? [];
-		$title_wrap	   = $options['title_wrap_cls'] ?? [];
-		$title     	   = $options['title_cls'] ?? [];
-		$desc      	   = $options['desc_cls'] ?? [];
-		$btn       	   = $options['btn_cls'] ?? [];
-		$is_btn_inside = $options['is_btn_inside'];
+		$wrap       = $options['wrap_cls'] ?? [];
+		$inner      = $options['inner_cls'] ?? [];
+		$title_wrap = $options['title_wrap_cls'] ?? [];
+		$title      = $options['title_cls'] ?? [];
+		$desc       = $options['desc_cls'] ?? [];
+		$btn        = $options['btn_cls'] ?? [];
+		$btn_inside = $options['btn_inside'] ?? false;
 
 		ob_start();
 		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner ) . '>';
 		echo '<div ' . Tools::flat_attr( array_filter( [ 'class' => implode( ' ', $title_wrap ) ] ) ) . '>';
 		static::render_block_part_title( $title );
 		static::render_block_part_desc( $desc );
-		if ( $is_btn_inside === TRUE ) {
+		if ( $btn_inside ) {
 			static::render_block_part_buttons( $btn );
 		}
 		echo '</div>';
 		echo $content;
-		if ( $is_btn_inside === FALSE ) {
+		if ( ! $btn_inside ) {
 			static::render_block_part_buttons( $btn );
 		}
 		echo '</div>';
