@@ -1,7 +1,6 @@
 <?php /* Research */
 
 use \TrevorWP\Theme\Single_Page\Research as Page;
-use \TrevorWP\Theme\Single_Page\Team;
 use \TrevorWP\CPT\Research;
 use \TrevorWP\Theme\Helper;
 
@@ -11,7 +10,7 @@ $researches = get_posts([
 	'post_type'    => Research::POST_TYPE,
 ]);
 
-$placeholder_img = Team::get_val( Team::SETTING_GENERAL_PLACEHOLDER_IMG );
+$placeholder_img = null;
 
 ?>
 

@@ -20,10 +20,6 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	const ALL = [
 		Strategic_Plan::class,
 		Research::class,
-		Meet_Our_Partners::class,
-		Team::class,
-		Careers::class,
-		Contact_Us::class,
 	];
 
 	/**

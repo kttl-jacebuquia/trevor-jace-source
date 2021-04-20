@@ -75,24 +75,22 @@
 
 		<ul class="my-20">
 			<li>
-				<a class="text-xl font-bold text-white line-through"
-				   href="#">Public Education</a>
-				<em>(Moved to Nav)</em>
-			</li>
-
-			<li>
-				<a class="text-xl font-bold text-white line-through"
-				   href="#">Ally Training</a>
-				<em>(Moved to Nav)</em>
+				<a class="text-xl font-bold text-white"
+				   href="/public-education/">Public Education</a>
 			</li>
 
 			<li>
 				<a class="text-xl font-bold text-white"
+				   href="/aly-training/">Ally Training</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white line-through"
 				   href="<?= TrevorWP\Theme\Single_Page\Strategic_Plan::get_permalink() ?>">Strategic Plan</a>
 			</li>
 
 			<li>
-				<a class="text-xl font-bold text-white"
+				<a class="text-xl font-bold text-white line-through"
 				   href="<?= TrevorWP\Theme\Single_Page\Research::get_permalink() ?>">Research</a>
 			</li>
 
@@ -103,22 +101,22 @@
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="<?= TrevorWP\Theme\Single_Page\Meet_Our_Partners::get_permalink() ?>">Meet Our Partners</a>
+				   href="/meet-our-partners/">Meet Our Partners</a>
 			</li>
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="<?= TrevorWP\Theme\Single_Page\Team::get_permalink() ?>">Team</a>
+				   href="/team/">Team</a>
 			</li>
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="<?= TrevorWP\Theme\Single_Page\Careers::get_permalink() ?>">Careers</a>
+				   href="/careers/">Careers</a>
 			</li>
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="<?= TrevorWP\Theme\Single_Page\Contact_Us::get_permalink() ?>">Contact Us</a>
+				   href="/contact-us/">Contact Us</a>
 			</li>
 		</ul>
 
