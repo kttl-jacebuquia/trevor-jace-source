@@ -119,6 +119,10 @@ footer {
 		  flex-basis: auto;
 		}
 	  }
+
+		.submenu-icon {
+			@apply hidden;
+		}
 	}
 
 	&.social-links {

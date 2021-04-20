@@ -56,15 +56,12 @@ $social_media_accounts = [
 			</form>
 		</div>
 		<div class="col">
-			<ul class="site-links">
-				<li><a href="#">Contact us</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="#">Events</a></li>
-				<li><a href="#">Press</a></li>
-				<li><a href="#">Careers</a></li>
-				<li><a href="#">Terms of Service</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-			</ul>
+			<?php
+				wp_nav_menu([
+					'menu_class'   => 'site-links',
+					'theme_location' => 'footer',
+				])
+			?>
 			<ul class="social-links">
 				<?php foreach ( $social_media_accounts as $account ) {
 					if ( ! empty( $account['url'] ) ) { ?>

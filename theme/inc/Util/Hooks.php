@@ -223,6 +223,7 @@ class Hooks {
 		register_nav_menus( [
 				'header-organization' => '[Header] Organization',
 				'header-support'      => '[Header] Support',
+				'footer'              => 'Footer',
 		] );
 	}
 
