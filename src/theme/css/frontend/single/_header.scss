@@ -355,16 +355,14 @@
   @screen lg {
 	/* Square */
 	&.type-square {
-	  max-height: rem-calc(840px);
+	  @include neg-img-btm-margin(rem-calc(-90px));
 	  @apply pb-0;
+	  max-height: none;
 
 	  .post-header-content {
+		@apply pb-px40;
 		@apply mb-10;
 	  }
-	}
-
-	&.type-square {
-	  @include neg-img-btm-margin(rem-calc(-150px));
 	}
 
 	/* Split */
