@@ -5,7 +5,8 @@
 	&__container {
 		@apply container mx-auto relative;
 		@apply flex flex-col md:flex-row justify-start;
-		@apply py-px20 md:items-center max-w-none;
+		@apply py-px20 md:items-center;
+		@apply max-w-none;
 
 		@screen md {
 			@apply max-w-screen-md;
@@ -16,7 +17,18 @@
 		}
 
 		@screen lg2 {
-			@apply pl-px50 max-w-none;
+			@apply px-0;
+			@apply max-w-screen-lg2;
+
+			width: calc(100% - 80px);
+		}
+
+		@screen xl {
+			@apply max-w-screen-xl;
+		}
+
+		@screen 2xl {
+			@apply max-w-screen-2xl;
 		}
 	}
 
@@ -57,7 +69,7 @@
 	}
 
 	&__close-btn {
-		@apply absolute right-px20 top-px20 text-px30 font-bold flex;
+		@apply absolute right-px20 top-px20 text-px30 font-bold flex xl:right-0;
 
 		i {
 			@apply flex;
