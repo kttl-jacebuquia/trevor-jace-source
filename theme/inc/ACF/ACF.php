@@ -22,6 +22,7 @@ class ACF {
 		Field_Group\Post_Grid::class,
 		Field_Group\Info_Card::class,
 		Field_Group\Info_Card_Grid::class,
+		Field_Group\Address::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Team_Member::class,
