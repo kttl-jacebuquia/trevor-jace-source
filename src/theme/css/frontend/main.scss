@@ -1,20 +1,18 @@
+@tailwind base;
+
 // Icon Fonts
 @import "../icon-font/trevor-ti";
 @import "../icon-font/vars";
 
-// Tailwind
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+// Vendors, Utils & Base Rules
 @import "./what-input";
 @import "../utils/index";
 @import "./vendor/index";
-
-// Our Components
 @import "./general";
 @import "./fonts";
 @import "./root";
+
+// Our Components
 @import "./container";
 @import "./grid";
 @import "./misc/index";
@@ -66,3 +64,8 @@
 @import "./partner-with-us";
 @import "./meet-our-partners";
 @import "./search";
+
+// Tailwind
+@tailwind components; /* tailwind components should come after ours to overwrite gutenberg block classes */
+@tailwind utilities;
+@tailwind screens;
