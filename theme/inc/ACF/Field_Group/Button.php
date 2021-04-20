@@ -80,7 +80,7 @@ class Button extends A_Field_Group implements I_Renderable {
 										'key'               => $page_link,
 										'name'              => static::FIELD_PAGE_LINK,
 										'label'             => 'Page Link',
-										'type'              => 'post_object',
+										'type'              => 'page_link',
 										'required'          => 1,
 										'conditional_logic' => [
 												[
@@ -124,13 +124,42 @@ class Button extends A_Field_Group implements I_Renderable {
 
 		$type      = $val->get( static::FIELD_TYPE );
 		$btn_cls[] = $type;
+		$btn_attr  = $val->get( static::FIELD_BUTTON_ATTR );
+		if ( empty( $btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] ) ) {
+			$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] = [];
+		}
+
+		# Links
+		if ( $val->get( static::FIELD_ACTION ) == 'link' ) {
+			if ( ( $link = $val->get( static::FIELD_LINK ) ) && is_array( $link ) ) {
+				foreach (
+						array_filter( [
+								'title'  => $link['title'] ?? null,
+								'href'   => $link['url'] ?? null,
+								'target' => $link['target'] ?? null,
+						] ) as $k => $v
+				) {
+					$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = [
+							DOM_Attr::FIELD_ATTR_KEY => $k,
+							DOM_Attr::FIELD_ATTR_VAL => $v,
+					];
+				}
+			}
+		} else if ( $val->get( static::FIELD_ACTION ) == 'page_link' ) {
+			if ( $page_link = $val->get( static::FIELD_PAGE_LINK ) ) {
+				$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = [
+						DOM_Attr::FIELD_ATTR_KEY => 'href',
+						DOM_Attr::FIELD_ATTR_VAL => $page_link,
+				];
+			}
+		}
 
 		ob_start(); ?>
-		<button <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_BUTTON_ATTR ), $btn_cls ) ?>>
+		<a <?= DOM_Attr::render_attrs_of( $btn_attr, $btn_cls ) ?>>
 			<span <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_LABEL_ATTR ), $label_cls ) ?>>
 				<?= $val->get( static::FIELD_LABEL ) ?>
 			</span>
-		</button>
+		</a>
 		<?php return ob_get_clean();
 	}
 }
