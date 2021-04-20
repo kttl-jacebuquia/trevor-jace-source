@@ -11,7 +11,7 @@
 
 	& > tilt,
 	& > tiltb {
-		@apply text-px46;
+	  @apply text-px46;
 	}
   }
 
@@ -19,7 +19,7 @@
 	@apply text-px38 leading-px50 tracking-normal;
 
 	& > tilt,
-  & > tiltb {
+	& > tiltb {
 	  @apply text-px48 leading-px70;
 	}
   }
@@ -28,7 +28,7 @@
 	@apply text-px52 leading-px62;
 
 	& > tilt,
-  & > tiltb {
+	& > tiltb {
 	  @apply text-px70 leading-px80;
 	}
   }
@@ -58,6 +58,12 @@
   }
 }
 
+.page-sub-title + .page-sub-title-desc {
+  @screen md {
+	@apply mt-2;
+  }
+}
+
 .page-sub-title {
   @apply font-bold text-px32 leading-px40;
 
@@ -69,7 +75,7 @@
 	@apply text-px46 leading-px56 tracking-em_001;
 
 	.is-single-page & {
-		@apply text-px42 leading-px52 tracking-em_001;
+	  @apply text-px42 leading-px52 tracking-em_001;
 	}
   }
 }

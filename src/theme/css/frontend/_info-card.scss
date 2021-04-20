@@ -4,11 +4,11 @@
 
 	& > .info-card {
 	  &:first-child {
-		@apply xl:mr-7;
+		@apply xl:mr-3.5;
 	  }
 
 	  &:last-child {
-		@apply xl:ml-7;
+		@apply xl:ml-3.5;
 	  }
 
 	  &:nth-child(2) {
@@ -19,7 +19,7 @@
 
   @apply mx-auto;
   @apply flex flex-col text-center;
-  @apply py-32 md:py-20 lg:py-28 px-7 md:px-px88;
+  @apply py-20 px-7 md:py-24  md:px-px88 lg:py-20;
   @apply rounded-px10;
   max-width: rem-calc(500px);
 

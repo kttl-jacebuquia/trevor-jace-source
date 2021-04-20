@@ -81,8 +81,9 @@
 			</li>
 
 			<li>
-				<a class="text-xl font-bold text-white"
-				   href="<?= TrevorWP\Theme\Single_Page\Ally_Training::get_permalink() ?>">Ally Training</a>
+				<a class="text-xl font-bold text-white line-through"
+				   href="#">Ally Training</a>
+				<em>(Moved to Nav)</em>
 			</li>
 
 			<li>

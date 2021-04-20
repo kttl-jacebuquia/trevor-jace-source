@@ -18,7 +18,6 @@ abstract class Abstract_Single_Page extends Abstract_Customizer {
 	 * All Single Pages
 	 */
 	const ALL = [
-		Ally_Training::class,
 		Strategic_Plan::class,
 		Research::class,
 		Meet_Our_Partners::class,
