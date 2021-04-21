@@ -79,6 +79,9 @@ class Hooks {
 		# REST API
 		add_action( 'rest_api_init', [ self::class, 'rest_api_init' ], 10, 0 );
 
+		# Body Class
+		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+
 		# Single Pages
 		Single_Page\Abstract_Single_Page::init_all();
 
@@ -577,5 +580,26 @@ class Hooks {
 		$resp->header( 'Cache-Control', sprintf( 'public, max-age=%d, s-maxage=%d', $browser_to, $proxy_to ) );
 
 		return $resp;
+	}
+
+	/**
+	 * Filters the list of CSS body class names for the current post or page.
+	 *
+	 * @param array $classes
+	 *
+	 * @return array
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/body_class/
+	 */
+	public static function body_class( array $classes ): array {
+		if ( Is::rc() ) {
+			$classes['general_bg']      = 'bg-indigo';
+			$classes['general_txt_clr'] = 'text-white';
+		} else {
+			$classes['general_bg']      = 'bg-teal-dark';
+			$classes['general_txt_clr'] = 'text-teal-dark';
+		}
+
+		return $classes;
 	}
 }
