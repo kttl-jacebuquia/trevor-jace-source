@@ -82,7 +82,7 @@ class Address extends A_Field_Group implements I_Block {
 
 		ob_start();
 		?>
-			<div>
+		<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ) ) ?>>
 				<h2 class="font-bold mt-px60 md:mt-px80 lg:mt-px90 text-px28 leading-px34 md:text-px32 md:leading-px42 lg:text-px36 lg:leading-px40">
 					<?php echo esc_html( @$title ); ?>
 				</h2>
