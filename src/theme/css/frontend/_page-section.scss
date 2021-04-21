@@ -1,9 +1,0 @@
-main > *:last-child {
-	@apply pb-px100 xl:pb-px140;
-}
-
-.page-section {
-	& + & {
-		@apply pt-px80 xl:pt-px120;
-	}
-}
