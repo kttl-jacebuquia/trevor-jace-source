@@ -1,86 +1,3 @@
-.meet-our-partners {
-
-	.container {
-		@apply px-px18;
-
-		@screen md {
-			@apply px-px50;
-		}
-
-		@screen lg2 {
-			@apply px-0;
-			width: calc(100% - #{rem-calc(200px)});
-		}
-	}
-
-	.page-sub-title {
-		@apply block text-center w-auto m-auto;
-		@apply text-px32 leading-px40 text-teal-dark;
-
-		@screen md {
-			@apply leading-px42;
-		}
-
-		@screen lg2 {
-			@apply text-left text-px42 leading-px52;
-		}
-	}
-
-	.page-sub-title-desc {
-		@apply w-auto mt-px12 mb-0;
-		@apply text-center;
-		@apply text-px18 leading-px24 text-teal-dark;
-
-		@screen md {
-			@apply mt-px14 mx-px60;
-		}
-
-		@screen lg2 {
-			@apply text-left text-px24 leading-px34 mx-0;
-		}
-	}
-
-	.page-btn-wrap {
-		@apply mt-px52 mx-auto text-center;
-
-		@screen md {
-			@apply mt-px40;
-		}
-
-		@screen lg2 {
-			@apply mt-px50 text-left;
-		}
-	}
-
-	.page-btn {
-		@apply h-px46 min-w-px190;
-		@apply text-px16 leading-px22 text-white;
-
-		@screen lg2 {
-			@apply inline-flex justify-center items-center;
-			@apply py-0 h-px66 min-w-px315 text-px20 leading-px26;
-		}
-	}
-
-	.cta-box {
-		@apply mt-px100;
-
-		@screen md {
-			@apply w-auto mx-px60;
-		}
-
-		@screen lg2 {
-			@apply w-auto mx-px100 px-px260;
-		}
-
-		.cta-box-title {
-			@screen lg2 {
-				@apply text-px46 leading-px56;
-			}
-		}
-	}
-}
-
 .partners-block {
 	@apply mt-px80;
 
@@ -102,13 +19,8 @@
 }
 
 .partners-block__panel {
-	@apply w-full;
-	@apply border-px2 mt-px50 overflow-hidden rounded-px10;
-	border-color: rgba(0, 58, 72, 0.2);
-
-	@screen lg2 {
-		@apply mt-0;
-	}
+  @apply w-full overflow-hidden;
+  @apply border-px2 border-teal-dark border-opacity-20 rounded-px10;
 }
 
 .partners-block__title {

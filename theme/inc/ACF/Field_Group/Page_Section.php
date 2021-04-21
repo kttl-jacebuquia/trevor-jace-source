@@ -89,8 +89,8 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		if ( $type == static::TYPE_HORIZONTAL ) {
 			$inner_cls[]           = 'xl:flex xl:flex-row xl:flex-wrap';
 			$title_wrap_cls[]      = $content_wrap_cls[] = 'xl:w-1/2 xl:flex xl:flex-col xl:justify-center';
-			$title_wrap_cls[]      = 'xl:flex-col xl:items-start xl:justify-start';
-			$content_wrap_cls[]    = 'xl:items-end';
+			$title_wrap_cls[]      = 'xl:flex-col xl:items-start';
+			$content_wrap_cls[]    = 'xl:items-end mt-12 xl:mt-0';
 			$btn_cls['wrap_cls'][] = 'xl:w-full xl:justify-start';
 			$title_cls[]           = $desc_cls[] = 'xl:w-3/4'; //fix left align
 		}
