@@ -46,6 +46,7 @@
 	  @apply py-0;
 
 	  .swiper-container {
+		@apply flex flex-col justify-center;
 		@apply relative top-1/2 left-1/2;
 		transform: translate(-50%, -50%);
 	  }
@@ -73,20 +74,22 @@
 	}
   }
 
+	.swiper-wrapper {
+		@apply h-auto;
+	}
+
   .trevor-ti-quote-open,
   .trevor-ti-quote-close {
 	@apply text-teal-dark;
   }
 
   .swiper-slide {
-	@screen md {
-	  @apply self-stretch inline-block align-top whitespace-normal;
-	}
+	@apply flex flex-col justify-center;
 
 	figure {
-	  @screen md {
-		@apply flex items-center justify-center;
-	  }
+		@screen md {
+			@apply flex items-center justify-center;
+		}
 	}
   }
 

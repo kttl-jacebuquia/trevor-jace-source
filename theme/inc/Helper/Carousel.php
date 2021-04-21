@@ -264,8 +264,8 @@ class Carousel {
 						</div>
 						<div class="swiper-wrapper">
 							<?php foreach ( $data as $entry ): ?>
-								<div class="swiper-slide px-4 pt-5 pb-14 lg:px-8 lg:pt-8">
-									<figure class="text-center text-teal-dark flex flex-col justify-between h-full md:w-full md:mx-auto">
+								<div class="swiper-slide h-auto px-4 pt-5 pb-14 lg:px-8 lg:pt-8">
+									<figure class="text-center text-teal-dark flex flex-col justify-between md:w-full md:mx-auto">
 										<blockquote
 												class="font-bold text-center text-3xl mb-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
 											<?= $entry['quote'] ?>

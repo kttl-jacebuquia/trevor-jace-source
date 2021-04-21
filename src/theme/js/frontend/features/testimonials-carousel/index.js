@@ -49,7 +49,6 @@ export default function testimonialsCarousel(id) {
 	function initTextSwiper () {
 		return new Swiper(txtWrap.querySelector('.swiper-container'), {
 			slidesPerView: 1,
-			autoHeight: true,
 			autoplay: true,
 			updateOnWindowResize: true,
 			pagination: {
