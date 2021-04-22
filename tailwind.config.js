@@ -412,6 +412,7 @@ module.exports = {
 				px100: px2rem(100),
 				px102: px2rem(102),
 				px104: px2rem(104),
+				px105: px2rem(105),
 				px106: px2rem(106),
 				px108: px2rem(108),
 				px110: px2rem(110),

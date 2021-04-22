@@ -54,6 +54,7 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
 		$taxonomy = static::get_val( static::FIELD_TIER_TYPE );
+        $list_type = $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ? 'images' : 'text';
 
 		ob_start();
 		?>
@@ -86,29 +87,33 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
                 ?>
                 <div class="partners-block__panel">
                     <div class="partners-block__title">
-                        <?php if ( $post_type === Partner::POST_TYPE ) : ?>
-                            <div class="partners-block__tier-name"><?= $partner_tier->name ?></div>
-                            <div class="partners-block__tier-amount">
-                                <?= esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?>
-                            </div>
-                        <?php else : ?>
-                            <?= $partner_tier->name ?>
-                        <?php endif; ?>
+                        <div class="partners-block__tier-name"><?= $partner_tier->name ?></div>
+                        <div class="partners-block__tier-amount">
+                            <?= esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?>
+                        </div>
                     </div>
-                    <div class="partners-block__list partners-block__list--images">
+                    <div class="partners-block__list partners-block__list--<?= $list_type ?>">
                         <?php foreach ( $partners as $partner ): ?>
+                            <?php $url = Meta\Post::get_partner_url( $partner->ID ); ?>
                             <?php if ( $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ): ?>
                                 <?php
                                     $featured_image = get_the_post_thumbnail_url($partner->ID, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD);
                                 ?>
                                 <div class="partners-block__image">
-                                    <div class="partners-block__img-wrap">
-                                        <img src="<?= $featured_image ?>" alt="<?= $partner->post_title ?>">
-                                    </div>
+                                    <a  href="<?= $url ?>"
+                                        rel="nofollow noreferrer noopener"
+                                        target="_blank"
+                                        class="partners-block__img-wrap">
+                                            <img src="<?= $featured_image ?>" alt="<?= $partner->post_title ?>">
+                                    </a>
                                 </div>
                             <?php else: ?>
                                 <div class="partners-block__name">
-                                    <?= $partner->post_title ?>
+                                    <a  href="<?= $url ?>"
+                                        rel="nofollow noreferrer noopener"
+                                        target="_blank">
+                                            <?= $partner->post_title ?>
+                                    </a>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>

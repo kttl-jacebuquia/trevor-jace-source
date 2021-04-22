@@ -65,7 +65,7 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 			return null;
 		}
 
-		$wrap_cls  = array_merge( [ 'flex justify-center mt-12' ], $options['wrap_cls'] ?? [] );
+		$wrap_cls  = array_merge( [ 'button-group flex justify-center mt-12' ], $options['wrap_cls'] ?? [] );
 		$btn_cls   = $options['btn_cls'] ?? [];
 		$label_cls = $options['label_cls'] ?? [];
 

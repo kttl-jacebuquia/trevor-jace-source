@@ -1,0 +1,44 @@
+.page-section {
+
+    /**
+        HORIZONTAL
+    */
+
+    &-type-horizontal {
+        .page-section-title {
+            @apply mb-px12;
+            // md
+            @apply md:mb-px14;
+            // xl
+            @apply xl:text-px42 xl:leading-px52 xl:tracking-em_001 xl:mb-px16;
+        }
+    
+        .page-section-title-desc {
+            letter-spacing: unset;
+            // xl
+            @apply xl:my-0;
+        }
+
+        .page-section-content-wrap {
+            @apply mt-px50;
+            // md
+            @apply md:mt-px50;
+            // xl
+            @apply xl:mt-0;
+        }
+    
+        .button-group {
+            @apply mt-px52;
+            // md
+            @apply md:mt-px40;
+            // xl
+            @apply xl:mt-px50;
+        }
+    
+        .page-btn {
+            @apply md:h-px44;
+            // xl
+            @apply xl:h-px66;
+        }
+    }
+}
