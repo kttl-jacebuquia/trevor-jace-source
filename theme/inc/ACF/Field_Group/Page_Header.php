@@ -15,9 +15,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
-		$type           = static::gen_key( static::FIELD_TYPE );
-		$title_top      = static::gen_key( static::FIELD_TITLE_TOP );
-		$title_top_attr = static::gen_key( static::FIELD_TITLE_TOP_ATTR );
+		$type           = static::gen_field_key( static::FIELD_TYPE );
+		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
+		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
 		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
 		$text_clr       = static::gen_field_key( static::FIELD_TEXT_CLR );
 		$bg_clr         = static::gen_field_key( static::FIELD_BG_CLR );
