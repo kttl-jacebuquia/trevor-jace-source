@@ -19,7 +19,7 @@ class Page_Circulation_Card extends A_Basic_Section {
 						'name'     => static::FIELD_CARD_KEY,
 						'label'    => 'Unique Identifier',
 						'type'     => 'text',
-						'required' => 1,
+						'required' => true,
 					],
 				],
 				static::_get_fields(),

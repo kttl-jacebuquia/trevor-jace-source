@@ -30,7 +30,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'name'          => static::FIELD_TYPE,
 					'label'         => 'Type',
 					'type'          => 'select',
-					'required'      => 1,
+					'required'      => true,
 					'default_value' => 'text',
 					'choices'       => [
 						'text'           => 'Text',
@@ -68,7 +68,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'key'               => $carousel,
 					'name'              => static::FIELD_CAROUSEL,
 					'label'             => 'Carousel',
-					'prefix_label'      => 1,
+					'prefix_label'      => true,
 					'display'           => 'group',
 					'layout'            => 'row',
 					'conditional_logic' => [
@@ -84,15 +84,15 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			],
 			static::_gen_tab_field( 'Styling' ),
 			[
-				static::FIELD_TEXT_CLR      =>	Field\Color::gen_args(
+				static::FIELD_TEXT_CLR => Field\Color::gen_args(
 					$text_clr,
 					static::FIELD_TEXT_CLR,
-					[ 'label'	=>	'Text Color',	'default'	=>	'teal-dark', ]
+					[ 'label' => 'Text Color', 'default' => 'teal-dark', ]
 				),
-				static::FIELD_BG_CLR        =>	Field\Color::gen_args(
+				static::FIELD_BG_CLR   => Field\Color::gen_args(
 					$bg_clr,
 					static::FIELD_BG_CLR,
-					[ 'label'	=>	'BG Color',	'default' =>	'white', ]
+					[ 'label' => 'BG Color', 'default' => 'white', ]
 				),
 			]
 		);
@@ -127,8 +127,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
 		$val = new Field_Val_Getter( static::class, $post, $data );
 
-		$type = $val->get( static::FIELD_TYPE );
-		$wrap_cls	=	[];
+		$type     = $val->get( static::FIELD_TYPE );
+		$wrap_cls = [];
 
 		# Check renderer
 		if ( ! ( new \ReflectionClass( Helper\Page_Header::class ) )->hasMethod( $type ) ) {
@@ -141,15 +141,15 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			'desc'      => $val->get( static::FIELD_DESC ),
 		];
 
-		$args[ 'styles' ]	= [];
+		$args['styles'] = [];
 		# Text color
 		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
-			$args[ 'styles' ][] = "text-{$txt_color}";
+			$args['styles'][] = "text-{$txt_color}";
 		}
 
 		# BG Color
 		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
-			$args[ 'styles' ][] = "bg-{$bg_color}";
+			$args['styles'][] = "bg-{$bg_color}";
 		}
 
 		# Buttons

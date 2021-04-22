@@ -23,7 +23,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 					'name'       => static::FIELD_DATA,
 					'label'      => 'Data',
 					'type'       => 'repeater',
-					'required'   => 1,
+					'required'   => true,
 					'layout'     => 'table',
 					'sub_fields' => [
 						static::FIELD_DATA_IMG   => [
@@ -31,7 +31,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 							'name'          => static::FIELD_DATA_IMG,
 							'label'         => 'Image',
 							'type'          => 'image',
-							'required'      => 1,
+							'required'      => true,
 							'return_format' => 'array',
 							'preview_size'  => 'medium',
 							'library'       => 'all',
@@ -41,7 +41,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 							'name'     => static::FIELD_DATA_QUOTE,
 							'label'    => 'Quote',
 							'type'     => 'textarea',
-							'required' => 1,
+							'required' => true,
 						],
 						static::FIELD_DATA_CITE  => [
 							'key'   => $data_subtitle,

@@ -87,8 +87,8 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	public static function clone( array $args = [] ): array {
 		return parent::clone( array_merge( [
 				'display'      => 'seamless',
-				'prefix_label' => 1,
-				'prefix_name'  => 1,
+				'prefix_label' => true,
+				'prefix_name'  => true,
 		], $args ) );
 	}
 }

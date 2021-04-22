@@ -81,7 +81,7 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 										'name'       => static::FIELD_BOXES,
 										'label'      => 'Boxes',
 										'type'       => 'repeater',
-										'required'   => 1,
+										'required'   => true,
 										'layout'     => 'row',
 										'sub_fields' => array_merge(
 												static::_gen_tab_field( 'General' ),

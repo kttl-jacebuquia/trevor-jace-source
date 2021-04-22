@@ -1,4 +1,5 @@
 <?php
+
 namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\Helper;
@@ -9,7 +10,7 @@ use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 use \TrevorWP\Meta;
 
 class Partners extends A_Field_Group implements I_Block, I_Renderable {
-    const FIELD_TIER_TYPE = 'tier_type';
+	const FIELD_TIER_TYPE = 'tier_type';
 
 	/**
 	 * @inheritDoc
@@ -18,21 +19,21 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 		$tier_type = static::gen_field_key( static::FIELD_TIER_TYPE );
 
 		return [
-			'title'   => 'Tier Type',
-			'fields'  => [
-					static::FIELD_TIER_TYPE => [
-						'key'           => $tier_type,
-						'name'          => static::FIELD_TIER_TYPE,
-						'label'         => 'Tier Type',
-						'type'          => 'select',
-						'required'      => 1,
-						'choices'       => [
-							Get_Involved_Object::TAXONOMY_PARTNER_TIER => 'Partner Tier',
-							Get_Involved_Object::TAXONOMY_GRANT_TIER => 'Grant Tier',
+				'title'  => 'Tier Type',
+				'fields' => [
+						static::FIELD_TIER_TYPE => [
+								'key'           => $tier_type,
+								'name'          => static::FIELD_TIER_TYPE,
+								'label'         => 'Tier Type',
+								'type'          => 'select',
+								'required'      => true,
+								'choices'       => [
+										Get_Involved_Object::TAXONOMY_PARTNER_TIER => 'Partner Tier',
+										Get_Involved_Object::TAXONOMY_GRANT_TIER   => 'Grant Tier',
+								],
+								'default_value' => null,
 						],
-						'default_value' => null,
-					],
-			],
+				],
 		];
 	}
 
@@ -53,73 +54,73 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
-		$taxonomy = static::get_val( static::FIELD_TIER_TYPE );
-        $list_type = $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ? 'images' : 'text';
+		$taxonomy  = static::get_val( static::FIELD_TIER_TYPE );
+		$list_type = $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ? 'images' : 'text';
 
 		ob_start();
 		?>
-            <? if ( ! empty($taxonomy) ) : ?>
-                <?php
-                    $post_type = ( $taxonomy === Get_Involved_Object::TAXONOMY_GRANT_TIER ) ? Grant::POST_TYPE : Partner::POST_TYPE;
+		<? if ( ! empty( $taxonomy ) ) : ?>
+			<?php
+			$post_type = ( $taxonomy === Get_Involved_Object::TAXONOMY_GRANT_TIER ) ? Grant::POST_TYPE : Partner::POST_TYPE;
 
-                    $partner_tier = ( new \WP_Term_Query( [
-                            'taxonomy'   => $taxonomy,
-                            'orderby'    => 'meta_value_num',
-                            'order'      => 'DESC',
-                            'hide_empty' => true,
-                            'meta_key'   => \TrevorWP\Meta\Taxonomy::KEY_PARTNER_TIER_VALUE,
-                            'number'     => 1,
-                    ] ) )->terms;
-                    $partner_tier = reset( $partner_tier );
+			$partner_tier = ( new \WP_Term_Query( [
+					'taxonomy'   => $taxonomy,
+					'orderby'    => 'meta_value_num',
+					'order'      => 'DESC',
+					'hide_empty' => true,
+					'meta_key'   => \TrevorWP\Meta\Taxonomy::KEY_PARTNER_TIER_VALUE,
+					'number'     => 1,
+			] ) )->terms;
+			$partner_tier = reset( $partner_tier );
 
-                    
-                    $partners = get_posts([
-                            'tax_query' => [
-                                    [
-                                            'taxonomy' => $taxonomy,
-                                            'terms'    => [ $partner_tier->term_id ]
-                                    ]
-                            ],
-                            'post_type' => $post_type,
-                            'orderby'   => 'title',
-                            'order'     => 'ASC',
-                    ]);
-                ?>
-                <div class="partners-block__panel">
-                    <div class="partners-block__title">
-                        <div class="partners-block__tier-name"><?= $partner_tier->name ?></div>
-                        <div class="partners-block__tier-amount">
-                            <?= esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?>
-                        </div>
-                    </div>
-                    <div class="partners-block__list partners-block__list--<?= $list_type ?>">
-                        <?php foreach ( $partners as $partner ): ?>
-                            <?php $url = Meta\Post::get_partner_url( $partner->ID ); ?>
-                            <?php if ( $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ): ?>
-                                <?php
-                                    $featured_image = get_the_post_thumbnail_url($partner->ID, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD);
-                                ?>
-                                <div class="partners-block__image">
-                                    <a  href="<?= $url ?>"
-                                        rel="nofollow noreferrer noopener"
-                                        target="_blank"
-                                        class="partners-block__img-wrap">
-                                            <img src="<?= $featured_image ?>" alt="<?= $partner->post_title ?>">
-                                    </a>
-                                </div>
-                            <?php else: ?>
-                                <div class="partners-block__name">
-                                    <a  href="<?= $url ?>"
-                                        rel="nofollow noreferrer noopener"
-                                        target="_blank">
-                                            <?= $partner->post_title ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            <? endif; ?>
+
+			$partners = get_posts( [
+					'tax_query' => [
+							[
+									'taxonomy' => $taxonomy,
+									'terms'    => [ $partner_tier->term_id ]
+							]
+					],
+					'post_type' => $post_type,
+					'orderby'   => 'title',
+					'order'     => 'ASC',
+			] );
+			?>
+			<div class="partners-block__panel">
+				<div class="partners-block__title">
+					<div class="partners-block__tier-name"><?= $partner_tier->name ?></div>
+					<div class="partners-block__tier-amount">
+						<?= esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?>
+					</div>
+				</div>
+				<div class="partners-block__list partners-block__list--<?= $list_type ?>">
+					<?php foreach ( $partners as $partner ): ?>
+						<?php $url = Meta\Post::get_partner_url( $partner->ID ); ?>
+						<?php if ( $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ): ?>
+							<?php
+							$featured_image = get_the_post_thumbnail_url( $partner->ID, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
+							?>
+							<div class="partners-block__image">
+								<a href="<?= $url ?>"
+								   rel="nofollow noreferrer noopener"
+								   target="_blank"
+								   class="partners-block__img-wrap">
+									<img src="<?= $featured_image ?>" alt="<?= $partner->post_title ?>">
+								</a>
+							</div>
+						<?php else: ?>
+							<div class="partners-block__name">
+								<a href="<?= $url ?>"
+								   rel="nofollow noreferrer noopener"
+								   target="_blank">
+									<?= $partner->post_title ?>
+								</a>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		<? endif; ?>
 		<?php return ob_get_clean();
 	}
 

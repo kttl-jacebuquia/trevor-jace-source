@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-
 class Carousel_Data extends A_Field_Group {
 	const FIELD_TYPE = 'type';
 	const FIELD_DATA = 'data';
@@ -38,7 +37,7 @@ class Carousel_Data extends A_Field_Group {
 					'name'              => static::FIELD_DATA,
 					'label'             => 'Data',
 					'type'              => 'repeater',
-					'required'          => 1,
+					'required'          => true,
 					'layout'            => 'table',
 					'conditional_logic' => [
 						[
@@ -55,7 +54,7 @@ class Carousel_Data extends A_Field_Group {
 							'name'          => static::FIELD_DATA_IMG,
 							'label'         => 'Image',
 							'type'          => 'image',
-							'required'      => 1,
+							'required'      => true,
 							'return_format' => 'array',
 							'preview_size'  => 'medium',
 							'library'       => 'all',
@@ -79,7 +78,7 @@ class Carousel_Data extends A_Field_Group {
 					'name'              => static::FIELD_POSTS,
 					'label'             => 'Posts',
 					'type'              => 'relationship',
-					'required'          => 1,
+					'required'          => true,
 					'return_format'     => 'object',
 					'conditional_logic' => [
 						[

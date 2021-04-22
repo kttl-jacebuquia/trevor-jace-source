@@ -31,7 +31,7 @@ class Button extends A_Field_Group implements I_Renderable {
 										'name'          => static::FIELD_TYPE,
 										'label'         => 'Type',
 										'type'          => 'select',
-										'required'      => 1,
+										'required'      => true,
 										'choices'       => [
 												'primary'   => 'Primary',
 												'secondary' => 'Secondary',
@@ -44,21 +44,21 @@ class Button extends A_Field_Group implements I_Renderable {
 										'name'     => static::FIELD_LABEL,
 										'label'    => 'Label',
 										'type'     => 'text',
-										'required' => 1,
+										'required' => true,
 								],
 								static::FIELD_ACTION    => [
 										'key'           => $action,
 										'name'          => static::FIELD_ACTION,
 										'label'         => 'Action',
 										'type'          => 'select',
-										'required'      => 1,
+										'required'      => true,
 										'choices'       => [
 												'link'      => 'Link',
 												'page_link' => 'Page Link',
 										],
 										'default_value' => 'page_link',
-										'allow_null'    => 1,
-										'multiple'      => 0,
+										'allow_null'    => true,
+										'multiple'      => false,
 								],
 								static::FIELD_LINK      => [
 										'key'               => $link,
@@ -81,7 +81,7 @@ class Button extends A_Field_Group implements I_Renderable {
 										'name'              => static::FIELD_PAGE_LINK,
 										'label'             => 'Page Link',
 										'type'              => 'page_link',
-										'required'          => 1,
+										'required'          => true,
 										'conditional_logic' => [
 												[
 														[
@@ -91,10 +91,10 @@ class Button extends A_Field_Group implements I_Renderable {
 														],
 												],
 										],
-										'allow_null'        => 0,
-										'multiple'          => 0,
+										'allow_null'        => false,
+										'multiple'          => false,
 										'return_format'     => 'object',
-										'ui'                => 1,
+										'ui'                => true,
 								]
 						],
 						static::_gen_tab_field( 'Attributes' ),

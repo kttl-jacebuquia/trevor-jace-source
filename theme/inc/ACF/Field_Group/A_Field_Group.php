@@ -238,7 +238,11 @@ abstract class A_Field_Group {
 	 * @return array
 	 */
 	protected static function _gen_tab_end_field( string $name = 'end', array $args = [] ): array {
-		return static::_gen_tab_field( '', array_merge( [ 'endpoint' => 1, 'label' => '', 'name' => $name ], $args ) );
+		return static::_gen_tab_field( '', array_merge( [
+			'endpoint' => true,
+			'label'    => '',
+			'name'     => $name
+		], $args ) );
 	}
 
 	/**
