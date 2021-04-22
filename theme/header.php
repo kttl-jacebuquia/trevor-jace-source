@@ -53,8 +53,20 @@ $is_rc = Is::rc();
 <![endif]-->
 <div class="site-banner" id="siteBannerContainer"></div>
 <script>window.trevorWP.siteBanners()</script>
+
+<?php /* Controls for expanded nav menu */ ?>
+<div class="burger-nav-controls">
+	<a class="btn burger-nav-control burger-nav-control-search" href="<?= get_search_link() ?>">
+		<i class="trevor-ti-search"></i>
+	</a>
+	<button class="btn burger-nav-control burger-nav-control-close">
+		<i class="trevor-ti-nav-close"></i>
+	</button>
+</div>
+
+<?php /* TOP BAR */ ?>
 <div id="top-bar" class="top-bar">
-	<div class="top-bar-inner container">
+	<div class="top-bar-inner">
 		<div class="logo-icon">
 			<a href="<?= \TrevorWP\Theme\Util\Tools::get_relative_home_url() ?>">
 				<i class="trevor-ti-logo-icon"></i>
@@ -89,14 +101,14 @@ $is_rc = Is::rc();
 			</a>
 			<button class="topbar-control-opener">
 				<i class="trevor-ti-hamburger-menu"></i>
-				<i class="trevor-ti-nav-close"></i>
 			</button>
 		</div>
 	</div>
 </div>
+
+<?php /* TOP NAV */ ?>
 <header id="top-nav" class="top-nav <?= $is_rc ? 'is_rc' : '' ?>">
-	<input id="top-nav-open" type="checkbox" class="hidden">
-	<div class="top-nav-inner container <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
+	<div class="top-nav-inner <?= 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
 			<a href="<?= \TrevorWP\Theme\Util\Tools::get_relative_home_url() ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>
@@ -109,7 +121,9 @@ $is_rc = Is::rc();
 		</div>
 
 		<div class="menu-wrap flex items-start">
-			<button type="button" class="back-to-tier1">BACK</button>
+			<div class="back-to-tier1-wrap">
+				<button type="button" class="back-to-tier1">BACK</button>
+			</div>
 
 			<?php wp_nav_menu( [
 					'menu_class'      => 'main-menu',

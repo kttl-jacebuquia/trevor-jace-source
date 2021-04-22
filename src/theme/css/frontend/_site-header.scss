@@ -275,6 +275,34 @@ $top--bar-height-tablet: rem-calc(106px);
 	}
 }
 
+// Burger nav controls for mobile/tablet
+.burger-nav-controls {
+	@apply fixed top-0 right-0;
+	@apply flex items-center justify-center;
+	@apply invisible opacity-0;
+	@apply transition-all duration-300 ease-out;
+	@apply py-px11 px-px8;
+	@apply transform-gpu translate-x-full;
+	z-index: var(--z-index-nav-switcher);
+}
+
+.btn.burger-nav-control {
+	@apply flex items-center justify-center;
+	@apply w-px45 h-px45 p-0 text-px25;
+
+	~ .btn {
+		@apply ml-px15;
+	}
+
+	&-search {
+		@apply rounded-px100 bg-indigo text-white;
+	}
+
+	&-close {
+		@apply text-indigo;
+	}
+}
+
 .cta-wrap {
 	@apply overflow-x-hidden;
 	@apply fixed bottom-0 right-0;
@@ -530,6 +558,17 @@ $top--bar-height-tablet: rem-calc(106px);
 			}
 		}
 
+		.sub-menu__heading {
+			@apply absolute top-px50 left-full w-full;
+			@apply flex justify-start py-px14 px-px24;
+			@apply font-bold text-px24 leading-px30 tracking-em001;
+			@apply transition-all invisible opacity-0;
+			// md
+			@apply md:text-px26 md:leading-px32 md:tracking-em001 md:top-px50 md:py-0;
+			// lg2
+			@apply lg2:hidden;
+		}
+
 		> a {
 			@apply flex justify-between py-px14 px-px24;
 			@apply transition-all duration-300 ease-out;
@@ -572,6 +611,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 			@screen md {
 				@apply top-px106;
+				height: calc(100% - #{rem-calc(106px)});
 			}
 
 			@screen lg2 {
@@ -670,20 +710,25 @@ $top--bar-height-tablet: rem-calc(106px);
 
 	// Tier-1 menu link, active state
 	> .menu-item.active {
-		// Accounting for up to 5 sub-menu
-		// Animating into the same position
 		@screen lg-max {
-			@for $i from 1 through 5 {
-				&:nth-child(#{$i}) > a {
-					@apply translate-x-full opacity-100 visible;
-					--tw-translate-y: calc(#{($i - 1) * -100%} + 50px);
+			// // Accounting for up to 5 sub-menu
+			// // Animating into the same position
+			// @for $i from 1 through 5 {
+			// 	&:nth-child(#{$i}) > a {
+			// 		@apply translate-x-full opacity-100 visible;
+			// 		--tw-translate-y: calc(#{($i - 1) * -100%} + 50px);
 
-					@screen md {
-						--tw-translate-y: calc(#{($i - 1) * -100%} + 38px);
-					}
-				}
+			// 		@screen md {
+			// 			--tw-translate-y: calc(#{($i - 1) * -100%} + 38px);
+			// 		}
+			// 	}
+			// }
+
+			> a {
+				@apply opacity-0 invisible;
 			}
 
+			> .sub-menu__heading,
 			> .sub-menu {
 				@apply opacity-100 visible;
 			}
@@ -697,7 +742,11 @@ $top--bar-height-tablet: rem-calc(106px);
 //
 #top-nav {
 	height: var(--top-nav-height);
-	@apply z-20;
+	@apply z-20 px-px28;
+	// md
+	@apply md:px-px50;
+	// lg2
+	@apply lg2:px-0;
 
 	// Background blur and fill, for mobile/tablet
 	@screen lg-max {
@@ -728,8 +777,8 @@ $top--bar-height-tablet: rem-calc(106px);
 	// Tier-2 submenu state, for mobile/tablet
 	&.tier-two-visible {
 		@screen lg-max {
-			.back-to-tier1 {
-				@apply opacity-100 visible;
+			.back-to-tier1-wrap {
+				@apply opacity-100 visible translate-x-0;
 			}
 
 			.main-menu {
@@ -758,14 +807,19 @@ $top--bar-height-tablet: rem-calc(106px);
 	}
 
 	// Back button, for mobile/tablet
-	.back-to-tier1 {
-		@apply transition-all opacity-0 invisible;
-		@apply flex items-center absolute top-px28 left-px24;
-		@apply font-bold text-px14 leading-px20 tracking-em001;
+	.back-to-tier1-wrap {
+		@apply w-full absolute top-px28 left-0 pl-px24;
+		@apply transition-all duration-300 ease-out opacity-0 invisible;
+		@apply transform-gpu translate-x-full;
 
 		@screen lg2 {
 			@apply hidden;
 		}
+	}
+
+	.back-to-tier1 {
+		@apply flex items-center;
+		@apply font-bold text-px14 leading-px20 tracking-em001;
 
 		// Chevron
 		&::before {
@@ -774,10 +828,6 @@ $top--bar-height-tablet: rem-calc(106px);
 			font-size: rem-calc(10px);
 			content: $font-trevor-ti-chevron-thick-right;
 			margin-right: rem-calc(9px);
-		}
-
-		@screen lg2 {
-			@apply hidden;
 		}
 	}
 
@@ -1061,29 +1111,8 @@ body.is-navigation-open {
 		}
 
 		.topbar-controls {
-		 @screen mobile {
-		 	@apply translate-x-px22 translate-y-px84;
-		 }
-
-		 @screen md {
-		 	@apply translate-y-px88 translate-x-px32;
-		 }
-
-			.trevor-ti-hamburger-menu {
-				@screen lg-max {
-					@apply invisible opacity-0;
-				}
-			}
-			.trevor-ti-nav-close {
-				@screen lg-max {
-					@apply visible opacity-100;
-				}
-			}
-		}
-
-		.topbar-control-search {
 			@screen lg-max {
-				@apply visible opacity-100 translate-y-0;
+				@apply invisible opacity-0;
 			}
 		}
 
@@ -1099,6 +1128,10 @@ body.is-navigation-open {
 				@apply visible opacity-100;
 			}
 		}
+	}
+
+	.burger-nav-controls {
+		@apply lg-max:visible lg-max:opacity-100 lg-max:translate-x-0;
 	}
 
 	.opener {

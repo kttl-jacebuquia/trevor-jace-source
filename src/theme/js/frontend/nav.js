@@ -7,6 +7,7 @@ const $window = $(window);
 const $root = $('html');
 const $body = $('body');
 const $navOpener = $('.topbar-control-opener,.opener');
+const $navCloser = $('.burger-nav-control-close');
 const $ctaLinks = $('.cta-wrap');
 const $switcher = $('.switcher-wrap');
 const $switcherLinks = $switcher.find('a');
@@ -45,10 +46,8 @@ const isScrolling = debounce(
 	},
 	2000
 );
-const onBurgerClick = (e) => {
-	e.preventDefault();
-
-	const navWillOpen = !$body.hasClass('is-navigation-open');
+const toggleNav = (willOpen) => {
+	const navWillOpen = typeof willOpen === 'boolean' ? willOpen : !$body.hasClass('is-navigation-open');
 
 	$body.toggleClass('is-navigation-open', navWillOpen);
 	resetNavState();
@@ -59,7 +58,8 @@ const onBurgerClick = (e) => {
 		$root.get(0).style.setProperty('--fixed-body-top', `-${fixedBodyScroll}px`);
 		$body.addClass('is-fixed');
 
-		$topbarLogo.add($navLogo).attr({
+		$topbarLogo.add($navLogo).add($navOpener)
+		.attr({
 			['aria-hidden']: true,
 			tabindex: -1
 		});
@@ -72,12 +72,20 @@ const onBurgerClick = (e) => {
 		window.scrollTo(0, fixedBodyScroll);
 		$root.css('scroll-behavior', '');
 
-		$topbarLogo.add($navLogo).attr({
+		$topbarLogo.add($navLogo).add($navOpener)
+		.attr({
 			['aria-hidden']: null,
 			tabindex: null
 		});
 	}
-
+}
+const onBurgerClick = (e) => {
+	e.preventDefault();
+	toggleNav(true);
+}
+const onBurgerCloseClick = (e) => {
+	e.preventDefault();
+	toggleNav(false);
 }
 const onSwitcherClick = (e) => {
 	if ( isLargeBreakpoint ) {
@@ -144,16 +152,26 @@ const resetNavState = () => {
 const navBlur = () => {
 	const $navBlur = $(`<div class="top-nav__underlay"></div>`);
 	$navBlur.prependTo($topNav);
-	$navBlur.on('click', onBurgerClick);
+	$navBlur.on('click', () => toggleNav(false));
+}
+// Duplicates tier-1 link texts to implement desired animation
+const duplicateTier1Text = () => {
+	$tier1Links.find('> a').each( (index, element) => {
+		const { textContent } = element;
+		const $duplicate = $('<div>').text(textContent).addClass('sub-menu__heading');
+		$duplicate.appendTo(element.parentElement);
+	});
 }
 
 $(isBodyOnTop); // On load
 $(isScrolling); // On load
 $(navBlur);
+$(duplicateTier1Text);
 // $body.addClass('is-not-scrolling');
 $(window).on('scroll', isBodyOnTop); // On scroll
 $(window).on('scroll', isScrolling); // On scroll
 $navOpener.on('click', onBurgerClick); // Burger nav click
+$navCloser.on('click', onBurgerCloseClick); // Burger nav click
 $switcherLinks.on('click', onSwitcherClick); // Switch link click
 $tier1Links.find('> a').on('click', onTier1LinkClick); // Tier-1 link click
 $backToTier1.on('click', onBackToTier1Click);
