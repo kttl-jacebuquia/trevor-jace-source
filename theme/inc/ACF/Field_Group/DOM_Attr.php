@@ -57,7 +57,7 @@ class DOM_Attr extends A_Field_Group {
 							'name'     => static::FIELD_ATTR_KEY,
 							'label'    => 'Key',
 							'type'     => 'text',
-							'required' => 1,
+							'required' => true,
 						],
 						static::FIELD_ATTR_VAL => [
 							'key'   => $attr_val,
@@ -71,7 +71,7 @@ class DOM_Attr extends A_Field_Group {
 					'name'     => static::FIELD_ACCORDION . '_end',
 					'key'      => static::gen_field_key( static::FIELD_ACCORDION ) . '_end',
 					'type'     => 'accordion',
-					'endpoint' => 1,
+					'endpoint' => true,
 				],
 			],
 		];
@@ -83,7 +83,7 @@ class DOM_Attr extends A_Field_Group {
 			'label'       => 'Attributes',
 			'name'        => 'attr',
 			'display'     => 'seamless',
-			'prefix_name' => 1,
+			'prefix_name' => true,
 		], $args ) );
 	}
 
@@ -94,6 +94,20 @@ class DOM_Attr extends A_Field_Group {
 	 * @return string
 	 */
 	public static function render_attrs_of( $value = null, array $default_cls = [] ): string {
+		$attributes = static::get_attrs_of( $value, $default_cls );
+		$class      = (array) @$attributes['class'];
+		unset( $attributes['class'] );
+
+		return parent::render_attrs( $class, $attributes );
+	}
+
+	/**
+	 * @param null $value
+	 * @param array $default_cls
+	 *
+	 * @return array
+	 */
+	public static function get_attrs_of( $value = null, array $default_cls = [] ): array {
 		if ( ! is_array( $value ) ) {
 			$value = [];
 		}
@@ -125,7 +139,9 @@ class DOM_Attr extends A_Field_Group {
 			$attributes[ $attribute[ DOM_Attr::FIELD_ATTR_KEY ] ] = $attribute[ DOM_Attr::FIELD_ATTR_VAL ];
 		}
 
-		return parent::render_attrs( array_merge( $default_cls, $style_cls, $extra_cls ), $attributes );
+		$attributes['class'] = implode( ' ', array_merge( $default_cls, $style_cls, $extra_cls ) );
+
+		return $attributes;
 	}
 
 	/**

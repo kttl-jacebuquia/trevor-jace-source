@@ -3,6 +3,7 @@
 <?php
 
 use \TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type as PT;
+use \TrevorWP\Theme\ACF\Field_Group\Post_Grid;
 
 $post_type       = get_queried_object()->name;
 $header_data     = PT::get_option_for( $post_type, PT::FIELD_HEADER );
@@ -34,9 +35,10 @@ if ( ! empty( $header_data ) ) {
 		<?php } ?>
 
 		<?php # Grid ?>
-		<?= \TrevorWP\Theme\Helper\Tile_Grid::posts( $wp_query->posts, [ // todo: use same grid on Team page
-				'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ]
-		] ) ?>
+		<?= Post_Grid::render( false, [
+				Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
+				Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
+		], [ 'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ] ] ) ?>
 
 		<?php # Pagination ?>
 		<?php switch ( $pagination_type ) {

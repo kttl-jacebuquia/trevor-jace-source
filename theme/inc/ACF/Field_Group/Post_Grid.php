@@ -1,89 +1,175 @@
-<?php
-namespace TrevorWP\Theme\ACF\Field_Group;
+<?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\CPT\Team;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Util\Tools;
 
 class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
+	const FIELD_SOURCE = 'source';
+	const FIELD_QUERY_PTS = 'post_query_pts'; // post types
+	const FIELD_QUERY_TAXS = 'post_query_taxs'; // taxonomies
+	const FIELD_POST_ITEMS = 'post_items';
+
 	const FIELD_NUM_COLS = 'number_columns';
 	const FIELD_PLACEHOLDER_IMG = 'placeholder';
-	const FIELD_POST_ITEMS = 'post_items';
 	const FIELD_NUM_DISPLAY_LIMIT = 'number_display_limit';
+	const FIELD_WRAPPER_ATTR = 'wrapper_attr';
 
-	/**
-	 * @inheritDoc
-	 */
+	const SOURCE_QUERY = 'query';
+	const SOURCE_PICK = 'pick';
+
+	/** @inheritDoc */
+	public static function register(): bool {
+		add_filter( 'acf/load_field/name=' . static::FIELD_QUERY_PTS, [ static::class, 'load_field_post_query_pts' ] );
+
+		return parent::register();
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
-		$placeholder_img = static::gen_field_key( static::FIELD_PLACEHOLDER_IMG );
-		$post_items = static::gen_field_key( static::FIELD_POST_ITEMS );
-		$num_cols = static::gen_field_key( static::FIELD_NUM_COLS );
+		$source            = static::gen_field_key( static::FIELD_SOURCE );
+		$post_items        = static::gen_field_key( static::FIELD_POST_ITEMS );
+		$q_pts             = static::gen_field_key( static::FIELD_QUERY_PTS );
+		$q_taxs            = static::gen_field_key( static::FIELD_QUERY_TAXS );
+		$placeholder_img   = static::gen_field_key( static::FIELD_PLACEHOLDER_IMG );
+		$num_cols          = static::gen_field_key( static::FIELD_NUM_COLS );
 		$num_display_limit = static::gen_field_key( static::FIELD_NUM_DISPLAY_LIMIT );
+		$wrapper_attr      = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
 
 		return [
-			'title'   => 'Post Grid',
-			'fields'  => [
-					static::FIELD_NUM_COLS => [
-						'key'           => $num_cols,
-						'name'          => static::FIELD_NUM_COLS,
-						'label'         => 'Number of Columns (Desktop)',
-						'type'          => 'button_group',
-						'required'      => 1,
-						'choices'       => [
-							3 => '3',
-							4 => '4',
+				'title'  => 'Post Grid',
+				'fields' => array_merge(
+						static::_gen_tab_field( 'General' ),
+						[
+								static::FIELD_SOURCE            => [
+										'key'     => $source,
+										'name'    => static::FIELD_SOURCE,
+										'label'   => 'Source',
+										'type'    => 'select',
+										'choices' => [
+												static::SOURCE_PICK  => 'Hand Pick',
+												static::SOURCE_QUERY => 'Query',
+										],
+										'wrapper' => [
+												'width' => '50%',
+										],
+								],
+								static::FIELD_NUM_COLS          => [
+										'key'           => $num_cols,
+										'name'          => static::FIELD_NUM_COLS,
+										'label'         => 'Number of Columns (Desktop)',
+										'type'          => 'button_group',
+										'required'      => true,
+										'choices'       => [
+												3 => '3',
+												4 => '4',
+										],
+										'default_value' => 4,
+										'wrapper'       => [
+												'width' => '50%',
+										],
+								],
+								static::FIELD_PLACEHOLDER_IMG   => [
+										'key'           => $placeholder_img,
+										'name'          => static::FIELD_PLACEHOLDER_IMG,
+										'label'         => 'Placeholder Image',
+										'type'          => 'image',
+										'required'      => false,
+										'return_format' => 'array',
+										'preview_size'  => 'small',
+										'library'       => 'all',
+										'wrapper'       => [
+												'width' => '50%',
+										],
+								],
+								static::FIELD_NUM_DISPLAY_LIMIT => [
+										'key'          => $num_display_limit,
+										'name'         => static::FIELD_NUM_DISPLAY_LIMIT,
+										'label'        => 'Display Limit',
+										'instructions' => 'Number of items to be displayed before clicking <i>Load More</i>',
+										'type'         => 'number',
+										'wrapper'      => [
+												'width' => '50%',
+										],
+								],
 						],
-						'default_value' => 4,
-						'wrapper'       => [
-							'width' => '50%',
-							'class' => '',
-							'id'    => '',
+						static::_gen_tab_field( 'Posts' ),
+						[
+								static::FIELD_QUERY_PTS  => [
+										'key'               => $q_pts,
+										'name'              => static::FIELD_QUERY_PTS,
+										'label'             => 'Post Types',
+										'type'              => 'select',
+										'choices'           => [/* @see load_field_post_query_pts() */ ],
+										'multiple'          => true,
+										'ui'                => true,
+										'conditional_logic' => [
+												[
+														[
+																'field'    => $source,
+																'operator' => '==',
+																'value'    => static::SOURCE_QUERY,
+														],
+												]
+										],
+								],
+								static::FIELD_QUERY_TAXS => [
+										'key'               => $q_taxs,
+										'name'              => static::FIELD_QUERY_TAXS,
+										'label'             => 'Taxonomies',
+										'type'              => 'taxonomy',
+										'multiple'          => true,
+										'ui'                => true,
+										'conditional_logic' => [
+												[
+														[
+																'field'    => $source,
+																'operator' => '==',
+																'value'    => static::SOURCE_QUERY,
+														],
+												]
+										],
+								],
+								static::FIELD_POST_ITEMS => [
+										'key'               => $post_items,
+										'name'              => static::FIELD_POST_ITEMS,
+										'label'             => 'Posts',
+										'type'              => 'relationship',
+										'required'          => true,
+										'return_format'     => 'object',
+										'filters'           => [
+												0 => 'search',
+												1 => 'post_type',
+												2 => 'taxonomy',
+										],
+										'elements'          => [
+												0 => 'featured_image',
+										],
+										'conditional_logic' => [
+												[
+														[
+																'field'    => $source,
+																'operator' => '==',
+																'value'    => static::SOURCE_PICK,
+														],
+												]
+										],
+								],
 						],
-					],
-					static::FIELD_PLACEHOLDER_IMG => [
-						'key'           => $placeholder_img,
-						'name'          => static::FIELD_PLACEHOLDER_IMG,
-						'label'         => 'Placeholder Image',
-						'type'          => 'image',
-						'required'      => 0,
-						'return_format' => 'array',
-						'preview_size'  => 'small',
-						'library'       => 'all',
-						'wrapper'       => [
-							'width' => '50%',
-							'class' => '',
-							'id'    => '',
-						],
-					],
-					static::FIELD_NUM_DISPLAY_LIMIT => [
-						'key'           => $num_display_limit,
-						'name'          => static::FIELD_NUM_DISPLAY_LIMIT,
-						'label'         => 'Display Limit',
-						'instructions'   => 'Number of items to be displayed before clicking <i>Load More</i>',
-						'type'          => 'number',
-					],
-					static::FIELD_POST_ITEMS => [
-						'key'           => $post_items,
-						'name'          => static::FIELD_POST_ITEMS,
-						'label'         => 'Posts',
-						'type'          => 'relationship',
-						'required'      => 1,
-						'return_format' => 'object',
-						'filters'           => [
-							0 => 'search',
-							1 => 'post_type',
-							2 => 'taxonomy',
-						],
-						'elements'          => [
-							0 => 'featured_image',
-						],
-					],
-			],
+						static::_gen_tab_field( 'Attributes' ),
+						[
+								static::FIELD_WRAPPER_ATTR => DOM_Attr::clone( [
+										'key'  => $wrapper_attr,
+										'name' => static::FIELD_WRAPPER_ATTR,
+								] )
+						]
+				),
+
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
+	/** @inheritDoc */
 	public static function get_block_args(): array {
 		return [
 				'name'       => static::get_key(),
@@ -94,22 +180,20 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		];
 	}
 
-	/**
-	 * @inheritDoc
-	 */
+	/** @inheritDoc */
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
-		$num_cols = static::get_val( static::FIELD_NUM_COLS );
-		$placeholder_img = static::get_val( static::FIELD_PLACEHOLDER_IMG );
-		$posts = static::get_val( static::FIELD_POST_ITEMS );
-		$display_limit = (int) static::get_val( static::FIELD_NUM_DISPLAY_LIMIT );
-		$id = uniqid( 'tile-container-', true );
+		$val             = new Field_Val_Getter( static::class, $post, $data );
+		$num_cols        = $val->get( static::FIELD_NUM_COLS );
+		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
+		$posts           = $val->get( static::FIELD_POST_ITEMS ); // todo: add query
+		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 
-		$cls	= [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60' ];
+		$cls = [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60' ];
 		if ( ! empty( $options['class'] ) ) {
-			$cls	= array_merge( $cls, $options[ 'class' ] );
+			$cls = array_merge( $cls, $options['class'] );
 		}
 
-		$tile_options = [ 'accordion' => false, 'class' => $options[ 'tileClass' ] ?: [] ];
+		$tile_options = [ 'accordion' => false, 'class' => $options['tileClass'] ?: [] ];
 
 		if ( $options['smAccordion'] ) {
 			$tile_options['accordion'] = true;
@@ -117,40 +201,50 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$cls[] = 'sm-accordion';
 		}
 
-		$tile_options['placeholder_image'] = $placeholder_img ? $placeholder_img[ 'ID' ] : null;
+		$tile_options['placeholder_image'] = $placeholder_img
+				? $placeholder_img['ID']
+				: null;
 
-		if ( count( $posts ) < 3) {
+		if ( count( $posts ) < 3 ) {
 			$cls[] = 'desktop-autofit-columns';
 		} else {
 			// number of columns on XL breakpoint
 			$cls[] = "desktop-{$num_cols}-columns";
 		}
 
-		ob_start();
-		?>
-			<div class="<?php echo implode( ' ', $cls ) ?>" id="<?php echo $id; ?>">
-				<?php foreach ( $posts as $key => $entry ) {
-					if ( $key + 1 > $display_limit ) {
-						$tile_options[ 'hidden' ] = true;
-					} else {
-						unset($tile_options[ 'hidden' ]);
-					}
+		$count = 0;
 
-					if ( 'trevor_team' === $entry->post_type ) {
-						echo Helper\Tile::staff( $entry, $key, $tile_options );
-					} else {
-						echo Helper\Tile::post( $entry, $key, $tile_options );
-					}
-				} ?>
-			</div>
-			<?php if ( $display_limit < count( $posts ) ) { ?>
+		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( static::FIELD_WRAPPER_ATTR ), $cls );
+
+		$wrapper_attrs['id'] = $id = empty( $wrapper_attrs['id'] )
+				? uniqid( 'tile-container-' )
+				: $wrapper_attrs['id'];
+
+		ob_start(); ?>
+		<div <?= Tools::flat_attr( $wrapper_attrs ) ?>>
+			<?php foreach ( $posts as $key => $post ) {
+				$post = get_post( $post );
+
+				$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
+
+				switch ( get_post_type( $post ) ) {
+					case Team::POST_TYPE:
+						echo Helper\Tile::staff( $post, $key, $tile_options );
+						break;
+					// TODO: Add other post types
+					default:
+						echo Helper\Tile::post( $post, $key, $tile_options );
+				}
+			} ?>
+		</div>
+		<?php if ( $display_limit && $display_limit < count( $posts ) ) { ?>
 			<div class="view-all-container text-center overflow-visible pb-2">
 				<a class="view-all-cta wave-underline font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-teal-dark self-center"
-					href="#!" data-tile-container="<?php echo $id; ?>">
+				   href="#!" data-tile-container="<?= $id; ?>">
 					Load More
 				</a>
 			</div>
-			<?php } ?>
+		<?php } ?>
 		<?php return ob_get_clean();
 	}
 
@@ -158,7 +252,25 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		echo static::render( $post_id, null, compact( 'is_preview' ) );
+		$data = (array) @$block['data'];
+		echo static::render( $post_id, $data, compact( 'is_preview' ) );
 	}
 
+	/**
+	 * @param $field
+	 *
+	 * @return mixed
+	 */
+	public static function load_field_post_query_pts( $field ) {
+		if ( $field && ! empty( $field['key'] ) && $field['key'] == static::gen_field_key( static::FIELD_QUERY_PTS ) ) {
+			$choices = [];
+			foreach ( get_post_types( [], 'objects' ) as $pt ) {
+				$choices[ $pt->name ] = "{$pt->name}: {$pt->label}";
+			}
+
+			$field['choices'] = $choices;
+		}
+
+		return $field;
+	}
 }
