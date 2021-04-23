@@ -82,10 +82,11 @@
 	}
 
 	.modal-container {
-	  @apply w-auto h-auto pt-7;
-	  max-width: 75%;
-	  max-height: 75%;
-	  @apply shadow-lg rounded-px10 mx-auto;
+		@apply w-auto h-auto pt-7;
+		min-width: rem-calc(668px);
+		max-width: 90%;
+		max-height: 75%;
+		@apply shadow-lg rounded-px10 mx-auto;
 	}
   }
 
@@ -101,7 +102,12 @@
 
   @screen xl {
 	.modal-container {
-	  @apply max-w-5xl;
+		min-width: rem-calc(1028px);
+		max-width: 75%;
+
+		.prose {
+			@apply max-w-full;
+		}
 	}
   }
 }

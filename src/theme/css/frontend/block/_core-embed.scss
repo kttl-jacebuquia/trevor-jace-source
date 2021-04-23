@@ -1,14 +1,16 @@
 .wp-block-embed {
 
 	&-youtube {
-		@apply mx-auto mt-px40 md:mt-px50 xl:mt-px60;
+		&.youtube-centered { // added custom class
+			@apply mx-auto mt-px40 md:mt-px50 xl:mt-px60;
 
-		@screen lg {
-			max-width: 817px / 1225px * 100%;
+			@screen lg {
+				max-width: 817px / 1225px * 100%;
+			}
 		}
 	}
 
-	&-youtube &__wrapper {
+	&-youtube.youtube-centered &__wrapper {
 		padding-top: 204px / 319px * 100%;
 
 		@screen md {

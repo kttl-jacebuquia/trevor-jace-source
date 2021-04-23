@@ -187,8 +187,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
 		$posts           = $val->get( static::FIELD_POST_ITEMS ); // todo: add query
 		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
-
-		$cls = [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60' ];
+		$cls = [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60', 'container', 'mx-auto' ];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}
@@ -201,9 +200,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$cls[] = 'sm-accordion';
 		}
 
-		$tile_options['placeholder_image'] = $placeholder_img
-				? $placeholder_img['ID']
-				: null;
+		$tile_options['placeholder_image'] = $placeholder_img ?: null;
 
 		if ( count( $posts ) < 3 ) {
 			$cls[] = 'desktop-autofit-columns';

@@ -218,7 +218,8 @@ class Tile {
 			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
 			self::_get_thumb_var( Thumbnail::TYPE_SQUARE ),
 		];
-		$thumbnail = Thumbnail::post( $post, $thumbnail_variants );
+
+		$thumbnail = Thumbnail::post( $post, ...$thumbnail_variants );
 		$is_placeholder_thumbnail = false;
 
 		$options = array_merge( array_fill_keys( [
