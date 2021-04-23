@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use \TrevorWP\Theme\Helper;
+use TrevorWP\Theme\ACF\Field_Group;
 
 /**
  * Page Header Helpers
@@ -22,6 +23,7 @@ class Page_Header {
 				'cta_txt',
 				'cta_url',
 				'styles',
+				'buttons',
 		], null ), [], $options );
 
 		ob_start();
@@ -39,22 +41,9 @@ class Page_Header {
 						<?= $options['desc'] ?>
 					</p>
 
-					<?php if ( ! empty( $options['cta_txt'] ) || ! empty( $options['cta2_txt'] ) ) { ?>
-						<div class="flex flex-col md:flex-row justify-start md:justify-center <?php echo ( ! empty( $options['cta_txt'] ) && ! empty( $options['cta2_txt'] ) ) ? 'two-cta' : '' ?>">
-							<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
-								<a href="<?= empty( $options['cta_url'] ) ? '#' : $options['cta_url'] ?>"
-									class="hero__btn-1 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
-									<?= $options['cta_txt'] ?>
-								</a>
-							<?php } ?>
-							<?php if ( ! empty( $options['cta2_txt'] ) ) { ?>
-								<a href="<?= empty( $options['cta2_url'] ) ? '#' : $options['cta2_url'] ?>"
-									class="hero__btn-2 mt-px20 md:mt-0 md:ml-px20 inline-block text-teal-dark font-bold bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
-									<?= $options['cta2_txt'] ?>
-								</a>
-							<?php } ?>
-						</div>
-					<?php } ?>
+					<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
+						echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
+					} ?>
 				</div>
 			</div>
 		</div>
@@ -78,6 +67,7 @@ class Page_Header {
 				'cta_txt',
 				'cta_url',
 				'styles',
+				'buttons',
 		], null ), [], $options );
 		ob_start();
 		?>
@@ -94,10 +84,9 @@ class Page_Header {
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
 							<p class="page-header-desc"><?= $options['desc'] ?></p>
 						<?php } ?>
-						<?php if( $options['cta_url'] && $options['cta_txt'] ): ?>
-						<a href="<?= $options['cta_url'] ?>"
-							class="page-header-cta"><?= $options['cta_txt'] ?></a>
-						<?php endif; ?>
+						<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
+							echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
+						} ?>
 					</div>
 					<div class="page-header-img-wrap">
 						<div class="page-header-img-inner">
@@ -140,12 +129,9 @@ class Page_Header {
 				<?php if ( $options['desc'] ) { ?>
 					<p class="page-header-desc"><?= $options['desc'] ?></p>
 				<?php } ?>
-				<?php if ( ! empty( $options['cta_txt'] ) ) { ?>
-					<a href="<?= $options['cta_url'] ?>"
-					   class="page-header-cta">
-						<?= $options['cta_txt'] ?>
-					</a>
-				<?php } ?>
+				<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
+					echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
+				} ?>
 			</div>
 
 			<?php if ( $options['img_id'] ) { ?>
@@ -171,6 +157,7 @@ class Page_Header {
 				'carousel_data',
 				'swiper',
 				'styles',
+				'buttons'
 		], null ), [], $options );
 		ob_start();
 		?>
@@ -185,11 +172,8 @@ class Page_Header {
 							<?= $options['title'] ?>
 						</h1>
 						<p class="page-header-desc"><?= $options['desc'] ?></p>
-						<?php if ( ! empty( $options['cta_url'] ) ) {
-							?>
-							<a href="<?= $options['cta_url'] ?>"
-								class="page-header-cta"><?= $options['cta_txt'] ?></a>
-							<?php
+						<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
+							echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
 						} ?>
 					</div>
 					<div class="page-header-img-wrap">
@@ -213,6 +197,7 @@ class Page_Header {
 				'desc',
 				'img_id',
 				'styles',
+				'buttons',
 		], null ), [], $options );
 		ob_start();
 		?>
@@ -227,6 +212,9 @@ class Page_Header {
 							<?php if ( ! empty( $options['desc'] ) ) { ?>
 								<p class="page-header-desc"><?php echo $options['desc']; ?></p>
 							<?php } ?>
+							<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
+								echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
+							} ?>
 						</div>
 					<?php } ?>
 					<?php if ( ! empty( $options['img_id'] ) ) { ?>

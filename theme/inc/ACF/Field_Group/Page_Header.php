@@ -153,10 +153,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		}
 
 		# Buttons
-		$buttons = $val->get( static::FIELD_BUTTONS );
-		if ( ! empty( $buttons ) ) {
-			#todo
-		}
+		$args[ 'buttons' ] = $val->get( static::FIELD_BUTTONS );
+
 
 		# Featured Image for Split Image, Horizontal, and Full
 		if ( in_array( $val->get( static::FIELD_TYPE ), [ 'split_img', 'horizontal', 'img_bg' ] ) ) {
