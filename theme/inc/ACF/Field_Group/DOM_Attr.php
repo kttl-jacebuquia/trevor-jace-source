@@ -119,9 +119,19 @@ class DOM_Attr extends A_Field_Group {
 				$screen = (string) @$data[ static::FIELD_STYLE_CLASS_SCREEN ];
 
 				return implode( ' ', array_map( function ( $data ) use ( $screen ) {
+					$has_val = isset( $data['value'] ) && '' != $data['value'];
+					$val     = $has_val ? $data['value'] : null;
+					$neg_val = $has_val && $data['value'][0] == '-';
+					$rule    = @$data['acf_fc_layout'];
+
+					if ( $neg_val ) {
+						$val  = substr( $val, 1 );
+						$rule = '-' . $rule;
+					}
+
 					return ( empty( $screen ) ? '' : "{$screen}:" ) .
-					       $data['acf_fc_layout'] .
-					       ( ( ! isset( $data['value'] ) || '' == $data['value'] ) ? '' : "-{$data['value']}" );
+					       $rule .
+					       ( $has_val ? "-{$val}" : '' );
 				}, (array) @$data[ static::FIELD_STYLE_CLASS_DATA ] ) );
 			}, $value[ static::FIELD_STYLE_CLASS ] );
 
