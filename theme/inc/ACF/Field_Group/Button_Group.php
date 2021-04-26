@@ -85,7 +85,20 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 
 	/** @inheritdoc */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		echo static::render( $post_id, null, compact( 'is_preview' ) );
+		$data = [
+				static::FIELD_BUTTONS => [],
+				static::FIELD_ATTR    => get_field( static::FIELD_ATTR ),
+		];
+
+		if ( have_rows( static::FIELD_BUTTONS ) ):
+			while ( have_rows( static::FIELD_BUTTONS ) ) : the_row();
+				$data[ static::FIELD_BUTTONS ][] = [
+						static::FIELD_BUTTON => get_sub_field( static::FIELD_BUTTON ),
+				];
+			endwhile;
+		endif;
+
+		echo static::render( $post_id, $data, compact( 'is_preview' ) );
 	}
 
 	/** @inheritdoc */
