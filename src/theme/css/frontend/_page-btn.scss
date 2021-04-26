@@ -4,11 +4,14 @@
   @apply rounded-px10;
   @apply py-3 px-6;
 
-  &.primary {
-	@apply text-white bg-teal-dark border-none;
+
+  &.primary /* deprecated, use: page-btn-primary */
+  , &-primary {
+	@apply text-white bg-teal-dark;
   }
 
-  &.secondary {
+  &.secondary /* deprecated, use: page-btn-secondary */
+  , &-secondary {
 	@apply text-teal-dark bg-white border-2 border-teal-dark;
   }
 

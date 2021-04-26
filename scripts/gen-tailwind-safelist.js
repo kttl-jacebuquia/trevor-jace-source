@@ -43,6 +43,7 @@ options['h'] = optionWalker(theme.height);
 options['rounded'] = optionWalker(theme.borderRadius);
 options['max-w'] = optionWalker(theme.maxWidth);
 options['container'] = {'': ''};
+options['border'] = Object.assign(optionWalker(theme.borderColor), optionWalker(theme.borderWidth));
 
 const fileContent = [];
 
