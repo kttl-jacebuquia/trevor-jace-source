@@ -86,12 +86,12 @@
 
 			<li>
 				<a class="text-xl font-bold text-white line-through"
-				   href="<?= TrevorWP\Theme\Single_Page\Strategic_Plan::get_permalink() ?>">Strategic Plan</a>
+				   href="/strategic-llan">Strategic Plan</a>
 			</li>
 
 			<li>
-				<a class="text-xl font-bold text-white line-through"
-				   href="<?= TrevorWP\Theme\Single_Page\Research::get_permalink() ?>">Research</a>
+				<a class="text-xl font-bold text-white"
+				   href="/research">Research</a>
 			</li>
 
 			<li>

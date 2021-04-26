@@ -185,7 +185,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$val             = new Field_Val_Getter( static::class, $post, $data );
 		$num_cols        = $val->get( static::FIELD_NUM_COLS );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
-		$posts           = $val->get( static::FIELD_POST_ITEMS ); // todo: add query
+		$posts           = (array) $val->get( static::FIELD_POST_ITEMS ); // todo: add query
 		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 		$cls = [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60', 'container', 'mx-auto' ];
 		if ( ! empty( $options['class'] ) ) {

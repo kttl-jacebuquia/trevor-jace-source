@@ -71,7 +71,7 @@ class Page_Header {
 		], null ), [], $options );
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo implode( ' ', $options['styles'] ) ?>">
+		<div class="header-container w-full <?php echo implode( ' ', (array) $options['styles'] ) ?>">
 			<div class="page-header type-split-img">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">

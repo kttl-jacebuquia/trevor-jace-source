@@ -82,9 +82,6 @@ class Hooks {
 		# Body Class
 		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
 
-		# Single Pages
-		Single_Page\Abstract_Single_Page::init_all();
-
 		# Search
 		Customizer\Search::init_all();
 
@@ -255,12 +252,6 @@ class Hooks {
 		new Customizer\Fundraise( $manager );
 		new Customizer\Social_Media_Accounts( $manager );
 		new Customizer\Research_Briefs( $manager );
-
-		# Single Pages
-		/** @var Single_Page\Abstract_Single_Page $cls */
-		foreach ( Single_Page\Abstract_Single_Page::ALL as $cls ) {
-			new $cls( $manager );
-		}
 	}
 
 	/**
