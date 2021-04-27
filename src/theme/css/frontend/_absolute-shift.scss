@@ -30,3 +30,9 @@ $prev-screen-width: theme('screens.sm');
 	}
   }
 }
+
+
+.expand-full-width {
+  width: 100vw;
+  margin-left: calc((100vw - 100%) / -2);
+}

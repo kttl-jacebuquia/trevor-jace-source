@@ -57,14 +57,16 @@ class Carousel {
 		ob_start(); ?>
 		<div class="carousel-wrap <?= implode( ' ', $ext_cls ) ?>"
 			 id="<?= esc_attr( $id ) ?>">
-			<div class="carousel-header container mx-auto">
-				<h2 class="page-sub-title <?= implode( ' ', $options['title_cls'] ); ?>"><?= $options['title'] ?></h2>
-				<?php if ( ! empty( $options['subtitle'] ) ) { ?>
-					<p class="page-sub-title-desc <?= implode( ' ', $options['title_cls'] ); ?>">
-						<?= esc_html( $options['subtitle'] ) ?>
-					</p>
-				<?php } ?>
-			</div>
+			<?php if ( ! empty( $options['title'] ) ) { ?>
+				<div class="carousel-header container mx-auto">
+					<h2 class="page-sub-title <?= implode( ' ', $options['title_cls'] ); ?>"><?= $options['title'] ?></h2>
+					<?php if ( ! empty( $options['subtitle'] ) ) { ?>
+						<p class="page-sub-title-desc <?= implode( ' ', $options['title_cls'] ); ?>">
+							<?= esc_html( $options['subtitle'] ) ?>
+						</p>
+					<?php } ?>
+				</div>
+			<?php } ?>
 
 			<div class="carousel-full-width-wrap">
 				<div class="carousel-container">

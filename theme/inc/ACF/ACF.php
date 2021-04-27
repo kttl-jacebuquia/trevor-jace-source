@@ -20,6 +20,7 @@ class ACF {
 		Field_Group\Page_Circulation::class,
 		Field_Group\Info_Boxes::class,
 		Field_Group\Post_Grid::class,
+		Field_Group\Post_Carousel::class,
 		Field_Group\Info_Card::class,
 		Field_Group\Info_Card_Grid::class,
 		Field_Group\Address::class,

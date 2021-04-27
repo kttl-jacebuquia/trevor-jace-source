@@ -10,6 +10,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_QUERY_PTS = 'post_query_pts'; // post types
 	const FIELD_QUERY_TAXS = 'post_query_taxs'; // taxonomies
 	const FIELD_POST_ITEMS = 'post_items';
+	const SUBFIELD_TAXS_TAX = self::FIELD_QUERY_TAXS . '_tax';
+	const SUBFIELD_TAXS_TERMS = self::FIELD_QUERY_TAXS . '_terms';
 
 	const FIELD_NUM_COLS = 'number_columns';
 	const FIELD_PLACEHOLDER_IMG = 'placeholder';
@@ -22,6 +24,10 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	/** @inheritDoc */
 	public static function register(): bool {
 		add_filter( 'acf/load_field/name=' . static::FIELD_QUERY_PTS, [ static::class, 'load_field_post_query_pts' ] );
+		add_filter( 'acf/load_field/name=' . static::SUBFIELD_TAXS_TAX, [
+				static::class,
+				'load_field_post_query_taxs'
+		] );
 
 		return parent::register();
 	}
@@ -118,9 +124,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 										'key'               => $q_taxs,
 										'name'              => static::FIELD_QUERY_TAXS,
 										'label'             => 'Taxonomies',
-										'type'              => 'taxonomy',
-										'multiple'          => true,
-										'ui'                => true,
+										'type'              => 'repeater',
 										'conditional_logic' => [
 												[
 														[
@@ -129,6 +133,20 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 																'value'    => static::SOURCE_QUERY,
 														],
 												]
+										],
+										'sub_fields'        => [
+												static::SUBFIELD_TAXS_TAX   => [
+														'key'     => self::gen_field_key( static::SUBFIELD_TAXS_TAX ),
+														'name'    => static::SUBFIELD_TAXS_TAX,
+														'type'    => 'select',
+														'choices' => [],
+												],
+												static::SUBFIELD_TAXS_TERMS => [
+														'key'         => self::gen_field_key( static::SUBFIELD_TAXS_TERMS ),
+														'name'        => static::SUBFIELD_TAXS_TERMS,
+														'type'        => 'text',
+														'placeholder' => '123,456,780'
+												],
 										],
 								],
 								static::FIELD_POST_ITEMS => [
@@ -185,9 +203,17 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$val             = new Field_Val_Getter( static::class, $post, $data );
 		$num_cols        = $val->get( static::FIELD_NUM_COLS );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
-		$posts           = (array) $val->get( static::FIELD_POST_ITEMS ); // todo: add query
+		$posts           = static::_get_posts( $val );
 		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
-		$cls = [ 'tile-grid-container', 'mb-px50', 'mt-px36', 'md:mt-px50', 'xl:mt-px60', 'container', 'mx-auto' ];
+		$cls             = [
+				'tile-grid-container',
+				'mb-px50',
+				'mt-px36',
+				'md:mt-px50',
+				'xl:mt-px60',
+				'container',
+				'mx-auto'
+		];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}
@@ -246,10 +272,58 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	}
 
 	/**
+	 * @param Field_Val_Getter $val
+	 *
+	 * @return array
+	 */
+	protected static function _get_posts( Field_Val_Getter $val ): array {
+		$source        = $val->get( static::FIELD_SOURCE );
+		$display_limit = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
+
+		if ( $source == static::SOURCE_QUERY ) {
+			$q_args = [ 'tax_query' => [ 'relation' => 'OR' ], 'posts_per_page' => $display_limit, ];
+
+			if ( ! empty( $post_type = $val->get( static::FIELD_QUERY_PTS ) ) ) {
+				$q_args['post_type'] = $post_type;
+			}
+
+			if ( ! empty( $taxs = $val->get( static::FIELD_QUERY_TAXS ) ) ) {
+				foreach ( $taxs as $tax ) {
+					$q_args['tax_query'][] = [
+							'taxonomy' => $tax[ static::SUBFIELD_TAXS_TAX ],
+							'terms'    => wp_parse_id_list( $tax[ static::SUBFIELD_TAXS_TERMS ] ),
+					];
+				}
+			}
+
+			$q     = new \WP_Query( $q_args );
+			$posts = $q->posts;
+		} elseif ( $source == static::SOURCE_PICK ) {
+			$posts = (array) $val->get( static::FIELD_POST_ITEMS );
+		} else {
+			$posts = [];
+		}
+
+		return $posts;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
 		$data = (array) @$block['data'];
+
+		if ( have_rows( static::FIELD_QUERY_TAXS ) ):
+			$data[ static::FIELD_QUERY_TAXS ] = [];
+			while ( have_rows( static::FIELD_QUERY_TAXS ) ) : the_row();
+				$data[ static::FIELD_QUERY_TAXS ][] = [
+						static::SUBFIELD_TAXS_TAX   => get_sub_field( static::SUBFIELD_TAXS_TAX ),
+						static::SUBFIELD_TAXS_TERMS => get_sub_field( static::SUBFIELD_TAXS_TERMS ),
+				];
+			endwhile;
+		endif;
+
+
 		echo static::render( $post_id, $data, compact( 'is_preview' ) );
 	}
 
@@ -266,6 +340,17 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			}
 
 			$field['choices'] = $choices;
+		}
+
+		return $field;
+	}
+
+	public static function load_field_post_query_taxs( $field ) {
+		if ( $field && ! empty( $field['key'] ) && $field['key'] == static::gen_field_key( static::SUBFIELD_TAXS_TAX ) ) {
+			$choices = &$field['choices'];
+			foreach ( get_taxonomies( [], 'object' ) as $tax ) {
+				$choices[ $tax->name ] = "{$tax->name}: {$tax->label}";
+			}
 		}
 
 		return $field;
