@@ -212,7 +212,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				'mt-px36',
 				'md:mt-px50',
 				'xl:mt-px60',
-				'container',
 				'mx-auto'
 		];
 		if ( ! empty( $options['class'] ) ) {
@@ -238,7 +237,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 		$count = 0;
 
-		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( static::FIELD_WRAPPER_ATTR ), $cls );
+		$wrapper_attrs = DOM_Attr::get_attrs_of( static::get_val( static::FIELD_WRAPPER_ATTR ), $cls );
 
 		$wrapper_attrs['id'] = $id = empty( $wrapper_attrs['id'] )
 				? uniqid( 'tile-container-' )
@@ -266,7 +265,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		</div>
 		<?php if ( $display_limit && $display_limit < count( $posts ) ) { ?>
 			<div class="view-all-container text-center overflow-visible pb-2">
-				<a class="view-all-cta wave-underline font-bold text-px24 leading-px34 tracking-em001 border-b-2 text-teal-dark self-center"
+				<a class="view-all-cta wave-underline font-bold text-px24 leading-px34 md:text-px18 tracking-px05 xl:text-px26 xl:leading-px36 tracking-em001 border-b-2 text-teal-dark self-center"
 				   href="#!" data-tile-container="<?= $id; ?>">
 					Load More
 				</a>

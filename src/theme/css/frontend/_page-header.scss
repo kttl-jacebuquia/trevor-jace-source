@@ -542,11 +542,15 @@
 		}
 
 		&-desc {
-			@apply pb-0 md:text-px18 md:leading-px24;
+			@apply pb-0 text-px20 leading-px28 md:text-px16 md:leading-px22 xl:text-px26 xl:leading-px36 xl:tracking-em005;
 		}
 
 		&-content-wrap {
 			@apply pb-px80 md:pb-px50 lg2:pb-px70 text-center mx-auto;
+
+			@screen xl {
+				width: rem-calc(822px);
+			}
 		}
 
 		&-image {

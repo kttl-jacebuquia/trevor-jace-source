@@ -22,6 +22,13 @@
 	}
   }
 
+	.swiper-slide {
+		@apply self-stretch h-auto;
+		.tile.staff {
+			@apply h-full;
+		}
+	}
+
 	.swiper-button {
 		@apply w-px100;
 
@@ -219,6 +226,23 @@
 
 			@screen xl {
 				width: theme('staffCard.width.xl');
+			}
+		}
+
+		.tile {
+			@apply p-0;
+		}
+
+		.post-thumbnail-wrap {
+			@apply rounded-t-px10;
+
+			img {
+				@apply object-center object-cover rounded-t-px10 mx-auto w-full;
+				height: rem-calc(180px);
+
+				@screen xl {
+					height: rem-calc(200px);
+				}
 			}
 		}
 

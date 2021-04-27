@@ -84,7 +84,7 @@ class Team {
 		ob_start();
 		?>
 		<div class="team-member container mx-auto text-teal-dark bg-white text-left xl:pl-14 xl:pr-28">
-			<h2 class="font-semibold w-full text-px32 leading-px42 md:text-px30 md:leading-px40 xl:text-px40 xl:leading-px48 mb-px16"><?php echo esc_html( $post->post_title ); ?></h2>
+			<h2 class="font-semibold md:font-bold xl:font-semibold w-full text-px32 leading-px42 md:text-px30 md:leading-px40 xl:text-px40 xl:leading-px48 mb-px16"><?php echo esc_html( $post->post_title ); ?></h2>
 			<div class="team-member__details mb-px30 md:mb-px44">
 				<?php if ( ! empty( $group ) ) { ?>
 					<span class="team-member__group font-semibold text-px18 leading-px26">
@@ -103,7 +103,7 @@ class Team {
 					<?php echo $options[ 'thumbnail' ];  ?>
 				</div>
 			<?php } ?>
-			<div class="prose prose-teal-dark">
+			<div class="text-px16 leading-px22 tracking-px05 md:text-px18 xl:leading-px26 prose-teal-dark prose">
 				<?= apply_filters( 'the_content', get_the_content( null, false, $post ) ); ?>
 			</div>
 		</div>

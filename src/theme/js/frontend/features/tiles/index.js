@@ -3,8 +3,9 @@ import $ from 'jquery';
 export default function showAllTiles ($showAllBtn) {
 
 	if ($showAllBtn.length) {
-		$showAllBtn.on('click', function() {
-			const tileContainerId = $showAllBtn[0].dataset.tileContainer;
+		$showAllBtn.on('click', function(e) {
+			e.preventDefault();
+			const tileContainerId = this.dataset.tileContainer;
 			const tileContainer = document.getElementById(tileContainerId);
 
 			if (tileContainer.children.length) {

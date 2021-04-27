@@ -1,8 +1,9 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
-use TrevorWP\Theme\Helper\Carousel;
+use TrevorWP\Theme\Helper;
 use TrevorWP\Util\Tools;
+use TrevorWP\CPT\Team;
 
 class Post_Carousel extends Post_Grid {
 	/** @inheritdoc */
@@ -31,10 +32,24 @@ class Post_Carousel extends Post_Grid {
 		$posts         = static::_get_posts( $val );
 		$cls           = [];
 		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( static::FIELD_WRAPPER_ATTR ), $cls );
+		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
+		$post_type     = $val->get( static::FIELD_QUERY_PTS );
+		$source        = $val->get( static::FIELD_SOURCE );
+
+		$class = [ 'mt-12', 'mb-0', ];
+
+		if ( in_array( Team::POST_TYPE, $post_type ) && $source === "query" ) {
+			$class[] = "post-carousel--staff";
+		}
+
+		$options = [ 'class' => implode( " ", $class ) ];
+		if ( ! empty( $placeholder_img ) ) {
+			$options[ 'card_options' ] = [ 'placeholder_image' => $placeholder_img ];
+		}
 
 		ob_start(); ?>
 		<div <?= Tools::flat_attr( $wrapper_attrs ) ?>>
-			<?= Carousel::posts( $posts, [ 'class' => 'expand-full-width mt-12 mb-0' ] ) ?>
+			<?= Helper\Carousel::posts( $posts, $options ) ?>
 		</div>
 		<?php return ob_get_clean();
 	}

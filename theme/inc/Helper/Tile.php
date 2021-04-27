@@ -4,6 +4,8 @@ use TrevorWP\CPT;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Meta;
 use \TrevorWP\Theme\Single_Page;
+use TrevorWP\Theme\ACF\Field_Group;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\ACF\Field_Group\Financial_Report;
 
 class Tile {
@@ -210,7 +212,8 @@ class Tile {
 		$_class = [ 'tile', 'staff', 'relative', ];
 		$post = get_post( $post );
 		$name = get_the_title( $post );
-		$pronoun = Meta\Post::get_pronounces( $post->ID );
+		$val = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
+		$pronoun = $val->get( Field_Group\Team_Member::FIELD_PRONOUN );
 		$group_terms = get_the_terms( $post, CPT\Team::TAXONOMY_GROUP );
 		$group = array_pop( $group_terms )->name;
 		$thumbnail_variants = [
@@ -227,8 +230,6 @@ class Tile {
 			'class',
 			'hidden',
 		], [] ), $options );
-
-
 
 		if ( empty( $thumbnail ) ) {
 			$_class[] = 'placeholder-thumbnail';
@@ -254,13 +255,21 @@ class Tile {
 
 			echo ( new \TrevorWP\Theme\Helper\Modal( CPT\Team::render_modal( $post,  compact( 'thumbnail', 'is_placeholder_thumbnail', ) ), [
 					'target' => "#{$id} a",
-					'id'     => "{$id}-content"
+					'id'     => "{$id}-content",
+					'class'  => [ 'team' ],
 			] ) )->render();
 		}, 10, 0 );
 
 		$attr          = (array) $options['attr'];
 		$attr['class'] = implode( ' ', $_class );
 		$attr['id'] = $id;
+
+		$name_class = [];
+		if ( strtolower( $group ) === "founder" ) {
+			$name_class = explode( " ", "text-px22 leading-px28 tracking-em005 md:text-px20 md:text-px30 xl:text-px22 xl:leading-px32" );
+		} else {
+			$name_class = explode( " ", "text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32" );
+		}
 
 		ob_start();
 	?>
@@ -269,18 +278,20 @@ class Tile {
 				<div class="post-thumbnail-wrap bg-gray-light">
 					<?php echo $thumbnail; ?>
 				</div>
-				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px35">
-					<p class="information__name font-semibold text-px18 leading-px26 xl:text-px22 xl:leading-px32 <?php echo ( strtolower( $group ) === 'founder' ) ? 'text-center' : '' ?>">
+				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px24">
+					<p class="information__name font-semibold <?php echo implode( " ", $name_class ); ?> <?php echo ( strtolower( $group ) === 'founder' ) ? 'text-center' : '' ?>">
 						<?php echo esc_html( $name ); ?>
 					</p>
-					<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
-						<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
-							<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
-						<?php } ?>
-						<?php if ( ! empty( $pronoun ) ) { ?>
-							<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
-						<?php } ?>
-					</div>
+					<?php if ( ! empty ( $group ) && strtolower( $group ) !== 'founder' || ! empty ( $pronoun ) ) { ?>
+						<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
+							<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
+								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
+							<?php } ?>
+							<?php if ( ! empty( $pronoun ) ) { ?>
+								<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
+							<?php } ?>
+						</div>
+					<?php } ?>
 				</div>
 			</a>
 		</article>

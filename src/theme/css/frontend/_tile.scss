@@ -49,8 +49,7 @@
 			}
 
 			img {
-				max-height: rem-calc(80px);
-				@apply w-auto m-auto rounded-t-px10;
+				@apply w-full m-auto rounded-t-px10 object-cover object-center max-h-full;
 			}
 
 			&.with-thumbnail {
@@ -118,7 +117,11 @@
 		&-container {
 			@apply justify-center;
 			@apply gap-px28;
-			grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+			grid-template-columns: repeat(2, minmax(0, rem-calc(264px)));
+
+			&.founder {
+				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+			}
 		}
   }
 
