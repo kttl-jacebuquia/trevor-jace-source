@@ -30,6 +30,7 @@ class ACF {
 		Field_Group\Team_Member::class,
 		Field_Group\Partners::class,
 		Field_Group\Post_Images::class,
+		Field_Group\Financial_Report::class,
 	];
 
 	public static function construct() {

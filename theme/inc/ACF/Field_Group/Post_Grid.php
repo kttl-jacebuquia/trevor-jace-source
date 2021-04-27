@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\CPT\Team;
+use TrevorWP\CPT\Financial_Report;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Util\Tools;
@@ -253,6 +254,9 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				switch ( get_post_type( $post ) ) {
 					case Team::POST_TYPE:
 						echo Helper\Tile::staff( $post, $key, $tile_options );
+						break;
+					case Financial_Report::POST_TYPE:
+						echo Helper\Tile::financial_report( $post, $key, $tile_options );
 						break;
 					// TODO: Add other post types
 					default:

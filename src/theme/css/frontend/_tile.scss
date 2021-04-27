@@ -168,6 +168,10 @@
 
 	@screen xl {
 		&-container {
+			.post-type-archive-trevor_fin_report & {
+				@apply grid-cols-3;
+			}
+			
 			&.desktop-autofit-columns {
 				grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(395px)));
 			}
@@ -204,16 +208,30 @@
 	@apply bg-gray-light transition-colors;
   }
 
+  .post-type-archive-trevor_fin_report & {
+	  @apply px-px28 pt-px38 pb-px92;
+  }
+
   &-title-top {
 	@apply text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5;
   }
 
   &-title {
 	@apply text-px24 leading-px28 tracking-em001 font-semibold mb-3;
+
+	.post-type-archive-trevor_fin_report & {
+		@apply text-px30 leading-px40;
+	}
   }
 
   &-desc {
 	@apply text-px16 leading-px24 mb-4;
+  }
+
+  &-cta-wrap {
+	.post-type-archive-trevor_fin_report & {
+		@apply mt-px28;
+	}
   }
 
   &-cta {
@@ -289,19 +307,39 @@
 	@apply shadow-md;
 	max-width: theme('postCard.width.md');
 
+	.post-type-archive-trevor_fin_report & {
+		@apply px-px27 pb-px152;
+	}
+
 	&-title {
+		.post-type-archive-trevor_fin_report & {
+			@apply text-px24 leading-px28 tracking-em001;
+			@apply mb-px40;
+		}
 	}
 
 	&-desc {
 	}
 
 	&-cta-wrap {
+		.post-type-archive-trevor_fin_report & {
+			@apply mt-px32;
+		}
+	}
 
+	&-cta {
+		.post-type-archive-trevor_fin_report & {
+			@apply text-px18 leading-px22;
+		}
 	}
   }
 
   @screen lg {
 	max-width: theme('postCard.width.lg');
+
+	.post-type-archive-trevor_fin_report & {
+		@apply pt-px48 px-px38 pb-px140;
+	}
 
 	&-title-top {
 	  @apply text-px18 leading-px24 mb-3;
@@ -309,6 +347,10 @@
 
 	&-title {
 	  @apply text-px26 leading-px36 mb-3;
+
+		.post-type-archive-trevor_fin_report & {
+			@apply text-px30 leading-px40 mb-px28;;
+		}
 	}
 
 	&-desc {
@@ -321,6 +363,16 @@
 
 	&-cta-wrap {
 	  @apply text-px20 leading-px26;
+
+		.post-type-archive-trevor_fin_report & {
+			@apply mt-px28;
+		}
+	}
+
+	&-cta {
+		.post-type-archive-trevor_fin_report & {
+			@apply text-px20 leading-px26;
+		}
 	}
   }
 

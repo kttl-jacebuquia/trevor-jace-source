@@ -22,6 +22,12 @@ class Tile_Grid {
 		return self::custom( $posts, $options );
 	}
 
+	public static function financial_report( array $posts, array $options = [] ): string {
+		$options[ 'tileMethod' ] = 'financial_report';
+
+		return self::custom( $posts, $options );
+	}
+
 	/**
 	 * @param array $data
 	 * @param array $options
@@ -33,6 +39,7 @@ class Tile_Grid {
 				'title',
 				'desc',
 				'class',
+				'gridClass',
 				'tileClass',
 		], null ), [
 				'smAccordion' => false,
@@ -41,6 +48,12 @@ class Tile_Grid {
 
 		# class
 		$cls = [ 'tile-grid' ];
+		if ( ! empty( $options['class'] ) ) {
+			$cls = array_merge( $cls, $options['class'] );
+		}
+
+		# gridClass
+		$grid_class = [ 'tile-grid' ];
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}

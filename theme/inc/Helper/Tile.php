@@ -4,6 +4,7 @@ use TrevorWP\CPT;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Meta;
 use \TrevorWP\Theme\Single_Page;
+use TrevorWP\Theme\ACF\Field_Group\Financial_Report;
 
 class Tile {
 	/**
@@ -139,7 +140,6 @@ class Tile {
 		if ( $options['accordion'] ) {
 			return self::accordion( $data, $key, $options );
 		}
-
 
 		$options = array_merge( array_fill_keys( [
 				'class',
@@ -285,6 +285,53 @@ class Tile {
 			</a>
 		</article>
 	<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 * @param int $key
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function financial_report ( \WP_Post $post, int $key, array $options = [] ) :string {
+		$options = array_merge( array_fill_keys( [
+				'class',
+				'attr',
+				'card_type',
+				'hidden',
+		], null ), $options );
+
+		# class
+		$cls = [ 'tile', 'financial-report-tile', 'relative' ];
+		if ( ! empty( $options['class'] ) ) {
+			$cls = array_merge( $cls, $options['class'] );
+		}
+
+		$reports = Financial_Report::get_reports($post);
+
+		$attr          = (array) $options['attr'];
+		$attr['class'] = implode( ' ', $cls );
+
+		ob_start();
+		?>
+		<div <?= Tools::flat_attr( $attr ) ?>>
+			<div class="tile-inner">
+				<div class="tile-title"><?= $post->post_title ?></div>
+				<?php if ( ! empty( $reports ) ) : ?>
+					<?php foreach ( $reports as $report ): ?>
+						<div class="tile-cta-wrap">
+							<a href="<?= $report['url'] ?>" class="tile-cta">
+								<span><?= $report['title'] ?></span>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+
+			</div>
+		</div>
+		<?php
 		return ob_get_clean();
 	}
 

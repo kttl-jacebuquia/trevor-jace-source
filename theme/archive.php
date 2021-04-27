@@ -11,6 +11,7 @@ $pagination_type = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_PAGINATION_
 $content_top     = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_CONTENT_TOP );
 $content_btm     = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_CONTENT_BTM );
 $cta_data        = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_CTA );
+$cta_location    = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_CTA_LOCATION );
 
 # Header
 if ( ! empty( $header_data ) ) {
@@ -36,8 +37,8 @@ if ( ! empty( $header_data ) ) {
 
 		<?php # Grid ?>
 		<?= Post_Grid::render( false, [
-				Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
-				Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
+			Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
+			Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
 		], [ 'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ] ] ) ?>
 
 		<?php # Pagination ?>
@@ -51,15 +52,27 @@ if ( ! empty( $header_data ) ) {
 				break;
 		} ?>
 
-		<?php # CTA ?>
-		<?php if ( ! empty( $cta_data ) ) { ?>
+		<?php # CTA Before Bottom ?>
+		<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_BEFORE && ! empty( $cta_data ) ) : ?>
 			<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
-		<?php } ?>
+		<?php endif; ?>
 
 		<?php # Bottom Content ?>
 		<?php if ( ! empty( $content_btm ) ) { ?>
-			<div class="page-ext-content page-ext-content-btm"><?= $content_btm ?></div>
+			<div class="page-ext-content page-ext-content-btm">
+				<?= $content_btm ?>
+
+				<?php # CTA Inside Bottom ?>
+				<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_INSIDE && ! empty( $cta_data ) ) : ?>
+					<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
+				<?php endif; ?>
+			</div>
 		<?php } ?>
+
+		<?php # CTA After Bottom ?>
+		<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_AFTER && ! empty( $cta_data ) ) : ?>
+			<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
+		<?php endif; ?>
 	</div>
 </main><!-- #site-content -->
 

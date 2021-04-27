@@ -23,7 +23,13 @@ abstract class A_Post_Type extends A_Options_Page {
 	const FIELD_ARCHIVE_CONTENT_TOP = 'arc_content_top';
 	const FIELD_ARCHIVE_CONTENT_BTM = 'arc_content_btm';
 	const FIELD_ARCHIVE_CTA = 'arc_cta';
+	const FIELD_ARCHIVE_CTA_LOCATION = 'arc_cta_location';
 	// todo: add slug
+
+	# CTA Location Options
+	const CTA_LOCATION_OPTION_BEFORE = 'arc_cta_location_before_btm';
+	const CTA_LOCATION_OPTION_INSIDE = 'arc_cta_location_inside_btm';
+	const CTA_LOCATION_OPTION_AFTER = 'arc_cta_location_after_btm';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
@@ -45,6 +51,7 @@ abstract class A_Post_Type extends A_Options_Page {
 		$archive_content_top = static::gen_field_key( static::FIELD_ARCHIVE_CONTENT_TOP );
 		$archive_content_btm = static::gen_field_key( static::FIELD_ARCHIVE_CONTENT_BTM );
 		$archive_cta         = static::gen_field_key( static::FIELD_ARCHIVE_CTA );
+		$arc_cta_location    = static::gen_field_key( static::FIELD_ARCHIVE_CTA_LOCATION );
 
 		return [
 			static::FIELD_HEADER                  => Page_Header::clone( [
@@ -99,6 +106,21 @@ abstract class A_Post_Type extends A_Options_Page {
 				'label'       => 'CTA',
 				'display'     => 'group',
 			] ),
+			static::FIELD_ARCHIVE_CTA_LOCATION     => [
+				'key'         => $arc_cta_location,
+				'name'        => $arc_cta_location,
+				'prefix_name' => true,
+				'label'       => 'CTA Location',
+				'display'     => 'group',
+				'type' 		  => 'radio',
+				'choices' => array(
+					static::CTA_LOCATION_OPTION_BEFORE => 'Before Bottom Content',
+					static::CTA_LOCATION_OPTION_INSIDE => 'Inside Bottom Content',
+					static::CTA_LOCATION_OPTION_AFTER => 'After Bottom Content',
+				),
+				'default_value' => static::CTA_LOCATION_OPTION_BEFORE,
+				'layout' => 'horizontal',
+			],
 		];
 	}
 

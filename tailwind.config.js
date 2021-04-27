@@ -325,6 +325,7 @@ module.exports = {
 				em005: '0.005em',
 				em001: '0.01em',
 				em002: '0.02em',
+				em_005: '-0.005em',
 				em_001: '-0.01em', // todo: convert to tailwind negative
 				px05: px2rem(.5),
 				px_015: px2rem(-1.5),
@@ -425,6 +426,7 @@ module.exports = {
 				px140: px2rem(140),
 				px145: px2rem(145),
 				px150: px2rem(150),
+				px152: px2rem(152),
 				px154: px2rem(154),
 				px160: px2rem(160),
 				px170: px2rem(170),
