@@ -20,6 +20,9 @@
 
 	.search-field {
 		@apply text-indigo;
+		@apply -ml-px60 pl-px60;
+		// md
+		@apply md:-ml-px94 md:pl-px94;
 	}
 
 	#rc-search-main[placeholder]::before {
