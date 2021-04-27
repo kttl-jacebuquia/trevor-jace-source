@@ -7,6 +7,25 @@
 	@apply pointer-events-auto opacity-100;
   }
 
+	&#js-fundraiser-quiz {
+		.modal-close {
+			@apply absolute m-0 top-px70 md:top-px50 right-px28 md:right-px50 bg-white text-teal-dark py-px12 px-px17;
+			border-radius: rem-calc(18px);
+		}
+
+		.modal-container {
+			@apply bg-teal-dark max-h-full max-w-none w-full pt-px50 md:pt-0;
+
+			&.dev-form {
+				@apply bg-blue_green;
+			}
+		}
+
+		.modal-content-wrap {
+			@apply h-screen flex flex-col justify-center m-0;
+		}
+	}
+
   .modal-overlay {
 	@apply absolute w-full h-full bg-teal-dark opacity-30 z-40;
   }

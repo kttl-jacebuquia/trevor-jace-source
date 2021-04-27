@@ -461,6 +461,7 @@ module.exports = {
 				'indigo-lg': '0px 8px 6px rgba(16, 16, 102, 0.1)',
 				'light': '0px 0px 16px rgba(0, 58, 72, 0.2)',
 				'darkGreen': '0px 6px 12px 0px rgb(0, 58, 72, 0.1)',
+				'radio' : 'inset 0 0 0 2px #003A48',
 				none: 'none',
 			},
 			backgroundImage: theme => ({

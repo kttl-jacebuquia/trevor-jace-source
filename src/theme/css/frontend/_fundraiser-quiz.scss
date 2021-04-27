@@ -1,0 +1,238 @@
+.fundraiser-quiz {
+
+	&--steps {
+		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
+	}
+
+	&--form {
+		@apply pb-px64 xl:pb-px100;
+		padding-top: rem-calc(450px);
+		@screen md {
+			@apply container pt-px200 pb-px130;
+		}
+	}
+
+	&--create-fundraiser {
+	}
+
+
+	@screen xl {
+		max-width: 764px / 1440px * 100%;
+
+	}
+
+	&--step-one &__title {
+		@apply font-normal md:font-bold text-px24 leading-px28 md:text-px32 md:leading-px42 xl:text-px36 xl:leading-px46 text-center;
+	}
+
+	&__title {
+		@apply font-bold text-px32 leading-px40 md:leading-px42 xl:text-px36 xl:leading-px46 text-center tracking-px_05 mb-px16 md:mb-px15 xl:mb-px12;
+	}
+
+	&__description {
+		@apply font-normal text-px16 leading-px24 md:leading-px22 xl:text-px20 xl:leading-px30 text-center mb-px16 md:mb-px15 xl:mb-px12;
+	}
+
+	&__instruction {
+		@apply font-normal text-px14 leading-px20 xl:text-px16 xl:leading-px22 tracking-px05;
+	}
+
+	&--step-one &__choices {
+		@screen md {
+			column-count: 2;
+		}
+	}
+
+	&__choices {
+		@apply font-normal text-left text-px16 leading-px22 mt-px26;
+		column-count: 1;
+
+		@screen md {
+			@apply text-px18 mt-px58 mx-auto;
+			width: 80%;
+		}
+
+		@screen xl {
+			@apply mx-auto mt-px35 w-2/4 gap-x-px30 gap-px30;
+		}
+	}
+
+	&--steps &__choices {
+		@apply w-auto flex flex-col justify-start gap-y-px30;
+
+		@screen md {
+			width: rem-calc(340px);
+		}
+
+		@screen xl {
+			width: rem-calc(300px);
+		}
+	}
+
+	&--steps &__btn-container {
+		@apply w-auto m-0 pl-px120;
+
+		@screen xl {
+			@apply pl-px100;
+		}
+	}
+
+	&__btn-container {
+		@apply relative mb-px25;
+
+		@screen lg {
+			width: 80%;
+			@apply mx-auto pl-px30;
+		}
+
+		@screen xl {
+			width: 90%;
+			@apply pl-0;
+		}
+
+		label {
+			@apply inline-block pl-px35 md:pl-px40;
+		}
+	}
+
+	&__radio-btn {
+		@apply absolute transform -translate-y-2/4 bg-teal-dark border-2 border-solid border-white rounded-px10 shadow-radio;
+		top: 50%;
+		height: rem-calc(18px);
+		width: rem-calc(18px);
+		outline: none;
+		vertical-align: middle;
+		appearance: none;
+		transition: all .3s ease-in-out;
+
+		&:checked {
+			@apply bg-white;
+		}
+	}
+
+	&__fields {
+		@apply flex flex-col text-px18 leading-px26 md:leading-px22 xl:text-px20 xl:leading-px24 font-medium mt-px40 md:mt-px50 xl:mt-px60;
+
+		:is(input, textarea, select) {
+			@apply bg-gray-light text-blue_green py-px20 px-px28 rounded-px10 w-full;
+
+			&::placeholder {
+				@apply text-blue_green;
+			}
+		}
+
+		@screen xl {
+			@apply mx-auto;
+			max-width: rem-calc(818px);
+		}
+	}
+
+	:is(&__message, &__inquiry) {
+		@apply mt-px30 md:mt-px20 xl:mt-px30;
+	}
+
+	&__small-fields {
+		@apply flex flex-col md:flex-row justify-center;
+
+		& + & {
+			@apply mt-px28;
+
+			@screen md {
+				@apply mt-px20;
+			}
+		}
+
+		input {
+			@apply w-full;
+
+			@screen xl {
+				max-width: rem-calc(395px);
+			}
+		}
+
+		input + input {
+			@apply mt-px28;
+
+			@screen md {
+				@apply mt-0 ml-px28;
+			}
+		}
+	}
+
+	&__message {
+		@apply mt-px30 md:mt-px20 xl:mt-px30;
+		height: rem-calc(240px);
+		resize: none;
+
+		@screen md {
+			height: rem-calc(225px);
+		}
+	}
+
+	&__submit {
+		@apply bg-white text-blue_green font-bold text-px16 leading-px22 mt-px50 px-0 self-start;
+		width: rem-calc(319px);
+
+		@screen md {
+			width: rem-calc(233px);
+		}
+	}
+
+	&__create-fundraiser-btn {
+		@apply bg-white text-teal-dark mt-px40 inline-block mx-auto;
+	}
+
+	&__get-your-fundraiser {
+		@apply bg-white text-teal-dark text-left rounded-px10 mt-px80 pt-px58 pb-20 px-px28;
+
+		@screen md {
+			@apply pt-px80 pb-20 px-16 mx-auto;
+
+			max-width: rem-calc(550px);
+		}
+
+		@screen xl {
+			@apply pt-px58 px-20;
+			max-width: rem-calc(764px);
+		}
+
+		&-title {
+			@apply font-bold text-px32 leading-px40 xl:text-px30 mb-px10 md:mb-px15;
+		}
+
+		&-description {
+			@apply font-normal text-px18 leading-px26;
+		}
+
+		&-links {
+			@apply flex flex-col md:flex-row flex-wrap mt-px15;
+		}
+
+		&-link {
+			@apply py-4 md:mr-px30;
+
+			a {
+				@apply border-b-2 border-teal-dark;
+			}
+		}
+	}
+
+	&__back-btn {
+		@apply bg-transparent text-white absolute left-px50 md:left-px70 top-px60 p-4;
+		&::before {
+			content: "<";
+			position: absolute;
+			left: rem-calc(-18px);
+			top: rem-calc(-4px);
+			@apply text-px40;
+		}
+	}
+
+	&__pagination {
+		@apply text-white text-px22 leading-px32 hidden xl:block;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		top: rem-calc(50px);
+	}
+}

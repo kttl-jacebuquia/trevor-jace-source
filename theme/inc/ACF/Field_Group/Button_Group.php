@@ -58,7 +58,7 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	/** @inheritdoc */
 	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
 		$val          = new Field_Val_Getter( static::class, $post, $data );
-		$buttons_data = $val->get( static::FIELD_BUTTONS );
+		$buttons_data = static::get_val( static::FIELD_BUTTONS );
 
 		// Do not render if there is no button
 		if ( empty( $buttons_data ) ) {

@@ -3,6 +3,7 @@
 use TrevorWP\CPT;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
+use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
@@ -462,6 +463,11 @@ class Hooks {
 			</div>
 			<?php
 		}
+
+		// Fundraiser Quiz Modal
+		echo (new \TrevorWP\Theme\Helper\FundraiserQuizModal( Options_Page\Fundraiser_Quiz::render(), [
+			"target"   => ".js-fundraiser-quiz",
+		] ))->render();
 	}
 
 	/**

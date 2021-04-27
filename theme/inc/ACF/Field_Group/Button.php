@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Button extends A_Field_Group implements I_Renderable {
@@ -125,6 +126,9 @@ class Button extends A_Field_Group implements I_Renderable {
 		$type      = $val->get( static::FIELD_TYPE );
 		$btn_cls[] = "page-btn-{$type}";
 		$btn_attr  = $val->get( static::FIELD_BUTTON_ATTR );
+
+		$id = uniqid( 'quiz-', true );
+
 		if ( empty( $btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] ) ) {
 			$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] = [];
 		}

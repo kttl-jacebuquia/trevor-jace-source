@@ -24,6 +24,7 @@ const inputSearchField = $("#rc-search-main");
 const bigImageCarousels = $('.big-img-carousel.body-carousel');
 const isPhoneField = $(".phone-number-format") ? true : false;
 const $showAllTilesBtn = $(".tile-grid-container + .view-all-container .view-all-cta");
+const $fundraiserQuizButton = $(".js-fundraiser-quiz");
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -37,6 +38,12 @@ features.ajaxPagination();
 features.stickyAnchor();
 
 features.showAllTiles($showAllTilesBtn);
+
+if ($fundraiserQuizButton.length) {
+	$fundraiserQuizButton.on("click", () => {
+		new features.FundraiserQuiz();
+	});
+}
 
 
 // Single (Detail) Page

@@ -63,6 +63,7 @@ class Modal {
 
 export default function modal($content, options, $targets) {
 	const controller = new Modal($content, options);
+
 	$targets.on('click', controller.open);
 
 	return () => $targets.off('click', controller.open);
