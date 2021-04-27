@@ -1,18 +1,29 @@
 $top--bar-height-mobile: rem-calc(84px);
 $top--bar-height-tablet: rem-calc(106px);
 
+$nav-base-z-index: 100;
+$z-index-topbar: $nav-base-z-index + 1;
+$z-index-nav-blur: $nav-base-z-index;
+$z-index-nav-white-bg: $z-index-nav-blur + 1;
+$z-index-nav-menu: $z-index-nav-blur + 4;
+$z-index-nav-switcher: $z-index-nav-blur + 5;
+$z-index-nav-controls: $z-index-nav-blur + 6;
+$z-index-nav-cta: $z-index-nav-blur + 5;
+
 :root {
   	--site-banner-height: 0px;
 	--top-bar-height: #{$top--bar-height-mobile};
 	--top-nav-height: 8.5rem;
 	--top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h) + var(--site-banner-height));
 	--nav-menu-width: #{percentage(327/375)};
-	--z-index-nav-blur: 98;
-	--z-index-nav-white-bg: 99;
-	--z-index-nav-menu: 102;
-	--z-index-nav-switcher: 103;
-	--z-index-nav-controls: 104;
-	--z-index-nav-cta: 103;
+	--z-index-nav-base: #{$nav-base-z-index};
+	--z-index-nav-blur: #{$z-index-nav-blur};
+	--z-index-nav-white-bg: #{$z-index-nav-white-bg};
+	--z-index-nav-menu: #{$z-index-nav-menu};
+	--z-index-nav-switcher: #{$z-index-nav-switcher};
+	--z-index-nav-controls: #{$z-index-nav-controls};
+	--z-index-nav-cta: #{$z-index-nav-cta};
+	--z-index-topbar: #{$z-index-topbar};
 
 	// fixes anchor link connections
 	* {
@@ -40,10 +51,11 @@ $top--bar-height-tablet: rem-calc(106px);
 // Top Bar
 //
 #top-bar {
-	@apply fixed top-0 left-0 z-30;
+	@apply fixed top-0 left-0;
 	@apply w-full h-px84;
 	@apply transition-transform duration-300 ease-out;
 	@apply transform-gpu -translate-y-full bg-white;
+	z-index: var(--z-index-topbar);
 
 	@screen md {
 		@apply h-px106;
@@ -139,7 +151,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 		> .main-menu > .menu-item {
 			@screen lg2 {
-				@apply px-0;
+				@apply px-0 py-px18;
 
 				&:not(:first-child) {
 					@apply ml-px24;
@@ -363,6 +375,7 @@ $top--bar-height-tablet: rem-calc(106px);
 	@apply top-px84;
 	width: var(--nav-menu-width);
 	height: rem-calc(133px);
+	z-index: var(--z-index-nav-switcher);
 
 	@screen md {
 		@apply top-px106;
@@ -518,6 +531,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 		@screen lg2 {
 			@apply relative;
+			@apply pb-px18;
 
 			// Desktop styles for hover and show submenu
 			&:hover,
@@ -616,7 +630,7 @@ $top--bar-height-tablet: rem-calc(106px);
 
 			@screen lg2 {
 				@apply h-auto top-full w-auto p-0 overflow-visible;
-				@apply left-1/2 -translate-x-1/2 mt-px18;
+				@apply left-1/2 -translate-x-1/2;
 				@apply bg-white rounded-px10 p-px24 pr-px32;
 
 				// submenu caret
@@ -742,7 +756,8 @@ $top--bar-height-tablet: rem-calc(106px);
 //
 #top-nav {
 	height: var(--top-nav-height);
-	@apply z-20 px-px28;
+	@apply px-px28;
+	z-index: var(--z-index-nav-base);
 	// md
 	@apply md:px-px50;
 	// lg2
@@ -751,11 +766,12 @@ $top--bar-height-tablet: rem-calc(106px);
 	// Background blur and fill, for mobile/tablet
 	@screen lg-max {
 		&::before {
-			@apply fixed top-0 left-0 w-full h-full bg-white z-20;
+			@apply fixed top-0 left-0 w-full h-full bg-white;
 			@apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
 			content: '';
 			background-color: rgba(16, 16, 102, 0.2);
 			backdrop-filter: blur(4px);
+			z-index: var(--z-index-nav-blur);
 		}
 
 		&::after {
@@ -769,9 +785,10 @@ $top--bar-height-tablet: rem-calc(106px);
 
 	// Underlay
 	.top-nav__underlay {
-		@apply absolute top-0 left-0 w-full h-full z-21;
+		@apply absolute top-0 left-0 w-full h-full;
 		@apply transition-all opacity-0 invisible duration-300 ease-out;
 		@apply lg2:hidden;
+		z-index: var(--z-index-nav-blur);
 	}
 
 	// Tier-2 submenu state, for mobile/tablet

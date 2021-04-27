@@ -19,7 +19,7 @@
 
 	&-theme-bar {
 		.ch2-dialog.ch2-dialog-bottom {
-			@apply transform-gpu translate-y-full transition-transform duration-300 ease-out;
+			@apply transform-gpu translate-y-full transition-transform duration-300 ease-out z-50;
 			bottom: 0 !important;
 
 			&.ch2-visible {
