@@ -56,7 +56,7 @@ class Post_Images extends A_Field_Group implements I_Block, I_Renderable {
 		<div class="w-full flex flex-row flex-wrap mb-px72 mx-auto mt-px20 md:justify-center lg:px-px105 md:mt-px40">
 			<?php foreach ( $post_ids as $post_id ):
 				if ( has_post_thumbnail( $post_id ) ): ?>
-					<div class="w-1/2 md:w-1/3 lg:w-1/4 py-2" data-aspectRatio="2:1">
+					<div class="w-1/2 md:w-1/4 lg:w-1/4 py-2" data-aspectRatio="2:1">
 						<?php $post_type = get_post_type( $post_id ); ?>
 						<?php $post_url = ( $post_type === Partner::POST_TYPE || $post_type === Grant::POST_TYPE ) ? Post::get_partner_url( $post_id ) : get_post_permalink( $post_id ); ?>
 						<?php $has_url = ! empty( $post_url ); ?>

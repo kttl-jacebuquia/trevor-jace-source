@@ -183,11 +183,56 @@
 
   // - - Text
   &.type-text {
-		.two-cta {
-			a {
-				@apply bg-teal-dark text-white border-2 border-white;
-			}
+	// md
+	@apply md:px-px110;
+	// xl
+	@apply xl:px-px311;
+
+	h1 {
+		@apply text-px32 leading-px40;
+		@apply mb-px16;
+		// xl
+		@apply xl:text-px46 xl:leading-px56 xl:tracking-em_001;
+		@apply xl:mb-px14;
+	}
+
+	.hero__description {
+		@apply text-px20 leading-px26 mb-0 font-normal;
+		// md
+		@apply md:text-px18 md:leading-px24 tracking-px05;
+		// xl
+		@apply xl:text-px24 xl:leading-px34;
+		@apply xl:w-full;
+	}
+
+	.two-cta {
+		a {
+			@apply bg-teal-dark text-white border-2 border-white;
 		}
+	}
+
+	.button-group {
+		@apply mt-px40;
+		@apply text-px16 leading-px22;
+		// md
+		@apply md:mt-px30;
+		// xl
+		@apply xl:mt-px40;
+	}
+
+	.page-btn {
+		@apply flex items-center justify-center;
+		@apply h-px46 tracking-em001 px-px32 py-0;
+		// md
+		@apply md:h-px44 md:px-px24;
+		// xl
+		@apply xl:h-px66 xl:px-px40;
+		@apply xl:text-px20 xl:leading-px26 xl:tracking-px05;
+
+		.bg-teal-dark & {
+			@apply bg-white text-teal-dark;
+		}
+	}
   }
 
   // - - Img BG
