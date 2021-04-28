@@ -301,10 +301,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 			$q     = new \WP_Query( $q_args );
 			$posts = $q->posts;
-		} elseif ( $source == static::SOURCE_PICK ) {
-			$posts = (array) $val->get( static::FIELD_POST_ITEMS );
 		} else {
-			$posts = [];
+			$posts = (array) $val->get( static::FIELD_POST_ITEMS );
 		}
 
 		return $posts;
