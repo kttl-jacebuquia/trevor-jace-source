@@ -499,7 +499,7 @@ class Hooks {
 			if ( $pt ) {
 				# Pagination
 				if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
-					$updates['posts_per_page'] = $per_page;
+					$updates['posts_per_archive_page'] = $per_page;
 				}
 
 				# Init Sorter
