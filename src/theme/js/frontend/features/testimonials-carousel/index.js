@@ -47,27 +47,36 @@ export default function testimonialsCarousel(id) {
 	}
 
 	function initTextSwiper () {
-		return new Swiper(txtWrap.querySelector('.swiper-container'), {
+		const options = {
 			slidesPerView: 1,
 			autoplay: true,
 			updateOnWindowResize: true,
-			pagination: {
+		};
+
+		if (txtWrap.querySelectorAll(".swiper-container .swiper-slide").length > 1) {
+			options.pagination = {
 				el: txtWrap.querySelector('.swiper-pagination'),
 				clickable: true,
-			},
-			navigation: {
+			}
+
+			options.navigation = {
 				nextEl: '.carousel-right-arrow-pane',
 				prevEl: '.carousel-left-arrow-pane',
-			},
-			on: {
+			};
+
+			options.on = {
 				init: () => {
 					checkArrow();
 				},
 				resize: () => {
 					checkArrow();
 				}
-			}
-		});
+			};
+		} else {
+			panesContainer.addClass("hidden");
+		}
+
+		return new Swiper(txtWrap.querySelector(".swiper-container"), options);
 	}
 
 	function checkArrow() {
