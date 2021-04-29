@@ -17,7 +17,8 @@ class Info_Card extends A_Basic_Section implements I_Block {
 		$title_cls = [ 'info-card-title' ];
 		$desc_cls  = [ 'info-card-title-desc' ];
 		$btn_cls   = [
-			'wrap_cls' => [ 'info-card-btn-wrap' ]
+			'wrap_cls' => [ 'info-card-btn-wrap', ],
+			'btn_cls'  => [ 'hover:bg-teal-dark', 'hover:text-white', ],
 		];
 
 		static::render_block_wrapper( $block, null, [

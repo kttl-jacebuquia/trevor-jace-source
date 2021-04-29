@@ -69,7 +69,7 @@ class Circulation_Card {
 			<div class="inner">
 				<h3 class="circulation-card-title"><?= $this->_args['title'] ?></h3>
 				<p class="circulation-card-desc"><?= $this->_args['desc'] ?></p>
-				<a class="circulation-card-cta"
+				<a class="circulation-card-cta hover:opacity-90"
 				   href="<?= esc_attr( $this->_args['cta_url'] ) ?>"><?= $this->_args['cta_text'] ?></a>
 			</div>
 		</div>
