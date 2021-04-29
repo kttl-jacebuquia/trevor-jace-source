@@ -17,6 +17,8 @@ class ACF {
 		Field_Group\Page_Circulation_Card::class,
 		// Blocks
 		Field_Group\HTML_Elem::class,
+		Field_Group\Grid_Row::class,
+		Field_Group\Grid_Rows_Container::class,
 		Field_Group\Page_Section::class,
 		Field_Group\Testimonials_Carousel::class,
 		Field_Group\Page_Circulation::class,
