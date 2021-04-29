@@ -117,10 +117,11 @@
 		&-container {
 			@apply justify-center;
 			@apply gap-px28;
-			grid-template-columns: repeat(2, minmax(0, rem-calc(264px)));
+			grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
 
-			&.founder {
-				grid-template-columns: repeat(2, minmax(0, rem-calc(319px)));
+
+			&.desktop-4-columns {
+				grid-template-columns: repeat(2, minmax(0, rem-calc(264px)));
 			}
 		}
   }
@@ -147,20 +148,21 @@
 	&-container {
 		@apply justify-center;
 		grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
+
+		.post-type-archive & {
+			@apply justify-start;
+		}
 	}
   }
 
 	@screen lg2 {
 		&-container {
 			@apply justify-center;
+			@apply grid-cols-3;
 
 
 			&.desktop-autofit-columns {
 				grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(355px)));
-			}
-
-			&.desktop-3-columns {
-				grid-template-columns: repeat(3, minmax(0, rem-calc(355px)));
 			}
 
 			&.desktop-4-columns {
@@ -174,14 +176,14 @@
 			.post-type-archive-trevor_fin_report & {
 				@apply grid-cols-3;
 			}
-			
+
+			grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
+
 			&.desktop-autofit-columns {
 				grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(395px)));
 			}
 
 			&.desktop-3-columns {
-				grid-template-columns: repeat(3, minmax(0, rem-calc(395px)));
-
 				.staff {
 					.post-thumbnail-wrap {
 						height: rem-calc(245px);
@@ -190,6 +192,7 @@
 			}
 
 			&.desktop-4-columns {
+				grid-template-columns: repeat(4, minmax(0, rem-calc(395px)));
 				.staff {
 					.post-thumbnail-wrap {
 						height: rem-calc(200px);

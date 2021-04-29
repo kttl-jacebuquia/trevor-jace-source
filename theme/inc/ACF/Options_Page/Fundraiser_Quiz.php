@@ -318,12 +318,6 @@ class Fundraiser_Quiz extends A_Options_Page {
 		);
 	}
 
-	private static function debug($var) {
-		echo "<pre>";
-		var_dump($var);
-
-	}
-
 	/**
 	 * Renders the fundraiser quiz modal
 	 */

@@ -209,7 +209,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$cls             = [
 				'tile-grid-container',
 				'mb-px50',
-				'mt-px36',
+				'mt-px40',
 				'md:mt-px50',
 				'xl:mt-px60',
 				'mx-auto'
@@ -218,7 +218,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$cls = array_merge( $cls, $options['class'] );
 		}
 
-		if ( ! $num_cols || ! $num_cols < 3 ) {
+		if ( ! $num_cols || $num_cols < 3 ) {
 			$num_cols = 3;
 		}
 

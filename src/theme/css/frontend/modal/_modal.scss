@@ -77,16 +77,6 @@
 				object-position: center;
 			}
 
-			&.placeholder {
-				width: rem-calc(319px);
-				height: rem-calc(220px);
-
-				img {
-					max-height: rem-calc(100px);
-					@apply w-auto m-auto;
-				}
-			}
-
 			@screen md {
 				max-width: rem-calc(210px);
 				@apply float-left mr-px26;

@@ -84,6 +84,9 @@ class Tile {
 			}, 10, 0 );
 		}
 
+		if ( $post->post_type === CPT\Research::POST_TYPE ) {
+			$data['cta_txt'] = 'Learn More';
+		}
 		return self::custom( $data, $key, $options );
 	}
 
