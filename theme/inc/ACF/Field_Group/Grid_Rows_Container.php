@@ -56,8 +56,10 @@ class Grid_Rows_Container extends A_Field_Group implements I_Block {
 				'acf/' . Grid_Row::get_key(),
 		];
 		?>
-		<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ), $cls ) ?>>
-			<InnerBlocks allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ) ?>"/>
+		<div class="overflow-hidden">
+			<div <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ), $cls ) ?>>
+				<InnerBlocks allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ) ?>"/>
+			</div>
 		</div>
 		<?php
 	}

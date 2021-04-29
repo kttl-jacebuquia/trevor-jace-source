@@ -78,6 +78,7 @@ class Grid_Row extends A_Field_Group implements I_Block {
 		$cls_img_wrap     = [
 				'grid-row-img-wrap',
 				'w-full',
+				'overflow-hidden',
 		];
 		$cls_img          = [
 				'grid-row-img',
