@@ -228,10 +228,6 @@
 		// xl
 		@apply xl:h-px66 xl:px-px40;
 		@apply xl:text-px20 xl:leading-px26 xl:tracking-px05;
-
-		.bg-teal-dark & {
-			@apply bg-white text-teal-dark;
-		}
 	}
   }
 

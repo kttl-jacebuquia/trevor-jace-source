@@ -155,6 +155,18 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Buttons
 		$args[ 'buttons' ] = $val->get( static::FIELD_BUTTONS );
 
+		# Update button attributes according to header attributes
+		foreach ( $args[ 'buttons' ]['buttons'] as &$button ) {
+			switch ( static::get_val( static::FIELD_BG_CLR ) ) {
+				case "teal-dark":
+					$button_class = $button['button']['button_attr']['class'];
+					$button['button']['button_attr']['class'] = 'bg-white text-teal-dark ' . $button_class;
+					break;
+				default:;
+	
+			}
+		}
+
 
 		# Featured Image for Split Image, Horizontal, and Full
 		if ( in_array( $val->get( static::FIELD_TYPE ), [ 'split_img', 'horizontal', 'img_bg' ] ) ) {
