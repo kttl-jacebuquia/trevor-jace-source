@@ -82,7 +82,7 @@ class Grid_Row extends A_Field_Group implements I_Block {
 		];
 		$cls_img          = [
 				'grid-row-img',
-				'h-full w-full object-cover rounded-px10 xl:rounded-l-none',
+				'h-full w-full object-cover rounded-px10',
 		];
 		$cls_content_wrap = [
 				'grid-row-content',

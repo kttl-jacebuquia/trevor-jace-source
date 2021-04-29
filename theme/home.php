@@ -86,12 +86,12 @@
 
 			<li>
 				<a class="text-xl font-bold text-white line-through"
-				   href="/strategic-llan">Strategic Plan</a>
+				   href="/strategic-plan/">Strategic Plan</a>
 			</li>
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="/research">Research</a>
+				   href="/research/">Research</a>
 			</li>
 
 			<li>
@@ -117,6 +117,11 @@
 			<li>
 				<a class="text-xl font-bold text-white"
 				   href="/contact-us/">Contact Us</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="/financial-reports/">Financial Reports</a>
 			</li>
 		</ul>
 

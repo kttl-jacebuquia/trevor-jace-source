@@ -224,7 +224,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 		$tile_options = [ 'accordion' => false, 'class' => $options['tileClass'] ?: [] ];
 
-		if ( $options['smAccordion'] ) {
+		if ( ! empty( $options['smAccordion'] ) ) {
 			$tile_options['accordion'] = true;
 
 			$cls[] = 'sm-accordion';

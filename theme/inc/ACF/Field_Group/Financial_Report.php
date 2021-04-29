@@ -115,7 +115,7 @@ class Financial_Report extends A_Field_Group {
         $reports = [];
 
 
-        foreach( $val->get( static::FIELD_REPORTS ) as $report ) {
+        foreach( (array) $val->get( static::FIELD_REPORTS ) as $report ) {
             $report_file['title'] = $report[static::FIELD_TITLE];
             $report_file['url'] = $report[static::FIELD_FILE][static::FIELD_FILE_SOURCE] === static::FILE_SOURCE_URL ?
                                   $report[static::FIELD_FILE][static::FIELD_FILE_URL] :
