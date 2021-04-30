@@ -149,7 +149,7 @@ class DOM_Attr extends A_Field_Group {
 			$attributes[ $attribute[ DOM_Attr::FIELD_ATTR_KEY ] ] = $attribute[ DOM_Attr::FIELD_ATTR_VAL ];
 		}
 
-		$attributes['class'] = implode( ' ', array_merge( $default_cls, $style_cls, $extra_cls ) );
+		$attributes['class'] = implode( ' ', array_merge( $default_cls, $extra_cls, $style_cls ) );
 
 		return $attributes;
 	}

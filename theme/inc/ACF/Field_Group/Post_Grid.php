@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\CPT\Post;
 use TrevorWP\CPT\Team;
 use TrevorWP\CPT\Financial_Report;
 use TrevorWP\Theme\Helper;
@@ -261,9 +262,14 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					case Financial_Report::POST_TYPE:
 						echo Helper\Tile::financial_report( $post, $key, $tile_options );
 						break;
+					case Post::POST_TYPE:
+					case \TrevorWP\CPT\RC\Post::POST_TYPE:
+						echo Helper\Card::post( $post, $key, $tile_options );
+						break;
 					// TODO: Add other post types
 					default:
 						echo Helper\Tile::post( $post, $key, $tile_options );
+						break;
 				}
 			} ?>
 		</div>

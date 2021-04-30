@@ -11,6 +11,7 @@ class ACF {
 		Options_Page\Page_Circulation_Options::class,
 		Options_Page\Fundraiser_Quiz::class,
 		// - Post Type Options
+		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,
 		Options_Page\Post_Type\Research::class,
 		// Misc

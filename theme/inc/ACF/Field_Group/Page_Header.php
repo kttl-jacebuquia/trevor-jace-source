@@ -10,6 +10,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TITLE_TOP = 'title_top';
 	const FIELD_TITLE_TOP_ATTR = 'title_top_attr';
 	const FIELD_CAROUSEL = 'carousel';
+	const FIELD_IMAGE = 'image';
 	const FIELD_BG_CLR = 'bg_clr';
 	const FIELD_TEXT_CLR = 'text_clr';
 
@@ -19,6 +20,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
 		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
 		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
+		$image          = static::gen_field_key( static::FIELD_IMAGE );
 		$text_clr       = static::gen_field_key( static::FIELD_TEXT_CLR );
 		$bg_clr         = static::gen_field_key( static::FIELD_BG_CLR );
 
@@ -63,7 +65,33 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				] ),
 			],
 			parent::_get_fields(),
+			static::_gen_tab_field( 'Image(s)', [
+				'conditional_logic' => [
+					[
+						[
+							'field'    => $type,
+							'operator' => '!=',
+							'value'    => 'text',
+						],
+					],
+				],
+			] ),
 			[
+				static::FIELD_IMAGE    => [
+					'key'               => $image,
+					'name'              => static::FIELD_IMAGE,
+					'label'             => 'Image',
+					'type'              => 'image',
+					'conditional_logic' => [
+						[
+							[
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'text',
+							],
+						],
+					],
+				],
 				static::FIELD_CAROUSEL => Carousel_Data::clone( [
 					'key'               => $carousel,
 					'name'              => static::FIELD_CAROUSEL,
@@ -113,6 +141,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'operator' => '==',
 						'value'    => 'page',
 					],
+					[
+						'param'    => 'post',
+						'operator' => '!=',
+						'value'    => get_option( 'page_for_posts' ),
+					],
 				],
 			],
 		] );
@@ -143,12 +176,12 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args['styles'] = [];
 		# Text color
-		if ( ! empty( $txt_color = static::get_val( static::FIELD_TEXT_CLR ) ) ) {
+		if ( ! empty( $txt_color = $val->get( static::FIELD_TEXT_CLR ) ) ) {
 			$args['styles'][] = "text-{$txt_color}";
 		}
 
 		# BG Color
-		if ( ! empty( $bg_color = static::get_val( static::FIELD_BG_CLR ) ) ) {
+		if ( ! empty( $bg_color = $val->get( static::FIELD_BG_CLR ) ) ) {
 			$args['styles'][] = "bg-{$bg_color}";
 		}
 
@@ -158,7 +191,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Update button attributes according to header attributes
 		if ( ! empty( $args['buttons']['buttons'] ) ) {
 			foreach ( $args['buttons']['buttons'] as &$button ) {
-				switch ( static::get_val( static::FIELD_BG_CLR ) ) {
+				switch ( $val->get( static::FIELD_BG_CLR ) ) {
 					case "teal-dark":
 						$button_class                             = $button['button']['button_attr']['class'];
 						$button['button']['button_attr']['class'] = 'bg-white text-teal-dark ' . $button_class;
@@ -169,12 +202,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			}
 		}
 
-
 		# Featured Image for Split Image, Horizontal, and Full
 		if ( in_array( $val->get( static::FIELD_TYPE ), [ 'split_img', 'horizontal', 'img_bg' ] ) ) {
-			$args['img_id'] = get_post_thumbnail_id();
+			$img            = $val->get( static::FIELD_IMAGE );
+			$args['img_id'] = empty( $img ) ? get_post_thumbnail_id() : @$img['ID'];
 		}
-
 
 		# Split Carousel
 		if ( $val->get( static::FIELD_TYPE ) === 'split_carousel' ) {

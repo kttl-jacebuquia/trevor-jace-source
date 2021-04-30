@@ -5,7 +5,7 @@
 use \TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type as PT;
 use \TrevorWP\Theme\ACF\Field_Group\Post_Grid;
 
-$post_type       = get_queried_object()->name;
+$post_type       = get_queried_object()->name ?: 'post';
 $header_data     = PT::get_option_for( $post_type, PT::FIELD_HEADER );
 $pagination_type = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_PAGINATION_TYPE );
 $content_top     = PT::get_option_for( $post_type, PT::FIELD_ARCHIVE_CONTENT_TOP );
@@ -37,8 +37,8 @@ if ( ! empty( $header_data ) ) {
 
 		<?php # Grid ?>
 		<?= Post_Grid::render( false, [
-			Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
-			Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
+				Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
+				Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
 		], [ 'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ] ] ) ?>
 
 		<?php # Pagination ?>

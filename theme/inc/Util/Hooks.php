@@ -30,7 +30,7 @@ class Hooks {
 			[ CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ],
 			[ CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ],
 			[ CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ],
-			[ CPT\Org\Org_Object::PERMALINK_ORG_LP, 'home.php' ],
+			[ CPT\Org\Org_Object::QV_ORG_LP, 'org-lp.php' ],
 	];
 
 	/**
