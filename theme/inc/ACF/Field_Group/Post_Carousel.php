@@ -33,12 +33,12 @@ class Post_Carousel extends Post_Grid {
 		$cls           = [];
 		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( static::FIELD_WRAPPER_ATTR ), $cls );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
-		$post_type     = $val->get( static::FIELD_QUERY_PTS );
+		$post_type     = $val->get( static::FIELD_QUERY_PTS ) ?: [];
 		$source        = $val->get( static::FIELD_SOURCE );
 
 		$class = [ 'mt-12', 'mb-0', ];
 
-		if ( in_array( Team::POST_TYPE, $post_type ) && $source === "query" ) {
+		if ( in_array( Team::POST_TYPE, @$post_type ) && $source === "query" ) {
 			$class[] = "post-carousel--staff";
 		}
 

@@ -94,33 +94,39 @@
 		}
 	}
 
+	body.is-rc .post-carousel & {
+		@screen lg {
+			--content-max-width: calc(theme('screens.lg') - 11.25rem);
+		}
+
+		@screen lg2 {
+			--content-max-width: calc(theme('screens.lg2') - 15rem);
+		}
+
+		@screen xl {
+			--content-max-width: calc(theme('screens.xl') - 17.5rem);
+		}
+
+		@screen 2xl {
+			--content-max-width: calc(theme('screens.2xl') - 17.5rem);
+		}
+	}
+
 	.post-carousel & {
 		@apply pl-px28;
 		@apply w-full ml-0;
 
 		@screen md {
-			$content-max-width: rem-calc(768px);
-			padding-left: calc( 50px + ( ( 100vw - #{$content-max-width} ) / 2 ) );
+			--content-max-width: theme('screens.md');
+			padding-left: calc( 50px + ( ( 100vw - var(--content-max-width) ) / 2 ) );
 		}
 
-		@screen lg {
-			$content-max-width: rem-calc(924px);
-			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
-		}
-
-		@screen lg2 {
-			$content-max-width: rem-calc(1120px);
-			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
-		}
-
-		@screen xl {
-			$content-max-width: rem-calc(1240px);
-			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
-		}
-
-		@screen 2xl {
-			$content-max-width: rem-calc(1400px);
-			padding-left: calc( ( 100vw - #{$content-max-width} ) / 2 );
+		$breakpoints: lg, lg2, xl, 2xl;
+		@each $size in $breakpoints {
+			@screen #{$size} {
+				--content-max-width: calc( theme( 'screens.#{$size}' ) - ( theme( 'container.padding.#{$size}' ) * 2 ) );
+				padding-left: calc( ( 100vw - var( --content-max-width ) ) / 2 );
+			}
 		}
 	}
 }

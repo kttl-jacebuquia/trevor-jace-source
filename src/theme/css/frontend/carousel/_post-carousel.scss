@@ -31,34 +31,45 @@
 
 	.swiper-button {
 		@apply w-px100;
+		--carousel-left-padding: 0;
+
+		$breakpoints: lg, lg2, xl, 2xl;
+			--carousel-gap: 1.75rem;
+
+		@each $size in $breakpoints {
+			@screen #{$size} {
+				@if $size == lg {
+					--number-of-cards: 2;
+				} @else {
+					--number-of-cards: 3;
+				}
+
+				--container-padding: theme('container.padding.#{$size}');
+				--carousel-left-padding: calc( ( 100vw - ( theme('screens.#{$size}') - ( 2 * var(--container-padding) ) ) ) / 2 );
+			}
+		}
 
 		&-prev {
 			@apply hidden;
 
 			.swiper-button-wrapper {
 				right: unset;
-				left: 0;
+				left: unset;
 			}
 
+			$breakpoints: lg, lg2, xl, 2xl;
+
+			@each $size in $breakpoints {
+				@screen #{$size} {
+					@apply flex;
+					left: calc( var(--carousel-left-padding) - 2.5rem );
+				}
+			}
+		}
+
+		body.is-rc &-prev {
 			@screen lg {
-				@apply flex;
-				$left-padding: calc( ( ( 100vw - 924px ) / 2 ) - 2.8rem );
-				left: $left-padding;
-			}
-
-			@screen lg2 {
-				$left-padding: calc( ( ( 100vw - 1120px ) / 2 ) - 2.8rem );
-				left: $left-padding;
-			}
-
-			@screen xl {
-				$left-padding: calc( ( ( 100vw - 1240px ) / 2 ) - 2.8rem );
-				left: $left-padding;
-			}
-
-			@screen 2xl {
-				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) - 2.8rem );
-				left: $left-padding;
+				@apply justify-end;
 			}
 		}
 
@@ -70,33 +81,30 @@
 			right: unset;
 			@apply hidden;
 
-			@screen lg {
-				$left-padding: calc( ( ( 100vw - 924px ) / 2 ) );
-				--carousel-card-size: theme('postCard.width.lg');
-				--number-of-cards: 2;
-				@apply flex;
-				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) );
-			}
+			$breakpoints: lg, lg2, xl, 2xl;
+			--carousel-gap: 1.75rem;
 
-			@screen lg2 {
-				$left-padding: calc( ( ( 100vw - 1120px ) / 2 ) );
-				--carousel-card-size: theme('postCard.width.lg2');
-				--number-of-cards: 3;
-				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
-			}
+			@each $size in $breakpoints {
+				@screen #{$size} {
+					@if $size == lg {
+						@apply justify-start;
+					} @else {
+						@apply justify-end;
+					}
 
-			@screen xl {
-				$left-padding: calc( ( ( 100vw - 1240px ) / 2 ) );
-				--carousel-card-size: theme('postCard.width.xl');
-				--number-of-cards: 3;
-				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
+					@apply flex;
+					left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+				}
 			}
+		}
 
-			@screen 2xl {
-				$left-padding: calc( ( ( 100vw - 1400px ) / 2 ) );
-				--carousel-card-size: theme('postCard.width.xl');
-				--number-of-cards: 3;
-				left: calc( #{$left-padding} + ( var(--number-of-cards) * var(--carousel-card-size) ) + 1.875rem );
+		body.is-rc &-next {
+			$breakpoints: lg, lg2, xl, 2xl;
+
+			@each $size in $breakpoints {
+				@screen #{$size} {
+					--container-padding: theme('container.RCpadding.#{$size}');
+				}
 			}
 		}
 	}
@@ -113,7 +121,7 @@
 	@apply mb-24;
 
 	.carousel-container {
-	  width: rem-calc(395px);
+	  width: theme('postCard.width.lg');
 	}
 
 	// Hide arrows if there are only 3 cards

@@ -102,9 +102,10 @@ module.exports = {
 			width: {
 				DEFAULT: px2rem(319),
 				md: px2rem(319),
-				lg: px2rem(395),
-				lg2: px2rem(355),
-				xl: px2rem(395),
+				lg: px2rem(335),
+				lg2: px2rem(328),
+				xl: px2rem(368),
+				'2xl': px2rem(368),
 			}
 		},
 		carousel: {
@@ -146,6 +147,14 @@ module.exports = {
 					lg2: px2rem(80),
 					xl: px2rem(100),
 					'2xl': px2rem(100),
+				},
+				RCpadding: {
+					DEFAULT: px2rem(28),
+					md: px2rem(50),
+					lg: px2rem(90),
+					lg2: px2rem(120),
+					xl: px2rem(140),
+					'2xl': px2rem(140),
 				},
 			},
 			borderRadius: {

@@ -3,3 +3,16 @@
 	max-width: 100%;
   }
 }
+
+body.is-rc .container {
+	$breakpoints: lg, lg2, xl;
+
+	@each $size in $breakpoints {
+		@screen #{$size} {
+			padding: {
+				left: theme('container.RCpadding.#{$size}');
+				right: theme('container.RCpadding.#{$size}');
+			}
+		}
+	}
+}
