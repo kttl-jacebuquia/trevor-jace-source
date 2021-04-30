@@ -18,7 +18,7 @@ class Search_Input {
 				</div>
 				<input type="hidden" name="s" value="<?= get_search_query( true ) ?>">
 				<span contenteditable role="searchbox"
-							class="search-field pl-0 pr-4 w-full tracking-em005 rounded-lg placeholder-violet text-indigo text-px14 leading-px18 tracking-em005 md:text-base md:leading-px22 lg:text-px22 lg:leading-px32 lg:tracking-normal py-5 lg:py-6"
+							class="search-field pl-0 pr-4 w-full tracking-em005 rounded-lg placeholder-violet text-indigo text-px14 leading-px18 tracking-em005 md:text-base md:leading-px22 lg:text-px22 lg:leading-px32 lg:tracking-normal py-5 lg:py-6 -ml-px60 pl-px60 md:-ml-px94 md:pl-px94 md:-ml-px146 md:pl-px146"
 							id="rc-search-main"
 							placeholder="<?php echo $placeholder; ?>"
 							autocomplete="off"
