@@ -269,7 +269,7 @@ class Tile {
 
 		$name_class = [];
 		if ( strtolower( $group ) === "founder" ) {
-			$name_class = explode( " ", "text-px22 leading-px28 tracking-em005 md:text-px20 md:text-px30 xl:text-px22 xl:leading-px32" );
+			$name_class = explode( " ", "text-px22 leading-px28 tracking-em005 md:text-px20 md:leading-px30 xl:text-px22 xl:leading-px32" );
 		} else {
 			$name_class = explode( " ", "text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32" );
 		}
