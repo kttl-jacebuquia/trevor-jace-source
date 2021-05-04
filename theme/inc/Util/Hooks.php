@@ -492,14 +492,13 @@ class Hooks {
 	public static function pre_get_posts( \WP_Query $query ): void {
 		$updates = [];
 
-		# Post type archive
-		if ( $query->is_post_type_archive && $query->is_main_query() ) {
-			$pt = $query->get_queried_object()->name;
+		if ( $query->is_main_query() ) {
+			if ( $query->is_post_type_archive || $query->is_home ) {
+				$pt = $query->get_queried_object()->name ?: 'post';
 
-			if ( $pt ) {
 				# Pagination
 				if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
-					$updates['posts_per_archive_page'] = $per_page;
+					$updates[ $pt == 'post' ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
 				}
 
 				# Init Sorter
