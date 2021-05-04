@@ -1,7 +1,5 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-use TrevorWP\Theme\Helper\Modal;
-
 class FundraiserQuizModal extends Modal {
 
 	public function __construct( string $content, array $options = [] ) {
