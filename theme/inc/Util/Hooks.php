@@ -7,7 +7,6 @@ use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
-use TrevorWP\Theme\Single_Page;
 use TrevorWP\Util\StaticFiles;
 
 /**
@@ -494,7 +493,9 @@ class Hooks {
 
 		if ( $query->is_main_query() ) {
 			if ( $query->is_post_type_archive || $query->is_home ) {
-				$pt = $query->get_queried_object()->name ?: 'post';
+				$pt = ( empty( $qo = $query->get_queried_object() ) || empty( $qo->name ) )
+						? 'post'
+						: $qo->name;
 
 				# Pagination
 				if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {

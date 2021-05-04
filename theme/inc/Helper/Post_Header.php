@@ -64,7 +64,7 @@ class Post_Header {
 		# BG Color
 		if ( self::supports_bg_color( $post ) ) {
 			list( $bg_color, $txt_color ) = self::get_bg_color( $post );
-			$cls[] = "bg-{$bg_color}"; // hint for tailwind, bg-gray-light bg-indigo text-white text-indigo // todo: move it to the tailwind config
+			$cls[] = "bg-{$bg_color}";
 			$cls[] = "text-{$txt_color}";
 		} else {
 			$cls[] = 'text-white';

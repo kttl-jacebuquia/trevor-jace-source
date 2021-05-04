@@ -69,8 +69,9 @@ class Post {
 	 * Registers all registered post meta.
 	 */
 	public static function register_all(): void {
-		$rc_ppt = CPT\RC\RC_Object::$PUBLIC_POST_TYPES;
-		$ppt    = Tools::get_public_post_types();
+		$rc_ppt       = CPT\RC\RC_Object::$PUBLIC_POST_TYPES;
+		$article_kind = array_merge( $rc_ppt, [ CPT\Post::POST_TYPE ] );
+		$ppt          = Tools::get_public_post_types();
 
 		$default = [
 			'show_in_rest'  => true,
@@ -86,31 +87,31 @@ class Post {
 				self::KEY_HEADER_TYPE         => [
 					'sanitize_callback' => [ self::class, 'sanitize_post_header_types' ],
 					'default'           => Theme\Helper\Post_Header::DEFAULT_TYPE,
-					'post_types'        => array_merge( $rc_ppt, [ CPT\Donate\Fundraiser_Stories::POST_TYPE ] ),
+					'post_types'        => $article_kind,
 				],
 				self::KEY_HEADER_BG_CLR       => [
 					'default'    => Theme\Helper\Post_Header::DEFAULT_BG_COLOR,
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_HEADER_SNOW_SHARE   => [
 					'type'       => 'boolean',
 					'default'    => true,
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_HEADER_SHOW_DATE    => [
 					'type'       => 'boolean',
 					'default'    => true,
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_LENGTH_IND          => [
 					'default'    => Theme\Helper\Content_Length::DEFAULT_OPTION,
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_IMAGE_SQUARE        => [
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_IMAGE_HORIZONTAL    => [
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_HIGHLIGHTS          => [
 					'type'         => 'array',
@@ -131,7 +132,7 @@ class Post {
 							'items' => [ 'type' => 'string' ],
 						],
 					],
-					'post_types'   => $rc_ppt,
+					'post_types'   => $article_kind,
 				],
 				self::KEY_FILE                => [
 					'post_types' => [

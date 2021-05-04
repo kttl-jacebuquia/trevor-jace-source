@@ -116,6 +116,9 @@ class Hooks {
 		# Resource Center
 		CPT\RC\RC_Object::construct();
 
+		# Blog
+		CPT\Post::construct();
+
 		# Get Involved
 		CPT\Get_Involved\Get_Involved_Object::construct();
 

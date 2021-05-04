@@ -141,6 +141,16 @@
 				<a class="text-xl font-bold text-white js-fundraiser-quiz"
 				   href="#">Fundraiser Quiz</a>
 			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="<?= get_post_type_archive_link( \TrevorWP\CPT\Post::POST_TYPE ) ?>">Blog</a>
+			</li>
+
+			<li>
+				<a class="text-xl font-bold text-white"
+				   href="/events/">Events</a>
+			</li>
 		</ul>
 	</div>
 </main> <!-- #site-content -->
