@@ -27,13 +27,16 @@ class Post_Header {
 	const CLR_WHITE = 'white';
 	const CLR_LIGHT_GRAY = 'gray-light';
 	const CLR_INDIGO = 'indigo';
+	const CLR_BLUE_GREEN = 'blue_green';
 	const BG_COLORS = [
 			self::CLR_LIGHT_GRAY => [ 'name' => 'Light Gray', 'color' => '#F3F3F7' ],
 			self::CLR_INDIGO     => [ 'name' => 'Indigo', 'color' => '#101066' ],
+			self::CLR_BLUE_GREEN => [ 'name' => 'Blue Green', 'color' => '#005E67' ],
 	];
 	const BG_CLR_2_TXT_CLR = [
 			self::CLR_LIGHT_GRAY => self::CLR_INDIGO,
-			self::CLR_INDIGO     => self::CLR_WHITE
+			self::CLR_INDIGO     => self::CLR_WHITE,
+			self::CLR_BLUE_GREEN => self::CLR_WHITE,
 	];
 
 	/* Settings */
@@ -47,7 +50,7 @@ class Post_Header {
 
 	/* Defaults */
 	const DEFAULT_TYPE = self::TYPE_TEXT_ONLY;
-	const DEFAULT_BG_COLOR = self::CLR_INDIGO;
+	const DEFAULT_BG_COLOR = self::CLR_LIGHT_GRAY;
 
 	/**
 	 * Renders the post header.
@@ -63,7 +66,7 @@ class Post_Header {
 
 		# BG Color
 		if ( self::supports_bg_color( $post ) ) {
-			list( $bg_color, $txt_color ) = self::get_bg_color( $post );
+			[ $bg_color, $txt_color ] = self::get_bg_color( $post );
 			$cls[] = "bg-{$bg_color}";
 			$cls[] = "text-{$txt_color}";
 		} else {

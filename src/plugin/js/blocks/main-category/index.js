@@ -14,7 +14,7 @@ const MainCategoryInput = compose(
 	withSelect(select => {
 		const {getEditedPostAttribute} = select('core/editor');
 		const postID = getEditedPostAttribute('id');
-		const cats = getEditedPostAttribute(catTax);
+		const cats = getEditedPostAttribute(catTax === 'category' ? 'categories' : catTax) || [];
 		const metaData = getEditedPostAttribute('meta');
 		const mainCat = metaData[MAIN_CAT_META_KEY];
 
@@ -88,7 +88,7 @@ addFilter(
 	'editor.PostTaxonomyType',
 	'trvr/main-category',
 	OriginalComponent => originalProps => {
-		if (originalProps && originalProps.slug === catTax) {
+		if (originalProps && originalProps.slug === catTax && -1 === ['post_tag'].indexOf(originalProps.slug)) {
 			return <MainCategoryInput originalProps={originalProps}
 									  OriginalComponent={OriginalComponent}/>
 		} else {

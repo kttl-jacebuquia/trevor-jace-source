@@ -69,6 +69,7 @@ class Post {
 	 * Registers all registered post meta.
 	 */
 	public static function register_all(): void {
+		global $wp_meta_keys;
 		$rc_ppt       = CPT\RC\RC_Object::$PUBLIC_POST_TYPES;
 		$article_kind = array_merge( $rc_ppt, [ CPT\Post::POST_TYPE ] );
 		$ppt          = Tools::get_public_post_types();
@@ -121,7 +122,7 @@ class Post {
 				self::KEY_MAIN_CATEGORY       => [
 					'type'       => 'integer',
 					'default'    => 0,
-					'post_types' => $rc_ppt,
+					'post_types' => $article_kind,
 				],
 				self::KEY_RECIRCULATION_CARDS => [
 					'default'      => [],
@@ -189,6 +190,10 @@ class Post {
 				register_post_meta( $post_type, $meta_key, $args );
 			}
 		}
+
+		# Set defaults
+		$wp_meta_keys['post'][ CPT\Post::POST_TYPE ][ static::KEY_HEADER_BG_CLR ]['default']    = Theme\Helper\Post_Header::CLR_BLUE_GREEN;
+		$wp_meta_keys['post'][ CPT\RC\Post::POST_TYPE ][ static::KEY_HEADER_BG_CLR ]['default'] = Theme\Helper\Post_Header::CLR_INDIGO;
 	}
 
 	/**
@@ -249,8 +254,7 @@ class Post {
 
 			# Header Colors
 			$config[ self::KEY_HEADER_BG_CLR ] = [
-				'colors'  => Theme\Helper\Post_Header::BG_COLORS,
-				'default' => Theme\Helper\Post_Header::DEFAULT_BG_COLOR,
+				'colors' => Theme\Helper\Post_Header::BG_COLORS,
 			];
 
 			# Content Length
