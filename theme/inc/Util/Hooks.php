@@ -492,19 +492,21 @@ class Hooks {
 		$updates = [];
 
 		if ( $query->is_main_query() ) {
-			if ( $query->is_post_type_archive || $query->is_home ) {
-				$pt = ( empty( $qo = $query->get_queried_object() ) || empty( $qo->name ) )
-						? 'post'
-						: $qo->name;
+			if ( ! $query->is_admin ) {
+				if ( $query->is_post_type_archive || $query->is_home ) {
+					$pt = ( empty( $qo = $query->get_queried_object() ) || empty( $qo->name ) )
+							? 'post'
+							: $qo->name;
 
-				# Pagination
-				if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
-					$updates[ $pt == 'post' ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
-				}
+					# Pagination
+					if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
+						$updates[ $pt == 'post' ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
+					}
 
-				# Init Sorter
-				if ( A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_SORTER_ACTIVE ) ) {
-					new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
+					# Init Sorter
+					if ( A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_SORTER_ACTIVE ) ) {
+						new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
+					}
 				}
 			}
 		}
