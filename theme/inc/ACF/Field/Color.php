@@ -14,7 +14,6 @@ class Color extends A_Field {
 				'gray'       => 'Gray',
 				'gray-light' => 'Gray - Light',
 				'orange'     => 'Orange',
-				'blue_green' => 'Blue Green',
 			]
 		], parent::gen_args( $key, $name, $ext_args ) );
 	}
