@@ -1,36 +1,51 @@
-.fundraiser-quiz {
+.modal#js-fundraiser-quiz {
+	@apply bg-teal-dark;
 
+	.modal-container {
+		@apply max-w-none h-full min-h-full w-full justify-start rounded-none bg-teal-dark p-0 shadow-none;
+
+		&.dev-form {
+			@apply bg-blue_green;
+		}
+	}
+
+	.modal-content-wrap {
+		@apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0;
+		@apply py-px150;
+	}
+
+	.modal-close {
+		@apply absolute flex justify-center items-center m-0 top-px28 right-px28 bg-white text-teal-dark py-px12 px-px17;
+		@apply w-px45 h-px45 p-0;
+		@apply md:top-px50 md:right-px50;
+		@apply xl:w-px50 xl:h-px50;
+		border-radius: rem-calc(18px);
+	}
+
+}
+
+.fundraiser-quiz {
 	&--steps {
 		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
 	}
 
 	&--form {
 		@apply pb-px64 xl:pb-px100;
-		padding-top: rem-calc(450px);
 		@screen md {
-			@apply container pt-px200 pb-px130;
+			@apply container pb-px130;
 		}
 	}
 
-	&--create-fundraiser {
-	}
-
-
-	@screen xl {
-		max-width: 764px / 1440px * 100%;
-
-	}
-
-	&--step-one &__title {
-		@apply font-normal md:font-bold text-px24 leading-px28 md:text-px32 md:leading-px42 xl:text-px36 xl:leading-px46 text-center;
-	}
-
 	&__title {
-		@apply font-bold text-px32 leading-px40 md:leading-px42 xl:text-px36 xl:leading-px46 text-center tracking-px_05 mb-px16 md:mb-px15 xl:mb-px12;
+		@apply font-semibold text-px24 leading-px28 text-center tracking-px_05 mb-px16;
+		@apply md:text-px32 md:leading-px42 md:mb-px15 md:tracking-em_001;
+		@apply xl:mb-px12 xl:text-px36 xl:leading-px48 xl:tracking-normal;
 	}
 
 	&__description {
-		@apply font-normal text-px16 leading-px24 md:leading-px22 xl:text-px20 xl:leading-px30 text-center mb-px16 md:mb-px15 xl:mb-px12;
+		@apply font-normal text-px16 leading-px24 text-center mb-px16;
+		@apply md:leading-px22 md:mb-px15 md:tracking-em005;
+		@apply xl:text-px20 xl:leading-px30 xl:tracking-px05 xl:mb-px12;
 	}
 
 	&__instruction {
@@ -38,56 +53,50 @@
 	}
 
 	&--step-one &__choices {
+		@apply w-full;
+		@apply md:w-auto;
+
 		@screen md {
+			column-gap: #{rem-calc(34px)};
 			column-count: 2;
 		}
 	}
 
+	fieldset {
+		@apply flex justify-center;
+	}
+
 	&__choices {
-		@apply font-normal text-left text-px16 leading-px22 mt-px26;
+		@apply font-normal text-left text-px16 leading-px22 tracking-px05 mt-px38;
 		column-count: 1;
 
 		@screen md {
-			@apply text-px18 mt-px58 mx-auto;
+			@apply text-px18 leading-px26 tracking-normal mt-px68 mx-auto;
 			width: 80%;
 		}
 
 		@screen xl {
-			@apply mx-auto mt-px35 w-2/4 gap-x-px30 gap-px30;
+			@apply mx-auto mt-px46 w-2/4 gap-x-px30 gap-px30;
 		}
 	}
 
 	&--steps &__choices {
 		@apply w-auto flex flex-col justify-start gap-y-px30;
-
-		@screen md {
-			width: rem-calc(340px);
-		}
-
-		@screen xl {
-			width: rem-calc(300px);
-		}
 	}
 
 	&--steps &__btn-container {
-		@apply w-auto m-0 pl-px120;
-
-		@screen xl {
-			@apply pl-px100;
-		}
+		@apply w-auto m-0;
 	}
 
 	&__btn-container {
-		@apply relative mb-px25;
+		@apply relative mb-px26 flex justify-start items-center;
 
-		@screen lg {
-			width: 80%;
-			@apply mx-auto pl-px30;
+		.fundraiser-quiz--step-one & {
+			@apply justify-start;
 		}
 
-		@screen xl {
-			width: 90%;
-			@apply pl-0;
+		@screen md {
+			@apply md:mb-px22;
 		}
 
 		label {
@@ -96,14 +105,8 @@
 	}
 
 	&__radio-btn {
-		@apply absolute transform -translate-y-2/4 bg-teal-dark border-2 border-solid border-white rounded-px10 shadow-radio;
-		top: 50%;
-		height: rem-calc(18px);
-		width: rem-calc(18px);
-		outline: none;
-		vertical-align: middle;
-		appearance: none;
-		transition: all .3s ease-in-out;
+		@apply bg-teal-dark border-2 border-solid border-white rounded-px10 shadow-radio;
+		@apply w-px18 h-px18 -mr-px18 transition-all duration-300 ease-in-out appearance-none outline-none align-middle;
 
 		&:checked {
 			@apply bg-white;
@@ -218,21 +221,20 @@
 	}
 
 	&__back-btn {
-		@apply bg-transparent text-white absolute left-px50 md:left-px70 top-px60 p-4;
+		@apply flex items-center bg-transparent text-white absolute left-px30 top-px28 p-px12;
+		@apply text-px16 leading-px22 -ml-px12;
+		@apply md:left-px70;
+
 		&::before {
 			content: "<";
-			position: absolute;
-			left: rem-calc(-18px);
-			top: rem-calc(-4px);
-			@apply text-px40;
+			@apply flex items-center text-px24 mr-px12;
 		}
 	}
 
 	&__pagination {
-		@apply text-white text-px22 leading-px32 hidden xl:block;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		top: rem-calc(50px);
+		@apply absolute top-px40 left-1/2 text-white text-px14 leading-px18 hidden;
+		@apply transform -translate-x-1/2;
+		@apply md:top-px50 md:text-px18 md:leading-px26;
+		@apply xl:block xl:text-px22 xl:leading-px32;
 	}
 }

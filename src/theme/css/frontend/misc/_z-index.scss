@@ -1,0 +1,29 @@
+$z-index-settings: (
+
+	// Navigation parts
+	'nav-base': 100,
+	'nav-blur': 101,
+	'nav-white-bg': 102,
+	'topbar': 103,
+	'nav-menu': 105,
+	'nav-switcher': 106,
+	'nav-cta': 106,
+	'nav-controls': 107,
+
+	// Modals
+	'modal-base': 110, // Should be above nav and banners
+	'fundraiser-quiz': 112,
+);
+
+@function z-index( $setting ) {
+	@if not map-has-key($z-index-settings, $setting) {
+		@error "'#{$setting}' key is missing from $z-index-settings map.";
+	}
+	@else {
+		@return map-get($z-index-settings, $setting);
+	}
+}
+
+@mixin z-index( $setting ) {
+	z-index: z-index($setting);
+}

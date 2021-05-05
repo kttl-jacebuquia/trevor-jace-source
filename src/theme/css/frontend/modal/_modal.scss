@@ -1,7 +1,8 @@
 .modal {
   @apply transition-all;
-  @apply fixed w-screen h-full top-0 left-0 flex items-center justify-center z-50;
+  @apply fixed w-screen h-full top-0 left-0 flex items-center justify-center;
   @apply opacity-0 pointer-events-none;
+  @include z-index(modal-base);
 
   &.is-active {
 	@apply pointer-events-auto opacity-100;
@@ -114,25 +115,5 @@ body.modal-active {
 
   .site-content {
 	filter: url('#blur3px');
-  }
-}
-
-#js-fundraiser-quiz {
-  .modal-close {
-	@apply absolute m-0 top-px70 md:top-px50 right-px28 md:right-px50 bg-white text-teal-dark py-px12 px-px17;
-	border-radius: rem-calc(18px);
-  }
-
-  .modal-container {
-	@apply bg-teal-dark pt-px50 md:pt-0;
-	//@apply max-h-full max-w-none w-full ;
-
-	&.dev-form {
-	  @apply bg-blue_green;
-	}
-  }
-
-  .modal-content-wrap {
-  @apply h-screen flex flex-col justify-center m-0;
   }
 }
