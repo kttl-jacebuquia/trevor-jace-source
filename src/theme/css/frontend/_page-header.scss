@@ -5,7 +5,7 @@
 
 	&.horizontal-header + main > div:first-child {
 		@screen md {
-			padding-top: rem-calc(165px);
+			padding-top: rem-calc(117px);
 		}
 
 		@screen lg2 {
@@ -13,7 +13,7 @@
 		}
 
 		@screen xl {
-			padding-top: rem-calc(409px);
+			padding-top: rem-calc(431px);
 		}
 	}
 }
@@ -563,7 +563,26 @@
 
 	// Horizontal
 	&.type-horizontal {
-		@apply mt-12;
+		@apply mt-px28;
+		@apply xl:mt-px49 xl:px-px140;
+
+		.page-header-title {
+			@apply tracking-normal;
+		}
+
+		.page-header-desc {
+			@apply pb-0 pt-px12 text-px18 leading-px26;
+			@apply md:pt-px10 md:text-px16 md:leading-px22;
+			@apply xl:pt-px14 xl:text-px26 xl:leading-px36 xl:tracking-em005;
+		}
+
+		.page-header-image {
+			@apply relative pt-vwfull;
+
+			img {
+				@apply absolute top-0 left-0 h-full;
+			}
+		}
 
 		& + * {
 			@screen md {
@@ -578,16 +597,23 @@
 
 	&.type-horizontal & {
 
+		&-title {
+			@apply md:text-px32 md:leading-px42;
+			@apply xl:text-px46 xl:leading-px56;
+		}
+
 		&-inner {
 			@apply flex flex-col justify-start;
 		}
 
-		&-desc {
-			@apply pb-0 text-px20 leading-px28 md:text-px16 md:leading-px22 xl:text-px26 xl:leading-px36 xl:tracking-em005;
-		}
-
 		&-content-wrap {
-			@apply pb-px80 md:pb-px50 lg2:pb-px70 text-center mx-auto;
+			@apply pb-px80 text-center mx-auto;
+			@apply md:pb-px50;
+			@apply xl:pb-px60;
+			
+			@screen md {
+				width: percentage(494/668);
+			}
 
 			@screen xl {
 				width: rem-calc(822px);
@@ -601,8 +627,8 @@
 
 			@screen md {
 				@apply w-full ml-0 z-10;
-
-				margin-bottom: rem-calc(-85px);
+				padding-top: calc(100% * #{(385/668)});
+				margin-bottom: rem-calc(-117px);
 			}
 
 			@screen lg2 {
@@ -610,7 +636,8 @@
 			}
 
 			@screen xl {
-				margin-bottom: rem-calc(-290px);
+				padding-top: calc(100% * #{(580/1160)});
+				margin-bottom: rem-calc(-285px);
 			}
 
 			img {
@@ -619,11 +646,7 @@
 
 				@screen md {
 					@apply rounded-px10;
-					max-height: rem-calc(313px);
-				}
-
-				@screen lg {
-					max-height: rem-calc(580px);
+					@apply block h-full max-h-none;
 				}
 			}
 		}

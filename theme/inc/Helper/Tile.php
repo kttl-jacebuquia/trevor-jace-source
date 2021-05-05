@@ -350,6 +350,37 @@ class Tile {
 	}
 
 	/**
+	 * @param \WP_Post $post
+	 * @param int $key
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function event ( $post, int $key, array $options = [] ) :string {
+		$post 	= get_post( $post );
+		$val 	= new Field_Val_Getter( Field_Group\Event::class, $post );
+		$date 	= $val->get( Field_Group\Event::FIELD_DATE );
+		$time 	= $val->get( Field_Group\Event::FIELD_TIME );
+		$label 	= $val->get( Field_Group\Event::FIELD_LABEL );
+
+		$options = array_merge( array_fill_keys( [
+				'class',
+				'attr',
+				'card_type',
+				'hidden',
+		], null ), $options );
+		
+		# Update classname
+		if ( $options[ 'hidden' ] ) {
+			$options['class'][] = 'hidden';
+		}
+
+		$options = array_merge( $options, compact( 'date', 'time', 'label' ));
+
+		return Card::event($post, $key, $options);
+	}
+
+	/**
 	 * @param string $type
 	 *
 	 * @return array

@@ -116,7 +116,7 @@ class Card {
 						<div class="title-top uppercase"><?= $title_top ?></div>
 					<?php } ?>
 
-					<h3 class="post-title">
+					<h3 class="post-title font-semibold text-px24 leading-px28">
 						<?php if ( $title_link ) { ?>
 							<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
 								<?= get_the_title( $post ); ?>
@@ -185,7 +185,7 @@ class Card {
 			<div class="card-content">
 				<div class="title-top uppercase">Individual donor</div>
 
-				<h3 class="post-title"
+				<h3 class="post-title font-semibold text-px24 leading-px28"
 					title="<?= esc_attr( $clean_title = wp_filter_nohtml_kses( $title ) ) ?>">
 					<a href="<?= esc_url( $canonical_url ) ?>"
 					   class="title stretched-link" target="_blank"
@@ -203,6 +203,150 @@ class Card {
 			</div>
 		</div>
 		<?php return ob_get_clean();
+	}
+
+	/*
+	* @param array $post
+	* @param int $key
+	* @param array $options
+	*
+	* @return string
+	*/
+   public static function event( $post, int $key = 0, array $options = [] ): string {
+		$post      = get_post( $post );
+		$permalink = get_permalink( $post );
+		$options   = array_merge( [
+				'class'            => [], // Additional classes
+		], $options );
+		$_class    = &$options['class'];
+
+		# Default class
+		$_class[] = 'card-post event';
+
+		$title_top_segments = [
+			"<strong>{$options['date']}</strong>",
+			"<span>{$options['time']}</span>"
+		];
+		$title_top  = implode( '', $title_top_segments );
+		$title_link = true;
+
+		# Thumbnail variants
+		$thumb_var   = [
+			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
+			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
+		 ];
+
+		// Fallback to the square
+		$thumb_var[]   = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb         = Thumbnail::post( $post, ...$thumb_var );
+		$has_thumbnail = ! empty( $thumb );
+		if ( ! $has_thumbnail ) {
+			$_class[] = 'no-thumbnail';
+		}
+
+		ob_start();
+		?>
+		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
+			<?php if ( ! empty( $options['label'] ) ): ?>
+				<span class="card-label">
+					<?= $options['label'] ?>
+				</span>
+			<?php endif; ?>
+
+
+			<?php if ( in_array( 'bg-full', $_class ) && $has_thumbnail ) { ?>
+				<div class="post-thumbnail-wrap">
+					<a href="<?= get_the_permalink( $post ) ?>">
+						<?= $thumb ?>
+					</a>
+				</div>
+			<?php } ?>
+
+			<div class="card-content">
+				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
+					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class ) ) { ?>
+						<div class="post-thumbnail-wrap">
+							<a href="<?= get_the_permalink( $post ) ?>">
+								<?= $thumb ?>
+							</a>
+						</div>
+					<?php } ?>
+
+					<?php if ( ! empty( $icon_cls ) ) { ?>
+						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+					<?php } ?>
+
+					<?php if ( ! empty( $title_top ) ) { ?>
+						<div class="title-top"><?= $title_top ?></div>
+					<?php } ?>
+
+					<h3 class="post-title">
+						<?php if ( $title_link ) { ?>
+							<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
+								<?= get_the_title( $post ); ?>
+							</a>
+						<?php } else { ?>
+							<?= get_the_title( $post ); ?>
+						<?php } ?>
+					</h3>
+
+					<?php if ( ! empty( $title_btm ) ) { ?>
+						<div class="title-btm"><?= esc_html( $title_btm ) ?></div>
+					<?php } ?>
+
+					<?php if ( ! empty( $desc ) ) { ?>
+						<div class="post-desc"><span><?= $desc /* Sanitized above */ ?></span></div>
+					<?php } ?>
+
+					<?php if ( $options['show_cta'] ) : ?>
+						<a href="<?= $permalink ?>" class="card-cta">View Event Details</a>
+					<?php endif; ?>
+				</div>
+
+				<?php if ( ! empty( $tags ) ) { ?>
+					<div class="tags-box">
+						<?php foreach ( $tags as $tag ) { ?>
+							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>"
+							class="tag-box"><?= $tag->name ?></a>
+						<?php } ?>
+					</div>
+				<?php } ?>
+			</div>
+		</article>
+		<?php
+		return ob_get_clean();
+   }
+
+   /*
+	* @param array $post
+	* @param int $key
+	* @param array $options
+	*
+	* @return string
+	*/
+	public static function attachment( $post, $key, $options ) {
+		$is_image = wp_attachment_is_image( $post );
+
+		$options   = array_merge( [
+				'class'            => [], // Additional classes
+		], $options );
+		$_class    = &$options['class'];
+
+		# Default class
+		$_class[] = 'card-post attachment';
+
+		# Thumbnail variants
+		$thumb = wp_get_attachment_image( $post, Thumbnail::SIZE_MD );
+
+		ob_start();
+		?>
+		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
+			<div class="post-thumbnail-wrap">
+				<?= $thumb ?>
+			</div>
+		</article>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**

@@ -134,6 +134,9 @@ class Hooks {
 		# Financial Reports
 		CPT\Financial_Report::construct();
 
+		# Event
+		CPT\Event::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 

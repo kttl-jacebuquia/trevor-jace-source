@@ -1,6 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-use TrevorWP\CPT\Team;
+use TrevorWP\CPT;
 
 /**
  * Carousel Helper
@@ -25,7 +25,6 @@ class Carousel {
 				'print_js'      => true,
 				'card_options'  => [],
 				'swiper'        => [], // swiper options
-				'card_renderer' => [ Card::class, 'post' ],
 		], $options );
 
 		if ( ! is_array( $options['title_cls'] ) ) {
@@ -74,8 +73,22 @@ class Carousel {
 				<div class="carousel-container">
 					<div class="swiper-wrapper">
 						<?php foreach ( $posts as $key => $post ) {
-							if ( $post->post_type === Team::POST_TYPE ) {
-								$options["card_renderer"] = [ Tile::class, "staff" ];
+							$post_type = get_post_type( $post );
+
+							switch ( $post_type ) {
+								case CPT\Team::POST_TYPE:
+									$options["card_renderer"] = [ Tile::class, "staff" ];
+									break;
+								case CPT\Event::POST_TYPE:
+									$options["card_renderer"] = [ Tile::class, "event" ];
+									$options["card_options"]['show_cta'] = true;
+									break;
+								case 'attachment':
+									$options["card_renderer"] = [ Card::class, "attachment" ];
+									break;
+								default:
+									$options["card_renderer"] = [ Card::class, 'post' ];
+									
 							}
 						?>
 							<div class="swiper-slide">

@@ -1,0 +1,12 @@
+.embed-content {
+    @apply relative;
+    padding-top: calc(100% * #{204/319});
+
+    @screen md {
+        padding-top: calc(100% * #{385/668});    
+    }
+
+    > * {
+        @apply absolute top-0 left-0 w-full h-full object-cover;
+    }
+}

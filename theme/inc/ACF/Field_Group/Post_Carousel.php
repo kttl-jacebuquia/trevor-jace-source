@@ -3,7 +3,7 @@
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Util\Tools;
-use TrevorWP\CPT\Team;
+use TrevorWP\CPT;
 
 class Post_Carousel extends Post_Grid {
 	/** @inheritdoc */
@@ -33,16 +33,37 @@ class Post_Carousel extends Post_Grid {
 		$cls           = [];
 		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( static::FIELD_WRAPPER_ATTR ), $cls );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
-		$post_type     = $val->get( static::FIELD_QUERY_PTS ) ?: [];
+		$post_types     = $val->get( static::FIELD_QUERY_PTS ) ?: [];
 		$source        = $val->get( static::FIELD_SOURCE );
+		$title         = $val->get( static::FIELD_HEADING );
 
-		$class = [ 'mt-12', 'mb-0', ];
-
-		if ( in_array( Team::POST_TYPE, @$post_type ) && $source === "query" ) {
-			$class[] = "post-carousel--staff";
+		// Manually get each post's post type if not able to get from above
+		if ( empty( $post_types ) && ! empty( $posts ) ) {
+			foreach ($posts as $post) {
+				$post_types[] = get_post_type( $post );
+			}
 		}
 
-		$options = [ 'class' => implode( " ", $class ) ];
+		$class = [ 'mt-12', 'mb-0', ];
+		$title_cls = [];
+
+		if ( in_array( CPT\Team::POST_TYPE, @$post_types ) && $source === "query" ) {
+			$class[] = "post-carousel--staff";
+		}
+		else if ( in_array( CPT\Event::POST_TYPE, $post_types ) ) {
+			$class[] = "post-carousel--event mb-px80";
+			$title_cls[] = "text-center";
+		}
+		else if ( in_array( "attachment", $post_types ) ) {
+			$class[] = "post-carousel--attachment";
+		}
+
+		$options = [
+			'title' => $title,
+			'class' => implode( " ", $class ),
+			'title_cls' => implode( " ", $title_cls ),
+			'post_types' => $post_types,
+		];
 		if ( ! empty( $placeholder_img ) ) {
 			$options[ 'card_options' ] = [ 'placeholder_image' => $placeholder_img ];
 		}

@@ -29,12 +29,14 @@ class ACF {
 		Field_Group\Info_Card::class,
 		Field_Group\Info_Card_Grid::class,
 		Field_Group\Address::class,
+		Field_Group\Embed::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Team_Member::class,
 		Field_Group\Partners::class,
 		Field_Group\Post_Images::class,
 		Field_Group\Financial_Report::class,
+		Field_Group\Event::class,
 	];
 
 	public static function construct() {

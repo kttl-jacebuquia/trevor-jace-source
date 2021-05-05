@@ -1,0 +1,13 @@
+.post-grid {
+    @apply pt-px80;
+    // md
+    @apply md:pt-px72;
+
+    &-heading {
+        @apply text-center text-px32 leading-px40 mb-px40 text-teal-dark font-bold;
+        // md
+        @apply md:mb-px40 md:leading-px42;
+        // xl
+        @apply xl:text-px46 xl:leading-px56;
+    }
+}

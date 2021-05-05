@@ -28,6 +28,12 @@ class Tile_Grid {
 		return self::custom( $posts, $options );
 	}
 
+	public static function event( array $posts, array $options = [] ): string {
+		$options[ 'tileMethod' ] = 'event';
+
+		return self::custom( $posts, $options );
+	}
+
 	/**
 	 * @param array $data
 	 * @param array $options

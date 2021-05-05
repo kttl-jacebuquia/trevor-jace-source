@@ -10,6 +10,18 @@
   --aspect-ratio: .75;
 }
 
+[data-aspectRatio="3:4"] {
+  --aspect-ratio: #{4/3};
+}
+
+[data-aspectRatio="16:9"] {
+  --aspect-ratio: #{9/16};
+}
+
+[data-aspectRatio="9:16"] {
+  --aspect-ratio: #{16/9};
+}
+
 [data-aspectRatio] {
   position: relative;
 
