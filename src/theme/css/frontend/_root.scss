@@ -14,6 +14,7 @@ body {
   @apply w-full;
   min-height: calc(100vh - var(--tr-wp-admin-bar-h));
   @apply bg-white;
+  -webkit-font-smoothing: antialiased;
 
   // Fixed content when nav is expanded for mobile/tablet
   &.is-fixed {

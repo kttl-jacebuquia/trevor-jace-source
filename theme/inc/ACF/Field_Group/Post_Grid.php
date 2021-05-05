@@ -28,6 +28,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const SOURCE_QUERY = 'query';
 	const SOURCE_PICK = 'pick';
 
+	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
+
 	/** @inheritDoc */
 	public static function register(): bool {
 		add_filter( 'acf/load_field/name=' . static::FIELD_QUERY_PTS, [ static::class, 'load_field_post_query_pts' ] );
@@ -267,12 +269,10 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$show_empty   	 = (int) $val->get( static::FIELD_SHOW_EMPTY );
 		$empty_message   = $val->get( static::FIELD_EMPTY_MESSAGE );
 		$cls             = [
-				'tile-grid-container',
-				'mb-px50',
-				'mt-px40',
-				'md:mt-px50',
-				'xl:mt-px80',
-				'mx-auto'
+				'tile-grid-container mx-auto',
+				'mb-px38 mt-px40',
+				'md:mt-px30',
+				'xl:mt-0',
 		];
 
 		$social_media_accounts = [
@@ -416,7 +416,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	protected static function _get_posts( Field_Val_Getter $val ): array {
 		$source        = $val->get( static::FIELD_SOURCE );
-		$display_limit = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
+		$display_limit = $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
+		$display_limit = ! empty( $display_limit ) ? (int) $display_limit : static::DEFAULT_NUM_DISPLAY_LIMIT;
 
 		if ( $source == static::SOURCE_QUERY ) {
 			$q_args = [ 'tax_query' => [ 'relation' => 'OR' ], 'posts_per_page' => $display_limit, ];

@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Util\Tools;
 
 class Page_Section extends A_Basic_Section implements I_Block {
@@ -45,7 +46,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 										static::TITLE_ALIGN_LEFT             => 'Left',
 										static::TITLE_ALIGN_CENTERED_XL_LEFT => 'Centered, XL:Left'
 								]
-						],
+						]
 				]
 		);
 	}
@@ -86,13 +87,22 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		}
 
 		# Type
-		if ( $type == static::TYPE_HORIZONTAL ) {
-			$inner_cls[]           = 'xl:flex xl:flex-row xl:flex-wrap';
-			$title_wrap_cls[]      = $content_wrap_cls[] = 'xl:w-1/2 xl:flex xl:flex-col xl:justify-center';
-			$title_wrap_cls[]      = 'xl:flex-col xl:items-start';
-			$content_wrap_cls[]    = 'xl:items-end mt-12 xl:mt-0';
-			$btn_cls['wrap_cls'][] = 'xl:w-full xl:justify-start';
-			$title_cls[]           = $desc_cls[] = 'xl:w-3/4'; //fix left align
+		switch ( $type ) {
+			case static::TYPE_HORIZONTAL:
+				$inner_cls[]           = 'xl:flex xl:flex-row xl:flex-wrap';
+				$title_wrap_cls[]      = $content_wrap_cls[] = 'xl:w-1/2 xl:flex xl:flex-col xl:justify-center';
+				$title_wrap_cls[]      = 'xl:flex-col xl:items-start';
+				$content_wrap_cls[]    = 'xl:items-end mt-12 xl:mt-0';
+				$btn_cls['wrap_cls'][] = 'xl:w-full xl:justify-start';
+				$title_cls[]           = $desc_cls[] = 'xl:w-3/4'; //fix left align
+				break;
+
+			default:
+				$title_wrap_cls[] = 'flex flex-col items-center';
+				$title_cls[] 	  = 'mb-px14 text-center';
+				$desc_cls[]  	  = 'tracking-px05 mb-0 text-center';
+				$desc_cls[]  	  = 'md:mt-0';
+				break;
 		}
 
 		ob_start(); ?>

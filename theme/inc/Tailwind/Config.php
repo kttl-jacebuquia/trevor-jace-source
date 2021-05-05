@@ -73,6 +73,7 @@ class Config {
 		$options['w']         = static::option_walker( $theme['width'] );
 		$options['h']         = static::option_walker( $theme['height'] );
 		$options['rounded']   = static::option_walker( $theme['borderRadius'] );
+		$options['min-w']     = static::option_walker( $theme['minWidth'] );
 		$options['max-w']     = static::option_walker( $theme['maxWidth'] );
 		$options['container'] = static::option_walker( [ '' => 'Container' ] );
 		$options['border']    = array_merge( static::option_walker( $theme['borderColor'] ), static::option_walker( $theme['borderWidth'] ) );

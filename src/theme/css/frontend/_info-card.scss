@@ -30,13 +30,14 @@
 
   &-title {
 	@apply mb-px20 font-bold text-px32 leading-px40 md:mb-3.5 md:leading-px42 mb-3;
+	@apply xl:text-px36 xl:leading-px46;
   }
 
-  &-desc {
-	@apply font-normal text-px18 leading-px26 tracking-px05 md:leading-px24 lg:text-px20 lg:leading-px26;
+  &-title-desc {
+	@apply font-normal text-px18 leading-px26 tracking-px05 md:text-px18 md:leading-px24 lg:text-px20 lg:leading-px26;
 
 	@screen xl {
-	  @apply mx-auto;
+	  @apply mx-auto text-px20 leading-px30;
 	  max-width: rem-calc(818px);
 	}
   }

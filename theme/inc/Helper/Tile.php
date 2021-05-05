@@ -75,9 +75,9 @@ class Tile {
 				?>
 				<script>jQuery(function () {
 						trevorWP.features.sharingMore(
-								document.querySelector('#<?= $id ?>-content .post-share-more-btn'),
-								document.querySelector('#<?= $id ?>-content .post-share-more-content'),
-								{appendTo: document.querySelector('#<?= $id ?>-content')}
+								document.querySelector('#<?php echo $id ?>-content .post-share-more-btn'),
+								document.querySelector('#<?php echo $id ?>-content .post-share-more-content'),
+								{appendTo: document.querySelector('#<?php echo $id ?>-content')}
 						);
 					})</script>
 				<?php
@@ -85,7 +85,8 @@ class Tile {
 		}
 
 		if ( $post->post_type === CPT\Research::POST_TYPE ) {
-			$data['cta_txt'] = 'Learn More';
+			$data['cta_txt']    = 'Learn More';
+			$options['class'][] = 'research-card';
 		}
 		return self::custom( $data, $key, $options );
 	}
@@ -110,22 +111,22 @@ class Tile {
 
 		ob_start();
 		?>
-		<div class="js-accordion <?= implode( ' ', $cls ) ?>">
-			<h2 class="accordion-header" id="heading-<?= $key ?>">
+		<div class="js-accordion <?php echo implode( ' ', $cls ) ?>">
+			<h2 class="accordion-header" id="heading-<?php echo $key ?>">
 				<button class="accordion-button text-px20 leading-px26 py-8 px-7 w-full text-left border-b border-blue_green border-opacity-20 flex justify-between items-center font-semibold md:pt-9 md:mb-px6 md:border-0 md:pb-0 md:text-px24 md:leading-px28 lg:text-px26 lg:leading-px36"
-						type="button" aria-expanded="false" aria-controls="collapse-<?= $key ?>">
-					<?= $data['title'] ?>
+						type="button" aria-expanded="false" aria-controls="collapse-<?php echo $key ?>">
+					<?php echo $data['title'] ?>
 				</button>
 			</h2>
-			<div id="collapse-<?= $key ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?= $key ?>">
+			<div id="collapse-<?php echo $key ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?php echo $key ?>">
 				<div class="accordion-body px-7 pt-5 pb-9 bg-gray-light md:bg-transparent md:pb-36 lg:pt-0">
 					<p class="text-px18 leading-px28 mb-6 md:text-px16 md:leading-px24 lg:text-px18 lg:leading-px26">
-						<?= $data['desc'] ?>
+						<?php echo $data['desc'] ?>
 					</p>
 					<div class="tile-cta-wrap">
-						<a href="<?= @$data['cta_url'] ?>"
+						<a href="<?php echo @$data['cta_url'] ?>"
 						   class="tile-cta font-bold text-px18 leading-px28 border-b-2 border-teal-dark lg:text-px20">
-							<span><?= $data['cta_txt'] ?></span>
+							<span><?php echo $data['cta_txt'] ?></span>
 						</a>
 					</div>
 				</div>
@@ -171,30 +172,30 @@ class Tile {
 
 		ob_start();
 		?>
-		<div <?= Tools::flat_attr( $attr ) ?>>
+		<div <?php echo Tools::flat_attr( $attr ) ?>>
 			<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
-				<a href="<?= @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
+				<a href="<?php echo @$data['cta_url'] ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
 
 			<?php if ( $options['card_type'] === 'product' && ! empty ( $data['img'] ) ) {?>
-				<?= $data['img'] ?>
+				<?php echo $data['img'] ?>
 			<?php } ?>
 			<div class="tile-inner">
 				<?php if ( ! empty ( $data['img'] ) && $options['card_type'] !== 'product' ) { ?>
-					<?= $data['img'] ?>
+					<?php echo $data['img'] ?>
 				<?php } ?>
 				<?php if ( ! empty( $data['title_top'] ) ) { ?>
-					<div class="tile-title-top"><?= $data['title_top'] ?></div>
+					<div class="tile-title-top"><?php echo $data['title_top'] ?></div>
 				<?php } ?>
-				<div class="tile-title"><?= $data['title'] ?></div>
+				<div class="tile-title"><?php echo $data['title'] ?></div>
 				<?php if ( ! empty( $data['desc'] ) ) { ?>
-					<div class="tile-desc"><?= $data['desc'] ?></div>
+					<div class="tile-desc"><?php echo $data['desc'] ?></div>
 				<?php } ?>
 
 				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
 					<div class="tile-cta-wrap">
-						<a href="<?= @$data['cta_url'] ?>" class="tile-cta stretched-link">
-							<span><?= $data['cta_txt'] ?></span>
+						<a href="<?php echo @$data['cta_url'] ?>" class="tile-cta stretched-link">
+							<span><?php echo $data['cta_txt'] ?></span>
 						</a>
 					</div>
 				<?php } ?>
@@ -212,7 +213,7 @@ class Tile {
 	 * @return string
 	 */
 	public static function staff ( \WP_Post $post, int $key, array $options = [] ) :string {
-		$_class = [ 'tile', 'staff', 'relative', ];
+		$_class = [ 'tile', 'staff', 'relative', 'shadow-darkGreen', 'overflow-hidden'];
 		$post = get_post( $post );
 		$name = get_the_title( $post );
 		$val = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
@@ -286,12 +287,12 @@ class Tile {
 						<?php echo esc_html( $name ); ?>
 					</p>
 					<?php if ( ! empty ( $group ) && strtolower( $group ) !== 'founder' || ! empty ( $pronoun ) ) { ?>
-						<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10">
+						<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10 md:tracking-em005">
 							<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>
 							<?php if ( ! empty( $pronoun ) ) { ?>
-								<span class="information__pronoun font-normal pl-px12"><?php echo esc_html( $pronoun ); ?></span>
+								<span class="information__pronoun font-normal pl-px12 border-l-px1 border-blue_green border-opacity-40"><?php echo esc_html( $pronoun ); ?></span>
 							<?php } ?>
 						</div>
 					<?php } ?>
@@ -330,14 +331,14 @@ class Tile {
 
 		ob_start();
 		?>
-		<div <?= Tools::flat_attr( $attr ) ?>>
+		<div <?php echo Tools::flat_attr( $attr ) ?>>
 			<div class="tile-inner">
-				<div class="tile-title"><?= $post->post_title ?></div>
+				<div class="tile-title"><?php echo $post->post_title ?></div>
 				<?php if ( ! empty( $reports ) ) : ?>
 					<?php foreach ( $reports as $report ): ?>
 						<div class="tile-cta-wrap">
-							<a href="<?= $report['url'] ?>" class="tile-cta">
-								<span><?= $report['title'] ?></span>
+							<a href="<?php echo $report['url'] ?>" class="tile-cta">
+								<span><?php echo $report['title'] ?></span>
 							</a>
 						</div>
 					<?php endforeach; ?>

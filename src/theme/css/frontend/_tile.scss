@@ -41,7 +41,7 @@
 		@apply grid grid-cols-1 gap-y-7 auto-rows-fr;
 
 		.staff {
-			@apply shadow-darkGreen h-auto p-0;
+			@apply h-auto p-0;
 
 			.post-thumbnail-wrap {
 				height: rem-calc(180px);
@@ -60,10 +60,6 @@
 
 			.information {
 				@apply rounded-b-px10;
-				&__pronoun {
-					border-left-width: 1px;
-					@apply border-blue_green border-opacity-40;
-				}
 			}
 		}
   }
@@ -215,7 +211,7 @@
   }
 
   .post-type-archive-trevor_fin_report & {
-	  @apply px-px28 pt-px38 pb-px92;
+	  @apply px-px28 py-px38 min-h-px370;
   }
 
   &-title-top {
@@ -226,12 +222,20 @@
 	@apply text-px24 leading-px28 tracking-em001 font-semibold mb-3;
 
 	.post-type-archive-trevor_fin_report & {
-		@apply text-px30 leading-px40;
+		@apply text-px30 leading-px40 font-bold;
+	}
+
+	.research-card & {
+		@apply mb-px14;
 	}
   }
 
   &-desc {
 	@apply text-px16 leading-px24 mb-4;
+
+	.research-card & {
+		@apply mb-px18;
+	}
   }
 
   &-cta-wrap {
@@ -282,7 +286,7 @@
 	}
 
 	&.research-card {
-		@apply shadow-none border-blue_green border-opacity-50;
+		@apply shadow-none border-blue_green border-opacity-50 pb-px28 min-h-px370;
 		border-width: 1px;
 
 		@screen md {
@@ -314,7 +318,8 @@
 	max-width: theme('postCard.width.md');
 
 	.post-type-archive-trevor_fin_report & {
-		@apply px-px27 pb-px152;
+		@apply px-px27 min-h-px400;
+		@apply shadow-none;
 	}
 
 	&-title {
@@ -322,9 +327,16 @@
 			@apply text-px24 leading-px28 tracking-em001;
 			@apply mb-px40;
 		}
+
+		.research-card & {
+			@apply mb-px12;
+		}
 	}
 
 	&-desc {
+		.research-card & {
+			@apply text-px16 leading-px22;
+		}
 	}
 
 	&-cta-wrap {
@@ -344,7 +356,7 @@
 	max-width: theme('postCard.width.lg');
 
 	.post-type-archive-trevor_fin_report & {
-		@apply pt-px48 px-px38 pb-px140;
+		@apply pt-px48 px-px38 pb-px140 min-h-px402;
 	}
 
 	&-title-top {
@@ -357,6 +369,10 @@
 		.post-type-archive-trevor_fin_report & {
 			@apply text-px30 leading-px40 mb-px28;;
 		}
+
+		.research-card & {
+			@apply text-px26 leading-px36 tracking-em005;
+		}
 	}
 
 	&-desc {
@@ -365,6 +381,10 @@
 	  -webkit-line-clamp: 4;
 	  -webkit-box-orient: vertical;
 	  overflow: hidden;
+
+	  .research-card & {
+		@apply text-px18 leading-px26;
+	}
 	}
 
 	&-cta-wrap {

@@ -100,6 +100,8 @@
   // - Types
   // - - Split Image
   &.type-split-img {
+	@apply md:min-h-px445;
+
 	.page-header-img {
 	  @apply object-center object-cover;
 	  @apply w-full h-full;
@@ -113,14 +115,10 @@
 	}
 
 	.page-header-img-wrap {
-	  @apply relative mt-px60;
+	  @apply relative mt-px70;
 	}
 
 	.page-header-content-wrap {
-		@apply pb-0;
-	}
-
-	.page-header-desc {
 		@apply pb-0;
 	}
 
@@ -128,6 +126,7 @@
 	  .page-header-inner {
 		@apply items-center;
 		@apply mt-0 mb-px104;
+		@apply md:mb-0;
 	  }
 
 	  .page-header-img-inner {
@@ -137,10 +136,6 @@
 
 	  .page-header-img {
 		@apply rounded-px10;
-	  }
-
-	  .page-header-desc {
-		@apply text-px16 leading-px26 pb-px32;
 	  }
 
 	  .page-header-content-wrap {
@@ -178,32 +173,17 @@
 	  .page-header-img-wrap {
 		@apply mx-0;
 	  }
+
+	  .page-header-content-wrap {
+		@apply w-px500;
+	  }
 	}
   }
 
   // - - Text
   &.type-text {
-	// md
-	@apply md:px-px110;
-	// xl
-	@apply xl:px-px311;
-
-	h1 {
-		@apply text-px32 leading-px40;
-		@apply mb-px16;
-		// xl
-		@apply xl:text-px46 xl:leading-px56 xl:tracking-em_001;
-		@apply xl:mb-px14;
-	}
-
-	.hero__description {
-		@apply text-px20 leading-px26 mb-0 font-normal;
-		// md
-		@apply md:text-px18 md:leading-px24 tracking-px05;
-		// xl
-		@apply xl:text-px24 xl:leading-px34;
-		@apply xl:w-full;
-	}
+	@apply md:min-h-px445 md:px-px50;
+	@apply xl:px-px311 xl:min-h-px546;
 
 	.two-cta {
 		a {

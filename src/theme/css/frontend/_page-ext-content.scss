@@ -17,15 +17,13 @@
         // md
         @apply md:justify-center md:mt-px30;
         // xl
-        @apply xl:inline-block mt-0 ml-px16;
+        @apply xl:inline-block xl:mt-0 xl:ml-px16;
     }
 
     .page-btn {
-        @apply bg-transparent p-0;
-        @apply text-teal-dark;
+        @apply bg-transparent text-teal-dark;
         @apply inline-block border-solid border-b-2 border-teal-dark rounded-none;
-        // md
-        @apply md:text-px18 md:leading-px24 md:tracking-px05;
+        @apply text-px18 leading-px24 tracking-px05 p-0;
 
         [data-whatintent='mouse'] &:hover {
             @apply border-none pb-2;

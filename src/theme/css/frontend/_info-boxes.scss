@@ -13,12 +13,6 @@
 	}
   }
 
-  &-desc {
-	@extend .page-sub-title-desc;
-	@extend .page-sub-title-desc.centered;
-	@apply mb-0;
-  }
-
   &-container {
 	@apply mt-14;
   }

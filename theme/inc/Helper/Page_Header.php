@@ -26,20 +26,37 @@ class Page_Header {
 				'buttons',
 		], null ), [], $options );
 
+		$hero_cls = implode( ' ', [
+			'hero page-header type-text flex items-start text-white h-auto',
+			'min-h-px611 pt-px105',
+			'md:px-px110 md:pt-px75',
+			'xl:px-px311 xl:pt-px105 xl:justify-start xl:mt-0',
+		]);
+
+		$heading_cls = implode( ' ', [
+			'flex flex-col font-bold',
+			'text-px32 leading-px40 mb-px20',
+			'md:text-px36 md:leading-px42 md:mb-5 md:inline-block md:mb-px20',
+			'xl:mb-7 xl:text-px56 xl:leading-px66 xl:tracking-em005 xl:mb-px28',
+		]);
+
+		$desc_cls = implode( ' ', [
+			'hero__description',
+			'text-px18 leading-px24',
+			'md:tracking-px05 md:mb-px30 md:mx-px60',
+			'xl:max-w-2xl xl:text-px24 xl:leading-px34 xl:tracking-normal',
+		]);
+
 		ob_start();
 		?>
-		<div class="header-container w-full <?= implode( ' ', (array) $options['styles'] ) ?>">
-			<div class="hero page-header type-text h-px600 md:h-px490 lg:h-px546 flex items-center text-white lg:justify-start">
+		<div class="header-container w-full <?php echo implode( ' ', (array) $options['styles'] ) ?>">
+			<div class="<?php echo $hero_cls ?>">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
-						<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
+						<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo $options['title_top'] ?></p>
 					<?php } ?>
-					<h1 class="text-px32 leading-px40 md:text-px36 md:leading-px42 mb-2.5 md:mb-5 lg:mb-7 flex flex-col font-bold md:inline-block md:mb-px20 lg:text-px46 lg:leading-px56">
-						<?= $options['title'] ?>
-					</h1>
-					<p class="hero__description text-px18 leading-px26 md:text-px16 md:leading-px22 mb-9 md:mb-px30 lg:text-px22 lg:leading-px32 lg:max-w-2xl">
-						<?= $options['desc'] ?>
-					</p>
+					<h1 class="<?php echo $heading_cls ?>"><?php echo $options['title'] ?></h1>
+					<p class="<?php echo $desc_cls ?>"><?php echo $options['desc'] ?></p>
 
 					<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
 						echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
@@ -69,20 +86,41 @@ class Page_Header {
 				'styles',
 				'buttons',
 		], null ), [], $options );
+
+		$hero_cls = implode( ' ', [
+			'page-header type-split-img pt-px65',
+			'md:pt-px25',
+			'xl:mt-0 xl:pt-px18',
+		]);
+
+		$heading_cls = implode( ' ', [
+			'heading-lg-tilted page-header-title',
+			'text-px32 leading-px40',
+			'md:leading-px42',
+			'xl:text-px56 xl:leading-px66',
+		]);
+
+		$desc_cls = implode( ' ', [
+			'page-header-desc',
+			'pt-0 mt-px12 mb-0 text-px18 leading-px26 tracking-px05 pb-0',
+			'md:mt-px15 md:text-px16 md:leading-px22 md:tracking-em001',
+		]);
+
+
 		ob_start();
 		?>
 		<div class="header-container w-full <?php echo implode( ' ', (array) $options['styles'] ) ?>">
-			<div class="page-header type-split-img">
+			<div class="<?php echo $hero_cls ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
 						<?php if ( ! empty( $options['title_top'] ) ) { ?>
-							<div class="page-header-title-top"><?= $options['title_top'] ?></div>
+							<div class="page-header-title-top"><?php echo $options['title_top'] ?></div>
 						<?php } ?>
-						<h1 class="heading-lg-tilted page-header-title">
-							<?= $options['title'] ?>
+						<h1 class="<?php echo $heading_cls ?>">
+							<?php echo $options['title'] ?>
 						</h1>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
-							<p class="page-header-desc"><?= $options['desc'] ?></p>
+							<p class="<?php echo $desc_cls ?>"><?php echo $options['desc'] ?></p>
 						<?php } ?>
 						<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
 							echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
@@ -91,7 +129,7 @@ class Page_Header {
 					<div class="page-header-img-wrap">
 						<div class="page-header-img-inner">
 							<div class="page-header-img-inner__wrapper" data-aspectRatio="1:1">
-							<?= Thumbnail::print_img_variants( [
+							<?php echo Thumbnail::print_img_variants( [
 									[
 											intval( $options['img_id'] ),
 											Thumbnail::variant( Thumbnail::SCREEN_SM, null, Thumbnail::SIZE_MD, [
@@ -124,10 +162,10 @@ class Page_Header {
 		<div class="page-header type-img-bg">
 			<div class="page-header-content-wrap">
 				<h1 class="heading-lg-tilted page-header-title">
-					<?= $options['title'] ?>
+					<?php echo $options['title'] ?>
 				</h1>
 				<?php if ( $options['desc'] ) { ?>
-					<p class="page-header-desc"><?= $options['desc'] ?></p>
+					<p class="page-header-desc"><?php echo $options['desc'] ?></p>
 				<?php } ?>
 				<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
 					echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
@@ -136,7 +174,7 @@ class Page_Header {
 
 			<?php if ( $options['img_id'] ) { ?>
 				<div class="page-header-img-wrap">
-					<?= wp_get_attachment_image( $options['img_id'], 'full', false, [
+					<?php echo wp_get_attachment_image( $options['img_id'], 'full', false, [
 							'class' => implode( ' ', [
 									'object-center',
 									'object-cover',
@@ -166,19 +204,19 @@ class Page_Header {
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
 						<?php if ( ! empty( $options['title_top'] ) ) { ?>
-							<p class="page-header-title-top uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?= $options['title_top'] ?></p>
+							<p class="page-header-title-top uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo $options['title_top'] ?></p>
 						<?php } ?>
 						<h1 class="heading-lg-tilted page-header-title">
-							<?= $options['title'] ?>
+							<?php echo $options['title'] ?>
 						</h1>
-						<p class="page-header-desc"><?= $options['desc'] ?></p>
+						<p class="page-header-desc"><?php echo $options['desc'] ?></p>
 						<?php if ( ! empty ( $options[ 'buttons' ] ) ) {
 							echo Field_Group\Button_Group::render( false, $options[ 'buttons' ], [] );
 						} ?>
 					</div>
 					<div class="page-header-img-wrap">
 						<?php if ( ! empty( $options['carousel_data'] ) ) { ?>
-							<?= Helper\Carousel::big_img( $options['carousel_data'], [
+							<?php echo Helper\Carousel::big_img( $options['carousel_data'], [
 									'class'  => ['text-white', 'header-carousel'],
 									'swiper' => $options['swiper']
 							] ) ?>

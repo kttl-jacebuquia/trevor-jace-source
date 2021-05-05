@@ -40,7 +40,7 @@
 //
 // Ajax Pagination
 .ajax-pagination {
-	@apply mt-px40 md:mt-px60 xl:mt-px76;
+	@apply mt-px40 md:mt-px60 xl:mt-px58;
 
 	:is(.post-type-archive-trevor_gi_bill, .post-type-archive-trevor_gi_letter) & {
 		margin-bottom: rem-calc(54px);
