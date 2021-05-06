@@ -21,9 +21,17 @@ class Post {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		add_rewrite_rule( self::PERMALINK_BASE . '/?$', 'index.php?' . http_build_query( [
-				'post_type' => static::POST_TYPE,
-			] ), 'top' );
+		global $wp_rewrite;
+		$data = [
+			'post_type' => static::POST_TYPE,
+		];
+
+		add_rewrite_rule( self::PERMALINK_BASE . '/?$', 'index.php?' . http_build_query( $data ), 'top' );
+		add_rewrite_rule(
+			self::PERMALINK_BASE . "/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
+			'index.php?' . http_build_query( $data ) . '&paged=$matches[1]',
+			'top'
+		);
 	}
 
 	/**
