@@ -134,6 +134,9 @@ class Hooks {
 		# Financial Reports
 		CPT\Financial_Report::construct();
 
+		# Page Recirculation
+		CPT\Page_ReCirculation::construct();
+
 		# Event
 		CPT\Event::construct();
 

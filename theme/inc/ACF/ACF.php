@@ -8,14 +8,11 @@ class ACF {
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
 		// Options
-		Options_Page\Page_Circulation_Options::class,
 		Options_Page\Fundraiser_Quiz::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,
 		Options_Page\Post_Type\Research::class,
-		// Misc
-		Field_Group\Page_Circulation_Card::class,
 		// Blocks
 		Field_Group\HTML_Elem::class,
 		Field_Group\Grid_Row::class,
@@ -32,6 +29,7 @@ class ACF {
 		Field_Group\Embed::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
+		Field_Group\Page_Circulation_Card::class,
 		Field_Group\Team_Member::class,
 		Field_Group\Partners::class,
 		Field_Group\Post_Images::class,

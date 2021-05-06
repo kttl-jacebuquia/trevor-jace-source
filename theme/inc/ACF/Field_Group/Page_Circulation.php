@@ -1,9 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-use TrevorWP\Theme\ACF\Options_Page\Page_Circulation_Options;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper\Circulation_Card;
-use TrevorWP\Util\Tools;
 
 class Page_Circulation extends A_Basic_Section implements I_Block {
 	const FIELD_CARDS = 'cards';
