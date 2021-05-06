@@ -354,8 +354,8 @@
 				background-size: 15.5px 12.5px;
 			}
 		}
-	} 
-	
+	}
+
 	// Attachment
 	&.attachment {
 		@apply relative;
@@ -363,9 +363,80 @@
 		.post-thumbnail-wrap {
 			@apply relative w-full h-full;
 		}
-		
+
 		img {
 			@apply absolute top-0 left-0 w-full h-full object-cover;
+		}
+	}
+
+	// ORG Post Type
+	&.type-post {
+		@apply min-h-px503 h-auto;
+		@apply md:min-h-px450;
+
+		&.no-thumbnail {
+			.title-top {
+				@apply block font-normal mb-px20;
+				@apply xl:mb-px24;
+			}
+
+			.post-desc {
+				@apply block tracking-em_005;
+				@apply md:text-px16 md:leading-px22;
+			}
+		}
+
+		.card-text-container {
+			@apply pt-px34 pb-px26;
+		}
+
+		.post-thumbnail-wrap {
+			@apply -mt-px34 mb-px28 relative;
+			padding-top: percentage(240/319);
+
+			@screen md {
+				@apply h-auto;
+				padding-top: percentage(205/319);
+			}
+
+			img {
+				@apply absolute top-0 left-0 h-full w-full;
+			}
+		}
+
+		.title-top {
+			@apply hidden;
+		}
+
+		.post-title {
+			@apply text-px22 leading-px32 tracking-px_05;
+			@apply xl:text-px26 xl:leading-px32 xl:tracking-em_005;
+		}
+
+		.post-desc {
+			@apply hidden;
+		}
+
+		.tags-box {
+			@apply flex items-center overflow-visible flex-nowrap whitespace-nowrap;
+		}
+
+		.tag-box {
+			@apply flex items-center h-px30 px-px14 mr-0 mb-0 bg-gray-light;
+			@apply xl:tracking-em001;
+
+			&:not(:first-child) {
+				@apply ml-px6;
+			}
+
+			// Hide 3rd item onwards
+			&:nth-child(n + 3):not(.ellipsis) {
+				@apply hidden;
+			}
+
+			&.ellipsis {
+				@apply static w-px34 h-px34 flex items-center justify-center p-0;
+			}
 		}
 	}
 

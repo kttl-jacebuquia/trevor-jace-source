@@ -7,41 +7,44 @@ use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post as PostMeta;
 
 class Card {
-	public static function post( $post, $key = 0, array $options = [] ): string {
+	public static function post( $post, $key = 0, array $options = array() ): string {
 		$post      = get_post( $post );
-		$options   = array_merge( [
-				'class'            => [], // Additional classes
-				'num_words'        => 100, // for description
+		$options   = array_merge(
+			array(
+				'class'            => array(), // Additional classes.
+				'num_words'        => 100, // for description.
 				'hide_cat_eyebrow' => false,
-		], $options );
+			),
+			$options
+		);
 		$post_type = get_post_type( $post );
 		$_class    = &$options['class'];
 
-		# Default class
+		// Default class.
 		$_class[] = 'card-post';
 
 		$title_top  = $title_btm = $desc = $icon_cls = null;
 		$is_bg_full = false;
 		$title_link = true;
 
-		# Determine the type
-		if ( $post_type == CPT\RC\Glossary::POST_TYPE ) {
+		// Determine the type.
+		if ( CPT\RC\Glossary::POST_TYPE === $post_type ) {
 			$title_top  = 'Glossary';
 			$title_btm  = $post->post_excerpt;
 			$desc       = $post->post_content;
 			$title_link = false;
-		} elseif ( $post_type == CPT\RC\External::POST_TYPE ) {
+		} elseif ( CPT\RC\External::POST_TYPE === $post_type ) {
 			$title_top  = 'Resource';
 			$desc       = $post->post_excerpt;
 			$is_bg_full = true;
 			$icon_cls   = 'trevor-ti-link-out';
-		} elseif ( $post_type == CPT\RC\Guide::POST_TYPE ) {
+		} elseif ( CPT\RC\Guide::POST_TYPE === $post_type ) {
 			$title_top  = 'Guide';
 			$desc       = $post->post_excerpt;
 			$is_bg_full = true;
-		} elseif ( $post_type == CPT\Donate\Fundraiser_Stories::POST_TYPE ) {
+		} elseif ( CPT\Donate\Fundraiser_Stories::POST_TYPE === $post_type ) {
 			$title_top = 'Fundraiser Story';
-		} elseif ( $post_type == CPT\RC\Article::POST_TYPE ) {
+		} elseif ( CPT\RC\Article::POST_TYPE === $post_type ) {
 			if ( ! $options['hide_cat_eyebrow'] ) {
 				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
 				$first_cat  = empty( $categories ) ? null : reset( $categories );
@@ -50,29 +53,32 @@ class Card {
 
 			$desc = $post->post_excerpt;
 
-		} elseif ( in_array( $post_type, [ CPT\RC\Post::POST_TYPE, CPT\Post::POST_TYPE ] ) ) {
+		} elseif ( in_array( $post_type, array( CPT\RC\Post::POST_TYPE ), true ) ) {
 			$title_top = 'Blog';
+		} elseif ( CPT\Post::POST_TYPE === $post_type ) {
+			$title_top = get_the_date( 'F d, Y', $post );
+			$desc 	   = $post->post_excerpt;
 		}
 
 		if ( $is_bg_full ) {
-			$_class[] = 'bg-full'; // Full img bg
+			$_class[] = 'bg-full'; // Full img bg.
 		}
 
-		# Tags
-		$tags = Taxonomy::get_post_tags_distinctive( $post, [ 'filter_count_1' => false ] );
+		// Tags.
+		$tags = Taxonomy::get_post_tags_distinctive( $post, array( 'filter_count_1' => false ) );
 
-		# Thumbnail variants
-		$thumb_var   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];
+		// Thumbnail variants.
+		$thumb_var   = array( self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) );
 		$thumb_var_h = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
 
 		if ( $is_bg_full ) {
-			// Prefer vertical image on full bg
+			// Prefer vertical image on full bg.
 			array_unshift( $thumb_var, $thumb_var_h );
 		} else {
 			$thumb_var[] = $thumb_var_h;
 		}
 
-		// Fallback to the square
+		// Fallback to the square.
 		$thumb_var[]   = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
 		$thumb         = Thumbnail::post( $post, ...$thumb_var );
 		$has_thumbnail = ! empty( $thumb );
@@ -80,66 +86,66 @@ class Card {
 			$_class[] = 'no-thumbnail';
 		}
 
-		// Process Desc
-		if ( $post_type == CPT\RC\Glossary::POST_TYPE ) {
-			$desc = ( new Parsedown() )->text( strip_tags( $desc ) );
+		// Process Desc.
+		if ( CPT\RC\Glossary::POST_TYPE === $post_type ) {
+			$desc = ( new Parsedown() )->text( wp_strip_all_tags( $desc ) );
 		} else {
-			$desc = esc_html( wp_trim_words( strip_tags( $desc ), $options['num_words'] ) );
+			$desc = esc_html( wp_trim_words( wp_strip_all_tags( $desc ), $options['num_words'] ) );
 		}
 
 		ob_start();
 		?>
-		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
-			<?php if ( in_array( 'bg-full', $_class ) && $has_thumbnail ) { ?>
+		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
+			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<a href="<?= get_the_permalink( $post ) ?>">
-						<?= $thumb ?>
+					<a href="<?php echo get_the_permalink( $post ); ?>">
+						<?php echo $thumb; ?>
 					</a>
 				</div>
 			<?php } ?>
 
 			<div class="card-content">
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
-					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class ) ) { ?>
+					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class, true ) ) { ?>
 						<div class="post-thumbnail-wrap">
-							<a href="<?= get_the_permalink( $post ) ?>">
-								<?= $thumb ?>
+							<a href="<?php echo get_the_permalink( $post ); ?>">
+								<?php echo $thumb; ?>
 							</a>
 						</div>
 					<?php } ?>
 
 					<?php if ( ! empty( $icon_cls ) ) { ?>
-						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+						<div class="icon-wrap"><i class="<?php echo esc_attr( $icon_cls ); ?>"></i></div>
 					<?php } ?>
 
 					<?php if ( ! empty( $title_top ) ) { ?>
-						<div class="title-top uppercase"><?= $title_top ?></div>
+						<div class="title-top uppercase"><?php echo $title_top; ?></div>
 					<?php } ?>
 
 					<h3 class="post-title font-semibold text-px24 leading-px28">
 						<?php if ( $title_link ) { ?>
-							<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
-								<?= get_the_title( $post ); ?>
+							<a href="<?php echo get_the_permalink( $post ); ?>" class="stretched-link">
+								<?php echo get_the_title( $post ); ?>
 							</a>
 						<?php } else { ?>
-							<?= get_the_title( $post ); ?>
+							<?php echo get_the_title( $post ); ?>
 						<?php } ?>
 					</h3>
 
 					<?php if ( ! empty( $title_btm ) ) { ?>
-						<div class="title-btm"><?= esc_html( $title_btm ) ?></div>
+						<div class="title-btm"><?php echo esc_html( $title_btm ); ?></div>
 					<?php } ?>
 
 					<?php if ( ! empty( $desc ) ) { ?>
-						<div class="post-desc"><span><?= $desc /* Sanitized above */ ?></span></div>
+						<div class="post-desc"><span><?php echo $desc; /* Sanitized above */ ?></span></div>
 					<?php } ?>
 				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
 					<div class="tags-box">
 						<?php foreach ( $tags as $tag ) { ?>
-							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>"
-							   class="tag-box"><?= $tag->name ?></a>
+							<a href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+								class="tag-box"><?php echo $tag->name; ?></a>
 						<?php } ?>
 					</div>
 				<?php } ?>
@@ -151,12 +157,12 @@ class Card {
 
 	/**
 	 * @param array $data
-	 * @param int $key
+	 * @param int   $key
 	 * @param array $options
 	 *
 	 * @return string
 	 */
-	public static function fundraiser( array $data, int $key = 0, array $options = [] ): string {
+	public static function fundraiser( array $data, int $key = 0, array $options = array() ): string {
 		static $currency_formatter;
 		$logo_url = @$data['logo_url'];
 		if ( empty( $logo_url ) && ! empty( $options['placeholder_logo_id'] ) ) {
@@ -172,37 +178,39 @@ class Card {
 		}
 
 		if ( empty( $currency_formatter ) ) {
-			$currency_formatter = new \NumberFormatter( "en-US", \NumberFormatter::CURRENCY );
+			$currency_formatter = new \NumberFormatter( 'en-US', \NumberFormatter::CURRENCY );
 			$currency_formatter->setAttribute( \NumberFormatter::MAX_FRACTION_DIGITS, 0 );
 		}
 
-		ob_start(); ?>
+		ob_start();
+		?>
 		<div class="card-post fundraiser">
 			<div class="post-thumbnail-wrap">
-				<img class="fundraiser-logo" src="<?= esc_url( $logo_url ) ?>" alt="Logo">
+				<img class="fundraiser-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="Logo">
 			</div>
 
 			<div class="card-content">
 				<div class="title-top uppercase">Individual donor</div>
 
 				<h3 class="post-title font-semibold text-px24 leading-px28"
-					title="<?= esc_attr( $clean_title = wp_filter_nohtml_kses( $title ) ) ?>">
-					<a href="<?= esc_url( $canonical_url ) ?>"
-					   class="title stretched-link" target="_blank"
-					   rel="noopener nofollow noreferrer"><?= $clean_title ?></a>
+					title="<?php echo esc_attr( $clean_title = wp_filter_nohtml_kses( $title ) ); ?>">
+					<a href="<?php echo esc_url( $canonical_url ); ?>"
+						class="title stretched-link" target="_blank"
+						rel="noopener nofollow noreferrer"><?php echo $clean_title; ?></a>
 				</h3>
 
 				<div class="fundraiser-progress-wrap">
 					<div class="fundraiser-progress-bar"
-						 style="<?= sprintf( "width: %.0f%%;", $percent_to_goal ) ?>"></div>
+						style="<?php echo sprintf( 'width: %.0f%%;', $percent_to_goal ); ?>"></div>
 				</div>
 				<div class="fundraiser-btm-wrap">
-					<div class="fundraiser-total"><?= $currency_formatter->format( $total_raised ) ?> raised</div>
-					<div class="fundraiser-percent"><?= sprintf( "%.0f%%", $percent_to_goal ) ?></div>
+					<div class="fundraiser-total"><?php echo $currency_formatter->format( $total_raised ); ?> raised</div>
+					<div class="fundraiser-percent"><?php echo sprintf( '%.0f%%', $percent_to_goal ); ?></div>
 				</div>
 			</div>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/*
@@ -212,29 +220,32 @@ class Card {
 	*
 	* @return string
 	*/
-   public static function event( $post, int $key = 0, array $options = [] ): string {
+	public static function event( $post, int $key = 0, array $options = array() ): string {
 		$post      = get_post( $post );
 		$permalink = get_permalink( $post );
-		$options   = array_merge( [
-				'class'            => [], // Additional classes
-		], $options );
+		$options   = array_merge(
+			array(
+				'class' => array(), // Additional classes
+			),
+			$options
+		);
 		$_class    = &$options['class'];
 
-		# Default class
+		// Default class
 		$_class[] = 'card-post event';
 
-		$title_top_segments = [
+		$title_top_segments = array(
 			"<strong>{$options['date']}</strong>",
-			"<span>{$options['time']}</span>"
-		];
-		$title_top  = implode( '', $title_top_segments );
-		$title_link = true;
+			"<span>{$options['time']}</span>",
+		);
+		$title_top          = implode( '', $title_top_segments );
+		$title_link         = true;
 
-		# Thumbnail variants
-		$thumb_var   = [
+		// Thumbnail variants
+		$thumb_var = array(
 			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
 			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
-		 ];
+		);
 
 		// Fallback to the square
 		$thumb_var[]   = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
@@ -246,18 +257,18 @@ class Card {
 
 		ob_start();
 		?>
-		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
-			<?php if ( ! empty( $options['label'] ) ): ?>
+		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
+			<?php if ( ! empty( $options['label'] ) ) : ?>
 				<span class="card-label">
-					<?= $options['label'] ?>
+					<?php echo $options['label']; ?>
 				</span>
 			<?php endif; ?>
 
 
 			<?php if ( in_array( 'bg-full', $_class ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<a href="<?= get_the_permalink( $post ) ?>">
-						<?= $thumb ?>
+					<a href="<?php echo get_the_permalink( $post ); ?>">
+						<?php echo $thumb; ?>
 					</a>
 				</div>
 			<?php } ?>
@@ -266,48 +277,48 @@ class Card {
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
 					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class ) ) { ?>
 						<div class="post-thumbnail-wrap">
-							<a href="<?= get_the_permalink( $post ) ?>">
-								<?= $thumb ?>
+							<a href="<?php echo get_the_permalink( $post ); ?>">
+								<?php echo $thumb; ?>
 							</a>
 						</div>
 					<?php } ?>
 
 					<?php if ( ! empty( $icon_cls ) ) { ?>
-						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+						<div class="icon-wrap"><i class="<?php echo esc_attr( $icon_cls ); ?>"></i></div>
 					<?php } ?>
 
 					<?php if ( ! empty( $title_top ) ) { ?>
-						<div class="title-top"><?= $title_top ?></div>
+						<div class="title-top"><?php echo $title_top; ?></div>
 					<?php } ?>
 
 					<h3 class="post-title">
 						<?php if ( $title_link ) { ?>
-							<a href="<?= get_the_permalink( $post ) ?>" class="stretched-link">
-								<?= get_the_title( $post ); ?>
+							<a href="<?php echo get_the_permalink( $post ); ?>" class="stretched-link">
+								<?php echo get_the_title( $post ); ?>
 							</a>
 						<?php } else { ?>
-							<?= get_the_title( $post ); ?>
+							<?php echo get_the_title( $post ); ?>
 						<?php } ?>
 					</h3>
 
 					<?php if ( ! empty( $title_btm ) ) { ?>
-						<div class="title-btm"><?= esc_html( $title_btm ) ?></div>
+						<div class="title-btm"><?php echo esc_html( $title_btm ); ?></div>
 					<?php } ?>
 
 					<?php if ( ! empty( $desc ) ) { ?>
-						<div class="post-desc"><span><?= $desc /* Sanitized above */ ?></span></div>
+						<div class="post-desc"><span><?php echo $desc; /* Sanitized above */ ?></span></div>
 					<?php } ?>
 
 					<?php if ( $options['show_cta'] ) : ?>
-						<a href="<?= $permalink ?>" class="card-cta">View Event Details</a>
+						<a href="<?php echo $permalink; ?>" class="card-cta">View Event Details</a>
 					<?php endif; ?>
 				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
 					<div class="tags-box">
 						<?php foreach ( $tags as $tag ) { ?>
-							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>"
-							class="tag-box"><?= $tag->name ?></a>
+							<a href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+							class="tag-box"><?php echo $tag->name; ?></a>
 						<?php } ?>
 					</div>
 				<?php } ?>
@@ -315,9 +326,9 @@ class Card {
 		</article>
 		<?php
 		return ob_get_clean();
-   }
+	}
 
-   /*
+	/*
 	* @param array $post
 	* @param int $key
 	* @param array $options
@@ -327,22 +338,25 @@ class Card {
 	public static function attachment( $post, $key, $options ) {
 		$is_image = wp_attachment_is_image( $post );
 
-		$options   = array_merge( [
-				'class'            => [], // Additional classes
-		], $options );
-		$_class    = &$options['class'];
+		$options = array_merge(
+			array(
+				'class' => array(), // Additional classes
+			),
+			$options
+		);
+		$_class  = &$options['class'];
 
-		# Default class
+		// Default class
 		$_class[] = 'card-post attachment';
 
-		# Thumbnail variants
+		// Thumbnail variants
 		$thumb = wp_get_attachment_image( $post, Thumbnail::SIZE_MD );
 
 		ob_start();
 		?>
-		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?>">
+		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
 			<div class="post-thumbnail-wrap">
-				<?= $thumb ?>
+				<?php echo $thumb; ?>
 			</div>
 		</article>
 		<?php
@@ -356,10 +370,10 @@ class Card {
 	 */
 	protected static function _get_thumb_var( string $type ): array {
 		return Thumbnail::variant(
-				Thumbnail::SCREEN_SM,
-				$type,
-				Thumbnail::SIZE_MD,
-				[ 'class' => 'post-header-bg' ]
+			Thumbnail::SCREEN_SM,
+			$type,
+			Thumbnail::SIZE_MD,
+			array( 'class' => 'post-header-bg' )
 		);
 	}
 
