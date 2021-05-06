@@ -109,6 +109,6 @@ class Jobs {
 			}
 		}
 
-		throw new \BadMethodCallException();
+		throw new \BadMethodCallException( 'Unknown job name: ' . var_export( $name, true ) );
 	}
 }
