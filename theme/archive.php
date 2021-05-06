@@ -24,56 +24,54 @@ if ( ! empty( $header_data ) ) {
 ?>
 
 <main id="site-content" role="main" class="bg-white">
-	<div class="container mx-auto pt-10 md:pt-px50 lg:pt-20">
-		<?php # Top Content ?>
-		<?php if ( ! empty( $content_top ) ) { ?>
-			<div class="page-ext-content page-ext-content-top"><?= $content_top ?></div>
-		<?php } ?>
+	<?php # Top Content ?>
+	<?php if ( ! empty( $content_top ) ) { ?>
+		<div class="page-ext-content page-ext-content-top"><?= $content_top ?></div>
+	<?php } ?>
 
-		<?php # Sorter ?>
-		<?php if ( $page_sorter = \TrevorWP\Theme\Helper\Sorter::get_page_sorter() ) { ?>
-			<?= $page_sorter->render(); ?>
-		<?php } ?>
+	<?php # Sorter ?>
+	<?php if ( $page_sorter = \TrevorWP\Theme\Helper\Sorter::get_page_sorter() ) { ?>
+		<?= $page_sorter->render(); ?>
+	<?php } ?>
 
-		<?php # Grid ?>
-		<?= Post_Grid::render( false, [
-				Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
-				Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
-		], [ 'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ] ] ) ?>
+	<?php # Grid ?>
+	<?= Post_Grid::render( false, [
+			Post_Grid::FIELD_SOURCE     => Post_Grid::SOURCE_PICK,
+			Post_Grid::FIELD_POST_ITEMS => $wp_query->posts,
+	], [ 'tileClass' => [ 'border', 'border-blue_green', 'border-opacity-50' ] ] ) ?>
 
-		<?php # Pagination ?>
-		<?php switch ( $pagination_type ) {
-			case PT::PAGINATION_TYPE_AJAX:
-				get_template_part( 'template-parts/ajax-pagination' );
-				break;
-			case PT::PAGINATION_TYPE_NORMAL:
-			default:
-				get_template_part( 'template-parts/pagination' );
-				break;
-		} ?>
+	<?php # Pagination ?>
+	<?php switch ( $pagination_type ) {
+		case PT::PAGINATION_TYPE_AJAX:
+			get_template_part( 'template-parts/ajax-pagination' );
+			break;
+		case PT::PAGINATION_TYPE_NORMAL:
+		default:
+			get_template_part( 'template-parts/pagination' );
+			break;
+	} ?>
 
-		<?php # CTA Before Bottom ?>
-		<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_BEFORE && ! empty( $cta_data ) ) : ?>
-			<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
-		<?php endif; ?>
+	<?php # CTA Before Bottom ?>
+	<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_BEFORE && ! empty( $cta_data ) ) : ?>
+		<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
+	<?php endif; ?>
 
-		<?php # Bottom Content ?>
-		<?php if ( ! empty( $content_btm ) ) { ?>
-			<div class="page-ext-content page-ext-content-btm">
-				<?= $content_btm ?>
+	<?php # Bottom Content ?>
+	<?php if ( ! empty( $content_btm ) ) { ?>
+		<div class="page-ext-content page-ext-content-btm">
+			<?= $content_btm ?>
 
-				<?php # CTA Inside Bottom ?>
-				<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_INSIDE && ! empty( $cta_data ) ) : ?>
-					<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
-				<?php endif; ?>
-			</div>
-		<?php } ?>
+			<?php # CTA Inside Bottom ?>
+			<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_INSIDE && ! empty( $cta_data ) ) : ?>
+				<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
+			<?php endif; ?>
+		</div>
+	<?php } ?>
 
-		<?php # CTA After Bottom ?>
-		<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_AFTER && ! empty( $cta_data ) ) : ?>
-			<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
-		<?php endif; ?>
-	</div>
+	<?php # CTA After Bottom ?>
+	<?php if ( $cta_location === PT::CTA_LOCATION_OPTION_AFTER && ! empty( $cta_data ) ) : ?>
+		<?= \TrevorWP\Theme\ACF\Field_Group\Button_Group::render( false, $cta_data, [] ) ?>
+	<?php endif; ?>
 </main><!-- #site-content -->
 
 <?php get_footer(); ?>

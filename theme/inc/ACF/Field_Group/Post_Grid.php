@@ -326,7 +326,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				: $wrapper_attrs['id'];
 
 		# Build post grid classnames
-		$post_grid_cls   = 'post-grid px-px28 md:px-px50 xl:px-px140';
+		$post_grid_cls   = 'post-grid';
 
 		# Build heading classnames
 		$heading_cls   = [ 'text-center text-teal-dark font-bold' ];
@@ -395,7 +395,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						</ul>
 					</div>
 				<?php endif; ?>
-				
+
 				<?php if ( $display_limit && $display_limit < count( $posts ) ) { ?>
 					<div class="view-all-container text-center overflow-visible pb-2">
 						<a class="view-all-cta wave-underline font-bold text-px24 leading-px34 md:text-px18 tracking-px05 xl:text-px26 xl:leading-px36 tracking-em001 border-b-2 text-teal-dark self-center"
