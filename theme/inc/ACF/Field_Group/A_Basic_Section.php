@@ -53,6 +53,7 @@ abstract class A_Basic_Section extends A_Field_Group {
 								'key'               => $desc_attr,
 								'name'              => static::FIELD_DESC_ATTR,
 								'label'             => 'Desc.',
+								'display'           => true,
 								'conditional_logic' => [
 										[
 												[

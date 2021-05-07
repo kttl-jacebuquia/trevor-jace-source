@@ -371,7 +371,7 @@
 
 	// ORG Post Type
 	&.type-post {
-		@apply min-h-px503 h-auto;
+		@apply min-h-px503 h-auto border-teal-dark border-opacity-16 shadow-none border-px2;
 		@apply md:min-h-px450;
 
 		&.no-thumbnail {

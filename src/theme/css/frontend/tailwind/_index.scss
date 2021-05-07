@@ -1,0 +1,22 @@
+// Applies a given list of classnames
+// as tailwind utility classnames
+//
+// Example:
+// @include tailwind("xl:text-left md:px-px140")
+//
+// Implements:
+// @apply xl:text-left
+// @apply md:px-px140
+@mixin tailwind( $classnames ) {
+	@each $classname in $classnames {
+		.#{unquote($classname)} {
+			@apply #{unquote($classname)};
+		}
+	}
+}
+
+// Spacing
+@import "./padding";
+
+// Text
+@import "./text-align";

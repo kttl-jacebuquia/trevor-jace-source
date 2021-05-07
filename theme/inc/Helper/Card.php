@@ -20,10 +20,13 @@ class Card {
 		$post_type = get_post_type( $post );
 		$_class    = &$options['class'];
 
-		// Default class.
+		// The default class name.
 		$_class[] = 'card-post';
 
-		$title_top  = $title_btm = $desc = $icon_cls = null;
+		$icon_cls   = null;
+		$desc       = null;
+		$title_btm  = null;
+		$title_top  = null;
 		$is_bg_full = false;
 		$title_link = true;
 
@@ -57,7 +60,8 @@ class Card {
 			$title_top = 'Blog';
 		} elseif ( CPT\Post::POST_TYPE === $post_type ) {
 			$title_top = get_the_date( 'F d, Y', $post );
-			$desc 	   = $post->post_excerpt;
+			$desc      = ! empty( $post->post_excerpt ) ? $post->post_excerpt : $post->post_content;
+			$desc      = esc_html( wp_trim_words( wp_strip_all_tags( $desc ), $options['num_words'] ) );
 		}
 
 		if ( $is_bg_full ) {

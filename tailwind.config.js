@@ -515,6 +515,7 @@ module.exports = {
 				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
 			}),
 			opacity: {
+				'16': '0.16',
 				'44': '0.44',
 				'86': '0.86',
 			}

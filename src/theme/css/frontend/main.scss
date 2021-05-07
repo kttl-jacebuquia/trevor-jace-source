@@ -67,6 +67,13 @@
 @import "./partner-with-us";
 @import "./search";
 
+/**
+  Additional utility classnames
+  It appears that when a utility classname is used in html,
+  but is not used anywhere in scss, it is not included in the build.
+*/
+@import "./tailwind/index";
+
 // Tailwind
 @tailwind components; /* tailwind components should come after ours to overwrite gutenberg block classes */
 @tailwind utilities;
