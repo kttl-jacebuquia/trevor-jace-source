@@ -1,7 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF;
 
 class ACF {
-	const ALL_GROUPS = [
+	const ALL_GROUPS = array(
 		// Common Fields
 		Field_Group\DOM_Attr::class,
 		Field_Group\Button::class,
@@ -27,6 +27,9 @@ class ACF {
 		Field_Group\Info_Card_Grid::class,
 		Field_Group\Address::class,
 		Field_Group\Embed::class,
+		Field_Group\Donate_Form::class,
+		Field_Group\Charity_Navigator::class,
+		Field_Group\FAQ::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
@@ -35,10 +38,10 @@ class ACF {
 		Field_Group\Post_Images::class,
 		Field_Group\Financial_Report::class,
 		Field_Group\Event::class,
-	];
+	);
 
 	public static function construct() {
-		add_action( 'acf/init', [ self::class, 'acf_init' ], 10, 0 );
+		add_action( 'acf/init', array( self::class, 'acf_init' ), 10, 0 );
 	}
 
 	/**
@@ -62,7 +65,7 @@ class ACF {
 				# Options Page
 				/* acf_init is at init:5,
 				   we should wait until init:10 to get post types to be registered */
-				add_action( 'init', [ $group, 'register_page' ], 10, 0 );
+				add_action( 'init', array( $group, 'register_page' ), 10, 0 );
 			}
 		}
 	}
