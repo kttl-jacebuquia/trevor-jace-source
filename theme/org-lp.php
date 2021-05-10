@@ -81,7 +81,7 @@
 
 			<li>
 				<a class="text-xl font-bold text-white"
-				   href="/aly-training/">Ally Training</a>
+				   href="/ally-training/">Ally Training</a>
 			</li>
 
 			<li>
