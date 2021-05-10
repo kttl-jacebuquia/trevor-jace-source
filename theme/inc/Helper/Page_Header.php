@@ -44,7 +44,7 @@ class Page_Header {
 			'hero__description',
 			'text-px18 leading-px24',
 			'md:tracking-px05 md:mb-px30 md:mx-px60',
-			'xl:max-w-2xl xl:text-px24 xl:leading-px34 xl:tracking-normal',
+			'xl:max-w-2xl xl:text-px22 xl:leading-px34 xl:tracking-normal',
 		]);
 
 		ob_start();
