@@ -61,13 +61,14 @@ class Tile_Grid {
 		# class
 		$cls = [ 'tile-grid' ];
 		if ( ! empty( $options['class'] ) ) {
-			$cls = array_merge( $cls, $options['class'] );
+			$cls = array_merge( $options['class'], $cls );
 		}
 
+
 		# gridClass
-		$grid_class = [ 'tile-grid' ];
-		if ( ! empty( $options['class'] ) ) {
-			$cls = array_merge( $cls, $options['class'] );
+		$grid_class = [ 'tile-grid-container' ];
+		if ( ! empty( $options['gridClass'] ) ) {
+			$grid_class = array_merge( $grid_class, $options['gridClass'] );
 		}
 
 		$tile_options = [ 'accordion' => false, 'class' => $options['tileClass'] ];
@@ -89,11 +90,15 @@ class Tile_Grid {
 						<?php } ?>
 					</div>
 				<?php } ?>
-				<div class="tile-grid-container">
-					<?php foreach ( $data as $key => $entry ) {
-						$tile_method = $options['tileMethod'];
+				<div class="<?= implode( ' ', $grid_class ) ?>">
+					<?php
+					foreach ( $data as $key => $entry ) {
+						$tile_method             = $options['tileMethod'];
+						$tile_options['cta_cls'] = $entry['cta_cls'] ?? [];
+						$tile_options['class'] = $entry['tile_cls'] ?? [];
 						echo Tile::$tile_method( $entry, $key, $tile_options );
-					} ?>
+					}
+					?>
 				</div>
 			</div>
 		</div>

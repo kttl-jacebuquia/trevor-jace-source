@@ -15,7 +15,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TEXT_CLR       = 'text_clr';
 
 	/** @inheritdoc */
-	public static function get_all_fields(): array {
+	public static function _get_fields(): array {
 		$type           = static::gen_field_key( static::FIELD_TYPE );
 		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
 		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
@@ -66,7 +66,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					)
 				),
 			),
-			parent::get_all_fields(),
+			parent::_get_fields(),
 			static::_gen_tab_field(
 				'Image(s)',
 				array(
@@ -186,7 +186,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args = array(
 			'title_top' => $val->get( static::FIELD_TITLE_TOP ),
-			'title'     => $val->get( static::FIELD_TITLE ) ? false : get_the_title( $post ), // fallback to post's title
+			'title'     => $val->get( static::FIELD_TITLE ) ?? get_the_title( $post ), // fallback to post's title
 			'desc'      => $val->get( static::FIELD_DESC ),
 			'title_cls' => array( 'page-header-title' ),
 			'desc_cls'  => array( 'page-header-desc' ),

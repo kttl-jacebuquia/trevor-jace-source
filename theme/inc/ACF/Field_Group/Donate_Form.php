@@ -65,9 +65,18 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$form_image = static::get_val( static::FIELD_FORM_IMAGE );
-		$heading    = static::get_val( static::FIELD_HEADING );
-		$intro      = static::get_val( static::FIELD_INTRO );
+		$options = array_merge(
+			[
+				'form_image' => static::get_val( static::FIELD_FORM_IMAGE ),
+				'heading'    => static::get_val( static::FIELD_HEADING ),
+				'intro'      => static::get_val( static::FIELD_INTRO ),
+			],
+			$options
+		);
+
+		$form_image = $options['form_image'];
+		$heading    = $options['heading'];
+		$intro      = $options['intro'];
 
 		ob_start();
 		?>

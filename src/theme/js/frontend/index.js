@@ -6,6 +6,7 @@ import * as matchMedia from './match-media';
 import './nav';
 import singlePages from './single-pages';
 import {infoBoxesCarousel} from "./features";
+import modal from './features/modal';
 
 Object.assign(
 	window.trevorWP = window.trevorWP || {},
@@ -17,7 +18,7 @@ const isSingle = $body.hasClass('single');
 const isPage = $body.hasClass('page');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
-const isDonate = !isSingle && $body.hasClass('is-donate');
+const isDonate = !isSingle && document.querySelector('.donation-form');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.navigator-container');
 const inputSearchField = $("#rc-search-main");
@@ -25,6 +26,7 @@ const bigImageCarousels = $('.big-img-carousel.body-carousel');
 const isPhoneField = $(".phone-number-format") ? true : false;
 const $showAllTilesBtn = $(".tile-grid-container + .view-all-container .view-all-cta");
 const $fundraiserQuizButton = $(".js-fundraiser-quiz");
+const $donationModalButton = $(".js-donation-modal");
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -43,6 +45,11 @@ if ($fundraiserQuizButton.length) {
 	$fundraiserQuizButton.on("click", () => {
 		new features.FundraiserQuiz();
 	});
+}
+
+if ($donationModalButton.length) {
+	const $donationModal = $('#js-donation-modal');
+	modal($donationModal, {}, $donationModalButton);
 }
 
 

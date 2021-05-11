@@ -209,7 +209,8 @@ class Page_Header {
 		<div class="page-header type-img-bg">
 			<div class="page-header-content-wrap">
 				<h1 class="heading-lg-tilted page-header-title">
-					<?php echo esc_html( $options['title'] ); ?>
+					<?php # Leave unescape in order to support <tilt> ?>
+					<?php echo $options['title']; ?>
 				</h1>
 				<?php if ( $options['desc'] ) { ?>
 					<p class="page-header-desc"><?php echo esc_html( $options['desc'] ); ?></p>

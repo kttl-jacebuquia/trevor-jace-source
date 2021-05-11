@@ -22,11 +22,17 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_SHOW_EMPTY        = 'show_empty';
 	const FIELD_EMPTY_MESSAGE     = 'empty_message';
 
+	const FIELD_CUSTOM_ITEMS      = 'custom_items';
+	const FIELD_CUSTOM_ITEM_TITLE = 'custom_item_title';
+	const FIELD_CUSTOM_ITEM_DESC  = 'custom_item_desc';
+	const FIELD_CUSTOM_ITEM_CTA   = 'custom_item_cta';
+
 	const PAGINATION_STYLE_OPTION_LOADMORE = 'load_more';
 	const PAGINATION_STYLE_OPTION_PAGES    = 'pages';
 
-	const SOURCE_QUERY = 'query';
-	const SOURCE_PICK  = 'pick';
+	const SOURCE_QUERY  = 'query';
+	const SOURCE_PICK   = 'pick';
+	const SOURCE_CUSTOM = 'custom';
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
 
@@ -59,6 +65,11 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$show_empty        = static::gen_field_key( static::FIELD_SHOW_EMPTY );
 		$empty_message     = static::gen_field_key( static::FIELD_EMPTY_MESSAGE );
 
+		$custom_items      = static::gen_field_key( static::FIELD_CUSTOM_ITEMS );
+		$custom_item_title = static::gen_field_key( static::FIELD_CUSTOM_ITEM_TITLE );
+		$custom_item_desc  = static::gen_field_key( static::FIELD_CUSTOM_ITEM_DESC );
+		$custom_item_cta   = static::gen_field_key( static::FIELD_CUSTOM_ITEM_CTA );
+
 		return array(
 			'title'  => 'Post Grid',
 			'fields' => array_merge(
@@ -72,6 +83,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'choices' => array(
 							static::SOURCE_PICK  => 'Hand Pick',
 							static::SOURCE_QUERY => 'Query',
+							static::SOURCE_CUSTOM => 'Custom',
 						),
 						'wrapper' => array(
 							'width' => '50%',
@@ -212,6 +224,52 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							),
 						),
 					),
+					static::FIELD_CUSTOM_ITEMS    => array(
+						'key'               => $post_items,
+						'name'              => static::FIELD_CUSTOM_ITEMS,
+						'label'             => 'Custom Items',
+						'type'              => 'repeater',
+						'required'          => true,
+						'layout'            => 'block',
+						'collapsed'         => $custom_item_title,
+						'button_label'      => 'Add Item',
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_CUSTOM,
+								),
+							),
+						),
+						'sub_fields'        => [
+							[
+								'key'   => $custom_item_title,
+								'name'  => static::FIELD_CUSTOM_ITEM_TITLE,
+								'label' => 'Title',
+								'type'  => 'text',
+							],
+							[
+								'key'   => $custom_item_desc,
+								'name'  => static::FIELD_CUSTOM_ITEM_DESC,
+								'label' => 'Desc',
+								'type'  => 'textarea',
+							],
+							Button::clone(
+								[
+									'key'       => $custom_item_cta,
+									'name'      => static::FIELD_CUSTOM_ITEM_CTA,
+									'label'     => 'CTA',
+									'display'   => 'group',
+								],
+							),
+							DOM_Attr::clone([
+								'key'   => static::gen_field_key( 'item_attrs' ),
+								'name'  => 'item_attrs',
+								'label' => 'Item Ittributes',
+							])
+						]
+					),
 					static::FIELD_SHOW_EMPTY    => array(
 						'key'     => $show_empty,
 						'name'    => static::FIELD_SHOW_EMPTY,
@@ -266,6 +324,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	/** @inheritDoc */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$val             = new Field_Val_Getter( static::class, $post, $data );
+		$source          = $val->get( static::FIELD_SOURCE );
 		$num_cols        = $val->get( static::FIELD_NUM_COLS );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
 		$heading         = static::get_val( static::FIELD_HEADING );
@@ -366,34 +425,38 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					</h2>
 				<?php endif; ?>
 				<?php if ( ! empty( $posts ) ) : ?>
-					<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
-						<?php
-						foreach ( $posts as $key => $post ) {
-							$post = get_post( $post );
+					<?php if ( static::SOURCE_CUSTOM === $source ): ?>
+						<?php echo Helper\Tile_Grid::custom( $posts ); ?>
+					<?php else: ?>
+						<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
+							<?php
+							foreach ( $posts as $key => $post ) {
+								$post = get_post( $post );
 
-							$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
+								$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
 
-							switch ( get_post_type( $post ) ) {
-								case CPT\Team::POST_TYPE:
-									echo Helper\Tile::staff( $post, $key, $tile_options );
-									break;
-								case CPT\Financial_Report::POST_TYPE:
-									echo Helper\Tile::financial_report( $post, $key, $tile_options );
-									break;
-								case CPT\Event::POST_TYPE:
-									echo Helper\Tile::event( $post, $key, $tile_options );
-									break;
-								case CPT\Post::POST_TYPE:
-								case CPT\RC\Post::POST_TYPE:
-									echo Helper\Card::post( $post, $key, $tile_options );
-									break;
-								// TODO: Add other post types
-								default:
-									echo Helper\Tile::post( $post, $key, $tile_options );
+								switch ( get_post_type( $post ) ) {
+									case CPT\Team::POST_TYPE:
+										echo Helper\Tile::staff( $post, $key, $tile_options );
+										break;
+									case CPT\Financial_Report::POST_TYPE:
+										echo Helper\Tile::financial_report( $post, $key, $tile_options );
+										break;
+									case CPT\Event::POST_TYPE:
+										echo Helper\Tile::event( $post, $key, $tile_options );
+										break;
+									case CPT\Post::POST_TYPE:
+									case CPT\RC\Post::POST_TYPE:
+										echo Helper\Card::post( $post, $key, $tile_options );
+										break;
+									// TODO: Add other post types
+									default:
+										echo Helper\Tile::post( $post, $key, $tile_options );
+								}
 							}
-						}
-						?>
-					</div>
+							?>
+						</div>
+					<?php endif; ?>
 				<?php elseif ( $show_empty && ! empty( $empty_message ) ) : ?>
 					<div class="post-grid-empty mb-px40 xl:mt-px20">
 						<div class="<?php echo $empty_msg_cls; ?>"><?php echo $empty_message; ?></div>
@@ -451,7 +514,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$display_limit = $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 		$display_limit = ! empty( $display_limit ) ? (int) $display_limit : static::DEFAULT_NUM_DISPLAY_LIMIT;
 
-		if ( $source == static::SOURCE_QUERY ) {
+		if ( static::SOURCE_QUERY === $source ) {
 			$q_args = array(
 				'tax_query'      => array( 'relation' => 'OR' ),
 				'posts_per_page' => $display_limit,
@@ -472,6 +535,19 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 			$q     = new \WP_Query( $q_args );
 			$posts = $q->posts;
+		} elseif ( static::SOURCE_CUSTOM === $source ) {
+			$posts = [];
+
+			foreach( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
+				$posts[] = [
+					'title'    => $post['custom_item_title'],
+					'desc'     => $post['custom_item_desc'],
+					'cta_txt'  => $post['custom_item_cta']['label'],
+					'cta_ur'   => $post['custom_item_cta']['link'],
+					'cta_cls'  => [ $post['custom_item_cta']['button_attr']['class'] ],
+					'tile_cls' => [ $post['item_attrs_class'] ],
+				];
+			};
 		} else {
 			$posts = $val->get( static::FIELD_POST_ITEMS );
 			$posts = ! empty( $posts ) ? (array) $posts : array();

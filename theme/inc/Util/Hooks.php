@@ -467,6 +467,13 @@ class Hooks {
 		echo ( new \TrevorWP\Theme\Helper\FundraiserQuizModal( Options_Page\Fundraiser_Quiz::render(), [
 				"target" => ".js-fundraiser-quiz",
 		] ) )->render();
+
+		// Donation Modal
+		if ( Options_Page\Donation_Modal::will_render_in( get_the_ID() ) ) {
+			echo ( new \TrevorWP\Theme\Helper\DonationModal( Options_Page\Donation_Modal::render(), [
+				"target" => ".js-fundraiser-quiz",
+		] ) )->render();
+		}
 	}
 
 	/**

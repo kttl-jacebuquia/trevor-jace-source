@@ -9,6 +9,7 @@ class ACF {
 		Field_Group\Carousel_Data::class,
 		// Options
 		Options_Page\Fundraiser_Quiz::class,
+		Options_Page\Donation_Modal::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,

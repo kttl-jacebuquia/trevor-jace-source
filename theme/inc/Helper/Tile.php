@@ -181,6 +181,7 @@ class Tile {
 					'attr',
 					'card_type',
 					'hidden',
+					'cta_cls',
 				),
 				null
 			),
@@ -202,6 +203,12 @@ class Tile {
 		if ( ! empty( $options['id'] ) ) {
 			$attr['id'] = $options['id'];
 		}
+
+		$cta_cls = array_merge(
+			[ 'tile-cta stretched-link' ],
+			$options['cta_cls'],
+		);
+		$cta_cls = implode( ' ', $cta_cls );
 
 		ob_start();
 		?>
@@ -227,7 +234,7 @@ class Tile {
 
 				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
 					<div class="tile-cta-wrap">
-						<a href="<?php echo @$data['cta_url']; ?>" class="tile-cta stretched-link">
+						<a href="<?php echo @$data['cta_url']; ?>" class="<?php echo $cta_cls; ?>">
 							<span><?php echo $data['cta_txt']; ?></span>
 						</a>
 					</div>
