@@ -13,6 +13,9 @@ $z-index-settings: (
 	// Modals
 	'modal-base': 110, // Should be above nav and banners
 	'fundraiser-quiz': 112,
+
+	// Banners
+	'cookie': 105,
 );
 
 @function z-index( $setting ) {
