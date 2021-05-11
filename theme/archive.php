@@ -33,7 +33,7 @@ if ( ! empty( $header_data ) ) {
 # Might implement post type check for additional classes instead
 $container_attrs['class'] = implode(
 	' ',
-	array( 'container mx-auto pt-10 md:pt-px50 lg:pt-20', $container_attrs['class'] ),
+	array( 'container mx-auto pt-10 md:py-px50 lg:py-20', $container_attrs['class'] ),
 );
 ?>
 
