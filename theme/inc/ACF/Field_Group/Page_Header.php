@@ -6,16 +6,16 @@ use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
-	const FIELD_TYPE = 'header_type';
-	const FIELD_TITLE_TOP = 'title_top';
+	const FIELD_TYPE           = 'header_type';
+	const FIELD_TITLE_TOP      = 'title_top';
 	const FIELD_TITLE_TOP_ATTR = 'title_top_attr';
-	const FIELD_CAROUSEL = 'carousel';
-	const FIELD_IMAGE = 'image';
-	const FIELD_BG_CLR = 'bg_clr';
-	const FIELD_TEXT_CLR = 'text_clr';
+	const FIELD_CAROUSEL       = 'carousel';
+	const FIELD_IMAGE          = 'image';
+	const FIELD_BG_CLR         = 'bg_clr';
+	const FIELD_TEXT_CLR       = 'text_clr';
 
 	/** @inheritdoc */
-	protected static function _get_fields(): array {
+	protected static function get_all_fields(): array {
 		$type           = static::gen_field_key( static::FIELD_TYPE );
 		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
 		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
@@ -26,103 +26,116 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
-			[
-				static::FIELD_TYPE => [
+			array(
+				static::FIELD_TYPE => array(
 					'key'           => $type,
 					'name'          => static::FIELD_TYPE,
 					'label'         => 'Type',
 					'type'          => 'select',
 					'required'      => true,
 					'default_value' => 'text',
-					'choices'       => [
+					'choices'       => array(
 						'text'           => 'Text',
 						'split_img'      => 'Split Image',
 						'img_bg'         => 'Full Image',
 						'split_carousel' => 'Split Carousel',
 						'horizontal'     => 'Horizontal',
-					],
-				],
-			],
+					),
+				),
+			),
 			static::_gen_tab_field( 'Title Top' ),
-			[
-				static::FIELD_TITLE_TOP      => [
+			array(
+				static::FIELD_TITLE_TOP      => array(
 					'key'   => $title_top,
 					'name'  => static::FIELD_TITLE_TOP,
 					'label' => 'Title Top',
 					'type'  => 'text',
-				],
-				static::FIELD_TITLE_TOP_ATTR => DOM_Attr::clone( [
-					'key'               => $title_top_attr,
-					'name'              => static::FIELD_TITLE_TOP_ATTR,
-					'conditional_logic' => [
-						[
-							[
-								'field'    => $title_top,
-								'operator' => '!=empty',
-							],
-						],
-					],
-				] ),
-			],
-			parent::_get_fields(),
-			static::_gen_tab_field( 'Image(s)', [
-				'conditional_logic' => [
-					[
-						[
-							'field'    => $type,
-							'operator' => '!=',
-							'value'    => 'text',
-						],
-					],
-				],
-			] ),
-			[
-				static::FIELD_IMAGE    => [
+				),
+				static::FIELD_TITLE_TOP_ATTR => DOM_Attr::clone(
+					array(
+						'key'               => $title_top_attr,
+						'name'              => static::FIELD_TITLE_TOP_ATTR,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $title_top,
+									'operator' => '!=empty',
+								),
+							),
+						),
+					)
+				),
+			),
+			parent::get_all_fields(),
+			static::_gen_tab_field(
+				'Image(s)',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'text',
+							),
+						),
+					),
+				)
+			),
+			array(
+				static::FIELD_IMAGE    => array(
 					'key'               => $image,
 					'name'              => static::FIELD_IMAGE,
 					'label'             => 'Image',
 					'type'              => 'image',
-					'conditional_logic' => [
-						[
-							[
+					'conditional_logic' => array(
+						array(
+							array(
 								'field'    => $type,
 								'operator' => '!=',
 								'value'    => 'text',
-							],
-						],
-					],
-				],
-				static::FIELD_CAROUSEL => Carousel_Data::clone( [
-					'key'               => $carousel,
-					'name'              => static::FIELD_CAROUSEL,
-					'label'             => 'Carousel',
-					'prefix_label'      => true,
-					'display'           => 'group',
-					'layout'            => 'row',
-					'conditional_logic' => [
-						[
-							[
-								'field'    => $type,
-								'operator' => '==',
-								'value'    => 'split_carousel',
-							],
-						],
-					],
-				] )
-			],
+							),
+						),
+					),
+				),
+				static::FIELD_CAROUSEL => Carousel_Data::clone(
+					array(
+						'key'               => $carousel,
+						'name'              => static::FIELD_CAROUSEL,
+						'label'             => 'Carousel',
+						'prefix_label'      => true,
+						'display'           => 'group',
+						'layout'            => 'row',
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $type,
+									'operator' => '==',
+									'value'    => 'split_carousel',
+								),
+							),
+						),
+					)
+				),
+			),
 			static::_gen_tab_field( 'Styling' ),
-			[
+			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
 					$text_clr,
 					static::FIELD_TEXT_CLR,
-					[ 'label' => 'Text Color', 'default' => 'teal-dark', ]
+					array(
+						'label'   => 'Text Color',
+						'default' => 'teal-dark',
+					)
 				),
 				static::FIELD_BG_CLR   => Field\Color::gen_args(
 					$bg_clr,
 					static::FIELD_BG_CLR,
-					[ 'label' => 'BG Color', 'default' => 'white', ]
+					array(
+						'label'   => 'BG Color',
+						'default' => 'white',
+					)
 				),
-			]
+			)
 		);
 
 		$return[ static::FIELD_TITLE ]['instructions'] = 'Leave empty to use Post`s title.';
@@ -132,23 +145,26 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 	/** @inheritdoc */
 	public static function prepare_register_args(): array {
-		$args = array_merge( parent::prepare_register_args(), [
-			'title'    => 'Page Header',
-			'location' => [
-				[
-					[
-						'param'    => 'post_type',
-						'operator' => '==',
-						'value'    => 'page',
-					],
-					[
-						'param'    => 'post',
-						'operator' => '!=',
-						'value'    => get_option( 'page_for_posts' ),
-					],
-				],
-			],
-		] );
+		$args = array_merge(
+			parent::prepare_register_args(),
+			array(
+				'title'    => 'Page Header',
+				'location' => array(
+					array(
+						array(
+							'param'    => 'post_type',
+							'operator' => '==',
+							'value'    => 'page',
+						),
+						array(
+							'param'    => 'post',
+							'operator' => '!=',
+							'value'    => get_option( 'page_for_posts' ),
+						),
+					),
+				),
+			)
+		);
 
 		// Title is not required here
 		$args['fields'][ static::FIELD_TITLE ]['required'] = 0;
@@ -157,31 +173,41 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	}
 
 	/** @inheritdoc */
-	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
+	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$val = new Field_Val_Getter( static::class, $post, $data );
 
 		$type     = $val->get( static::FIELD_TYPE );
-		$wrap_cls = [];
+		$wrap_cls = array();
 
 		# Check renderer
 		if ( ! ( new \ReflectionClass( Helper\Page_Header::class ) )->hasMethod( $type ) ) {
 			throw new Exception\Internal( 'Page header type is not supported.', compact( 'type' ) );
 		}
 
-		$args = [
+		$args = array(
 			'title_top' => $val->get( static::FIELD_TITLE_TOP ),
-			'title'     => $val->get( static::FIELD_TITLE ) ?: get_the_title( $post ), // fallback to post's title
+			'title'     => $val->get( static::FIELD_TITLE ) ? false : get_the_title( $post ), // fallback to post's title
 			'desc'      => $val->get( static::FIELD_DESC ),
-		];
+			'title_cls' => array( 'page-header-title' ),
+			'desc_cls'  => array( 'page-header-desc' ),
+		);
 
-		$args['styles'] = [];
+		# Additional title and desc classnames.
+		$title_attrs         = DOM_Attr::get_attrs_of( $val->get( static::FIELD_TITLE_ATTR ) );
+		$args['title_cls'][] = $title_attrs['class'];
+		$desc_attrs          = DOM_Attr::get_attrs_of( $val->get( static::FIELD_DESC_ATTR ) );
+		$args['desc_cls'][]  = $desc_attrs['class'];
+
+		$args['styles'] = array();
 		# Text color
-		if ( ! empty( $txt_color = $val->get( static::FIELD_TEXT_CLR ) ) ) {
+		$txt_color = $val->get( static::FIELD_TEXT_CLR );
+		if ( ! empty( $txt_color ) ) {
 			$args['styles'][] = "text-{$txt_color}";
 		}
 
 		# BG Color
-		if ( ! empty( $bg_color = $val->get( static::FIELD_BG_CLR ) ) ) {
+		$bg_color = $val->get( static::FIELD_BG_CLR );
+		if ( ! empty( $bg_color ) ) {
 			$args['styles'][] = "bg-{$bg_color}";
 		}
 
@@ -192,7 +218,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		if ( ! empty( $args['buttons']['buttons'] ) ) {
 			foreach ( $args['buttons']['buttons'] as &$button ) {
 				switch ( $val->get( static::FIELD_BG_CLR ) ) {
-					case "teal-dark":
+					case 'teal-dark':
 						$button_class                             = $button['button']['button_attr']['class'];
 						$button['button']['button_attr']['class'] = 'bg-white text-teal-dark ' . $button_class;
 						break;
@@ -203,7 +229,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		}
 
 		# Featured Image for Split Image, Horizontal, and Full
-		if ( in_array( $val->get( static::FIELD_TYPE ), [ 'split_img', 'horizontal', 'img_bg' ] ) ) {
+		if ( in_array( $val->get( static::FIELD_TYPE ), array( 'split_img', 'horizontal', 'img_bg' ), true ) ) {
 			$img            = $val->get( static::FIELD_IMAGE );
 			$args['img_id'] = empty( $img ) ? get_post_thumbnail_id() : @$img['ID'];
 		}
@@ -211,30 +237,30 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Split Carousel
 		if ( $val->get( static::FIELD_TYPE ) === 'split_carousel' ) {
 			$carousel_arr  = $val->get( static::FIELD_CAROUSEL );
-			$carousel_data = [];
+			$carousel_data = array();
 
-			if ( $carousel_arr['type'] === 'custom' ) {
+			if ( 'custom' === $carousel_arr['type'] ) {
 				foreach ( $carousel_arr['data'] as $item ) {
-					$carousel_data[] = [
+					$carousel_data[] = array(
 						'img'      => $item['data_img'],
 						'caption'  => $item['data_title'],
 						'subtitle' => $item['data_subtitle'],
-					];
+					);
 				}
 			} else {
 				foreach ( $carousel_arr['posts'] as $post_item ) {
-					$carousel_data[] = [
-						'img'     => [ 'id' => get_post_thumbnail_id( $post_item ) ],
+					$carousel_data[] = array(
+						'img'     => array( 'id' => get_post_thumbnail_id( $post_item ) ),
 						'caption' => $post_item->post_title,
-					];
+					);
 				}
 			}
 
 			$args['carousel_data'] = $carousel_data;
-			$args['swiper']        = [
+			$args['swiper']        = array(
 				'centeredSlides' => true,
 				'slidesPerView'  => 'auto',
-			];
+			);
 		}
 
 		return Helper\Page_Header::$type( $args );

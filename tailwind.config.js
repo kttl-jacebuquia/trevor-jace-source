@@ -286,6 +286,7 @@ module.exports = {
 				px600: px2rem(600),
 				px706: px2rem(706),
 				px737: px2rem(737),
+				px820: px2rem(820),
 			},
 			fontSize: {
 				px10: px2rem(10),

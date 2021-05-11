@@ -50,14 +50,6 @@
     */
 
     &-type-vertical {
-        .tile-grid-container {
-            @apply mt-px50;
-        }
-
-        .page-sub-title-desc {
-            @apply tracking-em005;
-        }
-
         .page-btn {
             @apply px-px32;
         }

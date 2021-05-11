@@ -543,19 +543,6 @@
 
 	// Horizontal
 	&.type-horizontal {
-		@apply mt-px28;
-		@apply xl:mt-px49 xl:px-px140;
-
-		.page-header-title {
-			@apply tracking-normal;
-		}
-
-		.page-header-desc {
-			@apply pb-0 pt-px12 text-px18 leading-px26;
-			@apply md:pt-px10 md:text-px16 md:leading-px22;
-			@apply xl:pt-px14 xl:text-px26 xl:leading-px36 xl:tracking-em005;
-		}
-
 		.page-header-image {
 			@apply relative pt-vwfull;
 
@@ -590,7 +577,7 @@
 			@apply pb-px80 text-center mx-auto;
 			@apply md:pb-px50;
 			@apply xl:pb-px60;
-			
+
 			@screen md {
 				width: percentage(494/668);
 			}
