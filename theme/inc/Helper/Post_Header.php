@@ -208,6 +208,17 @@ class Post_Header {
 			$mid_row[] = ob_get_clean();
 		}
 
+		# Author
+		if ( in_array( $post->post_type, [ CPT\Post::POST_TYPE ] ) ) {
+			ob_start();
+			?>
+			<div class="author-box">
+				BY: <span class="uppercase author-display_name"><?= get_the_author_meta( 'display_name', $post->post_author ) ?></span>
+			</div>
+			<?php
+			$mid_row[] = ob_get_clean();
+		}
+
 		## Sharing Box
 		if ( Meta\Post::can_show_share_box( $post->ID ) ) {
 			ob_start();
