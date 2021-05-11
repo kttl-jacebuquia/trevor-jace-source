@@ -24,6 +24,12 @@ body {
   	}
   }
 
+	// Fixed content when modal is visible
+	&.is-modal-open {
+		@apply fixed;
+		top: var(--fixed-body-top);
+	}
+
   > main {
 	flex: 1 0 auto;
   }

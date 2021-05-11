@@ -11,7 +11,7 @@
 
 	.modal-content-wrap {
 		@apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0;
-		@apply py-px150;
+		@apply py-px130;
 	}
 
 	.modal-close {
@@ -62,6 +62,18 @@
 		}
 	}
 
+	&--step-one &__title {
+		@apply text-left md:text-center;
+	}
+
+	&--step-one &__description {
+		@apply text-left md:text-center;
+	}
+
+	&--step-one &__instruction {
+		@apply text-left md:text-center;
+	}
+
 	fieldset {
 		@apply flex justify-center;
 	}
@@ -71,12 +83,12 @@
 		column-count: 1;
 
 		@screen md {
-			@apply text-px18 leading-px26 tracking-normal mt-px68 mx-auto;
+			@apply text-px18 leading-px26 tracking-normal mt-px72 mx-auto;
 			width: 80%;
 		}
 
 		@screen xl {
-			@apply mx-auto mt-px46 w-2/4 gap-x-px30 gap-px30;
+			@apply mx-auto mt-px50 w-2/4 gap-x-px30 gap-px30;
 		}
 	}
 
@@ -131,14 +143,14 @@
 	}
 
 	:is(&__message, &__inquiry) {
-		@apply mt-px30 md:mt-px20 xl:mt-px30;
+		@apply mt-px18 md:mt-px20 xl:mt-px30;
 	}
 
 	&__small-fields {
 		@apply flex flex-col md:flex-row justify-center;
 
 		& + & {
-			@apply mt-px28;
+			@apply mt-px18;
 
 			@screen md {
 				@apply mt-px20;
@@ -154,7 +166,7 @@
 		}
 
 		input + input {
-			@apply mt-px28;
+			@apply mt-px18;
 
 			@screen md {
 				@apply mt-0 ml-px28;
@@ -163,7 +175,7 @@
 	}
 
 	&__message {
-		@apply mt-px30 md:mt-px20 xl:mt-px30;
+		@apply mt-px18 md:mt-px20 xl:mt-px30;
 		height: rem-calc(240px);
 		resize: none;
 
@@ -212,7 +224,9 @@
 		}
 
 		&-link {
-			@apply py-4 md:mr-px30;
+			@apply text-px18 leading-px24 tracking-em001 font-bold py-4;
+			@apply xl:text-px20 xl:leading-px26;
+			@apply md:mr-px30;
 
 			a {
 				@apply border-b-2 border-teal-dark;
@@ -236,5 +250,33 @@
 		@apply transform -translate-x-1/2;
 		@apply md:top-px50 md:text-px18 md:leading-px26;
 		@apply xl:block xl:text-px22 xl:leading-px32;
+	}
+
+
+	// Vertex Specific Styles
+	[data-vertex="create"] {
+		.fundraiser-quiz__title {
+			@apply font-bold text-px32 leading-px40;
+			@apply md:leading-px42;
+			@apply xl:text-px36 xl:leading-px48;
+		}
+
+		.fundraiser-quiz__get-your-fundraiser-title {
+			@apply font-bold text-px30 leading-px40 tracking-em005;
+			@apply md:text-px32;
+			@apply xl:text-px30 xl:leading-px40;
+		}
+	}
+
+
+	// Form
+
+	input:not([type="radio"]),
+	textarea {
+		@apply text-teal-dark border-none;
+	}
+
+	input[type="radio"]:not(:checked) {
+		@apply bg-white bg-opacity-10 shadow-none;
 	}
 }

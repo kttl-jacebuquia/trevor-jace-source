@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+const $window = $(window);
 const $document = $(document);
 
 class Modal {
@@ -22,6 +23,8 @@ class Modal {
 		this.$content.addClass('is-active');
 		document.body.classList.add(this.constructor.bodyActiveClass);
 
+		this.toggleBodyFix(true);
+
 		this.$blurFilter = $('<svg width="0" height="0" style="position:absolute"><filter id="blur3px"><feGaussianBlur in="SourceGraphic" stdDeviation="3"></feGaussianBlur></filter></svg>').prependTo('.site-content');
 	}
 
@@ -31,6 +34,8 @@ class Modal {
 		this.$overlay.off('click', this.close);
 		this.$content.removeClass('is-active');
 		document.body.classList.remove(this.constructor.bodyActiveClass);
+
+		this.toggleBodyFix(false);
 
 		$('#blur3px').parent().remove();
 	}
@@ -57,6 +62,25 @@ class Modal {
 		this.close();
 		this.$overlay.remove();
 		this.$content.find(`.${this.constructor.closeClass}`).off('click', this.close);
+	}
+
+	toggleBodyFix(willFix) {
+		const bodyWillFix = typeof willFix === 'boolean' ? willFix : !$body.hasClass('is-modal-open');
+		const $root = $('html');
+		const $body = $('body');
+
+		if ( bodyWillFix ) {
+			this.fixedBodyScroll = $window.scrollTop();
+			$root[0].style.setProperty('--fixed-body-top', `-${this.fixedBodyScroll}px`);
+			$body.addClass('is-modal-open');
+		}
+		else {
+			$body.removeClass('is-modal-open');
+			$root[0].style.setProperty('--fixed-body-top', `0px`);
+			$root.css('scroll-behavior', 'auto');
+			window.scrollTo(0, this.fixedBodyScroll);
+			$root.css('scroll-behavior', '');
+		}
 	}
 }
 
