@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="The Trevor Project" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+	<description>A custom set of rules to check for a WPized WordPress project</description>
+
+	<!-- Exclude the Composer Vendor directory. -->
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/plugin/lib/*</exclude-pattern>
+	<exclude-pattern>/theme/lib/*</exclude-pattern>
+
+	<!-- Exclude the Node Modules directory. -->
+	<exclude-pattern>/node_modules/*</exclude-pattern>
+
+	<!-- Exclude Javascript files. -->
+	<exclude-pattern>*.js</exclude-pattern>
+
+	<!-- Exclude the build files. -->
+	<exclude-pattern>/build/*</exclude-pattern>
+	<exclude-pattern>/scripts/*</exclude-pattern>
+	<exclude-pattern>/plugin/static/*</exclude-pattern>
+	<exclude-pattern>/theme/static/*</exclude-pattern>
+
+	<!-- Exclude the icon fonts. -->
+	<exclude-pattern>/src/plugin/css/icon-font/*</exclude-pattern>
+	<exclude-pattern>/src/theme/css/icon-font/*</exclude-pattern>
+
+	<!-- Exclude the artifacts. -->
+	<exclude-pattern>/theme/data/*</exclude-pattern>
+
+	<!-- Exclude the configuration files. -->
+	<exclude-pattern>/tailwind.config.js</exclude-pattern>
+	<exclude-pattern>/config/*</exclude-pattern>
+
+	<!-- Exclude the Lando directory. -->
+	<exclude-pattern>/lando/*</exclude-pattern>
+
+	<!-- Include the WordPress-Core standard. -->
+	<rule ref="WordPress-Core">
+		<!--
+		We may want a middle ground though. The best way to do this is add the
+		entire ruleset, then rule by rule, remove ones that don't suit a project.
+		We can do this by running `phpcs` with the '-s' flag, which allows us to
+		see the names of the sniffs reporting errors.
+		Once we know the sniff names, we can opt to exclude sniffs which don't
+		suit our project like so.
+
+		The below two examples just show how you can exclude rules.
+		They are not intended as advice about which sniffs to exclude.
+		-->
+
+		<!--
+		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+		<exclude name="WordPress.Security.EscapeOutput"/>
+		-->
+
+		<exclude name="WordPress.Files.FileName"/>
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
+
+</ruleset>
