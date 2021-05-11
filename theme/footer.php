@@ -2,42 +2,44 @@
 
 use \TrevorWP\Theme\Customizer;
 
-$social_media_accounts = [
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_FACEBOOK_URL ),
-				'icon' => 'trevor-ti-facebook',
-		],
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TWITTER_URL ),
-				'icon' => 'trevor-ti-twitter',
-		],
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_INSTAGRAM_URL ),
-				'icon' => 'trevor-ti-instagram',
-		],
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TIKTOK_URL ),
-				'icon' => 'trevor-ti-tiktok',
-		],
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_YOUTUBE_URL ),
-				'icon' => 'trevor-ti-youtube',
-		],
-		[
-				'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_LINKEDIN_URL ),
-				'icon' => 'trevor-ti-linkedin',
-		],
-];
+$social_media_accounts = array(
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_FACEBOOK_URL ),
+		'icon' => 'trevor-ti-facebook',
+	),
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TWITTER_URL ),
+		'icon' => 'trevor-ti-twitter',
+	),
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_INSTAGRAM_URL ),
+		'icon' => 'trevor-ti-instagram',
+	),
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TIKTOK_URL ),
+		'icon' => 'trevor-ti-tiktok',
+	),
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_YOUTUBE_URL ),
+		'icon' => 'trevor-ti-youtube',
+	),
+	array(
+		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_LINKEDIN_URL ),
+		'icon' => 'trevor-ti-linkedin',
+	),
+);
+
+$page_template = get_page_template_slug();
+
+$hidden = ( 'template-info-page.php' === $page_template ) ? 'hidden' : '';
 
 ?>
 
-<footer class="w-full flex flex-col justify-center sticky-cta-anchor">
+<footer class="w-full flex flex-col justify-center sticky-cta-anchor <?php echo $hidden; ?>">
 	<div class="container mx-auto site-content-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">
-				<a href="<?= \TrevorWP\Theme\Util\Tools::get_relative_home_url() ?>"
-				   class="logo"
-				   rel="home">
+				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
 					<i class="logo-text trevor-ti-logo-text"></i>
 					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
@@ -57,25 +59,35 @@ $social_media_accounts = [
 		</div>
 		<div class="col">
 			<?php
-				wp_nav_menu([
-					'menu_class'   => 'site-links',
-					'theme_location' => 'footer',
-				])
-			?>
+				wp_nav_menu(
+					array(
+						'menu_class'     => 'site-links',
+						'theme_location' => 'footer',
+					)
+				)
+				?>
 			<ul class="social-links">
-				<?php foreach ( $social_media_accounts as $account ) {
-					if ( ! empty( $account['url'] ) ) { ?>
+				<?php foreach ( $social_media_accounts as $account ) : ?>
+					<?php if ( ! empty( $account['url'] ) ) : ?>
 						<li>
-							<a href="<?= esc_url( $account['url'] ); ?>">
-								<i class="<?= esc_attr( implode( ' ', [
-										$account['icon'],
-										'text-white'
-								] ) ); ?>"></i>
+							<a href="<?php echo esc_url( $account['url'] ); ?>">
+								<i class="
+								<?php
+								echo esc_attr(
+									implode(
+										' ',
+										array(
+											$account['icon'],
+											'text-white',
+										)
+									)
+								);
+								?>
+									"></i>
 							</a>
 						</li>
-						<?php
-					}
-				} ?>
+					<?php endif; ?>
+				<?php endforeach; ?>
 			</ul>
 		</div>
 	</div>

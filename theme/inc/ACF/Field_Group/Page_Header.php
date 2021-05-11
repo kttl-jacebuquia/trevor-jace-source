@@ -161,6 +161,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'operator' => '!=',
 							'value'    => get_option( 'page_for_posts' ),
 						),
+						array(
+							'param'    => 'page_template',
+							'operator' => '!=',
+							'value'    => 'template-info-page.php',
+						),
 					),
 				),
 			)
@@ -231,7 +236,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Featured Image for Split Image, Horizontal, and Full
 		if ( in_array( $val->get( static::FIELD_TYPE ), array( 'split_img', 'horizontal', 'img_bg' ), true ) ) {
 			$img            = $val->get( static::FIELD_IMAGE );
-			$args['img_id'] = empty( $img ) ? get_post_thumbnail_id() : @$img['ID'];
+			$args['img_id'] = empty( $img ) ? get_post_thumbnail_id() : $img['ID'];
 		}
 
 		# Split Carousel
