@@ -15,7 +15,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TEXT_CLR       = 'text_clr';
 
 	/** @inheritdoc */
-	protected static function get_all_fields(): array {
+	public static function get_all_fields(): array {
 		$type           = static::gen_field_key( static::FIELD_TYPE );
 		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
 		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
