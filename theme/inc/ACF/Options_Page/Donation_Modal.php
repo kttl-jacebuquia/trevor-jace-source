@@ -42,7 +42,7 @@ class Donation_Modal extends A_Options_Page {
 	 * Checks whether donate modal will render in the given post ID
 	 */
 	public static function will_render_in( $post_id ) {
-		$pages = static::get_option( static::FIELD_PAGES );
+		$pages = (array) static::get_option( static::FIELD_PAGES );
 		return in_array( $post_id, $pages );
 	}
 
