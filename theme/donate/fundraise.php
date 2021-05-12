@@ -122,7 +122,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 			), [
 					'title'  => 'Top Individuals',
 					'card_options' => [
-							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
+							'placeholder_image' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
 					],
 					'class'					=> 'top-individuals',
 			] ) ?>
@@ -143,7 +143,7 @@ use \TrevorWP\Theme\Customizer\Fundraise;
 			), [
 					'title'        => 'Top Teams',
 					'card_options' => [
-							'placeholder_logo_id' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
+							'placeholder_image' => Fundraise::get_val( Fundraise::SETTING_TOP_LIST_PLACEHOLDER_LOGO ),
 					],
 					'class'					=> 'top-teams',
 			] ) ?>

@@ -168,15 +168,15 @@ class Card {
 	 */
 	public static function fundraiser( array $data, int $key = 0, array $options = array() ): string {
 		static $currency_formatter;
-		$logo_url = @$data['logo_url'];
-		if ( empty( $logo_url ) && ! empty( $options['placeholder_logo_id'] ) ) {
-			$logo_url = wp_get_attachment_image_url( $options['placeholder_logo_id'], 'medium' );
+		$logo_url = ( isset( $data['logo_url'] ) ) ? $data['logo_url'] : '';
+		if ( empty( $logo_url ) && ! empty( $options['placeholder_image'] ) ) {
+			$logo_url = wp_get_attachment_image_url( $options['placeholder_image'], 'medium' );
 		}
 
-		$title           = isset( $data['title'] ) ? $data['title'] : @$data['name'];
-		$total_raised    = empty( $data['total_raised'] ) ? .0 : floatval( $data['total_raised'] );
-		$percent_to_goal = empty( $data['percent_to_goal'] ) ? .0 : floatval( $data['percent_to_goal'] );
-		$canonical_url   = empty( $data['canonical_url'] ) ? '#' : $data['canonical_url'];
+		$title           = ( isset( $data['title'] ) ) ? $data['title'] : ( ( isset( $data['name'] ) ) ? $data['name'] : '' );
+		$total_raised    = ( empty( $data['total_raised'] ) ) ? .0 : floatval( $data['total_raised'] );
+		$percent_to_goal = ( empty( $data['percent_to_goal'] ) ) ? .0 : floatval( $data['percent_to_goal'] );
+		$canonical_url   = ( empty( $data['canonical_url'] ) ) ? '#' : $data['canonical_url'];
 		if ( $percent_to_goal > 100.0 ) {
 			$percent_to_goal = 100.0;
 		}
@@ -185,6 +185,8 @@ class Card {
 			$currency_formatter = new \NumberFormatter( 'en-US', \NumberFormatter::CURRENCY );
 			$currency_formatter->setAttribute( \NumberFormatter::MAX_FRACTION_DIGITS, 0 );
 		}
+
+		$clean_title = wp_filter_nohtml_kses( $title );
 
 		ob_start();
 		?>
@@ -197,7 +199,7 @@ class Card {
 				<div class="title-top uppercase">Individual donor</div>
 
 				<h3 class="post-title font-semibold text-px24 leading-px28"
-					title="<?php echo esc_attr( $clean_title = wp_filter_nohtml_kses( $title ) ); ?>">
+					title="<?php echo esc_attr( $clean_title ); ?>">
 					<a href="<?php echo esc_url( $canonical_url ); ?>"
 						class="title stretched-link" target="_blank"
 						rel="noopener nofollow noreferrer"><?php echo $clean_title; ?></a>
@@ -269,7 +271,7 @@ class Card {
 			<?php endif; ?>
 
 
-			<?php if ( in_array( 'bg-full', $_class ) && $has_thumbnail ) { ?>
+			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
 					<a href="<?php echo get_the_permalink( $post ); ?>">
 						<?php echo $thumb; ?>
@@ -279,7 +281,7 @@ class Card {
 
 			<div class="card-content">
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
-					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class ) ) { ?>
+					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class, true ) ) { ?>
 						<div class="post-thumbnail-wrap">
 							<a href="<?php echo get_the_permalink( $post ); ?>">
 								<?php echo $thumb; ?>

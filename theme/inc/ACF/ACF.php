@@ -31,6 +31,7 @@ class ACF {
 		Field_Group\Donate_Form::class,
 		Field_Group\Charity_Navigator::class,
 		Field_Group\FAQ::class,
+		Field_Group\URL_File_List::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,

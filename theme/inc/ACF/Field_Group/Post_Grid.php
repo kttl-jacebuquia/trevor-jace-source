@@ -1,14 +1,17 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Classy\Content;
 use TrevorWP\CPT;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Customizer\Fundraise;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Theme\Customizer\Social_Media_Accounts;
 
 class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_SOURCE            = 'source';
 	const FIELD_HEADING           = 'heading';
+	const FIELD_CAMPAIGN_ID       = 'campaign_id';
 	const FIELD_QUERY_PTS         = 'post_query_pts'; // post types
 	const FIELD_QUERY_TAXS        = 'post_query_taxs'; // taxonomies
 	const FIELD_POST_ITEMS        = 'post_items';
@@ -30,9 +33,11 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const PAGINATION_STYLE_OPTION_LOADMORE = 'load_more';
 	const PAGINATION_STYLE_OPTION_PAGES    = 'pages';
 
-	const SOURCE_QUERY  = 'query';
-	const SOURCE_PICK   = 'pick';
-	const SOURCE_CUSTOM = 'custom';
+	const SOURCE_QUERY           = 'query';
+	const SOURCE_PICK            = 'pick';
+	const SOURCE_CUSTOM          = 'custom';
+	const SOURCE_TOP_INDIVIDUALS = 'top_individuals';
+	const SOURCE_TOP_TEAMS       = 'top_teams';
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
 
@@ -53,6 +58,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
 		$heading           = static::gen_field_key( static::FIELD_HEADING );
+		$campaign_id       = static::gen_field_key( static::FIELD_CAMPAIGN_ID );
 		$source            = static::gen_field_key( static::FIELD_SOURCE );
 		$post_items        = static::gen_field_key( static::FIELD_POST_ITEMS );
 		$q_pts             = static::gen_field_key( static::FIELD_QUERY_PTS );
@@ -81,9 +87,11 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'label'   => 'Source',
 						'type'    => 'select',
 						'choices' => array(
-							static::SOURCE_PICK  => 'Hand Pick',
-							static::SOURCE_QUERY => 'Query',
-							static::SOURCE_CUSTOM => 'Custom',
+							static::SOURCE_PICK            => 'Hand Pick',
+							static::SOURCE_QUERY           => 'Query',
+							static::SOURCE_CUSTOM          => 'Custom',
+							static::SOURCE_TOP_INDIVIDUALS => 'Top Individuals',
+							static::SOURCE_TOP_TEAMS       => 'Top Teams',
 						),
 						'wrapper' => array(
 							'width' => '50%',
@@ -94,6 +102,28 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'name'  => static::FIELD_HEADING,
 						'label' => 'Heading',
 						'type'  => 'text',
+					),
+					static::FIELD_CAMPAIGN_ID       => array(
+						'key'               => $campaign_id,
+						'name'              => static::FIELD_CAMPAIGN_ID,
+						'label'             => 'Campaign ID',
+						'type'              => 'text',
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_TOP_INDIVIDUALS,
+								),
+							),
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_TOP_TEAMS,
+								),
+							),
+						),
 					),
 					static::FIELD_NUM_COLS          => array(
 						'key'           => $num_cols,
@@ -150,7 +180,34 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::_gen_tab_field( 'Posts' ),
+				static::_gen_tab_field(
+					'Posts',
+					array(
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_PICK,
+								),
+							),
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_QUERY,
+								),
+							),
+							array(
+								array(
+									'field'    => $source,
+									'operator' => '==',
+									'value'    => static::SOURCE_CUSTOM,
+								),
+							),
+						),
+					)
+				),
 				array(
 					static::FIELD_QUERY_PTS     => array(
 						'key'               => $q_pts,
@@ -224,8 +281,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							),
 						),
 					),
-					static::FIELD_CUSTOM_ITEMS    => array(
-						'key'               => $post_items,
+					static::FIELD_CUSTOM_ITEMS  => array(
+						'key'               => $custom_items,
 						'name'              => static::FIELD_CUSTOM_ITEMS,
 						'label'             => 'Custom Items',
 						'type'              => 'repeater',
@@ -242,33 +299,35 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 								),
 							),
 						),
-						'sub_fields'        => [
-							[
+						'sub_fields'        => array(
+							array(
 								'key'   => $custom_item_title,
 								'name'  => static::FIELD_CUSTOM_ITEM_TITLE,
 								'label' => 'Title',
 								'type'  => 'text',
-							],
-							[
+							),
+							array(
 								'key'   => $custom_item_desc,
 								'name'  => static::FIELD_CUSTOM_ITEM_DESC,
 								'label' => 'Desc',
 								'type'  => 'textarea',
-							],
-							Button::clone(
-								[
-									'key'       => $custom_item_cta,
-									'name'      => static::FIELD_CUSTOM_ITEM_CTA,
-									'label'     => 'CTA',
-									'display'   => 'group',
-								],
 							),
-							DOM_Attr::clone([
-								'key'   => static::gen_field_key( 'item_attrs' ),
-								'name'  => 'item_attrs',
-								'label' => 'Item Ittributes',
-							])
-						]
+							Button::clone(
+								array(
+									'key'     => $custom_item_cta,
+									'name'    => static::FIELD_CUSTOM_ITEM_CTA,
+									'label'   => 'CTA',
+									'display' => 'group',
+								),
+							),
+							DOM_Attr::clone(
+								array(
+									'key'   => static::gen_field_key( 'item_attrs' ),
+									'name'  => 'item_attrs',
+									'label' => 'Item Ittributes',
+								)
+							),
+						),
 					),
 					static::FIELD_SHOW_EMPTY    => array(
 						'key'     => $show_empty,
@@ -364,7 +423,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 		$tile_options = array(
 			'accordion' => false,
-			'class'     => $options['tileClass'] ?: array(),
+			'class'     => ( ! empty( $options['tileClass'] ) ) ? $options['tileClass'] : array(),
 		);
 
 		if ( ! empty( $options['num_words'] ) ) {
@@ -377,7 +436,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$cls[] = 'sm-accordion';
 		}
 
-		$tile_options['placeholder_image'] = $placeholder_img ?: null;
+		$tile_options['placeholder_image'] = ( ! empty( $placeholder_img ) ) ? $placeholder_img : null;
 
 		if ( ! empty( $posts ) ) {
 			if ( count( $posts ) < 3 ) {
@@ -396,9 +455,9 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$wrapper_attrs['class'] .= ' ' . $options['wrapper_attrs']['class'];
 		}
 
-		$wrapper_attrs['id'] = $id = empty( $wrapper_attrs['id'] )
-				? uniqid( 'tile-container-' )
-				: $wrapper_attrs['id'];
+		$id = ( ! empty( $wrapper_attrs['id'] ) ) ? $wrapper_attrs['id'] : uniqid( 'tile-container-' );
+
+		$wrapper_attr['id'] = $id;
 
 		# Build post grid classnames
 		$post_grid_cls = 'post-grid';
@@ -425,9 +484,9 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					</h2>
 				<?php endif; ?>
 				<?php if ( ! empty( $posts ) ) : ?>
-					<?php if ( static::SOURCE_CUSTOM === $source ): ?>
+					<?php if ( static::SOURCE_CUSTOM === $source ) : ?>
 						<?php echo Helper\Tile_Grid::custom( $posts ); ?>
-					<?php else: ?>
+					<?php else : ?>
 						<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
 							<?php
 							foreach ( $posts as $key => $post ) {
@@ -520,11 +579,15 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				'posts_per_page' => $display_limit,
 			);
 
-			if ( ! empty( $post_type = $val->get( static::FIELD_QUERY_PTS ) ) ) {
+			$post_type = $val->get( static::FIELD_QUERY_PTS );
+
+			if ( ! empty( $post_type ) ) {
 				$q_args['post_type'] = $post_type;
 			}
 
-			if ( ! empty( $taxs = $val->get( static::FIELD_QUERY_TAXS ) ) ) {
+			$taxs = $val->get( static::FIELD_QUERY_TAXS );
+
+			if ( ! empty( $taxs ) ) {
 				foreach ( $taxs as $tax ) {
 					$q_args['tax_query'][] = array(
 						'taxonomy' => $tax[ static::SUBFIELD_TAXS_TAX ],
@@ -538,7 +601,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		} elseif ( static::SOURCE_CUSTOM === $source ) {
 			$posts = [];
 
-			foreach( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
+			foreach ( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
 				$posts[] = [
 					'title'    => $post['custom_item_title'],
 					'desc'     => $post['custom_item_desc'],
@@ -557,10 +620,30 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	}
 
 	/**
+	 * @param Field_Val_Getter $val
+	 *
+	 * @return array
+	 */
+	protected static function _get_fundraisers( Field_Val_Getter $val ): array {
+		$posts         = array();
+		$source        = $val->get( static::FIELD_SOURCE );
+		$display_limit = ( ! empty( $val->get( static::FIELD_NUM_DISPLAY_LIMIT ) ) ) ? $val->get( static::FIELD_NUM_DISPLAY_LIMIT ) : 1;
+		$campaign_id   = $val->get( static::FIELD_CAMPAIGN_ID );
+
+		if ( static::SOURCE_TOP_INDIVIDUALS === $source && ! empty( $campaign_id ) ) {
+			$posts = Content::get_fundraisers( $campaign_id, (int) $display_limit, true );
+		} elseif ( static::SOURCE_TOP_TEAMS === $source && ! empty( $campaign_id ) ) {
+			$posts = Content::get_fundraising_teams( $campaign_id, (int) $display_limit, true );
+		}
+
+		return $posts;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		$data = (array) @$block['data'];
+		$data = (array) $block['data'];
 
 		if ( have_rows( static::FIELD_QUERY_TAXS ) ) :
 			$data[ static::FIELD_QUERY_TAXS ] = array();
@@ -582,7 +665,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	 * @return mixed
 	 */
 	public static function load_field_post_query_pts( $field ) {
-		if ( $field && ! empty( $field['key'] ) && $field['key'] == static::gen_field_key( static::FIELD_QUERY_PTS ) ) {
+		if ( $field && ! empty( $field['key'] ) && static::gen_field_key( static::FIELD_QUERY_PTS ) === $field['key'] ) {
 			$choices = array();
 			foreach ( get_post_types( array(), 'objects' ) as $pt ) {
 				$choices[ $pt->name ] = "{$pt->name}: {$pt->label}";
@@ -595,7 +678,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	}
 
 	public static function load_field_post_query_taxs( $field ) {
-		if ( $field && ! empty( $field['key'] ) && $field['key'] == static::gen_field_key( static::SUBFIELD_TAXS_TAX ) ) {
+		if ( $field && ! empty( $field['key'] ) && static::gen_field_key( static::SUBFIELD_TAXS_TAX ) === $field['key'] ) {
 			$choices = &$field['choices'];
 			foreach ( get_taxonomies( array(), 'object' ) as $tax ) {
 				$choices[ $tax->name ] = "{$tax->name}: {$tax->label}";
