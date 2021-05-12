@@ -3,7 +3,7 @@
 use TrevorWP\Main;
 
 abstract class Org_Object {
-	const QV_BASE = Main::QV_PREFIX . 'org';
+	const QV_BASE   = Main::QV_PREFIX . 'org';
 	const QV_ORG_LP = self::QV_BASE . '__lp';
 
 	/* Permalinks */
@@ -14,8 +14,8 @@ abstract class Org_Object {
 	 */
 	final public static function construct(): void {
 		# Hooks
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_filter( 'query_vars', array( self::class, 'query_vars' ), PHP_INT_MAX, 1 );
 	}
 
 	/**
@@ -26,10 +26,12 @@ abstract class Org_Object {
 	public static function init(): void {
 		add_rewrite_rule(
 			self::PERMALINK_ORG_LP . '/?$',
-			"index.php?" . http_build_query( [
-				self::QV_BASE   => 1,
-				self::QV_ORG_LP => 1
-			] ),
+			'index.php?' . http_build_query(
+				array(
+					self::QV_BASE   => 1,
+					self::QV_ORG_LP => 1,
+				)
+			),
 			'top'
 		);
 	}
@@ -45,9 +47,12 @@ abstract class Org_Object {
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, [
-			self::QV_BASE,
-			self::QV_ORG_LP,
-		] );
+		return array_merge(
+			$vars,
+			array(
+				self::QV_BASE,
+				self::QV_ORG_LP,
+			)
+		);
 	}
 }

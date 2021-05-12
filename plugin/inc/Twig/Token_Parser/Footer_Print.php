@@ -17,7 +17,7 @@ class Footer_Print extends Twig\TokenParser\AbstractTokenParser {
 		$line_no = $token->getLine();
 
 		$this->parser->getStream()->expect( Twig\Token::BLOCK_END_TYPE );
-		$body = $this->parser->subparse( [ $this, 'decideEnd' ], true );
+		$body = $this->parser->subparse( array( $this, 'decideEnd' ), true );
 		$this->parser->getStream()->expect( Twig\Token::BLOCK_END_TYPE );
 
 		return new \TrevorWP\Twig\Node\Footer_Print( $body, $line_no, $this->getTag() );

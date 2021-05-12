@@ -17,72 +17,72 @@ class Hooks {
 	 *
 	 * @var string[]
 	 */
-	static public $admin_footer_buffer = [];
+	static public $admin_footer_buffer = array();
 
 	/**
 	 * Print buffer for wp_footer hook.
 	 *
 	 * @var array
 	 */
-	static public $frontend_footer_buffer = [];
+	static public $frontend_footer_buffer = array();
 
 	/**
 	 * Print buffer for admin_notices hook.
 	 *
 	 * @var array
 	 */
-	static public $admin_notices = [];
+	static public $admin_notices = array();
 
 	/**
 	 * List of admin page controllers.
 	 *
 	 * @var string[]
 	 */
-	static protected $_admin_page_controllers = [
-			Admin\Classy::class,
-			Admin\Google::class
-	];
+	static protected $_admin_page_controllers = array(
+		Admin\Classy::class,
+		Admin\Google::class,
+	);
 
 	/**
 	 * Registers all hooks
 	 */
 	public static function register_all() {
 		# Init
-		add_action( 'init', [ self::class, 'init' ] );
+		add_action( 'init', array( self::class, 'init' ) );
 
 		# Print footer
-		add_action( 'wp_footer', [ self::class, 'wp_footer' ] );
+		add_action( 'wp_footer', array( self::class, 'wp_footer' ) );
 
 		# Register & Enqueue Scripts
-		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], PHP_INT_MAX >> 2, 0 );
-		add_action( 'wp_enqueue_scripts', [ StaticFiles::class, 'register_frontend' ], 10, 0 );
+		add_action( 'wp_enqueue_scripts', array( self::class, 'wp_enqueue_scripts' ), PHP_INT_MAX >> 2, 0 );
+		add_action( 'wp_enqueue_scripts', array( StaticFiles::class, 'register_frontend' ), 10, 0 );
 
 		# Prints GA Post Events Tracker
-		add_action( 'wp_footer', [ self::class, 'print_post_event_tracker' ], PHP_INT_MAX, 0 );
+		add_action( 'wp_footer', array( self::class, 'print_post_event_tracker' ), PHP_INT_MAX, 0 );
 
 		# Google OAuth Return
-		add_action( 'wp_ajax_trevor-g-return', [ Google_API::class, 'handle_return_page' ], 10, 0 );
+		add_action( 'wp_ajax_trevor-g-return', array( Google_API::class, 'handle_return_page' ), 10, 0 );
 
 		# Recurring Job Hooks
-		add_action( 'init', [ Jobs::class, 'register_hooks' ], 10, 0 );
+		add_action( 'init', array( Jobs::class, 'register_hooks' ), 10, 0 );
 
 		if ( is_admin() ) {
 			# Scripts
-			add_action( 'admin_enqueue_scripts', [ self::class, 'admin_enqueue_scripts' ], 1, 1 );
-			add_action( 'admin_enqueue_scripts', [ StaticFiles::class, 'register_admin' ], 10, 1 );
+			add_action( 'admin_enqueue_scripts', array( self::class, 'admin_enqueue_scripts' ), 1, 1 );
+			add_action( 'admin_enqueue_scripts', array( StaticFiles::class, 'register_admin' ), 10, 1 );
 
 			# Header
-			add_action( 'admin_head', [ self::class, 'admin_head' ], 10, 0 );
+			add_action( 'admin_head', array( self::class, 'admin_head' ), 10, 0 );
 
 			# Footer
-			add_action( 'admin_footer', [ self::class, 'admin_footer' ], 10, 0 );
+			add_action( 'admin_footer', array( self::class, 'admin_footer' ), 10, 0 );
 
 			# Admin Notices
-			add_action( 'admin_notices', [ self::class, 'admin_notices' ] );
+			add_action( 'admin_notices', array( self::class, 'admin_notices' ) );
 
 			# Admin Pages
 			foreach ( self::$_admin_page_controllers as $admin_page_cls ) {
-				add_action( 'admin_menu', [ $admin_page_cls, 'register' ], 10, 0 );
+				add_action( 'admin_menu', array( $admin_page_cls, 'register' ), 10, 0 );
 			}
 
 			# Admin Post Columns
@@ -105,10 +105,10 @@ class Hooks {
 		}
 
 		# Custom Hooks
-		add_action( 'trevor_post_ranks_updated', [ self::class, 'trevor_post_ranks_updated' ], 10, 1 );
+		add_action( 'trevor_post_ranks_updated', array( self::class, 'trevor_post_ranks_updated' ), 10, 1 );
 
 		# Solr Index
-		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
+		add_filter( 'solr_build_document', array( self::class, 'solr_build_document' ), 10, 2 );
 
 		# Org
 		CPT\Org\Org_Object::construct();
@@ -144,42 +144,46 @@ class Hooks {
 		Meta\Post::register_all();
 
 		# Admin Blocks Data
-		add_filter( 'trevor_editor_blocks_data', [ self::class, 'trevor_editor_blocks_data' ], 10, 1 );
+		add_filter( 'trevor_editor_blocks_data', array( self::class, 'trevor_editor_blocks_data' ), 10, 1 );
 
 		# Post Save for Blocks
-		add_action( 'save_post', [ self::class, 'save_post_blocks' ], PHP_INT_MAX, 2 );
+		add_action( 'save_post', array( self::class, 'save_post_blocks' ), PHP_INT_MAX, 2 );
 
 		# Wrap Singular Post Blocks
-		add_filter( 'the_content', [ self::class, 'the_content' ], 8, 1 );
+		add_filter( 'the_content', array( self::class, 'the_content' ), 8, 1 );
 
 		# Editor Blocks
-		add_filter( 'block_categories', [ self::class, 'block_categories' ], 10, 2 );
-		add_action( 'init', [ Block\Base::class, 'register_all' ] );
+		add_filter( 'block_categories', array( self::class, 'block_categories' ), 10, 2 );
+		add_action( 'init', array( Block\Base::class, 'register_all' ) );
 
 		# Cron
-		add_filter( 'cron_schedules', [ self::class, 'cron_schedules' ], 10, 1 );
+		add_filter( 'cron_schedules', array( self::class, 'cron_schedules' ), 10, 1 );
 
 		# TODO: Remove search demo hooks
-		add_action( 'wp_ajax_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_autocomplete-test', [ self::class, 'autocomplete_test' ], 10, 0 );
-		add_action( 'wp_ajax_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_highlight-search-test', [ self::class, 'highlight_search' ], 10, 0 );
-		add_action( 'wp_ajax_partner-name-autocomplete', [ self::class, 'partner_name_autocomplete' ], 10, 0 );
-		add_action( 'wp_ajax_nopriv_partner-name-autocomplete', [ self::class, 'partner_name_autocomplete' ], 10, 0 );
+		add_action( 'wp_ajax_autocomplete-test', array( self::class, 'autocomplete_test' ), 10, 0 );
+		add_action( 'wp_ajax_nopriv_autocomplete-test', array( self::class, 'autocomplete_test' ), 10, 0 );
+		add_action( 'wp_ajax_highlight-search-test', array( self::class, 'highlight_search' ), 10, 0 );
+		add_action( 'wp_ajax_nopriv_highlight-search-test', array( self::class, 'highlight_search' ), 10, 0 );
+		add_action( 'wp_ajax_partner-name-autocomplete', array( self::class, 'partner_name_autocomplete' ), 10, 0 );
+		add_action( 'wp_ajax_nopriv_partner-name-autocomplete', array( self::class, 'partner_name_autocomplete' ), 10, 0 );
 	}
 
 	public static function partner_name_autocomplete(): void {
 		$term = (string) @$_GET['term'];
 		global $wpdb;
 		$partner_post_type   = CPT\Donate\Prod_Partner::POST_TYPE;
-		$prepared_statements = $wpdb->prepare( "SELECT ID, post_title FROM {$wpdb->posts}
+		$prepared_statements = $wpdb->prepare(
+			"SELECT ID, post_title FROM {$wpdb->posts}
 		WHERE post_type = %s
 		AND post_status = 'publish'
-		AND post_title LIKE %s", $partner_post_type, $wpdb->esc_like( $term ) . '%' );
+		AND post_title LIKE %s",
+			$partner_post_type,
+			$wpdb->esc_like( $term ) . '%'
+		);
 		$results             = $wpdb->get_results( $prepared_statements, ARRAY_A );
 
 		// echo JSON to page  and exit.
-		$response = $_GET["callback"] . "(" . json_encode( $results ) . ")";
+		$response = $_GET['callback'] . '(' . json_encode( $results ) . ')';
 		echo $response;
 		exit;
 	}
@@ -188,26 +192,28 @@ class Hooks {
 		$term = (string) @$_GET['term'];
 
 		$term_parts = explode( ' ', $term );
-		$term_parts = array_map( function ( $term_part ) {
-			return addslashes( rtrim( $term_part, '~' ) ) . '~';
-		}, $term_parts );
+		$term_parts = array_map(
+			function ( $term_part ) {
+				return addslashes( rtrim( $term_part, '~' ) ) . '~';
+			},
+			$term_parts
+		);
 
 		$term = implode( ' ', $term_parts );
-
 
 		$client = \SolrPower_Api::get_instance()->get_solr();
 
 		// get a select query instance
 		$query = $client->createSelect();
 		$query->setQuery( $term );
-		$query->setFields( [ 'ID', 'post_title' ] );
+		$query->setFields( array( 'ID', 'post_title' ) );
 
-		$aa = "post_type:(" . implode( " OR ", CPT\RC\RC_Object::$ALL_POST_TYPES ) . ")";
+		$aa = 'post_type:(' . implode( ' OR ', CPT\RC\RC_Object::$ALL_POST_TYPES ) . ')';
 		$query->createFilterQuery( 'post_types' )->setQuery( $aa );
 
 		// get highlighting component and apply settings
 		$hl = $query->getHighlighting();
-		$hl->setFields( [ 'post_title_t', 'post_content' ] );
+		$hl->setFields( array( 'post_title_t', 'post_content' ) );
 		$hl->setSimplePrefix( '<b>' );
 		$hl->setSimplePostfix( '</b>' );
 
@@ -215,7 +221,7 @@ class Hooks {
 		$resultset    = $client->select( $query );
 		$highlighting = $resultset->getHighlighting();
 
-		$results = [];
+		$results = array();
 		/** @var \Solarium\QueryType\Select\Result\Document $document */
 		foreach ( $resultset->getDocuments() as $document ) {
 			$fields = $document->getFields();
@@ -228,20 +234,20 @@ class Hooks {
 				$highlight = $highlight->getFields();
 				$highlight = array_map( 'reset', $highlight );
 			} else {
-				$highlight = [];
+				$highlight = array();
 			}
 
-			$results[] = [
-					'url'     => get_permalink( $id ),
-					'title'   => empty( $highlight['post_title_t'] ) ? $fields['post_title'] : $highlight['post_title_t'],
-					'content' => $highlight['post_content'] ?? '',
-			];
+			$results[] = array(
+				'url'     => get_permalink( $id ),
+				'title'   => empty( $highlight['post_title_t'] ) ? $fields['post_title'] : $highlight['post_title_t'],
+				'content' => $highlight['post_content'] ?? '',
+			);
 		}
 
-		$response = [
-				'error'   => false,
-				'results' => $results
-		];
+		$response = array(
+			'error'   => false,
+			'results' => $results,
+		);
 
 		wp_send_json( $response );
 	}
@@ -272,29 +278,29 @@ class Hooks {
 		$resultset        = $client->select( $query );
 		$spellcheckResult = $resultset->getSpellcheck();
 
-		$response = [
-				'correctlySpelled' => $spellcheckResult->getCorrectlySpelled(),
-//				'suggestions'      => [],
-				'collations'       => []
-		];
+		$response = array(
+			'correctlySpelled'               => $spellcheckResult->getCorrectlySpelled(),
+			//              'suggestions'      => [],
+								'collations' => array(),
+		);
 
-//		foreach ( $spellcheckResult as $suggestion ) {
-//			$response['suggestions'][] = [
-//					'numFound'          => $suggestion->getNumFound(),
-//					'startOffset'       => $suggestion->getStartOffset(),
-//					'endOffset'         => $suggestion->getEndOffset(),
-//					'originalFrequency' => $suggestion->getOriginalFrequency(),
-//					'words'             => $suggestion->getWords()
-//			];
-//		}
+		//      foreach ( $spellcheckResult as $suggestion ) {
+		//          $response['suggestions'][] = [
+		//                  'numFound'          => $suggestion->getNumFound(),
+		//                  'startOffset'       => $suggestion->getStartOffset(),
+		//                  'endOffset'         => $suggestion->getEndOffset(),
+		//                  'originalFrequency' => $suggestion->getOriginalFrequency(),
+		//                  'words'             => $suggestion->getWords()
+		//          ];
+		//      }
 
 		$collations = $spellcheckResult->getCollations();
 		foreach ( $collations as $collation ) {
-			$response['collations'][] = [
-					'query'       => $collation->getQuery(),
-					'hits'        => $collation->getHits(),
-					'corrections' => $collation->getCorrections()
-			];
+			$response['collations'][] = array(
+				'query'       => $collation->getQuery(),
+				'hits'        => $collation->getHits(),
+				'corrections' => $collation->getCorrections(),
+			);
 		}
 
 		wp_send_json( $response );
@@ -309,16 +315,17 @@ class Hooks {
 		# Disable solr on rest api queries
 		foreach (
 				array_merge(
-						CPT\RC\RC_Object::$ALL_POST_TYPES,
-						CPT\Get_Involved\Get_Involved_Object::$ALL_POST_TYPES,
-						CPT\Donate\Donate_Object::$ALL_POST_TYPES,
-						[ CPT\Team::POST_TYPE ],
-						[
-								'post',
-								'page'
-						] ) as $post_type
+					CPT\RC\RC_Object::$ALL_POST_TYPES,
+					CPT\Get_Involved\Get_Involved_Object::$ALL_POST_TYPES,
+					CPT\Donate\Donate_Object::$ALL_POST_TYPES,
+					array( CPT\Team::POST_TYPE ),
+					array(
+						'post',
+						'page',
+					)
+				) as $post_type
 		) {
-			add_filter( "rest_{$post_type}_query", [ self::class, 'rest_post_type_query' ], 1, 1 );
+			add_filter( "rest_{$post_type}_query", array( self::class, 'rest_post_type_query' ), 1, 1 );
 		}
 	}
 
@@ -330,8 +337,8 @@ class Hooks {
 	public static function admin_notices(): void {
 		foreach ( self::$admin_notices as $idx => $notice ) {
 			?>
-			<div class="notice <?= esc_attr( $notice['class'] ) ?> is-dismissible">
-				<p><?= $notice['msg'] ?></p>
+			<div class="notice <?php echo esc_attr( $notice['class'] ); ?> is-dismissible">
+				<p><?php echo $notice['msg']; ?></p>
 			</div>
 			<?php
 			unset( self::$admin_notices[ $idx ] );
@@ -369,9 +376,10 @@ class Hooks {
 	public static function admin_head(): void {
 		$screen = get_current_screen();
 
-		if ( $screen->is_block_editor && in_array( $screen->post_type, array_merge( Tools::get_public_post_types(), [ CPT\Team::POST_TYPE ] ) ) ) { ?>
+		if ( $screen->is_block_editor && in_array( $screen->post_type, array_merge( Tools::get_public_post_types(), array( CPT\Team::POST_TYPE ) ) ) ) {
+			?>
 			<script>
-				Object.assign(window.TrevorWP.screen, {editorBlocksData: <?=json_encode( apply_filters( 'trevor_editor_blocks_data', [] ) )?>})
+				Object.assign(window.TrevorWP.screen, {editorBlocksData: <?php echo json_encode( apply_filters( 'trevor_editor_blocks_data', array() ) ); ?>})
 			</script>
 			<?php
 		}
@@ -388,10 +396,11 @@ class Hooks {
 			echo $line;
 		}
 
-		foreach ( self::$admin_notices as $idx => $notice ) { ?>
+		foreach ( self::$admin_notices as $idx => $notice ) {
+			?>
 			<script>
 				jQuery(function () {
-					TrevorWP.utils.notices.add("<?=esc_js( $notice['msg'] );?>", {class: "<?=esc_js( $notice['class'] );?>"})
+					TrevorWP.utils.notices.add("<?php echo esc_js( $notice['msg'] ); ?>", {class: "<?php echo esc_js( $notice['class'] ); ?>"})
 				});
 			</script>
 			<?php
@@ -406,36 +415,39 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/
 	 */
 	public static function admin_enqueue_scripts( string $hook_suffix ): void {
-		$post_types = array_fill_keys( array_merge( [ CPT\Post::POST_TYPE ], CPT\RC\RC_Object::$ALL_POST_TYPES ), [] );
+		$post_types = array_fill_keys( array_merge( array( CPT\Post::POST_TYPE ), CPT\RC\RC_Object::$ALL_POST_TYPES ), array() );
 		foreach ( $post_types as $post_type => &$pt_data ) {
 			$obj              = get_post_type_object( $post_type );
 			$pt_data['label'] = $obj->label;
 		}
 
-		$taxonomies = array_fill_keys( [
+		$taxonomies = array_fill_keys(
+			array(
 				'post_tag',
 				'category',
 				CPT\RC\RC_Object::TAXONOMY_CATEGORY,
-				CPT\RC\RC_Object::TAXONOMY_TAG
-		], [] );
+				CPT\RC\RC_Object::TAXONOMY_TAG,
+			),
+			array()
+		);
 		foreach ( $taxonomies as $taxonomy => &$tax_data ) {
 			$obj               = get_taxonomy( $taxonomy );
 			$tax_data['label'] = $obj->label;
 		}
 
-		$js_ns = [
-				'screen'    => [
-						'hook_suffix' => esc_js( $hook_suffix )
-				],
-				'utils'     => new \stdClass(),
-				'adminApps' => new \stdClass(),
-				'common'    => [
-						'post_types' => $post_types,
-						'taxonomies' => $taxonomies
-				],
-		];
+		$js_ns = array(
+			'screen'    => array(
+				'hook_suffix' => esc_js( $hook_suffix ),
+			),
+			'utils'     => new \stdClass(),
+			'adminApps' => new \stdClass(),
+			'common'    => array(
+				'post_types' => $post_types,
+				'taxonomies' => $taxonomies,
+			),
+		);
 		?>
-		<script>window.TrevorWP = <?= json_encode( $js_ns )?>;</script>
+		<script>window.TrevorWP = <?php echo json_encode( $js_ns ); ?>;</script>
 		<?php
 	}
 
@@ -451,19 +463,19 @@ class Hooks {
 
 		$env  = Tools::get_env();
 		$wait = absint( get_option( Options\Google::KEY_GA_PAGE_VIEW_TO, Options\Google::DEFAULTS[ Options\Google::KEY_GA_PAGE_VIEW_TO ] ) ) * 1000;
-		$args = [
-				'event'          => 'post_event',
-				'eventCategory'  => "view_post_{$env}",
-				'eventAction'    => $post->post_type,
-				'eventLabel'     => implode( '#', [ $post->ID, $post->post_name ] ),
-				'nonInteraction' => true,
-		];
+		$args = array(
+			'event'          => 'post_event',
+			'eventCategory'  => "view_post_{$env}",
+			'eventAction'    => $post->post_type,
+			'eventLabel'     => implode( '#', array( $post->ID, $post->post_name ) ),
+			'nonInteraction' => true,
+		);
 		?>
 		<script>
 			jQuery(function () {
 				setTimeout(function () {
-					window.dataLayer && window.dataLayer.push(<?= json_encode( $args )?>);
-				}, <?=$wait?>);
+					window.dataLayer && window.dataLayer.push(<?php echo json_encode( $args ); ?>);
+				}, <?php echo $wait; ?>);
 			});
 		</script>
 		<?php
@@ -475,18 +487,21 @@ class Hooks {
 	 * @see Ranks\Post::update_ranks()
 	 */
 	public static function trevor_post_ranks_updated( string $post_type ): void {
-		$rules = [ 'post' => [ 'post_tag', 'category' ] ]
-				 + array_fill_keys( CPT\RC\RC_Object::$PUBLIC_POST_TYPES, [
+		$rules = array( 'post' => array( 'post_tag', 'category' ) )
+				+ array_fill_keys(
+					CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
+					array(
 						CPT\RC\RC_Object::TAXONOMY_CATEGORY,
-						CPT\RC\RC_Object::TAXONOMY_TAG
-				] );
+						CPT\RC\RC_Object::TAXONOMY_TAG,
+					)
+				);
 
 		if ( ! array_key_exists( $post_type, $rules ) ) {
 			return;
 		}
 
 		foreach ( $rules[ $post_type ] as $idx => $tax ) {
-			wp_schedule_single_event( time() + ( $idx * 10 ), Jobs::NAME_UPDATE_TAXONOMY_RANKS, [ $tax, $post_type ] );
+			wp_schedule_single_event( time() + ( $idx * 10 ), Jobs::NAME_UPDATE_TAXONOMY_RANKS, array( $tax, $post_type ) );
 		}
 	}
 
@@ -547,26 +562,29 @@ class Hooks {
 		$blocks = parse_blocks( $post->post_content );
 
 		/** @var Block\Post_Save_Handler[] $map */
-		$map = [
-				Block\Core_Heading::BLOCK_NAME => Block\Core_Heading::class,
-		];
+		$map = array(
+			Block\Core_Heading::BLOCK_NAME => Block\Core_Heading::class,
+		);
 
-		$states = array_fill_keys( array_keys( $map ), [] );
+		$states = array_fill_keys( array_keys( $map ), array() );
 
 		foreach ( $blocks as $block ) {
 			if ( ! array_key_exists( $block_name = $block['blockName'], $map ) ) {
 				continue;
 			}
 
-			call_user_func_array( [ $map[ $block_name ], 'save_post' ], [
+			call_user_func_array(
+				array( $map[ $block_name ], 'save_post' ),
+				array(
 					$block,
 					$post,
-					&$states[ $block_name ]
-			] );
+					&$states[ $block_name ],
+				)
+			);
 		}
 
 		foreach ( $map as $block_name => $cls ) {
-			call_user_func_array( [ $cls, 'save_post_finalize' ], [ $post, &$states[ $block_name ] ] );
+			call_user_func_array( array( $cls, 'save_post_finalize' ), array( $post, &$states[ $block_name ] ) );
 		}
 	}
 
@@ -607,11 +625,14 @@ class Hooks {
 	 */
 	public static function block_categories( array $categories, WP_Post $post ): array {
 		if ( in_array( $post->post_type, Tools::get_public_post_types() ) ) {
-			array_unshift( $categories, [
+			array_unshift(
+				$categories,
+				array(
 					'slug'  => 'trevor',
 					'title' => 'Trevor Custom',
 					'icon'  => null,
-			] );
+				)
+			);
 		}
 
 		return $categories;
@@ -628,17 +649,17 @@ class Hooks {
 	 */
 	public static function cron_schedules( array $new_schedules ): array {
 		if ( ! isset( $new_schedules['30min'] ) ) {
-			$new_schedules['30min'] = [
-					'interval' => 30 * 60,
-					'display'  => __( 'Once every 30 minutes' )
-			];
+			$new_schedules['30min'] = array(
+				'interval' => 30 * 60,
+				'display'  => __( 'Once every 30 minutes' ),
+			);
 		}
 
 		if ( ! isset( $new_schedules['10min'] ) ) {
-			$new_schedules['10min'] = [
-					'interval' => 10 * 60,
-					'display'  => __( 'Once every 10 minutes' )
-			];
+			$new_schedules['10min'] = array(
+				'interval' => 10 * 60,
+				'display'  => __( 'Once every 10 minutes' ),
+			);
 		}
 
 		return $new_schedules;

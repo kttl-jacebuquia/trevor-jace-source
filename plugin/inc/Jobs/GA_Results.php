@@ -9,14 +9,14 @@ use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
 
 class GA_Results {
-	const POST_STATS_REPORT_ITEM_COUNT = 1;
+	const POST_STATS_REPORT_ITEM_COUNT        = 1;
 	const POST_STATS_REPORT_NEXT_PAGE_COOLING = 20; // seconds; API is restricted to a maximum of 10 requests per second per user.
-	const POST_TYPES = [
+	const POST_TYPES                          = array(
 		CPT\Post::POST_TYPE,
 		CPT\RC\Post::POST_TYPE,
 		CPT\RC\Article::POST_TYPE,
-		CPT\RC\Guide::POST_TYPE
-	];
+		CPT\RC\Guide::POST_TYPE,
+	);
 
 	/**
 	 * @return false
@@ -62,27 +62,27 @@ class GA_Results {
 
 		// Create the DateRange object.
 		$dateRange7 = new \Google_Service_AnalyticsReporting_DateRange();
-		$dateRange7->setStartDate( "7daysAgo" );
-		$dateRange7->setEndDate( "today" );
+		$dateRange7->setStartDate( '7daysAgo' );
+		$dateRange7->setEndDate( 'today' );
 
 		$dateRange30 = new \Google_Service_AnalyticsReporting_DateRange();
-		$dateRange30->setStartDate( "36daysAgo" );
-		$dateRange30->setEndDate( "8daysAgo" );
+		$dateRange30->setStartDate( '36daysAgo' );
+		$dateRange30->setEndDate( '8daysAgo' );
 
 		// Create the Metrics object.
 		$sessions = new \Google_Service_AnalyticsReporting_Metric();
-		$sessions->setExpression( "ga:uniqueEvents" );
-		$sessions->setAlias( "sessions" );
+		$sessions->setExpression( 'ga:uniqueEvents' );
+		$sessions->setAlias( 'sessions' );
 
 		//Create the Dimensions object.
 		$browser = new \Google_Service_AnalyticsReporting_Dimension();
-		$browser->setName( "ga:eventLabel" );
+		$browser->setName( 'ga:eventLabel' );
 
 		// Ordering
 		$ordering = new \Google_Service_AnalyticsReporting_OrderBy();
-		$ordering->setFieldName( "ga:uniqueEvents" );
-		$ordering->setOrderType( "VALUE" );
-		$ordering->setSortOrder( "DESCENDING" );
+		$ordering->setFieldName( 'ga:uniqueEvents' );
+		$ordering->setOrderType( 'VALUE' );
+		$ordering->setSortOrder( 'DESCENDING' );
 
 		# Filters
 		$filters = new \Google_Service_AnalyticsReporting_DimensionFilterClause();
@@ -106,16 +106,16 @@ class GA_Results {
 		$filter_not_set->setOperator( 'REGEXP' );
 		$filter_not_set->setExpressions( '\d+#.*' );
 
-		$filters->setFilters( [ $filter_cat, $filter_not_set ] );
+		$filters->setFilters( array( $filter_cat, $filter_not_set ) );
 
 		// Create the ReportRequest object.
 		$request = new \Google_Service_AnalyticsReporting_ReportRequest();
 		$request->setViewId( $view_id );
-		$request->setDateRanges( [ $dateRange7, $dateRange30 ] );
+		$request->setDateRanges( array( $dateRange7, $dateRange30 ) );
 		$request->setDimensions( array( $browser ) );
 		$request->setMetrics( array( $sessions ) );
 		$request->setOrderBys( $ordering );
-		$request->setDimensionFilterClauses( [ $filters ] );
+		$request->setDimensionFilterClauses( array( $filters ) );
 		$request->pageSize  = self::POST_STATS_REPORT_ITEM_COUNT;
 		$request->pageToken = $page_token;
 
@@ -133,7 +133,7 @@ class GA_Results {
 		}
 
 		if ( count( $reports ) != 1 || empty( $reports[0] ) ) {
-			throw new Internal( 'GA post views reports should have only one report.', [ 'count' => count( $reports ) ] );
+			throw new Internal( 'GA post views reports should have only one report.', array( 'count' => count( $reports ) ) );
 		}
 
 		/** @var  \Google_Service_AnalyticsReporting_Report $report */
@@ -165,7 +165,7 @@ class GA_Results {
 			# Get ID
 			$id = absint( $parts[0] );
 			if ( $id == 0 ) {
-				Log::notice( 'Post ID cannot be 0.', [ 'raw' => $id__post_name ] );
+				Log::notice( 'Post ID cannot be 0.', array( 'raw' => $id__post_name ) );
 				continue;
 			}
 
@@ -184,7 +184,7 @@ class GA_Results {
 			# Compare slug
 			$post_name = implode( '#', array_slice( $parts, 1 ) );
 			if ( $post->post_name != $post_name ) {
-				Log::notice( "GA event label matched with ID but slugs are different.", compact( 'post', 'id__post_name' ) );
+				Log::notice( 'GA event label matched with ID but slugs are different.', compact( 'post', 'id__post_name' ) );
 			}
 
 			/** @var \Google_Service_AnalyticsReporting_DateRangeValues[] $metrics */
@@ -202,7 +202,7 @@ class GA_Results {
 			wp_schedule_single_event(
 				time() + self::POST_STATS_REPORT_NEXT_PAGE_COOLING,
 				Jobs::NAME_PROCESS_POST_STATS_PAGE,
-				[ $page_token ]
+				array( $page_token )
 			);
 		} else {
 			// Report finished, schedule the job for post rank calculation
@@ -210,7 +210,7 @@ class GA_Results {
 				wp_schedule_single_event(
 					time(),
 					Jobs::NAME_UPDATE_POST_RANKS,
-					[ $post_type ]
+					array( $post_type )
 				);
 			}
 		}

@@ -11,41 +11,40 @@ trait Meta_Box_File {
 	 * @param array $args
 	 * @param string $type
 	 */
-	public static function render_meta_box( \WP_Post $post, array $args = [], string $type = 'media' ): void {
+	public static function render_meta_box( \WP_Post $post, array $args = array(), string $type = 'media' ): void {
 		global $post;
-
 
 		$meta_box_id = $args['id'];
 		$meta_key    = Meta\Post::KEY_FILE;
 
 		list( $field_name ) = $args['args'];
-		$upload_link = esc_url( get_upload_iframe_src( $type, $post->ID ) );
-		$your_img_id = get_post_meta( $post->ID, $meta_key, true );
-		$url         = wp_attachment_is_image( $your_img_id ) ? wp_get_attachment_image( $your_img_id ) : esc_html( wp_get_attachment_url( $your_img_id ) );
+		$upload_link        = esc_url( get_upload_iframe_src( $type, $post->ID ) );
+		$your_img_id        = get_post_meta( $post->ID, $meta_key, true );
+		$url                = wp_attachment_is_image( $your_img_id ) ? wp_get_attachment_image( $your_img_id ) : esc_html( wp_get_attachment_url( $your_img_id ) );
 
 		$has_file = ! empty( $url );
 		?>
 
 		<div class="custom-img-container">
 			<?php if ( $has_file ) : ?>
-				<a href="<?= esc_url( $url ) ?>" title="Download file"><?= $url ?></a>
+				<a href="<?php echo esc_url( $url ); ?>" title="Download file"><?php echo $url; ?></a>
 			<?php endif; ?>
 		</div>
 
 		<p class="hide-if-no-js">
-			<a class="upload-custom-img <?= $has_file ? 'hidden' : '' ?>"
-			   href="<?= $upload_link ?>">Set file</a>
-			<a class="delete-custom-img <?= $has_file ? '' : 'hidden' ?>"
+			<a class="upload-custom-img <?php echo $has_file ? 'hidden' : ''; ?>"
+			   href="<?php echo $upload_link; ?>">Set file</a>
+			<a class="delete-custom-img <?php echo $has_file ? '' : 'hidden'; ?>"
 			   href="#">Remove file</a>
 		</p>
 
-		<input class="custom-img-id" name="<?= $field_name ?>" type="hidden"
+		<input class="custom-img-id" name="<?php echo $field_name; ?>" type="hidden"
 			   value="<?php echo esc_attr( $your_img_id ); ?>"/>
 
 		<script>
 			jQuery(function ($) {
 				var frame,
-						metaBox = $('#<?= esc_js( $meta_box_id ) ?>.postbox'),
+						metaBox = $('#<?php echo esc_js( $meta_box_id ); ?>.postbox'),
 						addImgLink = metaBox.find('.upload-custom-img'),
 						delImgLink = metaBox.find('.delete-custom-img'),
 						imgContainer = metaBox.find('.custom-img-container'),

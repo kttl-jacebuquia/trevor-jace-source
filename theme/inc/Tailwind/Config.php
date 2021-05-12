@@ -7,9 +7,9 @@ class Config {
 	 */
 	protected static $data;
 
-	const DEFAULT_OPTION = [
+	const DEFAULT_OPTION = array(
 		'' => 'Default',
-	];
+	);
 
 	/**
 	 * @return array
@@ -30,10 +30,10 @@ class Config {
 	 *
 	 * @return array
 	 */
-	public static function option_walker( array $root, string $prefix = '', int $walk = 2, array &$collection = [] ): array {
+	public static function option_walker( array $root, string $prefix = '', int $walk = 2, array &$collection = array() ): array {
 		foreach ( $root as $key => $val ) {
 			if ( is_array( $val ) && $walk > 0 ) {
-				static::option_walker( $val, $prefix . ( ( $prefix && $key ) ? "-" : '' ) . $key, $walk - 1, $collection );
+				static::option_walker( $val, $prefix . ( ( $prefix && $key ) ? '-' : '' ) . $key, $walk - 1, $collection );
 				continue;
 			}
 
@@ -41,7 +41,7 @@ class Config {
 				$key = '';
 			}
 
-			$key = $prefix . ( ( $prefix && $key ) ? "-" : '' ) . $key;
+			$key = $prefix . ( ( $prefix && $key ) ? '-' : '' ) . $key;
 
 			$collection[ $key ] = ( $key ? "{$key}: " : '' ) . ( is_scalar( $val ) ? $val : json_encode( $val ) );
 		}
@@ -56,10 +56,10 @@ class Config {
 		$theme = static::get_config()['theme'];
 		$m     = static::option_walker( $theme['margin'] );
 
-		$options = [];
+		$options = array();
 
-		foreach ( [ 'm', 'p' ] as $val ) {
-			foreach ( [ '', 'x', 'y', 't', 'b', 'l', 'r' ] as $iter ) {
+		foreach ( array( 'm', 'p' ) as $val ) {
+			foreach ( array( '', 'x', 'y', 't', 'b', 'l', 'r' ) as $iter ) {
 				$options[ $val . $iter ] = $m;
 			}
 		}
@@ -75,7 +75,7 @@ class Config {
 		$options['rounded']   = static::option_walker( $theme['borderRadius'] );
 		$options['min-w']     = static::option_walker( $theme['minWidth'] );
 		$options['max-w']     = static::option_walker( $theme['maxWidth'] );
-		$options['container'] = static::option_walker( [ '' => 'Container' ] );
+		$options['container'] = static::option_walker( array( '' => 'Container' ) );
 		$options['border']    = array_merge( static::option_walker( $theme['borderColor'] ), static::option_walker( $theme['borderWidth'] ) );
 
 		ksort( $options );
@@ -89,7 +89,7 @@ class Config {
 	public static function collect_screens(): array {
 		return array_intersect_key(
 			static::DEFAULT_OPTION + static::option_walker( static::get_config()['theme']['screens'], '', 0 ),
-			array_flip( [ '', 'md', 'xl' ] )
+			array_flip( array( '', 'md', 'xl' ) )
 		);
 	}
 }

@@ -599,17 +599,17 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			$q     = new \WP_Query( $q_args );
 			$posts = $q->posts;
 		} elseif ( static::SOURCE_CUSTOM === $source ) {
-			$posts = [];
+			$posts = array();
 
 			foreach ( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
-				$posts[] = [
+				$posts[] = array(
 					'title'    => $post['custom_item_title'],
 					'desc'     => $post['custom_item_desc'],
 					'cta_txt'  => $post['custom_item_cta']['label'],
 					'cta_ur'   => $post['custom_item_cta']['link'],
-					'cta_cls'  => [ $post['custom_item_cta']['button_attr']['class'] ],
-					'tile_cls' => [ $post['item_attrs_class'] ],
-				];
+					'cta_cls'  => array( $post['custom_item_cta']['button_attr']['class'] ),
+					'tile_cls' => array( $post['item_attrs_class'] ),
+				);
 			};
 		} else {
 			$posts = $val->get( static::FIELD_POST_ITEMS );

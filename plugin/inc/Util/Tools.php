@@ -8,8 +8,8 @@ use TrevorWP\Exception;
 use TrevorWP\Main;
 
 class Tools {
-	const MYSQL_DATE_FORMAT = 'Y-m-d';
-	const MYSQL_TIME_FORMAT = 'H:i:s';
+	const MYSQL_DATE_FORMAT      = 'Y-m-d';
+	const MYSQL_TIME_FORMAT      = 'H:i:s';
 	const MYSQL_DATE_TIME_FORMAT = self::MYSQL_DATE_FORMAT . ' ' . self::MYSQL_TIME_FORMAT;
 
 	/*
@@ -31,10 +31,10 @@ class Tools {
 	 * @param string $class Message class
 	 */
 	static public function add_msg( $msg, $class ) {
-		Hooks::$admin_notices[] = [
+		Hooks::$admin_notices[] = array(
 			'class' => $class,
 			'msg'   => $msg,
-		];
+		);
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Tools {
 	 *
 	 * @return string Nonce token
 	 */
-	static public function create_nonce( $action, $args = [] ) {
+	static public function create_nonce( $action, $args = array() ) {
 		$extra_args = self::create_nonce_action( $args );
 
 		return wp_create_nonce( "{$action}_{$extra_args}" );
@@ -94,7 +94,7 @@ class Tools {
 	 *
 	 * @return string
 	 */
-	static public function create_nonce_action( $extra = [] ) {
+	static public function create_nonce_action( $extra = array() ) {
 		// Convert all values to string
 		$extra = array_map( 'strval', $extra );
 
@@ -120,7 +120,7 @@ class Tools {
 	 *                   0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
 	 * @throws Exception\Unauthorized
 	 */
-	static public function verify_nonce( $action, $nonce, array $args = [] ) {
+	static public function verify_nonce( $action, $nonce, array $args = array() ) {
 		$args       = (array) $args;
 		$extra_args = self::create_nonce_action( $args );
 		$nonce_key  = "{$action}_{$extra_args}";
@@ -185,7 +185,7 @@ class Tools {
 	 * @return bool Returns TRUE on success or FALSE on failure.
 	 */
 	static public function sort_by( array &$array, $column = 'order', $sort_flag = SORT_NUMERIC, $order = SORT_ASC ) {
-		$columns = [];
+		$columns = array();
 		if ( is_callable( $column ) ) {
 			foreach ( $array as $key => $row ) {
 				$columns[ $key ] = call_user_func( $column, $row );
@@ -220,23 +220,29 @@ class Tools {
 	 *
 	 * @return bool
 	 */
-	static public function send_email_with_template( $template, array $mail_args, array $context = [], $filter = null ) {
+	static public function send_email_with_template( $template, array $mail_args, array $context = array(), $filter = null ) {
 		if ( ! is_string( $template ) ) {
 			throw new Exception\Internal( '$template parameter must be file path of the file.' );
 		}
 
-		$mail_args = array_merge( [
-			'subject'     => '',
-			'headers'     => '',
-			'message'     => '',
-			'attachments' => [],
-		], $mail_args );
+		$mail_args = array_merge(
+			array(
+				'subject'     => '',
+				'headers'     => '',
+				'message'     => '',
+				'attachments' => array(),
+			),
+			$mail_args
+		);
 
 		if ( empty( $mail_args['to'] ) ) {
-			Log::error( 'Parameter $to is required to send an email.', [
-				'template' => $template,
-				'subject'  => $mail_args['subject'],
-			] );
+			Log::error(
+				'Parameter $to is required to send an email.',
+				array(
+					'template' => $template,
+					'subject'  => $mail_args['subject'],
+				)
+			);
 
 			return false;
 		}
@@ -249,47 +255,63 @@ class Tools {
 
 		# Resolve html template
 		try {
-			$html = $twig->resolveTemplate( [
-				$dirname . '/' . $basename . '.html.twig',
-				$dirname . '/' . $basename . '.html',
-			] );
+			$html = $twig->resolveTemplate(
+				array(
+					$dirname . '/' . $basename . '.html.twig',
+					$dirname . '/' . $basename . '.html',
+				)
+			);
 		} catch ( Twig\Error\LoaderError $e ) {
 			$html = false;
 		}
 
 		if ( $html ) {
 			# Render html message
-			$mail_args['message'] = $twig->render( $html, $context = array_merge( $context, [
-				'mail_args' => $mail_args,
-				'is_html'   => true,
-			] ) );
+			$mail_args['message'] = $twig->render(
+				$html,
+				$context          = array_merge(
+					$context,
+					array(
+						'mail_args' => $mail_args,
+						'is_html'   => true,
+					)
+				)
+			);
 		} else {
 			# Resolve txt template
 			try {
-				$txt = $twig->resolveTemplate( [
-					$dirname . '/' . $basename . '.txt.twig',
-					$dirname . '/' . $basename . '.txt',
-				] );
+				$txt = $twig->resolveTemplate(
+					array(
+						$dirname . '/' . $basename . '.txt.twig',
+						$dirname . '/' . $basename . '.txt',
+					)
+				);
 			} catch ( Twig\Error\LoaderError $e ) {
 				$txt = false;
 			}
 
 			if ( $txt ) {
 				# Render txt message
-				$mail_args['message'] = $twig->render( $txt, $context = array_merge( $context, [
-					'mail_args' => $mail_args,
-					'is_txt'    => true,
-				] ) );
+				$mail_args['message'] = $twig->render(
+					$txt,
+					$context          = array_merge(
+						$context,
+						array(
+							'mail_args' => $mail_args,
+							'is_txt'    => true,
+						)
+					)
+				);
 			}
 		}
 
-		$mail_args = [
+		$mail_args = array(
 			$mail_args['to'],
 			$mail_args['subject'],
 			$mail_args['message'],
 			$mail_args['headers'],
 			$mail_args['attachments'],
-		];
+		);
 
 		if ( $filter ) {
 			$mail_args = apply_filters( "trevor_email_{$filter}", $mail_args, $context, $template );
@@ -300,7 +322,7 @@ class Tools {
 		} elseif ( $txt ) {
 			return call_user_func_array( 'wp_mail', $mail_args );
 		} else {
-			Log::error( "Could not find any email email templates for : " . $template );
+			Log::error( 'Could not find any email email templates for : ' . $template );
 
 			return false;
 		}
@@ -317,7 +339,7 @@ class Tools {
 	 */
 	static public function send_html_email( array $args ) {
 		$returnHtmlMime = function () {
-			return "text/html";
+			return 'text/html';
 		};
 
 		add_filter( 'wp_mail_content_type', $returnHtmlMime );
@@ -339,7 +361,7 @@ class Tools {
 			return;
 		}
 
-		$context = [ 'trace' => $e->getTrace() ];
+		$context = array( 'trace' => $e->getTrace() );
 
 		if ( $e instanceof Exception\Internal ) {
 			if ( ! empty( $e->detail_message ) ) {
@@ -361,12 +383,12 @@ class Tools {
 	 *
 	 * @return string Formatted html attributes.
 	 */
-	static public function flat_attr( $attr = [], $skip_empty = false ) {
+	static public function flat_attr( $attr = array(), $skip_empty = false ) {
 		if ( empty( $attr ) ) {
 			return '';
 		}
 
-		$out = [];
+		$out = array();
 		foreach ( $attr as $attr_key => $attr_value ) {
 
 			if ( $skip_empty && empty( $attr_value ) ) {
@@ -421,8 +443,8 @@ class Tools {
 	 *
 	 * @return array
 	 */
-	static public function pluck( $array, $pluck_keys, $filters = [], $prevent_keys = false ) {
-		$out           = [];
+	static public function pluck( $array, $pluck_keys, $filters = array(), $prevent_keys = false ) {
+		$out           = array();
 		$array         = (array) $array;
 		$filters       = (array) $filters;
 		$is_single_key = ! is_array( $pluck_keys );
@@ -436,7 +458,7 @@ class Tools {
 					}
 				}
 			} else {
-				$val = [];
+				$val = array();
 				foreach ( $pluck_keys as $pluck_key ) {
 					$val[ $pluck_key ] = is_object( $_val ) ? @$_val->$pluck_key : @$_val[ $pluck_key ];
 				}
@@ -469,18 +491,21 @@ class Tools {
 	 * @return array
 	 */
 	static public function get_allowed_file_types( array $allowed_types ) {
-		$allowed_types = array_intersect( $allowed_types, [
-			'image',
-			'video',
-			'audio',
-			'archive',
-			'document',
-			'spreadsheet',
-			'interactive',
-			'text',
-		] );
+		$allowed_types = array_intersect(
+			$allowed_types,
+			array(
+				'image',
+				'video',
+				'audio',
+				'archive',
+				'document',
+				'spreadsheet',
+				'interactive',
+				'text',
+			)
+		);
 
-		$allowed_extensions = [];
+		$allowed_extensions = array();
 		$wp_ext_types       = wp_get_ext_types();
 		foreach ( $allowed_types as $type ) {
 			if ( array_key_exists( $type, $wp_ext_types ) ) {
@@ -490,7 +515,7 @@ class Tools {
 		$allowed_extensions = array_unique( $allowed_extensions );
 
 		$wp_mime_types = wp_get_mime_types();
-		$allowed_mime  = [];
+		$allowed_mime  = array();
 		foreach ( $wp_mime_types as $ext => $mime_type ) {
 			foreach ( explode( '|', $ext ) as $sub_ext ) {
 				if ( in_array( $sub_ext, $allowed_extensions ) ) {
@@ -501,10 +526,10 @@ class Tools {
 		}
 		$allowed_mime = array_unique( $allowed_mime );
 
-		return [
+		return array(
 			'ext'  => $allowed_extensions,
 			'mime' => array_values( $allowed_mime ),
-		];
+		);
 	}
 
 	/**
@@ -565,7 +590,7 @@ class Tools {
 	 * @return array[]|object[]
 	 */
 	static public function index_by( $arrays, $key ) {
-		$out = [];
+		$out = array();
 		foreach ( $arrays as $ao ) {
 			if ( is_object( $ao ) ) {
 				if ( isset( $ao->$key ) ) {
@@ -645,7 +670,7 @@ class Tools {
 	 */
 	static public function get_ip_address( $no_private = false ) {
 		foreach (
-			[
+			array(
 				'HTTP_CLIENT_IP',
 				'HTTP_X_FORWARDED_FOR',
 				'HTTP_X_FORWARDED',
@@ -653,7 +678,7 @@ class Tools {
 				'HTTP_FORWARDED_FOR',
 				'HTTP_FORWARDED',
 				'REMOTE_ADDR',
-			] as $key
+			) as $key
 		) {
 			if ( array_key_exists( $key, $_SERVER ) === true ) {
 				foreach ( explode( ',', $_SERVER[ $key ] ) as $ip ) {
@@ -763,23 +788,23 @@ class Tools {
 		$result = preg_match( "#^\s+<(?<tag_name>{$t})\b(?<attrs>[^>]*)>(?<inside>.*?)<\/{$t}>\s+$#", $html, $matches );
 
 		if ( $result === false ) {
-			return [ false, false ];
+			return array( false, false );
 		}
 
 		# Parse attributes
-		$attributes = [];
+		$attributes = array();
 		if ( ! empty( $matches['attrs'] ) ) {
 			preg_match_all( "#\s*(?<name>\w+)(=(\"(?<value1>.*)\")|('(?<value2>.*)'))?\s*#", $matches['attrs'], $attr_matches );
 			foreach ( $attr_matches['name'] as $idx => $attr_key ) {
-				$attributes[ $attr_key ] = $attr_matches["value1"][ $idx ] ?: $attr_matches["value2"][ $idx ];
+				$attributes[ $attr_key ] = $attr_matches['value1'][ $idx ] ?: $attr_matches['value2'][ $idx ];
 			}
 		}
 
-		return [
+		return array(
 			@$matches['inside'],
 			$attributes,
 			@$matches['tag_name'],
-		];
+		);
 	}
 
 	/**
@@ -804,7 +829,7 @@ class Tools {
 			add_metadata( $meta_type, $object_id, $meta_key, $meta_value );
 		}
 
-		return [ $to_add, $to_del ];
+		return array( $to_add, $to_del );
 	}
 
 	/**
@@ -844,10 +869,10 @@ class Tools {
 	 */
 	public static function get_public_post_types(): array {
 		return array_merge(
-			[
+			array(
 				\TrevorWP\CPT\Post::POST_TYPE,
 				CPT\Donate\Fundraiser_Stories::POST_TYPE,
-			],
+			),
 			CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
 			CPT\Get_Involved\Get_Involved_Object::$PUBLIC_POST_TYPES,
 		);
@@ -859,17 +884,17 @@ class Tools {
 	public static function disable_solr() {
 		$inst = \SolrPower_WP_Query::get_instance();
 
-		remove_filter( 'pre_get_posts', [ $inst, 'pre_get_posts' ] );
+		remove_filter( 'pre_get_posts', array( $inst, 'pre_get_posts' ) );
 
-		remove_filter( 'posts_request', [ $inst, 'posts_request' ], 10 );
+		remove_filter( 'posts_request', array( $inst, 'posts_request' ), 10 );
 
-		remove_filter( 'found_posts_query', [ $inst, 'found_posts_query' ], 5 );
+		remove_filter( 'found_posts_query', array( $inst, 'found_posts_query' ), 5 );
 
-		remove_filter( 'found_posts', [ $inst, 'found_posts' ], 5 );
+		remove_filter( 'found_posts', array( $inst, 'found_posts' ), 5 );
 
-		remove_filter( 'posts_pre_query', [ $inst, 'posts_pre_query' ], 10 );
+		remove_filter( 'posts_pre_query', array( $inst, 'posts_pre_query' ), 10 );
 
-		remove_filter( 'the_posts', [ $inst, 'the_posts' ], 10 );
+		remove_filter( 'the_posts', array( $inst, 'the_posts' ), 10 );
 	}
 
 	/**
@@ -919,7 +944,7 @@ class Tools {
 	 * @return array
 	 */
 	public static function gen_tax_labels( string $name ): array {
-		return [
+		return array(
 			'name'          => "{$name}s",
 			'singular_name' => $name,
 			'search_items'  => "{$name}s",
@@ -930,7 +955,7 @@ class Tools {
 			'update_item'   => "Update {$name}",
 			'add_new_item'  => "Add New {$name}",
 			'new_item_name' => "New {$name}",
-		];
+		);
 	}
 
 	/**

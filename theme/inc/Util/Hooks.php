@@ -18,69 +18,69 @@ class Hooks {
 	/**
 	 * @deprecated
 	 */
-	const SINGLE_PAGE_FILES = [
-			[ CPT\RC\RC_Object::QV_GET_HELP, 'rc/get-help.php' ],
-			[ CPT\RC\RC_Object::QV_TREVORSPACE, 'rc/trevor-space.php' ],
-			[ CPT\Get_Involved\Get_Involved_Object::QV_ECT, 'get-involved/ending-conversion-therapy.php' ],
-			[ CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER, 'get-involved/volunteer.php' ],
-			[ CPT\Get_Involved\Get_Involved_Object::QV_PARTNER_W_US, 'get-involved/partner-with-us.php' ],
-			[ CPT\Get_Involved\Get_Involved_Object::QV_CORP_PARTNERSHIPS, 'get-involved/corporate-partnerships.php' ],
-			[ CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ],
-			[ CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ],
-			[ CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ],
-			[ CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ],
-			[ CPT\Org\Org_Object::QV_ORG_LP, 'org-lp.php' ],
-	];
+	const SINGLE_PAGE_FILES = array(
+		array( CPT\RC\RC_Object::QV_GET_HELP, 'rc/get-help.php' ),
+		array( CPT\RC\RC_Object::QV_TREVORSPACE, 'rc/trevor-space.php' ),
+		array( CPT\Get_Involved\Get_Involved_Object::QV_ECT, 'get-involved/ending-conversion-therapy.php' ),
+		array( CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER, 'get-involved/volunteer.php' ),
+		array( CPT\Get_Involved\Get_Involved_Object::QV_PARTNER_W_US, 'get-involved/partner-with-us.php' ),
+		array( CPT\Get_Involved\Get_Involved_Object::QV_CORP_PARTNERSHIPS, 'get-involved/corporate-partnerships.php' ),
+		array( CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ),
+		array( CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ),
+		array( CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ),
+		array( CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ),
+		array( CPT\Org\Org_Object::QV_ORG_LP, 'org-lp.php' ),
+	);
 
 	/**
 	 * Registers all hooks
 	 */
 	public static function register_all() {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'admin_init', [ self::class, 'admin_init' ], 10, 0 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_action( 'admin_init', array( self::class, 'admin_init' ), 10, 0 );
 
 		# Media
-		add_action( 'wp_enqueue_scripts', [ self::class, 'wp_enqueue_scripts' ], 10, 0 );
-		add_action( 'admin_enqueue_scripts', [ self::class, 'admin_enqueue_scripts' ], 10, 0 );
+		add_action( 'wp_enqueue_scripts', array( self::class, 'wp_enqueue_scripts' ), 10, 0 );
+		add_action( 'admin_enqueue_scripts', array( self::class, 'admin_enqueue_scripts' ), 10, 0 );
 
 		# Theme Support
-		add_action( 'after_setup_theme', [ self::class, 'after_setup_theme' ], 10, 0 );
+		add_action( 'after_setup_theme', array( self::class, 'after_setup_theme' ), 10, 0 );
 
 		# Theme Customizers
-		add_action( 'customize_register', [ self::class, 'customize_register' ], 10, 1 );
+		add_action( 'customize_register', array( self::class, 'customize_register' ), 10, 1 );
 
 		# Open Graph Headers
-		add_action( 'wp_head', [ self::class, 'wp_head' ], 10, 0 );
-		add_filter( 'language_attributes', [ self::class, 'language_attributes' ], 10, 1 );
+		add_action( 'wp_head', array( self::class, 'wp_head' ), 10, 0 );
+		add_filter( 'language_attributes', array( self::class, 'language_attributes' ), 10, 1 );
 
 		# Custom Nav Menu Item Fields
-		add_action( 'wp_nav_menu_item_custom_fields', [ self::class, 'wp_nav_menu_item_custom_fields' ], 10, 1 );
-		add_action( 'wp_update_nav_menu_item', [ self::class, 'wp_update_nav_menu_item' ], 10, 2 );
-		add_filter( 'nav_menu_item_title', [ self::class, 'nav_menu_item_title' ], 10, 4 );
+		add_action( 'wp_nav_menu_item_custom_fields', array( self::class, 'wp_nav_menu_item_custom_fields' ), 10, 1 );
+		add_action( 'wp_update_nav_menu_item', array( self::class, 'wp_update_nav_menu_item' ), 10, 2 );
+		add_filter( 'nav_menu_item_title', array( self::class, 'nav_menu_item_title' ), 10, 4 );
 
 		# Admin Bar
-		add_action( 'admin_bar_init', [ self::class, 'admin_bar_init' ], 10, 0 );
+		add_action( 'admin_bar_init', array( self::class, 'admin_bar_init' ), 10, 0 );
 
 		# Excerpt Length
-		add_filter( 'excerpt_length', [ self::class, 'excerpt_length' ], 10, 1 );
+		add_filter( 'excerpt_length', array( self::class, 'excerpt_length' ), 10, 1 );
 
 		# Template Load Fixes
-		add_filter( 'template_include', [ self::class, 'template_include' ], PHP_INT_MAX >> 2, 1 );
+		add_filter( 'template_include', array( self::class, 'template_include' ), PHP_INT_MAX >> 2, 1 );
 
 		# Footer
-		add_action( 'wp_footer', [ self::class, 'wp_footer' ], 10, 0 );
+		add_action( 'wp_footer', array( self::class, 'wp_footer' ), 10, 0 );
 
 		# Redirects
-		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
+		add_action( 'template_redirect', array( self::class, 'template_redirect' ), 10, 0 );
 
 		# Pre Get Posts
-		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+		add_action( 'pre_get_posts', array( self::class, 'pre_get_posts' ), 10, 1 );
 
 		# REST API
-		add_action( 'rest_api_init', [ self::class, 'rest_api_init' ], 10, 0 );
+		add_action( 'rest_api_init', array( self::class, 'rest_api_init' ), 10, 0 );
 
 		# Body Class
-		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
 
 		# Search
 		Customizer\Search::init_all();
@@ -96,9 +96,11 @@ class Hooks {
 	 */
 	public static function init(): void {
 		# Register Nav Menu(s)
-		register_nav_menus( [
+		register_nav_menus(
+			array(
 				'header-menu' => __( 'Header Menu' ),
-		] );
+			)
+		);
 	}
 
 	/**
@@ -109,16 +111,21 @@ class Hooks {
 	public static function admin_init(): void {
 		$current_screen = get_current_screen();
 		if ( TREVOR_ON_DEV ) {
-			add_action( 'enqueue_block_editor_assets', function () {
-				# Block Editor Styles
-				wp_enqueue_script(
+			add_action(
+				'enqueue_block_editor_assets',
+				function () {
+					# Block Editor Styles
+					wp_enqueue_script(
 						self::NAME_PREFIX . 'theme-editor-main',
 						TREVOR_THEME_STATIC_URL . '/css/editor.js',
-						[ 'jquery' ],
+						array( 'jquery' ),
 						$GLOBALS['trevor_theme_static_ver'],
 						true
-				);
-			}, 10, 0 );
+					);
+				},
+				10,
+				0
+			);
 		} else {
 			add_editor_style( TREVOR_THEME_STATIC_URL . '/css/editor.css' );
 		}
@@ -137,38 +144,38 @@ class Hooks {
 
 		# Theme's frontend JS package
 		wp_enqueue_script(
-				self::NAME_PREFIX . 'theme-frontend-main',
-				TREVOR_THEME_STATIC_URL . '/js/frontend.js',
-				[ 'jquery' ],
-				$GLOBALS['trevor_theme_static_ver'],
-				true
+			self::NAME_PREFIX . 'theme-frontend-main',
+			TREVOR_THEME_STATIC_URL . '/js/frontend.js',
+			array( 'jquery' ),
+			$GLOBALS['trevor_theme_static_ver'],
+			true
 		);
 
 		# Site Banners JS
 		wp_enqueue_script(
-				self::NAME_PREFIX . 'theme-site-banners',
-				TREVOR_THEME_STATIC_URL . '/js/site-banners.js',
-				[ 'jquery' ],
-				$GLOBALS['trevor_theme_static_ver'],
-				false
+			self::NAME_PREFIX . 'theme-site-banners',
+			TREVOR_THEME_STATIC_URL . '/js/site-banners.js',
+			array( 'jquery' ),
+			$GLOBALS['trevor_theme_static_ver'],
+			false
 		);
 
 		# Frontend style
 		if ( TREVOR_ON_DEV ) {
 			wp_enqueue_script(
-					self::NAME_PREFIX . 'theme-frontend-css',
-					TREVOR_THEME_STATIC_URL . '/css/frontend.js',
-					[ StaticFiles::NAME_JS_RUNTIME ],
-					$GLOBALS['trevor_theme_static_ver'],
-					false
+				self::NAME_PREFIX . 'theme-frontend-css',
+				TREVOR_THEME_STATIC_URL . '/css/frontend.js',
+				array( StaticFiles::NAME_JS_RUNTIME ),
+				$GLOBALS['trevor_theme_static_ver'],
+				false
 			);
 		} else {
 			wp_enqueue_style(
-					self::NAME_PREFIX . 'theme-frontend',
-					TREVOR_THEME_STATIC_URL . '/css/frontend.css',
-					[],
-					$GLOBALS['trevor_theme_static_ver'],
-					'all'
+				self::NAME_PREFIX . 'theme-frontend',
+				TREVOR_THEME_STATIC_URL . '/css/frontend.css',
+				array(),
+				$GLOBALS['trevor_theme_static_ver'],
+				'all'
 			);
 		}
 	}
@@ -181,29 +188,29 @@ class Hooks {
 	public static function admin_enqueue_scripts(): void {
 		# Admin JS
 		wp_enqueue_script(
-				self::NAME_PREFIX . 'theme-admin-main',
-				TREVOR_THEME_STATIC_URL . '/js/admin.js',
-				[ 'jquery' ],
-				$GLOBALS['trevor_theme_static_ver'],
-				true
+			self::NAME_PREFIX . 'theme-admin-main',
+			TREVOR_THEME_STATIC_URL . '/js/admin.js',
+			array( 'jquery' ),
+			$GLOBALS['trevor_theme_static_ver'],
+			true
 		);
 
 		# Admin Style
 		if ( TREVOR_ON_DEV ) {
 			wp_enqueue_script(
-					self::NAME_PREFIX . 'theme-admin-css',
-					TREVOR_THEME_STATIC_URL . '/css/admin.js',
-					[ StaticFiles::NAME_JS_RUNTIME ],
-					$GLOBALS['trevor_theme_static_ver'],
-					false
+				self::NAME_PREFIX . 'theme-admin-css',
+				TREVOR_THEME_STATIC_URL . '/css/admin.js',
+				array( StaticFiles::NAME_JS_RUNTIME ),
+				$GLOBALS['trevor_theme_static_ver'],
+				false
 			);
 		} else {
 			wp_enqueue_style(
-					self::NAME_PREFIX . 'theme-admin',
-					TREVOR_THEME_STATIC_URL . '/css/admin.css',
-					[],
-					$GLOBALS['trevor_theme_static_ver'],
-					'all'
+				self::NAME_PREFIX . 'theme-admin',
+				TREVOR_THEME_STATIC_URL . '/css/admin.css',
+				array(),
+				$GLOBALS['trevor_theme_static_ver'],
+				'all'
 			);
 		}
 	}
@@ -218,13 +225,15 @@ class Hooks {
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'html5' );
 		add_theme_support( 'editor-styles' );
-		add_theme_support( 'admin-bar', [ 'callback' => '__return_false' ] );
+		add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 
-		register_nav_menus( [
+		register_nav_menus(
+			array(
 				'header-organization' => '[Header] Organization',
 				'header-support'      => '[Header] Support',
 				'footer'              => 'Footer',
-		] );
+			)
+		);
 	}
 
 	/**
@@ -313,13 +322,13 @@ class Hooks {
 		$val = get_post_meta( $item_id, Meta::KEY_MENU_ITEM_SUBTITLE, true );
 		?>
 		<p class="description description-wide trevor-custom-menu-item-subtitle">
-			<label for="edit-menu-item-subtitle-<?= esc_attr( $item_id ) ?>">
+			<label for="edit-menu-item-subtitle-<?php echo esc_attr( $item_id ); ?>">
 				Subtitle<br>
 				<input type="text"
-					   id="edit-menu-item-subtitle-<?= esc_attr( $item_id ) ?>"
+					   id="edit-menu-item-subtitle-<?php echo esc_attr( $item_id ); ?>"
 					   class="widefat edit-menu-item-subtitle"
-					   name="menu-item-subtitle[<?= esc_attr( $item_id ) ?>]"
-					   value="<?= esc_attr( $val ) ?>">
+					   name="menu-item-subtitle[<?php echo esc_attr( $item_id ); ?>]"
+					   value="<?php echo esc_attr( $val ); ?>">
 			</label>
 		</p>
 		<?php
@@ -367,7 +376,7 @@ class Hooks {
 			}
 		}
 
-		$title .= "</div>"; // Closing .menu-link-text
+		$title .= '</div>'; // Closing .menu-link-text
 
 		return $title;
 	}
@@ -381,11 +390,16 @@ class Hooks {
 		/**
 		 * @see _admin_bar_bump_cb()
 		 */
-		add_action( 'wp_head', function () {
-			?>
+		add_action(
+			'wp_head',
+			function () {
+				?>
 			<script>document.documentElement.classList.add('admin-bar');</script>
-			<?php
-		}, PHP_INT_MAX, 0 );
+				<?php
+			},
+			PHP_INT_MAX,
+			0
+		);
 	}
 
 	/**
@@ -414,7 +428,7 @@ class Hooks {
 		$is_single = false;
 
 		# Single Pages
-		foreach ( self::SINGLE_PAGE_FILES as [$qv, $path] ) {
+		foreach ( self::SINGLE_PAGE_FILES as list( $qv, $path ) ) {
 			if ( ! empty( $wp_query->get( $qv ) ) ) {
 				$template  = locate_template( $path, false );
 				$is_single = true;
@@ -454,25 +468,32 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_footer/
 	 */
 	public static function wp_footer(): void {
-		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) { ?>
+		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
+			?>
 			<div class="floating-crisis-btn-wrap">
 				<a class="btn floating-crisis-btn"
-				   href="<?= esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ) ?>">
+				   href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>">
 					Reach a Counselor</a>
 			</div>
 			<?php
 		}
 
 		// Fundraiser Quiz Modal
-		echo ( new \TrevorWP\Theme\Helper\FundraiserQuizModal( Options_Page\Fundraiser_Quiz::render(), [
-				"target" => ".js-fundraiser-quiz",
-		] ) )->render();
+		echo ( new \TrevorWP\Theme\Helper\FundraiserQuizModal(
+			Options_Page\Fundraiser_Quiz::render(),
+			array(
+				'target' => '.js-fundraiser-quiz',
+			)
+		) )->render();
 
 		// Donation Modal
 		if ( Options_Page\Donation_Modal::will_render_in( get_the_ID() ) ) {
-			echo ( new \TrevorWP\Theme\Helper\DonationModal( Options_Page\Donation_Modal::render(), [
-				"target" => ".js-fundraiser-quiz",
-		] ) )->render();
+			echo ( new \TrevorWP\Theme\Helper\DonationModal(
+				Options_Page\Donation_Modal::render(),
+				array(
+					'target' => '.js-fundraiser-quiz',
+				)
+			) )->render();
 		}
 	}
 
@@ -496,7 +517,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
-		$updates = [];
+		$updates = array();
 
 		if ( $query->is_main_query() ) {
 			if ( ! $query->is_admin ) {
@@ -530,17 +551,21 @@ class Hooks {
 	 * Fires when preparing to serve a REST API request.
 	 */
 	public static function rest_api_init(): void {
-		register_rest_route( 'trevor/v1', '/site-banners', [
+		register_rest_route(
+			'trevor/v1',
+			'/site-banners',
+			array(
 				'methods'  => 'GET',
-				'callback' => [ self::class, 'ajax_site_banners' ],
-		] );
+				'callback' => array( self::class, 'ajax_site_banners' ),
+			)
+		);
 	}
 
 	/**
 	 * Site banners ajax handler.
 	 */
 	public static function ajax_site_banners() {
-		$banners = [];
+		$banners = array();
 
 		# Long waiting banner
 		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, true );
@@ -549,11 +574,11 @@ class Hooks {
 		}
 
 		if ( $is_long_wait ) {
-			$banners[] = [
-					'title' => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_TITLE ),
-					'desc'  => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_DESC ),
-					'type'  => 'long_wait',
-			];
+			$banners[] = array(
+				'title' => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_TITLE ),
+				'desc'  => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_DESC ),
+				'type'  => 'long_wait',
+			);
 		}
 
 		# Custom banners
@@ -563,11 +588,11 @@ class Hooks {
 				continue;
 			}
 
-			$banners[] = [
-					'title' => (string) @$banner_data['title'],
-					'desc'  => (string) @$banner_data['desc'],
-					'type'  => 'custom',
-			];
+			$banners[] = array(
+				'title' => (string) @$banner_data['title'],
+				'desc'  => (string) @$banner_data['desc'],
+				'type'  => 'custom',
+			);
 		}
 
 		# Add their signatures
@@ -575,10 +600,13 @@ class Hooks {
 			$banner['id'] = substr( \TrevorWP\Util\Tools::get_obj_signature( $banner ), 3, 6 );
 		}
 
-		$resp = new \WP_REST_Response( [
+		$resp = new \WP_REST_Response(
+			array(
 				'success' => true,
 				'banners' => $banners,
-		], 200 );
+			),
+			200
+		);
 
 		// Cache timeouts
 		$browser_to = 5 * 60; # 5 min

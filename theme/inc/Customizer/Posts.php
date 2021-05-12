@@ -11,33 +11,36 @@ class Posts extends Abstract_Customizer {
 
 	/* Sections */
 	/* * Header */
-	const SECTION_HEADER_PREFIX = self::PANEL_ID . '_header';
+	const SECTION_HEADER_PREFIX          = self::PANEL_ID . '_header';
 	const SECTION_HEADER_CONTENT_LENGTHS = self::SECTION_HEADER_PREFIX . 'content_lengths';
 
 	/* Settings */
 	/* * Header */
-	const SETTING_HEADER_PREFIX = self::SECTION_HEADER_PREFIX . '_';
+	const SETTING_HEADER_PREFIX                = self::SECTION_HEADER_PREFIX . '_';
 	const PREFIX_SETTING_HEADER_CONTENT_LENGTH = self::SETTING_HEADER_PREFIX . 'content_length_';
 
 	/* All Defaults */
-	const DEFAULTS = [
+	const DEFAULTS = array(
 		self::PREFIX_SETTING_HEADER_CONTENT_LENGTH . Content_Length::OPTION_MEDIUM => Content_Length::DEFAULT_LEN_VALUES[ Content_Length::OPTION_MEDIUM ],
 		self::PREFIX_SETTING_HEADER_CONTENT_LENGTH . Content_Length::OPTION_LONG   => Content_Length::DEFAULT_LEN_VALUES[ Content_Length::OPTION_LONG ],
-	];
+	);
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
-		$this->_manager->add_panel( self::PANEL_ID, [ 'title' => 'Posts' ] );
+		$this->_manager->add_panel( self::PANEL_ID, array( 'title' => 'Posts' ) );
 	}
 
 	/** @inheritDoc */
 	protected function _register_sections(): void {
 		# Header
 		## Content Lengths
-		$this->_manager->add_section( self::SECTION_HEADER_CONTENT_LENGTHS, [
-			'panel' => self::PANEL_ID,
-			'title' => 'Content Lengths',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HEADER_CONTENT_LENGTHS,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => 'Content Lengths',
+			)
+		);
 	}
 
 	/** @inheritDoc */
@@ -50,20 +53,26 @@ class Posts extends Abstract_Customizer {
 			}
 
 			$setting_id = self::PREFIX_SETTING_HEADER_CONTENT_LENGTH . $key;
-			$this->_manager->add_setting( $setting_id, [
-				'default' => isset( self::DEFAULTS[ $setting_id ] )
-					? self::DEFAULTS[ $setting_id ]
-					: null
-			] );
+			$this->_manager->add_setting(
+				$setting_id,
+				array(
+					'default' => isset( self::DEFAULTS[ $setting_id ] )
+						? self::DEFAULTS[ $setting_id ]
+						: null,
+				)
+			);
 
-			$this->_manager->add_control( $setting_id, [
-				'setting'     => $setting_id,
-				'section'     => self::SECTION_HEADER_CONTENT_LENGTHS,
-				'allow_order' => true,
-				'label'       => $options['name'],
-				'type'        => 'number',
-				'description' => 'Minimum word count.'
-			] );
+			$this->_manager->add_control(
+				$setting_id,
+				array(
+					'setting'     => $setting_id,
+					'section'     => self::SECTION_HEADER_CONTENT_LENGTHS,
+					'allow_order' => true,
+					'label'       => $options['name'],
+					'type'        => 'number',
+					'description' => 'Minimum word count.',
+				)
+			);
 		}
 	}
 }

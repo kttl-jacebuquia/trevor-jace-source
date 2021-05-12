@@ -6,7 +6,7 @@ use TrevorWP;
 $GLOBALS['trevor_plugin_static_ver'] = WP_DEBUG ? uniqid( TrevorWP\VERSION . '-' ) : TrevorWP\VERSION;
 
 class StaticFiles {
-	const NAME_PREFIX = 'trevor_';
+	const NAME_PREFIX     = 'trevor_';
 	const NAME_JS_RUNTIME = self::NAME_PREFIX . 'runtime';
 
 	/**
@@ -26,7 +26,7 @@ class StaticFiles {
 		wp_enqueue_script(
 			self::NAME_PREFIX . 'plugin-main',
 			TREVOR_PLUGIN_STATIC_URL . '/js/main.js',
-			[ 'jquery', 'wp-api', self::NAME_JS_RUNTIME ],
+			array( 'jquery', 'wp-api', self::NAME_JS_RUNTIME ),
 			$GLOBALS['trevor_wp_static_ver'],
 			true
 		);
@@ -36,23 +36,23 @@ class StaticFiles {
 			wp_enqueue_script(
 				self::NAME_PREFIX . 'editor-blocks',
 				TREVOR_PLUGIN_STATIC_URL . '/js/blocks.js',
-				[ 'wp-api', 'wp-blocks', 'wp-element', 'wp-editor', 'jquery-ui-autocomplete', self::NAME_JS_RUNTIME ],
+				array( 'wp-api', 'wp-blocks', 'wp-element', 'wp-editor', 'jquery-ui-autocomplete', self::NAME_JS_RUNTIME ),
 				$GLOBALS['trevor_wp_static_ver'],
 				true
 			);
 		}
 
-//		if ( $hook_suffix == 'term.php' && in_array( $screen->id, [ 'edit-category', 'edit-post_tag' ] ) ) {
-//			wp_enqueue_media(); // Required for the category image loader
-//			wp_enqueue_script( 'jquery-ui-autocomplete' ); // Auto complete for posts
-//		}
+		//      if ( $hook_suffix == 'term.php' && in_array( $screen->id, [ 'edit-category', 'edit-post_tag' ] ) ) {
+		//          wp_enqueue_media(); // Required for the category image loader
+		//          wp_enqueue_script( 'jquery-ui-autocomplete' ); // Auto complete for posts
+		//      }
 
 		# Admin Styles
 		if ( TREVOR_ON_DEV ) {
 			wp_enqueue_script(
 				self::NAME_PREFIX . 'plugin-admin-css',
 				TREVOR_PLUGIN_STATIC_URL . '/css/main.js',
-				[ self::NAME_JS_RUNTIME ],
+				array( self::NAME_JS_RUNTIME ),
 				$GLOBALS['trevor_wp_static_ver'],
 				false
 			);

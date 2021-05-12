@@ -32,9 +32,9 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 						)
 					) )->posts,
 					array(
-						'title' => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ),
-						'tileClass'	=> ['product-card'],
-						'class'	=> ['product-grid'],
+						'title'     => Product_Partnerships::get_val( Product_Partnerships::SETTING_HOME_STORIES_TITLE ),
+						'tileClass' => array( 'product-card' ),
+						'class'     => array( 'product-grid' ),
 					)
 				);
 				?>
@@ -110,17 +110,19 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 		</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation(
+		<?php
+		echo Helper\Circulation_Card::render_circulation(
 			'There are other ways to help.',
 			null,
-			[
+			array(
 				'fundraiser',
-				'counselor'
-			],
-			[
+				'counselor',
+			),
+			array(
 				'container' => 'cards',
-			]
-		); ?>
+			)
+		);
+		?>
 	</main>
 <?php
 get_footer();

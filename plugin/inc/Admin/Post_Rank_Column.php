@@ -6,11 +6,11 @@ use TrevorWP\Util\Hooks;
 class Post_Rank_Column {
 	/* Col Names */
 	const COL_NAME_PREFIX = 'trevor_';
-	const COL_NAME_RANK = self::COL_NAME_PREFIX . 'rank';
+	const COL_NAME_RANK   = self::COL_NAME_PREFIX . 'rank';
 
 	/* Query Vars */
 	const QUERY_VAR_PREFIX = 'qv_';
-	const QUERY_VAR_RANK = self::QUERY_VAR_PREFIX . self::COL_NAME_RANK;
+	const QUERY_VAR_RANK   = self::QUERY_VAR_PREFIX . self::COL_NAME_RANK;
 
 	/* Screen Ids */
 	const SCREEN_ID_EDIT_POST = 'edit-post';
@@ -22,10 +22,10 @@ class Post_Rank_Column {
 		$post_type = 'post';
 		$screen_id = self::SCREEN_ID_EDIT_POST;
 
-		add_action( "manage_{$post_type}_posts_custom_column", [ self::class, 'manage_posts_custom_column' ], 10, 2 );
-		add_filter( "manage_{$screen_id}_sortable_columns", [ self::class, 'manage_screen_sortable_columns' ], 10, 1 );
-		add_filter( 'manage_posts_columns', [ self::class, 'manage_posts_columns' ], 10, 2 );
-		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+		add_action( "manage_{$post_type}_posts_custom_column", array( self::class, 'manage_posts_custom_column' ), 10, 2 );
+		add_filter( "manage_{$screen_id}_sortable_columns", array( self::class, 'manage_screen_sortable_columns' ), 10, 1 );
+		add_filter( 'manage_posts_columns', array( self::class, 'manage_posts_columns' ), 10, 2 );
+		add_action( 'pre_get_posts', array( self::class, 'pre_get_posts' ), 10, 1 );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Post_Rank_Column {
 			$long  = (int) get_post_meta( $post_id, Post::KEY_VIEW_COUNT_LONG, true );
 			?>
 			<span title="Short|Long#Rank">
-				<em><?= $short ?></em>|<em><?= $long ?></em>#<strong><?= $rank ?></strong>
+				<em><?php echo $short; ?></em>|<em><?php echo $long; ?></em>#<strong><?php echo $rank; ?></strong>
 			</span>
 			<?php
 		}

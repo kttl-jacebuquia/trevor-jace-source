@@ -15,59 +15,59 @@ class Post_Header {
 	const TYPE_HORIZONTAL = 'horizontal';
 	const TYPE_SQUARE     = 'square';
 	const TYPE_TEXT_ONLY  = 'text_only';
-	const ALL_TYPES       = [
+	const ALL_TYPES       = array(
 		self::TYPE_SPLIT,
 		self::TYPE_FULL,
 		self::TYPE_HORIZONTAL,
 		self::TYPE_SQUARE,
 		self::TYPE_TEXT_ONLY,
-	];
+	);
 
 	/* Colors */
 	const CLR_WHITE        = 'white';
 	const CLR_LIGHT_GRAY   = 'gray-light';
 	const CLR_INDIGO       = 'indigo';
 	const CLR_BLUE_GREEN   = 'blue_green';
-	const BG_COLORS        = [
-		self::CLR_LIGHT_GRAY => [
+	const BG_COLORS        = array(
+		self::CLR_LIGHT_GRAY => array(
 			'name'  => 'Light Gray',
 			'color' => '#F3F3F7',
-		],
-		self::CLR_INDIGO     => [
+		),
+		self::CLR_INDIGO     => array(
 			'name'  => 'Indigo',
 			'color' => '#101066',
-		],
-		self::CLR_BLUE_GREEN => [
+		),
+		self::CLR_BLUE_GREEN => array(
 			'name'  => 'Blue Green',
 			'color' => '#005E67',
-		],
-	];
-	const BG_CLR_2_TXT_CLR = [
+		),
+	);
+	const BG_CLR_2_TXT_CLR = array(
 		self::CLR_LIGHT_GRAY => self::CLR_INDIGO,
 		self::CLR_INDIGO     => self::CLR_WHITE,
 		self::CLR_BLUE_GREEN => self::CLR_WHITE,
-	];
+	);
 
 	/* Settings */
-	const SETTINGS = [
-		self::TYPE_SPLIT      => [ 'name' => 'Split' ],
-		self::TYPE_FULL       => [
+	const SETTINGS = array(
+		self::TYPE_SPLIT      => array( 'name' => 'Split' ),
+		self::TYPE_FULL       => array(
 			'name'     => 'Full Bleed',
-			'validate' => [ 'image-horizontal' ],
-		],
-		self::TYPE_HORIZONTAL => [
+			'validate' => array( 'image-horizontal' ),
+		),
+		self::TYPE_HORIZONTAL => array(
 			'name'     => 'Horizontal',
-			'validate' => [ 'image-horizontal' ],
-		],
-		self::TYPE_SQUARE     => [
+			'validate' => array( 'image-horizontal' ),
+		),
+		self::TYPE_SQUARE     => array(
 			'name'     => 'Square',
-			'validate' => [ 'image-square' ],
-		],
-		self::TYPE_TEXT_ONLY  => [
+			'validate' => array( 'image-square' ),
+		),
+		self::TYPE_TEXT_ONLY  => array(
 			'name'     => 'Text Only',
-			'supports' => [ 'bg-color' ],
-		],
-	];
+			'supports' => array( 'bg-color' ),
+		),
+	);
 
 	/* Defaults */
 	const DEFAULT_TYPE     = self::TYPE_TEXT_ONLY;
@@ -81,31 +81,31 @@ class Post_Header {
 	 *
 	 * @return string
 	 */
-	public static function render( \WP_Post $post, array $options = [] ): string {
+	public static function render( \WP_Post $post, array $options = array() ): string {
 		$options['type'] = self::get_header_type( $post );
 		$type            = $options['type'];
-		$cls             = [ 'post-header', "type-${type}" ];
+		$cls             = array( 'post-header', "type-${type}" );
 
 		# BG Color
 		if ( self::supports_bg_color( $post ) ) {
-			[ $bg_color, $txt_color ] = self::get_bg_color( $post );
-			$cls[]                    = "bg-{$bg_color}";
-			$cls[]                    = "text-{$txt_color}";
+			list( $bg_color, $txt_color ) = self::get_bg_color( $post );
+			$cls[]                        = "bg-{$bg_color}";
+			$cls[]                        = "text-{$txt_color}";
 		} else {
 			$cls[] = 'text-white';
 		}
 
-		$thumb_wrap_attrs = [];
+		$thumb_wrap_attrs = array();
 		if ( self::TYPE_SQUARE == $type ) {
 			$thumb_wrap_attrs['data-aspectRatio'] = '1:1';
 		}
 
 		ob_start() ?>
-		<div class="<?= esc_attr( implode( ' ', $cls ) ) ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $cls ) ); ?>">
 			<div class="container post-header-inner">
-				<?= self::_render_content_area( $post, $options ) ?>
-				<div class="thumbnail-wrap" <?= Tools::flat_attr( $thumb_wrap_attrs ) ?>>
-					<?= self::_render_thumbnail( $post, $options ) ?>
+				<?php echo self::_render_content_area( $post, $options ); ?>
+				<div class="thumbnail-wrap" <?php echo Tools::flat_attr( $thumb_wrap_attrs ); ?>>
+					<?php echo self::_render_thumbnail( $post, $options ); ?>
 				</div>
 			</div>
 		</div>
@@ -119,8 +119,8 @@ class Post_Header {
 	 *
 	 * @return string|null
 	 */
-	protected static function _render_thumbnail( \WP_Post $post, array &$options = [] ): ?string {
-		$variants = [];
+	protected static function _render_thumbnail( \WP_Post $post, array &$options = array() ): ?string {
+		$variants = array();
 		switch ( $options['type'] ) {
 			case self::TYPE_SQUARE:
 				// Small
@@ -156,7 +156,7 @@ class Post_Header {
 	 *
 	 * @return string
 	 */
-	protected static function _render_content_area( \WP_Post $post, array &$options = [] ): string {
+	protected static function _render_content_area( \WP_Post $post, array &$options = array() ): string {
 		$external_url = null;
 		$title_btm    = null;
 		$title_top    = null;
@@ -185,7 +185,7 @@ class Post_Header {
 		}
 
 		# Mid Row
-		$mid_row = [];
+		$mid_row = array();
 
 		## Article Length
 		$len_ind = Content_Length::post( $post );
@@ -201,7 +201,7 @@ class Post_Header {
 
 			<div class="date-box">
 				<time class="font-semibold text-px14 leading-px18"
-					  datetime="<?= $post->post_date ?>"><?= $date_time->format( 'M. j, Y' ) ?></time>
+					  datetime="<?php echo $post->post_date; ?>"><?php echo $date_time->format( 'M. j, Y' ); ?></time>
 			</div>
 
 			<?php
@@ -209,11 +209,11 @@ class Post_Header {
 		}
 
 		# Author
-		if ( in_array( $post->post_type, [ CPT\Post::POST_TYPE ] ) ) {
+		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) ) {
 			ob_start();
 			?>
 			<div class="author-box">
-				BY: <span class="uppercase author-display_name"><?= get_the_author_meta( 'display_name', $post->post_author ) ?></span>
+				BY: <span class="uppercase author-display_name"><?php echo get_the_author_meta( 'display_name', $post->post_author ); ?></span>
 			</div>
 			<?php
 			$mid_row[] = ob_get_clean();
@@ -223,12 +223,12 @@ class Post_Header {
 		if ( Meta\Post::can_show_share_box( $post->ID ) ) {
 			ob_start();
 
-			$facebook_share_query = http_build_query( [ 'u' => get_permalink() ] );
+			$facebook_share_query = http_build_query( array( 'u' => get_permalink() ) );
 			$twitter_share_query  = http_build_query(
-				[
+				array(
 					'text' => get_the_title( $post ),
 					'url'  => get_permalink( $post ),
-				]
+				)
 			);
 			?>
 			<div class="sharing-box">
@@ -236,14 +236,14 @@ class Post_Header {
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
 				   data-type="facebook"
-				   href="https://www.facebook.com/sharer.php?<?= $facebook_share_query ?>">
+				   href="https://www.facebook.com/sharer.php?<?php echo $facebook_share_query; ?>">
 					<i class="share-icon trevor-ti-facebook hover:text-melrose"></i>
 				</a>
 				<a target="_blank"
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
 				   data-type="twitter"
-				   href="https://twitter.com/share?<?= $twitter_share_query ?>">
+				   href="https://twitter.com/share?<?php echo $twitter_share_query; ?>">
 					<i class="share-icon trevor-ti-twitter hover:text-melrose"></i>
 				</a>
 				<span>
@@ -284,22 +284,22 @@ class Post_Header {
 		}
 
 		# Tags
-		$tags = $hide_tags ? [] : Taxonomy::get_post_tags_distinctive(
+		$tags = $hide_tags ? array() : Taxonomy::get_post_tags_distinctive(
 			$post,
-			[
+			array(
 				'filter_count_1' => false,
-			]
+			)
 		);
 
 		ob_start();
 		?>
 		<div class="post-header-content">
 			<?php if ( $title_top ) { ?>
-				<div class="title-top"><?= $title_top ?></div>
+				<div class="title-top"><?php echo $title_top; ?></div>
 			<?php } ?>
-			<h1 class="title "><?= esc_html( $post->post_title ) ?></h1>
+			<h1 class="title "><?php echo esc_html( $post->post_title ); ?></h1>
 			<?php if ( $title_btm ) { ?>
-				<div class="title-btm"><?= $title_btm ?></div>
+				<div class="title-btm"><?php echo $title_btm; ?></div>
 			<?php } ?>
 
 			<?php
@@ -309,9 +309,9 @@ class Post_Header {
 				<div class="mid-row">
 					<?php foreach ( $mid_row as $idx => $col ) { ?>
 						<div class="mid-row-col">
-							<?= $col ?>
+							<?php echo $col; ?>
 						</div>
-						<?= $mid_row_count - $idx > 1 ? '<div class="mid-row-v-separator"></div>' : '' ?>
+						<?php echo $mid_row_count - $idx > 1 ? '<div class="mid-row-v-separator"></div>' : ''; ?>
 					<?php } ?>
 				</div>
 			<?php } ?>
@@ -319,8 +319,8 @@ class Post_Header {
 			<?php if ( ! empty( $tags ) ) { ?>
 				<div class="tags-box">
 					<?php foreach ( $tags as $tag ) { ?>
-						<a href="<?= CPT\RC\RC_Object::get_search_url( $tag->name ) ?>"
-						   class="tag-box"><?= $tag->name ?></a>
+						<a href="<?php echo CPT\RC\RC_Object::get_search_url( $tag->name ); ?>"
+						   class="tag-box"><?php echo $tag->name; ?></a>
 					<?php } ?>
 				</div>
 			<?php } ?>
@@ -328,7 +328,7 @@ class Post_Header {
 			<?php if ( ! empty( $external_url ) ) { ?>
 				<div class="link-out-wrap">
 					<a class="link-out"
-					   href="<?= esc_url( $external_url ) ?>"
+					   href="<?php echo esc_url( $external_url ); ?>"
 					   rel="noopener noreferrer nofollow"
 					   target="_blank">Visit Site</a>
 					<i class="trevor-ti-link-out"></i>
@@ -369,7 +369,7 @@ class Post_Header {
 
 		$txt_color = self::BG_CLR_2_TXT_CLR[ $bg_color ];
 
-		return [ $bg_color, $txt_color ];
+		return array( $bg_color, $txt_color );
 	}
 
 	/**

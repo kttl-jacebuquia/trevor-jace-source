@@ -5,7 +5,7 @@
  */
 class Taxonomy_Select extends Abstract_Object_Select {
 	public $taxonomy = 'category';
-	public $parent = null;
+	public $parent   = null;
 
 	/**
 	 * @inheritDoc
@@ -18,19 +18,22 @@ class Taxonomy_Select extends Abstract_Object_Select {
 	 * @inheritDoc
 	 */
 	public function get_object_query_args(): array {
-		return [
+		return array(
 			'number'   => 0,
 			'taxonomy' => $this->taxonomy,
-			'parent'   => $this->parent
-		];
+			'parent'   => $this->parent,
+		);
 	}
 
 	/** @inheritDoc */
 	public function json() {
-		return array_merge( parent::json(), [
-			'taxonomy' => $this->taxonomy,
-			'parent'   => $this->parent
-		] );
+		return array_merge(
+			parent::json(),
+			array(
+				'taxonomy' => $this->taxonomy,
+				'parent'   => $this->parent,
+			)
+		);
 	}
 
 	public function get_default_value(): object {
@@ -42,25 +45,28 @@ class Taxonomy_Select extends Abstract_Object_Select {
 		$order_map = array_flip( $ids ); // Save the order
 
 		if ( ! empty( $ids ) ) {
-			$args = array_merge( $this->get_object_query_args(), [
-				'include'    => $ids,
-				'hide_empty' => false
-			] );
+			$args = array_merge(
+				$this->get_object_query_args(),
+				array(
+					'include'    => $ids,
+					'hide_empty' => false,
+				)
+			);
 
 			$terms = get_terms( $args );
 		} else {
-			$terms = [];
+			$terms = array();
 		}
 
 		$out = new \stdClass();
 
 		/** @var \WP_Term $term */
 		foreach ( $terms as $term ) {
-			$out->{$term->term_id} = [
+			$out->{$term->term_id} = array(
 				'name'  => $term->name,
 				'tax'   => $term->taxonomy,
-				'order' => $order_map[ $term->term_id ] ?? - 1
-			];
+				'order' => $order_map[ $term->term_id ] ?? - 1,
+			);
 		}
 
 		return $out;

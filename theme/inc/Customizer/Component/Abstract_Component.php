@@ -38,12 +38,12 @@ abstract class Abstract_Component {
 	 * @param string $section_id
 	 * @param array $settings
 	 */
-	public function __construct( string $panel_id, string $section_id, array $settings = [] ) {
+	public function __construct( string $panel_id, string $section_id, array $settings = array() ) {
 		$this->_panel_id   = $panel_id;
 		$this->_section_id = $section_id;
 
-		$this->_options  = $settings['options'] ?? [];
-		$this->_defaults = $settings['defaults'] ?? [];
+		$this->_options  = $settings['options'] ?? array();
+		$this->_defaults = $settings['defaults'] ?? array();
 	}
 
 	/**
@@ -69,14 +69,14 @@ abstract class Abstract_Component {
 	 *
 	 * @return string|null
 	 */
-	abstract function render( array $ext_options = [] ): ?string;
+	abstract function render( array $ext_options = array() ): ?string;
 
 	/**
 	 * Registers the section.
 	 *
 	 * @param array $args
 	 */
-	abstract public function register_section( array $args = [] ): void;
+	abstract public function register_section( array $args = array() ): void;
 
 	/**
 	 * Registers the settings.
@@ -91,7 +91,7 @@ abstract class Abstract_Component {
 
 			$manager->add_setting(
 				$this->get_setting_id( $key ),
-				[ 'default' => $this->get_default( $key ) ],
+				array( 'default' => $this->get_default( $key ) ),
 			);
 		}
 	}

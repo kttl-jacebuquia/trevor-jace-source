@@ -12,7 +12,7 @@ class Post_Select extends Abstract_Object_Select {
 	/**
 	 * @var array
 	 */
-	public $taxonomy = [];
+	public $taxonomy = array();
 
 	/**
 	 * @inheritDoc
@@ -25,34 +25,37 @@ class Post_Select extends Abstract_Object_Select {
 	 * @inheritDoc
 	 */
 	public function get_object_query_args(): array {
-		$tax_query = [
-			'relation' => 'OR'
-		];
+		$tax_query = array(
+			'relation' => 'OR',
+		);
 
 		# Taxonomy filter
 		if ( ! empty( $this->taxonomy ) && is_array( $this->taxonomy ) ) {
 			foreach ( $this->taxonomy as $taxonomy => $terms ) {
-				$tax_query[] = [
+				$tax_query[] = array(
 					'taxonomy' => $taxonomy,
 					'terms'    => $terms,
-					'operator' => 'IN'
-				];
+					'operator' => 'IN',
+				);
 			}
 		}
 
-		return [
+		return array(
 			'post_type'   => $this->post_type,
 			'numberposts' => - 1,
-			'tax_query'   => $tax_query
-		];
+			'tax_query'   => $tax_query,
+		);
 	}
 
 	/** @inheritDoc */
 	public function json() {
-		return array_merge( parent::json(), [
-			'post_type' => $this->post_type,
-			'taxonomy'  => $this->taxonomy,
-		] );
+		return array_merge(
+			parent::json(),
+			array(
+				'post_type' => $this->post_type,
+				'taxonomy'  => $this->taxonomy,
+			)
+		);
 	}
 
 	/** @inheritDoc */
@@ -65,23 +68,26 @@ class Post_Select extends Abstract_Object_Select {
 		$order_map = array_flip( $ids ); // Save the order
 
 		if ( ! empty( $ids ) ) {
-			$args = array_merge( $this->get_object_query_args(), [
-				'post__in' => $ids
-			] );
+			$args = array_merge(
+				$this->get_object_query_args(),
+				array(
+					'post__in' => $ids,
+				)
+			);
 
 			$posts = get_posts( $args );
 		} else {
-			$posts = [];
+			$posts = array();
 		}
 
 		$out = new \stdClass();
 
 		foreach ( $posts as $post ) {
-			$out->{$post->ID} = [
+			$out->{$post->ID} = array(
 				'name'  => $post->post_title,
 				'pt'    => $post->post_type,
-				'order' => $order_map[ $post->ID ] ?? - 1
-			];
+				'order' => $order_map[ $post->ID ] ?? - 1,
+			);
 		}
 
 		return $out;

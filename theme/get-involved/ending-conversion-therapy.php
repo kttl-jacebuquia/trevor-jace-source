@@ -7,22 +7,26 @@ use \TrevorWP\Theme\Helper\Page_Header;
 
 ?>
 <main id="site-content" role="main" class="site-content">
-	<?= Page_Header::split_img( [
+	<?php
+	echo Page_Header::split_img(
+		array(
 			'img_id'    => ECT::get_val( ECT::SETTING_HOME_HERO_IMG ),
 			'title_top' => ECT::get_val( ECT::SETTING_HOME_HERO_TITLE_TOP ),
 			'title'     => ECT::get_val( ECT::SETTING_HOME_HERO_TITLE ),
 			'desc'      => ECT::get_val( ECT::SETTING_HOME_HERO_DESC ),
 			'cta_txt'   => ECT::get_val( ECT::SETTING_HOME_HERO_CTA ),
 			'cta_url'   => '#',
-	] ) ?>
+		)
+	)
+	?>
 
 	<div class="py-14 text-teal-dark bg-white md:py-20 lg:py-28">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-bold text-px32 leading-px42 mb-3.5 mx-6 md:mx-0 lg:text-px46 lg:leading-px56">
-				<?= ECT::get_val( ECT::SETTING_HOME_1_TITLE ) ?>
+				<?php echo ECT::get_val( ECT::SETTING_HOME_1_TITLE ); ?>
 			</h2>
 			<p class="mx-auto text-px18 leading-px26 lg:text-px22 lg:leading-px32 lg:w-5/6">
-				<?= ECT::get_val( ECT::SETTING_HOME_1_DESC ) ?>
+				<?php echo ECT::get_val( ECT::SETTING_HOME_1_DESC ); ?>
 			</p>
 		</div>
 	</div>
@@ -39,39 +43,56 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		<div class="container mx-auto">
 			<div class="mx-auto site-content-inner text-center">
 				<h2 class="font-bold text-px32 leading-px42 mb-3.5 mx-6 md:mx-0 lg:text-px46 lg:leading-px56">
-					<?= ECT::get_val( ECT::SETTING_HOME_2_TITLE ) ?>
+					<?php echo ECT::get_val( ECT::SETTING_HOME_2_TITLE ); ?>
 				</h2>
 				<p class="mx-auto text-px18 leading-px26 mb-px60 md:mx-9 lg:text-px22 lg:leading-px32 lg:mb-20 lg:w-5/6">
-					<?= ECT::get_val( ECT::SETTING_HOME_2_DESC ) ?>
+					<?php echo ECT::get_val( ECT::SETTING_HOME_2_DESC ); ?>
 				</p>
 			</div>
 			<picture class="rounded-px10 img-square">
 				<?php if ( ! empty( $img_id = ECT::get_val( ECT::SETTING_HOME_2_IMG ) ) ) { ?>
-					<?= wp_get_attachment_image( $img_id, 'large', false, [
-							'class' => implode( ' ', [
+					<?php
+					echo wp_get_attachment_image(
+						$img_id,
+						'large',
+						false,
+						array(
+							'class' => implode(
+								' ',
+								array(
 									'w-full',
 									'h-auto',
 									'object-cover',
 									'object-center',
 									'rounded-px10',
-							] )
-					] ) ?>
+								)
+							),
+						)
+					)
+					?>
 				<?php } ?>
 			</picture>
 		</div>
 	</div>
 
 	<div class="text-teal-dark bg-teal-tint bg-white pb-px40 md:pb-0">
-		<?= \TrevorWP\Theme\Helper\Carousel::posts( ( new WP_Query() )->query( [
-				's'         => $search_term = ECT::get_val( ECT::SETTING_HOME_CAROUSEL_TERMS ),
-				'post_type' => array_merge( \TrevorWP\CPT\RC\RC_Object::$PUBLIC_POST_TYPES, [ \TrevorWP\CPT\RC\Glossary::POST_TYPE ] ),
-		] ), [
+		<?php
+		echo \TrevorWP\Theme\Helper\Carousel::posts(
+			( new WP_Query() )->query(
+				array(
+					's'         => $search_term = ECT::get_val( ECT::SETTING_HOME_CAROUSEL_TERMS ),
+					'post_type' => array_merge( \TrevorWP\CPT\RC\RC_Object::$PUBLIC_POST_TYPES, array( \TrevorWP\CPT\RC\Glossary::POST_TYPE ) ),
+				)
+			),
+			array(
 				'title'    => ECT::get_val( ECT::SETTING_HOME_CAROUSEL_TITLE ),
 				'subtitle' => ECT::get_val( ECT::SETTING_HOME_CAROUSEL_DESC ),
-		] ) ?>
+			)
+		)
+		?>
 
 		<div class="text-center mx-auto pb-20 lg:pb-28">
-			<a href="<?= \TrevorWP\CPT\RC\RC_Object::get_search_url( $search_term ) ?>"
+			<a href="<?php echo \TrevorWP\CPT\RC\RC_Object::get_search_url( $search_term ); ?>"
 			   class="font-bold text-px24 leading-px34 border-b-2 border-teal-dark lg:text-px26 lg:leading-px36">
 				View All Results
 			</a>

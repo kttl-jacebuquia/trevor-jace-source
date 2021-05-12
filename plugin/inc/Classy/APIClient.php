@@ -31,10 +31,10 @@ class APIClient {
 	 * @return array [$client_id, $client_secret]
 	 */
 	public static function get_credentials(): array {
-		return [
+		return array(
 			get_option( Main::OPTION_KEY_CLASSY_CLIENT_ID, '' ),
 			get_option( Main::OPTION_KEY_CLASSY_CLIENT_SECRET, '' ),
-		];
+		);
 	}
 
 	/**
@@ -90,12 +90,14 @@ class APIClient {
 		$token     = $use_cache ? get_transient( $cache_key ) : null;
 
 		if ( empty( $token ) ) {
-			$result = wp_remote_post(
-				$url = 'https://api.classy.org/oauth2/auth?' . http_build_query( [
+			$result  = wp_remote_post(
+				$url = 'https://api.classy.org/oauth2/auth?' . http_build_query(
+					array(
 						'client_id'     => $this->client_id,
 						'client_secret' => $this->client_secret,
-						'grant_type'    => 'client_credentials'
-					] )
+						'grant_type'    => 'client_credentials',
+					)
+				)
 			);
 
 			if ( is_wp_error( $result ) ) {
@@ -126,21 +128,21 @@ class APIClient {
 	 *
 	 * @return string Content response
 	 */
-	public function request( string $url, $method = 'GET', $params = [] ): ?string {
+	public function request( string $url, $method = 'GET', $params = array() ): ?string {
 		$url = self::CLASSY_API_BASEURL
-		       . '/' . self::CLASSY_API_VERSION
-		       . '/' . $url
-		       . '?' . http_build_query( $params );
+			   . '/' . self::CLASSY_API_VERSION
+			   . '/' . $url
+			   . '?' . http_build_query( $params );
 
 		$token = $this->get_access_token();
 
-		$options = [
-			'http' => [
+		$options = array(
+			'http' => array(
 				'method' => $method,
 				'header' => "Content-Type: text/plain\r\n"
-				            . "Authorization: Bearer $token\r\n"
-			]
-		];
+							. "Authorization: Bearer $token\r\n",
+			),
+		);
 
 		$context = stream_context_create( $options );
 

@@ -11,8 +11,8 @@ class Post {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_filter( 'post_type_archive_link', [ self::class, 'post_type_archive_link' ], 10, 2 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_filter( 'post_type_archive_link', array( self::class, 'post_type_archive_link' ), 10, 2 );
 	}
 
 	/**
@@ -22,9 +22,9 @@ class Post {
 	 */
 	public static function init(): void {
 		global $wp_rewrite;
-		$data = [
+		$data = array(
 			'post_type' => static::POST_TYPE,
-		];
+		);
 
 		add_rewrite_rule( self::PERMALINK_BASE . '/?$', 'index.php?' . http_build_query( $data ), 'top' );
 		add_rewrite_rule(

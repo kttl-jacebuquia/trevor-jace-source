@@ -9,8 +9,8 @@ class Financial_Report {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_action( 'template_redirect', array( self::class, 'template_redirect' ), 10, 0 );
 	}
 
 	/**
@@ -19,27 +19,30 @@ class Financial_Report {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		register_post_type( self::POST_TYPE, [
-			'public'              => false,
-			'hierarchical'        => false,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
-			'show_ui'             => true,
-			'show_in_rest'        => false,
-			'has_archive'         => true,
-			'rewrite'             => [
-				'slug'       => 'financial-reports',
-				'with_front' => false,
-			],
-			'supports'            => [
-				'title',
-				'custom-fields',
-			],
-			'labels'              => [
-				'name'          => 'Financial Reports',
-				'singular_name' => 'Financial Report',
-			],
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'public'              => false,
+				'hierarchical'        => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => true,
+				'show_ui'             => true,
+				'show_in_rest'        => false,
+				'has_archive'         => true,
+				'rewrite'             => array(
+					'slug'       => 'financial-reports',
+					'with_front' => false,
+				),
+				'supports'            => array(
+					'title',
+					'custom-fields',
+				),
+				'labels'              => array(
+					'name'          => 'Financial Reports',
+					'singular_name' => 'Financial Report',
+				),
+			)
+		);
 	}
 
 	/**

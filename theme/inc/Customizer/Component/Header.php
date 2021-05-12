@@ -9,49 +9,52 @@ use TrevorWP\Theme\Helper\Page_Header;
  */
 class Header extends Abstract_Component {
 	const SETTING_TITLE_TOP = 'title_top';
-	const SETTING_TITLE = 'title';
-	const SETTING_DESC = 'desc';
-	const SETTING_CTA_TXT = 'cta_txt';
-	const SETTING_CTA_URL = 'cta_url';
-	const SETTING_CTA2_TXT = 'cta2_txt';
-	const SETTING_CTA2_URL = 'cta2_url';
-	const SETTING_IMG = 'img';
-	const SETTING_CAROUSEL = 'carousel';
+	const SETTING_TITLE     = 'title';
+	const SETTING_DESC      = 'desc';
+	const SETTING_CTA_TXT   = 'cta_txt';
+	const SETTING_CTA_URL   = 'cta_url';
+	const SETTING_CTA2_TXT  = 'cta2_txt';
+	const SETTING_CTA2_URL  = 'cta2_url';
+	const SETTING_IMG       = 'img';
+	const SETTING_CAROUSEL  = 'carousel';
 
-	const TYPE_SPLIT_IMG = 'split_img';
-	const TYPE_IMG_BG = 'img_bg';
-	const TYPE_CAROUSEL = 'split_carousel';
-	const TYPE_TEXT = 'text';
+	const TYPE_SPLIT_IMG  = 'split_img';
+	const TYPE_IMG_BG     = 'img_bg';
+	const TYPE_CAROUSEL   = 'split_carousel';
+	const TYPE_TEXT       = 'text';
 	const TYPE_HORIZONTAL = 'horizontal';
 
-	const FIELDSET_CUSTOM_LIST_CAROUSEL = [
-		'img'     => [
+	const FIELDSET_CUSTOM_LIST_CAROUSEL = array(
+		'img'     => array(
 			'type'      => Custom_List::FIELD_TYPE_MEDIA,
 			'label'     => 'Media',
 			'mime_type' => 'image',
-		],
-		'caption' => [
+		),
+		'caption' => array(
 			'type'  => Custom_List::FIELD_TYPE_TEXTAREA,
-			'label' => 'Description'
-		],
-		'cta_txt' => [
+			'label' => 'Description',
+		),
+		'cta_txt' => array(
 			'type'  => Custom_List::FIELD_TYPE_INPUT,
-			'label' => 'CTA Text'
-		],
-		'cta_url' => [
+			'label' => 'CTA Text',
+		),
+		'cta_url' => array(
 			'type'  => Custom_List::FIELD_TYPE_INPUT,
-			'label' => 'CTA Url'
-		],
-	];
+			'label' => 'CTA Url',
+		),
+	);
 
 	/** @inheritDoc */
-	public function register_section( array $args = [] ): void {
+	public function register_section( array $args = array() ): void {
 		$this->get_manager()->add_section(
 			$this->get_section_id(),
-			array_merge( [
-				'panel' => $this->get_panel_id(),
-				'title' => 'Header',
-			], $args )
+			array_merge(
+				array(
+					'panel' => $this->get_panel_id(),
+					'title' => 'Header',
+				),
+				$args
+			)
 		);
 	}
 
@@ -64,78 +67,78 @@ class Header extends Abstract_Component {
 		# Title top
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_TITLE_TOP ),
-			[
+			array(
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Title Top',
 				'type'    => 'text',
-			]
+			)
 		);
 
 		# Title
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_TITLE ),
-			[
+			array(
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Title',
 				'type'    => 'text',
-			]
+			)
 		);
 
 		# Description
 		$manager->add_control(
 			$setting_title = $this->get_setting_id( self::SETTING_DESC ),
-			[
+			array(
 				'setting' => $setting_title,
 				'section' => $sec_id,
 				'label'   => 'Description',
 				'type'    => 'text',
-			]
+			)
 		);
 
 		# CTA1 Text
 		$manager->add_control(
 			$setting_cta_txt = $this->get_setting_id( self::SETTING_CTA_TXT ),
-			[
+			array(
 				'setting' => $setting_cta_txt,
 				'section' => $sec_id,
 				'label'   => 'CTA1 Text',
 				'type'    => 'text',
-			]
+			)
 		);
 
 		# CTA1 URL
 		$manager->add_control(
 			$setting_cta_url = $this->get_setting_id( self::SETTING_CTA_URL ),
-			[
+			array(
 				'setting' => $setting_cta_url,
 				'section' => $sec_id,
 				'label'   => 'CTA1 URL',
 				'type'    => 'url',
-			]
+			)
 		);
 
 		# CTA2 Text
 		$manager->add_control(
 			$setting_cta2_txt = $this->get_setting_id( self::SETTING_CTA2_TXT ),
-			[
+			array(
 				'setting' => $setting_cta2_txt,
 				'section' => $sec_id,
 				'label'   => 'CTA2 Text',
 				'type'    => 'text',
-			]
+			)
 		);
 
 		# CTA2 URL
 		$manager->add_control(
 			$setting_cta2_url = $this->get_setting_id( self::SETTING_CTA2_URL ),
-			[
+			array(
 				'setting' => $setting_cta2_url,
 				'section' => $sec_id,
 				'label'   => 'CTA2 URL',
 				'type'    => 'url',
-			]
+			)
 		);
 
 		if ( $type == self::TYPE_IMG_BG || $type == self::TYPE_SPLIT_IMG || $type == self::TYPE_HORIZONTAL ) {
@@ -144,37 +147,46 @@ class Header extends Abstract_Component {
 				new \WP_Customize_Media_Control(
 					$manager,
 					$img_id = $this->get_setting_id( self::SETTING_IMG ),
-					[
+					array(
 						'setting'   => $img_id,
 						'section'   => $sec_id,
 						'label'     => 'Image',
 						'mime_type' => 'image',
-					]
+					)
 				)
 			);
-		} else if ( $type == self::TYPE_CAROUSEL ) {
+		} elseif ( $type == self::TYPE_CAROUSEL ) {
 			# Carousel
-			$manager->add_control( new Custom_List( $manager, $carousel_id = $this->get_setting_id( self::SETTING_CAROUSEL ), [
-				'setting' => $carousel_id,
-				'section' => $sec_id,
-				'label'   => 'Carousel Data',
-				'fields'  => static::FIELDSET_CUSTOM_LIST_CAROUSEL,
-			] ) );
+			$manager->add_control(
+				new Custom_List(
+					$manager,
+					$carousel_id = $this->get_setting_id( self::SETTING_CAROUSEL ),
+					array(
+						'setting' => $carousel_id,
+						'section' => $sec_id,
+						'label'   => 'Carousel Data',
+						'fields'  => static::FIELDSET_CUSTOM_LIST_CAROUSEL,
+					)
+				)
+			);
 		}
 	}
 
 	/** @inheritdoc */
-	public function render( array $ext_options = [] ): ?string {
-		$options = array_merge( [
-			'title_top' => $this->get_val( static::SETTING_TITLE_TOP ),
-			'title'     => $this->get_val( static::SETTING_TITLE ),
-			'desc'      => $this->get_val( static::SETTING_DESC ),
-			'img_id'    => $this->get_val( static::SETTING_IMG ),
-			'cta_txt'   => $this->get_val( static::SETTING_CTA_TXT ),
-			'cta_url'   => $this->get_val( static::SETTING_CTA_URL ),
-			'cta2_txt'  => $this->get_val( static::SETTING_CTA2_TXT ),
-			'cta2_url'  => $this->get_val( static::SETTING_CTA2_URL ),
-		], $ext_options );
+	public function render( array $ext_options = array() ): ?string {
+		$options = array_merge(
+			array(
+				'title_top' => $this->get_val( static::SETTING_TITLE_TOP ),
+				'title'     => $this->get_val( static::SETTING_TITLE ),
+				'desc'      => $this->get_val( static::SETTING_DESC ),
+				'img_id'    => $this->get_val( static::SETTING_IMG ),
+				'cta_txt'   => $this->get_val( static::SETTING_CTA_TXT ),
+				'cta_url'   => $this->get_val( static::SETTING_CTA_URL ),
+				'cta2_txt'  => $this->get_val( static::SETTING_CTA2_TXT ),
+				'cta2_url'  => $this->get_val( static::SETTING_CTA2_URL ),
+			),
+			$ext_options
+		);
 
 		switch ( $type = $this->get_option( 'type' ) ) {
 			case static::TYPE_SPLIT_IMG:

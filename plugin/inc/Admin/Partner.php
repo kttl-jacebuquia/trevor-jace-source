@@ -10,18 +10,18 @@ class Partner {
 	/* Field Names */
 	const FIELD_NAME_URL = 'partner_url';
 
-	const POST_TYPES = [
-			CPT\Get_Involved\Partner::POST_TYPE,
-			CPT\Get_Involved\Grant::POST_TYPE,
-	];
+	const POST_TYPES = array(
+		CPT\Get_Involved\Partner::POST_TYPE,
+		CPT\Get_Involved\Grant::POST_TYPE,
+	);
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function register_hooks(): void {
 		foreach ( self::POST_TYPES as $pt ) {
-			add_action( "add_meta_boxes_{$pt}", [ self::class, 'add_meta_boxes' ], 10, 1 );
-			add_action( "save_post_{$pt}", [ self::class, 'save_post' ], 10, 1 );
+			add_action( "add_meta_boxes_{$pt}", array( self::class, 'add_meta_boxes' ), 10, 1 );
+			add_action( "save_post_{$pt}", array( self::class, 'save_post' ), 10, 1 );
 		}
 	}
 
@@ -34,12 +34,12 @@ class Partner {
 	 */
 	public static function add_meta_boxes( \WP_Post $post ): void {
 		add_meta_box(
-				'partner_url',
-				'Partner URL',
-				[ self::class, 'render_url_input' ],
-				$post->post_type,
-				'normal',
-				'high'
+			'partner_url',
+			'Partner URL',
+			array( self::class, 'render_url_input' ),
+			$post->post_type,
+			'normal',
+			'high'
 		);
 	}
 
@@ -51,8 +51,8 @@ class Partner {
 	public static function render_url_input( \WP_Post $post ): void {
 		$url = Meta\Post::get_partner_url( $post->ID )
 		?>
-		<input name="<?= esc_attr( self::FIELD_NAME_URL ) ?>"
-			   value="<?= esc_attr( $url ) ?>"
+		<input name="<?php echo esc_attr( self::FIELD_NAME_URL ); ?>"
+			   value="<?php echo esc_attr( $url ); ?>"
 			   placeholder="https://"
 			   autocomplete="off"
 			   type="url"

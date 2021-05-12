@@ -14,10 +14,10 @@ class Content {
 	 */
 	public static function get_fundraisers( string $campaign_id, int $count = 10, bool $use_cache = true ): ?array {
 		$endpoint  = '/fundraising-pages';
-		$cache_key = implode( "|", [ Main::CACHE_GROUP_PREFIX, $campaign_id, $endpoint, $count ] );
+		$cache_key = implode( '|', array( Main::CACHE_GROUP_PREFIX, $campaign_id, $endpoint, $count ) );
 
 		if ( ! $use_cache || empty( $result = get_transient( $cache_key ) ) ) {
-			$result = self::get_campaign_data( $campaign_id, $endpoint, [ 'per_page' => $count ] );
+			$result = self::get_campaign_data( $campaign_id, $endpoint, array( 'per_page' => $count ) );
 
 			set_transient( $cache_key, $result, self::CACHE_EXPIRATION );
 		}
@@ -34,10 +34,10 @@ class Content {
 	 */
 	public static function get_fundraising_teams( string $campaign_id, int $count = 10, bool $use_cache = true ): ?array {
 		$endpoint  = '/fundraising-teams';
-		$cache_key = implode( "|", [ Main::CACHE_GROUP_PREFIX, $campaign_id, $endpoint, $count ] );
+		$cache_key = implode( '|', array( Main::CACHE_GROUP_PREFIX, $campaign_id, $endpoint, $count ) );
 
 		if ( ! $use_cache || empty( $result = get_transient( $cache_key ) ) ) {
-			$result = self::get_campaign_data( $campaign_id, $endpoint, [ 'per_page' => $count ] );
+			$result = self::get_campaign_data( $campaign_id, $endpoint, array( 'per_page' => $count ) );
 
 			set_transient( $cache_key, $result, self::CACHE_EXPIRATION );
 		}
@@ -45,18 +45,25 @@ class Content {
 		return $result;
 	}
 
-	public static function get_campaign_data( string $campaign_id, string $endpoint, array $params = [] ): ?array {
+	public static function get_campaign_data( string $campaign_id, string $endpoint, array $params = array() ): ?array {
 		$client = APIClient::get_instance();
-		if(empty($client)){
+		if ( empty( $client ) ) {
 			return null;
 		}
 
-		$teams  = $client->request( '/campaigns/' . $campaign_id . $endpoint, 'GET', array_merge( [
-			'aggregates' => 'true',
-			'sort'       => 'total_raised:desc',
-			'filter'     => 'status=active',
-			'count'      => 10,
-		], $params ) );
+		$teams  = $client->request(
+			'/campaigns/' . $campaign_id . $endpoint,
+			'GET',
+			array_merge(
+				array(
+					'aggregates' => 'true',
+					'sort'       => 'total_raised:desc',
+					'filter'     => 'status=active',
+					'count'      => 10,
+				),
+				$params
+			)
+		);
 		$result = json_decode( $teams, true );
 		$result = $result['data'];
 

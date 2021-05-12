@@ -17,14 +17,24 @@ class Partnership {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function register_hooks(): void {
-		add_action( 'add_meta_boxes_' . CPT\Get_Involved\Partnership::POST_TYPE, [
-			self::class,
-			'add_meta_boxes'
-		], 10, 2 );
-		add_action( 'save_post_' . CPT\Get_Involved\Partnership::POST_TYPE, [
-			self::class,
-			'save_post'
-		], 10, 1 );
+		add_action(
+			'add_meta_boxes_' . CPT\Get_Involved\Partnership::POST_TYPE,
+			array(
+				self::class,
+				'add_meta_boxes',
+			),
+			10,
+			2
+		);
+		add_action(
+			'save_post_' . CPT\Get_Involved\Partnership::POST_TYPE,
+			array(
+				self::class,
+				'save_post',
+			),
+			10,
+			1
+		);
 	}
 
 	/**
@@ -38,11 +48,11 @@ class Partnership {
 		add_meta_box(
 			'partnership_file',
 			'Partnership File',
-			[ self::class, 'render_meta_box' ],
+			array( self::class, 'render_meta_box' ),
 			$post->post_type,
 			'normal',
 			'high',
-			[ self::FIELD_FILE_ID ]
+			array( self::FIELD_FILE_ID )
 		);
 	}
 

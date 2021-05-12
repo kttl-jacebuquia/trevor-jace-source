@@ -44,12 +44,12 @@ class Sorter {
 		<div class="custom-select">
 			<ul>
 				<li class="label">
-					<button>Sort By: <?= $current['title'] ?></button>
+					<button>Sort By: <?php echo $current['title']; ?></button>
 					<ul class="dropdown">
-						<?php foreach ( $this->_options as $key => $option ): ?>
-							<li class="<?= $this->_current == $key ? 'active' : '' ?>">
-								<a href="<?= add_query_arg( self::$GET_key, $key, home_url( $wp->request ) ) ?>">
-									Sort By: <?= $option['title'] ?>
+						<?php foreach ( $this->_options as $key => $option ) : ?>
+							<li class="<?php echo $this->_current == $key ? 'active' : ''; ?>">
+								<a href="<?php echo add_query_arg( self::$GET_key, $key, home_url( $wp->request ) ); ?>">
+									Sort By: <?php echo $option['title']; ?>
 								</a>
 							</li>
 						<?php endforeach; ?>
@@ -79,21 +79,21 @@ class Sorter {
 	 * @return string[][]
 	 */
 	public static function get_options_for_date(): array {
-		return [
-				'new-old' => [
-						'title' => 'Newest to Oldest',
-						'args'  => [
-								'order'   => 'DESC',
-								'orderby' => 'date',
-						]
-				],
-				'old-new' => [
-						'title' => 'Oldest to Newest',
-						'args'  => [
-								'order'   => 'ASC',
-								'orderby' => 'date',
-						]
-				],
-		];
+		return array(
+			'new-old' => array(
+				'title' => 'Newest to Oldest',
+				'args'  => array(
+					'order'   => 'DESC',
+					'orderby' => 'date',
+				),
+			),
+			'old-new' => array(
+				'title' => 'Oldest to Newest',
+				'args'  => array(
+					'order'   => 'ASC',
+					'orderby' => 'date',
+				),
+			),
+		);
 	}
 }

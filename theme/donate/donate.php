@@ -9,15 +9,19 @@ use \TrevorWP\Theme\Customizer\Donate;
 	<main id="site-content" role="main" class="site-content">
 		<?php /* Header */ ?>
 
-		<?= Helper\Page_Header::img_bg( [
-				'title'   => Donate::get_val( Donate::SETTING_HOME_HERO_TITLE ),
-				'desc'    => Donate::get_val( Donate::SETTING_HOME_HERO_DESC ),
-				'img_id'  => Donate::get_val( Donate::SETTING_HOME_HERO_IMG )
-		] ) ?>
+		<?php
+		echo Helper\Page_Header::img_bg(
+			array(
+				'title'  => Donate::get_val( Donate::SETTING_HOME_HERO_TITLE ),
+				'desc'   => Donate::get_val( Donate::SETTING_HOME_HERO_DESC ),
+				'img_id' => Donate::get_val( Donate::SETTING_HOME_HERO_IMG ),
+			)
+		)
+		?>
 
 		<?php /** Featured Text */ ?>
 		<?php $desc = Donate::get_val( Donate::SETTING_HOME_TEXT ); ?>
-		<?php if( $desc ): ?>
+		<?php if ( $desc ) : ?>
 		<div class="featured-text donate">
 			<div class="container mx-auto text-center">
 				<p><?php echo $desc; ?></p>
@@ -33,8 +37,8 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<div class="donation-form">
 			<div class="donation-form__content">
 				<div class="donation-form__content-wrapper">
-					<h2><?= $form_heading ?></h2>
-					<p><?= $form_intro ?></p>
+					<h2><?php echo $form_heading; ?></h2>
+					<p><?php echo $form_intro; ?></p>
 
 					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form">
 						<div class="frequency">
@@ -82,56 +86,63 @@ use \TrevorWP\Theme\Customizer\Donate;
 		</div>
 
 		<?php /* How your Money is Used */ ?>
-		<?= Helper\Audit_Block::render( 
-			$_1_title = Donate::get_val( Donate::SETTING_HOME_1_TITLE ), 
-			$_1_data = Donate::get_val( Donate::SETTING_HOME_1_DATA ), 
-			$custom_class = null 
-		); ?>
+		<?php
+		echo Helper\Audit_Block::render(
+			$_1_title     = Donate::get_val( Donate::SETTING_HOME_1_TITLE ),
+			$_1_data      = Donate::get_val( Donate::SETTING_HOME_1_DATA ),
+			$custom_class = null
+		);
+		?>
 		
 		<?php /* More Ways to Give */ ?>
 		<?php $_2_title = Donate::get_val( Donate::SETTING_HOME_2_TITLE ); ?>
 		<div class="card-collection">
 			<div class="container mx-auto">
-				<h3 class="heading text-center"><?= $_2_title ?></h3> 
+				<h3 class="heading text-center"><?php echo $_2_title; ?></h3> 
 
-				<?= Helper\Tile_Grid::custom( [
-						[
-								'title'   => 'Legacy & Stock Gifts',
-								'desc'    => 'Lorem ipsum',
-								'cta_txt' => 'Donate Now',
-								'cta_url' => '#',
-						],
-						[
-								'title'   => 'Workplace Giving & Match Gifts',
-								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
-								'cta_txt' => 'Donate Now',
-								'cta_url' => '#',
-						],
-						[
-								'title'   => 'Memorial / In Memory / Tribute',
-								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
-								'cta_txt' => 'Donate Now',
-								'cta_url' => '#',
-						],
-						[
-								'title'   => 'Estate Planning',
-								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
-								'cta_txt' => 'Donate Now',
-								'cta_url' => '#',
-						],
-						[
-								'title'   => 'Corporate Partnerships',
-								'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
-								'cta_txt' => 'Donate Now',
-								'cta_url' => '#',
-						]
-				], [] ) ?>
+				<?php
+				echo Helper\Tile_Grid::custom(
+					array(
+						array(
+							'title'   => 'Legacy & Stock Gifts',
+							'desc'    => 'Lorem ipsum',
+							'cta_txt' => 'Donate Now',
+							'cta_url' => '#',
+						),
+						array(
+							'title'   => 'Workplace Giving & Match Gifts',
+							'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
+							'cta_txt' => 'Donate Now',
+							'cta_url' => '#',
+						),
+						array(
+							'title'   => 'Memorial / In Memory / Tribute',
+							'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
+							'cta_txt' => 'Donate Now',
+							'cta_url' => '#',
+						),
+						array(
+							'title'   => 'Estate Planning',
+							'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
+							'cta_txt' => 'Donate Now',
+							'cta_url' => '#',
+						),
+						array(
+							'title'   => 'Corporate Partnerships',
+							'desc'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio lorem pellentesque facilisis fermentum nisl neque id. Integer.',
+							'cta_txt' => 'Donate Now',
+							'cta_url' => '#',
+						),
+					),
+					array()
+				)
+				?>
 			</div>
 		</div>
 		<?php /* Testimonials */ ?>
 		<div class="testimonials">
 			<?php $testimonial = Donate::get_val( Donate::SETTING_HOME_QUOTE_DATA ); ?>
-			<?= Helper\Carousel::testimonials( $testimonial ) ?>
+			<?php echo Helper\Carousel::testimonials( $testimonial ); ?>
 		</div>
 
 
@@ -139,25 +150,25 @@ use \TrevorWP\Theme\Customizer\Donate;
 		<?php $nav_title = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_TITLE ); ?>
 		<?php $nav_desc = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_DESC ); ?>
 		<?php $nav_data = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_DATA ); ?>
-		<?php $nav_img  = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_IMAGE ); ?>
+		<?php $nav_img = Donate::get_val( Donate::SETTING_HOME_NAVIGATOR_IMAGE ); ?>
 
 		<div class="navigator">
 			<div class="container mx-auto">
 				<div class="navigator--wrapper text-center">
-					<h3 class="navigator--heading"><?= $nav_title ?></h3>
-					<p><?= $nav_desc ?></p>
+					<h3 class="navigator--heading"><?php echo $nav_title; ?></h3>
+					<p><?php echo $nav_desc; ?></p>
 
-					<?php if( $nav_img ): ?>
+					<?php if ( $nav_img ) : ?>
 						<div class="text-center mt-px50 block">
 							<img src="<?php echo esc_url( wp_get_attachment_url( $nav_img ) ); ?>" class="block mx-auto" alt="<?php echo esc_attr( $nav_title ); ?>">
 						</div>
 					<?php endif; ?>
 					<div>
-						<div class="navigator-container swiper-container mobile-only" id="nav-<?= uniqid(); ?>">
+						<div class="navigator-container swiper-container mobile-only" id="nav-<?php echo uniqid(); ?>">
 							<div class="navigator-data swiper-wrapper">
-								<?php foreach ( $nav_data as $navigator ): ?>
+								<?php foreach ( $nav_data as $navigator ) : ?>
 									<div class="navigator-data__item swiper-slide text-center">
-										<h2 class="navigator-data__item--heading"><?= $navigator['name'] ?></h2>
+										<h2 class="navigator-data__item--heading"><?php echo $navigator['name']; ?></h2>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -166,9 +177,9 @@ use \TrevorWP\Theme\Customizer\Donate;
 						
 						<div class="navigator-container swiper-container">
 							<div class="navigator-data swiper-wrapper">
-								<?php foreach ( $nav_data as $navigator ): ?>
+								<?php foreach ( $nav_data as $navigator ) : ?>
 									<div class="navigator-data__item swiper-slide text-center ">
-										<h2 class="navigator-data__item--heading"><?= $navigator['name'] ?></h2>
+										<h2 class="navigator-data__item--heading"><?php echo $navigator['name']; ?></h2>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -186,10 +197,10 @@ use \TrevorWP\Theme\Customizer\Donate;
 
 		<div class="faqs">
 			<div class="container mx-auto">
-				<h3 class="faqs-heading"><?= $faq_title ?></h3>
+				<h3 class="faqs-heading"><?php echo $faq_title; ?></h3>
 
 				<div class="faq-list">
-					<?php foreach ( $faq_data as $faq ): ?>
+					<?php foreach ( $faq_data as $faq ) : ?>
 						<div class="faq-list__item">
 							<div class="faq-list__heading">
 								<h4 class="faq-list__heading-headline">
@@ -204,34 +215,37 @@ use \TrevorWP\Theme\Customizer\Donate;
 										<path fill-rule="evenodd" clip-rule="evenodd" d="M25.1108 13.0378C25.1108 13.8662 24.4392 14.5378 23.6108 14.5378L2.6134 14.5381C1.78497 14.5382 1.11341 13.8666 1.11342 13.0382C1.11343 12.2097 1.78502 11.5382 2.61344 11.5381L23.6108 11.5378C24.4393 11.5378 25.1108 12.2094 25.1108 13.0378Z" fill="#003A48"/>
 									</svg>
 
-									<?= $faq['label'] ?>
+									<?php echo $faq['label']; ?>
 								</h4>
 							</div>
 							<div class="faq-list__content">
-								<?= $faq['content'] ?>
+								<?php echo $faq['content']; ?>
 							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>
 
 				<div class="faq-footer">
-					<p><?= $faq_footer ?></p>
+					<p><?php echo $faq_footer; ?></p>
 				</div>
 			</div>
 		</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation( 
-			Donate::get_val( Donate::SETTING_HOME_CIRCULATION_TITLE ), 
-			null, 
-			[ 
-				'fundraiser', 
-				'counselor' 
-			], 
-			[
+		<?php
+		echo Helper\Circulation_Card::render_circulation(
+			Donate::get_val( Donate::SETTING_HOME_CIRCULATION_TITLE ),
+			null,
+			array(
+				'fundraiser',
+				'counselor',
+			),
+			array(
 				'container' => 'other-ways',
-			] 
-		); ?>
+			)
+		);
+		?>
 	</main>
 
-<?php get_footer();
+<?php
+get_footer();

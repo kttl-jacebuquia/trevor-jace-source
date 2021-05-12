@@ -9,7 +9,7 @@ class Page_ReCirculation {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
 	}
 
 	/**
@@ -18,21 +18,24 @@ class Page_ReCirculation {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		register_post_type( self::POST_TYPE, [
-			'public'              => false,
-			'hierarchical'        => false,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => false,
-			'show_ui'             => true,
-			'show_in_rest'        => false,
-			'has_archive'         => false,
-			'supports'            => [
-				'custom-fields',
-			],
-			'labels'              => [
-				'name'          => 'Page ReCirculation Cards',
-				'singular_name' => 'Page ReCirculation Card',
-			],
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'public'              => false,
+				'hierarchical'        => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'show_ui'             => true,
+				'show_in_rest'        => false,
+				'has_archive'         => false,
+				'supports'            => array(
+					'custom-fields',
+				),
+				'labels'              => array(
+					'name'          => 'Page ReCirculation Cards',
+					'singular_name' => 'Page ReCirculation Card',
+				),
+			)
+		);
 	}
 }

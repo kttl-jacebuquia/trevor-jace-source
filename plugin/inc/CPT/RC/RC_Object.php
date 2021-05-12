@@ -20,47 +20,47 @@ abstract class RC_Object {
 	const POST_TYPE_PREFIX = Main::POST_TYPE_PREFIX . 'rc_';
 
 	/* Taxonomies */
-	const TAXONOMY_PREFIX = self::POST_TYPE_PREFIX;
-	const TAXONOMY_CATEGORY = self::TAXONOMY_PREFIX . '_category';
-	const TAXONOMY_TAG = self::TAXONOMY_PREFIX . '_tag';
+	const TAXONOMY_PREFIX     = self::POST_TYPE_PREFIX;
+	const TAXONOMY_CATEGORY   = self::TAXONOMY_PREFIX . '_category';
+	const TAXONOMY_TAG        = self::TAXONOMY_PREFIX . '_tag';
 	const TAXONOMY_SEARCH_KEY = self::TAXONOMY_PREFIX . '_search_key';
 
 	/* Query Vars */
-	const QV_BASE = Main::QV_PREFIX . 'rc';
-	const QV_RESOURCES_LP = self::QV_BASE . '__lp';
+	const QV_BASE               = Main::QV_PREFIX . 'rc';
+	const QV_RESOURCES_LP       = self::QV_BASE . '__lp';
 	const QV_RESOURCES_NON_BLOG = self::QV_BASE . '__non_blog';
-	const QV_GET_HELP = self::QV_BASE . '__get_help';
-	const QV_TREVORSPACE = self::QV_BASE . '__trevorspace';
+	const QV_GET_HELP           = self::QV_BASE . '__get_help';
+	const QV_TREVORSPACE        = self::QV_BASE . '__trevorspace';
 
 	/* Permalinks */
-	const PERMALINK_BASE = 'resources';
+	const PERMALINK_BASE              = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
-	const PERMALINK_BLOG = self::PERMALINK_BASE . '/blog';
-	const PERMALINK_GUIDE = self::PERMALINK_BASE . '/guide';
-	const PERMALINK_ARTICLE = self::PERMALINK_BASE . '/article';
-	const PERMALINK_EXTERNAL = self::PERMALINK_BASE . '/external';
+	const PERMALINK_BLOG              = self::PERMALINK_BASE . '/blog';
+	const PERMALINK_GUIDE             = self::PERMALINK_BASE . '/guide';
+	const PERMALINK_ARTICLE           = self::PERMALINK_BASE . '/article';
+	const PERMALINK_EXTERNAL          = self::PERMALINK_BASE . '/external';
 
-	const PERMALINK_GET_HELP = 'get-help';
+	const PERMALINK_GET_HELP    = 'get-help';
 	const PERMALINK_TREVORSPACE = 'trevorspace';
 
 	/* Collections */
-	const _ALL_ = [
+	const _ALL_ = array(
 		Post::class,
 		Guide::class,
 		Article::class,
 		External::class,
 		Glossary::class,
-	];
+	);
 
 	/**
 	 * @var string[]
 	 */
-	static $ALL_POST_TYPES = [];
+	static $ALL_POST_TYPES = array();
 
 	/**
 	 * @var string[]
 	 */
-	static $PUBLIC_POST_TYPES = [];
+	static $PUBLIC_POST_TYPES = array();
 
 	/**
 	 * @see construct()
@@ -83,17 +83,17 @@ abstract class RC_Object {
 		}
 
 		# Hooks
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'admin_menu', [ self::class, 'admin_menu' ], PHP_INT_MAX, 0 );
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
-		add_filter( 'post_type_link', [ self::class, 'post_type_link' ], PHP_INT_MAX >> 1, 2 );
-		add_filter( 'parent_file', [ self::class, 'parent_file' ], 10, 1 );
-		add_action( 'parse_request', [ self::class, 'parse_request' ], 10, 1 );
-		add_action( 'parse_query', [ self::class, 'parse_query' ], 10, 1 );
-		add_filter( 'posts_request', [ self::class, 'posts_request' ], 8 /* Must be lower than the Solr's hook */, 2 );
-		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
-		add_filter( 'solr_build_document', [ self::class, 'solr_build_document' ], 10, 2 );
-		add_filter( 'the_posts', [ self::class, 'the_posts' ], 12 /* Must be higher than the Solr's hook */, 2 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_action( 'admin_menu', array( self::class, 'admin_menu' ), PHP_INT_MAX, 0 );
+		add_filter( 'query_vars', array( self::class, 'query_vars' ), PHP_INT_MAX, 1 );
+		add_filter( 'post_type_link', array( self::class, 'post_type_link' ), PHP_INT_MAX >> 1, 2 );
+		add_filter( 'parent_file', array( self::class, 'parent_file' ), 10, 1 );
+		add_action( 'parse_request', array( self::class, 'parse_request' ), 10, 1 );
+		add_action( 'parse_query', array( self::class, 'parse_query' ), 10, 1 );
+		add_filter( 'posts_request', array( self::class, 'posts_request' ), 8 /* Must be lower than the Solr's hook */, 2 );
+		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
+		add_filter( 'solr_build_document', array( self::class, 'solr_build_document' ), 10, 2 );
+		add_filter( 'the_posts', array( self::class, 'the_posts' ), 12 /* Must be higher than the Solr's hook */, 2 );
 	}
 
 	/**
@@ -114,70 +114,100 @@ abstract class RC_Object {
 
 		# Taxonomies
 		## Category
-		register_taxonomy( self::TAXONOMY_CATEGORY, self::$PUBLIC_POST_TYPES, [
-			'public'            => true,
-			'hierarchical'      => false,
-			'show_in_rest'      => true,
-			'show_tagcloud'     => false,
-			'show_admin_column' => true,
-			'rewrite'           => [
-				'slug'         => self::PERMALINK_BASE_TAX_CATEGORY,
-				'hierarchical' => false,
-				'with_front'   => false,
-			],
-			'labels'            => get_taxonomy_labels( get_taxonomy( 'category' ) ),
-		] );
+		register_taxonomy(
+			self::TAXONOMY_CATEGORY,
+			self::$PUBLIC_POST_TYPES,
+			array(
+				'public'            => true,
+				'hierarchical'      => false,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'rewrite'           => array(
+					'slug'         => self::PERMALINK_BASE_TAX_CATEGORY,
+					'hierarchical' => false,
+					'with_front'   => false,
+				),
+				'labels'            => get_taxonomy_labels( get_taxonomy( 'category' ) ),
+			)
+		);
 
 		## Tag
-		$tag_post_types = array_diff( self::$PUBLIC_POST_TYPES, [ External::POST_TYPE ] );
-		register_taxonomy( self::TAXONOMY_TAG, $tag_post_types, [
-			'public'            => false,
-			'hierarchical'      => false,
-			'show_ui'           => true,
-			'show_in_rest'      => true,
-			'show_tagcloud'     => false,
-			'show_admin_column' => true,
-			'rewrite'           => false,
-		] );
+		$tag_post_types = array_diff( self::$PUBLIC_POST_TYPES, array( External::POST_TYPE ) );
+		register_taxonomy(
+			self::TAXONOMY_TAG,
+			$tag_post_types,
+			array(
+				'public'            => false,
+				'hierarchical'      => false,
+				'show_ui'           => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'rewrite'           => false,
+			)
+		);
 
 		## Search Key
-		register_taxonomy( self::TAXONOMY_SEARCH_KEY, self::$PUBLIC_POST_TYPES, [
-			'labels'            => Tools::gen_tax_labels( 'Search Key' ),
-			'public'            => false,
-			'hierarchical'      => false,
-			'show_ui'           => true,
-			'show_in_rest'      => true,
-			'show_tagcloud'     => false,
-			'show_admin_column' => false,
-			'rewrite'           => false
-		] );
+		register_taxonomy(
+			self::TAXONOMY_SEARCH_KEY,
+			self::$PUBLIC_POST_TYPES,
+			array(
+				'labels'            => Tools::gen_tax_labels( 'Search Key' ),
+				'public'            => false,
+				'hierarchical'      => false,
+				'show_ui'           => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => false,
+				'rewrite'           => false,
+			)
+		);
 
 		# Rewrites
 
 		## Taxonomy
 		add_filter(
 			self::TAXONOMY_CATEGORY . '_rewrite_rules',
-			[ self::class, 'rewrite_rules_category' ],
-			PHP_INT_MAX, 0
+			array( self::class, 'rewrite_rules_category' ),
+			PHP_INT_MAX,
+			0
 		);
 
 		## Get Help
-		add_rewrite_rule( self::PERMALINK_GET_HELP . '/?$', 'index.php?' . http_build_query( [
-				self::QV_BASE     => 1,
-				self::QV_GET_HELP => 1,
-			] ), 'top' );
+		add_rewrite_rule(
+			self::PERMALINK_GET_HELP . '/?$',
+			'index.php?' . http_build_query(
+				array(
+					self::QV_BASE     => 1,
+					self::QV_GET_HELP => 1,
+				)
+			),
+			'top'
+		);
 
 		## Trevor Space
-		add_rewrite_rule( self::PERMALINK_TREVORSPACE . '/?$', 'index.php?' . http_build_query( [
-				self::QV_BASE        => 1,
-				self::QV_TREVORSPACE => 1,
-			] ), 'top' );
+		add_rewrite_rule(
+			self::PERMALINK_TREVORSPACE . '/?$',
+			'index.php?' . http_build_query(
+				array(
+					self::QV_BASE        => 1,
+					self::QV_TREVORSPACE => 1,
+				)
+			),
+			'top'
+		);
 
 		## Main Page
-		$main_page_query = "index.php?" . http_build_query( array_merge( [
-				self::QV_BASE         => 1,
-				self::QV_RESOURCES_LP => 1
-			], array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 ) ) );
+		$main_page_query = 'index.php?' . http_build_query(
+			array_merge(
+				array(
+					self::QV_BASE         => 1,
+					self::QV_RESOURCES_LP => 1,
+				),
+				array_fill_keys( RC_Object::$PUBLIC_POST_TYPES, 1 )
+			)
+		);
 
 		add_rewrite_rule(
 			self::PERMALINK_BASE . '/?$',
@@ -193,48 +223,65 @@ abstract class RC_Object {
 		);
 
 		## Post Types
-		$catch_all_q = [
+		$catch_all_q = array(
 			self::QV_BASE               => 1,
-			self::QV_RESOURCES_NON_BLOG => 1
-		];
+			self::QV_RESOURCES_NON_BLOG => 1,
+		);
 
 		### Blog
 		add_rewrite_rule(
-			self::PERMALINK_BLOG . "/([^/]+)/?$",
-			"index.php?" . http_build_query( [
-				self::QV_BASE => 1,
-				'post_type'   => [
-					Post::POST_TYPE,
-					CPT\Post::POST_TYPE,
-				],
-			] ) . "&name=\$matches[1]",
+			self::PERMALINK_BLOG . '/([^/]+)/?$',
+			'index.php?' . http_build_query(
+				array(
+					self::QV_BASE => 1,
+					'post_type'   => array(
+						Post::POST_TYPE,
+						CPT\Post::POST_TYPE,
+					),
+				)
+			) . '&name=$matches[1]',
 			'top'
 		);
 
 		### Article
 		add_rewrite_rule(
-			self::PERMALINK_ARTICLE . "/([^/]+)/?$",
-			"index.php?" . http_build_query( array_merge( $catch_all_q, [
-				'post_type' => Article::POST_TYPE,
-			] ) ) . "&name=\$matches[1]",
+			self::PERMALINK_ARTICLE . '/([^/]+)/?$',
+			'index.php?' . http_build_query(
+				array_merge(
+					$catch_all_q,
+					array(
+						'post_type' => Article::POST_TYPE,
+					)
+				)
+			) . '&name=$matches[1]',
 			'top'
 		);
 
 		### Guide
 		add_rewrite_rule(
-			self::PERMALINK_GUIDE . "/([^/]+)/?$",
-			"index.php?" . http_build_query( array_merge( $catch_all_q, [
-				'post_type' => Guide::POST_TYPE,
-			] ) ) . "&name=\$matches[1]",
+			self::PERMALINK_GUIDE . '/([^/]+)/?$',
+			'index.php?' . http_build_query(
+				array_merge(
+					$catch_all_q,
+					array(
+						'post_type' => Guide::POST_TYPE,
+					)
+				)
+			) . '&name=$matches[1]',
 			'top'
 		);
 
 		### External
 		add_rewrite_rule(
-			self::PERMALINK_EXTERNAL . "/([^/]+)/?$",
-			"index.php?" . http_build_query( array_merge( $catch_all_q, [
-				'post_type' => External::POST_TYPE,
-			] ) ) . "&name=\$matches[1]",
+			self::PERMALINK_EXTERNAL . '/([^/]+)/?$',
+			'index.php?' . http_build_query(
+				array_merge(
+					$catch_all_q,
+					array(
+						'post_type' => External::POST_TYPE,
+					)
+				)
+			) . '&name=$matches[1]',
 			'top'
 		);
 	}
@@ -253,23 +300,44 @@ abstract class RC_Object {
 	public static function post_type_link( string $post_link, \WP_Post $post ): string {
 		switch ( $post->post_type ) {
 			case CPT\RC\Article::POST_TYPE:
-				return trailingslashit( home_url( implode( '/', [
-					'',
-					self::PERMALINK_ARTICLE,
-					$post->post_name
-				] ) ) );
+				return trailingslashit(
+					home_url(
+						implode(
+							'/',
+							array(
+								'',
+								self::PERMALINK_ARTICLE,
+								$post->post_name,
+							)
+						)
+					)
+				);
 			case CPT\RC\Guide::POST_TYPE:
-				return trailingslashit( home_url( implode( '/', [
-					'',
-					self::PERMALINK_GUIDE,
-					$post->post_name
-				] ) ) );
+				return trailingslashit(
+					home_url(
+						implode(
+							'/',
+							array(
+								'',
+								self::PERMALINK_GUIDE,
+								$post->post_name,
+							)
+						)
+					)
+				);
 			case CPT\RC\External::POST_TYPE:
-				return trailingslashit( home_url( implode( '/', [
-					'',
-					self::PERMALINK_EXTERNAL,
-					$post->post_name
-				] ) ) );
+				return trailingslashit(
+					home_url(
+						implode(
+							'/',
+							array(
+								'',
+								self::PERMALINK_EXTERNAL,
+								$post->post_name,
+							)
+						)
+					)
+				);
 			case CPT\Post::POST_TYPE:
 			case CPT\RC\Post::POST_TYPE:
 				if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX /* TODO: We need a qVar flag to force it */ ) ) {
@@ -297,10 +365,10 @@ abstract class RC_Object {
 	public static function rewrite_rules_category(): array {
 		global $wp_rewrite;
 
-		return [
+		return array(
 			self::PERMALINK_BASE_TAX_CATEGORY . "/([^/]+)/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$" => 'index.php?' . self::TAXONOMY_CATEGORY . '=$matches[1]&paged=$matches[2]',
-			self::PERMALINK_BASE_TAX_CATEGORY . '/([^/]+)/?$'                                             => 'index.php?' . self::TAXONOMY_CATEGORY . '=$matches[1]'
-		];
+			self::PERMALINK_BASE_TAX_CATEGORY . '/([^/]+)/?$'                                             => 'index.php?' . self::TAXONOMY_CATEGORY . '=$matches[1]',
+		);
 	}
 
 	/**
@@ -314,14 +382,14 @@ abstract class RC_Object {
 	public static function admin_menu(): void {
 		global $menu, $submenu;
 
-		$indexes  = [];
-		$slug_map = [];
-		$pt_map   = [];
-		$sm_lists = [];
+		$indexes  = array();
+		$slug_map = array();
+		$pt_map   = array();
+		$sm_lists = array();
 
 		# Produce slugs
 		foreach ( self::$ALL_POST_TYPES as $post_type ) {
-			$slug                 = "edit.php?" . http_build_query( compact( 'post_type' ) );
+			$slug                 = 'edit.php?' . http_build_query( compact( 'post_type' ) );
 			$slug_map[ $slug ]    = $post_type;
 			$pt_map[ $post_type ] = $slug;
 		}
@@ -368,7 +436,7 @@ abstract class RC_Object {
 		$menu[ $lead_idx ][0] = 'Resource Center';
 
 		# Make room on the lead submenu
-		$lead_sm_rest = [];
+		$lead_sm_rest = array();
 		foreach ( array_slice( $lead_sm_idx_map, 2 ) as $idx => $old_idx ) {
 			$lead_sm_rest[ $old_idx + $idx_count + 5 ] = $lead_sm[ $old_idx ];
 		}
@@ -378,7 +446,7 @@ abstract class RC_Object {
 			unset( $menu[ $indexes[ $pt ] ] );
 
 			# Collect the submenu list
-			$slug = $pt_map[ $pt ];
+			$slug            = $pt_map[ $pt ];
 			list( $sm_list ) = array_slice( $submenu[ $slug ], 0, 1 );
 			$sm_lists[ $pt ] = $sm_list;
 
@@ -388,7 +456,7 @@ abstract class RC_Object {
 
 		# Combine all
 		$lead_sm_list = $lead_sm[ $lead_sm_idx_map[0] ];
-		$lead_sm      = [ $lead_sm_idx_map[0] => $lead_sm_list ];
+		$lead_sm      = array( $lead_sm_idx_map[0] => $lead_sm_list );
 
 		for ( $i = 1; $i < $idx_count; $i ++ ) {
 			$pt                                    = self::$ALL_POST_TYPES[ $i ];
@@ -409,13 +477,16 @@ abstract class RC_Object {
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, [
-			self::QV_BASE,
-			self::QV_RESOURCES_LP,
-			self::QV_RESOURCES_NON_BLOG,
-			self::QV_GET_HELP,
-			self::QV_TREVORSPACE,
-		] );
+		return array_merge(
+			$vars,
+			array(
+				self::QV_BASE,
+				self::QV_RESOURCES_LP,
+				self::QV_RESOURCES_NON_BLOG,
+				self::QV_GET_HELP,
+				self::QV_TREVORSPACE,
+			)
+		);
 	}
 
 	/**
@@ -430,10 +501,10 @@ abstract class RC_Object {
 	 */
 	public static function parent_file( string $parent_file ): string {
 		# Fix glossary main menu
-		if ( $parent_file == ( "edit.php?post_type=" . Glossary::POST_TYPE ) ||
-		     $parent_file == ( "edit.php?post_type=" . External::POST_TYPE )
+		if ( $parent_file == ( 'edit.php?post_type=' . Glossary::POST_TYPE ) ||
+			 $parent_file == ( 'edit.php?post_type=' . External::POST_TYPE )
 		) {
-			$parent_file = "edit.php?post_type=" . reset( self::$ALL_POST_TYPES );
+			$parent_file = 'edit.php?post_type=' . reset( self::$ALL_POST_TYPES );
 		}
 
 		return $parent_file;
@@ -457,16 +528,18 @@ abstract class RC_Object {
 			$wp->query_vars['post_type'] = null;
 			$wp->query_vars['name']      = '';
 		} elseif ( ! empty( $post_type = @$wp->query_vars['post_type'] ) ) {
-			$blog_pts = [ Post::POST_TYPE, CPT\Post::POST_TYPE ];
+			$blog_pts = array( Post::POST_TYPE, CPT\Post::POST_TYPE );
 			if (
 				( is_array( $post_type ) && ! empty( array_intersect( $post_type, $blog_pts ) ) )
 				|| in_array( $post_type, $blog_pts )
 			) {
-				$posts = get_posts( [
-					'post_type'     => $blog_pts,
-					'numberposts'   => 1,
-					'post_name__in' => [ $wp->query_vars['name'] ]
-				] );
+				$posts = get_posts(
+					array(
+						'post_type'     => $blog_pts,
+						'numberposts'   => 1,
+						'post_name__in' => array( $wp->query_vars['name'] ),
+					)
+				);
 
 				if ( ! empty( $posts ) ) {
 					$first_post = reset( $posts );
@@ -510,7 +583,7 @@ abstract class RC_Object {
 		}
 
 		# Taxonomy Pagination
-		if ( $query->is_tax( [ self::TAXONOMY_CATEGORY, self::TAXONOMY_TAG ] ) ) {
+		if ( $query->is_tax( array( self::TAXONOMY_CATEGORY, self::TAXONOMY_TAG ) ) ) {
 			$query->set( 'posts_per_page', Resource_Center::get_val( Resource_Center::SETTING_PAGINATION_TAX_ARCHIVE ) );
 		}
 	}
@@ -529,7 +602,7 @@ abstract class RC_Object {
 		/* We need to modify the post_type qv right this time and just before the solr */
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp && $query->is_search() ) {
-			$query->set( 'post_type', array_merge( self::$PUBLIC_POST_TYPES, [ Glossary_Entry::POST_TYPE ] ) );
+			$query->set( 'post_type', array_merge( self::$PUBLIC_POST_TYPES, array( Glossary_Entry::POST_TYPE ) ) );
 		}
 
 		return $request;
@@ -546,7 +619,7 @@ abstract class RC_Object {
 			return $base;
 		}
 
-		return $base . '?' . http_build_query( [ 's' => $term ] );
+		return $base . '?' . http_build_query( array( 's' => $term ) );
 	}
 
 	/**

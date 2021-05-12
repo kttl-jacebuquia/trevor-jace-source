@@ -14,23 +14,26 @@ class Partnership extends Get_Involved_Object {
 	/** @inheritDoc */
 	public static function register_post_type(): void {
 		# Post Type
-		register_post_type( self::POST_TYPE, [
-			'labels'              => [
-				'name'          => 'Partnerships',
-				'singular_name' => 'Partnership',
-				'add_new'       => 'Add New Partnership'
-			],
-			'public'              => false,
-			'hierarchical'        => false,
-			'exclude_from_search' => true,
-			'show_in_rest'        => true,
-			'show_ui'             => true,
-			'supports'            => [
-				'title',
-				'thumbnail',
-			],
-			'has_archive'         => false,
-			'rewrite'             => false,
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'labels'              => array(
+					'name'          => 'Partnerships',
+					'singular_name' => 'Partnership',
+					'add_new'       => 'Add New Partnership',
+				),
+				'public'              => false,
+				'hierarchical'        => false,
+				'exclude_from_search' => true,
+				'show_in_rest'        => true,
+				'show_ui'             => true,
+				'supports'            => array(
+					'title',
+					'thumbnail',
+				),
+				'has_archive'         => false,
+				'rewrite'             => false,
+			)
+		);
 	}
 }

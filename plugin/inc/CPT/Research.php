@@ -11,8 +11,8 @@ class Research {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_action( 'pre_get_posts', [ self::class, 'pre_get_posts' ], 10, 1 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_action( 'pre_get_posts', array( self::class, 'pre_get_posts' ), 10, 1 );
 	}
 
 	/**
@@ -21,31 +21,34 @@ class Research {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		register_post_type( self::POST_TYPE, [
-			'public'              => true,
-			'hierarchical'        => false,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
-			'show_ui'             => true,
-			'show_in_rest'        => true,
-			'has_archive'         => true,
-			'rewrite'             => [
-				'slug'       => Research_Briefs::get_val( Research_Briefs::SETTING_SLUG ),
-				'with_front' => false,
-				'feeds'      => false,
-			],
-			'supports'            => [
-				'title',
-				'editor',
-				'thumbnail',
-				'custom-fields',
-				'excerpt',
-			],
-			'labels'              => [
-				'name'          => 'Research',
-				'singular_name' => 'Research Brief',
-			],
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'public'              => true,
+				'hierarchical'        => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => true,
+				'show_ui'             => true,
+				'show_in_rest'        => true,
+				'has_archive'         => true,
+				'rewrite'             => array(
+					'slug'       => Research_Briefs::get_val( Research_Briefs::SETTING_SLUG ),
+					'with_front' => false,
+					'feeds'      => false,
+				),
+				'supports'            => array(
+					'title',
+					'editor',
+					'thumbnail',
+					'custom-fields',
+					'excerpt',
+				),
+				'labels'              => array(
+					'name'          => 'Research',
+					'singular_name' => 'Research Brief',
+				),
+			)
+		);
 	}
 
 	/**

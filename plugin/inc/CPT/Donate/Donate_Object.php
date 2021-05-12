@@ -8,31 +8,31 @@ abstract class Donate_Object {
 	const POST_TYPE_PREFIX = Main::POST_TYPE_PREFIX;
 
 	/* Query Vars */
-	const QV_DONATE = Main::QV_PREFIX . 'donate';
-	const QV_FUNDRAISE = Main::QV_PREFIX . 'fundraise';
+	const QV_DONATE            = Main::QV_PREFIX . 'donate';
+	const QV_FUNDRAISE         = Main::QV_PREFIX . 'fundraise';
 	const QV_PROD_PARTNERSHIPS = Main::QV_PREFIX . 'prod_partnerships';
 
-	const _QV_ALL = [
+	const _QV_ALL = array(
 		self::QV_DONATE,
 		self::QV_FUNDRAISE,
 		self::QV_PROD_PARTNERSHIPS,
-	];
+	);
 
 	/* Permalinks */
-	const PERMALINK_DONATE = 'donate';
-	const PERMALINK_FUNDRAISE = 'fundraise';
-	const PERMALINK_PROD_PARTNERS = 'shop-products';
+	const PERMALINK_DONATE            = 'donate';
+	const PERMALINK_FUNDRAISE         = 'fundraise';
+	const PERMALINK_PROD_PARTNERS     = 'shop-products';
 	const PERMALINK_PROD_PARTNERSHIPS = 'product-partnerships';
-	const PERMALINK_FUND_STORY = 'fundraise/success-stories';
+	const PERMALINK_FUND_STORY        = 'fundraise/success-stories';
 
 	/**
 	 * @var string[]
 	 */
-	static $ALL_POST_TYPES = [
+	static $ALL_POST_TYPES = array(
 		Prod_Partner::POST_TYPE,
 		Partner_Prod::POST_TYPE,
 		Fundraiser_Stories::POST_TYPE,
-	];
+	);
 
 	/**
 	 * @see construct()
@@ -43,11 +43,11 @@ abstract class Donate_Object {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	final public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], PHP_INT_MAX, 1 );
-		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_filter( 'query_vars', array( self::class, 'query_vars' ), PHP_INT_MAX, 1 );
+		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
 
-		add_action( 'template_redirect', [ self::class, 'template_redirect' ], 10, 0 );
+		add_action( 'template_redirect', array( self::class, 'template_redirect' ), 10, 0 );
 	}
 
 	public static function init(): void {
@@ -59,17 +59,23 @@ abstract class Donate_Object {
 		# Rewrites
 		## Single Pages
 		foreach (
-			[
-				[ self::PERMALINK_DONATE, self::QV_DONATE ],
-				[ self::PERMALINK_FUNDRAISE, self::QV_FUNDRAISE ],
-				[ self::PERMALINK_PROD_PARTNERSHIPS, self::QV_PROD_PARTNERSHIPS ],
-			] as list(
+			array(
+				array( self::PERMALINK_DONATE, self::QV_DONATE ),
+				array( self::PERMALINK_FUNDRAISE, self::QV_FUNDRAISE ),
+				array( self::PERMALINK_PROD_PARTNERSHIPS, self::QV_PROD_PARTNERSHIPS ),
+			) as list(
 			$regex, $qv
 		)
 		) {
-			add_rewrite_rule( $regex . '/?$', 'index.php?' . http_build_query( [
-					$qv => 1,
-				] ), 'top' );
+			add_rewrite_rule(
+				$regex . '/?$',
+				'index.php?' . http_build_query(
+					array(
+						$qv => 1,
+					)
+				),
+				'top'
+			);
 		}
 	}
 

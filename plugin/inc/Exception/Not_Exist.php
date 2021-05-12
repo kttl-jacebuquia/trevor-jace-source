@@ -6,7 +6,7 @@
  */
 class Not_Exist extends Exception {
 	/** @inheritdoc */
-	public function __construct( $message = "", $code = 0, \Exception $previous = null ) {
+	public function __construct( $message = '', $code = 0, \Exception $previous = null ) {
 		if ( empty( $message ) ) {
 			$message = __( 'You attempted to edit an item that doesn&#8217;t exist. Perhaps it was deleted?' );
 		}

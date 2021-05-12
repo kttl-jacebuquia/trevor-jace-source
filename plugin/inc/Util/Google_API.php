@@ -81,7 +81,7 @@ class Google_API {
 			# Renew if necessary
 			if ( $validate_token && $has_token && self::$_client->isAccessTokenExpired() ) {
 				self::set_token( self::$_client->fetchAccessTokenWithRefreshToken(), false );
-				Log::info( "Google access token is updated using the refresh token." );
+				Log::info( 'Google access token is updated using the refresh token.' );
 			}
 		}
 

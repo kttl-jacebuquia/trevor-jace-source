@@ -4,13 +4,13 @@ use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
 
 abstract class A_Options_Page extends A_Field_Group {
 	const PAGE_SLUG_PREFIX = 'trvr--';
-	const PAGE_SLUG = '';
+	const PAGE_SLUG        = '';
 
 	/**
 	 * @return array
 	 */
 	protected static function prepare_page_register_args(): array {
-		return [];
+		return array();
 	}
 
 	/**
@@ -20,18 +20,18 @@ abstract class A_Options_Page extends A_Field_Group {
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
-		return [
+		return array(
 			'key'    => static::gen_key(),
 			'fields' => static::prepare_fields(),
 			'title'  => str_replace( '_', ' ', ( new \ReflectionClass( static::class ) )->getShortName() ),
-		];
+		);
 	}
 
 	/**
 	 * @return string
 	 */
 	public static function gen_page_slug(): string {
-		static $cache = [];
+		static $cache = array();
 
 		if ( ! array_key_exists( static::class, $cache ) ) {
 			$cache[ static::class ] = empty( static::PAGE_SLUG )
@@ -48,7 +48,7 @@ abstract class A_Options_Page extends A_Field_Group {
 	 * @return mixed
 	 */
 	public static function get_page_register_args( string $key = null ) {
-		static $cache = [];
+		static $cache = array();
 
 		if ( ! array_key_exists( static::class, $cache ) ) {
 			$args = static::prepare_page_register_args();

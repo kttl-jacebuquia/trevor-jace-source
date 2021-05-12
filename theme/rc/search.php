@@ -7,8 +7,8 @@ $no_results = empty( $wp_query->found_posts );
 	<div class="container mx-auto site-content-inner">
 		<div class="search-input-wrap md:mx-auto mb-10 md:mb-12 lg:mb-20 mt-5 md:mb-12 md:mt-10 md:w-2/3 lg:w-1/2 lg:my-10">
 			<form role="search" method="get" class="search-form"
-				  action="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ) ?>">
-				<?= \TrevorWP\Theme\Helper\Search_Input::render_rc("What do you want to learn about?") ?>
+				  action="<?php echo esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ); ?>">
+				<?php echo \TrevorWP\Theme\Helper\Search_Input::render_rc( 'What do you want to learn about?' ); ?>
 			</form>
 		</div>
 
@@ -17,17 +17,18 @@ $no_results = empty( $wp_query->found_posts );
 				<h1 class="search-results-list-title text-white text-center text-base mb-5 md:mb-10 lg:mb-10">
 					<?php if ( $no_results ) { ?>
 						<span class="leading-px20 font-medium md:font-light md:text-px18 md:leading-px26 lg:font-normal lg:text-px22 lg:leading-px32 lg:tracking-px05">
-						There are no results for “<?= get_search_query() ?>”
+						There are no results for “<?php echo get_search_query(); ?>”
 					</span>
 					<?php } else { ?>
 						<span class="leading-px22 font-normal md:text-px18 md:leading-px24 lg:text-px22 lg:leading-px32 lg:tracking-px05">
-						Search Results for “<span class="font-extrabold md:font-normal"><?= get_search_query() ?></span>”
+						Search Results for “<span class="font-extrabold md:font-normal"><?php echo get_search_query(); ?></span>”
 					</span>
 					<?php } ?>
 				</h1>
 				<?php if ( have_posts() ) { ?>
 					<div class="search-results-list trevor-grid-default">
-						<?php while ( have_posts() ) {
+						<?php
+						while ( have_posts() ) {
 							the_post();
 							echo \TrevorWP\Theme\Helper\Card::post( get_post() );
 							?>
@@ -37,7 +38,7 @@ $no_results = empty( $wp_query->found_posts );
 							<?php get_template_part( 'template-parts/pagination' ); ?>
 						</div>
 					</div>
-				<?php } else if ( $no_results ) { ?>
+				<?php } elseif ( $no_results ) { ?>
 					<div class="search-results-popular-wrap text-center flex-1 text-white">
 						<h2 class="font-semibold text-px26 leading-px32 -tracking-px05 mb-2 md:text-px32 md:leading-px42 md:tracking-em_001 lg:text-px46 lg:leading-px56">
 							Popular Searches
@@ -46,23 +47,25 @@ $no_results = empty( $wp_query->found_posts );
 							Here’s some popular search terms other people have been exploring:
 						</p>
 						<div class="flex flex-wrap justify-center mb-20 lg:mb-40 lg:w-3/6 lg:mx-auto">
-							<?php foreach (
-									[
-											'Arbitrary Data',
-											'Not Implemented!',
-											'Coming Out',
-											'Mental Health',
-											'Gay',
-											'Lesbian',
-											'Bisexual',
-											'Queer',
-											'Nonbinary',
-											'Gender',
-											'Transgender',
-									] as $search
-							) { ?>
-								<a href="<?= esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url( $search ) ) ?>"
-								   class="bg-violet-light hover:bg-melrose text-indigo font-medium text-px14 leading-px18 tracking-em001 rounded-full py-1.5 px-3.5 mb-3 mr-2"><?= esc_html( $search ) ?></a>
+							<?php
+							foreach (
+									array(
+										'Arbitrary Data',
+										'Not Implemented!',
+										'Coming Out',
+										'Mental Health',
+										'Gay',
+										'Lesbian',
+										'Bisexual',
+										'Queer',
+										'Nonbinary',
+										'Gender',
+										'Transgender',
+									) as $search
+							) {
+								?>
+								<a href="<?php echo esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url( $search ) ); ?>"
+								   class="bg-violet-light hover:bg-melrose text-indigo font-medium text-px14 leading-px18 tracking-em001 rounded-full py-1.5 px-3.5 mb-3 mr-2"><?php echo esc_html( $search ); ?></a>
 							<?php } ?>
 						</div>
 					</div>
@@ -70,6 +73,6 @@ $no_results = empty( $wp_query->found_posts );
 			</div>
 		</div>
 	</div>
-	<?= \TrevorWP\Theme\Helper\Categories::render_rc_featured_hero(); ?>
+	<?php echo \TrevorWP\Theme\Helper\Categories::render_rc_featured_hero(); ?>
 </main>
 <?php get_footer(); ?>

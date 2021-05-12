@@ -12,7 +12,7 @@ class Footer_Print extends Twig\Node\Node {
 	 * @param string $tag
 	 */
 	public function __construct( Twig\Node\Node $body, $line_no, $tag = 'footerprint' ) {
-		parent::__construct( [ 'body' => $body ], [], $line_no, $tag );
+		parent::__construct( array( 'body' => $body ), array(), $line_no, $tag );
 	}
 
 	/**

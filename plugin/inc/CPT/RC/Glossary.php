@@ -17,24 +17,27 @@ class Glossary extends RC_Object {
 	/** @inheritDoc */
 	static function register_post_type(): void {
 		# Post Type
-		register_post_type( self::POST_TYPE, [
-			'labels'              => [
-				'name'          => 'Glossary',
-				'singular_name' => 'Glossary Entry',
-				'add_new'       => 'Add New Entry'
-			],
-			'public'              => false,
-			'show_ui'             => true,
-			'hierarchical'        => false,
-			'show_in_rest'        => true,
-			'supports'            => [ 'title' ],
-			'has_archive'         => false,
-			'rewrite'             => false,
-			'exclude_from_search' => false,
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'labels'              => array(
+					'name'          => 'Glossary',
+					'singular_name' => 'Glossary Entry',
+					'add_new'       => 'Add New Entry',
+				),
+				'public'              => false,
+				'show_ui'             => true,
+				'hierarchical'        => false,
+				'show_in_rest'        => true,
+				'supports'            => array( 'title' ),
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => false,
+			)
+		);
 
 		# Check page id for rest of the hooks
-		add_action( 'current_screen', [ self::class, 'current_screen' ] );
+		add_action( 'current_screen', array( self::class, 'current_screen' ) );
 	}
 
 	/**
@@ -51,13 +54,13 @@ class Glossary extends RC_Object {
 		}
 
 		# Add custom meta boxes
-		add_action( 'edit_form_after_title', [ self::class, 'edit_form_after_title' ] );
+		add_action( 'edit_form_after_title', array( self::class, 'edit_form_after_title' ) );
 
 		# Title -> Name
-		add_filter( 'enter_title_here', [ self::class, 'enter_title_here' ] );
+		add_filter( 'enter_title_here', array( self::class, 'enter_title_here' ) );
 
 		# Save post filter for WP_Post params
-		add_filter( 'wp_insert_post_data', [ self::class, 'wp_insert_post_data' ] );
+		add_filter( 'wp_insert_post_data', array( self::class, 'wp_insert_post_data' ) );
 	}
 
 	/**
@@ -69,9 +72,12 @@ class Glossary extends RC_Object {
 	 * @see current_screen()
 	 */
 	public static function edit_form_after_title( WP_Post $post ): void {
-		echo Main::get_twig()->render( 'admin/rc/glossary/edit/after-title.twig', [
-			'post' => $post,
-		] );
+		echo Main::get_twig()->render(
+			'admin/rc/glossary/edit/after-title.twig',
+			array(
+				'post' => $post,
+			)
+		);
 	}
 
 	/**

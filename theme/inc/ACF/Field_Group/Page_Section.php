@@ -27,72 +27,75 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		return array_merge(
 			parent::_get_fields(),
 			static::_gen_tab_field( 'Styling' ),
-			[
-				static::FIELD_TYPE        => [
+			array(
+				static::FIELD_TYPE        => array(
 					'name'    => static::FIELD_TYPE,
 					'key'     => $type,
 					'label'   => 'Type',
 					'default' => static::TYPE_VERTICAL,
 					'type'    => 'select',
-					'choices' => [
-							static::TYPE_VERTICAL   => 'Vertical',
-							static::TYPE_HORIZONTAL => 'Horizontal',
-					],
-					'wrapper' => [
+					'choices' => array(
+						static::TYPE_VERTICAL   => 'Vertical',
+						static::TYPE_HORIZONTAL => 'Horizontal',
+					),
+					'wrapper' => array(
 						'width' => '50',
-					],
-				],
-				static::FIELD_TITLE_ALIGN => [
+					),
+				),
+				static::FIELD_TITLE_ALIGN => array(
 					'name'    => static::FIELD_TITLE_ALIGN,
 					'key'     => $title_align,
 					'label'   => 'Title Align',
 					'type'    => 'select',
 					'default' => static::TITLE_ALIGN_CENTERED,
-					'choices' => [
-							static::TITLE_ALIGN_CENTERED         => 'Centered',
-							static::TITLE_ALIGN_LEFT             => 'Left',
-							static::TITLE_ALIGN_CENTERED_XL_LEFT => 'Centered, XL:Left'
-					],
-					'wrapper' => [
+					'choices' => array(
+						static::TITLE_ALIGN_CENTERED => 'Centered',
+						static::TITLE_ALIGN_LEFT     => 'Left',
+						static::TITLE_ALIGN_CENTERED_XL_LEFT => 'Centered, XL:Left',
+					),
+					'wrapper' => array(
 						'width' => '50',
-					],
-				],
+					),
+				),
 				static::FIELD_BG_COLOR    => Field\Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_COLOR,
 					array(
 						'label'   => 'Background Color',
 						'default' => 'white',
-						'wrapper' => [
+						'wrapper' => array(
 							'width' => '50',
-						],
+						),
 					)
 				),
-				static::FIELD_TEXT_COLOR    => Field\Color::gen_args(
+				static::FIELD_TEXT_COLOR  => Field\Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(
 						'label'   => 'Text Color',
 						'default' => 'teal-dark',
-						'wrapper' => [
+						'wrapper' => array(
 							'width' => '50',
-						],
+						),
 					),
 				),
-			]
+			)
 		);
 	}
 
 	/** @inheritDoc */
 	public static function get_block_args(): array {
-		return array_merge( parent::get_block_args(), [
+		return array_merge(
+			parent::get_block_args(),
+			array(
 				'name'       => static::get_key(),
 				'title'      => 'Page Section',
-				'post_types' => [ 'page' ],
-				'supports'   => [
-						'jsx' => true,
-				],
-		] );
+				'post_types' => array( 'page' ),
+				'supports'   => array(
+					'jsx' => true,
+				),
+			)
+		);
 	}
 
 	/** @inheritDoc */
@@ -100,15 +103,15 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		$data             = (array) @$block['data'];
 		$val              = new Field_Val_Getter( static::class, $post_id, $data );
 		$type             = $val->get( static::FIELD_TYPE );
-		$wrap_cls         = [ 'page-section', "page-section-type-${type}", 'py-20 xl:py-24' ];
-		$inner_cls        = [ 'page-section-inner', 'container mx-auto' ];
-		$content_wrap_cls = [ 'page-section-content-wrap' ];
-		$title_wrap_cls   = [ 'page-sub-title-wrap' ];
-		$title_cls        = [ 'page-sub-title', 'page-section-title' ];
-		$desc_cls         = [ 'page-sub-title-desc', 'page-section-title-desc' ];
-		$btn_cls          = [
-				'wrap_cls' => [],
-		];
+		$wrap_cls         = array( 'page-section', "page-section-type-${type}", 'py-20 xl:py-24' );
+		$inner_cls        = array( 'page-section-inner', 'container mx-auto' );
+		$content_wrap_cls = array( 'page-section-content-wrap' );
+		$title_wrap_cls   = array( 'page-sub-title-wrap' );
+		$title_cls        = array( 'page-sub-title', 'page-section-title' );
+		$desc_cls         = array( 'page-sub-title-desc', 'page-section-title-desc' );
+		$btn_cls          = array(
+			'wrap_cls' => array(),
+		);
 
 		# Additional wrapper classes.
 		$bg_color  = $val->get( static::FIELD_BG_COLOR );
@@ -142,17 +145,21 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 			default:
 				$title_wrap_cls[] = 'flex flex-col items-center';
-				$title_cls[] 	  = 'mb-px14 text-center';
-				$desc_cls[]  	  = 'tracking-px05 mb-0 text-center';
-				$desc_cls[]  	  = 'md:mt-0';
+				$title_cls[]      = 'mb-px14 text-center';
+				$desc_cls[]       = 'tracking-px05 mb-0 text-center';
+				$desc_cls[]       = 'md:mt-0';
 				break;
 		}
 
 		ob_start(); ?>
-		<div <?= Tools::flat_attr( array_filter( [ 'class' => implode( ' ', $content_wrap_cls ) ] ) ) ?>>
+		<div <?php echo Tools::flat_attr( array_filter( array( 'class' => implode( ' ', $content_wrap_cls ) ) ) ); ?>>
 			<InnerBlocks/>
 		</div>
-		<?php static::render_block_wrapper( $block, ob_get_clean(), [
+		<?php
+		static::render_block_wrapper(
+			$block,
+			ob_get_clean(),
+			array(
 				'wrap_cls'       => $wrap_cls,
 				'title_cls'      => $title_cls,
 				'desc_cls'       => $desc_cls,
@@ -160,6 +167,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 				'inner_cls'      => $inner_cls,
 				'btn_cls'        => $btn_cls,
 				'btn_inside'     => $type == static::TYPE_HORIZONTAL,
-		] );
+			)
+		);
 	}
 }

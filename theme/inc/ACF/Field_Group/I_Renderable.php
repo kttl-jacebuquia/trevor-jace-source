@@ -8,5 +8,5 @@ interface I_Renderable {
 	 *
 	 * @return string|null
 	 */
-	public static function render( $post = false, array $data = null, array $options = [] ): ?string;
+	public static function render( $post = false, array $data = null, array $options = array() ): ?string;
 }

@@ -27,10 +27,10 @@ class Tools {
 
 			if ( get_query_var( RC_Object::QV_GET_HELP ) ) {
 				$type = 'get_help';
-			} else if ( get_query_var( RC_Object::QV_TREVORSPACE ) ) {
+			} elseif ( get_query_var( RC_Object::QV_TREVORSPACE ) ) {
 				$type = 'trevorspace';
 			}
-		} else if ( get_query_var( Search::QV_SEARCH ) ) {
+		} elseif ( get_query_var( Search::QV_SEARCH ) ) {
 			$type = 'search';
 		} else {
 			$type = 'default';

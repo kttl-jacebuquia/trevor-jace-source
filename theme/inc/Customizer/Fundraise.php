@@ -10,79 +10,79 @@ class Fundraise extends Abstract_Customizer {
 	const PANEL_ID = self::ID_PREFIX . 'fundraise';
 
 	/** Sections */
-	const SECTION_HEADER = self::PANEL_ID . '_header';
-	const SECTION_FEATURED_TEXT = self::PANEL_ID . '_featured_text';
-	const SECTION_THREE = self::PANEL_ID . '_three_column';
-	const SECTION_ONE = self::PANEL_ID . '_one_column';
-	const SECTION_LINK = self::PANEL_ID . '_links';
-	const SECTION_PARTNER = self::PANEL_ID . '_partner';
+	const SECTION_HEADER          = self::PANEL_ID . '_header';
+	const SECTION_FEATURED_TEXT   = self::PANEL_ID . '_featured_text';
+	const SECTION_THREE           = self::PANEL_ID . '_three_column';
+	const SECTION_ONE             = self::PANEL_ID . '_one_column';
+	const SECTION_LINK            = self::PANEL_ID . '_links';
+	const SECTION_PARTNER         = self::PANEL_ID . '_partner';
 	const SECTION_SUCCESS_STORIES = self::PANEL_ID . '_success_stories';
-	const SECTION_TOP_LIST = self::PANEL_ID . '_top_list';
-	const SECTION_QUESTIONS = self::PANEL_ID . '_question';
-	const SECTION_OTHER = self::PANEL_ID . '_other';
+	const SECTION_TOP_LIST        = self::PANEL_ID . '_top_list';
+	const SECTION_QUESTIONS       = self::PANEL_ID . '_question';
+	const SECTION_OTHER           = self::PANEL_ID . '_other';
 
 	/** Settings */
 
 	/** Featured Text */
 	const PREFIX_SETTING_FEATURED_TEXT = self::SECTION_FEATURED_TEXT . '_';
-	const SETTING_FEATURED_TEXT_TITLE = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_title';
-	const SETTING_FEATURED_TEXT_DESC = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_desc';
+	const SETTING_FEATURED_TEXT_TITLE  = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_title';
+	const SETTING_FEATURED_TEXT_DESC   = self::PREFIX_SETTING_FEATURED_TEXT . 'featured_desc';
 
 	/** Three Column Text */
 	const PREFIX_SETTING_THREE = self::SECTION_THREE . '_';
-	const SETTING_THREE_TITLE = self::PREFIX_SETTING_THREE . 'three_title';
-	const SETTING_THREE_DATA = self::PREFIX_SETTING_THREE . 'three_data';
+	const SETTING_THREE_TITLE  = self::PREFIX_SETTING_THREE . 'three_title';
+	const SETTING_THREE_DATA   = self::PREFIX_SETTING_THREE . 'three_data';
 
 	/** One Column Text */
 	const PREFIX_SETTING_ONE = self::SECTION_ONE . '_';
-	const SETTING_ONE_DATA = self::PREFIX_SETTING_ONE . 'one_data';
+	const SETTING_ONE_DATA   = self::PREFIX_SETTING_ONE . 'one_data';
 
 	/** Three Column Text */
 	const PREFIX_SETTING_LINKS = self::SECTION_LINK . '_';
-	const SETTING_LINK_TITLE = self::PREFIX_SETTING_LINKS . 'link_title';
-	const SETTING_LINK_DESC = self::PREFIX_SETTING_LINKS . 'link_desc';
-	const SETTING_LINK_DATA = self::PREFIX_SETTING_THREE . 'link_data';
+	const SETTING_LINK_TITLE   = self::PREFIX_SETTING_LINKS . 'link_title';
+	const SETTING_LINK_DESC    = self::PREFIX_SETTING_LINKS . 'link_desc';
+	const SETTING_LINK_DATA    = self::PREFIX_SETTING_THREE . 'link_data';
 
 	/** Become a Partner */
-	const PREFIX_SETTING_PARTNER = self::SECTION_PARTNER . '_';
-	const SETTING_PARTNER_TITLE = self::PREFIX_SETTING_PARTNER . 'link_title';
-	const SETTING_PARTNER_DESC = self::PREFIX_SETTING_PARTNER . 'link_desc';
-	const SETTING_PARTNER_CTA = self::PREFIX_SETTING_PARTNER . 'link_cta';
+	const PREFIX_SETTING_PARTNER   = self::SECTION_PARTNER . '_';
+	const SETTING_PARTNER_TITLE    = self::PREFIX_SETTING_PARTNER . 'link_title';
+	const SETTING_PARTNER_DESC     = self::PREFIX_SETTING_PARTNER . 'link_desc';
+	const SETTING_PARTNER_CTA      = self::PREFIX_SETTING_PARTNER . 'link_cta';
 	const SETTING_PARTNER_CTA_LINK = self::PREFIX_SETTING_PARTNER . 'link_url';
 
 	/** Success Stories */
-	const PREFIX_SUCCESS_STORIES = self::SECTION_SUCCESS_STORIES . '_';
+	const PREFIX_SUCCESS_STORIES        = self::SECTION_SUCCESS_STORIES . '_';
 	const SETTING_SUCCESS_STORIES_TITLE = self::PREFIX_SUCCESS_STORIES . 'title';
-	const SETTING_SUCCESS_STORIES_DESC = self::PREFIX_SUCCESS_STORIES . 'desc';
+	const SETTING_SUCCESS_STORIES_DESC  = self::PREFIX_SUCCESS_STORIES . 'desc';
 
 	/** Top List */
-	const PREFIX_TOP_LIST = self::SECTION_TOP_LIST . '_';
-	const SETTING_TOP_LIST_TITLE = self::PREFIX_TOP_LIST . 'title';
-	const SETTING_TOP_LIST_DESC = self::PREFIX_TOP_LIST . 'desc';
-	const SETTING_TOP_LIST_CAMPAIGN_ID = self::PREFIX_TOP_LIST . 'campaign_id';
-	const SETTING_TOP_LIST_COUNT = self::PREFIX_TOP_LIST . 'count';
+	const PREFIX_TOP_LIST                   = self::SECTION_TOP_LIST . '_';
+	const SETTING_TOP_LIST_TITLE            = self::PREFIX_TOP_LIST . 'title';
+	const SETTING_TOP_LIST_DESC             = self::PREFIX_TOP_LIST . 'desc';
+	const SETTING_TOP_LIST_CAMPAIGN_ID      = self::PREFIX_TOP_LIST . 'campaign_id';
+	const SETTING_TOP_LIST_COUNT            = self::PREFIX_TOP_LIST . 'count';
 	const SETTING_TOP_LIST_PLACEHOLDER_LOGO = self::PREFIX_TOP_LIST . 'placeholder_logo';
 
 	/** Questions */
-	const PREFIX_QUESTIONS = self::SECTION_QUESTIONS . '_';
-	const SETTING_QUESTIONS_TITLE = self::PREFIX_QUESTIONS . 'link_title';
-	const SETTING_QUESTIONS_DESC = self::PREFIX_QUESTIONS . 'link_desc';
-	const SETTING_QUESTIONS_CTA = self::PREFIX_QUESTIONS . 'link_cta';
+	const PREFIX_QUESTIONS           = self::SECTION_QUESTIONS . '_';
+	const SETTING_QUESTIONS_TITLE    = self::PREFIX_QUESTIONS . 'link_title';
+	const SETTING_QUESTIONS_DESC     = self::PREFIX_QUESTIONS . 'link_desc';
+	const SETTING_QUESTIONS_CTA      = self::PREFIX_QUESTIONS . 'link_cta';
 	const SETTING_QUESTIONS_CTA_LINK = self::PREFIX_QUESTIONS . 'link_url';
 
 	/** All Defaults */
 	const DEFAULTS = array(
-		self::SETTING_FEATURED_TEXT_TITLE => 'THE POWER OF FUNDRAISING',
-		self::SETTING_FEATURED_TEXT_DESC  => 'The impact of fundraising has raised <b>$100,000</b> by individuals and <b>$200,000</b> by teams since <b>20XX.</b>',
+		self::SETTING_FEATURED_TEXT_TITLE   => 'THE POWER OF FUNDRAISING',
+		self::SETTING_FEATURED_TEXT_DESC    => 'The impact of fundraising has raised <b>$100,000</b> by individuals and <b>$200,000</b> by teams since <b>20XX.</b>',
 
-		self::SETTING_THREE_TITLE => 'How your money is used',
-		self::SETTING_THREE_DATA  => array(
+		self::SETTING_THREE_TITLE           => 'How your money is used',
+		self::SETTING_THREE_DATA            => array(
 			array( 'desc' => 'We plan to train a record number of crisis counselors. Every counselor can reach over 100 LGBTQ young people.' ),
 			array( 'desc' => 'Help us to continue to provide all of our crisis services 24/7 and free of cost. Lorem ipsm dolor set. Vitae id accumsan.' ),
 			array( 'desc' => 'Assist us in expanding our research and advocacy efforts. Et vehicula viverra facilisi nunc aliquet nunc eu quam. Etiam et.' ),
 		),
 
-		self::SETTING_ONE_DATA => array(
+		self::SETTING_ONE_DATA              => array(
 			array(
 				'title'     => 'Fundraise as an individual.',
 				'desc'      => 'Personalize the page with information about you and why you’re fundraising to save young LGBTQ lives.',
@@ -97,9 +97,9 @@ class Fundraise extends Abstract_Customizer {
 			),
 		),
 
-		self::SETTING_LINK_TITLE => 'Get your fundraiser started now.',
-		self::SETTING_LINK_DESC  => 'Here are some helpful tips and tools to help you get started on your fundraiser.',
-		self::SETTING_LINK_DATA  => array(
+		self::SETTING_LINK_TITLE            => 'Get your fundraiser started now.',
+		self::SETTING_LINK_DESC             => 'Here are some helpful tips and tools to help you get started on your fundraiser.',
+		self::SETTING_LINK_DATA             => array(
 			array(
 				'label' => 'How To Talk Trevor',
 				'link'  => '#',
@@ -137,34 +137,34 @@ class Fundraise extends Abstract_Customizer {
 		self::SETTING_TOP_LIST_CAMPAIGN_ID  => '24399',
 		self::SETTING_TOP_LIST_COUNT        => 10,
 
-		self::SETTING_QUESTIONS_TITLE    => 'Have questions?',
-		self::SETTING_QUESTIONS_DESC     => 'Please reach out to us and a member of our Development team will get back to you.',
-		self::SETTING_QUESTIONS_CTA      => 'Reach Out',
-		self::SETTING_QUESTIONS_CTA_LINK => '#',
+		self::SETTING_QUESTIONS_TITLE       => 'Have questions?',
+		self::SETTING_QUESTIONS_DESC        => 'Please reach out to us and a member of our Development team will get back to you.',
+		self::SETTING_QUESTIONS_CTA         => 'Reach Out',
+		self::SETTING_QUESTIONS_CTA_LINK    => '#',
 	);
 
 	/** @inheritdoc */
-	protected static $_section_components = [
-		self::SECTION_HEADER => [
+	protected static $_section_components = array(
+		self::SECTION_HEADER => array(
 			Component\Header::class,
-			[
-				'options'  => [ 'type' => Header::TYPE_SPLIT_IMG ],
-				'defaults' => [
+			array(
+				'options'  => array( 'type' => Header::TYPE_SPLIT_IMG ),
+				'defaults' => array(
 					Component\Header::SETTING_TITLE   => 'Start a fundraiser. <tilt>Change the world.</tilt>',
 					Component\Header::SETTING_DESC    => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
 					Component\Header::SETTING_CTA_TXT => 'Become a Fundraiser',
-				]
-			]
-		],
-		self::SECTION_OTHER  => [
+				),
+			),
+		),
+		self::SECTION_OTHER  => array(
 			Component\Circulation::class,
-			[
-				'defaults' => [
+			array(
+				'defaults' => array(
 					Component\Circulation::SETTING_TITLE => 'Other ways to help',
-				]
-			]
-		]
-	];
+				),
+			),
+		),
+	);
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
@@ -224,19 +224,19 @@ class Fundraise extends Abstract_Customizer {
 		// Fundraiser Success Stories
 		$this->_manager->add_section(
 			self::SECTION_SUCCESS_STORIES,
-			[
+			array(
 				'panel' => self::PANEL_ID,
 				'title' => 'Success Stories',
-			]
+			)
 		);
 
 		// Featured Fundraisers
 		$this->_manager->add_section(
 			self::SECTION_TOP_LIST,
-			[
+			array(
 				'panel' => self::PANEL_ID,
-				'title' => 'Featured Fundraisers'
-			]
+				'title' => 'Featured Fundraisers',
+			)
 		);
 
 		// Questions
@@ -494,12 +494,18 @@ class Fundraise extends Abstract_Customizer {
 			)
 		);
 
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_TOP_LIST_PLACEHOLDER_LOGO, [
-			'setting'   => self::SETTING_TOP_LIST_PLACEHOLDER_LOGO,
-			'section'   => self::SECTION_TOP_LIST,
-			'label'     => 'Placeholder Logo',
-			'mime_type' => 'image',
-		] ) );
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_TOP_LIST_PLACEHOLDER_LOGO,
+				array(
+					'setting'   => self::SETTING_TOP_LIST_PLACEHOLDER_LOGO,
+					'section'   => self::SECTION_TOP_LIST,
+					'label'     => 'Placeholder Logo',
+					'mime_type' => 'image',
+				)
+			)
+		);
 
 		// Questions
 		$this->_manager->add_control(

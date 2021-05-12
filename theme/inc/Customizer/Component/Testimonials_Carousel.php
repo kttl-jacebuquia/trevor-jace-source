@@ -10,13 +10,16 @@ class Testimonials_Carousel extends Abstract_Component {
 	const SETTING_DATA = 'data';
 
 	/** @inheritDoc */
-	public function register_section( array $args = [] ): void {
+	public function register_section( array $args = array() ): void {
 		$this->get_manager()->add_section(
 			$this->get_section_id(),
-			array_merge( [
-				'panel' => $this->get_panel_id(),
-				'title' => 'Testimonials Carousel',
-			], $args )
+			array_merge(
+				array(
+					'panel' => $this->get_panel_id(),
+					'title' => 'Testimonials Carousel',
+				),
+				$args
+			)
 		);
 	}
 
@@ -26,16 +29,22 @@ class Testimonials_Carousel extends Abstract_Component {
 		$sec_id  = $this->get_section_id();
 
 		# Quote
-		$manager->add_control( new Control\Custom_List( $manager, $data_id = $this->get_setting_id( self::SETTING_DATA ), [
-			'setting' => $data_id,
-			'section' => $sec_id,
-			'label'   => 'Testimonials',
-			'fields'  => Control\Custom_List::FIELDSET_QUOTE,
-		] ) );
+		$manager->add_control(
+			new Control\Custom_List(
+				$manager,
+				$data_id = $this->get_setting_id( self::SETTING_DATA ),
+				array(
+					'setting' => $data_id,
+					'section' => $sec_id,
+					'label'   => 'Testimonials',
+					'fields'  => Control\Custom_List::FIELDSET_QUOTE,
+				)
+			)
+		);
 	}
 
 	/** @inheritDoc */
-	public function render( array $ext_options = [] ): ?string {
+	public function render( array $ext_options = array() ): ?string {
 		return Carousel::testimonials( (array) $this->get_val( self::SETTING_DATA ), $ext_options );
 	}
 }

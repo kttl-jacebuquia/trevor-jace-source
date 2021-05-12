@@ -23,10 +23,10 @@ class Classy {
 			$url = trailingslashit( home_url( Donate_Object::PERMALINK_FUNDRAISE ) );
 
 			pantheon_wp_clear_edge_paths(
-				[
+				array(
 					$url,
-					rtrim( $url, '/' )
-				]
+					rtrim( $url, '/' ),
+				)
 			);
 		} else {
 			Log::alert( 'pantheon_wp_clear_edge_paths() is not exists.' );

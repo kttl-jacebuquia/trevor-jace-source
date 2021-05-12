@@ -205,7 +205,7 @@ class Tile {
 		}
 
 		$cta_cls = array_merge(
-			[ 'tile-cta stretched-link' ],
+			array( 'tile-cta stretched-link' ),
 			$options['cta_cls'],
 		);
 		$cta_cls = implode( ' ', $cta_cls );

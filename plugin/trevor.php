@@ -23,10 +23,12 @@ defined( 'TREVOR_CACHE_DIR' ) or define( 'TREVOR_CACHE_DIR', TREVOR_CONTENT_DIR 
 defined( 'TREVOR_LOGS_DIR' ) or define( 'TREVOR_LOGS_DIR', TREVOR_CONTENT_DIR . '/logs' );
 defined( 'TREVOR_ON_DEV' ) or define( 'TREVOR_ON_DEV', constant( 'PANTHEON_ENVIRONMENT' ) == 'lando' );
 defined( 'TREVOR_PLUGIN_TEMPLATES_DIR' ) or define( 'TREVOR_PLUGIN_TEMPLATES_DIR', TREVOR_PLUGIN_DIR . '/templates' );
-defined( 'TREVOR_PLUGIN_STATIC_URL' ) or define( 'TREVOR_PLUGIN_STATIC_URL', (
+defined( 'TREVOR_PLUGIN_STATIC_URL' ) or define(
+	'TREVOR_PLUGIN_STATIC_URL',
+	(
 	constant( 'TREVOR_ON_DEV' ) &&
 	$dev_path = getenv( 'MEDIA_DEV_PATH_PREFIX' )
-)
+	)
 	? trailingslashit( $dev_path ) . 'plugin'
 	: plugin_dir_url( __FILE__ ) . 'static'
 );
@@ -38,8 +40,8 @@ require_once( __DIR__ . '/lib/autoload.php' );
 include_once( get_template_directory() . '/lib/autoload.php' );
 
 # De/Activation Hooks
-register_activation_hook( __FILE__, [ \TrevorWP\Util\Activate::class, 'activate' ] );
-register_deactivation_hook( __FILE__, [ \TrevorWP\Util\Deactivate::class, 'deactivate' ] );
+register_activation_hook( __FILE__, array( \TrevorWP\Util\Activate::class, 'activate' ) );
+register_deactivation_hook( __FILE__, array( \TrevorWP\Util\Deactivate::class, 'deactivate' ) );
 
 if ( ! TrevorWP\Main::is_initiated() ) {
 	new TrevorWP\Main();

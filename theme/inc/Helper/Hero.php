@@ -16,36 +16,36 @@ class Hero {
 	 *
 	 * @return string|null
 	 */
-	public static function img_bg( array $imgs_data, string $context, array $options = [] ): ?string {
+	public static function img_bg( array $imgs_data, string $context, array $options = array() ): ?string {
 		# Main container class
 		$cls = array_merge(
-				[
-						'w-full',
-						'py-10',
-						'flex',
-						'flex-col',
-						'items-center',
-						'relative',
-						'hero',
-						'hero-bg-img'
-				],
-				empty( $options['root_cls'] )
-						? []
+			array(
+				'w-full',
+				'py-10',
+				'flex',
+				'flex-col',
+				'items-center',
+				'relative',
+				'hero',
+				'hero-bg-img',
+			),
+			empty( $options['root_cls'] )
+						? array()
 						: (array) $options['root_cls']
 		);
 
 		# Context Wrap class
 		$context_cls = array_merge(
-				[
-						'container',
-						'mx-auto',
-						'flex',
-						'flex-col',
-						'items-center',
-						'hero-context-wrap',
-				],
-				empty( $options['context_cls'] )
-						? []
+			array(
+				'container',
+				'mx-auto',
+				'flex',
+				'flex-col',
+				'items-center',
+				'hero-context-wrap',
+			),
+			empty( $options['context_cls'] )
+						? array()
 						: $options['context_cls']
 		);
 
@@ -55,11 +55,12 @@ class Hero {
 		}
 
 		ob_start(); ?>
-		<div class="<?= esc_attr( implode( ' ', array_unique( $cls ) ) ) ?>">
-			<div class="absolute top-0 left-0 w-full h-full bg-img-wrap -z-1"><?= implode( "\n", wp_list_pluck( $imgs, 0 ) ); ?></div>
-			<div class="<?= esc_attr( implode( ' ', array_unique( $context_cls ) ) ) ?>"><?= $context; ?></div>
+		<div class="<?php echo esc_attr( implode( ' ', array_unique( $cls ) ) ); ?>">
+			<div class="absolute top-0 left-0 w-full h-full bg-img-wrap -z-1"><?php echo implode( "\n", wp_list_pluck( $imgs, 0 ) ); ?></div>
+			<div class="<?php echo esc_attr( implode( ' ', array_unique( $context_cls ) ) ); ?>"><?php echo $context; ?></div>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -70,16 +71,17 @@ class Hero {
 	 *
 	 * @return string|null
 	 */
-	public static function quote( array $data, array $options = [] ): ?string {
+	public static function quote( array $data, array $options = array() ): ?string {
 		# image class
-		$img_cls = empty( $options['img_class'] ) ? [
-				'absolute',
-				'bottom-0',
-				'right-0',
-				'h-3/5',
-				'w-auto'
-		] : (array) $options['img_class'];
-		ob_start(); ?>
+		$img_cls = empty( $options['img_class'] ) ? array(
+			'absolute',
+			'bottom-0',
+			'right-0',
+			'h-3/5',
+			'w-auto',
+		) : (array) $options['img_class'];
+		ob_start();
+		?>
 		<div class="hero h-px737 lg:h-px546 lg:flex lg:items-center">
 			<figure class="container text-left text-teal-dark pt-10 md:flex-1 lg:p-0 lg:w-4/5 lg:flex-initial z-1">
 				<div class="flex flex-row justify-start md:mb-2 lg:mb-5">
@@ -88,26 +90,36 @@ class Hero {
 				</div>
 				<blockquote
 						class="font-bold text-3xl my-4 md:text-px30 md:leading-px40 md:mr-24 lg:text-px32 lg:leading-px42 lg:font-semibold">
-					<?= @$data['quote'] ?>
+					<?php echo @$data['quote']; ?>
 				</blockquote>
 				<?php if ( ! empty( $data['cite'] ) ) { ?>
 					<figcaption class="text-px18 leading-px26 lg:text-px22 lg:leading-px32">
-						<?= $data['cite'] ?>
+						<?php echo $data['cite']; ?>
 					</figcaption>
 				<?php } ?>
 			</figure>
 
 			<?php
 			if ( ! empty( $data['img'] ) && ! empty( $data['img']['id'] ) ) {
-				echo wp_get_attachment_image( $data['img']['id'], 'medium', false, [
-						'class' => implode( ' ', array_unique( $img_cls ) )
-				] );
+				echo wp_get_attachment_image(
+					$data['img']['id'],
+					'medium',
+					false,
+					array(
+						'class' => implode( ' ', array_unique( $img_cls ) ),
+					)
+				);
 			}
 			?>
 
 		</div>
-		<?php return self::img_bg( [
-				[ $options['img_id'] ]
-		], ob_get_clean(), $options );
+		<?php
+		return self::img_bg(
+			array(
+				array( $options['img_id'] ),
+			),
+			ob_get_clean(),
+			$options
+		);
 	}
 }

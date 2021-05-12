@@ -14,7 +14,7 @@ class Team {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', [ self::class, 'init' ], 10, 0 );
+		add_action( 'init', array( self::class, 'init' ), 10, 0 );
 	}
 
 	/**
@@ -23,37 +23,44 @@ class Team {
 	 * @link https://developer.wordpress.org/reference/hooks/init/
 	 */
 	public static function init(): void {
-		register_post_type( self::POST_TYPE, [
-			'public'              => false,
-			'hierarchical'        => false,
-			'exclude_from_search' => true,
-			'publicly_queryable'  => false,
-			'show_ui'             => true,
-			'show_in_rest'        => true,
-			'has_archive'         => false,
-			'rewrite'             => false,
-			'supports'            => [
-				'title',
-				'editor',
-				'thumbnail',
-				'custom-fields',
-			],
-			'labels'              => [
-				'name'          => 'Team',
-				'singular_name' => 'Team Member',
-			],
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'public'              => false,
+				'hierarchical'        => false,
+				'exclude_from_search' => true,
+				'publicly_queryable'  => false,
+				'show_ui'             => true,
+				'show_in_rest'        => true,
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'supports'            => array(
+					'title',
+					'editor',
+					'thumbnail',
+					'custom-fields',
+				),
+				'labels'              => array(
+					'name'          => 'Team',
+					'singular_name' => 'Team Member',
+				),
+			)
+		);
 
 		# Taxonomies
-		register_taxonomy( self::TAXONOMY_GROUP, [ self::POST_TYPE ], [
-			'public'            => false,
-			'hierarchical'      => false,
-			'show_ui'           => true,
-			'show_in_rest'      => true,
-			'show_tagcloud'     => false,
-			'show_admin_column' => true,
-			'labels'            => Tools::gen_tax_labels( 'Group' ),
-		] );
+		register_taxonomy(
+			self::TAXONOMY_GROUP,
+			array( self::POST_TYPE ),
+			array(
+				'public'            => false,
+				'hierarchical'      => false,
+				'show_ui'           => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'labels'            => Tools::gen_tax_labels( 'Group' ),
+			)
+		);
 	}
 
 
@@ -62,22 +69,28 @@ class Team {
 	 *
 	 * @return string
 	 */
-	public static function render_modal( \WP_Post $post, array $options = [] ): string {
+	public static function render_modal( \WP_Post $post, array $options = array() ): string {
 		$group_terms = get_the_terms( $post, self::TAXONOMY_GROUP );
-		$group = array_pop( $group_terms )->name;
-		$is_founder = false;
+		$group       = array_pop( $group_terms )->name;
+		$is_founder  = false;
 
-		$val = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
-		$pronoun = $val->get( Field_Group\Team_Member::FIELD_PRONOUN );
+		$val      = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
+		$pronoun  = $val->get( Field_Group\Team_Member::FIELD_PRONOUN );
 		$location = $val->get( Field_Group\Team_Member::FIELD_LOCATION );
 
-		$options = array_merge( array_fill_keys( [
-			'thumbnail',
-			'is_placeholder_thumbnail',
-		], [] ), $options );
+		$options = array_merge(
+			array_fill_keys(
+				array(
+					'thumbnail',
+					'is_placeholder_thumbnail',
+				),
+				array()
+			),
+			$options
+		);
 
 		if ( strtolower( $group ) === 'founder' ) {
-			$group .= ', The Trevor Project';
+			$group     .= ', The Trevor Project';
 			$is_founder = true;
 		}
 
@@ -98,15 +111,16 @@ class Team {
 					<span class="team-member__pronoun font-normal text-px16 leading-px22"><?php echo esc_html( $pronoun ); ?></span>
 				<?php } ?>
 			</div>
-			<?php if ( ! empty( $options[ 'thumbnail' ] ) && ! $is_founder ) { ?>
-				<div class="team-member__thumbnail-wrap <?php echo $options[ 'is_placeholder_thumbnail' ] ? 'placeholder' : '' ?> bg-gray-light mb-px28">
-					<?php echo $options[ 'thumbnail' ];  ?>
+			<?php if ( ! empty( $options['thumbnail'] ) && ! $is_founder ) { ?>
+				<div class="team-member__thumbnail-wrap <?php echo $options['is_placeholder_thumbnail'] ? 'placeholder' : ''; ?> bg-gray-light mb-px28">
+					<?php echo $options['thumbnail']; ?>
 				</div>
 			<?php } ?>
 			<div class="text-px16 leading-px22 tracking-px05 md:text-px18 xl:leading-px26 prose-teal-dark prose">
-				<?= apply_filters( 'the_content', get_the_content( null, false, $post ) ); ?>
+				<?php echo apply_filters( 'the_content', get_the_content( null, false, $post ) ); ?>
 			</div>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 }

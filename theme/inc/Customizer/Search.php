@@ -12,7 +12,7 @@ use TrevorWP\Theme\Helper\Taxonomy;
 
 class Search extends Abstract_Customizer {
 	/* Query Values */
-	const QV_SEARCH = Main::QV_PREFIX . 'search';
+	const QV_SEARCH       = Main::QV_PREFIX . 'search';
 	const QV_SEARCH_SCOPE = Main::QV_PREFIX . 'search_scope';
 
 	/* Panel */
@@ -20,110 +20,134 @@ class Search extends Abstract_Customizer {
 
 	/* Sections */
 	const SECTION_GENERAL = self::PANEL_ID . '_general';
-	const SECTION_HOME = self::PANEL_ID . '_home';
+	const SECTION_HOME    = self::PANEL_ID . '_home';
 
 	/* Sections */
-	const SCOPES = [
-			'resources' => [
-					'name'      => 'Resources',
-					'post_type' => [
-							CPT\RC\Article::POST_TYPE,
-							CPT\RC\External::POST_TYPE,
-							CPT\RC\Guide::POST_TYPE,
-					]
-			],
-			'blogs'     => [
-					'name'      => 'Blogs',
-					'post_type' => [
-							// CPT\Post::POST_TYPE,
-							CPT\RC\Post::POST_TYPE,
-					]
-			]
-	];
+	const SCOPES = array(
+		'resources' => array(
+			'name'      => 'Resources',
+			'post_type' => array(
+				CPT\RC\Article::POST_TYPE,
+				CPT\RC\External::POST_TYPE,
+				CPT\RC\Guide::POST_TYPE,
+			),
+		),
+		'blogs'     => array(
+			'name'      => 'Blogs',
+			'post_type' => array(
+				// CPT\Post::POST_TYPE,
+				CPT\RC\Post::POST_TYPE,
+			),
+		),
+	);
 
 	/* Settings */
 	/* * General */
-	const SETTING_GENERAL_SLUG = self::SECTION_GENERAL . '_slug';
-	const SETTING_GENERAL_PER_PAGE = self::SECTION_GENERAL . '_per_page';
-	const SETTING_GENERAL_PAGE_TITLE = self::SECTION_GENERAL . '_page_title';
+	const SETTING_GENERAL_SLUG              = self::SECTION_GENERAL . '_slug';
+	const SETTING_GENERAL_PER_PAGE          = self::SECTION_GENERAL . '_per_page';
+	const SETTING_GENERAL_PAGE_TITLE        = self::SECTION_GENERAL . '_page_title';
 	const SETTING_GENERAL_INPUT_PLACEHOLDER = self::SECTION_GENERAL . '_input_placeholder';
-	const SETTING_HOME_CAROUSEL_TITLE = self::SECTION_HOME . '_carousel_title';
-	const SETTING_HOME_CAROUSEL_DESC = self::SECTION_HOME . '_carousel_desc';
+	const SETTING_HOME_CAROUSEL_TITLE       = self::SECTION_HOME . '_carousel_title';
+	const SETTING_HOME_CAROUSEL_DESC        = self::SECTION_HOME . '_carousel_desc';
 
-	const DEFAULTS = [
-			self::SETTING_GENERAL_SLUG              => 'search',
-			self::SETTING_GENERAL_PER_PAGE          => 20,
-			self::SETTING_GENERAL_PAGE_TITLE        => 'Search The Trevor Project',
-			self::SETTING_GENERAL_INPUT_PLACEHOLDER => 'What are you looking for?',
-			self::SETTING_HOME_CAROUSEL_TITLE       => 'The Latest',
-			self::SETTING_HOME_CAROUSEL_DESC        => 'Explore the latest from The Trevor Project.',
-	];
+	const DEFAULTS = array(
+		self::SETTING_GENERAL_SLUG              => 'search',
+		self::SETTING_GENERAL_PER_PAGE          => 20,
+		self::SETTING_GENERAL_PAGE_TITLE        => 'Search The Trevor Project',
+		self::SETTING_GENERAL_INPUT_PLACEHOLDER => 'What are you looking for?',
+		self::SETTING_HOME_CAROUSEL_TITLE       => 'The Latest',
+		self::SETTING_HOME_CAROUSEL_DESC        => 'Explore the latest from The Trevor Project.',
+	);
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
-		$this->_manager->add_panel( self::PANEL_ID, [ 'title' => 'Search' ] );
+		$this->_manager->add_panel( self::PANEL_ID, array( 'title' => 'Search' ) );
 	}
 
 	/** @inheritDoc */
 	protected function _register_sections(): void {
 		# General
-		$this->_manager->add_section( self::SECTION_GENERAL, [
+		$this->_manager->add_section(
+			self::SECTION_GENERAL,
+			array(
 				'panel' => self::PANEL_ID,
 				'title' => 'General',
-		] );
+			)
+		);
 
 		# Home
-		$this->_manager->add_section( self::SECTION_HOME, [
+		$this->_manager->add_section(
+			self::SECTION_HOME,
+			array(
 				'panel' => self::PANEL_ID,
 				'title' => 'Home',
-		] );
+			)
+		);
 	}
 
 	/** @inheritDoc */
 	protected function _register_controls(): void {
 		# General
-		$this->_manager->add_control( self::SETTING_GENERAL_PAGE_TITLE, [
+		$this->_manager->add_control(
+			self::SETTING_GENERAL_PAGE_TITLE,
+			array(
 				'setting' => self::SETTING_GENERAL_PAGE_TITLE,
 				'section' => self::SECTION_GENERAL,
 				'label'   => 'Page Title',
 				'type'    => 'text',
-		] );
+			)
+		);
 
-		$this->_manager->add_control( self::SETTING_GENERAL_PER_PAGE, [
+		$this->_manager->add_control(
+			self::SETTING_GENERAL_PER_PAGE,
+			array(
 				'setting' => self::SETTING_GENERAL_PER_PAGE,
 				'section' => self::SECTION_GENERAL,
 				'label'   => 'Posts Per Page',
 				'type'    => 'number',
-		] );
+			)
+		);
 
-		$this->_manager->add_control( self::SETTING_GENERAL_PAGE_TITLE, [
+		$this->_manager->add_control(
+			self::SETTING_GENERAL_PAGE_TITLE,
+			array(
 				'setting' => self::SETTING_GENERAL_PAGE_TITLE,
 				'section' => self::SECTION_GENERAL,
 				'label'   => 'Page Title',
 				'type'    => 'text',
-		] );
+			)
+		);
 
-		$this->_manager->add_control( self::SETTING_GENERAL_INPUT_PLACEHOLDER, [
+		$this->_manager->add_control(
+			self::SETTING_GENERAL_INPUT_PLACEHOLDER,
+			array(
 				'setting' => self::SETTING_GENERAL_INPUT_PLACEHOLDER,
 				'section' => self::SECTION_GENERAL,
 				'label'   => 'Input Placeholder',
 				'type'    => 'text',
-		] );
+			)
+		);
 
 		# Home
-		$this->_manager->add_control( self::SETTING_HOME_CAROUSEL_TITLE, [
+		$this->_manager->add_control(
+			self::SETTING_HOME_CAROUSEL_TITLE,
+			array(
 				'setting' => self::SETTING_HOME_CAROUSEL_TITLE,
 				'section' => self::SECTION_HOME,
 				'label'   => 'Carousel Title',
 				'type'    => 'text',
-		] );
+			)
+		);
 
-		$this->_manager->add_control( self::SETTING_HOME_CAROUSEL_DESC, [
+		$this->_manager->add_control(
+			self::SETTING_HOME_CAROUSEL_DESC,
+			array(
 				'setting' => self::SETTING_HOME_CAROUSEL_DESC,
 				'section' => self::SECTION_HOME,
 				'label'   => 'Carousel Description',
 				'type'    => 'textarea',
-		] );
+			)
+		);
 	}
 
 	/**
@@ -153,10 +177,10 @@ class Search extends Abstract_Customizer {
 	 * @see Hooks::register_all()
 	 */
 	public static function init_all(): void {
-		add_action( 'init', [ static::class, 'handle_init' ] );
-		add_action( 'pre_get_posts', [ static::class, 'pre_get_posts' ] );
-		add_filter( 'query_vars', [ self::class, 'query_vars' ], 10, 1 );
-		add_filter( 'body_class', [ self::class, 'body_class' ], 10, 1 );
+		add_action( 'init', array( static::class, 'handle_init' ) );
+		add_action( 'pre_get_posts', array( static::class, 'pre_get_posts' ) );
+		add_filter( 'query_vars', array( self::class, 'query_vars' ), 10, 1 );
+		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
 	}
 
 	/**
@@ -164,9 +188,11 @@ class Search extends Abstract_Customizer {
 	 */
 	public static function handle_init(): void {
 		global $wp_rewrite;
-		$main_page_query = 'index.php?' . http_build_query( [
-						self::QV_SEARCH => 1,
-				] );
+		$main_page_query = 'index.php?' . http_build_query(
+			array(
+				self::QV_SEARCH => 1,
+			)
+		);
 
 		$base = trailingslashit( static::get_val( static::SETTING_GENERAL_SLUG ) );
 
@@ -178,15 +204,15 @@ class Search extends Abstract_Customizer {
 
 		# Paged
 		add_rewrite_rule(
-				"{$base}{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
-				$main_page_query . '&paged=$matches[1]',
-				'top'
+			"{$base}{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
+			$main_page_query . '&paged=$matches[1]',
+			'top'
 		);
 		# Paged, scoped
 		add_rewrite_rule(
-				"{$scoped_base}{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
-				$main_page_query . '&' . self::QV_SEARCH_SCOPE . '=$matches[1]&paged=$matches[2]',
-				'top'
+			"{$scoped_base}{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$",
+			$main_page_query . '&' . self::QV_SEARCH_SCOPE . '=$matches[1]&paged=$matches[2]',
+			'top'
 		);
 	}
 
@@ -212,10 +238,13 @@ class Search extends Abstract_Customizer {
 	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
 	 */
 	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, [
+		return array_merge(
+			$vars,
+			array(
 				self::QV_SEARCH,
 				self::QV_SEARCH_SCOPE,
-		] );
+			)
+		);
 	}
 
 	/**
@@ -224,61 +253,61 @@ class Search extends Abstract_Customizer {
 	 * @return string
 	 */
 	public static function render_post( \WP_Post $post ): ?string {
-		$_class = [
-				'pb-10',
-				'lg:pb-px50',
-				'border-b',
-				'border-b-1',
-				'border-indigo',
-				'border-opacity-20',
-		];
+		$_class = array(
+			'pb-10',
+			'lg:pb-px50',
+			'border-b',
+			'border-b-1',
+			'border-indigo',
+			'border-opacity-20',
+		);
 
 		$title_top = $desc = $img = null;
 
 		switch ( $post->post_type ) {
-			case CPT\RC\External::POST_TYPE :
+			case CPT\RC\External::POST_TYPE:
 				$title_top = 'Resource';
-				$icon_cls   = 'trevor-ti-link-out';
+				$icon_cls  = 'trevor-ti-link-out';
 				break;
-			case CPT\RC\Guide::POST_TYPE :
+			case CPT\RC\Guide::POST_TYPE:
 				$title_top = 'Guide';
 				break;
-			case CPT\Donate\Fundraiser_Stories::POST_TYPE :
+			case CPT\Donate\Fundraiser_Stories::POST_TYPE:
 				$title_top = 'Fundraiser Story';
 				break;
-			case CPT\RC\Article::POST_TYPE :
+			case CPT\RC\Article::POST_TYPE:
 				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
 				$first_cat  = empty( $categories ) ? null : reset( $categories );
 				$title_top  = $first_cat ? $first_cat->name : null;
 				break;
-			case CPT\RC\Post::POST_TYPE :
+			case CPT\RC\Post::POST_TYPE:
 				$title_top = 'Blog';
 
 				break;
-			case CPT\Post::POST_TYPE :
+			case CPT\Post::POST_TYPE:
 				$title_top = 'Blog';
 				break;
-			}
+		}
 
 		# Thumbnail variants
-		$thumb_variants   = [ self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) ];
+		$thumb_variants   = array( self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) );
 		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
 		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
-		$thumb         = Thumbnail::post( $post, ...$thumb_variants );
-		$has_thumbnail = ! empty( $thumb );
+		$thumb            = Thumbnail::post( $post, ...$thumb_variants );
+		$has_thumbnail    = ! empty( $thumb );
 
 		if ( ! $has_thumbnail ) {
 			$_class[] = 'no-thumbnail';
 		}
 
 		# Tags
-		$tags = Taxonomy::get_post_tags_distinctive( $post, [ 'filter_count_1' => false ] );
+		$tags = Taxonomy::get_post_tags_distinctive( $post, array( 'filter_count_1' => false ) );
 
 		ob_start(); ?>
-		<article class="<?= esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ) ?> flex flex-row flex-wrap search-result-item text-indigo">
+		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?> flex flex-row flex-wrap search-result-item text-indigo">
 			<?php if ( $has_thumbnail ) { ?>
 				<div class="thumbnail-wrap" data-aspectRatio="1:1">
-					<a href="<?= get_the_permalink( $post ) ?>">
+					<a href="<?php echo get_the_permalink( $post ); ?>">
 						<?php echo $thumb; ?>
 					</a>
 				</div>
@@ -287,48 +316,51 @@ class Search extends Abstract_Customizer {
 				<div class="eyebrow text-indigo uppercase mb-px23">
 					<p>
 						<strong class="pr-px12"><?php echo $title_top; ?></strong>
-						<?php if ( in_array( $post->post_type, [ CPT\RC\Post::POST_TYPE, CPT\Post::POST_TYPE ] ) ) { ?>
-							<time class="pl-px12" datetime="<?php echo $post->post_date ?>"><?php echo date("F j, Y", strtotime($post->post_date)) ?></time>
+						<?php if ( in_array( $post->post_type, array( CPT\RC\Post::POST_TYPE, CPT\Post::POST_TYPE ) ) ) { ?>
+							<time class="pl-px12" datetime="<?php echo $post->post_date; ?>"><?php echo date( 'F j, Y', strtotime( $post->post_date ) ); ?></time>
 						<?php } ?>
 					</p>
 				</div>
 
 				<div class="relative">
 					<?php if ( ! empty( $icon_cls ) ) { ?>
-						<div class="icon-wrap"><i class="<?= esc_attr( $icon_cls ) ?>"></i></div>
+						<div class="icon-wrap"><i class="<?php echo esc_attr( $icon_cls ); ?>"></i></div>
 					<?php } ?>
 					<h3 class="w-full text-px24 leading-px30 lg:text-px30 lg:leading-px40">
-						<a href="<?= get_the_permalink( $post ) ?>"><?= $post->post_title ?></a>
+						<a href="<?php echo get_the_permalink( $post ); ?>"><?php echo $post->post_title; ?></a>
 					</h3>
 				</div>
 
 				<?php if ( ! $has_thumbnail ) { ?>
-					<p><?php echo $post->post_excerpt ?></p>
+					<p><?php echo $post->post_excerpt; ?></p>
 				<?php } ?>
 
 				<?php if ( ! empty( $tags ) ) { ?>
 					<div class="tags-box">
 						<?php foreach ( $tags as $tag ) { ?>
-							<a href="<?= esc_url( RC_Object::get_search_url( $tag->name ) ) ?>"
-									class="tag-box"><?= $tag->name ?></a>
+							<a href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+									class="tag-box"><?php echo $tag->name; ?></a>
 						<?php } ?>
 					</div>
 				<?php } ?>
 			</div>
 		</article>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
 	 * @return \WP_Post|null
 	 */
 	public static function get_glossary_item(): ?\WP_Post {
-		$q = new \WP_Query( [
+		$q = new \WP_Query(
+			array(
 				's'              => get_search_query( false ),
 				'post_type'      => CPT\RC\Glossary::POST_TYPE,
 				'posts_per_page' => 1,
 				'paged'          => get_query_var( 'paged' ),
-		] );
+			)
+		);
 
 		return $q->have_posts()
 				? reset( $q->posts )
@@ -343,27 +375,29 @@ class Search extends Abstract_Customizer {
 		$current = self::get_current_scope();
 		$all_pts = self::get_scope_post_types( 'all' );
 
-		$all = [
-						'all' => [
-								'name'      => 'All Results',
-								'post_type' => $all_pts,
-						],
-				] + self::SCOPES;
+		$all = array(
+			'all' => array(
+				'name'      => 'All Results',
+				'post_type' => $all_pts,
+			),
+		) + self::SCOPES;
 
 		//todo:  check from facets and hide if empty
 
-		ob_start(); ?>
+		ob_start();
+		?>
 		<div class="scope flex flex-row mb-10 mt-12 md:mt-16 lg:mt-14 text-indigo">
 			<?php foreach ( $all as $id => $detail ) { ?>
 				<div>
-					<a href="<?= esc_url( self::get_permalink( get_search_query( false ), $id == 'all' ? 'all' : $id ) ) ?>"
-					  class="scope-link <?= $id == $current ? 'font-bold current' : '' ?> <?= $id == 'all' ? 'scope-link--first' : '' ?>">
-						<?= $detail['name']; ?>
+					<a href="<?php echo esc_url( self::get_permalink( get_search_query( false ), $id == 'all' ? 'all' : $id ) ); ?>"
+					  class="scope-link <?php echo $id == $current ? 'font-bold current' : ''; ?> <?php echo $id == 'all' ? 'scope-link--first' : ''; ?>">
+						<?php echo $detail['name']; ?>
 					</a>
 				</div>
 			<?php } ?>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -410,10 +444,10 @@ class Search extends Abstract_Customizer {
 	 */
 	protected static function _get_thumb_var( string $type ): array {
 		return Thumbnail::variant(
-				Thumbnail::SCREEN_SM,
-				$type,
-				Thumbnail::SIZE_MD,
-				[ 'class' => 'post-header-bg' ]
+			Thumbnail::SCREEN_SM,
+			$type,
+			Thumbnail::SIZE_MD,
+			array( 'class' => 'post-header-bg' )
 		);
 	}
 }

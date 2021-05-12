@@ -21,24 +21,24 @@ class Log {
 	 * Logger Names
 	 */
 	const LOGGER_NAME_GENERAL = 'general';
-	const LOGGER_NAME_AUDIT = 'audit';
+	const LOGGER_NAME_AUDIT   = 'audit';
 
 	/*
 	 * File Names
 	 */
 	const FILE_NAME_GENERAL = 'general';
-	const FILE_NAME_AUDIT = 'audit';
+	const FILE_NAME_AUDIT   = 'audit';
 
 	/*
 	 * Error Log Levels
 	 */
-	const ERROR_LOG_LEVEL_DEBUG = 'debug';
-	const ERROR_LOG_LEVEL_INFO = 'info';
-	const ERROR_LOG_LEVEL_NOTICE = 'notice';
-	const ERROR_LOG_LEVEL_WARNING = 'warning';
-	const ERROR_LOG_LEVEL_ERROR = 'error';
-	const ERROR_LOG_LEVEL_CRITICAL = 'critical';
-	const ERROR_LOG_LEVEL_ALERT = 'alert';
+	const ERROR_LOG_LEVEL_DEBUG     = 'debug';
+	const ERROR_LOG_LEVEL_INFO      = 'info';
+	const ERROR_LOG_LEVEL_NOTICE    = 'notice';
+	const ERROR_LOG_LEVEL_WARNING   = 'warning';
+	const ERROR_LOG_LEVEL_ERROR     = 'error';
+	const ERROR_LOG_LEVEL_CRITICAL  = 'critical';
+	const ERROR_LOG_LEVEL_ALERT     = 'alert';
 	const ERROR_LOG_LEVEL_EMERGENCY = 'emergency';
 
 	/**
@@ -47,7 +47,7 @@ class Log {
 	 * @var int[]
 	 * @internal
 	 */
-	static protected $_map_levels = [
+	static protected $_map_levels = array(
 		self::ERROR_LOG_LEVEL_DEBUG     => Logger::DEBUG,
 		self::ERROR_LOG_LEVEL_INFO      => Logger::INFO,
 		self::ERROR_LOG_LEVEL_NOTICE    => Logger::NOTICE,
@@ -56,7 +56,7 @@ class Log {
 		self::ERROR_LOG_LEVEL_CRITICAL  => Logger::CRITICAL,
 		self::ERROR_LOG_LEVEL_ALERT     => Logger::ALERT,
 		self::ERROR_LOG_LEVEL_EMERGENCY => Logger::EMERGENCY,
-	];
+	);
 
 	/**
 	 * @var Logger
@@ -74,9 +74,9 @@ class Log {
 	 *
 	 * @return bool
 	 */
-	static function __callStatic( $name, $args = [] ) {
+	static function __callStatic( $name, $args = array() ) {
 		try {
-			return call_user_func_array( [ self::get_error_logger(), $name ], $args );
+			return call_user_func_array( array( self::get_error_logger(), $name ), $args );
 		} catch ( \UnexpectedValueException $e ) {
 			error_log( 'Logger error: ' . $e->getMessage() );
 
@@ -159,7 +159,7 @@ class Log {
 	 * @param string $message The log message
 	 * @param array $context The log context
 	 */
-	public static function audit( $message, array $context = [] ) {
+	public static function audit( $message, array $context = array() ) {
 		if ( is_null( self::$_audit_logger ) ) {
 			$days = self::get_max_audit_files();
 
@@ -169,7 +169,7 @@ class Log {
 			$logger = new Logger( self::LOGGER_NAME_AUDIT );
 			$logger->setTimezone( wp_timezone() );
 			$logger->pushHandler( $file_handler );
-			$logger->pushProcessor( [ self::class, 'audit_log_user_processor' ] );
+			$logger->pushProcessor( array( self::class, 'audit_log_user_processor' ) );
 
 			self::$_audit_logger = $logger;
 		}
@@ -210,7 +210,7 @@ class Log {
 			$user = wp_get_current_user();
 
 			if ( empty( $record['extra']['user'] ) ) {
-				$record['extra']['user'] = [];
+				$record['extra']['user'] = array();
 			}
 
 			$record['extra']['user']['id']    = $user->ID;

@@ -11,15 +11,15 @@ use TrevorWP\Util\Tools;
 class Core_Heading implements Post_Save_Handler {
 	const BLOCK_NAME = 'core/heading';
 
-	const HIGHLIGHT_POST_TYPES = [
-			CPT\RC\Guide::POST_TYPE,
-			CPT\RC\Article::POST_TYPE,
-	];
+	const HIGHLIGHT_POST_TYPES = array(
+		CPT\RC\Guide::POST_TYPE,
+		CPT\RC\Article::POST_TYPE,
+	);
 
-	const HIGHLIGHT_POST_TYPE_TITLE_MAP = [
-			CPT\RC\Guide::POST_TYPE   => 'This Guide includes',
-			CPT\RC\Article::POST_TYPE => 'Article Highlights',
-	];
+	const HIGHLIGHT_POST_TYPE_TITLE_MAP = array(
+		CPT\RC\Guide::POST_TYPE   => 'This Guide includes',
+		CPT\RC\Article::POST_TYPE => 'Article Highlights',
+	);
 
 	/**
 	 * @param WP_Post $post
@@ -37,23 +37,24 @@ class Core_Heading implements Post_Save_Handler {
 		}
 		ob_start(); ?>
 		<div class="post-highlights-container">
-			<h2 class="post-highlights-title"><?= self::HIGHLIGHT_POST_TYPE_TITLE_MAP[ $post->post_type ]; ?></h2>
+			<h2 class="post-highlights-title"><?php echo self::HIGHLIGHT_POST_TYPE_TITLE_MAP[ $post->post_type ]; ?></h2>
 			<ul class="post-highlights-list">
 				<?php foreach ( $highlights as $dom_id => $highlight ) { ?>
 					<li class="post-highlight relative">
 						<a class="highlight-link stretched-link"
-						   href="#<?= esc_attr( $dom_id ) ?>"><?= esc_html( $highlight['title'] ) ?></a>
-						<span><?= esc_html( $highlight['description'] ) ?></span>
+						   href="#<?php echo esc_attr( $dom_id ); ?>"><?php echo esc_html( $highlight['title'] ); ?></a>
+						<span><?php echo esc_html( $highlight['description'] ); ?></span>
 					</li>
 				<?php } ?>
 			</ul>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/** @inheritDoc */
 	public static function save_post( array $block, WP_Post $post, array &$state ): void {
-		$attrs = $block['attrs'] ?? [];
+		$attrs = $block['attrs'] ?? array();
 
 		if ( empty( $description = $attrs['description'] ) ) {
 			return;
@@ -66,10 +67,10 @@ class Core_Heading implements Post_Save_Handler {
 		}
 
 		// Save to the state
-		$state[ $dom_id ] = [
-				'title'       => $inside,
-				'description' => $description
-		];
+		$state[ $dom_id ] = array(
+			'title'       => $inside,
+			'description' => $description,
+		);
 	}
 
 	/** @inheritDoc */

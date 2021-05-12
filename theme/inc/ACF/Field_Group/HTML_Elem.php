@@ -11,9 +11,9 @@ class HTML_Elem extends A_Field_Group implements I_Block {
 			$elem = 'div';
 		}
 		?>
-		<<?= $elem ?> <?= DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ) ) ?>>
+		<<?php echo $elem; ?> <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_ATTR ) ); ?>>
 		<InnerBlocks/>
-		</<?= $elem ?>>
+		</<?php echo $elem; ?>>
 		<?php
 	}
 
@@ -22,35 +22,40 @@ class HTML_Elem extends A_Field_Group implements I_Block {
 		$name = static::gen_field_key( static::FIELD_NAME );
 		$attr = static::gen_field_key( static::FIELD_ATTR );
 
-		return [
-				'title'  => 'HTML Element',
-				'fields' => [
-						static::FIELD_NAME => [
-								'key'         => $name,
-								'name'        => static::FIELD_NAME,
-								'required'    => true,
-								'type'        => 'text',
-								'label'       => 'Element Name',
-								'placeholder' => 'div',
-						],
-						static::FIELD_ATTR => DOM_Attr::clone( [
-								'key'         => $attr,
-								'name'        => static::FIELD_ATTR,
-								'prefix_name' => false,
-						] ),
-				],
-		];
+		return array(
+			'title'  => 'HTML Element',
+			'fields' => array(
+				static::FIELD_NAME => array(
+					'key'         => $name,
+					'name'        => static::FIELD_NAME,
+					'required'    => true,
+					'type'        => 'text',
+					'label'       => 'Element Name',
+					'placeholder' => 'div',
+				),
+				static::FIELD_ATTR => DOM_Attr::clone(
+					array(
+						'key'         => $attr,
+						'name'        => static::FIELD_ATTR,
+						'prefix_name' => false,
+					)
+				),
+			),
+		);
 	}
 
 	/** @inheritDoc */
 	public static function get_block_args(): array {
-		return array_merge( parent::get_block_args(), [
+		return array_merge(
+			parent::get_block_args(),
+			array(
 				'name'       => static::get_key(),
 				'title'      => 'HTML Element',
-				'post_types' => [ 'page' ],
-				'supports'   => [
-						'jsx' => true,
-				],
-		] );
+				'post_types' => array( 'page' ),
+				'supports'   => array(
+					'jsx' => true,
+				),
+			)
+		);
 	}
 }

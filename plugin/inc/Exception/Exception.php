@@ -16,7 +16,7 @@ abstract class Exception extends \Exception {
 	 * @param int $code
 	 * @param \Exception|null $previous
 	 */
-	public function __construct( $message = "", $code = 0, \Exception $previous = null ) {
+	public function __construct( $message = '', $code = 0, \Exception $previous = null ) {
 		if ( is_wp_error( $message ) ) {
 			/** @var WP_Error $message */
 			$message = $message->get_error_message();

@@ -8,19 +8,19 @@ class Main {
 	/*
 	 * Global Keys
 	 */
-	const GLOBALS_PREFIX = 'trevor__';
+	const GLOBALS_PREFIX   = 'trevor__';
 	const GLOBALS_VAR_MAIN = self::GLOBALS_PREFIX . 'main';
 	const GLOBALS_VAR_TWIG = self::GLOBALS_PREFIX . 'twig';
 
 	/*
 	 * Option Keys
 	 */
-	const OPTION_KEY_PREFIX = 'trevor__';
-	const OPTION_KEY_VERSION = self::OPTION_KEY_PREFIX . 'version';
+	const OPTION_KEY_PREFIX                   = 'trevor__';
+	const OPTION_KEY_VERSION                  = self::OPTION_KEY_PREFIX . 'version';
 	const OPTION_KEY_TREVORSPACE_ACTIVE_COUNT = self::OPTION_KEY_PREFIX . 'trevorspace_active_count';
-	const OPTION_KEY_CLASSY_CLIENT_ID = self::OPTION_KEY_PREFIX . 'classy_client_id';
-	const OPTION_KEY_CLASSY_CLIENT_SECRET = self::OPTION_KEY_PREFIX . 'classy_client_secret';
-	const OPTION_KEY_COUNSELOR_LONG_WAIT = self::OPTION_KEY_PREFIX . 'counselor_long_wait';
+	const OPTION_KEY_CLASSY_CLIENT_ID         = self::OPTION_KEY_PREFIX . 'classy_client_id';
+	const OPTION_KEY_CLASSY_CLIENT_SECRET     = self::OPTION_KEY_PREFIX . 'classy_client_secret';
+	const OPTION_KEY_COUNSELOR_LONG_WAIT      = self::OPTION_KEY_PREFIX . 'counselor_long_wait';
 
 	/*
 	 * Post Types
@@ -45,17 +45,17 @@ class Main {
 	/*
 	 * Cache Keys
 	 */
-	const CACHE_GROUP_PREFIX = 'trevor:';
-	const CACHE_GROUP_MAIN = self::CACHE_GROUP_PREFIX . 'main';
+	const CACHE_GROUP_PREFIX     = 'trevor:';
+	const CACHE_GROUP_MAIN       = self::CACHE_GROUP_PREFIX . 'main';
 	const CACHE_GROUP_TAX_PREFIX = self::CACHE_GROUP_PREFIX . 'tax:';
 
 	/*
 	 * Collections
 	 */
-	const BLOG_POST_TYPES = [
+	const BLOG_POST_TYPES = array(
 		CPT\Post::POST_TYPE,
 		CPT\RC\Post::POST_TYPE,
-	];
+	);
 
 	/**
 	 * Main constructor.
@@ -73,12 +73,15 @@ class Main {
 		Util\Hooks::register_all();
 
 		if ( version_compare( $old = get_option( self::OPTION_KEY_VERSION ), VERSION, '<' ) ) {
-			Util\Log::info( 'Looks like plugin is updated. Starting upgrading process.', [
-				'old' => $old,
-				'new' => VERSION
-			] );
+			Util\Log::info(
+				'Looks like plugin is updated. Starting upgrading process.',
+				array(
+					'old' => $old,
+					'new' => VERSION,
+				)
+			);
 
-			add_action( 'init', [ Activate::class, 'activate' ], 10, 0 );
+			add_action( 'init', array( Activate::class, 'activate' ), 10, 0 );
 		}
 	}
 

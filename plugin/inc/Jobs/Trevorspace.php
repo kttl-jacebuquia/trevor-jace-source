@@ -27,10 +27,10 @@ class Trevorspace {
 				$url = trailingslashit( home_url( RC_Object::PERMALINK_TREVORSPACE ) );
 
 				pantheon_wp_clear_edge_paths(
-					[
+					array(
 						$url,
-						rtrim( $url, '/' )
-					]
+						rtrim( $url, '/' ),
+					)
 				);
 			} else {
 				Log::alert( 'pantheon_wp_clear_edge_paths() is not exists.' );

@@ -11,7 +11,7 @@ abstract class A_Field {
 	 *
 	 * @return array
 	 */
-	public static function gen_args( string $key, string $name, array $ext_args = [] ): array {
+	public static function gen_args( string $key, string $name, array $ext_args = array() ): array {
 		return array_merge( compact( 'key', 'name' ), $ext_args );
 	}
 }

@@ -5,27 +5,27 @@
  */
 class Content_Length {
 	/* Options */
-	const OPTION_AUTO = 'auto';
-	const OPTION_SHORT = 'short';
+	const OPTION_AUTO   = 'auto';
+	const OPTION_SHORT  = 'short';
 	const OPTION_MEDIUM = 'medium';
-	const OPTION_LONG = 'long';
+	const OPTION_LONG   = 'long';
 	const OPTION_HIDDEN = 'hidden';
 
 	/* Settings */
-	const SETTINGS = [
-		self::OPTION_AUTO   => [ 'name' => 'Auto' ],
-		self::OPTION_SHORT  => [ 'name' => 'Short' ],
-		self::OPTION_MEDIUM => [ 'name' => 'Medium' ],
-		self::OPTION_LONG   => [ 'name' => 'Long' ],
-		self::OPTION_HIDDEN => [ 'name' => 'Hidden' ],
-	];
+	const SETTINGS = array(
+		self::OPTION_AUTO   => array( 'name' => 'Auto' ),
+		self::OPTION_SHORT  => array( 'name' => 'Short' ),
+		self::OPTION_MEDIUM => array( 'name' => 'Medium' ),
+		self::OPTION_LONG   => array( 'name' => 'Long' ),
+		self::OPTION_HIDDEN => array( 'name' => 'Hidden' ),
+	);
 
 	/* Defaults */
-	const DEFAULT_OPTION = self::OPTION_AUTO;
-	const DEFAULT_LEN_VALUES = [
+	const DEFAULT_OPTION     = self::OPTION_AUTO;
+	const DEFAULT_LEN_VALUES = array(
 		self::OPTION_MEDIUM => 500,
 		self::OPTION_LONG   => 1000,
-	];
+	);
 
 	/**
 	 * @param \WP_Post $post

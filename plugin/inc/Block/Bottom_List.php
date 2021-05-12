@@ -23,12 +23,15 @@ class Bottom_List extends Base {
 				array_merge( $attributes, compact( 'content' ) ),
 			);
 		} catch ( \Twig\Error\Error $exception ) {
-			Log::error( 'Template render error.', [
-				'exception'  => $exception,
-				'block'      => static::BLOCK_NAME,
-				'attributes' => $attributes,
-				'content'    => $content,
-			] );
+			Log::error(
+				'Template render error.',
+				array(
+					'exception'  => $exception,
+					'block'      => static::BLOCK_NAME,
+					'attributes' => $attributes,
+					'content'    => $content,
+				)
+			);
 
 			return '';
 		}

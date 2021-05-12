@@ -3,10 +3,10 @@
 use TrevorWP\Theme\Helper;
 
 class Testimonials_Carousel extends A_Field_Group implements I_Block {
-	const FIELD_DATA = 'data';
-	const FIELD_DATA_IMG = 'img';
+	const FIELD_DATA       = 'data';
+	const FIELD_DATA_IMG   = 'img';
 	const FIELD_DATA_QUOTE = 'quote';
-	const FIELD_DATA_CITE = 'cite';
+	const FIELD_DATA_CITE  = 'cite';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -15,18 +15,18 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		$data_title    = static::gen_field_key( static::FIELD_DATA_QUOTE );
 		$data_subtitle = static::gen_field_key( static::FIELD_DATA_CITE );
 
-		return [
+		return array(
 			'title'  => 'Testimonials Carousel',
-			'fields' => [
-				static::FIELD_DATA => [
+			'fields' => array(
+				static::FIELD_DATA => array(
 					'key'        => $data,
 					'name'       => static::FIELD_DATA,
 					'label'      => 'Data',
 					'type'       => 'repeater',
 					'required'   => true,
 					'layout'     => 'table',
-					'sub_fields' => [
-						static::FIELD_DATA_IMG   => [
+					'sub_fields' => array(
+						static::FIELD_DATA_IMG   => array(
 							'key'           => $data_img,
 							'name'          => static::FIELD_DATA_IMG,
 							'label'         => 'Image',
@@ -35,44 +35,47 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 							'return_format' => 'array',
 							'preview_size'  => 'medium',
 							'library'       => 'all',
-						],
-						static::FIELD_DATA_QUOTE => [
+						),
+						static::FIELD_DATA_QUOTE => array(
 							'key'      => $data_title,
 							'name'     => static::FIELD_DATA_QUOTE,
 							'label'    => 'Quote',
 							'type'     => 'textarea',
 							'required' => true,
-						],
-						static::FIELD_DATA_CITE  => [
+						),
+						static::FIELD_DATA_CITE  => array(
 							'key'   => $data_subtitle,
 							'name'  => static::FIELD_DATA_CITE,
 							'label' => 'Cite',
 							'type'  => 'textarea',
-						],
-					],
-				]
-			]
-		];
+						),
+					),
+				),
+			),
+		);
 	}
 
 	/** @inheritDoc */
 	public static function get_block_args(): array {
-		return array_merge( parent::get_block_args(), [
-			'name'       => static::get_key(),
-			'title'      => 'Testimonials Carousel',
-			'post_types' => [ 'page' ],
-		] );
+		return array_merge(
+			parent::get_block_args(),
+			array(
+				'name'       => static::get_key(),
+				'title'      => 'Testimonials Carousel',
+				'post_types' => array( 'page' ),
+			)
+		);
 	}
 
 	/** @inheritDoc */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		$data = [];
+		$data = array();
 		foreach ( (array) static::get_val( static::FIELD_DATA ) as $entry ) {
-			$data[] = [
+			$data[] = array(
 				'img'   => $entry[ self::FIELD_DATA_IMG ],
 				'cite'  => $entry[ self::FIELD_DATA_CITE ],
 				'quote' => $entry[ self::FIELD_DATA_QUOTE ],
-			];
+			);
 		}
 
 		echo Helper\Carousel::testimonials( $data );

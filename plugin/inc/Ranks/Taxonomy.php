@@ -15,7 +15,7 @@ class Taxonomy {
 	 * @return int Updated term count.
 	 * @throws Internal
 	 */
-	public static function update_ranks( string $taxonomy, string $post_type, array $excluded_slugs = [] ): int {
+	public static function update_ranks( string $taxonomy, string $post_type, array $excluded_slugs = array() ): int {
 		global $wpdb;
 
 		if ( ! taxonomy_exists( $taxonomy ) ) {
@@ -24,14 +24,16 @@ class Taxonomy {
 
 		$ext_where = '';
 		if ( ! empty( $excluded_slugs ) ) {
-			$ss        = implode( ',', array_fill( 0, count( $excluded_slugs ), '%s' ) );
+			$ss         = implode( ',', array_fill( 0, count( $excluded_slugs ), '%s' ) );
 			$ext_where .= call_user_func_array(
-				[ $wpdb, 'prepare' ],
-				array_merge( [ ' AND t.slug NOT IN (' . $ss . ') ' ], $excluded_slugs )
+				array( $wpdb, 'prepare' ),
+				array_merge( array( ' AND t.slug NOT IN (' . $ss . ') ' ), $excluded_slugs )
 			);
 		}
 
-		$results = $wpdb->get_results( $wpdb->prepare( "
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"
 		SELECT t.term_id term_id
 		FROM {$wpdb->terms} t
 		INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = t.term_id AND tt.taxonomy = %s
@@ -44,7 +46,14 @@ class Taxonomy {
 		ORDER BY
 			(SUM(IFNULL(pm_long.meta_value,0))/4 + SUM(IFNULL(pm_short.meta_value,0))) DESC,
 			tt.count DESC
-		", $taxonomy, $post_type, Meta\Post::KEY_VIEW_COUNT_SHORT, Meta\Post::KEY_VIEW_COUNT_LONG ), ARRAY_N );
+		",
+				$taxonomy,
+				$post_type,
+				Meta\Post::KEY_VIEW_COUNT_SHORT,
+				Meta\Post::KEY_VIEW_COUNT_LONG
+			),
+			ARRAY_N
+		);
 
 		$meta_key = self::get_meta_key( $post_type );
 
@@ -72,19 +81,26 @@ class Taxonomy {
 		$ranks = wp_cache_get( $post_type, Main::CACHE_GROUP_TAX_PREFIX . $taxonomy, false, $found );
 
 		if ( ! $found || ! is_array( $ranks ) ) {
-			$q = $wpdb->prepare( "
+			$q = $wpdb->prepare(
+				"
 			SELECT tm.term_id term_id, tm.meta_value rank
 			FROM {$wpdb->termmeta} tm
 			INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = tm.term_id
 			WHERE
 				tm.meta_key = %s AND
 				tt.taxonomy = %s
-			", self::get_meta_key( $post_type ), $taxonomy );
+			",
+				self::get_meta_key( $post_type ),
+				$taxonomy
+			);
 
 			$ranks = $wpdb->get_results( $q, OBJECT_K );
-			$ranks = array_map( function ( \stdClass $row ) {
-				return intval( $row->rank );
-			}, $ranks );
+			$ranks = array_map(
+				function ( \stdClass $row ) {
+					return intval( $row->rank );
+				},
+				$ranks
+			);
 
 			# Save to cache
 			wp_cache_set(
@@ -108,7 +124,7 @@ class Taxonomy {
 		$terms = get_the_terms( $post, $taxonomy );
 
 		if ( ! $terms || is_wp_error( $terms ) ) {
-			return [];
+			return array();
 		}
 
 		return self::sort_terms( $terms, $taxonomy, $post->post_type );
@@ -129,9 +145,12 @@ class Taxonomy {
 		}
 
 		# Sort by rank
-		usort( $terms, function ( $a, $b ) {
-			return $a->rank <=> $b->rank;
-		} );
+		usort(
+			$terms,
+			function ( $a, $b ) {
+				return $a->rank <=> $b->rank;
+			}
+		);
 
 		return $terms;
 	}

@@ -14,7 +14,7 @@ Template Name: Info Page Template
 					<?php the_content(); ?>
 				</div>
 				<div class="post-content-sidebar">
-					<?= \TrevorWP\Theme\ACF\Field_Group\Page_Sidebar::render() ?>
+					<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Sidebar::render(); ?>
 					<div class="floating-blocks-home hidden lg:block"></div>
 				</div>
 			</div>

@@ -1,1 +1,6 @@
-<?= paginate_links( [ 'next_text' => '&rsaquo;', 'prev_text' => '&lsaquo;' ] ); ?>
+<?php echo paginate_links(
+	array(
+		'next_text' => '&rsaquo;',
+		'prev_text' => '&lsaquo;',
+	)
+);

@@ -15,12 +15,15 @@ class Environment {
 	static public function create() {
 		global $wp_locale;
 
-		$loader = new Twig\Loader\FilesystemLoader( [ TREVOR_PLUGIN_TEMPLATES_DIR ] );
+		$loader = new Twig\Loader\FilesystemLoader( array( TREVOR_PLUGIN_TEMPLATES_DIR ) );
 
-		$env = new Twig\Environment( $loader, [
-			'debug' => WP_DEBUG,
-//			'cache' => self::get_cache_folder(),
-		] );
+		$env = new Twig\Environment(
+			$loader,
+			array(
+				'debug' => WP_DEBUG,
+			//          'cache' => self::get_cache_folder(),
+			)
+		);
 
 		# Core Extension
 		/** @var Twig\Extension\CoreExtension $core_ext */
@@ -35,19 +38,19 @@ class Environment {
 
 		# Add WP escape functions as a filter
 		foreach (
-			[
+			array(
 				'esc_textarea',
 				'esc_attr',
 				'esc_url',
 				// TODO: Remove unused ones
-			] as $wp_esc_filter
+			) as $wp_esc_filter
 		) {
-			$env->addFilter( new Twig\TwigFilter( $wp_esc_filter, $wp_esc_filter, [ 'is_safe' => [ 'html' ] ] ) );
+			$env->addFilter( new Twig\TwigFilter( $wp_esc_filter, $wp_esc_filter, array( 'is_safe' => array( 'html' ) ) ) );
 		}
 
 		# Safe Functions
 		foreach (
-			[
+			array(
 				'wp_get_attachment_image',
 				'wp_trim_words',
 				'get_permalink',
@@ -55,16 +58,16 @@ class Environment {
 				'get_the_post_thumbnail',
 				'get_the_ID',
 				// TODO: Remove unused ones
-			] as $func
+			) as $func
 		) {
-			$env->addFunction( new Twig\TwigFunction( $func, $func, [ 'is_safe' => [ 'html' ] ] ) );
+			$env->addFunction( new Twig\TwigFunction( $func, $func, array( 'is_safe' => array( 'html' ) ) ) );
 		}
 
 		# Unsafe Functions
 		foreach (
-			[
-				'uniqid'
-			] as $func
+			array(
+				'uniqid',
+			) as $func
 		) {
 			$env->addFunction( new Twig\TwigFunction( $func, $func ) );
 		}

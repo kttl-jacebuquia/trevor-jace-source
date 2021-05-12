@@ -11,22 +11,22 @@ use TrevorWP\Util\Tools;
 class Post {
 	# Popularity
 	const KEY_VIEW_COUNT_SHORT = Main::META_KEY_PREFIX . 'uniq_views_short';
-	const KEY_VIEW_COUNT_LONG = Main::META_KEY_PREFIX . 'uniq_views_long';
-	const KEY_POPULARITY_RANK = Main::META_KEY_PREFIX . 'popularity_rank';
-	const KEY_AVG_VISITS = Main::META_KEY_PREFIX . 'avg_visits';
+	const KEY_VIEW_COUNT_LONG  = Main::META_KEY_PREFIX . 'uniq_views_long';
+	const KEY_POPULARITY_RANK  = Main::META_KEY_PREFIX . 'popularity_rank';
+	const KEY_AVG_VISITS       = Main::META_KEY_PREFIX . 'avg_visits';
 
 	# Images
-	const KEY_IMAGE_SQUARE = Main::META_KEY_PREFIX . 'image_square';
+	const KEY_IMAGE_SQUARE     = Main::META_KEY_PREFIX . 'image_square';
 	const KEY_IMAGE_HORIZONTAL = Main::META_KEY_PREFIX . 'image_horizontal';
 
 	# File
 	const KEY_FILE = Main::META_KEY_PREFIX . 'file';
 
 	# Header
-	const KEY_HEADER_TYPE = Main::META_KEY_PREFIX . 'header_type';
-	const KEY_HEADER_BG_CLR = Main::META_KEY_PREFIX . 'header_bg_clr';
+	const KEY_HEADER_TYPE       = Main::META_KEY_PREFIX . 'header_type';
+	const KEY_HEADER_BG_CLR     = Main::META_KEY_PREFIX . 'header_bg_clr';
 	const KEY_HEADER_SNOW_SHARE = Main::META_KEY_PREFIX . 'show_share';
-	const KEY_HEADER_SHOW_DATE = Main::META_KEY_PREFIX . 'show_date';
+	const KEY_HEADER_SHOW_DATE  = Main::META_KEY_PREFIX . 'show_date';
 
 	# Length
 	const KEY_LENGTH_IND = Main::META_KEY_PREFIX . 'length_ind';
@@ -52,8 +52,8 @@ class Post {
 	const ITEM_NAME = Main::META_KEY_PREFIX . 'item_name';
 
 	# Products
-	const PROD_ITEM_IMG = self::KEY_FILE;
-	const PROD_ITEM_URL = Main::META_KEY_PREFIX . 'prod_item_url';
+	const PROD_ITEM_IMG   = self::KEY_FILE;
+	const PROD_ITEM_URL   = Main::META_KEY_PREFIX . 'prod_item_url';
 	const PROD_PARTNER_ID = Main::META_KEY_PREFIX . 'prod_partner_id';
 
 	# Bill
@@ -62,8 +62,8 @@ class Post {
 	# Team
 	const KEY_PRONOUNS = Main::META_KEY_PREFIX . 'pronouns';
 
-	public static $KEYS_BY_POST_TYPE = [];
-	public static $ARGS_BY_KEY = [];
+	public static $KEYS_BY_POST_TYPE = array();
+	public static $ARGS_BY_KEY       = array();
 
 	/**
 	 * Registers all registered post meta.
@@ -71,115 +71,115 @@ class Post {
 	public static function register_all(): void {
 		global $wp_meta_keys;
 		$rc_ppt       = CPT\RC\RC_Object::$PUBLIC_POST_TYPES;
-		$article_kind = array_merge( $rc_ppt, [ CPT\Post::POST_TYPE ] );
+		$article_kind = array_merge( $rc_ppt, array( CPT\Post::POST_TYPE ) );
 		$ppt          = Tools::get_public_post_types();
 
-		$default = [
+		$default = array(
 			'show_in_rest'  => true,
 			'single'        => true,
 			'type'          => 'string',
-			'auth_callback' => [ self::class, 'auth_check_editors' ],
+			'auth_callback' => array( self::class, 'auth_check_editors' ),
 			'post_types'    => $ppt,
-		];
+		);
 
 		// Posts
 		foreach (
-			[
-				self::KEY_HEADER_TYPE         => [
-					'sanitize_callback' => [ self::class, 'sanitize_post_header_types' ],
+			array(
+				self::KEY_HEADER_TYPE         => array(
+					'sanitize_callback' => array( self::class, 'sanitize_post_header_types' ),
 					'default'           => Theme\Helper\Post_Header::DEFAULT_TYPE,
 					'post_types'        => $article_kind,
-				],
-				self::KEY_HEADER_BG_CLR       => [
+				),
+				self::KEY_HEADER_BG_CLR       => array(
 					'default'    => Theme\Helper\Post_Header::DEFAULT_BG_COLOR,
 					'post_types' => $article_kind,
-				],
-				self::KEY_HEADER_SNOW_SHARE   => [
+				),
+				self::KEY_HEADER_SNOW_SHARE   => array(
 					'type'       => 'boolean',
 					'default'    => true,
 					'post_types' => $article_kind,
-				],
-				self::KEY_HEADER_SHOW_DATE    => [
+				),
+				self::KEY_HEADER_SHOW_DATE    => array(
 					'type'       => 'boolean',
 					'default'    => true,
 					'post_types' => $article_kind,
-				],
-				self::KEY_LENGTH_IND          => [
+				),
+				self::KEY_LENGTH_IND          => array(
 					'default'    => Theme\Helper\Content_Length::DEFAULT_OPTION,
 					'post_types' => $article_kind,
-				],
-				self::KEY_IMAGE_SQUARE        => [
+				),
+				self::KEY_IMAGE_SQUARE        => array(
 					'post_types' => $article_kind,
-				],
-				self::KEY_IMAGE_HORIZONTAL    => [
+				),
+				self::KEY_IMAGE_HORIZONTAL    => array(
 					'post_types' => $article_kind,
-				],
-				self::KEY_HIGHLIGHTS          => [
+				),
+				self::KEY_HIGHLIGHTS          => array(
 					'type'         => 'array',
-					'default'      => [],
+					'default'      => array(),
 					'show_in_rest' => false,
-				],
-				self::KEY_MAIN_CATEGORY       => [
+				),
+				self::KEY_MAIN_CATEGORY       => array(
 					'type'       => 'integer',
 					'default'    => 0,
 					'post_types' => $article_kind,
-				],
-				self::KEY_RECIRCULATION_CARDS => [
-					'default'      => [],
+				),
+				self::KEY_RECIRCULATION_CARDS => array(
+					'default'      => array(),
 					'type'         => 'array',
-					'show_in_rest' => [
-						'schema' => [
+					'show_in_rest' => array(
+						'schema' => array(
 							'type'  => 'array',
-							'items' => [ 'type' => 'string' ],
-						],
-					],
+							'items' => array( 'type' => 'string' ),
+						),
+					),
 					'post_types'   => $article_kind,
-				],
-				self::KEY_FILE                => [
-					'post_types' => [
+				),
+				self::KEY_FILE                => array(
+					'post_types' => array(
 						CPT\RC\Guide::POST_TYPE,
 						/* These two sharing the same key */
 						CPT\Donate\Prod_Partner::POST_TYPE,
 						CPT\Donate\Partner_Prod::POST_TYPE,
-					],
-				],
-				self::KEY_BILL_ID             => [
-					'post_types' => [
+					),
+				),
+				self::KEY_BILL_ID             => array(
+					'post_types' => array(
 						CPT\Get_Involved\Bill::POST_TYPE,
-					],
-				],
-				self::STORE_URL               => [
-					'post_types' => [
+					),
+				),
+				self::STORE_URL               => array(
+					'post_types' => array(
 						CPT\Donate\Prod_Partner::POST_TYPE,
-					],
-				],
-				self::ITEM_NAME               => [
-					'post_types' => [
+					),
+				),
+				self::ITEM_NAME               => array(
+					'post_types' => array(
 						CPT\Donate\Prod_Partner::POST_TYPE,
-					],
-				],
-				self::PROD_ITEM_URL           => [
-					'post_types' => [
+					),
+				),
+				self::PROD_ITEM_URL           => array(
+					'post_types' => array(
 						CPT\Donate\Partner_Prod::POST_TYPE,
-					],
-				],
-				self::PROD_PARTNER_ID         => [
-					'post_types' => [
+					),
+				),
+				self::PROD_PARTNER_ID         => array(
+					'post_types' => array(
 						CPT\Donate\Partner_Prod::POST_TYPE,
-					],
-				],
-				self::PARTNER_URL             => [
-					'post_types' => [
+					),
+				),
+				self::PARTNER_URL             => array(
+					'post_types' => array(
 						CPT\Get_Involved\Partner::POST_TYPE,
 						CPT\Get_Involved\Grant::POST_TYPE,
-					],
-				],
-				self::KEY_PRONOUNS            => [
-					'post_types' => [
+					),
+				),
+				self::KEY_PRONOUNS            => array(
+					'post_types' => array(
 						CPT\Team::POST_TYPE,
-					]
-				],
-			] as $meta_key => $args
+					),
+				),
+			) as $meta_key => $args
 		) {
 			$args = array_merge( $default, $args );
 
@@ -234,10 +234,10 @@ class Post {
 	 */
 	public static function get_editor_config( \WP_Post $post ): array {
 		$ppt    = Tools::get_public_post_types();
-		$config = [
-			'metaKeys'           => [],
+		$config = array(
+			'metaKeys'           => array(),
 			'metaKeysByPostType' => Post::$KEYS_BY_POST_TYPE,
-		];
+		);
 
 		# Collect Meta Keys
 		foreach ( ( new \ReflectionClass( self::class ) )->getConstants() as $constant => $key ) {
@@ -248,24 +248,24 @@ class Post {
 
 		if ( in_array( $post->post_type, $ppt ) ) {
 			# Header types
-			$config[ self::KEY_HEADER_TYPE ] = [
+			$config[ self::KEY_HEADER_TYPE ] = array(
 				'types' => Theme\Helper\Post_Header::SETTINGS,
-			];
+			);
 
 			# Header Colors
-			$config[ self::KEY_HEADER_BG_CLR ] = [
+			$config[ self::KEY_HEADER_BG_CLR ] = array(
 				'colors' => Theme\Helper\Post_Header::BG_COLORS,
-			];
+			);
 
 			# Content Length
-			$config[ self::KEY_LENGTH_IND ] = [
+			$config[ self::KEY_LENGTH_IND ] = array(
 				'settings' => Theme\Helper\Content_Length::SETTINGS,
-			];
+			);
 
 			# ReCirculation Cards
-			$config[ self::KEY_RECIRCULATION_CARDS ] = [
+			$config[ self::KEY_RECIRCULATION_CARDS ] = array(
 				'settings' => Theme\Helper\Circulation_Card::SETTINGS,
-			];
+			);
 
 		}
 
@@ -298,7 +298,7 @@ class Post {
 		# Fallback
 		$main_cat = null;
 		if ( ! $term_id || empty( $main_cat = get_term( $term_id, $tax ) ) ) {
-			if ( ! empty( $terms = wp_get_object_terms( $post->ID, $tax, [ 'number' => 1 ] ) ) ) {
+			if ( ! empty( $terms = wp_get_object_terms( $post->ID, $tax, array( 'number' => 1 ) ) ) ) {
 				$main_cat = reset( $terms );
 			}
 		}
@@ -388,7 +388,7 @@ class Post {
 	public static function get_recirculation_cards( int $post_id ): array {
 		$posts = get_post_meta( $post_id, self::KEY_RECIRCULATION_CARDS, true );
 		if ( empty( $posts ) || ! is_array( $posts ) ) {
-			return [];
+			return array();
 		}
 
 		return $posts;

@@ -14,27 +14,30 @@ class External extends RC_Object {
 	/** @inheritDoc */
 	public static function register_post_type(): void {
 		# Post Type
-		register_post_type( self::POST_TYPE, [
-			'labels'       => [
-				'name'          => 'External Resources',
-				'singular_name' => 'External Resource',
-				'add_new'       => 'Add New External Resource'
-			],
-			'public'       => true,
-			'hierarchical' => false,
-			'show_in_rest' => true,
-			'supports'     => [
-				'title',
-				'revisions',
-				'thumbnail',
-				'excerpt',
-			],
-			'has_archive'  => false,
-			'rewrite'      => false,
-		] );
+		register_post_type(
+			self::POST_TYPE,
+			array(
+				'labels'       => array(
+					'name'          => 'External Resources',
+					'singular_name' => 'External Resource',
+					'add_new'       => 'Add New External Resource',
+				),
+				'public'       => true,
+				'hierarchical' => false,
+				'show_in_rest' => true,
+				'supports'     => array(
+					'title',
+					'revisions',
+					'thumbnail',
+					'excerpt',
+				),
+				'has_archive'  => false,
+				'rewrite'      => false,
+			)
+		);
 
 		# Check page id for rest of the hooks
-		add_action( 'current_screen', [ self::class, 'current_screen' ] );
+		add_action( 'current_screen', array( self::class, 'current_screen' ) );
 	}
 
 	/**
@@ -51,16 +54,16 @@ class External extends RC_Object {
 		}
 
 		# Add custom meta boxes
-		add_action( 'edit_form_after_title', [ self::class, 'edit_form_after_title' ] );
+		add_action( 'edit_form_after_title', array( self::class, 'edit_form_after_title' ) );
 
 		# Title -> Name
-		add_filter( 'enter_title_here', [ self::class, 'enter_title_here' ] );
+		add_filter( 'enter_title_here', array( self::class, 'enter_title_here' ) );
 
 		# Save post action
-		add_action( 'save_post_' . self::POST_TYPE, [ self::class, 'save_post_' ] );
+		add_action( 'save_post_' . self::POST_TYPE, array( self::class, 'save_post_' ) );
 
 		# Save post filter for WP_Post params
-		add_filter( 'wp_insert_post_data', [ self::class, 'wp_insert_post_data' ] );
+		add_filter( 'wp_insert_post_data', array( self::class, 'wp_insert_post_data' ) );
 	}
 
 	/**
@@ -72,9 +75,9 @@ class External extends RC_Object {
 	 * @see current_screen()
 	 */
 	public static function edit_form_after_title( $post ): void {
-		$data = [
+		$data = array(
 			'url' => self::obj_get_url( $post->ID ),
-		];
+		);
 
 		echo Main::get_twig()->render( 'admin/rc/external/edit/after-title.twig', compact( 'post', 'data' ) );
 	}

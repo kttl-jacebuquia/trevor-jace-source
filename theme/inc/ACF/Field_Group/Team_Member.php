@@ -3,7 +3,7 @@
 use TrevorWP\CPT;
 
 class Team_Member extends A_Field_Group {
-	const FIELD_PRONOUN = 'member_pronoun';
+	const FIELD_PRONOUN  = 'member_pronoun';
 	const FIELD_LOCATION = 'member_location';
 
 	/** @inheritDoc */
@@ -11,31 +11,31 @@ class Team_Member extends A_Field_Group {
 		$pronoun  = static::gen_field_key( static::FIELD_PRONOUN );
 		$location = static::gen_field_key( static::FIELD_LOCATION );
 
-		return [
+		return array(
 			'title'    => 'Details',
-			'fields'   => [
-				static::FIELD_PRONOUN  => [
+			'fields'   => array(
+				static::FIELD_PRONOUN  => array(
 					'key'   => $pronoun,
 					'name'  => static::FIELD_PRONOUN,
 					'label' => 'Pronoun',
 					'type'  => 'text',
-				],
-				static::FIELD_LOCATION => [
+				),
+				static::FIELD_LOCATION => array(
 					'key'   => $location,
 					'name'  => static::FIELD_LOCATION,
 					'label' => 'Location',
 					'type'  => 'text',
-				]
-			],
-			'location' => [
-				[
-					[
+				),
+			),
+			'location' => array(
+				array(
+					array(
 						'param'    => 'post_type',
 						'operator' => '==',
 						'value'    => CPT\Team::POST_TYPE,
-					],
-				],
-			],
-		];
+					),
+				),
+			),
+		);
 	}
 }

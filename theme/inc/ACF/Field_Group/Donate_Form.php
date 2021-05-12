@@ -66,11 +66,11 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$options = array_merge(
-			[
+			array(
 				'form_image' => static::get_val( static::FIELD_FORM_IMAGE ),
 				'heading'    => static::get_val( static::FIELD_HEADING ),
 				'intro'      => static::get_val( static::FIELD_INTRO ),
-			],
+			),
 			$options
 		);
 

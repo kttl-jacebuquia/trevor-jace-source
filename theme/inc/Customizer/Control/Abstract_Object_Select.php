@@ -23,12 +23,12 @@ abstract class Abstract_Object_Select extends WP_Customize_Control {
 
 	/** @inheritDoc */
 	public function json() {
-		$etx = [
+		$etx = array(
 			'object_type'    => $this->get_object_type(),
 			'default_value'  => $this->get_default_value(),
 			'allow_multiple' => $this->allow_multiple,
 			'allow_order'    => $this->allow_order,
-		];
+		);
 
 		if ( isset( $this->meta_key ) ) {
 			$ext['meta_key'] = $this->meta_key;

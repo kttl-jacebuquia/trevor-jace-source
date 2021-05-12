@@ -20,13 +20,13 @@ class Classy {
 	 */
 	public static function register() {
 		add_menu_page(
-				'Classy API',
-				'Classy API',
-				'update_core',
-				self::MENU_SLUG,
-				[ self::class, 'render' ],
-				'none',
-				101.3
+			'Classy API',
+			'Classy API',
+			'update_core',
+			self::MENU_SLUG,
+			array( self::class, 'render' ),
+			'none',
+			101.3
 		);
 	}
 
@@ -40,19 +40,19 @@ class Classy {
 		?>
 		<div class="wrap">
 			<h1>Classy.org</h1>
-			<form class="app-wrap" method="post" action="<?= admin_url( 'admin.php?page=' . self::MENU_SLUG ) ?>">
-				<input type="hidden" name="nonce" value="<?= Tools::create_nonce( self::NONCE_KEY ) ?>">
+			<form class="app-wrap" method="post" action="<?php echo admin_url( 'admin.php?page=' . self::MENU_SLUG ); ?>">
+				<input type="hidden" name="nonce" value="<?php echo Tools::create_nonce( self::NONCE_KEY ); ?>">
 				<table class="form-table">
 					<tbody>
 					<tr>
 						<th scope="row"><label for="client_id">Client Id</label></th>
 						<td><input name="client_id" id="client_id" type="text" class="regular-text"
-								   value="<?= esc_attr( $client_id ) ?>"></td>
+								   value="<?php echo esc_attr( $client_id ); ?>"></td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="client_secret">Client Secret</label></th>
 						<td><input name="client_secret" id="client_secret" type="text" class="regular-text"
-								   value="<?= esc_attr( $client_secret ) ?>">
+								   value="<?php echo esc_attr( $client_secret ); ?>">
 						</td>
 					</tr>
 					</tbody>
@@ -79,17 +79,21 @@ class Classy {
 			throw new Unauthorized();
 		}
 
-		$data = filter_input_array( INPUT_POST, [
+		$data = filter_input_array(
+			INPUT_POST,
+			array(
 				'client_id'     => FILTER_UNSAFE_RAW,
-				'client_secret' => FILTER_UNSAFE_RAW
-		], true );
+				'client_secret' => FILTER_UNSAFE_RAW,
+			),
+			true
+		);
 
 		//todo: test before save
-//		$test_instance = new APIClient( $data['client_id'], $data['client_secret'] );
+		//      $test_instance = new APIClient( $data['client_id'], $data['client_secret'] );
 
 		APIClient::$instance = null; // Clear previous instance
 		APIClient::set_credentials( $data['client_id'], $data['client_secret'] );
 
-		Tools::add_update_msg( "Credentials updated." );
+		Tools::add_update_msg( 'Credentials updated.' );
 	}
 }

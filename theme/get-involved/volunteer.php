@@ -7,77 +7,108 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 ?>
 <main id="site-content" role="main" class="site-content volunteer">
-	<?= Helper\Page_Header::img_bg( [
+	<?php
+	echo Helper\Page_Header::img_bg(
+		array(
 			'title'   => Volunteer::get_val( Volunteer::SETTING_HOME_HERO_TITLE ),
 			'cta_txt' => Volunteer::get_val( Volunteer::SETTING_HOME_HERO_CTA ),
 			'img_id'  => Volunteer::get_val( Volunteer::SETTING_HOME_HERO_IMG ),
-	] ) ?>
+		)
+	)
+	?>
 
 	<div class="pt-20 pb-24 text-teal-dark lg:pt-px140 lg:pb-48">
 		<div class="container mx-auto site-content-inner text-center">
-			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56"><?= Volunteer::get_val( Volunteer::SETTING_HOME_TITLE ); ?></h2>
-			<p class="text-px18 leading-px26 mb-px60 font-normal md:mx-9 md:mb-20 lg:text-px24 lg:leading-px36 lg:mb-px120 lg:mx-44"><?= Volunteer::get_val( Volunteer::SETTING_HOME_DESC ); ?></p>
+			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 md:mx-40 lg:text-px46 lg:leading-px56"><?php echo Volunteer::get_val( Volunteer::SETTING_HOME_TITLE ); ?></h2>
+			<p class="text-px18 leading-px26 mb-px60 font-normal md:mx-9 md:mb-20 lg:text-px24 lg:leading-px36 lg:mb-px120 lg:mx-44"><?php echo Volunteer::get_val( Volunteer::SETTING_HOME_DESC ); ?></p>
 
 			<div class="flex flex-col lg:container mb-px72 md:mb-20 md:flex-row lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0 lg:max-w-px500" data-aspectRatio="1:1">
-					<?= Helper\Thumbnail::print_img_variants( [
-							[
-									intval( Volunteer::get_val( Volunteer::SETTING_HOME_1_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
-					] ) ?>
+					<?php
+					echo Helper\Thumbnail::print_img_variants(
+						array(
+							array(
+								intval( Volunteer::get_val( Volunteer::SETTING_HOME_1_IMG ) ),
+								Helper\Thumbnail::variant(
+									Helper\Thumbnail::SCREEN_MD,
+									null,
+									Helper\Thumbnail::SIZE_MD,
+									array(
+										'class' => array(
+											'object-center',
+											'object-cover',
+											'rounded-px10',
+										),
+									)
+								),
+							),
+						)
+					)
+					?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_1_DESC ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_1_DESC ); ?>
 					</p>
 				</div>
 			</div>
 			<div class="flex flex-col lg:container mb-px72 md:mb-20 md:flex-row-reverse lg:mb-28">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0 lg:max-w-px500" data-aspectRatio="1:1">
-					<?= Helper\Thumbnail::print_img_variants( [
-							[
-									intval( Volunteer::get_val( Volunteer::SETTING_HOME_2_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
-					] ) ?>
+					<?php
+					echo Helper\Thumbnail::print_img_variants(
+						array(
+							array(
+								intval( Volunteer::get_val( Volunteer::SETTING_HOME_2_IMG ) ),
+								Helper\Thumbnail::variant(
+									Helper\Thumbnail::SCREEN_MD,
+									null,
+									Helper\Thumbnail::SIZE_MD,
+									array(
+										'class' => array(
+											'object-center',
+											'object-cover',
+											'rounded-px10',
+										),
+									)
+								),
+							),
+						)
+					)
+					?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_2_DESC ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_2_DESC ); ?>
 					</p>
 				</div>
 			</div>
 			<div class="flex flex-col lg:container md:flex-row">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0 lg:max-w-px500" data-aspectRatio="1:1">
-					<?= Helper\Thumbnail::print_img_variants( [
-							[
-									intval( Volunteer::get_val( Volunteer::SETTING_HOME_3_IMG ) ),
-									Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_MD, null, Helper\Thumbnail::SIZE_MD, [
-											'class' => [
-													'object-center',
-													'object-cover',
-													'rounded-px10',
-											]
-									] ),
-							],
-					] ) ?>
+					<?php
+					echo Helper\Thumbnail::print_img_variants(
+						array(
+							array(
+								intval( Volunteer::get_val( Volunteer::SETTING_HOME_3_IMG ) ),
+								Helper\Thumbnail::variant(
+									Helper\Thumbnail::SCREEN_MD,
+									null,
+									Helper\Thumbnail::SIZE_MD,
+									array(
+										'class' => array(
+											'object-center',
+											'object-cover',
+											'rounded-px10',
+										),
+									)
+								),
+							),
+						)
+					)
+					?>
 				</div>
 				<div class="text-center md:flex-1 md:flex md:flex-col md:justify-center md:items-center">
 					<p class="text-px24 leading-px28 tracking-em001 md:leading-px32 mx-4 lg:text-px26 lg:leading-px36 lg:mx-auto lg:max-w-sm">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_3_DESC ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_3_DESC ); ?>
 					</p>
 				</div>
 			</div>
@@ -85,27 +116,29 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 	</div>
 
-	<?= Helper\Carousel::testimonials(
-			Volunteer::get_val( Volunteer::SETTING_HOME_TESTIMONIALS ),
-			[]
-	) ?>
+	<?php
+	echo Helper\Carousel::testimonials(
+		Volunteer::get_val( Volunteer::SETTING_HOME_TESTIMONIALS ),
+		array()
+	)
+	?>
 
 	<div class="pt-20 pb-24 text-white bg-teal-dark lg:pt-36">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
-				<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_TITLE ) ?>
+				<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_TITLE ); ?>
 			</h2>
 			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px26 lg:leading-px36 lg:mb-px60 lg:mx-44">
-				<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_DESC ) ?>
+				<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_DESC ); ?>
 			</p>
 
 			<div class="mx-auto grid grid-cols-1 gap-y-7 gap-x-8 md:w-3/4 lg:w-full lg:grid-cols-2 xl:w-3/4">
 				<div class="bg-white rounded-px10 pt-9 px-7 pb-14 text-teal-dark md:text-left md:p-9 lg:p-12 flex flex-col">
 					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40 font-semibold mx-12 md:mx-0">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_TITLE ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_TITLE ); ?>
 					</h3>
 					<p class="text-px16 leading-px24 mb-7 lg:text-px18 lg:leading-px26">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_DESC ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_SPECS_DESC ); ?>
 					</p>
 					<ul class="mb-6 text-left list-check">
 						<li class="text-px14 leading-px20 mb-3.5 lg:text-px18 lg:leading-px26">
@@ -128,10 +161,10 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 
 				<div class="bg-white rounded-px10 pt-9 px-7 pb-7 text-teal-dark md:text-left md:p-9 lg:p-12">
 					<h3 class="text-px26 leading-px36 mb-2 lg:text-px30 lg:leading-px40 font-semibold">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_APPLY_TITLE ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_APPLY_TITLE ); ?>
 					</h3>
 					<p class="text-px16 leading-px24 mb-7 lg:text-px18 lg:leading-px26">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_APPLY_DESC ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_APPLY_DESC ); ?>
 					</p>
 					<ol class="mb-6 text-left list-decimal">
 						<li class="text-px14 leading-px20 mb-3.5 lg:text-px18 lg:leading-px26">
@@ -156,7 +189,7 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 			<div class="justify-center py-10">
 				<a href="#"
 				   class="inline-block font-bold text-teal-dark bg-white py-3 px-8 rounded-px10 md:px-8 lg:text-px18 lg:leading-px26 lg:py-5 lg:px-10">
-					<?= Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_CTA ) ?>
+					<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_COUNSELOR_CTA ); ?>
 				</a>
 			</div>
 		</div>
@@ -165,43 +198,43 @@ use \TrevorWP\Theme\Customizer\Volunteer;
 	<div class="pt-20 pb-24 text-white lg:pt-24 lg:pb-px150 bg-blue_green">
 		<div class="container mx-auto site-content-inner text-center">
 			<h2 class="font-semibold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
-				<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TITLE ) ?>
+				<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TITLE ); ?>
 			</h2>
 			<p class="text-px18 leading-px26 mb-px50 md:mx-20 lg:text-px24 lg:leading-px34 lg:mb-px86 lg:mx-44">
-				<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_DESC ) ?>
+				<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_DESC ); ?>
 			</p>
 
 			<div class="grid grid-cols-2 gap-y-12 gap-x-3 md:mx-20 lg:grid-cols-4">
 				<div>
 					<p class="volunteer-icon volunteer-icon-1 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_1 ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_1 ); ?>
 					</p>
 				</div>
 				<div>
 					<p class="volunteer-icon volunteer-icon-2 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_2 ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_2 ); ?>
 					</p>
 				</div>
 				<div>
 					<p class="volunteer-icon volunteer-icon-3 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_3 ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_3 ); ?>
 					</p>
 				</div>
 				<div>
 					<p class="volunteer-icon volunteer-icon-4 text-px20 leading-px30 lg:text-px20 lg:leading-px30px">
-						<?= Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_4 ) ?>
+						<?php echo Volunteer::get_val( Volunteer::SETTING_HOME_REASONS_TXT_4 ); ?>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<?php 
-		$cards = [ 'donation', 'fundraiser' ]; 
+	<?php
+		$cards             = array( 'donation', 'fundraiser' );
 		$circulation_title = 'There are other ways to help.';
 	?>
 	
-	<?= Helper\Circulation_Card::render_circulation( $circulation_title, null, $cards, null ); ?>
+	<?php echo Helper\Circulation_Card::render_circulation( $circulation_title, null, $cards, null ); ?>
 
 </main>
 <?php get_footer(); ?>

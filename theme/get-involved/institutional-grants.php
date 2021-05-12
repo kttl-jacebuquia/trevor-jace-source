@@ -8,39 +8,47 @@ use \TrevorWP\Meta;
 use \TrevorWP\Theme\Helper\Circulation_Card;
 use \TrevorWP\Theme\Helper;
 
-$tiers = ( new \WP_Term_Query( [
+$tiers = ( new \WP_Term_Query(
+	array(
 		'taxonomy'   => Get_Involved_Object::TAXONOMY_GRANT_TIER,
 		'orderby'    => 'meta_value_num',
 		'order'      => 'DESC',
 		'hide_empty' => true,
 		'meta_key'   => Meta\Taxonomy::KEY_PARTNER_TIER_VALUE,
-] ) )->terms;
+	)
+) )->terms;
 
 /** @var \WP_Term $tier */
 foreach ( $tiers as $tier ) {
-	$tier->posts = get_posts( [
+	$tier->posts = get_posts(
+		array(
 			'numberposts' => - 1,
 			'orderby'     => 'name',
 			'order'       => 'ASC',
 			'post_type'   => Grant::POST_TYPE,
-			'tax_query'   => [
-					[
-							'taxonomy' => Get_Involved_Object::TAXONOMY_GRANT_TIER,
-							'terms'    => $tier->term_id
-					]
-			]
-	] );
+			'tax_query'   => array(
+				array(
+					'taxonomy' => Get_Involved_Object::TAXONOMY_GRANT_TIER,
+					'terms'    => $tier->term_id,
+				),
+			),
+		)
+	);
 }
 
 ?>
 <main id="site-content" role="main" class="site-content institutional-grants">
-	<?= TrevorWP\Theme\Helper\Page_Header::text( [
+	<?php
+	echo TrevorWP\Theme\Helper\Page_Header::text(
+		array(
 			'title_top' => 'Partner with us',
 			'title'     => 'Institutional Grants',
 			'desc'      => 'The Trevor Project’s life-saving programs are supported by grants from institutional funders such as government and private foundations.',
 			'cta_txt'   => 'Become a Partner',
 			'cta_url'   => '#',
-	] ) ?>
+		)
+	)
+	?>
 
 	<div class="funders bg-white flex flex-col">
 		<h2 class="funders__title text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
@@ -48,12 +56,13 @@ foreach ( $tiers as $tier ) {
 		<div class="table-container">
 			<table>
 				<tbody>
-				<?php foreach ( $tiers as $tier ) :
+				<?php
+				foreach ( $tiers as $tier ) :
 					?>
 					<tr class="flex flex-col md:flex-row text-center">
 						<th>
-							<div class="tier-name text-px20 leading-px26 md:text-left font-semibold lg:mb-0 lg:text-px26 lg:leading-px36"><?= $tier->name ?></div>
-							<div class="tier-value font-normal text-px20 md:text-left leading-px26 lg:text-px22 lg:leading-px32"><?= esc_html( get_term_meta( $tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ) ?></div>
+							<div class="tier-name text-px20 leading-px26 md:text-left font-semibold lg:mb-0 lg:text-px26 lg:leading-px36"><?php echo $tier->name; ?></div>
+							<div class="tier-value font-normal text-px20 md:text-left leading-px26 lg:text-px22 lg:leading-px32"><?php echo esc_html( get_term_meta( $tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ); ?></div>
 
 						</th>
 						<td class="logo-size flex flex-col md:flex-row">
@@ -62,15 +71,14 @@ foreach ( $tiers as $tier ) {
 							foreach ( $tier->posts as $post ) :
 
 								if ( ! empty( Meta\Post::get_partner_url( $post->ID ) ) ) {
-								?>
+									?>
 									<a href="<?php echo Meta\Post::get_partner_url( $post->ID ); ?>" class="funder-name" rel="nofollow noreferrer noopener" target="_blank"
 										title="<?php echo esc_attr( $post->title ); ?>">
 										<span><?php echo esc_html( $post->post_title ); ?></span>
 									</a>
-								<?php
-								}
-								else {
-								?>
+									<?php
+								} else {
+									?>
 									<div class="funder-name"><?php echo esc_html( $post->post_title ); ?></div>
 								<?php } ?>
 							<?php endforeach ?>
@@ -86,17 +94,19 @@ foreach ( $tiers as $tier ) {
 	</div>
 
 	<?php /* Recirculation */ ?>
-	<?= Helper\Circulation_Card::render_circulation( 
-		'There are other ways to help.', 
-		null, 
-		[ 
-			'donation', 
-			'fundraiser' 
-		], 
-		[
+	<?php
+	echo Helper\Circulation_Card::render_circulation(
+		'There are other ways to help.',
+		null,
+		array(
+			'donation',
+			'fundraiser',
+		),
+		array(
 			'container' => 'cards',
-		] 
-	); ?>
+		)
+	);
+	?>
 
 </main>
 <?php get_footer(); ?>

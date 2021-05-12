@@ -21,10 +21,13 @@ class Long_Wait {
 		$resp = json_decode( $resp['body'], true );
 		if ( json_last_error() ) {
 			// JSON error
-			Log::alert( "Counselor wait response JSON decode error.", [
-				'error' => json_last_error_msg(),
-				'body'  => $resp['body']
-			] );
+			Log::alert(
+				'Counselor wait response JSON decode error.',
+				array(
+					'error' => json_last_error_msg(),
+					'body'  => $resp['body'],
+				)
+			);
 
 			return null;
 		}

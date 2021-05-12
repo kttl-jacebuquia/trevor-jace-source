@@ -36,7 +36,6 @@ class Parsedown extends RealParsedown {
 		$url_parts = parse_url( $url );
 		$scheme    = (string) @$url_parts['scheme'];
 
-
 		if ( $scheme === 'wp' ) {
 			$this->_process_wp_protocol( $Element, $url_parts );
 		}
@@ -53,9 +52,9 @@ class Parsedown extends RealParsedown {
 		$path  = (string) @$url_parts['path'];
 		$query = (string) @$url_parts['query'];
 
-		$forced_args = [
+		$forced_args = array(
 			'posts_per_page' => 1,
-		];
+		);
 
 		$href = &$Element['attributes']['href'];
 
@@ -67,7 +66,7 @@ class Parsedown extends RealParsedown {
 			if ( ! empty( $q->posts ) ) {
 				$href = get_permalink( reset( $q->posts ) );
 			}
-		} else if ( $host == 'rc' ) {
+		} elseif ( $host == 'rc' ) {
 			if ( $path == '/search/' ) {
 				$href = home_url( RC_Object::PERMALINK_BASE ) . ( empty( $query ) ? '' : "?$query" );
 			}

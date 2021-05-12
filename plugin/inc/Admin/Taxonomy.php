@@ -3,8 +3,8 @@
 use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 
 class Taxonomy {
-	const FIELD_NAME_TIER_NAME = 'tier-amt-name';
-	const FIELD_NAME_TIER_VALUE = 'tier-amt-val';
+	const FIELD_NAME_TIER_NAME      = 'tier-amt-name';
+	const FIELD_NAME_TIER_VALUE     = 'tier-amt-val';
 	const FIELD_NAME_TIER_LOGO_SIZE = 'tier-logo-size';
 
 	/**
@@ -12,24 +12,34 @@ class Taxonomy {
 	 */
 	public static function register_hooks(): void {
 		foreach (
-				[
-						Get_Involved_Object::TAXONOMY_PARTNER_TIER,
-						Get_Involved_Object::TAXONOMY_GRANT_TIER
-				] as $taxonomy
+				array(
+					Get_Involved_Object::TAXONOMY_PARTNER_TIER,
+					Get_Involved_Object::TAXONOMY_GRANT_TIER,
+				) as $taxonomy
 		) {
 			# Add New Form
-			add_action( "{$taxonomy}_add_form_fields", [
+			add_action(
+				"{$taxonomy}_add_form_fields",
+				array(
 					self::class,
-					'add_tier_fields'
-			], 10, 0 );
+					'add_tier_fields',
+				),
+				10,
+				0
+			);
 			# Edit Form
-			add_action( "{$taxonomy}_edit_form", [
+			add_action(
+				"{$taxonomy}_edit_form",
+				array(
 					self::class,
-					'add_tier_fields'
-			], 10, 2 );
+					'add_tier_fields',
+				),
+				10,
+				2
+			);
 
 			# Save Action
-			add_action( "saved_{$taxonomy}", [ self::class, 'save_tier_values' ], 10, 1 );
+			add_action( "saved_{$taxonomy}", array( self::class, 'save_tier_values' ), 10, 1 );
 		}
 	}
 
@@ -54,33 +64,33 @@ class Taxonomy {
 
 		?>
 		<div class="form-field form-required">
-			<label for="<?= self::FIELD_NAME_TIER_NAME ?>">Amount Name</label>
-			<input name="<?= self::FIELD_NAME_TIER_NAME ?>"
-				   id="<?= self::FIELD_NAME_TIER_NAME ?>"
+			<label for="<?php echo self::FIELD_NAME_TIER_NAME; ?>">Amount Name</label>
+			<input name="<?php echo self::FIELD_NAME_TIER_NAME; ?>"
+				   id="<?php echo self::FIELD_NAME_TIER_NAME; ?>"
 				   type="text"
 				   placeholder="$1M+"
-				   value="<?= esc_attr( $name ) ?>"
+				   value="<?php echo esc_attr( $name ); ?>"
 				   aria-required="true"
 				   required>
 		</div>
 		<div class="form-field form-required">
-			<label for="<?= self::FIELD_NAME_TIER_VALUE ?>">Amount Value</label>
-			<input name="<?= self::FIELD_NAME_TIER_VALUE ?>"
-				   id="<?= self::FIELD_NAME_TIER_VALUE ?>"
+			<label for="<?php echo self::FIELD_NAME_TIER_VALUE; ?>">Amount Value</label>
+			<input name="<?php echo self::FIELD_NAME_TIER_VALUE; ?>"
+				   id="<?php echo self::FIELD_NAME_TIER_VALUE; ?>"
 				   type="number"
 				   placeholder="1000000"
-				   value="<?= esc_attr( $val ) ?>"
+				   value="<?php echo esc_attr( $val ); ?>"
 				   aria-required="true"
 				   required>
 			<p>Required for sorting. Bigger values appear on top.</p>
 		</div>
 		<div class="form-field form-required">
-			<label for="<?= self::FIELD_NAME_TIER_LOGO_SIZE ?>">Logo Size</label>
-			<select name="<?= self::FIELD_NAME_TIER_LOGO_SIZE ?>"
+			<label for="<?php echo self::FIELD_NAME_TIER_LOGO_SIZE; ?>">Logo Size</label>
+			<select name="<?php echo self::FIELD_NAME_TIER_LOGO_SIZE; ?>"
 					class="widefat"
-					id="<?= self::FIELD_NAME_TIER_LOGO_SIZE ?>">
+					id="<?php echo self::FIELD_NAME_TIER_LOGO_SIZE; ?>">
 				<?php foreach ( Get_Involved_Object::LOGO_SIZES as $key => $args ) { ?>
-					<option value="<?= $key ?>" <?= selected( $logo_size, $key ) ?>><?= esc_html( $args['name'] ) ?></option>
+					<option value="<?php echo $key; ?>" <?php echo selected( $logo_size, $key ); ?>><?php echo esc_html( $args['name'] ); ?></option>
 				<?php } ?>
 			</select>
 		</div>

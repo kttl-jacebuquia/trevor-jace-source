@@ -11,27 +11,27 @@ class Thumbnail {
 	const SCREEN_XL = 'xl';
 
 	/* Types */
-	const TYPE_VERTICAL = 'vertical';
+	const TYPE_VERTICAL   = 'vertical';
 	const TYPE_HORIZONTAL = 'horizontal';
-	const TYPE_SQUARE = 'square';
+	const TYPE_SQUARE     = 'square';
 
 	/* Sizes */
 	const SIZE_MD = 'medium';
 	const SIZE_LG = 'large';
 
 	/* Screen Order */
-	const _SCREEN_ORDER = [
+	const _SCREEN_ORDER = array(
 		self::SCREEN_SM => 0,
 		self::SCREEN_MD => 1,
 		self::SCREEN_LG => 2,
 		self::SCREEN_XL => 3,
-	];
+	);
 
 	/* Defaults */
-	const _DEFAULT_SCREEN = self::SCREEN_SM;
-	const _DEFAULT_TYPE = self::TYPE_VERTICAL;
-	const _DEFAULT_SIZE = self::SIZE_LG;
-	const _DEFAULT_VARIANT = [ self::_DEFAULT_SCREEN, self::_DEFAULT_TYPE, self::_DEFAULT_SIZE, [] ];
+	const _DEFAULT_SCREEN  = self::SCREEN_SM;
+	const _DEFAULT_TYPE    = self::TYPE_VERTICAL;
+	const _DEFAULT_SIZE    = self::SIZE_LG;
+	const _DEFAULT_VARIANT = array( self::_DEFAULT_SCREEN, self::_DEFAULT_TYPE, self::_DEFAULT_SIZE, array() );
 
 	/**
 	 * @param int|\WP_Post $post
@@ -87,8 +87,8 @@ class Thumbnail {
 	 *
 	 * @return array [$screen, $type, $size, $attr]
 	 */
-	public static function variant( $screen = self::_DEFAULT_SCREEN, $type = self::_DEFAULT_TYPE, $size = self::_DEFAULT_SIZE, array $attr = [] ): array {
-		return [ $screen, $type, $size, $attr ];
+	public static function variant( $screen = self::_DEFAULT_SCREEN, $type = self::_DEFAULT_TYPE, $size = self::_DEFAULT_SIZE, array $attr = array() ): array {
+		return array( $screen, $type, $size, $attr );
 	}
 
 	/**
@@ -97,24 +97,26 @@ class Thumbnail {
 	 * @return array
 	 */
 	public static function render_img_variants( array $images_data ): array {
-		$images_data = array_filter( $images_data, function ( $img_data ): bool {
-			// Filter missing, or non-img entries
-			list( $img_id ) = $img_data;
+		$images_data = array_filter(
+			$images_data,
+			function ( $img_data ): bool {
+				// Filter missing, or non-img entries
+				list( $img_id ) = $img_data;
 
-			if ( ! wp_attachment_is_image( $img_id ) ) {
-				return false;
+				if ( ! wp_attachment_is_image( $img_id ) ) {
+					return false;
+				}
+
+				return true;
 			}
-
-			return true;
-		} );
+		);
 		$images_data = array_values( $images_data ); // reset numeric index, we'll use it below
 		$img_count   = count( $images_data );
-		$out         = [];
+		$out         = array();
 
 		foreach ( $images_data as $idx => $img_data ) {
-			list( $img_id, $variant ) = $img_data;
+			list( $img_id, $variant )       = $img_data;
 			list( $screen, , $size, $attr ) = $variant;
-
 
 			$prev_count = count( $out );
 			$prev       = $prev_count > 0 ? $out[ $prev_count - 1 ] : null;
@@ -122,15 +124,15 @@ class Thumbnail {
 
 			# Class
 			if ( empty( $attr['class'] ) ) {
-				$attr['class'] = [];
-			} else if ( ! is_array( $attr['class'] ) ) {
+				$attr['class'] = array();
+			} elseif ( ! is_array( $attr['class'] ) ) {
 				$attr['class'] = explode( ' ', $attr['class'] );
 			}
 			$class = &$attr['class'];
 
 			if ( $next ) {
 				list( , list( $next_screen ) ) = $next;
-				$class[] = $next_screen . ( empty( $next_screen ) ? '' : ':' ) . 'hidden';
+				$class[]                       = $next_screen . ( empty( $next_screen ) ? '' : ':' ) . 'hidden';
 			}
 
 			if ( $prev ) {
@@ -140,7 +142,7 @@ class Thumbnail {
 
 			$class = implode( ' ', $class );
 			if ( ! empty( $html = wp_get_attachment_image( $img_id, $size, false, $attr ) ) ) {
-				$out[] = [ $html, $variant ];
+				$out[] = array( $html, $variant );
 			}
 		}
 
@@ -154,26 +156,26 @@ class Thumbnail {
 	 * @return array
 	 */
 	public static function get_post_imgs( int $post_id, ...$variants ): array {
-		$found_images = [];
+		$found_images = array();
 
 		# Check variants
 		if ( empty( $variants ) ) {
-			$variants = [ self::_DEFAULT_VARIANT ];
+			$variants = array( self::_DEFAULT_VARIANT );
 		}
 
 		# Order variants
-		usort( $variants, [ self::class, '_order_variant' ] );
+		usort( $variants, array( self::class, '_order_variant' ) );
 
 		# Group by screen
-		$screen_groups = array_fill_keys( array_keys( self::_SCREEN_ORDER ), [] );
+		$screen_groups = array_fill_keys( array_keys( self::_SCREEN_ORDER ), array() );
 		foreach ( $variants as $variant ) {
-			list( $screen ) = $variant;
+			list( $screen )             = $variant;
 			$screen_groups[ $screen ][] = $variant;
 		}
 
 		# Make sure the default screen is defined
 		if ( empty( $screen_groups[ self::SCREEN_SM ] ) ) {
-			$screen_groups[ self::SCREEN_SM ] = [ self::_DEFAULT_VARIANT ];
+			$screen_groups[ self::SCREEN_SM ] = array( self::_DEFAULT_VARIANT );
 			Log::warning( 'Small screen variant should be defined.', compact( 'variants', 'img_id' ) );
 		}
 
@@ -182,13 +184,13 @@ class Thumbnail {
 			foreach ( $variants as $idx => $variant ) {
 				list( , $type ) = $variant;
 
-				$img_id = call_user_func( [ \TrevorWP\Meta\Post::class, "get_{$type}_img_id" ], $post_id );
+				$img_id = call_user_func( array( \TrevorWP\Meta\Post::class, "get_{$type}_img_id" ), $post_id );
 				if ( empty( $img_id ) ) {
 					continue;
 				}
 
 				if ( wp_attachment_is_image( $img_id ) ) {
-					$found_images[] = [ $img_id, $variant ];
+					$found_images[] = array( $img_id, $variant );
 					continue 2;
 				}
 			}

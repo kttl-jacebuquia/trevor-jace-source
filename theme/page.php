@@ -1,7 +1,10 @@
 <?php get_header(); ?>
 
-<?php while ( have_posts() ) : the_post(); ?>
-	<?= \TrevorWP\Theme\ACF\Field_Group\Page_Header::render() ?>
+<?php
+while ( have_posts() ) :
+	the_post();
+	?>
+	<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Header::render(); ?>
 	<main id="site-content" class="bg-white" role="main">
 		<?php the_content(); ?>
 	</main>

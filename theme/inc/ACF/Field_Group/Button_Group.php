@@ -4,8 +4,8 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	const FIELD_BUTTONS = 'buttons';
-	const FIELD_BUTTON = 'button';
-	const FIELD_ATTR = 'attr';
+	const FIELD_BUTTON  = 'button';
+	const FIELD_ATTR    = 'attr';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -13,50 +13,52 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 		$button  = static::gen_field_key( static::FIELD_BUTTON );
 		$attr    = static::gen_field_key( static::FIELD_ATTR );
 
-		return [
-				'title'  => 'Button Group',
-				'fields' => [
-						static::FIELD_BUTTONS => [
-								'key'          => $buttons,
-								'name'         => static::FIELD_BUTTONS,
-								'label'        => '',
-								'type'         => 'repeater',
-								'layout'       => 'table',
-								'button_label' => 'Add Button',
-								'sub_fields'   => [
-										static::FIELD_BUTTON => Button::clone(
-												[
-														'key'     => $button,
-														'name'    => static::FIELD_BUTTON,
-														'label'   => 'Button',
-														'display' => 'group',
-														'layout'  => 'block',
-												]
-										),
-								],
-						],
-						static::FIELD_ATTR    => DOM_Attr::clone( [
-								'key'   => $attr,
-								'name'  => static::FIELD_ATTR,
-								'label' => '',
-						] ),
-				],
-		];
+		return array(
+			'title'  => 'Button Group',
+			'fields' => array(
+				static::FIELD_BUTTONS => array(
+					'key'          => $buttons,
+					'name'         => static::FIELD_BUTTONS,
+					'label'        => '',
+					'type'         => 'repeater',
+					'layout'       => 'table',
+					'button_label' => 'Add Button',
+					'sub_fields'   => array(
+						static::FIELD_BUTTON => Button::clone(
+							array(
+								'key'     => $button,
+								'name'    => static::FIELD_BUTTON,
+								'label'   => 'Button',
+								'display' => 'group',
+								'layout'  => 'block',
+							)
+						),
+					),
+				),
+				static::FIELD_ATTR    => DOM_Attr::clone(
+					array(
+						'key'   => $attr,
+						'name'  => static::FIELD_ATTR,
+						'label' => '',
+					)
+				),
+			),
+		);
 	}
 
 	/** @inheritdoc */
 	public static function get_block_args(): array {
-		return [
-				'name'       => static::get_key(),
-				'title'      => 'Button Group',
-				'category'   => 'common',
-				'icon'       => 'book-alt',
-				'post_types' => [ 'page' ],
-		];
+		return array(
+			'name'       => static::get_key(),
+			'title'      => 'Button Group',
+			'category'   => 'common',
+			'icon'       => 'book-alt',
+			'post_types' => array( 'page' ),
+		);
 	}
 
 	/** @inheritdoc */
-	public static function render( $post = false, array $data = null, array $options = [] ): ?string {
+	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$val          = new Field_Val_Getter( static::class, $post, $data );
 		$buttons_data = $val->get( static::FIELD_BUTTONS );
 
@@ -65,9 +67,9 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 			return null;
 		}
 
-		$wrap_cls  = array_merge( [ 'button-group flex justify-center mt-12' ], $options['wrap_cls'] ?? [] );
-		$btn_cls   = $options['btn_cls'] ?? [];
-		$label_cls = $options['label_cls'] ?? [];
+		$wrap_cls  = array_merge( array( 'button-group flex justify-center mt-12' ), $options['wrap_cls'] ?? array() );
+		$btn_cls   = $options['btn_cls'] ?? array();
+		$label_cls = $options['label_cls'] ?? array();
 
 		if ( $multiple = count( $buttons_data ) > 1 ) {
 			$btn_cls[]  = 'my-2.5 md:my-0 md:mx-2.5';
@@ -75,26 +77,28 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 		}
 
 		ob_start(); ?>
-		<div <?= DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ), $wrap_cls ) ?>>
-			<?php foreach ( $buttons_data as $button_data ): ?>
-				<?= Button::render( null, (array) @$button_data[ static::FIELD_BUTTON ], compact( 'btn_cls', 'label_cls' ) ); ?>
+		<div <?php echo DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ), $wrap_cls ); ?>>
+			<?php foreach ( $buttons_data as $button_data ) : ?>
+				<?php echo Button::render( null, (array) @$button_data[ static::FIELD_BUTTON ], compact( 'btn_cls', 'label_cls' ) ); ?>
 			<?php endforeach; ?>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 
 	/** @inheritdoc */
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
-		$data = [
-				static::FIELD_BUTTONS => [],
-				static::FIELD_ATTR    => get_field( static::FIELD_ATTR ),
-		];
+		$data = array(
+			static::FIELD_BUTTONS => array(),
+			static::FIELD_ATTR    => get_field( static::FIELD_ATTR ),
+		);
 
-		if ( have_rows( static::FIELD_BUTTONS ) ):
-			while ( have_rows( static::FIELD_BUTTONS ) ) : the_row();
-				$data[ static::FIELD_BUTTONS ][] = [
-						static::FIELD_BUTTON => get_sub_field( static::FIELD_BUTTON ),
-				];
+		if ( have_rows( static::FIELD_BUTTONS ) ) :
+			while ( have_rows( static::FIELD_BUTTONS ) ) :
+				the_row();
+				$data[ static::FIELD_BUTTONS ][] = array(
+					static::FIELD_BUTTON => get_sub_field( static::FIELD_BUTTON ),
+				);
 			endwhile;
 		endif;
 
@@ -102,11 +106,16 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	}
 
 	/** @inheritdoc */
-	public static function clone( array $args = [] ): array {
-		return parent::clone( array_merge( [
-				'display'      => 'seamless',
-				'prefix_label' => true,
-				'prefix_name'  => true,
-		], $args ) );
+	public static function clone( array $args = array() ): array {
+		return parent::clone(
+			array_merge(
+				array(
+					'display'      => 'seamless',
+					'prefix_label' => true,
+					'prefix_name'  => true,
+				),
+				$args
+			)
+		);
 	}
 }

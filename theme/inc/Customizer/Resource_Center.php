@@ -11,12 +11,12 @@ class Resource_Center extends Abstract_Customizer {
 
 	/* Sections */
 	/* * Home */
-	const SECTION_HOME_PREFIX = self::PANEL_ID . '_home';
-	const SECTION_HOME_GENERAL = self::SECTION_HOME_PREFIX . '_general';
+	const SECTION_HOME_PREFIX         = self::PANEL_ID . '_home';
+	const SECTION_HOME_GENERAL        = self::SECTION_HOME_PREFIX . '_general';
 	const SECTION_HOME_FEATURED_POSTS = self::SECTION_HOME_PREFIX . '_featured_posts';
-	const SECTION_HOME_GLOSSARY = self::SECTION_HOME_PREFIX . '_glossary';
-	const SECTION_HOME_GUIDES = self::SECTION_HOME_PREFIX . '_guides';
-	const SECTION_HOME_FEATURED_CATS = self::SECTION_HOME_PREFIX . '_featured_cats';
+	const SECTION_HOME_GLOSSARY       = self::SECTION_HOME_PREFIX . '_glossary';
+	const SECTION_HOME_GUIDES         = self::SECTION_HOME_PREFIX . '_guides';
+	const SECTION_HOME_FEATURED_CATS  = self::SECTION_HOME_PREFIX . '_featured_cats';
 	/* * Pagination */
 	const SECTION_PAGINATION = self::PANEL_ID . '_page';
 	/* * Get Help */
@@ -25,77 +25,77 @@ class Resource_Center extends Abstract_Customizer {
 
 	/* Settings */
 	/* * Home */
-	const SETTING_HOME_PREFIX = self::SECTION_HOME_PREFIX . '_';
-	const SETTING_HOME_FEATURED = self::SETTING_HOME_PREFIX . 'featured';
-	const SETTING_HOME_CATS = self::SETTING_HOME_PREFIX . 'cats';
-	const SETTING_HOME_GUIDES = self::SETTING_HOME_PREFIX . 'guides';
-	const SETTING_HOME_GLOSSARY = self::SETTING_HOME_PREFIX . 'glossary';
-	const SETTING_HOME_GLOSSARY_BG_IMG = self::SETTING_HOME_PREFIX . 'glossary_bg_img';
-	const SETTING_HOME_GLOSSARY_IMG = self::SETTING_HOME_PREFIX . 'glossary_img';
+	const SETTING_HOME_PREFIX            = self::SECTION_HOME_PREFIX . '_';
+	const SETTING_HOME_FEATURED          = self::SETTING_HOME_PREFIX . 'featured';
+	const SETTING_HOME_CATS              = self::SETTING_HOME_PREFIX . 'cats';
+	const SETTING_HOME_GUIDES            = self::SETTING_HOME_PREFIX . 'guides';
+	const SETTING_HOME_GLOSSARY          = self::SETTING_HOME_PREFIX . 'glossary';
+	const SETTING_HOME_GLOSSARY_BG_IMG   = self::SETTING_HOME_PREFIX . 'glossary_bg_img';
+	const SETTING_HOME_GLOSSARY_IMG      = self::SETTING_HOME_PREFIX . 'glossary_img';
 	const SETTING_HOME_GLOSSARY_BG_IMG_V = self::SETTING_HOME_PREFIX . 'glossary_bg_img_v';
-	const SETTING_HOME_CARD_NUM = self::SETTING_HOME_PREFIX . 'card_num';
-	const PREFIX_SETTING_HOME_CAT_POSTS = self::SETTING_HOME_PREFIX . 'cat_posts_';
+	const SETTING_HOME_CARD_NUM          = self::SETTING_HOME_PREFIX . 'card_num';
+	const PREFIX_SETTING_HOME_CAT_POSTS  = self::SETTING_HOME_PREFIX . 'cat_posts_';
 
 	/* * Pagination */
-	const SETTING_PAGINATION_PREFIX = self::SECTION_PAGINATION . '_';
-	const SETTING_PAGINATION_TAX_ARCHIVE = self::SETTING_PAGINATION_PREFIX . 'tax';
+	const SETTING_PAGINATION_PREFIX         = self::SECTION_PAGINATION . '_';
+	const SETTING_PAGINATION_TAX_ARCHIVE    = self::SETTING_PAGINATION_PREFIX . 'tax';
 	const SETTING_PAGINATION_SEARCH_RESULTS = self::SETTING_PAGINATION_PREFIX . 'search';
 
 	/* * Get Help */
-	const SETTING_GET_HELP_PREFIX = self::SECTION_GET_HELP . '_';
+	const SETTING_GET_HELP_PREFIX  = self::SECTION_GET_HELP . '_';
 	const SETTING_GET_HELP_1_TITLE = self::SETTING_GET_HELP_PREFIX . '1_title';
-	const SETTING_GET_HELP_1_DESC = self::SETTING_GET_HELP_PREFIX . '1_desc';
+	const SETTING_GET_HELP_1_DESC  = self::SETTING_GET_HELP_PREFIX . '1_desc';
 	const SETTING_GET_HELP_2_TITLE = self::SETTING_GET_HELP_PREFIX . '2_title';
-	const SETTING_GET_HELP_2_DESC = self::SETTING_GET_HELP_PREFIX . '2_desc';
+	const SETTING_GET_HELP_2_DESC  = self::SETTING_GET_HELP_PREFIX . '2_desc';
 	/* * * Text */
-	const SETTING_GET_HELP_TEXT_TITLE = self::SETTING_GET_HELP_PREFIX . 'text_title';
-	const SETTING_GET_HELP_TEXT_DESC = self::SETTING_GET_HELP_PREFIX . 'text_desc';
-	const SETTING_GET_HELP_TEXT_CTA = self::SETTING_GET_HELP_PREFIX . 'text_cta';
+	const SETTING_GET_HELP_TEXT_TITLE      = self::SETTING_GET_HELP_PREFIX . 'text_title';
+	const SETTING_GET_HELP_TEXT_DESC       = self::SETTING_GET_HELP_PREFIX . 'text_desc';
+	const SETTING_GET_HELP_TEXT_CTA        = self::SETTING_GET_HELP_PREFIX . 'text_cta';
 	const SETTING_GET_HELP_TEXT_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'text_cta_Action';
-	const SETTING_GET_HELP_TEXT_IMG = self::SETTING_GET_HELP_PREFIX . 'text_img';
-	const SETTING_GET_HELP_TEXT_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'text_btn_cta';
-	const SETTING_GET_HELP_TEXT_STEP1 = self::SETTING_GET_HELP_PREFIX . 'text_step1';
-	const SETTING_GET_HELP_TEXT_STEP2 = self::SETTING_GET_HELP_PREFIX . 'text_step2';
-	const SETTING_GET_HELP_TEXT_STEP3 = self::SETTING_GET_HELP_PREFIX . 'text_step3';
-	const SETTING_GET_HELP_TEXT_TERMS = self::SETTING_GET_HELP_PREFIX . 'text_terms';
+	const SETTING_GET_HELP_TEXT_IMG        = self::SETTING_GET_HELP_PREFIX . 'text_img';
+	const SETTING_GET_HELP_TEXT_BTN_CTA    = self::SETTING_GET_HELP_PREFIX . 'text_btn_cta';
+	const SETTING_GET_HELP_TEXT_STEP1      = self::SETTING_GET_HELP_PREFIX . 'text_step1';
+	const SETTING_GET_HELP_TEXT_STEP2      = self::SETTING_GET_HELP_PREFIX . 'text_step2';
+	const SETTING_GET_HELP_TEXT_STEP3      = self::SETTING_GET_HELP_PREFIX . 'text_step3';
+	const SETTING_GET_HELP_TEXT_TERMS      = self::SETTING_GET_HELP_PREFIX . 'text_terms';
 
 	/* * * Call */
-	const SETTING_GET_HELP_CALL_TITLE = self::SETTING_GET_HELP_PREFIX . 'call_title';
-	const SETTING_GET_HELP_CALL_DESC = self::SETTING_GET_HELP_PREFIX . 'call_desc';
-	const SETTING_GET_HELP_CALL_CTA = self::SETTING_GET_HELP_PREFIX . 'call_cta';
+	const SETTING_GET_HELP_CALL_TITLE      = self::SETTING_GET_HELP_PREFIX . 'call_title';
+	const SETTING_GET_HELP_CALL_DESC       = self::SETTING_GET_HELP_PREFIX . 'call_desc';
+	const SETTING_GET_HELP_CALL_CTA        = self::SETTING_GET_HELP_PREFIX . 'call_cta';
 	const SETTING_GET_HELP_CALL_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'call_cta_action';
-	const SETTING_GET_HELP_CALL_IMG = self::SETTING_GET_HELP_PREFIX . 'call_img';
-	const SETTING_GET_HELP_CALL_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'call_btn_cta';
-	const SETTING_GET_HELP_CALL_STEP1 = self::SETTING_GET_HELP_PREFIX . 'call_step1';
-	const SETTING_GET_HELP_CALL_STEP2 = self::SETTING_GET_HELP_PREFIX . 'call_step2';
-	const SETTING_GET_HELP_CALL_STEP3 = self::SETTING_GET_HELP_PREFIX . 'call_step3';
-	const SETTING_GET_HELP_CALL_TERMS = self::SETTING_GET_HELP_PREFIX . 'call_terms';
+	const SETTING_GET_HELP_CALL_IMG        = self::SETTING_GET_HELP_PREFIX . 'call_img';
+	const SETTING_GET_HELP_CALL_BTN_CTA    = self::SETTING_GET_HELP_PREFIX . 'call_btn_cta';
+	const SETTING_GET_HELP_CALL_STEP1      = self::SETTING_GET_HELP_PREFIX . 'call_step1';
+	const SETTING_GET_HELP_CALL_STEP2      = self::SETTING_GET_HELP_PREFIX . 'call_step2';
+	const SETTING_GET_HELP_CALL_STEP3      = self::SETTING_GET_HELP_PREFIX . 'call_step3';
+	const SETTING_GET_HELP_CALL_TERMS      = self::SETTING_GET_HELP_PREFIX . 'call_terms';
 
 	/* * * Chat */
-	const SETTING_GET_HELP_CHAT_TITLE = self::SETTING_GET_HELP_PREFIX . 'chat_title';
-	const SETTING_GET_HELP_CHAT_DESC = self::SETTING_GET_HELP_PREFIX . 'chat_desc';
-	const SETTING_GET_HELP_CHAT_CTA = self::SETTING_GET_HELP_PREFIX . 'chat_cta';
+	const SETTING_GET_HELP_CHAT_TITLE      = self::SETTING_GET_HELP_PREFIX . 'chat_title';
+	const SETTING_GET_HELP_CHAT_DESC       = self::SETTING_GET_HELP_PREFIX . 'chat_desc';
+	const SETTING_GET_HELP_CHAT_CTA        = self::SETTING_GET_HELP_PREFIX . 'chat_cta';
 	const SETTING_GET_HELP_CHAT_CTA_ACTION = self::SETTING_GET_HELP_PREFIX . 'chat_cta_action';
-	const SETTING_GET_HELP_CHAT_IMG = self::SETTING_GET_HELP_PREFIX . 'chat_img';
-	const SETTING_GET_HELP_CHAT_BTN_CTA = self::SETTING_GET_HELP_PREFIX . 'chat_btn_cta';
-	const SETTING_GET_HELP_CHAT_STEP1 = self::SETTING_GET_HELP_PREFIX . 'chat_step1';
-	const SETTING_GET_HELP_CHAT_STEP2 = self::SETTING_GET_HELP_PREFIX . 'chat_step2';
-	const SETTING_GET_HELP_CHAT_STEP3 = self::SETTING_GET_HELP_PREFIX . 'chat_step3';
-	const SETTING_GET_HELP_CHAT_TERMS = self::SETTING_GET_HELP_PREFIX . 'chat_terms';
+	const SETTING_GET_HELP_CHAT_IMG        = self::SETTING_GET_HELP_PREFIX . 'chat_img';
+	const SETTING_GET_HELP_CHAT_BTN_CTA    = self::SETTING_GET_HELP_PREFIX . 'chat_btn_cta';
+	const SETTING_GET_HELP_CHAT_STEP1      = self::SETTING_GET_HELP_PREFIX . 'chat_step1';
+	const SETTING_GET_HELP_CHAT_STEP2      = self::SETTING_GET_HELP_PREFIX . 'chat_step2';
+	const SETTING_GET_HELP_CHAT_STEP3      = self::SETTING_GET_HELP_PREFIX . 'chat_step3';
+	const SETTING_GET_HELP_CHAT_TERMS      = self::SETTING_GET_HELP_PREFIX . 'chat_terms';
 
 	/* * * Notification */
 	const SETTING_GET_HELP_NOTIFICATION_TXT = self::SETTING_GET_HELP_PREFIX . 'notification_txt';
 	const SETTING_GET_HELP_NOTIFICATION_URL = self::SETTING_GET_HELP_PREFIX . 'notification_url';
 	/* * * Exercise */
 	const SETTING_GET_HELP_EXERCISE_TITLE = self::SETTING_GET_HELP_PREFIX . 'exercise_title';
-	const SETTING_GET_HELP_EXERCISE_DESC = self::SETTING_GET_HELP_PREFIX . 'exercise_desc';
-	const SETTING_GET_HELP_EXERCISE_CTA = self::SETTING_GET_HELP_PREFIX . 'exercise_cta';
+	const SETTING_GET_HELP_EXERCISE_DESC  = self::SETTING_GET_HELP_PREFIX . 'exercise_desc';
+	const SETTING_GET_HELP_EXERCISE_CTA   = self::SETTING_GET_HELP_PREFIX . 'exercise_cta';
 	/* * * Circulation */
 	const SETTING_GET_HELP_CIRCULATION_TITLE = self::SETTING_GET_HELP_PREFIX . 'circulation_title';
-	const SETTING_GET_HELP_CIRCULATION_DESC = self::SETTING_GET_HELP_PREFIX . 'circulation_desc';
+	const SETTING_GET_HELP_CIRCULATION_DESC  = self::SETTING_GET_HELP_PREFIX . 'circulation_desc';
 
 	/* All Defaults */
-	const DEFAULTS = [
+	const DEFAULTS = array(
 		self::SETTING_HOME_CARD_NUM              => 10,
 		self::SETTING_PAGINATION_TAX_ARCHIVE     => 6,
 		self::SETTING_PAGINATION_SEARCH_RESULTS  => 6,
@@ -144,57 +144,78 @@ class Resource_Center extends Abstract_Customizer {
 		/* * * Circulation */
 		self::SETTING_GET_HELP_CIRCULATION_TITLE => 'Looking for another kind of support?',
 		self::SETTING_GET_HELP_CIRCULATION_DESC  => 'Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.',
-	];
+	);
 
 	/** @inheritDoc */
 	protected function _register_panels(): void {
-		$this->_manager->add_panel( self::PANEL_ID, [ 'title' => 'Resource Center' ] );
+		$this->_manager->add_panel( self::PANEL_ID, array( 'title' => 'Resource Center' ) );
 	}
 
 	/** @inheritDoc */
 	protected function _register_sections(): void {
 		# Home
 		## General
-		$this->_manager->add_section( self::SECTION_HOME_GENERAL, [
-			'panel' => self::PANEL_ID,
-			'title' => '[Home] General',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HOME_GENERAL,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => '[Home] General',
+			)
+		);
 
 		## Featured Posts
-		$this->_manager->add_section( self::SECTION_HOME_FEATURED_POSTS, [
-			'panel' => self::PANEL_ID,
-			'title' => '[Home] Featured Posts',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HOME_FEATURED_POSTS,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => '[Home] Featured Posts',
+			)
+		);
 
 		## Featured Categories
-		$this->_manager->add_section( self::SECTION_HOME_FEATURED_CATS, [
-			'panel' => self::PANEL_ID,
-			'title' => '[Home] Featured Categories',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HOME_FEATURED_CATS,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => '[Home] Featured Categories',
+			)
+		);
 
 		## Guides
-		$this->_manager->add_section( self::SECTION_HOME_GUIDES, [
-			'panel' => self::PANEL_ID,
-			'title' => '[Home] Guides',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HOME_GUIDES,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => '[Home] Guides',
+			)
+		);
 
 		## Glossary
-		$this->_manager->add_section( self::SECTION_HOME_GLOSSARY, [
-			'panel' => self::PANEL_ID,
-			'title' => '[Home] Glossary',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_HOME_GLOSSARY,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => '[Home] Glossary',
+			)
+		);
 
 		# Pagination
-		$this->_manager->add_section( self::SECTION_PAGINATION, [
-			'panel' => self::PANEL_ID,
-			'title' => 'Pagination',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_PAGINATION,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => 'Pagination',
+			)
+		);
 
 		# Get Help
-		$this->_manager->add_section( self::SECTION_GET_HELP, [
-			'panel' => self::PANEL_ID,
-			'title' => 'Get Help',
-		] );
+		$this->_manager->add_section(
+			self::SECTION_GET_HELP,
+			array(
+				'panel' => self::PANEL_ID,
+				'title' => 'Get Help',
+			)
+		);
 	}
 
 	/** @inheritDoc */
@@ -202,354 +223,530 @@ class Resource_Center extends Abstract_Customizer {
 		# Home
 
 		## General
-		$this->_manager->add_control( self::SETTING_HOME_CARD_NUM, [
-			'setting'     => self::SETTING_HOME_CARD_NUM,
-			'section'     => self::SECTION_HOME_GENERAL,
-			'label'       => 'Number of Cards',
-			'type'        => 'number',
-			'description' => 'Cards per carousel.'
-		] );
+		$this->_manager->add_control(
+			self::SETTING_HOME_CARD_NUM,
+			array(
+				'setting'     => self::SETTING_HOME_CARD_NUM,
+				'section'     => self::SECTION_HOME_GENERAL,
+				'label'       => 'Number of Cards',
+				'type'        => 'number',
+				'description' => 'Cards per carousel.',
+			)
+		);
 
 		## Featured Posts
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_HOME_FEATURED, [
-			'setting'     => self::SETTING_HOME_FEATURED,
-			'section'     => self::SECTION_HOME_FEATURED_POSTS,
-			'allow_order' => true,
-			'label'       => 'Featured Posts',
-			'post_type'   => CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
-			'description' => 'Suggested post count: 3'
-		] ) );
+		$this->_manager->add_control(
+			new Control\Post_Select(
+				$this->_manager,
+				self::SETTING_HOME_FEATURED,
+				array(
+					'setting'     => self::SETTING_HOME_FEATURED,
+					'section'     => self::SECTION_HOME_FEATURED_POSTS,
+					'allow_order' => true,
+					'label'       => 'Featured Posts',
+					'post_type'   => CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
+					'description' => 'Suggested post count: 3',
+				)
+			)
+		);
 
 		## Categories
-		$this->_manager->add_control( new Control\Taxonomy_Select( $this->_manager, self::SETTING_HOME_CATS, [
-			'setting'     => self::SETTING_HOME_CATS,
-			'section'     => self::SECTION_HOME_FEATURED_CATS,
-			'allow_order' => true,
-			'label'       => 'Featured Categories',
-			'taxonomy'    => CPT\RC\RC_Object::TAXONOMY_CATEGORY,
-			'parent'      => 0
-		] ) );
+		$this->_manager->add_control(
+			new Control\Taxonomy_Select(
+				$this->_manager,
+				self::SETTING_HOME_CATS,
+				array(
+					'setting'     => self::SETTING_HOME_CATS,
+					'section'     => self::SECTION_HOME_FEATURED_CATS,
+					'allow_order' => true,
+					'label'       => 'Featured Categories',
+					'taxonomy'    => CPT\RC\RC_Object::TAXONOMY_CATEGORY,
+					'parent'      => 0,
+				)
+			)
+		);
 
 		foreach (
-			get_terms( [
-				'taxonomy'   => CPT\RC\RC_Object::TAXONOMY_CATEGORY,
-				'hide_empty' => false,
-				'parent'     => 0
-			] ) as $cat
+			get_terms(
+				array(
+					'taxonomy'   => CPT\RC\RC_Object::TAXONOMY_CATEGORY,
+					'hide_empty' => false,
+					'parent'     => 0,
+				)
+			) as $cat
 		) {
 			// TODO: Sort them by the order of categories
 			$setting_id = self::PREFIX_SETTING_HOME_CAT_POSTS . $cat->term_id;
 			$this->_manager->add_setting( $setting_id );
-			$this->_manager->add_control( new Control\Post_Select( $this->_manager, $setting_id, [
-				'setting'         => $setting_id,
-				'section'         => self::SECTION_HOME_FEATURED_CATS,
-				'allow_order'     => true,
-				'label'           => "[{$cat->name}] Posts",
-				'post_type'       => CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
-				'taxonomy'        => [ CPT\RC\RC_Object::TAXONOMY_CATEGORY => $cat->term_id ],
-				'active_callback' => function ( Control\Post_Select $control ) use ( $cat ) {
-					$list = array_map( 'absint', explode( ',', $this::get_val( self::SETTING_HOME_CATS ) ) );
+			$this->_manager->add_control(
+				new Control\Post_Select(
+					$this->_manager,
+					$setting_id,
+					array(
+						'setting'         => $setting_id,
+						'section'         => self::SECTION_HOME_FEATURED_CATS,
+						'allow_order'     => true,
+						'label'           => "[{$cat->name}] Posts",
+						'post_type'       => CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
+						'taxonomy'        => array( CPT\RC\RC_Object::TAXONOMY_CATEGORY => $cat->term_id ),
+						'active_callback' => function ( Control\Post_Select $control ) use ( $cat ) {
+							$list = array_map( 'absint', explode( ',', $this::get_val( self::SETTING_HOME_CATS ) ) );
 
-					if ( empty( $list ) || ! is_array( $list ) ) {
-						return false;
-					}
+							if ( empty( $list ) || ! is_array( $list ) ) {
+								return false;
+							}
 
-					return in_array( $cat->term_id, $list );
-				}
-			] ) );
+							return in_array( $cat->term_id, $list );
+						},
+					)
+				)
+			);
 		}
 
 		## Guides
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_HOME_GUIDES, [
-			'setting'     => self::SETTING_HOME_GUIDES,
-			'section'     => self::SECTION_HOME_GUIDES,
-			'allow_order' => true,
-			'label'       => 'Guides',
-			'post_type'   => CPT\RC\Guide::POST_TYPE,
-		] ) );
+		$this->_manager->add_control(
+			new Control\Post_Select(
+				$this->_manager,
+				self::SETTING_HOME_GUIDES,
+				array(
+					'setting'     => self::SETTING_HOME_GUIDES,
+					'section'     => self::SECTION_HOME_GUIDES,
+					'allow_order' => true,
+					'label'       => 'Guides',
+					'post_type'   => CPT\RC\Guide::POST_TYPE,
+				)
+			)
+		);
 
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_BG_IMG, [
-			'setting'   => self::SETTING_HOME_GLOSSARY_BG_IMG,
-			'section'   => self::SETTING_HOME_GLOSSARY,
-			'label'     => 'Background Image (Horizontal)',
-			'mime_type' => 'image',
-		] ) );
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_HOME_GLOSSARY_BG_IMG,
+				array(
+					'setting'   => self::SETTING_HOME_GLOSSARY_BG_IMG,
+					'section'   => self::SETTING_HOME_GLOSSARY,
+					'label'     => 'Background Image (Horizontal)',
+					'mime_type' => 'image',
+				)
+			)
+		);
 
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_HOME_GLOSSARY_IMG, [
-			'setting'   => self::SETTING_HOME_GLOSSARY_IMG,
-			'section'   => self::SETTING_HOME_GLOSSARY,
-			'label'     => 'Image',
-			'mime_type' => 'image',
-		] ) );
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_HOME_GLOSSARY_IMG,
+				array(
+					'setting'   => self::SETTING_HOME_GLOSSARY_IMG,
+					'section'   => self::SETTING_HOME_GLOSSARY,
+					'label'     => 'Image',
+					'mime_type' => 'image',
+				)
+			)
+		);
 
 		## Glossary
-		$this->_manager->add_control( new Control\Post_Select( $this->_manager, self::SETTING_HOME_GLOSSARY, [
-			'setting'     => self::SETTING_HOME_GLOSSARY,
-			'section'     => self::SECTION_HOME_GLOSSARY,
-			'allow_order' => true,
-			'label'       => 'Glossary Entries',
-			'post_type'   => CPT\RC\Glossary::POST_TYPE,
-		] ) );
+		$this->_manager->add_control(
+			new Control\Post_Select(
+				$this->_manager,
+				self::SETTING_HOME_GLOSSARY,
+				array(
+					'setting'     => self::SETTING_HOME_GLOSSARY,
+					'section'     => self::SECTION_HOME_GLOSSARY,
+					'allow_order' => true,
+					'label'       => 'Glossary Entries',
+					'post_type'   => CPT\RC\Glossary::POST_TYPE,
+				)
+			)
+		);
 
 		# Pagination
 		## Taxonomy Archive
-		$this->_manager->add_control( self::SETTING_PAGINATION_TAX_ARCHIVE, [
-			'setting'     => self::SETTING_PAGINATION_TAX_ARCHIVE,
-			'section'     => self::SECTION_PAGINATION,
-			'label'       => 'Taxonomy Pages',
-			'type'        => 'number',
-			'description' => 'Posts per page.'
-		] );
+		$this->_manager->add_control(
+			self::SETTING_PAGINATION_TAX_ARCHIVE,
+			array(
+				'setting'     => self::SETTING_PAGINATION_TAX_ARCHIVE,
+				'section'     => self::SECTION_PAGINATION,
+				'label'       => 'Taxonomy Pages',
+				'type'        => 'number',
+				'description' => 'Posts per page.',
+			)
+		);
 
 		## Search Results
-		$this->_manager->add_control( self::SETTING_PAGINATION_SEARCH_RESULTS, [
-			'setting'     => self::SETTING_PAGINATION_SEARCH_RESULTS,
-			'section'     => self::SECTION_PAGINATION,
-			'label'       => 'Search Results',
-			'type'        => 'number',
-			'description' => 'Posts per page.'
-		] );
+		$this->_manager->add_control(
+			self::SETTING_PAGINATION_SEARCH_RESULTS,
+			array(
+				'setting'     => self::SETTING_PAGINATION_SEARCH_RESULTS,
+				'section'     => self::SECTION_PAGINATION,
+				'label'       => 'Search Results',
+				'type'        => 'number',
+				'description' => 'Posts per page.',
+			)
+		);
 
 		# Get Help
-		$this->_manager->add_control( self::SETTING_GET_HELP_1_TITLE, [
-			'setting' => self::SETTING_GET_HELP_1_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[1] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_1_DESC, [
-			'setting' => self::SETTING_GET_HELP_1_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[1] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_2_TITLE, [
-			'setting' => self::SETTING_GET_HELP_2_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[2] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_2_DESC, [
-			'setting' => self::SETTING_GET_HELP_2_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[2] Description',
-			'type'    => 'textarea',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_1_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_1_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[1] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_1_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_1_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[1] Description',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_2_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_2_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[2] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_2_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_2_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[2] Description',
+				'type'    => 'textarea',
+			)
+		);
 
 		## Text
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_TITLE, [
-			'setting' => self::SETTING_GET_HELP_TEXT_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_DESC, [
-			'setting' => self::SETTING_GET_HELP_TEXT_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_CTA, [
-			'setting' => self::SETTING_GET_HELP_TEXT_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_GET_HELP_TEXT_IMG, [
-			'setting'   => self::SETTING_GET_HELP_TEXT_IMG,
-			'section'   => self::SECTION_GET_HELP,
-			'label'     => '[Text] Image',
-			'mime_type' => 'image',
-		] ) );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_BTN_CTA, [
-			'setting' => self::SETTING_GET_HELP_TEXT_BTN_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Button CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP1, [
-			'setting' => self::SETTING_GET_HELP_TEXT_STEP1,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Step 1 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP2, [
-			'setting' => self::SETTING_GET_HELP_TEXT_STEP2,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Step 2 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_STEP3, [
-			'setting' => self::SETTING_GET_HELP_TEXT_STEP3,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Step 3 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_TEXT_TERMS, [
-			'setting' => self::SETTING_GET_HELP_TEXT_TERMS,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Text] Terms - What to Expect',
-			'type'    => 'textarea',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Description',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_GET_HELP_TEXT_IMG,
+				array(
+					'setting'   => self::SETTING_GET_HELP_TEXT_IMG,
+					'section'   => self::SECTION_GET_HELP,
+					'label'     => '[Text] Image',
+					'mime_type' => 'image',
+				)
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_BTN_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_BTN_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Button CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_STEP1,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_STEP1,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Step 1 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_STEP2,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_STEP2,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Step 2 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_STEP3,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_STEP3,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Step 3 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_TEXT_TERMS,
+			array(
+				'setting' => self::SETTING_GET_HELP_TEXT_TERMS,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Text] Terms - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
 
 		## Call
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_TITLE, [
-			'setting' => self::SETTING_GET_HELP_CALL_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_DESC, [
-			'setting' => self::SETTING_GET_HELP_CALL_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_CTA, [
-			'setting' => self::SETTING_GET_HELP_CALL_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_GET_HELP_CALL_IMG, [
-			'setting'   => self::SETTING_GET_HELP_CALL_IMG,
-			'section'   => self::SECTION_GET_HELP,
-			'label'     => '[Call] Image',
-			'mime_type' => 'image',
-		] ) );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_BTN_CTA, [
-			'setting' => self::SETTING_GET_HELP_CALL_BTN_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Button CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP1, [
-			'setting' => self::SETTING_GET_HELP_CALL_STEP1,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Step 1 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP2, [
-			'setting' => self::SETTING_GET_HELP_CALL_STEP2,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Step 2 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_STEP3, [
-			'setting' => self::SETTING_GET_HELP_CALL_STEP3,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Step 3 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CALL_TERMS, [
-			'setting' => self::SETTING_GET_HELP_CALL_TERMS,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Call] Terms - What to Expect',
-			'type'    => 'textarea',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Description',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_GET_HELP_CALL_IMG,
+				array(
+					'setting'   => self::SETTING_GET_HELP_CALL_IMG,
+					'section'   => self::SECTION_GET_HELP,
+					'label'     => '[Call] Image',
+					'mime_type' => 'image',
+				)
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_BTN_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_BTN_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Button CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_STEP1,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_STEP1,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Step 1 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_STEP2,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_STEP2,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Step 2 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_STEP3,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_STEP3,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Step 3 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CALL_TERMS,
+			array(
+				'setting' => self::SETTING_GET_HELP_CALL_TERMS,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Call] Terms - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
 
 		## Chat
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_TITLE, [
-			'setting' => self::SETTING_GET_HELP_CHAT_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_DESC, [
-			'setting' => self::SETTING_GET_HELP_CHAT_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_CTA, [
-			'setting' => self::SETTING_GET_HELP_CHAT_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( new \WP_Customize_Media_Control( $this->_manager, self::SETTING_GET_HELP_CHAT_IMG, [
-			'setting'   => self::SETTING_GET_HELP_CHAT_IMG,
-			'section'   => self::SECTION_GET_HELP,
-			'label'     => '[Chat] Image',
-			'mime_type' => 'image',
-		] ) );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_BTN_CTA, [
-			'setting' => self::SETTING_GET_HELP_CHAT_BTN_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Button CTA',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP1, [
-			'setting' => self::SETTING_GET_HELP_CHAT_STEP1,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Step 1 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP2, [
-			'setting' => self::SETTING_GET_HELP_CHAT_STEP2,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Step 2 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_STEP3, [
-			'setting' => self::SETTING_GET_HELP_CHAT_STEP3,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Step 3 - What to Expect',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CHAT_TERMS, [
-			'setting' => self::SETTING_GET_HELP_CHAT_TERMS,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Chat] Terms - What to Expect',
-			'type'    => 'textarea',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Description',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			new \WP_Customize_Media_Control(
+				$this->_manager,
+				self::SETTING_GET_HELP_CHAT_IMG,
+				array(
+					'setting'   => self::SETTING_GET_HELP_CHAT_IMG,
+					'section'   => self::SECTION_GET_HELP,
+					'label'     => '[Chat] Image',
+					'mime_type' => 'image',
+				)
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_BTN_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_BTN_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Button CTA',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_STEP1,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_STEP1,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Step 1 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_STEP2,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_STEP2,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Step 2 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_STEP3,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_STEP3,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Step 3 - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CHAT_TERMS,
+			array(
+				'setting' => self::SETTING_GET_HELP_CHAT_TERMS,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Chat] Terms - What to Expect',
+				'type'    => 'textarea',
+			)
+		);
 
 		## Notification
-		$this->_manager->add_control( self::SETTING_GET_HELP_NOTIFICATION_TXT, [
-			'setting' => self::SETTING_GET_HELP_NOTIFICATION_TXT,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Notification] Text',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_NOTIFICATION_URL, [
-			'setting' => self::SETTING_GET_HELP_NOTIFICATION_URL,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Notification] Url',
-			'type'    => 'url',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_NOTIFICATION_TXT,
+			array(
+				'setting' => self::SETTING_GET_HELP_NOTIFICATION_TXT,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Notification] Text',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_NOTIFICATION_URL,
+			array(
+				'setting' => self::SETTING_GET_HELP_NOTIFICATION_URL,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Notification] Url',
+				'type'    => 'url',
+			)
+		);
 
 		## Exercise
-		$this->_manager->add_control( self::SETTING_GET_HELP_EXERCISE_TITLE, [
-			'setting' => self::SETTING_GET_HELP_EXERCISE_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Exercise] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_EXERCISE_DESC, [
-			'setting' => self::SETTING_GET_HELP_EXERCISE_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Exercise] Description',
-			'type'    => 'textarea',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_EXERCISE_CTA, [
-			'setting' => self::SETTING_GET_HELP_EXERCISE_CTA,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Exercise] CTA',
-			'type'    => 'text',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_EXERCISE_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_EXERCISE_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Exercise] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_EXERCISE_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_EXERCISE_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Exercise] Description',
+				'type'    => 'textarea',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_EXERCISE_CTA,
+			array(
+				'setting' => self::SETTING_GET_HELP_EXERCISE_CTA,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Exercise] CTA',
+				'type'    => 'text',
+			)
+		);
 
 		## Circulation
-		$this->_manager->add_control( self::SETTING_GET_HELP_CIRCULATION_TITLE, [
-			'setting' => self::SETTING_GET_HELP_CIRCULATION_TITLE,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Circulation] Title',
-			'type'    => 'text',
-		] );
-		$this->_manager->add_control( self::SETTING_GET_HELP_CIRCULATION_DESC, [
-			'setting' => self::SETTING_GET_HELP_CIRCULATION_DESC,
-			'section' => self::SECTION_GET_HELP,
-			'label'   => '[Circulation] Description',
-			'type'    => 'textarea',
-		] );
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CIRCULATION_TITLE,
+			array(
+				'setting' => self::SETTING_GET_HELP_CIRCULATION_TITLE,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Circulation] Title',
+				'type'    => 'text',
+			)
+		);
+		$this->_manager->add_control(
+			self::SETTING_GET_HELP_CIRCULATION_DESC,
+			array(
+				'setting' => self::SETTING_GET_HELP_CIRCULATION_DESC,
+				'section' => self::SECTION_GET_HELP,
+				'label'   => '[Circulation] Description',
+				'type'    => 'textarea',
+			)
+		);
 	}
 }

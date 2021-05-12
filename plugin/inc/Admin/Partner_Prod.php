@@ -4,11 +4,11 @@ use TrevorWP\Meta;
 use TrevorWP\CPT\Donate\Prod_Partner;
 
 class Partner_Prod {
-	const FIELD_FILE_ID = '__file_id';
-	const FIELD_URL = '__url';
+	const FIELD_FILE_ID      = '__file_id';
+	const FIELD_URL          = '__url';
 	const FIELD_PARTNER_NAME = '__partner_name';
 
-	use Mixin\Meta_Box_File {
+	use Mixin \Meta_Box_File {
 		render_meta_box as render_file_meta_box;
 	}
 
@@ -17,14 +17,24 @@ class Partner_Prod {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function register_hooks(): void {
-		add_action( 'add_meta_boxes_' . \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE, [
+		add_action(
+			'add_meta_boxes_' . \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+			array(
 				self::class,
-				'add_meta_boxes'
-		], 10, 2 );
-		add_action( 'save_post_' . \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE, [
+				'add_meta_boxes',
+			),
+			10,
+			2
+		);
+		add_action(
+			'save_post_' . \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+			array(
 				self::class,
-				'save_post'
-		], 10, 1 );
+				'save_post',
+			),
+			10,
+			1
+		);
 	}
 
 	/**
@@ -36,29 +46,29 @@ class Partner_Prod {
 	 */
 	public static function add_meta_boxes( \WP_Post $post ): void {
 		add_meta_box(
-				'item_img',
-				'Item Image',
-				[ self::class, 'render_file_meta_box' ],
-				$post->post_type,
-				'normal',
-				'high',
-				[ self::FIELD_FILE_ID ]
+			'item_img',
+			'Item Image',
+			array( self::class, 'render_file_meta_box' ),
+			$post->post_type,
+			'normal',
+			'high',
+			array( self::FIELD_FILE_ID )
 		);
 		add_meta_box(
-				'partner_name',
-				'Partner',
-				[ self::class, 'render_text_input' ],
-				$post->post_type,
-				'normal',
-				'high',
+			'partner_name',
+			'Partner',
+			array( self::class, 'render_text_input' ),
+			$post->post_type,
+			'normal',
+			'high',
 		);
 		add_meta_box(
-				'item_url',
-				'Item URL',
-				[ self::class, 'render_url_input' ],
-				$post->post_type,
-				'advanced',
-				'high'
+			'item_url',
+			'Item URL',
+			array( self::class, 'render_url_input' ),
+			$post->post_type,
+			'advanced',
+			'high'
 		);
 	}
 
@@ -70,8 +80,8 @@ class Partner_Prod {
 	public static function render_url_input( \WP_Post $post ): void {
 		$url = Meta\Post::get_item_url( $post->ID );
 		?>
-		<input name="<?= esc_attr( self::FIELD_URL ) ?>"
-			   value="<?= esc_attr( $url ) ?>"
+		<input name="<?php echo esc_attr( self::FIELD_URL ); ?>"
+			   value="<?php echo esc_attr( $url ); ?>"
 			   placeholder="https://"
 			   autocomplete="off"
 			   type="url"
@@ -89,8 +99,8 @@ class Partner_Prod {
 		$admin_ajax = admin_url( 'admin-ajax.php' );
 		?>
 		<input id="partnerName"
-			   name="<?= esc_attr( self::FIELD_PARTNER_NAME ) ?>"
-			   value="<?= esc_attr( $partner_id ) ?>"
+			   name="<?php echo esc_attr( self::FIELD_PARTNER_NAME ); ?>"
+			   value="<?php echo esc_attr( $partner_id ); ?>"
 			   class="widefat"
 			   type="text"
 			   required>
@@ -98,7 +108,7 @@ class Partner_Prod {
 			jQuery(function ($) {
 				$("#partnerName").autocomplete({
 					source: function (request, response) {
-						$.getJSON("<?= $admin_ajax ?>" + "?callback=?&action=partner-name-autocomplete", request, function (data) {
+						$.getJSON("<?php echo $admin_ajax; ?>" + "?callback=?&action=partner-name-autocomplete", request, function (data) {
 							response($.map(data.slice(0, 10), function (item) {
 								item.label = item.post_title;
 								item.value = item.ID;

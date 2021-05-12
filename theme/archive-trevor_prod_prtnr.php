@@ -8,17 +8,21 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 ?>
 	<main id="site-content" role="main" class="site-content product-partner">
 		<?php /* Header */ ?>
-		<?= Helper\Page_Header::split_carousel( [
+		<?php
+		echo Helper\Page_Header::split_carousel(
+			array(
 				'title_top'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE_TOP ),
 				'title'         => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_TITLE ),
 				'desc'          => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_DESC ),
 				'carousel_data' => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_HERO_CAROUSEL ),
-				'swiper'        => [
-						'centeredSlides' => true,
-						'slidesPerView'  => 'auto'
-				],
+				'swiper'        => array(
+					'centeredSlides' => true,
+					'slidesPerView'  => 'auto',
+				),
 				'bg'            => 'blue_green',
-		] ); ?>
+			)
+		);
+		?>
 
 		<?php
 		/**
@@ -33,26 +37,34 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		 *
 		 */
 		?>
-		<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
+		<?php
+		if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
 			if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES ) ) ) {
 				?>
 				<div class="featured-collections">
 					<?php
-					echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-							'orderby'   => 'title',
-							'order'     => 'ASC',
-							'post__in'  => explode( ",", $item_ids ),
-							'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-					] ) )->posts, [
+					echo Helper\Tile_Grid::posts(
+						( new \WP_Query(
+							array(
+								'orderby'   => 'title',
+								'order'     => 'ASC',
+								'post__in'  => explode( ',', $item_ids ),
+								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+							)
+						) )->posts,
+						array(
 							'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES_TITLE ),
-							'tileClass' => [ 'product-card' ],
-							'class'	=> ['product-grid'],
-					] );
+							'tileClass' => array( 'product-card' ),
+							'class'     => array( 'product-grid' ),
+						)
+					);
 					?>
 				</div>
 
-			<?php }
-		} ?>
+				<?php
+			}
+		}
+		?>
 
 		<div class="bg-white">
 			<?php
@@ -69,28 +81,36 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			 *
 			 */
 			?>
-			<?php if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
+			<?php
+			if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
 				if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS ) ) ) {
 					?>
 					<div class="favorite-items">
 						<?php
-						echo Helper\Tile_Grid::posts( ( new \WP_Query( [
-								'orderby'   => 'title',
-								'order'     => 'ASC',
-								'post__in'  => explode( ",", $item_ids ),
-								'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
-						] ) )->posts,
-								[
-										'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
-										'tileClass' => [ 'clickable-card', 'product-card' ],
-										'class'	=> ['product-grid'],
-								] );
+						echo Helper\Tile_Grid::posts(
+							( new \WP_Query(
+								array(
+									'orderby'   => 'title',
+									'order'     => 'ASC',
+									'post__in'  => explode( ',', $item_ids ),
+									'post_type' => \TrevorWP\CPT\Donate\Partner_Prod::POST_TYPE,
+								)
+							) )->posts,
+							array(
+								'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS_TITLE ),
+								'tileClass' => array( 'clickable-card', 'product-card' ),
+								'class'     => array( 'product-grid' ),
+							)
+						);
 						?>
 					</div>
-				<?php }
-			} ?>
+					<?php
+				}
+			}
+			?>
 
-			<?php /* Current Partners */
+			<?php
+			/* Current Partners */
 			/**
 			 * Current Partners
 			 *
@@ -105,28 +125,39 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 
 			<?php
 				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-				$query = new WP_Query( [
-					'post_type'   		=> \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
-					'orderby'					=> 'ID',
-					'order'						=> 'ASC',
-					'posts_per_page'	=> 6,
-					'paged'						=> $paged,
-				] );
-			?>
+				$query = new WP_Query(
+					array(
+						'post_type'      => \TrevorWP\CPT\Donate\Prod_Partner::POST_TYPE,
+						'orderby'        => 'ID',
+						'order'          => 'ASC',
+						'posts_per_page' => 6,
+						'paged'          => $paged,
+					)
+				);
+				?>
 
 			<?php if ( $query->have_posts() ) : ?>
 				<div class="partners-list">
-					<?php echo Helper\Tile_Grid::posts( $query->posts,
-							[
-									'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
-									'tileClass' => [ 'product-card' ],
-									'class'	=> ['product-grid'],
-							] );
+					<?php
+					echo Helper\Tile_Grid::posts(
+						$query->posts,
+						array(
+							'title'     => Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_LIST_TITLE ),
+							'tileClass' => array( 'product-card' ),
+							'class'     => array( 'product-grid' ),
+						)
+					);
 					?>
 
-					<?php get_template_part( 'template-parts/ajax-pagination', null, [
-							'data-containerSelector' => '.partners-list .tile-grid-container'
-					] ); ?>
+					<?php
+					get_template_part(
+						'template-parts/ajax-pagination',
+						null,
+						array(
+							'data-containerSelector' => '.partners-list .tile-grid-container',
+						)
+					);
+					?>
 				</div>
 			<?php endif; ?>
 
@@ -138,25 +169,28 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 
 			<div class="banner container">
 				<div class="banner__inner">
-					<h3 class="banner__title"><?= esc_attr( $banner_title ) ?></h3>
-					<p class="banner__description"><?= esc_attr( $banner_desc ) ?></p>
-					<a href="<?= esc_url( $banner_cta ) ?>" class="banner__cta font-bold" target="_blank">Learn More</a>
+					<h3 class="banner__title"><?php echo esc_attr( $banner_title ); ?></h3>
+					<p class="banner__description"><?php echo esc_attr( $banner_desc ); ?></p>
+					<a href="<?php echo esc_url( $banner_cta ); ?>" class="banner__cta font-bold" target="_blank">Learn More</a>
 				</div>
 			</div>
 		</div>
 
 		<?php /* Recirculation */ ?>
-		<?= Helper\Circulation_Card::render_circulation(
+		<?php
+		echo Helper\Circulation_Card::render_circulation(
 			Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ),
 			null,
-			[
+			array(
 				'fundraiser',
-				'counselor'
-			],
-			[
+				'counselor',
+			),
+			array(
 				'container' => 'cards',
-			]
-		); ?>
+			)
+		);
+		?>
 	</main>
 
-<?php get_footer();
+<?php
+get_footer();

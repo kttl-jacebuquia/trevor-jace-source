@@ -5,11 +5,11 @@
  */
 abstract class Base {
 	const NAME_PREFIX = 'trevor/';
-	const _ALL_ = [
+	const _ALL_       = array(
 		Glossary_Entry::class,
 		Link_List::class,
 		Bottom_List::class,
-	];
+	);
 
 	/**
 	 * Registers all blocks for dynamic rendering.
@@ -19,7 +19,7 @@ abstract class Base {
 	 */
 	public static function register_all() {
 		foreach ( self::_ALL_ as $cls ) {
-			call_user_func( [ $cls, 'register' ] );
+			call_user_func( array( $cls, 'register' ) );
 		}
 	}
 
@@ -39,9 +39,9 @@ abstract class Base {
 	 * @return array
 	 */
 	public static function get_register_args(): array {
-		return [
-			'render_callback' => [ static::class, 'render' ]
-		];
+		return array(
+			'render_callback' => array( static::class, 'render' ),
+		);
 	}
 
 	/**

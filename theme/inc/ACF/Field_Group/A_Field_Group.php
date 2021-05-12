@@ -7,8 +7,8 @@ use TrevorWP\Util\Tools;
  * Field Group
  */
 abstract class A_Field_Group {
-	const KEY_PREFIX = 'trvr-';
-	const KEY = '';
+	const KEY_PREFIX       = 'trvr-';
+	const KEY              = '';
 	const FIELD_PREFIX_TAB = 'tab_';
 
 	/**
@@ -17,7 +17,7 @@ abstract class A_Field_Group {
 	 * @return string
 	 */
 	public static function gen_key( string $suffix = '' ): string {
-		static $cache = [];
+		static $cache = array();
 
 		if ( ! array_key_exists( static::class, $cache ) ) {
 			$cache[ static::class ] = empty( static::KEY )
@@ -46,7 +46,7 @@ abstract class A_Field_Group {
 	 * @return mixed
 	 */
 	public static function get_register_args( string $key = null ) {
-		static $cache = [];
+		static $cache = array();
 
 		if ( ! array_key_exists( static::class, $cache ) ) {
 			$args = static::prepare_register_args();
@@ -57,26 +57,26 @@ abstract class A_Field_Group {
 			}
 
 			# Get Location
-			empty( $args['location'] ) && $args['location'] = [];
-			empty( $args['location'][0] ) && $args['location'][0] = [];
-			empty( $args['location'][1] ) && $args['location'][1] = [];
+			empty( $args['location'] ) && $args['location']       = array();
+			empty( $args['location'][0] ) && $args['location'][0] = array();
+			empty( $args['location'][1] ) && $args['location'][1] = array();
 
 			$and_rules = &$args['location'][0];
 			$or_rules  = &$args['location'][1];
 
 			# Add Block to Location
 			if ( static::is_block() ) {
-				$or_rules[] = [
+				$or_rules[] = array(
 					'param'    => 'block',
 					'operator' => '==',
 					'value'    => 'acf/' . $args['key'],
-				];
+				);
 			} elseif ( static::is_options_page() ) {
-				$and_rules[] = [
+				$and_rules[] = array(
 					'param'    => 'options_page',
 					'operator' => '==',
 					'value'    => static::gen_page_slug(),
-				];
+				);
 			}
 
 			$cache[ static::class ] = $args;
@@ -103,11 +103,11 @@ abstract class A_Field_Group {
 	 * @return string|null
 	 */
 	public static function get_field_key( string $field_name ): ?string {
-		static $cache = [];
+		static $cache = array();
 
 		if ( ! array_key_exists( $field_name, $cache ) ) {
 			$fields               = static::get_register_args( 'fields' );
-			$cache[ $field_name ] = ( $fields[ $field_name ] ?? [] )['key'] ?? null;
+			$cache[ $field_name ] = ( $fields[ $field_name ] ?? array() )['key'] ?? null;
 		}
 
 		return $cache[ $field_name ];
@@ -125,13 +125,16 @@ abstract class A_Field_Group {
 	 *
 	 * @return array
 	 */
-	public static function clone( array $args = [] ): array {
-		return array_merge( $args, [
-			'type'  => 'clone',
-			'clone' => [
-				static::get_key(),
-			],
-		] );
+	public static function clone( array $args = array() ): array {
+		return array_merge(
+			$args,
+			array(
+				'type'  => 'clone',
+				'clone' => array(
+					static::get_key(),
+				),
+			)
+		);
 	}
 
 	/**
@@ -148,10 +151,10 @@ abstract class A_Field_Group {
 	 * @return array
 	 */
 	public static function get_block_args(): array {
-		return [
+		return array(
 			'category' => 'common',
 			'icon'     => 'book-alt',
-		];
+		);
 	}
 
 	/**
@@ -159,9 +162,12 @@ abstract class A_Field_Group {
 	 * @see acf_register_block_type()
 	 */
 	public static function register_block() {
-		$args = array_merge( [
-			'render_callback' => [ static::class, 'render_block' ],
-		], static::get_block_args() );
+		$args = array_merge(
+			array(
+				'render_callback' => array( static::class, 'render_block' ),
+			),
+			static::get_block_args()
+		);
 
 		return acf_register_block_type( $args );
 	}
@@ -193,13 +199,13 @@ abstract class A_Field_Group {
 	 *
 	 * @return string
 	 */
-	public static function render_attrs( array $class, array $attributes = [] ): string {
+	public static function render_attrs( array $class, array $attributes = array() ): string {
 		if ( ! empty( $attributes['class'] ) ) {
 			$class[] = $attributes['class'];
 			unset( $attributes['class'] );
 		}
 
-		$attr_top = []; // prints them first
+		$attr_top = array(); // prints them first
 		if ( ! empty( $class ) ) {
 			$attr_top['class'] = implode( ' ', $class );
 		}
@@ -214,21 +220,23 @@ abstract class A_Field_Group {
 	 *
 	 * @return array
 	 */
-	protected static function _gen_tab_field( string $label, array $args = [] ): array {
+	protected static function _gen_tab_field( string $label, array $args = array() ): array {
 		$name = empty( $args['name'] )
 			? acf_slugify( $label, '-' )
 			: $args['name'];
 
-
 		$field_name = static::FIELD_PREFIX_TAB . $name;
 
-		return [
-			$field_name => array_merge( [
-				'key'   => static::gen_field_key( $field_name ),
-				'type'  => 'tab',
-				'label' => $label,
-			], $args ),
-		];
+		return array(
+			$field_name => array_merge(
+				array(
+					'key'   => static::gen_field_key( $field_name ),
+					'type'  => 'tab',
+					'label' => $label,
+				),
+				$args
+			),
+		);
 	}
 
 	/**
@@ -237,12 +245,18 @@ abstract class A_Field_Group {
 	 *
 	 * @return array
 	 */
-	protected static function _gen_tab_end_field( string $name = 'end', array $args = [] ): array {
-		return static::_gen_tab_field( '', array_merge( [
-			'endpoint' => true,
-			'label'    => '',
-			'name'     => $name
-		], $args ) );
+	protected static function _gen_tab_end_field( string $name = 'end', array $args = array() ): array {
+		return static::_gen_tab_field(
+			'',
+			array_merge(
+				array(
+					'endpoint' => true,
+					'label'    => '',
+					'name'     => $name,
+				),
+				$args
+			)
+		);
 	}
 
 	/**
@@ -251,14 +265,23 @@ abstract class A_Field_Group {
 	public static function register_patterns(): void {
 		if ( static::has_patterns() ) {
 			$category = static::get_key();
-			register_block_pattern_category( $category, [
-				'label' => str_replace( '_', ' ', ( new \ReflectionClass( static::class ) )->getShortName() ),
-			] );
+			register_block_pattern_category(
+				$category,
+				array(
+					'label' => str_replace( '_', ' ', ( new \ReflectionClass( static::class ) )->getShortName() ),
+				)
+			);
 
 			foreach ( static::get_patterns() as $key => $args ) {
-				register_block_pattern( "trevor/{$key}", array_merge( [
-					'categories' => [ $category ],
-				], $args ) );
+				register_block_pattern(
+					"trevor/{$key}",
+					array_merge(
+						array(
+							'categories' => array( $category ),
+						),
+						$args
+					)
+				);
 			}
 		}
 	}
@@ -277,7 +300,7 @@ abstract class A_Field_Group {
 	 * @return array
 	 */
 	public static function get_all_fields(): array {
-		$constants = [];
+		$constants = array();
 
 		# Collect Meta Keys
 		foreach ( ( new \ReflectionClass( static::class ) )->getConstants() as $constant => $key ) {

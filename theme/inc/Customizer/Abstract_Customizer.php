@@ -20,27 +20,27 @@ abstract class Abstract_Customizer {
 	/**
 	 * @var array
 	 */
-	const DEFAULTS = [];
+	const DEFAULTS = array();
 
 	/**
 	 * @var array
 	 */
-	protected static $_section_components = [];
+	protected static $_section_components = array();
 
 	/**
 	 * @var Component\Abstract_Component[]
 	 */
-	protected static $_section_component_objs = [];
+	protected static $_section_component_objs = array();
 
 	/**
 	 * @var string[]
 	 */
-	protected static $_sub_components = [];
+	protected static $_sub_components = array();
 
 	/**
 	 * @var Component\Abstract_Component[]
 	 */
-	protected static $_sub_component_objs = [];
+	protected static $_sub_component_objs = array();
 
 	/**
 	 * Abstract_Customizer constructor.
@@ -89,7 +89,7 @@ abstract class Abstract_Customizer {
 				continue;
 			}
 
-			$this->_manager->add_setting( $key, [ 'default' => static::get_default( $key ) ] );
+			$this->_manager->add_setting( $key, array( 'default' => static::get_default( $key ) ) );
 		}
 
 		# Section component settings
@@ -186,7 +186,7 @@ abstract class Abstract_Customizer {
 			}
 
 			if ( empty( $settings['options'] ) ) {
-				$settings['options'] = [];
+				$settings['options'] = array();
 			}
 
 			$settings['options']['name_prefix'] = $name;
