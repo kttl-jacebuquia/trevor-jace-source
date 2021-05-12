@@ -68,6 +68,7 @@ export default class FundraiserQuiz {
 			$(`${this.selector}--step-one`).addClass(this.classes);
 		});
 		this.paginationContainer.hide();
+		this.changeContainerBackground(false);
 	}
 
 	displayNextPage (btn) {
