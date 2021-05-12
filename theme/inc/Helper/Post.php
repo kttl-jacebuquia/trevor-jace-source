@@ -4,6 +4,8 @@ use TrevorWP\Block;
 use TrevorWP\CPT\RC\External;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
+use TrevorWP\Theme\ACF\Field_Group\Page_Circulation;
+use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
 use TrevorWP\Theme\Customizer;
 
@@ -74,12 +76,11 @@ class Post {
 	 */
 	public static function render_after_post( \WP_Post $post ): string {
 		$out = [
-				self::_render_bottom_recirculation( $post ),
+				self::_render_post_recirculation( $post ),
+				self::_render_page_recirculation( $post, 'after_post' ),
 		];
 
 		return implode( "\n", array_filter( $out ) );
-
-		return "<div class='post-after-blocks'>{$inner}</div>";
 	}
 
 	/**
@@ -87,7 +88,7 @@ class Post {
 	 *
 	 * @return string|null
 	 */
-	protected static function _render_bottom_recirculation( \WP_Post $post ): ?string {
+	protected static function _render_post_recirculation( \WP_Post $post ): ?string {
 		if ( empty( $main_cat = Meta\Post::get_main_category( $post ) ) ) {
 			return null;
 		}
@@ -102,7 +103,7 @@ class Post {
 
 		ob_start(); ?>
 		<div class="post-bottom-recirculation">
-			<div class="post-bottom-recirculation-inner ">
+			<div class="post-bottom-recirculation-inner">
 				<h3 class="post-bottom-recirculation-title">
 					<span class="post-bottom-recirculation-title-top">Learn more about</span>
 					<br>
@@ -119,6 +120,11 @@ class Post {
 		<?php return ob_get_clean();
 	}
 
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return string|null
+	 */
 	protected static function _render_bottom_tags( \WP_Post $post ): ?string {
 		$tax   = Tools::get_post_tag_tax( $post );
 		$terms = wp_get_object_terms( $post->ID, $tax );
@@ -181,37 +187,72 @@ class Post {
 	 *
 	 * @return string|null
 	 */
-	protected static function _render_content_bottom_recirculation( \WP_Post $post ): ?string {
+	protected static function _render_page_recirculation( \WP_Post $post, string $where ): ?string {
 		$cards = Meta\Post::get_recirculation_cards( $post->ID );
 		if ( empty( $cards ) ) {
 			return null;
 		}
 
-		ob_start();
-		?>
-		<div class="circulation-cards">
-			<?php foreach ( $cards as $card ) {
-				$method = "render_{$card}";
-				if ( ! method_exists( Circulation_Card::class, $method ) ) {
-					continue;
+
+		switch ( $where ):
+			case 'after_post':
+				if ( $post->post_type != \TrevorWP\CPT\Post::POST_TYPE ) {
+					return null;
 				}
 
-				?>
-				<div class="circulation-card-wrap">
-					<?= Circulation_Card::$method(); ?>
+				ob_start(); ?>
+				<div class=" bg-white py-20 xl:py-24">
+
+					<div class="container mx-auto">
+						<h2 class="page-sub-title centered">
+							Looking for another kind of support?
+						</h2>
+						<p class="page-sub-title-desc centered">
+							Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.
+						</p>
+
+						<?= Page_Circulation::render_grid( $cards ); ?>
+					</div>
 				</div>
-			<?php } ?>
-		</div>
-		<?php return ob_get_clean();
+				<?php return ob_get_clean();
+			case 'content_footer':
+				if ( $post->post_type != \TrevorWP\CPT\RC\Post::POST_TYPE ) {
+					return null;
+				}
+				ob_start(); ?>
+				<div class="circulation-cards">
+					<?php foreach ( $cards as $card ) {
+						$method = "render_{$card}";
+						if ( ! method_exists( Circulation_Card::class, $method ) ) {
+							continue;
+						}
+
+						?>
+						<div class="circulation-card-wrap">
+							<?= Circulation_Card::$method(); ?>
+						</div>
+					<?php } ?>
+				</div>
+				<?php return ob_get_clean();
+			default:
+				Log::notice( 'Unknown $where value.', compact( 'where' ) );
+
+				return null;
+		endswitch;
 	}
 
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return string
+	 */
 	public static function render_content_footer( \WP_Post $post ): string {
 		$out = [
 			# All tags
 				self::_render_bottom_tags( $post ),
 
 			# Content Bottom Recirculation
-				self::_render_content_bottom_recirculation( $post ),
+				self::_render_page_recirculation( $post, 'content_footer' ),
 
 			# All Categories
 				self::_render_bottom_categories( $post ),

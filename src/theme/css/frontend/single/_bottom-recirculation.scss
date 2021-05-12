@@ -1,5 +1,9 @@
 .recirculation-section {
-  @apply bg-violet;
+  @apply bg-teal-dark;
+
+  body.is-rc & {
+	@apply bg-violet;
+  }
 }
 
 .post-bottom-recirculation {
