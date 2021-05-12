@@ -150,14 +150,16 @@ class Page_Header {
 							<div class="page-header-title-top"><?php echo esc_html( $options['title_top'] ); ?></div>
 						<?php } ?>
 						<h1 class="<?php echo esc_html( $heading_cls ); ?>">
-							<?php echo esc_html( $options['title'] ); ?>
+							<?php # Unescaping title to support <tilt> ?>
+							<?php echo $options['title']; ?>
 						</h1>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
 							<p class="<?php echo esc_html( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
 						<?php } ?>
 						<?php
 						if ( ! empty( $options['buttons'] ) ) {
-							echo esc_html( Field_Group\Button_Group::render( false, $options['buttons'], array() ) );
+							$wrap_cls = [ $options['buttons']['class'] ];
+							echo Field_Group\Button_Group::render( false, $options['buttons'], compact( 'wrap_cls' ) );
 						}
 						?>
 					</div>
@@ -165,23 +167,21 @@ class Page_Header {
 						<div class="page-header-img-inner">
 							<div class="page-header-img-inner__wrapper" data-aspectRatio="1:1">
 							<?php
-							echo esc_html(
-								Thumbnail::print_img_variants(
+							echo Thumbnail::print_img_variants(
+								array(
 									array(
-										array(
-											intval( $options['img_id'] ),
-											Thumbnail::variant(
-												Thumbnail::SCREEN_SM,
-												null,
-												Thumbnail::SIZE_MD,
-												array(
-													'class' => array(
-														'page-header-img',
-													),
-												)
-											),
+										intval( $options['img_id'] ),
+										Thumbnail::variant(
+											Thumbnail::SCREEN_SM,
+											null,
+											Thumbnail::SIZE_MD,
+											array(
+												'class' => array(
+													'page-header-img',
+												),
+											)
 										),
-									)
+									),
 								)
 							)
 							?>

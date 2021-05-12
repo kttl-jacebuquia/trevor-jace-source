@@ -145,9 +145,9 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 			default:
 				$title_wrap_cls[] = 'flex flex-col items-center';
-				$title_cls[]      = 'mb-px14 text-center';
-				$desc_cls[]       = 'tracking-px05 mb-0 text-center';
-				$desc_cls[]       = 'md:mt-0';
+				$title_cls[] 	  = 'mb-px14';
+				$desc_cls[]  	  = 'tracking-px05 mb-0';
+				$desc_cls[]  	  = 'md:mt-0';
 				break;
 		}
 

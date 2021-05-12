@@ -56,7 +56,10 @@ class Config {
 		$theme = static::get_config()['theme'];
 		$m     = static::option_walker( $theme['margin'] );
 
-		$options = array();
+		# Remove unnecessary key.
+		unset( $m['-0'] );
+
+		$options = [];
 
 		foreach ( array( 'm', 'p' ) as $val ) {
 			foreach ( array( '', 'x', 'y', 't', 'b', 'l', 'r' ) as $iter ) {

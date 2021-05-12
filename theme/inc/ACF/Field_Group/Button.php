@@ -172,8 +172,8 @@ class Button extends A_Field_Group implements I_Renderable {
 		}
 
 		ob_start(); ?>
-		<a <?php echo esc_html( DOM_Attr::render_attrs_of( $btn_attr, $btn_cls ) ); ?>>
-			<span <?php echo esc_html( DOM_Attr::render_attrs_of( $val->get( static::FIELD_LABEL_ATTR ), $label_cls ) ); ?>>
+		<a <?php echo DOM_Attr::render_attrs_of( $btn_attr, $btn_cls ); ?>>
+			<span <?php echo DOM_Attr::render_attrs_of( $val->get( static::FIELD_LABEL_ATTR ), $label_cls ); ?>>
 				<?php echo esc_html( $val->get( static::FIELD_LABEL ) ); ?>
 			</span>
 		</a>

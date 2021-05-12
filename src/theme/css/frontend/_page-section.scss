@@ -5,6 +5,11 @@
         @apply md:mb-px14;
         // xl
         @apply xl:text-px42 xl:leading-px52 xl:tracking-em_001 xl:mb-px16;
+
+		tilt {
+			@apply mx-px14;
+			font-size: 1.375em;
+		}
     }
 
     &-title-desc {
