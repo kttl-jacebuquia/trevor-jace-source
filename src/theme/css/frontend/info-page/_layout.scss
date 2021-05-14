@@ -1,0 +1,27 @@
+.info-page {
+	&-wrap {
+		@apply bg-white text-indigo pt-px70 ml-px28;
+		@apply md:pt-px26 md:ml-px50;
+		@apply xl:pt-px80 xl:ml-px100;
+		width: calc(100% - #{rem-calc(56px)});
+
+		@screen md {
+			width: calc(100% - #{rem-calc(100px)});
+		}
+
+		@screen xl {
+			width: calc(100% - #{rem-calc(200px)});
+		}
+	}
+
+	&-content {
+		@apply flex flex-col-reverse;
+		@apply md:grid md:grid-cols-8 md:gap-x-px28;
+		@apply xl:grid-cols-12;
+	}
+
+	&-sidebar {
+		@apply md:col-span-8 md:row-start-1;
+		@apply xl:col-span-3 xl:col-start-10;
+	}
+}

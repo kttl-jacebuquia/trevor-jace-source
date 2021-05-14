@@ -8,17 +8,18 @@ Template Name: Info Page Template
 
 <main id="site-content" role="main" class="site-content">
 	<div class="site-content-inner">
-		<div class="post-content-wrap">
-			<div class="container post-content-grid">
-				<div class="post-content">
+		<div class="info-page-wrap">
+			<h1 class="info-page-heading"><?php the_title(); ?></h1>
+			<div class="info-page-content">
+				<div class="info-page-body">
 					<?php the_content(); ?>
 				</div>
-				<div class="post-content-sidebar">
+				<div class="info-page-sidebar">
 					<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Sidebar::render(); ?>
 					<div class="floating-blocks-home hidden lg:block"></div>
 				</div>
 			</div>
-		</div><!-- .post-content-wrap -->
+		</div><!-- .info-page-wrap -->
 	</div>
 </main> <!-- #site-content -->
 

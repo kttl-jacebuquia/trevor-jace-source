@@ -163,6 +163,7 @@ module.exports = {
 			},
 			borderWidth: {
 				px1: px2rem(1),
+				'px1.5': px2rem(1.5),
 				px2: px2rem(2),
 				px4: px2rem(4),
 				px6: px2rem(6),

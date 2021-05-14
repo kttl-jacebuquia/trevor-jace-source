@@ -81,20 +81,20 @@ class Page_Sidebar extends A_Basic_Section implements I_Renderable {
 
 		ob_start();
 		?>
-		<div>
-			<p><?php echo esc_html( $quick_links_header ); ?></p>
+		<aside class="quick-links">
+			<p class="quick-links__heading"><?php echo esc_html( $quick_links_header ); ?></p>
 			<?php if ( ! empty( $quick_links_entries ) ) : ?>
-				<ul>
+				<ul class="quick-links__list">
 				<?php foreach ( $quick_links_entries as $entry ) : ?>
-					<li>
+					<li class="quick-links__item">
 					<?php if ( ! empty( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ] ) ) : ?>
-						<a href="<?php echo esc_url( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_attr( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['title'] ); ?></a>
+						<a class="quick-links__link" href="<?php echo esc_url( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_attr( $entry[ static::FIELD_QUICK_LINKS_ENTRY_LINK ]['title'] ); ?></a>
 					</li>
 					<?php endif; ?>
 				<?php endforeach; ?>
 				</ul>
 			<?php endif; ?>
-		</div>
+		</aside>
 		<?php
 		return ob_get_clean();
 	}

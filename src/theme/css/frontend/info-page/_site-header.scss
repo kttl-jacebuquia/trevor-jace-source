@@ -1,0 +1,13 @@
+// Navigation overrides for info page
+
+.page-template-template-info-page #top-nav {
+	@apply bg-white;
+
+	.logo {
+		@apply text-orange;
+	}
+
+	.opener {
+		@apply text-indigo;
+	}
+}

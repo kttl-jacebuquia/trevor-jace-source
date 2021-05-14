@@ -1,0 +1,18 @@
+.quick-links {
+	&__heading {
+		@apply font-extrabold text-px14 leading-px24;
+	}
+
+	&__list {
+
+	}
+
+	&__item {
+		@apply mt-px14 text-px14 leading-px20 font-semibold;
+		@apply mt-px16 md:text-px16 md:leading-px24;
+	}
+
+	&__link {
+		@apply border-b-px1.5 border-indigo;
+	}
+}
