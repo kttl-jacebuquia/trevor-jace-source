@@ -103,8 +103,8 @@ class Tile_Grid {
 					<?php
 					foreach ( $data as $key => $entry ) {
 						$tile_method             = $options['tileMethod'];
-						$tile_options['cta_cls'] = $entry['cta_cls'] ?? array();
-						$tile_options['class']   = $entry['tile_cls'] ?? array();
+						$tile_options['cta_cls'] = $entry->cta_cls ?? array();
+						$tile_options['class']   = $entry->tile_cls ?? array();
 						echo Tile::$tile_method( $entry, $key, $tile_options );
 					}
 					?>

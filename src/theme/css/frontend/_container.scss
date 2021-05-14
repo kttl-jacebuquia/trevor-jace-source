@@ -4,15 +4,24 @@
   }
 }
 
-body.is-rc .container {
-	$breakpoints: lg, lg2, xl;
+body.is-rc,
+body.post-type-archive-trevor_fin_report {
+	.container {
+		$breakpoints: lg, lg2, xl;
 
-	@each $size in $breakpoints {
-		@screen #{$size} {
-			padding: {
-				left: theme('container.RCpadding.#{$size}');
-				right: theme('container.RCpadding.#{$size}');
+		@each $size in $breakpoints {
+			@screen #{$size} {
+				padding: {
+					left: theme('container.RCpadding.#{$size}');
+					right: theme('container.RCpadding.#{$size}');
+				}
 			}
 		}
+	}
+}
+
+body.post-type-archive-trevor_fin_report .container {
+	@screen xl {
+		@apply max-w-screen-xl;
 	}
 }
