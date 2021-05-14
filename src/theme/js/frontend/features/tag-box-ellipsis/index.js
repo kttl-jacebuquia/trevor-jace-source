@@ -39,20 +39,14 @@ class TagBoxEllipsis {
 	}
 
 	calc() {
-		const newRowHeight = this.$boxes.first().outerHeight();
-
-		if (this.rowHeight !== newRowHeight) {
-			this.$box.css('height', this.rowHeight = newRowHeight);
-		}
-
-		let showEllipsis = false;
 		let $firstRowLastBox = null;
+		const showEllipsis = this.$boxes.length > 2;
 
 		for (let i = 0; i < this.$boxes.length; i++) {
 			const box = this.$boxes.get(i);
 
 			if (box.offsetTop > 0) {
-				showEllipsis = true;
+				box.style.display = 'hidden';
 				break;
 			}
 
@@ -62,7 +56,7 @@ class TagBoxEllipsis {
 		const marginR = parseInt($firstRowLastBox.css('margin-right'));
 
 		if (showEllipsis) {
-			this.$box.css('padding-right', this.$ellipsis.outerWidth());
+			// this.$box.css('padding-right', this.$ellipsis.outerWidth());
 			this.$ellipsis.show();
 			const marginL = $firstRowLastBox.get(0).offsetLeft + $firstRowLastBox.outerWidth() + marginR;
 			this.$ellipsis.css('left', marginL);

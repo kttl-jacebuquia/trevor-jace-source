@@ -71,3 +71,23 @@
 	}
   }
 }
+
+// Numbered pagination
+.number-pagination {
+	@apply flex items-center justify-center;
+
+	.page-numbers {
+		@apply w-px30 h-px30 rounded-full overflow-hidden inline-flex items-center justify-center;
+		@apply text-px18 leading-px26 text-teal-dark font-semibold;
+		@apply md:leading-px24;
+
+		&.current {
+			@apply bg-teal-dark text-white;
+		}
+
+		&.prev,
+		&.next {
+			font-size: 1.5em;
+		}
+	}
+}

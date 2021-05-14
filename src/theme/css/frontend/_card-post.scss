@@ -26,7 +26,6 @@
 	@apply h-px240;
 	@apply overflow-hidden;
 	@apply flex-shrink-0;
-	@apply rounded-t-px10;
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-webkit-transform: translate3d(0, 0, 0);
@@ -36,7 +35,6 @@
 			@apply h-full;
 			@apply object-center object-cover;
 			@apply transition-transform duration-500;
-			@apply rounded-t-px10;
 		}
   }
 
@@ -371,7 +369,7 @@
 
 	// ORG Post Type
 	&.type-post {
-		@apply min-h-px503 h-auto border-teal-dark border-opacity-16 shadow-none border-px2;
+		@apply h-px503 border-teal-dark border-opacity-16 shadow-none border-px2;
 		@apply md:min-h-px450;
 
 		&.no-thumbnail {
@@ -418,24 +416,22 @@
 		}
 
 		.tags-box {
-			@apply flex items-center overflow-visible flex-nowrap whitespace-nowrap;
+			@apply flex items-center flex-wrap overflow-visible h-px30;
+
+			// Hide 3rd tag item onwards
+			&:not(.show-all) {
+				.tag-box:nth-child(n + 3):not(.ellipsis) {
+					@apply hidden;
+				}
+			}
 		}
 
 		.tag-box {
-			@apply flex items-center h-px30 px-px14 mr-0 mb-0 bg-gray-light;
+			@apply flex items-center h-px30 px-px14 mr-0 mb-0 bg-gray-light mr-px6 mb-px6 text-teal-dark;
 			@apply xl:tracking-em001;
 
-			&:not(:first-child) {
-				@apply ml-px6;
-			}
-
-			// Hide 3rd item onwards
-			&:nth-child(n + 3):not(.ellipsis) {
-				@apply hidden;
-			}
-
 			&.ellipsis {
-				@apply static w-px34 h-px34 flex items-center justify-center p-0;
+				@apply static w-px34 h-px34 flex items-center justify-center p-0 bg-blue_green mr-0 text-white;
 			}
 		}
 	}

@@ -2,14 +2,14 @@
     @apply mt-px38 mb-px102;
     @apply text-px18 leading-px26 tracking-px05;
     // md
-    @apply md:mt-px80 md:text-center md:tracking-em_005;
+    @apply md:mt-px80 md:tracking-em_005;
     @apply md:px-px88;
     // xl
-    @apply xl:mt-px58 xl:tracking-em_005 xl:px-0 xl:text-left;
+    @apply xl:mt-px58 xl:tracking-em_005 xl:px-0;
 
-    p {
-        @apply xl:inline-block;
-    }
+	&-btm {
+		@apply md:mb-0;
+	}
 
     .button-group {
         @apply justify-start;
