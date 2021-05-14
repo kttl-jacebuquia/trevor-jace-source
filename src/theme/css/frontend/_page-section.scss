@@ -45,7 +45,7 @@
             // md
             @apply md:h-px44 md:px-px24 md:text-px16 md:leading-px20 md:tracking-em001;
             // xl
-            @apply xl:h-px66 xl:px-px80;
+            @apply xl:h-px66 xl:px-px40;
             @apply xl:text-px20 xl:leading-px26 xl:tracking-px05;
         }
     }
@@ -56,7 +56,7 @@
 
     &-type-vertical {
         .page-btn {
-            @apply px-px32;
+            @apply px-px40;
         }
     }
 }

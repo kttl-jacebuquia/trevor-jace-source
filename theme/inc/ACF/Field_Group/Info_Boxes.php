@@ -217,7 +217,8 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 		$cls_box_desc    = array( 'info-box-desc' );
 
 		# Carousel
-		if ( $is_carousel = $val->get( static::FIELD_BREAK ) == 'carousel' ) { // if carousel
+		$is_carousel = $val->get( static::FIELD_BREAK );
+		if ( 'carousel' == $is_carousel ) { // if carousel
 			$cls_box_wrapper[] = 'swiper-slide';
 			$cls_inner[]       = 'swiper-wrapper';
 			$cls_wrapper[]     = 'swiper-container';
@@ -242,29 +243,18 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 			$boxes[] = $box;
 		}
 
-		switch ( $type ) {
-			// Possible other variants...
-			default:
-				$cls_box_text[] = 'font-bold text-px64 leading-px74 tracking-em_001';
-				$cls_box_text[] = 'md:text-px60 md:leading-px70';
-				$cls_box_text[] = 'xl:text-px70 xl:leading-px80';
-				$cls_box_desc[] = 'mt-px10 text-px18 leading-px24 tracking-em_001';
-				$cls_box_desc[] = 'md:mt-px14';
-				$cls_box_desc[] = 'xl:text-px20 xl:leading-px26';
-		}
-
 		ob_start(); ?>
 		<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_WRAPPER_ATTR ), $cls_wrapper ); ?>>
 			<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_INNER_ATTR ), $cls_inner ); ?>>
 				<?php foreach ( $boxes as $box ) { ?>
 					<div <?php echo DOM_Attr::render_attrs_of( @$box[ static::FIELD_BOX_WRAPPER_ATTR ], $cls_box_wrapper ); ?>>
 						<div class="info-box-top">
-							<?php if ( $type != static::BOX_TYPE_TEXT ) : ?>
+							<?php if ( static::BOX_TYPE_TEXT != $type ) : ?>
 								<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_IMG_ATTR ), $cls_box_img ); ?>>
 									<?php echo wp_get_attachment_image( $box[ static::FIELD_BOX_IMG ], 'medium' ); ?>
 								</div>
 							<?php endif; ?>
-							<?php if ( $type != static::BOX_TYPE_IMG ) : ?>
+							<?php if ( static::BOX_TYPE_IMG != $type ) : ?>
 								<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_TEXT_ATTR ), $cls_box_text ); ?>>
 									<?php echo $box[ static::FIELD_BOX_TEXT ]; ?>
 								</div>

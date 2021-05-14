@@ -59,7 +59,7 @@ class Config {
 		# Remove unnecessary key.
 		unset( $m['-0'] );
 
-		$options = [];
+		$options = array();
 
 		foreach ( array( 'm', 'p' ) as $val ) {
 			foreach ( array( '', 'x', 'y', 't', 'b', 'l', 'r' ) as $iter ) {

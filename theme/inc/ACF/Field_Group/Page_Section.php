@@ -127,27 +127,36 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		# Title align
 		$title_align = $val->get( static::FIELD_TITLE_ALIGN );
 		if ( static::TITLE_ALIGN_CENTERED == $title_align ) {
-			$title_cls[] = $desc_cls[] = 'centered';
+			$desc_cls[]  = 'centered';
+			$title_cls[] = 'centered';
 		} elseif ( static::TITLE_ALIGN_CENTERED_XL_LEFT == $title_align ) {
-			$title_cls[] = $desc_cls[] = 'centered xl:no-centered';
+			$desc_cls[]  = 'centered xl:no-centered';
+			$title_cls[] = 'centered xl:no-centered';
 		}
 
 		# Type
 		switch ( $type ) {
 			case static::TYPE_HORIZONTAL:
-				$inner_cls[]           = 'xl:flex xl:flex-row xl:flex-wrap';
-				$title_wrap_cls[]      = $content_wrap_cls[] = 'xl:w-1/2 xl:flex xl:flex-col xl:justify-center';
+				$inner_cls[] = 'xl:flex xl:flex-row xl:flex-wrap';
+
+				$xl_wrap_cls        = 'xl:w-1/2 xl:flex xl:flex-col xl:justify-center';
+				$content_wrap_cls[] = $xl_wrap_cls;
+				$title_wrap_cls[]   = $xl_wrap_cls;
+
 				$title_wrap_cls[]      = 'xl:flex-col xl:items-start';
 				$content_wrap_cls[]    = 'xl:items-end mt-12 xl:mt-0';
 				$btn_cls['wrap_cls'][] = 'xl:w-full xl:justify-start';
-				$title_cls[]           = $desc_cls[] = 'xl:w-3/4'; //fix left align
+
+				$xl_wrap_cls_width = 'xl:w-3/4'; //fix left align
+				$title_cls[]       = $xl_wrap_cls_width;
+				$title_cls[]       = $xl_wrap_cls_width;
 				break;
 
 			default:
 				$title_wrap_cls[] = 'flex flex-col items-center';
-				$title_cls[] 	  = 'mb-px14';
-				$desc_cls[]  	  = 'tracking-px05 mb-0';
-				$desc_cls[]  	  = 'md:mt-0';
+				$title_cls[]      = 'mb-px14';
+				$desc_cls[]       = 'tracking-px05 mb-0';
+				$desc_cls[]       = 'md:mt-0';
 				break;
 		}
 
@@ -166,7 +175,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 				'title_wrap_cls' => $title_wrap_cls,
 				'inner_cls'      => $inner_cls,
 				'btn_cls'        => $btn_cls,
-				'btn_inside'     => $type == static::TYPE_HORIZONTAL,
+				'btn_inside'     => static::TYPE_HORIZONTAL == $type,
 			)
 		);
 	}

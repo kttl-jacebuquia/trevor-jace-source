@@ -71,7 +71,8 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 		$btn_cls   = $options['btn_cls'] ?? array();
 		$label_cls = $options['label_cls'] ?? array();
 
-		if ( $multiple = count( $buttons_data ) > 1 ) {
+		$multiple = count( $buttons_data );
+		if ( $multiple > 1 ) {
 			$btn_cls[]  = 'my-2.5 md:my-0 md:mx-2.5';
 			$wrap_cls[] = 'flex flex-col md:flex-row';
 		}

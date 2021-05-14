@@ -65,18 +65,18 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_html( implode( ' ', (array) $options['styles'] ) ); ?>">
-			<div class="<?php echo esc_html( $hero_cls ); ?>">
+		<div class="header-container w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
 						<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo esc_html( $options['title_top'] ); ?></p>
 					<?php } ?>
-					<h1 class="<?php echo esc_html( $heading_cls ); ?>"><?php echo esc_html( $options['title'] ); ?></h1>
-					<p class="<?php echo esc_html( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
+					<h1 class="<?php echo esc_attr( $heading_cls ); ?>"><?php echo esc_html( $options['title'] ); ?></h1>
+					<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
 
 					<?php
 					if ( ! empty( $options['buttons'] ) ) {
-						echo esc_html( Field_Group\Button_Group::render( false, $options['buttons'], array() ) );
+						echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
 					}
 					?>
 				</div>
@@ -142,23 +142,23 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_html( implode( ' ', (array) $options['styles'] ) ); ?>">
-			<div class="<?php echo esc_html( $hero_cls ); ?>">
+		<div class="header-container w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
 						<?php if ( ! empty( $options['title_top'] ) ) { ?>
 							<div class="page-header-title-top"><?php echo esc_html( $options['title_top'] ); ?></div>
 						<?php } ?>
-						<h1 class="<?php echo esc_html( $heading_cls ); ?>">
+						<h1 class="<?php echo esc_attr( $heading_cls ); ?>">
 							<?php # Unescaping title to support <tilt> ?>
 							<?php echo $options['title']; ?>
 						</h1>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
-							<p class="<?php echo esc_html( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
+							<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
 						<?php } ?>
 						<?php
 						if ( ! empty( $options['buttons'] ) ) {
-							$wrap_cls = [ $options['buttons']['class'] ];
+							$wrap_cls = array( $options['buttons']['class'] );
 							echo Field_Group\Button_Group::render( false, $options['buttons'], compact( 'wrap_cls' ) );
 						}
 						?>
@@ -217,7 +217,7 @@ class Page_Header {
 				<?php } ?>
 				<?php
 				if ( ! empty( $options['buttons'] ) ) {
-					echo esc_html( Field_Group\Button_Group::render( false, $options['buttons'], array() ) );
+					echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
 				}
 				?>
 			</div>
@@ -267,7 +267,7 @@ class Page_Header {
 		);
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_html( implode( ' ', $options['styles'] ) ); ?>">
+		<div class="header-container w-full <?php echo esc_attr( implode( ' ', $options['styles'] ) ); ?>">
 			<div class="page-header type-split-carousel">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -280,7 +280,7 @@ class Page_Header {
 						<p class="page-header-desc"><?php echo esc_html( $options['desc'] ); ?></p>
 						<?php
 						if ( ! empty( $options['buttons'] ) ) {
-							echo esc_html( Field_Group\Button_Group::render( false, $options['buttons'], array() ) );
+							echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
 						}
 						?>
 					</div>
@@ -354,7 +354,7 @@ class Page_Header {
 							<?php } ?>
 							<?php
 							if ( ! empty( $options['buttons'] ) ) {
-								echo esc_html( Field_Group\Button_Group::render( false, $options['buttons'], array() ) );
+								echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
 							}
 							?>
 						</div>
