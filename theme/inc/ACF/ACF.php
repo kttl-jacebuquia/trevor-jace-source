@@ -10,6 +10,7 @@ class ACF {
 		// Options
 		Options_Page\Fundraiser_Quiz::class,
 		Options_Page\Donation_Modal::class,
+		Options_Page\Site_Banners::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,

@@ -5,6 +5,7 @@ use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
+use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Util\StaticFiles;
@@ -269,7 +270,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
 	 */
 	public static function wp_head(): void {
-		if ( $is_fp = is_front_page() ) {
+		if ( is_front_page() ) {
 			echo '<meta name="description" content="' . esc_attr( get_option( 'blogdescription' ) ) . '"/>' . PHP_EOL;
 			echo '<meta property="og:title" content="' . esc_attr( get_option( 'blogname' ) ) . '"/>' . PHP_EOL;
 			echo '<meta property="og:url" content="' . home_url() . '"/>' . PHP_EOL;
@@ -325,10 +326,10 @@ class Hooks {
 			<label for="edit-menu-item-subtitle-<?php echo esc_attr( $item_id ); ?>">
 				Subtitle<br>
 				<input type="text"
-					   id="edit-menu-item-subtitle-<?php echo esc_attr( $item_id ); ?>"
-					   class="widefat edit-menu-item-subtitle"
-					   name="menu-item-subtitle[<?php echo esc_attr( $item_id ); ?>]"
-					   value="<?php echo esc_attr( $val ); ?>">
+					id="edit-menu-item-subtitle-<?php echo esc_attr( $item_id ); ?>"
+					class="widefat edit-menu-item-subtitle"
+					name="menu-item-subtitle[<?php echo esc_attr( $item_id ); ?>]"
+					value="<?php echo esc_attr( $val ); ?>">
 			</label>
 		</p>
 		<?php
@@ -366,9 +367,9 @@ class Hooks {
 	 */
 	public static function nav_menu_item_title( string $title, \WP_Post $item, \stdClass $args, int $depth ): string {
 		$title = "<div class='menu-link-text'><span class='title-wrap'>{$title}</span>";
-		if ( $depth == 0 ) {
+		if ( 0 === $depth ) {
 			$title .= '<span class="submenu-icon trevor-ti-caret-down"></span>';
-		} elseif ( $depth == 1 ) {
+		} elseif ( 1 === $depth ) {
 			$subtitle = get_post_meta( $item->ID, Meta::KEY_MENU_ITEM_SUBTITLE, true );
 
 			if ( ! empty( $subtitle ) ) {
@@ -449,8 +450,8 @@ class Hooks {
 						$template = locate_template( 'rc/search.php', false );
 					}
 				}
-			} # Get Involved
-			elseif ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_BASE ) ) ) {
+			} elseif ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_BASE ) ) ) {
+				# Get Involved
 				if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ADVOCACY ) ) ) {
 					$template = locate_template( 'get-involved/advocate.php', false );
 				}
@@ -471,8 +472,7 @@ class Hooks {
 		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
 			?>
 			<div class="floating-crisis-btn-wrap">
-				<a class="btn floating-crisis-btn"
-				   href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>">
+				<a class="btn floating-crisis-btn" href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>">
 					Reach a Counselor</a>
 			</div>
 			<?php
@@ -522,13 +522,13 @@ class Hooks {
 		if ( $query->is_main_query() ) {
 			if ( ! $query->is_admin ) {
 				if ( $query->is_post_type_archive || $query->is_home ) {
-					$pt = ( empty( $qo = $query->get_queried_object() ) || empty( $qo->name ) )
-							? 'post'
-							: $qo->name;
+					$qo = $query->get_queried_object();
+					$pt = ( empty( $qo ) || empty( $qo->name ) ) ? 'post' : $qo->name;
 
 					# Pagination
-					if ( $per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP ) ) {
-						$updates[ $pt == 'post' ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
+					$per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP );
+					if ( $per_page ) {
+						$updates[ 'post' === $pt ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
 					}
 
 					# Init Sorter
@@ -567,31 +567,40 @@ class Hooks {
 	public static function ajax_site_banners() {
 		$banners = array();
 
+		$current_date = current_datetime();
+		$current_date = wp_date( 'M j, Y', $current_date->date, $current_date->timezone );
+
+		# Custom banners
+		$custom_entries = Site_Banners::get_option( Site_Banners::FIELD_CUSTOM_ENTRIES );
+		if ( ! empty( $custom_entries ) ) {
+			foreach ( $custom_entries as $entry ) {
+				$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
+				$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
+				$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
+
+				if ( $active && $current_date >= $start_date && $current_date <= $end_date ) {
+					$banners[] = array(
+						'title' => $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_TITLE ],
+						'desc'  => $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_MESSAGE ],
+						'type'  => 'custom',
+					);
+				}
+			}
+		}
+
 		# Long waiting banner
 		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, true );
-		if ( Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_FORCE ) ) {
+		$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
+
+		if ( $force_show ) {
 			$is_long_wait = true;
 		}
 
-		if ( $is_long_wait ) {
+		if ( $is_long_wait && empty( $banners ) ) {
 			$banners[] = array(
-				'title' => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_TITLE ),
-				'desc'  => Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_LONG_WAIT_DESC ),
+				'title' => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_TITLE ),
+				'desc'  => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_DESCRIPTION ),
 				'type'  => 'long_wait',
-			);
-		}
-
-		# Custom banners
-		$custom = Customizer\Site_Banners::get_val( Customizer\Site_Banners::SETTING_CUSTOM_DATA );
-		foreach ( $custom as $banner_data ) {
-			if ( empty( $banner_data['active'] ) ) {
-				continue;
-			}
-
-			$banners[] = array(
-				'title' => (string) @$banner_data['title'],
-				'desc'  => (string) @$banner_data['desc'],
-				'type'  => 'custom',
 			);
 		}
 
