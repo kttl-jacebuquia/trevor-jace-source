@@ -87,7 +87,7 @@ class Carousel {
 				</div>
 			<?php } ?>
 
-			<div class="carousel-full-width-wrap">
+			<div class="carousel-full-width-wrap container mx-auto">
 				<div class="carousel-container">
 					<div class="swiper-wrapper">
 						<?php

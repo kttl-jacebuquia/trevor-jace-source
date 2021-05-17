@@ -12,6 +12,10 @@
 				@apply text-orange;
 			}
 		}
+
+		.menu-link-text {
+			@apply xl:text-indigo;
+		}
 	}
 
 	:is(.trevor-ti-search, .trevor-ti-x) {
@@ -22,7 +26,9 @@
 		@apply text-indigo;
 		@apply -ml-px60 pl-px60;
 		// md
-		@apply md:-ml-px94 md:pl-px94;
+		@apply md:-ml-px94 md:pl-px146;
+		// xl
+		@apply md:-ml-px146 md:pl-px146;
 	}
 
 	#rc-search-main[placeholder]::before {
