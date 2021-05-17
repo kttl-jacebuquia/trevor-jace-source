@@ -69,10 +69,10 @@ class Page_Header {
 			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
-						<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo esc_html( $options['title_top'] ); ?></p>
+						<p class="uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo $options['title_top']; ?></p>
 					<?php } ?>
-					<h1 class="<?php echo esc_attr( $heading_cls ); ?>"><?php echo esc_html( $options['title'] ); ?></h1>
-					<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
+					<h1 class="<?php echo esc_attr( $heading_cls ); ?>"><?php echo $options['title']; ?></h1>
+					<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo $options['desc']; ?></p>
 
 					<?php
 					if ( ! empty( $options['buttons'] ) ) {
@@ -154,7 +154,7 @@ class Page_Header {
 							<?php echo $options['title']; ?>
 						</h1>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
-							<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
+							<p class="<?php echo esc_attr( $desc_cls ); ?>"><?php echo $options['desc']; ?></p>
 						<?php } ?>
 						<?php
 						if ( ! empty( $options['buttons'] ) ) {
@@ -213,7 +213,7 @@ class Page_Header {
 					<?php echo $options['title']; ?>
 				</h1>
 				<?php if ( $options['desc'] ) { ?>
-					<p class="page-header-desc"><?php echo esc_html( $options['desc'] ); ?></p>
+					<p class="page-header-desc"><?php echo $options['desc']; ?></p>
 				<?php } ?>
 				<?php
 				if ( ! empty( $options['buttons'] ) ) {
@@ -275,9 +275,9 @@ class Page_Header {
 							<p class="page-header-title-top uppercase text-px16 md:text-px14 leading-px24 md:leading-px18 mb-2.5"><?php echo esc_html( $options['title_top'] ); ?></p>
 						<?php } ?>
 						<h1 class="heading-lg-tilted page-header-title">
-							<?php echo esc_html( $options['title'] ); ?>
+							<?php echo $options['title']; ?>
 						</h1>
-						<p class="page-header-desc"><?php echo esc_html( $options['desc'] ); ?></p>
+						<p class="page-header-desc"><?php echo $options['desc']; ?></p>
 						<?php
 						if ( ! empty( $options['buttons'] ) ) {
 							echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
@@ -328,9 +328,8 @@ class Page_Header {
 		$header_cls = 'page-header type-horizontal mt-px28 xl:mt-px49 xl:px-px140';
 
 		# Title classnames
-		$title_cls   = array( 'heading-lg-tilted page-header-title  tracking-normal' );
-		$title_cls[] = array_merge( $options['title_cls'], $title_cls );
-		$title_cls   = implode( ' ', $title_cls );
+		$title_cls = array_merge( $options['title_cls'], [ 'heading-lg-tilted page-header-title  tracking-normal' ] );
+		$title_cls = implode( ' ', $title_cls );
 
 		# Description classnames
 		$desc_cls   = array( 'page-header-desc pb-0 pt-px12 text-px18 leading-px26' );
@@ -347,10 +346,10 @@ class Page_Header {
 					<?php if ( ! empty( $options['title'] ) || ! empty( $options['desc'] ) ) { ?>
 						<div class="page-header-content-wrap">
 							<?php if ( ! empty( $options['title'] ) ) { ?>
-								<h1 class="<?php echo esc_html( $title_cls ); ?>"><?php echo esc_html( $options['title'] ); ?></h1>
+								<h1 class="<?php echo esc_html( $title_cls ); ?>"><?php echo $options['title']; ?></h1>
 							<?php } ?>
 							<?php if ( ! empty( $options['desc'] ) ) { ?>
-								<p class="<?php echo esc_html( $desc_cls ); ?>"><?php echo esc_html( $options['desc'] ); ?></p>
+								<p class="<?php echo esc_html( $desc_cls ); ?>"><?php echo $options['desc']; ?></p>
 							<?php } ?>
 							<?php
 							if ( ! empty( $options['buttons'] ) ) {
