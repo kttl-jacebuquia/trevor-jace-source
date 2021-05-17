@@ -85,13 +85,13 @@ class Jobs {
 	 * @param $name
 	 * @param $arguments
 	 */
-	public static function __callStatic( $name, $arguments ) {
+	public static function __callStatic( $name, $arguments ): void {
 		if ( strpos( $name, self::HOOK_NAME_PREFIX ) == 0 ) {
 			$job_name = substr( $name, strlen( self::HOOK_NAME_PREFIX ) );
 
 			if ( array_key_exists( $job_name, self::$RECURRING ) ) {
 				list( $function ) = self::$RECURRING[ $job_name ];
-				$job_type         = 'Recurring';
+				$job_type = 'Recurring';
 			} elseif ( array_key_exists( $job_name, self::$SINGLE ) ) {
 				$function = self::$SINGLE[ $job_name ];
 				$job_type = 'Single';
@@ -107,6 +107,8 @@ class Jobs {
 			} catch ( \Exception $e ) {
 				Log::error( "Exception occurred during the {$job_type}:{$job_name} job.", compact( 'e', 'arguments' ) );
 			}
+
+			return;
 		}
 
 		throw new \BadMethodCallException( 'Unknown job name: ' . var_export( $name, true ) );
