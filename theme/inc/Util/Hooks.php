@@ -248,7 +248,6 @@ class Hooks {
 		# Panels
 		new Customizer\Search( $manager );
 		new Customizer\External_Scripts( $manager );
-		new Customizer\Site_Banners( $manager );
 		new Customizer\Resource_Center( $manager );
 		new Customizer\Trevorspace( $manager );
 		new Customizer\Posts( $manager );

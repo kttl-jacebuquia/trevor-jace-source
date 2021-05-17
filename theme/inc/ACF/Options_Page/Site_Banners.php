@@ -1,7 +1,5 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
-use TrevorWP\Theme\ACF\Options_Page\A_Options_Page;
-
 class Site_Banners extends A_Options_Page {
 	const FIELD_LONG_WAIT_URL           = 'long_wait_url';
 	const FIELD_LONG_WAIT_FORCE_SHOW    = 'force_show';
@@ -14,12 +12,7 @@ class Site_Banners extends A_Options_Page {
 	const FIELD_CUSTOM_ENTRY_START_DATE = 'custom_entry_start_date';
 	const FIELD_CUSTOM_ENTRY_END_DATE   = 'custom_entry_end_date';
 
-	const BANNER_TYPE_LONG_WAIT = 'long_wait';
-	const BANNER_TYPE_CUSTOM    = 'custom';
-
-	/**
-	 * @inheritDoc
-	 */
+	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$long_wait_url           = static::gen_field_key( static::FIELD_LONG_WAIT_URL );
 		$long_wait_force_show    = static::gen_field_key( static::FIELD_LONG_WAIT_FORCE_SHOW );
@@ -36,12 +29,13 @@ class Site_Banners extends A_Options_Page {
 			static::_gen_tab_field( 'Long Wait' ),
 			array(
 				static::FIELD_LONG_WAIT_URL         => array(
-					'key'      => $long_wait_url,
-					'name'     => static::FIELD_LONG_WAIT_URL,
-					'label'    => 'Wait URL',
-					'type'     => 'url',
-					'required' => true,
-					'wrapper'  => array(
+					'key'           => $long_wait_url,
+					'name'          => static::FIELD_LONG_WAIT_URL,
+					'label'         => 'Wait URL',
+					'type'          => 'url',
+					'default_value' => 'https://trevorproject.secure.force.com/services/apexrest/wait',
+					'required'      => true,
+					'wrapper'       => array(
 						'width' => '50%',
 					),
 				),
@@ -86,7 +80,7 @@ class Site_Banners extends A_Options_Page {
 					'type'       => 'repeater',
 					'layout'     => 'block',
 					'sub_fields' => array(
-						static::FIELD_CUSTOM_ENTRY_ACTIVE  => array(
+						static::FIELD_CUSTOM_ENTRY_ACTIVE     => array(
 							'key'         => $custom_entry_active,
 							'name'        => static::FIELD_CUSTOM_ENTRY_ACTIVE,
 							'label'       => 'Active',
@@ -108,7 +102,7 @@ class Site_Banners extends A_Options_Page {
 							'return_format'  => 'M j, Y',
 							'first_day'      => 0,
 						),
-						static::FIELD_CUSTOM_ENTRY_END_DATE => array(
+						static::FIELD_CUSTOM_ENTRY_END_DATE   => array(
 							'key'            => $custom_entry_end_date,
 							'name'           => static::FIELD_CUSTOM_ENTRY_END_DATE,
 							'label'          => 'End Date',
@@ -121,7 +115,7 @@ class Site_Banners extends A_Options_Page {
 							'return_format'  => 'M j, Y',
 							'first_day'      => 0,
 						),
-						static::FIELD_CUSTOM_ENTRY_TITLE   => array(
+						static::FIELD_CUSTOM_ENTRY_TITLE      => array(
 							'key'      => $custom_entry_title,
 							'name'     => static::FIELD_CUSTOM_ENTRY_TITLE,
 							'label'    => 'Title',
@@ -131,7 +125,7 @@ class Site_Banners extends A_Options_Page {
 								'width' => '50%',
 							),
 						),
-						static::FIELD_CUSTOM_ENTRY_MESSAGE => array(
+						static::FIELD_CUSTOM_ENTRY_MESSAGE    => array(
 							'key'     => $custom_entry_message,
 							'name'    => static::FIELD_CUSTOM_ENTRY_MESSAGE,
 							'label'   => 'Message',
