@@ -66,7 +66,7 @@ $is_rc = Is::rc();
 
 <?php /* TOP BAR */ ?>
 <div id="top-bar" class="top-bar">
-	<div class="top-bar-inner">
+	<div class="top-bar-inner container">
 		<div class="logo-icon">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>">
 				<i class="trevor-ti-logo-icon"></i>
@@ -108,7 +108,7 @@ $is_rc = Is::rc();
 
 <?php /* TOP NAV */ ?>
 <header id="top-nav" class="top-nav <?php echo $is_rc ? 'is_rc' : ''; ?>">
-	<div class="top-nav-inner <?php echo 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
+	<div class="top-nav-inner container <?php echo 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>

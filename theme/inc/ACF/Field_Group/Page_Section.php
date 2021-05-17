@@ -149,7 +149,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 				$xl_wrap_cls_width = 'xl:w-3/4'; //fix left align
 				$title_cls[]       = $xl_wrap_cls_width;
-				$title_cls[]       = $xl_wrap_cls_width;
+				$desc_cls[]        = $xl_wrap_cls_width;
 				break;
 
 			default:

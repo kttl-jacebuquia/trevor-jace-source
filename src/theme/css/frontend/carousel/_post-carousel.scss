@@ -62,9 +62,15 @@
 			@each $size in $breakpoints {
 				@screen #{$size} {
 					@apply flex;
-					left: calc( var(--carousel-left-padding) - 2.5rem );
+
+					@if $size == 2xl {
+						left: theme('container.padding.2xl');
+					} @else {
+						left: calc( var(--carousel-left-padding) - 2.5rem );
+					}
 				}
 			}
+
 		}
 
 		body.is-rc &-prev {
@@ -93,7 +99,12 @@
 					}
 
 					@apply flex;
-					left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+
+					@if $size == 2xl {
+						left: calc( theme('container.padding.2xl') + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+					} @else {
+						left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+					}
 				}
 			}
 		}
@@ -103,7 +114,7 @@
 
 			@each $size in $breakpoints {
 				@screen #{$size} {
-					--container-padding: theme('container.RCpadding.#{$size}');
+					--container-padding: theme('container.padding.#{$size}');
 				}
 			}
 		}

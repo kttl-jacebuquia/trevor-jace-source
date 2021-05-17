@@ -756,12 +756,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 //
 #top-nav {
 	height: var(--top-nav-height);
-	@apply px-px28;
 	z-index: var(--z-index-nav-base);
-	// md
-	@apply md:px-px50;
-	// lg2
-	@apply lg2:px-0;
 
 	// Background blur and fill, for mobile/tablet
 	@screen lg-max {

@@ -114,7 +114,7 @@
 
 	.post-carousel & {
 		@apply pl-px28;
-		@apply w-full ml-0;
+		@apply w-full;
 
 		@screen md {
 			--content-max-width: theme('screens.md');
@@ -125,7 +125,13 @@
 		@each $size in $breakpoints {
 			@screen #{$size} {
 				--content-max-width: calc( theme( 'screens.#{$size}' ) - ( theme( 'container.padding.#{$size}' ) * 2 ) );
-				padding-left: calc( ( 100vw - var( --content-max-width ) ) / 2 );
+
+				@if $size == 2xl {
+					@apply max-w-screen-xl;
+					padding-left: theme('container.padding.2xl');
+				} @else {
+					padding-left: calc( ( 100vw - var( --content-max-width ) ) / 2 );
+				}
 			}
 		}
 	}
