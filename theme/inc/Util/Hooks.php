@@ -27,7 +27,6 @@ class Hooks {
 		array( CPT\Get_Involved\Get_Involved_Object::QV_PARTNER_W_US, 'get-involved/partner-with-us.php' ),
 		array( CPT\Get_Involved\Get_Involved_Object::QV_CORP_PARTNERSHIPS, 'get-involved/corporate-partnerships.php' ),
 		array( CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ),
-		array( CPT\Donate\Donate_Object::QV_DONATE, 'donate/donate.php' ),
 		array( CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ),
 		array( CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ),
 		array( CPT\Org\Org_Object::QV_ORG_LP, 'org-lp.php' ),
@@ -255,7 +254,6 @@ class Hooks {
 		new Customizer\Volunteer( $manager );
 		new Customizer\PWU( $manager );
 		new Customizer\ECT( $manager );
-		new Customizer\Donate( $manager );
 		new Customizer\Product_Partnerships( $manager );
 		new Customizer\Shop_Product_Partners( $manager );
 		new Customizer\Fundraise( $manager );
