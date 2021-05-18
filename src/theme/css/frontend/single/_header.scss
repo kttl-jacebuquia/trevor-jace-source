@@ -54,8 +54,16 @@
 
   // Mid Row
   .mid-row {
-	@apply flex flex-row items-center;
+	@apply flex flex-row flex-wrap items-center justify-center;
 	@apply my-2;
+  }
+
+  .mid-row-col {
+	@apply flex-shrink;
+  }
+
+  .mid-row-text {
+	@apply uppercase font-semibold text-px14 leading-px26 md:leading-px18 xl:tracking-px05;
   }
 
   .length-indicator {
@@ -64,16 +72,9 @@
 
   .mid-row-v-separator {
 	@apply mx-4;
+	@apply bg-current;
 	width: rem-calc(1px);
 	height: rem-calc(29px);
-
-	.post-header.text-white & {
-	  @apply bg-white;
-	}
-
-	.post-header.text-indigo & {
-	  @apply bg-indigo;
-	}
   }
 
   // Tags
@@ -112,6 +113,10 @@
 
 	.title-btm {
 	  @apply text-px18 leading-px22;
+	}
+
+	.mid-row {
+	  @apply justify-start;
 	}
 
 	.length-indicator {
@@ -184,18 +189,9 @@
   }
 
   // Article
-	body.single-trevor_rc_article :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
-		@apply bg-violet-alt;
-	}
-
-	// Blog
-	body.single-trevor_rc_post :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
-		@apply bg-purple;
-	}
-
-  // Purple bg
-  &:not(.type-text_only):not(.type-full) {
-	@apply bg-purple;
+  body.single-trevor_rc_article :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
+	@apply bg-violet-alt;
+	// todo: move this to meta
   }
 
   /* Breaking Headers, Img at the btm for mobile */
@@ -258,6 +254,14 @@
 		@apply w-full h-full max-h-full;
 		@apply object-cover object-center;
 	  }
+	}
+  }
+
+  // < XL
+  @media (max-width: theme('screens.xl')) {
+	.mid-row > .mid-row-v-separator:nth-child(4) {
+	  @apply w-full bg-transparent;
+	  @apply h-3;
 	}
   }
 
@@ -374,7 +378,7 @@
 	  max-height: none;
 
 	  .post-header-content {
-		  @apply pb-px40;
+		@apply pb-px40;
 	  }
 
 	  .thumbnail-wrap {
@@ -431,13 +435,13 @@
   }
 
   @screen 2xl {
-	  /* Split */
+	/* Split */
 	&.type-split {
-		@include neg-img-btm-margin(rem-calc(-93px));
-  
-		.thumbnail-wrap {
-		  max-height: rem-calc(650px);
-		}
+	  @include neg-img-btm-margin(rem-calc(-93px));
+
+	  .thumbnail-wrap {
+		max-height: rem-calc(650px);
 	  }
+	}
   }
 }

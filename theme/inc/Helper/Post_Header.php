@@ -24,49 +24,58 @@ class Post_Header {
 	);
 
 	/* Colors */
-	const CLR_WHITE        = 'white';
-	const CLR_LIGHT_GRAY   = 'gray-light';
-	const CLR_INDIGO       = 'indigo';
-	const CLR_BLUE_GREEN   = 'blue_green';
-	const BG_COLORS        = array(
-		self::CLR_LIGHT_GRAY => array(
-			'name'  => 'Light Gray',
-			'color' => '#F3F3F7',
-		),
-		self::CLR_INDIGO     => array(
-			'name'  => 'Indigo',
-			'color' => '#101066',
-		),
-		self::CLR_BLUE_GREEN => array(
-			'name'  => 'Blue Green',
-			'color' => '#005E67',
-		),
+	const CLR_WHITE = 'white';
+	const CLR_LIGHT_GRAY = 'gray-light';
+	const CLR_INDIGO = 'indigo';
+	const CLR_BLUE_GREEN = 'blue_green';
+	const CLR_TEAL_DARK = 'teal-dark';
+	const BG_COLORS = array(
+			self::CLR_LIGHT_GRAY => array(
+					'name'  => 'Gray (Light)',
+					'color' => '#F3F3F7',
+			),
+			self::CLR_INDIGO     => array(
+					'name'  => 'Indigo',
+					'color' => '#101066',
+			),
+			self::CLR_BLUE_GREEN => array(
+					'name'  => 'Blue Green',
+					'color' => '#005E67',
+			),
+			self::CLR_TEAL_DARK  => array(
+					'name'  => 'Teal (Dark)',
+					'color' => '#003A48',
+			),
 	);
 	const BG_CLR_2_TXT_CLR = array(
 		self::CLR_LIGHT_GRAY => self::CLR_INDIGO,
 		self::CLR_INDIGO     => self::CLR_WHITE,
 		self::CLR_BLUE_GREEN => self::CLR_WHITE,
+		self::CLR_TEAL_DARK => self::CLR_WHITE,
 	);
 
 	/* Settings */
 	const SETTINGS = array(
-		self::TYPE_SPLIT      => array( 'name' => 'Split' ),
-		self::TYPE_FULL       => array(
-			'name'     => 'Full Bleed',
-			'validate' => array( 'image-horizontal' ),
-		),
-		self::TYPE_HORIZONTAL => array(
-			'name'     => 'Horizontal',
-			'validate' => array( 'image-horizontal' ),
-		),
-		self::TYPE_SQUARE     => array(
-			'name'     => 'Square',
-			'validate' => array( 'image-square' ),
-		),
-		self::TYPE_TEXT_ONLY  => array(
-			'name'     => 'Text Only',
-			'supports' => array( 'bg-color' ),
-		),
+			self::TYPE_SPLIT      => array(
+					'name'     => 'Split',
+					'supports' => array( 'bg-color' ),
+			),
+			self::TYPE_FULL       => array(
+					'name'     => 'Full Bleed',
+					'validate' => array( 'image-horizontal' ),
+			),
+			self::TYPE_HORIZONTAL => array(
+					'name'     => 'Horizontal',
+					'validate' => array( 'image-horizontal' ),
+			),
+			self::TYPE_SQUARE     => array(
+					'name'     => 'Square',
+					'validate' => array( 'image-square' ),
+			),
+			self::TYPE_TEXT_ONLY  => array(
+					'name'     => 'Text Only',
+					'supports' => array( 'bg-color' ),
+			),
 	);
 
 	/* Defaults */
@@ -190,7 +199,7 @@ class Post_Header {
 		## Article Length
 		$len_ind = Content_Length::post( $post );
 		if ( ! empty( $len_ind ) ) {
-			$mid_row[] = '<div class="length-indicator"> ' . ( CPT\RC\Guide::POST_TYPE == $post->post_type ? 'Guide' : 'Article' ) . ' Length: ' . esc_html( $len_ind ) . '</div>';
+			$mid_row[] = '<div class="length-indicator mid-row-text"> ' . ( CPT\RC\Guide::POST_TYPE == $post->post_type ? 'Guide' : 'Article' ) . ' Length: ' . esc_html( $len_ind ) . '</div>';
 		}
 
 		## Date Box
@@ -200,7 +209,7 @@ class Post_Header {
 			?>
 
 			<div class="date-box">
-				<time class="font-semibold text-px14 leading-px18"
+				<time class="mid-row-text"
 					  datetime="<?php echo $post->post_date; ?>"><?php echo $date_time->format( 'M. j, Y' ); ?></time>
 			</div>
 
@@ -212,8 +221,8 @@ class Post_Header {
 		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) ) {
 			ob_start();
 			?>
-			<div class="author-box">
-				BY: <span class="uppercase author-display_name"><?php echo get_the_author_meta( 'display_name', $post->post_author ); ?></span>
+			<div class="author-box mid-row-text">
+				BY: <span class="author-display_name"><?php echo get_the_author_meta( 'display_name', $post->post_author ); ?></span>
 			</div>
 			<?php
 			$mid_row[] = ob_get_clean();

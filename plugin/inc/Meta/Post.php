@@ -193,7 +193,9 @@ class Post {
 
 		# Set defaults
 		$wp_meta_keys['post'][ CPT\Post::POST_TYPE ][ static::KEY_HEADER_BG_CLR ]['default']    = Theme\Helper\Post_Header::CLR_BLUE_GREEN;
+		$wp_meta_keys['post'][ CPT\Post::POST_TYPE ][ static::KEY_HEADER_TYPE ]['default']    = Theme\Helper\Post_Header::TYPE_SPLIT;
 		$wp_meta_keys['post'][ CPT\RC\Post::POST_TYPE ][ static::KEY_HEADER_BG_CLR ]['default'] = Theme\Helper\Post_Header::CLR_INDIGO;
+		$wp_meta_keys['post'][ CPT\RC\Post::POST_TYPE ][ static::KEY_HEADER_TYPE ]['default'] = Theme\Helper\Post_Header::TYPE_SPLIT;
 	}
 
 	/**

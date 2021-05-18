@@ -77,8 +77,8 @@ class Post {
 	 */
 	public static function render_after_post( \WP_Post $post ): string {
 		$out = array(
-			self::_render_post_recirculation( $post ),
-			self::_render_page_recirculation( $post, 'after_post' ),
+				self::_render_post_recirculation( $post ),
+				self::_render_page_recirculation( $post, 'after_post' ),
 		);
 
 		return implode( "\n", array_filter( $out ) );
@@ -95,11 +95,11 @@ class Post {
 		}
 
 		$posts = Posts::get_recirculation(
-			$post,
-			2,
-			array(
-				'force_main_category' => true,
-			)
+				$post,
+				2,
+				array(
+						'force_main_category' => true,
+				)
 		);
 
 		if ( empty( $posts ) || count( $posts ) != 2 ) {
@@ -134,6 +134,10 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_bottom_tags( \WP_Post $post ): ?string {
+		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) ) {
+			return null;
+		}
+
 		$tax   = Tools::get_post_tag_tax( $post );
 		$terms = wp_get_object_terms( $post->ID, $tax );
 
@@ -169,13 +173,13 @@ class Post {
 
 		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
 		$terms            = get_terms(
-			array(
-				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
-				'orderby'    => 'include',
-				'include'    => $featured_cat_ids,
-				'parent'     => 0,
-				'hide_empty' => false,
-			)
+				array(
+						'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+						'orderby'    => 'include',
+						'include'    => $featured_cat_ids,
+						'parent'     => 0,
+						'hide_empty' => false,
+				)
 		);
 
 		if ( empty( $terms ) ) {
@@ -188,7 +192,8 @@ class Post {
 			<h3 class="list-title">Browse trending content below or choose a topic category to explore.</h3>
 			<div class="list-container">
 				<?php foreach ( $terms as $term ) { ?>
-					<a href="<?php echo esc_attr( get_term_link( $term ) ); ?>" rel="tag"><?php echo esc_attr( $term->name ); ?></a>
+					<a href="<?php echo esc_attr( get_term_link( $term ) ); ?>"
+					   rel="tag"><?php echo esc_attr( $term->name ); ?></a>
 				<?php } ?>
 			</div>
 		</div>
@@ -222,7 +227,8 @@ class Post {
 							Looking for another kind of support?
 						</h2>
 						<p class="page-sub-title-desc centered">
-							Explore answers and information across a variety of topics, or connect to one of our trained counselors to receive immediate support.
+							Explore answers and information across a variety of topics, or connect to one of our trained
+							counselors to receive immediate support.
 						</p>
 
 						<?php echo Page_Circulation::render_grid( $cards ); ?>

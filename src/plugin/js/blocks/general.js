@@ -108,7 +108,7 @@ class PostSidebar extends React.Component {
 				{/* Slug */}
 				<TextControl label="Slug" value={slug} onChange={this.handleSlugChange}/>
 
-				{/* File */}
+				{/* File todo: remove this */}
 				{this.canRenderField(metaKeys.KEY_FILE) &&
 				<FileFiled
 					key="fileInput"
@@ -117,12 +117,12 @@ class PostSidebar extends React.Component {
 					allowedTypes={['application/pdf']}
 				/>}
 
-				{/* Bill Id */}
+				{/* Bill Id todo: remove this */}
 				{this.canRenderField(META_KEY_MAP.billId) &&
 				<TextControl label="Bill ID" value={billId} onChange={this.handleBillIdChange}/>
 				}
 
-				{/* Team: Pronouns */}
+				{/* Team: Pronouns todo: remove this */}
 				{this.canRenderField(META_KEY_MAP.pronouns) &&
 				<TextControl label="Pronouns" value={pronouns} onChange={this.handlePronounsChange}/>}
 			</PluginDocumentSettingPanel>

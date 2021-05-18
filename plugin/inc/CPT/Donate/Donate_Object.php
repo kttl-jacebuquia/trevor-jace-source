@@ -8,7 +8,6 @@ abstract class Donate_Object {
 	const POST_TYPE_PREFIX = Main::POST_TYPE_PREFIX;
 
 	/* Query Vars */
-	const QV_DONATE            = Main::QV_PREFIX . 'donate';
 	const QV_FUNDRAISE         = Main::QV_PREFIX . 'fundraise';
 	const QV_PROD_PARTNERSHIPS = Main::QV_PREFIX . 'prod_partnerships';
 
@@ -18,7 +17,7 @@ abstract class Donate_Object {
 	);
 
 	/* Permalinks */
-	const PERMALINK_DONATE            = 'donate';
+	const PERMALINK_DONATE            = 'donate'; // todo: create a ACF options page & remove this
 	const PERMALINK_FUNDRAISE         = 'fundraise';
 	const PERMALINK_PROD_PARTNERS     = 'shop-products';
 	const PERMALINK_PROD_PARTNERSHIPS = 'product-partnerships';
