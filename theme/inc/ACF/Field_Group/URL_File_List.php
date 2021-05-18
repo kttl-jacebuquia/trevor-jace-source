@@ -138,7 +138,7 @@ class URL_File_List extends A_Field_Group implements I_Block, I_Renderable {
 				<ul>
 					<?php foreach ( $url_file_entries as $entry ) : ?>
 						<?php if ( 'link' === $entry['url_file_entry_type'] ) : ?>
-							<li><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_url( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
+							<li><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_attr( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
 						<?php elseif ( 'file' === $entry['url_file_entry_type'] ) : ?>
 							<li><a href="<?php echo esc_url( $entry['url_file_entry_group']['url_file_entry_file']['url'] ); ?>" download><?php echo esc_attr( $entry['url_file_entry_group']['url_file_entry_label'] ); ?></a></li>
 						<?php endif; ?>

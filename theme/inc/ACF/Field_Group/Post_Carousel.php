@@ -25,6 +25,9 @@ class Post_Carousel extends Post_Grid {
 		$fields = &$args['fields'];
 		unset( $fields[ static::FIELD_NUM_COLS ] );
 
+		$fields[ static::FIELD_SOURCE ]['choices'][ static::SOURCE_TOP_INDIVIDUALS ] = 'Top Individuals';
+		$fields[ static::FIELD_SOURCE ]['choices'][ static::SOURCE_TOP_TEAMS ]       = 'Top Teams';
+
 		// todo: add carousel specific fields here.
 		return $args;
 	}

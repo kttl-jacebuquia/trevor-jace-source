@@ -99,9 +99,6 @@ class Hooks {
 
 			# Product Partner
 			Admin\Prod_Partner::register_hooks();
-
-			# Partner Product
-			Admin\Partner_Prod::register_hooks();
 		}
 
 		# Custom Hooks

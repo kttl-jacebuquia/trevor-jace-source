@@ -93,7 +93,7 @@ class Tile_Grid {
 			<div class="tile-grid-inner">
 				<?php if ( ! empty( $options['title'] ) ) { ?>
 					<div class="tile-grid-header">
-						<h2 class="page-sub-title centered <?php echo $options['title_cls']; ?>"><?php echo $options['title']; ?></h2>
+						<h2 class="page-sub-title centered <?php echo ( ! empty( $options['title_cls'] ) ? $options['title_cls'] : '' ); ?>"><?php echo $options['title']; ?></h2>
 						<?php if ( ! empty( $options['desc'] ) ) { ?>
 							<p class="page-sub-title-desc centered"><?php echo $options['desc']; ?></p>
 						<?php } ?>
@@ -102,9 +102,13 @@ class Tile_Grid {
 				<div class="<?php echo implode( ' ', $grid_class ); ?>">
 					<?php
 					foreach ( $data as $key => $entry ) {
-						$tile_method             = $options['tileMethod'];
-						$tile_options['cta_cls'] = $entry->cta_cls ?? array();
-						$tile_options['class']   = $entry->tile_cls ?? array();
+						$tile_method = $options['tileMethod'];
+
+						if ( is_array( $entry ) ) {
+							$tile_options['cta_cls'] = ( isset( $entry['cta_cls'] ) ) ? $entry['cta_cls'] : array();
+							$tile_options['class']   = ( isset( $entry['tile_cls'] ) ) ? $entry['tile_cls'] : array();
+						}
+
 						echo Tile::$tile_method( $entry, $key, $tile_options );
 					}
 					?>

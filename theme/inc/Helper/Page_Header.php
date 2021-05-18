@@ -267,7 +267,7 @@ class Page_Header {
 		);
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_attr( implode( ' ', $options['styles'] ) ); ?>">
+		<div class="header-container w-full <?php echo esc_attr( ( ! empty( $options['styles'] ) ) ? implode( ' ', $options['styles'] ) : '' ); ?>">
 			<div class="page-header type-split-carousel">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -287,13 +287,11 @@ class Page_Header {
 					<div class="page-header-img-wrap">
 						<?php if ( ! empty( $options['carousel_data'] ) ) { ?>
 							<?php
-							echo esc_html(
-								Helper\Carousel::big_img(
-									$options['carousel_data'],
-									array(
-										'class'  => array( 'text-white', 'header-carousel' ),
-										'swiper' => $options['swiper'],
-									)
+							echo Helper\Carousel::big_img(
+								$options['carousel_data'],
+								array(
+									'class'  => array( 'text-white', 'header-carousel' ),
+									'swiper' => $options['swiper'],
 								)
 							)
 							?>
@@ -328,7 +326,7 @@ class Page_Header {
 		$header_cls = 'page-header type-horizontal mt-px28 xl:mt-px49 xl:px-px140';
 
 		# Title classnames
-		$title_cls = array_merge( $options['title_cls'], [ 'heading-lg-tilted page-header-title  tracking-normal' ] );
+		$title_cls = array_merge( $options['title_cls'], array( 'heading-lg-tilted page-header-title  tracking-normal' ) );
 		$title_cls = implode( ' ', $title_cls );
 
 		# Description classnames

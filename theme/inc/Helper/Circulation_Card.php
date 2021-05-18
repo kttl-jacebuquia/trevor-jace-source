@@ -78,8 +78,7 @@ class Circulation_Card {
 			<div class="inner">
 				<h3 class="circulation-card-title"><?php echo $this->_args['title']; ?></h3>
 				<p class="circulation-card-desc"><?php echo $this->_args['desc']; ?></p>
-				<a class="circulation-card-cta hover:opacity-90"
-				   href="<?php echo esc_attr( $this->_args['cta_url'] ); ?>"><?php echo $this->_args['cta_text']; ?></a>
+				<a class="circulation-card-cta hover:opacity-90" href="<?php echo esc_attr( $this->_args['cta_url'] ); ?>"><?php echo $this->_args['cta_text']; ?></a>
 			</div>
 		</div>
 		<?php
@@ -98,8 +97,8 @@ class Circulation_Card {
 	 */
 	static public function render_circulation( string $title, ?string $desc, array $cards, ?array $options ): string {
 		$container_class = $options['container'] ? $options['container'] : null;
-		$wrapper_class   = $options['wrapper'] ? $options['wrapper'] : null;
-		$option_class    = $options['title'] ? $options['title'] : null;
+		$wrapper_class   = ( ! empty( $options['wrapper'] ) ) ? $options['wrapper'] : null;
+		$option_class    = ( ! empty( $options['title'] ) ) ? $options['title'] : null;
 		ob_start();
 		?>
 		<div class="pt-20 pb-24 text-teal-dark bg-white lg:pt-24 <?php echo $container_class; ?>">

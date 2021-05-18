@@ -7,6 +7,7 @@ use \TrevorWP\Theme\Single_Page;
 use TrevorWP\Theme\ACF\Field_Group;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\ACF\Field_Group\Financial_Report;
+use TrevorWP\Theme\ACF\Field_Group\Product;
 
 /**
  * Tile Grid item.
@@ -23,11 +24,20 @@ class Tile {
 	 */
 	public static function post( \WP_Post $post, $key, array $options = array() ): string {
 		$attachment_id = '';
+
 		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
-			$attachment_id = Meta\Post::get_item_img_id( $post->ID );
+			$attachment    = Product::get_val( Product::FIELD_PRODUCT_IMAGE, $post->ID );
+			$attachment_id = ( ! empty( $attachment ) ) ? $attachment['id'] : null;
 		} elseif ( CPT\Donate\Prod_Partner::POST_TYPE === $post->post_type ) {
 			$attachment_id = Meta\Post::get_store_img_id( $post->ID );
 		}
+
+		$data = array(
+			'title'   => $post->post_title,
+			'desc'    => $post->post_excerpt,
+			'cta_txt' => 'Read More',
+			'cta_url' => get_permalink( $post ),
+		);
 
 		if ( ! empty( $attachment_id ) ) {
 			$img = wp_get_attachment_image(
@@ -45,36 +55,32 @@ class Tile {
 					),
 				)
 			);
+
+			$data['img'] = $img;
 		}
 
-		$data = array(
-			'title'   => $post->post_title,
-			'desc'    => $post->post_excerpt,
-			'img'     => $img,
-			'cta_txt' => 'Read More',
-			'cta_url' => get_permalink( $post ),
-		);
-
-		if ( $post->post_type == CPT\Get_Involved\Bill::POST_TYPE ) {
+		if ( CPT\Get_Involved\Bill::POST_TYPE === $post->post_type ) {
 			$data['title_top'] = \TrevorWP\Meta\Post::get_bill_id( $post->ID );
 		}
 
-		if ( $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE ) {
-			$data['title_top'] = get_the_title( Meta\Post::get_partner_id( $post->ID ) );
+		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
+			$partner           = Product::get_val( Product::FIELD_PRODUCT_PARTNER, $post->ID );
+			$partner_id        = ( ! empty( $partner ) ) ? $partner->ID : null;
+			$data['title_top'] = ( ! empty( $partner_id ) ) ? get_the_title( $partner_id ) : '';
 		}
 
-		if ( $post->post_type == CPT\Donate\Prod_Partner::POST_TYPE ) {
+		if ( CPT\Donate\Prod_Partner::POST_TYPE === $post->post_type ) {
 			$data['title_top'] = '';
 		}
 
-		if ( $post->post_type == CPT\Donate\Prod_Partner::POST_TYPE || $post->post_type == CPT\Donate\Partner_Prod::POST_TYPE ) {
+		if ( CPT\Donate\Prod_Partner::POST_TYPE === $post->post_type || CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
 			$data['cta_txt']      = 'Check It Out';
-			$data['cta_url']      = Meta\Post::get_store_url( $post->ID ) | Meta\Post::get_item_url( $post->ID );
+			$data['cta_url']      = Meta\Post::get_store_url( $post->ID ) | Product::get_val( Product::FIELD_PRODUCT_URL, $post->ID );
 			$options['class'][]   = 'product-card';
 			$options['card_type'] = 'product';
 		}
 
-		if ( in_array( $post->post_type, array( CPT\Get_Involved\Bill::POST_TYPE, CPT\Get_Involved\Letter::POST_TYPE ) ) ) {
+		if ( in_array( $post->post_type, array( CPT\Get_Involved\Bill::POST_TYPE, CPT\Get_Involved\Letter::POST_TYPE ), true ) ) {
 			$id                 = uniqid( 'post-' );
 			$options['id']      = $id;
 			$options['class'][] = 'bill-letter-card';
@@ -104,7 +110,7 @@ class Tile {
 			);
 		}
 
-		if ( $post->post_type === CPT\Research::POST_TYPE ) {
+		if ( CPT\Research::POST_TYPE === $post->post_type ) {
 			$data['cta_txt']    = 'Learn More';
 			$options['class'][] = 'research-card';
 		}
@@ -150,8 +156,7 @@ class Tile {
 						<?php echo $data['desc']; ?>
 					</p>
 					<div class="tile-cta-wrap">
-						<a href="<?php echo @$data['cta_url']; ?>"
-						   class="tile-cta font-bold text-px18 leading-px28 border-b-2 border-teal-dark lg:text-px20">
+						<a href="<?php echo $data['cta_url']; ?>" class="tile-cta font-bold text-px18 leading-px28 border-b-2 border-teal-dark lg:text-px20">
 							<span><?php echo $data['cta_txt']; ?></span>
 						</a>
 					</div>
@@ -213,15 +218,15 @@ class Tile {
 		ob_start();
 		?>
 		<div <?php echo Tools::flat_attr( $attr ); ?>>
-			<?php if ( in_array( 'clickable-card', $cls ) ) { ?>
-				<a href="<?php echo @$data['cta_url']; ?>" class="card-link">&nbsp;</a>
+			<?php if ( in_array( 'clickable-card', $cls, true ) ) { ?>
+				<a href="<?php echo $data['cta_url']; ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
 
-			<?php if ( $options['card_type'] === 'product' && ! empty( $data['img'] ) ) { ?>
+			<?php if ( 'product' === $options['card_type'] && ! empty( $data['img'] ) ) { ?>
 				<?php echo $data['img']; ?>
 			<?php } ?>
 			<div class="tile-inner">
-				<?php if ( ! empty( $data['img'] ) && $options['card_type'] !== 'product' ) { ?>
+				<?php if ( ! empty( $data['img'] ) && 'product' !== $options['card_type'] ) { ?>
 					<?php echo $data['img']; ?>
 				<?php } ?>
 				<?php if ( ! empty( $data['title_top'] ) ) { ?>
@@ -234,7 +239,7 @@ class Tile {
 
 				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
 					<div class="tile-cta-wrap">
-						<a href="<?php echo @$data['cta_url']; ?>" class="<?php echo $cta_cls; ?>">
+						<a href="<?php echo $data['cta_url']; ?>" class="<?php echo $cta_cls; ?>">
 							<span><?php echo $data['cta_txt']; ?></span>
 						</a>
 					</div>

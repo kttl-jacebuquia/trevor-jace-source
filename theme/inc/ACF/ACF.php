@@ -42,6 +42,7 @@ class ACF {
 		Field_Group\Post_Images::class,
 		Field_Group\Financial_Report::class,
 		Field_Group\Event::class,
+		Field_Group\Product::class,
 	);
 
 	public static function construct() {
