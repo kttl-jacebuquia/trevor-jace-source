@@ -283,6 +283,7 @@
 
 	&--event {
 		@apply mb-px80;
+		@apply overflow-visible;
 
 		.carousel-header {
 			@apply mb-px30;
@@ -295,6 +296,7 @@
 		.carousel-full-width-wrap {
 			@apply py-0;
 			@apply xl:px-px140;
+			@apply overflow-visible;
 		}
 
 		.carousel-container {
@@ -322,11 +324,15 @@
 		.carousel-container,
 		.swiper-slide {
 			@apply w-px264 h-px328;
-			@apply xl:w-px370 xl:h-px440;
+			@apply xl:h-px440;
+		}
+
+		.carousel-container {
+			@apply xl:w-px370;
 		}
 
 		.swiper-slide {
-			@apply mr-px12;
+			@apply mr-px12 xl:w-auto;
 		}
 
 		.card-post {

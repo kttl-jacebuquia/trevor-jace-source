@@ -2,7 +2,8 @@
 .carousel-right-arrow-pane,
 .big-img-carousel.body-carousel .swiper-button-prev,
 .big-img-carousel.body-carousel .swiper-button-next {
-  @apply cursor-pointer lg:z-10;
+  @apply lg:z-10;
+  cursor: none;
 
   .swiper-button-wrapper {
 	@apply flex bg-teal-dark;
@@ -35,5 +36,11 @@
 .carousel-full-width-wrap {
 	&.is-mobile-breakpoint > .swiper-button {
 		@apply hidden;
+	}
+}
+
+.carousel-wrap.post-carousel--attachment {
+	.swiper-pagination {
+		@apply xl:flex;
 	}
 }

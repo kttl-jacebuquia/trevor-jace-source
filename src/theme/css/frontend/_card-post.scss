@@ -300,6 +300,7 @@
 	// Event
 	&.event {
 		@apply min-h-px464 h-full;
+		box-shadow: 0px 0px 16px rgba(0, 58, 72, 0.2);
 		// xl
 		@apply xl:min-h-px445;
 
@@ -316,6 +317,10 @@
 
 		.post-thumbnail-wrap {
 			@apply h-px250;
+
+			img {
+				@apply w-full;
+			}
 		}
 
 		.title-top {
@@ -357,13 +362,16 @@
 	// Attachment
 	&.attachment {
 		@apply relative;
+		@apply xl:w-auto max-w-none;
 
 		.post-thumbnail-wrap {
 			@apply relative w-full h-full;
+			@apply xl:w-auto max-w-none;
 		}
 
 		img {
 			@apply absolute top-0 left-0 w-full h-full object-cover;
+			@apply xl:w-auto max-w-none;
 		}
 	}
 
