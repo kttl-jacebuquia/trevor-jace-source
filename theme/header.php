@@ -8,22 +8,6 @@ $is_rc = Is::rc();
 ?>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
-	<?php /* TODO: Remove GTM */ ?>
-	<!-- Google Tag Manager -->
-	<script>(function (w, d, s, l, i) {
-			w[l] = w[l] || [];
-			w[l].push({
-				'gtm.start':
-						new Date().getTime(), event: 'gtm.js'
-			});
-			var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-			j.async = true;
-			j.src =
-					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-			f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-KQFZF3W');</script>
-	<!-- End Google Tag Manager -->
 	<script>(function (e) {
 			e.className = e.className.replace(/\bno-js\b/, 'js');
 		})(document.documentElement)</script>
@@ -32,8 +16,6 @@ $is_rc = Is::rc();
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<meta name="ac-ajax-url" content="<?php echo admin_url( 'admin-ajax.php?action=autocomplete-test' ); ?>"/>
-	<meta name="ac2-ajax-url" content="<?php echo admin_url( 'admin-ajax.php?action=highlight-search-test' ); ?>"/>
 	<?php wp_head(); ?>
 	<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ); ?>
 </head>
