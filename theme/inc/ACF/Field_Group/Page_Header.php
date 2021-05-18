@@ -191,7 +191,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args = array(
 			'title_top' => $val->get( static::FIELD_TITLE_TOP ),
-			'title'     => $val->get( static::FIELD_TITLE ) ?? get_the_title( $post ), // fallback to post's title
+			'title'     => ( ! empty( $val->get( static::FIELD_TITLE ) ) ) ? $val->get( static::FIELD_TITLE ) : get_the_title( $post ), // fallback to post's title
 			'desc'      => $val->get( static::FIELD_DESC ),
 			'title_cls' => array( 'page-header-title' ),
 			'desc_cls'  => array( 'page-header-desc' ),
