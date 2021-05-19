@@ -1,17 +1,9 @@
 .info-page {
 	&-wrap {
-		@apply bg-white text-indigo pt-px70 ml-px28;
-		@apply md:pt-px26 md:ml-px50;
-		@apply xl:pt-px80 xl:ml-px100;
-		width: calc(100% - #{rem-calc(56px)});
-
-		@screen md {
-			width: calc(100% - #{rem-calc(100px)});
-		}
-
-		@screen xl {
-			width: calc(100% - #{rem-calc(200px)});
-		}
+		@apply container mx-auto w-full;
+		@apply bg-white text-indigo pt-px70;
+		@apply md:pt-px26;
+		@apply xl:pt-px80;
 	}
 
 	&-content {

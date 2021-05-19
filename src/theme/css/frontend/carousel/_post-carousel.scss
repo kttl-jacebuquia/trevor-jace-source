@@ -63,11 +63,7 @@
 				@screen #{$size} {
 					@apply flex;
 
-					@if $size == 2xl {
-						left: theme('container.padding.2xl');
-					} @else {
-						left: calc( var(--carousel-left-padding) - 2.5rem );
-					}
+					left: calc( var(--carousel-left-padding) - 2.5rem );
 				}
 			}
 
@@ -99,12 +95,7 @@
 					}
 
 					@apply flex;
-
-					@if $size == 2xl {
-						left: calc( theme('container.padding.2xl') + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
-					} @else {
-						left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
-					}
+					left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
 				}
 			}
 		}
@@ -282,9 +273,6 @@
 	}
 
 	&--event {
-		@apply mb-px80;
-		@apply overflow-visible;
-
 		.carousel-header {
 			@apply mb-px30;
 		}
@@ -295,8 +283,6 @@
 
 		.carousel-full-width-wrap {
 			@apply py-0;
-			@apply xl:px-px140;
-			@apply overflow-visible;
 		}
 
 		.carousel-container {
@@ -317,10 +303,6 @@
 	}
 
 	&--attachment {
-		.carousel-full-width-wrap {
-			@apply xl:px-px240;
-		}
-
 		.carousel-container,
 		.swiper-slide {
 			@apply w-px264 h-px328;

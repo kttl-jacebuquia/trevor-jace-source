@@ -9,6 +9,5 @@
 body.is-fundraise {
   :is(.top-lists, .post-carousel) .swiper-pagination {
 		@apply flex;
-	  margin-left: calc(-2 * var(--v-padding-full)); // center pagination
   }
 }

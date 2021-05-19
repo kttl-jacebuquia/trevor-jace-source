@@ -85,7 +85,6 @@
   padding-left: var(--v-padding-full);
   width: 100vw;
   position: relative;
-  overflow: hidden;
   @apply pb-px20;
 
 	@screen md {
@@ -94,27 +93,10 @@
 		}
 	}
 
-	body.is-rc .post-carousel & {
-		@screen lg {
-			--content-max-width: calc(theme('screens.lg') - 11.25rem);
-		}
-
-		@screen lg2 {
-			--content-max-width: calc(theme('screens.lg2') - 15rem);
-		}
-
-		@screen xl {
-			--content-max-width: calc(theme('screens.xl') - 17.5rem);
-		}
-
-		@screen 2xl {
-			--content-max-width: calc(theme('screens.2xl') - 17.5rem);
-		}
-	}
-
+	body.is-rc .post-carousel &,
 	.post-carousel & {
 		@apply pl-px28;
-		@apply w-full;
+		@apply w-full ml-0;
 
 		@screen md {
 			--content-max-width: theme('screens.md');
@@ -126,12 +108,7 @@
 			@screen #{$size} {
 				--content-max-width: calc( theme( 'screens.#{$size}' ) - ( theme( 'container.padding.#{$size}' ) * 2 ) );
 
-				@if $size == 2xl {
-					@apply max-w-screen-xl;
-					padding-left: theme('container.padding.2xl');
-				} @else {
-					padding-left: calc( ( 100vw - var( --content-max-width ) ) / 2 );
-				}
+				padding-left: calc( ( 100vw - var( --content-max-width ) ) / 2 );
 			}
 		}
 	}
@@ -146,6 +123,16 @@
   @screen xl {
 	@apply hidden;
   }
+
+ 	.carousel-full-width-wrap & {
+		$breakpoints: md, lg, lg2, xl, 2xl;
+
+		@each $size in $breakpoints {
+			@screen #{$size} {
+				margin-left: calc( ( 100vw - theme( 'screens.#{$size}' ) ) / 2 );
+			}
+		}
+	}
 }
 
 .swiper-pagination-bullet {
