@@ -279,7 +279,7 @@ class Card {
 				</div>
 			<?php } ?>
 
-			<div class="card-content">
+			<div class="card-content relative">
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
 					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class, true ) ) { ?>
 						<div class="post-thumbnail-wrap">
@@ -328,6 +328,13 @@ class Card {
 						<?php } ?>
 					</div>
 				<?php } ?>
+
+				<a
+					href="<?php echo $options['link']; ?>"
+					target="_blank"
+					rel="noreferer"
+					class="absolute top-0 left-0 h-full w-full z-1">
+				</a>
 			</div>
 		</article>
 		<?php

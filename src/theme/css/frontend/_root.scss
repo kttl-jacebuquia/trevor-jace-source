@@ -30,6 +30,25 @@ body {
 		top: var(--fixed-body-top);
 	}
 
+	// Grid overlay helper
+	&::after {
+		@apply fixed top-0 left-1/2 grid grid-cols-6 gap-x-px12 transform -translate-x-1/2 h-full pointer-events-none;
+		@apply md:grid-cols-8 md:gap-x-px28;
+		@apply md:grid-cols-12;
+		content: '';
+		z-index: 1000;
+		width: calc(100% - #{rem-calc(56)});
+		max-width: #{rem-calc(1160)};
+
+		@screen md {
+			width: calc(100% - #{rem-calc(100)});
+		}
+
+		@screen xl {
+			width: calc(100% - #{rem-calc(280)});
+		}
+	}
+
   > main {
 	flex: 1 0 auto;
   }

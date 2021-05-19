@@ -32,7 +32,6 @@ class Event {
 				'rewrite'             => false,
 				'supports'            => array(
 					'title',
-					'editor',
 					'thumbnail',
 					'custom-fields',
 				),

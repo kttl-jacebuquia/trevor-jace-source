@@ -3,9 +3,11 @@
 use TrevorWP\CPT;
 
 class Event extends A_Field_Group {
-	const FIELD_DATE   = 'event_date';
-	const FIELD_TIME   = 'event_time';
-	const FIELD_LABEL  = 'event_label';
+	const FIELD_DATE  = 'event_date';
+	const FIELD_TIME  = 'event_time';
+	const FIELD_LABEL = 'event_label';
+	const FIELD_LINK  = 'event_link';
+
 	const LABEL_OPTION = array(
 		''              => '',
 		'free'          => 'Free',
@@ -18,6 +20,7 @@ class Event extends A_Field_Group {
 		$event_date  = static::gen_field_key( static::FIELD_DATE );
 		$event_time  = static::gen_field_key( static::FIELD_TIME );
 		$event_label = static::gen_field_key( static::FIELD_LABEL );
+		$event_link  = static::gen_field_key( static::FIELD_LINK );
 
 		return array(
 			'title'    => 'Event Details',
@@ -58,6 +61,13 @@ class Event extends A_Field_Group {
 					),
 					'return_format' => 'label',
 					'default_value' => false,
+				),
+				static::FIELD_LINK  => array(
+					'key'      => $event_link,
+					'name'     => static::FIELD_LINK,
+					'label'    => 'Event Link',
+					'type'     => 'url',
+					'required' => 1,
 				),
 			),
 			'location' => array(

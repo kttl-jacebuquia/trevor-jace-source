@@ -38,6 +38,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const SOURCE_CUSTOM          = 'custom';
 	const SOURCE_TOP_INDIVIDUALS = 'top_individuals';
 	const SOURCE_TOP_TEAMS       = 'top_teams';
+	const SOURCE_UPCOMING_EVENTS = 'upcoming_events';
+	const SOURCE_PAST_EVENTS     = 'past_events';
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
 
@@ -87,9 +89,13 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'label'   => 'Source',
 						'type'    => 'select',
 						'choices' => array(
-							static::SOURCE_PICK   => 'Hand Pick',
-							static::SOURCE_QUERY  => 'Query',
-							static::SOURCE_CUSTOM => 'Custom',
+							static::SOURCE_PICK            => 'Hand Pick',
+							static::SOURCE_QUERY           => 'Query',
+							static::SOURCE_CUSTOM          => 'Custom',
+							static::SOURCE_TOP_INDIVIDUALS => 'Top Individuals',
+							static::SOURCE_TOP_TEAMS       => 'Top Teams',
+							static::SOURCE_UPCOMING_EVENTS => 'Upcoming Events',
+							static::SOURCE_PAST_EVENTS     => 'Past Events',
 						),
 						'wrapper' => array(
 							'width' => '50%',
@@ -571,47 +577,77 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$display_limit = $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 		$display_limit = ! empty( $display_limit ) ? (int) $display_limit : static::DEFAULT_NUM_DISPLAY_LIMIT;
 
-		if ( static::SOURCE_QUERY === $source ) {
-			$q_args = array(
-				'tax_query'      => array( 'relation' => 'OR' ),
-				'posts_per_page' => $display_limit,
-			);
-
-			$post_type = $val->get( static::FIELD_QUERY_PTS );
-
-			if ( ! empty( $post_type ) ) {
-				$q_args['post_type'] = $post_type;
-			}
-
-			$taxs = $val->get( static::FIELD_QUERY_TAXS );
-
-			if ( ! empty( $taxs ) ) {
-				foreach ( $taxs as $tax ) {
-					$q_args['tax_query'][] = array(
-						'taxonomy' => $tax[ static::SUBFIELD_TAXS_TAX ],
-						'terms'    => wp_parse_id_list( $tax[ static::SUBFIELD_TAXS_TERMS ] ),
-					);
-				}
-			}
-
-			$q     = new \WP_Query( $q_args );
-			$posts = $q->posts;
-		} elseif ( static::SOURCE_CUSTOM === $source ) {
-			$posts = array();
-
-			foreach ( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
-				$posts[] = array(
-					'title'    => $post['custom_item_title'],
-					'desc'     => $post['custom_item_desc'],
-					'cta_txt'  => $post['custom_item_cta']['label'],
-					'cta_ur'   => $post['custom_item_cta']['link'],
-					'cta_cls'  => array( $post['custom_item_cta']['button_attr']['class'] ),
-					'tile_cls' => array( $post['item_attrs_class'] ),
+		switch ( $source ) {
+			case static::SOURCE_QUERY:
+				$q_args = array(
+					'tax_query'      => array( 'relation' => 'OR' ),
+					'posts_per_page' => $display_limit,
 				);
-			};
-		} else {
-			$posts = $val->get( static::FIELD_POST_ITEMS );
-			$posts = ! empty( $posts ) ? (array) $posts : array();
+
+				$post_type = $val->get( static::FIELD_QUERY_PTS );
+
+				if ( ! empty( $post_type ) ) {
+					$q_args['post_type'] = $post_type;
+				}
+
+				$taxs = $val->get( static::FIELD_QUERY_TAXS );
+
+				if ( ! empty( $taxs ) ) {
+					foreach ( $taxs as $tax ) {
+						$q_args['tax_query'][] = array(
+							'taxonomy' => $tax[ static::SUBFIELD_TAXS_TAX ],
+							'terms'    => wp_parse_id_list( $tax[ static::SUBFIELD_TAXS_TERMS ] ),
+						);
+					}
+				}
+
+				$q     = new \WP_Query( $q_args );
+				$posts = $q->posts;
+				break;
+
+			case static::SOURCE_CUSTOM:
+				$posts = array();
+
+				foreach ( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
+					$posts[] = array(
+						'title'    => $post['custom_item_title'],
+						'desc'     => $post['custom_item_desc'],
+						'cta_txt'  => $post['custom_item_cta']['label'],
+						'cta_url'  => $post['custom_item_cta']['link'],
+						'cta_cls'  => array( $post['custom_item_cta']['button_attr']['class'] ),
+						'tile_cls' => array( $post['item_attrs_class'] ),
+					);
+				};
+				break;
+
+			case static::SOURCE_PAST_EVENTS:
+			case static::SOURCE_UPCOMING_EVENTS:
+					$order      = static::SOURCE_PAST_EVENTS === $source ? 'DESC' : 'ASC';
+					$compare    = static::SOURCE_PAST_EVENTS === $source ? '<' : '>';
+					$date_today = date( 'Ymd' );
+
+					$args  = array(
+						'posts_per_page' => $display_limit,
+						'post_type'      => CPT\Event::POST_TYPE,
+						'orderby'        => 'meta_value',
+						'meta_key'       => Event::FIELD_DATE,
+						'order'          => $order,
+						'meta_query'     => array(
+							'relation' => 'AND',
+							array(
+								'key'     => Event::FIELD_DATE,
+								'value'   => $date_today,
+								'compare' => $compare,
+								'type'    => 'DATE',
+							),
+						),
+					);
+					$posts = get_posts( $args );
+				break;
+
+			default:
+				$posts = $val->get( static::FIELD_POST_ITEMS );
+				$posts = ! empty( $posts ) ? (array) $posts : array();
 		}
 
 		return $posts;

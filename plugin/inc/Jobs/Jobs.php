@@ -91,7 +91,7 @@ class Jobs {
 
 			if ( array_key_exists( $job_name, self::$RECURRING ) ) {
 				list( $function ) = self::$RECURRING[ $job_name ];
-				$job_type = 'Recurring';
+				$job_type         = 'Recurring';
 			} elseif ( array_key_exists( $job_name, self::$SINGLE ) ) {
 				$function = self::$SINGLE[ $job_name ];
 				$job_type = 'Single';

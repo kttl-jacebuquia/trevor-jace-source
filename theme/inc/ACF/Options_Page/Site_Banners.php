@@ -80,7 +80,7 @@ class Site_Banners extends A_Options_Page {
 					'type'       => 'repeater',
 					'layout'     => 'block',
 					'sub_fields' => array(
-						static::FIELD_CUSTOM_ENTRY_ACTIVE     => array(
+						static::FIELD_CUSTOM_ENTRY_ACTIVE  => array(
 							'key'         => $custom_entry_active,
 							'name'        => static::FIELD_CUSTOM_ENTRY_ACTIVE,
 							'label'       => 'Active',
@@ -102,7 +102,7 @@ class Site_Banners extends A_Options_Page {
 							'return_format'  => 'M j, Y',
 							'first_day'      => 0,
 						),
-						static::FIELD_CUSTOM_ENTRY_END_DATE   => array(
+						static::FIELD_CUSTOM_ENTRY_END_DATE => array(
 							'key'            => $custom_entry_end_date,
 							'name'           => static::FIELD_CUSTOM_ENTRY_END_DATE,
 							'label'          => 'End Date',
@@ -115,7 +115,7 @@ class Site_Banners extends A_Options_Page {
 							'return_format'  => 'M j, Y',
 							'first_day'      => 0,
 						),
-						static::FIELD_CUSTOM_ENTRY_TITLE      => array(
+						static::FIELD_CUSTOM_ENTRY_TITLE   => array(
 							'key'      => $custom_entry_title,
 							'name'     => static::FIELD_CUSTOM_ENTRY_TITLE,
 							'label'    => 'Title',
@@ -125,7 +125,7 @@ class Site_Banners extends A_Options_Page {
 								'width' => '50%',
 							),
 						),
-						static::FIELD_CUSTOM_ENTRY_MESSAGE    => array(
+						static::FIELD_CUSTOM_ENTRY_MESSAGE => array(
 							'key'     => $custom_entry_message,
 							'name'    => static::FIELD_CUSTOM_ENTRY_MESSAGE,
 							'label'   => 'Message',

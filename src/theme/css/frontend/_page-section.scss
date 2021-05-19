@@ -1,4 +1,6 @@
 .page-section {
+	@apply overflow-hidden;
+
     &-title {
         @apply mb-px12;
         // md

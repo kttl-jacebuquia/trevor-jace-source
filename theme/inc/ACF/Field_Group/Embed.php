@@ -4,28 +4,22 @@ namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
-class Embed extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_HEADING      = 'heading';
+class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 	const FIELD_EMBED_URL    = 'embed_url';
 	const FIELD_ASPECT_RATIO = 'aspect_ratio';
+	const FIELD_ATTR         = 'attr';
 
 	/**
 	 * @inheritDoc
 	 */
-	protected static function prepare_register_args(): array {
-		$heading      = static::gen_field_key( static::FIELD_HEADING );
+	public static function prepare_register_args(): array {
 		$embed_url    = static::gen_field_key( static::FIELD_EMBED_URL );
 		$aspect_ratio = static::gen_field_key( static::FIELD_ASPECT_RATIO );
+		$attr         = static::gen_field_key( static::FIELD_ATTR );
 
 		return array(
 			'title'  => 'Embed',
 			'fields' => array(
-				static::FIELD_HEADING      => array(
-					'key'   => $heading,
-					'name'  => static::FIELD_HEADING,
-					'label' => 'Heading',
-					'type'  => 'text',
-				),
 				static::FIELD_EMBED_URL    => array(
 					'key'   => $embed_url,
 					'name'  => static::FIELD_EMBED_URL,
@@ -48,6 +42,13 @@ class Embed extends A_Field_Group implements I_Block, I_Renderable {
 					),
 					'default_value' => '9:16',
 				),
+				static::FIELD_ATTR         => DOM_Attr::clone(
+					array(
+						'key'   => $attr,
+						'name'  => static::FIELD_ATTR,
+						'label' => 'Attributes.',
+					)
+				),
 			),
 		);
 	}
@@ -69,23 +70,11 @@ class Embed extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$heading      = static::get_val( static::FIELD_HEADING );
 		$embed        = static::get_val( static::FIELD_EMBED_URL );
 		$aspect_ratio = static::get_val( static::FIELD_ASPECT_RATIO );
 
 		# Build wrapper classnames
-		$wrapper_cls   = array( 'embed flex flex-col justify-center items-center flex-nowrap' );
-		$wrapper_cls[] = 'mt-px70 px-px28';
-		$wrapper_cls[] = 'md:mt-px80 md:px-px50';
-		$wrapper_cls[] = 'xl:mt-px120 xl:px-px240';
-		$wrapper_cls   = implode( ' ', $wrapper_cls );
-
-		# Build heading classnames
-		$heading_cls   = array( 'embed-heading text-center font-bold' );
-		$heading_cls[] = 'text-px32 leading-px40';
-		$heading_cls[] = 'md:font-extrabold';
-		$heading_cls[] = 'xl:text-px40 xl:leading-px48';
-		$heading_cls   = implode( ' ', $heading_cls );
+		$wrapper_cls = 'embed flex justify-center items-center flex-nowrap';
 
 		# Build embed classnames
 		$embed_cls   = array( 'embed-content w-full' );
@@ -106,7 +95,6 @@ class Embed extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 		<div class="<?php echo $wrapper_cls; ?>">
-			<h2 class="<?php echo $heading_cls; ?>"><?php echo $heading; ?></h2>
 			<div class="<?php echo $embed_cls; ?>" <?php echo $attrs_string; ?>>
 				<?php echo $embed; ?>
 			</div>

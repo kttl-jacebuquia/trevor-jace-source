@@ -428,6 +428,7 @@ class Tile {
 		$date  = $val->get( Field_Group\Event::FIELD_DATE );
 		$time  = $val->get( Field_Group\Event::FIELD_TIME );
 		$label = $val->get( Field_Group\Event::FIELD_LABEL );
+		$link  = $val->get( Field_Group\Event::FIELD_LINK );
 
 		$options = array_merge(
 			array_fill_keys(
@@ -447,7 +448,7 @@ class Tile {
 			$options['class'][] = 'hidden';
 		}
 
-		$options = array_merge( $options, compact( 'date', 'time', 'label' ) );
+		$options = array_merge( $options, compact( 'date', 'time', 'label', 'link' ) );
 
 		return Card::event( $post, $key, $options );
 	}
