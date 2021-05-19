@@ -77,8 +77,8 @@ class Post {
 	 */
 	public static function render_after_post( \WP_Post $post ): string {
 		$out = array(
-				self::_render_post_recirculation( $post ),
-				self::_render_page_recirculation( $post, 'after_post' ),
+			self::_render_post_recirculation( $post ),
+			self::_render_page_recirculation( $post, 'after_post' ),
 		);
 
 		return implode( "\n", array_filter( $out ) );
@@ -95,11 +95,11 @@ class Post {
 		}
 
 		$posts = Posts::get_recirculation(
-				$post,
-				2,
-				array(
-						'force_main_category' => true,
-				)
+			$post,
+			2,
+			array(
+				'force_main_category' => true,
+			)
 		);
 
 		if ( empty( $posts ) || count( $posts ) != 2 ) {
@@ -173,13 +173,13 @@ class Post {
 
 		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
 		$terms            = get_terms(
-				array(
-						'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
-						'orderby'    => 'include',
-						'include'    => $featured_cat_ids,
-						'parent'     => 0,
-						'hide_empty' => false,
-				)
+			array(
+				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+				'orderby'    => 'include',
+				'include'    => $featured_cat_ids,
+				'parent'     => 0,
+				'hide_empty' => false,
+			)
 		);
 
 		if ( empty( $terms ) ) {

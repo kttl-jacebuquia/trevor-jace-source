@@ -2,6 +2,7 @@
 <?php get_header(); ?>
 <?php
 
+use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Theme\Customizer\Resource_Center;
 use \TrevorWP\Theme\Helper\Circulation_Card;
 use TrevorWP\Theme\Helper\Thumbnail;
@@ -156,12 +157,16 @@ use TrevorWP\Theme\Helper;
 	</div>
 
 	<?php
+	$ts_args                  = Helper\Circulation_Card::DEFAULTS['trevorspace'];
+	$ts_args['button']['url'] = home_url( RC_Object::PERMALINK_TREVORSPACE );
+	$rc_args                  = Helper\Circulation_Card::DEFAULTS['rc'];
+	$rc_args['button']['url'] = home_url( RC_Object::PERMALINK_BASE );
 	echo Helper\Circulation_Card::render_circulation(
 		Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_TITLE ),
 		Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_CIRCULATION_DESC ),
 		array(
-			'trevorspace',
-			'rc',
+			'trevorspace' => $ts_args,
+			'rc'          => $rc_args,
 		),
 		array(
 			'wrapper' => 'text-indigo',

@@ -2,6 +2,7 @@
 <?php get_header(); ?>
 <?php
 
+use TrevorWP\CPT\Donate\Donate_Object;
 use \TrevorWP\Theme\Helper;
 use \TrevorWP\Theme\Customizer\PWU;
 use \TrevorWP\Theme\Helper\Circulation_Card;
@@ -69,14 +70,16 @@ use \TrevorWP\Theme\Helper\Circulation_Card;
 
 	<?php /* Recirculation */ ?>
 	<?php
+	$donation_args                  = Helper\Circulation_Card::DEFAULTS['donation'];
+	$donation_args['button']['url'] = home_url( Donate_Object::PERMALINK_DONATE );
 	echo Helper\Circulation_Card::render_circulation(
-		$title    = 'There are other ways to help.',
-		$subtitle = null,
-		$cards    = array(
-			'donation',
-			'counselor',
+		$title                      = 'There are other ways to help.',
+		$subtitle                   = null,
+		$cards                      = array(
+			'donation'  => $donation_args,
+			'counselor' => Helper\Circulation_Card::DEFAULTS['counselor'],
 		),
-		$class    = null
+		$class                      = null
 	);
 	?>
 </main>

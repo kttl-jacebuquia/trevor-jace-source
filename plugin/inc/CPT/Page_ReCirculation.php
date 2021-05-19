@@ -29,6 +29,7 @@ class Page_ReCirculation {
 				'show_in_rest'        => false,
 				'has_archive'         => false,
 				'supports'            => array(
+					'title',
 					'custom-fields',
 				),
 				'labels'              => array(

@@ -53,10 +53,17 @@ class Circulation extends Abstract_Component {
 
 	/** @inheritDoc */
 	public function render( array $ext_options = array() ): ?string {
+		$circ_cards = array();
+		$cards      = $ext_options['cards'] ?? $this->get_option( 'cards' );
+
+		foreach ( $cards as $card ) {
+			$circ_cards[ $card ] = Circulation_Card::DEFAULTS[ $card ];
+		}
+
 		return Circulation_Card::render_circulation(
 			$this->get_val( self::SETTING_TITLE ),
 			$this->get_val( self::SETTING_DESC ),
-			$ext_options['cards'] ?? $this->get_option( 'cards' ),
+			$circ_cards,
 			$ext_options['options'] ?? array()
 		);
 	}

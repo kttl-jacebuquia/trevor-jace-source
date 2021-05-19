@@ -39,7 +39,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 		?>
 		<?php
 		if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
-			if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES ) ) ) {
+			$item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_STORIES );
+			if ( ! empty( $item_ids ) ) {
 				?>
 				<div class="featured-collections">
 					<?php
@@ -83,7 +84,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			?>
 			<?php
 			if ( get_query_var( 'paged' ) < 2 ) { // Show only on the first page
-				if ( ! empty( $item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS ) ) ) {
+				$item_ids = Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_ITEMS );
+				if ( ! empty( $item_ids ) ) {
 					?>
 					<div class="favorite-items">
 						<?php
@@ -182,8 +184,8 @@ use \TrevorWP\Theme\Customizer\Shop_Product_Partners;
 			Shop_Product_Partners::get_val( Shop_Product_Partners::SETTING_HOME_CIRCULATION_TITLE ),
 			null,
 			array(
-				'fundraiser',
-				'counselor',
+				'fundraiser' => Helper\Circulation_Card::DEFAULTS['fundraiser'],
+				'counselor'  => Helper\Circulation_Card::DEFAULTS['counselor'],
 			),
 			array(
 				'container' => 'cards',

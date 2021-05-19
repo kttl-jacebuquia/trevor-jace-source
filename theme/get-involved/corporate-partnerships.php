@@ -2,6 +2,7 @@
 <?php get_header(); ?>
 <?php
 
+use TrevorWP\CPT\Donate\Donate_Object;
 use \TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 use \TrevorWP\CPT\Get_Involved\Partner;
 use \TrevorWP\Meta;
@@ -110,12 +111,14 @@ foreach ( $tiers as $tier ) {
 
 	<?php /* Recirculation */ ?>
 	<?php
+	$donation_args                  = Helper\Circulation_Card::DEFAULTS['donation'];
+	$donation_args['button']['url'] = home_url( Donate_Object::PERMALINK_DONATE );
 	echo Helper\Circulation_Card::render_circulation(
 		'There are other ways to help.',
 		null,
 		array(
-			'donation',
-			'counselor',
+			'donation'  => $donation_args,
+			'counselor' => Helper\Circulation_Card::DEFAULTS['counselor'],
 		),
 		array(
 			'container' => 'cards',

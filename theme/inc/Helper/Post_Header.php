@@ -24,58 +24,58 @@ class Post_Header {
 	);
 
 	/* Colors */
-	const CLR_WHITE = 'white';
-	const CLR_LIGHT_GRAY = 'gray-light';
-	const CLR_INDIGO = 'indigo';
-	const CLR_BLUE_GREEN = 'blue_green';
-	const CLR_TEAL_DARK = 'teal-dark';
-	const BG_COLORS = array(
-			self::CLR_LIGHT_GRAY => array(
-					'name'  => 'Gray (Light)',
-					'color' => '#F3F3F7',
-			),
-			self::CLR_INDIGO     => array(
-					'name'  => 'Indigo',
-					'color' => '#101066',
-			),
-			self::CLR_BLUE_GREEN => array(
-					'name'  => 'Blue Green',
-					'color' => '#005E67',
-			),
-			self::CLR_TEAL_DARK  => array(
-					'name'  => 'Teal (Dark)',
-					'color' => '#003A48',
-			),
+	const CLR_WHITE        = 'white';
+	const CLR_LIGHT_GRAY   = 'gray-light';
+	const CLR_INDIGO       = 'indigo';
+	const CLR_BLUE_GREEN   = 'blue_green';
+	const CLR_TEAL_DARK    = 'teal-dark';
+	const BG_COLORS        = array(
+		self::CLR_LIGHT_GRAY => array(
+			'name'  => 'Gray (Light)',
+			'color' => '#F3F3F7',
+		),
+		self::CLR_INDIGO     => array(
+			'name'  => 'Indigo',
+			'color' => '#101066',
+		),
+		self::CLR_BLUE_GREEN => array(
+			'name'  => 'Blue Green',
+			'color' => '#005E67',
+		),
+		self::CLR_TEAL_DARK  => array(
+			'name'  => 'Teal (Dark)',
+			'color' => '#003A48',
+		),
 	);
 	const BG_CLR_2_TXT_CLR = array(
 		self::CLR_LIGHT_GRAY => self::CLR_INDIGO,
 		self::CLR_INDIGO     => self::CLR_WHITE,
 		self::CLR_BLUE_GREEN => self::CLR_WHITE,
-		self::CLR_TEAL_DARK => self::CLR_WHITE,
+		self::CLR_TEAL_DARK  => self::CLR_WHITE,
 	);
 
 	/* Settings */
 	const SETTINGS = array(
-			self::TYPE_SPLIT      => array(
-					'name'     => 'Split',
-					'supports' => array( 'bg-color' ),
-			),
-			self::TYPE_FULL       => array(
-					'name'     => 'Full Bleed',
-					'validate' => array( 'image-horizontal' ),
-			),
-			self::TYPE_HORIZONTAL => array(
-					'name'     => 'Horizontal',
-					'validate' => array( 'image-horizontal' ),
-			),
-			self::TYPE_SQUARE     => array(
-					'name'     => 'Square',
-					'validate' => array( 'image-square' ),
-			),
-			self::TYPE_TEXT_ONLY  => array(
-					'name'     => 'Text Only',
-					'supports' => array( 'bg-color' ),
-			),
+		self::TYPE_SPLIT      => array(
+			'name'     => 'Split',
+			'supports' => array( 'bg-color' ),
+		),
+		self::TYPE_FULL       => array(
+			'name'     => 'Full Bleed',
+			'validate' => array( 'image-horizontal' ),
+		),
+		self::TYPE_HORIZONTAL => array(
+			'name'     => 'Horizontal',
+			'validate' => array( 'image-horizontal' ),
+		),
+		self::TYPE_SQUARE     => array(
+			'name'     => 'Square',
+			'validate' => array( 'image-square' ),
+		),
+		self::TYPE_TEXT_ONLY  => array(
+			'name'     => 'Text Only',
+			'supports' => array( 'bg-color' ),
+		),
 	);
 
 	/* Defaults */

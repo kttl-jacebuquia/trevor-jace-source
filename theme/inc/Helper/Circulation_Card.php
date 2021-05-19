@@ -1,8 +1,5 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-use TrevorWP\CPT\Donate\Donate_Object;
-use TrevorWP\CPT\RC\RC_Object;
-
 /**
  * Circulation Card Helper
  */
@@ -25,6 +22,79 @@ class Circulation_Card {
 		self::TYPE_COUNSELOR   => array( 'name' => 'Counselor' ),
 	);
 
+	const DEFAULTS = array(
+		self::TYPE_TREVORSPACE => array(
+			'type'         => self::TYPE_TREVORSPACE,
+			'title'        => 'Meet new LGBTQ <tilt>friends</tilt> in TrevorSpace.',
+			'desc'         => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
+			'button'       => array(
+				'title'  => 'Check It Out',
+				'url'    => '#',
+				'target' => '',
+			), // cta_url' => home_url( RC_Object::PERMALINK_TREVORSPACE ),
+			'bg-inner-cls' => 'bg-gradient-trevorspace',
+		),
+		self::TYPE_RC          => array(
+			'type'         => self::TYPE_RC,
+			'title'        => 'Get answers for <tilt>everything</tilt> LGBTQ',
+			'desc'         => 'Is there something you want to learn more about? Find topics you’re interested in here.',
+			'button'       => array(
+				'title'  => 'Find Answers',
+				'url'    => '#',
+				'target' => '',
+			), // 'cta_url' => home_url( RC_Object::PERMALINK_BASE ),
+			'cls'          => array( 'bg-purple' ),
+			'bg-inner-cls' => 'bg-gradient-rc',
+		),
+		self::TYPE_GET_HELP    => array(
+			'type'         => self::TYPE_GET_HELP,
+			'title'        => 'We’re here <tilt>for you.</tilt>',
+			'desc'         => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
+			'button'       => array(
+				'title'  => 'Reach a Counselor',
+				'url'    => '#',
+				'target' => '',
+			), // 'cta_url' => home_url( RC_Object::PERMALINK_GET_HELP ),
+			'bg-inner-cls' => 'bg-gradient-gethelp',
+		),
+		self::TYPE_DONATION    => array(
+			'type'         => self::TYPE_DONATION,
+			'title'        => 'Your donation can <tilt>save lives.</tilt>',
+			'desc'         => 'Every day, LGBTQ young people in crisis reach out. It is vital we make sure our volunteers can continue to offer that support.',
+			'button'       => array(
+				'title'  => 'Donate Now',
+				'url'    => '#',
+				'target' => '',
+			), // 'cta_url' => home_url( Donate_Object::PERMALINK_DONATE ),
+			'cls'          => array( 'bg-teal-dark' ),
+			'bg-inner-cls' => 'bg-gradient-darkgreen-flip',
+		),
+		self::TYPE_FUNDRAISER  => array(
+			'type'         => self::TYPE_FUNDRAISER,
+			'title'        => 'Make an <tilt>impact.</tilt> Be a fundraiser.',
+			'desc'         => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
+			'button'       => array(
+				'title'  => 'Fundraise Now',
+				'url'    => '#',
+				'target' => '',
+			),
+			'cls'          => array( 'bg-teal-dark' ),
+			'bg-inner-cls' => 'bg-gradient-darkgreen',
+		),
+		self::TYPE_COUNSELOR   => array(
+			'type'         => self::TYPE_COUNSELOR,
+			'title'        => 'Train to be a <tilt>counselor.</tilt>',
+			'desc'         => 'One volunteer can help support over 100 young people that wouldn’t be supported otherwise.',
+			'button'       => array(
+				'title'  => 'Volunteer Now',
+				'url'    => '#',
+				'target' => '',
+			),
+			'cls'          => array( 'bg-teal-dark' ),
+			'bg-inner-cls' => 'bg-gradient-darkgreen',
+		),
+	);
+
 	/**
 	 * @var array
 	 */
@@ -45,10 +115,12 @@ class Circulation_Card {
 				'type'         => 'rc',
 				'title'        => '',
 				'desc'         => '',
-				'cta_text'     => '',
-				'cta_url'      => '',
+				'button'       => array(),
 				'cls'          => array(),
 				'bg-inner-cls' => 'bg-white',
+				'inner_cls'    => array(),
+				'title_cls'    => array(),
+				'desc_cls'     => array(),
 			),
 			$args
 		);
@@ -71,14 +143,20 @@ class Circulation_Card {
 			)
 		);
 
+		$inner_cls = implode( ' ', $this->_args['inner_cls'] );
+		$title_cls = implode( ' ', $this->_args['title_cls'] );
+		$desc_cls  = implode( ' ', $this->_args['desc_cls'] );
+
 		ob_start(); ?>
 
 		<div class="<?php echo esc_attr( $class ); ?>">
 			<div class="bg-inner <?php echo $this->_args['bg-inner-cls']; ?>"></div>
-			<div class="inner">
-				<h3 class="circulation-card-title"><?php echo $this->_args['title']; ?></h3>
-				<p class="circulation-card-desc"><?php echo $this->_args['desc']; ?></p>
-				<a class="circulation-card-cta hover:opacity-90" href="<?php echo esc_attr( $this->_args['cta_url'] ); ?>"><?php echo $this->_args['cta_text']; ?></a>
+			<div class="inner <?php echo $inner_cls; ?>">
+				<h3 class="circulation-card-title <?php echo $title_cls; ?>"><?php echo $this->_args['title']; ?></h3>
+				<p class="circulation-card-desc <?php echo $desc_cls; ?>"><?php echo $this->_args['desc']; ?></p>
+				<?php if ( ! empty( $this->_args['button'] ) ) : ?>
+					<a class="circulation-card-cta hover:opacity-90" href="<?php echo esc_attr( $this->_args['button']['url'] ); ?>" target="<?php echo esc_html( $this->_args['button']['target'] ); ?>"><?php echo esc_html( $this->_args['button']['title'] ); ?></a>
+				<?php endif; ?> 
 			</div>
 		</div>
 		<?php
@@ -116,8 +194,8 @@ class Circulation_Card {
 				</div>
 				<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
 					<?php
-					foreach ( $cards as $card ) {
-						echo call_user_func( array( self::class, "render_{$card}" ) );
+					foreach ( $cards as $card => $args ) {
+						echo call_user_func( array( self::class, "render_{$card}" ), $args );
 					}
 					?>
 				</div>
@@ -132,18 +210,10 @@ class Circulation_Card {
 	 *
 	 * @return string
 	 */
-	static public function render_trevorspace(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_TREVORSPACE,
-				'title'        => 'Meet new LGBTQ <tilt>friends</tilt> in TrevorSpace.',
-				'desc'         => 'Join an international community for LGBTQ young people ages 13-24. Sign up and start a conversation now.',
-				'cta_text'     => 'Check It Out',
-				'cta_url'      => home_url( RC_Object::PERMALINK_TREVORSPACE ),
-				'bg-inner-cls' => 'bg-gradient-trevorspace',
-			)
-		) )->render();
+	static public function render_trevorspace( array $args ): string {
+		$args['bg-inner-cls'] = 'bg-gradient-trevorspace';
+
+		return ( new self( $args ) )->render();
 	}
 
 	/**
@@ -151,19 +221,11 @@ class Circulation_Card {
 	 *
 	 * @return string
 	 */
-	static public function render_rc(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_RC,
-				'title'        => 'Get answers for <tilt>everything</tilt> LGBTQ',
-				'desc'         => 'Is there something you want to learn more about? Find topics you’re interested in here.',
-				'cta_text'     => 'Find Answers',
-				'cta_url'      => home_url( RC_Object::PERMALINK_BASE ),
-				'cls'          => array( 'bg-purple' ),
-				'bg-inner-cls' => 'bg-gradient-rc',
-			)
-		) )->render();
+	static public function render_rc( array $args ): string {
+		$args['cls']          = array_merge( $args['cls'], array( 'bg-purple' ) );
+		$args['bg-inner-cls'] = 'bg-gradient-rc';
+
+		return ( new self( $args ) )->render();
 	}
 
 	/**
@@ -171,71 +233,39 @@ class Circulation_Card {
 	 *
 	 * @return string
 	 */
-	static public function render_get_help(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_GET_HELP,
-				'title'        => 'We’re here <tilt>for you.</tilt>',
-				'desc'         => 'If you ever need immediate help or support — you aren’t alone. Call, text, or chat with a trained counselor 24/7, all year round. For free.',
-				'cta_text'     => 'Reach a Counselor',
-				'cta_url'      => home_url( RC_Object::PERMALINK_GET_HELP ),
-				'bg-inner-cls' => 'bg-gradient-gethelp',
-			)
-		) )->render();
+	static public function render_get_help( array $args ): string {
+		$args['bg-inner-cls'] = 'bg-gradient-gethelp';
+
+		return ( new self( $args ) )->render();
 	}
 
 	/**
 	 * @return string
 	 */
-	static public function render_donation(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_DONATION,
-				'title'        => 'Your donation can <tilt>save lives.</tilt>',
-				'desc'         => 'Every day, LGBTQ young people in crisis reach out. It is vital we make sure our volunteers can continue to offer that support.',
-				'cta_text'     => 'Donate Now',
-				'cta_url'      => home_url( Donate_Object::PERMALINK_DONATE ),
-				'cls'          => array( 'bg-teal-dark' ),
-				'bg-inner-cls' => 'bg-gradient-darkgreen-flip',
-			)
-		) )->render();
+	static public function render_donation( array $args ): string {
+		$args['cls']          = array_merge( $args['cls'], array( 'bg-teal-dark' ) );
+		$args['bg-inner-cls'] = 'bg-gradient-darkgreen-flip';
+
+		return ( new self( $args ) )->render();
 	}
 
 	/**
 	 * @return string
 	 */
-	static public function render_fundraiser(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_FUNDRAISER,
-				'title'        => 'Make an <tilt>impact.</tilt> Be a fundraiser.',
-				'desc'         => 'Join our amazing community of online fundraisers, and start saving young LGBTQ lives today.',
-				'cta_text'     => 'Fundraise Now',
-				'cta_url'      => '#', // todo: fix url
-				'cls'          => array( 'bg-teal-dark' ),
-				'bg-inner-cls' => 'bg-gradient-darkgreen',
-			)
-		) )->render();
+	static public function render_fundraiser( array $args ): string {
+		$args['cls']          = array_merge( $args['cls'], array( 'bg-teal-dark' ) );
+		$args['bg-inner-cls'] = 'bg-gradient-darkgreen';
+
+		return ( new self( $args ) )->render();
 	}
 
 	/**
 	 * @return string
 	 */
-	static public function render_counselor(): string {
-		// TODO: Get variables from the theme customizer
-		return ( new self(
-			array(
-				'type'         => self::TYPE_COUNSELOR,
-				'title'        => 'Train to be a <tilt>counselor.</tilt>',
-				'desc'         => 'One volunteer can help support over 100 young people that wouldn’t be supported otherwise.',
-				'cta_text'     => 'Volunteer Now',
-				'cta_url'      => '#', // todo: fix url
-				'cls'          => array( 'bg-teal-dark' ),
-				'bg-inner-cls' => 'bg-gradient-darkgreen',
-			)
-		) )->render();
+	static public function render_counselor( array $args ): string {
+		$args['cls']          = array_merge( $args['cls'], array( 'bg-teal-dark' ) );
+		$args['bg-inner-cls'] = 'bg-gradient-darkgreen';
+
+		return ( new self( $args ) )->render();
 	}
 }

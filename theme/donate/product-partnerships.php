@@ -115,8 +115,8 @@ use \TrevorWP\Theme\Customizer\Product_Partnerships;
 			'There are other ways to help.',
 			null,
 			array(
-				'fundraiser',
-				'counselor',
+				'fundraiser' => Helper\Circulation_Card::DEFAULTS['fundraiser'],
+				'counselor'  => Helper\Circulation_Card::DEFAULTS['counselor'],
 			),
 			array(
 				'container' => 'cards',

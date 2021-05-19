@@ -237,8 +237,8 @@ use \TrevorWP\Theme\Customizer\Donate;
 			Donate::get_val( Donate::SETTING_HOME_CIRCULATION_TITLE ),
 			null,
 			array(
-				'fundraiser',
-				'counselor',
+				'fundraiser' => Helper\Circulation_Card::DEFAULTS['fundraiser'],
+				'counselor'  => Helper\Circulation_Card::DEFAULTS['counselor'],
 			),
 			array(
 				'container' => 'other-ways',

@@ -92,8 +92,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							static::SOURCE_PICK            => 'Hand Pick',
 							static::SOURCE_QUERY           => 'Query',
 							static::SOURCE_CUSTOM          => 'Custom',
-							static::SOURCE_TOP_INDIVIDUALS => 'Top Individuals',
-							static::SOURCE_TOP_TEAMS       => 'Top Teams',
 							static::SOURCE_UPCOMING_EVENTS => 'Upcoming Events',
 							static::SOURCE_PAST_EVENTS     => 'Past Events',
 						),
