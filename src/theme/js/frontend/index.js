@@ -42,8 +42,14 @@ features.stickyAnchor();
 features.showAllTiles($showAllTilesBtn);
 
 if ($fundraiserQuizButton.length) {
-	$fundraiserQuizButton.on("click", () => {
-		new features.FundraiserQuiz();
+	$fundraiserQuizButton.on("click", (e) => {
+		const initialVertex = e.currentTarget.dataset.fundraiseVertex;
+		const single = e.currentTarget.dataset.fundraiseSingle === 'true';
+
+		new features.FundraiserQuiz({
+			initialVertex,
+			single
+		});
 	});
 }
 

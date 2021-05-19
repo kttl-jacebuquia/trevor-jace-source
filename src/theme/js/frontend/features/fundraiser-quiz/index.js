@@ -1,7 +1,16 @@
 import $ from 'jquery';
 
 export default class FundraiserQuiz {
-	constructor () {
+
+	/**
+	 *
+	 * @param {object} options Fundraiser Options
+	 *
+	 * Available options
+	 * initialVertex - Initial vertex to show when modal appears
+	 * single        - If true, hides pagination and back buttons
+	 */
+	constructor (options) {
 		this.selector = ".fundraiser-quiz";
 		this.parentContainer = $(`${this.selector}`);
 		this.backBtn = $(`${this.selector}__back-btn`);
@@ -13,6 +22,7 @@ export default class FundraiserQuiz {
 		this.totalPageContainer = $(`${this.selector}__total-page`);
 		this.totalPages = 1;
 		this.currentPage = 0;
+		this.options = options;
 
 		this.containers = {
 			donate: `${this.selector}--step-one`,
@@ -61,14 +71,29 @@ export default class FundraiserQuiz {
 	}
 
 	init () {
+		// Default initial step
+		let $initialStepContent = $(`${this.selector}--step-one`);
+
+		this.changeContainerBackground(false);
+
+		// Override iniial step if supplied in options
+		if ( this.options.initialVertex ) {
+			const $content = $(`[data-vertex="${this.options.initialVertex}"]:not(input)`, this.selector);
+			if ( $content.length ) {
+				$initialStepContent.hide();
+				$initialStepContent = $content;
+			}
+
+			this.changeContainerBackground(this.options.initialVertex);
+		}
+
 		this.choices.attr("checked", false);
 		this.backBtn.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
-		$(`${this.selector}--step-one`).fadeIn(500, () => {
-			$(`${this.selector}--step-one`).addClass(this.classes);
+		$initialStepContent.fadeIn(500, () => {
+			$initialStepContent.addClass(this.classes);
 		});
 		this.paginationContainer.hide();
-		this.changeContainerBackground(false);
 	}
 
 	displayNextPage (btn) {

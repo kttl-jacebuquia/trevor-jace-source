@@ -417,7 +417,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function step_one( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--step-one bg-teal-dark">
+			<div class="fundraiser-quiz--step-one hidden bg-teal-dark">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
@@ -511,7 +511,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 						<ul class="fundraiser-quiz__get-your-fundraiser-links">
 							<?php foreach ( $data['card_links'] as $link ) { ?>
 								<li class="fundraiser-quiz__get-your-fundraiser-link">
-									<a class="wave-underline" target="<?php echo $link['target'] ?: ''; ?>" href="<?php echo esc_attr( $link['url'] ); ?>" 
+									<a class="wave-underline" target="<?php echo $link['target'] ?: ''; ?>" href="<?php echo esc_attr( $link['url'] ); ?>"
 																				 <?php
 																					if ( $link['type'] === 'file' ) {
 																						echo 'download';}
