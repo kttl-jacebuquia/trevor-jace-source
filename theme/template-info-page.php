@@ -10,7 +10,7 @@ Template Name: Info Page Template
 	<div class="site-content-inner">
 		<div class="info-page-wrap">
 			<h1 class="info-page-heading"><?php the_title(); ?></h1>
-			<div class="info-page-content">
+			<div class="info-page-content pb-px80">
 				<div class="info-page-body">
 					<?php the_content(); ?>
 				</div>

@@ -1,10 +1,11 @@
 .quick-links {
-	&__heading {
-		@apply font-extrabold text-px14 leading-px24;
+	@screen xl {
+		@apply -ml-px55;
+		width: calc(100% + #{rem-calc(55)});
 	}
 
-	&__list {
-
+	&__heading {
+		@apply font-extrabold text-px14 leading-px24;
 	}
 
 	&__item {

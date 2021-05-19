@@ -49,6 +49,14 @@ body {
 		}
 	}
 
+	// Grid overlay override for info page
+	&.page-template-template-info-page-php::after {
+		@screen xl {
+			width: calc(100% - #{rem-calc(200)});
+			max-width: #{rem-calc(1240)};
+		}
+	}
+
   > main {
 	flex: 1 0 auto;
   }

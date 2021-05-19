@@ -29,10 +29,6 @@ $social_media_accounts = array(
 	),
 );
 
-$page_template = get_page_template_slug();
-
-$hidden = ( 'template-info-page.php' === $page_template ) ? 'hidden' : '';
-
 ?>
 
 <footer class="w-full flex flex-col justify-center sticky-cta-anchor <?php echo $hidden; ?>">
