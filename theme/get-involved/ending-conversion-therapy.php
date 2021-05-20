@@ -16,6 +16,7 @@ use \TrevorWP\Theme\Helper\Page_Header;
 			'desc'      => ECT::get_val( ECT::SETTING_HOME_HERO_DESC ),
 			'cta_txt'   => ECT::get_val( ECT::SETTING_HOME_HERO_CTA ),
 			'cta_url'   => '#',
+			'styles'    => 'text-white',
 		)
 	)
 	?>

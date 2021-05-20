@@ -41,4 +41,10 @@ body.is-gi_ect {
 	margin: 5px -15px 0px -15px;
 	padding: 15px;
   }
+
+  form {
+	  input:focus {
+		box-shadow: none !important;
+	  }
+  }
 }
