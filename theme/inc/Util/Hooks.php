@@ -559,23 +559,52 @@ class Hooks {
 	}
 
 	/**
+	 * Check if custom site banner is active.
+	 */
+	public static function is_custom_site_banner_entry_active( array $entry, string $current_date ): bool {
+		$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
+		$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
+		$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
+
+		if ( $active && empty( $start_date ) && empty( $end_date ) ) {
+			return true;
+		}
+
+		if ( $active && ! empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( $current_date >= $start_date && $current_date <= $end_date ) {
+				return true;
+			}
+		}
+
+		if ( $active && ! empty( $start_date ) && empty( $end_date ) ) {
+			if ( $current_date >= $start_date ) {
+				return true;
+			}
+		}
+
+		if ( $active && empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( $current_date <= $end_date ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Site banners ajax handler.
 	 */
 	public static function ajax_site_banners() {
 		$banners = array();
 
 		$current_date = current_datetime();
-		$current_date = wp_date( 'M j, Y', $current_date->date, $current_date->timezone );
+		$current_date = wp_date( 'M j, Y H:i:s', $current_date->date, $current_date->timezone );
 
 		# Custom banners
 		$custom_entries = Site_Banners::get_option( Site_Banners::FIELD_CUSTOM_ENTRIES );
 		if ( ! empty( $custom_entries ) ) {
 			foreach ( $custom_entries as $entry ) {
-				$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
-				$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
-				$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
-
-				if ( $active && $current_date >= $start_date && $current_date <= $end_date ) {
+				if ( static::is_custom_site_banner_entry_active( $entry, $current_date ) ) {
 					$banners[] = array(
 						'title' => $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_TITLE ],
 						'desc'  => $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_MESSAGE ],
