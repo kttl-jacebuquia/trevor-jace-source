@@ -1,6 +1,8 @@
 $top--bar-height-mobile: rem-calc(84px);
 $top--bar-height-tablet: rem-calc(106px);
 
+$top-nav-height: #{rem-calc(136px)};
+
 $nav-base-z-index: z-index(nav-base);
 $z-index-nav-blur: $nav-base-z-index;
 $z-index-nav-white-bg: $z-index-nav-blur + 1;
@@ -13,7 +15,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 :root {
   	--site-banner-height: 0px;
 	--top-bar-height: #{$top--bar-height-mobile};
-	--top-nav-height: 8.5rem;
+	--top-nav-height: #{$top-nav-height};
 	--top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h) + var(--site-banner-height));
 	--nav-menu-width: #{percentage(327/375)};
 	--z-index-nav-base: #{$nav-base-z-index};

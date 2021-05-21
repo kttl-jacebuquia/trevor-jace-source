@@ -65,7 +65,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+		<div class="header-container header-container--text w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
@@ -115,7 +115,7 @@ class Page_Header {
 		$hero_cls = implode(
 			' ',
 			array(
-				'page-header type-split-img pt-px65',
+				'page-header type-split-img pt-px40',
 				'md:pt-px25',
 				'xl:mt-0 xl:pt-px18',
 			)
@@ -142,7 +142,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+		<div class="header-container w-full header-container--split-img <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -323,7 +323,7 @@ class Page_Header {
 		);
 
 		# Header classnames.
-		$header_cls = 'page-header type-horizontal mt-px28 xl:mt-px49 xl:px-px140';
+		$header_cls = 'page-header type-horizontal xl:mt-px49 xl:px-px140';
 
 		# Title classnames
 		$title_cls = array_merge( $options['title_cls'], array( 'heading-lg-tilted page-header-title  tracking-normal' ) );
@@ -338,7 +338,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full horizontal-header <?php echo esc_html( implode( ' ', $options['styles'] ) ); ?>">
+		<div class="header-container w-full header-container--horizontal <?php echo esc_html( implode( ' ', $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_html( $header_cls ); ?>">
 				<div class="page-header-inner">
 					<?php if ( ! empty( $options['title'] ) || ! empty( $options['desc'] ) ) { ?>

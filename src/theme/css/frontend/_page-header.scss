@@ -1,25 +1,37 @@
 .header-container {
-	--neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
-	padding-top: var(--neg-top-margin);
-	margin-top: calc(-1 * var(--neg-top-margin));
+	@screen mobile {
+		padding-top: $top-nav-height;
+		margin-top: -$top-nav-height;
+		min-height: 100vh;
+	}
 
-	&.horizontal-header + main > div:first-child {
-		@screen md {
-			padding-top: rem-calc(117px);
-		}
+	@screen mobile {
+		@apply flex items-stretch;
+	}
 
-		@screen lg2 {
-			padding-top: rem-calc(500px);
-		}
+	&--horizontal {
+		+ main > div:first-child {
+			@screen md {
+				padding-top: rem-calc(117px);
+			}
 
-		@screen xl {
-			padding-top: rem-calc(431px);
+			@screen lg2 {
+				padding-top: rem-calc(500px);
+			}
+
+			@screen xl {
+				padding-top: rem-calc(431px);
+			}
 		}
 	}
 }
 
 .page-header {
 	@apply container mx-auto;
+
+	@screen mobile {
+		@apply flex items-stretch;
+	}
 
   &-inner {
 	@apply flex flex-col;
@@ -115,7 +127,7 @@
 	}
 
 	.page-header-img-wrap {
-	  @apply relative mt-px70;
+	  @apply relative mt-auto mb-0;
 	}
 
 	.page-header-content-wrap {
@@ -215,11 +227,18 @@
   &.type-img-bg {
 	@apply relative mb-pxn5;
 	@apply w-full max-w-none;
-	// --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
-	padding-top: var(--top-nav-top-margin);
-	margin-top: calc(-1 * var(--top-nav-height));
-	// margin-left: calc(-1 * ((100vw - 100%) / 2));
 	@apply h-px737 md:h-px490 lg:h-px737 flex items-center text-white;
+
+	@screen mobile {
+		padding-top: $top-nav-height;
+		margin-top: -$top-nav-height;
+		min-height: 100vh;
+	}
+
+	@screen md {
+		padding-top: var(--top-nav-top-margin);
+		margin-top: calc(-1 * var(--top-nav-height));
+	}
 
 	.page-header-img-wrap {
 	  @apply absolute w-full h-full top-0 left-0;
@@ -570,15 +589,17 @@
 		}
 
 		&-inner {
-			@apply flex flex-col justify-start;
+			@apply flex flex-col justify-center h-full;
 		}
 
 		&-content-wrap {
-			@apply pb-px80 text-center mx-auto;
+			@apply flex flex-col justify-center;
+			@apply pb-px80 text-center mx-auto flex-grow;
 			@apply md:pb-px50;
 			@apply xl:pb-px60;
 
 			@screen md {
+				@apply block;
 				width: percentage(494/668);
 			}
 
@@ -588,7 +609,7 @@
 		}
 
 		&-image {
-			@apply w-screen;
+			@apply w-screen mb-0 mt-auto;
 			margin-left: calc( ( 100vw - 100% ) / -2 );
 
 
@@ -598,13 +619,9 @@
 				margin-bottom: rem-calc(-117px);
 			}
 
-			@screen lg2 {
-				margin-bottom: rem-calc(-403px);
-			}
-
 			@screen xl {
 				padding-top: calc(100% * #{(580/1160)});
-				margin-bottom: rem-calc(-285px);
+				margin-bottom: rem-calc(-289px);
 			}
 
 			img {
