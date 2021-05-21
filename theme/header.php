@@ -19,7 +19,7 @@ $is_rc = Is::rc();
 	<?php wp_head(); ?>
 	<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('on-top'); ?>>
 
 <?php if ( ! empty( $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type() ) ) { ?>
 	<div id="bg-wrap">
