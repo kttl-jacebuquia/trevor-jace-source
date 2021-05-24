@@ -25,6 +25,8 @@
 }
 
 .fundraiser-quiz {
+	@apply flex flex-col items-center justify-start;
+
 	&--steps {
 		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
 	}
@@ -278,5 +280,20 @@
 
 	input[type="radio"]:not(:checked) {
 		@apply bg-white bg-opacity-10 shadow-none;
+	}
+
+	// Per question overrides
+	&--gathering,
+	&--collect-donations,
+	&--who-is-fundraising {
+		@apply flex flex-col justify-center items-center;
+
+		.fundraiser-quiz__title {
+			@apply inline-block;
+		}
+
+		fieldset {
+			@apply self-start;
+		}
 	}
 }
