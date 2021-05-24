@@ -104,6 +104,8 @@ class Tile_Grid {
 					foreach ( $data as $key => $entry ) {
 						$tile_method = $options['tileMethod'];
 
+						$tile_options['attr'] = ! empty( $entry['tile_attr'] ) ? $entry['tile_attr'] : null;
+
 						if ( is_array( $entry ) ) {
 							$tile_options['cta_cls'] = ( isset( $entry['cta_cls'] ) ) ? $entry['cta_cls'] : array();
 							$tile_options['class']   = ( isset( $entry['tile_cls'] ) ) ? $entry['tile_cls'] : array();

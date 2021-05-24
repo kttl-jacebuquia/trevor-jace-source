@@ -607,13 +607,16 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				$posts = array();
 
 				foreach ( static::get_val( static::FIELD_CUSTOM_ITEMS ) as $post ) {
+					$cta_url = $post['custom_item_cta']['link'];
+
 					$posts[] = array(
-						'title'    => $post['custom_item_title'],
-						'desc'     => $post['custom_item_desc'],
-						'cta_txt'  => $post['custom_item_cta']['label'],
-						'cta_url'  => $post['custom_item_cta']['link'],
-						'cta_cls'  => array( $post['custom_item_cta']['button_attr']['class'] ),
-						'tile_cls' => array( $post['item_attrs_class'] ),
+						'title'     => $post['custom_item_title'],
+						'desc'      => $post['custom_item_desc'],
+						'cta_txt'   => $post['custom_item_cta']['label'],
+						'cta_url'   => ! empty( $post['custom_item_cta']['link'] ) ? $post['custom_item_cta']['link']['url'] : '',
+						'cta_cls'   => array( $post['custom_item_cta']['button_attr']['class'] ),
+						'tile_cls'  => array( $post['item_attrs_class'] ),
+						'tile_attr' => DOM_Attr::get_attrs_of( $post['custom_item_cta']['button_attr'] ),
 					);
 				};
 				break;

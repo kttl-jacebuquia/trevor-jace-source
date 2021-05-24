@@ -49,11 +49,16 @@ class Donation_Modal extends A_Options_Page {
 	/**
 	 * Renders the fundraiser quiz modal
 	 */
-	public static function render(): string {
+	public static function render( $options ): string {
 		$heading = static::get_option( static::FIELD_TITLE );
 		$intro   = static::get_option( static::FIELD_INTRO );
 
-		return Field_Group\Donate_Form::render( null, null, compact( 'heading', 'intro' ) );
+		$options = array_merge(
+			compact( 'heading', 'intro' ),
+			$options,
+		);
+
+		return Field_Group\Donate_Form::render( null, null, $options );
 	}
 
 }

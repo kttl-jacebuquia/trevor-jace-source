@@ -71,7 +71,8 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 				'heading'    => static::get_val( static::FIELD_HEADING ),
 				'intro'      => static::get_val( static::FIELD_INTRO ),
 			),
-			$options
+			array( 'dedication' => false ),
+			$options,
 		);
 
 		$form_image = $options['form_image'];
@@ -115,6 +116,15 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 									<input type="text" name="currency-field" class="display-amount" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
 								</div>
 							</div>
+
+							<?php if ( $options['dedication'] ) : ?>
+								<div class="dedication">
+									<input type="checkbox" id="dedication-checkbox" class="dedication-checkbox">
+									<label for="dedication-checkbox">
+										<strong>Dedicate my donation</strong> in honor or in memory of someone.
+									</label>
+								</div>
+							<?php endif; ?>
 
 							<div class="submit">
 								<input type="submit" value="Donate Now"/>

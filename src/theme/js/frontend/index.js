@@ -55,7 +55,18 @@ if ($fundraiserQuizButton.length) {
 
 if ($donationModalButton.length) {
 	const $donationModal = $('#js-donation-modal');
-	modal($donationModal, {}, $donationModalButton);
+
+	const options = {
+		onOpen({ initiator, modalContent }) {
+			const willHideDedicationField = $(initiator).data('hideDedication');
+
+			$('.dedication', modalContent)[
+				willHideDedicationField ? 'hide' : 'show'
+			]();
+		}
+	}
+
+	modal($donationModal, options, $donationModalButton);
 }
 
 

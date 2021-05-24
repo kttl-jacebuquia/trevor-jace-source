@@ -1,0 +1,32 @@
+.donation-form {
+	.dedication {
+		@apply mb-px50 flex flex-nowrap items-start;
+		@apply text-px18 leading-px26 tracking-px05;
+	}
+
+	.dedication-checkbox.dedication-checkbox {
+		@apply flex w-px30 h-px30 relative items-center justify-center;
+		@apply visible mr-px20 opacity-100 bg-teal-dark;
+		@apply appearance-none rounded-px4;
+
+		&::before {
+			content: '';
+			@apply absolute top-0 left-0 w-full h-full;
+		}
+
+		&::after {
+			@apply relative text-px30 text-white;
+			font-family: "trevor-ti";
+			content: $font-trevor-ti-checkmark;
+		}
+
+		&:not(:checked)::after {
+			@apply hidden;
+		}
+
+		&:focus {
+			@apply outline-none;
+			box-shadow: none;
+		}
+	}
+}

@@ -486,9 +486,10 @@ class Hooks {
 		// Donation Modal
 		if ( Options_Page\Donation_Modal::will_render_in( get_the_ID() ) ) {
 			echo ( new \TrevorWP\Theme\Helper\DonationModal(
-				Options_Page\Donation_Modal::render(),
+				Options_Page\Donation_Modal::render( array( 'dedication' => true ) ),
 				array(
-					'target' => '.js-fundraiser-quiz',
+					'target'     => '.js-donation-modal',
+					'dedication' => true,
 				)
 			) )->render();
 		}

@@ -160,6 +160,7 @@ module.exports = {
 				},
 			},
 			borderRadius: {
+				px4: px2rem(4),
 				px10: px2rem(10),
 				px100: px2rem(100),
 			},
