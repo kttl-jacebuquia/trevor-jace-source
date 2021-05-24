@@ -2,6 +2,8 @@
 
 namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\CPT\Donate\Prod_Partner;
+use TrevorWP\CPT\Get_Involved\Grant;
 use TrevorWP\CPT\Get_Involved\Partner;
 use \TrevorWP\Meta\Post;
 
@@ -60,7 +62,14 @@ class Post_Images extends A_Field_Group implements I_Block, I_Renderable {
 					?>
 					<div class="w-1/2 md:w-1/4 lg:w-1/4 py-2" data-aspectRatio="2:1">
 						<?php $post_type = get_post_type( $post_id ); ?>
-						<?php $post_url = ( $post_type === Partner::POST_TYPE || $post_type === Grant::POST_TYPE ) ? Post::get_partner_url( $post_id ) : get_post_permalink( $post_id ); ?>
+						<?php $post_url = get_post_permalink( $post_id ); ?>
+						<?php
+						if ( $post_type === Partner::POST_TYPE || $post_type === Grant::POST_TYPE ) {
+							$post_url = Post::get_partner_url( $post_id );
+						} elseif ( $post_type === Prod_Partner::POST_TYPE ) {
+							$post_url = Post::get_store_url( $post_id );
+						}
+						?>
 						<?php $has_url = ! empty( $post_url ); ?>
 						<a class="w-3/4 mx-auto flex items-center content-center"
 						   rel="nofollow noreferrer noopener"

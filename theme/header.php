@@ -19,9 +19,9 @@ $is_rc = Is::rc();
 	<?php wp_head(); ?>
 	<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ); ?>
 </head>
-<body <?php body_class('on-top'); ?>>
-
-<?php if ( ! empty( $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type() ) ) { ?>
+<body <?php body_class( 'on-top' ); ?>>
+<?php $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type(); ?>
+<?php if ( ! empty( $gradient_type ) ) { ?>
 	<div id="bg-wrap">
 		<div id="bg-gradient" class="gradient-type-<?php echo esc_attr( $gradient_type ); ?>"></div>
 	</div>
@@ -58,20 +58,20 @@ $is_rc = Is::rc();
 			<ul class="switcher">
 				<li>
 					<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ); ?>"
-					   class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>">Find Support</a>
+					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>">Find Support</a>
 				</li>
 				<li>
 					<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ); ?>"
-					   class="<?php echo $is_rc ? '' : 'active'; ?>">Explore Trevor</a>
+					class="<?php echo $is_rc ? '' : 'active'; ?>">Explore Trevor</a>
 				</li>
 			</ul>
 		</div>
 		<div class="cta-wrap">
 			<div class="cta-links">
 				<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>"
-				   class="btn bg-orange text-white">Reach a Counselor</a>
+				class="btn bg-orange text-white">Reach a Counselor</a>
 				<a href="<?php echo esc_attr( home_url( TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ); ?>"
-				   class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
+				class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
 				</div>
 		</div>
 		<div class="topbar-nav-wrap">
