@@ -9,6 +9,18 @@
 		@apply flex items-stretch;
 	}
 
+	&--text {
+		@screen md {
+			padding-top: $top-nav-height-tablet;
+			margin-top: -$top-nav-height-tablet;
+		}
+
+		@screen xl {
+			padding-top: $top-nav-height-desktop;
+			margin-top: -$top-nav-height-desktop;
+		}
+	}
+
 	&--horizontal {
 		+ main > div:first-child {
 			@screen md {

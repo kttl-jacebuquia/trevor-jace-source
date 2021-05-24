@@ -2,6 +2,8 @@ $top--bar-height-mobile: rem-calc(84px);
 $top--bar-height-tablet: rem-calc(106px);
 
 $top-nav-height: #{rem-calc(136px)};
+$top-nav-height-tablet: #{rem-calc(144px)};
+$top-nav-height-desktop: #{rem-calc(176px)};
 
 $nav-base-z-index: z-index(nav-base);
 $z-index-nav-blur: $nav-base-z-index;
