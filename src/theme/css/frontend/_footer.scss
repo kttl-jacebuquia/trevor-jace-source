@@ -60,7 +60,7 @@ footer {
   }
 
   .btn {
-	@apply bg-white text-teal-dark;
+	@apply bg-white text-teal-dark transition-all duration-300;
 
 	@screen md {
 	  @apply flex-auto;
@@ -68,7 +68,7 @@ footer {
 	}
 
 	@screen lg {
-	  @apply flex-grow-0;
+	  @apply flex-grow-0 hover:bg-opacity-90;
 	}
   }
 
@@ -95,7 +95,8 @@ footer {
 	  }
 
 	  a {
-		@apply text-px18 leading-px22 uppercase;
+		@apply block text-px18 leading-px22 uppercase;
+		@apply transition-opacity duration-300 hover:opacity-80;
 	  }
 
 	  i {

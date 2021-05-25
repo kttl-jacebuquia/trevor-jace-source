@@ -1,4 +1,16 @@
 .donation-form {
+	.frequency--choices,
+	.amount-choices {
+		label {
+			@apply transition-all duration-300;
+			@apply hover:text-opacity-80;
+		}
+
+		.is-selected {
+			@apply hover:bg-opacity-90;
+		}
+	}
+
 	.dedication {
 		@apply mb-px50 flex flex-nowrap items-start;
 		@apply text-px18 leading-px26 tracking-px05;
@@ -27,6 +39,14 @@
 		&:focus {
 			@apply outline-none;
 			box-shadow: none;
+		}
+	}
+
+	&__submit {
+		@apply transition-all duration-300;
+
+		&:hover {
+			--tw-bg-opacity: .9 !important;
 		}
 	}
 }

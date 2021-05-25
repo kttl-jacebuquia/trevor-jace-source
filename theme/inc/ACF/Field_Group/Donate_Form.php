@@ -127,7 +127,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 							<?php endif; ?>
 
 							<div class="submit">
-								<input type="submit" value="Donate Now"/>
+								<input type="submit" value="Donate Now" class="donation-form__submit" />
 							</div>
 						</div>
 					</form>
