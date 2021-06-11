@@ -213,6 +213,27 @@ class Hooks {
 				'all'
 			);
 		}
+
+		# Apply Frontend style only on Block Editor
+		if ( Is::block_editor() ) {
+			if ( TREVOR_ON_DEV ) {
+				wp_enqueue_script(
+					self::NAME_PREFIX . 'theme-frontend-css',
+					TREVOR_THEME_STATIC_URL . '/css/frontend.js',
+					array( StaticFiles::NAME_JS_RUNTIME ),
+					$GLOBALS['trevor_theme_static_ver'],
+					false
+				);
+			} else {
+				wp_enqueue_style(
+					self::NAME_PREFIX . 'theme-frontend',
+					TREVOR_THEME_STATIC_URL . '/css/frontend.css',
+					array(),
+					$GLOBALS['trevor_theme_static_ver'],
+					'all'
+				);
+			}
+		}
 	}
 
 	/**

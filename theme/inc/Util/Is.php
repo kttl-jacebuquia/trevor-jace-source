@@ -61,4 +61,11 @@ class Is {
 
 		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_GET_HELP ) );
 	}
+
+	/**
+	 * return bool
+	 */
+	public static function block_editor() {
+		return function_exists( 'get_current_screen' ) && get_current_screen()->is_block_editor;
+	}
 }

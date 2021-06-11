@@ -1,0 +1,41 @@
+.block-editor__container {
+	.editor-styles-wrapper {
+		padding: 0 !important;
+	}
+
+	.editor-post-title__block {
+		padding: 0 20px;
+	}
+
+	.wp-block {
+		max-width: none !important;
+	}
+
+	.acf-block-fields {
+		max-width: 900px;
+		margin: 50px auto;
+	}
+
+	.interface-interface-skeleton__sidebar {
+		position: absolute !important;
+		left: auto;
+		right: 0;
+
+		.edit-post-sidebar {
+			width: auto !important;
+		}
+	}
+
+	// For Header ACF to be always visible
+	.edit-post-layout__metaboxes {
+		@apply sticky bottom-0 z-50;
+
+		.postbox-header {
+			@apply bg-gray-light text-teal-dark hover:bg-gray hover:text-teal-dark;
+		}
+
+		.toggle-indicator {
+			@apply text-teal-dark;
+		}
+	}
+}
