@@ -126,31 +126,35 @@ class Guiding_Principles extends A_Field_Group implements I_Block, I_Renderable 
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo esc_html( $title ); ?></h3>
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-			<div>
-				<?php if ( ! empty( $principle_entries ) ) : ?>
-					<div>
-						<?php foreach ( $principle_entries as $entry ) : ?>
-							<div>
-								<?php if ( ! empty( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ) ) : ?>
-									<h2><?php echo esc_html( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ); ?></h2>
-								<?php endif; ?>
-							</div>
-						<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-				<?php if ( ! empty( $file['url'] && ! empty( $button_text ) ) ) : ?>
-					<a href="<?php echo esc_url( $file['url'] ); ?>" download><?php echo esc_html( $button_text ); ?></a>
-				<?php endif; ?>
+		<div class="guiding-principles">
+			<div class="guiding-principles__container">
 				<?php if ( ! empty( $image['url'] ) ) : ?>
-					<div>
-						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
-					</div>
+					<figure class="guiding-principles__figure" data-aspectRatio="1:1" aria-hidden="true">
+						<img class="guiding-principles__image" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
+					</figure>
 				<?php endif; ?>
+				<div class="guiding-principles__content">
+					<h3 class="guiding-principles__title"><?php echo esc_html( $title ); ?></h3>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="guiding-principles__description"><?php echo esc_html( $description ); ?></p>
+					<?php endif; ?>
+					<div class="guiding-principles__entries" role="list">
+						<?php if ( ! empty( $principle_entries ) ) : ?>
+							<?php foreach ( $principle_entries as $entry ) : ?>
+								<span class="guiding-principles__entry">
+									<?php if ( ! empty( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ) ) : ?>
+										<?php echo esc_html( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ); ?></span>
+									<?php endif; ?>
+								</span>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+					<?php if ( ! empty( $file['url'] && ! empty( $button_text ) ) ) : ?>
+						<div class="guiding-principles__cta-wrap">
+							<a class="guiding-principles__cta" href="<?php echo esc_url( $file['url'] ); ?>" download><?php echo esc_html( $button_text ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 		<?php

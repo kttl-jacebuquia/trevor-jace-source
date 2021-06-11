@@ -6,16 +6,30 @@ const px2rem = (px, root = 16) => {
 }
 
 /**
- * Generates a map of tailwind custom values,
- * with numbers divisible by the given divisor
+ * Builds object containing px 2 rem key-value for tailwind, e.g.:
+ * {
+ *   px5: px2rem(5)
+ * }
+ * @param {Array} values List of numbers
+ */
+const px2remMap = (values = []) => values.reduce((all, currentValue) => ({
+	...all,
+	[`px${currentValue}`]: px2rem(currentValue)
+}), {});
+
+/**
+ * Generates a list of divisible numbers
  * @param {Int} divisor Divisor
  * @param {Int} maxItems Total number of items to generate
+ * @param {Int} minValue Minimum value
+ * @param {Int} maxValue Maximum value
  * @returns Array
  */
-const divisibles = (divisor = 1, maxItems = 10, start = 0) => Array.from({ length: maxItems }).reduce((all, current, index) => ({
-	...all,
-	[(index + 1) * divisor]: px2rem((index + 1) * divisor),
-}), {});
+const divisibles = (divisor = 1, maxItems = 10, minValue = 0, maxValue = 500) => (
+	Array.from({ length: maxItems })
+	.map((...[, index]) => (index + 1) * divisor)
+	.filter(value => value <= maxValue && value >= minValue)
+);
 
 const DARK_TEAL = '#003A48';
 
@@ -304,6 +318,9 @@ module.exports = {
 				px706: px2rem(706),
 				px737: px2rem(737),
 				px820: px2rem(820),
+				...px2remMap([
+					292,
+				])
 			},
 			fontSize: {
 				px10: px2rem(10),
@@ -393,7 +410,7 @@ module.exports = {
 			gap: {
 				'sm': px2rem(12),
 				'md': px2rem(28),
-				...divisibles(10, 10),
+				... px2remMap(divisibles(10, 10, 0, 100))
 			},
 			spacing: {
 				full: '100%',
@@ -402,107 +419,30 @@ module.exports = {
 				pxn25: px2rem(-25),
 				pxn28: px2rem(-28),
 				pxn2: px2rem(-2),
-				px2: px2rem(2),
-				px3: px2rem(3),
-				px4: px2rem(4),
-				px5: px2rem(5),
-				px6: px2rem(6),
-				px7: px2rem(7),
-				px8: px2rem(8),
-				px9: px2rem(9),
-				px10: px2rem(10),
-				px11: px2rem(11),
-				px12: px2rem(12),
-				px14: px2rem(14),
-				px15: px2rem(15),
-				px16: px2rem(16),
-				px17: px2rem(17),
-				px18: px2rem(18),
-				px20: px2rem(20),
-				px22: px2rem(22),
-				px23: px2rem(23),
-				px24: px2rem(24),
-				px25: px2rem(25),
-				px26: px2rem(26),
-				px27: px2rem(27),
-				px28: px2rem(28),
-				px29: px2rem(29),
-				px30: px2rem(30),
-				px32: px2rem(32),
-				px34: px2rem(34),
-				px35: px2rem(35),
-				px37: px2rem(37),
-				px38: px2rem(38),
-				px40: px2rem(40),
-				px41: px2rem(41),
-				px42: px2rem(42),
-				px43: px2rem(43),
-				px44: px2rem(44),
-				px45: px2rem(45),
-				px46: px2rem(46),
-				px48: px2rem(48),
-				px49: px2rem(49),
-				px50: px2rem(50),
-				px52: px2rem(52),
-				px55: px2rem(55),
-				px56: px2rem(56),
-				px58: px2rem(58),
-				px59: px2rem(59),
-				px60: px2rem(60),
-				px62: px2rem(62),
-				px64: px2rem(64),
-				px65: px2rem(65),
-				px66: px2rem(66),
-				px68: px2rem(68),
-				px70: px2rem(70),
-				px72: px2rem(72),
-				px74: px2rem(74),
-				px75: px2rem(75),
-				px76: px2rem(76),
-				px80: px2rem(80),
-				px84: px2rem(84),
-				px86: px2rem(86),
-				px88: px2rem(88),
-				px90: px2rem(90),
-				px92: px2rem(92),
-				px94: px2rem(94),
-				px100: px2rem(100),
-				px102: px2rem(102),
-				px104: px2rem(104),
-				px105: px2rem(105),
-				px106: px2rem(106),
-				px108: px2rem(108),
-				px110: px2rem(110),
-				px117: px2rem(117),
-				px120: px2rem(120),
-				px130: px2rem(130),
-				px127: px2rem(127),
-				px135: px2rem(135),
-				px137: px2rem(137),
-				px140: px2rem(140),
-				px145: px2rem(145),
-				px146: px2rem(146),
-				px150: px2rem(150),
-				px152: px2rem(152),
-				px154: px2rem(154),
-				px160: px2rem(160),
-				px170: px2rem(170),
-				px168: px2rem(168),
-				px180: px2rem(180),
-				px187: px2rem(187),
-				px188: px2rem(188),
-				px190: px2rem(190),
-				px200: px2rem(200),
-				px209: px2rem(209),
-				px210: px2rem(210),
-				px239: px2rem(239),
-				px240: px2rem(240),
-				px260: px2rem(260),
-				px292: px2rem(292),
-				px311: px2rem(311),
-				px319: px2rem(319),
-				px355: px2rem(355),
-				px395: px2rem(395),
+				...px2remMap([
+					...divisibles(2, 100, 0, 400),
+					...divisibles(3, 100, 0, 400),
+					...divisibles(5, 100, 0, 400),
+					...divisibles(7, 100, 0, 400),
+					...divisibles(11, 100, 0, 400),
+					...divisibles(13, 100, 0, 400),
+					17,
+					23,
+					27,
+					29,
+					37,
+					41,
+					43,
+					59,
+					117,
+					127,
+					137,
+					187,
+					239,
+					311,
+					319,
+					395,
+				]),
 			},
 			typography: {
 				'teal-dark': {
