@@ -1,0 +1,36 @@
+$aspect-ratios: (
+	"1-1": 1,
+	"2-1": 1.5,
+	"4-3": .75,
+	"3-4": 4/3,
+	"16-9": 9/16,
+	"9-16": 16/9,
+);
+
+@layer utilities {
+	@each $key, $value in $aspect-ratios {
+		.aspect-ratio-#{$key} {
+			--aspect-ratio: #{$value};
+			position: relative;
+
+			& > :first-child {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+			}
+
+			& > img {
+				height: auto;
+			}
+
+			&::before {
+				content: "";
+				display: block;
+				padding-bottom: calc(100% / (var(--aspect-ratio)));
+			}
+		}
+	}
+}
+

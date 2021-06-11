@@ -694,37 +694,3 @@ class Hooks {
 		return $classes;
 	}
 }
-
-function render_pillars( $content ) {
-	$pillars = array(
-		array(
-			'heading' => 'Our Mission',
-			'content' => 'To end suicide among lesbian, gay, bisexual, transgender, queer & questioning young people.',
-		),
-		array(
-			'heading' => 'Our Vision',
-			'content' => 'A world where all LGBTQ young people see a bright future for themselves.',
-		),
-		array(
-			'heading' => 'Our goal',
-			'content' => 'To serve 1.8 million crisis contacts annually, by the end of our 25th year, while continuing to innovate on our core services.',
-		),
-	);
-
-	ob_start();
-	?>
-		<div class="pillars" role="list">
-			<div class="pillars__content">
-				<?php foreach ( $pillars as $pillar ) : ?>
-					<div class="pillars__pillar" role="listitem">
-						<h3 class="pillars__heading"><?php echo esc_html( $pillar['heading'] ); ?></h3>
-						<p class="pillars__body"><?php echo esc_html( $pillar['content'] ); ?></p>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	<?php
-
-	return $content . ob_get_clean();
-}
-add_filter( 'the_content', 'TrevorWP\Theme\Util\render_pillars', 0 );

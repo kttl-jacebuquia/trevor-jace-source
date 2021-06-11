@@ -1,45 +1,23 @@
 [data-aspectRatio="1:1"] {
-  --aspect-ratio: 1;
+	@apply aspect-ratio-1-1;
 }
 
 [data-aspectRatio="2:1"] {
-  --aspect-ratio: 1.5;
+	@apply aspect-ratio-2-1;
 }
 
 [data-aspectRatio="4:3"] {
-  --aspect-ratio: .75;
+	@apply aspect-ratio-4-3;
 }
 
 [data-aspectRatio="3:4"] {
-  --aspect-ratio: #{4/3};
+	@apply aspect-ratio-3-4;
 }
 
 [data-aspectRatio="16:9"] {
-  --aspect-ratio: #{9/16};
+  @apply aspect-ratio-16-9;
 }
 
 [data-aspectRatio="9:16"] {
-  --aspect-ratio: #{16/9};
-}
-
-[data-aspectRatio] {
-  position: relative;
-
-  & > :first-child {
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-  }
-
-  & > img {
-	height: auto;
-  }
-
-  &::before {
-	content: "";
-	display: block;
-	padding-bottom: calc(100% / (var(--aspect-ratio)));
-  }
+  @apply aspect-ratio-9-16;
 }

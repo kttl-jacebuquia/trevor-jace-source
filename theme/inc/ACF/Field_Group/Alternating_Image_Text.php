@@ -11,6 +11,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	const FIELD_ENTRY_HEADER = 'entry_header';
 	const FIELD_ENTRY_BODY   = 'entry_body';
 	const FIELD_BUTTON       = 'button';
+	const PLACEHOLDER_IMAGE  = '/wp-content/themes/trevor/static/media/generic-placeholder.png';
 
 	/**
 	 * @inheritDoc
@@ -113,35 +114,40 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$button      = static::get_val( static::FIELD_BUTTON );
 
 		ob_start();
-		// Next Step: FE
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo $headline; ?></h3>
-			<?php if ( ! empty( $description ) ) : ?>
-				<div><?php echo $description; ?></div>
-			<?php endif; ?>
-			<div>
+		<div class="alternating-image-text">
+			<div class="alternating-image-text__container">
+				<h2 class="alternating-image-text__heading"><?php echo $headline; ?></h3>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="alternating-image-text__description"><?php echo $description; ?></div>
+				<?php endif; ?>
 				<?php if ( ! empty( $entries ) ) : ?>
-					<div>
+					<div class="alternating-image-text__items" role="list">
 						<?php foreach ( $entries as $entry ) : ?>
-							<div>
-								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
-									<p><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></p>
-								<?php endif; ?>
-								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
-									<div><?php echo $entry[ static::FIELD_ENTRY_BODY ]; ?></div>
-								<?php endif; ?>
-								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
-									<div>
+							<div class="alternating-image-text__item">
+								<figure class="alternating-image-text__item-figure" aria-hidden="true">
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 										<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>" alt="<?php echo ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $headline ); ?>">
-									</div>
-								<?php endif; ?>
+									<?php else : ?>
+										<img src="<?php echo static::PLACEHOLDER_IMAGE; ?>" alt="">
+									<?php endif; ?>
+								</figure>
+								<div class="alternating-image-text__body">
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
+										<h3 class="alternating-image-text__item-title"><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h3>
+									<?php endif; ?>
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
+										<div class="alternating-image-text__item-content"><?php echo $entry[ static::FIELD_ENTRY_BODY ]; ?></div>
+									<?php endif; ?>
+								</div>
 							</div>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
 				<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
-					<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					<div class="alternating-image-text__cta-wrap">
+						<a class="alternating-image-text__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>

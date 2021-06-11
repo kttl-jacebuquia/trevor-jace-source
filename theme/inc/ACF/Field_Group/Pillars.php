@@ -69,20 +69,21 @@ class Pillars extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $pillar_entries ) ) : ?>
-				<?php foreach ( $pillar_entries as $pillar ) : ?>
-					<div>
-						<?php if ( ! empty( $pillar[ static::FIELD_PILLAR_ENTRY_HEADER ] ) ) : ?>
-							<h2><?php echo esc_html( $pillar[ static::FIELD_PILLAR_ENTRY_HEADER ] ); ?></h2>
-						<?php endif; ?>
-
-						<?php if ( ! empty( $pillar[ static::FIELD_PILLAR_ENTRY_BODY ] ) ) : ?>
-							<p><?php echo esc_html( $pillar[ static::FIELD_PILLAR_ENTRY_BODY ] ); ?></p>
-						<?php endif; ?>
-					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
+		<div class="pillars" role="list">
+			<div class="pillars__content">
+				<?php if ( ! empty( $pillar_entries ) ) : ?>
+					<?php foreach ( $pillar_entries as $pillar ) : ?>
+						<div class="pillars__pillar" role="listitem">
+							<?php if ( ! empty( $pillar[ static::FIELD_PILLAR_ENTRY_HEADER ] ) ) : ?>
+								<h3 class="pillars__heading"><?php echo esc_html( $pillar[ static::FIELD_PILLAR_ENTRY_HEADER ] ); ?></h3>
+							<?php endif; ?>
+							<?php if ( ! empty( $pillar[ static::FIELD_PILLAR_ENTRY_BODY ] ) ) : ?>
+								<p class="pillars__body"><?php echo esc_html( $pillar[ static::FIELD_PILLAR_ENTRY_BODY ] ); ?></p>
+							<?php endif; ?>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();

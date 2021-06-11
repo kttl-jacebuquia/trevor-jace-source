@@ -1,0 +1,25 @@
+@layer utilities {
+	.btn {
+		@apply inline-flex items-center justify-center px-px32;
+		@apply font-bold text-px16 leading-px22 tracking-em001;
+		@apply h-px46 rounded-px10 overflow-hidden cursor-pointer;
+
+		@screen md {
+			@apply px-px24 h-px44;
+			@apply leading-px20;
+		}
+
+		@screen xl {
+			@apply px-px40 h-px60;
+			@apply text-px20;
+		}
+
+		// Default variant
+		@apply text-white bg-teal-dark;
+
+		// White {
+		&.white {
+			@apply text-teal-dark bg-white;
+		}
+	}
+}

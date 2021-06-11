@@ -1,0 +1,149 @@
+.alternating-image-text {
+	&__container {
+		@apply tw-grid;
+		@apply container mx-auto py-px80 gap-0;
+
+		@screen xl {
+			@apply py-px120;
+		}
+	}
+
+	&__heading {
+		@apply col-span-full text-center font-bold text-px30 leading-px38 tracking-em005;
+
+		@screen md {
+			@apply text-px32 leading-px42;
+
+			br {
+				display: none;
+			}
+		}
+
+		@screen xl {
+			@apply text-px46 leading-px56 tracking-em_001 col-span-10 col-start-2;
+		}
+	}
+
+	&__description {
+		@apply col-span-full text-center text-px18 leading-px24 tracking-px05 mt-px10;
+
+		@screen md {
+			@apply mt-px20 text-px22 leading-px32;
+		}
+
+		@screen xl {
+			@apply text-px26 leading-px36 tracking-em005 mt-px16 col-span-10 col-start-2;
+		}
+	}
+
+	&__items {
+		@apply col-span-full mt-px60;
+
+		@screen md {
+			@apply mt-px80;
+		}
+
+		@screen xl {
+			@apply mt-px120;
+		}
+	}
+
+	&__item {
+		@apply tw-grid items-center;
+		@apply text-center gap-y-0;
+
+		& + & {
+			@apply mt-px70;
+
+			@screen md {
+				@apply mt-px100;
+			}
+
+			@screen xl {
+				@apply mt-px120;
+			}
+		}
+	}
+
+	&__item-figure {
+		@apply block rounded-px10 overflow-hidden aspect-ratio-1-1 col-span-6;
+
+		@screen md {
+			@apply col-span-4;
+		}
+
+		@screen xl {
+			@apply col-span-5 col-start-2;
+		}
+
+		img {
+			position: absolute;
+			object-fit: cover;
+		}
+	}
+
+	&__body {
+		@apply mt-px30 col-span-6;
+
+		@screen md {
+			@apply col-span-4 text-left mt-0;
+		}
+
+		@screen xl {
+			@apply col-span-5 col-start-8;
+		}
+	}
+
+	&__item-title {
+		@apply font-bold text-px24 leading-px28 tracking-em001;
+
+		@screen xl {
+			@apply text-px26 leading-px36 tracking-em005;
+		}
+	}
+
+	&__item-content {
+		@apply mt-px10 text-px16 leading-px24;
+
+		@screen xl {
+			@apply mt-px16 text-px18 leading-px26;
+		}
+	}
+
+	&__cta-wrap {
+		@apply col-span-full mt-px70 text-center;
+
+		@screen md {
+			@apply mt-px80;
+		}
+	}
+
+	&__cta {
+		@apply btn;
+	}
+}
+
+// Alternating style
+.alternating-image-text__item {
+	&:nth-child(even) {
+		.alternating-image-text__item-figure {
+			@screen md {
+				@apply col-start-5 order-2;
+			}
+
+			@screen xl {
+				@apply col-start-7;
+			}
+		}
+
+		.alternating-image-text__body {
+			@screen md {
+				@apply col-start-1;
+			}
+
+			@screen xl {
+				@apply col-start-2 col-span-4;
+			}
+		}
+	}
+}

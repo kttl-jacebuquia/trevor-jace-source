@@ -3,8 +3,8 @@
 	@apply text-teal-dark;
 
 	&__content {
-		@apply tw-grid gap-y-px50;
-		@apply container mx-auto;
+		@apply tw-grid;
+		@apply container mx-auto gap-y-px50;
 		@apply py-px80;
 
 		@screen md {
