@@ -383,4 +383,49 @@ class Page_Header {
 		<?php
 		return ob_get_clean();
 	}
+
+	public static function multi_image_text( array $options ): string {
+		$options = array_merge(
+			array_fill_keys(
+				array(
+					'title',
+					'desc',
+					'cta_txt',
+					'cta_url',
+					'carousel_data',
+					'swiper',
+					'styles',
+					'buttons',
+				),
+				null
+			),
+			array(),
+			$options
+		);
+		ob_start();
+		?>
+		<div class="header-container w-full header-container--horizontal">
+			<div class="page-header">
+				<div class="page-header-inner">
+					<div class="page-header-content-wrap">
+						<h1 class="heading-lg-tilted page-header-title">
+							<?php echo $options['title']; ?>
+						</h1>
+						<p class="page-header-desc"><?php echo $options['desc']; ?></p>
+					</div>
+					<?php if ( ! empty( $options['images'] ) ) : ?>
+						<div class="page-header-img-wrap">
+							<?php foreach ( $options['images'] as $image ) : ?>
+								<?php if ( ! empty( $image['image_entry_image']['url'] ) ) : ?>
+									<img src="<?php echo esc_url( $image['image_entry_image']['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['image_entry_image']['alt'] ) ) ? esc_attr( $image['image_entry_image']['alt'] ) : esc_attr( $options['title'] ); ?>">
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 }

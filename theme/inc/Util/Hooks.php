@@ -706,4 +706,4 @@ function render_pillars( $content ) {
 
 	return $content . ob_get_clean();
 }
-add_filter( 'the_content', 'TrevorWP\Theme\Util\render_pillars', 0);
+add_filter( 'the_content', 'TrevorWP\Theme\Util\render_pillars', 0 );

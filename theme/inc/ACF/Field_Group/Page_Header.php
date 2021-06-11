@@ -6,23 +6,27 @@ use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
-	const FIELD_TYPE           = 'header_type';
-	const FIELD_TITLE_TOP      = 'title_top';
-	const FIELD_TITLE_TOP_ATTR = 'title_top_attr';
-	const FIELD_CAROUSEL       = 'carousel';
-	const FIELD_IMAGE          = 'image';
-	const FIELD_BG_CLR         = 'bg_clr';
-	const FIELD_TEXT_CLR       = 'text_clr';
+	const FIELD_TYPE              = 'header_type';
+	const FIELD_TITLE_TOP         = 'title_top';
+	const FIELD_TITLE_TOP_ATTR    = 'title_top_attr';
+	const FIELD_CAROUSEL          = 'carousel';
+	const FIELD_IMAGE             = 'image';
+	const FIELD_BG_CLR            = 'bg_clr';
+	const FIELD_TEXT_CLR          = 'text_clr';
+	const FIELD_IMAGE_ENTRIES     = 'image_entries';
+	const FIELD_IMAGE_ENTRY_IMAGE = 'image_entry_image';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
-		$type           = static::gen_field_key( static::FIELD_TYPE );
-		$title_top      = static::gen_field_key( static::FIELD_TITLE_TOP );
-		$title_top_attr = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
-		$carousel       = static::gen_field_key( static::FIELD_CAROUSEL );
-		$image          = static::gen_field_key( static::FIELD_IMAGE );
-		$text_clr       = static::gen_field_key( static::FIELD_TEXT_CLR );
-		$bg_clr         = static::gen_field_key( static::FIELD_BG_CLR );
+		$type              = static::gen_field_key( static::FIELD_TYPE );
+		$title_top         = static::gen_field_key( static::FIELD_TITLE_TOP );
+		$title_top_attr    = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
+		$carousel          = static::gen_field_key( static::FIELD_CAROUSEL );
+		$image             = static::gen_field_key( static::FIELD_IMAGE );
+		$text_clr          = static::gen_field_key( static::FIELD_TEXT_CLR );
+		$bg_clr            = static::gen_field_key( static::FIELD_BG_CLR );
+		$image_entries     = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
+		$image_entry_image = static::gen_field_key( static::FIELD_IMAGE_ENTRY_IMAGE );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -35,21 +39,44 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'required'      => true,
 					'default_value' => 'text',
 					'choices'       => array(
-						'text'           => 'Text',
-						'split_img'      => 'Split Image',
-						'img_bg'         => 'Full Image',
-						'split_carousel' => 'Split Carousel',
-						'horizontal'     => 'Horizontal',
+						'text'             => 'Text',
+						'split_img'        => 'Split Image',
+						'img_bg'           => 'Full Image',
+						'split_carousel'   => 'Split Carousel',
+						'horizontal'       => 'Horizontal',
+						'multi_image_text' => 'Multi Image + Text',
 					),
 				),
 			),
-			static::_gen_tab_field( 'Title Top' ),
+			static::_gen_tab_field(
+				'Title Top',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'multi_image_text',
+							),
+						),
+					),
+				)
+			),
 			array(
 				static::FIELD_TITLE_TOP      => array(
-					'key'   => $title_top,
-					'name'  => static::FIELD_TITLE_TOP,
-					'label' => 'Title Top',
-					'type'  => 'text',
+					'key'               => $title_top,
+					'name'              => static::FIELD_TITLE_TOP,
+					'label'             => 'Title Top',
+					'type'              => 'text',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'multi_image_text',
+							),
+						),
+					),
 				),
 				static::FIELD_TITLE_TOP_ATTR => DOM_Attr::clone(
 					array(
@@ -82,7 +109,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			),
 			array(
-				static::FIELD_IMAGE    => array(
+				static::FIELD_IMAGE         => array(
 					'key'               => $image,
 					'name'              => static::FIELD_IMAGE,
 					'label'             => 'Image',
@@ -94,10 +121,34 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'operator' => '!=',
 								'value'    => 'text',
 							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'multi_image_text',
+							),
 						),
 					),
 				),
-				static::FIELD_CAROUSEL => Carousel_Data::clone(
+				static::FIELD_IMAGE_ENTRIES => array(
+					'key'        => $image_entries,
+					'name'       => static::FIELD_IMAGE_ENTRIES,
+					'label'      => 'Image Entries',
+					'type'       => 'repeater',
+					'layout'     => 'block',
+					'min'        => 6,
+					'max'        => 6,
+					'sub_fields' => array(
+						static::FIELD_IMAGE_ENTRY_IMAGE => array(
+							'key'          => $image_entry_image,
+							'name'         => static::FIELD_IMAGE_ENTRY_IMAGE,
+							'label'        => 'Image',
+							'type'         => 'image',
+							'required'     => 1,
+							'preview_size' => 'thumbnail',
+						),
+					),
+				),
+				static::FIELD_CAROUSEL      => Carousel_Data::clone(
 					array(
 						'key'               => $carousel,
 						'name'              => static::FIELD_CAROUSEL,
@@ -117,7 +168,20 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					)
 				),
 			),
-			static::_gen_tab_field( 'Styling' ),
+			static::_gen_tab_field(
+				'Styling',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'multi_image_text',
+							),
+						),
+					),
+				)
+			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
 					$text_clr,
@@ -266,6 +330,13 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				'centeredSlides' => true,
 				'slidesPerView'  => 'auto',
 			);
+		}
+
+		# Multi Image + Text
+		if ( 'multi_image_text' === $type ) {
+			$images = $val->get( static::FIELD_IMAGE_ENTRIES );
+
+			$args['images'] = $images;
 		}
 
 		return Helper\Page_Header::$type( $args );
