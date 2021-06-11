@@ -5,6 +5,18 @@ const px2rem = (px, root = 16) => {
 	return String(+remVal.toFixed(2)) + 'rem'
 }
 
+/**
+ * Generates a map of tailwind custom values,
+ * with numbers divisible by the given divisor
+ * @param {Int} divisor Divisor
+ * @param {Int} maxItems Total number of items to generate
+ * @returns Array
+ */
+const divisibles = (divisor = 1, maxItems = 10, start = 0) => Array.from({ length: maxItems }).reduce((all, current, index) => ({
+	...all,
+	[(index + 1) * divisor]: px2rem((index + 1) * divisor),
+}), {});
+
 const DARK_TEAL = '#003A48';
 
 module.exports = {
@@ -381,7 +393,7 @@ module.exports = {
 			gap: {
 				'sm': px2rem(12),
 				'md': px2rem(28),
-				'px40': px2rem(40),
+				...divisibles(10, 10),
 			},
 			spacing: {
 				full: '100%',

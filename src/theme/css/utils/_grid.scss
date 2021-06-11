@@ -1,0 +1,22 @@
+@layer utilities {
+	@variants responsive {
+		.tw-grid-mobile {
+			@apply grid-cols-6 gap-sm;
+		}
+		.tw-grid-tablet {
+			@apply grid-cols-8 gap-md;
+		}
+		.tw-grid-dektop {
+			@apply grid-cols-12;
+		}
+	}
+}
+
+@layer utilities {
+	.tw-grid {
+		@apply grid tw-grid-mobile;
+		@apply md:tw-grid-tablet;
+		@apply xl:tw-grid-dektop;
+	}
+}
+

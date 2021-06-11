@@ -1,0 +1,65 @@
+.pillars {
+	@apply bg-gray-light;
+	@apply text-teal-dark;
+
+	&__content {
+		@apply tw-grid gap-y-px50;
+		@apply container mx-auto;
+		@apply py-px80;
+
+		@screen md {
+			@apply gap-y-px60;
+			@apply py-px100;
+		}
+
+		@screen xl {
+			@apply py-px120;
+		}
+	}
+
+	&__pillar {
+		@apply text-center col-span-full;
+
+		@screen md {
+			@apply col-span-4;
+
+			// Last odd item should be centered
+			&:last-child:nth-child(odd) {
+				@apply col-start-3;
+			}
+		}
+
+		@screen xl {
+			@apply col-span-4;
+
+			&:last-child:nth-child(odd) {
+				@apply col-start-auto;
+			}
+		}
+	}
+
+	&__heading {
+		@apply font-bold;
+		@apply text-px28 leading-px34 tracking-em005;
+
+		@screen md {
+			@apply text-px28 leading-px34;
+		}
+
+		@screen xl {
+			@apply text-px32 leading-px42;
+		}
+	}
+
+	&__body {
+		@apply text-px20 leading-px26 mt-px10;
+
+		@screen md {
+			@apply mt-px20;
+		}
+
+		@screen xl {
+			@apply text-px22 leading-px32 mt-px12;
+		}
+	}
+}

@@ -53,6 +53,7 @@
 @import "./embed";
 @import "./quick-links";
 @import "./donation-form";
+@import "./pillars";
 
 // Page specific
 @import "./rc"; // Resources Center
@@ -79,5 +80,4 @@
 
 // Tailwind
 @tailwind components; /* tailwind components should come after ours to overwrite gutenberg block classes */
-@tailwind utilities;
 @tailwind screens;
