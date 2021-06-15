@@ -130,23 +130,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					),
 				),
 				static::FIELD_IMAGE_ENTRIES => array(
-					'key'        => $image_entries,
-					'name'       => static::FIELD_IMAGE_ENTRIES,
-					'label'      => 'Image Entries',
-					'type'       => 'repeater',
-					'layout'     => 'block',
-					'min'        => 6,
-					'max'        => 6,
-					'sub_fields' => array(
-						static::FIELD_IMAGE_ENTRY_IMAGE => array(
-							'key'          => $image_entry_image,
-							'name'         => static::FIELD_IMAGE_ENTRY_IMAGE,
-							'label'        => 'Image',
-							'type'         => 'image',
-							'required'     => 1,
-							'preview_size' => 'thumbnail',
-						),
-					),
+					'key'           => $image_entries,
+					'name'          => static::FIELD_IMAGE_ENTRIES,
+					'label'         => 'Image Entries',
+					'type'          => 'gallery',
+					'layout'        => 'block',
+					'return_format' => 'array',
+					'preview_size'  => 'medium',
+					'insert'        => 'append',
+					'library'       => 'all',
+					'min'           => 6,
+					'max'           => 6,
 				),
 				static::FIELD_CAROUSEL      => Carousel_Data::clone(
 					array(
@@ -170,17 +164,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			),
 			static::_gen_tab_field(
 				'Styling',
-				array(
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $type,
-								'operator' => '!=',
-								'value'    => 'multi_image_text',
-							),
-						),
-					),
-				)
 			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
@@ -189,7 +172,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					array(
 						'label'   => 'Text Color',
 						'default' => 'teal-dark',
-					)
+						'wrapper' => array(
+							'width' => '50%',
+						),
+					),
 				),
 				static::FIELD_BG_CLR   => Field\Color::gen_args(
 					$bg_clr,
@@ -197,7 +183,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					array(
 						'label'   => 'BG Color',
 						'default' => 'white',
-					)
+						'wrapper' => array(
+							'width' => '50%',
+						),
+					),
 				),
 			)
 		);

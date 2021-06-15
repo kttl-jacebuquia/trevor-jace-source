@@ -402,10 +402,23 @@ class Page_Header {
 			array(),
 			$options
 		);
+
+		list( $text_color, $bg_color ) = $options['styles'];
+
+		$container_classnames = implode(
+			' ',
+			array( 'header-container', 'w-full', 'header-container--multi-image', $text_color, $bg_color ),
+		);
+
+		$header_classnames = implode(
+			' ',
+			array( 'page-header', 'type-multi-image' ),
+		);
+
 		ob_start();
 		?>
-		<div class="header-container w-full header-container--horizontal">
-			<div class="page-header">
+		<div class="<?php echo esc_attr( $container_classnames ); ?>">
+			<div class="<?php echo esc_attr( $header_classnames ); ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
 						<h1 class="heading-lg-tilted page-header-title">
@@ -416,8 +429,8 @@ class Page_Header {
 					<?php if ( ! empty( $options['images'] ) ) : ?>
 						<div class="page-header-img-wrap">
 							<?php foreach ( $options['images'] as $image ) : ?>
-								<?php if ( ! empty( $image['image_entry_image']['url'] ) ) : ?>
-									<img src="<?php echo esc_url( $image['image_entry_image']['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['image_entry_image']['alt'] ) ) ? esc_attr( $image['image_entry_image']['alt'] ) : esc_attr( $options['title'] ); ?>">
+								<?php if ( ! empty( $image['url'] ) ) : ?>
+									<img src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
 								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
