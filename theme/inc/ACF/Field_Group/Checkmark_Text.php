@@ -91,25 +91,29 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo esc_html( $headline ); ?></h3>
-			<?php if ( ! empty( $description ) ) : ?>
-				<div><?php echo $description; ?></div>
-			<?php endif; ?>
-			<div>
+		<div class="checkmark-text">
+			<div class="checkmark-text__container">
+				<h3 class="checkmark-text__headline"><?php echo esc_html( $headline ); ?></h3>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="checkmark-text__description"><?php echo $description; ?></div>
+				<?php endif; ?>
 				<?php if ( ! empty( $checkmark_entries ) ) : ?>
-					<ul>
+					<ul class="checkmark-text__checklist">
 						<?php foreach ( $checkmark_entries as $entry ) : ?>
-							<li>
+							<li class="checkmark-text__item trevor-ti-checkmark">
 								<?php if ( ! empty( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ) ) : ?>
-									<p><?php echo esc_html( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ); ?></p>
+									<div class="checkmark-text__item-text">
+										<?php echo esc_html( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ); ?>
+									</div>
 								<?php endif; ?>
 							</li>
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
 				<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
-					<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					<div class="checkmark-text__cta-wrap">
+						<a class="checkmark-text__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>
