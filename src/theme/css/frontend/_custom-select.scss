@@ -3,7 +3,7 @@
   .label {
 	@apply relative pb-2.5;
 	&:after {
-	  @extend .trevor-ti-chevron-down::before;
+	  content: $font-trevor-ti-chevron-down;
 	  @apply text-teal-dark font-bold text-px14 mt-3 ml-2;
 	}
 

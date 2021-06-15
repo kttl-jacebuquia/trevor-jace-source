@@ -25,11 +25,19 @@ const px2remMap = (values = []) => values.reduce((all, currentValue) => ({
  * @param {Int} maxValue Maximum value
  * @returns Array
  */
-const divisibles = (divisor = 1, maxItems = 10, minValue = 0, maxValue = 500) => (
-	Array.from({ length: maxItems })
-	.map((...[, index]) => (index + 1) * divisor)
-	.filter(value => value <= maxValue && value >= minValue)
-);
+const divisibles = (divisor = 1, maxItems = 10, minValue = 0, maxValue = 500) => {
+	const result = [];
+
+	for (
+		let index = 0;
+		index < maxItems && (result.slice(-1)[0] || 0) <= maxValue;
+		index++
+	) {
+		result.push(index * divisor + minValue);
+	}
+
+	return result;
+};
 
 const DARK_TEAL = '#003A48';
 
@@ -259,25 +267,10 @@ module.exports = {
 				px422: px2rem(422),
 				px500: px2rem(500),
 			},
-			minHeight: {
-				px108: px2rem(108),
-				px128: px2rem(128),
-				px370: px2rem(370),
-				px400: px2rem(400),
-				px402: px2rem(402),
-				px445: px2rem(445),
-				px464: px2rem(464),
-				px482: px2rem(482),
-				px524: px2rem(524),
-				px546: px2rem(546),
-				px611: px2rem(611),
-				px724: px2rem(724),
-				px445: px2rem(445),
-				px450: px2rem(450),
-				px464: px2rem(464),
-				px482: px2rem(482),
-				px503: px2rem(503),
-			},
+			minHeight: px2remMap([
+				...divisibles(2, 500, 0, 800),
+				...divisibles(5, 500, 0, 800),
+			]),
 			height: {
 				px13: px2rem(13),
 				px20: px2rem(20),

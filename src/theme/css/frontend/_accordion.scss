@@ -27,7 +27,7 @@
 
 .accordion-button {
   &:after {
-	@extend .trevor-ti-minus::before;
+	content: $font-trevor-ti-minus;
 	@apply mt-3 font-bold;
 	font-size: rem-calc(15px);
   }
@@ -36,7 +36,7 @@
 
 	&::after {
 	  @apply mt-0 text-px18;
-	  @extend .trevor-ti-plus::before;
+	  content: $font-trevor-ti-plus;
 	}
   }
 

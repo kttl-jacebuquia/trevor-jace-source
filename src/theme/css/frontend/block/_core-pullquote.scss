@@ -11,12 +11,12 @@
 	}
 
 	&:before {
-	  @extend .trevor-ti-quote-open::before;
+	  content: $font-trevor-ti-quote-open;
 	  @apply top-0 left-0;
 	}
 
 	&:after {
-	  @extend .trevor-ti-quote-close::before;
+	  content: font-trevor-ti-quote-close;
 	  top: .5em;
 	  left: 1.5em;
 	}

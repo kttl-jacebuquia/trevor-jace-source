@@ -1,10 +1,10 @@
 @layer utilities {
 	@variants responsive {
 		.tw-grid-mobile {
-			@apply grid-cols-6 gap-sm;
+			@apply grid-cols-6 gap-x-sm;
 		}
 		.tw-grid-tablet {
-			@apply grid-cols-8 gap-md;
+			@apply grid-cols-8 gap-x-md;
 		}
 		.tw-grid-dektop {
 			@apply grid-cols-12;
@@ -14,7 +14,8 @@
 
 @layer utilities {
 	.tw-grid {
-		@apply grid tw-grid-mobile;
+		@apply grid gap-y-0;
+		@apply tw-grid-mobile;
 		@apply md:tw-grid-tablet;
 		@apply xl:tw-grid-dektop;
 	}

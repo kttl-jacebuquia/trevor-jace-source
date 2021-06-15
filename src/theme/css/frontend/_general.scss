@@ -13,7 +13,7 @@
 	  @apply flex flex-row items-center;
 	  &:before {
 		@apply text-px46 mr-6;
-		@extend .trevor-ti-checkmark::before;
+		content: $font-trevor-ti-checkmark;
 		line-height: 0;
 	  }
 	}

@@ -17,12 +17,12 @@
 	}
 
 	.interface-interface-skeleton__sidebar {
-		position: absolute !important;
-		left: auto;
-		right: 0;
-
 		.edit-post-sidebar {
-			width: auto !important;
+			width: 400px;
+		}
+
+		.acf-tab-group li {
+			margin-right: 0 !important;
 		}
 	}
 
