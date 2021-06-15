@@ -2,9 +2,9 @@
 
 use TrevorWP\Classy\Content;
 use TrevorWP\CPT;
+use TrevorWP\CPT\Donate\Partner_Prod;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
-use TrevorWP\Theme\Customizer\Fundraise;
 use TrevorWP\Util\Tools;
 use \TrevorWP\Theme\Customizer\Social_Media_Accounts;
 
@@ -42,6 +42,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const SOURCE_PAST_EVENTS     = 'past_events';
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
+
+	public static $rendered_posts = array();
 
 	/** @inheritDoc */
 	public static function register(): bool {
@@ -586,6 +588,10 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 				if ( ! empty( $post_type ) ) {
 					$q_args['post_type'] = $post_type;
+
+					if ( in_array( Partner_Prod::POST_TYPE, $post_type, true ) ) {
+						$q_args['post__not_in'] = static::$rendered_posts;
+					}
 				}
 
 				$taxs = $val->get( static::FIELD_QUERY_TAXS );
@@ -601,6 +607,10 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 				$q     = new \WP_Query( $q_args );
 				$posts = $q->posts;
+
+				if ( ! empty( $post_type ) && in_array( Partner_Prod::POST_TYPE, $post_type, true ) ) {
+					static::push_data_to_rendered_posts( $posts );
+				}
 				break;
 
 			case static::SOURCE_CUSTOM:
@@ -721,5 +731,13 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		}
 
 		return $field;
+	}
+
+	protected static function push_data_to_rendered_posts( $posts ) {
+		foreach ( $posts as $post ) {
+			if ( ! in_array( $post->ID, static::$rendered_posts, true ) ) {
+				array_push( static::$rendered_posts, $post->ID );
+			}
+		}
 	}
 }
