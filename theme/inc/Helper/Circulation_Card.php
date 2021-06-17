@@ -149,14 +149,14 @@ class Circulation_Card {
 
 		ob_start(); ?>
 
-		<div class="<?php echo esc_attr( $class ); ?>">
+		<div class="<?php echo esc_attr( $class ); ?>" role="listitem">
 			<div class="bg-inner <?php echo $this->_args['bg-inner-cls']; ?>"></div>
 			<div class="inner <?php echo $inner_cls; ?>">
 				<h3 class="circulation-card-title <?php echo $title_cls; ?>"><?php echo $this->_args['title']; ?></h3>
 				<p class="circulation-card-desc <?php echo $desc_cls; ?>"><?php echo $this->_args['desc']; ?></p>
 				<?php if ( ! empty( $this->_args['button'] ) ) : ?>
-					<a class="circulation-card-cta hover:opacity-90" href="<?php echo esc_attr( $this->_args['button']['url'] ); ?>" target="<?php echo esc_html( $this->_args['button']['target'] ); ?>"><?php echo esc_html( $this->_args['button']['title'] ); ?></a>
-				<?php endif; ?> 
+					<a aria-label="" class="circulation-card-cta hover:opacity-90" href="<?php echo esc_attr( $this->_args['button']['url'] ); ?>" target="<?php echo esc_html( $this->_args['button']['target'] ); ?>"><?php echo esc_html( $this->_args['button']['title'] ); ?></a>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php
@@ -192,7 +192,10 @@ class Circulation_Card {
 						</p>
 					<?php endif; ?>
 				</div>
-				<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">
+				<div
+					role="list"
+					class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240"
+				>
 					<?php
 					foreach ( $cards as $card => $args ) {
 						echo call_user_func( array( self::class, "render_{$card}" ), $args );
