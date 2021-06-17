@@ -160,9 +160,17 @@ class Page_Section extends A_Basic_Section implements I_Block {
 				break;
 		}
 
+		$blocks = acf_get_block_types();
+
+		if ( isset( $blocks['acf/trvr-page-section'] ) ) {
+			unset( $blocks['acf/trvr-page-section'] );
+		}
+
+		$blocks = array_keys($blocks);
+
 		ob_start(); ?>
 		<div <?php echo Tools::flat_attr( array_filter( array( 'class' => implode( ' ', $content_wrap_cls ) ) ) ); ?>>
-			<InnerBlocks/>
+			<InnerBlocks allowedBlocks="<?php echo esc_attr(wp_json_encode($blocks)); ?>"/>
 		</div>
 		<?php
 		static::render_block_wrapper(
