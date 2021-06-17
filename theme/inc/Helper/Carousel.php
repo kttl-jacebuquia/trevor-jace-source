@@ -346,10 +346,10 @@ class Carousel {
 						</div>
 						<div class="swiper-wrapper">
 							<?php foreach ( $data as $entry ) : ?>
-								<div class="swiper-slide h-auto px-4 pt-5 pb-14 md:p-0">
+								<div class="swiper-slide h-auto px-4 pt-5 pb-14 md:p-0" tabindex="-1" aria-hidden="true">
 									<figure class="text-center text-teal-dark flex flex-col justify-between md:w-full md:mx-auto">
 										<blockquote
-												class="font-bold text-center text-3xl mb-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
+											class="font-bold text-center text-3xl mb-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
 											<?php echo $entry['quote']; ?>
 										</blockquote>
 										<?php if ( ! empty( $entry['cite'] ) ) { ?>
@@ -364,8 +364,8 @@ class Carousel {
 						</div>
 						<div class="swiper-pagination"></div>
 
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev" tabindex="0" role="button" aria-label="click to go the previous quote"></div>
+						<div class="swiper-button-next" tabindex="0" role="button" aria-label="click to go the next quote"></div>
 					</div>
 				</div>
 			</div>
