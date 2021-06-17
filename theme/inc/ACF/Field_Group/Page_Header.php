@@ -130,17 +130,26 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					),
 				),
 				static::FIELD_IMAGE_ENTRIES => array(
-					'key'           => $image_entries,
-					'name'          => static::FIELD_IMAGE_ENTRIES,
-					'label'         => 'Image Entries',
-					'type'          => 'gallery',
-					'layout'        => 'block',
-					'return_format' => 'array',
-					'preview_size'  => 'medium',
-					'insert'        => 'append',
-					'library'       => 'all',
-					'min'           => 6,
-					'max'           => 6,
+					'key'               => $image_entries,
+					'name'              => static::FIELD_IMAGE_ENTRIES,
+					'label'             => 'Image Entries',
+					'type'              => 'gallery',
+					'layout'            => 'block',
+					'return_format'     => 'array',
+					'preview_size'      => 'medium',
+					'insert'            => 'append',
+					'library'           => 'all',
+					'min'               => 6,
+					'max'               => 6,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'multi_image_text',
+							),
+						),
+					),
 				),
 				static::FIELD_CAROUSEL      => Carousel_Data::clone(
 					array(
