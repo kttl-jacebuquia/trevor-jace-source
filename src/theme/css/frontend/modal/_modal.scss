@@ -1,11 +1,11 @@
 .modal {
   @apply transition-all;
   @apply fixed w-screen h-full top-0 left-0 flex items-center justify-center;
-  @apply opacity-0 pointer-events-none;
+  @apply opacity-0 pointer-events-none invisible;
   @include z-index(modal-base);
 
   &.is-active {
-	@apply pointer-events-auto opacity-100;
+	@apply pointer-events-auto opacity-100 visible;
   }
 
   .modal-overlay {

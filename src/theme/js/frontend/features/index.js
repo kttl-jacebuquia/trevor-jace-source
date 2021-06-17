@@ -17,3 +17,4 @@ export stickyAnchor from './sticky-anchor';
 export infoBoxesCarousel from './info-boxes-carousel';
 export showAllTiles from './tiles';
 export FundraiserQuiz from './fundraiser-quiz';
+export QuickExit from './quick-exit';

@@ -30,9 +30,9 @@ class Modal {
 		?>
 		<div class="modal <?php echo implode( ' ', $this->_options['class'] ); ?>" id="<?php echo esc_attr( $this->_selector ); ?>">
 			<div class="modal-container">
-				<div class="modal-close cursor-pointer z-50">
-					<i class="trevor-ti-close"></i>
-				</div>
+				<button class="modal-close js-modal-close cursor-pointer z-50" aria-label="click to close this modal">
+					<i class="trevor-ti-close" aria-hidden="true"></i>
+				</button>
 				<div class="modal-content-wrap">
 					<?php echo $this->_content; ?>
 				</div>

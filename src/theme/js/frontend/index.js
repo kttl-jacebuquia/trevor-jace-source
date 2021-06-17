@@ -27,6 +27,7 @@ const isPhoneField = $(".phone-number-format") ? true : false;
 const $showAllTilesBtn = $(".tile-grid-container + .view-all-container .view-all-cta");
 const $fundraiserQuizButton = $(".js-fundraiser-quiz");
 const $donationModalButton = $(".js-donation-modal");
+const $quickExitModal = $(".js-quick-exit-modal");
 
 let faqTrigger = $('.faq-list__heading');
 
@@ -67,6 +68,23 @@ if ($donationModalButton.length) {
 	}
 
 	modal($donationModal, options, $donationModalButton);
+}
+
+if ( $quickExitModal.length ) {
+	const isQuickExitModalDismissed = localStorage.getItem('quick-exit-modal-dismissed');
+
+	const options = {
+		onInit(modal) {
+			if ( !isQuickExitModalDismissed ) {
+				setTimeout(() => modal.open(), 500);
+			}
+		},
+		onClose() {
+			localStorage.setItem('quick-exit-modal-dismissed', 1);
+		}
+	}
+
+	modal($quickExitModal, options);
 }
 
 
@@ -300,3 +318,5 @@ $(() => {
 		});
 	}
 });
+
+features.QuickExit.init();

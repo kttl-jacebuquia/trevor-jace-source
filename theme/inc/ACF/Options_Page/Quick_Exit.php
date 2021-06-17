@@ -45,4 +45,31 @@ class Quick_Exit extends A_Options_Page {
 			),
 		);
 	}
+
+	/**
+	 * Renders the quick exit modal contents.
+	 */
+	public static function render(): string {
+		$headline                  = static::get_option( static::FIELD_HEADLINE );
+		$description_desktop       = static::get_option( static::FIELD_DESCRIPTION_DESKTOP );
+		$description_tablet_mobile = static::get_option( static::FIELD_DESCRIPTION_TABLET_MOBILE );
+		$link_text                 = static::get_option( static::FIELD_LINK_TEXT );
+
+		ob_start();
+		?>
+			<div class="quick-exit-modal__content">
+				<h2 class="quick-exit-modal__heading"><?php echo esc_html( $headline ); ?></h2>
+				<p class="quick-exit-modal__description quick-exit-modal__description--mobile">
+					<?php echo esc_html( $description_tablet_mobile ); ?>
+				</p>
+				<p class="quick-exit-modal__description quick-exit-modal__description--desktop">
+					<?php echo esc_html( $description_desktop ); ?>
+				</p>
+				<button class="quick-exit-modal__cta js-modal-close"><?php echo esc_html( $link_text ); ?></button>
+			</div>
+		<?php
+		return ob_get_clean();
+
+
+	}
 }

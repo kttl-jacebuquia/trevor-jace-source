@@ -1,11 +1,15 @@
 import $ from 'jquery';
+import * as focusTrap from 'focus-trap';
 
 const $window = $(window);
 const $document = $(document);
 
+const FOCUS_TRAP_KEY = Symbol();
+
 /**
  * OPTIONS
  *
+ * onInit - Callback when modal initializes
  * onOpen - Callback when modal opens
  * onClose - Callback when modal closes
  */
@@ -13,13 +17,36 @@ class Modal {
 	static bodyActiveClass = 'modal-active';
 	static modalActiveClass = 'is-active';
 	static overlayClass = 'modal-overlay';
-	static closeClass = 'modal-close';
+	static closeSelector = '.js-modal-close,.modal-close';
+	static renderedModalContents = [];
 
-	constructor($content, options) {
+	constructor($content, options = {}) {
 		this.$content = $content;
 		this.options = Object.assign({}, options);
 		this.$overlay = $('<div>').addClass('modal-overlay').prependTo(this.$content);
-		this.$content.find(`.${this.constructor.closeClass}`).on('click', this.close);
+		this.$content.find(this.constructor.closeSelector).on('click', this.close.bind(this));
+
+		// Create focus trap
+		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content[0], {
+			initialFocus: 'button.modal-close',
+			onPostDeactivate: () => {
+				// If focus remains inside the modal, remove focus
+				if ( this.$content[0].contains(document.activeElement) ) {
+					setTimeout(() => document.activeElement.blur(), 500);
+				}
+			}
+		});
+
+		this.$content.on('transitionend', this.onTransitionEnd.bind(this));
+
+		this.constructor.renderedModalContents.push($content[0]);
+
+		// Ensure that this modal is an initial child of the body
+		document.body.appendChild(this.$content[0]);
+
+		if ( typeof this.options.onInit === 'function' ) {
+			this.options.onInit(this);
+		}
 	}
 
 	open = (e) => {
@@ -49,14 +76,36 @@ class Modal {
 		document.body.classList.remove(this.constructor.bodyActiveClass);
 
 		this.toggleBodyFix(false);
+		this[FOCUS_TRAP_KEY].deactivate();
+		this.toggleBackgroundElements(true);
 
 		$('#blur3px').parent().remove();
 
 		if ( typeof this.options.onClose === 'function' ) {
 			this.options.onClose({
-				initiator: e.currentTarget,
+				initiator: e ? e.currentTarget : null,
 				modalContent: this.$content[0],
 			});
+		}
+	}
+
+	onAfterOpen() {
+		this.toggleBackgroundElements(false);
+		this[FOCUS_TRAP_KEY].activate();
+	}
+
+	onAfterClose() {
+		// Contents here
+	}
+
+	onTransitionEnd(e) {
+		if ( e.target === e.currentTarget ) {
+			if ( this.isActive() ) {
+				this.onAfterOpen();
+			}
+			else {
+				this.onAfterClose();
+			}
 		}
 	}
 
@@ -81,7 +130,7 @@ class Modal {
 	destroy = () => {
 		this.close();
 		this.$overlay.remove();
-		this.$content.find(`.${this.constructor.closeClass}`).off('click', this.close);
+		this.$content.find(this.constructor.closeSelector).off('click', this.close);
 	}
 
 	toggleBodyFix(willFix) {
@@ -102,13 +151,44 @@ class Modal {
 			$root.css('scroll-behavior', '');
 		}
 	}
+
+	// Disables VO access to the elements behind the modal (background elements)
+	toggleBackgroundElements(willEnable = true) {
+		const backgroundElementsSelector = [
+			':not(.modal)',
+			':not(noscript)',
+			':not(style)',
+			':not(script)',
+			':not([aria-hidden="true"])',
+		].join(',');
+
+		if ( willEnable ) {
+			if ( this.$backgroundElements ) {
+				this.$backgroundElements.removeAttr('aria-hidden');
+			}
+		}
+		else {
+			this.$backgroundElements = (
+				$(document.body.children)
+				.filter((index, element) => (
+					$(element).is(backgroundElementsSelector)
+					&& element !== this.$content[0]
+				))
+				.attr('aria-hidden', true)
+			);
+		}
+	}
 }
 
 
 export default function modal($content, options, $targets) {
-	const controller = new Modal($content, options);
+	const controller = Modal.renderedModalContents.includes($content[0])
+		? Modal.renderedModalContents.find(content => content === $content[0])
+		: new Modal($content, options);
 
-	$targets.on('click', controller.open);
+	if ( $targets && $targets.length ) {
+		$targets.on('click', controller.open);
+	}
 
 	return () => $targets.off('click', controller.open);
 }

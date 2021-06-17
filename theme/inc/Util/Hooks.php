@@ -514,6 +514,16 @@ class Hooks {
 				)
 			) )->render();
 		}
+
+		// Quick Exit Modal
+		echo ( new \TrevorWP\Theme\Helper\Modal(
+			Options_Page\Quick_Exit::render(),
+			array(
+				'target' => '.js-quick-exit-modal',
+				'id'     => 'js-quick-exit-modal',
+				'class'  => array( 'quick-exit-modal', 'js-quick-exit-modal' ),
+			)
+		) )->render();
 	}
 
 	/**
