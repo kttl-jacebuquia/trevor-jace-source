@@ -55,10 +55,12 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 					),
 				),
 				static::FIELD_FOOTER      => array(
-					'key'   => $footer,
-					'name'  => static::FIELD_FOOTER,
-					'label' => 'Footer',
-					'type'  => 'textarea',
+					'key'          => $footer,
+					'name'         => static::FIELD_FOOTER,
+					'label'        => 'Footer',
+					'type'         => 'wysiwyg',
+					'toolbar'      => 'basic',
+					'media_upload' => 0,
 				),
 			),
 		);
