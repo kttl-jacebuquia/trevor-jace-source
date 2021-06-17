@@ -26,22 +26,23 @@
 
 
 .accordion-button {
-  &:after {
+  &:before {
+	font-family: "trevor-ti";
 	content: $font-trevor-ti-minus;
-	@apply mt-3 font-bold;
+	@apply pt-3 font-bold;
 	font-size: rem-calc(15px);
   }
 
   .js-accordion:not(.show) & {
 
-	&::after {
-	  @apply mt-0 text-px18;
+	&::before {
+	  @apply pt-0 text-px18;
 	  content: $font-trevor-ti-plus;
 	}
   }
 
   @screen md {
-	&:after {
+	&:before {
 	  display: none !important;
 	}
   }

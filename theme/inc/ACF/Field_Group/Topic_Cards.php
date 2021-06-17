@@ -92,31 +92,56 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo esc_html( $title ); ?></h3>
-			
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+		<div class="topic-cards">
+			<div class="topic-cards__container">
+				<h2 class="topic-cards__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php if ( ! empty( $description ) ) : ?>
+					<p class="topic-cards__description"><?php echo esc_html( $description ); ?></p>
+				<?php endif; ?>
 
-			<div>
-				<?php if ( ! empty( $topic_entries ) ) : ?>
+				<div class="topic-cards__accordion">
 					<?php foreach ( $topic_entries as $topic ) : ?>
-						<div>
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
-								<h2><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h2>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
-								<p><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ) ) : ?>
-								<a href="<?php echo esc_url( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ); ?></a>
-							<?php endif; ?>
+						<div class="topic-cards__accordion-item js-accordion">
+							<div class="topic-cards__accordion-header">
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
+									<h3 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h3>
+								<?php endif; ?>
+								<button
+									class="topic-cards__accordion-toggle accordion-button"
+									aria-label="click to expand <?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?>">
+								</button>
+							</div>
+							<div class="topic-cards__accordion-content accordion-collapse">
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
+									<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
+								<?php endif; ?>
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ) ) : ?>
+									<a class="topic-cards__cta" href="<?php echo esc_url( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ); ?></a>
+								<?php endif; ?>
+							</div>
 						</div>
 					<?php endforeach; ?>
-				<?php endif; ?>
+				</div>
+
+				<div class="topic-cards__grid">
+					<?php if ( ! empty( $topic_entries ) ) : ?>
+						<?php foreach ( $topic_entries as $topic ) : ?>
+							<div class="topic-cards__item">
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
+									<h2 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h2>
+								<?php endif; ?>
+
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
+									<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
+								<?php endif; ?>
+
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ) ) : ?>
+									<a class="topic-cards__cta" href="<?php echo esc_url( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ); ?></a>
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 		<?php

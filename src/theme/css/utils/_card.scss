@@ -1,0 +1,65 @@
+/*
+	Basic Card Style
+	- No Image
+	- Rounded edge and card padding only
+	- Heading & Description - Font weight and tracking only
+	- CTA - Font weight, margins, and wavy underline
+
+	USAGE
+
+	.card-element {
+		@apply card-sm md:card-md xl:card-xl;
+
+		&__heading {
+			@apply card-heading;
+		}
+
+		&__description {
+			@apply card-description;
+		}
+
+		&__cta{
+			@apply card-cta;
+		}
+	}
+*/
+
+@layer utilities {
+	@variants responsive {
+		.card-sm {
+			@apply rounded-px10 p-px28 col-span-6;
+			box-shadow: 0px 0px 16px rgba(0, 58, 72, 0.2);
+		}
+
+		.card-md {
+			@apply rounded-px10 p-px28 col-span-4;
+			box-shadow: 0px 6px 12px rgba(0, 58, 72, 0.1);
+		}
+
+		.card-lg {
+			@apply rounded-px10 p-px28 col-span-5;
+			box-shadow: 0px 6px 12px rgba(0, 58, 72, 0.3);
+		}
+
+		.card-xl {
+			@apply rounded-px10 px-px28 py-px38 col-span-4;
+			box-shadow: 0px 0px 16px rgba(0, 58, 72, 0.2);
+		}
+	}
+
+	.card-heading {
+		@apply font-bold tracking-em001;
+	}
+
+	.card-description {
+		@apply font-normal;
+	}
+
+	.card-cta {
+		@apply inline-flex font-bold mb-px2;
+		@apply pb-px4 border-b-px2 border-solid border-current;
+		@include wave-underline;
+	}
+
+
+}

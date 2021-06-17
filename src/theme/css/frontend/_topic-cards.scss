@@ -1,0 +1,135 @@
+.topic-cards {
+	@apply my-px80;
+
+	@screen md {
+		@apply my-px100;
+	}
+
+	@screen xl {
+		@apply mt-px100 mb-px120;
+	}
+
+	&__container {
+		@apply container mx-auto;
+	}
+
+	&__heading {
+		@apply font-bold text-px30 leading-px38 tracking-em005 text-center;
+
+		@screen md {
+			@apply text-px30 leading-px38;
+		}
+
+		@screen xl {
+			@apply text-px46 leading-px56 tracking-em_001;
+		}
+	}
+
+	&__description {
+		@apply text-px20 leading-px28 tracking-px05 mt-px8 text-center;
+
+		@screen md {
+			@apply tracking-px_05 mt-px14;
+		}
+
+		@screen xl {
+			@apply mt-px20 text-px24 leading-px34 tracking-px05;
+		}
+	}
+
+	&__accordion {
+		@apply mt-px38 -ml-px28 -mr-px28;
+		@apply border-blue_green border-solid border-t-px1 border-b-px1;
+
+		@screen md {
+			@apply hidden;
+		}
+	}
+
+	&__accordion-item {
+		&:not(:last-child) {
+			border-bottom: 1px solid rgba(0, 94, 103, 0.2);
+		}
+	}
+
+	&__accordion-header {
+		@apply flex items-center justify-between px-px28 h-px86;
+	}
+
+	&__accordion-toggle {
+		@apply flex items-center justify-center w-px45 h-px45 -mr-px20;
+
+		&::before {
+			@apply flex items-center justify-center m-auto;
+			margin-top: auto !important;
+		}
+	}
+
+	&__accordion-content {
+		@apply hidden;
+		@apply px-px28 bg-gray-light pt-px24 pb-px38;
+	}
+
+	&__grid {
+		@apply tw-grid;
+
+		@screen mobile {
+			@apply hidden;
+		}
+
+		@screen md {
+			@apply mt-px50 gap-y-px30;
+			grid-auto-rows: 1fr;
+		}
+
+		@screen xl {
+			@apply mt-px76 gap-y-px28;
+		}
+	}
+
+	&__item {
+		@apply card-sm md:card-md lg:card-lg xl:card-xl;
+		@apply md:shadow-none lg:shadow-none xl:shadow-none;
+		border: 1px solid rgba(0, 94, 103, 0.5);
+
+		@screen md {
+			@apply min-h-px320;
+		}
+
+		@screen xl {
+			@apply min-h-px402;
+		}
+	}
+
+	&__item-title {
+		@apply card-heading;
+		@apply text-px20 leading-px26;
+
+		@screen md {
+			@apply text-px30 leading-px40;
+		}
+	}
+
+	&__item-description {
+		@apply card-description;
+		@apply text-px18 leading-px28;
+
+		@screen md {
+			@apply mt-px12 text-px18 leading-px26 tracking-px05;
+		}
+	}
+
+	&__cta {
+		@apply card-cta;
+		@apply text-px18 leading-px24 tracking-em001 mt-px24;
+
+		@screen md {
+			@apply mt-px18;
+		}
+	}
+
+	// Expanded accordion
+	&__accordion-item.show &__accordion-content {
+		@apply block;
+	}
+}

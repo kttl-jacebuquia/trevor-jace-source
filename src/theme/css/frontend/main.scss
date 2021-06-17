@@ -7,6 +7,7 @@
 
 // Vendors, Utils & Base Rules
 @import "./what-input";
+@import "./misc/index";
 @import "../utils/index";
 @import "./vendor/index";
 @import "./general";
@@ -16,7 +17,6 @@
 // Our Components
 @import "./container";
 @import "./grid";
-@import "./misc/index";
 @import "./modal/index";
 @import "./headings";
 @import "./form";
@@ -58,6 +58,7 @@
 @import "./pillars";
 @import "./checkmark-text";
 @import "./guiding-principles";
+@import "./topic-cards";
 
 // Page specific
 @import "./rc"; // Resources Center
