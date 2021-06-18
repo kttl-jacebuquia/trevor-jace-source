@@ -141,7 +141,7 @@ class Guiding_Principles extends A_Field_Group implements I_Block, I_Renderable 
 					<div class="guiding-principles__entries" role="list">
 						<?php if ( ! empty( $principle_entries ) ) : ?>
 							<?php foreach ( $principle_entries as $entry ) : ?>
-								<span class="guiding-principles__entry">
+								<span class="guiding-principles__entry" role="listitem">
 									<?php if ( ! empty( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ) ) : ?>
 										<?php echo esc_html( $entry[ static::FIELD_PRINCIPLE_ENTRY_TITLE ] ); ?></span>
 									<?php endif; ?>

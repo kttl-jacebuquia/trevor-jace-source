@@ -124,8 +124,8 @@
 		Use btn utility once merged
 	*/
 	&__cta {
-		@apply font-bold inline-flex items-center px-px32 bg-teal-dark text-white h-px46 rounded-px10 cursor-pointer;
-		@apply text-px16 leading-px22 tracking-em001;
+		@apply font-bold inline-flex items-center px-px32 bg-teal-dark text-white h-auto min-h-px46 rounded-px10 cursor-pointer;
+		@apply text-px16 leading-px22 tracking-em001 py-px10;
 
 		@screen md {
 			@apply leading-px20 h-px44 px-px24;
