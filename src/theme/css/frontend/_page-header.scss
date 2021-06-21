@@ -6,49 +6,49 @@ $multi-image-images-config: (
 	1: (
 		rotate: -9.4,
 		z-index: 1,
-		sm: ( 162, 162, 620, -27 ),
-		md: ( 183, 183, 579, -45 ),
-		xl: ( 377, 375, 904, -81 ),
+		sm: ( 162, 162, 74, -27 ), // 620
+		md: ( 183, 183, 477, 15 ),
+		xl: ( 377, 375, 838, -60 ),
 	),
 	// Image 2
 	2: (
-		rotate: -4.53,
-		z-index: 3,
-		sm: ( 165, 220, 906, -7 ),
-		md: ( 208, 277, 679, 110 ),
-		xl: ( 428, 568,1110, 237 ),
+		rotate: 7.15,
+		z-index: 2,
+		sm: ( 182, 215, 206, 37 ),
+		md: ( 174, 205, 448, 348 ),
+		xl: ( 357, 421, 784, 536 ),
 	),
 	// Image 3
 	3: (
-		rotate: 7.15,
-		z-index: 2,
-		sm: ( 182, 215, 725, 46 ),
-		md: ( 174, 205, 520, 288 ),
-		xl: ( 357, 421, 784, 602 ),
+		rotate: -4.53,
+		z-index: 3,
+		sm: ( 165, 220, 374, -7 ),
+		md: ( 208, 277, 590, 170 ),
+		xl: ( 428, 568, 1065, 257 ),
 	),
 	// Image 4
 	4: (
 		rotate: -4.3,
 		z-index: 1,
-		sm: ( 219, 238, 632, 182 ),
-		md: ( 201, 218, 234, 441 ),
+		sm: ( 219, 238, 97, 182 ),
+		md: ( 201, 218, 147, 501 ),
 		xl: ( 390, 425, 296, 900 ),
 	),
 	// Image 5
 	5: (
 		rotate: 0,
 		z-index: 2,
-		sm: ( 168, 206, 846, 237 ),
-		md: ( 264, 323, 321, 529 ),
-		xl: ( 513, 627, 466, 1053 ),
+		sm: ( 168, 206, 327, 237 ),
+		md: ( 264, 323, 249, 589 ),
+		xl: ( 513, 627, 497, 1056 ),
 	),
 	// Image 6
 	6: (
 		rotate: 7.93,
 		z-index: 3,
-		sm: ( 171, 197, 1064, 170 ),
-		md: ( 201, 232, 730, 468 ),
-		xl: ( 414, 477, 1217, 973 ),
+		sm: ( 171, 197, 545, 170 ),
+		md: ( 201, 232, 659, 528 ),
+		xl: ( 414, 477, 1217, 920 ),
 	),
 );
 
@@ -715,7 +715,7 @@ $multi-image-images-config: (
 	}
 
 	&.type-multi-image {
-		@apply pt-px50;
+		@apply pt-px50 relative;
 
 		@screen md {
 			@apply pt-px22;
@@ -733,6 +733,10 @@ $multi-image-images-config: (
 				@screen md {
 					@apply p-0;
 				}
+			}
+
+			&-inner {
+				@apply pb-0 md:pb-0 xl:pb-0;
 			}
 
 			&-title {
@@ -773,18 +777,23 @@ $multi-image-images-config: (
 			}
 
 			&-img-wrap {
-				@apply absolute left-0 right-0 w-full pointer-events-none overflow-hidden top-full;
-				@apply -mt-px822;
-				height: 200%;
+				@apply relative h-0 -ml-px28 overflow-visible;
+				width: calc(100% + #{rem-calc(56)});
 
 				@screen md {
-					@apply -mt-px800;
+					@apply absolute left-0 -top-px140 -ml-px50;
+					width: calc(100% + #{rem-calc(100)});
 				}
 
 				@screen xl {
-					@apply -mt-px1600;
+					@apply w-full -top-px270 ml-0;
 				}
+			}
 
+			&-images {
+				@apply absolute top-0 left-0 right-0 w-full pointer-events-none overflow-hidden;
+				height: 200vh;
+				min-height: 2160px; // 1080p x 2
 
 				img {
 					@apply block absolute rounded-px10 transform rotate-0;

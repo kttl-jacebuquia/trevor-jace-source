@@ -417,7 +417,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="<?php echo esc_attr( $container_classnames ); ?>">
+		<header class="<?php echo esc_attr( $container_classnames ); ?>">
 			<div class="<?php echo esc_attr( $header_classnames ); ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -428,16 +428,18 @@ class Page_Header {
 					</div>
 					<?php if ( ! empty( $options['images'] ) ) : ?>
 						<div class="page-header-img-wrap">
-							<?php foreach ( $options['images'] as $image ) : ?>
-								<?php if ( ! empty( $image['url'] ) ) : ?>
-									<img src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
-								<?php endif; ?>
-							<?php endforeach; ?>
+							<div class="page-header-images">
+								<?php foreach ( $options['images'] as $image ) : ?>
+									<?php if ( ! empty( $image['url'] ) ) : ?>
+										<img aria-hidden="true" src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
 					<?php endif; ?>
 				</div>
 			</div>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}
