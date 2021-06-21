@@ -71,18 +71,26 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		$image       = static::get_val( static::FIELD_IMAGE );
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo esc_html( $title ); ?></h3>
-			<p><?php echo esc_html( $description ); ?></p>
 
-			<?php if ( $image ) : ?>
-				<div class="text-center mt-px50 block">
-					<img src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
-				</div>
-			<?php endif; ?>
+		<div class="center-text-with-full-image">
+			<div class="center-text-with-full-image__container">
+				<h2 class="center-text-with-full-image__title"><?php echo esc_html( $title ); ?></h2>
+				<p class="center-text-with-full-image__description"><?php echo esc_html( $description ); ?></p>
+				<?php if ( $image ) : ?>
+					<figure class="center-text-with-full-image__figure">
+						<img
+							src="<?php echo esc_url( $image['url'] ); ?>""
+							alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>"
+							class="center-text-with-full-image__image" />
+						<figcaption class="center-text-with-full-image__caption">
+							Pinch to zoom into this image.
+						</figcaption>
+					</figure>
+				<?php endif; ?>
+			</div>
 		</div>
+
 		<?php
 		return ob_get_clean();
 	}
