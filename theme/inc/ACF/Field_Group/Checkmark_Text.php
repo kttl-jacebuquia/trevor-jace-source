@@ -100,7 +100,8 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 				<?php if ( ! empty( $checkmark_entries ) ) : ?>
 					<ul class="checkmark-text__checklist">
 						<?php foreach ( $checkmark_entries as $entry ) : ?>
-							<li class="checkmark-text__item trevor-ti-checkmark">
+							<li class="checkmark-text__item">
+								<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
 								<?php if ( ! empty( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ) ) : ?>
 									<div class="checkmark-text__item-text">
 										<?php echo esc_html( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ); ?>

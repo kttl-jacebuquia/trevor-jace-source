@@ -63,14 +63,6 @@
 			@apply text-px18 leading-px26 tracking-px05;
 		}
 
-		&::before {
-			@apply text-px50 h-px18 w-px16 flex flex-shrink-0 justify-center items-center mr-px18 mt-px2;
-
-			@screen md {
-				@apply mr-px6 w-px45 h-px45 mt-0;
-			}
-		}
-
 		& + & {
 			@apply mt-px24;
 
@@ -81,6 +73,14 @@
 
 		&-text {
 			@apply flex items-center self-stretch;
+		}
+	}
+
+	&__icon {
+		@apply text-px50 h-px18 w-px16 flex flex-shrink-0 justify-center items-center mr-px18 mt-px2;
+
+		@screen md {
+			@apply mr-px6 w-px45 h-px45 mt-0;
 		}
 	}
 
