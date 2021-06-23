@@ -95,7 +95,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			$content = implode( "\n", $cards );
 		}
 
-		return '<div class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">' .
+		return '<div role="list" class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">' .
 			$content .
 			'</div>';
 	}

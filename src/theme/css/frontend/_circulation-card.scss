@@ -16,7 +16,7 @@
 	@apply font-bold text-px32 leading-px42 m-0 mb-2;
 
 	tilt {
-	  @apply text-px50 leading-px60 tracking-px_02 mr-2;
+	  @apply inline text-px50 leading-px60 tracking-px_02 mr-2;
 	}
   }
 
@@ -80,7 +80,7 @@
 
 	.circulation-card-desc {
 	  @apply mt-6;
-	  @apply font-normal text-px18 leading-px24 tracking-px05;  
+	  @apply font-normal text-px18 leading-px24 tracking-px05;
 	}
 
 	.circulation-card-cta {
