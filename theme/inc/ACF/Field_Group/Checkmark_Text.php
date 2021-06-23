@@ -98,9 +98,9 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 					<div class="checkmark-text__description"><?php echo $description; ?></div>
 				<?php endif; ?>
 				<?php if ( ! empty( $checkmark_entries ) ) : ?>
-					<ul class="checkmark-text__checklist">
+					<ul class="checkmark-text__checklist" role="list">
 						<?php foreach ( $checkmark_entries as $entry ) : ?>
-							<li class="checkmark-text__item">
+							<li class="checkmark-text__item" role="listitem">
 								<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
 								<?php if ( ! empty( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ) ) : ?>
 									<div class="checkmark-text__item-text">
