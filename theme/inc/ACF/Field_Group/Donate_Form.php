@@ -84,8 +84,8 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 		<div class="donation-form">
 			<div class="donation-form__content">
 				<div class="donation-form__content-wrapper">
-					<h2><?php echo $heading; ?></h2>
-					<p><?php echo $intro; ?></p>
+					<h2 class="donation-form__heading text-center xl:text-left"><?php echo $heading; ?></h2>
+					<p class="donation-form__intro text-center xl:text-left"><?php echo $intro; ?></p>
 
 					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form">
 						<div class="frequency">

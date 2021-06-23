@@ -115,6 +115,14 @@ class Tile_Grid {
 					}
 					?>
 				</div>
+				<?php if ( $display_limit && $display_limit < count( $data ) ) { ?>
+					<div class="view-all-container text-center overflow-visible pb-2">
+						<a class="view-all-cta wave-underline font-bold text-px24 leading-px34 md:text-px18 tracking-px05 xl:text-px26 xl:leading-px36 tracking-em001 border-b-2 text-teal-dark self-center"
+						href="#!" data-tile-container="<?php echo $id; ?>">
+							Load More
+						</a>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		<?php

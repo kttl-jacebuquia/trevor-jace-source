@@ -243,13 +243,11 @@ module.exports = {
 				px160: px2rem(160),
 			},
 			minWidth: {
-				px50: px2rem(50),
-				px145: px2rem(145),
-				px190: px2rem(190),
-				px200: px2rem(200),
-				px315: px2rem(315),
-				px319: px2rem(319),
-				px355: px2rem(355),
+				...px2remMap([
+					...divisibles(2, 500, 0, 500),
+					...divisibles(5, 500, 0, 500),
+					319
+				]),
 			},
 			width: {
 				px13: px2rem(13),

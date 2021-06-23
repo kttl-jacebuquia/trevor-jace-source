@@ -2,209 +2,213 @@
   @apply bg-white;
 
   @screen lg {
-	@apply flex justify-between items-stretch;
+    @apply flex justify-between items-stretch;
   }
 
   &__content {
-	@apply px-px28 pt-px80 pb-px80;
+    @apply px-px28 pt-px80 pb-px80;
 
-	@screen md {
-	  @apply px-0;
-	}
+    @screen md {
+      @apply px-0;
+    }
 
-	@screen lg {
-	  @apply pt-0 pb-px30 px-0 flex flex-auto justify-end ;
-	}
+    @screen lg {
+      @apply pt-0 pb-px30 px-0 flex flex-auto justify-end ;
+    }
 
-	&-wrapper {
-	  @apply mr-auto ml-auto max-w-px493;
+    &-wrapper {
+      @apply mr-auto ml-auto max-w-px493;
 
-	  @screen lg {
-		width: 72%;
-		margin-left: rem-calc(100px);
-		@apply mr-auto;
-		@apply flex flex-col justify-center max-w-none;
-	  }
+      @screen lg {
+        width: 72%;
+        margin-left: rem-calc(100px);
+        @apply mr-auto;
+        @apply flex flex-col justify-center max-w-none;
+      }
 
-	  h2 {
-		@apply font-bold text-px32 leading-px40 mb-px20 text-teal-dark;
+      h2 {
+        @apply font-bold text-px32 leading-px40 mb-px20 text-teal-dark;
 
-		@screen md {
-		  @apply leading-px42 mb-px8;
-		}
+        @screen md {
+          @apply leading-px42 mb-px8;
+        }
 
-		@screen lg {
-		  @apply text-px40 leading-px48 mb-px20;
-		}
-	  }
+        @screen lg {
+          @apply text-px40 leading-px48 mb-px20;
+        }
+      }
 
-	  p {
-		@apply font-normal text-px20 leading-px26 mb-px40 text-teal-dark;
+      p {
+        @apply font-normal text-px20 leading-px26 mb-px40 text-teal-dark;
 
-		@screen md {
-		  @apply text-px18 leading-px24 mb-px50;
-		}
+        @screen md {
+          @apply text-px18 leading-px24 mb-px50;
+        }
 
-		@screen lg {
-		  @apply text-px20 leading-px28 mb-px58;
-		}
-	  }
+        @screen lg {
+          @apply text-px20 leading-px28 mb-px58;
+        }
+      }
 
-	  form {
-		input:not([type="submit"]) {
-		  @apply invisible overflow-hidden opacity-0 h-0;
-		}
+      form {
+        input:not([type="submit"]) {
+          @apply invisible overflow-hidden opacity-0 h-0;
+        }
 
-		input[type="text"],
-		input[type="number"] {
-		  border: 1px solid rgba(0, 58, 72, 0.5);
-		  @apply h-px68 w-full block visible  rounded-px10 box-border px-px35 text-teal-dark;
-		  opacity: 1;
+        input[type="text"],
+        input[type="number"] {
+          border: 1px solid rgba(0, 58, 72, 0.5);
+          @apply h-px68 w-full block visible  rounded-px10 box-border px-px35 text-teal-dark;
+          opacity: 1;
 
-			&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-				@apply text-teal-dark;
-				opacity: 1; /* Firefox */
-			}
+          &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            @apply text-teal-dark;
+            opacity: 1; /* Firefox */
+          }
 
-			&:-ms-input-placeholder { /* Internet Explorer 10-11 */
-				@apply text-teal-dark;
-			}
+          &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            @apply text-teal-dark;
+          }
 
-			&::-ms-input-placeholder { /* Microsoft Edge */
-				@apply text-teal-dark;
-			}
+          &::-ms-input-placeholder { /* Microsoft Edge */
+            @apply text-teal-dark;
+          }
 
-		  @screen md {
-			@apply h-px72;
-		  }
-		}
+          @screen md {
+            @apply h-px72;
+          }
+        }
 
-		input[type="text"] {
-			&:focus {
-				@apply ring-1 ring-offset-0 ring-teal-dark ring-offset-transparent;
-			}
-		}
+        input[type="text"] {
+          &:focus {
+            @apply ring-1 ring-offset-0 ring-teal-dark ring-offset-transparent;
+          }
+        }
 
-		.frequency {
-			.visually-hidden {
-				@apply overflow-hidden h-0;
-			}
-		}
+        .frequency {
+          .visually-hidden {
+            @apply overflow-hidden h-0;
+          }
+        }
 
-		.frequency--choices {
-		  @apply flex mb-px30;
+        .frequency--choices {
+          @apply flex mb-px30;
 
-		  @screen lg {
-			@apply mb-px40;
-		  }
+          @screen lg {
+            @apply mb-px40;
+          }
 
-		  label {
-			border: 1px solid rgba(0, 58, 72, 0.5);
-			@apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0 bg-white text-teal-dark w-px214;
-			border: 1px solid rgba(0, 58, 72, 0.5);
+          @screen xl {
+            @apply inline-flex min-w-px444;
+          }
 
-			&:first-child {
-			@apply border-r-0;
-			}
+          label {
+            border: 1px solid rgba(0, 58, 72, 0.5);
+            @apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0 bg-white text-teal-dark w-px214;
+            border: 1px solid rgba(0, 58, 72, 0.5);
 
-			&:last-child {
-			@apply border-l-0;
-			}
+            &:first-child {
+              @apply border-r-0;
+            }
 
-			@screen lg {
-			  @apply text-px18 leading-px26;
-			}
+            &:last-child {
+              @apply border-l-0;
+            }
 
-			&.is-selected {
-			  @apply border-r-0 text-white bg-teal-dark;
-			}
+            @screen lg {
+              @apply text-px18 leading-px26;
+            }
 
-			& + label {
-			  @apply rounded-none rounded-tr-px10 rounded-br-px10;
-			}
-		  }
-		}
+            &.is-selected {
+              @apply border-r-0 text-white bg-teal-dark;
+            }
 
-		.amount {
-		  @apply mb-px40;
+            & + label {
+              @apply rounded-none rounded-tr-px10 rounded-br-px10;
+            }
+          }
+        }
 
-		  @screen lg {
-			@apply mb-px50;
-		  }
+        .amount {
+          @apply mb-px40;
 
-		  &-choices {
-			@apply flex justify-between flex-wrap font-medium text-px16 leading-px20 mb-px30;
+          @screen lg {
+            @apply mb-px50;
+          }
+
+          &-choices {
+            @apply flex justify-between flex-wrap font-medium text-px16 leading-px20 mb-px30;
 
 
-			label {
-			  flex: 0 0 49%;
-			  @apply py-px22 font-normal text-px16 leading-px20 mb-px14 rounded-px10 text-center cursor-pointer text-teal-dark;
-			  border: 1px solid rgba(0, 58, 72, 0.5);
+            label {
+              flex: 0 0 49%;
+              @apply py-px22 font-normal text-px16 leading-px20 mb-px14 rounded-px10 text-center cursor-pointer text-teal-dark;
+              border: 1px solid rgba(0, 58, 72, 0.5);
 
-			  &.is-selected {
-				@apply bg-teal-dark text-white;
-			  }
-			}
+              &.is-selected {
+                @apply bg-teal-dark text-white;
+              }
+            }
 
-			@screen md {
-			  @apply text-px18 leading-px24;
+            @screen md {
+              @apply text-px18 leading-px24;
 
-			  label {
-				flex: 0 0 23%;
-				@apply py-px30 text-px18 leading-px24 mb-0;
-			  }
-			}
+              label {
+                flex: 0 0 23%;
+                @apply py-px30 text-px18 leading-px24 mb-0;
+              }
+            }
 
-			@screen lg {
-			  @apply leading-px24;
+            @screen lg {
+              @apply leading-px24;
 
-			  label {
-				@apply py-px30 text-px18 leading-px26;
-			  }
-			}
-		  }
-		}
+              label {
+                @apply py-px30 text-px18 leading-px26;
+              }
+            }
+          }
+        }
 
-		.submit {
-		  input[type="submit"] {
-			@apply py-px18 font-bold text-px16 leading-px22 rounded-px10 text-center cursor-pointer text-white bg-teal-dark w-full;
+        .submit {
+          input[type="submit"] {
+            @apply py-px18 font-bold text-px16 leading-px22 rounded-px10 text-center cursor-pointer text-white bg-teal-dark w-full;
 
-			@screen md {
-			  width: rem-calc(233px);
-			}
-		  }
-		}
+            @screen md {
+              width: rem-calc(233px);
+            }
+          }
+        }
 
-		input[type="number"].custom-amount {
-			@apply overflow-hidden invisible h-0 my-0 py-0;
-		}
-	  }
-	}
+        input[type="number"].custom-amount {
+          @apply overflow-hidden invisible h-0 my-0 py-0;
+        }
+      }
+    }
   }
 
   &__image {
-	@screen lg {
-	  flex: 0 0 42%;
-	}
+    @screen lg {
+      flex: 0 0 42%;
+    }
 
-	.image-wrapper {
-	  padding-top: calc((1 / 1) * 100%);
-	  @apply block relative overflow-hidden w-full h-auto;
+    .image-wrapper {
+      padding-top: calc((1 / 1) * 100%);
+      @apply block relative overflow-hidden w-full h-auto;
 
-	  @screen md {
-		padding-top: calc((450 / 768) * 100%);
-	  }
+      @screen md {
+        padding-top: calc((450 / 768) * 100%);
+      }
 
-	  @screen lg {
-		height: rem-calc(892px);
-		padding-top: calc((892 / 600) * 100%);
-	  }
+      @screen lg {
+        height: rem-calc(892px);
+        padding-top: calc((892 / 600) * 100%);
+      }
 
 
-	  img {
-		@apply block absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full;
-	  }
-	}
+      img {
+        @apply block absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full;
+      }
+    }
 
   }
 }
