@@ -1,8 +1,15 @@
 .center-text-with-full-image {
 	&__container {
 		@apply container mx-auto;
-		@apply tw-grid;
-		@apply py-px80;
+		@apply tw-grid pt-px100 pb-px74;
+
+		@screen md {
+			@apply pt-px80 pb-px100;
+		}
+
+		@screen xl {
+			@apply pt-px188 pb-px190;
+		}
 	}
 
 	&__title {
@@ -43,7 +50,8 @@
 		}
 
 		@screen xl {
-			@apply mt-px70 col-span-10 col-start-2 -mx-px32;
+			@apply mt-px70 col-span-10 col-start-2 -mx-px42;
+			width: calc(100% + 85px);
 		}
 	}
 
