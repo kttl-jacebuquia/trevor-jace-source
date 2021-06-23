@@ -1,1 +1,10 @@
 @include tailwind('xl:gap-x-px68 xl:gap-x-7 gap-x-0');
+
+// Grid Columns
+@for $count from 1 through 12 {
+	@include tailwind('grid-cols-#{$count}');
+	@include tailwind('md:grid-cols-#{$count}');
+	@include tailwind('lg:grid-cols-#{$count}');
+	@include tailwind('lg2:grid-cols-#{$count}');
+	@include tailwind('xl:grid-cols-#{$count}');
+}

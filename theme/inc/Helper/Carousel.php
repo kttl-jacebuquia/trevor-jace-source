@@ -289,8 +289,9 @@ class Carousel {
 		}
 
 		$carousel_cls = array(
-			'carousel-testimonials bg-gray-light pt-px56 pb-px70 px-0',
+			'carousel-testimonials pt-px56 pb-px70 px-0',
 			'md:py-px50 lg:py-px80',
+			'bg-' . $options['bg_color'],
 		);
 		$carousel_cls = implode( ' ', $carousel_cls );
 

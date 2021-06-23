@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Theme\Helper;
 
 class Testimonials_Carousel extends A_Field_Group implements I_Block {
@@ -7,6 +8,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 	const FIELD_DATA_IMG   = 'img';
 	const FIELD_DATA_QUOTE = 'quote';
 	const FIELD_DATA_CITE  = 'cite';
+	const FIELD_BG_CLR     = 'bg_color';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -14,11 +16,12 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		$data_img      = static::gen_field_key( static::FIELD_DATA_IMG );
 		$data_title    = static::gen_field_key( static::FIELD_DATA_QUOTE );
 		$data_subtitle = static::gen_field_key( static::FIELD_DATA_CITE );
+		$bg_color      = static::gen_field_key( static::FIELD_BG_CLR );
 
 		return array(
 			'title'  => 'Testimonials Carousel',
 			'fields' => array(
-				static::FIELD_DATA => array(
+				static::FIELD_DATA   => array(
 					'key'        => $data,
 					'name'       => static::FIELD_DATA,
 					'label'      => 'Data',
@@ -51,6 +54,14 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 						),
 					),
 				),
+				static::FIELD_BG_CLR => Field\Color::gen_args(
+					$bg_color,
+					static::FIELD_BG_CLR,
+					array(
+						'label'         => 'BG Color',
+						'default_value' => 'gray-light',
+					),
+				),
 			),
 		);
 	}
@@ -78,6 +89,10 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 			);
 		}
 
-		echo Helper\Carousel::testimonials( $data );
+		$options = array(
+			'bg_color' => static::get_val( static::FIELD_BG_CLR ) ?? 'gray-light',
+		);
+
+		echo Helper\Carousel::testimonials( $data, $options );
 	}
 }

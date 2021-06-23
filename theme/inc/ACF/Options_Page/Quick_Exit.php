@@ -70,6 +70,5 @@ class Quick_Exit extends A_Options_Page {
 		<?php
 		return ob_get_clean();
 
-
 	}
 }
