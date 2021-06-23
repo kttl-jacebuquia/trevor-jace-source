@@ -9,6 +9,7 @@ class Button extends A_Field_Group implements I_Renderable {
 	const FIELD_ACTION      = 'action';
 	const FIELD_LINK        = 'link';
 	const FIELD_PAGE_LINK   = 'page_link';
+	const FIELD_FILE        = 'file';
 	const FIELD_BUTTON_ATTR = 'button_attr';
 	const FIELD_LABEL_ATTR  = 'label_attr';
 
@@ -19,6 +20,7 @@ class Button extends A_Field_Group implements I_Renderable {
 		$action      = static::gen_field_key( static::FIELD_ACTION );
 		$link        = static::gen_field_key( static::FIELD_LINK );
 		$page_link   = static::gen_field_key( static::FIELD_PAGE_LINK );
+		$file        = static::gen_field_key( static::FIELD_FILE );
 		$button_attr = static::gen_field_key( static::FIELD_BUTTON_ATTR );
 		$label_attr  = static::gen_field_key( static::FIELD_LABEL_ATTR );
 
@@ -55,8 +57,9 @@ class Button extends A_Field_Group implements I_Renderable {
 						'type'          => 'select',
 						'required'      => true,
 						'choices'       => array(
-							'link'      => 'Link',
-							'page_link' => 'Page Link',
+							'link'          => 'Link',
+							'page_link'     => 'Page Link',
+							'file_download' => 'File Download',
 						),
 						'default_value' => 'page_link',
 						'allow_null'    => true,
@@ -90,6 +93,26 @@ class Button extends A_Field_Group implements I_Renderable {
 									'field'    => $action,
 									'operator' => '==',
 									'value'    => 'page_link',
+								),
+							),
+						),
+						'allow_null'        => false,
+						'multiple'          => false,
+						'return_format'     => 'object',
+						'ui'                => true,
+					),
+					static::FIELD_FILE      => array(
+						'key'               => $file,
+						'name'              => static::FIELD_FILE,
+						'label'             => 'File',
+						'type'              => 'file',
+						'required'          => true,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $action,
+									'operator' => '==',
+									'value'    => 'file_download',
 								),
 							),
 						),
@@ -167,6 +190,31 @@ class Button extends A_Field_Group implements I_Renderable {
 				$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
 					DOM_Attr::FIELD_ATTR_KEY => 'href',
 					DOM_Attr::FIELD_ATTR_VAL => $page_link,
+				);
+			}
+		} elseif ( 'file_download' === $val->get( static::FIELD_ACTION ) ) {
+			$file = $val->get( static::FIELD_FILE );
+			if ( ! empty( $file ) ) {
+				$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
+					$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ],
+					array(
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'href',
+							DOM_Attr::FIELD_ATTR_VAL => $file['url'],
+						),
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'download',
+							DOM_Attr::FIELD_ATTR_VAL => $file['filename'],
+						),
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'download',
+							DOM_Attr::FIELD_ATTR_VAL => $file['filename'],
+						),
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'target',
+							DOM_Attr::FIELD_ATTR_VAL => '_blank',
+						),
+					)
 				);
 			}
 		}

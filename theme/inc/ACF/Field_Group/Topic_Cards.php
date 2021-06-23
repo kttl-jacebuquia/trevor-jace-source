@@ -123,10 +123,10 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					<?php endforeach; ?>
 				</div>
 
-				<div class="topic-cards__grid">
+				<div class="topic-cards__grid" role="list">
 					<?php if ( ! empty( $topic_entries ) ) : ?>
 						<?php foreach ( $topic_entries as $topic ) : ?>
-							<div class="topic-cards__item">
+							<div class="topic-cards__item" role="listitem">
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
 									<h2 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h2>
 								<?php endif; ?>

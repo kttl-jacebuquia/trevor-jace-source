@@ -151,7 +151,7 @@ class Guiding_Principles extends A_Field_Group implements I_Block, I_Renderable 
 					</div>
 					<?php if ( ! empty( $file['url'] && ! empty( $button_text ) ) ) : ?>
 						<div class="guiding-principles__cta-wrap">
-							<a class="guiding-principles__cta" href="<?php echo esc_url( $file['url'] ); ?>" download><?php echo esc_html( $button_text ); ?></a>
+							<a class="guiding-principles__cta" href="<?php echo esc_url( $file['url'] ); ?>" download="<?php echo esc_attr( $file['filename'] ); ?>"><?php echo esc_html( $button_text ); ?></a>
 						</div>
 					<?php endif; ?>
 				</div>
