@@ -65,6 +65,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		$uuid = uniqid();
 		$options = array_merge(
 			array(
 				'form_image' => static::get_val( static::FIELD_FORM_IMAGE ),
@@ -113,7 +114,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 								</div>
 								<div class="amount-custom">
 									<input type="number" name="custom" class="custom-amount" placeholder="$Custom amount">
-									<input type="text" name="currency-field" class="display-amount" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
+									<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
 								</div>
 							</div>
 
