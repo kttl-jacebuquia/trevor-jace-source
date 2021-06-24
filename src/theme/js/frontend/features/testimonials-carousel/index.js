@@ -69,11 +69,12 @@ export default function testimonialsCarousel(id) {
 				init: () => {
 					checkArrow();
 				},
-				afterInit: () => {
+				afterInit: (swiper) => {
 					applyA11y();
+					onSlideChange(swiper)
 				},
 				slideChange: (swiper) => {
-					onSlideTransitionEnd(swiper);
+					onSlideChange(swiper, true);
 				},
 				resize: () => {
 					checkArrow();
@@ -105,14 +106,21 @@ export default function testimonialsCarousel(id) {
 		});
 	}
 
-	function onSlideTransitionEnd (swiper) {
+	function onSlideChange (swiper, focus = false) {
 		[...swiper.slides].forEach((slide, index) => {
 			const isActiveIndex = index === swiper.activeIndex;
 
-			$(slide).attr('tabindex', isActiveIndex ? "0" : "-1");
-
 			if ( isActiveIndex ) {
-				$(slide).focus();
+				$(slide)
+					.attr('tabindex', 0)
+					.removeAttr('aria-hidden')
+
+				if ( focus ) { $(slide).focus(); }
+			}
+			else {
+				$(slide)
+					.attr('tabindex', -1)
+					.attr('aria-hidden', true);
 			}
 		});
 		console.log(swiper.activeIndex, swiper.slides);
