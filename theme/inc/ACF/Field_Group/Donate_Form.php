@@ -65,7 +65,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$uuid = uniqid();
+		$uuid    = uniqid();
 		$options = array_merge(
 			array(
 				'form_image' => static::get_val( static::FIELD_FORM_IMAGE ),

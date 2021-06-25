@@ -11,6 +11,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TOPIC_ENTRY_TITLE       = 'topic_entry_title';
 	const FIELD_TOPIC_ENTRY_DESCRIPTION = 'topic_entry_description';
 	const FIELD_TOPIC_ENTRY_LINK        = 'topic_entry_link';
+	const FIELD_BUTTON                  = 'button';
 
 	/**
 	 * @inheritDoc
@@ -24,6 +25,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$topic_entry_title       = static::gen_field_key( static::FIELD_TOPIC_ENTRY_TITLE );
 		$topic_entry_description = static::gen_field_key( static::FIELD_TOPIC_ENTRY_DESCRIPTION );
 		$topic_entry_link        = static::gen_field_key( static::FIELD_TOPIC_ENTRY_LINK );
+		$button                  = static::gen_field_key( static::FIELD_BUTTON );
 
 		return array(
 			'title'  => 'Topic Cards',
@@ -95,6 +97,13 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
+				static::FIELD_BUTTON        => array(
+					'key'           => $button,
+					'name'          => static::FIELD_BUTTON,
+					'label'         => 'Button',
+					'type'          => 'link',
+					'return_format' => 'array',
+				),
 			),
 		);
 	}
@@ -122,11 +131,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$title         = static::get_val( static::FIELD_TITLE );
 		$description   = static::get_val( static::FIELD_DESCRIPTION );
 		$topic_entries = static::get_val( static::FIELD_TOPIC_ENTRIES );
+		$button        = static::get_val( static::FIELD_BUTTON );
 
 		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
 
 		ob_start();
-		// Next Step - FE (Apply Color)
+		// Next Step - FE (Apply Color & Button)
 		?>
 		<div class="topic-cards">
 			<div class="topic-cards__container">
@@ -185,6 +195,10 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 							</div>
 						<?php endforeach; ?>
 					</div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $button['url'] ) ) : ?>
+					<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
 				<?php endif; ?>
 			</div>
 		</div>
