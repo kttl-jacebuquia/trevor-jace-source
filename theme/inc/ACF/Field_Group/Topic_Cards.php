@@ -70,25 +70,28 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'layout'     => 'block',
 					'min'        => 1,
 					'collapsed'  => $topic_entry_title,
-					'sub_fields' => array(
-						static::FIELD_TOPIC_ENTRY_TITLE => array(
-							'key'   => $topic_entry_title,
-							'name'  => static::FIELD_TOPIC_ENTRY_TITLE,
-							'label' => 'Title',
-							'type'  => 'text',
-						),
-						static::FIELD_TOPIC_ENTRY_DESCRIPTION => array(
-							'key'   => $topic_entry_description,
-							'name'  => static::FIELD_TOPIC_ENTRY_DESCRIPTION,
-							'label' => 'Description',
-							'type'  => 'textarea',
-						),
-						static::FIELD_TOPIC_ENTRY_LINK  => array(
-							'key'           => $topic_entry_link,
-							'name'          => static::FIELD_TOPIC_ENTRY_LINK,
-							'label'         => 'Link',
-							'type'          => 'link',
-							'return_format' => 'array',
+					'sub_fields' => array_merge(
+						array(
+							static::FIELD_TOPIC_ENTRY_TITLE => array(
+								'key'   => $topic_entry_title,
+								'name'  => static::FIELD_TOPIC_ENTRY_TITLE,
+								'label' => 'Title',
+								'type'  => 'text',
+							),
+							static::FIELD_TOPIC_ENTRY_DESCRIPTION => array(
+								'key'   => $topic_entry_description,
+								'name'  => static::FIELD_TOPIC_ENTRY_DESCRIPTION,
+								'label' => 'Description',
+								'type'  => 'textarea',
+							),
+							static::FIELD_TOPIC_ENTRY_LINK => array(
+								'key'        => $topic_entry_link,
+								'name'       => static::FIELD_TOPIC_ENTRY_LINK,
+								'label'      => 'Link',
+								'type'       => 'group',
+								'layout'     => 'block',
+								'sub_fields' => Advanced_Link::_get_fields(),
+							),
 						),
 					),
 				),
@@ -170,9 +173,15 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 									<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
 								<?php endif; ?>
 
-								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ) ) : ?>
-									<a class="topic-cards__cta" href="<?php echo esc_url( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['title'] ); ?></a>
-								<?php endif; ?>
+								<?php
+									echo Advanced_Link::render(
+										null,
+										$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
+										array(
+											'class' => array( 'topic-cards__cta wave-underline' ),
+										)
+									);
+								?>
 							</div>
 						<?php endforeach; ?>
 					</div>

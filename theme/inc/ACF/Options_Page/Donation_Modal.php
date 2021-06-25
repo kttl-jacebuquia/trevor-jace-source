@@ -1,7 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 use TrevorWP\Theme\ACF\Field_Group;
-use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Helper\DonationModal;
 
 class Donation_Modal extends A_Options_Page {
 	const FIELD_TITLE = 'title';

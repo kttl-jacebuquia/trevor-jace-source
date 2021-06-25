@@ -4,6 +4,7 @@ class ACF {
 	const ALL_GROUPS = array(
 		// Common Fields
 		Field_Group\DOM_Attr::class,
+		Field_Group\Advanced_Link::class,
 		Field_Group\Button::class,
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
@@ -52,6 +53,7 @@ class ACF {
 		Field_Group\Financial_Report::class,
 		Field_Group\Event::class,
 		Field_Group\Product::class,
+		Field_Group\Text_Only_Popup::class,
 	);
 
 	public static function construct() {

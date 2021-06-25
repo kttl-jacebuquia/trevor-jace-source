@@ -9,6 +9,7 @@ use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Util\StaticFiles;
+use TrevorWP\Theme\Helper\Modal;
 
 /**
  * Theme Hooks
@@ -495,6 +496,9 @@ class Hooks {
 			</div>
 			<?php
 		}
+
+		// TODO:
+		// Remove these modal renders once integrated through the Advanced_Link field
 
 		// Fundraiser Quiz Modal
 		echo ( new \TrevorWP\Theme\Helper\FundraiserQuizModal(

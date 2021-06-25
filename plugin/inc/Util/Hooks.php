@@ -137,6 +137,9 @@ class Hooks {
 		# Event
 		CPT\Event::construct();
 
+		# Text Only Popup
+		CPT\Text_Only_Popup::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 

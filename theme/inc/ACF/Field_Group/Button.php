@@ -3,24 +3,14 @@
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
-class Button extends A_Field_Group implements I_Renderable {
+class Button extends Advanced_Link implements I_Renderable {
 	const FIELD_TYPE        = 'type';
-	const FIELD_LABEL       = 'label';
-	const FIELD_ACTION      = 'action';
-	const FIELD_LINK        = 'link';
-	const FIELD_PAGE_LINK   = 'page_link';
-	const FIELD_FILE        = 'file';
 	const FIELD_BUTTON_ATTR = 'button_attr';
 	const FIELD_LABEL_ATTR  = 'label_attr';
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
 		$type        = static::gen_field_key( static::FIELD_TYPE );
-		$label       = static::gen_field_key( static::FIELD_LABEL );
-		$action      = static::gen_field_key( static::FIELD_ACTION );
-		$link        = static::gen_field_key( static::FIELD_LINK );
-		$page_link   = static::gen_field_key( static::FIELD_PAGE_LINK );
-		$file        = static::gen_field_key( static::FIELD_FILE );
 		$button_attr = static::gen_field_key( static::FIELD_BUTTON_ATTR );
 		$label_attr  = static::gen_field_key( static::FIELD_LABEL_ATTR );
 
@@ -29,7 +19,7 @@ class Button extends A_Field_Group implements I_Renderable {
 			'fields' => array_merge(
 				static::_gen_tab_field( 'General' ),
 				array(
-					static::FIELD_TYPE      => array(
+					static::FIELD_TYPE => array(
 						'key'           => $type,
 						'name'          => static::FIELD_TYPE,
 						'label'         => 'Type',
@@ -43,85 +33,8 @@ class Button extends A_Field_Group implements I_Renderable {
 						'default_value' => 'primary',
 						'return_format' => 'value',
 					),
-					static::FIELD_LABEL     => array(
-						'key'      => $label,
-						'name'     => static::FIELD_LABEL,
-						'label'    => 'Label',
-						'type'     => 'text',
-						'required' => true,
-					),
-					static::FIELD_ACTION    => array(
-						'key'           => $action,
-						'name'          => static::FIELD_ACTION,
-						'label'         => 'Action',
-						'type'          => 'select',
-						'required'      => true,
-						'choices'       => array(
-							'link'          => 'Link',
-							'page_link'     => 'Page Link',
-							'file_download' => 'File Download',
-						),
-						'default_value' => 'page_link',
-						'allow_null'    => true,
-						'multiple'      => false,
-					),
-					static::FIELD_LINK      => array(
-						'key'               => $link,
-						'label'             => 'Link',
-						'name'              => static::FIELD_LINK,
-						'type'              => 'link',
-						'conditional_logic' => array(
-							array(
-								array(
-									'field'    => $action,
-									'operator' => '==',
-									'value'    => 'link',
-								),
-							),
-						),
-						'return_format'     => 'array',
-					),
-					static::FIELD_PAGE_LINK => array(
-						'key'               => $page_link,
-						'name'              => static::FIELD_PAGE_LINK,
-						'label'             => 'Page Link',
-						'type'              => 'page_link',
-						'required'          => true,
-						'conditional_logic' => array(
-							array(
-								array(
-									'field'    => $action,
-									'operator' => '==',
-									'value'    => 'page_link',
-								),
-							),
-						),
-						'allow_null'        => false,
-						'multiple'          => false,
-						'return_format'     => 'object',
-						'ui'                => true,
-					),
-					static::FIELD_FILE      => array(
-						'key'               => $file,
-						'name'              => static::FIELD_FILE,
-						'label'             => 'File',
-						'type'              => 'file',
-						'required'          => true,
-						'conditional_logic' => array(
-							array(
-								array(
-									'field'    => $action,
-									'operator' => '==',
-									'value'    => 'file_download',
-								),
-							),
-						),
-						'allow_null'        => false,
-						'multiple'          => false,
-						'return_format'     => 'object',
-						'ui'                => true,
-					),
 				),
+				parent::_get_fields(),
 				static::_gen_tab_field( 'Attributes' ),
 				array(
 					static::FIELD_BUTTON_ATTR => DOM_Attr::clone(
@@ -148,12 +61,14 @@ class Button extends A_Field_Group implements I_Renderable {
 	/** @inheritdoc */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$val       = new Field_Val_Getter( static::class, $post, $data );
+		$btn_tag   = 'a';
 		$btn_cls   = array_merge( array( 'page-btn' ), ( $options['btn_cls'] ?? array() ) );
 		$label_cls = array_merge( array( 'page-btn-label' ), ( $options['label_cls'] ?? array() ) );
 
-		$type      = $val->get( static::FIELD_TYPE );
-		$btn_cls[] = "page-btn-{$type}";
-		$btn_attr  = $val->get( static::FIELD_BUTTON_ATTR );
+		$type       = $val->get( static::FIELD_TYPE );
+		$btn_cls[]  = "page-btn-{$type}";
+		$btn_attr   = $val->get( static::FIELD_BUTTON_ATTR );
+		$label_attr = $val->get( static::FIELD_LABEL_ATTR );
 
 		$id = uniqid( 'quiz-', true );
 
@@ -165,67 +80,19 @@ class Button extends A_Field_Group implements I_Renderable {
 			$btn_cls[] = 'wave-underline';
 		}
 
-		# Links
-		if ( 'link' === $val->get( static::FIELD_ACTION ) ) {
-			$link = $val->get( static::FIELD_LINK );
-			if ( $link && is_array( $link ) ) {
-				foreach (
-						array_filter(
-							array(
-								'title'  => $link['title'] ?? null,
-								'href'   => $link['url'] ?? null,
-								'target' => $link['target'] ?? null,
-							)
-						) as $k => $v
-				) {
-					$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
-						DOM_Attr::FIELD_ATTR_KEY => $k,
-						DOM_Attr::FIELD_ATTR_VAL => $v,
-					);
-				}
-			}
-		} elseif ( 'page_link' === $val->get( static::FIELD_ACTION ) ) {
-			$page_link = $val->get( static::FIELD_PAGE_LINK );
-			if ( $page_link ) {
-				$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
-					DOM_Attr::FIELD_ATTR_KEY => 'href',
-					DOM_Attr::FIELD_ATTR_VAL => $page_link,
-				);
-			}
-		} elseif ( 'file_download' === $val->get( static::FIELD_ACTION ) ) {
-			$file = $val->get( static::FIELD_FILE );
-			if ( ! empty( $file ) ) {
-				$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
-					$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ],
-					array(
-						array(
-							DOM_Attr::FIELD_ATTR_KEY => 'href',
-							DOM_Attr::FIELD_ATTR_VAL => $file['url'],
-						),
-						array(
-							DOM_Attr::FIELD_ATTR_KEY => 'download',
-							DOM_Attr::FIELD_ATTR_VAL => $file['filename'],
-						),
-						array(
-							DOM_Attr::FIELD_ATTR_KEY => 'download',
-							DOM_Attr::FIELD_ATTR_VAL => $file['filename'],
-						),
-						array(
-							DOM_Attr::FIELD_ATTR_KEY => 'target',
-							DOM_Attr::FIELD_ATTR_VAL => '_blank',
-						),
-					)
-				);
-			}
-		}
+		$btn_attr[ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+			DOM_Attr::FIELD_ATTR_KEY => 'id',
+			DOM_Attr::FIELD_ATTR_VAL => $id,
+		);
 
-		ob_start(); ?>
-		<a <?php echo DOM_Attr::render_attrs_of( $btn_attr, $btn_cls ); ?>>
-			<span <?php echo DOM_Attr::render_attrs_of( $val->get( static::FIELD_LABEL_ATTR ), $label_cls ); ?>>
-				<?php echo esc_html( $val->get( static::FIELD_LABEL ) ); ?>
-			</span>
-		</a>
-		<?php
-		return ob_get_clean();
+		$options = array(
+			'tag'              => $btn_tag,
+			'class'            => $btn_cls,
+			'attributes'       => $btn_attr,
+			'label_class'      => $label_cls,
+			'label_attributes' => $label_attr,
+		);
+
+		return static::render_link( $options, $post, $data );
 	}
 }
