@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import debounce from 'lodash/debounce';
+import WithState from '../../WithState';
+import * as focusTrap from 'focus-trap';
 
 const resizeObserver = new ResizeObserver(function (entries) {
 	entries.forEach(elem => {
@@ -11,8 +13,17 @@ const resizeObserver = new ResizeObserver(function (entries) {
 	})
 });
 
-class TagBoxEllipsis {
+class TagBoxEllipsis extends WithState {
+	state = {
+		expanded: false,
+	};
+
+	// Replace on init
+	focusTrap = null;
+
 	constructor(elem) {
+		super();
+
 		elem.tagBoxEllipsis = this;
 		resizeObserver.observe(elem);
 		this.elem = elem;
@@ -21,6 +32,7 @@ class TagBoxEllipsis {
 		this.$boxes = this.$box.find('.tag-box');
 		this.$box.css('position', 'relative');
 		this.$textContainer = this.$.find('.card-text-container');
+		this.title = this.$box.data('title');
 
 		/**
 		 * calulate the distance between the tags box and its previous sibling
@@ -29,13 +41,17 @@ class TagBoxEllipsis {
 		 */
 		this.boxTopMargin = this.$box.offset().top - (this.$box.prev().offset().top + this.$box.prev().outerHeight(true));
 
-		this.$ellipsis = $('<a href="#" class="tag-box ellipsis"></a>')
+		this.$ellipsis = $(`<button href="#" class="tag-box ellipsis" aria-label="Show more tags for ${this.title}"></button>`)
 			.on('click', this.toggleClick)
 			.appendTo(this.$box);
 
 		this.calc();
 		this.handleResize();
 		this.handleCardHover();
+
+		this.focusTrap = focusTrap.createFocusTrap(this.$box[0], {
+			initialFocus: this.$boxes[0],
+		});
 	}
 
 	calc() {
@@ -88,11 +104,33 @@ class TagBoxEllipsis {
 	toggleClick = (e) => {
 		e.preventDefault();
 		let mobile = window.matchMedia('(max-width: 767px)');
-		$(this.elem).toggleClass('show-tags');
-		this.$box.toggleClass('show-all');
 		if (mobile.matches) {
 			this.$box.css('marginTop', `${this.boxTopMargin}px`);
 		}
+
+		this.setState({
+			expanded: !this.state.expanded
+		});
+	}
+
+	componentDidUpdate(stateChange) {
+		if ( 'expanded' in stateChange ) {
+			this.onExpandedStateChange(stateChange.expanded);
+		}
+	}
+
+	onExpandedStateChange(isExpanded) {
+		const ariaLabel = isExpanded ?
+			`Hide tags for ${this.title}` :
+			`Show more tags for ${this.title}`;
+
+		this.$box.attr('aria-expanded', isExpanded);
+
+		$(this.elem).toggleClass('show-tags', isExpanded);
+		this.$box.toggleClass('show-all', isExpanded);
+		this.$ellipsis.attr('aria-label', ariaLabel);
+
+		this.focusTrap[ isExpanded ? 'activate' : 'deactivate' ]();
 	}
 }
 

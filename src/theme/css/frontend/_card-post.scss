@@ -23,7 +23,7 @@
 
   // Thumbnail
   .post-thumbnail-wrap {
-	@apply h-px240;
+	@apply h-px240 relative;
 	@apply overflow-hidden;
 	@apply flex-shrink-0;
 	-webkit-backface-visibility: hidden;
@@ -35,6 +35,7 @@
 			@apply h-full;
 			@apply object-center object-cover;
 			@apply transition-transform duration-500;
+      @apply pointer-events-none;
 		}
   }
 

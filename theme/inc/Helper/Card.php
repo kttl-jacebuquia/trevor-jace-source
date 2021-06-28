@@ -97,12 +97,14 @@ class Card {
 			$desc = esc_html( wp_trim_words( wp_strip_all_tags( $desc ), $options['num_words'] ) );
 		}
 
+		$title = get_the_title( $post );
+
 		ob_start();
 		?>
 		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
 			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<a href="<?php echo get_the_permalink( $post ); ?>">
+					<a href="<?php echo $title; ?>" aria-label="click to read <?php echo $title; ?>">
 						<?php echo $thumb; ?>
 					</a>
 				</div>
@@ -112,7 +114,7 @@ class Card {
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
 					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class, true ) ) { ?>
 						<div class="post-thumbnail-wrap">
-							<a href="<?php echo get_the_permalink( $post ); ?>">
+							<a href="<?php echo $title; ?>" aria-label="click to read <?php echo $title; ?>">
 								<?php echo $thumb; ?>
 							</a>
 						</div>
@@ -129,10 +131,10 @@ class Card {
 					<h3 class="post-title font-semibold text-px24 leading-px28">
 						<?php if ( $title_link ) { ?>
 							<a href="<?php echo get_the_permalink( $post ); ?>" class="stretched-link">
-								<?php echo get_the_title( $post ); ?>
+								<?php echo $title; ?>
 							</a>
 						<?php } else { ?>
-							<?php echo get_the_title( $post ); ?>
+							<?php echo $title; ?>
 						<?php } ?>
 					</h3>
 
@@ -146,12 +148,16 @@ class Card {
 				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
-					<div class="tags-box">
+					<aside class="tags-box" data-title="<?php echo esc_attr($title); ?>" aria-label="tags for <?php echo esc_attr($title); ?>">
 						<?php foreach ( $tags as $tag ) { ?>
-							<a href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
-								class="tag-box"><?php echo $tag->name; ?></a>
+							<a
+								href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+								class="tag-box"
+								aria-label="<?php echo $tag->name; ?> tag">
+									<?php echo $tag->name; ?>
+							</a>
 						<?php } ?>
-					</div>
+					</aside>
 				<?php } ?>
 			</div>
 		</article>
