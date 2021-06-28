@@ -1,138 +1,129 @@
 .guiding-principles {
-	@apply text-teal-dark;
-	@apply my-px80;
+  @apply text-teal-dark;
+  @apply my-px80;
 
-	@screen md {
-		@apply my-px100;
-	}
+  @screen md {
+    @apply my-px100;
+  }
 
-	&__container {
-		@apply tw-grid container mx-auto text-center;
+  &__container {
+    @apply tw-grid container mx-auto text-center;
 
-		@screen xl {
-			@apply text-left;
-		}
-	}
+    @screen xl {
+      @apply text-left;
+    }
+  }
 
-	&__figure {
-		@apply overflow-hidden rounded-px10 col-span-full;
+  &__figure {
+    @apply overflow-hidden rounded-px10 col-span-full;
 
-		@screen md {
-			@apply col-span-4 col-start-3;
-		}
+    @screen md {
+      @apply col-span-4 col-start-3;
+    }
 
-		@screen xl {
-			@apply col-span-6 col-start-7 order-2;
-		}
+    @screen xl {
+      @apply col-span-6 col-start-7 order-2;
+    }
 
-		img {
-			@apply h-full w-full object-cover;
-		}
-	}
+    img {
+      @apply h-full w-full object-cover;
+    }
+  }
 
-	&__content {
-		@apply mt-px40 col-span-full;
-		grid-gap: inherit; // Just so the &__entries child will inherit the container gap above.
+  &__content {
+    @apply mt-px40 col-span-full;
+    grid-gap: inherit; // Just so the &__entries child will inherit the container gap above.
 
-		@screen md {
-			@apply col-span-6 col-start-2;
-		}
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
 
-		@screen xl {
-			@apply col-span-5 col-start-1;
-		}
-	}
+    @screen xl {
+      @apply col-span-5 col-start-1;
+    }
+  }
 
-	&__title {
-		@apply font-bold text-px30 leading-px38 tracking-em005;
+  &__title {
+    @apply font-bold text-px30 leading-px38 tracking-em005;
 
-		@screen xl {
-			@apply text-px40 leading-px46 tracking-em_001;
-		}
-	}
+    @screen xl {
+      @apply text-px40 leading-px46 tracking-em_001;
+    }
+  }
 
-	&__description {
-		@apply mt-px8 text-px18 leading-px26 tracking-px05;
+  &__description {
+    @apply mt-px8 text-px18 leading-px26 tracking-px05;
 
-		@screen xl {
-			@apply text-px24 leading-px34 tracking-px05 mt-px20;
-		}
-	}
+    @screen xl {
+      @apply text-px24 leading-px34 tracking-px05 mt-px20;
+    }
+  }
 
-	&__entries {
-		@apply mt-px34;
+  &__entries {
+    @apply mt-px34;
 
-		@screen md {
-			@apply grid grid-cols-6 gap-y-px22 mt-px54;
-			column-gap: inherit;
-		}
+    @screen md {
+      @apply grid grid-cols-6 gap-y-px22 mt-px54;
+      column-gap: inherit;
+    }
 
-		@screen xl {
-			@apply block mt-px20;
-		}
-	}
+    @screen xl {
+      @apply block mt-px20;
+    }
+  }
 
-	&__entry {
-		@apply block font-bold text-px22 leading-px28 tracking-em005;
+  &__entry {
+    @apply block font-bold text-px22 leading-px28 tracking-em005;
 
-		&:not(:first-child) {
-			@screen xl {
-				@apply mr-px28;
-			}
-		}
+    &:not(:first-child) {
+      @screen xl {
+        @apply mr-px28;
+      }
+    }
 
-		&:not(:last-child) {
-			@apply mb-px18;
+    &:not(:last-child) {
+      @apply mb-px18;
 
-			@screen md {
-				@apply mb-0;
-			}
+      @screen md {
+        @apply mb-0;
+      }
 
-			@screen xl {
-				@apply mr-px28;
-			}
-		}
+      @screen xl {
+        @apply mr-px28;
+      }
+    }
 
-		@screen md {
-			&:nth-child(odd) {
-				@apply col-span-2 col-start-2;
-			}
-			&:nth-child(even) {
-				@apply col-span-2 col-start-4;
-			}
-		}
+    @screen md {
+      &:nth-child(odd) {
+        @apply col-span-2 col-start-2;
+      }
+      &:nth-child(even) {
+        @apply col-span-2 col-start-4;
+      }
+    }
 
-		@screen xl {
-			@apply inline-block text-px26 leading-px32 mt-px28;
-		}
-	}
+    @screen xl {
+      @apply inline-block text-px26 leading-px32 mt-px28;
+    }
+  }
 
-	&__cta-wrap {
-		@apply mt-px50 text-center;
+  &__cta-wrap {
+    @apply mt-px50 text-center;
 
-		@screen md {
-			@apply mt-px75;
-		}
+    @screen md {
+      @apply mt-px75;
+    }
 
-		@screen xl {
-			@apply mt-px58 text-left;
-		}
-	}
+    @screen xl {
+      @apply mt-px58 text-left;
+    }
+  }
 
-	/**
-		TO DO:
-		Use btn utility once merged
-	*/
-	&__cta {
-		@apply font-bold inline-flex items-center px-px32 bg-teal-dark text-white h-auto min-h-px46 rounded-px10 cursor-pointer;
-		@apply text-px16 leading-px22 tracking-em001 py-px10;
+  &__cta {
+    @apply btn;
 
-		@screen md {
-			@apply leading-px20 h-px44 px-px24;
-		}
-
-		@screen xl {
-			@apply h-px66 px-px62;
-		}
-	}
+    @screen xl {
+      @apply text-px20 leading-px26 tracking-px05;
+    }
+  }
 }
