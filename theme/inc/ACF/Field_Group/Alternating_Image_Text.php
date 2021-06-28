@@ -124,7 +124,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 				<?php if ( ! empty( $entries ) ) : ?>
 					<div class="alternating-image-text__items" role="list">
 						<?php foreach ( $entries as $entry ) : ?>
-							<div class="alternating-image-text__item">
+							<div class="alternating-image-text__item" role="listitem">
 								<figure class="alternating-image-text__item-figure" aria-hidden="true">
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 										<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>" alt="<?php echo ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $headline ); ?>">

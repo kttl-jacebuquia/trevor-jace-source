@@ -1,8 +1,8 @@
 @layer utilities {
 	.btn {
-		@apply inline-flex items-center justify-center px-px32;
+		@apply inline-flex items-center justify-center px-px32 py-px12;
 		@apply font-bold text-px16 leading-px22 tracking-em001;
-		@apply h-px46 rounded-px10 overflow-hidden cursor-pointer;
+		@apply min-h-px46 h-auto rounded-px10 overflow-hidden cursor-pointer;
 
 		@screen md {
 			@apply px-px24 h-px44;
