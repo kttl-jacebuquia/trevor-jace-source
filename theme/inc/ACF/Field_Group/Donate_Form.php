@@ -85,10 +85,12 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 		<div class="donation-form">
 			<div class="donation-form__content">
 				<div class="donation-form__content-wrapper">
-					<h2 class="donation-form__heading text-center xl:text-left"><?php echo $heading; ?></h2>
+					<h2
+						id="<?php echo 'form-heading-' . $uuid; ?>"
+						class="donation-form__heading text-center xl:text-left"><?php echo $heading; ?></h2>
 					<p class="donation-form__intro text-center xl:text-left"><?php echo $intro; ?></p>
 
-					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form">
+					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form" aria-labelledby="<?php echo 'form-heading-' . $uuid; ?>">
 						<div class="frequency">
 							<div class="visually-hidden">
 								<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
@@ -120,8 +122,8 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 
 							<?php if ( $options['dedication'] ) : ?>
 								<div class="dedication">
-									<input type="checkbox" id="dedication-checkbox" class="dedication-checkbox">
-									<label for="dedication-checkbox">
+									<input type="checkbox" class="dedication-checkbox" aria-labelledby="<?php echo 'dedication-checkbox-' . $uuid; ?>" />
+									<label id="<?php echo 'dedication-checkbox-' . $uuid; ?>">
 										<strong>Dedicate my donation</strong> in honor or in memory of someone.
 									</label>
 								</div>

@@ -32,7 +32,7 @@ export default class SiteBanner {
 			class: `site-banner__${bannerObj.type}`,
 			id: `site-banner-${bannerObj.id}`,
 			'data-type': bannerObj.type,
-			'data-id': bannerObj.id
+			'data-id': bannerObj.id,
 		});
 		const $container = $("<div class='site-banner__container'>" +
 			"<i class='site-banner__warning'></i>" +

@@ -65,7 +65,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container header-container--text w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+		<header class="header-container header-container--text w-full <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="hero--inner mx-auto text-center site-content-inner items-center w-full">
 					<?php if ( ! empty( $options['title_top'] ) ) { ?>
@@ -81,7 +81,7 @@ class Page_Header {
 					?>
 				</div>
 			</div>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}

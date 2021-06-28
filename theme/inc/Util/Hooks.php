@@ -490,10 +490,10 @@ class Hooks {
 	public static function wp_footer(): void {
 		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
 			?>
-			<div class="floating-crisis-btn-wrap">
+			<aside class="floating-crisis-btn-wrap">
 				<a class="btn floating-crisis-btn" href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>">
 					Reach a Counselor</a>
-			</div>
+			</aside>
 			<?php
 		}
 

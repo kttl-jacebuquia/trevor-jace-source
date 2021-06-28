@@ -33,7 +33,7 @@ $is_rc = Is::rc();
 	Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.
 </p>
 <![endif]-->
-<div class="site-banner" id="siteBannerContainer"></div>
+<aside class="site-banner" id="siteBannerContainer" aria-label="site-banner"></aside>
 <script>window.trevorWP.siteBanners()</script>
 
 <?php /* Controls for expanded nav menu */ ?>
@@ -48,7 +48,7 @@ $is_rc = Is::rc();
 
 <?php /* TOP BAR */ ?>
 <div id="top-bar" class="top-bar">
-	<div class="top-bar-inner container">
+	<div class="top-bar-inner container" role="navigation" aria-label="Top Bar Navigation">
 		<div class="logo-icon">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>">
 				<i class="trevor-ti-logo-icon"></i>
@@ -89,7 +89,7 @@ $is_rc = Is::rc();
 </div>
 
 <?php /* TOP NAV */ ?>
-<header id="top-nav" class="top-nav <?php echo $is_rc ? 'is_rc' : ''; ?>">
+<div id="top-nav" class="top-nav <?php echo $is_rc ? 'is_rc' : ''; ?>" role="navigation">
 	<div class="top-nav-inner container <?php echo 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
 		<div class="logo-wrap">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
@@ -133,5 +133,5 @@ $is_rc = Is::rc();
 
 		</div>
 	</div>
-</header>
+</div>
 <?php wp_body_open(); ?>
