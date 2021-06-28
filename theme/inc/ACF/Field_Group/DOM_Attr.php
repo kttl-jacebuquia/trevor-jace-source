@@ -209,4 +209,24 @@ class DOM_Attr extends A_Field_Group {
 			),
 		);
 	}
+
+	/**
+	 * @params {Assoc} $attributes - e.g.: [ 'class' => [ 'someclass' ], 'aria-label' => 'some label' ]
+	 */
+	public static function attrs_from_array( $attributes = array() ): array {
+		$dom_attr = array(
+			static::FIELD_ATTRIBUTES => array(),
+		);
+
+		foreach ( $attributes as $key => $value ) {
+			$dom_attr[ static::FIELD_ATTRIBUTES ][] = (
+				array(
+					DOM_Attr::FIELD_ATTR_KEY => $key,
+					DOM_Attr::FIELD_ATTR_VAL => $value,
+				)
+			);
+		}
+
+		return $dom_attr;
+	}
 }

@@ -309,6 +309,14 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 	/** @inheritdoc */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		// Ensure attributes matches the DOM_Attr attributes format
+		if ( array_key_exists( 'attributes', $options ) ) {
+			$options['attributes'] = DOM_Attr::attrs_from_array( $options['attributes'] );
+		}
+		if ( array_key_exists( 'label_attributes', $options ) ) {
+			$options['label_attributes'] = DOM_Attr::attrs_from_array( $options['label_attributes'] );
+		}
+
 		return static::render_link( $options, $post, $data );
 	}
 }
