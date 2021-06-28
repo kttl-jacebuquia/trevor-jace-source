@@ -53,7 +53,7 @@ export default class SiteBanner {
 			text: bannerObj.desc,
 		}).appendTo($text);
 
-		$("<button role='button' class='site-banner__close-btn'>" +
+		$("<button aria-label='click to close banner' class='site-banner__close-btn'>" +
 			"<i class='trevor-ti-x text-indigo'></i>" +
 			"</button>")
 			.on('click', this.handleCloseClick)
