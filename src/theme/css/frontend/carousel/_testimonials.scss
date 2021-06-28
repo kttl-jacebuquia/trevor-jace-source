@@ -1,123 +1,127 @@
 .carousel-testimonials {
   max-width: 100vw;
-	@apply overflow-x-hidden;
+  @apply overflow-x-hidden;
 
   &-inner {
-	@apply flex flex-col;
-	@apply overflow-hidden;
-	@apply max-w-full ml-px28;
-	width: calc(100% - #{rem-calc(56px)});
+    @apply flex flex-col;
+    @apply overflow-hidden;
+    @apply max-w-full ml-px28;
+    width: calc(100% - #{rem-calc(56px)});
   }
 
   &-img-wrap {
-	@apply bg-white;
-	@apply w-full;
-	@apply flex-1;
+    @apply bg-white;
+    @apply w-full;
+    @apply flex-1;
   }
 
   &-txt-wrap {
-	@apply max-w-full;
+    @apply max-w-full;
 
-	.swiper-pagination {
-	  @apply flex;
-	  @apply -mt-4;
-	  @apply pb-8 lg:pb-0;
-	  @apply z-2;
+    .swiper-pagination {
+      @apply flex;
+      @apply -mt-4;
+      @apply pb-8 lg:pb-0;
+      @apply z-2;
 
-	  .swiper-pagination-bullet {
-		@apply bg-teal-dark;
-		@apply z-2;
-	  }
-	}
+      .swiper-pagination-bullet {
+        @apply bg-teal-dark bg-opacity-20 opacity-100;
+        @apply z-2;
+
+        &-active {
+          @apply bg-opacity-100;
+        }
+      }
+    }
   }
 
   @screen md {
-	&-inner {
-		@apply ml-px50;
-		@apply grid grid-cols-8 gap-x-px28 items-center;
-		width: calc(100% - #{rem-calc(100px)});
-	}
+    &-inner {
+      @apply ml-px50;
+      @apply grid grid-cols-8 gap-x-px28 items-center;
+      width: calc(100% - #{rem-calc(100px)});
+    }
 
-	&-img-wrap {
-	  @apply col-span-3;
-	}
+    &-img-wrap {
+      @apply col-span-3;
+    }
 
-	&-txt-wrap {
-	  @apply col-span-5;
-	  @apply py-0;
+    &-txt-wrap {
+      @apply col-span-5;
+      @apply py-0;
 
-	  .swiper-container {
-		@apply flex flex-col justify-center;
-	  }
+      .swiper-container {
+        @apply flex flex-col justify-center;
+      }
 
-		.swiper-pagination {
-			@apply mt-0 pb-0 mt-px20;
-		}
+      .swiper-pagination {
+        @apply mt-0 pb-0 mt-px20;
+      }
 
-		.swiper-wrapper {
-			@apply mt-px30;
-		}
-	}
+      .swiper-wrapper {
+        @apply mt-px30;
+      }
+    }
   }
 
   @screen lg {
-	&-inner {
-		@apply transform -translate-x-1/2 grid-cols-12;
-		max-width: #{rem-calc(1160)};
-		width: calc(100% - #{rem-calc(280px)});
-		margin-left: 50%;
-	}
+    &-inner {
+      @apply transform -translate-x-1/2 grid-cols-12;
+      max-width: #{rem-calc(1160)};
+      width: calc(100% - #{rem-calc(280px)});
+      margin-left: 50%;
+    }
 
-	&-img-wrap {
-		@apply col-span-5;
-	}
+    &-img-wrap {
+      @apply col-span-5;
+    }
 
-	&-txt-wrap {
-		@apply col-span-6  col-start-7;
-	}
+    &-txt-wrap {
+      @apply col-span-6  col-start-7;
+    }
   }
 
-	.swiper-wrapper {
-		@apply h-auto;
-	}
+  .swiper-wrapper {
+    @apply h-auto;
+  }
 
   .trevor-ti-quote-open,
   .trevor-ti-quote-close {
-	@apply text-teal-dark;
+    @apply text-teal-dark;
   }
 
   .swiper-slide {
-	@apply flex flex-col justify-center;
+    @apply flex flex-col justify-center;
 
-	figure {
-		@screen md {
-			@apply flex items-center justify-center;
-		}
-	}
+    figure {
+      @screen md {
+        @apply flex items-center justify-center;
+      }
+    }
   }
 
   .panes-container {
-	&.is-mobile-breakpoint {
-	  @apply hidden;
-	}
+    &.is-mobile-breakpoint {
+      @apply hidden;
+    }
   }
 
   blockquote {
-	@apply overflow-hidden overflow-ellipsis mx-auto;
-	@screen md {
-	  /**
-	   * 442px = width of the blockquote's container at tablet breakpoint
-	   * 370px = target width of the blockquote at tablet breakpoint
-	  */
-	  width: calc(370 / 442 * 100%);
-	}
+    @apply overflow-hidden overflow-ellipsis mx-auto;
+    @screen md {
+      /**
+      * 442px = width of the blockquote's container at tablet breakpoint
+      * 370px = target width of the blockquote at tablet breakpoint
+      */
+      width: calc(370 / 442 * 100%);
+    }
 
-	@screen lg {
-	  @apply w-px500;
-	}
+    @screen lg {
+      @apply w-px500;
+    }
   }
 
   figcaption {
-	@apply lg:text-px20;
+    @apply lg:text-px20;
   }
 }
