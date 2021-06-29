@@ -2,7 +2,7 @@
 	@apply justify-center items-center;
 
 	.modal-container {
-		@apply p-0 w-auto h-auto rounded-px10;
+		@apply w-auto h-auto rounded-px10 relative;
 		width: calc(100% - #{rem-calc(56)});
 		max-width: #{rem-calc(606)};
 	}
@@ -41,10 +41,18 @@
 
 		&--mobile {
 			@apply block;
+
+      @screen xl {
+        @apply hidden;
+      }
 		}
 
 		&--desktop {
 			@apply hidden;
+
+      @screen xl {
+        @apply block;
+      }
 		}
 	}
 

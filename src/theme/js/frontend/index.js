@@ -71,20 +71,33 @@ if ($donationModalButton.length) {
 }
 
 if ( $quickExitModal.length ) {
+	let siteVisitCount = Number(window.localStorage.getItem('site-visit-count') || 0);
 	const isQuickExitModalDismissed = localStorage.getItem('quick-exit-modal-dismissed');
+	let willShowModal = !isQuickExitModalDismissed;
 
-	const options = {
-		onInit(modal) {
-			if ( !isQuickExitModalDismissed ) {
-				setTimeout(() => modal.open(), 500);
-			}
-		},
-		onClose() {
-			localStorage.setItem('quick-exit-modal-dismissed', 1);
+	if ( isQuickExitModalDismissed ) {
+		siteVisitCount++;
+		window.localStorage.setItem('site-visit-count', siteVisitCount);
+
+		if ( siteVisitCount === 4 ) {
+			willShowModal = true;
 		}
 	}
 
-	modal($quickExitModal, options);
+	if ( willShowModal ) {
+		const options = {
+			onInit(modal) {
+				setTimeout(() => modal.open(), 500);
+			},
+			onClose({ initiator }) {
+				if ( initiator && initiator.classList.contains('quick-exit-modal__cta') ) {
+					localStorage.setItem('quick-exit-modal-dismissed', true);
+				}
+			}
+		}
+
+		modal($quickExitModal, options);
+	}
 }
 
 

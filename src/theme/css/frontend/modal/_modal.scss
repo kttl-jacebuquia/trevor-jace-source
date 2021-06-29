@@ -5,107 +5,109 @@
   @include z-index(modal-base);
 
   &.is-active {
-	@apply pointer-events-auto opacity-100 visible;
+    @apply pointer-events-auto opacity-100 visible;
   }
 
   .modal-overlay {
-	@apply absolute w-full h-full bg-teal-dark opacity-30 z-40;
+    @apply absolute w-full h-full bg-teal-dark opacity-30 z-40;
   }
 
-	&.team {
-		.modal-overlay {
-			@apply bg-white;
-			opacity: 8%;
-		}
-	}
+  &.team {
+    .modal-overlay {
+      @apply bg-white;
+      opacity: 8%;
+    }
+  }
 
   .modal-container {
-	@apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
-	// padding-top: var(--top-nav-top-margin);
-	padding-top: 50px;
+    @apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
+    @apply pt-px100;
+
+    @screen xl {
+      @apply pt-px50;
+    }
   }
 
   .modal-close {
-	top: Max(calc(var(--top-nav-top-margin) - 2.5rem), 0px);
-	@apply right-4 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
-	@apply bg-teal-dark text-white;
+    @apply absolute top-0 right-4 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
+    @apply bg-teal-dark text-white;
   }
 
   .modal-content-wrap {
-	@apply h-full;
+    @apply h-full;
   }
 
   body.is-rc & {
-	.modal-close {
-	  @apply bg-indigo;
-	}
+    .modal-close {
+      @apply bg-indigo;
+    }
   }
 
   // todo: move this
-	.team-member {
-		&__details {
-			span:not(:first-child) {
-				@apply pl-px12 ml-px12 border-l-2 border-blue_green border-opacity-40;
-			}
-		}
+  .team-member {
+    &__details {
+      span:not(:first-child) {
+        @apply pl-px12 ml-px12 border-l-2 border-blue_green border-opacity-40;
+      }
+    }
 
-		&__thumbnail-wrap {
-			max-width: rem-calc(319px);
-			@apply mx-auto flex;
+    &__thumbnail-wrap {
+      max-width: rem-calc(319px);
+      @apply mx-auto flex;
 
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				object-position: center;
-			}
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
 
-			@screen md {
-				max-width: rem-calc(210px);
-				@apply float-left mr-px26;
-			}
+      @screen md {
+        max-width: rem-calc(210px);
+        @apply float-left mr-px26;
+      }
 
-			@screen xl {
-				max-width: rem-calc(236px);
-			}
-		}
-	}
+      @screen xl {
+        max-width: rem-calc(236px);
+      }
+    }
+  }
 
 
 
   @screen md {
-	@apply w-full;
+    @apply w-full;
 
-	.modal-close {
-	  @apply mt-0 mr-7;
-	}
+    .modal-close {
+      @apply mt-0 mr-7;
+    }
 
-	.modal-container {
-		@apply w-auto h-auto pt-7;
-		max-width: rem-calc(668px);
-		max-height: 75%;
-		@apply shadow-lg rounded-px10 mx-auto;
-	}
+    .modal-container {
+      @apply w-auto h-auto pt-7;
+      max-width: rem-calc(668px);
+      max-height: 75%;
+      @apply shadow-lg rounded-px10 mx-auto;
+    }
   }
 
   @screen lg {
-	.modal-container {
-	  @apply pt-5;
-	}
+    .modal-container {
+      @apply pt-5;
+    }
 
-	.modal-close {
-	  @apply mr-5 -mb-4;
-	}
+    .modal-close {
+      @apply mr-5 -mb-4;
+    }
   }
 
   @screen xl {
-	.modal-container {
-		max-width: rem-calc(1028px);
+    .modal-container {
+      max-width: rem-calc(1028px);
 
-		.prose {
-			@apply max-w-full;
-		}
-	}
+      .prose {
+        @apply max-w-full;
+      }
+    }
   }
 }
 
@@ -114,6 +116,6 @@ body.modal-active {
   overflow-y: visible !important;
 
   .site-content {
-	filter: url('#blur3px');
+    filter: url('#blur3px');
   }
 }

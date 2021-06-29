@@ -28,11 +28,13 @@ class Modal {
 
 		// Create focus trap
 		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content[0], {
-			initialFocus: 'button.modal-close',
+			initialFocus: '.modal-container',
 			onPostDeactivate: () => {
 				// If focus remains inside the modal, remove focus
 				if ( this.$content[0].contains(document.activeElement) ) {
-					setTimeout(() => document.activeElement.blur(), 500);
+					setTimeout(() => {
+						document.querySelector('a[href],button').focus();
+					}, 500);
 				}
 			}
 		});
@@ -95,7 +97,7 @@ class Modal {
 	}
 
 	onAfterClose() {
-		// Contents here
+
 	}
 
 	onTransitionEnd(e) {
