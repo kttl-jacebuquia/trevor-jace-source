@@ -148,7 +148,7 @@ class Card {
 				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
-					<aside class="tags-box" data-title="<?php echo esc_attr($title); ?>" aria-label="tags for <?php echo esc_attr($title); ?>">
+					<aside class="tags-box" data-title="<?php echo esc_attr( $title ); ?>" aria-label="tags for <?php echo esc_attr( $title ); ?>">
 						<?php foreach ( $tags as $tag ) { ?>
 							<a
 								href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
