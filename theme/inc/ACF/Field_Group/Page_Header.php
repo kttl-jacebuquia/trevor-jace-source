@@ -210,7 +210,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$args = array_merge(
 			parent::prepare_register_args(),
 			array(
-				'title'    => 'Page Header',
+				'title'    => 'Landing Page Hero',
 				'location' => array(
 					array(
 						array(
