@@ -15,6 +15,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TEXT_CLR          = 'text_clr';
 	const FIELD_IMAGE_ENTRIES     = 'image_entries';
 	const FIELD_IMAGE_ENTRY_IMAGE = 'image_entry_image';
+	const FIELD_VIDEO             = 'video';
+	const FIELD_MEDIA_TYPE        = 'media_type';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -27,6 +29,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$bg_clr            = static::gen_field_key( static::FIELD_BG_CLR );
 		$image_entries     = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
 		$image_entry_image = static::gen_field_key( static::FIELD_IMAGE_ENTRY_IMAGE );
+		$video             = static::gen_field_key( static::FIELD_VIDEO );
+		$media_type        = static::gen_field_key( static::FIELD_MEDIA_TYPE );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -95,7 +99,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			),
 			parent::_get_fields(),
 			static::_gen_tab_field(
-				'Image(s)',
+				'Image/Video',
 				array(
 					'conditional_logic' => array(
 						array(
@@ -109,6 +113,26 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			),
 			array(
+				static::FIELD_MEDIA_TYPE    => array(
+					'key'               => $media_type,
+					'name'              => static::FIELD_MEDIA_TYPE,
+					'label'             => 'Media Type',
+					'type'              => 'button_group',
+					'choices'           => array(
+						'image' => 'Image',
+						'video' => 'Video',
+					),
+					'default_value'     => 'image',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'img_bg',
+							),
+						),
+					),
+				),
 				static::FIELD_IMAGE         => array(
 					'key'               => $image,
 					'name'              => static::FIELD_IMAGE,
@@ -118,13 +142,50 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						array(
 							array(
 								'field'    => $type,
-								'operator' => '!=',
-								'value'    => 'text',
+								'operator' => '==',
+								'value'    => 'horizontal',
 							),
+						),
+						array(
 							array(
 								'field'    => $type,
-								'operator' => '!=',
-								'value'    => 'multi_image_text',
+								'operator' => '==',
+								'value'    => 'split_img',
+							),
+						),
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'img_bg',
+							),
+							array(
+								'field'    => $media_type,
+								'operator' => '==',
+								'value'    => 'image',
+							),
+						),
+					),
+				),
+				static::FIELD_VIDEO         => array(
+					'key'               => $video,
+					'name'              => static::FIELD_VIDEO,
+					'label'             => 'Video',
+					'type'              => 'file',
+					'return_format'     => 'array',
+					'library'           => 'all',
+					'mime_types'        => 'MP4',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'img_bg',
+							),
+							array(
+								'field'    => $media_type,
+								'operator' => '==',
+								'value'    => 'video',
 							),
 						),
 					),
@@ -335,6 +396,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$images = $val->get( static::FIELD_IMAGE_ENTRIES );
 
 			$args['images'] = $images;
+		}
+
+		# Full Bleed Image/Video + Text
+		if ( 'img_bg' === $type ) {
+			$media_type = $val->get( static::FIELD_MEDIA_TYPE );
+
+			$args['media_type'] = $media_type;
+
+			if ( 'video' === $media_type ) {
+				$args['video'] = $val->get( static::FIELD_VIDEO );
+			}
 		}
 
 		return Helper\Page_Header::$type( $args );
