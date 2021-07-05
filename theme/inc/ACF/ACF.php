@@ -49,6 +49,7 @@ class ACF {
 		Field_Group\Text_Block::class,
 		Field_Group\File_Download::class,
 		Field_Group\Tier::class,
+		Field_Group\CTA_Block::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
