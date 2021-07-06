@@ -10,6 +10,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	const FIELD_ALTERNATE_TEXT_ALIGNMENT = 'alternate_text_alignment';
 	const FIELD_ENTRIES                  = 'entries';
 	const FIELD_ENTRY_IMAGE              = 'entry_image';
+	const FIELD_ENTRY_EYEBROW            = 'entry_eyebrow';
 	const FIELD_ENTRY_HEADER             = 'entry_header';
 	const FIELD_ENTRY_BODY               = 'entry_body';
 	const FIELD_ENTRY_CTA_BUTTON         = 'entry_cta_button';
@@ -27,6 +28,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$alternate_text_alignment = static::gen_field_key( static::FIELD_ALTERNATE_TEXT_ALIGNMENT );
 		$entries                  = static::gen_field_key( static::FIELD_ENTRIES );
 		$entry_image              = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
+		$entry_eyebrow            = static::gen_field_key( static::FIELD_ENTRY_EYEBROW );
 		$entry_header             = static::gen_field_key( static::FIELD_ENTRY_HEADER );
 		$entry_body               = static::gen_field_key( static::FIELD_ENTRY_BODY );
 		$entry_cta_button         = static::gen_field_key( static::FIELD_ENTRY_CTA_BUTTON );
@@ -108,6 +110,21 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 										'field'    => $alternate_type,
 										'operator' => '==',
 										'value'    => 'image',
+									),
+								),
+							),
+						),
+						static::FIELD_ENTRY_EYEBROW    => array(
+							'key'               => $entry_eyebrow,
+							'name'              => static::FIELD_ENTRY_EYEBROW,
+							'label'             => 'Eyebrow',
+							'type'              => 'text',
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => $alternate_type,
+										'operator' => '==',
+										'value'    => 'color',
 									),
 								),
 							),
@@ -230,6 +247,9 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 									<!-- alternate type color here -->
 								<?php endif; ?>
 								<div class="alternating-image-text__body <?php echo esc_attr( $alignment_class ); ?>">
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_EYEBROW ] ) ) : ?>
+										<p><?php echo esc_html( $entry[ static::FIELD_ENTRY_EYEBROW ] ); ?></p>
+									<?php endif; ?>
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
 										<h3 class="alternating-image-text__item-title"><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h3>
 									<?php endif; ?>
