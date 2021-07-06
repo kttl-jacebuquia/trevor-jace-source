@@ -14,6 +14,7 @@ class ACF {
 		Options_Page\Site_Banners::class,
 		Options_Page\Quick_Exit::class,
 		Options_Page\Resource_Center::class,
+		Options_Page\Search::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,
