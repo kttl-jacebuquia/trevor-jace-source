@@ -109,15 +109,7 @@
   blockquote {
     @apply overflow-hidden overflow-ellipsis mx-auto;
     @screen md {
-      /**
-      * 442px = width of the blockquote's container at tablet breakpoint
-      * 370px = target width of the blockquote at tablet breakpoint
-      */
-      width: calc(370 / 442 * 100%);
-    }
-
-    @screen lg {
-      @apply w-px500;
+      @apply w-full;
     }
   }
 

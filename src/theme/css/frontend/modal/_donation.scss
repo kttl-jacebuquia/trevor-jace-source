@@ -1,0 +1,21 @@
+#js-donation-modal {
+  .modal-close {
+    @apply mt-px20 right-0;
+  }
+
+  .modal-container {
+    @screen xl {
+      @apply pt-px68;
+    }
+  }
+
+  .donation-form {
+    @screen md {
+      @apply px-px42;
+    }
+
+    @screen xl {
+      @apply px-px58;
+    }
+  }
+}

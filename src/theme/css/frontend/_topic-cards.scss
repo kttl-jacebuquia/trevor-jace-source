@@ -1,12 +1,12 @@
 .topic-cards {
-	@apply my-px80;
+	@apply py-px80;
 
 	@screen md {
-		@apply my-px100;
+		@apply pt-px80 pb-px100;
 	}
 
 	@screen xl {
-		@apply mt-px100 mb-px120;
+		@apply pt-px100 pb-px120;
 	}
 
 	&__container {
@@ -47,6 +47,8 @@
 	}
 
 	&__accordion-item {
+    @apply bg-white text-teal-dark;
+
 		&:not(:last-child) {
 			border-bottom: 1px solid rgba(0, 94, 103, 0.2);
 		}
@@ -88,12 +90,12 @@
 	}
 
 	&__item {
-		@apply card-sm md:card-md lg:card-lg xl:card-xl;
+		@apply card-sm md:card-md lg:card-lg xl:card-xl bg-white text-teal-dark;
 		@apply md:shadow-none lg:shadow-none xl:shadow-none;
 		border: 1px solid rgba(0, 94, 103, 0.5);
 
 		@screen md {
-			@apply min-h-px320;
+			@apply min-h-px320 col-span-4;
 		}
 
 		@screen xl {

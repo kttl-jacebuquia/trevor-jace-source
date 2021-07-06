@@ -181,6 +181,7 @@
 
     @screen lg {
       max-width: rem-calc(500px);
+      @apply text-px20 leading-px28;
     }
   }
 }

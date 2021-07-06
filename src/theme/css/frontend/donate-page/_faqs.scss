@@ -6,7 +6,7 @@
   }
 
   &-heading {
-	@apply mb-px50 text-center text-px32 leading-px42 font-bold text-teal-dark;
+	@apply mb-px50 text-center text-px32 leading-px42 font-semibold text-teal-dark;
 
 	@screen md {
 	  @apply mb-px30 text-left text-px30 leading-px40;
@@ -37,7 +37,7 @@
 
 		&-headline {
 		  @apply text-px18 leading-px26 tracking-px05 font-semibold text-teal-dark;
- 
+
 		  @screen md {
 			@apply text-px20;
 		  }

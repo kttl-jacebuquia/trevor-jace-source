@@ -136,9 +136,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
 
 		ob_start();
-		// Next Step - FE (Apply Color & Button)
 		?>
-		<div class="topic-cards">
+		<div class="topic-cards <?php echo esc_attr($styles); ?>">
 			<div class="topic-cards__container">
 				<h2 class="topic-cards__heading"><?php echo esc_html( $title ); ?></h2>
 				<?php if ( ! empty( $description ) ) : ?>
