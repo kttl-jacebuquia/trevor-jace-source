@@ -49,8 +49,10 @@ class Hero {
 						: $options['context_cls']
 		);
 
+		$imgs = Thumbnail::render_img_variants( $imgs_data );
+
 		# Image
-		if ( empty( $imgs = Thumbnail::render_img_variants( $imgs_data ) ) ) {
+		if ( empty( $imgs ) ) {
 			return null;
 		}
 

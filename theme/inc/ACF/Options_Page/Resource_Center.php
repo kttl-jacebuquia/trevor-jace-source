@@ -18,6 +18,7 @@ class Resource_Center extends A_Options_Page {
 	const FIELD_GUIDES             = 'guide';
 	const FIELD_GLOSSARY_IMAGE     = 'glossary_image';
 	const FIELD_GLOSSARY           = 'glossary';
+	const FIELD_CARD_NUM           = 'card_num';
 
 	public static $used_post_ids = array();
 	public static $category_num  = 4;
@@ -33,8 +34,19 @@ class Resource_Center extends A_Options_Page {
 		$guides             = static::gen_field_key( static::FIELD_GUIDES );
 		$glossary_image     = static::gen_field_key( static::FIELD_GLOSSARY_IMAGE );
 		$glossary           = static::gen_field_key( static::FIELD_GLOSSARY );
+		$card_num           = static::gen_field_key( static::FIELD_CARD_NUM );
 
 		return array_merge(
+			static::_gen_tab_field( 'General' ),
+			array(
+				static::FIELD_CARD_NUM            => array(
+					'key'      => $card_num,
+					'name'     => static::FIELD_CARD_NUM,
+					'label'    => 'Number of Cards',
+					'type'     => 'number',
+					'required' => 1,
+				),
+			),
 			static::_gen_tab_field( 'Hero' ),
 			array(
 				static::FIELD_EYEBROW            => array(
@@ -78,7 +90,7 @@ class Resource_Center extends A_Options_Page {
 					'add_term'      => 0,
 					'save_terms'    => 0,
 					'load_terms'    => 0,
-					'return_format' => 'id',
+					'return_format' => 'object',
 					'multiple'      => 0,
 				),
 			),
@@ -127,7 +139,7 @@ class Resource_Center extends A_Options_Page {
 					'name'          => static::FIELD_GLOSSARY_IMAGE,
 					'label'         => 'Glossary Image',
 					'type'          => 'image',
-					'return_format' => 'array',
+					'return_format' => 'id',
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 				),
@@ -247,7 +259,7 @@ class Resource_Center extends A_Options_Page {
 		}
 
 		$cat_rows         = array();
-		$featured_cat_ids = wp_parse_id_list( $featured_topics );
+		$featured_cat_ids = wp_list_pluck( $featured_topics, 'ID' );
 		$featured_cats    = get_terms(
 			array(
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
@@ -258,10 +270,12 @@ class Resource_Center extends A_Options_Page {
 			)
 		);
 
+		$card_num = static::get_option( static::FIELD_CARD_NUM );
+
 		foreach ( $featured_cats as $cat ) {
 			$cat_posts = Helper\Posts::get_from_list(
 				$featured_cat_ids,
-				self::$category_num,
+				$card_num,
 				array( 'post__not_in' => self::$used_post_ids ),
 				array(
 					'post_type' => RC_Object::$PUBLIC_POST_TYPES,
@@ -318,7 +332,7 @@ class Resource_Center extends A_Options_Page {
 		);
 
 		$guide = Helper\Posts::get_one_from_list(
-			$guides,
+			wp_list_pluck( $guides, 'ID' ),
 			array( 'post__not_in' => self::$used_post_ids )
 		);
 
@@ -365,7 +379,7 @@ class Resource_Center extends A_Options_Page {
 		);
 
 		$featured_word = Helper\Posts::get_one_from_list(
-			wp_parse_id_list( $glossary ),
+			wp_list_pluck( $glossary, 'ID' ),
 			array(),
 			array( 'post_type' => \TrevorWP\CPT\RC\Glossary::POST_TYPE )
 		);
