@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\ACF\Field;
 
 class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Pattern {
 	/* Box Type */
@@ -28,6 +29,8 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 	const FIELD_BOX_DESC_ATTR    = 'box_desc_attr';
 	const FIELD_BOX_INNER_ATTR   = 'box_inner_attr';
 	const FIELD_BOX_WRAPPER_ATTR = 'box_wrapper_attr';
+	const FIELD_BG_COLOR         = 'bg_color';
+	const FIELD_TEXT_COLOR       = 'text_color';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -43,6 +46,8 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 		$box_wrapper_attr = static::gen_field_key( static::FIELD_BOX_WRAPPER_ATTR );
 		$inner_attr       = static::gen_field_key( static::FIELD_BOX_INNER_ATTR );
 		$wrapper_attr     = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
+		$bg_color         = static::gen_field_key( static::FIELD_BG_COLOR );
+		$text_color       = static::gen_field_key( static::FIELD_TEXT_COLOR );
 
 		return array(
 			'title'  => 'Info Boxes',
@@ -196,14 +201,41 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 						)
 					),
 				),
+				static::_gen_tab_field( 'Styling' ),
+				array(
+					static::FIELD_BG_COLOR   => Field\Color::gen_args(
+						$bg_color,
+						static::FIELD_BG_COLOR,
+						array(
+							'label'   => 'Background Color',
+							'default' => 'white',
+							'wrapper' => array(
+								'width' => '50',
+							),
+						)
+					),
+					static::FIELD_TEXT_COLOR => Field\Color::gen_args(
+						$text_color,
+						static::FIELD_TEXT_COLOR,
+						array(
+							'label'   => 'Text Color',
+							'default' => 'teal-dark',
+							'wrapper' => array(
+								'width' => '50',
+							),
+						),
+					),
+				)
 			),
 		);
 	}
 
 	/** @inheritdoc */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$val  = new Field_Val_Getter( static::class, $post, $data );
-		$type = $val->get( static::FIELD_TYPE );
+		$val        = new Field_Val_Getter( static::class, $post, $data );
+		$type       = $val->get( static::FIELD_TYPE );
+		$bg_color   = $val->get( static::FIELD_BG_COLOR );
+		$text_color = $val->get( static::FIELD_TEXT_COLOR );
 
 		$cls_wrapper     = array(
 			'info-boxes',
@@ -216,9 +248,17 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 		$cls_box_text    = array( 'info-box-text' );
 		$cls_box_desc    = array( 'info-box-desc' );
 
+		if ( ! empty( $bg_color ) ) {
+			$cls_wrapper[] = "bg-{$bg_color}";
+		}
+
+		if ( ! empty( $text_color ) ) {
+			$cls_wrapper[] = "text-{$text_color}";
+		}
+
 		# Carousel
 		$is_carousel = $val->get( static::FIELD_BREAK );
-		if ( 'carousel' == $is_carousel ) { // if carousel
+		if ( 'carousel' === $is_carousel ) { // if carousel
 			$cls_box_wrapper[] = 'swiper-slide';
 			$cls_inner[]       = 'swiper-wrapper';
 			$cls_wrapper[]     = 'swiper-container';
@@ -249,12 +289,12 @@ class Info_Boxes extends A_Field_Group implements I_Block, I_Renderable, I_Patte
 				<?php foreach ( $boxes as $box ) { ?>
 					<div <?php echo DOM_Attr::render_attrs_of( @$box[ static::FIELD_BOX_WRAPPER_ATTR ], $cls_box_wrapper ); ?>>
 						<div class="info-box-top">
-							<?php if ( static::BOX_TYPE_TEXT != $type ) : ?>
+							<?php if ( static::BOX_TYPE_TEXT !== $type ) : ?>
 								<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_IMG_ATTR ), $cls_box_img ); ?>>
 									<?php echo wp_get_attachment_image( $box[ static::FIELD_BOX_IMG ], 'medium' ); ?>
 								</div>
 							<?php endif; ?>
-							<?php if ( static::BOX_TYPE_IMG != $type ) : ?>
+							<?php if ( static::BOX_TYPE_IMG !== $type ) : ?>
 								<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_BOX_TEXT_ATTR ), $cls_box_text ); ?>>
 									<?php echo $box[ static::FIELD_BOX_TEXT ]; ?>
 								</div>
