@@ -1,6 +1,12 @@
 .quick-exit-modal {
 	@apply justify-center items-center;
 
+  .modal-overlay {
+    background: rgba(0, 0, 102, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+  }
+
 	.modal-container {
 		@apply w-auto h-auto rounded-px10 relative;
 		width: calc(100% - #{rem-calc(56)});
