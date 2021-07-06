@@ -74,7 +74,7 @@ export default function testimonialsCarousel(id) {
 					onSlideChange(swiper)
 				},
 				slideChange: (swiper) => {
-					onSlideChange(swiper, true);
+					onSlideChange(swiper);
 				},
 				resize: () => {
 					checkArrow();
@@ -106,16 +106,14 @@ export default function testimonialsCarousel(id) {
 		});
 	}
 
-	function onSlideChange (swiper, focus = false) {
+	function onSlideChange (swiper) {
 		[...swiper.slides].forEach((slide, index) => {
 			const isActiveIndex = index === swiper.activeIndex;
 
 			if ( isActiveIndex ) {
 				$(slide)
 					.attr('tabindex', 0)
-					.removeAttr('aria-hidden')
-
-				if ( focus ) { $(slide).focus(); }
+					.removeAttr('aria-hidden');
 			}
 			else {
 				$(slide)
@@ -123,7 +121,6 @@ export default function testimonialsCarousel(id) {
 					.attr('aria-hidden', true);
 			}
 		});
-		console.log(swiper.activeIndex, swiper.slides);
 	}
 
 	/**

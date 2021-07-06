@@ -335,10 +335,10 @@ class Carousel {
 					<div class="panes-container flex justify-between absolute h-full w-full">
 						<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative"
 							data-direction="left"
-							aria-label="Previous Slide" role="button"></div>
+							aria-hidden="true"></div>
 						<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative"
 							data-direction='right'
-							aria-label="Next Slide" role="button"></div>
+							aria-hidden="true"></div>
 					</div>
 					<div class="swiper-container h-full pt-px50 md:py-px20">
 						<div class="flex flex-row justify-center w-full" aria-hidden="true">
@@ -364,9 +364,6 @@ class Carousel {
 							<?php endforeach; ?>
 						</div>
 						<div class="swiper-pagination"></div>
-
-						<div class="swiper-button-prev" tabindex="0" role="button" aria-label="click to go the previous quote"></div>
-						<div class="swiper-button-next" tabindex="0" role="button" aria-label="click to go the next quote"></div>
 					</div>
 				</div>
 			</div>
