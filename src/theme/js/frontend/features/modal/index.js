@@ -28,7 +28,7 @@ class Modal {
 
 		// Create focus trap
 		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content[0], {
-			initialFocus: '.modal-container',
+			initialFocus: this.$content.find('.modal-container')[0],
 			onPostDeactivate: () => {
 				// If focus remains inside the modal, remove focus
 				if ( this.$content[0].contains(document.activeElement) ) {

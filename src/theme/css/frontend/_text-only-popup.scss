@@ -1,4 +1,14 @@
 .text-only-popup {
+  .modal-overlay {
+    @apply opacity-100;
+    background: rgba(173, 186, 185, 0.14);
+    backdrop-filter: blur(20px);
+  }
+
+  .modal-container {
+    @apply max-h-full;
+  }
+
   &__content {
     @apply px-px28 pb-px28;
 
@@ -7,12 +17,12 @@
     }
 
     @screen xl {
-      @apply px-px58 pb-px84;
+      @apply pl-px60 pr-px114 pb-px84;
     }
   }
 
   &__title {
-    @apply font-bold text-px32 leading-px42;
+    @apply font-semibold text-px32 leading-px42;
 
     @screen md {
       @apply tracking-em005;
@@ -24,7 +34,7 @@
   }
 
   &__subtitle {
-    @apply font-semibold mt-px14 text-px18 leading-px26 tracking-em001;
+    @apply font-medium mt-px14 text-px18 leading-px26 tracking-em001;
 
     @screen md {
       @apply text-px14 leading-px22;
@@ -43,11 +53,11 @@
     }
 
     @screen xl {
-      @apply mt-px28 text-px18 leading-px22;
+      @apply mt-px28 text-px18 leading-px26 font-semibold;
     }
 
     ul {
-      @apply list-disc pl-px24 mt-px16;
+      @apply list-disc pl-px22 mt-px16;
     }
 
     li {

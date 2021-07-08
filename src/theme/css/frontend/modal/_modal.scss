@@ -23,14 +23,27 @@
     @apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
     @apply pt-px100;
 
+    @screen md {
+      @apply pt-px57;
+    }
+
     @screen xl {
-      @apply pt-px50;
+      @apply pt-px84;
     }
   }
 
   .modal-close {
-    @apply absolute top-0 right-4 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
+    @apply absolute top-0 right-0 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
     @apply bg-teal-dark text-white;
+    @apply w-px45 h-px45 rounded-px18;
+
+    @screen md {
+      @apply top-px37;
+    }
+
+    @screen xl {
+      @apply top-px20 w-px50 h-px50;
+    }
   }
 
   .modal-content-wrap {
@@ -83,7 +96,7 @@
     }
 
     .modal-container {
-      @apply w-auto h-auto pt-7;
+      @apply w-auto h-auto;
       max-width: rem-calc(668px);
       max-height: 75%;
       @apply shadow-lg rounded-px10 mx-auto;
@@ -91,10 +104,6 @@
   }
 
   @screen lg {
-    .modal-container {
-      @apply pt-5;
-    }
-
     .modal-close {
       @apply mr-5 -mb-4;
     }

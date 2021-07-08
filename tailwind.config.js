@@ -196,6 +196,7 @@ module.exports = {
 			borderRadius: {
 				px4: px2rem(4),
 				px10: px2rem(10),
+				px18: px2rem(18),
 				px100: px2rem(100),
 			},
 			borderWidth: {

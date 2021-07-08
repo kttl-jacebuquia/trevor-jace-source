@@ -37,7 +37,7 @@ class Modal {
 
 		ob_start();
 		?>
-		<div class="modal <?php echo implode( ' ', $this->_options['class'] ); ?>" id="<?php echo esc_attr( $this->_selector ); ?>">
+		<div class="modal <?php echo implode( ' ', $this->_options['class'] ); ?>" id="<?php echo esc_attr( $this->_selector ); ?>" role="dialog">
 			<div class="modal-container" tabindex="0">
 				<div class="modal-content-wrap">
 					<?php echo $this->_content; ?>
