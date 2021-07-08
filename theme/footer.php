@@ -29,6 +29,8 @@ $social_media_accounts = array(
 	),
 );
 
+$data = \TrevorWP\Theme\ACF\Options_Page\Footer::get_footer();
+
 ?>
 
 <footer class="w-full flex flex-col justify-center sticky-cta-anchor">
@@ -40,12 +42,15 @@ $social_media_accounts = array(
 					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
 			</div>
-			<p class="mb-9 text-px18 leading-px26 tracking-em_001 md:mr-10 lg:mr-60">The Trevor Project is the leading
-				national organization providing crisis intervention and suicide prevention services to lesbian, gay,
-				bisexual, transgender, queer & questioning youth.</p>
+			
+			<?php if ( ! empty( $data['description'] ) ) : ?>
+				<p class="mb-9 text-px18 leading-px26 tracking-em_001 md:mr-10 lg:mr-60">
+					<?php echo esc_html( $data['description'] ); ?>
+				</p>
+			<?php endif; ?>
 
 			<form>
-				<legend>Sign Up For Our Newsletter</legend>
+				<legend><?php echo esc_html( $data['newsletter_title'] ); ?></legend>
 				<fieldset>
 					<label for="newsletter" class="sr-only">Email Address</label>
 					<input type="email" id="newsletter" placeholder="Email Address"/>
@@ -62,29 +67,31 @@ $social_media_accounts = array(
 					)
 				)
 				?>
-			<ul class="social-links">
-				<?php foreach ( $social_media_accounts as $account ) : ?>
-					<?php if ( ! empty( $account['url'] ) ) : ?>
-						<li>
-							<a href="<?php echo esc_url( $account['url'] ); ?>">
-								<i class="
-								<?php
-								echo esc_attr(
-									implode(
-										' ',
-										array(
-											$account['icon'],
-											'text-white',
+			<?php if ( ! empty( $data['social_media_links'] ) ) : ?>
+				<ul class="social-links">
+					<?php foreach ( $data['social_media_links'] as $link ) : ?>
+						<?php if ( ! empty( $link['url'] ) ) : ?>
+							<li>
+								<a href="<?php echo esc_url( $link['url'] ); ?>">
+									<i class="
+									<?php
+									echo esc_attr(
+										implode(
+											' ',
+											array(
+												$link['icon'],
+												'text-white',
+											)
 										)
-									)
-								);
-								?>
-									"></i>
-							</a>
-						</li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
+									);
+									?>
+										"></i>
+								</a>
+							</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 		</div>
 	</div>
 </footer>

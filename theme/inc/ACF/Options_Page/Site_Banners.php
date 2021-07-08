@@ -13,6 +13,16 @@ class Site_Banners extends A_Options_Page {
 	const FIELD_CUSTOM_ENTRY_END_DATE   = 'custom_entry_end_date';
 
 	/** @inheritDoc */
+	protected static function prepare_page_register_args(): array {
+		return array_merge(
+			parent::prepare_page_register_args(),
+			array(
+				'parent_slug' => 'general-settings',
+			)
+		);
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$long_wait_url           = static::gen_field_key( static::FIELD_LONG_WAIT_URL );
 		$long_wait_force_show    = static::gen_field_key( static::FIELD_LONG_WAIT_FORCE_SHOW );

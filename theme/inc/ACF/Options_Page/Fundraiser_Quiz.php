@@ -29,7 +29,15 @@ class Fundraiser_Quiz extends A_Options_Page {
 	const WHO_FUNDRAISING_ITEM                   = 'who_fundraising_item';
 	const PLANNING_GATHERING_TITLE               = 'planning_gathering_title';
 
-
+	/** @inheritDoc */
+	protected static function prepare_page_register_args(): array {
+		return array_merge(
+			parent::prepare_page_register_args(),
+			array(
+				'parent_slug' => 'general-settings',
+			)
+		);
+	}
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {

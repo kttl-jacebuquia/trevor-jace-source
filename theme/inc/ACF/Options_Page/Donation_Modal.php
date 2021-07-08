@@ -9,6 +9,16 @@ class Donation_Modal extends A_Options_Page {
 	const FIELD_PAGES = 'pages';
 
 	/** @inheritDoc */
+	protected static function prepare_page_register_args(): array {
+		return array_merge(
+			parent::prepare_page_register_args(),
+			array(
+				'parent_slug' => 'general-settings',
+			)
+		);
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$title = static::gen_field_key( static::FIELD_TITLE );
 		$intro = static::gen_field_key( static::FIELD_INTRO );

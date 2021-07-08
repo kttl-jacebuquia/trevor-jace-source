@@ -8,6 +8,16 @@ class Search extends A_Options_Page {
 	const FIELD_DESCRIPTION        = 'search_carousel_description';
 
 	/** @inheritDoc */
+	protected static function prepare_page_register_args(): array {
+		return array_merge(
+			parent::prepare_page_register_args(),
+			array(
+				'parent_slug' => 'general-settings',
+			)
+		);
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$posts_per_page     = static::gen_field_key( static::FIELD_POSTS_PER_PAGE );
 		$headline           = static::gen_field_key( static::FIELD_HEADLINE );

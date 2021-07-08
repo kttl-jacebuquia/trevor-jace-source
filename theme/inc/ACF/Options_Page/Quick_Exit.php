@@ -7,6 +7,16 @@ class Quick_Exit extends A_Options_Page {
 	const FIELD_LINK_TEXT                 = 'link_text';
 
 	/** @inheritDoc */
+	protected static function prepare_page_register_args(): array {
+		return array_merge(
+			parent::prepare_page_register_args(),
+			array(
+				'parent_slug' => 'general-settings',
+			)
+		);
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$headline                  = static::gen_field_key( static::FIELD_HEADLINE );
 		$description_desktop       = static::gen_field_key( static::FIELD_DESCRIPTION_DESKTOP );

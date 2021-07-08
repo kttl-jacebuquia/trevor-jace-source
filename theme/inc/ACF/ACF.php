@@ -9,16 +9,17 @@ class ACF {
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
 		// Options
-		Options_Page\Fundraiser_Quiz::class,
-		Options_Page\Donation_Modal::class,
+		Options_Page\Footer::class,
 		Options_Page\Site_Banners::class,
 		Options_Page\Quick_Exit::class,
-		Options_Page\Resource_Center::class,
+		Options_Page\Fundraiser_Quiz::class,
+		Options_Page\Donation_Modal::class,
 		Options_Page\Search::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,
 		Options_Page\Post_Type\Research::class,
+		Options_Page\Resource_Center::class,
 		// Blocks
 		Field_Group\HTML_Elem::class,
 		Field_Group\Grid_Row::class,

@@ -85,6 +85,12 @@ abstract class A_Options_Page extends A_Field_Group {
 	 * @return mixed
 	 */
 	public static function register_page() {
+		$args = static::get_page_register_args();
+
+		if ( ! empty( $args['parent_slug'] ) ) {
+			return acf_add_options_sub_page( static::get_page_register_args() );
+		}
+
 		return acf_add_options_page( static::get_page_register_args() );
 	}
 

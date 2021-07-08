@@ -39,12 +39,13 @@ class Resource_Center extends A_Options_Page {
 		return array_merge(
 			static::_gen_tab_field( 'General' ),
 			array(
-				static::FIELD_CARD_NUM            => array(
-					'key'      => $card_num,
-					'name'     => static::FIELD_CARD_NUM,
-					'label'    => 'Number of Cards',
-					'type'     => 'number',
-					'required' => 1,
+				static::FIELD_CARD_NUM => array(
+					'key'           => $card_num,
+					'name'          => static::FIELD_CARD_NUM,
+					'label'         => 'Number of Cards',
+					'type'          => 'number',
+					'required'      => 1,
+					'default_value' => 4,
 				),
 			),
 			static::_gen_tab_field( 'Hero' ),

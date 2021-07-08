@@ -102,6 +102,16 @@ class Hooks {
 				'header-menu' => __( 'Header Menu' ),
 			)
 		);
+
+		acf_add_options_page(
+			array(
+				'page_title' => 'General Settings',
+				'menu_title' => 'General Settings',
+				'menu_slug'  => 'general-settings',
+				'capability' => 'administrator',
+				'redirect'   => true,
+			)
+		);
 	}
 
 	/**
