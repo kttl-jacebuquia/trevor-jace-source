@@ -9,6 +9,7 @@ class ACF {
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
 		// Options
+		Options_Page\Header::class,
 		Options_Page\Footer::class,
 		Options_Page\Site_Banners::class,
 		Options_Page\Quick_Exit::class,

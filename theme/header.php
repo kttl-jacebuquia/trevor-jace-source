@@ -5,6 +5,8 @@ use TrevorWP\Theme\Customizer;
 use \TrevorWP\Theme\Util\Is;
 
 $is_rc = Is::rc();
+
+$header_data = \TrevorWP\Theme\ACF\Options_Page\Header::get_header();
 ?>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
@@ -57,22 +59,34 @@ $is_rc = Is::rc();
 		<div class="switcher-wrap">
 			<ul class="switcher">
 				<li>
-					<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE ) ); ?>"
-					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>">Find Support</a>
+					<a href="<?php echo esc_url( $header_data['find_support_link']['url'] ); ?>"
+					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>" 
+					target="<?php echo esc_attr( $header_data['find_support_link']['target'] ); ?>">
+						<?php echo esc_html( $header_data['find_support_link']['title'] ); ?>
+					</a>
 				</li>
 				<li>
-					<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\Org\Org_Object::PERMALINK_ORG_LP ) ); ?>"
-					class="<?php echo $is_rc ? '' : 'active'; ?>">Explore Trevor</a>
+					<a href="<?php echo esc_url( $header_data['explore_trevor_link']['url'] ); ?>"
+					class="<?php echo $is_rc ? '' : 'active'; ?>" 
+					target="<?php echo esc_attr( $header_data['explore_trevor_link']['target'] ); ?>">
+						<?php echo esc_html( $header_data['explore_trevor_link']['title'] ); ?>
+					</a>
 				</li>
 			</ul>
 		</div>
 		<div class="cta-wrap">
 			<div class="cta-links">
-				<a href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>"
-				class="btn bg-orange text-white">Reach a Counselor</a>
-				<a href="<?php echo esc_attr( home_url( TrevorWP\CPT\Donate\Donate_Object::PERMALINK_DONATE ) ); ?>"
-				class="btn bg-white text-orange border-2" rel="noopener nofollow">Donate</a>
-				</div>
+				<a href="<?php echo esc_url( $header_data['counselor_link']['url'] ); ?>"
+				class="btn bg-orange text-white"
+				target="<?php echo esc_attr( $header_data['counselor_link']['target'] ); ?>">
+					<?php echo esc_html( $header_data['counselor_link']['title'] ); ?>
+				</a>
+				<a href="<?php echo esc_url( $header_data['donate_link']['url'] ); ?>"
+				class="btn bg-white text-orange border-2" rel="noopener nofollow"
+				target="<?php echo esc_attr( $header_data['donate_link']['target'] ); ?>">
+					<?php echo esc_html( $header_data['donate_link']['title'] ); ?>
+				</a>
+			</div>
 		</div>
 		<div class="topbar-nav-wrap">
 			<?php /* Will contain menu for desktop, for seamless transition */ ?>
