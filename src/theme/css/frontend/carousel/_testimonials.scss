@@ -7,6 +7,10 @@
     @apply overflow-hidden;
     @apply max-w-full ml-px28;
     width: calc(100% - #{rem-calc(56px)});
+
+    @screen xl {
+      @apply overflow-visible;
+    }
   }
 
   &-img-wrap {
