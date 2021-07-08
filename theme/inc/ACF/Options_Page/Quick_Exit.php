@@ -65,7 +65,10 @@ class Quick_Exit extends A_Options_Page {
 				<p class="quick-exit-modal__description quick-exit-modal__description--desktop">
 					<?php echo esc_html( $description_desktop ); ?>
 				</p>
-				<a href="#" name="Quick exit close" aria-label="click here to close this modal" class="quick-exit-modal__cta js-modal-close"><?php echo esc_html( $link_text ); ?></a>
+				<a
+					href="#"
+					name="Quick exit close"
+					aria-label="<?php echo esc_attr( $link_text ); ?>, click here to close this modal" class="quick-exit-modal__cta js-modal-close"><?php echo esc_html( $link_text ); ?></a>
 			</div>
 		<?php
 		return ob_get_clean();
