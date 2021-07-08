@@ -33,6 +33,12 @@
     }
   }
 
+  .swiper-pagination {
+    @screen md {
+      @apply mt-px50;
+    }
+  }
+
   .swiper-pagination-bullet {
     @apply bg-current;
   }

@@ -90,7 +90,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 						class="donation-form__heading text-center xl:text-left"><?php echo $heading; ?></h2>
 					<p class="donation-form__intro text-center xl:text-left"><?php echo $intro; ?></p>
 
-					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form" aria-labelledby="<?php echo 'form-heading-' . $uuid; ?>">
+					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form-<?php echo $uuid; ?>" aria-labelledby="<?php echo 'form-heading-' . $uuid; ?>">
 						<div class="frequency">
 							<div class="visually-hidden">
 								<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
@@ -103,16 +103,16 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 							</div>
 
 							<div class="frequency--choices">
-								<label for="once" class="is-selected text-center">Give Once</label>
-								<label for="monthly" class="text-center">Give Monthly</label>
+								<label tabindex="0" for="once" class="is-selected text-center">Give Once</label>
+								<label tabindex="0" for="monthly" class="text-center">Give Monthly</label>
 							</div>
 
 							<div class="amount">
 								<div class="amount-choices">
-									<label for="amount-30" class="selected">$30</label>
-									<label for="amount-60">$60</label>
-									<label for="amount-120">$120</label>
-									<label for="amount-250">$250</label>
+									<label tabindex="0" for="amount-30" class="selected">$30</label>
+									<label tabindex="0" for="amount-60">$60</label>
+									<label tabindex="0" for="amount-120">$120</label>
+									<label tabindex="0" for="amount-250">$250</label>
 								</div>
 								<div class="amount-custom">
 									<input type="number" name="custom" class="custom-amount" placeholder="$Custom amount">
@@ -138,7 +138,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 			</div>
 			<?php if ( ! empty( $form_image ) ) : ?>
 				<div class="donation-form__image">
-					<div class="image-wrapper"><img src="<?php echo $form_image['url']; ?>"/></div>
+					<div class="image-wrapper"><img src="<?php echo $form_image['url']; ?>" alt="<?php echo $form_image['alt']?>"/></div>
 				</div>
 			<?php endif; ?>
 		</div>

@@ -142,7 +142,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full header-container--split-img <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
+		<header class="header-container w-full header-container--split-img <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_attr( $hero_cls ); ?>">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -190,7 +190,7 @@ class Page_Header {
 					</div>
 				</div>
 			</div>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}
@@ -206,7 +206,7 @@ class Page_Header {
 	public static function img_bg( array $options ): ?string {
 		ob_start();
 		?>
-		<div class="page-header type-img-bg">
+		<header class="page-header type-img-bg">
 			<div class="page-header-content-wrap">
 				<h1 class="heading-lg-tilted page-header-title">
 					<?php # Leave unescape in order to support <tilt> ?>
@@ -253,7 +253,7 @@ class Page_Header {
 					</div>
 				<?php endif; ?>
 			<?php endif; ?>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}
@@ -278,7 +278,7 @@ class Page_Header {
 		);
 		ob_start();
 		?>
-		<div class="header-container w-full <?php echo esc_attr( ( ! empty( $options['styles'] ) ) ? implode( ' ', $options['styles'] ) : '' ); ?>">
+		<header class="header-container w-full <?php echo esc_attr( ( ! empty( $options['styles'] ) ) ? implode( ' ', $options['styles'] ) : '' ); ?>">
 			<div class="page-header type-split-carousel">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
@@ -310,7 +310,7 @@ class Page_Header {
 					</div>
 				</div>
 			</div>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}
@@ -349,7 +349,7 @@ class Page_Header {
 
 		ob_start();
 		?>
-		<div class="header-container w-full header-container--horizontal <?php echo esc_html( implode( ' ', $options['styles'] ) ); ?>">
+		<header class="header-container w-full header-container--horizontal <?php echo esc_html( implode( ' ', $options['styles'] ) ); ?>">
 			<div class="<?php echo esc_html( $header_cls ); ?>">
 				<div class="page-header-inner">
 					<?php if ( ! empty( $options['title'] ) || ! empty( $options['desc'] ) ) { ?>
@@ -390,7 +390,7 @@ class Page_Header {
 					<?php } ?>
 				</div>
 			</div>
-		</div>
+		</header>
 		<?php
 		return ob_get_clean();
 	}

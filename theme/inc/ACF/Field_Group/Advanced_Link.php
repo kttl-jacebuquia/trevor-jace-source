@@ -269,9 +269,13 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 				// DONATE MODAL
 				if ( 'donate' === $modal_type ) {
-					$dedication_donation = $val->get( static::FIELD_DONATE_DEDICATION );
-					$options['tag']      = 'button';
-					$options['class'][]  = DonationModal::ID;
+					$dedication_donation                                   = $val->get( static::FIELD_DONATE_DEDICATION );
+					$options['tag']                                        = 'button';
+					$options['class'][]                                    = DonationModal::ID;
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+						DOM_Attr::FIELD_ATTR_VAL => 'click to open donate form modal',
+					);
 					DonationModal::create(
 						array(
 							'dedication' => $dedication_donation,
@@ -280,8 +284,12 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 					// FUNDRAISE MODAL
 				} elseif ( 'fundraise_quiz' === $modal_type ) {
-					$options['tag']     = 'button';
-					$options['class'][] = FundraiserQuizModal::ID;
+					$options['tag']                                        = 'button';
+					$options['class'][]                                    = FundraiserQuizModal::ID;
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+						DOM_Attr::FIELD_ATTR_VAL => 'click to open fundraise quiz modal',
+					);
 					FundraiserQuizModal::create();
 
 					// TEXT ONLY POPUP

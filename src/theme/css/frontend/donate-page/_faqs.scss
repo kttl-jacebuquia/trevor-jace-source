@@ -2,118 +2,122 @@
   @apply pb-px80 pt-px80 bg-white;
 
   @screen lg {
-	@apply pb-px120 pt-px120;
+    @apply pb-px120 pt-px120;
   }
 
   &-heading {
-	@apply mb-px50 text-center text-px32 leading-px42 font-semibold text-teal-dark;
+    @apply mb-px50 text-center text-px32 leading-px42 font-semibold text-teal-dark;
 
-	@screen md {
-	  @apply mb-px30 text-left text-px30 leading-px40;
+    @screen md {
+      @apply mb-px30 text-left text-px30 leading-px40;
 
-	}
+    }
 
-	@screen lg {
-	  @apply mb-px40 text-px40 leading-px28;
-	}
+    @screen lg {
+      @apply mb-px40 text-px40 leading-px28;
+    }
   }
 
   .faq {
-	&-list {
-	  border-top: 1px solid theme('colors.teal.dark');
-	  @apply mr-pxn25 ml-pxn25;
+    &-list {
+      border-top: 1px solid theme('colors.teal.dark');
+      @apply mr-pxn25 ml-pxn25;
 
-	  @screen md {
-		@apply mr-auto ml-auto;
-	  }
+      @screen md {
+        @apply mr-auto ml-auto;
+      }
 
-	  &__heading {
-		@apply pt-px28 pb-px28 pl-px20 pr-px20 cursor-pointer;
-		border-bottom: 1px solid rgba(149, 163, 167, 0.4);
+      &__toggle {
+        @apply flex flex-shrink-0 w-px45 h-px45 justify-center items-center order-1 -mr-px20;
 
-		@screen md {
-		  @apply pt-px40 pb-px40 pl-0 pr-0;
-		}
+        @screen xl {
+          @apply mr-0;
+        }
+      }
 
-		&-headline {
-		  @apply text-px18 leading-px26 tracking-px05 font-semibold text-teal-dark;
+      &__heading {
+        @apply pt-px28 pb-px28 pl-px20 pr-px20 cursor-pointer;
+        border-bottom: 1px solid rgba(149, 163, 167, 0.4);
 
-		  @screen md {
-			@apply text-px20;
-		  }
+        @screen md {
+          @apply pt-px40 pb-px40 pl-0 pr-0;
+        }
 
-		  @screen lg {
-			@apply text-px26 leading-px36;
-		  }
+        &-headline {
+          @apply flex justify-between items-center text-px18 leading-px26 tracking-px05 font-semibold text-teal-dark;
 
-		  svg {
-			@apply block float-right mr-px20 translate-y-2/4;
-		  }
+          @screen md {
+            @apply text-px20;
+          }
 
-		  .minus {
-			@apply hidden translate-y-10;
-		  }
-		}
+          @screen lg {
+            @apply text-px26 leading-px36;
+          }
 
-		&.is-open {
-		  h4 {
-			.plus {
-			  @apply hidden;
-			}
+          .minus {
+            @apply hidden translate-y-10;
+          }
+        }
 
-			.minus {
-			  @apply block;
-			}
-		  }
-		}
-	  }
+        &.is-open {
+          h4 {
+            .plus {
+              @apply hidden;
+            }
 
-	  &__content {
-		border-bottom: 1px solid rgba(149, 163, 167, 0.4);
-		@apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22 text-teal-dark bg-gray-light;
+            .minus {
+              @apply block;
+            }
+          }
+        }
+      }
 
-		@screen md {
-		  @apply pt-px40 pr-px30 pb-px40 pl-px30 text-px18 leading-px26;
-		}
+      &__content {
+        border-bottom: 1px solid rgba(149, 163, 167, 0.4);
+        @apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22 text-teal-dark bg-gray-light;
 
-		@screen lg {
-		  @apply pt-px50 pr-px48 pb-px58 pl-px38 text-px20 leading-px28;
-		}
+        @screen md {
+          @apply pt-px40 pr-px30 pb-px40 pl-px30 text-px18 leading-px26;
+        }
 
-		&.is-open {
-		  @apply block;
-		}
-	  }
-	}
+        @screen lg {
+          @apply pt-px50 pr-px48 pb-px58 pl-px38 text-px20 leading-px28;
+        }
 
-	&-footer {
-	  @apply mt-px40;
+        &.is-open {
+          @apply block;
+        }
+      }
+    }
 
-	  @screen lg {
-		@apply mt-px30;
-	  }
+    &-footer {
+      @apply mt-px40;
 
-	  p {
-		@apply text-center text-px18 leading-px26 text-teal-dark;
+      @screen lg {
+        @apply mt-px30;
+      }
 
-		@screen lg {
-		  @apply text-left;
-		}
+      p {
+        @apply text-center text-px18 leading-px26 text-teal-dark;
 
-		a {
-		  @apply relative block mt-px20 font-bold ml-px10 text-teal-dark;
+        @screen lg {
+          @apply text-left;
+        }
 
-		  &:after {
-			content: '';
-			border-bottom: 1px solid theme('colors.teal.dark');
-			@apply absolute bottom-0 left-0 right-0 mx-auto w-px127;
-		  }
+        a {
+          @apply relative block mt-px20 font-bold ml-px10 text-teal-dark;
 
-		  @screen lg {
-			@apply mt-0 inline-block;
-		  }
-		}
-	  }
-	}
+          &:after {
+            content: '';
+            border-bottom: 1px solid theme('colors.teal.dark');
+            @apply absolute bottom-0 left-0 right-0 mx-auto w-px127;
+          }
+
+          @screen lg {
+            @apply mt-0 inline-block;
+          }
+        }
+      }
+    }
   }
 }

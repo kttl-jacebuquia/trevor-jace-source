@@ -105,7 +105,7 @@
 
 	&__item-title {
 		@apply card-heading;
-		@apply text-px20 leading-px26;
+		@apply font-semibold text-px20 leading-px26;
 
 		@screen md {
 			@apply text-px30 leading-px40;
@@ -114,7 +114,7 @@
 
 	&__item-description {
 		@apply card-description;
-		@apply text-px18 leading-px28;
+		@apply text-px16 leading-px22;
 
 		@screen md {
 			@apply mt-px12 text-px18 leading-px26 tracking-px05;
