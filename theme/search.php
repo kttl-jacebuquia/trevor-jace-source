@@ -3,17 +3,21 @@
 use TrevorWP\Parsedown\Parsedown;
 use \TrevorWP\Theme\Customizer\Search as Page;
 
+$search_data = \TrevorWP\Theme\ACF\Options_Page\Search::get_search();
+
+$glossary_item = Page::get_glossary_item()
+
 ?>
 <?php get_header(); ?>
 	<main id="site-content" role="main">
 		<?php // TODO: Add header ?>
 		<div class="bg-gray-light">
 			<div class="container mx-auto text-center text-indigo py-20">
-				<h1 class="font-bold text-center text-px30 leading-px40 md:text-px32 md:leading-px40 lg:text-px40 lg:leading-px50 mb-7 lg:mb-10"><?php echo Page::get_val( Page::SETTING_GENERAL_PAGE_TITLE ); ?></h1>
+				<h1 class="font-bold text-center text-px30 leading-px40 md:text-px32 md:leading-px40 lg:text-px40 lg:leading-px50 mb-7 lg:mb-10"><?php echo esc_html( $search_data['headline'] ); ?></h1>
 				<form role="search" method="get" class="search-form relative"
 						action="<?php echo esc_url( Page::get_permalink() ); ?>">
 					<div class="relative w-full md:w-3/5 xl:max-w-px606 mx-auto">
-						<?php echo \TrevorWP\Theme\Helper\Search_Input::render_rc( esc_attr( Page::get_val( Page::SETTING_GENERAL_INPUT_PLACEHOLDER ) ) ); ?>
+						<?php echo \TrevorWP\Theme\Helper\Search_Input::render_rc( esc_attr( $search_data['search_placeholder'] ) ); ?>
 					</div>
 				</form>
 			</div>
@@ -28,7 +32,7 @@ use \TrevorWP\Theme\Customizer\Search as Page;
 					</div>
 
 					<?php if ( have_posts() ) : ?>
-						<?php if ( ! empty( $glossary_item = Page::get_glossary_item() ) ) : ?>
+						<?php if ( ! empty( $glossary_item ) ) : ?>
 							<div class="w-full bg-gray-light text-indigo p-px30 mb-14 md:mb-16 rounded-px10 xl:w-7/12">
 								<h3 class="font-bold lg:font-semibold text-px22 leading-px28 lg:text-px24 lg:leading-px34 tracking-px05 mb-px8 md:mb-px16 lg:mb-px10"><?php echo @$glossary_item->post_title_t; ?></h3>
 								<div class="text-px16 leading-px22 tracking-px05 mb-4"><?php echo @$glossary_item->post_excerpt_t; ?></div>
@@ -65,8 +69,8 @@ use \TrevorWP\Theme\Customizer\Search as Page;
 							)
 						),
 						array(
-							'title'     => Page::get_val( Page::SETTING_HOME_CAROUSEL_TITLE ),
-							'subtitle'  => Page::get_val( Page::SETTING_HOME_CAROUSEL_DESC ),
+							'title'     => $search_data['carousel']['title'],
+							'subtitle'  => $search_data['carousel']['description'],
 							'class'     => 'text-indigo',
 							'title_cls' => 'centered',
 							'onlyMd'    => false,
