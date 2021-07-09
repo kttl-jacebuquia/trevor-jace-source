@@ -53,6 +53,7 @@ class ACF {
 		Field_Group\File_Download::class,
 		Field_Group\Tier::class,
 		Field_Group\CTA_Block::class,
+		Field_Group\Crisis_Services_Text_Block::class,
 		Field_Group\Messaging_Block::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
