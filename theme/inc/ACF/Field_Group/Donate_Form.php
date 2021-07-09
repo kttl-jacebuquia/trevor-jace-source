@@ -138,7 +138,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 			</div>
 			<?php if ( ! empty( $form_image ) ) : ?>
 				<div class="donation-form__image">
-					<div class="image-wrapper"><img src="<?php echo $form_image['url']; ?>" alt="<?php echo $form_image['alt']?>"/></div>
+					<div class="image-wrapper"><img src="<?php echo $form_image['url']; ?>" alt="<?php echo $form_image['alt']; ?>"/></div>
 				</div>
 			<?php endif; ?>
 		</div>
