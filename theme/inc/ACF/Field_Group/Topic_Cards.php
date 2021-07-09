@@ -145,9 +145,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				<?php endif; ?>
 
 				<?php if ( ! empty( $topic_entries ) ) : ?>
-					<div class="topic-cards__accordion">
+					<div class="topic-cards__accordion" role="list">
 						<?php foreach ( $topic_entries as $topic ) : ?>
-							<div class="topic-cards__accordion-item js-accordion">
+							<div class="topic-cards__accordion-item js-accordion" role="listitem">
 								<div class="topic-cards__accordion-header">
 									<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
 										<h3 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h3>
@@ -180,7 +180,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				<?php endif; ?>
 
 				<?php if ( ! empty( $topic_entries ) ) : ?>
-					<div class="topic-cards__grid">
+					<div class="topic-cards__grid" role="list">
 						<?php foreach ( $topic_entries as $topic ) : ?>
 							<div class="topic-cards__item" role="listitem">
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
@@ -191,18 +191,20 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 									<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
 								<?php endif; ?>
 
-								<?php
-									echo Advanced_Link::render(
-										null,
-										$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
-										array(
-											'class'      => array( 'topic-cards__cta wave-underline' ),
-											'attributes' => array(
-												'aria-label' => 'click to learn more about ' . $topic[ static::FIELD_TOPIC_ENTRY_TITLE ],
-											),
-										)
-									);
-								?>
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['label'] ) ) : ?>
+									<?php
+										echo Advanced_Link::render(
+											null,
+											$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
+											array(
+												'class'      => array( 'topic-cards__cta wave-underline' ),
+												'attributes' => array(
+													'aria-label' => 'click to learn more about ' . $topic[ static::FIELD_TOPIC_ENTRY_TITLE ],
+												),
+											)
+										);
+									?>
+								<?php endif; ?>
 							</div>
 						<?php endforeach; ?>
 					</div>
