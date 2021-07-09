@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-export default function faqToggle($btn) {
+export default function faqToggle($heading) {
 	const slideDuration = 50;
-	$btn.toggleClass('is-open');
-	$btn.next().slideToggle(slideDuration);
+	$heading.toggleClass('is-open');
+	$heading.next().slideToggle(slideDuration);
 }

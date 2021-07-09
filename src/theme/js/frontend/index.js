@@ -29,7 +29,7 @@ const $fundraiserQuizButton = $(".js-fundraiser-quiz");
 const $donationModalButton = $(".js-donation-modal");
 const $quickExitModal = $(".js-quick-exit-modal");
 
-let faqTrigger = $('.faq-list__heading');
+let faqTrigger = $('.faq-list__toggle');
 
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
@@ -128,9 +128,31 @@ if (isSingle) {
 
 // If FAQ is Present
 if (isFAQPresent) {
+	const onHeadingMutate = (heading) => {
+		const $heading = $(heading);
+		const $button = $heading.find('button');
+		const title = $button.data('title');
+		const isExpanded = $heading.hasClass('is-open');
+		const label = `Click to ${ isExpanded ? 'hide' : 'show' } contents for ${title}`;
+		$button.attr('aria-label', label).attr('aria-expanded', isExpanded);
+	};
+
+	const faqTriggerObserver = new MutationObserver(([ mutation ]) => {
+		if ( mutation.attributeName === 'class' ) {
+			onHeadingMutate(mutation.target);
+		}
+	});
+
+	faqTrigger.each((index, el) => {
+		const $heading = $(el).closest('.faq-list__heading');
+		faqTriggerObserver.observe($heading[0], { attributes: true });
+		onHeadingMutate($heading);
+	});
+
 	faqTrigger.on('click', function (e) {
 		e.preventDefault();
-		features.faqToggle($(this));
+		const $heading = $(this).closest('.faq-list__heading');
+		features.faqToggle($heading);
 	});
 }
 

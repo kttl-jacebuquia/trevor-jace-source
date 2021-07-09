@@ -3,8 +3,8 @@ import $ from 'jquery';
 const _frequency = $('.frequency--choices label');
 const _amount = $('.amount-choices label');
 const _donateForm = $('#donate-form');
-const _customAmount = $('.custom-amount', _donateForm); 
-const _displayAmount = $('.display-amount', _donateForm); 
+const _customAmount = $('.custom-amount', _donateForm);
+const _displayAmount = $('.display-amount', _donateForm);
 const _fixedAmount = $('.fixed-amount');
 const _displayFormatAmount = $("input[data-type='currency']");
 
@@ -12,6 +12,14 @@ export function toggleFrequency() {
 	_frequency.click(function(){
 		_frequency.removeClass('is-selected');
 		$(this).toggleClass('is-selected');
+	});
+	_frequency.on('keyup', function(e){
+		if ( /space|enter/i.test(e.code) ) {
+			e.preventDefault();
+			_frequency.removeClass('is-selected');
+			$(this).toggleClass('is-selected');
+			return false;
+		}
 	});
 }
 
@@ -22,12 +30,23 @@ export function toggleAmount() {
 		_customAmount.val('');
 		_displayAmount.val('');
 	});
+
+	_amount.on('keyup', function (e) {
+		if ( /space|enter/i.test(e.code) ) {
+			e.preventDefault();
+			_amount.removeClass('is-selected');
+			$(this).toggleClass('is-selected');
+			_customAmount.val('');
+			_displayAmount.val('');
+			return false;
+		}
+	});
 }
 
 export function displayAmountAction() {
 	_displayAmount.bind('keyup', function () {
 		_amount.removeClass('is-selected');
-		_fixedAmount.prop('checked', false);        
+		_fixedAmount.prop('checked', false);
 	});
 
 	_donateForm.submit( function(e){
@@ -48,7 +67,7 @@ export function displayAmountAction() {
 			}
 
 			_donateForm.attr( 'action', _url  );
-		} 
+		}
 
 		e.currentTarget.submit();
 	});
@@ -59,12 +78,12 @@ export function displayCurrency() {
 		keyup: function() {
 			formatCurrency($(this));
 		},
-		blur: function() { 
+		blur: function() {
 			formatCurrency($(this), "blur");
 		}
 	});
 }
- 
+
 function formatNumber(number) {
 	// format number 1000000 to 1,234,567
 
@@ -84,16 +103,16 @@ function formatCurrency(input, blur) {
 
 	// get input value
 	let input_value = input.val();
-	
+
 	// don't validate empty input
 	if (input_value === "") { return; }
-	
+
 	// original length
 	let original_length = input_value.length;
 
-	// initial caret position 
+	// initial caret position
 	let caret_position = input.prop("selectionStart");
-		
+
 	// check for decimal
 	if (input_value.indexOf(".") >= 0) {
 
@@ -111,12 +130,12 @@ function formatCurrency(input, blur) {
 
 		// validate right side
 		right_side_decimals = formatNumber(right_side_decimals);
-		
+
 		// On blur make sure 2 numbers after decimal
 		if (blur === "blur") {
 			right_side_decimals += "00";
 		}
-		
+
 		// Limit decimal to only 2 digits
 		right_side_decimals = right_side_decimals.substring(0, 2);
 
@@ -129,13 +148,13 @@ function formatCurrency(input, blur) {
 		// remove all non-digits
 		input_value = formatNumber(input_value);
 		input_value = "$" + input_value;
-		
+
 		// final formatting
 		if (blur === "blur") {
 			input_value += ".00";
 		}
 	}
-	
+
 	// send updated string to input
 	input.val(input_value);
 

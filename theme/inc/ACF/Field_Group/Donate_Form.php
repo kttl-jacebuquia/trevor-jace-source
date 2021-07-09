@@ -103,19 +103,19 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 							</div>
 
 							<div class="frequency--choices">
-								<label tabindex="0" for="once" class="is-selected text-center">Give Once</label>
-								<label tabindex="0" for="monthly" class="text-center">Give Monthly</label>
+								<label role="button" aria-label="click to select give once" tabindex="0" for="once" class="is-selected text-center">Give Once</label>
+								<label role="button" aria-label="click to select give monthly" tabindex="0" for="monthly" class="text-center">Give Monthly</label>
 							</div>
 
 							<div class="amount">
 								<div class="amount-choices">
-									<label tabindex="0" for="amount-30" class="selected">$30</label>
-									<label tabindex="0" for="amount-60">$60</label>
-									<label tabindex="0" for="amount-120">$120</label>
-									<label tabindex="0" for="amount-250">$250</label>
+									<label role="button" aria-label="click to select 30 dollars" tabindex="0" for="amount-30" class="selected">$30</label>
+									<label role="button" aria-label="click to select 60 dollars" tabindex="0" for="amount-60">$60</label>
+									<label role="button" aria-label="click to select 120 dollars" tabindex="0" for="amount-120">$120</label>
+									<label role="button" aria-label="click to select 250 dollars" tabindex="0" for="amount-250">$250</label>
 								</div>
 								<div class="amount-custom">
-									<input type="number" name="custom" class="custom-amount" placeholder="$Custom amount">
+									<input type="number" name="custom" class="custom-amount" placeholder="$Custom amount" aria-hidden="true">
 									<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
 								</div>
 							</div>

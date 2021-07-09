@@ -92,35 +92,35 @@ class Charity_Navigator extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="navigator">
+		<div class="charity-navigator">
 			<div class="container mx-auto">
-				<div class="navigator--wrapper text-center">
-					<h3 class="navigator--heading"><?php echo $title; ?></h3>
+				<div class="charity-navigator--wrapper text-center">
+					<h3 class="charity-navigator--heading"><?php echo $title; ?></h3>
 					<p><?php echo $description; ?></p>
 
 					<?php if ( $image ) : ?>
-						<div class="text-center mt-px50 block">
-							<img src="<?php echo $image['url']; ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? $image['alt'] : $title; ?>">
+						<div class="charity-navigator__seal text-center mt-px50 block">
+							<img aria-hidden="true" src="<?php echo $image['url']; ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? $image['alt'] : $title; ?>">
 						</div>
 					<?php endif; ?>
 					<div>
 						<?php if ( ! empty( $navigator_entries ) ) : ?>
-							<div class="navigator-container swiper-container mobile-only" id="nav-<?php echo uniqid(); ?>">
-								<div class="navigator-data swiper-wrapper">
+							<div class="charity-navigator-container swiper-container mobile-only" id="nav-<?php echo uniqid(); ?>">
+								<div class="charity-navigator-data swiper-wrapper">
 									<?php foreach ( $navigator_entries as $navigator ) : ?>
-										<div class="navigator-data__item swiper-slide text-center">
-											<h2 class="navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
+										<div class="charity-navigator-data__item swiper-slide text-center">
+											<h2 class="charity-navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
 										</div>
 									<?php endforeach; ?>
 								</div>
 								<div class="swiper-pagination"></div>
 							</div>
 
-							<div class="navigator-container swiper-container">
-								<div class="navigator-data swiper-wrapper">
+							<div class="charity-navigator-container swiper-container">
+								<div class="charity-navigator-data swiper-wrapper">
 									<?php foreach ( $navigator_entries as $navigator ) : ?>
-										<div class="navigator-data__item swiper-slide text-center ">
-											<h2 class="navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
+										<div class="charity-navigator-data__item swiper-slide text-center ">
+											<h2 class="charity-navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
 										</div>
 									<?php endforeach; ?>
 								</div>
