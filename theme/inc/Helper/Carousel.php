@@ -341,7 +341,7 @@ class Carousel {
 							aria-hidden="true"></div>
 					</div>
 					<div class="swiper-container h-full pt-px50 md:py-px20">
-						<div class="flex flex-row justify-center w-full" aria-hidden="true">
+						<div class="carousel-testimonials-quotes flex flex-row justify-center w-full" aria-hidden="true">
 							<i class="trevor-ti-quote-open -mt-2 mr-0.5 lg:text-px28 lg:mr-2"></i>
 							<i class="trevor-ti-quote-close lg:text-px28"></i>
 						</div>

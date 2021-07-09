@@ -39,6 +39,20 @@
     }
   }
 
+  .carousel-testimonials-txt-wrap {
+    .swiper-container {
+      @screen mobile {
+        @apply mt-px50 overflow-visible;
+      }
+    }
+  }
+
+  &-quotes {
+    @screen mobile {
+      @apply pt-px8;
+    }
+  }
+
   @screen md {
     &-inner {
       @apply ml-px50;
