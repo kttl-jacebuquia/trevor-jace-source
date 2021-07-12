@@ -2,6 +2,12 @@ import whatInput from 'what-input';
 import $ from 'jquery';
 import Swiper from 'swiper';
 
+const onSlideChange = (swiper) => {
+	swiper.slides.forEach((slide, index) => {
+		$(slide).attr('aria-hidden', index !== swiper.activeIndex);
+	});
+}
+
 
 export function carousel($element, $option) {
 
@@ -30,7 +36,12 @@ export function carouselNavigator($element, $option) {
 		pagination: {
 			el: '.swiper-pagination',
 			clickable: true,
+			bulletElement: 'button',
 		},
+		on: {
+			init: onSlideChange,
+			slideChange: onSlideChange,
+		}
 	});
 
 }

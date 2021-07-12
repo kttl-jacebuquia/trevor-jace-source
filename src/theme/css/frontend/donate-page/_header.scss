@@ -22,6 +22,10 @@ body.is-donate {
 }
 
 .donate-header-description {
+  @screen md {
+    @apply text-px18 leading-px24 tracking-px05;
+  }
+
   @screen xl {
     padding-top: #{rem-calc(100)} !important;
     padding-bottom: #{rem-calc(100)} !important;

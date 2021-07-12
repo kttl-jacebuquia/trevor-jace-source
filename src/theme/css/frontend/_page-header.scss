@@ -387,10 +387,10 @@ xl: ( 414, 477, 1217, 920 ),
     @screen md {
 
       .page-header-title {
-        @apply text-px36 leading-px42;
+        @apply text-px32 leading-px42;
         tilt,
         tiltb {
-          @apply text-px46 leading-px54;
+          @apply text-px44 leading-px54;
         }
 
         tiltb {

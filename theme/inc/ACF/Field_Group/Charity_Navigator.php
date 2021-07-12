@@ -108,7 +108,7 @@ class Charity_Navigator extends A_Field_Group implements I_Block, I_Renderable {
 							<div class="charity-navigator-container swiper-container mobile-only" id="nav-<?php echo uniqid(); ?>">
 								<div class="charity-navigator-data swiper-wrapper">
 									<?php foreach ( $navigator_entries as $navigator ) : ?>
-										<div class="charity-navigator-data__item swiper-slide text-center">
+										<div class="charity-navigator-data__item swiper-slide text-center" aria-hidden="true">
 											<h2 class="charity-navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
 										</div>
 									<?php endforeach; ?>
@@ -119,7 +119,7 @@ class Charity_Navigator extends A_Field_Group implements I_Block, I_Renderable {
 							<div class="charity-navigator-container swiper-container">
 								<div class="charity-navigator-data swiper-wrapper">
 									<?php foreach ( $navigator_entries as $navigator ) : ?>
-										<div class="charity-navigator-data__item swiper-slide text-center ">
+										<div class="charity-navigator-data__item swiper-slide text-center" aria-hidden="true">
 											<h2 class="charity-navigator-data__item--heading"><?php echo $navigator['navigator_entry_name']; ?></h2>
 										</div>
 									<?php endforeach; ?>
