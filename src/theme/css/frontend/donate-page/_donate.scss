@@ -102,7 +102,7 @@
             @apply inline-flex min-w-px444;
           }
 
-          label {
+          button {
             border: 1px solid rgba(0, 58, 72, 0.5);
             @apply flex-auto py-px17 font-medium text-px18 leading-px24 box-border rounded-none rounded-tl-px10 rounded-bl-px10 cursor-pointer border-l-0 bg-white text-teal-dark w-px214;
             border: 1px solid rgba(0, 58, 72, 0.5);
@@ -123,7 +123,7 @@
               @apply border-r-0 text-white bg-teal-dark;
             }
 
-            & + label {
+            & + button {
               @apply rounded-none rounded-tr-px10 rounded-br-px10;
             }
           }
@@ -140,7 +140,7 @@
             @apply flex justify-between flex-wrap font-medium text-px16 leading-px20 mb-px30;
 
 
-            label {
+            button {
               flex: 0 0 49%;
               @apply py-px22 font-normal text-px16 leading-px20 mb-px14 rounded-px10 text-center cursor-pointer text-teal-dark;
               border: 1px solid rgba(0, 58, 72, 0.5);
@@ -153,7 +153,7 @@
             @screen md {
               @apply text-px18 leading-px24;
 
-              label {
+              button {
                 flex: 0 0 23%;
                 @apply py-px30 text-px18 leading-px24 mb-0;
               }
@@ -162,7 +162,7 @@
             @screen lg {
               @apply leading-px24;
 
-              label {
+              button {
                 @apply py-px30 text-px18 leading-px26;
               }
             }

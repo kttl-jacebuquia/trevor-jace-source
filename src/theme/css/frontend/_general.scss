@@ -158,3 +158,15 @@
 .carousel-wrap {
 	@apply overflow-x-hidden;
 }
+
+// Remove stepper from hidden input
+input[aria-hidden="true"]::-webkit-outer-spin-button,
+input[aria-hidden="true"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}

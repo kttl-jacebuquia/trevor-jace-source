@@ -93,29 +93,29 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 					<form action="https://give.thetrevorproject.org/give/63307" method="get" id="donate-form-<?php echo $uuid; ?>" aria-labelledby="<?php echo 'form-heading-' . $uuid; ?>">
 						<div class="frequency">
 							<div class="visually-hidden">
-								<input type="radio" name="recurring" value="0" id="once" checked class="donation-frequency">
-								<input type="radio" name="recurring" value="1" id="monthly" class="donation-frequency">
+								<input type="radio" name="recurring" value="0" id="<?php echo $uuid; ?>-once" checked class="donation-frequency">
+								<input type="radio" name="recurring" value="1" id="<?php echo $uuid; ?>-monthly" class="donation-frequency">
 
-								<input type="radio" name="amount" value="30" id="amount-30" class="fixed-amount">
-								<input type="radio" name="amount" value="60" id="amount-60" class="fixed-amount">
-								<input type="radio" name="amount" value="120" id="amount-120" class="fixed-amount">
-								<input type="radio" name="amount" value="250" id="amount-250" class="fixed-amount">
+								<input type="radio" name="amount" value="30" id="<?php echo $uuid; ?>-amount-30" class="fixed-amount">
+								<input type="radio" name="amount" value="60" id="<?php echo $uuid; ?>-amount-60" class="fixed-amount">
+								<input type="radio" name="amount" value="120" id="<?php echo $uuid; ?>-amount-120" class="fixed-amount">
+								<input type="radio" name="amount" value="250" id="<?php echo $uuid; ?>-amount-250" class="fixed-amount">
 							</div>
 
 							<div class="frequency--choices">
-								<label role="button" aria-label="click to select give once" tabindex="0" for="once" class="is-selected text-center">Give Once</label>
-								<label role="button" aria-label="click to select give monthly" tabindex="0" for="monthly" class="text-center">Give Monthly</label>
+								<button type="button" aria-label="click to select give once" tabindex="0" for="<?php echo $uuid; ?>-once" class="is-selected text-center">Give Once</button>
+								<button type="button" aria-label="click to select give monthly" tabindex="0" for="<?php echo $uuid; ?>-monthly" class="text-center">Give Monthly</button>
 							</div>
 
 							<div class="amount">
 								<div class="amount-choices">
-									<label role="button" aria-label="click to select 30 dollars" tabindex="0" for="amount-30" class="selected">$30</label>
-									<label role="button" aria-label="click to select 60 dollars" tabindex="0" for="amount-60">$60</label>
-									<label role="button" aria-label="click to select 120 dollars" tabindex="0" for="amount-120">$120</label>
-									<label role="button" aria-label="click to select 250 dollars" tabindex="0" for="amount-250">$250</label>
+									<button type="button" aria-label="click to select 30 dollars" tabindex="0" for="<?php echo $uuid; ?>-amount-30" class="selected">$30</button>
+									<button type="button" aria-label="click to select 60 dollars" tabindex="0" for="<?php echo $uuid; ?>-amount-60">$60</button>
+									<button type="button" aria-label="click to select 120 dollars" tabindex="0" for="<?php echo $uuid; ?>-amount-120">$120</button>
+									<button type="button" aria-label="click to select 250 dollars" tabindex="0" for="<?php echo $uuid; ?>-amount-250">$250</button>
 								</div>
 								<div class="amount-custom">
-									<input type="number" name="custom" class="custom-amount" placeholder="$Custom amount" aria-hidden="true">
+									<input name="custom" class="custom-amount" placeholder="$Custom amount" aria-hidden="true">
 									<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
 								</div>
 							</div>

@@ -20,3 +20,48 @@ body.is-donate {
   @apply hidden;
   }
 }
+
+.donate-header-description {
+  @screen xl {
+    padding-top: #{rem-calc(100)} !important;
+    padding-bottom: #{rem-calc(100)} !important;
+  }
+
+  .page-section-inner {
+    @apply tw-grid;
+
+    @screen md {
+      @apply w-auto max-w-none;
+    }
+
+    @screen xl {
+      @apply grid;
+    }
+  }
+
+  .page-sub-title-wrap {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3;
+    }
+  }
+
+  .page-sub-title-desc {
+    @apply text-px18 leading-px26 tracking-px05;
+
+    @screen md {
+      @apply w-px494 m-auto;
+      @apply text-px18 leading-px24;
+    }
+
+    @screen xl {
+      @apply w-auto;
+      @apply text-px24 leading-px34 -ml-px27 -mr-px27;
+    }
+  }
+}

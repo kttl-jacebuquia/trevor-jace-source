@@ -1,61 +1,51 @@
 import $ from 'jquery';
 
-const _frequency = $('.frequency--choices label');
-const _amount = $('.amount-choices label');
-const _donateForm = $('#donate-form');
+const _frequency = $('.frequency--choices button');
+const _amount = $('.amount-choices button');
+const _donateForm = $('[id^="donate-form');
 const _customAmount = $('.custom-amount', _donateForm);
 const _displayAmount = $('.display-amount', _donateForm);
 const _fixedAmount = $('.fixed-amount');
 const _displayFormatAmount = $("input[data-type='currency']");
 
+const onFrequencyToggle = (freqElement) => {
+	const $freq = $(freqElement);
+	const $radio = $('#' + $freq .attr('for'));
+	_frequency.removeClass('is-selected');
+	$freq.toggleClass('is-selected');
+	$radio[0].checked = true;
+}
+
 export function toggleFrequency() {
-	_frequency.click(function(){
-		_frequency.removeClass('is-selected');
-		$(this).toggleClass('is-selected');
-	});
-	_frequency.on('keyup', function(e){
-		if ( /space|enter/i.test(e.code) ) {
-			e.preventDefault();
-			_frequency.removeClass('is-selected');
-			$(this).toggleClass('is-selected');
-			return false;
-		}
-	});
+	_frequency.click(function(){ onFrequencyToggle(this) });
+}
+
+const onAmountToggle = (amountElement) => {
+	const $amount = $(amountElement);
+	const $radio = $('#' + $amount.attr('for'));
+	_amount.removeClass('is-selected');
+	$amount.toggleClass('is-selected');
+	_customAmount.val('');
+	_displayAmount.val('');
+	$radio[0].checked = true;
 }
 
 export function toggleAmount() {
-	_amount.click(function(){
-		_amount.removeClass('is-selected');
-		$(this).toggleClass('is-selected');
-		_customAmount.val('');
-		_displayAmount.val('');
-	});
-
-	_amount.on('keyup', function (e) {
-		if ( /space|enter/i.test(e.code) ) {
-			e.preventDefault();
-			_amount.removeClass('is-selected');
-			$(this).toggleClass('is-selected');
-			_customAmount.val('');
-			_displayAmount.val('');
-			return false;
-		}
-	});
+	_amount.click(function(){ onAmountToggle(this) });
 }
 
 export function displayAmountAction() {
-	_displayAmount.bind('keyup', function () {
+	_displayAmount.on('input', function () {
 		_amount.removeClass('is-selected');
 		_fixedAmount.prop('checked', false);
 	});
 
-	_donateForm.submit( function(e){
+	_donateForm.on( 'submit', function(e){
 		e.preventDefault();
 		let _newCustomAmount = _customAmount.val();
 		let _isRecurring = $('.donation-frequency:checked');
 		_customAmount.prop('disabled', true);
 		_displayAmount.prop('disabled', true);
-
 
 
 		if( _newCustomAmount !== '' ) {
