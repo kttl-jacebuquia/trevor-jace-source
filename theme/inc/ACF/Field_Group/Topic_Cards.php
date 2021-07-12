@@ -197,7 +197,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 											null,
 											$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
 											array(
-												'class'      => array( 'topic-cards__cta wave-underline' ),
+												'class' => array( 'topic-cards__cta wave-underline' ),
 												'attributes' => array(
 													'aria-label' => 'click to learn more about ' . $topic[ static::FIELD_TOPIC_ENTRY_TITLE ],
 												),

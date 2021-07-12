@@ -56,6 +56,7 @@ class ACF {
 		Field_Group\Crisis_Services_Text_Block::class,
 		Field_Group\Messaging_Block::class,
 		Field_Group\TrevorSpace_Text_Image::class,
+		Field_Group\Resource_Center_Block::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
