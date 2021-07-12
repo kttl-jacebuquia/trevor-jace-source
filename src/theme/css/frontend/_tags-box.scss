@@ -6,23 +6,27 @@
   @apply rounded-full;
   @apply transition-colors;
 
+  &[hidden] {
+    display: none;
+  }
+
   &:hover {
-	@apply bg-melrose;
+    @apply bg-melrose;
   }
 
   &.ellipsis {
-	@apply bg-violet-tint;
-	@apply text-white;
-	&:hover {
-	  @apply bg-violet;
-	}
+    @apply bg-violet-tint;
+    @apply text-white;
+    &:hover {
+      @apply bg-violet;
+    }
   }
 
   .is-gi & {
-	@apply bg-gray-light text-teal-dark;
+    @apply bg-gray-light text-teal-dark;
 
-	&.ellipsis {
-	  @apply bg-blue_green text-white;
-	}
+    &.ellipsis {
+      @apply bg-blue_green text-white;
+    }
   }
 }

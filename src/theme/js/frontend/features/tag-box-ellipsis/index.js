@@ -61,22 +61,22 @@ class TagBoxEllipsis extends WithState {
 		for (let i = 0; i < this.$boxes.length; i++) {
 			const box = this.$boxes.get(i);
 
-			if (box.offsetTop > 0) {
-				box.style.display = 'hidden';
-				break;
+			if (i > 1 && !this.state.expanded) {
+				box.hidden = true;
+				continue;
 			}
 
+			box.hidden = false;
 			$firstRowLastBox = $(box);
 		}
 
 		const marginR = parseInt($firstRowLastBox.css('margin-right'));
 
 		if (showEllipsis) {
-			// this.$box.css('padding-right', this.$ellipsis.outerWidth());
 			this.$ellipsis.show();
-			const marginL = $firstRowLastBox.get(0).offsetLeft + $firstRowLastBox.outerWidth() + marginR;
-			this.$ellipsis.css('left', marginL);
-			this.$ellipsis.css('right', 'auto');
+			// const marginL = $firstRowLastBox.get(0).offsetLeft + $firstRowLastBox.outerWidth() + marginR;
+			// this.$ellipsis.css('left', marginL);
+			// this.$ellipsis.css('right', 'auto');
 		} else {
 			this.$ellipsis.hide();
 		}
@@ -131,6 +131,8 @@ class TagBoxEllipsis extends WithState {
 		this.$ellipsis.attr('aria-label', ariaLabel);
 
 		this.focusTrap[ isExpanded ? 'activate' : 'deactivate' ]();
+
+		this.calc();
 	}
 }
 

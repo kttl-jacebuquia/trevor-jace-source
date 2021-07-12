@@ -1,0 +1,11 @@
+.card-post {
+  @screen md {
+    @apply min-h-px450 h-auto;
+  }
+
+  .post-thumbnail-wrap {
+    @screen md {
+      @apply h-px205;
+    }
+  }
+}
