@@ -126,10 +126,10 @@ class Page_Section extends A_Basic_Section implements I_Block {
 
 		# Title align
 		$title_align = $val->get( static::FIELD_TITLE_ALIGN );
-		if ( static::TITLE_ALIGN_CENTERED == $title_align ) {
+		if ( static::TITLE_ALIGN_CENTERED === $title_align ) {
 			$desc_cls[]  = 'centered';
 			$title_cls[] = 'centered';
-		} elseif ( static::TITLE_ALIGN_CENTERED_XL_LEFT == $title_align ) {
+		} elseif ( static::TITLE_ALIGN_CENTERED_XL_LEFT === $title_align ) {
 			$desc_cls[]  = 'centered xl:no-centered';
 			$title_cls[] = 'centered xl:no-centered';
 		}
@@ -167,6 +167,12 @@ class Page_Section extends A_Basic_Section implements I_Block {
 		}
 
 		$blocks = array_keys( $blocks );
+		$blocks = array_merge(
+			$blocks,
+			array(
+				'core/image',
+			)
+		);
 
 		ob_start(); ?>
 		<div <?php echo Tools::flat_attr( array_filter( array( 'class' => implode( ' ', $content_wrap_cls ) ) ) ); ?>>
@@ -183,7 +189,7 @@ class Page_Section extends A_Basic_Section implements I_Block {
 				'title_wrap_cls' => $title_wrap_cls,
 				'inner_cls'      => $inner_cls,
 				'btn_cls'        => $btn_cls,
-				'btn_inside'     => static::TYPE_HORIZONTAL == $type,
+				'btn_inside'     => static::TYPE_HORIZONTAL === $type,
 			)
 		);
 	}
