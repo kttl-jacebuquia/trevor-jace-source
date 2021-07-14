@@ -4,6 +4,8 @@
   }
 
   .post-thumbnail-wrap {
+    border-radius: #{rem-calc(10)} #{rem-calc(10)} 0 0;
+
     @screen md {
       @apply h-px205;
     }

@@ -183,7 +183,7 @@ class Resource_Center extends A_Options_Page {
 
 		ob_start();
 		?>
-		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8">
+		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8 resource-center-hero">
 			<div class="mx-auto mb-10 lg:w-3/4">
 				<?php if ( ! empty( $eyebrow ) ) : ?>
 					<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">

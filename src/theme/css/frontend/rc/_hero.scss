@@ -1,0 +1,11 @@
+.resource-center-hero {
+  .search-field {
+    @screen md {
+      @apply text-px16;
+    }
+
+    @screen xl {
+      @apply text-px20;
+    }
+  }
+}
