@@ -43,6 +43,18 @@ body.is-donate {
     }
   }
 
+  .page-section-content-wrap {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3;
+    }
+  }
+
   .page-sub-title-wrap {
     @apply col-span-full;
 

@@ -30,6 +30,12 @@ export function carousel($element, $option) {
 
 export function carouselNavigator($element, $option) {
 
+	const onAfterInit = swiper => {
+		Array.from(swiper.pagination.bullets).forEach((bullet, index) => {
+			bullet.setAttribute('aria-label', `click to go to charity navigator slide ${index + 1}`);
+		});
+	}
+
 	const swiper = new Swiper($element, {
 		// Optional parameters
 		slidesPerView: 1,
@@ -40,6 +46,7 @@ export function carouselNavigator($element, $option) {
 		},
 		on: {
 			init: onSlideChange,
+			afterInit: onAfterInit,
 			slideChange: onSlideChange,
 		}
 	});
