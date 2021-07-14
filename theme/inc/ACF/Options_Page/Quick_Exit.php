@@ -1,10 +1,10 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 class Quick_Exit extends A_Options_Page {
-	const FIELD_HEADLINE                  = 'headline';
-	const FIELD_DESCRIPTION_DESKTOP       = 'description_desktop';
-	const FIELD_DESCRIPTION_TABLET_MOBILE = 'description_tablet_mobile';
-	const FIELD_LINK_TEXT                 = 'link_text';
+	const FIELD_HEADLINE                  = 'quick_exit_headline';
+	const FIELD_DESCRIPTION_DESKTOP       = 'quick_exit_description_desktop';
+	const FIELD_DESCRIPTION_TABLET_MOBILE = 'quick_exit_description_tablet_mobile';
+	const FIELD_LINK_TEXT                 = 'quick_exit_link_text';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
