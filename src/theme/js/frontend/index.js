@@ -242,6 +242,7 @@ $(() => {
 				hiddenInputField.val(ui.item.value);
 				moveCursorToEnd($(this)[0]);
 			},
+			autoFocus: true,
 		})
 		/**
 		 * Immediately open the jQuery autocomplete
