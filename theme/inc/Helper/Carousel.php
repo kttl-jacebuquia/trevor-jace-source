@@ -393,8 +393,9 @@ class Carousel {
 				'spaceBetween'  => 20,
 				'centerSlides'  => true,
 				'pagination'    => array(
-					'el'        => "{$base_selector} .swiper-pagination",
-					'clickable' => true,
+					'el'            => "{$base_selector} .swiper-pagination",
+					'clickable'     => true,
+					'bulletElement' => 'button',
 				),
 				'breakpoints'   => array(
 					768 => array( 'spaceBetween' => 28 ),
@@ -430,6 +431,11 @@ class Carousel {
 							nextButton.classList.remove('should-hide');
 						}
 					}
+
+					jQuery(swiper.el.parentElement).find('.swiper-pagination-bullet').each(function (index, bullet) {
+						const addOrRemoveMethod = index === swiper.activeIndex ? 'add' : 'remove';
+						bullet.classList[addOrRemoveMethod]('swiper-pagination-bullet-active');
+					});
 				}
 
 				function init() {

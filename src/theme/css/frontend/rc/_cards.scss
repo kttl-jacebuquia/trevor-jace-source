@@ -10,4 +10,23 @@
       @apply h-px205;
     }
   }
+
+  // External Resource Card
+  &.trevor_rc_external {
+    &.has-post-thumbnail {
+      .card-text-container {
+        @apply text-white;
+      }
+    }
+
+    .card-text-container {
+      @apply text-indigo;
+    }
+
+    .title-top,
+    .post-title,
+    .post-desc {
+      color: inherit;
+    }
+  }
 }

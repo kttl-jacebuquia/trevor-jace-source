@@ -21,6 +21,7 @@ export function carousel($element, $option) {
 		pagination: {
 			el: '.swiper-pagination',
 			clickable: true,
+			bulletElement: 'button',
 		}
 	});
 

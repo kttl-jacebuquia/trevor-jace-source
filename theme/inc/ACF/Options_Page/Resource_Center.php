@@ -260,7 +260,7 @@ class Resource_Center extends A_Options_Page {
 		}
 
 		$cat_rows         = array();
-		$featured_cat_ids = wp_list_pluck( $featured_topics, 'ID' );
+		$featured_cat_ids = wp_list_pluck( $featured_topics, 'term_taxonomy_id' );
 		$featured_cats    = get_terms(
 			array(
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
@@ -343,7 +343,7 @@ class Resource_Center extends A_Options_Page {
 		?>
 		<div class="mx-auto lg:w-3/4">
 			<?php if ( ! empty( $main_cat ) ) : ?>
-				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase lg:text-px18 lg:leading-px22 z-10" href="<?php echo esc_url( get_term_link( $main_cat ) ); ?>"><?php echo esc_html( $main_cat->name ); ?></a>
+				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase lg:text-px18 lg:leading-px22 z-10" href="<?php echo esc_url( get_the_permalink( $guide ) ); ?>"><?php echo esc_html( $guide->post_title ); ?></a>
 			<?php endif; ?>
 			<h2 class="text-px32 leading-px42 font-semibold my-3 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?php echo strip_tags( $guide->post_excerpt, '<tilt>' ); ?></h2>
 			<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26" href="<?php echo get_the_permalink( $guide ); ?>">Read Guide</a>
@@ -380,7 +380,7 @@ class Resource_Center extends A_Options_Page {
 		);
 
 		$featured_word = Helper\Posts::get_one_from_list(
-			wp_list_pluck( $glossary, 'ID' ),
+			$glossary,
 			array(),
 			array( 'post_type' => \TrevorWP\CPT\RC\Glossary::POST_TYPE )
 		);
