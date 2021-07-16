@@ -65,6 +65,18 @@
 		}
 	}
 
+  &__eyebrow {
+    @apply font-semibold uppercase text-px14 leading-px20 tracking-px05 mb-px14;
+
+    @screen md {
+      @apply text-px14 leading-px18 tracking-em001 mb-px10;
+    }
+
+    @screen xl {
+      @apply text-px14 leading-px18 tracking-em001 mb-px18;
+    }
+  }
+
 	&__item-figure {
 		@apply block rounded-px10 overflow-hidden aspect-ratio-1-1 col-span-6;
 

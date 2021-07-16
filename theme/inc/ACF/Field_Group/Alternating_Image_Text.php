@@ -43,7 +43,6 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'name'      => static::FIELD_HEADLINE,
 					'label'     => 'Headline',
 					'type'      => 'textarea',
-					'required'  => 1,
 					'new_lines' => 'br',
 				),
 				static::FIELD_DESCRIPTION              => array(
@@ -115,19 +114,10 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 							),
 						),
 						static::FIELD_ENTRY_EYEBROW    => array(
-							'key'               => $entry_eyebrow,
-							'name'              => static::FIELD_ENTRY_EYEBROW,
-							'label'             => 'Eyebrow',
-							'type'              => 'text',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $alternate_type,
-										'operator' => '==',
-										'value'    => 'color',
-									),
-								),
-							),
+							'key'   => $entry_eyebrow,
+							'name'  => static::FIELD_ENTRY_EYEBROW,
+							'label' => 'Eyebrow',
+							'type'  => 'text',
 						),
 						static::FIELD_ENTRY_HEADER     => array(
 							'key'      => $entry_header,
@@ -248,7 +238,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 								<?php endif; ?>
 								<div class="alternating-image-text__body <?php echo esc_attr( $alignment_class ); ?>">
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_EYEBROW ] ) ) : ?>
-										<p><?php echo esc_html( $entry[ static::FIELD_ENTRY_EYEBROW ] ); ?></p>
+										<p class="alternating-image-text__eyebrow"><?php echo esc_html( $entry[ static::FIELD_ENTRY_EYEBROW ] ); ?></p>
 									<?php endif; ?>
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
 										<h3 class="alternating-image-text__item-title"><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h3>

@@ -326,8 +326,11 @@ module.exports = {
 				em005: '0.005em',
 				em001: '0.01em',
 				em002: '0.02em',
+				em003: '0.03em',
+				em_003: '-0.003em',
 				em_005: '-0.005em',
 				em_001: '-0.01em', // todo: convert to tailwind negative
+				px025: px2rem(.25),
 				px05: px2rem(.5),
 				px_015: px2rem(-1.5),
 				px_02: px2rem(-2),
@@ -415,6 +418,7 @@ module.exports = {
 				'gradient-darkgreen-flip': `url('${theme('paths.themeGradients')}/darkgreen-flip.png')`,
 				'gradient-trevorspace': `url('${theme('paths.themeGradients')}/trevorspace.png')`,
 				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
+				'gradient-orange': `url('${theme('paths.themeGradients')}/orange.png')`,
 			}),
 			opacity: {
 				'16': '0.16',

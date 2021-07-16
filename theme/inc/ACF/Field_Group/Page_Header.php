@@ -6,17 +6,19 @@ use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
-	const FIELD_TYPE              = 'header_type';
-	const FIELD_TITLE_TOP         = 'title_top';
-	const FIELD_TITLE_TOP_ATTR    = 'title_top_attr';
-	const FIELD_CAROUSEL          = 'carousel';
-	const FIELD_IMAGE             = 'image';
-	const FIELD_BG_CLR            = 'bg_clr';
-	const FIELD_TEXT_CLR          = 'text_clr';
-	const FIELD_IMAGE_ENTRIES     = 'image_entries';
-	const FIELD_IMAGE_ENTRY_IMAGE = 'image_entry_image';
-	const FIELD_VIDEO             = 'video';
-	const FIELD_MEDIA_TYPE        = 'media_type';
+	const FIELD_TYPE               = 'header_type';
+	const FIELD_TITLE_TOP          = 'title_top';
+	const FIELD_TITLE_TOP_ATTR     = 'title_top_attr';
+	const FIELD_CAROUSEL           = 'carousel';
+	const FIELD_IMAGE              = 'image';
+	const FIELD_BG_CLR             = 'bg_clr';
+	const FIELD_TEXT_CLR           = 'text_clr';
+	const FIELD_IMAGE_ENTRIES      = 'image_entries';
+	const FIELD_IMAGE_ENTRY_IMAGE  = 'image_entry_image';
+	const FIELD_VIDEO              = 'video';
+	const FIELD_MEDIA_TYPE         = 'media_type';
+	const FIELD_MEMBERS_COUNT      = 'members_count';
+	const FIELD_BOTTOM_TEXT        = 'bottom_text';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -31,6 +33,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$image_entry_image = static::gen_field_key( static::FIELD_IMAGE_ENTRY_IMAGE );
 		$video             = static::gen_field_key( static::FIELD_VIDEO );
 		$media_type        = static::gen_field_key( static::FIELD_MEDIA_TYPE );
+		$members_count     = static::gen_field_key( static::FIELD_MEMBERS_COUNT );
+		$bottom_text       = static::gen_field_key( static::FIELD_BOTTOM_TEXT );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -43,12 +47,66 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'required'      => true,
 					'default_value' => 'text',
 					'choices'       => array(
-						'text'             => 'Colorblock + Text',
-						'horizontal'       => 'Colorblock + Image + Text',
-						'multi_image_text' => 'Multi-image + Text',
-						'img_bg'           => 'Full Bleed Image/Video + Text',
-						'split_img'        => 'Text + Image',
-						'split_carousel'   => 'Text + Carousel',
+						'text'                => 'Colorblock + Text',
+						'horizontal'          => 'Colorblock + Image + Text',
+						'multi_image_text'    => 'Multi-image + Text',
+						'img_bg'              => 'Full Bleed Image/Video + Text',
+						'split_img'           => 'Text + Image',
+						'split_carousel'      => 'Text + Carousel',
+						'support_trevorspace' => 'Support Trevorspace',
+					),
+				),
+			),
+			static::_gen_tab_field(
+				'Support TrevoSpace',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'support_trevorspace',
+							),
+						),
+					),
+				)
+			),
+			array(
+				static::FIELD_MEMBERS_COUNT      => array(
+					'key'               => $members_count,
+					'name'              => static::FIELD_MEMBERS_COUNT,
+					'label'             => 'Members Count',
+					'type'              => 'number',
+					'required'          => 1,
+					'min'               => 0,
+					'step'              => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'support_trevorspace',
+							),
+						),
+					),
+				),
+				static::FIELD_BOTTOM_TEXT => array(
+					'key'               => $bottom_text,
+					'name'              => static::FIELD_BOTTOM_TEXT,
+					'label'             => 'Members Login Text',
+					'type'              => 'wysiwyg',
+					'tabs'              => 'visual',
+					'toolbar'           => 'basic',
+					'media_upload'      => 0,
+					'required'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'support_trevorspace',
+							),
+						),
 					),
 				),
 			),
@@ -107,6 +165,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'field'    => $type,
 								'operator' => '!=',
 								'value'    => 'text',
+							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'support_trevorspace',
 							),
 						),
 					),
@@ -406,6 +469,20 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 			if ( 'video' === $media_type ) {
 				$args['video'] = $val->get( static::FIELD_VIDEO );
+			}
+		}
+
+		# Support TrevorSpace
+		if ( 'support_trevorspace' === $type ) {
+			$members_count      = $val->get( static::FIELD_MEMBERS_COUNT );
+			$bottom_text = $val->get( static::FIELD_BOTTOM_TEXT );
+
+			if ( ! empty( $members_count ) ) {
+				$args['title_top'] = $members_count . ' members currently online';
+			}
+
+			if ( ! empty( $bottom_text ) ) {
+				$args['bottom'] = $bottom_text;
 			}
 		}
 

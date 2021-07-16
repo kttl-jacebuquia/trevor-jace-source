@@ -454,4 +454,68 @@ class Page_Header {
 		<?php
 		return ob_get_clean();
 	}
+
+	public static function support_trevorspace( array $options ): string {
+		$options = array_merge(
+			array_fill_keys(
+				array(
+					'title_top',
+					'title',
+					'desc',
+					'cta_txt',
+					'cta_url',
+					'styles',
+					'buttons',
+					'bottom',
+				),
+				null
+			),
+			array(),
+			$options
+		);
+
+		list( $text_color, $bg_color ) = $options['styles'];
+
+		$container_classnames = implode(
+			' ',
+			array( 'header-container', 'header-container--support-trevorspace', $text_color, $bg_color ),
+		);
+
+		$header_classnames = implode(
+			' ',
+			array( 'page-header', 'type-support-trevorspace' ),
+		);
+
+		ob_start();
+		?>
+		<header class="<?php echo esc_attr( $container_classnames ); ?>">
+			<div class="<?php echo esc_attr( $header_classnames ); ?>">
+				<div class="page-header-inner">
+					<div class="page-header-content-wrap">
+						<?php if ( ! empty( $options['title_top'] ) ) { ?>
+							<p class="page-header-title-top">
+								<span class="page-header-title-top__icon trevor-ti-online" aria-hidden='true'></span>
+								<?php echo esc_html( $options['title_top'] ); ?>
+							</p>
+						<?php } ?>
+						<h1 class="heading-lg-tilted page-header-title">
+							<?php echo $options['title']; ?>
+						</h1>
+						<p class="page-header-desc"><?php echo $options['desc']; ?></p>
+						<?php
+						if ( ! empty( $options['buttons'] ) ) {
+							$wrap_cls = array( $options['buttons']['class'] );
+							echo Field_Group\Button_Group::render( false, $options['buttons'], compact( 'wrap_cls' ) );
+						}
+						?>
+						<?php if ( ! empty( $options['bottom'] ) ) { ?>
+							<div class="page-header-bottom"><?php echo $options['bottom']; ?></div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</header>
+		<?php
+		return ob_get_clean();
+	}
 }
