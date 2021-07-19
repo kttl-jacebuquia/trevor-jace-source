@@ -35,7 +35,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Page Circulation',
+				'title'      => 'Recirculation',
 				'post_types' => array( 'page' ),
 			)
 		);
