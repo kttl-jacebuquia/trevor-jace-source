@@ -2,89 +2,89 @@
 @tailwind utilities;
 
 // Icon Fonts
-@import "../icon-font/trevor-ti";
-@import "../icon-font/vars";
+@import '../icon-font/trevor-ti';
+@import '../icon-font/vars';
 
 // Vendors, Utils & Base Rules
-@import "./what-input";
-@import "./misc/index";
-@import "../utils/index";
-@import "./vendor/index";
-@import "./general";
-@import "./fonts";
-@import "./root";
+@import './what-input';
+@import './misc/index';
+@import '../utils/index';
+@import './vendor/index';
+@import './general';
+@import './fonts';
+@import './root';
 
 // Our Components
-@import "./container";
-@import "./grid";
-@import "./modal/index";
-@import "./headings";
-@import "./form";
-@import "./tilt-txt";
-@import "./bg_img";
-@import "./circulation-card";
-@import "./bg-gradients";
-@import "./site-header";
-@import "./page-header";
-@import "./site-content";
-@import "./footer";
-@import "./button";
-@import "./tags-box";
-@import "./card-post";
-@import "./single/index";
-@import "./block/index";
-@import "./pagination";
-@import "./carousel/index";
-@import "./tile";
-@import "./topic-page/index";
-@import "./accordion";
+@import './container';
+@import './grid';
+@import './modal/index';
+@import './headings';
+@import './form';
+@import './tilt-txt';
+@import './bg_img';
+@import './circulation-card';
+@import './bg-gradients';
+@import './site-header';
+@import './page-header';
+@import './site-content';
+@import './footer';
+@import './button';
+@import './tags-box';
+@import './card-post';
+@import './single/index';
+@import './block/index';
+@import './pagination';
+@import './carousel/index';
+@import './tile';
+@import './topic-page/index';
+@import './accordion';
 @import './one_up/card';
-@import "./custom-select";
-@import "./cookie";
-@import "./banners";
-@import "./info-boxes";
-@import "./info-card";
-@import "./cta-box";
-@import "./page-btn";
-@import "./absolute-shift";
-@import "./page-section";
-@import "./partners-block";
-@import "./page-ext-content";
-@import "./fundraiser-quiz";
-@import "./embed";
-@import "./quick-links";
-@import "./donation-form";
-@import "./alternating-image-text";
-@import "./pillars";
-@import "./checkmark-text";
-@import "./guiding-principles";
-@import "./topic-cards";
-@import "./center-text-with-full-image";
-@import "./text-only-popup";
-@import "./word-of-the-day";
+@import './custom-select';
+@import './cookie';
+@import './banners';
+@import './info-boxes';
+@import './info-card';
+@import './cta-box';
+@import './page-btn';
+@import './absolute-shift';
+@import './page-section';
+@import './partners-block';
+@import './page-ext-content';
+@import './fundraiser-quiz';
+@import './embed';
+@import './quick-links';
+@import './donation-form';
+@import './alternating-image-text';
+@import './pillars';
+@import './checkmark-text';
+@import './guiding-principles';
+@import './topic-cards';
+@import './center-text-with-full-image';
+@import './text-only-popup';
+@import './text-icon';
 
 // Page specific
-@import "./rc"; // Resources Center
-@import "./single-page/index";
-@import "./trevor-space";
-@import "./institutional-grants";
-@import "./corporate-partnerships";
-@import "./donate-page/index";
-@import "./product-partner";
-@import "./product-partnerships";
-@import "./fundraise/index";
-@import "./get-help";
-@import "./advocacy";
-@import "./partner-with-us";
-@import "./search";
-@import "./info-page/index";
+@import './rc'; // Resources Center
+@import './single-page/index';
+@import './trevor-space';
+@import './institutional-grants';
+@import './corporate-partnerships';
+@import './donate-page/index';
+@import './product-partner';
+@import './product-partnerships';
+@import './fundraise/index';
+@import './get-help';
+@import './advocacy';
+@import './partner-with-us';
+@import './search';
+@import './info-page/index';
 
 /**
   Additional utility classnames
   It appears that when a utility classname is used in html,
   but is not used anywhere in scss, it is not included in the build.
 */
-@import "./tailwind/index";
+@import './tailwind/index';
 
 // Tailwind
 @tailwind components; /* tailwind components should come after ours to overwrite gutenberg block classes */

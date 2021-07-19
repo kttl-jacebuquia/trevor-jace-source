@@ -1,6 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-class Volunteer_Reason extends A_Field_Group implements I_Block, I_Renderable {
+class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ENTRIES     = 'entries';
@@ -18,7 +18,7 @@ class Volunteer_Reason extends A_Field_Group implements I_Block, I_Renderable {
 		$entry_title = static::gen_field_key( static::FIELD_ENTRY_TITLE );
 
 		return array(
-			'title'  => 'Volunteer Reason',
+			'title'  => 'Text + Icon',
 			'fields' => array(
 				static::FIELD_TITLE       => array(
 					'key'      => $title,
@@ -74,7 +74,7 @@ class Volunteer_Reason extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Volunteer Reason',
+				'title'      => 'Text + Icon',
 				'post_types' => array( 'page' ),
 			)
 		);
@@ -89,33 +89,39 @@ class Volunteer_Reason extends A_Field_Group implements I_Block, I_Renderable {
 		$entries     = static::get_val( static::FIELD_ENTRIES );
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="text-icon">
+			<div class="text-icon__container">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h3 class="text-icon__heading"><?php echo esc_html( $title ); ?></h3>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<p class="text-icon__description"><?php echo esc_html( $description ); ?></p>
+				<?php endif; ?>
 
-			<div>
 				<?php if ( ! empty( $entries ) ) : ?>
-					<?php foreach ( $entries as $entry ) : ?>
-						<div>
-							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_ICON ]['url'] ) ) : ?>
-									<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
-							<?php endif; ?>
+				<div class="text-icon__content">
+					<div class="text-icon__entries" role="list">
+						<?php foreach ( $entries as $entry ) : ?>
+							<div class="text-icon__entry" role="listitem">
+								<div class="text-icon__entry-image" aria-hidden="true">
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_ICON ]['url'] ) ) : ?>
+										<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
+								<?php endif; ?>
+								</div>
 
-							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_TITLE ] ) ) : ?>
-								<h2><?php echo esc_html( $entry[ static::FIELD_ENTRY_TITLE ] ); ?></h2>
-							<?php endif; ?>
-						</div>
-					<?php endforeach; ?>
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_TITLE ] ) ) : ?>
+									<h2 class="text-icon__entry-title"><?php echo $entry[ static::FIELD_ENTRY_TITLE ]; ?></h2>
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
 				<?php endif; ?>
 			</div>
 		</div>
+
 		<?php
 		return ob_get_clean();
 	}
