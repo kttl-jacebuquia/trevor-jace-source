@@ -56,10 +56,6 @@ class Tier {
 				</table>
 			</div>
 		<?php endif; ?>
-
-		<?php if ( ! empty( $data['button']['url'] ) ) : ?>
-			<a href="<?php echo esc_url( $data['button']['url'] ); ?>" target="<?php echo esc_attr( $data['button']['target'] ); ?>" class="funders__partner inline-block mx-auto flex-grow-0 flex-shrink-0"><?php echo esc_html( $data['button']['title'] ); ?></a>
-		<?php endif; ?>
 	</div>
 		<?php
 		return ob_get_clean();
