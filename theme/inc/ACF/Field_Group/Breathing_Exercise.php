@@ -1,6 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-class CTA_Block extends A_Field_Group implements I_Block, I_Renderable {
+class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_CTA_LINK    = 'cta_link';
@@ -14,7 +14,7 @@ class CTA_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$cta_link    = static::gen_field_key( static::FIELD_CTA_LINK );
 
 		return array(
-			'title'  => 'CTA Block',
+			'title'  => 'Breathing Exercise',
 			'fields' => array(
 				static::FIELD_TITLE       => array(
 					'key'   => $title,
@@ -47,7 +47,7 @@ class CTA_Block extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'CTA Block',
+				'title'      => 'Breathing Exercise',
 				'post_types' => array( 'page' ),
 			)
 		);

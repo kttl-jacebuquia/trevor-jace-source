@@ -52,7 +52,7 @@ class ACF {
 		Field_Group\Text_Block::class,
 		Field_Group\File_Download::class,
 		Field_Group\Tier::class,
-		Field_Group\CTA_Block::class,
+		Field_Group\Breathing_Exercise::class,
 		Field_Group\Crisis_Services_Text_Block::class,
 		Field_Group\Messaging_Block::class,
 		Field_Group\TrevorSpace_Text_Image::class,
