@@ -140,7 +140,7 @@ class Resource_Center extends A_Options_Page {
 					'name'          => static::FIELD_GLOSSARY_IMAGE,
 					'label'         => 'Glossary Image',
 					'type'          => 'image',
-					'return_format' => 'id',
+					'return_format' => 'url',
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 				),
@@ -183,10 +183,10 @@ class Resource_Center extends A_Options_Page {
 
 		ob_start();
 		?>
-		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 md:mb-8 resource-center-hero">
-			<div class="mx-auto mb-10 lg:w-3/4">
+		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 resource-center-hero">
+			<div class="mx-auto lg:w-3/4">
 				<?php if ( ! empty( $eyebrow ) ) : ?>
-					<h2 class="font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">
+					<h2 class="resource-center-hero__eyebrow font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">
 						<?php echo esc_html( $eyebrow ); ?>
 					</h2>
 				<?php endif; ?>
@@ -197,7 +197,7 @@ class Resource_Center extends A_Options_Page {
 					</h1>
 				<?php endif; ?>
 
-				<div class="my-8 mx-auto md:w-3/5 md:my-6 lg:w-3/4 xl:w-4/6">
+				<div class="search-container my-8 mx-auto md:w-3/5 md:my-6 lg:w-3/4 xl:w-4/6">
 					<form role="search" method="get" class="search-form"
 						action="<?php echo esc_url( \TrevorWP\CPT\RC\RC_Object::get_search_url() ); ?>">
 						<?php echo Helper\Search_Input::render_rc( $search_placeholder ); ?>
@@ -205,15 +205,15 @@ class Resource_Center extends A_Options_Page {
 				</div>
 
 				<?php if ( ! empty( $description ) ) : ?>
-					<p class="text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px18 lg:tracking-px05 xl:text-px20 xl:leading-px24 lg:mb-6">
+					<p class="resource-center-hero__description text-white font-medium text-base leading-px22 tracking-em001 md:text-px18 md:leading-px24 md:mt-8 md:mb-5 lg:text-px18 lg:tracking-px05 xl:text-px20 xl:leading-px24 lg:mb-6">
 						<?php echo esc_html( $description ); ?>
 					</p>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $featured_topics ) ) : ?>
-					<div class="flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto lg:w-3/4 xl:w-3/5">
+					<div class="resource-center-hero__topics flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto">
 						<?php foreach ( $featured_topics as $topic ) : ?>
-							<a href="<?php echo get_term_link( $topic ); ?>" class="rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5 hover:bg-persian_blue-lighter">
+							<a href="<?php echo get_term_link( $topic ); ?>" class="resource-center-hero__topic rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5 hover:bg-persian_blue-lighter">
 								<?php echo esc_html( $topic->name ); ?>
 							</a>
 						<?php endforeach; ?>
@@ -243,11 +243,11 @@ class Resource_Center extends A_Options_Page {
 		return Helper\Carousel::posts(
 			$trending_posts,
 			array(
-				'title'     => 'Trending',
-				'subtitle'  => 'Explore the latest articles, resources, and guides.',
-				'title_cls' => 'centered lg:no-centered',
-				'onlyMd'    => false,
-				'class'     => 'text-white md:mt-12 lg:mt-18 resource-center-trending',
+				'title'      => 'Trending',
+				'subtitle'   => 'Explore the latest articles, resources, and guides.',
+				'title_cls'  => 'centered lg:no-centered',
+				'breakpoint' => 'tabletAndUp',
+				'class'      => 'text-white md:mt-12 lg:mt-18 resource-center-trending',
 			)
 		);
 	}
@@ -366,19 +366,6 @@ class Resource_Center extends A_Options_Page {
 		$glossary_image = static::get_option( static::FIELD_GLOSSARY_IMAGE );
 		$glossary       = static::get_option( static::FIELD_GLOSSARY );
 
-		$root_cls    = array(
-			'text-indigo',
-			'h-px600',
-			'mt-10',
-			'md:h-px490',
-			'md:justify-center',
-			'lg:h-px737',
-		);
-		$context_cls = array(
-			'md:mx-0',
-			'md:items-start',
-		);
-
 		$featured_word = Helper\Posts::get_one_from_list(
 			$glossary,
 			array(),
@@ -389,38 +376,13 @@ class Resource_Center extends A_Options_Page {
 			return;
 		}
 
-		ob_start();
-		?>
-		<div class="word-of-the-day">
-
-			<h2 class="text-px14 leading-px20 font-semibold capitalize tracking-px05 mb-5 lg:leading-px18">
-				WORD OF THE DAY
-			</h2>
-			<strong class="text-px32 leading-px42 font-semibold mb-5 md:text-px40 md:leading-px50 lg:text-px46 lg:leading-px56 lg:tracking-em_001">
-				<?php echo get_the_title( $featured_word ); ?>
-			</strong>
-			<div class="font-normal text-px14 leading-px20 tracking-px05 mb-5 lg:text-px22 lg:leading-px32 lg:tracing-px05">
-				<?php echo nl2br( esc_html( $featured_word->post_excerpt ) ); ?>
-			</div>
-			<p class="font-medium text-px18 leading-px24 tracking-em001 lg:text-px26 lg:leading-px36 lg:tracing-em005">
-				<?php echo nl2br( esc_html( $featured_word->post_content ) ); ?>
-			</p>
-
-		</div>
-		<?php
-		$context = ob_get_clean();
-		return Helper\Hero::img_bg(
-			array(
-				array(
-					intval( $glossary_image ),
-					Helper\Thumbnail::variant( Helper\Thumbnail::SCREEN_LG, Helper\Thumbnail::TYPE_HORIZONTAL ),
-				),
-			),
-			$context,
-			array(
-				'root_cls'    => $root_cls,
-				'context_cls' => $context_cls,
-			)
+		$options = array(
+			'word'           => get_the_title( $featured_word ),
+			'pronounciation' => $featured_word->post_excerpt,
+			'description'    => $featured_word->post_content,
+			'image'          => $glossary_image,
 		);
+
+		return Helper\Word_Of_The_Day::render( $options );
 	}
 }

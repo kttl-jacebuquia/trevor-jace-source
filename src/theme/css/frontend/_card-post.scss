@@ -95,7 +95,11 @@
         @apply max-w-none;
       }
 
-      :is(.icon-wrap, .title-top, .post-title, .title-btm, .post-desc) {
+      .icon-wrap,
+      .title-top,
+      .post-title,
+      .title-btm,
+      .post-desc {
         @apply px-6;
       }
 
@@ -443,6 +447,13 @@
           &.ellipsis {
             @apply static w-px34 h-px34 flex items-center justify-center p-0 bg-blue_green mr-0 text-white;
           }
+        }
+      }
+
+      // RC Post type
+      &.type-trevor_rc_post {
+        @screen xl {
+          @apply h-px510;
         }
       }
 

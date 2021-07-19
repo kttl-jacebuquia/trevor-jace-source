@@ -22,6 +22,8 @@ class Carousel {
 					'title',
 					'subtitle',
 					'class',
+					'onlyMd',
+					'breakpoint',
 				),
 				null
 			),
@@ -44,6 +46,10 @@ class Carousel {
 			$id = uniqid( 'posts-carousel-' );
 		}
 
+		if ( $options['onlyMd'] ) {
+			$options['breakpoint'] = 'onlyMd';
+		}
+
 		if ( $options['print_js'] ) {
 			add_action(
 				'wp_footer',
@@ -53,7 +59,7 @@ class Carousel {
 						array_merge(
 							$options['swiper'],
 							array(
-								'onlyMd' => $options['onlyMd'] ?? null,
+								'breakpoint' => $options['breakpoint'] ?? null,
 							)
 						)
 					);
@@ -87,46 +93,48 @@ class Carousel {
 				</div>
 			<?php } ?>
 
-			<div class="carousel-full-width-wrap container mx-auto">
-				<div class="carousel-container">
-					<div class="swiper-wrapper">
-						<?php
-						foreach ( $posts as $key => $post ) {
-							$post_type = get_post_type( $post );
+			<div class="carousel-wrap__content">
+				<div class="carousel-full-width-wrap container mx-auto">
+					<div class="carousel-container">
+						<div class="swiper-wrapper">
+							<?php
+							foreach ( $posts as $key => $post ) {
+								$post_type = get_post_type( $post );
 
-							switch ( $post_type ) {
-								case CPT\Team::POST_TYPE:
-									$options['card_renderer'] = array( Tile::class, 'staff' );
-									break;
-								case CPT\Event::POST_TYPE:
-									$options['card_renderer']            = array( Tile::class, 'event' );
-									$options['card_options']['show_cta'] = true;
-									break;
-								case 'attachment':
-									$options['card_renderer'] = array( Card::class, 'attachment' );
-									break;
-								default:
-									$options['card_renderer'] = ( ! empty( $options['card_renderer'] ) ? $options['card_renderer'] : array( Card::class, 'post' ) );
+								switch ( $post_type ) {
+									case CPT\Team::POST_TYPE:
+										$options['card_renderer'] = array( Tile::class, 'staff' );
+										break;
+									case CPT\Event::POST_TYPE:
+										$options['card_renderer']            = array( Tile::class, 'event' );
+										$options['card_options']['show_cta'] = true;
+										break;
+									case 'attachment':
+										$options['card_renderer'] = array( Card::class, 'attachment' );
+										break;
+									default:
+										$options['card_renderer'] = ( ! empty( $options['card_renderer'] ) ? $options['card_renderer'] : array( Card::class, 'post' ) );
 
-							}
-							?>
-							<div class="swiper-slide">
-								<?php echo call_user_func( $options['card_renderer'], $post, $key, $options['card_options'] ); ?>
-							</div>
-						<?php } ?>
+								}
+								?>
+								<div class="swiper-slide">
+									<?php echo call_user_func( $options['card_renderer'], $post, $key, $options['card_options'] ); ?>
+								</div>
+							<?php } ?>
+						</div>
 					</div>
-				</div>
-				<div class="swiper-button swiper-button-prev">
-					<div class="swiper-button-wrapper">
-						<i class="trevor-ti-arrow-left"></i>
+					<div class="swiper-button swiper-button-prev">
+						<div class="swiper-button-wrapper">
+							<i class="trevor-ti-arrow-left"></i>
+						</div>
 					</div>
-				</div>
-				<div class="swiper-button swiper-button-next">
-					<div class="swiper-button-wrapper">
-						<i class="trevor-ti-arrow-right"></i>
+					<div class="swiper-button swiper-button-next">
+						<div class="swiper-button-wrapper">
+							<i class="trevor-ti-arrow-right"></i>
+						</div>
 					</div>
+					<div class="swiper-pagination"></div>
 				</div>
-				<div class="swiper-pagination"></div>
 			</div>
 		</div>
 		<?php
@@ -392,6 +400,7 @@ class Carousel {
 				'slidesPerView' => 1,
 				'spaceBetween'  => 20,
 				'centerSlides'  => true,
+				'simulateTouch' => true,
 				'pagination'    => array(
 					'el'            => "{$base_selector} .swiper-pagination",
 					'clickable'     => true,
@@ -410,48 +419,11 @@ class Carousel {
 		);
 		?>
 		<script>
-			(function () {
-				let swiper;
-				let options = <?php echo json_encode( $options ); ?>;
-				options.on.init = function () {
-					document.querySelectorAll('.carousel-testimonials .card-post').forEach(elem => {
-						elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
-					});
-				}
-
-				options.on.activeIndexChange = function (swiper) {
-					let nextButton = swiper.navigation.nextEl;
-					let carouselParentContainer = swiper.$el[0].parentElement.parentElement;
-
-					// only apply hide the next button on 2nd to the last index on post-carousels
-					if (Array.from(carouselParentContainer.classList).includes('post-carousel')) {
-						if (swiper.activeIndex === swiper.slides.length - 2) {
-							nextButton.classList.add('should-hide');
-						} else {
-							nextButton.classList.remove('should-hide');
-						}
-					}
-
-					jQuery(swiper.el.parentElement).find('.swiper-pagination-bullet').each(function (index, bullet) {
-						const addOrRemoveMethod = index === swiper.activeIndex ? 'add' : 'remove';
-						bullet.classList[addOrRemoveMethod]('swiper-pagination-bullet-active');
-					});
-				}
-
-				function init() {
-					if (!swiper || swiper.destroyed) {
-						swiper = new trevorWP.vendors.Swiper('<?php echo esc_js( $base_selector ); ?> .carousel-container', options);
-					}
-				}
-
-				<?php if ( ! empty( $options['onlyMd'] ) ) { ?>
-				trevorWP.matchMedia.carouselWith3Cards(init, function () {
-					swiper && swiper.destroy();
-				});
-				<?php } else { ?>
-				init();
-				<?php } ?>
-			})();
+			window.trevorWP.features.initializeCarousel({
+				options: <?php echo json_encode( $options ); ?>,
+				base_selector: '<?php echo esc_js( $base_selector ); ?>',
+				onlyMd: <?php echo ! empty( $options['onlyMd'] ) ? 'true' : 'false'; ?>,
+			});
 		</script>
 		<?php
 	}

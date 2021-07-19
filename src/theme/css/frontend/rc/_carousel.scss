@@ -1,7 +1,37 @@
 .carousel-wrap {
-  overflow: visible;
+  @apply overflow-visible mb-0;
 
-  .carousel-full-width-wrap {
-    overflow: hidden;
+  & + & {
+    @apply mt-px80;
+
+    @screen md {
+      @apply mt-px96;
+    }
+
+    @screen xl {
+      @apply mt-px120;
+    }
+  }
+
+  .carousel-wrap__content {
+    @apply overflow-hidden;
+  }
+
+  // Uninitialized trending carousel
+  &.resource-center-trending {
+    .carousel-container:not(.swiper-container-initialized) {
+      .swiper-wrapper {
+        @apply flex-col;
+      }
+
+      .swiper-slide + .swiper-slide {
+        @apply mt-px28;
+      }
+
+      ~ .swiper-pagination {
+        display: none;
+      }
+    }
   }
 }
+

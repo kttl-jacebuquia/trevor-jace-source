@@ -1,0 +1,91 @@
+.word-of-the-day {
+  @apply bg-gradient-trevorspace pt-px80 text-indigo text-center w-full max-w-none;
+  background-size: cover;
+
+  @screen xl {
+    @apply pt-0 text-left;
+  }
+
+  &__container {
+    @apply tw-grid items-center;
+    @apply container mx-auto;
+  }
+
+  &__content {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-4 col-start-3;
+    }
+
+    @screen xl {
+      @apply col-span-7 col-start-1 pl-px40 py-px130;
+    }
+  }
+
+  &__eyebrow {
+    @apply font-semibold text-px14 leading-px20 tracking-px05 uppercase;
+
+    @screen xl {
+      @apply text-px14 leading-px18 tracking-px05;
+    }
+  }
+
+  &__heading {
+    @apply block mt-px2 font-semibold text-px32 leading-px42;
+
+    @screen md {
+      @apply text-px40 leading-px50 mt-px4;
+    }
+
+    @screen xl {
+      @apply text-px46 leading-px56 tracking-em_001 mt-px16;
+    }
+  }
+
+  &__pronounciation {
+    @apply text-px14 leading-px20 tracking-px05 mt-px10;
+
+    @screen md {
+      @apply text-px14 leading-px18 tracking-px05 mt-px8;
+    }
+
+    @screen xl {
+      @apply mt-px14 text-px22 leading-px32 tracking-px05;
+    }
+  }
+
+  &__description {
+    @apply font-medium text-px18 leading-px24 tracking-em001;
+
+    @screen md {
+      @apply text-px18 leading-px24 mt-px12;
+    }
+
+    @screen xl {
+      @apply text-px24 leading-px34 tracking-em001;
+    }
+  }
+
+  &__image {
+    @apply col-span-full mt-px38 -ml-px28;
+    width: calc(100% + #{rem-calc(56)});
+
+    @screen md {
+      @apply mt-px54 mx-0;
+    }
+
+    @screen xl {
+      @apply mt-px75 col-start-9 col-span-4 self-end;
+      width: calc(100% + #{rem-calc(68)});
+    }
+  }
+
+  &__img {
+    @apply block w-full mx-auto max-w-none;
+
+    @screen md {
+      @apply h-px392 w-auto;
+    }
+  }
+}

@@ -175,3 +175,55 @@ export function generateSwiperArrows(leftPaneSelector, rightPaneSelector, eBase)
 		}
 	});
 }
+
+export const initializeCarousel = (carouselSettings) => {
+	/**
+	 * Initialize remaining carousels
+	 */
+	 let swiper;
+	 let base_selector = carouselSettings.base_selector;
+	 let options = carouselSettings.options || {};
+	 let breakpoint = carouselSettings.options.breakpoint;
+	 const baseContainer = document.querySelector(base_selector);
+
+	 options.on.init = function (swiper) {
+		 document.querySelectorAll('.carousel-testimonials .card-post').forEach(elem => {
+			 elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
+		 });
+	 }
+
+	 options.on.activeIndexChange = function (swiper) {
+		 let nextButton = swiper.navigation.nextEl;
+		 let carouselParentContainer = swiper.$el[0].parentElement.parentElement;
+
+		 // only apply hide the next button on 2nd to the last index on post-carousels
+		 if (Array.from(carouselParentContainer.classList).includes('post-carousel')) {
+			 if (swiper.activeIndex === swiper.slides.length - 2) {
+				 nextButton.classList.add('should-hide');
+			 } else {
+				 nextButton.classList.remove('should-hide');
+			 }
+		 }
+
+		 jQuery(swiper.el.parentElement).find('.swiper-pagination-bullet').each(function (index, bullet) {
+			 const addOrRemoveMethod = index === swiper.activeIndex ? 'add' : 'remove';
+			 bullet.classList[addOrRemoveMethod]('swiper-pagination-bullet-active');
+		 });
+	 }
+
+	 function init() {
+		 if ((!swiper || swiper.destroyed) && baseContainer) {
+			 const carouselContainer = baseContainer.querySelector('.carousel-container');
+			 swiper = new trevorWP.vendors.Swiper(carouselContainer, options);
+		 }
+	 }
+
+	 if ( breakpoint && breakpoint in trevorWP.matchMedia ) {
+		 trevorWP.matchMedia.[breakpoint](init, function () {
+			 swiper && swiper.destroy(true, true);
+		 });
+	 }
+	 else {
+		 init();
+	 }
+}

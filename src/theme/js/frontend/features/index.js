@@ -7,7 +7,7 @@ export modal from './modal';
 export faqToggle from './faqs';
 export cardToggle from './cards';
 export {toggleFrequency, toggleAmount, displayAmountAction, displayCurrency} from './donate';
-export {carousel, carouselNavigator, generateSwiperArrows} from './carousel';
+export {carousel, carouselNavigator, generateSwiperArrows, initializeCarousel} from './carousel';
 export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
 export ectMap from './ect-map';
