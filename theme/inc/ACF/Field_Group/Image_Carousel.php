@@ -1,6 +1,6 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-class Image_Gallery extends A_Field_Group implements I_Block, I_Renderable {
+class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE                 = 'title';
 	const FIELD_GALLERY_ENTRIES       = 'gallery_entries';
 	const FIELD_GALLERY_ENTRY_IMAGE   = 'gallery_entry_image';
@@ -16,7 +16,7 @@ class Image_Gallery extends A_Field_Group implements I_Block, I_Renderable {
 		$gallery_entry_caption = static::gen_field_key( static::FIELD_GALLERY_ENTRY_CAPTION );
 
 		return array(
-			'title'  => 'Image Gallery',
+			'title'  => 'Image Carousel',
 			'fields' => array(
 				static::FIELD_TITLE           => array(
 					'key'      => $title,
@@ -63,7 +63,7 @@ class Image_Gallery extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Image Gallery',
+				'title'      => 'Image Carousel',
 				'post_types' => array( 'page' ),
 			)
 		);

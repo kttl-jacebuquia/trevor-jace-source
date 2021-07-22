@@ -46,7 +46,7 @@ class ACF {
 		Field_Group\Topic_Cards::class,
 		Field_Group\Center_Text_Full_Width_Image::class,
 		Field_Group\Text_Icon::class,
-		Field_Group\Image_Gallery::class,
+		Field_Group\Image_Carousel::class,
 		Field_Group\Single_Quote::class,
 		Field_Group\Text_Only_Messaging_Block::class,
 		Field_Group\Current_Partners_Table::class,
@@ -56,6 +56,7 @@ class ACF {
 		Field_Group\TrevorSpace_Text_Image::class,
 		Field_Group\Resource_Center_Block::class,
 		Field_Group\Current_Funders_Table_CTA::class,
+		Field_Group\Header_Image_Grid::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
