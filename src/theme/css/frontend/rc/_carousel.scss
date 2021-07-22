@@ -2,10 +2,10 @@
   @apply overflow-visible mb-0;
 
   & + & {
-    @apply mt-px80;
+    @apply mt-px103;
 
     @screen md {
-      @apply mt-px96;
+      @apply mt-px130;
     }
 
     @screen xl {

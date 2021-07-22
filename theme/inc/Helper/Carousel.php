@@ -123,17 +123,19 @@ class Carousel {
 							<?php } ?>
 						</div>
 					</div>
-					<div class="swiper-button swiper-button-prev">
-						<div class="swiper-button-wrapper">
-							<i class="trevor-ti-arrow-left"></i>
+					<?php if ( count( $posts ) > 1 ) : ?>
+						<div class="swiper-button swiper-button-prev">
+							<div class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-left"></i>
+							</div>
 						</div>
-					</div>
-					<div class="swiper-button swiper-button-next">
-						<div class="swiper-button-wrapper">
-							<i class="trevor-ti-arrow-right"></i>
+						<div class="swiper-button swiper-button-next">
+							<div class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-right"></i>
+							</div>
 						</div>
-					</div>
-					<div class="swiper-pagination"></div>
+						<div class="swiper-pagination"></div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
