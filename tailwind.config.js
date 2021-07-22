@@ -264,6 +264,7 @@ module.exports = {
 			fontSize: px2remMap([
 				...divisibles(2, 500, 10, 100),
 				...divisibles(5, 500, 10, 100),
+				11,
 			]),
 			lineHeight: px2remMap([
 				...divisibles(2, 500, 10, 200),
