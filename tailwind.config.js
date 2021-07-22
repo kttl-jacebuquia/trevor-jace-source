@@ -1,31 +1,42 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const px2rem = (px, root = 16) => {
 	const remVal = px / root;
-	return String(+remVal.toFixed(2)) + 'rem'
-}
+	return String(+remVal.toFixed(2)) + 'rem';
+};
 
 /**
  * Builds object containing px 2 rem key-value for tailwind, e.g.:
  * {
  *   px5: px2rem(5)
  * }
+ *
  * @param {Array} values List of numbers
  */
-const px2remMap = (values = []) => values.reduce((all, currentValue) => ({
-	...all,
-	[`px${currentValue}`]: px2rem(currentValue)
-}), {});
+const px2remMap = (values = []) =>
+	values.reduce(
+		(all, currentValue) => ({
+			...all,
+			[`px${currentValue}`]: px2rem(currentValue),
+		}),
+		{}
+	);
 
 /**
  * Generates a list of divisible numbers
+ *
  * @param {Int} divisor Divisor
  * @param {Int} maxItems Total number of items to generate
  * @param {Int} minValue Minimum value
  * @param {Int} maxValue Maximum value
- * @returns Array
+ * @return Array
  */
-const divisibles = (divisor = 1, maxItems = 10, minValue = 0, maxValue = 500) => {
+const divisibles = (
+	divisor = 1,
+	maxItems = 10,
+	minValue = 0,
+	maxValue = 500
+) => {
 	const result = [];
 
 	for (
@@ -58,26 +69,27 @@ module.exports = {
 	separator: ':',
 	theme: {
 		screens: {
-			'mobile': {'max': px2rem(767)},
-			'md-max': {'max': px2rem(1023)},
-			'lg-max': {'max': px2rem(1279)},
-			'sm': px2rem(375),
-			'md': px2rem(768),
-			'lg': px2rem(1024),
-			'lg2': px2rem(1280),
-			'xl': px2rem(1440),
+			mobile: { max: px2rem(767) },
+			'md-max': { max: px2rem(1023) },
+			'lg-max': { max: px2rem(1279) },
+			sm: px2rem(375),
+			md: px2rem(768),
+			lg: px2rem(1024),
+			lg2: px2rem(1280),
+			xl: px2rem(1440),
 			'2xl': px2rem(1600),
-			dark: {'raw': '(prefers-color-scheme: dark)'},
+			dark: { raw: '(prefers-color-scheme: dark)' },
 		},
 		container: {
-			screens: { // set the max-width per breakpoint
-				'sm': '100%',
-				'md': px2rem(768),
-				'lg': px2rem(1024),
-				'lg2': px2rem(1280),
-				'xl': px2rem(1440),
+			screens: {
+				// set the max-width per breakpoint
+				sm: '100%',
+				md: px2rem(768),
+				lg: px2rem(1024),
+				lg2: px2rem(1280),
+				xl: px2rem(1440),
 				'2xl': px2rem(1600),
-			}
+			},
 		},
 		colors: {
 			transparent: 'transparent',
@@ -86,18 +98,18 @@ module.exports = {
 				DEFAULT: '#000',
 			},
 			white: {
-				DEFAULT: '#fff'
+				DEFAULT: '#fff',
 			},
 			gray: {
 				DEFAULT: '#ccc',
-				light: '#F3F3F7'
+				light: '#F3F3F7',
 			},
 			violet: {
 				DEFAULT: '#6B5DF6',
 				alt: '#7155FF',
 				light: '#EDEDFB',
 				lighter: '#DBD5FF',
-				tint: '#897DF8'
+				tint: '#897DF8',
 			},
 			orange: {
 				DEFAULT: '#FF5A3D',
@@ -127,11 +139,11 @@ module.exports = {
 			teal: {
 				lighter: 'rgba(0, 58, 72, 0.2)',
 				dark: DARK_TEAL,
-				tint: '#D9E2E4'
+				tint: '#D9E2E4',
 			},
 			moss: {
 				DEFAULT: '#E1E8E9',
-				dark: '#08535A'
+				dark: '#08535A',
 			},
 			persian_blue: {
 				DEFAULT: '#3626D9',
@@ -139,7 +151,7 @@ module.exports = {
 			},
 			melrose: {
 				DEFAULT: '#CAC5FC',
-			}
+			},
 		},
 		// Custom
 		postCard: {
@@ -150,7 +162,7 @@ module.exports = {
 				lg2: px2rem(328),
 				xl: px2rem(368),
 				'2xl': px2rem(368),
-			}
+			},
 		},
 		carousel: {
 			w3Card: {
@@ -161,12 +173,12 @@ module.exports = {
 				height: px2rem(319),
 				heightMD: px2rem(409),
 				heightLG: px2rem(500),
-			}
+			},
 		},
 		header: {
 			overflow: {
-				xl: '-1.25rem'
-			}
+				xl: '-1.25rem',
+			},
 		},
 		paths: {
 			themeGradients: '/wp-content/themes/trevor/static/media/gradients',
@@ -175,7 +187,7 @@ module.exports = {
 			width: {
 				DEFAULT: px2rem(264),
 				xl: px2rem(289),
-			}
+			},
 		},
 		// Extend
 		extend: {
@@ -207,22 +219,13 @@ module.exports = {
 				px6: px2rem(6),
 				px9: px2rem(9),
 				px10: px2rem(10),
-				px12: px2rem(12)
+				px12: px2rem(12),
 			},
 			maxWidth: {
 				unset: 'unset',
 				...px2remMap([
-					170,
-					289,
-					318, 319, 394,
-					403, 422, 450, 490, 493,
-					500, 550,
-					605, 606,
-					718, 733,
-					818, 894,
-					960,
-					1028, 1080,
-					1240,
+					170, 289, 318, 319, 394, 403, 422, 450, 490, 493, 500, 550,
+					605, 606, 718, 733, 818, 894, 960, 1028, 1080, 1240,
 				]),
 				'7/10': '70%',
 				'4/5': '80%',
@@ -239,18 +242,12 @@ module.exports = {
 				...px2remMap([
 					...divisibles(2, 500, 0, 500),
 					...divisibles(5, 500, 0, 500),
-					319
+					319,
 				]),
 			},
 			width: px2remMap([
-				13, 20, 40, 45,
-				127,
-				214, 264,
-				315, 319, 368, 370, 394,
-				422,
-				500,
-				606,
-				733,
+				13, 20, 40, 45, 127, 214, 264, 315, 319, 368, 370, 394, 422,
+				500, 606, 733,
 			]),
 			minHeight: px2remMap([
 				...divisibles(2, 500, 0, 800),
@@ -258,16 +255,11 @@ module.exports = {
 			]),
 			height: {
 				...px2remMap([
-					13, 20, 34, 42, 46, 45, 48, 52, 54, 68, 72, 78, 84,
-					100, 104, 106, 128, 133, 138, 140, 160,
-					200, 240, 250, 292,
-					302, 328, 375,
-					412, 436, 440, 445, 490,
-					503, 510, 534, 546,
-					600,
-					706, 737,
-					820,
-				])
+					13, 20, 34, 42, 46, 45, 48, 52, 54, 68, 72, 78, 84, 100,
+					104, 106, 128, 133, 138, 140, 160, 200, 240, 250, 292, 302,
+					328, 375, 412, 436, 440, 445, 490, 503, 510, 534, 546, 600,
+					706, 737, 820,
+				]),
 			},
 			fontSize: px2remMap([
 				...divisibles(2, 500, 10, 100),
@@ -286,24 +278,24 @@ module.exports = {
 				em_003: '-0.003em',
 				em_005: '-0.005em',
 				em_001: '-0.01em', // todo: convert to tailwind negative
-				px025: px2rem(.25),
-				px05: px2rem(.5),
+				px025: px2rem(0.25),
+				px05: px2rem(0.5),
 				px_015: px2rem(-1.5),
 				px_02: px2rem(-2),
-				px_05: px2rem(-.5),
+				px_05: px2rem(-0.5),
 			},
 			zIndex: {
-				'1': '1',
-				'2': '2',
+				1: '1',
+				2: '2',
 				'-1': '-1',
 				21: 21,
 				30: 30,
-				31: 31
+				31: 31,
 			},
 			gap: {
-				'sm': px2rem(12),
-				'md': px2rem(28),
-				... px2remMap(divisibles(10, 10, 0, 100))
+				sm: px2rem(12),
+				md: px2rem(28),
+				...px2remMap(divisibles(10, 10, 0, 100)),
 			},
 			spacing: {
 				full: '100%',
@@ -351,46 +343,58 @@ module.exports = {
 					css: {
 						color: DARK_TEAL,
 						h3: {
-							color: DARK_TEAL
+							color: DARK_TEAL,
 						},
 						'ul > li::before': {
-							backgroundColor: DARK_TEAL
-						}
-					}
-				}
+							backgroundColor: DARK_TEAL,
+						},
+					},
+				},
 			},
 			boxShadow: {
 				'indigo-md': '0px 6px 8px rgba(16, 16, 102, 0.08)',
 				'indigo-lg': '0px 8px 6px rgba(16, 16, 102, 0.1)',
-				'light': '0px 0px 16px rgba(0, 58, 72, 0.2)',
-				'darkGreen': '0px 6px 12px 0px rgb(0, 58, 72, 0.1)',
-				'radio' : 'inset 0 0 0 2px #003A48',
+				light: '0px 0px 16px rgba(0, 58, 72, 0.2)',
+				darkGreen: '0px 6px 12px 0px rgb(0, 58, 72, 0.1)',
+				radio: 'inset 0 0 0 2px #003A48',
 				none: 'none',
 			},
-			backgroundImage: theme => ({
-				'gradient-default': `url('${theme('paths.themeGradients')}/default.png')`,
+			backgroundImage: (theme) => ({
+				'gradient-default': `url('${theme(
+					'paths.themeGradients'
+				)}/default.png')`,
 				'gradient-rc': `url('${theme('paths.themeGradients')}/rc.png')`,
-				'gradient-darkgreen': `url('${theme('paths.themeGradients')}/darkgreen.png')`,
-				'gradient-darkgreen-flip': `url('${theme('paths.themeGradients')}/darkgreen-flip.png')`,
-				'gradient-trevorspace': `url('${theme('paths.themeGradients')}/trevorspace.png')`,
-				'gradient-gethelp': `url('${theme('paths.themeGradients')}/gethelp.png')`,
-				'gradient-orange': `url('${theme('paths.themeGradients')}/orange.png')`,
+				'gradient-darkgreen': `url('${theme(
+					'paths.themeGradients'
+				)}/darkgreen.png')`,
+				'gradient-darkgreen-flip': `url('${theme(
+					'paths.themeGradients'
+				)}/darkgreen-flip.png')`,
+				'gradient-trevorspace': `url('${theme(
+					'paths.themeGradients'
+				)}/trevorspace.png')`,
+				'gradient-gethelp': `url('${theme(
+					'paths.themeGradients'
+				)}/gethelp.png')`,
+				'gradient-orange': `url('${theme(
+					'paths.themeGradients'
+				)}/orange.png')`,
 			}),
 			opacity: {
-				'16': '0.16',
-				'44': '0.44',
-				'86': '0.86',
-			}
+				16: '0.16',
+				44: '0.44',
+				86: '0.86',
+			},
 		},
 	},
 	variants: {
 		extend: {
-			backgroundColor: ['checked']
-		}
+			backgroundColor: ['checked'],
+		},
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/line-clamp'),
 	],
-}
+};

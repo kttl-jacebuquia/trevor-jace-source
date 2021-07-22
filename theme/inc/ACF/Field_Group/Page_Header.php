@@ -6,19 +6,19 @@ use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
-	const FIELD_TYPE               = 'header_type';
-	const FIELD_TITLE_TOP          = 'title_top';
-	const FIELD_TITLE_TOP_ATTR     = 'title_top_attr';
-	const FIELD_CAROUSEL           = 'carousel';
-	const FIELD_IMAGE              = 'image';
-	const FIELD_BG_CLR             = 'bg_clr';
-	const FIELD_TEXT_CLR           = 'text_clr';
-	const FIELD_IMAGE_ENTRIES      = 'image_entries';
-	const FIELD_IMAGE_ENTRY_IMAGE  = 'image_entry_image';
-	const FIELD_VIDEO              = 'video';
-	const FIELD_MEDIA_TYPE         = 'media_type';
-	const FIELD_MEMBERS_COUNT      = 'members_count';
-	const FIELD_BOTTOM_TEXT        = 'bottom_text';
+	const FIELD_TYPE              = 'header_type';
+	const FIELD_TITLE_TOP         = 'title_top';
+	const FIELD_TITLE_TOP_ATTR    = 'title_top_attr';
+	const FIELD_CAROUSEL          = 'carousel';
+	const FIELD_IMAGE             = 'image';
+	const FIELD_BG_CLR            = 'bg_clr';
+	const FIELD_TEXT_CLR          = 'text_clr';
+	const FIELD_IMAGE_ENTRIES     = 'image_entries';
+	const FIELD_IMAGE_ENTRY_IMAGE = 'image_entry_image';
+	const FIELD_VIDEO             = 'video';
+	const FIELD_MEDIA_TYPE        = 'media_type';
+	const FIELD_MEMBERS_COUNT     = 'members_count';
+	const FIELD_BOTTOM_TEXT       = 'bottom_text';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -72,7 +72,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			),
 			array(
-				static::FIELD_MEMBERS_COUNT      => array(
+				static::FIELD_MEMBERS_COUNT => array(
 					'key'               => $members_count,
 					'name'              => static::FIELD_MEMBERS_COUNT,
 					'label'             => 'Members Count',
@@ -90,7 +90,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						),
 					),
 				),
-				static::FIELD_BOTTOM_TEXT => array(
+				static::FIELD_BOTTOM_TEXT   => array(
 					'key'               => $bottom_text,
 					'name'              => static::FIELD_BOTTOM_TEXT,
 					'label'             => 'Members Login Text',
@@ -474,8 +474,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		# Support TrevorSpace
 		if ( 'support_trevorspace' === $type ) {
-			$members_count      = $val->get( static::FIELD_MEMBERS_COUNT );
-			$bottom_text = $val->get( static::FIELD_BOTTOM_TEXT );
+			$members_count = $val->get( static::FIELD_MEMBERS_COUNT );
+			$bottom_text   = $val->get( static::FIELD_BOTTOM_TEXT );
 
 			if ( ! empty( $members_count ) ) {
 				$args['title_top'] = $members_count . ' members currently online';

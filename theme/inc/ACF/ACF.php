@@ -45,7 +45,6 @@ class ACF {
 		Field_Group\Guiding_Principles::class,
 		Field_Group\Topic_Cards::class,
 		Field_Group\Center_Text_Full_Width_Image::class,
-		Field_Group\Crisis_Support::class,
 		Field_Group\Text_Icon::class,
 		Field_Group\Image_Gallery::class,
 		Field_Group\Single_Quote::class,
