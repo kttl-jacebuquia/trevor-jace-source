@@ -56,6 +56,8 @@ class ACF {
 		Field_Group\TrevorSpace_Text_Image::class,
 		Field_Group\Resource_Center_Block::class,
 		Field_Group\Current_Funders_Table_CTA::class,
+		Field_Group\ECT_Map::class,
+		Field_Group\Campaign_Form::class,
 		Field_Group\Header_Image_Grid::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
