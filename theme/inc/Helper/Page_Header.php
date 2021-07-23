@@ -518,4 +518,42 @@ class Page_Header {
 		<?php
 		return ob_get_clean();
 	}
+
+	public static function support_crisis_services( array $options ): string {
+		$title       = $options['title'];
+		$description = $options['desc'];
+
+		$ctas = array(
+			array( 'chat', 'Chat With Us' ),
+			array( 'call', 'Call Us' ),
+			array( 'smartphone', 'Text Us' ),
+		);
+
+		ob_start();
+		?>
+			<div class='header-container header-container--support-crisis-services'>
+				<div class='hero page-header type-support-crisis-services'>
+					<?php if ( ! empty( $title ) ) : ?>
+						<h1 class="page-header-title"><?php echo $title; ?></h1>
+					<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="page-header-desc"><?php echo $description; ?></p>
+					<?php endif; ?>
+					<div class="page-header__support-ctas">
+						<?php foreach ( $ctas as $cta ) : ?>
+							<?php // TODO: Integrate What to Expect Modal ?>
+							<button type="button" class="page-header__support-cta" aria-label="click to open what to expect modal">
+								<i class="trevor-ti-<?php echo $cta[0]; ?>" aria-hidden="true"></i>
+								<span class="page-header__support-cta-text"><?php echo $cta[1]; ?></span>
+							</button>
+						<?php endforeach; ?>
+					</div>
+					<aside class="page-header__bottom">
+						<button class="page-header__scroll-down trevor-ti-chevron-down"></button>
+					</aside>
+				</div>
+			</div>
+		<?php
+		return ob_get_clean();
+	}
 }

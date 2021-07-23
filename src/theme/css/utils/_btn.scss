@@ -17,9 +17,14 @@
 		// Default variant
 		@apply text-white bg-teal-dark;
 
-		// White {
+		// White
 		&.white {
 			@apply text-teal-dark bg-white;
+		}
+
+    // Indigo
+		&.indigo {
+			@apply text-white bg-indigo;
 		}
 	}
 }

@@ -15,6 +15,7 @@ class ACF {
 		Options_Page\Quick_Exit::class,
 		Options_Page\Fundraiser_Quiz::class,
 		Options_Page\Donation_Modal::class,
+		Options_Page\What_To_Expect::class,
 		Options_Page\Search::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,

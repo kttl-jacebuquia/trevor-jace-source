@@ -1,9 +1,11 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use \TrevorWP\Theme\Helper;
+
 class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
-	const FIELD_CTA_LINK    = 'cta_link';
+	const FIELD_CTA_TEXT    = 'cta_link';
 
 	/**
 	 * @inheritDoc
@@ -11,7 +13,7 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 	protected static function prepare_register_args(): array {
 		$title       = static::gen_field_key( static::FIELD_TITLE );
 		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$cta_link    = static::gen_field_key( static::FIELD_CTA_LINK );
+		$cta_text    = static::gen_field_key( static::FIELD_CTA_TEXT );
 
 		return array(
 			'title'  => 'Breathing Exercise',
@@ -28,12 +30,11 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
-				static::FIELD_CTA_LINK    => array(
-					'key'           => $cta_link,
-					'name'          => static::FIELD_CTA_LINK,
-					'label'         => 'CTA Link',
-					'type'          => 'link',
-					'return_format' => 'array',
+				static::FIELD_CTA_TEXT    => array(
+					'key'   => $cta_text,
+					'name'  => static::FIELD_CTA_TEXT,
+					'label' => 'CTA Text',
+					'type'  => 'text',
 				),
 			),
 		);
@@ -59,23 +60,35 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$title       = static::get_val( static::FIELD_TITLE );
 		$description = static::get_val( static::FIELD_DESCRIPTION );
-		$cta_link    = static::get_val( static::FIELD_CTA_LINK );
+		$cta_text    = static::get_val( static::FIELD_CTA_TEXT );
+
+		$cta_class = array(
+			'breathing-exercise__cta',
+			Helper\Breathing_Exercise::TRIGGER_ELEMENT_CLASS,
+		);
+
+		// Overlay will render in footer
+		Helper\Breathing_Exercise::render_overlay();
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="breathing-exercise">
+			<div class="breathing-exercise__container">
+				<div class="breathing-exercise__content">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="breathing-exercise__title"><?php echo esc_html( $title ); ?></h2>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $cta_link['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $cta_link['url'] ); ?>" target="<?php echo esc_attr( $cta_link['target'] ); ?>"><?php echo esc_html( $cta_link['title'] ); ?></a>
-			<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="breathing-exercise__description"><?php echo esc_html( $description ); ?></p>
+					<?php endif; ?>
+					<?php if ( ! empty( $cta_text ) ) : ?>
+						<button class="<?php echo esc_attr( implode( ' ', $cta_class ) ); ?>" type="button">
+							<?php echo $cta_text; ?>
+						</button>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();

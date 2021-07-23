@@ -9,6 +9,7 @@ use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper\DonationModal;
 use TrevorWP\Theme\Helper\FundraiserQuizModal;
+use TrevorWP\Theme\Helper\WhatToExpectModal;
 
 class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_LABEL             = 'label';
@@ -19,6 +20,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_MODAL             = 'modal';
 	const FIELD_DONATE_DEDICATION = 'donate_dedication';
 	const FIELD_TEXTONLY_POPUP    = 'textonly_popup';
+	const FIELD_PHONE             = 'phone';
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
@@ -35,6 +37,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$modal             = static::gen_field_key( static::FIELD_MODAL );
 		$donate_dedication = static::gen_field_key( static::FIELD_DONATE_DEDICATION );
 		$textonly_popup    = static::gen_field_key( static::FIELD_TEXTONLY_POPUP );
+		$phone             = static::gen_field_key( static::FIELD_PHONE );
 
 		return array(
 			static::FIELD_LABEL             => array(
@@ -55,10 +58,34 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'page_link'     => 'Page Link',
 					'file_download' => 'File Download',
 					'modal'         => 'Pop-up Modal',
+					'call'          => 'Call',
+					'sms'           => 'SMS',
 				),
 				'default_value' => 'page_link',
 				'allow_null'    => true,
 				'multiple'      => false,
+			),
+			static::FIELD_PHONE             => array(
+				'key'               => $phone,
+				'name'              => static::FIELD_PHONE,
+				'label'             => 'Phone Number',
+				'type'              => 'text',
+				'conditional_logic' => array(
+					array(
+						array(
+							'field'    => $action,
+							'operator' => '==',
+							'value'    => 'call',
+						),
+					),
+					array(
+						array(
+							'field'    => $action,
+							'operator' => '==',
+							'value'    => 'sms',
+						),
+					),
+				),
 			),
 			static::FIELD_LINK              => array(
 				'key'               => $link,
@@ -135,6 +162,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'donate'          => 'Donate Modal',
 					'fundraise_quiz'  => 'Fundraise Quiz Modal',
 					'text_only_popup' => 'Text Only Pop-up',
+					'what_to_expect'  => 'What to Expect Pop-up',
 				),
 			),
 			static::FIELD_TEXTONLY_POPUP    => array(
@@ -264,6 +292,30 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					);
 				}
 				break;
+			case 'call':
+				$phone = $val->get( static::FIELD_PHONE );
+				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ],
+					array(
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'href',
+							DOM_Attr::FIELD_ATTR_VAL => 'tel://' . $phone,
+						),
+					)
+				);
+				break;
+			case 'sms':
+				$phone = $val->get( static::FIELD_PHONE );
+				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ],
+					array(
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'href',
+							DOM_Attr::FIELD_ATTR_VAL => 'sms://' . $phone,
+						),
+					)
+				);
+				break;
 			case 'modal':
 				$modal_type = $val->get( static::FIELD_MODAL );
 
@@ -299,18 +351,31 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					$options['class'][] = $modal_id;
 					$options['tag']     = 'button';
 					Text_Only_Popup::render_modal_for( $text_only_popup );
+
+					// WHAT TO EXPECT POPUP
+				} elseif ( 'what_to_expect' === $modal_type ) {
+					$options['tag']                                        = 'button';
+					$options['class'][]                                    = WhatToExpectModal::ID;
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+						DOM_Attr::FIELD_ATTR_VAL => 'click to open what to expect modal',
+					);
+					WhatToExpectModal::create();
 				}
+				break;
 		}
 
 		ob_start();
 		?>
-		<<?php echo $options['tag']; ?>
-			<?php echo DOM_Attr::render_attrs_of( $options['attributes'], $options['class'] ); ?>
-		>
-			<span <?php echo DOM_Attr::render_attrs_of( $options['label_attributes'], $options['label_class'] ); ?>>
-				<?php echo esc_html( $label ); ?>
-			</span>
-		</<?php echo $options['tag']; ?>>
+		<?php if ( ! empty( $label ) ) : ?>
+			<<?php echo $options['tag']; ?>
+				<?php echo DOM_Attr::render_attrs_of( $options['attributes'], $options['class'] ); ?>
+			>
+				<span <?php echo DOM_Attr::render_attrs_of( $options['label_attributes'], $options['label_class'] ); ?>>
+					<?php echo esc_html( $label ); ?>
+				</span>
+			</<?php echo $options['tag']; ?>>
+		<?php endif; ?>
 		<?php
 		return ob_get_clean();
 	}

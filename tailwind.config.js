@@ -181,6 +181,7 @@ module.exports = {
 			},
 		},
 		paths: {
+			themeMedia: '/wp-content/themes/trevor/static/media',
 			themeGradients: '/wp-content/themes/trevor/static/media/gradients',
 		},
 		staffCard: {
@@ -224,8 +225,17 @@ module.exports = {
 			maxWidth: {
 				unset: 'unset',
 				...px2remMap([
-					170, 289, 318, 319, 394, 403, 422, 450, 490, 493, 500, 550,
-					605, 606, 718, 733, 818, 894, 960, 1028, 1080, 1240,
+					170,
+					289, 276,
+					318, 319, 394,
+					403, 422, 450, 490, 493,
+					500, 550,
+					605, 606,
+					718, 733,
+					818, 894,
+					960,
+					1028, 1080,
+					1240,
 				]),
 				'7/10': '70%',
 				'4/5': '80%',
@@ -242,12 +252,19 @@ module.exports = {
 				...px2remMap([
 					...divisibles(2, 500, 0, 500),
 					...divisibles(5, 500, 0, 500),
+					187,
 					319,
 				]),
 			},
 			width: px2remMap([
-				13, 20, 40, 45, 127, 214, 264, 315, 319, 368, 370, 394, 422,
-				500, 606, 733,
+				13, 20, 40, 45,
+				127,
+				214, 264,
+				315, 319, 368, 370, 394,
+				422,
+				500, 568,
+				606,
+				733,
 			]),
 			minHeight: px2remMap([
 				...divisibles(2, 500, 0, 800),
@@ -265,11 +282,15 @@ module.exports = {
 				...divisibles(2, 500, 10, 100),
 				...divisibles(5, 500, 10, 100),
 				11,
+				180,
+				200,
 			]),
 			lineHeight: px2remMap([
 				...divisibles(2, 500, 10, 200),
 				...divisibles(5, 500, 10, 200),
 				19,
+				246,
+				273,
 			]),
 			letterSpacing: {
 				em005: '0.005em',
@@ -381,6 +402,21 @@ module.exports = {
 				'gradient-orange': `url('${theme(
 					'paths.themeGradients'
 				)}/orange.png')`,
+				'gradient-crisis-services': `url('${theme(
+					'paths.themeGradients'
+				)}/crisis-services.png')`,
+				'breathing-exercise-mobile': `url('${theme(
+					'paths.themeMedia'
+				)}/breathing-exercise/mobile.svg')`,
+				'breathing-exercise-tablet': `url('${theme(
+					'paths.themeMedia'
+				)}/breathing-exercise/tablet.svg')`,
+				'breathing-exercise-desktop': `url('${theme(
+					'paths.themeMedia'
+				)}/breathing-exercise/desktop.svg')`,
+				'gradient-violet': `url('${theme(
+					'paths.themeGradients'
+				)}/violet.svg')`,
 			}),
 			opacity: {
 				16: '0.16',

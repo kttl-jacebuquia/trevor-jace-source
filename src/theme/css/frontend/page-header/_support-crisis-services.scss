@@ -1,0 +1,121 @@
+.header-container--support-crisis-services {
+  @apply bg-gradient-crisis-services flex-col text-indigo;
+  background-size: 100% 100%;
+
+  @screen md {
+    padding-top: $top-nav-height-tablet;
+    margin-top: -$top-nav-height-tablet;
+  }
+
+  @screen xl {
+    padding-top: $top-nav-height-desktop;
+    margin-top: -$top-nav-height-desktop;
+  }
+}
+
+.page-header.type-support-crisis-services {
+  @apply tw-grid container mx-auto text-center pb-px50;
+
+  @screen xl {
+    @apply pb-px60;
+  }
+
+  .page-header-title {
+    @apply font-semibold text-px38 leading-px42 tracking-em001;
+    @apply col-span-full;
+
+    @screen md {
+      @apply text-px36 leading-px46 tracking-em005;
+    }
+
+    @screen xl {
+      @apply text-px52 leading-px62;
+    }
+
+    tilt {
+      @apply block font-bold text-px58 leading-px68 tracking-em_003 -mt-px14;
+
+      @screen md {
+        @apply inline mt-0 text-px48 leading-px58 tracking-em005;
+      }
+
+      @screen xl {
+        @apply text-px70 leading-px80 tracking-em005;
+      }
+    }
+  }
+
+  .page-header-desc {
+    @apply col-span-full mt-px12;
+    @apply text-px18 leading-px24 tracking-em005;
+
+    @screen md {
+      @apply mt-px13 col-span-6 col-start-2;
+      @apply text-px20 leading-px30 tracking-em005;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 mt-px22 text-px26 leading-px36 -mx-px28;
+    }
+  }
+
+  .page-header__support-ctas {
+    @apply col-span-full flex flex-col items-center;
+
+    @screen md {
+      @apply mt-px50 grid grid-cols-3;
+      grid-column-gap: inherit;
+    }
+
+    @screen xl {
+      @apply mt-px58 col-span-8 col-start-3;
+      grid-column-gap: inherit;
+    }
+  }
+
+  .page-header__support-cta {
+    @apply flex flex-col justify-center w-full items-center rounded-px10 bg-white text-orange h-px115;
+
+    @screen mobile {
+      &:not(:first-child) {
+        @apply mt-px18;
+      }
+    }
+
+    @screen md {
+      @apply pt-px16 pb-px24 h-px118;
+    }
+
+    i[class^="trevor-ti"] {
+      @apply flex items-center justify-center w-px45 h-px45 text-px35;
+
+      @screen md {
+        @apply w-px50 h-px50 text-px35;
+      }
+    }
+
+    &-text {
+      @apply font-semibold text-px20 leading-px22 mt-px14;
+
+      @screen md {
+        @apply text-px18 leading-px22 mt-px6;
+      }
+
+      @screen xl {
+        @apply text-px18 leading-px22 tracking-px05;
+      }
+    }
+  }
+
+  .page-header__bottom {
+    @apply flex justify-center col-span-full mt-px65 text-px30 text-indigo;
+
+    @screen md {
+      @apply mt-px70;
+    }
+
+    @screen xl {
+      @apply mt-px128 text-px35;
+    }
+  }
+}

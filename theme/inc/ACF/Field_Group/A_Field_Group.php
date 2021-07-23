@@ -129,8 +129,9 @@ abstract class A_Field_Group {
 		return array_merge(
 			$args,
 			array(
-				'type'  => 'clone',
-				'clone' => array(
+				'type'        => 'clone',
+				'prefix_name' => 1,
+				'clone'       => array(
 					static::get_key(),
 				),
 			)

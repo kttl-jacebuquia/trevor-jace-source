@@ -1,0 +1,51 @@
+.text-only-messaging {
+  @apply mb-px80;
+
+  &__container {
+    @apply tw-grid container mx-auto;
+  }
+
+  &__box {
+    @apply col-span-full rounded-px10 py-px60 px-px28 text-center;
+
+    @screen md {
+      @apply py-px50 px-px40;
+    }
+
+    @screen xl {
+      @apply col-span-10 col-start-2 py-px70 px-px99;
+    }
+  }
+
+  &__body {
+    @apply font-medium text-px18 leading-px22 tracking-em005;
+
+    @screen md {
+      @apply text-px20 leading-px30 tracking-em005;
+    }
+
+    @screen xl {
+      @apply text-px24 leading-px36 tracking-em005;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px24;
+
+    @screen md {
+      @apply mt-px30;
+    }
+  }
+
+  &__cta {
+    @apply font-extrabold text-px18 leading-px24 tracking-px025;
+
+    @screen xl {
+      @apply text-px22 leading-px26;
+    }
+
+    .page-btn-link {
+      @apply pb-px2;
+    }
+  }
+}

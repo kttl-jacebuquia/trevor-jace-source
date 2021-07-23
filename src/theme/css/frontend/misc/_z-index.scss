@@ -10,12 +10,15 @@ $z-index-settings: (
 	'nav-cta': 106,
 	'nav-controls': 107,
 
+    // Banners
+    'cookie': 105,
+
 	// Modals
 	'modal-base': 110, // Should be above nav and banners
 	'fundraiser-quiz': 112,
 
-	// Banners
-	'cookie': 105,
+  // Breathing Ex.
+  'breathing-exercise-overlay': 120,
 );
 
 @function z-index( $setting ) {

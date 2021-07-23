@@ -356,3 +356,4 @@ $(() => {
 });
 
 features.QuickExit.init();
+features.BreathingExercise.init();

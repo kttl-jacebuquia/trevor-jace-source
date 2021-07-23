@@ -122,6 +122,32 @@
 		}
 	}
 
+  &__cta-button {
+    @apply inline-flex items-center mt-px24 h-px58 max-w-px276 min-w-px187 py-0;
+    @apply text-px18 leading-px24;
+
+    @screen md {
+      @apply mt-px20 min-w-0 max-w-none px-px32 h-px46;
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen xl {
+      @apply text-px16 leading-px22 tracking-em001 mt-px40;
+    }
+  }
+
+  &__cta-link {
+    @apply mt-px24 font-extrabold text-px18 leading-px24 tracking-px025 pb-px2;
+
+    @screen md {
+      @apply mt-px20 font-semibold text-px18 leading-px24;
+    }
+
+    @screen xl {
+      @apply mt-px30 text-px18 leading-px24;
+    }
+  }
+
 	&__cta-wrap {
 		@apply col-span-full mt-px70 text-center;
 

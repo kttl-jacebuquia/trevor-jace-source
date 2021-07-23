@@ -79,43 +79,6 @@ class Button extends Advanced_Link implements I_Renderable {
 						),
 					),
 				),
-				static::_gen_tab_field( 'Attributes' ),
-				array(
-					static::FIELD_BUTTON_ATTR => DOM_Attr::clone(
-						array(
-							'key'               => $button_attr,
-							'name'              => static::FIELD_BUTTON_ATTR,
-							'label'             => 'Button',
-							'display'           => 'group',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $type,
-										'operator' => '==',
-										'value'    => 'custom',
-									),
-								),
-							),
-						)
-					),
-					static::FIELD_LABEL_ATTR  => DOM_Attr::clone(
-						array(
-							'key'               => $label_attr,
-							'name'              => static::FIELD_LABEL_ATTR,
-							'label'             => 'Label',
-							'display'           => 'group',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $type,
-										'operator' => '==',
-										'value'    => 'custom',
-									),
-								),
-							),
-						)
-					),
-				),
 			),
 		);
 	}

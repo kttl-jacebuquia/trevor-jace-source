@@ -1,0 +1,142 @@
+.header-container {
+  &--support-trevorspace {
+    @apply pb-px100;
+
+    @screen md {
+      padding-top: $top-nav-height-tablet;
+      margin-top: -$top-nav-height-tablet;
+    }
+
+    @screen xl {
+      padding-top: $top-nav-height-desktop;
+      margin-top: -$top-nav-height-desktop;
+      @apply pb-px150;
+    }
+  }
+}
+
+.page-header {
+  &.type-support-trevorspace {
+    @apply tw-grid justify-center;
+
+    .page-header-inner {
+      @apply col-span-full;
+
+      @screen md {
+        @apply col-span-6 col-start-2;
+      }
+
+      @screen xl {
+        @apply col-span-8 col-start-3;
+      }
+    }
+
+    .page-header-content-wrap {
+      @apply w-full pb-0 text-center;
+    }
+
+    .page-header-title-top {
+      @apply flex items-center justify-center text-px14 leading-px20;
+
+      @screen md {
+        @apply mb-px16 text-px14 leading-px18;
+      }
+
+      @screen xl {
+        @apply mb-px23 text-px16 leading-px22;
+      }
+
+      &__icon {
+        @apply flex items-center text-px16 mb-px16 mb-px14;
+
+        @screen md {
+          @apply mr-px8 inline-flex mb-0;
+        }
+      }
+    }
+
+    .page-header-title {
+      @apply font-semibold text-px38 leading-px52 tracking-em001;
+
+      @screen md {
+        @apply text-px36 leading-px46 tracking-em005;
+      }
+
+      @screen xl {
+        @apply text-px50 leading-px60 tracking-em001;
+      }
+
+      tilt {
+        @apply font-bold block text-px65 leading-px75 tracking-em_003;
+
+        @screen md {
+          @apply inline-block;
+        }
+
+        @screen xl {
+          @apply text-px72 leading-px82 tracking-em_003;
+        }
+      }
+
+      br {
+        @apply hidden;
+
+        @screen md {
+          @apply block;
+        }
+      }
+    }
+
+    .page-header-desc {
+      @apply p-0 mt-px20;
+
+      @screen md {
+        @apply mt-px16 text-px20 leading-px30 tracking-em005;
+      }
+
+      @screen xl {
+        @apply text-px22 leading-px34 tracking-em005;
+      }
+    }
+
+    .button-group {
+      @apply mt-px30;
+
+      @screen md {
+        @apply mt-px22;
+      }
+
+      @screen xl {
+        @apply mt-px32;
+      }
+    }
+
+    .page-btn {
+      @apply min-w-px216;
+
+      @screen md {
+        @apply min-w-px135;
+      }
+
+      @screen md {
+        @apply min-w-px176;
+      }
+    }
+
+    .page-header-bottom {
+      @apply mt-px20;
+
+      @screen md {
+        @apply mt-px22 text-px18 leading-px24 tracking-px025;
+      }
+
+      @screen xl {
+        @apply mt-px36;
+      }
+
+      a {
+        @apply font-bold border-b-px2 border-current border-solid pb-px10;
+      }
+    }
+  }
+}

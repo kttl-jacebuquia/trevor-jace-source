@@ -66,25 +66,16 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'default_value' => 'image',
 				),
 				static::FIELD_ALTERNATE_TEXT_ALIGNMENT => array(
-					'key'               => $alternate_text_alignment,
-					'name'              => static::FIELD_ALTERNATE_TEXT_ALIGNMENT,
-					'label'             => 'Alternate Text Alignment',
-					'type'              => 'button_group',
-					'required'          => 1,
-					'choices'           => array(
+					'key'           => $alternate_text_alignment,
+					'name'          => static::FIELD_ALTERNATE_TEXT_ALIGNMENT,
+					'label'         => 'Alternate Text Alignment',
+					'type'          => 'button_group',
+					'required'      => 1,
+					'choices'       => array(
 						'left'   => 'Left',
 						'center' => 'Center',
 					),
-					'default_value'     => 'left',
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $alternate_type,
-								'operator' => '==',
-								'value'    => 'color',
-							),
-						),
-					),
+					'default_value' => 'left',
 				),
 				static::FIELD_ENTRIES                  => array(
 					'key'        => $entries,
@@ -134,36 +125,25 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 							'toolbar'      => 'basic',
 							'media_upload' => 0,
 						),
-						static::FIELD_ENTRY_CTA_BUTTON => array(
-							'key'               => $entry_cta_button,
-							'name'              => static::FIELD_ENTRY_CTA_BUTTON,
-							'label'             => 'CTA Button',
-							'type'              => 'link',
-							'return_format'     => 'array',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $alternate_type,
-										'operator' => '==',
-										'value'    => 'color',
-									),
-								),
-							),
+						static::FIELD_ENTRY_CTA_BUTTON => Button::clone(
+							array(
+								'key'           => $entry_cta_button,
+								'name'          => static::FIELD_ENTRY_CTA_BUTTON,
+								'label'         => 'CTA Button',
+								'return_format' => 'array',
+								'display'       => 'group',
+								'layout'        => 'block',
+							)
 						),
-						static::FIELD_ENTRY_CTA_LINK   => array(
-							'key'               => $entry_cta_link,
-							'name'              => static::FIELD_ENTRY_CTA_LINK,
-							'label'             => 'CTA Link',
-							'type'              => 'link',
-							'return_format'     => 'array',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $alternate_type,
-										'operator' => '==',
-										'value'    => 'color',
-									),
-								),
+						static::FIELD_ENTRY_CTA_LINK   => Button::clone(
+							array(
+								'key'           => $entry_cta_link,
+								'name'          => static::FIELD_ENTRY_CTA_LINK,
+								'label'         => 'CTA Link',
+								'type'          => 'link',
+								'return_format' => 'array',
+								'display'       => 'group',
+								'layout'        => 'block',
 							),
 						),
 					),
@@ -207,10 +187,17 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$alignment_class = '';
 
 		if ( 'left' === $alternate_text_alignment ) {
-			// Generate class for text align left
+			$alignment_class .= 'md:text-left xl:text-left';
 		} elseif ( 'center' === $alternate_text_alignment ) {
-			// Generate class for text align center
+			$alignment_class .= 'md:text-center xl:text-center';
 		}
+
+		$cta_btn_options = array(
+			'btn_cls' => array( 'alternating-image-text__cta-button' ),
+		);
+		$cta_link_options = array(
+			'btn_cls' => array( 'alternating-image-text__cta-link' ),
+		);
 
 		ob_start();
 		// Next Step - FE (apply variation)
@@ -246,13 +233,11 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
 										<div class="alternating-image-text__item-content"><?php echo $entry[ static::FIELD_ENTRY_BODY ]; ?></div>
 									<?php endif; ?>
-									<?php if ( 'color' === $alternate_type ) : ?>
-										<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_BUTTON ]['url'] ) ) : ?>
-											<a href="<?php echo esc_url( $entry[ static::FIELD_ENTRY_CTA_BUTTON ]['url'] ); ?>" target="<?php echo esc_attr( $entry[ static::FIELD_ENTRY_CTA_BUTTON ]['target'] ); ?>"><?php echo esc_html( $entry[ static::FIELD_ENTRY_CTA_BUTTON ]['title'] ); ?></a>
-										<?php endif; ?>
-										<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ]['url'] ) ) : ?>
-											<a href="<?php echo esc_url( $entry[ static::FIELD_ENTRY_CTA_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $entry[ static::FIELD_ENTRY_CTA_LINK ]['target'] ); ?>"><?php echo esc_html( $entry[ static::FIELD_ENTRY_CTA_LINK ]['title'] ); ?></a>
-										<?php endif; ?>
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_BUTTON ] ) ) : ?>
+										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_BUTTON ], $cta_btn_options ); ?>
+									<?php endif; ?>
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ] ) ) : ?>
+										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_LINK ], $cta_link_options ); ?>
 									<?php endif; ?>
 								</div>
 							</div>

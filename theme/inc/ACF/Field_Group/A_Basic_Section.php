@@ -14,6 +14,8 @@ abstract class A_Basic_Section extends A_Field_Group {
 	const FIELD_BUTTONS      = 'buttons';
 	const FIELD_WRAPPER_ATTR = 'wrapper_attr';
 
+	// const TAB_TITLE = static::_gen_tab_field( 'Title' );
+
 	/**
 	 * @return array
 	 */

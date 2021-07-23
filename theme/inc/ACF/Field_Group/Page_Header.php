@@ -47,13 +47,14 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'required'      => true,
 					'default_value' => 'text',
 					'choices'       => array(
-						'text'                => 'Colorblock + Text',
-						'horizontal'          => 'Colorblock + Image + Text',
-						'multi_image_text'    => 'Multi-image + Text',
-						'img_bg'              => 'Full Bleed Image/Video + Text',
-						'split_img'           => 'Text + Image',
-						'split_carousel'      => 'Text + Carousel',
-						'support_trevorspace' => 'Support Trevorspace',
+						'text'                    => 'Colorblock + Text',
+						'horizontal'              => 'Colorblock + Image + Text',
+						'multi_image_text'        => 'Multi-image + Text',
+						'img_bg'                  => 'Full Bleed Image/Video + Text',
+						'split_img'               => 'Text + Image',
+						'split_carousel'          => 'Text + Carousel',
+						'support_trevorspace'     => 'Support Trevorspace',
+						'support_crisis_services' => 'Support Crisis Services',
 					),
 				),
 			),
@@ -120,6 +121,16 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'operator' => '!=',
 								'value'    => 'multi_image_text',
 							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'support_trevorspace',
+							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'support_crisis_services',
+							),
 						),
 					),
 				)
@@ -155,7 +166,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					)
 				),
 			),
-			parent::_get_fields(),
+			static::_get_parent_fields(),
 			static::_gen_tab_field(
 				'Image/Video',
 				array(
@@ -170,6 +181,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'field'    => $type,
 								'operator' => '!=',
 								'value'    => 'support_trevorspace',
+							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'support_crisis_services',
 							),
 						),
 					),
@@ -297,6 +313,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			),
 			static::_gen_tab_field(
 				'Styling',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'support_crisis_services',
+							),
+						),
+					),
+				)
 			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
@@ -327,6 +354,62 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$return[ static::FIELD_TITLE ]['instructions'] = 'Leave empty to use Post`s title.';
 
 		return $return;
+	}
+
+	/** @inheritdoc */
+	public static function _get_parent_fields(): array {
+		$type_field_key = static::gen_field_key( static::FIELD_TYPE );
+		$parent_fields  = parent::_get_fields();
+
+		// Parent fields override
+		foreach ( $parent_fields as $key => &$field ) {
+			switch ( $key ) {
+				case 'tab_inner':
+				case 'tab_wrapper':
+					$field['conditional_logic'] = array(
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'support_crisis_services',
+						),
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'support_trevorspace',
+						),
+					);
+					break;
+				case 'tab_buttons':
+					$field['conditional_logic'] = array(
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'support_crisis_services',
+						),
+					);
+					break;
+				case 'title_attr':
+				case 'desc_attr':
+					$field['display']           = 'group';
+					$field['conditional_logic'] = array(
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'support_trevorspace',
+						),
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'support_crisis_services',
+						),
+					);
+					break;
+				default:
+					;
+			}
+		}
+
+		return $parent_fields;
 	}
 
 	/** @inheritdoc */

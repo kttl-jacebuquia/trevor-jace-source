@@ -25,7 +25,7 @@
 @import './circulation-card';
 @import './bg-gradients';
 @import './site-header';
-@import './page-header';
+@import './page-header/index';
 @import './site-content';
 @import './footer';
 @import './button';
@@ -62,6 +62,8 @@
 @import './center-text-with-full-image';
 @import './text-only-popup';
 @import './text-icon';
+@import './text-only-messaging';
+@import './breathing-exercise/index';
 @import './word-of-the-day';
 
 // Page specific

@@ -7,6 +7,7 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 	const FIELD_TEXT_COLOR  = 'text_color';
 	const FIELD_HEADER      = 'header';
 	const FIELD_DESCRIPTION = 'description';
+	const FIELD_CTA         = 'cta';
 
 	/**
 	 * @inheritDoc
@@ -16,6 +17,7 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 		$text_color  = static::gen_field_key( static::FIELD_TEXT_COLOR );
 		$header      = static::gen_field_key( static::FIELD_HEADER );
 		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$cta         = static::gen_field_key( static::FIELD_CTA );
 
 		return array(
 			'title'  => 'Text Only Messaging Block',
@@ -54,6 +56,15 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
+				static::FIELD_CTA         => Button::clone(
+					array(
+						'key'     => $cta,
+						'name'    => static::FIELD_CTA,
+						'label'   => 'CTA',
+						'display' => 'group',
+						'layout'  => 'block',
+					)
+				)
 			),
 		);
 	}
@@ -80,19 +91,34 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 		$bg_color    = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
 		$header      = static::get_val( static::FIELD_HEADER );
 		$description = static::get_val( static::FIELD_DESCRIPTION );
+		$cta         = static::get_val( static::FIELD_CTA );
 
 		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
 
+		$cta_options = array(
+			'btn_cls' => array( 'text-only-messaging__cta' ),
+		);
+
 		ob_start();
 		?>
-		<div class="container mx-auto <?php echo esc_attr( $styles ); ?>">
-			<?php if ( ! empty( $header ) ) : ?>
-				<p><?php echo esc_html( $header ); ?></p>
-			<?php endif; ?>
+		<div class="text-only-messaging">
+			<div class="text-only-messaging__container">
+				<div class="text-only-messaging__box <?php echo esc_attr( $styles ); ?>">
+					<?php if ( ! empty( $header ) ) : ?>
+						<h2 class="text-only-messaging__heading"><?php echo esc_html( $header ); ?></h2>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<h3><?php echo esc_html( $description ); ?></h3>
-			<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="text-only-messaging__body"><?php echo esc_html( $description ); ?></p>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $cta ) ) : ?>
+						<div class="text-only-messaging__cta-wrap">
+							<?php echo Button::render( false, $cta, $cta_options ); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
