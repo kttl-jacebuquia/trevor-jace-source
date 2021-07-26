@@ -32,7 +32,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Topic Cards',
 			'fields' => array(
-				static::FIELD_BG_COLOR         => Color::gen_args(
+				static::FIELD_BG_COLOR      => Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_COLOR,
 					array(
@@ -43,7 +43,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					)
 				),
-				static::FIELD_TEXT_COLOR       => Color::gen_args(
+				static::FIELD_TEXT_COLOR    => Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(
@@ -54,13 +54,13 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::FIELD_TITLE            => array(
+				static::FIELD_TITLE         => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
 					'label' => 'Title',
 					'type'  => 'text',
 				),
-				static::FIELD_DESCRIPTION      => array(
+				static::FIELD_DESCRIPTION   => array(
 					'key'   => $description,
 					'name'  => static::FIELD_DESCRIPTION,
 					'label' => 'Description',
@@ -72,8 +72,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'label'             => 'Mobile Layout',
 					'type'              => 'radio',
 					'choices'           => array(
-						'drawers'      => 'Drawers',
-						'stacked'      => 'Stacked',
+						'drawers' => 'Drawers',
+						'stacked' => 'Stacked',
 					),
 					'allow_null'        => 0,
 					'other_choice'      => 0,
@@ -82,7 +82,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'return_format'     => 'value',
 					'save_other_choice' => 0,
 				),
-				static::FIELD_TOPIC_ENTRIES    => array(
+				static::FIELD_TOPIC_ENTRIES => array(
 					'key'        => $topic_entries,
 					'name'       => static::FIELD_TOPIC_ENTRIES,
 					'label'      => 'Topic Entries',
@@ -115,7 +115,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::FIELD_BUTTON           => array(
+				static::FIELD_BUTTON        => array(
 					'key'           => $button,
 					'name'          => static::FIELD_BUTTON,
 					'label'         => 'Button',

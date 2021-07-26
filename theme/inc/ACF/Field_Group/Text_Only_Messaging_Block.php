@@ -37,7 +37,7 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 						),
 					)
 				),
-				static::FIELD_BOX_COLOR    => Color::gen_args(
+				static::FIELD_BOX_COLOR   => Color::gen_args(
 					$box_color,
 					static::FIELD_BOX_COLOR,
 					array(
@@ -59,7 +59,7 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 						),
 					),
 				),
-				static::FIELD_EYEBROW      => array(
+				static::FIELD_EYEBROW     => array(
 					'key'   => $eyebrow,
 					'name'  => static::FIELD_EYEBROW,
 					'label' => 'Eyebrow',

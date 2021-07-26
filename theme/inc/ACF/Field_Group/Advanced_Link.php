@@ -42,14 +42,14 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$show_download_icon = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
 
 		return array(
-			static::FIELD_LABEL             => array(
+			static::FIELD_LABEL              => array(
 				'key'      => $label,
 				'name'     => static::FIELD_LABEL,
 				'label'    => 'Label',
 				'type'     => 'text',
 				'required' => true,
 			),
-			static::FIELD_ACTION            => array(
+			static::FIELD_ACTION             => array(
 				'key'           => $action,
 				'name'          => static::FIELD_ACTION,
 				'label'         => 'Action',
@@ -87,7 +87,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					),
 				),
 			),
-			static::FIELD_PHONE             => array(
+			static::FIELD_PHONE              => array(
 				'key'               => $phone,
 				'name'              => static::FIELD_PHONE,
 				'label'             => 'Phone Number',
@@ -109,7 +109,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					),
 				),
 			),
-			static::FIELD_LINK              => array(
+			static::FIELD_LINK               => array(
 				'key'               => $link,
 				'label'             => 'Link',
 				'name'              => static::FIELD_LINK,
@@ -125,7 +125,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				),
 				'return_format'     => 'array',
 			),
-			static::FIELD_PAGE_LINK         => array(
+			static::FIELD_PAGE_LINK          => array(
 				'key'               => $page_link,
 				'name'              => static::FIELD_PAGE_LINK,
 				'label'             => 'Page Link',
@@ -145,7 +145,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				'return_format'     => 'object',
 				'ui'                => true,
 			),
-			static::FIELD_FILE              => array(
+			static::FIELD_FILE               => array(
 				'key'               => $file,
 				'name'              => static::FIELD_FILE,
 				'label'             => 'File',
@@ -165,7 +165,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				'return_format'     => 'object',
 				'ui'                => true,
 			),
-			static::FIELD_MODAL             => array(
+			static::FIELD_MODAL              => array(
 				'key'               => $modal,
 				'name'              => static::FIELD_MODAL,
 				'label'             => 'Modal',
@@ -187,7 +187,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'what_to_expect'  => 'What to Expect Pop-up',
 				),
 			),
-			static::FIELD_TEXTONLY_POPUP    => array(
+			static::FIELD_TEXTONLY_POPUP     => array(
 				'key'               => $textonly_popup,
 				'name'              => static::FIELD_TEXTONLY_POPUP,
 				'label'             => 'Text Only Popup',
@@ -214,7 +214,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				'return_format'     => 'object',
 				'ui'                => 1,
 			),
-			static::FIELD_DONATE_DEDICATION => array(
+			static::FIELD_DONATE_DEDICATION  => array(
 				'key'               => $donate_dedication,
 				'name'              => static::FIELD_DONATE_DEDICATION,
 				'label'             => 'Dedication Donation',
