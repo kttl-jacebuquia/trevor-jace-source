@@ -64,9 +64,9 @@ class Tier {
 	public static function grant( $data ) {
 		ob_start();
 		?>
-		<div class="funders bg-white flex flex-col">
+		<div class="current-funders bg-white flex flex-col">
 			<?php if ( ! empty( $data['title'] ) ) : ?>
-				<h2 class="funders__title text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
+				<h2 class="current-funders__title text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
 					<?php echo esc_html( $data['title'] ); ?></h2>
 			<?php endif; ?>
 
@@ -101,7 +101,7 @@ class Tier {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $data['button']['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $data['button']['url'] ); ?>" target="<?php echo esc_attr( $data['button']['target'] ); ?>" class="funders__partner inline-block mx-auto flex-grow-0 flex-shrink-0"><?php echo esc_html( $data['button']['title'] ); ?></a>
+				<a href="<?php echo esc_url( $data['button']['url'] ); ?>" target="<?php echo esc_attr( $data['button']['target'] ); ?>" class="current-funders__partner inline-block mx-auto flex-grow-0 flex-shrink-0"><?php echo esc_html( $data['button']['title'] ); ?></a>
 			<?php endif; ?>
 		</div>
 		<?php
