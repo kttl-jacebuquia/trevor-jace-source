@@ -9,6 +9,7 @@ class Color extends A_Field {
 				'type'     => 'select',
 				'required' => 0,
 				'choices'  => array(
+					'transparent'     => 'None',
 					'white'           => 'White',
 					'black'           => 'Black',
 					'teal-dark'       => 'Teal - Dark',

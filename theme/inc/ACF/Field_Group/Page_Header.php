@@ -416,7 +416,16 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						array(
 							'field'    => $type_field_key,
 							'operator' => '!=',
-							'value'    => 'img_bg',
+							'value'    => 'split_carousel',
+						),
+					);
+					break;
+				case 'tab_title-top':
+					$field['conditional_logic'] = array(
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'split_carousel',
 						),
 					);
 					break;
@@ -560,6 +569,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'img'      => $item['data_img'],
 						'caption'  => $item['data_title'],
 						'subtitle' => $item['data_subtitle'],
+						'cta_txt'  => $item['data_cta'] ? $item['data_cta']['title'] : '',
+						'cta_url'  => $item['data_cta'] ? $item['data_cta']['url'] : '',
 					);
 				}
 			} else {

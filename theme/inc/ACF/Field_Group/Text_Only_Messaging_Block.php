@@ -4,7 +4,9 @@ use TrevorWP\Theme\ACF\Field\Color;
 
 class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_BG_COLOR    = 'bg_color';
+	const FIELD_BOX_COLOR   = 'box_color';
 	const FIELD_TEXT_COLOR  = 'text_color';
+	const FIELD_EYEBROW     = 'header';
 	const FIELD_HEADER      = 'header';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_CTA         = 'cta';
@@ -14,8 +16,10 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 	 */
 	protected static function prepare_register_args(): array {
 		$bg_color    = static::gen_field_key( static::FIELD_BG_COLOR );
+		$box_color   = static::gen_field_key( static::FIELD_BOX_COLOR );
 		$text_color  = static::gen_field_key( static::FIELD_TEXT_COLOR );
 		$header      = static::gen_field_key( static::FIELD_HEADER );
+		$eyebrow     = static::gen_field_key( static::FIELD_EYEBROW );
 		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$cta         = static::gen_field_key( static::FIELD_CTA );
 
@@ -33,6 +37,17 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 						),
 					)
 				),
+				static::FIELD_BOX_COLOR    => Color::gen_args(
+					$box_color,
+					static::FIELD_BOX_COLOR,
+					array(
+						'label'   => 'Inner Box Color',
+						'default' => 'white',
+						'wrapper' => array(
+							'width' => '50%',
+						),
+					)
+				),
 				static::FIELD_TEXT_COLOR  => Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
@@ -43,6 +58,12 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 							'width' => '50%',
 						),
 					),
+				),
+				static::FIELD_EYEBROW      => array(
+					'key'   => $eyebrow,
+					'name'  => static::FIELD_EYEBROW,
+					'label' => 'Eyebrow',
+					'type'  => 'text',
 				),
 				static::FIELD_HEADER      => array(
 					'key'   => $header,
@@ -89,11 +110,13 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$text_color  = ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark';
 		$bg_color    = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
+		$box_color   = ! empty( static::get_val( static::FIELD_BOX_COLOR ) ) ? static::get_val( static::FIELD_BOX_COLOR ) : 'white';
 		$header      = static::get_val( static::FIELD_HEADER );
 		$description = static::get_val( static::FIELD_DESCRIPTION );
 		$cta         = static::get_val( static::FIELD_CTA );
 
-		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
+		$wrapper_styles = 'bg-' . $bg_color;
+		$box_styles     = 'bg-' . $box_color . ' ' . 'text-' . $text_color;
 
 		$cta_options = array(
 			'btn_cls' => array( 'text-only-messaging__cta' ),
@@ -101,9 +124,9 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 
 		ob_start();
 		?>
-		<div class="text-only-messaging">
+		<div class="text-only-messaging <?php echo esc_attr( $wrapper_styles ); ?>">
 			<div class="text-only-messaging__container">
-				<div class="text-only-messaging__box <?php echo esc_attr( $styles ); ?>">
+				<div class="text-only-messaging__box <?php echo esc_attr( $box_styles ); ?>">
 					<?php if ( ! empty( $header ) ) : ?>
 						<h2 class="text-only-messaging__heading"><?php echo esc_html( $header ); ?></h2>
 					<?php endif; ?>

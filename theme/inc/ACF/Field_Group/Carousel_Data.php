@@ -6,6 +6,7 @@ class Carousel_Data extends A_Field_Group {
 	const FIELD_DATA_IMG      = 'data_img';
 	const FIELD_DATA_TITLE    = 'data_title';
 	const FIELD_DATA_SUBTITLE = 'data_subtitle';
+	const FIELD_DATA_CTA      = 'data_cta';
 	const FIELD_POSTS         = 'posts';
 
 	/** @inheritDoc */
@@ -16,6 +17,7 @@ class Carousel_Data extends A_Field_Group {
 		$data_title    = static::gen_field_key( static::FIELD_DATA_TITLE );
 		$data_subtitle = static::gen_field_key( static::FIELD_DATA_SUBTITLE );
 		$data_posts    = static::gen_field_key( static::FIELD_POSTS );
+		$data_cta      = static::gen_field_key( static::FIELD_DATA_CTA );
 
 		return array(
 			'title'  => 'Carousel Data',
@@ -39,6 +41,7 @@ class Carousel_Data extends A_Field_Group {
 					'type'              => 'repeater',
 					'required'          => true,
 					'layout'            => 'table',
+					'max'               => 4,
 					'conditional_logic' => array(
 						array(
 							array(
@@ -70,6 +73,12 @@ class Carousel_Data extends A_Field_Group {
 							'name'  => static::FIELD_DATA_SUBTITLE,
 							'label' => 'Subtitle',
 							'type'  => 'textarea',
+						),
+						static::FIELD_DATA_CTA      => array(
+							'key'   => $data_cta,
+							'name'  => static::FIELD_DATA_CTA,
+							'label' => 'CTA',
+							'type'  => 'link',
 						),
 					),
 				),
