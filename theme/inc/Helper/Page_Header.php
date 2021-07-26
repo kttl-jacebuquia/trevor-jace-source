@@ -2,6 +2,7 @@
 
 use \TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field_Group;
+use TrevorWP\Util\Tools;
 
 /**
  * Page Header Helpers
@@ -204,22 +205,35 @@ class Page_Header {
 	 * @todo: Complete this implementation by moving all classnames to scss file
 	 */
 	public static function img_bg( array $options ): ?string {
+
+		$attrs = array(
+			'class' => array( 'page-header type-img-bg' ),
+		);
+
+		if ( ! empty( $options['content_alignment'] ) ) {
+			$attrs['class'][] = 'content-' . $options['content_alignment'];
+		}
+
+		$attrs['class'] = implode( ' ', $attrs['class'] );
+
 		ob_start();
 		?>
-		<header class="page-header type-img-bg">
+		<header <?php echo Tools::flat_attr( $attrs ); ?>>
 			<div class="page-header-content-wrap">
-				<h1 class="heading-lg-tilted page-header-title">
-					<?php # Leave unescape in order to support <tilt> ?>
-					<?php echo $options['title']; ?>
-				</h1>
-				<?php if ( $options['desc'] ) { ?>
-					<p class="page-header-desc"><?php echo $options['desc']; ?></p>
-				<?php } ?>
-				<?php
-				if ( ! empty( $options['buttons'] ) ) {
-					echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
-				}
-				?>
+				<div class="page-header-content">
+					<h1 class="heading-lg-tilted page-header-title">
+						<?php # Leave unescape in order to support <tilt> ?>
+						<?php echo $options['title']; ?>
+					</h1>
+					<?php if ( $options['desc'] ) { ?>
+						<p class="page-header-desc"><?php echo $options['desc']; ?></p>
+					<?php } ?>
+					<?php
+					if ( ! empty( $options['buttons'] ) ) {
+						echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
+					}
+					?>
+				</div>
 			</div>
 
 			<?php if ( 'video' === $options['media_type'] ) : ?>

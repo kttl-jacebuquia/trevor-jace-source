@@ -19,6 +19,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_MEDIA_TYPE        = 'media_type';
 	const FIELD_MEMBERS_COUNT     = 'members_count';
 	const FIELD_BOTTOM_TEXT       = 'bottom_text';
+	const FIELD_CONTENT_ALIGNMENT = 'content_alignment';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -35,6 +36,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$media_type        = static::gen_field_key( static::FIELD_MEDIA_TYPE );
 		$members_count     = static::gen_field_key( static::FIELD_MEMBERS_COUNT );
 		$bottom_text       = static::gen_field_key( static::FIELD_BOTTOM_TEXT );
+		$content_alignment = static::gen_field_key( static::FIELD_CONTENT_ALIGNMENT );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -56,6 +58,40 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'support_trevorspace'     => 'Support Trevorspace',
 						'support_crisis_services' => 'Support Crisis Services',
 					),
+				),
+			),
+			static::_gen_tab_field(
+				'Content Alignment',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $media_type,
+								'operator' => '==',
+								'value'    => 'video',
+							),
+						),
+					),
+				)
+			),
+			array(
+				static::FIELD_CONTENT_ALIGNMENT => array(
+					'key'               => $content_alignment,
+					'name'              => static::FIELD_CONTENT_ALIGNMENT,
+					'label'             => 'Alignment',
+					'instructions'      => '(Desktop only)',
+					'type'              => 'radio',
+					'choices'           => array(
+						'left'   => 'Left',
+						'center' => 'Center',
+						'right'  => 'Right',
+					),
+					'allow_null'        => 0,
+					'other_choice'      => 0,
+					'default_value'     => 'center',
+					'layout'            => 'horizontal',
+					'return_format'     => 'value',
+					'save_other_choice' => 0,
 				),
 			),
 			static::_gen_tab_field(
@@ -377,6 +413,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'operator' => '!=',
 							'value'    => 'support_trevorspace',
 						),
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'img_bg',
+						),
 					);
 					break;
 				case 'tab_buttons':
@@ -551,7 +592,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$args['media_type'] = $media_type;
 
 			if ( 'video' === $media_type ) {
-				$args['video'] = $val->get( static::FIELD_VIDEO );
+				$args['video']             = $val->get( static::FIELD_VIDEO );
+				$args['content_alignment'] = $val->get( static::FIELD_CONTENT_ALIGNMENT );
 			}
 		}
 

@@ -1,0 +1,135 @@
+.type-img-bg {
+  @apply relative mb-pxn5 px-0;
+  @apply w-full max-w-none;
+  @apply h-px737 lg:h-px737 flex items-center text-white;
+
+  @screen mobile {
+    padding-top: $top-nav-height;
+    margin-top: -$top-nav-height;
+    min-height: 100vh;
+  }
+
+  @screen md {
+    @apply md:h-px490;
+    padding-top: var(--top-nav-top-margin);
+    margin-top: calc(-1 * var(--top-nav-height));
+  }
+
+  @screen xl {
+    @apply min-h-px800;
+  }
+
+  .page-header-content {
+    @apply col-span-full;
+  }
+
+  .page-header-img-wrap {
+    @apply absolute w-full h-full top-0 left-0;
+    margin-top: -4px; //FIXME: Why -4px?
+
+    img {
+      @apply object-cover object-center;
+      @apply w-full h-full;
+    }
+  }
+
+  .page-header-content-wrap {
+    @apply tw-grid;
+    @apply container mx-auto text-center items-center z-1;
+  }
+
+  .page-header-title {
+    @apply text-px34 leading-px40;
+    tilt,
+    tiltb {
+      @apply text-px44 leading-px54;
+    }
+
+    tiltb {
+      @apply block;
+    }
+  }
+
+  @screen md {
+
+    .page-header-title {
+      @apply text-px32 leading-px42;
+      tilt,
+      tiltb {
+        @apply text-px44 leading-px54;
+      }
+
+      tiltb {
+        @apply block;
+      }
+    }
+  }
+
+  @screen lg {
+    .page-header-title {
+      @apply text-px56 leading-px66;
+      tilt,
+      tiltb {
+        @apply text-px82 leading-px92;
+      }
+
+      tiltb {
+        @apply block;
+      }
+    }
+  }
+
+  .button-group {
+    @apply mt-px30;
+
+    @screen md {
+      @apply mt-px30;
+    }
+
+    @screen xl {
+      @apply mt-px30;
+    }
+  }
+}
+
+// With content alignment on Full Bleed Video type
+@screen xl {
+  .type-img-bg {
+    // Left Alignment
+    &.content-left {
+      .page-header-content {
+        @apply col-span-4;
+
+        h1 {
+          @apply text-px46 leading-px56;
+        }
+
+        tilt {
+          @apply text-px70 leading-px80;
+        }
+      }
+    }
+
+    // Center Alignment
+    &.content-center {
+      .page-header-content {
+        @apply col-span-6 col-start-4;
+      }
+    }
+
+    // Right Alignment
+    &.content-right {
+      .page-header-content {
+        @apply col-span-4 col-start-9;
+
+        h1 {
+          @apply text-px46 leading-px56;
+        }
+
+        tilt {
+          @apply text-px70 leading-px80;
+        }
+      }
+    }
+  }
+}
