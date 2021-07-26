@@ -69,6 +69,7 @@ class Current_Partners_Table extends A_Field_Group implements I_Block, I_Rendera
 
 		if ( ! empty( $tiers ) ) {
 			foreach ( $tiers as $tier ) {
+				$tier->logo_size = Taxonomy::get_partner_tier_logo_size( $tier->term_id );
 				$tier->posts = get_posts(
 					array(
 						'numberposts' => - 1,

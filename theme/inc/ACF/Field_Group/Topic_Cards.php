@@ -12,6 +12,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TOPIC_ENTRY_DESCRIPTION = 'topic_entry_description';
 	const FIELD_TOPIC_ENTRY_LINK        = 'topic_entry_link';
 	const FIELD_BUTTON                  = 'button';
+	const FIELD_MOBILE_LAYOUT           = 'show_mobile_accordion';
 
 	/**
 	 * @inheritDoc
@@ -26,11 +27,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$topic_entry_description = static::gen_field_key( static::FIELD_TOPIC_ENTRY_DESCRIPTION );
 		$topic_entry_link        = static::gen_field_key( static::FIELD_TOPIC_ENTRY_LINK );
 		$button                  = static::gen_field_key( static::FIELD_BUTTON );
+		$mobile_layout           = static::gen_field_key( static::FIELD_MOBILE_LAYOUT );
 
 		return array(
 			'title'  => 'Topic Cards',
 			'fields' => array(
-				static::FIELD_BG_COLOR      => Color::gen_args(
+				static::FIELD_BG_COLOR         => Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_COLOR,
 					array(
@@ -41,7 +43,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					)
 				),
-				static::FIELD_TEXT_COLOR    => Color::gen_args(
+				static::FIELD_TEXT_COLOR       => Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(
@@ -52,19 +54,35 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::FIELD_TITLE         => array(
+				static::FIELD_TITLE            => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
 					'label' => 'Title',
 					'type'  => 'text',
 				),
-				static::FIELD_DESCRIPTION   => array(
+				static::FIELD_DESCRIPTION      => array(
 					'key'   => $description,
 					'name'  => static::FIELD_DESCRIPTION,
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
-				static::FIELD_TOPIC_ENTRIES => array(
+				static::FIELD_MOBILE_LAYOUT => array(
+					'key'               => $mobile_layout,
+					'name'              => static::FIELD_MOBILE_LAYOUT,
+					'label'             => 'Mobile Layout',
+					'type'              => 'radio',
+					'choices'           => array(
+						'drawers'      => 'Drawers',
+						'stacked'      => 'Stacked',
+					),
+					'allow_null'        => 0,
+					'other_choice'      => 0,
+					'default_value'     => 'drawers',
+					'layout'            => 'horizontal',
+					'return_format'     => 'value',
+					'save_other_choice' => 0,
+				),
+				static::FIELD_TOPIC_ENTRIES    => array(
 					'key'        => $topic_entries,
 					'name'       => static::FIELD_TOPIC_ENTRIES,
 					'label'      => 'Topic Entries',
@@ -97,7 +115,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::FIELD_BUTTON        => array(
+				static::FIELD_BUTTON           => array(
 					'key'           => $button,
 					'name'          => static::FIELD_BUTTON,
 					'label'         => 'Button',
@@ -132,8 +150,19 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$description   = static::get_val( static::FIELD_DESCRIPTION );
 		$topic_entries = static::get_val( static::FIELD_TOPIC_ENTRIES );
 		$button        = static::get_val( static::FIELD_BUTTON );
+		$mobile_layout = static::get_val( static::FIELD_MOBILE_LAYOUT );
 
 		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
+
+		$grid_class = array(
+			'topic-cards__grid',
+		);
+
+		if ( 'drawers' === $mobile_layout ) {
+			$grid_class[] = 'mobile:hidden';
+		}
+
+		$grid_class = implode( ' ', $grid_class );
 
 		ob_start();
 		?>
@@ -144,7 +173,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					<p class="topic-cards__description"><?php echo esc_html( $description ); ?></p>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $topic_entries ) ) : ?>
+				<?php if ( ! empty( $topic_entries ) && 'drawers' === $mobile_layout ) : ?>
 					<div class="topic-cards__accordion" role="list">
 						<?php foreach ( $topic_entries as $topic ) : ?>
 							<div class="topic-cards__accordion-item js-accordion" role="listitem">
@@ -180,7 +209,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				<?php endif; ?>
 
 				<?php if ( ! empty( $topic_entries ) ) : ?>
-					<div class="topic-cards__grid" role="list">
+					<div class="<?php echo $grid_class; ?>" role="list">
 						<?php foreach ( $topic_entries as $topic ) : ?>
 							<div class="topic-cards__item" role="listitem">
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
@@ -211,7 +240,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				<?php endif; ?>
 
 				<?php if ( ! empty( $button['url'] ) ) : ?>
-					<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					<div class="topic-cards__block-cta-wrap">
+						<a class="topic-cards__block-cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
 				<?php endif; ?>
 			</div>
 		</div>

@@ -77,10 +77,22 @@
   }
 
   &__grid {
-    @apply tw-grid;
+    @apply tw-grid mt-px30;
+    @apply gap-y-px28;
 
+    // Need to override accordion styles on mobile
     @screen mobile {
-      @apply hidden;
+      .topic-cards__item-title {
+        @apply font-semibold text-px24 leading-px28 tracking-em001;
+      }
+
+      .topic-cards__item-description {
+        @apply mt-px14 text-px16 leading-px24;
+      }
+
+      .topic-cards__item-cta {
+        @apply mt-px18 text-px18 leading-px24 tracking-em001;
+      }
     }
 
     @screen md {
@@ -132,6 +144,26 @@
     @screen md {
       @apply mt-px18;
     }
+
+    .trevor-ti-download {
+      @apply text-px16 ml-px5;
+    }
+  }
+
+  &__block-cta-wrap {
+    @apply mt-px50 text-center;
+
+    @screen md {
+      @apply mt-px64;
+    }
+
+    @screen xl {
+      @apply mt-px60;
+    }
+  }
+
+  &__block-cta {
+    @apply btn;
   }
 
   // Expanded accordion

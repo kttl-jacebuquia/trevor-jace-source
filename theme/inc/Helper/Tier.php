@@ -10,9 +10,9 @@ class Tier {
 	public static function partner( $data ) {
 		ob_start();
 		?>
-	<div class="partners bg-white flex flex-col">
+	<div class="current-partners-table bg-white flex flex-col">
 		<?php if ( ! empty( $data['title'] ) ) : ?>
-			<h2 class="partners__title text-px32 leading-px42 md:leading-px40 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
+			<h2 class="current-partners-table__title text-px32 leading-px42 md:leading-px40 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
 				<?php echo esc_html( $data['title'] ); ?></h2>
 		<?php endif; ?>
 
