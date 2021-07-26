@@ -192,7 +192,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 			$alignment_class .= 'md:text-center xl:text-center';
 		}
 
-		$cta_btn_options = array(
+		$cta_btn_options  = array(
 			'btn_cls' => array( 'alternating-image-text__cta-button' ),
 		);
 		$cta_link_options = array(

@@ -64,7 +64,7 @@ class Text_Only_Messaging_Block extends A_Field_Group implements I_Block, I_Rend
 						'display' => 'group',
 						'layout'  => 'block',
 					)
-				)
+				),
 			),
 		);
 	}

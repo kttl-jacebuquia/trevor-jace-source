@@ -97,9 +97,9 @@ class What_To_Expect extends A_Options_Page {
 	 * Renders the quick exit modal contents.
 	 */
 	public static function render(): string {
-		$headline      = static::get_option( static::FIELD_HEADLINE );
-		$description   = static::get_option( static::FIELD_DESCRIPTION );
-		$entries       = static::get_option( static::FIELD_ENTRIES );
+		$headline    = static::get_option( static::FIELD_HEADLINE );
+		$description = static::get_option( static::FIELD_DESCRIPTION );
+		$entries     = static::get_option( static::FIELD_ENTRIES );
 		// $entry_text    = static::get_option( static::FIELD_ENTRY_TEXT );
 		$terms         = static::get_option( static::FIELD_TERMS );
 		$terms_heading = $terms[ static::FIELD_TERMS_HEADING ];
