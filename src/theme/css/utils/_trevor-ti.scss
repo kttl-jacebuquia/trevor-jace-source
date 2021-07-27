@@ -1,3 +1,40 @@
+// TODO: Allow this map to be dynamically created during build
+$trevor-ti-contents: (
+  arrow-left: "\f100",
+  arrow-right: "\f101",
+  call: "\f112",
+  caret-down: "\f102",
+  chat: "\f113",
+  checkmark: "\f117",
+  chevron-down: "\f103",
+  chevron-thick-right: "\f121",
+  close: "\f115",
+  download: "\f104",
+  facebook: "\f105",
+  facebook-alt: "\f10f",
+  hamburger-menu: "\f106",
+  instagram: "\f119",
+  link: "\f110",
+  link-out: "\f107",
+  linkedin: "\f11a",
+  logo-icon: "\f108",
+  logo-text: "\f109",
+  mail: "\f111",
+  minus: "\f11d",
+  nav-close: "\f120",
+  online: "\f118",
+  plus: "\f11e",
+  quote-close: "\f10a",
+  quote-open: "\f10b",
+  search: "\f10c",
+  share-others: "\f10d",
+  smartphone: "\f114",
+  tiktok: "\f11b",
+  twitter: "\f10e",
+  x: "\f11f",
+  youtube: "\f11c",
+);
+
 @layer utilities {
   @each $icon, $content in $trevor-ti-contents {
     .trevor-ti-#{$icon} {
