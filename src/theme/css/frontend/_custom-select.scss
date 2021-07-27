@@ -1,74 +1,77 @@
 .custom-select {
   @apply flex justify-center;
+
   .label {
-	@apply relative pb-2.5;
-	&:after {
-	  content: $font-trevor-ti-chevron-down;
-	  @apply text-teal-dark font-bold text-px14 mt-3 ml-2;
-	}
+    @apply trevor-ti-chevron-down trevor-ti-after;
+    @apply relative pb-2.5;
 
-	&:hover,
-	&.show {
-	  &:after {
-		transform: rotate(180deg);
-		@apply mt-0;
-		margin-bottom: rem-calc(11px);
-	  }
+    // Chevron icon
+    &:after {
+      @apply text-teal-dark font-bold text-px14 mt-3 ml-2;
+    }
 
-	  .dropdown {
-		@apply flex;
-	  }
-	}
+    &:hover,
+    &.show {
+      &:after {
+        transform: rotate(180deg);
+        @apply mt-0;
+        margin-bottom: rem-calc(11px);
+      }
 
-	> button {
-	  @apply font-bold text-px20 leading-px30;
-	  @apply text-teal-dark;
-	  @apply relative;
-	}
+      .dropdown {
+        @apply flex;
+      }
+    }
+
+    > button {
+      @apply font-bold text-px20 leading-px30;
+      @apply text-teal-dark;
+      @apply relative;
+    }
   }
 
   .dropdown {
-	@apply absolute top-full hidden;
-	@apply rounded-px10 overflow-hidden;
-	@apply flex-col;
-	@apply z-2;
-	box-shadow: 0px 0px #{rem-calc(8px)} #{rem-calc(2px)} rgba(0, 58, 72, 0.14);
-	width: calc(100vw - 30px);
-	left: rem-calc(-36px);
+    @apply absolute top-full hidden;
+    @apply rounded-px10 overflow-hidden;
+    @apply flex-col;
+    @apply z-2;
+    box-shadow: 0px 0px #{rem-calc(8px)} #{rem-calc(2px)} rgba(0, 58, 72, 0.14);
+    width: calc(100vw - 30px);
+    left: rem-calc(-36px);
 
-	li {
-	  @apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
-	  @apply py-5 px-12;
-	  @apply cursor-pointer;
-	  &.active {
-		@apply bg-gray-light;
-	  }
-	}
+    li {
+      @apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
+      @apply py-5 px-12;
+      @apply cursor-pointer;
+      &.active {
+        @apply bg-gray-light;
+      }
+    }
   }
 
   @screen md {
-	@apply justify-start;
+    @apply justify-start;
 
-	.label {
-	  @apply flex;
-	}
+    .label {
+      @apply flex;
+    }
 
-	.dropdown {
-	  @apply flex-auto;
-	  width: 130%;
-	  left: rem-calc(-18px);
+    .dropdown {
+      @apply flex-auto;
+      width: 130%;
+      left: rem-calc(-18px);
 
-	  li {
-		@apply px-5;
-	  }
-	}
+      li {
+        @apply px-5;
+      }
+    }
   }
 
   @screen lg {
-	.label {
-	  > button {
-		@apply text-px22;
-	  }
-	}
+    .label {
+      > button {
+        @apply text-px22;
+      }
+    }
   }
 }

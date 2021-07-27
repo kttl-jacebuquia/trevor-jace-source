@@ -11,6 +11,13 @@ use TrevorWP\Theme\ACF\Options_Page\A_Options_Page;
  * Abstract Post Type Options Page
  */
 abstract class A_Post_Type extends A_Options_Page {
+	const OTHER_FIELDS = array(
+		'sort',
+		'pagination_type',
+		'text_contents',
+		'cta',
+	);
+
 	const PAGE_SLUG_PREFIX = 'trvr-pt-';
 	const POST_TYPE        = ''; // required
 
@@ -53,6 +60,24 @@ abstract class A_Post_Type extends A_Options_Page {
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$header              = static::gen_field_key( static::FIELD_HEADER );
+
+		return array_merge(
+			array(
+				static::FIELD_HEADER                  => Page_Header::clone(
+					array(
+						'key'         => $header,
+						'name'        => $header, // name = key
+						'prefix_name' => true,
+						'display'     => 'group',
+						'label'       => 'Header',
+					)
+				),
+			),
+			static::_get_other_fields(),
+		);
+	}
+
+	public static function _get_other_fields() {
 		$sorter_active       = static::gen_field_key( static::FIELD_SORTER_ACTIVE );
 		$archive_pp          = static::gen_field_key( static::FIELD_ARCHIVE_PP );
 		$archive_pt          = static::gen_field_key( static::FIELD_ARCHIVE_PAGINATION_TYPE );
@@ -62,90 +87,90 @@ abstract class A_Post_Type extends A_Options_Page {
 		$arc_cta_location    = static::gen_field_key( static::FIELD_ARCHIVE_CTA_LOCATION );
 		$arc_container_attrs = static::gen_field_key( static::FIELD_ARCHIVE_CONTAINER_ATTR );
 
-		return array(
-			static::FIELD_HEADER                  => Page_Header::clone(
-				array(
-					'key'         => $header,
-					'name'        => $header, // name = key
-					'prefix_name' => true,
-					'display'     => 'group',
-					'label'       => 'Header',
-				)
-			),
-			static::FIELD_SORTER_ACTIVE           => array(
-				'key'           => $sorter_active,
-				'name'          => $sorter_active,
-				'type'          => 'true_false',
-				'label'         => 'Sorter Active',
-				'default_value' => true,
-				'ui'            => true,
-			),
-			static::FIELD_ARCHIVE_CONTAINER_ATTR  => DOM_Attr::clone(
-				array(
-					'key'     => $arc_container_attrs,
-					'name'    => static::FIELD_ARCHIVE_CONTAINER_ATTR,
-					'label'   => 'Archive Container',
-					'display' => 'group',
-				)
-			),
-			static::FIELD_ARCHIVE_PP              => array(
-				'key'           => $archive_pp,
-				'name'          => $archive_pp,
-				'type'          => 'number',
-				'label'         => 'Archive Per Page',
-				'default_value' => 6,
-			),
-			static::FIELD_ARCHIVE_PAGINATION_TYPE => array(
-				'key'           => $archive_pt,
-				'name'          => $archive_pt,
-				'type'          => 'select',
-				'label'         => 'Pagination Type',
-				'default_value' => static::PAGINATION_TYPE_AJAX,
-				'choices'       => array(
-					static::PAGINATION_TYPE_AJAX   => 'Ajax',
-					static::PAGINATION_TYPE_NORMAL => 'Normal',
-				),
-			),
-			static::FIELD_ARCHIVE_CONTENT_TOP     => array(
-				'key'   => $archive_content_top,
-				'name'  => $archive_content_top,
-				'label' => 'Content / Top',
-				'type'  => 'wysiwyg',
-			),
-			static::FIELD_ARCHIVE_CONTENT_BTM     => array(
-				'key'   => $archive_content_btm,
-				'name'  => $archive_content_btm,
-				'label' => 'Content / Bottom',
-				'type'  => 'wysiwyg',
-			),
-			static::FIELD_ARCHIVE_CTA             => Button_Group::clone(
-				array(
-					'key'         => $archive_cta,
-					'name'        => $archive_cta,
-					'prefix_name' => true,
-					'label'       => 'CTA',
-					'display'     => 'group',
-				)
-			),
-			static::FIELD_ARCHIVE_CTA_LOCATION    => array(
-				'key'           => $arc_cta_location,
-				'name'          => $arc_cta_location,
-				'prefix_name'   => true,
-				'label'         => 'CTA Location',
-				'display'       => 'group',
-				'type'          => 'radio',
-				'choices'       => array(
-					static::CTA_LOCATION_OPTION_BEFORE => 'Before Bottom Content',
-					static::CTA_LOCATION_OPTION_INSIDE => 'Inside Bottom Content',
-					static::CTA_LOCATION_OPTION_AFTER  => 'After Bottom Content',
-				),
-				'default_value' => static::CTA_LOCATION_OPTION_BEFORE,
-				'layout'        => 'vertical',
-				'wrapper'       => array(
-					'width' => '50',
-				),
-			),
-		);
+		$fields = array();
+
+		if ( is_array( static::OTHER_FIELDS ) ) {
+			foreach ( static::OTHER_FIELDS as $field ) {
+				switch ( $field ) {
+
+					// Add sorter
+					case 'sort':
+						$fields[ static::FIELD_SORTER_ACTIVE ] =  array(
+							'key'           => $sorter_active,
+							'name'          => $sorter_active,
+							'type'          => 'true_false',
+							'label'         => 'Sorter Active',
+							'default_value' => true,
+							'ui'            => true,
+						);
+						break;
+
+					// Add pagination type
+					case 'pagination_type':
+						$fields[ static::FIELD_ARCHIVE_PAGINATION_TYPE ] =  array(
+							'key'           => $archive_pt,
+							'name'          => $archive_pt,
+							'type'          => 'select',
+							'label'         => 'Pagination Type',
+							'default_value' => static::PAGINATION_TYPE_AJAX,
+							'choices'       => array(
+								static::PAGINATION_TYPE_AJAX   => 'Ajax',
+								static::PAGINATION_TYPE_NORMAL => 'Normal',
+							),
+						);
+						break;
+
+					// Add text contents
+					case 'text_contents':
+						$fields[ static::FIELD_ARCHIVE_CONTENT_TOP ] = array(
+							'key'   => $archive_content_top,
+							'name'  => $archive_content_top,
+							'label' => 'Content / Top',
+							'type'  => 'wysiwyg',
+						);
+						$fields[ static::FIELD_ARCHIVE_CONTENT_BTM ] = array(
+							'key'   => $archive_content_btm,
+							'name'  => $archive_content_btm,
+							'label' => 'Content / Bottom',
+							'type'  => 'wysiwyg',
+						);
+						break;
+
+					// Add CTA
+					case 'cta':
+						$fields[ static::FIELD_ARCHIVE_CTA ]          = Button_Group::clone(
+							array(
+								'key'         => $archive_cta,
+								'name'        => $archive_cta,
+								'prefix_name' => true,
+								'label'       => 'CTA',
+								'display'     => 'group',
+							)
+						);
+						$fields[ static::FIELD_ARCHIVE_CTA_LOCATION ] = array(
+							'key'           => $arc_cta_location,
+							'name'          => $arc_cta_location,
+							'prefix_name'   => true,
+							'label'         => 'CTA Location',
+							'display'       => 'group',
+							'type'          => 'radio',
+							'choices'       => array(
+								static::CTA_LOCATION_OPTION_BEFORE => 'Before Bottom Content',
+								static::CTA_LOCATION_OPTION_INSIDE => 'Inside Bottom Content',
+								static::CTA_LOCATION_OPTION_AFTER  => 'After Bottom Content',
+							),
+							'default_value' => static::CTA_LOCATION_OPTION_BEFORE,
+							'layout'        => 'vertical',
+							'wrapper'       => array(
+								'width' => '50',
+							),
+						);
+						break;
+				}
+			}
+		}
+
+		return $fields;
 	}
 
 	/** @inheritDoc */

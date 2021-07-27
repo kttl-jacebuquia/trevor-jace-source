@@ -1,0 +1,55 @@
+@layer utilities {
+  @each $icon, $content in $trevor-ti-contents {
+    .trevor-ti-#{$icon} {
+      --icon: "#{$content}";
+
+      &.trevor-ti-before {
+        &::before {
+          content: var(--icon);
+        }
+      }
+
+      &.trevor-ti-after {
+        &::before {
+          content: var(--icon);
+        }
+      }
+    }
+  }
+
+  .trevor-ti-before {
+    &::after {
+      content: var(--icon);
+      display: inline-block;
+      font-family: "trevor-ti";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      text-decoration: inherit;
+      text-rendering: optimizeLegibility;
+      text-transform: none;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+    }
+  }
+
+  .trevor-ti-after {
+    &::after {
+      content: var(--icon);
+      display: inline-block;
+      font-family: "trevor-ti";
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      line-height: 1;
+      text-decoration: inherit;
+      text-rendering: optimizeLegibility;
+      text-transform: none;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+    }
+  }
+}
