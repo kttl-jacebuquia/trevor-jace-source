@@ -14,7 +14,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 		$intro      = static::gen_field_key( static::FIELD_INTRO );
 
 		return array(
-			'title'  => 'Donate Form',
+			'title'  => 'Donation Form + IMG',
 			'fields' => array(
 				static::FIELD_FORM_IMAGE => array(
 					'key'           => $form_image,
@@ -55,7 +55,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Donate Form',
+				'title'      => 'Donation Form + IMG',
 				'post_types' => array( 'page' ),
 			)
 		);

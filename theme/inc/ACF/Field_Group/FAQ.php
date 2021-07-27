@@ -18,7 +18,7 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 		$footer            = static::gen_field_key( static::FIELD_FOOTER );
 
 		return array(
-			'title'  => 'FAQ',
+			'title'  => 'FAQ Drawer',
 			'fields' => array(
 				static::FIELD_TITLE       => array(
 					'key'   => $title,
@@ -74,7 +74,7 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'FAQ',
+				'title'      => 'FAQ Drawer',
 				'post_types' => array( 'page' ),
 			)
 		);
