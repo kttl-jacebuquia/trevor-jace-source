@@ -10,18 +10,43 @@ use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
 use \TrevorWP\Meta;
 
 class Partners extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_TIER_TYPE = 'tier_type';
+	const FIELD_TITLE       = 'title';
+	const FIELD_DESCRIPTION = 'description';
+	const FIELD_BUTTON      = 'button';
+	const FIELD_TIER_TYPE   = 'tier_type';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$tier_type = static::gen_field_key( static::FIELD_TIER_TYPE );
+		$title       = static::gen_field_key( static::FIELD_TITLE );
+		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$button      = static::gen_field_key( static::FIELD_BUTTON );
+		$tier_type   = static::gen_field_key( static::FIELD_TIER_TYPE );
 
 		return array(
-			'title'  => 'Tier Type',
+			'title'  => 'Text + Table Block',
 			'fields' => array(
-				static::FIELD_TIER_TYPE => array(
+				static::FIELD_TITLE       => array(
+					'key'   => $title,
+					'name'  => static::FIELD_TITLE,
+					'label' => 'Title',
+					'type'  => 'text',
+				),
+				static::FIELD_DESCRIPTION => array(
+					'key'   => $description,
+					'name'  => static::FIELD_DESCRIPTION,
+					'label' => 'Description',
+					'type'  => 'textarea',
+				),
+				static::FIELD_BUTTON      => array(
+					'key'           => $button,
+					'name'          => static::FIELD_BUTTON,
+					'label'         => 'Button',
+					'type'          => 'link',
+					'return_format' => 'array',
+				),
+				static::FIELD_TIER_TYPE   => array(
 					'key'           => $tier_type,
 					'name'          => static::FIELD_TIER_TYPE,
 					'label'         => 'Tier Type',
@@ -43,7 +68,7 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 	public static function get_block_args(): array {
 		return array(
 			'name'       => static::get_key(),
-			'title'      => 'Partners',
+			'title'      => 'Text + Table Block',
 			'category'   => 'common',
 			'icon'       => 'groups',
 			'post_types' => array( 'page' ),
@@ -54,8 +79,11 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$taxonomy  = static::get_val( static::FIELD_TIER_TYPE );
-		$list_type = $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ? 'images' : 'text';
+		$title       = static::get_val( static::FIELD_TITLE );
+		$description = static::get_val( static::FIELD_DESCRIPTION );
+		$button      = static::get_val( static::FIELD_BUTTON );
+		$taxonomy    = static::get_val( static::FIELD_TIER_TYPE );
+		$list_type   = $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ? 'images' : 'text';
 
 		ob_start();
 		?>
@@ -89,6 +117,18 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 				)
 			);
 			?>
+			<?php if ( ! empty( $title ) ) : ?>
+				<h2><?php echo esc_html( $title ); ?></h2>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $description ) ) : ?>
+				<p><?php echo esc_html( $description ); ?></p>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $button['url'] ) ) : ?>
+				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+			<?php endif; ?>
+
 			<div class="partners-block__panel">
 				<div class="partners-block__title">
 					<div class="partners-block__tier-name"><?php echo $partner_tier->name; ?></div>
