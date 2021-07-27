@@ -2,18 +2,19 @@
 <?php
 
 use TrevorWP\Theme\Customizer;
+use \TrevorWP\Theme\ACF\Options_Page;
 use \TrevorWP\Theme\Util\Is;
 
 $is_rc = Is::rc();
 
-$header_data = \TrevorWP\Theme\ACF\Options_Page\Header::get_header();
+$header_data = Options_Page\Header::get_header();
 ?>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
 	<script>(function (e) {
 			e.className = e.className.replace(/\bno-js\b/, 'js');
 		})(document.documentElement)</script>
-	<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_TOP ); ?>
+	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_TOP' ); ?>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,7 +29,7 @@ $header_data = \TrevorWP\Theme\ACF\Options_Page\Header::get_header();
 		<div id="bg-gradient" class="gradient-type-<?php echo esc_attr( $gradient_type ); ?>"></div>
 	</div>
 <?php } ?>
-<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_BODY_TOP ); ?>
+<?php echo Options_Page\External_Scripts::get_external_script( 'BODY_TOP' ); ?>
 <!--[if IE]>
 <p class="browserupgrade">
 	You are using an <strong>outdated</strong> browser.
@@ -60,14 +61,14 @@ $header_data = \TrevorWP\Theme\ACF\Options_Page\Header::get_header();
 			<ul class="switcher">
 				<li>
 					<a href="<?php echo esc_url( $header_data['find_support_link']['url'] ); ?>"
-					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>" 
+					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>"
 					target="<?php echo esc_attr( $header_data['find_support_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['find_support_link']['title'] ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo esc_url( $header_data['explore_trevor_link']['url'] ); ?>"
-					class="<?php echo $is_rc ? '' : 'active'; ?>" 
+					class="<?php echo $is_rc ? '' : 'active'; ?>"
 					target="<?php echo esc_attr( $header_data['explore_trevor_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['explore_trevor_link']['title'] ); ?>
 					</a>

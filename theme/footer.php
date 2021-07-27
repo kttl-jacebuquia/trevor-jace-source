@@ -1,35 +1,9 @@
 <?php wp_footer();
 
-use \TrevorWP\Theme\Customizer;
+use \TrevorWP\Theme\ACF\Options_Page;
 
-$social_media_accounts = array(
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_FACEBOOK_URL ),
-		'icon' => 'trevor-ti-facebook',
-	),
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TWITTER_URL ),
-		'icon' => 'trevor-ti-twitter',
-	),
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_INSTAGRAM_URL ),
-		'icon' => 'trevor-ti-instagram',
-	),
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_TIKTOK_URL ),
-		'icon' => 'trevor-ti-tiktok',
-	),
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_YOUTUBE_URL ),
-		'icon' => 'trevor-ti-youtube',
-	),
-	array(
-		'url'  => Customizer\Social_Media_Accounts::get_val( Customizer\Social_Media_Accounts::SETTING_LINKEDIN_URL ),
-		'icon' => 'trevor-ti-linkedin',
-	),
-);
-
-$data = \TrevorWP\Theme\ACF\Options_Page\Footer::get_footer();
+$data                   = Options_Page\Footer::get_footer();
+$footer_external_script = Options_Page\External_Scripts::get_external_script( 'BODY_BOTTOM' );
 
 ?>
 
@@ -42,7 +16,7 @@ $data = \TrevorWP\Theme\ACF\Options_Page\Footer::get_footer();
 					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
 			</div>
-			
+
 			<?php if ( ! empty( $data['description'] ) ) : ?>
 				<p class="mb-9 text-px18 leading-px26 tracking-em_001 md:mr-10 lg:mr-60">
 					<?php echo esc_html( $data['description'] ); ?>
@@ -96,6 +70,6 @@ $data = \TrevorWP\Theme\ACF\Options_Page\Footer::get_footer();
 	</div>
 </footer>
 
-<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_BODY_BTM ); ?>
+<?php echo $footer_external_script; ?>
 </body>
 </html>
