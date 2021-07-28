@@ -41,199 +41,205 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$phone              = static::gen_field_key( static::FIELD_PHONE );
 		$show_download_icon = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
 
-		return array(
-			static::FIELD_LABEL              => array(
-				'key'      => $label,
-				'name'     => static::FIELD_LABEL,
-				'label'    => 'Label',
-				'type'     => 'text',
-				'required' => true,
-			),
-			static::FIELD_ACTION             => array(
-				'key'           => $action,
-				'name'          => static::FIELD_ACTION,
-				'label'         => 'Action',
-				'type'          => 'select',
-				'required'      => true,
-				'choices'       => array(
-					'link'          => 'Link',
-					'page_link'     => 'Page Link',
-					'file_download' => 'File Download',
-					'modal'         => 'Pop-up Modal',
-					'call'          => 'Call',
-					'sms'           => 'SMS',
+		return array_merge(
+			static::_gen_tab_field( 'Action' ),
+			array(
+				static::FIELD_LABEL              => array(
+					'key'      => $label,
+					'name'     => static::FIELD_LABEL,
+					'label'    => 'Label',
+					'type'     => 'text',
+					'required' => true,
 				),
-				'default_value' => 'page_link',
-				'allow_null'    => true,
-				'multiple'      => false,
+				static::FIELD_ACTION             => array(
+					'key'           => $action,
+					'name'          => static::FIELD_ACTION,
+					'label'         => 'Action',
+					'type'          => 'select',
+					'required'      => true,
+					'choices'       => array(
+						'link'          => 'Link',
+						'page_link'     => 'Page Link',
+						'file_download' => 'File Download',
+						'modal'         => 'Pop-up Modal',
+						'call'          => 'Call',
+						'sms'           => 'SMS',
+					),
+					'default_value' => 'page_link',
+					'allow_null'    => true,
+					'multiple'      => false,
+				),
 			),
-			static::FIELD_SHOW_DOWNLOAD_ICON => array(
-				'key'               => $show_download_icon,
-				'name'              => static::FIELD_SHOW_DOWNLOAD_ICON,
-				'label'             => 'Show download icon',
-				'type'              => 'true_false',
-				'required'          => 0,
-				'default_value'     => 0,
-				'ui'                => 1,
-				'ui_on_text'        => '',
-				'ui_off_text'       => '',
-				'conditional_logic' => array(
-					array(
+			static::_gen_tab_field( 'Data' ),
+			array(
+				static::FIELD_PHONE              => array(
+					'key'               => $phone,
+					'name'              => static::FIELD_PHONE,
+					'label'             => 'Phone Number',
+					'type'              => 'text',
+					'conditional_logic' => array(
 						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'file_download',
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'call',
+							),
+						),
+						array(
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'sms',
+							),
 						),
 					),
 				),
-			),
-			static::FIELD_PHONE              => array(
-				'key'               => $phone,
-				'name'              => static::FIELD_PHONE,
-				'label'             => 'Phone Number',
-				'type'              => 'text',
-				'conditional_logic' => array(
-					array(
+				static::FIELD_LINK               => array(
+					'key'               => $link,
+					'label'             => 'Link',
+					'name'              => static::FIELD_LINK,
+					'type'              => 'link',
+					'conditional_logic' => array(
 						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'call',
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'link',
+							),
 						),
 					),
-					array(
-						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'sms',
-						),
-					),
+					'return_format'     => 'array',
 				),
-			),
-			static::FIELD_LINK               => array(
-				'key'               => $link,
-				'label'             => 'Link',
-				'name'              => static::FIELD_LINK,
-				'type'              => 'link',
-				'conditional_logic' => array(
-					array(
+				static::FIELD_SHOW_DOWNLOAD_ICON => array(
+					'key'               => $show_download_icon,
+					'name'              => static::FIELD_SHOW_DOWNLOAD_ICON,
+					'label'             => 'Show download icon',
+					'type'              => 'true_false',
+					'required'          => 0,
+					'default_value'     => 0,
+					'ui'                => 1,
+					'ui_on_text'        => '',
+					'ui_off_text'       => '',
+					'conditional_logic' => array(
 						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'link',
-						),
-					),
-				),
-				'return_format'     => 'array',
-			),
-			static::FIELD_PAGE_LINK          => array(
-				'key'               => $page_link,
-				'name'              => static::FIELD_PAGE_LINK,
-				'label'             => 'Page Link',
-				'type'              => 'page_link',
-				'required'          => true,
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'page_link',
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'file_download',
+							),
 						),
 					),
 				),
-				'allow_null'        => false,
-				'multiple'          => false,
-				'return_format'     => 'object',
-				'ui'                => true,
-			),
-			static::FIELD_FILE               => array(
-				'key'               => $file,
-				'name'              => static::FIELD_FILE,
-				'label'             => 'File',
-				'type'              => 'file',
-				'required'          => true,
-				'conditional_logic' => array(
-					array(
+				static::FIELD_PAGE_LINK          => array(
+					'key'               => $page_link,
+					'name'              => static::FIELD_PAGE_LINK,
+					'label'             => 'Page Link',
+					'type'              => 'page_link',
+					'required'          => true,
+					'conditional_logic' => array(
 						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'file_download',
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'page_link',
+							),
+						),
+					),
+					'allow_null'        => false,
+					'multiple'          => false,
+					'return_format'     => 'object',
+					'ui'                => true,
+				),
+				static::FIELD_FILE               => array(
+					'key'               => $file,
+					'name'              => static::FIELD_FILE,
+					'label'             => 'File',
+					'type'              => 'file',
+					'required'          => true,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'file_download',
+							),
+						),
+					),
+					'allow_null'        => false,
+					'multiple'          => false,
+					'return_format'     => 'object',
+					'ui'                => true,
+				),
+				static::FIELD_MODAL              => array(
+					'key'               => $modal,
+					'name'              => static::FIELD_MODAL,
+					'label'             => 'Modal',
+					'type'              => 'select',
+					'required'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'modal',
+							),
+						),
+					),
+					'choices'           => array(
+						'donate'          => 'Donate Modal',
+						'fundraise_quiz'  => 'Fundraise Quiz Modal',
+						'text_only_popup' => 'Text Only Pop-up',
+						'what_to_expect'  => 'What to Expect Pop-up',
+					),
+				),
+				static::FIELD_TEXTONLY_POPUP     => array(
+					'key'               => $textonly_popup,
+					'name'              => static::FIELD_TEXTONLY_POPUP,
+					'label'             => 'Text Only Popup',
+					'type'              => 'post_object',
+					'required'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $modal,
+								'operator' => '==',
+								'value'    => 'text_only_popup',
+							),
+						),
+					),
+					'post_type'         => array(
+						0 => CPT\Text_Only_Popup::POST_TYPE,
+					),
+					'filters'           => array(
+						0 => 'search',
+					),
+					'taxonomy'          => '',
+					'allow_null'        => 0,
+					'multiple'          => 0,
+					'return_format'     => 'object',
+					'ui'                => 1,
+				),
+				static::FIELD_DONATE_DEDICATION  => array(
+					'key'               => $donate_dedication,
+					'name'              => static::FIELD_DONATE_DEDICATION,
+					'label'             => 'Dedication Donation',
+					'type'              => 'true_false',
+					'required'          => 0,
+					'default_value'     => 0,
+					'ui'                => 1,
+					'ui_on_text'        => '',
+					'ui_off_text'       => '',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $modal,
+								'operator' => '==',
+								'value'    => 'donate',
+							),
 						),
 					),
 				),
-				'allow_null'        => false,
-				'multiple'          => false,
-				'return_format'     => 'object',
-				'ui'                => true,
-			),
-			static::FIELD_MODAL              => array(
-				'key'               => $modal,
-				'name'              => static::FIELD_MODAL,
-				'label'             => 'Modal',
-				'type'              => 'select',
-				'required'          => 1,
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => $action,
-							'operator' => '==',
-							'value'    => 'modal',
-						),
-					),
-				),
-				'choices'           => array(
-					'donate'          => 'Donate Modal',
-					'fundraise_quiz'  => 'Fundraise Quiz Modal',
-					'text_only_popup' => 'Text Only Pop-up',
-					'what_to_expect'  => 'What to Expect Pop-up',
-				),
-			),
-			static::FIELD_TEXTONLY_POPUP     => array(
-				'key'               => $textonly_popup,
-				'name'              => static::FIELD_TEXTONLY_POPUP,
-				'label'             => 'Text Only Popup',
-				'type'              => 'post_object',
-				'required'          => 1,
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => $modal,
-							'operator' => '==',
-							'value'    => 'text_only_popup',
-						),
-					),
-				),
-				'post_type'         => array(
-					0 => CPT\Text_Only_Popup::POST_TYPE,
-				),
-				'filters'           => array(
-					0 => 'search',
-				),
-				'taxonomy'          => '',
-				'allow_null'        => 0,
-				'multiple'          => 0,
-				'return_format'     => 'object',
-				'ui'                => 1,
-			),
-			static::FIELD_DONATE_DEDICATION  => array(
-				'key'               => $donate_dedication,
-				'name'              => static::FIELD_DONATE_DEDICATION,
-				'label'             => 'Dedication Donation',
-				'type'              => 'true_false',
-				'required'          => 0,
-				'default_value'     => 0,
-				'ui'                => 1,
-				'ui_on_text'        => '',
-				'ui_off_text'       => '',
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => $modal,
-							'operator' => '==',
-							'value'    => 'donate',
-						),
-					),
-				),
-			),
+			)
 		);
 	}
 

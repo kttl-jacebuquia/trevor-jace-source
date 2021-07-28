@@ -3,19 +3,19 @@
 namespace TrevorWP\Theme\ACF\Field_Group;
 
 class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Renderable {
-
 	const FIELD_HEADLINE                 = 'headline';
 	const FIELD_DESCRIPTION              = 'description';
-	const FIELD_ALTERNATE_TYPE           = 'alternate_type';
 	const FIELD_ALTERNATE_TEXT_ALIGNMENT = 'alternate_text_alignment';
 	const FIELD_ENTRIES                  = 'entries';
 	const FIELD_ENTRY_IMAGE              = 'entry_image';
 	const FIELD_ENTRY_EYEBROW            = 'entry_eyebrow';
 	const FIELD_ENTRY_HEADER             = 'entry_header';
 	const FIELD_ENTRY_BODY               = 'entry_body';
+	const FIELD_ENTRY_SHOW_CTA           = 'entry_show_cta';
 	const FIELD_ENTRY_CTA_BUTTON         = 'entry_cta_button';
 	const FIELD_ENTRY_CTA_LINK           = 'entry_cta_link';
 	const FIELD_BUTTON                   = 'button';
+	const FIELD_ITEM_ALIGNMENT           = 'item_alignment';
 	const PLACEHOLDER_IMAGE              = '/wp-content/themes/trevor/static/media/generic-placeholder.png';
 
 	/**
@@ -24,16 +24,17 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	protected static function prepare_register_args(): array {
 		$headline                 = static::gen_field_key( static::FIELD_HEADLINE );
 		$description              = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$alternate_type           = static::gen_field_key( static::FIELD_ALTERNATE_TYPE );
 		$alternate_text_alignment = static::gen_field_key( static::FIELD_ALTERNATE_TEXT_ALIGNMENT );
 		$entries                  = static::gen_field_key( static::FIELD_ENTRIES );
 		$entry_image              = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
 		$entry_eyebrow            = static::gen_field_key( static::FIELD_ENTRY_EYEBROW );
 		$entry_header             = static::gen_field_key( static::FIELD_ENTRY_HEADER );
 		$entry_body               = static::gen_field_key( static::FIELD_ENTRY_BODY );
+		$entry_show_cta           = static::gen_field_key( static::FIELD_ENTRY_SHOW_CTA );
 		$entry_cta_button         = static::gen_field_key( static::FIELD_ENTRY_CTA_BUTTON );
 		$entry_cta_link           = static::gen_field_key( static::FIELD_ENTRY_CTA_LINK );
 		$button                   = static::gen_field_key( static::FIELD_BUTTON );
+		$item_alignment                   = static::gen_field_key( static::FIELD_ITEM_ALIGNMENT );
 
 		return array(
 			'title'  => 'Alternating Image + Text Lockup',
@@ -53,22 +54,10 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'toolbar'      => 'basic',
 					'media_upload' => 0,
 				),
-				static::FIELD_ALTERNATE_TYPE           => array(
-					'key'           => $alternate_type,
-					'name'          => static::FIELD_ALTERNATE_TYPE,
-					'label'         => 'Alternate Type',
-					'type'          => 'button_group',
-					'required'      => 1,
-					'choices'       => array(
-						'color' => 'Color',
-						'image' => 'Image',
-					),
-					'default_value' => 'image',
-				),
 				static::FIELD_ALTERNATE_TEXT_ALIGNMENT => array(
 					'key'           => $alternate_text_alignment,
 					'name'          => static::FIELD_ALTERNATE_TEXT_ALIGNMENT,
-					'label'         => 'Alternate Text Alignment',
+					'label'         => 'Item Text Alignment',
 					'type'          => 'button_group',
 					'required'      => 1,
 					'choices'       => array(
@@ -76,6 +65,19 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 						'center' => 'Center',
 					),
 					'default_value' => 'left',
+				),
+				static::FIELD_ITEM_ALIGNMENT           => array(
+					'key'           => $item_alignment,
+					'name'          => static::FIELD_ITEM_ALIGNMENT,
+					'label'         => 'First Item Alignment',
+					'type'          => 'select',
+					'required'      => true,
+					'choices'       => array(
+						'image_first' => 'Image First',
+						'text_first'  => 'Text First',
+					),
+					'default_value' => 'image_first',
+					'return_format' => 'value',
 				),
 				static::FIELD_ENTRIES                  => array(
 					'key'        => $entries,
@@ -86,23 +88,14 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'collapsed'  => $entry_header,
 					'sub_fields' => array(
 						static::FIELD_ENTRY_IMAGE      => array(
-							'key'               => $entry_image,
-							'name'              => static::FIELD_ENTRY_IMAGE,
-							'label'             => 'Image',
-							'type'              => 'image',
-							'required'          => 1,
-							'return_format'     => 'array',
-							'preview_size'      => 'thumbnail',
-							'library'           => 'all',
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => $alternate_type,
-										'operator' => '==',
-										'value'    => 'image',
-									),
-								),
-							),
+							'key'           => $entry_image,
+							'name'          => static::FIELD_ENTRY_IMAGE,
+							'label'         => 'Image',
+							'type'          => 'image',
+							'required'      => 1,
+							'return_format' => 'array',
+							'preview_size'  => 'thumbnail',
+							'library'       => 'all',
 						),
 						static::FIELD_ENTRY_EYEBROW    => array(
 							'key'   => $entry_eyebrow,
@@ -125,25 +118,50 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 							'toolbar'      => 'basic',
 							'media_upload' => 0,
 						),
+						static::FIELD_ENTRY_SHOW_CTA   => array(
+							'key'   => $entry_show_cta,
+							'name'  => static::FIELD_ENTRY_SHOW_CTA,
+							'label' => 'Show CTAs',
+							'type'  => 'true_false',
+							'ui'    => 1,
+						),
 						static::FIELD_ENTRY_CTA_BUTTON => Button::clone(
 							array(
-								'key'           => $entry_cta_button,
-								'name'          => static::FIELD_ENTRY_CTA_BUTTON,
-								'label'         => 'CTA Button',
-								'return_format' => 'array',
-								'display'       => 'group',
-								'layout'        => 'block',
+								'key'               => $entry_cta_button,
+								'name'              => static::FIELD_ENTRY_CTA_BUTTON,
+								'label'             => 'CTA Button',
+								'return_format'     => 'array',
+								'display'           => 'group',
+								'layout'            => 'block',
+								'conditional_logic' => array(
+									array(
+										array(
+											'field'    => $entry_show_cta,
+											'operator' => '==',
+											'value'    => 1,
+										),
+									),
+								),
 							)
 						),
 						static::FIELD_ENTRY_CTA_LINK   => Button::clone(
 							array(
-								'key'           => $entry_cta_link,
-								'name'          => static::FIELD_ENTRY_CTA_LINK,
-								'label'         => 'CTA Link',
-								'type'          => 'link',
-								'return_format' => 'array',
-								'display'       => 'group',
-								'layout'        => 'block',
+								'key'               => $entry_cta_link,
+								'name'              => static::FIELD_ENTRY_CTA_LINK,
+								'label'             => 'CTA Link',
+								'type'              => 'link',
+								'return_format'     => 'array',
+								'display'           => 'group',
+								'layout'            => 'block',
+								'conditional_logic' => array(
+									array(
+										array(
+											'field'    => $entry_show_cta,
+											'operator' => '==',
+											'value'    => 1,
+										),
+									),
+								),
 							),
 						),
 					),
@@ -179,10 +197,10 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$headline                 = static::get_val( static::FIELD_HEADLINE );
 		$description              = static::get_val( static::FIELD_DESCRIPTION );
-		$alternate_type           = static::get_val( static::FIELD_ALTERNATE_TYPE ) ?? 'image';
 		$alternate_text_alignment = static::get_val( static::FIELD_ALTERNATE_TEXT_ALIGNMENT ) ?? 'left';
 		$entries                  = static::get_val( static::FIELD_ENTRIES );
 		$button                   = static::get_val( static::FIELD_BUTTON );
+		$item_alignment           = static::get_val( static::FIELD_ITEM_ALIGNMENT );
 
 		$alignment_class = '';
 
@@ -199,10 +217,17 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 			'btn_cls' => array( 'alternating-image-text__cta-link' ),
 		);
 
+		$classname = implode(
+			' ',
+			array(
+				'alternating-image-text',
+				'alternating-image-text--' . $item_alignment,
+			)
+		);
+
 		ob_start();
-		// Next Step - FE (apply variation)
 		?>
-		<div class="alternating-image-text">
+		<div class="<?php echo $classname; ?>">
 			<div class="alternating-image-text__container">
 				<h2 class="alternating-image-text__heading"><?php echo $headline; ?></h3>
 				<?php if ( ! empty( $description ) ) : ?>
@@ -212,7 +237,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					<div class="alternating-image-text__items" role="list">
 						<?php foreach ( $entries as $entry ) : ?>
 							<div class="alternating-image-text__item" role="listitem">
-								<?php if ( 'image' === $alternate_type ) : ?>
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 									<figure class="alternating-image-text__item-figure" aria-hidden="true">
 										<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 											<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>" alt="<?php echo ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $headline ); ?>">
@@ -220,8 +245,6 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 											<img src="<?php echo static::PLACEHOLDER_IMAGE; ?>" alt="">
 										<?php endif; ?>
 									</figure>
-								<?php elseif ( 'color' === $alternate_type ) : ?>
-									<!-- alternate type color here -->
 								<?php endif; ?>
 								<div class="alternating-image-text__body <?php echo esc_attr( $alignment_class ); ?>">
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_EYEBROW ] ) ) : ?>
@@ -237,6 +260,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_BUTTON ], $cta_btn_options ); ?>
 									<?php endif; ?>
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ] ) ) : ?>
+										<br />
 										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_LINK ], $cta_link_options ); ?>
 									<?php endif; ?>
 								</div>
