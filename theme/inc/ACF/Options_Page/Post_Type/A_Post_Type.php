@@ -59,11 +59,11 @@ abstract class A_Post_Type extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
-		$header              = static::gen_field_key( static::FIELD_HEADER );
+		$header = static::gen_field_key( static::FIELD_HEADER );
 
 		return array_merge(
 			array(
-				static::FIELD_HEADER                  => Page_Header::clone(
+				static::FIELD_HEADER => Page_Header::clone(
 					array(
 						'key'         => $header,
 						'name'        => $header, // name = key
@@ -95,7 +95,7 @@ abstract class A_Post_Type extends A_Options_Page {
 
 					// Add sorter
 					case 'sort':
-						$fields[ static::FIELD_SORTER_ACTIVE ] =  array(
+						$fields[ static::FIELD_SORTER_ACTIVE ] = array(
 							'key'           => $sorter_active,
 							'name'          => $sorter_active,
 							'type'          => 'true_false',
@@ -107,7 +107,7 @@ abstract class A_Post_Type extends A_Options_Page {
 
 					// Add pagination type
 					case 'pagination_type':
-						$fields[ static::FIELD_ARCHIVE_PAGINATION_TYPE ] =  array(
+						$fields[ static::FIELD_ARCHIVE_PAGINATION_TYPE ] = array(
 							'key'           => $archive_pt,
 							'name'          => $archive_pt,
 							'type'          => 'select',
