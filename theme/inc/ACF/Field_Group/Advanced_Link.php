@@ -44,14 +44,14 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		return array_merge(
 			static::_gen_tab_field( 'Action' ),
 			array(
-				static::FIELD_LABEL              => array(
+				static::FIELD_LABEL  => array(
 					'key'      => $label,
 					'name'     => static::FIELD_LABEL,
 					'label'    => 'Label',
 					'type'     => 'text',
 					'required' => true,
 				),
-				static::FIELD_ACTION             => array(
+				static::FIELD_ACTION => array(
 					'key'           => $action,
 					'name'          => static::FIELD_ACTION,
 					'label'         => 'Action',

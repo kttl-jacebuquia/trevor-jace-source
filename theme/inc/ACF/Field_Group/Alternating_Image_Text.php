@@ -34,7 +34,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$entry_cta_button         = static::gen_field_key( static::FIELD_ENTRY_CTA_BUTTON );
 		$entry_cta_link           = static::gen_field_key( static::FIELD_ENTRY_CTA_LINK );
 		$button                   = static::gen_field_key( static::FIELD_BUTTON );
-		$item_alignment                   = static::gen_field_key( static::FIELD_ITEM_ALIGNMENT );
+		$item_alignment           = static::gen_field_key( static::FIELD_ITEM_ALIGNMENT );
 
 		return array(
 			'title'  => 'Alternating Image + Text Lockup',
