@@ -68,6 +68,7 @@ class ACF {
 		Field_Group\Featured_Resource_Two_Up::class,
 		Field_Group\Featured_Card_Three_Up::class,
 		Field_Group\Staff_Module::class,
+		Field_Group\Side_Text_Image::class,
 		Field_Group\Organization_Mission::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
