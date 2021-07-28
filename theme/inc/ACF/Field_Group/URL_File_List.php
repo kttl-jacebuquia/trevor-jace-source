@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Util\Tools;
+
 class URL_File_List extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE               = 'title';
 	const FIELD_DESCRIPTION         = 'description';
@@ -72,24 +74,29 @@ class URL_File_List extends A_Field_Group implements I_Block, I_Renderable {
 		$description      = static::get_val( static::FIELD_DESCRIPTION );
 		$url_file_entries = static::get_val( static::FIELD_URL_FILE_ENTRIES );
 
+		$attrs = array(
+			'class' => 'links',
+		);
+
 		ob_start();
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h2><?php echo esc_html( $title ); ?></h2>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-			<div class="links-content">
-			<?php if ( ! empty( $url_file_entries ) ) : ?>
-				<ul>
-					<?php foreach ( $url_file_entries as $entry ) : ?>
-						<li><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_attr( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
+		<div <?php echo Tools::flat_attr( $attrs ); ?> >
+			<div class="links__container">
+				<div class="links__content">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="links__heading"><?php echo $title; ?></h2>
+					<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="links__description"><?php echo $description; ?></p>
+					<?php endif; ?>
+					<?php if ( ! empty( $url_file_entries ) ) : ?>
+						<ul class="links__items">
+							<?php foreach ( $url_file_entries as $entry ) : ?>
+								<li class="links__item"><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_attr( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 		<?php
