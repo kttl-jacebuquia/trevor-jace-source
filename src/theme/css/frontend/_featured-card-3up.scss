@@ -1,0 +1,59 @@
+.featured-card-3up {
+  &__container {
+    @apply container mx-auto;
+    @apply pt-px72 pb-px80;
+
+    @screen xl {
+      @apply py-px130;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px32 leading-px40 text-center;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen md {
+      @apply text-px40 leading-px48 tracking-px_05;
+    }
+  }
+
+  &__items {
+    @apply tw-grid mt-px40;
+    @apply gap-y-px28;
+
+    @screen md {
+      @apply mt-px54;
+    }
+
+    @screen xl {
+      @apply mt-px60;
+    }
+  }
+
+  &__item {
+    @apply col-span-full h-full;
+
+    @screen md {
+      @apply col-span-4;
+    }
+
+    .tile {
+      @apply h-full;
+    }
+  }
+
+  &__cta-wrap {
+    @apply text-center mt-px30;
+
+    @screen md {
+      @apply mt-px50;
+    }
+  }
+
+  &__cta {
+    @apply btn;
+  }
+}

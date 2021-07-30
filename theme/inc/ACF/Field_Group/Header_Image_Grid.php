@@ -78,24 +78,32 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step - FE
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $header ) ) : ?>
-				<h3><?php echo esc_html( $header ); ?></h3>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $image_entries ) ) : ?>
-				<div>
-					<?php foreach ( $image_entries as $entry ) : ?>
-						<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
-							<img src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>" alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>">
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+		<div class="header-image-grid">
+			<div class="header-image-grid__container">
+				<?php if ( ! empty( $header ) ) : ?>
+					<h2 class="header-image-grid__heading"><?php echo esc_html( $header ); ?></h2>
+				<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="header-image-grid__description"><?php echo esc_html( $description ); ?></div>
+				<?php endif; ?>
+				<?php if ( ! empty( $image_entries ) ) : ?>
+					<div class="header-image-grid__grid" role="list">
+						<?php foreach ( $image_entries as $entry ) : ?>
+							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
+								<div class="header-image-grid__item">
+									<div class="header-image-grid__image">
+										<img
+											class="header-image-grid__image"
+											src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>"
+											alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>"
+										/>
+									</div>
+								</div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();

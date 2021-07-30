@@ -70,6 +70,7 @@ module.exports = {
 	theme: {
 		screens: {
 			mobile: { max: px2rem(767) },
+			'md-minmax': { min: px2rem(768), max: px2rem(1023) },
 			'md-max': { max: px2rem(1023) },
 			'lg-max': { max: px2rem(1279) },
 			sm: px2rem(375),

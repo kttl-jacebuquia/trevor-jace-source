@@ -1,0 +1,120 @@
+.header-image-grid {
+  @apply pt-px88 pb-px120;
+  @apply bg-white text-teal-dark text-center;
+
+  &__container {
+    @apply container mx-auto;
+    @apply tw-grid;
+  }
+
+  &__heading {
+    @apply text-center col-span-full;
+    @apply font-semibold text-px32 leading-px42;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply text-px40 leading-px50 tracking-em_001 col-start-1 col-span-full;
+    }
+  }
+
+  &__description {
+    @apply text-px20 leading-px26 mt-px14 col-span-full;
+
+    @screen md {
+      @apply mt-px8 text-px18 leading-px24 col-span-6 col-start-2 mb-px80;
+
+      + .header-image-grid__grid {
+        @apply mt-0;
+      }
+    }
+
+    @screen xl {
+      @apply col-start-1 col-span-full mt-px14 mb-px60;
+
+      + .header-image-grid__grid {
+        @apply mt-0;
+      }
+    }
+  }
+
+  &__grid {
+    @apply flex flex-wrap justify-between mt-px30 col-span-full;
+
+    @screen md {
+      @apply mt-px50 justify-center;
+    }
+
+    @screen xl {
+      @apply mt-px40;
+    }
+  }
+
+  &__item {
+    @apply relative aspect-ratio-1-1;
+    @apply mx-px6;
+    width: calc((100% - 13px) / 2);
+
+    @screen mobile {
+      // First item in each row
+      &:nth-child(odd) {
+        @apply ml-0;
+      }
+
+      // Last item in each row
+      &:nth-child(even) {
+        @apply mr-0;
+      }
+
+      // 2nd row onwards
+      &:nth-child(n + 3) {
+        @apply mt-px12;
+      }
+    }
+
+    @screen md {
+      @apply mx-px14;
+      width: calc((100% - (28px * 3) - 1px) / 4);
+
+      // 2nd row onwards
+      &:nth-child(n + 5) {
+        @apply mt-px28;
+      }
+
+      // First item in each row
+      &:nth-child(4n + 1) {
+        @apply ml-0;
+      }
+
+      // Last item in each row
+      &:nth-child(4n) {
+        @apply mr-0;
+      }
+
+      // First item in last row with items < 4
+      &:nth-child(4n + 1):not(:nth-last-child(n + 4)) {
+        @apply ml-auto;
+      }
+
+      // Last child in last row with items < 4
+      &:last-child:not(:nth-child(4n)) {
+        @apply mr-auto;
+      }
+
+      // Only child in last row
+      &:last-child:nth-child(4n + 1) {
+        @apply mx-auto;
+      }
+    }
+  }
+
+  &__image {
+    @apply absolute flex items-center justify-center top-0 left-0 w-full h-full;
+
+    img {
+      @apply block max-w-full max-h-full object-contain;
+    }
+  }
+}

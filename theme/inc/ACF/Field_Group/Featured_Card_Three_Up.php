@@ -157,24 +157,30 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 		ob_start();
 		// Next Step - FE
 		?>
-		<div class="container mx-auto  <?php echo esc_attr( $styles ); ?>">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="featured-card-3up  <?php echo esc_attr( $styles ); ?>">
+			<div class="featured-card-3up__container">
+				<div class="featured-card-3up__content">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="featured-card-3up__heading"><?php echo esc_html( $title ); ?></h2>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $cards ) ) : ?>
-				<div>
-					<?php foreach ( $cards as $key => $card ) : ?>
-						<div>
-							<?php echo Helper\Tile::post( $card, $key, $tile_options ); ?>
+					<?php if ( ! empty( $cards ) ) : ?>
+						<div class="featured-card-3up__items" role="list">
+							<?php foreach ( $cards as $key => $card ) : ?>
+								<div class="featured-card-3up__item" role="listitem">
+									<?php echo Helper\Tile::post( $card, $key, $tile_options ); ?>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+					<?php if ( ! empty( $button['url'] ) ) : ?>
+						<div class="featured-card-3up__cta-wrap">
+							<a class="featured-card-3up__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
