@@ -227,7 +227,7 @@ module.exports = {
 				unset: 'unset',
 				...px2remMap([
 					170,
-					289, 276,
+					248, 289, 276,
 					318, 319, 394,
 					403, 422, 450, 490, 493,
 					500, 550,
@@ -318,6 +318,7 @@ module.exports = {
 			gap: {
 				sm: px2rem(12),
 				md: px2rem(28),
+				xl: px2rem(28),
 				...px2remMap(divisibles(10, 10, 0, 100)),
 			},
 			spacing: {

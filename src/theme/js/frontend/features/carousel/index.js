@@ -9,9 +9,26 @@ const onSlideChange = (swiper) => {
 }
 
 
-export function carousel($element, $option) {
+export function carousel($element, option = {}) {
+	let _el;
 
-	let _el = '#' + $element;
+	if ( typeof $element === 'string' ) {
+		_el = '#' + $element;
+	}
+	else if ( typeof $element === 'object'  ) {
+		if ( 'jquery' in $element ) {
+			_el = $element[0];
+		}
+		else if ( $element instanceof HTMLElement ) {
+			_el = $element;
+		}
+		else {
+			return null;
+		}
+	}
+	else {
+		return null;
+	}
 
 	const swiper = new Swiper(_el, {
 		// Optional parameters
@@ -22,9 +39,11 @@ export function carousel($element, $option) {
 			el: '.swiper-pagination',
 			clickable: true,
 			bulletElement: 'button',
-		}
+		},
+		...option,
 	});
 
+	return swiper;
 }
 
 

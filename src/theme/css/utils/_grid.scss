@@ -6,18 +6,15 @@
 		.tw-grid-tablet {
 			@apply grid-cols-8 gap-x-md;
 		}
-		.tw-grid-dektop {
-			@apply grid-cols-12;
+		.tw-grid-desktop {
+			@apply grid-cols-12 gap-x-xl;
 		}
 	}
-}
 
-@layer utilities {
-	.tw-grid {
+  .tw-grid {
 		@apply grid gap-y-0;
 		@apply tw-grid-mobile;
 		@apply md:tw-grid-tablet;
-		@apply xl:tw-grid-dektop;
+		@apply xl:tw-grid-desktop;
 	}
 }
-

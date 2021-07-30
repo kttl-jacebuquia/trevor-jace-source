@@ -1,0 +1,112 @@
+.statistics {
+  @apply text-center my-px80;
+
+  @screen xl {
+    @apply my-px140;
+  }
+
+  &[class*="bg-"]:not(.bg-transparent) {
+    @apply text-center py-px80 my-0;
+
+    @screen xl {
+      @apply py-px140 my-0;
+    }
+  }
+
+  &__container {
+    @apply container mx-auto;
+
+    @screen xl {
+      @apply grid tw-grid-desktop;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px32 leading-px40;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen xl {
+      @apply text-px46 leading-px56 tracking-em_001;
+      @apply col-span-10 col-start-2;
+    }
+  }
+
+  &__description {
+    @apply text-px18 leading-px24 tracking-px05 mt-px16;
+
+    @screen md {
+      @apply text-px18 leading-px22;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 -mx-px28 mt-px14;
+      @apply text-px24 leading-px34 tracking-em005;
+    }
+  }
+
+  &__cards-container {
+    @apply mt-px60;
+
+    @screen md {
+      @apply mt-px50;
+    }
+
+    @screen xl {
+      @apply col-span-full mt-px80;
+    }
+  }
+
+  &__cards-wrapper {
+    @apply h-auto;
+
+    @screen xl {
+      @apply grid tw-grid-desktop;
+    }
+  }
+
+  &__card {
+    @screen xl {
+      @apply col-span-4;
+    }
+  }
+
+  &__card-heading {
+    @apply font-semibold text-px80 leading-px90 tracking-em_001;
+  }
+
+  &__card-body {
+    @apply block mx-auto mt-px12 text-px20 leading-px26 mt-px12;
+
+    @screen md {
+      @apply mt-px15 max-w-px248;
+    }
+
+    @screen xl {
+      @apply max-w-none mt-px16;
+      @apply text-px22 leading-px28 tracking-em_001;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px50;
+
+    @screen xl {
+      @apply col-span-full text-center;
+    }
+  }
+
+  &__cta {
+    @apply btn;
+  }
+
+  .swiper-pagination {
+    @apply mt-px50;
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-current;
+  }
+}

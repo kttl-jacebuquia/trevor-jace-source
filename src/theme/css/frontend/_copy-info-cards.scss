@@ -1,0 +1,122 @@
+.copy-info-cards {
+  @apply text-center my-px80;
+
+  @screen xl {
+    @apply my-px100;
+  }
+
+  &[class*=bg]:not(.bg-transparent) {
+    @apply py-px80;
+
+    @screen xl {
+      @apply py-px100;
+    }
+  }
+
+  &__container {
+    @apply container mx-auto;
+    @apply tw-grid;
+  }
+
+  &__heading {
+    @apply font-semibold text-px32 leading-px40 col-span-full;
+
+    @screen md {
+      @apply text-px32 leading-px42 col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 text-px46 leading-px56;
+    }
+  }
+
+  &__description {
+    @apply text-px18 leading-px24 tracking-px05 mt-px14 col-span-full;
+
+    @screen md {
+      @apply text-px18 leading-px24 col-span-6 col-start-2 mt-px14;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 mt-px16 text-px24 leading-px34 tracking-em005;
+    }
+  }
+
+  &__cards-container {
+    @apply mt-px50 col-span-full;
+
+    @screen md {
+      @apply mt-px50 col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply mt-px78 col-span-10 col-start-2;
+    }
+  }
+
+  &__cards-wrapper {
+    @apply tw-grid;
+    @apply gap-y-px28;
+
+    @screen xl {
+      @apply grid-cols-10;
+    }
+  }
+
+  &__card {
+    @apply col-span-full rounded-px10 overflow-hidden bg-white py-px88 px-px28;
+
+    @screen md {
+      @apply py-px90 px-px50;
+    }
+
+    @screen xl {
+      @apply col-span-5 py-px80 px-px35;
+    }
+  }
+
+  &__card-heading {
+    @apply font-semibold text-px30 leading-px40;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen xl {
+      @apply text-px36 leading-px46;
+    }
+  }
+
+  &__card-body {
+    @apply block mx-auto mt-px12 text-px20 leading-px26 mt-px12;
+
+    @screen md {
+      @apply mt-px14 text-px18 leading-px26 tracking-px05;
+    }
+
+    @screen xl {
+      @apply mt-px12 text-px20 leading-px30;
+    }
+  }
+
+  &__card-cta {
+    @apply btn mt-px30;
+    @apply text-current border-px2 border-current border-solid bg-white;
+
+    @screen md {
+      @apply mt-px30;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px50 col-span-full;
+
+    @screen xl {
+      @apply mt-px80;
+    }
+  }
+
+  &__cta {
+    @apply btn;
+  }
+}

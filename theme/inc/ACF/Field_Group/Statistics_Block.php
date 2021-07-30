@@ -123,35 +123,53 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$button             = static::get_val( static::FIELD_BUTTON );
 		$statistics_entries = static::get_val( static::FIELD_STATISTICS_ENTRIES );
 
+		$class = implode(
+			' ',
+			array(
+				'statistics',
+				'bg-' . $bg_color,
+				'text-' . $text_color,
+			)
+		);
+
 		ob_start();
 		// Next Step: FE
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h1><?php echo esc_html( $title ); ?></h1>
-			<?php endif; ?>
+		<div class="<?php echo $class; ?>">
+			<div class="statistics__container">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h2 class="statistics__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="statistics__description"><?php echo esc_html( $description ); ?></div>
+				<?php endif; ?>
+				<?php if ( ! empty( $statistics_entries ) ) : ?>
+					<div class="statistics__cards-container swiper-container">
+						<div class="swiper-wrapper statistics__cards-wrapper">
+							<?php foreach ( $statistics_entries as $statistic ) : ?>
+								<div class="statistics__card swiper-slide">
+									<div>
+										<?php if ( ! empty( $statistic[ static::FIELD_STATISTICS_ENTRY_HEADER ] ) ) : ?>
+											<h2 class="statistics__card-heading"><?php echo esc_html( $statistic[ static::FIELD_STATISTICS_ENTRY_HEADER ] ); ?></h2>
+										<?php endif; ?>
 
-			<?php if ( ! empty( $statistics_entries ) ) : ?>
-				<?php foreach ( $statistics_entries as $statistic ) : ?>
-					<div>
-						<?php if ( ! empty( $statistic[ static::FIELD_STATISTICS_ENTRY_HEADER ] ) ) : ?>
-							<h2><?php echo esc_html( $statistic[ static::FIELD_STATISTICS_ENTRY_HEADER ] ); ?></h2>
-						<?php endif; ?>
-
-						<?php if ( ! empty( $statistic[ static::FIELD_STATISTICS_ENTRY_BODY ] ) ) : ?>
-							<p><?php echo esc_html( $statistic[ static::FIELD_STATISTICS_ENTRY_BODY ] ); ?></p>
-						<?php endif; ?>
+										<?php if ( ! empty( $statistic[ static::FIELD_STATISTICS_ENTRY_BODY ] ) ) : ?>
+											<div class="statistics__card-body"><?php echo esc_html( $statistic[ static::FIELD_STATISTICS_ENTRY_BODY ] ); ?></div>
+										<?php endif; ?>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+						<div class="swiper-pagination"></div>
 					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+				<?php endif; ?>
+				<?php if ( ! empty( $button['url'] ) ) : ?>
+					<div class="statistics__cta-wrap">
+						<a class="statistics__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();

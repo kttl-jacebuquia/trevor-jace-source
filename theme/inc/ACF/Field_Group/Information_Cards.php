@@ -28,7 +28,7 @@ class Information_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$button             = static::gen_field_key( static::FIELD_BUTTON );
 
 		return array(
-			'title'  => 'Copy components + Information cards + button',
+			'title'  => 'Copy + Information cards + button',
 			'fields' => array(
 				static::FIELD_BG_COLOR    => Color::gen_args(
 					$bg_color,
@@ -114,7 +114,7 @@ class Information_Cards extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Copy components + Information cards + button',
+				'title'      => 'Copy + Information cards + button',
 				'post_types' => array( 'page' ),
 			)
 		);
@@ -131,41 +131,55 @@ class Information_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$cards       = static::get_val( static::FIELD_CARDS );
 		$button      = static::get_val( static::FIELD_BUTTON );
 
-		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
+		$class = implode(
+			' ',
+			array(
+				'copy-info-cards',
+				'bg-' . $bg_color,
+				'text-' . $text_color,
+			)
+		);
 
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="<?php echo esc_attr( $styles ); ?>">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h1><?php echo esc_html( $title ); ?></h1>
-			<?php endif; ?>
+		<div class="<?php echo $class ?>">
+			<div class="copy-info-cards__container">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h2 class="copy-info-cards__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="copy-info-cards__description"><?php echo esc_html( $description ); ?></div>
+				<?php endif; ?>
+				<?php if ( ! empty( $cards ) ) : ?>
+					<div class="copy-info-cards__cards-container">
+						<div class="copy-info-cards__cards-wrapper">
+							<?php foreach ( $cards as $card ) : ?>
+								<div class="copy-info-cards__card">
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
+										<h3 class="copy-info-cards__card-heading"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h3>
+									<?php endif; ?>
 
-			<?php if ( ! empty( $cards ) ) : ?>
-				<?php foreach ( $cards as $card ) : ?>
-					<div>
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
-							<h2><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h2>
-						<?php endif; ?>
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_BODY ] ) ) : ?>
+										<div class="copy-info-cards__card-body"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_BODY ] ); ?></div>
+									<?php endif; ?>
 
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_BODY ] ) ) : ?>
-							<p><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_BODY ] ); ?></p>
-						<?php endif; ?>
-
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
-							<a href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
-						<?php endif; ?>
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
+										<a class="copy-info-cards__card-cta" href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
+									<?php endif; ?>
+								</div>
+							<?php endforeach; ?>
+						</div>
+						<div class="swiper-pagination"></div>
 					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+				<?php endif; ?>
+				<?php if ( ! empty( $button['url'] ) ) : ?>
+					<div class="copy-info-cards__cta-wrap">
+						<a class="copy-info-cards__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
