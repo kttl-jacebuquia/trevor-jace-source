@@ -70,6 +70,7 @@ class ACF {
 		Field_Group\Side_Text_Image::class,
 		Field_Group\Organization_Mission::class,
 		Field_Group\Volunteer_Information_Cards::class,
+		Field_Group\Text_Overlapping_Image::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
