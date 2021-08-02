@@ -143,7 +143,7 @@ class Information_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="<?php echo $class ?>">
+		<div class="<?php echo $class; ?>">
 			<div class="copy-info-cards__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="copy-info-cards__heading"><?php echo esc_html( $title ); ?></h2>
