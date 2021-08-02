@@ -17,7 +17,7 @@ class Address extends A_Field_Group implements I_Block {
 		$attr        = static::gen_field_key( static::FIELD_ATTR );
 
 		return array(
-			'title'  => 'Address',
+			'title'  => 'Contact Information Block',
 			'fields' => array(
 				static::FIELD_TITLE   => array(
 					'key'   => $title,
@@ -72,7 +72,7 @@ class Address extends A_Field_Group implements I_Block {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Address',
+				'title'      => 'Contact Information Block',
 				'post_types' => array( 'page' ),
 			)
 		);
