@@ -5,13 +5,14 @@ import * as vendors from './vendors';
 import * as matchMedia from './match-media';
 import './nav';
 import singlePages from './single-pages';
-import {infoBoxesCarousel} from "./features";
+import { infoBoxesCarousel } from './features';
 import modal from './features/modal';
 
-Object.assign(
-	window.trevorWP = window.trevorWP || {},
-	{features, vendors, matchMedia}
-);
+Object.assign((window.trevorWP = window.trevorWP || {}), {
+	features,
+	vendors,
+	matchMedia,
+});
 
 const $body = $('body');
 const isSingle = $body.hasClass('single');
@@ -21,16 +22,18 @@ const isCardPresent = $('.card-collection');
 const isDonate = !isSingle && document.querySelector('.donation-form');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.charity-navigator-container');
-const inputSearchField = $("#rc-search-main");
+const inputSearchField = $('#rc-search-main');
 const bigImageCarousels = $('.big-img-carousel.body-carousel');
-const isPhoneField = $(".phone-number-format") ? true : false;
-const $showAllTilesBtn = $(".tile-grid-container + .view-all-container .view-all-cta");
-const $fundraiserQuizButton = $(".js-fundraiser-quiz");
-const $donationModalButton = $(".js-donation-modal");
-const $quickExitModal = $(".js-quick-exit-modal");
-const $statistics = $(".statistics");
+const isPhoneField = $('.phone-number-format') ? true : false;
+const $showAllTilesBtn = $(
+	'.tile-grid-container + .view-all-container .view-all-cta'
+);
+const $fundraiserQuizButton = $('.js-fundraiser-quiz');
+const $donationModalButton = $('.js-donation-modal');
+const $quickExitModal = $('.js-quick-exit-modal');
+const $statistics = $('.statistics');
 
-let faqTrigger = $('.faq-list__toggle');
+const faqTrigger = $('.faq-list__toggle');
 
 // Tag Box Ellipsis
 features.tagBoxEllipsis($('.card-post'));
@@ -44,13 +47,13 @@ features.stickyAnchor();
 features.showAllTiles($showAllTilesBtn);
 
 if ($fundraiserQuizButton.length) {
-	$fundraiserQuizButton.on("click", (e) => {
+	$fundraiserQuizButton.on('click', (e) => {
 		const initialVertex = e.currentTarget.dataset.fundraiseVertex;
 		const single = e.currentTarget.dataset.fundraiseSingle === 'true';
 
 		new features.FundraiserQuiz({
 			initialVertex,
-			single
+			single,
 		});
 	});
 }
@@ -65,42 +68,48 @@ if ($donationModalButton.length) {
 			$('.dedication', modalContent)[
 				willHideDedicationField ? 'hide' : 'show'
 			]();
-		}
-	}
+		},
+	};
 
 	modal($donationModal, options, $donationModalButton);
 }
 
-if ( $quickExitModal.length ) {
-	let siteVisitCount = Number(window.localStorage.getItem('site-visit-count') || 0);
-	const isQuickExitModalDismissed = localStorage.getItem('quick-exit-modal-dismissed');
+if ($quickExitModal.length) {
+	let siteVisitCount = Number(
+		window.localStorage.getItem('site-visit-count') || 0
+	);
+	const isQuickExitModalDismissed = localStorage.getItem(
+		'quick-exit-modal-dismissed'
+	);
 	let willShowModal = !isQuickExitModalDismissed;
 
-	if ( isQuickExitModalDismissed ) {
+	if (isQuickExitModalDismissed) {
 		siteVisitCount++;
 		window.localStorage.setItem('site-visit-count', siteVisitCount);
 
-		if ( siteVisitCount === 4 ) {
+		if (siteVisitCount === 4) {
 			willShowModal = true;
 		}
 	}
 
-	if ( willShowModal ) {
+	if (willShowModal) {
 		const options = {
 			onInit(modal) {
 				setTimeout(() => modal.open(), 500);
 			},
 			onClose({ initiator }) {
-				if ( initiator && initiator.classList.contains('quick-exit-modal__cta') ) {
+				if (
+					initiator &&
+					initiator.classList.contains('quick-exit-modal__cta')
+				) {
 					localStorage.setItem('quick-exit-modal-dismissed', true);
 				}
-			}
-		}
+			},
+		};
 
 		modal($quickExitModal, options);
 	}
 }
-
 
 // Single (Detail) Page
 if (isSingle) {
@@ -134,12 +143,14 @@ if (isFAQPresent) {
 		const $button = $heading.find('button');
 		const title = $button.data('title');
 		const isExpanded = $heading.hasClass('is-open');
-		const label = `Click to ${ isExpanded ? 'hide' : 'show' } contents for ${title}`;
+		const label = `Click to ${
+			isExpanded ? 'hide' : 'show'
+		} contents for ${title}`;
 		$button.attr('aria-label', label).attr('aria-expanded', isExpanded);
 	};
 
-	const faqTriggerObserver = new MutationObserver(([ mutation ]) => {
-		if ( mutation.attributeName === 'class' ) {
+	const faqTriggerObserver = new MutationObserver(([mutation]) => {
+		if (mutation.attributeName === 'class') {
 			onHeadingMutate(mutation.target);
 		}
 	});
@@ -165,21 +176,21 @@ if (isDonate) {
 }
 
 if (isNavigator) {
-	isNavigator.forEach(_el => {
-		let _element = `#${_el.getAttribute('id')}`;
+	isNavigator.forEach((_el) => {
+		const _element = `#${_el.getAttribute('id')}`;
 		features.carouselNavigator(_element);
 	});
 }
 
 if (auditSlider) {
-	auditSlider.forEach(_el => {
-		let _element = `#${_el.getAttribute('id')}`;
+	auditSlider.forEach((_el) => {
+		const _element = `#${_el.getAttribute('id')}`;
 		features.carouselNavigator(_element);
 	});
 }
 
 if (isCardPresent) {
-	let cardTrigger = $('.tile-title');
+	const cardTrigger = $('.tile-title');
 
 	cardTrigger.on('click', function (e) {
 		e.preventDefault();
@@ -187,28 +198,35 @@ if (isCardPresent) {
 	});
 }
 
-$(() => {
+(() => {
 	if (bigImageCarousels.length) {
 		$.each(bigImageCarousels, (index, element) => {
-			const swiper = $('.carousel-container.swiper-container-initialized', element);
+			const swiper = $(
+				'.carousel-container.swiper-container-initialized',
+				element
+			);
 			if (swiper.length) {
 				const leftPaneSelector = '.swiper-button-prev';
 				const rightPaneSelector = '.swiper-button-next';
-				features.generateSwiperArrows(leftPaneSelector, rightPaneSelector, element);
+				features.generateSwiperArrows(
+					leftPaneSelector,
+					rightPaneSelector,
+					element
+				);
 			}
 		});
 	}
-});
+})();
 
 // features.modal($('.modal'), {}, $('.modal-open'));
 features.collapsible($('.js-accordion'), {});
 
-
 /**
  * Search bar autocomplete function
+ *
  * @todo: move under is-rc
  */
-$(() => {
+(() => {
 	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
 	const searchCancelIcon = $('.icon-search-cancel');
 	const maxInputSize = 35;
@@ -222,22 +240,24 @@ $(() => {
 
 	inputSearchField
 		.autocomplete({
-			source: function (request, response) {
+			source(request, response) {
 				const results = $.ui.autocomplete.filter(terms, request.term);
 				response(results.slice(0, 5)); // Limit the results to five.
 			},
 			minLength: 0,
-			appendTo: "#input-suggestions",
-			open: function () {
+			appendTo: '#input-suggestions',
+			open() {
 				/**
 				 * The results will automatically show without a header
 				 * when the user starts to type anything on the search bar.
 				 */
 				if ($(this).val() == '') {
-					$('ul.ui-autocomplete').prepend('<li class="list-header"><h3>Popular Searches</h3></li>');
+					$('ul.ui-autocomplete').prepend(
+						'<li class="list-header"><h3>Popular Searches</h3></li>'
+					);
 				}
 			},
-			select: function (event, ui) {
+			select(event, ui) {
 				$(this).addClass('has-value');
 				$(this).parent().addClass('input-has-value');
 				hiddenInputField.val(ui.item.value);
@@ -253,7 +273,7 @@ $(() => {
 		.focus(function () {
 			$(this).autocomplete('search', $(this).val());
 		})
-		.on("keyup", function (event) {
+		.on('keyup', function (event) {
 			const inputText = $(this).html();
 			if (!inputText) {
 				$(this).parent().removeClass('input-has-value');
@@ -263,7 +283,7 @@ $(() => {
 				hiddenInputField.val(inputText);
 			}
 		})
-		.on("keypress", function (event) {
+		.on('keypress', function (event) {
 			if (event.keyCode === 13) {
 				form.submit();
 				return false;
@@ -274,8 +294,8 @@ $(() => {
 			}
 		});
 
-	searchCancelIcon.on("click", function (e) {
-		inputSearchField.html("");
+	searchCancelIcon.on('click', function (e) {
+		inputSearchField.html('');
 		inputSearchField.parent().removeClass('input-has-value');
 		inputSearchField.focus();
 	});
@@ -283,8 +303,8 @@ $(() => {
 	function moveCursorToEnd(el) {
 		setTimeout(() => {
 			if (el.innerText && document.createRange) {
-				let selection = document.getSelection();
-				let range = document.createRange();
+				const selection = document.getSelection();
+				const range = document.createRange();
 
 				range.setStart(el.childNodes[0], el.innerText.length);
 				range.collapse(true);
@@ -293,12 +313,12 @@ $(() => {
 			}
 		}, 100);
 	}
-});
+})();
 
 /**
  * Bouncing Arrow function
  */
-$(() => {
+(() => {
 	const bouncingArrow = $('.bouncing-arrow');
 
 	if (bouncingArrow.length) {
@@ -317,30 +337,32 @@ $(() => {
 
 			if (parentsNextSibling.length) {
 				parentsNextSibling[0].scrollIntoView({
-					behavior: "smooth",
-					block: "start",
+					behavior: 'smooth',
+					block: 'start',
 				});
 			}
 		});
 	}
-});
+})();
 
 if (isPhoneField) {
-	features.phoneFormat($(".phone-number-format"));
+	features.phoneFormat($('.phone-number-format'));
 }
 
 /**
  * Varying squiggly line breakers on post bottom tags.
  */
-$(() => {
+(() => {
 	// fixme: overselecting
-	const tagsWaveSeparators = $(".post-bottom-tags .wp-block-separator.is-style-wave");
+	const tagsWaveSeparators = $(
+		'.post-bottom-tags .wp-block-separator.is-style-wave'
+	);
 
 	// set the width on load.
 	setTagsSeparatorsWidth(tagsWaveSeparators);
 
 	// set the width on resize
-	$(window).on("resize", () => {
+	$(window).on('resize', () => {
 		setTagsSeparatorsWidth(tagsWaveSeparators);
 	});
 
@@ -349,14 +371,16 @@ $(() => {
 			return;
 		}
 
-		const listContainerWidth = $(".post-bottom-tags .list-container").length ? $(".post-bottom-tags .list-container").width() + 'px' : '100%';
+		const listContainerWidth = $('.post-bottom-tags .list-container').length
+			? $('.post-bottom-tags .list-container').width() + 'px'
+			: '100%';
 		$.each(separators, (index, el) => {
 			el.style.width = listContainerWidth;
 		});
 	}
-});
+})();
 
-if ( $statistics.length ) {
+if ($statistics.length) {
 	let swiper;
 	const $swiperContainer = $statistics.find('.swiper-container');
 	const $cards = $statistics.find('.swiper-slide');
@@ -368,17 +392,18 @@ if ( $statistics.length ) {
 			},
 			destroy() {
 				swiper = null;
-			}
-		}
+			},
+		},
 	};
 
-	if ( $cards.length ) {
+	if ($cards.length) {
 		matchMedia.mobileAndTablet(
 			() => !swiper && features.carousel($swiperContainer, swiperOptions),
-			() => swiper && swiper.destroy(),
+			() => swiper && swiper.destroy()
 		);
 	}
 }
 
 features.QuickExit.init();
 features.BreathingExercise.init();
+features.CurrentOpenings.init();

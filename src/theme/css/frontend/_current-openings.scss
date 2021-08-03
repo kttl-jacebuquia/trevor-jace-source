@@ -1,0 +1,56 @@
+.current-openings {
+	@apply text-teal-dark;
+
+	&__container {
+		@apply tw-grid;
+		@apply container mx-auto py-px58;
+
+		@screen md {
+			@apply py-px100;
+		}
+
+		@screen xl {
+			@apply pt-px110 pb-px90;
+		}
+	}
+
+	&__headline {
+		@apply font-semibold text-center text-px32 leading-px40;
+
+		@screen md {
+			@apply leading-px42;
+		}
+
+		@screen xl {
+			@apply text-px42 leading-px52 tracking-em_001 -mx-px56;
+		}
+	}
+
+	&__description {
+		@apply text-center text-px18 leading-px24 tracking-px05 mt-px18;
+
+		@screen xl {
+			@apply text-px26 leading-px36 mt-px14 -mx-px28;
+		}
+	}
+
+	&__header {
+		@apply col-span-full;
+
+		@screen xl {
+			@apply col-span-8 col-start-3;
+		}
+	}
+
+	&__content {
+		@apply col-span-full mt-px36;
+
+		@screen md {
+			@apply mt-px63;
+		}
+
+		@screen xl {
+			@apply mt-px60;
+		}
+	}
+}

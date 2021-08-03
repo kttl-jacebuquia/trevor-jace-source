@@ -6,8 +6,18 @@ export sharingPopUp from './sharing-popup';
 export modal from './modal';
 export faqToggle from './faqs';
 export cardToggle from './cards';
-export {toggleFrequency, toggleAmount, displayAmountAction, displayCurrency} from './donate';
-export {carousel, carouselNavigator, generateSwiperArrows, initializeCarousel} from './carousel';
+export {
+	toggleFrequency,
+	toggleAmount,
+	displayAmountAction,
+	displayCurrency,
+} from './donate';
+export {
+	carousel,
+	carouselNavigator,
+	generateSwiperArrows,
+	initializeCarousel,
+} from './carousel';
 export collapsible from './collapsible';
 export testimonialsCarousel from './testimonials-carousel';
 export ectMap from './ect-map';
@@ -19,3 +29,4 @@ export showAllTiles from './tiles';
 export FundraiserQuiz from './fundraiser-quiz';
 export QuickExit from './quick-exit';
 export BreathingExercise from './breathing-exercise';
+export CurrentOpenings from './current-openings';
