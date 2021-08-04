@@ -6,6 +6,7 @@ use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
+use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Util\StaticFiles;
@@ -88,6 +89,9 @@ class Hooks {
 
 		# ACF
 		ACF::construct();
+
+		# Phone2Action API
+		PhoneTwoAction::construct();
 	}
 
 	/**

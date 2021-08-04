@@ -12,8 +12,8 @@ class Four_O_Four extends A_Options_Page {
 			parent::prepare_page_register_args(),
 			array(
 				'parent_slug' => 'general-settings',
-				'page_title' => '404 Settings',
-				'menu_title' => '404',
+				'page_title'  => '404 Settings',
+				'menu_title'  => '404',
 			)
 		);
 	}
