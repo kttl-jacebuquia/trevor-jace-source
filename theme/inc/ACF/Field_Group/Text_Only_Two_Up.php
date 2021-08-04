@@ -38,7 +38,7 @@ class Text_Only_Two_Up extends A_Field_Group implements I_Block, I_Renderable {
 					'label'      => 'Entries',
 					'type'       => 'repeater',
 					'layout'     => 'block',
-					'min'        => 1,
+					'min'        => 4,
 					'max'        => 4,
 					'collapsed'  => $entry_header,
 					'sub_fields' => array(
@@ -86,27 +86,31 @@ class Text_Only_Two_Up extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h2><?php echo esc_html( $title ); ?></h2>
-			<?php endif; ?>
+		<div class="text-only-2up">
+			<div class="text-only-2up__container bg-white text-teal-dark text-center">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h2 class="text-only-2up__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="text-only-2up__description"><?php echo esc_html( $description ); ?></div>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $entries ) ) : ?>
-				<?php foreach ( $entries as $entry ) : ?>
-					<div>
-						<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
-							<h2><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h2>
-						<?php endif; ?>
-						<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
-							<p><?php echo esc_html( $entry[ static::FIELD_ENTRY_BODY ] ); ?></p>
-						<?php endif; ?>
+				<?php if ( ! empty( $entries ) ) : ?>
+					<div class="text-only-2up__entries">
+						<?php foreach ( $entries as $entry ) : ?>
+							<div class="text-only-2up__entry">
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
+									<h3 class="text-only-2up__entry-heading"><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h2>
+								<?php endif; ?>
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
+									<div class="text-only-2up__entry-body"><?php echo esc_html( $entry[ static::FIELD_ENTRY_BODY ] ); ?></div>
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>
 					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();

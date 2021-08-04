@@ -100,34 +100,43 @@ class Training extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h1><?php echo esc_html( $title ); ?></h1>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $card ) ) : ?>
-				<div>
-					<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_HEADER ] ) ) : ?>
-						<h2><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_HEADER ] ); ?></h2>
+		<div class="training">
+			<div class="training__container">
+				<div class="training__main">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="training__heading"><?php echo esc_html( $title ); ?></h2>
 					<?php endif; ?>
 
-					<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_BODY ] ) ) : ?>
-						<p><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_BODY ] ); ?></p>
+					<?php if ( ! empty( $description ) ) : ?>
+						<div class="training__description"><?php echo esc_html( $description ); ?></div>
 					<?php endif; ?>
 
-					<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_LINK ]['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $card[ static::FIELD_CARD_GROUP_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARD_GROUP_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_LINK ]['title'] ); ?></a>
+					<?php if ( ! empty( $button['url'] ) ) : ?>
+						<a class="training__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
 					<?php endif; ?>
 				</div>
-			<?php endif; ?>
+				<?php if ( ! empty( $card ) ) : ?>
+					<div class="training__card">
+						<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_HEADER ] ) ) : ?>
+							<h3 class="training__card-heading"><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_HEADER ] ); ?></h3>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_BODY ] ) ) : ?>
+							<p class="training__card-body"><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_BODY ] ); ?></p>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $card[ static::FIELD_CARD_GROUP_LINK ]['url'] ) ) : ?>
+							<a class="training__card-cta" href="<?php echo esc_url( $card[ static::FIELD_CARD_GROUP_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARD_GROUP_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARD_GROUP_LINK ]['title'] ); ?></a>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+				<?php if ( ! empty( $button['url'] ) ) : ?>
+					<div class="training__bottom">
+						<a class="training__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
 		</div>
 		<?php
 		return ob_get_clean();

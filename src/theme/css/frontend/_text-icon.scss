@@ -85,7 +85,11 @@
 	}
 
 	&__entry {
-		@apply col-span-3;
+		@apply col-span-full;
+
+    @screen md {
+      @apply col-span-3;
+    }
 
 		&-image {
 			@apply flex justify-center items-center;
@@ -101,15 +105,15 @@
 		}
 
 		&-title {
-			@apply font-semibold text-px20 leading-px30 tracking-wider;
+			@apply font-semibold text-px18 leading-px24 tracking-wider;
 			@apply text-center mt-7;
 
 			@screen xl {
-				@apply mt-8;
+				@apply mt-8 text-px20 leading-px30;
 			}
 
 			@screen xl {
-				@apply text-px22 leading-px32 mt-10;
+				@apply text-px20 leading-px26 mt-10;
 			}
 		}
 	}
