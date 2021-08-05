@@ -20,6 +20,8 @@ namespace {
 		: get_theme_file_uri( 'static' )
 	);
 
+	define( 'ALLOW_UNFILTERED_UPLOADS', true );
+
 	// Autoload
 	require_once __DIR__ . '/lib/autoload.php';
 

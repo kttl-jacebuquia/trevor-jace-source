@@ -83,6 +83,9 @@ class Hooks {
 		# Body Class
 		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
 
+		# Allow SVG
+		add_filter( 'upload_mimes', array( self::class, 'upload_mimes' ) );
+
 		# Search
 		Customizer\Search::init_all();
 
@@ -729,5 +732,21 @@ class Hooks {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Add SVG type to Uploads
+	 *
+	 * @param array $file_types
+	 *
+	 * @return array $file_types
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/upload_mimes/
+	 */
+	public static function upload_mimes( $file_types ) {
+		$new_filetypes        = array();
+		$new_filetypes['svg'] = 'image/svg+xml';
+		$file_types           = array_merge( $file_types, $new_filetypes );
+		return $file_types;
 	}
 }
