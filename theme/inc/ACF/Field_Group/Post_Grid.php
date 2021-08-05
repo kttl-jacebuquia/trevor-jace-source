@@ -492,32 +492,12 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						<?php echo Helper\Tile_Grid::custom( $posts ); ?>
 					<?php else : ?>
 						<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
-							<?php
-							foreach ( $posts as $key => $post ) {
-								$post = get_post( $post );
-
-								$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
-
-								switch ( get_post_type( $post ) ) {
-									case CPT\Team::POST_TYPE:
-										echo Helper\Tile::staff( $post, $key, $tile_options );
-										break;
-									case CPT\Financial_Report::POST_TYPE:
-										echo Helper\Tile::financial_report( $post, $key, $tile_options );
-										break;
-									case CPT\Event::POST_TYPE:
-										echo Helper\Tile::event( $post, $key, $tile_options );
-										break;
-									case CPT\Post::POST_TYPE:
-									case CPT\RC\Post::POST_TYPE:
-										echo Helper\Card::post( $post, $key, $tile_options );
-										break;
-									// TODO: Add other post types
-									default:
-										echo Helper\Tile::post( $post, $key, $tile_options );
-								}
-							}
-							?>
+							<?php foreach( $posts as $key => $post ) : ?>
+								<?php
+									$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
+									echo static::render_post_card( $post, $key, $tile_options );
+								?>
+							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
 				<?php elseif ( $show_empty && ! empty( $empty_message ) ) : ?>
@@ -739,5 +719,71 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				array_push( static::$rendered_posts, $post->ID );
 			}
 		}
+	}
+
+	public static function render_post_card( $post = array(), $key, array $tile_options = array() ): string {
+		ob_start();
+		$post_object = get_post( $post );
+
+		switch ( get_post_type( $post_object ) ) {
+			case CPT\Team::POST_TYPE:
+				echo Helper\Tile::staff( $post_object, $key, $tile_options );
+				break;
+			case CPT\Financial_Report::POST_TYPE:
+				echo Helper\Tile::financial_report( $post_object, $key, $tile_options );
+				break;
+			case CPT\Event::POST_TYPE:
+				echo Helper\Tile::event( $post_object, $key, $tile_options );
+				break;
+			case CPT\Post::POST_TYPE:
+			case CPT\RC\Post::POST_TYPE:
+				echo Helper\Card::post( $post_object, $key, $tile_options );
+				break;
+			// TODO: Add other post types
+			default:
+				echo Helper\Tile::post( $post_object, $key, $tile_options );
+		}
+		return ob_get_clean();
+	}
+
+	public static function ajax_post_cards( $request ) {
+		$params       = $request->get_params();
+		$exclude      = ! empty( $params['exclude'] ) ? explode( ',', $params['exclude'] ) : array();
+		$post_type    = $params['post_type'];
+		$limit        = (int) $params['count'];
+		$card_options = ! empty( $params['card_options'] ) ? $params['card_options'] : array();
+
+		$tile_options = (array) json_decode( $card_options );
+
+		// Get posts
+		$posts = get_posts(
+			array(
+				'posts_per_page' => $limit,
+				'post_type'      => $post_type,
+				'post__not_in'   => $exclude,
+				'post_status'    => 'publish',
+				'orderby'        => 'publish_date',
+				'order'          => 'DESC',
+			)
+		);
+
+		// Build cards html
+		$cards_rendered = array();
+
+		// Render each card
+		foreach ( $posts as $key => $post ) {
+			$cards_rendered[] = static::render_post_card( $post, $key, $tile_options );
+		}
+
+		$resp = new \WP_REST_Response(
+			array(
+				'success'        => true,
+				'cards_rendered' => $cards_rendered,
+				'cards_ids'      => wp_list_pluck( $posts, 'ID' ),
+			),
+			200
+		);
+
+		return $resp;
 	}
 }

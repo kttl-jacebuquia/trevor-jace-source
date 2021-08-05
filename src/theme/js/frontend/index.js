@@ -442,3 +442,4 @@ if (isPhoneField) {
 features.QuickExit.init();
 features.BreathingExercise.init();
 features.CurrentOpenings.init();
+features.TopicCards.initializeInstances();

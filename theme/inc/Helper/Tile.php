@@ -33,6 +33,7 @@ class Tile {
 		}
 
 		$data = array(
+			'id'      => $post->ID,
 			'title'   => $post->post_title,
 			'desc'    => $post->post_excerpt,
 			'cta_txt' => 'Read More',
@@ -214,6 +215,8 @@ class Tile {
 			(array) $options['cta_cls'],
 		);
 		$cta_cls = implode( ' ', $cta_cls );
+
+		$attr['data-post'] = $data['id'];
 
 		ob_start();
 		?>

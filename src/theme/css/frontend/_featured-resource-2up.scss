@@ -1,0 +1,69 @@
+.featured-resource-2up {
+  @apply py-px80;
+
+  @screen md {
+    @apply pt-px110 pb-px120;
+  }
+
+  &__container {
+    @apply tw-grid container mx-auto;
+  }
+
+  &__content {
+    @apply col-span-full;
+
+    @screen xl {
+      @apply col-span-8 col-start-3;
+    }
+  }
+
+  &__eyebrow {
+    @apply font-medium text-px28 leading-px38;
+
+    @screen md {
+      @apply text-px24 leading-px34 tracking-em005;
+    }
+
+    @screen xl {
+      @apply text-px22 leading-px32 tracking-px05;
+    }
+  }
+
+  &__title {
+    @apply font-semibold text-px32 leading-px42 mt-px10;
+
+    @screen md {
+      @apply font-bold text-px32 leading-px42 tracking-em_001;
+      @apply mt-px8;
+    }
+
+    @screen xl {
+      @apply font-semibold text-px40 leading-px50 tracking-em_001;
+    }
+  }
+
+  &__cards {
+    @apply col-span-full tw-grid mt-px50;
+    @apply gap-y-px28;
+
+    @screen md {
+      @apply mt-px40;
+    }
+
+    @screen xl {
+      @apply grid-cols-8 mt-px50;
+    }
+  }
+
+  &__card {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-4;
+    }
+
+    .tile {
+      @apply h-full;
+    }
+  }
+}

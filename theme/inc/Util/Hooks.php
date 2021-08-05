@@ -10,7 +10,6 @@ use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Util\StaticFiles;
-use TrevorWP\Theme\Helper\Modal;
 
 /**
  * Theme Hooks
@@ -604,6 +603,16 @@ class Hooks {
 			array(
 				'methods'  => 'GET',
 				'callback' => array( self::class, 'ajax_site_banners' ),
+			)
+		);
+
+		// Cards REST API
+		register_rest_route(
+			'trevor/v1',
+			'/post-cards',
+			array(
+				'methods'  => 'GET',
+				'callback' => array( 'TrevorWP\Theme\ACF\Field_Group\Post_Grid', 'ajax_post_cards' ),
 			)
 		);
 	}

@@ -30,3 +30,4 @@ export FundraiserQuiz from './fundraiser-quiz';
 export QuickExit from './quick-exit';
 export BreathingExercise from './breathing-exercise';
 export CurrentOpenings from './current-openings';
+export TopicCards from './topic-cards';

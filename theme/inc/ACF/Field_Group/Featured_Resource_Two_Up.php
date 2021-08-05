@@ -3,6 +3,7 @@
 use TrevorWP\CPT\Donate\Partner_Prod;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Theme\Helper;
+use TrevorWP\CPT;
 
 use TrevorWP\Theme\ACF\Field\Color;
 
@@ -98,31 +99,58 @@ class Featured_Resource_Two_Up extends A_Field_Group implements I_Block, I_Rende
 		$title      = static::get_val( static::FIELD_TITLE );
 		$cards      = static::get_val( static::FIELD_CARDS );
 
-		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
+		$classnames = array(
+			'featured-resource-2up',
+			'bg-' . $bg_color,
+			'text-' . $text_color,
+			'text-' . ( ! empty( $eyebrow ) ? 'left' : 'center' ),
+		);
+		$classnames = implode( ' ', $classnames );
 
 		$options = array();
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="container mx-auto  <?php echo esc_attr( $styles ); ?>">
-			<?php if ( ! empty( $eyebrow ) ) : ?>
-				<h3><?php echo esc_html( $eyebrow ); ?></h3>
-			<?php endif; ?>
+		<div class="<?php echo $classnames; ?>">
+			<div class="featured-resource-2up__container">
+				<div class="featured-resource-2up__content">
+					<?php if ( ! empty( $eyebrow ) ) : ?>
+						<span class="featured-resource-2up__eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
+					<?php endif; ?>
+					<?php if ( ! empty( $title ) ) : ?>
+						<h3 class="featured-resource-2up__title"><?php echo esc_html( $title ); ?></h3>
+					<?php endif; ?>
+					<?php if ( ! empty( $cards ) ) : ?>
+						<div class="featured-resource-2up__cards">
+							<?php foreach ( $cards as $key => $card ) : ?>
+								<div class="featured-resource-2up__card">
+									<?php
+									$post = get_post( $card );
 
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $cards ) ) : ?>
-				<div>
-					<?php foreach ( $cards as $key => $card ) : ?>
-						<div>
-							<?php echo Helper\Card::post( $card, $key, $options ); ?>
+									switch ( get_post_type( $post ) ) {
+										case CPT\Team::POST_TYPE:
+											echo Helper\Tile::staff( $post, $key, $options );
+											break;
+										case CPT\Financial_Report::POST_TYPE:
+											echo Helper\Tile::financial_report( $post, $key, $options );
+											break;
+										case CPT\Event::POST_TYPE:
+											echo Helper\Tile::event( $post, $key, $options );
+											break;
+										case CPT\Post::POST_TYPE:
+										case CPT\RC\Post::POST_TYPE:
+											echo Helper\Card::post( $post, $key, $options );
+											break;
+										default:
+											echo Helper\Tile::post( $post, $key, $options );
+									}
+									?>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
