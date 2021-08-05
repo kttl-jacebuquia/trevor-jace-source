@@ -258,7 +258,7 @@ class Tile {
 	 * @return string
 	 */
 	public static function staff( \WP_Post $post, int $key, array $options = array() ) :string {
-		$_class             = array( 'tile', 'staff', 'relative', 'shadow-darkGreen', 'overflow-hidden' );
+		$_class             = array( 'tile-staff', 'relative', 'shadow-darkGreen', 'overflow-hidden' );
 		$post               = get_post( $post );
 		$name               = get_the_title( $post );
 		$val                = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
@@ -330,15 +330,17 @@ class Tile {
 		$name_class = array();
 		if ( strtolower( $group ) === 'founder' ) {
 			$name_class = explode( ' ', 'text-px22 leading-px28 tracking-em005 md:text-px20 md:leading-px30 xl:text-px22 xl:leading-px32' );
+			$details_class = 'text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		} else {
-			$name_class = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32' );
+			$name_class = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32 text-left' );
+			$details_class = 'text-left text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		}
 
 		ob_start();
 		?>
 		<article <?php echo Tools::flat_attr( $attr ); ?>>
 			<a href="<?php echo get_permalink( $post ); ?>">
-				<div class="post-thumbnail-wrap bg-gray-light">
+				<div class="post-thumbnail-wrap bg-gray-light aspect-ratio-3-4">
 					<?php echo $thumbnail; ?>
 				</div>
 				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px24">
@@ -346,7 +348,7 @@ class Tile {
 						<?php echo esc_html( $name ); ?>
 					</p>
 					<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' || ! empty( $pronoun ) ) { ?>
-						<div class="information__details text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px10 md:tracking-em005">
+						<div class="information__details <?php echo $details_class; ?>">
 							<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>

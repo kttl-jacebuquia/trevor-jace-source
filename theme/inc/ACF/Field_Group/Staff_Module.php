@@ -140,31 +140,37 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$tile_options = array();
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="container mx-auto  <?php echo esc_attr( $styles ); ?>">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="staff <?php echo esc_attr( $styles ); ?>">
+			<div class="staff__container">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h2 class="staff__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<div class="staff__description"><?php echo esc_html( $description ); ?></div>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $cards ) ) : ?>
-				<div>
-					<?php foreach ( $cards as $key => $card ) : ?>
-						<div>
-							<?php echo Helper\Tile::staff( $card, $key, $tile_options ); ?>
+				<?php if ( ! empty( $cards ) ) : ?>
+					<div class="staff__cards-container swiper-container">
+						<div class="swiper-wrapper staff__cards-wrapper">
+							<?php foreach ( $cards as $key => $card ) : ?>
+								<div class="staff__card swiper-slide">
+									<?php echo Helper\Tile::staff( $card, $key, $tile_options ); ?>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+						<div class="swiper-pagination"></div>
+					</div>
+				<?php endif; ?>
+				<?php if ( ! empty( $button['url'] ) ) : ?>
+					<div class="staff__cta-wrap">
+						<a class="staff__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
+
 		<?php
 		return ob_get_clean();
 	}
