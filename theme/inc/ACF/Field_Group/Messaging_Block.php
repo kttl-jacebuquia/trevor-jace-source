@@ -34,6 +34,38 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Messaging Block',
 			'fields' => array(
+				static::FIELD_EXTEND_PADDING => array(
+					'key'        => $extend_padding,
+					'name'       => static::FIELD_EXTEND_PADDING,
+					'label'      => 'Extend Padding',
+					'type'       => 'group',
+					'layout'     => 'block',
+					'sub_fields' => array(
+
+						'top'    => array(
+							'key'           => 'top',
+							'name'          => 'top',
+							'label'         => 'Top',
+							'type'          => 'button_group',
+							'choices'       => array(
+								'yes' => 'Yes',
+								'no'  => 'No',
+							),
+							'default_value' => 'no',
+						),
+						'bottom' => array(
+							'key'           => 'bottom',
+							'name'          => 'bottom',
+							'label'         => 'Bottom ',
+							'type'          => 'button_group',
+							'choices'       => array(
+								'yes' => 'Yes',
+								'no'  => 'No',
+							),
+							'default_value' => 'no',
+						),
+					),
+				),
 				static::FIELD_BG_COLOR       => Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_COLOR,
@@ -66,17 +98,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 							'width' => '50',
 						),
 					),
-				),
-				static::FIELD_EXTEND_PADDING => array(
-					'key'           => $extend_padding,
-					'name'          => static::FIELD_EXTEND_PADDING,
-					'label'         => 'Extend Padding?',
-					'type'          => 'button_group',
-					'choices'       => array(
-						'yes' => 'Yes',
-						'no'  => 'No',
-					),
-					'default_value' => 'no',
 				),
 				static::FIELD_TITLE          => array(
 					'key'      => $title,
@@ -166,17 +187,22 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title          = static::get_val( static::FIELD_TITLE );
-		$description    = static::get_val( static::FIELD_DESCRIPTION );
-		$bg_color       = static::get_val( static::FIELD_BG_COLOR );
-		$box_color      = static::get_val( static::FIELD_BOX_COLOR );
-		$text_color     = static::get_val( static::FIELD_TEXT_COLOR );
-		$extend_padding = static::get_val( static::FIELD_EXTEND_PADDING );
-		$buttons        = static::get_val( static::FIELD_BUTTONS );
+		$title                 = static::get_val( static::FIELD_TITLE );
+		$description           = static::get_val( static::FIELD_DESCRIPTION );
+		$bg_color              = static::get_val( static::FIELD_BG_COLOR );
+		$box_color             = static::get_val( static::FIELD_BOX_COLOR );
+		$text_color            = static::get_val( static::FIELD_TEXT_COLOR );
+		$extend_padding        = static::get_val( static::FIELD_EXTEND_PADDING ) ?? array();
+		$extend_padding_top    = $extend_padding['top'] ?? 'no';
+		$extend_padding_bottom = $extend_padding['bottom'] ?? 'no';
+		$buttons               = static::get_val( static::FIELD_BUTTONS );
 
 		$wrapper_styles = "bg-{$bg_color}";
-		if ( 'yes' === $extend_padding ) {
-			$wrapper_styles .= ' extend-padding';
+		if ( 'yes' === $extend_padding_top ) {
+			$wrapper_styles .= ' extend-top';
+		}
+		if ( 'yes' === $extend_padding_bottom ) {
+			$wrapper_styles .= ' extend-bottom';
 		}
 
 		$box_styles = "bg-{$box_color} text-{$text_color}";

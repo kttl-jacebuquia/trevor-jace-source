@@ -1,16 +1,20 @@
 .messaging {
 	&__container {
-		@apply tw-grid container mx-auto mt-px58;
+		@apply tw-grid container mx-auto;
 
-		@screen md {
-			@apply mt-px100;
+		.messaging.extend-top & {
+			@apply mt-px58;
+
+			@screen md {
+				@apply mt-px100;
+			}
+
+			@screen xl {
+				@apply mt-px120;
+			}
 		}
 
-		@screen xl {
-			@apply mt-px120;
-		}
-
-		.messaging.extend-padding & {
+		.messaging.extend-bottom & {
 			@apply mb-px58;
 
 			@screen md {
