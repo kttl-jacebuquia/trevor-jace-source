@@ -66,9 +66,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'conditional_logic' => array(
 						array(
 							array(
-								'field'    => $media_type,
+								'field'    => $type,
 								'operator' => '==',
-								'value'    => 'video',
+								'value'    => 'img_bg',
 							),
 						),
 					),
@@ -600,11 +600,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		if ( 'img_bg' === $type ) {
 			$media_type = $val->get( static::FIELD_MEDIA_TYPE );
 
-			$args['media_type'] = $media_type;
+			$args['media_type']        = $media_type;
+			$args['content_alignment'] = $val->get( static::FIELD_CONTENT_ALIGNMENT );
 
 			if ( 'video' === $media_type ) {
-				$args['video']             = $val->get( static::FIELD_VIDEO );
-				$args['content_alignment'] = $val->get( static::FIELD_CONTENT_ALIGNMENT );
+				$args['video'] = $val->get( static::FIELD_VIDEO );
 			}
 		}
 
