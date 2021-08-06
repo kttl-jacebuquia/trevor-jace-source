@@ -299,9 +299,11 @@ class Carousel {
 		}
 
 		$carousel_cls = array(
-			'carousel-testimonials pt-px56 pb-px70 px-0',
-			'md:py-px50 lg:py-px80',
+			'carousel-testimonials',
 			'bg-' . $options['bg_color'],
+			'text-' . $options['text_alignment'],
+			'image-' . $options['image_position'],
+			$options['image_type'],
 		);
 		$carousel_cls = implode( ' ', $carousel_cls );
 
@@ -309,73 +311,113 @@ class Carousel {
 		?>
 		<div class="<?php echo $carousel_cls; ?>" id="<?php echo esc_attr( $id ); ?>">
 			<div class="carousel-testimonials-inner">
-				<div class="carousel-testimonials-img-wrap rounded-px10 overflow-hidden" data-aspectRatio="1:1">
-					<div class="swiper-container h-full">
-						<div class="swiper-wrapper">
-							<?php foreach ( $data as $entry ) : ?>
-								<div class="swiper-slide">
-									<?php if ( empty( $entry['img']['id'] ) ) { ?>
-										<div class="w-full h-full bg-white"></div>
-									<?php } else { ?>
-										<?php
-										echo wp_get_attachment_image(
-											$entry['img']['id'],
-											'large',
-											false,
+				<?php if ( 'left' === $options['image_position'] ) : ?>
+					<?php echo self::render_testimonials_image( $data, $options ); ?>
+				<?php endif; ?>
+
+				<?php echo self::render_testimonials_text( $data ); ?>
+
+				<?php if ( 'right' === $options['image_position'] ) : ?>
+					<?php echo self::render_testimonials_image( $data, $options ); ?>
+				<?php endif; ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Testimonials carousel - image
+	 *
+	 * @param array|null $data
+	 * @param array $options
+	 *
+	 * @return string|null
+	 */
+	public static function render_testimonials_image( array $data = array(), array $options = array() ): ?string {
+
+		ob_start();
+
+		$is_cover = 'cover' === $options['image_type'];
+		?>
+		<div class="carousel-testimonials-img-wrap" data-aspectRatio="<?php echo $is_cover ? '4:3' : '1:1'; ?>">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<?php foreach ( $data as $entry ) : ?>
+						<div class="swiper-slide <?php echo 'bg-' . $options['bg_color']; ?>">
+							<?php if ( empty( $entry['img']['id'] ) ) { ?>
+								<div class="w-full h-full bg-white"></div>
+							<?php } else { ?>
+								<?php
+								echo wp_get_attachment_image(
+									$entry['img']['id'],
+									'large',
+									false,
+									array(
+										'class' => implode(
+											' ',
 											array(
-												'class' => implode(
-													' ',
-													array(
-														'object-center',
-														'object-cover',
-														'w-full',
-														'h-full',
-													)
-												),
+												'object-center',
+												'object-cover',
+												'w-full',
+												'h-full',
 											)
-										)
-										?>
-									<?php } ?>
-								</div>
-							<?php endforeach; ?>
+										),
+									)
+								)
+								?>
+							<?php } ?>
 						</div>
-					</div>
+					<?php endforeach; ?>
 				</div>
-				<div class="carousel-testimonials-txt-wrap relative md:py-0">
-					<div class="panes-container flex justify-between absolute h-full w-full">
-						<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative"
-							data-direction="left"
-							aria-hidden="true"></div>
-						<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative"
-							data-direction='right'
-							aria-hidden="true"></div>
-					</div>
-					<div class="swiper-container h-full pt-px50 md:py-px20">
-						<div class="carousel-testimonials-quotes flex flex-row justify-center w-full" aria-hidden="true">
-							<i class="trevor-ti-quote-open -mt-2 mr-0.5 lg:text-px28 lg:mr-2"></i>
-							<i class="trevor-ti-quote-close lg:text-px28"></i>
-						</div>
-						<div class="swiper-wrapper">
-							<?php foreach ( $data as $entry ) : ?>
-								<div class="swiper-slide h-auto px-4 pt-5 pb-14 md:p-0" tabindex="-1" aria-hidden="true">
-									<figure class="text-center text-teal-dark flex flex-col justify-between md:w-full md:mx-auto">
-										<blockquote
-											class="font-bold text-center text-3xl mb-4 md:text-px20 md:leading-px26 lg:text-px30 lg:leading-px40">
-											<?php echo $entry['quote']; ?>
-										</blockquote>
-										<?php if ( ! empty( $entry['cite'] ) ) { ?>
-											<figcaption
-													class="text-px18 leading-px26 lg:text-px22 lg:leading-px32">
-												<?php echo $entry['cite']; ?>
-											</figcaption>
-										<?php } ?>
-									</figure>
-								</div>
-							<?php endforeach; ?>
-						</div>
-						<div class="swiper-pagination"></div>
-					</div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Testimonials carousel - text
+	 *
+	 * @param array|null $data
+	 * @param array $options
+	 *
+	 * @return string|null
+	 */
+	public static function render_testimonials_text( array $data = null ): ?string {
+		ob_start();
+		?>
+		<div class="carousel-testimonials-txt-wrap relative md:py-0">
+			<div class="panes-container flex justify-between absolute h-full w-full">
+				<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative"
+					data-direction="left"
+					aria-hidden="true"></div>
+				<div class="carousel-right-arrow-pane swiper-button h-full w-1/6 px-4 relative"
+					data-direction='right'
+					aria-hidden="true"></div>
+			</div>
+			<div class="swiper-container">
+				<div class="carousel-testimonials-quotes" aria-hidden="true">
+					<i class="trevor-ti-quote-open"></i>
+					<i class="trevor-ti-quote-close"></i>
 				</div>
+				<div class="swiper-wrapper">
+					<?php foreach ( $data as $entry ) : ?>
+						<div class="swiper-slide h-auto" tabindex="-1" aria-hidden="true">
+							<figure>
+								<blockquote>
+									<?php echo $entry['quote']; ?>
+								</blockquote>
+								<?php if ( ! empty( $entry['cite'] ) ) { ?>
+									<figcaption>
+										<?php echo $entry['cite']; ?>
+									</figcaption>
+								<?php } ?>
+							</figure>
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<div class="swiper-pagination"></div>
 			</div>
 		</div>
 		<?php

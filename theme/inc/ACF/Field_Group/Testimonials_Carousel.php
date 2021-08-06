@@ -4,24 +4,64 @@ use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Theme\Helper;
 
 class Testimonials_Carousel extends A_Field_Group implements I_Block {
-	const FIELD_DATA       = 'data';
-	const FIELD_DATA_IMG   = 'img';
-	const FIELD_DATA_QUOTE = 'quote';
-	const FIELD_DATA_CITE  = 'cite';
-	const FIELD_BG_CLR     = 'bg_color';
+	const FIELD_TEXT_ALIGNMENT = 'text_alignment';
+	const FIELD_IMAGE_POSITION = 'image_position';
+	const FIELD_IMAGE_TYPE     = 'image_type';
+	const FIELD_DATA           = 'data';
+	const FIELD_DATA_IMG       = 'img';
+	const FIELD_DATA_QUOTE     = 'quote';
+	const FIELD_DATA_CITE      = 'cite';
+	const FIELD_BG_CLR         = 'bg_color';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
-		$data          = static::gen_field_key( static::FIELD_DATA );
-		$data_img      = static::gen_field_key( static::FIELD_DATA_IMG );
-		$data_title    = static::gen_field_key( static::FIELD_DATA_QUOTE );
-		$data_subtitle = static::gen_field_key( static::FIELD_DATA_CITE );
-		$bg_color      = static::gen_field_key( static::FIELD_BG_CLR );
+		$text_alignment = static::gen_field_key( static::FIELD_TEXT_ALIGNMENT );
+		$image_type     = static::gen_field_key( static::FIELD_IMAGE_POSITION );
+		$image_position = static::gen_field_key( static::FIELD_IMAGE_TYPE );
+		$data           = static::gen_field_key( static::FIELD_DATA );
+		$data_img       = static::gen_field_key( static::FIELD_DATA_IMG );
+		$data_title     = static::gen_field_key( static::FIELD_DATA_QUOTE );
+		$data_subtitle  = static::gen_field_key( static::FIELD_DATA_CITE );
+		$bg_color       = static::gen_field_key( static::FIELD_BG_CLR );
 
 		return array(
 			'title'  => 'Testimonials Carousel',
 			'fields' => array(
-				static::FIELD_DATA   => array(
+				static::FIELD_IMAGE_POSITION => array(
+					'key'           => $image_position,
+					'name'          => static::FIELD_IMAGE_POSITION,
+					'label'         => 'Image Position (Desktop)',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'left'  => 'Left',
+						'right' => 'Right',
+					),
+					'default_value' => 'left',
+				),
+				static::FIELD_IMAGE_TYPE     => array(
+					'key'           => $image_type,
+					'name'          => static::FIELD_IMAGE_TYPE,
+					'label'         => 'Image Type',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'contained' => 'Contained',
+						'cover'     => 'Cover',
+					),
+					'default_value' => 'contained',
+				),
+				static::FIELD_TEXT_ALIGNMENT => array(
+					'key'           => $text_alignment,
+					'name'          => static::FIELD_TEXT_ALIGNMENT,
+					'label'         => 'Text Alignment',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'left'   => 'Left',
+						'center' => 'Center',
+						'right'  => 'Right',
+					),
+					'default_value' => 'center',
+				),
+				static::FIELD_DATA           => array(
 					'key'        => $data,
 					'name'       => static::FIELD_DATA,
 					'label'      => 'Data',
@@ -54,7 +94,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 						),
 					),
 				),
-				static::FIELD_BG_CLR => Field\Color::gen_args(
+				static::FIELD_BG_CLR         => Field\Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_CLR,
 					array(
@@ -90,7 +130,10 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		}
 
 		$options = array(
-			'bg_color' => static::get_val( static::FIELD_BG_CLR ) ?? 'gray-light',
+			'text_alignment' => static::get_val( static::FIELD_TEXT_ALIGNMENT ) ?? 'center',
+			'image_position' => static::get_val( static::FIELD_IMAGE_POSITION ) ?? 'left',
+			'image_type'     => static::get_val( static::FIELD_IMAGE_TYPE ) ?? 'contained',
+			'bg_color'       => static::get_val( static::FIELD_BG_CLR ) ?? 'gray-light',
 		);
 
 		echo Helper\Carousel::testimonials( $data, $options );

@@ -20,6 +20,7 @@ class Color extends A_Field {
 					'orange'          => 'Orange',
 					'blue_green'      => 'Blue Green',
 					'canary'          => 'Canary',
+					'gold'            => 'Gold',
 					'gradient_peach'  => 'Gradient Peach',
 					'gradient-orange' => 'Gradient Orange',
 				),
