@@ -332,10 +332,10 @@ class Tile {
 
 		$name_class = array();
 		if ( strtolower( $group ) === 'founder' ) {
-			$name_class = explode( ' ', 'text-px22 leading-px28 tracking-em005 md:text-px20 md:leading-px30 xl:text-px22 xl:leading-px32' );
+			$name_class    = explode( ' ', 'text-px22 leading-px28 tracking-em005 md:text-px20 md:leading-px30 xl:text-px22 xl:leading-px32' );
 			$details_class = 'text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		} else {
-			$name_class = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32 text-left' );
+			$name_class    = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32 text-left' );
 			$details_class = 'text-left text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		}
 
@@ -355,7 +355,7 @@ class Tile {
 							<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>
-							<?php if ( ! empty( $pronoun ) ) { ?>
+							<?php if ( ! empty( $pronoun && strtolower( $group ) !== 'founder' ) ) { ?>
 								<span class="information__pronoun font-normal pl-px12 border-l-px1 border-blue_green border-opacity-40"><?php echo esc_html( $pronoun ); ?></span>
 							<?php } ?>
 						</div>
