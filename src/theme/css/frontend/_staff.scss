@@ -1,5 +1,5 @@
 .staff {
-  @apply text-center my-px80;
+  @apply my-px80;
   overflow-x: hidden;
 
   @screen lg {
@@ -13,6 +13,14 @@
     @screen lg {
       @apply py-px140 my-0;
     }
+  }
+
+  &.is-grid {
+    overflow: unset;
+  }
+
+  &__load-more {
+    font-weight: 600;
   }
 
   .page-section-content-wrap & {
@@ -32,6 +40,13 @@
     @screen lg {
       overflow: unset;
     }
+
+    .page-section-content-wrap & {
+      @screen lg {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
   }
 
   &__heading {
@@ -42,7 +57,7 @@
     }
 
     @screen lg {
-      @apply text-px40 leading-px46 text-left;
+      @apply text-px40 leading-px46;
     }
   }
 
@@ -55,7 +70,7 @@
     }
 
     @screen lg {
-      @apply col-span-full text-px18 leading-px24 text-left mx-0 w-full;
+      @apply col-span-full text-px18 leading-px24 mx-0 w-full;
     }
   }
 
@@ -79,19 +94,44 @@
       @apply grid tw-grid-desktop;
       row-gap: 1.75rem;
     }
+
+    .is-grid & {
+      @apply mt-px50;
+      flex-flow: column wrap;
+
+      @screen md {
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+
+      @screen lg {
+        @apply mt-px55;
+      }
+    }
+
+    .is-grid.researchers & {
+      @screen md {
+        @apply mr-auto ml-auto;
+        width: 83.4834834835%;
+      }
+
+      @screen lg {
+        width: unset;
+      }
+    }
   }
 
   &__card {
-    width: 83.333333% !important;
+    width: 82.7586206897%;
     @apply mr-px12;
 
     @screen md {
-      @apply mr-px18;
+      @apply w-px264 mr-px18;
     }
 
     @screen lg {
       @apply col-span-4 mr-0;
-      width: auto !important;
+      width: auto;
     }
 
     @screen xl {
@@ -107,6 +147,69 @@
 
       @screen lg {
         @apply mr-0;
+      }
+    }
+
+    .is-grid & {
+      &[data-staff-part="last"] {
+        display: none;
+      }
+    }
+
+    .founders & {
+      @apply w-full mr-auto ml-auto;
+
+      @screen md {
+        @apply mr-0 ml-0;
+        width: calc((100% - 28px) / 2);
+      }
+
+      @screen lg {
+        @apply col-span-6;
+        width: auto;
+      }
+
+      @screen xl {
+        @apply col-span-4;
+      }
+
+      & + .staff__card {
+        @apply mt-px28;
+
+        @screen md {
+          @apply mt-0 mb-px28;
+        }
+
+        @screen lg {
+          @apply mb-0;
+        }
+      }
+
+      .information__details { display: none; }
+    }
+
+    .researchers.is-grid & {
+      @apply mr-auto ml-auto;
+
+      @screen md {
+        @apply mr-0 ml-0;
+        width: calc((100% - 28px) / 2);
+      }
+
+      @screen lg {
+        width: unset;
+      }
+
+      & + .staff__card {
+        @apply mt-px28;
+
+        @screen md {
+          @apply mt-0 mb-px28;
+        }
+
+        @screen lg {
+          @apply mb-0;
+        }
       }
     }
 

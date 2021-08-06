@@ -155,7 +155,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="staff <?php echo esc_attr( $styles ); ?>">
+		<div class="staff <?php echo $card_type; ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?>">
 			<div class="staff__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="staff__heading"><?php echo esc_html( $title ); ?></h2>
@@ -178,14 +178,20 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 							<div class="swiper-pagination"></div>
 						</div>
 					<?php elseif ( 'grid' === $display_type ) : ?>
-						<?php if ( count( $cards ) <= 3 ) : ?>
-							<!-- Add class here -->
-						<?php endif; ?>
-						<?php foreach ( $cards as $key => $card ) : ?>
-							<div>
-								<?php echo Helper\Tile::staff( $card, $key, $tile_options ); ?>
+						<div class="swiper-wrapper staff__cards-wrapper">
+							<?php $card_ctr = 0; foreach ( $cards as $key => $card ) : ?>
+								<div class="staff__card" data-staff-part="<?php echo $card_ctr < 8 ? 'first' : 'last'; ?>">
+									<?php echo Helper\Tile::staff( $card, $key, $tile_options ); ?>
+								</div>
+							<?php $card_ctr++; endforeach; ?>
+						</div>
+						<?php if ( 8 <= count( $cards ) ) : ?>
+							<div class="staff__load-more-container mt-px40 md:mt-px22 lg:mt-px50">
+								<button class="staff__load-more text-center text-px24 leading-px32 tracking-em005 border-b-px4">
+									<span class="pb-px4">Load More</span>
+								</button>
 							</div>
-						<?php endforeach; ?>
+						<?php endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php if ( ! empty( $button['url'] ) ) : ?>
