@@ -219,6 +219,39 @@ class Page_Header {
 		ob_start();
 		?>
 		<header <?php echo Tools::flat_attr( $attrs ); ?>>
+			<div class="page-header__bg">
+				<?php if ( 'video' === $options['media_type'] ) : ?>
+					<?php if ( ! empty( $options['video']['url'] ) ) : ?>
+						<div class="page-header-img-wrap overflow-hidden">
+							<video class="object-center object-cover w-full h-full" autoplay loop muted>
+								<source src="<?php echo esc_url( $options['video']['url'] ); ?>" type="video/mp4" />
+								Your browser does not support the video tag.
+							</video>
+						</div>
+					<?php endif; ?>
+				<?php elseif ( 'image' === $options['media_type'] ) : ?>
+					<?php if ( ! empty( $options['img_id'] ) ) : ?>
+						<div class="page-header-img-wrap">
+							<?php
+							echo wp_get_attachment_image(
+								$options['img_id'],
+								'full',
+								false,
+								array(
+									'class' => implode(
+										' ',
+										array(
+											'object-center',
+											'object-cover',
+										)
+									),
+								)
+							)
+							?>
+						</div>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
 			<div class="page-header-content-wrap">
 				<div class="page-header-content">
 					<h1 class="heading-lg-tilted page-header-title">
@@ -235,38 +268,6 @@ class Page_Header {
 					?>
 				</div>
 			</div>
-
-			<?php if ( 'video' === $options['media_type'] ) : ?>
-				<?php if ( ! empty( $options['video']['url'] ) ) : ?>
-					<div class="page-header-img-wrap overflow-hidden">
-						<video class="object-center object-cover w-full h-full" autoplay loop muted>
-							<source src="<?php echo esc_url( $options['video']['url'] ); ?>" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
-					</div>
-				<?php endif; ?>
-			<?php elseif ( 'image' === $options['media_type'] ) : ?>
-				<?php if ( ! empty( $options['img_id'] ) ) : ?>
-					<div class="page-header-img-wrap">
-						<?php
-						echo wp_get_attachment_image(
-							$options['img_id'],
-							'full',
-							false,
-							array(
-								'class' => implode(
-									' ',
-									array(
-										'object-center',
-										'object-cover',
-									)
-								),
-							)
-						)
-						?>
-					</div>
-				<?php endif; ?>
-			<?php endif; ?>
 		</header>
 		<?php
 		return ob_get_clean();
