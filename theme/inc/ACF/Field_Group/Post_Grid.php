@@ -11,6 +11,7 @@ use \TrevorWP\Theme\Customizer\Social_Media_Accounts;
 class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_SOURCE            = 'source';
 	const FIELD_HEADING           = 'heading';
+	const FIELD_DESCRIPTION       = 'description';
 	const FIELD_CAMPAIGN_ID       = 'campaign_id';
 	const FIELD_QUERY_PTS         = 'post_query_pts'; // post types
 	const FIELD_QUERY_TAXS        = 'post_query_taxs'; // taxonomies
@@ -62,6 +63,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
 		$heading           = static::gen_field_key( static::FIELD_HEADING );
+		$description       = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$campaign_id       = static::gen_field_key( static::FIELD_CAMPAIGN_ID );
 		$source            = static::gen_field_key( static::FIELD_SOURCE );
 		$post_items        = static::gen_field_key( static::FIELD_POST_ITEMS );
@@ -106,6 +108,12 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'name'  => static::FIELD_HEADING,
 						'label' => 'Heading',
 						'type'  => 'text',
+					),
+					static::FIELD_DESCRIPTION           => array(
+						'key'   => $description,
+						'name'  => static::FIELD_DESCRIPTION,
+						'label' => 'Description',
+						'type'  => 'textarea',
 					),
 					static::FIELD_CAMPAIGN_ID       => array(
 						'key'               => $campaign_id,
@@ -360,15 +368,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::_gen_tab_field( 'Attributes' ),
-				array(
-					static::FIELD_WRAPPER_ATTR => DOM_Attr::clone(
-						array(
-							'key'  => $wrapper_attr,
-							'name' => static::FIELD_WRAPPER_ATTR,
-						)
-					),
-				)
 			),
 		);
 	}
@@ -390,7 +389,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$source          = $val->get( static::FIELD_SOURCE );
 		$num_cols        = $val->get( static::FIELD_NUM_COLS );
 		$placeholder_img = $val->get( static::FIELD_PLACEHOLDER_IMG );
-		$heading         = static::get_val( static::FIELD_HEADING );
+		$heading         = $val->get( static::FIELD_HEADING );
+		$description     = $val->get( static::FIELD_DESCRIPTION );
 		$posts           = static::_get_posts( $val );
 		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 		$show_empty      = (int) $val->get( static::FIELD_SHOW_EMPTY );
@@ -473,6 +473,13 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$heading_cls[] = 'xl:text-px46 xl:leading-px56 xl:tracking-em_001 xl:pt-0';
 		$heading_cls   = implode( ' ', $heading_cls );
 
+		# Build description classnames
+		$description_cls   = array( 'text-center text-teal-dark font-bold' );
+		$description_cls[] = 'mt-px80 text-px32 leading-px40 mb-px40';
+		$description_cls[] = 'md:pt-px72 md:mb-px40 md:leading-px42 md:mt-0';
+		$description_cls[] = 'xl:text-px46 xl:leading-px56 xl:tracking-em_001 xl:pt-0';
+		$description_cls   = implode( ' ', $description_cls );
+
 		# Build empty message classnames
 		$empty_msg_cls   = array( 'post-grid-empty__message text-center' );
 		$empty_msg_cls[] = 'text-px20 leading-px28 tracking-em001';
@@ -483,9 +490,10 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start(); ?>
 			<div class="<?php echo $post_grid_cls; ?>">
 				<?php if ( ! empty( $heading ) ) : ?>
-					<h2 class="<?php echo $heading_cls; ?>">
-						<?php echo $heading; ?>
-					</h2>
+					<h2 class="<?php echo $heading_cls; ?>"><?php echo $heading; ?></h2>
+				<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<p class="<?php echo $description_cls; ?>"><?php echo $description; ?></p>
 				<?php endif; ?>
 				<?php if ( ! empty( $posts ) ) : ?>
 					<?php if ( static::SOURCE_CUSTOM === $source ) : ?>

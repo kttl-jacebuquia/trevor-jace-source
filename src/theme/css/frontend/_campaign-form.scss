@@ -1,0 +1,15 @@
+.join-the-campaign-form {
+  &__field-group {
+    @screen md {
+      @apply items-start;
+    }
+  }
+
+  &__field {
+    @apply flex-wrap;
+  }
+
+  &__error {
+    @apply w-full text-left;
+  }
+}

@@ -1,324 +1,385 @@
 .post-carousel {
+  &-container {
+    @apply pb-px80;
+
+    @screen xl {
+      @apply pb-px120;
+    }
+  }
+
+  .page-sub-title {
+    @apply w-full font-semibold text-px32 leading-px40 text-center col-span-full;
+
+    @screen md {
+      @apply text-px32 leading-px42 col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply w-full text-px46 leading-px56 tracking-em_001 text-left col-span-full col-start-1;
+    }
+  }
+
+  .page-sub-title-desc {
+    @apply w-full text-px20 leading-px26 text-center col-span-full;
+
+    @screen md {
+      @apply text-px22 leading-px32 tracking-px05 col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply w-full text-px22 leading-px32 tracking-px05 text-left col-span-full col-start-1;
+    }
+  }
+
   .carousel-container {
-	width: theme('postCard.width.DEFAULT');
+    width: theme('postCard.width.DEFAULT');
   }
 
   body:not(.is-rc) & .swiper-pagination-bullet {
-	@apply bg-teal-dark opacity-30;
+    @apply bg-teal-dark opacity-30;
 
-	&.swiper-pagination-bullet-active {
-	  @apply opacity-100;
-	}
+    &.swiper-pagination-bullet-active {
+      @apply opacity-100;
+    }
   }
 
   .carousel-full-width-wrap {
-		@apply pt-3;
+    @apply pt-3;
   }
+
+  .carousel-header {
+    @apply tw-grid;
+  }
+
+  &__cta-wrap {
+    @apply text-center mt-px30;
+
+    @screen md {
+      @apply mt-px30;
+    }
+
+    @screen xl {
+      @apply mt-px50;
+    }
+  }
+
+  &__cta {
+    @apply font-semibold text-px24 leading-px34 tracking-px05;
+
+    @screen md {
+      @apply text-px18 leading-px34;
+    }
+
+    @screen xl {
+      @apply text-px20 leading-px24 tracking-em005;
+    }
+  }
+
 
   body.is-rc & {
-	.page-sub-title,
-	.page-sub-title-desc {
-	  @apply text-white;
-	}
+    .page-sub-title,
+    .page-sub-title-desc {
+      @apply text-white;
+    }
   }
 
-	.swiper-slide {
-		@apply self-stretch h-auto;
-		.tile.staff {
-			@apply h-full;
-		}
-	}
+  .swiper-slide {
+    @apply self-stretch h-auto;
+    .tile.staff {
+      @apply h-full;
+    }
+  }
 
-	.swiper-button {
-		@apply w-px100;
-		--carousel-left-padding: 0;
+  .swiper-button {
+    @apply w-px100;
+    --carousel-left-padding: 0;
 
-		$breakpoints: lg, lg2, xl, 2xl;
-			--carousel-gap: 1.75rem;
+    $breakpoints: lg, lg2, xl, 2xl;
+    --carousel-gap: 1.75rem;
 
-		@each $size in $breakpoints {
-			@screen #{$size} {
-				@if $size == lg {
-					--number-of-cards: 2;
-				} @else {
-					--number-of-cards: 3;
-				}
+    @each $size in $breakpoints {
+      @screen #{$size} {
+        @if $size == lg {
+          --number-of-cards: 2;
+        } @else {
+          --number-of-cards: 3;
+        }
 
-				--container-padding: theme('container.padding.#{$size}');
-				--carousel-left-padding: calc( ( 100vw - ( theme('screens.#{$size}') - ( 2 * var(--container-padding) ) ) ) / 2 );
-			}
-		}
+        --container-padding: theme('container.padding.#{$size}');
+        --carousel-left-padding: calc( ( 100vw - ( theme('screens.#{$size}') - ( 2 * var(--container-padding) ) ) ) / 2 );
+      }
+    }
 
-		&-prev {
-			@apply hidden;
+    &-prev {
+      @apply hidden;
 
-			.swiper-button-wrapper {
-				right: unset;
-				left: unset;
-			}
+      .swiper-button-wrapper {
+        right: unset;
+        left: unset;
+      }
 
-			$breakpoints: lg, lg2, xl, 2xl;
+      $breakpoints: lg, lg2, xl, 2xl;
 
-			@each $size in $breakpoints {
-				@screen #{$size} {
-					@apply flex;
+      @each $size in $breakpoints {
+        @screen #{$size} {
+          @apply flex;
 
-					left: calc( var(--carousel-left-padding) - 2.5rem );
-				}
-			}
+          left: calc( var(--carousel-left-padding) - 2.5rem );
+        }
+      }
 
-		}
+    }
 
-		body.is-rc &-prev {
-			@screen lg {
-				@apply justify-end;
-			}
-		}
+    body.is-rc &-prev {
+      @screen lg {
+        @apply justify-end;
+      }
+    }
 
-		&-next {
-			&.should-hide {
-				@apply hidden;
-			}
+    &-next {
+      &.should-hide {
+        @apply hidden;
+      }
 
-			right: unset;
-			@apply hidden;
+      right: unset;
+      @apply hidden;
 
-			$breakpoints: lg, lg2, xl, 2xl;
-			--carousel-gap: 1.75rem;
+      $breakpoints: lg, lg2, xl, 2xl;
+      --carousel-gap: 1.75rem;
 
-			@each $size in $breakpoints {
-				@screen #{$size} {
-					@if $size == lg {
-						@apply justify-start;
-					} @else {
-						@apply justify-end;
-					}
+      @each $size in $breakpoints {
+        @screen #{$size} {
+          @if $size == lg {
+            @apply justify-start;
+          } @else {
+            @apply justify-end;
+          }
 
-					@apply flex;
-					left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
-				}
-			}
-		}
+          @apply flex;
+          left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+        }
+      }
+    }
 
-		body.is-rc &-next {
-			$breakpoints: lg, lg2, xl, 2xl;
+    body.is-rc &-next {
+      $breakpoints: lg, lg2, xl, 2xl;
 
-			@each $size in $breakpoints {
-				@screen #{$size} {
-					--container-padding: theme('container.padding.#{$size}');
-				}
-			}
-		}
-	}
+      @each $size in $breakpoints {
+        @screen #{$size} {
+          --container-padding: theme('container.padding.#{$size}');
+        }
+      }
+    }
+  }
 
 
 
   @screen md {
-	.carousel-container {
-	  width: theme('postCard.width.md');
-	}
+    .carousel-container {
+      width: theme('postCard.width.md');
+    }
   }
 
   @screen lg {
-	@apply mb-24;
+    @apply mb-24;
 
-	.carousel-container {
-	  width: theme('postCard.width.lg');
-	}
+    .carousel-container {
+      width: theme('postCard.width.lg');
+    }
 
-	// Hide arrows if there are only 3 cards
-	&.card-count-3 {
-	  .swiper-button-next,
-	  .swiper-button-prev {
-		@apply hidden;
-	  }
-	}
+    // Hide arrows if there are only 3 cards
+    &.card-count-3 {
+      .swiper-button-next,
+      .swiper-button-prev {
+        @apply hidden;
+      }
+    }
   }
 
-	@screen lg2 {
-		.carousel-container {
-			width: theme('postCard.width.lg2');
-		}
-	}
+  @screen lg2 {
+    .carousel-container {
+      width: theme('postCard.width.lg2');
+    }
+  }
 
-	@screen xl {
-		.carousel-container {
-			width: theme('postCard.width.xl');
-		}
-	}
+  @screen xl {
+    .carousel-container {
+      width: theme('postCard.width.xl');
+    }
+  }
 
   // Only Md fixes
   &.only-md {
-	// Small
-	@media screen and (max-width: theme('carousel.w3Card.minWidth') /*500px*/
-	) {
-	  .swiper-pagination {
-		@apply hidden;
-	  }
+    // Small
+    @media screen and (max-width: theme('carousel.w3Card.minWidth') /*500px*/
+    ) {
+      .swiper-pagination {
+        @apply hidden;
+      }
 
-	  .carousel-container,
-	  .carousel-full-width-wrap {
-		width: theme('postCard.width.DEFAULT');
-	  }
+      .carousel-container,
+      .carousel-full-width-wrap {
+        width: theme('postCard.width.DEFAULT');
+      }
 
-	  .carousel-container,
-	  .carousel-full-width-wrap {
-		@apply m-0 p-0;
-		margin: 0 auto;
-	  }
+      .carousel-container,
+      .carousel-full-width-wrap {
+        @apply m-0 p-0;
+        margin: 0 auto;
+      }
 
-	  .swiper-wrapper {
-		@apply flex flex-col w-full;
-	  }
+      .swiper-wrapper {
+        @apply flex flex-col w-full;
+      }
 
-	  .swiper-slide + .swiper-slide {
-		@apply mt-5;
-	  }
+      .swiper-slide + .swiper-slide {
+        @apply mt-5;
+      }
 
-	  .card-post {
-		@apply mx-auto;
-	  }
-	}
+      .card-post {
+        @apply mx-auto;
+      }
+    }
 
-	// large
-	@media screen and (min-width: theme('carousel.w3Card.maxWidth') /*1275px*/
-	) {
-	  .carousel-full-width-wrap {
-		@apply mx-auto px-0 w-screen;
-		margin-left: calc((100vw - 100%) / -2);
+    // large
+    @media screen and (min-width: theme('carousel.w3Card.maxWidth') /*1275px*/
+    ) {
+      .carousel-full-width-wrap {
+        @apply mx-auto px-0 w-screen;
+        margin-left: calc((100vw - 100%) / -2);
 
-		.carousel-container {
-		  @apply w-full;
-		  max-width: none;
+        .carousel-container {
+          @apply w-full;
+          max-width: none;
 
-		  .swiper-wrapper {
-			margin: 0 auto;
-		  }
-		}
+          .swiper-wrapper {
+            margin: 0 auto;
+          }
+        }
 
-		.swiper-wrapper {
-		  @apply flex flex-row justify-center;
-		}
+        .swiper-wrapper {
+          @apply flex flex-row justify-center;
+        }
 
-		.swiper-pagination {
-		  @apply hidden;
-		}
+        .swiper-pagination {
+          @apply hidden;
+        }
 
-		.swiper-slide {
-		  //width: theme('postCard.width.md');
-		  margin: 0 rem-calc(10px);
-		}
-	  }
-	}
+        .swiper-slide {
+          //width: theme('postCard.width.md');
+          margin: 0 rem-calc(10px);
+        }
+      }
+    }
 
-	@screen md {
-	  .swiper-slide {
-		width: theme('postCard.width.md');
-	  }
+    @screen md {
+      .swiper-slide {
+        width: theme('postCard.width.md');
+      }
 
-	  //  .carousel-title,
-	  //  .carousel-subtitle {
-	  // @apply text-center;
-	  //  }
-	}
+      //  .carousel-title,
+      //  .carousel-subtitle {
+        // @apply text-center;
+        //  }
+      }
 
-	@screen lg {
-	  .swiper-slide {
-		width: theme('postCard.width.lg');
-	  }
-	}
+      @screen lg {
+        .swiper-slide {
+          width: theme('postCard.width.lg');
+        }
+      }
 
+    }
+
+    &--staff {
+      .carousel-container {
+        width: theme('staffCard.width.DEFAULT');
+
+        @screen xl {
+          width: theme('staffCard.width.xl');
+        }
+      }
+
+      .tile {
+        @apply p-0;
+      }
+
+      .post-thumbnail-wrap {
+        @apply rounded-t-px10;
+
+        img {
+          @apply object-center object-cover rounded-t-px10 mx-auto w-full;
+          height: rem-calc(180px);
+
+          @screen xl {
+            height: rem-calc(200px);
+          }
+        }
+      }
+
+      .swiper-button {
+        @apply hidden;
+        &-next {
+          @screen lg {
+            --carousel-card-size: theme('staffCard.width.DEFAULT');
+            --number-of-cards: 3;
+          }
+
+          @screen xl {
+            --carousel-card-size: theme('staffCard.width.xl');
+            --number-of-cards: 3;
+          }
+        }
+      }
+    }
+
+    &--event {
+      .carousel-header {
+        @apply mb-px30;
+      }
+
+      .page-sub-title {
+        @apply md:w-full;
+      }
+
+      .carousel-full-width-wrap {
+        @apply py-0;
+      }
+
+      .carousel-container {
+        @apply xl:w-px368;
+      }
+
+      .swiper-pagination {
+        @apply mt-px30;
+      }
+
+      .swiper-slide {
+        @apply xl:w-px368;
+      }
+
+      .card-post {
+        @apply xl:w-px368 xl:mx-0;
+      }
+    }
+
+    &--attachment {
+      .carousel-container,
+      .swiper-slide {
+        @apply w-px264 h-px328;
+        @apply xl:h-px440;
+      }
+
+      .carousel-container {
+        @apply xl:w-px370;
+      }
+
+      .swiper-slide {
+        @apply mr-px12 xl:w-auto;
+      }
+
+      .card-post {
+        height: 100%;
+      }
+    }
   }
-
-	&--staff {
-		.carousel-container {
-			width: theme('staffCard.width.DEFAULT');
-
-			@screen xl {
-				width: theme('staffCard.width.xl');
-			}
-		}
-
-		.tile {
-			@apply p-0;
-		}
-
-		.post-thumbnail-wrap {
-			@apply rounded-t-px10;
-
-			img {
-				@apply object-center object-cover rounded-t-px10 mx-auto w-full;
-				height: rem-calc(180px);
-
-				@screen xl {
-					height: rem-calc(200px);
-				}
-			}
-		}
-
-		.swiper-button {
-			@apply hidden;
-			&-next {
-				@screen lg {
-					--carousel-card-size: theme('staffCard.width.DEFAULT');
-					--number-of-cards: 3;
-				}
-
-				@screen xl {
-					--carousel-card-size: theme('staffCard.width.xl');
-					--number-of-cards: 3;
-				}
-			}
-		}
-	}
-
-	&--event {
-		.carousel-header {
-			@apply mb-px30;
-		}
-
-		.page-sub-title {
-			@apply md:w-full;
-		}
-
-		.carousel-full-width-wrap {
-			@apply py-0;
-		}
-
-		.carousel-container {
-			@apply xl:w-px368;
-		}
-
-		.swiper-pagination {
-			@apply mt-px30;
-		}
-
-		.swiper-slide {
-			@apply xl:w-px368;
-		}
-
-		.card-post {
-			@apply xl:w-px368 xl:mx-0;
-		}
-	}
-
-	&--attachment {
-		.carousel-container,
-		.swiper-slide {
-			@apply w-px264 h-px328;
-			@apply xl:h-px440;
-		}
-
-		.carousel-container {
-			@apply xl:w-px370;
-		}
-
-		.swiper-slide {
-			@apply mr-px12 xl:w-auto;
-		}
-
-		.card-post {
-			height: 100%;
-		}
-	}
-}

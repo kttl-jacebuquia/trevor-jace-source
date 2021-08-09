@@ -91,7 +91,7 @@ class PhoneTwoAction {
 			wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
 		}
 
-		wp_die( json_encode( array( 'status' => 'SUCCESS' ) ), 400 );
+		wp_die( json_encode( array( 'status' => 'SUCCESS' ) ), 200 );
 	}
 
 	/**

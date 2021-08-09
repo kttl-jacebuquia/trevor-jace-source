@@ -8,6 +8,7 @@ class ACF {
 		Field_Group\Button::class,
 		Field_Group\Button_Group::class,
 		Field_Group\Carousel_Data::class,
+		Field_Group\Block_Styles::class,
 		// Options
 		Options_Page\Header::class,
 		Options_Page\Footer::class,

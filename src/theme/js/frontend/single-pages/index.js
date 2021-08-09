@@ -2,7 +2,7 @@ import $ from 'jquery';
 import {infoBoxesCarousel} from "theme/js/frontend/features";
 
 export const ALL = {
-	'is-gi_ect': require('./ect').default,
+	// 'is-gi_ect': require('./ect').default,
 	'is-donate': require('./donate').default,
 }
 

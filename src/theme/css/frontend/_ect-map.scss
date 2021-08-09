@@ -1,0 +1,132 @@
+.ect-map {
+  @apply bg-blue_green text-white;
+
+  &__container {
+    @apply container mx-auto;
+    @apply tw-grid items-center;
+  }
+
+  &__content {
+    @apply col-span-full pt-px70 pb-px60 text-center;
+
+    @screen md {
+      @apply col-span-4 col-start-3 pt-px40 pb-px60;
+    }
+
+    @screen xl {
+      @apply col-span-5 pr-px140 py-0;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px30 leading-px40 tracking-em005;
+
+    @screen md {
+      @apply px-px60;
+      @apply font-semibold text-px24 leading-px28 tracking-px_05;
+    }
+
+    @screen xl {
+      @apply px-px28;
+      @apply text-px32 leading-px40;
+    }
+  }
+
+  &__description {
+    @apply text-px20 leading-px26 mt-px14;
+
+    @screen md {
+      @apply px-px60;
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen xl {
+      @apply px-px28;
+      @apply text-px20 leading-px26;
+    }
+  }
+
+  &__map-container {
+    @apply col-span-full -mx-px28 relative;
+
+    @screen md {
+      @apply -mx-px50;
+    }
+
+    @screen xl {
+      @apply col-start-6 col-span-7 ml-0 -mr-px140;
+    }
+  }
+
+  &__search {
+    @apply mt-px30 flex items-center w-full relative text-teal-dark;
+
+    @screen xl {
+      @apply mt-px50;
+    }
+  }
+
+  &__search-input {
+    @apply h-px60 flex items-center appearance-none border-0 rounded-px10 w-full pl-px58;
+  }
+
+  &__search-submit {
+    @apply absolute top-0 left-0 h-full text-px20 flex items-center pl-px28 pr-px10;
+  }
+
+  // Uncomment for now, in case client wants to revert this back
+  // &__filters {
+  //   @apply flex items-center bg-teal-tint pl-px28 overflow-auto h-px54;
+  //   @apply w-full justify-center;
+
+  //   @screen xl {
+  //     @apply h-px80;
+  //   }
+  // }
+
+  // &__filter {
+  //   @apply btn;
+  //   @apply bg-transparent text-teal-dark whitespace-nowrap rounded-px100;
+  //   @apply min-h-px35 px-px14 py-0 flex-shrink-0;
+  //   @apply text-px14 leading-px18 tracking-em001;
+
+  //   @screen xl {
+  //     @apply h-px40 px-px20 text-px16 leading-px20;
+  //   }
+
+  //   &--active {
+  //     @apply bg-teal-dark text-white;
+  //   }
+  // }
+
+  &__download {
+    @apply absolute btn bottom-px42 transform -translate-x-1/2 rounded-px100;
+    left: 50%;
+
+    @screen md {
+      @apply bottom-px30 right-px50 translate-x-0;
+      left: auto;
+    }
+
+    i {
+      @apply ml-px10;
+    }
+  }
+
+  .highcharts-container {
+    @apply bg-gray h-px600;
+    width: 100% !important;
+
+    @screen md {
+      @apply h-px430;
+    }
+
+    @screen xl {
+      @apply h-px670;
+    }
+  }
+
+  .highcharts-exporting-group {
+    display: none;
+  }
+}

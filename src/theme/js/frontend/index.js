@@ -32,6 +32,7 @@ const $fundraiserQuizButton = $('.js-fundraiser-quiz');
 const $donationModalButton = $('.js-donation-modal');
 const $quickExitModal = $('.js-quick-exit-modal');
 const $statistics = $('.statistics');
+const $ectMap = $('.ect-map');
 const $staffCarousel = $('.staff.is-carousel');
 const $staffGrid = $('.staff.is-grid');
 
@@ -454,7 +455,13 @@ if (isPhoneField) {
 	}
 })();
 
+if ( $ectMap.length ) {
+	$ectMap.each((index, element) => features.ectMap(element));
+}
+
 features.QuickExit.init();
 features.BreathingExercise.init();
 features.CurrentOpenings.init();
 features.TopicCards.initializeInstances();
+features.CampaignForm.initializeInstances();
+

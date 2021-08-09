@@ -5,6 +5,7 @@ use TrevorWP\Theme\ACF\Field\Color;
 class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE               = 'title';
 	const FIELD_DESCRIPTION         = 'description';
+	const FIELD_BLOCK_STYLES        = 'block_styles';
 	const FIELD_BG_COLOR            = 'bg_color';
 	const FIELD_BOX_COLOR           = 'box_color';
 	const FIELD_TEXT_COLOR          = 'text_color';
@@ -21,9 +22,8 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	protected static function prepare_register_args(): array {
 		$title               = static::gen_field_key( static::FIELD_TITLE );
 		$description         = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$bg_color            = static::gen_field_key( static::FIELD_BG_COLOR );
+		$block_styles        = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 		$box_color           = static::gen_field_key( static::FIELD_BOX_COLOR );
-		$text_color          = static::gen_field_key( static::FIELD_TEXT_COLOR );
 		$extend_padding      = static::gen_field_key( static::FIELD_EXTEND_PADDING );
 		$buttons             = static::gen_field_key( static::FIELD_BUTTONS );
 		$button              = static::gen_field_key( static::FIELD_BUTTON );
@@ -34,6 +34,26 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Messaging Block',
 			'fields' => array(
+				static::FIELD_BLOCK_STYLES   => Block_Styles::clone(
+					array(
+						'key'     => $block_styles,
+						'name'    => static::FIELD_BLOCK_STYLES,
+						'label'   => 'Block Styles',
+						'display' => 'seamless',
+						'layout'  => 'block',
+					)
+				),
+				static::FIELD_BOX_COLOR      => Color::gen_args(
+					$box_color,
+					static::FIELD_BOX_COLOR,
+					array(
+						'label'   => 'Inner Box Color',
+						'default' => 'gray-light',
+						'wrapper' => array(
+							'width' => '50%',
+						),
+					)
+				),
 				static::FIELD_EXTEND_PADDING => array(
 					'key'        => $extend_padding,
 					'name'       => static::FIELD_EXTEND_PADDING,
@@ -63,39 +83,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 								'no'  => 'No',
 							),
 							'default_value' => 'no',
-						),
-					),
-				),
-				static::FIELD_BG_COLOR       => Color::gen_args(
-					$bg_color,
-					static::FIELD_BG_COLOR,
-					array(
-						'label'   => 'Background Color',
-						'default' => 'none',
-						'wrapper' => array(
-							'width' => '50',
-						),
-					)
-				),
-				static::FIELD_BOX_COLOR      => Color::gen_args(
-					$box_color,
-					static::FIELD_BOX_COLOR,
-					array(
-						'label'   => 'Inner Box Color',
-						'default' => 'gray-light',
-						'wrapper' => array(
-							'width' => '50%',
-						),
-					)
-				),
-				static::FIELD_TEXT_COLOR     => Color::gen_args(
-					$text_color,
-					static::FIELD_TEXT_COLOR,
-					array(
-						'label'   => 'Text Color',
-						'default' => 'teal-dark',
-						'wrapper' => array(
-							'width' => '50',
 						),
 					),
 				),
@@ -187,15 +174,15 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title                 = static::get_val( static::FIELD_TITLE );
-		$description           = static::get_val( static::FIELD_DESCRIPTION );
-		$bg_color              = static::get_val( static::FIELD_BG_COLOR );
-		$box_color             = static::get_val( static::FIELD_BOX_COLOR );
-		$text_color            = static::get_val( static::FIELD_TEXT_COLOR );
-		$extend_padding        = static::get_val( static::FIELD_EXTEND_PADDING ) ?? array();
-		$extend_padding_top    = $extend_padding['top'] ?? 'no';
-		$extend_padding_bottom = $extend_padding['bottom'] ?? 'no';
-		$buttons               = static::get_val( static::FIELD_BUTTONS );
+		$title                         = static::get_val( static::FIELD_TITLE );
+		$description                   = static::get_val( static::FIELD_DESCRIPTION );
+		$block_styles                  = static::get_val( static::FIELD_BLOCK_STYLES );
+		$box_color                     = static::get_val( static::FIELD_BOX_COLOR );
+		$extend_padding                = static::get_val( static::FIELD_EXTEND_PADDING );
+		$extend_padding_top            = $extend_padding['top'] ?? 'no';
+		$extend_padding_bottom         = $extend_padding['bottom'] ?? 'no';
+		$buttons                       = static::get_val( static::FIELD_BUTTONS );
+		list( $bg_color, $text_color ) = array_values( $block_styles );
 
 		$wrapper_styles = "bg-{$bg_color}";
 		if ( 'yes' === $extend_padding_top ) {

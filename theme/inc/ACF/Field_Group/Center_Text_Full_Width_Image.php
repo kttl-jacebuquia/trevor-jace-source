@@ -3,7 +3,6 @@
 class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE           = 'title';
 	const FIELD_DESCRIPTION     = 'description';
-	const FIELD_IMAGE_VARIATION = 'image_variation';
 	const FIELD_IMAGE           = 'image';
 
 	/**
@@ -12,7 +11,6 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 	protected static function prepare_register_args(): array {
 		$title           = static::gen_field_key( static::FIELD_TITLE );
 		$description     = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$image_variation = static::gen_field_key( static::FIELD_IMAGE_VARIATION );
 		$image           = static::gen_field_key( static::FIELD_IMAGE );
 
 		return array(
@@ -35,18 +33,6 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 					'wrapper' => array(
 						'width' => '50%',
 					),
-				),
-				static::FIELD_IMAGE_VARIATION => array(
-					'key'           => $image_variation,
-					'name'          => static::FIELD_IMAGE_VARIATION,
-					'label'         => 'Image Variation',
-					'type'          => 'button_group',
-					'required'      => 1,
-					'choices'       => array(
-						'full_width' => 'Full Width',
-						'center'     => 'Center',
-					),
-					'default_value' => 'link',
 				),
 				static::FIELD_IMAGE           => array(
 					'key'           => $image,
@@ -80,13 +66,11 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title           = static::get_val( static::FIELD_TITLE );
-		$description     = static::get_val( static::FIELD_DESCRIPTION );
-		$image           = static::get_val( static::FIELD_IMAGE );
-		$image_variation = static::get_val( static::FIELD_IMAGE_VARIATION );
+		$title       = static::get_val( static::FIELD_TITLE );
+		$description = static::get_val( static::FIELD_DESCRIPTION );
+		$image       = static::get_val( static::FIELD_IMAGE );
 
 		ob_start();
-		// Next Step - FE (Image Variation)
 		?>
 
 		<div class="center-text-with-full-image">

@@ -4,6 +4,8 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 
+	static $rendered = false;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -52,9 +54,8 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 		$description = static::get_val( static::FIELD_DESCRIPTION );
 
 		ob_start();
-		// Next Step - FE & Submission
 		?>
-		<div class="sticky-cta-anchor pt-14 md:pt-px110 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
+		<div class="join-the-campaign-form sticky-cta-anchor pt-14 md:pt-px110 pb-12 text-white bg-blue_green md:pb-20 lg:pt-28 lg:pb-28">
 			<div class="container mx-auto site-content-inner text-center">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="font-semibold md:font-bold text-px32 leading-px42 mb-3.5 lg:text-px46 lg:leading-px56">
@@ -68,56 +69,65 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 					</p>
 				<?php endif; ?>
 
-				<form class="mx-auto w-full lg:max-w-px818">
-					<div class="md:flex md:grid md:grid-cols-2 md:gap-x-7 md:gap-y-5 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
-						<div class="flex full-w relative mb-7 md:mb-0">
+				<form class="join-the-campaign-form__form mx-auto w-full lg:max-w-px818">
+					<div class="join-the-campaign-form__field-group md:flex md:grid md:grid-cols-2 md:gap-x-7 md:gap-y-5 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
+						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
 							<label for="fullname" class="sr-only">Full Name*</label>
-							<input id="fullname"
+							<input
+								name="fullname"
 								required="required"
 								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 								placeholder="Full Name*"/>
+							<div class="join-the-campaign-form__error"></div>
 						</div>
-						<div class="flex full-w relative mb-7 md:mb-0">
+						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
 							<label for="email" class="sr-only">Email*</label>
-							<input id="email"
+							<input
+								name="email"
 								type="email"
 								required="required"
 								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 								placeholder="Email*"/>
+							<div class="join-the-campaign-form__error"></div>
 						</div>
-						<div class="flex full-w relative mb-7 md:mb-0">
+						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
 							<label for="mobilephone" class="sr-only">Mobile Phone</label>
-							<input id="mobilephone"
+							<input
+								name="phone"
 								maxlength="16"
 								class="phone-number-format bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 								placeholder="Mobile Phone"/>
+							<div class="join-the-campaign-form__error"></div>
 						</div>
-						<div class="flex full-w relative mb-12 md:mb-0">
+						<div class="join-the-campaign-form__field flex full-w relative mb-12 md:mb-0">
 							<label for="zipcode" class="sr-only">Zip Code*</label>
-							<input id="zipcode"
+							<input
+								name="zipcode"
 								maxlength="5"
 								required="required"
 								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
 								placeholder="Zip Code*"/>
+							<div class="join-the-campaign-form__error"></div>
 						</div>
 					</div>
 					<div class="flex flex-row full-w relative mb-7 md:mb-6 lg:mb-7">
-						<input id="checkbox-1" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
+						<input name="email_notif" id="checkbox-1" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
 						<label for="checkbox-1"
 							class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">
 							Send me emails about this campaign.
 						</label>
 					</div>
 					<div class="flex flex-row full-w relative mb-px50">
-						<input id="checkbox-2" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
+						<input name="sms_notif" type="checkbox" checked class="mr-5 w-7 h-7 border-0 rounded"/>
 						<label for="checkbox-2"
 							class="text-px16 leading-px24 text-white text-left cursor-pointer mt-0.5 lg:text-px18 lg:leading-px26">
 							Send me text messages about this campaign.
 						</label>
 					</div>
 
-					<button type="submit"
-							class="block w-full font-bold text-teal-dark bg-white py-5 px-8 rounded-px10 md:py-4 md:px-20 lg:text-px18 lg:leading-px26 lg:py-5 md:w-auto">
+					<button
+						type="submit"
+						class="block w-full font-bold text-teal-dark bg-white py-5 px-8 rounded-px10 md:py-4 md:px-20 lg:text-px18 lg:leading-px26 lg:py-5 md:w-auto">
 						Submit
 					</button>
 				</form>

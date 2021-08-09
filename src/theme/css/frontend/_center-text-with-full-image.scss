@@ -43,16 +43,24 @@
 	}
 
 	&__figure {
-		@apply col-span-full mt-px52 text-center;
+		@apply col-span-full mt-px52;
 
 		@screen md {
 			@apply mt-px40;
 		}
 
 		@screen xl {
-			@apply mt-px70 col-span-10 col-start-2 -mx-px42;
-			width: calc(100% + 85px);
+			@apply mt-px70 col-span-10 col-start-2;
 		}
+
+    img {
+      @apply -mx-px28 max-w-none;
+      width: calc(100% + 56px);
+
+      @screen md {
+        @apply w-full m-0;
+      }
+    }
 	}
 
 	&__caption {

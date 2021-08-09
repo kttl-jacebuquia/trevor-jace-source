@@ -52,21 +52,31 @@ class ECT_Map extends A_Field_Group implements I_Block, I_Renderable {
 		$description = static::get_val( static::FIELD_DESCRIPTION );
 
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="h-px600 bg-gray-light relative flex justify-center">
-			<div>
-				<?php if ( ! empty( $title ) ) : ?>
-					<h2><?php echo esc_html( $title ); ?></h2>
-				<?php endif; ?>
+		<div class="ect-map">
+			<div class="ect-map__container">
+				<div class="ect-map__content">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="ect-map__heading"><?php echo esc_html( $title ); ?></h2>
+					<?php endif; ?>
 
-				<?php if ( ! empty( $description ) ) : ?>
-					<h2><?php echo esc_html( $description ); ?></h2>
-				<?php endif; ?>
-			</div>
-			<div class="w-11/12" id="container">
-				<div class="w-full h-full flex justify-center items-center">
-					<div class="text-blue_green">Loading data...</div>
+					<?php if ( ! empty( $description ) ) : ?>
+						<div class="ect-map__description"><?php echo esc_html( $description ); ?></div>
+					<?php endif; ?>
+					<form class="ect-map__search">
+						<input type="search" class="ect-map__search-input" name="ect_map_search" />
+						<button class="ect-map__search-submit trevor-ti-search" aria-label="click to filter map"></button>
+					</form>
+				</div>
+				<div class="ect-map__map-container">
+					<div class="ect-map__map" id="container">
+						<div class="w-full h-full flex justify-center items-center">
+							<div class="text-blue_green">Loading data...</div>
+						</div>
+					</div>
+					<div class="button ect-map__download" type="button" aria-label="click to download this map">
+						Download Map <i class="trevor-ti-download"></i>
+					</div>
 				</div>
 			</div>
 		</div>

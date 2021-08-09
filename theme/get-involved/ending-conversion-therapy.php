@@ -32,8 +32,8 @@ use \TrevorWP\Theme\Helper\Page_Header;
 		</div>
 	</div>
 
-	<div class="h-px600 bg-gray-light relative flex justify-center">
-		<div class="w-11/12" id="container">
+	<div class="ect-map h-px600 bg-gray-light relative flex justify-center">
+		<div class="w-11/12 ect-map__map" id="container">
 			<div class="w-full h-full flex justify-center items-center">
 				<div class="text-blue_green">Loading data...</div>
 			</div>

@@ -4,23 +4,30 @@ import proj4 from 'proj4';
 import Highcharts from 'highcharts/highmaps';
 import mapData from '@highcharts/map-collection/countries/us/us-all.geo.json';
 // Load required modules
-require('highcharts/modules/data').default(Highcharts);
-require('highcharts/modules/map').default(Highcharts);
-require('highcharts/modules/exporting').default(Highcharts);
-require('highcharts/modules/offline-exporting').default(Highcharts);
-require('highcharts/modules/pattern-fill').default(Highcharts);
+require('highcharts/modules/data')(Highcharts);
+require('highcharts/modules/map')(Highcharts);
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/offline-exporting')(Highcharts);
+require('highcharts/modules/pattern-fill')(Highcharts);
 window.proj4 = window.proj4 || proj4;
 
 /*
 Fixme: Do not hardcode keys
 Fixme: Get elements via arguments, do not use hardcoded id selectors
  */
-export default function () {
+export default function (moduleElement) {
+	const ectMapContainer = moduleElement.querySelector('.ect-map__map');
+	const downloadButton = moduleElement.querySelector('.ect-map__download');
+	const mapForm = moduleElement.querySelector('.ect-map__search');
+	const [...filters] = moduleElement.querySelectorAll('.ect-map__filter');
+	const PDF_FILENAME = 'Ending Conversion Therapy Map';
+
 	const regulationPattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARhJREFUeNqs1MkKwjAQBuD2t2rBi6KIeih48f3fxbMIggvuKMW11gFFSrSTmdg55JDlYxLa3x+OJl5OlYBB1KXRE1R8voxny+wMdyx5PBabvcSlnfP1zpi0dLQ7xtPV1upSv+frTUdb9TxXRDM640rpnzrvKmhDt7pUgacp0mnsNOtW902HlXK31Zgs1tSLRD/EJ8lOkNvvtWthlUbh3yFxqfx7knxEuiPdVHiSL+rYT9M0O1WI/noJ/JwVvgzjkgBm7R8397t2041TYPZFnZbcJdHoBqqcVCUwtHkmzxkU5X7rKNA19KBYN5tiUOWkSg9UOamqQJWTqgSGKidVCQy3/1iSBHDLB4kON1eiw9m1ruIfl9/zFGAA/6QAGrgarkQAAAAASUVORK5CYII=';
 	const introducedPattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNq01ssOwiAQBdBCWttqXFgf0YX//1kuXPhKNDGpj1qCEE21BCiFmbtkcXIDyQyEcx4Zci1v+/MlckuaJOvFnFLSnFA4d/bvGmkvV6U09P1Zhbsa+lXX2+Mp3FVp4W52BxC3RcO6IjHgu2laY7iSRnIljeSKxhTJFY0pkmubIYFuN+3tdtAhro0OdI10uKunQVwNDeWqNKDbomHdHw3ufmkMV66CPB2I/4PjkHpUPTYyYYyB9/3cBLH8nrzd8TBfFpMYw11NC6eh6ud2073cUZY1rshbgAEADd+9Bu55XrUAAAAASUVORK5CYII=';
-	let updatedDate, data1 = [],
+	let stateFilter, updatedDate, data1 = [],
 		data2 = [], data3 = [], chart,
-		align, verticalAlign, floating, layout, tooltipW;
+		align, verticalAlign, floating, layout, tooltipW,
+		statesList, municipalitiesList1, municipalitiesList2;
 
 	if ($(window).width() > 560) {
 		align = 'left';
@@ -117,7 +124,7 @@ export default function () {
 	});
 
 	function createChart() {
-		chart = $('#container').highcharts('Map', {
+		$(ectMapContainer).highcharts('Map', {
 			title: {
 				text: ''
 			},
@@ -129,11 +136,12 @@ export default function () {
 				padding: 0,
 				animation: false,
 				events: {
-					render: renderLabel
+					render: renderLabel,
+					load: onChartLoad,
 				},
 				style: {
 					fontFamily: 'Manrope',
-				}
+				},
 				// styledMode: true,
 			},
 			plotOptions: {
@@ -150,7 +158,9 @@ export default function () {
 				}
 			},
 			mapNavigation: {
-				enabled: true
+				enableButtons: true,
+				enableTouchZoom: true,
+				enableMouseWheelZoom: false,
 			},
 			legend: {
 				margin: 0,
@@ -337,6 +347,77 @@ export default function () {
 			y: 0, // offset
 		}), null, 'spacingBox');
 	}
+
+	function onChartLoad(event) {
+		chart = event.target;
+		statesList = [...data1];
+		municipalitiesList1 = [...data2];
+		municipalitiesList2 = [...data3];
+	}
+
+	function onDownloadClick(e) {
+		e.preventDefault();
+		if ( chart ) {
+			chart.exportChart({
+				type: 'application/pdf',
+				filename: PDF_FILENAME,
+			})
+		}
+	}
+
+	// Just keep this for now in case client reverts back the status filter pills
+	function onFilterClick(e) {
+		e.preventDefault();
+
+		// Active filter
+		e.currentTarget.classList.add('ect-map__filter--active')
+
+		// Deactivate other filters
+		filters
+		.filter(button => button !== e.currentTarget)
+		.forEach(button => button.classList.remove('ect-map__filter--active'))
+
+		filterMap();
+	}
+
+	function filterMap() {
+		const statePattern = new RegExp(stateFilter, 'i');
+		const filteredStateBySearch = stateFilter
+			? statesList.filter(({ stateName, ...stateData }) => statePattern.test(stateName))
+			: statesList;
+		const matchedStateAbbrevs = filteredStateBySearch.map(({ code }) => code.split('-')[1].toUpperCase());
+
+		chart.series.forEach((series, index) => {
+			let seriesData;
+
+			switch ( index ) {
+				// Filter Municipalities
+				case 1:
+					seriesData = municipalitiesList1.filter(({ ST }) => matchedStateAbbrevs.includes(ST));
+					break;
+				case 2:
+					seriesData = municipalitiesList2.filter(({ ST }) => matchedStateAbbrevs.includes(ST));
+					break;
+				// Filter states
+				case 3:
+					seriesData = statesList.filter(({ stateName }) => statePattern.test(stateName));
+					break;
+			}
+
+			series.setData(seriesData);
+		});
+	}
+
+	function onFormSubmit(e) {
+		e.preventDefault();
+		stateFilter = e.currentTarget.ect_map_search.value;
+		filterMap();
+	}
+
+	downloadButton.addEventListener('click', onDownloadClick);
+	filters.forEach(filterButton => filterButton.addEventListener('click', onFilterClick));
+	mapForm.addEventListener('submit', onFormSubmit);
+	mapForm.addEventListener('change', onFormSubmit);
 }
 
 function formatDate(timestamp) {
