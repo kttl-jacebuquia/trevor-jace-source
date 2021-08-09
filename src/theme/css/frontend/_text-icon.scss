@@ -1,120 +1,186 @@
 .text-icon {
-	@apply pt-px70 pb-px132;
-	@apply bg-blue_green text-white;
+  @apply pt-px70 pb-px132;
+  @apply bg-blue_green text-white;
 
-	@screen md {
-		@apply py-20;
-	}
+  @screen md {
+    @apply py-20;
+  }
 
-	@screen xl {
-		@apply pt-px90 pb-px150;
-	}
+  @screen xl {
+    @apply pt-px90 pb-px150;
+  }
 
-	&__container {
-		@apply tw-grid container mx-auto;
-	}
+  &__container {
+    @apply tw-grid container mx-auto;
+  }
 
-	&__heading {
-		@apply font-semibold text-px32 leading-px42;
+  &__heading {
+    @apply font-semibold text-px32 leading-px42;
 
-		@screen md {
-			@apply tracking-em_001;
-		}
+    @screen md {
+      @apply tracking-em_001;
+    }
 
-		@screen xl {
-			@apply text-px46 leading-px56;
-		}
-	}
+    @screen xl {
+      @apply text-px46 leading-px56;
+    }
+  }
 
-	&__description {
-		@apply font-normal text-px18 leading-px26;
+  &__description {
+    @apply font-normal text-px18 leading-px26;
 
-		@screen md {
-			@apply tracking-em_005;
-		}
+    @screen md {
+      @apply tracking-em_005;
+    }
 
-		@screen xl {
-			@apply text-px26 leading-px36;
-		}
-	}
+    @screen xl {
+      @apply text-px26 leading-px36;
+    }
+  }
 
-	&__heading,
-	&__description {
-		@apply mx-auto col-span-full text-center;
+  &__heading,
+  &__description {
+    @apply mx-auto col-span-full text-center;
 
-		@screen md {
-			@apply col-start-2 col-span-6;
-		}
+    @screen md {
+      @apply col-start-2 col-span-6;
+    }
 
-		@screen xl {
-			@apply col-start-3 col-span-8;
-		}
-	}
+    @screen xl {
+      @apply col-start-3 col-span-8;
+    }
+  }
 
-	&__heading + &__description {
-		@apply mt-px12;
+  &__heading + &__description {
+    @apply mt-px12;
 
-		@screen md {
-			@apply mt-px14;
-		}
-	}
+    @screen md {
+      @apply mt-px14;
+    }
+  }
 
-	&__content {
-		@apply col-span-full;
+  &__content {
+    @apply col-span-full;
 
-		@screen md {
-			@apply col-start-2 col-span-6;
-		}
+    @screen md {
+      @apply col-start-2 col-span-6;
+    }
 
-		@screen xl {
-			@apply col-start-2 col-span-10;
-		}
-	}
+    @screen xl {
+      @apply col-start-2 col-span-10;
+    }
+  }
 
-	&__entries {
-		@apply grid grid-cols-6 gap-y-px55 gap-x-px12 mt-px70;
+  &__entries {
+    @apply grid grid-cols-6 gap-y-px55 gap-x-sm mt-px70;
 
-		@screen md {
-			@apply gap-y-px100 gap-x-px28 mt-px77;
-		}
+    @screen md {
+      @apply gap-y-px100 gap-x-md mt-px77;
+    }
 
-		@screen xl {
-			@apply grid-cols-12 gap-x-px40;
-			@apply mt-px85;
-		}
-	}
+    @screen xl {
+      @apply grid-cols-12 gap-x-xl;
+      @apply mt-px85;
+    }
+  }
 
-	&__entry {
-		@apply col-span-full;
+  &__entry {
+    @apply col-span-3;
 
     @screen md {
       @apply col-span-3;
     }
 
-		&-image {
-			@apply flex justify-center items-center;
-			@apply h-px110;
+    &-image {
+      @apply flex justify-center items-center;
+      @apply h-px110;
 
-			@screen md {
-				@apply h-px115;
-			}
+      @screen md {
+        @apply h-px115;
+      }
 
-			img {
-				@apply max-w-full max-h-full;
-			}
-		}
+      img {
+        @apply max-w-full max-h-full;
+      }
+    }
 
-		&-title {
-			@apply font-semibold text-px18 leading-px24 tracking-wider;
-			@apply text-center mt-7;
+    &-title {
+      @apply font-semibold text-px18 leading-px24 tracking-wider;
+      @apply text-center mt-7;
 
-			@screen xl {
-				@apply mt-8 text-px20 leading-px30;
-			}
+      @screen xl {
+        @apply mt-8 text-px20 leading-px30;
+      }
 
-			@screen xl {
-				@apply text-px20 leading-px26 mt-10;
-			}
-		}
-	}
+      @screen xl {
+        @apply text-px20 leading-px26 mt-10;
+      }
+    }
+  }
+
+  .swiper-pagination {
+    @apply mt-px80;
+
+    @screen md {
+      @apply mt-px50;
+    }
+
+    @screen xl {
+      @apply hidden;
+    }
+  }
+
+  // Tablet/Mobile layout
+  &--carousel {
+    .text-icon__content {
+      @apply -mx-px28;
+
+      @screen md {
+        @apply col-span-full col-start-1 -mx-px50;
+      }
+
+      @screen xl {
+        @apply mx-0;
+      }
+    }
+
+    .text-icon__entries {
+      @screen md-max {
+        @apply flex gap-x-0;
+      }
+    }
+
+    .text-icon__entry {
+      @apply w-full px-px28;
+
+      @screen md {
+        @apply px-px173;
+      }
+
+      @screen xl {
+        @apply p-0;
+      }
+    }
+  }
+
+  // Desktop columns layout
+  @screen xl {
+    &--3-columns {
+      .text-icon__entry {
+        @apply col-span-4;
+      }
+    }
+    &--4-columns {
+      .text-icon__entries {
+        @apply flex flex-wrap justify-start gap-x-0;
+      }
+      .text-icon__entry {
+        width: calc((100% - #{28px * 3}) / 4);
+
+        &:not(:first-child) {
+          @apply ml-px28;
+        }
+      }
+    }
+  }
 }
