@@ -500,7 +500,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						<?php echo Helper\Tile_Grid::custom( $posts ); ?>
 					<?php else : ?>
 						<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
-							<?php foreach( $posts as $key => $post ) : ?>
+							<?php foreach ( $posts as $key => $post ) : ?>
 								<?php
 									$tile_options['hidden'] = $display_limit && ++ $count > $display_limit;
 									echo static::render_post_card( $post, $key, $tile_options );

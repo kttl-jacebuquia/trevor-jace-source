@@ -51,7 +51,6 @@ class ACF {
 		Field_Group\Center_Text_Full_Width_Image::class,
 		Field_Group\Text_Icon::class,
 		Field_Group\Image_Carousel::class,
-		Field_Group\Single_Quote::class,
 		Field_Group\Current_Partners_Table::class,
 		Field_Group\Breathing_Exercise::class,
 		Field_Group\Crisis_Services_Text_Block::class,
