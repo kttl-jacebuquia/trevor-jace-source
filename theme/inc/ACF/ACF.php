@@ -76,6 +76,7 @@ class ACF {
 		Field_Group\Article_Card_Carousel::class,
 		Field_Group\Current_Openings::class,
 		Field_Group\Article_River::class,
+		Field_Group\Video_Player::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,
