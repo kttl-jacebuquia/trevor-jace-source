@@ -1,10 +1,13 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use \TrevorWP\Theme\Customizer\Advocacy;
+use \TrevorWP\Theme\Helper;
+
 class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE                 = 'title';
 	const FIELD_GALLERY_ENTRIES       = 'gallery_entries';
-	const FIELD_GALLERY_ENTRY_IMAGE   = 'gallery_entry_image';
-	const FIELD_GALLERY_ENTRY_CAPTION = 'gallery_entry_caption';
+	const FIELD_GALLERY_ENTRY_IMAGE   = 'img';
+	const FIELD_GALLERY_ENTRY_CAPTION = 'caption';
 
 	/**
 	 * @inheritDoc
@@ -79,26 +82,29 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step - FE
 		?>
-		<div class="container mx-auto">
-			<h3><?php echo esc_html( $title ); ?></h3>
-			<?php if ( ! empty( $gallery_entries ) ) : ?>
-				<div>
-					<?php foreach ( $gallery_entries as $entry ) : ?>
-						<div>
-							<?php if ( ! empty( $entry[ static::FIELD_GALLERY_ENTRY_IMAGE ]['url'] ) ) : ?>
-								<div>
-									<img src="<?php echo esc_url( $entry[ static::FIELD_GALLERY_ENTRY_IMAGE ]['url'] ); ?>" alt="<?php echo ( ! empty( $entry[ static::FIELD_GALLERY_ENTRY_IMAGE ]['alt'] ) ) ? esc_attr( $entry[ static::FIELD_GALLERY_ENTRY_IMAGE ]['alt'] ) : esc_attr( $title ); ?>">
-								</div>
-							<?php endif; ?>
 
-							<?php if ( ! empty( $entry[ static::FIELD_GALLERY_ENTRY_CAPTION ] ) ) : ?>
-								<div><?php echo esc_html( $entry[ static::FIELD_GALLERY_ENTRY_CAPTION ] ); ?></div>
-							<?php endif; ?>
-						</div>
-					<?php endforeach; ?>
+
+
+	<div class="carousel-image">
+		<div class="carousel-image__container">
+			<?php if ( ! empty( $gallery_entries ) ) : ?>
+				<div class="carousel-image__content">
+				<?php
+				echo Helper\Carousel::big_img(
+					$gallery_entries,
+					array(
+						'title'  => $title,
+						'class'  => array(),
+						'swiper' => array(
+							'centeredSlides' => true,
+						),
+					)
+				)
+				?>
 				</div>
 			<?php endif; ?>
 		</div>
+	</div>
 		<?php
 		return ob_get_clean();
 	}

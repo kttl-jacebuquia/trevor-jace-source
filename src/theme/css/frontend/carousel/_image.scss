@@ -1,0 +1,125 @@
+.carousel-image {
+	&__container {
+		@apply py-px80;
+
+		@screen lg {
+			@apply py-px100;
+		}
+
+		@screen lg2 {
+			@apply py-px140;
+		}
+	}
+
+	&__content {
+		@apply relative overflow-x-hidden;
+	}
+
+	.carousel-wrap {
+		@apply mt-0;
+	}
+
+	.carousel-full-width-wrap {
+		@apply pb-0;
+	}
+
+	.carousel-container {
+		@apply mx-auto;
+
+		@screen lg {
+			@apply max-w-px818;
+		}
+
+		@screen xl {
+			@apply px-0;
+		}
+	}
+
+	.carousel-header {
+		@apply tw-grid container mx-auto mb-px42;
+
+		@screen md {
+			@apply mb-px50;
+		}
+	}
+
+	.swiper-wrapper {
+		@screen lg {
+			@apply col-span-12;
+		}
+	}
+
+	.page-sub-title {
+		@apply col-span-full mb-0;
+		@apply font-semibold;
+
+		@screen lg {
+			@apply text-px40 leading-px50 tracking-em_001;
+		}
+
+		@screen xl {
+			@apply text-px46 leading-px56;
+		}
+	}
+
+	.big-img-carousel {
+		.swiper-slide {
+			figcaption {
+				@apply text-teal-dark tracking-px05 mt-px28;
+
+				@screen md {
+					@apply tracking-normal;
+				}
+
+				@screen lg2 {
+					@apply text-left w-full;
+				}
+			}
+		}
+
+		.swiper-pagination {
+			@apply mx-auto mt-px30;
+
+			@screen xl {
+				@apply flex;
+			}
+
+			&-bullets {
+				@apply gap-x-px20;
+			}
+
+			&-bullet {
+				@apply bg-teal-dark bg-opacity-30 opacity-100 z-2;
+				@apply w-px14 h-px14 mx-0;
+
+				&-active {
+					@apply bg-opacity-100;
+				}
+			}
+		}
+
+		.swiper-button {
+			@apply hidden;
+
+			@screen lg {
+				width: calc(
+					50% - #{theme('screens.lg')} / 2 * (5 / 6) + 2.5rem
+				);
+			}
+
+			@screen lg2 {
+				@apply flex;
+			}
+
+			@screen xl {
+				width: calc(50% - #{theme('screens.xl')} / 2 * (2 / 3) + 6rem);
+			}
+
+			&-wrapper {
+				@screen lg2 {
+					@apply mt-px40;
+				}
+			}
+		}
+	}
+}
