@@ -5,19 +5,22 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\ACF\Field;
 
 class Button extends Advanced_Link implements I_Renderable {
-	const FIELD_TYPE        = 'type';
-	const FIELD_BUTTON_ATTR = 'button_attr';
-	const FIELD_LABEL_ATTR  = 'label_attr';
-	const FIELD_TEXT_COLOR  = 'text_color';
-	const FIELD_BG_COLOR    = 'bg_color';
+	const FIELD_TYPE         = 'type';
+	const FIELD_BUTTON_ATTR  = 'button_attr';
+	const FIELD_LABEL_ATTR   = 'label_attr';
+	const FIELD_TEXT_COLOR   = 'text_color';
+	const FIELD_BG_COLOR     = 'bg_color';
+	const FIELD_BORDER_STYLE = 'border_style';
+
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
-		$type        = static::gen_field_key( static::FIELD_TYPE );
-		$button_attr = static::gen_field_key( static::FIELD_BUTTON_ATTR );
-		$label_attr  = static::gen_field_key( static::FIELD_LABEL_ATTR );
-		$text_color  = static::gen_field_key( static::FIELD_TEXT_COLOR );
-		$bg_color    = static::gen_field_key( static::FIELD_BG_COLOR );
+		$type         = static::gen_field_key( static::FIELD_TYPE );
+		$button_attr  = static::gen_field_key( static::FIELD_BUTTON_ATTR );
+		$label_attr   = static::gen_field_key( static::FIELD_LABEL_ATTR );
+		$text_color   = static::gen_field_key( static::FIELD_TEXT_COLOR );
+		$bg_color     = static::gen_field_key( static::FIELD_BG_COLOR );
+		$border_style = static::gen_field_key( static::FIELD_BORDER_STYLE );
 
 		return array(
 			'title'  => 'Page Button',
@@ -56,7 +59,7 @@ class Button extends Advanced_Link implements I_Renderable {
 					),
 				),
 				array(
-					static::FIELD_TEXT_COLOR => Field\Color::gen_args(
+					static::FIELD_TEXT_COLOR   => Field\Color::gen_args(
 						$text_color,
 						static::FIELD_TEXT_COLOR,
 						array(
@@ -67,7 +70,7 @@ class Button extends Advanced_Link implements I_Renderable {
 							),
 						),
 					),
-					static::FIELD_BG_COLOR   => Field\Color::gen_args(
+					static::FIELD_BG_COLOR     => Field\Color::gen_args(
 						$bg_color,
 						static::FIELD_BG_COLOR,
 						array(
@@ -77,6 +80,17 @@ class Button extends Advanced_Link implements I_Renderable {
 								'width' => '50%',
 							),
 						),
+					),
+					static::FIELD_BORDER_STYLE => array(
+						'key'           => $border_style,
+						'name'          => static::FIELD_BORDER_STYLE,
+						'label'         => 'Border Style',
+						'type'          => 'button_group',
+						'choices'       => array(
+							'filled'   => 'Filled',
+							'outlined' => 'Outlined',
+						),
+						'default_value' => 'filled',
 					),
 				),
 			),
@@ -95,10 +109,14 @@ class Button extends Advanced_Link implements I_Renderable {
 		$label_attr = $val->get( static::FIELD_LABEL_ATTR );
 
 		if ( 'custom' === $type ) {
-			$text_color = $val->get( static::FIELD_TEXT_COLOR );
-			$bg_color   = $val->get( static::FIELD_BG_COLOR );
-			$btn_cls[]  = 'text-' . $text_color;
-			$btn_cls[]  = 'bg-' . $bg_color;
+			$text_color   = $val->get( static::FIELD_TEXT_COLOR );
+			$bg_color     = $val->get( static::FIELD_BG_COLOR );
+			$border_style = $val->get( static::FIELD_BORDER_STYLE );
+			$btn_cls[]    = 'text-' . $text_color;
+			$btn_cls[]    = 'bg-' . $bg_color;
+			if ( 'outlined' === $border_style ) {
+				$btn_cls[] = "border-2 border-{$text_color}";
+			}
 		} else {
 			$btn_cls[] = "page-btn-{$type}";
 		}

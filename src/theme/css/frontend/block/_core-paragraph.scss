@@ -1,11 +1,32 @@
 p {
-  &.has-medium-font-size {
-	@apply font-normal text-px22 leading-px32;
-  }
-
-  @screen lg {
 	&.has-medium-font-size {
-	  @apply text-px26 leading-px36 tracking-em005;
+		@apply font-normal text-px22 leading-px32;
 	}
-  }
+
+	@screen lg {
+		&.has-medium-font-size {
+			@apply text-px26 leading-px36 tracking-em005;
+		}
+	}
+}
+
+// Paragraph Block
+main > p {
+	@apply mt-px50;
+
+	@screen md {
+		@apply mt-px40;
+	}
+
+	@screen xl {
+		@apply mt-px42;
+	}
+
+	&:last-child {
+		@apply mb-px100;
+	}
+
+	a {
+		@apply border-b-2;
+	}
 }

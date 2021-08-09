@@ -541,6 +541,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Update button attributes according to header attributes
 		if ( ! empty( $args['buttons']['buttons'] ) ) {
 			foreach ( $args['buttons']['buttons'] as &$button ) {
+				if ( 'custom' === $button['button']['type'] ) {
+					continue;
+				}
 				switch ( $val->get( static::FIELD_BG_CLR ) ) {
 					case 'teal-dark':
 						$button_class                             = $button['button']['button_attr']['class'];
