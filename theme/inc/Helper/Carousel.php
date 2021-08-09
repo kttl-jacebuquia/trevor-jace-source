@@ -114,7 +114,6 @@ class Carousel {
 										break;
 									default:
 										$options['card_renderer'] = ( ! empty( $options['card_renderer'] ) ? $options['card_renderer'] : array( Card::class, 'post' ) );
-
 								}
 								?>
 								<div class="swiper-slide">

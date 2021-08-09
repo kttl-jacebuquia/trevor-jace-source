@@ -64,14 +64,16 @@
   }
 
   &__cta {
-    @apply font-semibold text-px24 leading-px34 tracking-px05;
+    @apply btn;
+    @apply inline-flex min-h-px46 h-auto pl-px32;
+    @apply font-semibold text-px16 leading-px22 tracking-em001;
 
     @screen md {
-      @apply text-px18 leading-px34;
+      @apply leading-px20 min-h-px44 px-px24;
     }
 
     @screen xl {
-      @apply text-px20 leading-px24 tracking-em005;
+      @apply min-h-px50 px-px40 text-px20 leading-px20 tracking-px05;
     }
   }
 

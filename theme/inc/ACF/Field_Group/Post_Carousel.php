@@ -24,10 +24,9 @@ class Post_Carousel extends Post_Grid {
 
 	/** @inheritdoc */
 	protected static function prepare_register_args(): array {
-		$cta          = static::gen_field_key( static::FIELD_CTA );
-		$block_styles = static::gen_field_key( static::FIELD_BLOCK_STYLES );
-		$args         = parent::prepare_register_args();
-		$fields       = $args['fields'];
+		$cta    = static::gen_field_key( static::FIELD_CTA );
+		$args   = parent::prepare_register_args();
+		$fields = $args['fields'];
 
 		// Remove unnecessary fields
 		unset( $fields[ static::FIELD_NUM_COLS ] );
@@ -38,17 +37,10 @@ class Post_Carousel extends Post_Grid {
 		unset( $fields[ static::FIELD_EMPTY_MESSAGE ] );
 
 		// With additional fields
-		$updated_fields = array(
-			static::FIELD_BLOCK_STYLES => Block_Styles::clone(
-				array(
-					'key'     => $block_styles,
-					'name'    => static::FIELD_BLOCK_STYLES,
-					'display' => 'seamless',
-				),
-			),
-		);
+		$updated_fields = array();
 
-		// Loop through each field so we can inject a field at specific order
+		// Loop through each field so we can inject a field at specific order,
+		// or edit specific fields
 		foreach ( $fields as $key => $field ) {
 			$updated_fields[ $key ] = $field;
 			switch ( $key ) {
@@ -61,6 +53,11 @@ class Post_Carousel extends Post_Grid {
 						'type'          => 'link',
 						'return_format' => 'array',
 					);
+					break;
+				case static::FIELD_SOURCE:
+					// Remove "Custom" Option from Source Field
+					unset( $field['choices']['custom'] );
+					$updated_fields[ static::FIELD_SOURCE ] = $field;
 					break;
 			}
 		}
@@ -147,7 +144,7 @@ class Post_Carousel extends Post_Grid {
 			<?php endif; ?>
 			<?php if ( ! empty( $cta ) ) : ?>
 				<div class="post-carousel__cta-wrap">
-					<a href="<?php echo esc_attr( $cta['title'] ); ?>" class="post-carousel__cta wave-underline"><?php echo esc_html( $cta['title'] ); ?></a>
+					<a href="<?php echo esc_attr( $cta['title'] ); ?>" class="post-carousel__cta"><?php echo esc_html( $cta['title'] ); ?></a>
 				</div>
 			<?php endif; ?>
 		</div>

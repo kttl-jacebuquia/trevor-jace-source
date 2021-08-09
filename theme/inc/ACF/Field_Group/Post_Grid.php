@@ -31,6 +31,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_CUSTOM_ITEM_DESC  = 'custom_item_desc';
 	const FIELD_CUSTOM_ITEM_CTA   = 'custom_item_cta';
 
+	const FIELD_BLOCK_STYLES = 'block_styles';
+
 	const PAGINATION_STYLE_OPTION_LOADMORE = 'load_more';
 	const PAGINATION_STYLE_OPTION_PAGES    = 'pages';
 
@@ -72,7 +74,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$placeholder_img   = static::gen_field_key( static::FIELD_PLACEHOLDER_IMG );
 		$num_cols          = static::gen_field_key( static::FIELD_NUM_COLS );
 		$num_display_limit = static::gen_field_key( static::FIELD_NUM_DISPLAY_LIMIT );
-		$wrapper_attr      = static::gen_field_key( static::FIELD_WRAPPER_ATTR );
 		$pagination_style  = static::gen_field_key( static::FIELD_PAGINATION_STYLE );
 		$show_empty        = static::gen_field_key( static::FIELD_SHOW_EMPTY );
 		$empty_message     = static::gen_field_key( static::FIELD_EMPTY_MESSAGE );
@@ -81,6 +82,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$custom_item_title = static::gen_field_key( static::FIELD_CUSTOM_ITEM_TITLE );
 		$custom_item_desc  = static::gen_field_key( static::FIELD_CUSTOM_ITEM_DESC );
 		$custom_item_cta   = static::gen_field_key( static::FIELD_CUSTOM_ITEM_CTA );
+
+		$block_styles = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 
 		return array(
 			'title'  => 'Post Grid',
@@ -332,13 +335,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 									'display' => 'group',
 								),
 							),
-							DOM_Attr::clone(
-								array(
-									'key'   => static::gen_field_key( 'item_attrs' ),
-									'name'  => 'item_attrs',
-									'label' => 'Item Ittributes',
-								)
-							),
 						),
 					),
 					static::FIELD_SHOW_EMPTY    => array(
@@ -368,6 +364,16 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
+				static::_gen_tab_field( 'Styles' ),
+				array(
+					static::FIELD_BLOCK_STYLES => Block_Styles::clone(
+						array(
+							'key' => $block_styles,
+							'name' => static::FIELD_BLOCK_STYLES,
+							'label' => 'Block Styles',
+						)
+					),
+				),
 			),
 		);
 	}
@@ -395,6 +401,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$display_limit   = (int) $val->get( static::FIELD_NUM_DISPLAY_LIMIT );
 		$show_empty      = (int) $val->get( static::FIELD_SHOW_EMPTY );
 		$empty_message   = $val->get( static::FIELD_EMPTY_MESSAGE );
+
 		$cls             = array(
 			'tile-grid-container mx-auto',
 			'mb-px38 mt-px40',
