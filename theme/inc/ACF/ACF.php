@@ -73,7 +73,6 @@ class ACF {
 		Field_Group\Volunteer_Information_Cards::class,
 		Field_Group\Recent_Highlights::class,
 		Field_Group\Text_Overlapping_Image::class,
-		Field_Group\Article_Card_Carousel::class,
 		Field_Group\Current_Openings::class,
 		Field_Group\Article_River::class,
 		Field_Group\Video_Player::class,

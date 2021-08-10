@@ -2,6 +2,7 @@
 
 use TrevorWP\Theme\ACF\Field\Color;
 use TrevorWP\CPT\Donate;
+use TrevorWP\CPT\Get_Involved;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Util\Tools;
 
@@ -20,6 +21,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	// Source dependent fields
 	const FIELD_PRODUCTS         = 'products';
 	const FIELD_PRODUCT_PARTNERS = 'product_partners';
+	const FIELD_BILLS            = 'bills';
+	const FIELD_LETTERS          = 'letters';
 	const FIELD_SHOW_LOAD_MORE   = 'show_load_more';
 
 	/**
@@ -39,6 +42,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$mobile_layout           = static::gen_field_key( static::FIELD_MOBILE_LAYOUT );
 		$products                = static::gen_field_key( static::FIELD_PRODUCTS );
 		$product_partners        = static::gen_field_key( static::FIELD_PRODUCT_PARTNERS );
+		$bills                   = static::gen_field_key( static::FIELD_BILLS );
+		$letters                 = static::gen_field_key( static::FIELD_LETTERS );
 		$show_load_more          = static::gen_field_key( static::FIELD_SHOW_LOAD_MORE );
 
 		return array(
@@ -112,6 +117,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						'custom'   => 'Custom',
 						'products' => 'Products',
 						'partners' => 'Product Partners',
+						'bills'    => 'Bills',
+						'letters'  => 'Letters',
 					),
 					'default_value' => 'custom',
 					'return_format' => 'value',
@@ -201,6 +208,48 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
+				static::FIELD_BILLS            => array(
+					'key'               => $bills,
+					'name'              => static::FIELD_BILLS,
+					'label'             => 'Bills',
+					'type'              => 'post_object',
+					'post_type'         => array(
+						Get_Involved\Bill::POST_TYPE,
+					),
+					'multiple'          => 1,
+					'return_format'     => 'object',
+					'ui'                => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $entries_source,
+								'operator' => '==',
+								'value'    => 'bills',
+							),
+						),
+					),
+				),
+				static::FIELD_LETTERS          => array(
+					'key'               => $letters,
+					'name'              => static::FIELD_LETTERS,
+					'label'             => 'Letters',
+					'type'              => 'post_object',
+					'post_type'         => array(
+						Get_Involved\Letter::POST_TYPE,
+					),
+					'multiple'          => 1,
+					'return_format'     => 'object',
+					'ui'                => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $entries_source,
+								'operator' => '==',
+								'value'    => 'letters',
+							),
+						),
+					),
+				),
 				static::FIELD_BUTTON           => array(
 					'key'               => $button,
 					'name'              => static::FIELD_BUTTON,
@@ -277,6 +326,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				case 'partners':
 					$attr['data-post-type'] = Donate\Prod_Partner::POST_TYPE;
 					break;
+				case 'bills':
+					$attr['data-post-type'] = Get_Involved\Bill::POST_TYPE;
+					break;
+				case 'letters':
+					$attr['data-post-type'] = Get_Involved\Letter::POST_TYPE;
+					break;
 			}
 		}
 
@@ -299,6 +354,14 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						$posts = static::get_val( static::FIELD_PRODUCT_PARTNERS );
 						echo static::render_posts( $posts );
 						break;
+					case 'bills':
+						$posts = static::get_val( static::FIELD_BILLS );
+						echo static::render_posts( $posts );
+						break;
+					case 'letters':
+						$posts = static::get_val( static::FIELD_LETTERS );
+						echo static::render_posts( $posts );
+						break;
 					default:
 						echo static::render_entries();
 						break;
@@ -312,8 +375,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	/**
 	 * @inheritDoc
 	 */
-
-	private static function render_posts( array $posts = array() ): string {
+	private static function render_posts( $posts = array() ): string {
 		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE );
 		$tile_options   = array(
 			'class' => array( 'topic-cards__item' ),
@@ -324,7 +386,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-			<?php if ( ! empty( $posts ) ) : ?>
+			<?php if ( ! empty( $posts ) && count( $posts ) > 0 ) : ?>
 				<div class="topic-cards__grid" role="list">
 					<?php foreach ( $posts as $key => $post ) : ?>
 						<?php echo Helper\Tile::post( $post, $key, $tile_options ); ?>

@@ -1,22 +1,22 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_TITLE           = 'title';
-	const FIELD_DESCRIPTION     = 'description';
-	const FIELD_IMAGE           = 'image';
+	const FIELD_TITLE       = 'title';
+	const FIELD_DESCRIPTION = 'description';
+	const FIELD_IMAGE       = 'image';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$title           = static::gen_field_key( static::FIELD_TITLE );
-		$description     = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$image           = static::gen_field_key( static::FIELD_IMAGE );
+		$title       = static::gen_field_key( static::FIELD_TITLE );
+		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$image       = static::gen_field_key( static::FIELD_IMAGE );
 
 		return array(
 			'title'  => 'Static Image with Copy',
 			'fields' => array(
-				static::FIELD_TITLE           => array(
+				static::FIELD_TITLE       => array(
 					'key'     => $title,
 					'name'    => static::FIELD_TITLE,
 					'label'   => 'Title',
@@ -25,7 +25,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 						'width' => '50%',
 					),
 				),
-				static::FIELD_DESCRIPTION     => array(
+				static::FIELD_DESCRIPTION => array(
 					'key'     => $description,
 					'name'    => static::FIELD_DESCRIPTION,
 					'label'   => 'Description',
@@ -34,7 +34,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 						'width' => '50%',
 					),
 				),
-				static::FIELD_IMAGE           => array(
+				static::FIELD_IMAGE       => array(
 					'key'           => $image,
 					'name'          => static::FIELD_IMAGE,
 					'label'         => 'Image',

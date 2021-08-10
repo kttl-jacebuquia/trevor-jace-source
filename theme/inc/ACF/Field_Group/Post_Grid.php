@@ -112,7 +112,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'label' => 'Heading',
 						'type'  => 'text',
 					),
-					static::FIELD_DESCRIPTION           => array(
+					static::FIELD_DESCRIPTION       => array(
 						'key'   => $description,
 						'name'  => static::FIELD_DESCRIPTION,
 						'label' => 'Description',
@@ -368,8 +368,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				array(
 					static::FIELD_BLOCK_STYLES => Block_Styles::clone(
 						array(
-							'key' => $block_styles,
-							'name' => static::FIELD_BLOCK_STYLES,
+							'key'   => $block_styles,
+							'name'  => static::FIELD_BLOCK_STYLES,
 							'label' => 'Block Styles',
 						)
 					),
@@ -402,7 +402,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$show_empty      = (int) $val->get( static::FIELD_SHOW_EMPTY );
 		$empty_message   = $val->get( static::FIELD_EMPTY_MESSAGE );
 
-		$cls             = array(
+		$cls = array(
 			'tile-grid-container mx-auto',
 			'mb-px38 mt-px40',
 			'md:mt-px30',
