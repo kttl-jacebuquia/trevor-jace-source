@@ -117,50 +117,55 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 				)
 			);
 			?>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h2><?php echo esc_html( $title ); ?></h2>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
-
-			<div class="partners-block__panel">
-				<div class="partners-block__title">
-					<div class="partners-block__tier-name"><?php echo $partner_tier->name; ?></div>
-					<div class="partners-block__tier-amount">
-						<?php echo esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ); ?>
-					</div>
-				</div>
-				<div class="partners-block__list partners-block__list--<?php echo $list_type; ?>">
-					<?php foreach ( $partners as $partner ) : ?>
-						<?php $url = Meta\Post::get_partner_url( $partner->ID ); ?>
-						<?php if ( $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ) : ?>
-							<?php
-							$featured_image = get_the_post_thumbnail_url( $partner->ID, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
-							?>
-							<div class="partners-block__image">
-								<a href="<?php echo $url; ?>"
-								   rel="nofollow noreferrer noopener"
-								   target="_blank"
-								   class="partners-block__img-wrap">
-									<img src="<?php echo $featured_image; ?>" alt="<?php echo $partner->post_title; ?>">
-								</a>
-							</div>
-						<?php else : ?>
-							<div class="partners-block__name">
-								<a href="<?php echo $url; ?>"
-								   rel="nofollow noreferrer noopener"
-								   target="_blank">
-									<?php echo $partner->post_title; ?>
-								</a>
-							</div>
+			<div class="partners-block">
+				<div class="partners-block__container">
+					<div class="partners-block__headgroup">
+						<?php if ( ! empty( $title ) ) : ?>
+							<h2 class="partners-block__heading"><?php echo esc_html( $title ); ?></h2>
 						<?php endif; ?>
-					<?php endforeach; ?>
+
+						<?php if ( ! empty( $description ) ) : ?>
+							<p class="partners-block__description"><?php echo esc_html( $description ); ?></p>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $button['url'] ) ) : ?>
+							<a class="partners-block__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+						<?php endif; ?>
+					</div>
+					<div class="partners-block__panel">
+						<div class="partners-block__title">
+							<div class="partners-block__tier-name"><?php echo $partner_tier->name; ?></div>
+							<div class="partners-block__tier-amount">
+								<?php echo esc_html( get_term_meta( $partner_tier->term_id, Meta\Taxonomy::KEY_PARTNER_TIER_NAME, true ) ); ?>
+							</div>
+						</div>
+						<div class="partners-block__list partners-block__list--<?php echo $list_type; ?>">
+							<?php foreach ( $partners as $partner ) : ?>
+								<?php $url = Meta\Post::get_partner_url( $partner->ID ); ?>
+								<?php if ( $taxonomy === Get_Involved_Object::TAXONOMY_PARTNER_TIER ) : ?>
+									<?php
+									$featured_image = get_the_post_thumbnail_url( $partner->ID, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
+									?>
+									<div class="partners-block__image">
+										<a href="<?php echo $url; ?>"
+										rel="nofollow noreferrer noopener"
+										target="_blank"
+										class="partners-block__img-wrap">
+											<img src="<?php echo $featured_image; ?>" alt="<?php echo $partner->post_title; ?>">
+										</a>
+									</div>
+								<?php else : ?>
+									<div class="partners-block__name">
+										<a href="<?php echo $url; ?>"
+										rel="nofollow noreferrer noopener"
+										target="_blank">
+											<?php echo $partner->post_title; ?>
+										</a>
+									</div>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
 				</div>
 			</div>
 		<? endif; ?>
