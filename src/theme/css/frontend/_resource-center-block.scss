@@ -1,0 +1,76 @@
+.resource-center-block {
+  &__container {
+    @apply container mx-auto;
+  }
+
+  &__box {
+    @apply rounded-px10 bg-violet text-center text-white py-px80;
+
+    @screen xl {
+      @apply py-px170;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px28 leading-px38 tracking-em005 px-px24;
+
+    @screen md {
+      @apply text-px32 leading-px40 px-px105;
+    }
+
+    @screen xl {
+      @apply text-px42 leading-px52 tracking-em_001 px-px200;
+    }
+  }
+
+  &__description {
+    @apply px-px24 mt-px16;
+    @apply text-px16 leading-px22;
+
+    @screen md {
+      @apply mt-px14 px-px135 text-px18 leading-px26 tracking-em001;
+    }
+
+    @screen xl {
+      @apply px-px132 mt-px18 text-px24 leading-px34 tracking-em005;
+    }
+  }
+
+  &__items {
+    @apply mt-px36 -mb-px10 px-px12 tracking-px6;
+
+    @screen md {
+      @apply mt-px30 -mb-px12 px-px62 tracking-px10;
+    }
+
+    @screen xl {
+      @apply mt-px50 px-px206 -mb-px24;
+    }
+  }
+
+  &__item {
+    @apply h-px30 px-px14 inline-flex items-center text-indigo rounded-px100 font-medium;
+    @apply text-px14 leading-px18 tracking-em001 bg-white mb-px10;
+
+    @screen md {
+      @apply mb-px12 h-px34 px-px14 text-px14 leading-px18 tracking-em001;
+    }
+
+    @screen xl {
+      @apply h-px36 text-px16 leading-px20 tracking-px05 mb-px24;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px40 text-center;
+
+    @screen xl {
+      @apply mt-px60;
+    }
+  }
+
+  &__cta {
+    @apply btn;
+    @apply bg-indigo;
+  }
+}

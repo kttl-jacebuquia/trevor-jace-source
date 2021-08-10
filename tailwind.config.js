@@ -294,6 +294,8 @@ module.exports = {
 				px_015: px2rem(-1.5),
 				px_02: px2rem(-2),
 				px_05: px2rem(-0.5),
+				px6: px2rem(6),
+				px10: px2rem(10),
 			},
 			zIndex: {
 				1: '1',

@@ -77,25 +77,35 @@ class Resource_Center_Block extends A_Field_Group implements I_Block, I_Renderab
 
 		ob_start();
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="resource-center-block">
+			<div class="resource-center-block__container">
+				<div class="resource-center-block__box">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h2 class="resource-center-block__heading"><?php echo esc_html( $title ); ?></h2>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $title ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+					<?php if ( ! empty( $title ) ) : ?>
+						<div class="resource-center-block__description">
+							<?php echo esc_html( $description ); ?>
+						</div>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $topics ) ) : ?>
-				<?php foreach ( $topics as $topic ) : ?>
-					<?php $term_link = get_term_link( $topic->term_id ); ?>
-					<a href="<?php echo esc_url( $term_link ); ?>"><?php echo esc_html( $topic->name ); ?></a>
-				<?php endforeach; ?>
-			<?php endif; ?>
+					<?php if ( ! empty( $topics ) ) : ?>
+						<div class="resource-center-block__items">
+							<?php foreach ( $topics as $topic ) : ?>
+								<?php $term_link = get_term_link( $topic->term_id ); ?>
+								<a class="resource-center-block__item" href="<?php echo esc_url( $term_link ); ?>"><?php echo esc_html( $topic->name ); ?></a>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+					<?php if ( ! empty( $button['url'] ) ) : ?>
+						<div class="resource-center-block__cta-wrap">
+							<a class="resource-center-block__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
