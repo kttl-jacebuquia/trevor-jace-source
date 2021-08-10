@@ -1,0 +1,51 @@
+.logo {
+	@apply inline-block relative;
+
+	&-wrap {
+		@apply relative overflow-hidden h-px68;
+
+		@screen md {
+			@apply h-px76;
+		}
+
+		@screen lg2 {
+			@apply h-px98;
+		}
+
+		@screen xl {
+			@apply h-px102;
+		}
+
+		@screen 2xl {
+			@apply h-px116;
+		}
+	}
+
+	&-text {
+		@apply block text-px154 leading-none;
+
+		@screen md {
+			@apply text-px182;
+		}
+
+		@screen lg2 {
+			@apply text-px230;
+		}
+
+		@screen xl {
+			@apply text-px242;
+		}
+
+		@screen 2xl {
+			@apply text-px270;
+		}
+	}
+
+	&-icon {
+		@apply text-px20;
+
+		@screen lg2 {
+			@apply text-px36;
+		}
+	}
+}

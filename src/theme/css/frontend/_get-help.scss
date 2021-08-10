@@ -1,18 +1,30 @@
 .get-help {
+	.circulation-card {
+		&.type-trevorspace {
+			.circulation-card-title {
+				@screen lg {
+					@apply text-px32 font-bold;
+				}
 
-  .circulation-card {
-	&.type-trevorspace {
-	  .circulation-card-title {
-		@screen lg {
-		  @apply text-px32 font-bold;
+				tilt {
+					@screen lg {
+						@apply text-px42;
+					}
+				}
+			}
 		}
-
-		tilt {
-		  @screen lg {
-			@apply text-px42;
-		  }
-		}
-	  }
 	}
-  }
+}
+
+.is-get-help {
+	#top-nav {
+		.main-menu > .menu-item > a {
+			@apply text-indigo;
+
+			// Chevron
+			&::after {
+				@apply text-indigo opacity-44;
+			}
+		}
+	}
 }

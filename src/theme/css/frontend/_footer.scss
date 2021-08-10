@@ -1,160 +1,195 @@
 footer {
-  @apply bg-teal-dark text-white;
-  @apply pt-20 pb-14;
-
-  // Logo
-  .logo-wrap {
-	@apply flex-1 mb-5;
-  }
-
-  .logo {
-	@apply inline-block relative;
-  }
-
-  .logo-text {
-	@apply block;
-	font-size: 7.75rem;
-	line-height: 7.75rem;
-  }
-
-  .logo-icon {
-	@apply block absolute;
-	font-size: 2.3rem;
-	top: -1.75rem;
-	right: -1.25rem;
-  }
-
-  form {
-	@apply flex flex-col;
-	@apply mb-12;
+	@apply bg-teal-dark text-white;
+	@apply pt-px60 pb-px100;
 
 	@screen md {
-	  @apply flex-row flex-wrap space-x-5 mr-10;
+		@apply pt-px80 pb-px140;
 	}
 
 	@screen lg {
-	  @apply mr-36;
-	}
-  }
-
-  fieldset {
-	@apply flex flex-col mb-7;
-
-	@screen md {
-	  @apply mb-0 flex-auto;
-	  margin-left: 0 !important;
-	}
-  }
-
-  legend {
-	@apply text-px16 leading-px20 mb-5 uppercase;
-
-	@screen md {
-	  flex-basis: 100%;
-	}
-  }
-
-  input[type] {
-	@apply py-5 px-7 rounded-px10 placeholder-teal-dark text-teal-dark;
-	@apply flex-grow;
-  }
-
-  .btn {
-	@apply bg-white text-teal-dark transition-all duration-300;
-
-	@screen md {
-	  @apply flex-auto;
-	  @apply text-px18 leading-px26;
+		@apply pt-px90 pb-px135;
 	}
 
-	@screen lg {
-	  @apply flex-grow-0 hover:bg-opacity-90;
+	@screen lg2 {
+		@apply pb-px135;
 	}
-  }
 
-  .is-rc & {
-	@apply bg-indigo;
+	@screen xl {
+		@apply pt-px70 pb-px150;
+	}
+
+	// Logo
+	.logo-wrap {
+		@apply flex-1 mb-12;
+
+		@screen mobile {
+			@apply h-px84;
+		}
+	}
+
+	// .logo {
+	// 	@apply inline-block relative overflow-hidden;
+	// }
+
+	.logo-text {
+		@screen mobile {
+			@apply text-px200;
+		}
+	}
+	// 	@apply block text-px200 leading-none;
+
+	// 	@screen lg {
+	// 		@apply text-px220;
+	// 	}
+
+	// 	@screen lg2 {
+	// 		@apply text-px230;
+	// 	}
+
+	// 	@screen xl {
+	// 		@apply text-px242;
+	// 	}
+
+	// 	@screen 2xl {
+	// 		@apply text-px270;
+	// 	}
+	// }
+
+	// .logo-icon {
+	// 	@apply block absolute;
+	// 	font-size: 2.3rem;
+	// 	top: -1.75rem;
+	// 	right: -1.25rem;
+	// }
+
+	form {
+		@apply flex flex-col;
+		@apply mb-12;
+
+		@screen md {
+			@apply flex-row flex-wrap space-x-5 mr-10;
+		}
+
+		@screen lg {
+			@apply mr-36;
+		}
+	}
+
+	fieldset {
+		@apply flex flex-col mb-7;
+
+		@screen md {
+			@apply mb-0 flex-auto;
+			margin-left: 0 !important;
+		}
+	}
+
+	legend {
+		@apply text-px16 leading-px20 mb-5 uppercase;
+
+		@screen md {
+			flex-basis: 100%;
+		}
+	}
 
 	input[type] {
-	  @apply placeholder-indigo text-indigo;
+		@apply py-5 px-7 rounded-px10 placeholder-teal-dark text-teal-dark;
+		@apply flex-grow;
 	}
 
 	.btn {
-	  @apply text-indigo;
-	}
-  }
+		@apply bg-white text-teal-dark transition-all duration-300;
 
-  ul {
-	@apply mb-14;
-
-	li {
-	  @apply mb-5;
-
-	  &:last-child {
-		@apply mb-0;
-	  }
-
-	  a {
-		@apply block text-px18 leading-px22 uppercase;
-		@apply transition-opacity duration-300 hover:opacity-80;
-	  }
-
-	  i {
-		font-size: 1.4rem;
-	  }
-	}
-
-	&.site-links {
-	  @screen md {
-		@apply flex flex-row flex-wrap mr-36;
-
-		li {
-		  flex-basis: 50%;
+		@screen md {
+			@apply flex-auto;
+			@apply text-px18 leading-px26;
 		}
-	  }
 
-	  @screen lg {
-		@apply flex-col mr-0 mt-4;
-
-		li {
-		  flex-basis: auto;
-		}
-	  }
-
-		.submenu-icon {
-			@apply hidden;
+		@screen lg {
+			@apply flex-grow-0 hover:bg-opacity-90;
 		}
 	}
 
-	&.social-links {
-	  @apply mb-0 flex flex-row;
+	.is-rc & {
+		@apply bg-indigo;
 
-	  li {
-		@apply flex-auto mr-7;
-	  }
+		input[type] {
+			@apply placeholder-indigo text-indigo;
+		}
+
+		.btn {
+			@apply text-indigo;
+		}
 	}
-  }
 
-  @screen md {
 	ul {
-	  &.social-links {
+		@apply mb-14;
+
 		li {
-		  @apply flex-initial;
+			@apply mb-5;
+
+			&:last-child {
+				@apply mb-0;
+			}
+
+			a {
+				@apply block text-px18 leading-px22 uppercase;
+				@apply transition-opacity duration-300 hover:opacity-80;
+			}
+
+			i {
+				font-size: 1.4rem;
+			}
 		}
-	  }
+
+		&.site-links {
+			@screen md {
+				@apply flex flex-row flex-wrap mr-36;
+
+				li {
+					flex-basis: 50%;
+				}
+			}
+
+			@screen lg {
+				@apply flex-col mr-0 mt-4;
+
+				li {
+					flex-basis: auto;
+				}
+			}
+
+			.submenu-icon {
+				@apply hidden;
+			}
+		}
+
+		&.social-links {
+			@apply mb-0 flex flex-row;
+
+			li {
+				@apply flex-auto mr-7;
+			}
+		}
 	}
-  }
 
-  @screen lg {
-	@apply pb-24;
-
-	.col {
-	  @apply flex-auto;
-
-	  &:last-child {
-		@apply flex-shrink-0;
-	  }
+	@screen md {
+		ul {
+			&.social-links {
+				li {
+					@apply flex-initial;
+				}
+			}
+		}
 	}
 
-  }
+	@screen lg {
+		.col {
+			@apply flex-auto;
+
+			&:last-child {
+				@apply flex-shrink-0;
+			}
+		}
+	}
 }

@@ -10,4 +10,13 @@
 	.opener {
 		@apply text-indigo;
 	}
+
+	.main-menu > .menu-item > a {
+		@apply text-indigo;
+
+		// Chevron
+		&::after {
+			@apply text-indigo opacity-44;
+		}
+	}
 }

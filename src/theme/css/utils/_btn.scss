@@ -22,9 +22,19 @@
 			@apply text-teal-dark bg-white;
 		}
 
-    // Indigo
+		// White Orange
+		&.white-orange {
+			@apply text-orange bg-white;
+		}
+
+		// Indigo
 		&.indigo {
 			@apply text-white bg-indigo;
+		}
+
+		// Orange
+		&.orange {
+			@apply text-white bg-orange;
 		}
 	}
 }

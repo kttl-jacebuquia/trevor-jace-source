@@ -78,12 +78,12 @@ $header_data = Options_Page\Header::get_header();
 		<div class="cta-wrap">
 			<div class="cta-links">
 				<a href="<?php echo esc_url( $header_data['counselor_link']['url'] ); ?>"
-				class="btn bg-orange text-white"
+				class="btn orange"
 				target="<?php echo esc_attr( $header_data['counselor_link']['target'] ); ?>">
 					<?php echo esc_html( $header_data['counselor_link']['title'] ); ?>
 				</a>
 				<a href="<?php echo esc_url( $header_data['donate_link']['url'] ); ?>"
-				class="btn bg-white text-orange border-2" rel="noopener nofollow"
+				class="btn white-orange border-2" rel="noopener nofollow"
 				target="<?php echo esc_attr( $header_data['donate_link']['target'] ); ?>">
 					<?php echo esc_html( $header_data['donate_link']['title'] ); ?>
 				</a>
@@ -109,7 +109,6 @@ $header_data = Options_Page\Header::get_header();
 		<div class="logo-wrap">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>
-				<i class="logo-icon trevor-ti-logo-icon"></i>
 			</a>
 		</div>
 

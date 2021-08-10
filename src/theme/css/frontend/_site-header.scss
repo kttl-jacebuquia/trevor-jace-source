@@ -15,10 +15,13 @@ $z-index-nav-cta: $z-index-nav-blur + 5;
 $z-index-topbar: $z-index-nav-white-bg + 1;
 
 :root {
-  	--site-banner-height: 0px;
+	--site-banner-height: 0px;
 	--top-bar-height: #{$top--bar-height-mobile};
 	--top-nav-height: #{$top-nav-height};
-	--top-nav-top-margin: calc(var(--top-bar-height) + var(--tr-wp-admin-bar-h) + var(--site-banner-height));
+	--top-nav-top-margin: calc(
+		var(--top-bar-height) + var(--tr-wp-admin-bar-h) +
+			var(--site-banner-height)
+	);
 	--nav-menu-width: #{percentage(327/375)};
 	--z-index-nav-base: #{$nav-base-z-index};
 	--z-index-nav-blur: #{$z-index-nav-blur};
@@ -468,10 +471,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	.submenu-icon {
-	@apply hidden transform-gpu transition-transform duration-300 ease-out;
+		@apply hidden transform-gpu transition-transform duration-300 ease-out;
 
 		&:before {
-			font-size: .5rem;
+			font-size: 0.5rem;
 			display: inline-block;
 			vertical-align: middle;
 		}
@@ -500,7 +503,6 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		.logo-wrap {
 			@apply block;
 		}
-
 	}
 }
 
@@ -601,7 +603,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			&::after {
 				@apply block transform text-px14 font-bold;
 				@apply transition-opacity duration-300 ease-out opacity-100;
-				font-family: "trevor-ti";
+				font-family: 'trevor-ti';
 				content: $font-trevor-ti-chevron-thick-right;
 
 				@screen lg2 {
@@ -651,8 +653,8 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 			// Empty or not configured links should not
 			// be clickable on desktop
-			& a[href="#"],
-			a[href=""] {
+			& a[href='#'],
+			a[href=''] {
 				@apply lg2:pointer-events-none lg2:inline-block;
 			}
 
@@ -676,7 +678,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 					&::after {
 						@apply transform inline-block ml-px14 text-px14;
 						@apply lg2:text-px10 lg2:ml-px11;
-						font-family: "trevor-ti";
+						font-family: 'trevor-ti';
 						content: $font-trevor-ti-chevron-thick-right;
 					}
 				}
@@ -753,7 +755,6 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		}
 	}
 }
-
 
 //
 // NAV
@@ -840,7 +841,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		// Chevron
 		&::before {
 			@apply leading-px20 transform rotate-180;
-			font-family: "trevor-ti";
+			font-family: 'trevor-ti';
 			font-size: rem-calc(10px);
 			content: $font-trevor-ti-chevron-thick-right;
 			margin-right: rem-calc(9px);
@@ -941,21 +942,18 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		width: calc(100% - #{rem-calc(160px)});
 	}
 
-	.logo {
-	@apply inline-block relative;
-	}
+	.logo-wrap {
+		@apply -mt-px10;
 
-	.logo-text {
-	@apply block;
-	font-size: 4.75rem;
-	line-height: 4.75rem;
+		@screen md {
+			@apply mt-0;
+		}
 	}
 
 	.logo-icon {
 		@apply absolute;
-		font-size: 1.25rem;
-		top: -.75rem;
-		right: -.25rem;
+		top: -0.75rem;
+		right: -0.25rem;
 	}
 
 	// Opener
@@ -995,20 +993,13 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			margin-right: -1.5rem;
 		}
 
-		.logo-text {
-			font-size: 7.25rem;
-			line-height: 7rem;
-		}
-
 		.logo-icon {
 			@apply block absolute;
-			font-size: 2.25rem;
 			top: 0.5rem;
 			right: -1rem;
 		}
 	}
 }
-
 
 // Collapased nav state
 body:not(.on-top) {

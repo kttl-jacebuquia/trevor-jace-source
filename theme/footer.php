@@ -13,7 +13,6 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 			<div class="logo-wrap">
 				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
 					<i class="logo-text trevor-ti-logo-text"></i>
-					<i class="logo-icon trevor-ti-logo-icon"></i>
 				</a>
 			</div>
 
