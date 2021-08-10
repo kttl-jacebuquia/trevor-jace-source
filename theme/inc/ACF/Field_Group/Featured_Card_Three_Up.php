@@ -1,36 +1,42 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\CPT\Donate\Prod_Partner;
-use TrevorWP\CPT\RC\RC_Object;
+use TrevorWP\CPT\RC;
 use TrevorWP\Theme\Helper;
 
 use TrevorWP\Theme\ACF\Field\Color;
 
 class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_BG_COLOR         = 'bg_color';
-	const FIELD_TEXT_COLOR       = 'text_color';
-	const FIELD_TITLE            = 'title';
-	const FIELD_CARD_TYPE        = 'card_type';
-	const FIELD_ARTICLES         = 'articles';
-	const FIELD_PRODUCT_PARTNERS = 'product_partners';
-	const FIELD_BUTTON           = 'button';
+	const FIELD_BG_COLOR                  = 'bg_color';
+	const FIELD_TEXT_COLOR                = 'text_color';
+	const FIELD_TITLE                     = 'title';
+	const FIELD_CARD_TYPE                 = 'card_type';
+	const FIELD_ARTICLES                  = 'articles';
+	const FIELD_PRODUCT_PARTNERS          = 'product_partners';
+	const FIELD_BUTTON                    = 'button';
+	const FIELD_DESCRIPTION               = 'description';
+	const FIELD_DESKTOP_HEADING_ALIGNMENT = 'desktop_heading_alignment';
+	const FIELD_MOBILE_TABLET_LAYOUT      = 'mobile_tablet_layout';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$bg_color         = static::gen_field_key( static::FIELD_BG_COLOR );
-		$text_color       = static::gen_field_key( static::FIELD_TEXT_COLOR );
-		$title            = static::gen_field_key( static::FIELD_TITLE );
-		$card_type        = static::gen_field_key( static::FIELD_CARD_TYPE );
-		$articles         = static::gen_field_key( static::FIELD_ARTICLES );
-		$product_partners = static::gen_field_key( static::FIELD_PRODUCT_PARTNERS );
-		$button           = static::gen_field_key( static::FIELD_BUTTON );
+		$bg_color                  = static::gen_field_key( static::FIELD_BG_COLOR );
+		$text_color                = static::gen_field_key( static::FIELD_TEXT_COLOR );
+		$title                     = static::gen_field_key( static::FIELD_TITLE );
+		$card_type                 = static::gen_field_key( static::FIELD_CARD_TYPE );
+		$articles                  = static::gen_field_key( static::FIELD_ARTICLES );
+		$product_partners          = static::gen_field_key( static::FIELD_PRODUCT_PARTNERS );
+		$button                    = static::gen_field_key( static::FIELD_BUTTON );
+		$description               = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$desktop_heading_alignment = static::gen_field_key( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
+		$mobile_tablet_layout      = static::gen_field_key( static::FIELD_MOBILE_TABLET_LAYOUT );
 
 		return array(
 			'title'  => 'Featured Card 3-Up Block',
 			'fields' => array(
-				static::FIELD_BG_COLOR         => Color::gen_args(
+				static::FIELD_BG_COLOR                  => Color::gen_args(
 					$bg_color,
 					static::FIELD_BG_COLOR,
 					array(
@@ -41,7 +47,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 						),
 					)
 				),
-				static::FIELD_TEXT_COLOR       => Color::gen_args(
+				static::FIELD_TEXT_COLOR                => Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(
@@ -52,13 +58,32 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 						),
 					),
 				),
-				static::FIELD_TITLE            => array(
+				static::FIELD_DESKTOP_HEADING_ALIGNMENT => array(
+					'key'           => $desktop_heading_alignment,
+					'name'          => static::FIELD_DESKTOP_HEADING_ALIGNMENT,
+					'label'         => 'Heading Alignment on Desktop',
+					'type'          => 'radio',
+					'layout'        => 'horizontal',
+					'ui'            => 1,
+					'default_value' => 'center',
+					'choices'       => array(
+						'center' => 'Center',
+						'left'   => 'Left',
+					),
+				),
+				static::FIELD_TITLE                     => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
 					'label' => 'Title',
 					'type'  => 'text',
 				),
-				static::FIELD_CARD_TYPE        => array(
+				static::FIELD_DESCRIPTION               => array(
+					'key'   => $description,
+					'name'  => static::FIELD_DESCRIPTION,
+					'label' => 'Description',
+					'type'  => 'textarea',
+				),
+				static::FIELD_CARD_TYPE                 => array(
 					'key'           => $card_type,
 					'name'          => static::FIELD_CARD_TYPE,
 					'label'         => 'Card Type',
@@ -69,13 +94,25 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 					),
 					'default_value' => 'articles',
 				),
-				static::FIELD_ARTICLES         => array(
+				static::FIELD_MOBILE_TABLET_LAYOUT      => array(
+					'key'           => $mobile_tablet_layout,
+					'name'          => static::FIELD_MOBILE_TABLET_LAYOUT,
+					'label'         => 'Cards Layout on Tablet/Mobile',
+					'type'          => 'radio',
+					'layout'        => 'horizontal',
+					'choices'       => array(
+						'grid'     => 'Grid',
+						'carousel' => 'Carousel',
+					),
+					'default_value' => 'grid',
+				),
+				static::FIELD_ARTICLES                  => array(
 					'key'               => $articles,
 					'name'              => static::FIELD_ARTICLES,
 					'label'             => 'Articles',
 					'type'              => 'relationship',
 					'required'          => 1,
-					'post_type'         => RC_Object::$PUBLIC_POST_TYPES,
+					'post_type'         => RC\RC_Object::$PUBLIC_POST_TYPES,
 					'min'               => 3,
 					'max'               => 3,
 					'conditional_logic' => array(
@@ -88,7 +125,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 						),
 					),
 				),
-				static::FIELD_PRODUCT_PARTNERS => array(
+				static::FIELD_PRODUCT_PARTNERS          => array(
 					'key'               => $product_partners,
 					'name'              => static::FIELD_PRODUCT_PARTNERS,
 					'label'             => 'Product Partners',
@@ -107,7 +144,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 						),
 					),
 				),
-				static::FIELD_BUTTON           => array(
+				static::FIELD_BUTTON                    => array(
 					'key'           => $button,
 					'name'          => static::FIELD_BUTTON,
 					'label'         => 'Button',
@@ -136,11 +173,14 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$text_color = ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark';
-		$bg_color   = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
-		$title      = static::get_val( static::FIELD_TITLE );
-		$card_type  = static::get_val( static::FIELD_CARD_TYPE );
-		$button     = static::get_val( static::FIELD_BUTTON );
+		$text_color  = ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark';
+		$bg_color    = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
+		$title       = static::get_val( static::FIELD_TITLE );
+		$description = static::get_val( static::FIELD_DESCRIPTION );
+		$card_type   = static::get_val( static::FIELD_CARD_TYPE );
+		$button      = static::get_val( static::FIELD_BUTTON );
+		$alignment   = static::get_val( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
+		$layout      = static::get_val( static::FIELD_MOBILE_TABLET_LAYOUT );
 
 		$cards = array();
 
@@ -150,27 +190,45 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 			$cards = static::get_val( static::FIELD_PRODUCT_PARTNERS );
 		}
 
-		$styles = 'bg-' . $bg_color . ' ' . 'text-' . $text_color;
-
 		$tile_options = array();
 
+		$attrs = array(
+			'class' => implode(
+				' ',
+				array(
+					'featured-card-3up',
+					'featured-card-3up--' . $alignment,
+					'featured-card-3up--' . $layout,
+					'bg-' . $bg_color,
+					'text-' . $text_color,
+				),
+			),
+		);
+
 		ob_start();
-		// Next Step - FE
 		?>
-		<div class="featured-card-3up  <?php echo esc_attr( $styles ); ?>">
+		<div <?php echo static::render_attrs( $attrs ); ?>>
 			<div class="featured-card-3up__container">
 				<div class="featured-card-3up__content">
 					<?php if ( ! empty( $title ) ) : ?>
 						<h2 class="featured-card-3up__heading"><?php echo esc_html( $title ); ?></h2>
 					<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<div class="featured-card-3up__description"><?php echo esc_html( $description ); ?></div>
+					<?php endif; ?>
 
 					<?php if ( ! empty( $cards ) ) : ?>
-						<div class="featured-card-3up__items" role="list">
-							<?php foreach ( $cards as $key => $card ) : ?>
-								<div class="featured-card-3up__item" role="listitem">
-									<?php echo Helper\Tile::post( $card, $key, $tile_options ); ?>
-								</div>
-							<?php endforeach; ?>
+						<div class="featured-card-3up__items-container swiper-container">
+							<div class="featured-card-3up__items swiper-wrapper" role="list">
+								<?php foreach ( $cards as $key => $card ) : ?>
+									<div class="featured-card-3up__item swiper-slide" role="listitem">
+										<?php echo Post_Grid::render_post_card( $card, $key, $tile_options ); ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<?php if ( 'carousel' === $layout ) : ?>
+								<div class="swiper-pagination"></div>
+							<?php endif; ?>
 						</div>
 					<?php endif; ?>
 

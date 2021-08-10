@@ -1,4 +1,37 @@
 .featured-card-3up {
+
+  &--left {
+    @screen xl {
+      .featured-card-3up__heading,
+      .featured-card-3up__description {
+        @apply text-left;
+      }
+    }
+  }
+
+  &--carousel {
+    @screen md-max {
+      .featured-card-3up__items-container {
+        @apply -mx-px50 px-px50 py-px20 -my-px20 overflow-hidden;
+      }
+      .featured-card-3up__items {
+        @apply flex gap-x-0;
+      }
+      .featured-card-3up__item {
+        width: calc((100% - 28px) / 2);
+      }
+    }
+
+    @screen mobile {
+      .featured-card-3up__items-container {
+        @apply -mx-px28 px-px28;
+      }
+      .featured-card-3up__item {
+        @apply w-full;
+      }
+    }
+  }
+
   &__container {
     @apply container mx-auto;
     @apply pt-px72 pb-px80;
@@ -15,14 +48,25 @@
       @apply text-px32 leading-px42;
     }
 
-    @screen md {
+    @screen xl {
       @apply text-px40 leading-px48 tracking-px_05;
     }
   }
 
-  &__items {
-    @apply tw-grid mt-px40;
-    @apply gap-y-px28;
+  &__description {
+    @apply text-px20 leading-px26 mt-px8 mb-px40 text-center;
+
+    @screen md {
+      @apply text-px22 leading-px32 mt-px8 mb-px50;
+    }
+
+    @screen xl {
+      @apply text-px24 leading-px34 tracking-px05 mt-px14 mb-px50;
+    }
+  }
+
+  &__items-container {
+    @apply overflow-visible mt-px40;
 
     @screen md {
       @apply mt-px54;
@@ -33,8 +77,17 @@
     }
   }
 
+  &__items {
+    @apply tw-grid;
+    @apply gap-y-px28;
+
+    @screen md {
+      @apply gap-x-px28;
+    }
+  }
+
   &__item {
-    @apply col-span-full h-full;
+    @apply col-span-full h-full flex-grow-0;
 
     @screen md {
       @apply col-span-4;
@@ -55,5 +108,9 @@
 
   &__cta {
     @apply btn;
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-current;
   }
 }
