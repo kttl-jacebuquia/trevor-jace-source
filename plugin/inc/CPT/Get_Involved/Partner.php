@@ -17,9 +17,9 @@ class Partner extends Get_Involved_Object {
 			self::POST_TYPE,
 			array(
 				'labels'              => array(
-					'name'          => 'Partners',
-					'singular_name' => 'Partner',
-					'add_new'       => 'Add New Partner',
+					'name'          => 'Corporate Partners',
+					'singular_name' => 'Corporate Partner',
+					'add_new'       => 'Add New Corporate Partner',
 				),
 				'public'              => false,
 				'hierarchical'        => false,
