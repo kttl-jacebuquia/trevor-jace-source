@@ -20,6 +20,7 @@ class ACF {
 		Options_Page\Four_O_Four::class,
 		Options_Page\Search::class,
 		Options_Page\External_Scripts::class,
+		Options_Page\API_Keys::class,
 		// - Post Type Options
 		Options_Page\Post_Type\Post::class,
 		Options_Page\Post_Type\Financial_Report::class,
