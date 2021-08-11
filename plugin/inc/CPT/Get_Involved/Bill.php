@@ -16,9 +16,9 @@ class Bill extends Get_Involved_Object {
 			self::POST_TYPE,
 			array(
 				'labels'        => array(
-					'name'          => 'Bills',
-					'singular_name' => 'Bill',
-					'add_new'       => 'Add New Bill',
+					'name'          => 'State Priorities',
+					'singular_name' => 'State Priority',
+					'add_new'       => 'Add New State Priority',
 				),
 				'public'        => true,
 				'hierarchical'  => false,
