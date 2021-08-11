@@ -14,9 +14,9 @@ class Letter extends Get_Involved_Object {
 			self::POST_TYPE,
 			array(
 				'labels'        => array(
-					'name'          => 'Letters',
-					'singular_name' => 'Letter',
-					'add_new'       => 'Add New Letter',
+					'name'          => 'Federal Priorities',
+					'singular_name' => 'Federal Priority',
+					'add_new'       => 'Add New Federal Priority',
 				),
 				'public'        => true,
 				'hierarchical'  => false,
