@@ -16,9 +16,9 @@ class Grant extends Get_Involved_Object {
 			self::POST_TYPE,
 			array(
 				'labels'       => array(
-					'name'          => 'Grants',
-					'singular_name' => 'Grant',
-					'add_new'       => 'Add New Grant',
+					'name'          => 'Funders',
+					'singular_name' => 'Funder',
+					'add_new'       => 'Add New Funder',
 				),
 				'public'       => true,
 				'hierarchical' => false,
