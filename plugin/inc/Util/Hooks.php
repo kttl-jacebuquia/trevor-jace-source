@@ -163,6 +163,9 @@ class Hooks {
 		add_action( 'wp_ajax_nopriv_highlight-search-test', array( self::class, 'highlight_search' ), 10, 0 );
 		add_action( 'wp_ajax_partner-name-autocomplete', array( self::class, 'partner_name_autocomplete' ), 10, 0 );
 		add_action( 'wp_ajax_nopriv_partner-name-autocomplete', array( self::class, 'partner_name_autocomplete' ), 10, 0 );
+
+		add_filter( 'menu_order', array( self::class, 'custom_menu_order' ), 10, 1 );
+		add_filter( 'custom_menu_order', array( self::class, 'custom_menu_order' ), 10, 1 );
 	}
 
 	public static function partner_name_autocomplete(): void {
@@ -660,5 +663,47 @@ class Hooks {
 		}
 
 		return $new_schedules;
+	}
+
+	public static function custom_menu_order( $menu ) {
+		if ( ! $menu ) {
+			return true;
+		}
+
+		return array(
+			'index.php',
+			'separator1',
+			'edit.php?post_type=page',
+			'edit.php',
+			'edit.php?post_type=trevor_rc_post',
+			'edit.php?post_type=trevor_gi_bill',
+			'edit.php?post_type=trevor_gi_letter',
+			'edit.php?post_type=trevor_research',
+			'edit.php?post_type=trevor_fin_report',
+			'edit.php?post_type=trevor_page_recirc',
+			'edit.php?post_type=trevor_text_popup',
+			'edit.php?post_type=trevor_gi_grant',
+			'edit.php?post_type=trevor_gi_partner',
+			'edit.php?post_type=trevor_gi_prtnrshp',
+			'edit.php?post_type=trevor_prod_prtnr',
+			'edit.php?post_type=trevor_prtnr_prod',
+			'edit.php?post_type=trevor_fund_story',
+			'edit.php?post_type=trevor_event',
+			'edit.php?post_type=trevor_team',
+			'separator2',
+			'trvr--header',
+			'options-general.php',
+			'upload.php',
+			'users.php',
+			'tools.php',
+			'wpseo_dashboard',
+			'themes.php',
+			'edit-comments.php',
+			'plugins.php',
+			'edit.php?post_type=acf-field-group',
+			'solr-power',
+			'trevor-classy-api',
+			'trevor-google-api',
+		);
 	}
 }
