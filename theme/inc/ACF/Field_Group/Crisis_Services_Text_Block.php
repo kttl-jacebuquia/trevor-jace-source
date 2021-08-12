@@ -76,24 +76,27 @@ class Crisis_Services_Text_Block extends A_Field_Group implements I_Block, I_Ren
 
 		ob_start();
 		?>
-		<div class="container mx-auto">
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="crisis-services-image-text">
+			<div class="crisis-services-image-text__container">
+				<div class="crisis-services-image-text__box">
+					<?php if ( ! empty( $title ) ) : ?>
+						<h3 class="crisis-services-image-text__heading"><?php echo esc_html( $title ); ?></h3>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+						<p class="crisis-services-image-text__description"><?php echo esc_html( $description ); ?></p>
+					<?php endif; ?>
 
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $image['url'] ) ) : ?>
-				<div class="text-center mt-px50 block">
-					<img src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
+					<?php if ( ! empty( $button['url'] ) ) : ?>
+						<a class="crisis-services-image-text__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
+				<?php if ( ! empty( $image['url'] ) ) : ?>
+					<div class="crisis-services-image-text__image">
+						<img src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
