@@ -44,8 +44,9 @@ class Research {
 					'excerpt',
 				),
 				'labels'              => array(
-					'name'          => 'Research',
+					'name'          => 'Research Briefs',
 					'singular_name' => 'Research Brief',
+					'add_new'       => 'Add New Research Brief',
 				),
 			)
 		);
