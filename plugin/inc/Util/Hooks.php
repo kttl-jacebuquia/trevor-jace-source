@@ -94,9 +94,6 @@ class Hooks {
 			# Partner
 			Admin\Partner::register_hooks();
 
-			# Partnership
-			Admin\Partnership::register_hooks();
-
 			# Product Partner
 			Admin\Prod_Partner::register_hooks();
 		}

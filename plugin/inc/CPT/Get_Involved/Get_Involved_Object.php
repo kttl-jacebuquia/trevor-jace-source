@@ -57,7 +57,6 @@ abstract class Get_Involved_Object {
 		Letter::class,
 		Partner::class,
 		Grant::class,
-		Partnership::class,
 	);
 
 	/* Misc */
