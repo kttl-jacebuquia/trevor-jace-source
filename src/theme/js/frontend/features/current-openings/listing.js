@@ -35,7 +35,7 @@ class Listing {
 	}
 
 	showItems() {
-		const activeFilters = getActiveFilters(this.context);
+		const activeFilters = getActiveFilters(this.$context);
 		const itemClass = this.generateClass(activeFilters);
 		this.$context
 			.find(`${this.selector}__item${itemClass}`)
@@ -46,7 +46,7 @@ class Listing {
 		const classes = [];
 		for (const filterGroup in activeFilters) {
 			const filterItems = activeFilters[filterGroup];
-			filterItems.forEach((filterItem, filterIndex) => {
+			filterItems.forEach((filterItem) => {
 				const isAllOption = filterItem.indexOf('all-') >= 0;
 				if (!isAllOption) {
 					classes.push(filterItem);
