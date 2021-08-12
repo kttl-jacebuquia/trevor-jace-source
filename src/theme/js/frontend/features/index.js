@@ -34,3 +34,4 @@ export TopicCards from './topic-cards';
 export CampaignForm from './campaign-form';
 export TextIcon from './text-icon';
 export FeaturedCardThreeUp from './featured-card-3up';
+export OrgMission from './org-mission';

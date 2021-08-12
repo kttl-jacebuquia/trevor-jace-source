@@ -1,0 +1,140 @@
+.org-mission {
+  @apply bg-purple text-white text-center;
+
+  &__container {
+    @apply container mx-auto tw-grid py-px80;
+
+    @screen md {
+      @apply py-px100;
+    }
+
+    @screen xl {
+      @apply pt-px178 pb-px118;
+    }
+  }
+
+  &__heading {
+    @apply col-span-full font-semibold text-px30 leading-px40 tracking-em005;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 -ml-px28 text-px66 leading-px76;
+    }
+  }
+
+  &__cards-container {
+    @apply col-span-full mt-px60 -mx-px28 px-px28;
+
+    @screen md {
+      @apply -mx-px50 px-px50;
+    }
+
+    @screen xl {
+      @apply mt-px140 mx-0 px-0;
+    }
+  }
+
+  &__cards {
+    @apply h-auto flex items-stretch;
+
+    @screen xl {
+      @apply grid tw-grid-desktop gap-y-px28;
+    }
+  }
+
+  &__card {
+    @apply w-full rounded-px10 bg-white text-indigo;
+    @apply py-px70 px-px26 h-auto;
+
+    @screen md {
+      width: calc(( 100% - 28px ) / 2);
+    }
+
+    @screen xl {
+      @apply col-span-6 w-full py-px116 px-px99;
+    }
+  }
+
+  &__image {
+    @apply w-px118 h-px118 py-px20 px-px12 inline-flex justify-center items-center;
+
+    @screen xl {
+      @apply w-px200 h-px200;
+    }
+
+    img {
+      @apply max-h-full max-w-full block;
+    }
+  }
+
+  &__card-heading {
+    @apply mt-px11;
+    @apply font-semibold text-px24 leading-px28 tracking-px_05;
+
+    @screen md {
+      @apply mt-px10 text-px24 leading-px28 tracking-px_05;
+    }
+
+    @screen xl {
+      @apply mt-px20 text-px36 leading-px46;
+    }
+  }
+
+  &__description {
+    @apply text-px16 leading-px24 mt-px10;
+
+    @screen md {
+      @apply text-px16 leading-px24;
+    }
+
+    @screen xl {
+      @apply mt-px12 text-px20 leading-px30 tracking-em001;
+    }
+  }
+
+  &__card-cta {
+    @apply btn;
+    @apply bg-indigo mt-px30 text-px16 leading-px22 tracking-em001 h-px46;
+
+    @screen md {
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen xl {
+      @apply h-px66 text-px20 leading-px26 tracking-px05;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px40 col-span-full flex justify-center;
+
+    @screen md {
+      @apply mt-px30;
+    }
+
+    @screen xl {
+      @apply mt-px96;
+    }
+  }
+
+  &__cta {
+    @apply font-semibold text-px16 leading-px22 tracking-px05;
+    @apply pb-px2 border-b-px2 border-solid border-current;
+    @include wave-underline-white;
+
+    @screen md {
+      @apply text-px18 leading-px24 tracking-px05;
+    }
+
+    @screen xl {
+      @apply text-px26 leading-px36 tracking-em005;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-current;
+  }
+}

@@ -107,38 +107,44 @@ class Organization_Mission extends A_Field_Group implements I_Block, I_Renderabl
 
 		ob_start();
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
-			<?php endif; ?>
+		<div class="org-mission">
+			<div class="org-mission__container">
+				<h3 class="org-mission__heading"><?php echo esc_html( $title ); ?></h3>
+				<?php if ( ! empty( $cards ) ) : ?>
+					<div class="org-mission__cards-container swiper-container">
+						<div class="org-mission__cards swiper-wrapper">
+							<?php foreach ( $cards as $card ) : ?>
+								<div class="org-mission__card swiper-slide">
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ) ) : ?>
+										<div class="org-mission__image">
+										<img src="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) ) ? esc_attr( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) : esc_attr( $title ); ?>">
+										</div>
+									<?php endif; ?>
 
-			<?php if ( ! empty( $cards ) ) : ?>
-				<div>
-					<?php foreach ( $cards as $card ) : ?>
-						<div>
-							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ) ) : ?>
-								<img src="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) ) ? esc_attr( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) : esc_attr( $title ); ?>">
-							<?php endif; ?>
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
+										<h2 class="org-mission__card-heading"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h2>
+									<?php endif; ?>
 
-							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
-								<h2><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h2>
-							<?php endif; ?>
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ) ) : ?>
+										<p class="org-mission__description"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ); ?></p>
+									<?php endif; ?>
 
-							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ) ) : ?>
-								<p><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ); ?></p>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
-								<a href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
-							<?php endif; ?>
+									<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
+										<a class="org-mission__card-cta" href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
+									<?php endif; ?>
+								</div>
+							<?php endforeach; ?>
 						</div>
-					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
+						<div class="swiper-pagination"></div>
+					</div>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+				<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
+					<div class="org-mission__cta-wrap">
+						<a class="org-mission__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
