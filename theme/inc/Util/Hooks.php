@@ -155,6 +155,11 @@ class Hooks {
 		} else {
 			add_editor_style( TREVOR_THEME_STATIC_URL . '/css/editor.css' );
 		}
+
+		if ( current_user_can( 'editor' ) && ! current_user_can( 'unfiltered_upload' ) ) {
+			$contributor = get_role( 'editor' );
+			$contributor->add_cap( 'unfiltered_upload' );
+		}
 	}
 
 	/**
