@@ -1,0 +1,154 @@
+.text-overlapping-image {
+  @apply py-px100;
+
+  @screen md {
+    @apply pt-px80 pb-px100;
+  }
+
+  &__container {
+    @apply container mx-auto;
+    @apply tw-grid items-center;
+  }
+
+  &__body {
+    @apply col-span-full text-center;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen xl {
+      @apply col-span-5 col-start-1 text-left;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px36 leading-px40;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen xl {
+      @apply text-px56 leading-px66;
+    }
+  }
+
+  &__description {
+    @apply text-px20 leading-px26 mt-px12;
+
+    @screen md {
+      @apply text-px22 leading-px32 tracking-em005;
+    }
+
+    @screen xl {
+      @apply mt-px20 text-px24 leading-px34;
+    }
+  }
+
+  &__numbers {
+    @apply mt-px50;
+
+    @screen md {
+      @apply mt-px40 flex justify-between;
+    }
+
+    @screen xl {
+      @apply mt-px60 -mr-px100;
+    }
+  }
+
+  &__number {
+    @screen mobile {
+      @apply mt-px44;
+    }
+
+    @screen md {
+      width: calc((100% - 28px) / 2);
+    }
+  }
+
+  &__number-value {
+    @apply font-semibold text-px60 leading-px70;
+
+    @screen xl {
+      @apply text-px80 leading-px90;
+    }
+  }
+
+  &__number-caption {
+    @apply text-px20 leading-px28;
+
+    @screen md {
+      @apply mt-px15 text-px22 leading-px32;
+    }
+
+    @screen xl {
+      @apply mt-px14 text-px24 leading-px34;
+    }
+  }
+
+  &__cta-wrap {
+    @apply mt-px50;
+
+    @screen md {
+      @apply mt-px60;
+    }
+
+    @screen xl {
+      @apply col-span-full;
+    }
+  }
+
+  &__cta {
+    @apply inline-flex items-center justify-center h-px46 px-px32 rounded-px10;
+    @apply font-semibold text-px16 leading-px22 tracking-em001;
+
+    @screen md {
+      @apply px-px24;
+    }
+
+    @screen xl {
+      @apply px-px40 h-px66;
+    }
+  }
+
+  &__image {
+    @apply col-span-full mt-px145;
+
+    @screen md {
+      @apply mt-px80;
+    }
+
+    @screen xl {
+      @apply col-span-7 mt-0 pl-px35 -mr-px158;
+    }
+
+    img {
+      @apply w-full h-auto;
+    }
+  }
+
+  // No numbers variant
+  &--no-numbers {
+    .text-overlapping-image__body {
+      @screen md {
+        @apply col-span-4 text-left;
+      }
+
+      @screen xl {
+        @apply col-span-5 -mr-px28;
+      }
+    }
+
+    .text-overlapping-image__image {
+      @screen md {
+        @apply col-span-4 mt-0;
+      }
+
+      @screen xl {
+        @apply col-span-6 col-start-7 -ml-px48 -mr-px58;
+      }
+    }
+  }
+}
