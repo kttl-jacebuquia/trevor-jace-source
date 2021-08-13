@@ -2,6 +2,7 @@
 
 use \TrevorWP\Theme\Customizer;
 use \TrevorWP\CPT\RC\RC_Object;
+use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 
 /**
  * Categories Helper
@@ -13,7 +14,8 @@ class Categories {
 	 * @return string
 	 */
 	public static function render_rc_featured_hero(): string {
-		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
+		$featured_cat_ids = Resource_Center::get_featured_topics();
+		$featured_cat_ids = array_column($featured_cat_ids, 'term_id');
 		$featured_cats    = get_terms(
 			array(
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
