@@ -12,22 +12,25 @@
 	}
 
 	.dedication {
-		@apply mb-px50 flex flex-nowrap items-start;
+		@apply flex flex-nowrap items-start mt-px50;
 		@apply text-px18 leading-px26 tracking-px05;
+
+    @screen md {
+      @apply mt-px40;
+    }
 	}
 
 	.dedication-checkbox.dedication-checkbox {
 		@apply flex w-px30 h-px30 relative items-center justify-center;
-		@apply visible mr-px20 opacity-100 bg-teal-dark;
+		@apply visible mr-px20 opacity-100 bg-none;
 		@apply appearance-none rounded-px4;
 
-		&::before {
-			content: '';
-			@apply absolute top-0 left-0 w-full h-full;
-		}
+    &:checked {
+      @apply bg-teal-dark;
+    }
 
 		&::after {
-			@apply relative text-px30 text-white;
+			@apply relative text-px40 text-white;
 			font-family: "trevor-ti";
 			content: $font-trevor-ti-checkmark;
 		}
@@ -42,11 +45,24 @@
 		}
 	}
 
-	&__submit {
-		@apply transition-all duration-300;
+  .amount {
+    margin-bottom: 0 !important;
+  }
+
+	&__submit,
+  input.submit {
+		@apply transition-all duration-300 mt-px50;
+
+    @screen xl {
+      @apply mt-px40;
+    }
 
 		&:hover {
 			--tw-bg-opacity: .9 !important;
 		}
 	}
+
+  &__error {
+    @apply font-semibold text-px16 leading-px22 tracking-em001 mt-px14;
+  }
 }

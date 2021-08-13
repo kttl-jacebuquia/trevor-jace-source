@@ -312,4 +312,35 @@ abstract class A_Field_Group {
 
 		return $constants;
 	}
+
+	/**
+	 * @param string $label
+	 * @param array $args
+	 * @arg $args['name'] Can be defined. Otherwise produces one from the label.
+	 *
+	 * @return array
+	 */
+	protected static function _gen_accordion_field( string $label, array $args = array() ): array {
+		$name = empty( $args['name'] )
+			? acf_slugify( $label, '-' )
+			: $args['name'];
+
+		$open         = array_key_exists( 'open', $args ) ? $args['open'] : 0;
+		$multi_expand = array_key_exists( 'multi_expand', $args ) ? $args['multi_expand'] : 0;
+
+		$field_name = static::FIELD_PREFIX_TAB . $name;
+
+		return array(
+			$field_name => array_merge(
+				array(
+					'key'          => static::gen_field_key( $field_name ),
+					'type'         => 'accordion',
+					'label'        => $label,
+					'open'         => $open,
+					'multi_expand' => $multi_expand,
+				),
+				$args
+			),
+		);
+	}
 }
