@@ -4,6 +4,7 @@ use TrevorWP\Theme\ACF\Field\Color;
 
 class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE               = 'title';
+	const FIELD_HEADER              = 'header';
 	const FIELD_DESCRIPTION         = 'description';
 	const FIELD_BLOCK_STYLES        = 'block_styles';
 	const FIELD_BG_COLOR            = 'bg_color';
@@ -21,6 +22,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	protected static function prepare_register_args(): array {
 		$title               = static::gen_field_key( static::FIELD_TITLE );
+		$header              = static::gen_field_key( static::FIELD_HEADER );
 		$description         = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$block_styles        = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 		$box_color           = static::gen_field_key( static::FIELD_BOX_COLOR );
@@ -87,10 +89,16 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 					),
 				),
 				static::FIELD_TITLE          => array(
-					'key'      => $title,
-					'name'     => static::FIELD_TITLE,
-					'label'    => 'Title',
-					'type'     => 'text',
+					'key'   => $title,
+					'name'  => static::FIELD_TITLE,
+					'label' => 'Title',
+					'type'  => 'text',
+				),
+				static::FIELD_HEADER         => array(
+					'key'   => $header,
+					'name'  => static::FIELD_HEADER,
+					'label' => 'Header',
+					'type'  => 'text',
 				),
 				static::FIELD_DESCRIPTION    => array(
 					'key'   => $description,
@@ -175,6 +183,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$title                         = static::get_val( static::FIELD_TITLE );
+		$header                        = static::get_val( static::FIELD_HEADER );
 		$description                   = static::get_val( static::FIELD_DESCRIPTION );
 		$block_styles                  = static::get_val( static::FIELD_BLOCK_STYLES );
 		$box_color                     = static::get_val( static::FIELD_BOX_COLOR );
@@ -200,11 +209,15 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 			<div class="messaging__container">
 				<div class="messaging__content <?php echo esc_attr( $box_styles ); ?>">
 					<?php if ( ! empty( $title ) ) : ?>
-						<h2 class="messaging__headline"><?php echo $title; ?></h2>
+						<h2 class="messaging__title"><?php echo $title; ?></h2>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $header ) ) : ?>
+						<h4 class="messaging__header"><?php echo $header; ?></h4>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $description ) ) : ?>
-						<p class="messaging__description"><?php echo esc_html( $description ); ?></p>
+						<p class="messaging__description"><?php echo $description; ?></p>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $buttons ) ) : ?>
@@ -213,12 +226,11 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 								<?php
 								$button_wrap_cls = array();
 
-								$border_style = ! empty( $button[ static::FIELD_BUTTON_BG_COLOR ] ) ? $button[ static::FIELD_BUTTON_BORDER_STYLE ] : 'none';
+								$border_style      = ! empty( $button[ static::FIELD_BUTTON_BG_COLOR ] ) ? $button[ static::FIELD_BUTTON_BORDER_STYLE ] : 'none';
 								$button_wrap_cls[] = "messaging__button--{$button[ static::FIELD_BUTTON_BORDER_STYLE ]}";
 								if ( 'outlined' === $border_style ) {
 									$button_wrap_cls[] = "border-2 border-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
-								}
-								elseif ( 'link' === $border_style ) {
+								} elseif ( 'link' === $border_style ) {
 									$button_wrap_cls[] = "border-b-2 border-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
 								}
 

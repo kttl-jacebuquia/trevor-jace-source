@@ -41,7 +41,7 @@
 		}
 	}
 
-	&__headline {
+	&__title {
 		@apply font-semibold text-px30 leading-px36 text-center;
 
 		@screen md {
@@ -53,15 +53,29 @@
 		}
 	}
 
+	&__header {
+		@apply font-normal text-px16 leading-px24 text-center;
+
+		@screen md {
+			@apply text-px18 leading-px26 tracking-px05;
+		}
+	}
+
 	&__description {
 		@apply text-px18 leading-px26 tracking-px05 text-center mt-px18;
 
 		@screen xl {
 			@apply text-px20 leading-px28 mt-px14;
 		}
+
+		b,
+		strong {
+			@apply font-semibold;
+		}
 	}
 
-	&__headline + &__description {
+	&__title + &__description,
+	&__title + &__header {
 		@apply mt-px16;
 
 		@screen md {
@@ -70,6 +84,18 @@
 
 		@screen xl {
 			@apply mt-px18;
+		}
+	}
+
+	&__header + &__description {
+		@apply mt-px14;
+
+		@screen md {
+			@apply mt-px16;
+		}
+
+		@screen xl {
+			@apply mt-px14;
 		}
 	}
 
@@ -95,7 +121,8 @@
 		}
 	}
 
-	&__headline,
+	&__title,
+	&__header,
 	&__description,
 	&__buttons {
 		@screen md {
