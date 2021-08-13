@@ -42,26 +42,22 @@
 	}
 
 	&__headline {
-		@apply font-semibold text-px30 leading-px40 tracking-em005 text-center;
+		@apply font-semibold text-px30 leading-px36 text-center;
 
 		@screen md {
-			@apply text-px32 leading-px42 tracking-normal;
+			@apply text-px32 leading-px38 tracking-px_05;
 		}
 
 		@screen xl {
-			@apply text-px40 leading-px48 tracking-px_05;
+			@apply text-px40 leading-px46;
 		}
 	}
 
 	&__description {
-		@apply text-px16 leading-px22 tracking-px05 text-center mt-px18;
-
-		@screen md {
-			@apply text-px18 leading-px24;
-		}
+		@apply text-px18 leading-px26 tracking-px05 text-center mt-px18;
 
 		@screen xl {
-			@apply text-px20 leading-px28 tracking-em005 mt-px14;
+			@apply text-px20 leading-px28 mt-px14;
 		}
 	}
 
