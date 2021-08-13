@@ -4,6 +4,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_FORM_IMAGE = 'form_image';
 	const FIELD_HEADING    = 'heading';
 	const FIELD_INTRO      = 'intro';
+	const FIELD_DEDICATION = 'dedication';
 
 	/**
 	 * @inheritDoc
@@ -12,6 +13,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 		$form_image = static::gen_field_key( static::FIELD_FORM_IMAGE );
 		$heading    = static::gen_field_key( static::FIELD_HEADING );
 		$intro      = static::gen_field_key( static::FIELD_INTRO );
+		$dedication = static::gen_field_key( static::FIELD_DEDICATION );
 
 		return array(
 			'title'  => 'Donation Form + IMG',
@@ -43,6 +45,13 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 						'width' => '50%',
 					),
 				),
+				static::FIELD_DEDICATION => array(
+					'key'   => $dedication,
+					'name'  => static::FIELD_DEDICATION,
+					'label' => 'Show dedication field',
+					'type'  => 'true_false',
+					'ui'    => 1,
+				),
 			),
 		);
 	}
@@ -71,8 +80,8 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 				'form_image' => static::get_val( static::FIELD_FORM_IMAGE ),
 				'heading'    => static::get_val( static::FIELD_HEADING ),
 				'intro'      => static::get_val( static::FIELD_INTRO ),
+				'dedication' => static::get_val( static::FIELD_DEDICATION ),
 			),
-			array( 'dedication' => false ),
 			$options,
 		);
 
@@ -120,10 +129,12 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 								</div>
 							</div>
 
+							<div class="donation-form__error hidden">* Please select a donation amount before submitting.</div>
+
 							<?php if ( $options['dedication'] ) : ?>
 								<div class="dedication">
-									<input type="checkbox" class="dedication-checkbox" aria-labelledby="<?php echo 'dedication-checkbox-' . $uuid; ?>" />
-									<label id="<?php echo 'dedication-checkbox-' . $uuid; ?>">
+									<input type="checkbox" class="dedication-checkbox" id="<?php echo 'dedication-checkbox-' . $uuid; ?>" />
+									<label for="<?php echo 'dedication-checkbox-' . $uuid; ?>">
 										<strong>Dedicate my donation</strong> in honor or in memory of someone.
 									</label>
 								</div>
