@@ -80,7 +80,7 @@ class Crisis_Services_Text_Block extends A_Field_Group implements I_Block, I_Ren
 			<div class="crisis-services-image-text__container">
 				<div class="crisis-services-image-text__box">
 					<?php if ( ! empty( $title ) ) : ?>
-						<h3 class="crisis-services-image-text__heading"><?php echo esc_html( $title ); ?></h3>
+						<h3 class="crisis-services-image-text__heading"><?php echo $title; ?></h3>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $description ) ) : ?>

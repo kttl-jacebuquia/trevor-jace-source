@@ -78,7 +78,7 @@ class TrevorSpace_Text_Image extends A_Field_Group implements I_Block, I_Rendera
 		?>
 		<div class="container mx-auto">
 			<?php if ( ! empty( $title ) ) : ?>
-				<h3><?php echo esc_html( $title ); ?></h3>
+				<h3><?php echo $title; ?></h3>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $description ) ) : ?>

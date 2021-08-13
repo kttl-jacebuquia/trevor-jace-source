@@ -126,50 +126,63 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 		$cards           = static::get_val( static::FIELD_CARDS );
 
 		ob_start();
-		// Next Step: FE
 		?>
-		<div>
-			<?php if ( ! empty( $title ) ) : ?>
-				<h1><?php echo esc_html( $title ); ?></h1>
-			<?php endif; ?>
+		<div class="volunteer-information">
+			<div class="volunteer-information__container">
+				<div class="volunteer-information__header">
+				<?php if ( ! empty( $title ) ) : ?>
+					<h2><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $description ) ) : ?>
-				<p><?php echo esc_html( $description ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $description ) ) : ?>
+					<p><?php echo esc_html( $description ); ?></p>
+				<?php endif; ?>
+				</div>
 
-			<?php if ( ! empty( $number ) ) : ?>
-				<p><?php echo esc_html( $number ); ?></p>
-			<?php endif; ?>
+				<div class="volunteer-information__supporting-text">
+				<?php if ( ! empty( $number ) ) : ?>
+					<p class="volunteer-information__supporting-text__number"><?php echo esc_html( number_format( $number ) ); ?></p>
+				<?php endif; ?>
 
-			<?php if ( ! empty( $supporting_text ) ) : ?>
-				<p><?php echo esc_html( $supporting_text ); ?></p>
-			<?php endif; ?>
+				<?php if ( ! empty( $supporting_text ) ) : ?>
+					<p class="volunteer-information__supporting-text__text"><?php echo esc_html( $supporting_text ); ?></p>
+				<?php endif; ?>
+				</div>
 
-			<?php if ( ! empty( $cards ) ) : ?>
-				<?php foreach ( $cards as $card ) : ?>
-					<div>
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ) ) : ?>
-							<img src="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) ) ? esc_attr( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) : esc_attr( $title ); ?>">
-						<?php endif; ?>
+				<div class="volunteer-information__content">
+				<?php if ( ! empty( $cards ) ) : ?>
+					<?php foreach ( $cards as $card ) : ?>
+					<div class="volunteer-information__card">
+						<div class="volunteer-information__card-inner">
+							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ) ) : ?>
+							<div class="volunteer-information__card__image">
+								<img src="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_ICON ]['url'] ); ?>" alt="<?php echo ( ! empty( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) ) ? esc_attr( $card[ static::FIELD_CARDS_ENTRY_ICON ]['alt'] ) : esc_attr( $title ); ?>">
+							</div>
+							<?php endif; ?>
 
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
-							<h2><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h2>
-						<?php endif; ?>
+							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ) ) : ?>
+							<div class="volunteer-information__card__title">
+								<h3><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_HEADER ] ); ?></h3>
+							</div>
+							<?php endif; ?>
 
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ) ) : ?>
-							<p><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ); ?></p>
-						<?php endif; ?>
+							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ) ) : ?>
+							<div class="volunteer-information__card__description">
+								<p><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_DESCRIPTION ] ); ?></p>
+							</div>
+							<?php endif; ?>
 
-						<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
-							<a href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
-						<?php endif; ?>
+							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
+							<div class="volunteer-information__card__cta">
+								<a href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
+							</div>
+							<?php endif; ?>
+						</div>
 					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<a href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-			<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+				</div>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
