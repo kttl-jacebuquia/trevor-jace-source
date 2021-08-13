@@ -91,7 +91,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 					'name'     => static::FIELD_TITLE,
 					'label'    => 'Title',
 					'type'     => 'text',
-					'required' => 1,
 				),
 				static::FIELD_DESCRIPTION    => array(
 					'key'   => $description,
@@ -135,11 +134,12 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						static::FIELD_BUTTON_BORDER_STYLE => array(
 							'key'           => $button_border_style,
 							'name'          => static::FIELD_BUTTON_BORDER_STYLE,
-							'label'         => 'Border Style',
+							'label'         => 'Button Style',
 							'type'          => 'button_group',
 							'choices'       => array(
 								'filled'   => 'Filled',
 								'outlined' => 'Outlined',
+								'link'     => 'Link',
 							),
 							'default_value' => 'filled',
 						),
@@ -211,9 +211,18 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						<div class="messaging__buttons">
 							<?php foreach ( $buttons as $button ) : ?>
 								<?php
-									$button_wrap_cls = array();
+								$button_wrap_cls = array();
 
-								if ( ! empty( $button[ static::FIELD_BUTTON_BG_COLOR ] ) ) {
+								$border_style = ! empty( $button[ static::FIELD_BUTTON_BG_COLOR ] ) ? $button[ static::FIELD_BUTTON_BORDER_STYLE ] : 'none';
+								$button_wrap_cls[] = "messaging__button--{$button[ static::FIELD_BUTTON_BORDER_STYLE ]}";
+								if ( 'outlined' === $border_style ) {
+									$button_wrap_cls[] = "border-2 border-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
+								}
+								elseif ( 'link' === $border_style ) {
+									$button_wrap_cls[] = "border-b-2 border-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
+								}
+
+								if ( ! empty( $button[ static::FIELD_BUTTON_BG_COLOR ] && 'link' !== $border_style ) ) {
 									$button_wrap_cls[] = "bg-{$button[ static::FIELD_BUTTON_BG_COLOR ]}";
 								}
 
@@ -221,9 +230,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 									$button_wrap_cls[] = "text-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
 								}
 
-								if ( ! empty( $button[ static::FIELD_BUTTON_BORDER_STYLE ] ) && 'outlined' === $button[ static::FIELD_BUTTON_BORDER_STYLE ] ) {
-									$button_wrap_cls[] = "border-2 border-{$button[ static::FIELD_BUTTON_TEXT_COLOR ]}";
-								}
 								?>
 								<a class="messaging__button <?php echo esc_attr( implode( ' ', $button_wrap_cls ) ); ?>"
 								href="<?php echo esc_url( $button[ static::FIELD_BUTTON ]['url'] ); ?>"

@@ -74,7 +74,8 @@
 	}
 
 	&__buttons {
-		@apply flex flex-wrap flex-shrink-0	gap-5 justify-center text-center mt-px30;
+		@apply flex flex-wrap flex-shrink-0 gap-5 justify-center items-center;
+		@apply text-center mt-px30;
 
 		@screen md {
 			@apply flex-wrap;
@@ -87,6 +88,10 @@
 
 		@screen xl {
 			@apply text-px20 leading-px26 tracking-px05 py-px20 px-px40;
+		}
+
+		&--link {
+			@apply p-0 mt-px2 rounded-none;
 		}
 	}
 
