@@ -26,6 +26,7 @@ class ACF {
 		Options_Page\Post_Type\Financial_Report::class,
 		Options_Page\Post_Type\Research::class,
 		Options_Page\Post_Type\Letter::class,
+		Options_Page\Post_Type\Bill::class,
 		Options_Page\Resource_Center::class,
 		// Blocks
 		Field_Group\HTML_Elem::class,
