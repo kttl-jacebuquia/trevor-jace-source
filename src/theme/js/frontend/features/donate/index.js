@@ -7,6 +7,7 @@ const _customAmount = $('.custom-amount', _donateForm);
 const _displayAmount = $('.display-amount', _donateForm);
 const _fixedAmount = $('.fixed-amount');
 const _displayFormatAmount = $("input[data-type='currency']");
+const _error = $('.donation-form__error');
 
 const onFrequencyToggle = (freqElement) => {
 	const $freq = $(freqElement);
@@ -44,6 +45,14 @@ export function displayAmountAction() {
 		e.preventDefault();
 		let _newCustomAmount = _customAmount.val();
 		let _isRecurring = $('.donation-frequency:checked');
+
+		if ( !_newCustomAmount && !(new FormData(e.currentTarget).get('amount')) ) {
+			_error.removeClass('hidden');
+			return false;
+		} else {
+			_error.addClass('hidden');
+		}
+
 		_customAmount.prop('disabled', true);
 		_displayAmount.prop('disabled', true);
 

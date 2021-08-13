@@ -45,10 +45,11 @@ class Address extends A_Field_Group implements I_Block {
 							'layout'     => 'block',
 							'sub_fields' => array(
 								static::FIELD_LINE => array(
-									'key'   => $line,
-									'name'  => static::FIELD_LINE,
-									'label' => 'Line',
-									'type'  => 'textarea',
+									'key'       => $line,
+									'name'      => static::FIELD_LINE,
+									'label'     => 'Line',
+									'type'      => 'textarea',
+									'new_lines' => 'br',
 								),
 							),
 						),
@@ -86,7 +87,7 @@ class Address extends A_Field_Group implements I_Block {
 						<div class="contact-information__card">
 							<h3 class="contact-information__title"><?php echo esc_html( @$entry[ static::FIELD_ENTRY_TITLE ] ); ?></h3>
 							<?php foreach ( @$entry['entry_lines'] as $line ) { ?>
-								<div class="contact-information__description"><?php echo esc_html( $line[ static::FIELD_LINE ] ); ?></div>
+								<div class="contact-information__description"><?php echo $line[ static::FIELD_LINE ]; ?></div>
 							<?php } ?>
 						</div>
 					<?php endforeach; ?>

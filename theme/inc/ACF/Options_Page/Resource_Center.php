@@ -385,4 +385,10 @@ class Resource_Center extends A_Options_Page {
 
 		return Helper\Word_Of_The_Day::render( $options );
 	}
+
+	public static function get_featured_topics() {
+		$featured_topics = static::get_option( static::FIELD_FEATURED_TOPICS );
+
+		return $featured_topics;
+	}
 }

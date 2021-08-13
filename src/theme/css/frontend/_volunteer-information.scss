@@ -1,0 +1,137 @@
+.volunteer-information {
+	@apply bg-teal-dark text-white text-center;
+	@apply pt-px94 pb-px110;
+
+	&__container {
+		@apply tw-grid container mx-auto;
+	}
+
+	&__header {
+		@apply col-span-full;
+
+		@screen xl {
+			@apply col-span-6 text-left;
+		}
+
+		h2 {
+			@apply font-semibold text-px30 leading-px40 tracking-em005;
+
+			@screen md {
+				@apply text-px32 leading-px42 tracking-normal;
+			}
+
+			@screen xl {
+				@apply text-px56 leading-px66;
+			}
+		}
+
+		p {
+			@apply text-px20 leading-px26;
+
+			@screen md {
+				@apply text-px22 leading-px32 tracking-em005 mt-px15;
+			}
+
+			@screen xl {
+				@apply text-px24 leading-px34 mt-px20;
+			}
+		}
+	}
+
+	&__supporting-text {
+		@apply col-span-full mt-px57;
+
+		@screen md {
+			@apply mt-px40;
+		}
+
+		@screen xl {
+			@apply col-span-5 col-start-8 text-right mt-px10 px-px66;
+		}
+
+		&__number {
+			@apply font-semibold text-px60 leading-px70 tracking-px_01;
+
+			@screen md {
+				@apply tracking-normal;
+			}
+
+			@screen xl {
+				@apply text-px100 leading-px110 tracking-em_001;
+			}
+		}
+
+		&__text {
+			@apply text-px20 leading-px28 mt-px4;
+
+			@screen md {
+				@apply text-px22 leading-px32 tracking-em005 mt-px15;
+			}
+
+			@screen xl {
+				@apply text-px32 leading-px42 tracking-em001 mt-px25 px-px26;
+			}
+		}
+	}
+
+	&__content {
+		@apply grid col-span-full gap-px38 mt-px80;
+
+		@screen md {
+			@apply tw-grid gap-px28 mt-px60;
+		}
+
+		@screen xl {
+			@apply mt-px120;
+		}
+	}
+
+	&__card {
+		@apply flex items-center;
+		@apply bg-white text-teal-dark rounded-px10;
+		@apply py-px70 px-px26;
+
+		@screen md {
+			@apply col-span-4 pt-px40;
+		}
+
+		@screen xl {
+			@apply col-span-6 p-px100;
+		}
+
+		&-inner {
+		}
+
+		&__image {
+			@apply mx-auto w-px118;
+
+			@screen xl {
+				@apply w-px200;
+			}
+		}
+
+		&__title {
+			@apply font-semibold text-px24 leading-px28 tracking-px_05 mt-px10;
+
+			@screen xl {
+				@apply col-span-4 text-px36 leading-px46 tracking-normal mt-px20;
+			}
+		}
+
+		&__description {
+			@apply text-px16 leading-px24 mt-px10;
+
+			@screen xl {
+				@apply col-span-4 text-px20 leading-px30 tracking-em001  mt-px12;
+			}
+		}
+
+		&__cta {
+			@apply btn mt-px30;
+
+			@screen xl {
+				@apply mt-px40;
+			}
+		}
+	}
+}
