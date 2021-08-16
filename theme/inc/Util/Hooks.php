@@ -3,6 +3,7 @@
 use TrevorWP\CPT;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
+use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
@@ -88,6 +89,9 @@ class Hooks {
 		# Allow SVG
 		add_filter( 'upload_mimes', array( self::class, 'upload_mimes' ) );
 
+		# WPSEO Title
+		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
+
 		# Search
 		Customizer\Search::init_all();
 
@@ -102,7 +106,6 @@ class Hooks {
 
 		# MailChimp API
 		MailChimp::construct();
-
 	}
 
 	/**
@@ -762,5 +765,26 @@ class Hooks {
 		$new_filetypes['svg'] = 'image/svg+xml';
 		$file_types           = array_merge( $file_types, $new_filetypes );
 		return $file_types;
+	}
+
+	/**
+	 * Change the WPSEO Title value to Page Hero Title
+	 *
+	 * @param string $title
+	 *
+	 * @return string $title
+	 *
+	 * @link http://hookr.io/filters/wpseo_title/
+	 */
+	public static function custom_seo_title( $title ) {
+		if ( is_page() ) {
+			$hero_title = Page_Header::get_val( Page_Header::FIELD_TITLE );
+
+			if ( ! empty( $hero_title ) ) {
+				$title = str_replace( get_the_title(), Page_Header::get_val( Page_Header::FIELD_TITLE ), $title );
+			}
+		}
+
+		return $title;
 	}
 }
