@@ -146,7 +146,7 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 						),
 					),
 				),
-			)
+			),
 		);
 	}
 
