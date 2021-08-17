@@ -12,6 +12,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 	const FIELD_DATA_QUOTE     = 'quote';
 	const FIELD_DATA_CITE      = 'cite';
 	const FIELD_BG_CLR         = 'bg_color';
+	const FIELD_OUTER_BG_CLR   = 'outer_bg_color';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -23,6 +24,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		$data_title     = static::gen_field_key( static::FIELD_DATA_QUOTE );
 		$data_subtitle  = static::gen_field_key( static::FIELD_DATA_CITE );
 		$bg_color       = static::gen_field_key( static::FIELD_BG_CLR );
+		$outer_bg_color = static::gen_field_key( static::FIELD_OUTER_BG_CLR );
 
 		return array(
 			'title'  => 'Testimonials Carousel',
@@ -98,8 +100,22 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 					$bg_color,
 					static::FIELD_BG_CLR,
 					array(
-						'label'         => 'BG Color',
+						'label'         => 'Inner BG Color',
 						'default_value' => 'gray-light',
+						'wrapper'       => array(
+							'width' => '50%',
+						),
+					),
+				),
+				static::FIELD_OUTER_BG_CLR   => Field\Color::gen_args(
+					$outer_bg_color,
+					static::FIELD_OUTER_BG_CLR,
+					array(
+						'label'         => 'Outer BG Color',
+						'default_value' => 'white',
+						'wrapper'       => array(
+							'width' => '50%',
+						),
 					),
 				),
 			),
@@ -134,6 +150,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 			'image_position' => static::get_val( static::FIELD_IMAGE_POSITION ) ?? 'left',
 			'image_type'     => static::get_val( static::FIELD_IMAGE_TYPE ) ?? 'contained',
 			'bg_color'       => static::get_val( static::FIELD_BG_CLR ) ?? 'gray-light',
+			'outer_bg_color' => static::get_val( static::FIELD_OUTER_BG_CLR ) ?? 'white',
 		);
 
 		echo Helper\Carousel::testimonials( $data, $options );
