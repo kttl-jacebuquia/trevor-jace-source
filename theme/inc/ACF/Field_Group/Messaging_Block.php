@@ -6,6 +6,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE               = 'title';
 	const FIELD_HEADER              = 'header';
 	const FIELD_DESCRIPTION         = 'description';
+	const FIELD_LARGE_TEXT          = 'large_text';
 	const FIELD_BLOCK_STYLES        = 'block_styles';
 	const FIELD_BG_COLOR            = 'bg_color';
 	const FIELD_BOX_COLOR           = 'box_color';
@@ -24,6 +25,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$title               = static::gen_field_key( static::FIELD_TITLE );
 		$header              = static::gen_field_key( static::FIELD_HEADER );
 		$description         = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$large_text          = static::gen_field_key( static::FIELD_LARGE_TEXT );
 		$block_styles        = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 		$box_color           = static::gen_field_key( static::FIELD_BOX_COLOR );
 		$extend_padding      = static::gen_field_key( static::FIELD_EXTEND_PADDING );
@@ -106,6 +108,12 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
+				static::FIELD_LARGE_TEXT    => array(
+					'key'   => $large_text,
+					'name'  => static::FIELD_LARGE_TEXT,
+					'label' => 'Large Text',
+					'type'  => 'textarea',
+				),
 				static::FIELD_BUTTONS        => array(
 					'key'          => $buttons,
 					'name'         => static::FIELD_BUTTONS,
@@ -185,6 +193,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$title                         = static::get_val( static::FIELD_TITLE );
 		$header                        = static::get_val( static::FIELD_HEADER );
 		$description                   = static::get_val( static::FIELD_DESCRIPTION );
+		$large_text                    = static::get_val( static::FIELD_LARGE_TEXT );
 		$block_styles                  = static::get_val( static::FIELD_BLOCK_STYLES );
 		$box_color                     = static::get_val( static::FIELD_BOX_COLOR );
 		$extend_padding                = static::get_val( static::FIELD_EXTEND_PADDING );
@@ -218,6 +227,10 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 
 					<?php if ( ! empty( $description ) ) : ?>
 						<p class="messaging__description"><?php echo $description; ?></p>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $large_text ) ) : ?>
+						<p><?php echo $large_text; ?></p>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $buttons ) ) : ?>

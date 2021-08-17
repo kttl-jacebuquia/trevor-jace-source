@@ -20,7 +20,7 @@ $header_data = Options_Page\Header::get_header();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
-	<?php echo Customizer\External_Scripts::get_val( Customizer\External_Scripts::SETTING_HEAD_BTM ); ?>
+	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_BOTTOM' ); ?>
 </head>
 <body <?php body_class( 'on-top' ); ?>>
 <?php $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type(); ?>
