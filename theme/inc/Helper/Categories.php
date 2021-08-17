@@ -15,7 +15,7 @@ class Categories {
 	 */
 	public static function render_rc_featured_hero(): string {
 		$featured_cat_ids = Resource_Center::get_featured_topics();
-		$featured_cat_ids = array_column($featured_cat_ids, 'term_id');
+		$featured_cat_ids = array_column( $featured_cat_ids, 'term_id' );
 		$featured_cats    = get_terms(
 			array(
 				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
@@ -35,7 +35,7 @@ class Categories {
 				<div class="flex flex-wrap justify-center">
 					<?php foreach ( $featured_cats as $cat ) { ?>
 						<a href="<?php echo get_term_link( $cat ); ?>"
-						   class="rounded-full hover:bg-persian_blue-lighter py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?php echo $cat->name; ?></a>
+						class="rounded-full hover:bg-persian_blue-lighter py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?php echo $cat->name; ?></a>
 					<?php } ?>
 				</div>
 			</div>
