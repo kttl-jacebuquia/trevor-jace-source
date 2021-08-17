@@ -1,6 +1,11 @@
 .word-of-the-day {
   @apply bg-gradient-trevorspace pt-px80 text-indigo text-center w-full max-w-none;
   background-size: cover;
+  @apply mt-20;
+
+  @screen md {
+    @apply mt-px120
+  }
 
   @screen xl {
     @apply pt-0 text-left;
