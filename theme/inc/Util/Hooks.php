@@ -635,6 +635,16 @@ class Hooks {
 				'callback' => array( 'TrevorWP\Theme\ACF\Field_Group\Post_Grid', 'ajax_post_cards' ),
 			)
 		);
+
+		// Article River Entries API
+		register_rest_route(
+			'trevor/v1',
+			'/article-river-entries',
+			array(
+				'methods'  => 'GET',
+				'callback' => array( 'TrevorWP\Theme\ACF\Field_Group\Article_River', 'ajax_entries' ),
+			)
+		);
 	}
 
 	/**
