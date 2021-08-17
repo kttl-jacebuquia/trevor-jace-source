@@ -54,7 +54,7 @@ export default class Component extends WithState {
       ComponentClass.getInstances = () => ComponentClass[instancesStore];
     }
 
-    const instance = new ComponentClass();
+    const instance = new ComponentClass(element);
 
     // Add this instance into instances store
     ComponentClass[instancesStore].push(instance);
