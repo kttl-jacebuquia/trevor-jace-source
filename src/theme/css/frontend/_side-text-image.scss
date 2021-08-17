@@ -1,0 +1,72 @@
+.side-text-image {
+  &__container {
+    @apply tw-grid container mx-auto;
+    @apply items-center;
+  }
+
+  &__text {
+    @apply col-span-full py-px84 text-center;
+
+    @screen md {
+      @apply col-span-4 py-px10 text-left;
+    }
+
+    @screen xl {
+      @apply col-span-5;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px28 leading-px34 tracking-em005;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen xl {
+      @apply text-px46 leading-px56 tracking-em_001;
+    }
+  }
+
+  &__description {
+    @apply text-px20 leading-px26 mt-px12;
+
+    @screen md {
+      @apply mt-px12 text-px18 leading-px26;
+    }
+
+    @screen xl {
+      @apply mt-px20 text-px26 leading-px36 tracking-em005;
+    }
+  }
+
+  &__cta {
+    @apply btn mt-px40;
+    @apply h-px46 px-px32;
+    @apply text-px16 leading-px22 tracking-em001;
+
+    @screen md {
+      @apply text-px16 leading-px22 px-px24;
+    }
+
+    @screen xl {
+      @apply h-px66 px-px40 text-px20 leading-px26 tracking-px05;
+    }
+  }
+
+  &__image {
+    @apply col-span-full -mx-px28;
+
+    @screen md {
+      @apply col-span-4 col-start-5 ml-0 -mr-px50;
+    }
+
+    @screen xl {
+      @apply col-span-6 col-start-7 -mr-px140;
+    }
+
+    img {
+      @apply w-full;
+    }
+  }
+}
