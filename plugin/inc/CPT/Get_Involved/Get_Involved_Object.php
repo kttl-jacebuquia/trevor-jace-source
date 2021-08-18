@@ -99,6 +99,7 @@ abstract class Get_Involved_Object {
 		add_action( 'init', array( self::class, 'init' ), 10, 0 );
 		add_filter( 'query_vars', array( self::class, 'query_vars' ), PHP_INT_MAX, 1 );
 		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
+		add_action( 'pre_get_posts', array( self::class, 'pre_get_posts' ), 10, 1 );
 	}
 
 	/**
@@ -204,5 +205,22 @@ abstract class Get_Involved_Object {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Fires after the query variable object is created, but before the actual query is run.
+	 *
+	 * @param \WP_Query $query
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
+	 */
+	public static function pre_get_posts( \WP_Query $query ): void {
+		if ( ! is_admin() && is_post_type_archive( Bill::POST_TYPE ) ) {
+			# Set per page
+			set_query_var( 'posts_per_archive_page', 12 );
+		} elseif ( ! is_admin() && is_post_type_archive( Letter::POST_TYPE ) ) {
+			# Set per page
+			set_query_var( 'posts_per_archive_page', 12 );
+		}
 	}
 }
