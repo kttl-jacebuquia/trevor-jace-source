@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
 
 /**
  * Carousel Helper
@@ -299,22 +300,31 @@ class Carousel {
 
 		$carousel_cls = array(
 			'carousel-testimonials',
-			'bg-' . $options['bg_color'],
+			'bg-' . $options['outer_bg_color'],
 			'text-' . $options['text_alignment'],
+			'text-' . $options['text_color'],
 			'image-' . $options['image_position'],
 			$options['image_type'],
+			$options['boxed'],
 		);
-		$carousel_cls = implode( ' ', $carousel_cls );
+		$attrs        = array(
+			'id' => $id,
+		);
+
+		$box_class = array(
+			'carousel-testimonials-inner',
+			'bg-' . $options['box_bg_color'],
+		);
 
 		ob_start();
 		?>
-		<div class="<?php echo $carousel_cls; ?>" id="<?php echo esc_attr( $id ); ?>">
-			<div class="carousel-testimonials-inner">
+		<div <?php echo A_Field_Group::render_attrs( $carousel_cls, $attrs ); ?>>
+			<div <?php echo A_Field_Group::render_attrs( $box_class ); ?>>
 				<?php if ( 'left' === $options['image_position'] ) : ?>
 					<?php echo self::render_testimonials_image( $data, $options ); ?>
 				<?php endif; ?>
 
-				<?php echo self::render_testimonials_text( $data ); ?>
+				<?php echo self::render_testimonials_text( $data, $options ); ?>
 
 				<?php if ( 'right' === $options['image_position'] ) : ?>
 					<?php echo self::render_testimonials_image( $data, $options ); ?>
@@ -383,10 +393,15 @@ class Carousel {
 	 *
 	 * @return string|null
 	 */
-	public static function render_testimonials_text( array $data = null ): ?string {
+	public static function render_testimonials_text( array $data = null, array $options = array() ): ?string {
+		$class = array(
+			'carousel-testimonials-txt-wrap relative md:py-0',
+			'text-' . $options['text_color'],
+		);
+
 		ob_start();
 		?>
-		<div class="carousel-testimonials-txt-wrap relative md:py-0">
+		<div <?php echo A_Field_Group::render_attrs( $class ); ?>>
 			<div class="panes-container flex justify-between absolute h-full w-full">
 				<div class="carousel-left-arrow-pane swiper-button h-full w-1/6 px-4 relative"
 					data-direction="left"

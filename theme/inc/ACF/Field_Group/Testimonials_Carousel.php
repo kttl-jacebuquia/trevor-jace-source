@@ -11,8 +11,10 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 	const FIELD_DATA_IMG       = 'img';
 	const FIELD_DATA_QUOTE     = 'quote';
 	const FIELD_DATA_CITE      = 'cite';
-	const FIELD_BG_CLR         = 'bg_color';
+	const FIELD_BOX_BG_CLR     = 'box_bg_color';
+	const FIELD_BOXED          = 'boxed';
 	const FIELD_OUTER_BG_CLR   = 'outer_bg_color';
+	const FIELD_TEXT_COLOR     = 'text_color';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
@@ -23,8 +25,10 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		$data_img       = static::gen_field_key( static::FIELD_DATA_IMG );
 		$data_title     = static::gen_field_key( static::FIELD_DATA_QUOTE );
 		$data_subtitle  = static::gen_field_key( static::FIELD_DATA_CITE );
-		$bg_color       = static::gen_field_key( static::FIELD_BG_CLR );
+		$box_bg_color   = static::gen_field_key( static::FIELD_BOX_BG_CLR );
 		$outer_bg_color = static::gen_field_key( static::FIELD_OUTER_BG_CLR );
+		$boxed          = static::gen_field_key( static::FIELD_BOXED );
+		$text_color     = static::gen_field_key( static::FIELD_TEXT_COLOR );
 
 		return array(
 			'title'  => 'Testimonials Carousel',
@@ -96,14 +100,34 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 						),
 					),
 				),
-				static::FIELD_BG_CLR         => Field\Color::gen_args(
-					$bg_color,
-					static::FIELD_BG_CLR,
+				static::FIELD_BOXED          => array(
+					'key'           => $boxed,
+					'name'          => static::FIELD_BOXED,
+					'label'         => 'Layout',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'default' => 'Default',
+						'boxed'   => 'Boxed',
+					),
+					'default_value' => 'default',
+				),
+				static::FIELD_BOX_BG_CLR     => Field\Color::gen_args(
+					$box_bg_color,
+					static::FIELD_BOX_BG_CLR,
 					array(
-						'label'         => 'Inner BG Color',
-						'default_value' => 'gray-light',
-						'wrapper'       => array(
+						'label'             => 'Box BG Color',
+						'default_value'     => 'gray-light',
+						'wrapper'           => array(
 							'width' => '50%',
+						),
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $boxed,
+									'operator' => '==',
+									'value'    => 'boxed',
+								),
+							),
 						),
 					),
 				),
@@ -113,6 +137,17 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 					array(
 						'label'         => 'Outer BG Color',
 						'default_value' => 'white',
+						'wrapper'       => array(
+							'width' => '50%',
+						),
+					),
+				),
+				static::FIELD_TEXT_COLOR   => Field\Color::gen_args(
+					$text_color,
+					static::FIELD_TEXT_COLOR,
+					array(
+						'label'         => 'Text Color',
+						'default_value' => 'teal-dark',
 						'wrapper'       => array(
 							'width' => '50%',
 						),
@@ -149,8 +184,10 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 			'text_alignment' => static::get_val( static::FIELD_TEXT_ALIGNMENT ) ?? 'center',
 			'image_position' => static::get_val( static::FIELD_IMAGE_POSITION ) ?? 'left',
 			'image_type'     => static::get_val( static::FIELD_IMAGE_TYPE ) ?? 'contained',
-			'bg_color'       => static::get_val( static::FIELD_BG_CLR ) ?? 'gray-light',
+			'boxed'          => static::get_val( static::FIELD_BOXED ) ?? 'boxed',
+			'box_bg_color'   => 'boxed' === static::get_val( static::FIELD_BOXED ) ? static::get_val( static::FIELD_BOX_BG_CLR ) : 'transparent',
 			'outer_bg_color' => static::get_val( static::FIELD_OUTER_BG_CLR ) ?? 'white',
+			'text_color'     => static::get_val( static::FIELD_TEXT_COLOR ) ?? 'teal-dark',
 		);
 
 		echo Helper\Carousel::testimonials( $data, $options );
