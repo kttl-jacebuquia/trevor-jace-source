@@ -1,4 +1,10 @@
-.crisis-services-image-text {
+.overlapping-text-image-tiles {
+  @apply overflow-hidden py-px50;
+
+  @screen md {
+    @apply py-px100;
+  }
+
   &__container {
     @apply tw-grid container mx-auto;
   }
@@ -6,15 +12,13 @@
   &__box {
     @apply col-span-full rounded-px10 py-px80 text-indigo;
     @apply px-px24 text-center;
-    background: radial-gradient(170.2% 144.04% at 46.11% 196%, #DBD5FF 20.03%, #DBD5FF 92.79%);
 
     @screen md {
       @apply col-start-3 col-span-6 -mr-px102 pl-px76 pr-px130;
     }
 
     @screen xl {
-      @apply col-span-9 col-start-4 -mr-px140 pt-px180 pb-px190 pl-px198 pr-px240;
-      border-radius: 0 10px 10px 0;
+      @apply col-span-9 col-start-4 -mr-px140 pt-px180 pb-px190 pl-px198 pr-px240 rounded-r-none;
     }
   }
 
@@ -82,6 +86,31 @@
 
     img {
       @apply absolute top-0 left-0 w-full h-full object-cover;
+    }
+  }
+
+  // Image On Right Layout
+  &--image-on-right {
+    .overlapping-text-image-tiles__box {
+      @screen md {
+        @apply rounded-l-none col-span-6 col-start-1 -ml-px90 mr-0 pl-px154 pr-px116;
+      }
+
+      @screen xl {
+        @apply -ml-px140 col-span-8 pl-px240 pr-px198 rounded-r-px10;
+      }
+    }
+
+    .overlapping-text-image-tiles__image {
+      @apply col-start-2 col-span-5 ml-0 -mr-px90;
+
+      @screen md {
+        @apply col-span-3 col-start-6 -mr-px90;
+      }
+
+      @screen xl {
+        @apply col-span-5 col-start-8 -mr-px220;
+      }
     }
   }
 }
