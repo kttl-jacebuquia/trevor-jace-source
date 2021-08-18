@@ -368,9 +368,9 @@ class Resource_Center extends A_Options_Page {
 
 		$featured_word = Helper\Posts::get_one_from_list(
 			$glossary,
-			array(),
 			array( 'post_type' => \TrevorWP\CPT\RC\Glossary::POST_TYPE )
 		);
+
 
 		if ( empty( $featured_word ) ) {
 			return;
