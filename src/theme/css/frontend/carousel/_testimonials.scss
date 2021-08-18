@@ -1,407 +1,406 @@
 .carousel-testimonials {
-	@apply overflow-x-hidden;
-	@apply pt-px56 pb-px150;
-
-	@screen md {
-		@apply py-px50;
-	}
-
-	@screen xl {
-		@apply py-px80;
-	}
-
-	&-inner {
-		@apply tw-grid container mx-auto;
-
-		@screen md {
-			@apply items-center;
-		}
-	}
-
-	&-img-wrap {
-		@apply col-span-full;
-
-		@screen md {
-			@apply col-span-3;
-		}
-
-		@screen xl {
-			@apply col-span-5;
-		}
-
-		.swiper-container {
-			@apply h-full;
-		}
-	}
-
-	&-txt-wrap {
-		@apply col-span-full mt-px50;
-
-		@screen md {
-			@apply col-span-5 mt-0;
-		}
-
-		@screen xl {
-			@apply col-span-6 col-start-7;
-		}
-	}
-
-	&-quotes {
-		@apply flex flex-row;
-		@apply mb-px24;
-
-		@screen md {
-			@apply mb-px30;
-		}
-
-		@screen xl {
-			@apply mb-px20;
-		}
-	}
-
-	.trevor-ti-quote-open,
-	.trevor-ti-quote-close {
-		@apply text-teal-dark h-px13 text-px13;
-
-		@screen md {
-			@apply h-px16 text-px16;
-		}
-
-		@screen xl {
-			@apply h-px26 text-px26;
-		}
-	}
-
-	.trevor-ti-quote-close {
-		@apply mt-px4 ml-px6;
-
-		@screen xl {
-			@apply ml-px10;
-		}
-	}
-
-	figure {
-		@apply flex flex-col justify-between text-teal-dark;
-	}
-
-	blockquote {
-		@apply overflow-hidden overflow-ellipsis mx-auto;
-		@apply font-semibold text-px30 leading-px40 tracking-em005;
-
-		@screen md {
-			@apply text-px20 leading-px26;
-		}
-		@screen xl {
-			@apply text-px32 leading-px40;
-		}
-	}
-
-	figcaption {
-		@apply text-px18 leading-px26 mt-px24;
-
-		@screen md {
-			@apply text-px14 leading-px22 tracking-px05 mt-px20;
-		}
-
-		@screen xl {
-			@apply text-px24 leading-px32 mt-px30;
-		}
-	}
-
-	.swiper {
-		&-wrapper {
-			@apply h-auto;
-		}
-
-		&-pagination {
-			@apply flex z-2 mt-px24;
-
-			@screen md {
-				@apply mt-px20;
-			}
-
-			@screen xl {
-				@apply mt-px30;
-			}
-
-			&-bullet {
-				@apply bg-teal-dark bg-opacity-20 opacity-100;
-				@apply z-2;
-
-				&-active {
-					@apply bg-opacity-100;
-				}
-			}
-		}
-	}
-
-	.swiper-slide {
-		@apply h-auto;
-	}
-
-	.panes-container {
-		&.is-mobile-breakpoint {
-			@apply hidden;
-		}
-	}
-
-	&.text-left {
-		.carousel-testimonials-quotes {
-			@apply justify-start;
-		}
-
-		.carousel-testimonials-txt-wrap .swiper-slide {
-			@apply justify-start;
-
-			figure {
-				@screen md {
-					@apply items-start justify-start;
-				}
-			}
-		}
-	}
-
-	&.text-center {
-		.carousel-testimonials-quotes {
-			@apply justify-center;
-		}
-
-		.carousel-testimonials-txt-wrap .swiper-slide {
-			@apply justify-center;
-
-			figure {
-				@screen md {
-					@apply items-center justify-center;
-				}
-			}
-		}
-	}
-
-	&.text-right {
-		.carousel-testimonials-quotes {
-			@apply justify-end;
-		}
-
-		.carousel-testimonials-txt-wrap .swiper-slide {
-			@apply justify-end;
-
-			figure {
-				@screen md {
-					@apply items-end justify-end;
-				}
-			}
-		}
-	}
-
-	&.image-right {
-		@apply pb-px56;
-
-		@screen md {
-			@apply pb-px50;
-		}
-
-		@screen xl {
-			@apply py-px80;
-		}
-
-		.carousel-testimonials-img-wrap {
-			@screen md {
-				@apply col-start-6;
-			}
-
-			@screen xl {
-				@apply col-start-8;
-			}
-		}
-
-		.carousel-testimonials-txt-wrap {
-			@apply mt-0 mb-px65;
-
-			@screen md {
-				@apply col-start-1 mb-0;
-			}
-		}
-	}
-
-	&.contained {
-		.carousel-testimonials-img-wrap {
-			@apply rounded-px10 overflow-hidden;
-
-			.swiper-slide {
-				@apply bg-white;
-			}
-		}
-	}
-
-	&.cover {
-		@screen xl {
-			@apply flex min-h-px550;
-		}
-
-		.carousel-testimonials-inner {
-			@screen xl {
-				@apply relative;
-			}
-		}
-
-		.carousel-testimonials-img-wrap {
-			@screen md {
-				@apply col-span-6;
-			}
-			@screen xl {
-				@apply col-span-full;
-				@apply absolute z-1;
-				bottom: -115px;
-			}
-
-			&::before {
-				@apply hidden;
-			}
-
-			.swiper-container {
-				@apply relative h-auto -ml-px28;
-				width: calc(100% + 56px);
-
-				@screen md {
-					@apply ml-0 -mr-px50;
-					width: calc(100% + 50px);
-				}
-
-				@screen xl {
-					@apply mr-0 w-px577;
-				}
-
-				.swiper-slide {
-					@apply flex justify-center;
-
-					img {
-						@apply w-auto h-px302;
-
-						@screen md {
-							@apply h-px412;
-						}
-
-						@screen xl {
-							@apply h-px436;
-						}
-					}
-				}
-			}
-		}
-
-		.carousel-testimonials-txt-wrap {
-			@screen md {
-				@apply col-span-6 col-start-2;
-			}
-
-			@screen xl {
-				@apply relative col-span-8 col-start-1 z-2;
-			}
-		}
-
-		blockquote {
-			@screen md {
-				@apply text-px30 leading-px40;
-			}
-			@screen xl {
-				@apply text-px34 leading-px42 tracking-em_005;
-			}
-		}
-
-		figcaption {
-			@screen md {
-				@apply text-px18 leading-px28 tracking-normal mt-px22;
-			}
-
-			@screen xl {
-				@apply text-px22 leading-px32 mt-px18;
-			}
-		}
-
-		.trevor-ti-quote-open,
-		.trevor-ti-quote-close {
-			@screen md {
-				@apply h-px24 text-px24;
-			}
-
-			@screen xl {
-				@apply h-px26 text-px26;
-			}
-		}
-
-		.trevor-ti-quote-close {
-			@screen md {
-				@apply mt-px6;
-			}
-
-			@screen xl {
-				@apply ml-px10;
-			}
-		}
-
-		&.image-right {
-			@apply pb-0;
-
-			@screen md {
-				@apply pt-px100;
-			}
-
-			@screen xl {
-				@apply py-px115;
-			}
-
-			.carousel-testimonials-img-wrap {
-				@screen md {
-					@apply col-start-3;
-				}
-				@screen xl {
-					@apply col-start-6;
-					right: -140px;
-				}
-
-				.swiper-container {
-					@screen md {
-						@apply ml-0 -mr-px50;
-					}
-					@screen xl {
-						@apply mr-0;
-					}
-				}
-			}
-		}
-
-		&.image-left {
-			@apply pt-0 pb-px80;
-
-			@screen xl {
-				@apply py-px115;
-			}
-
-			.carousel-testimonials-txt-wrap {
-				@screen md {
-					@apply mt-px30;
-				}
-				@screen xl {
-					@apply col-start-6;
-				}
-			}
-			.carousel-testimonials-img-wrap {
-				@screen md {
-					@apply col-start-1;
-				}
-				@screen xl {
-					left: -140px;
-				}
-
-				.swiper-container {
-					@screen md {
-						@apply -ml-px50;
-					}
-					@screen xl {
-						@apply ml-0;
-					}
-				}
-			}
-		}
-	}
+  @apply overflow-x-hidden;
+  @apply pt-px56 pb-px150;
+
+  @screen md {
+    @apply py-px50;
+  }
+
+  @screen xl {
+    @apply py-px80;
+  }
+
+  &-inner {
+    @apply tw-grid container mx-auto;
+
+    @screen md {
+      @apply items-center;
+    }
+  }
+
+  &-img-wrap {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-3;
+    }
+
+    @screen xl {
+      @apply col-span-5;
+    }
+
+    .swiper-container {
+      @apply h-full;
+    }
+  }
+
+  &-txt-wrap {
+    @apply col-span-full mt-px50;
+
+    @screen md {
+      @apply col-span-5 mt-0;
+    }
+
+    @screen xl {
+      @apply col-span-6 col-start-7;
+    }
+  }
+
+  &-quotes {
+    @apply flex flex-row;
+    @apply mb-px24;
+
+    @screen md {
+      @apply mb-px30;
+    }
+
+    @screen xl {
+      @apply mb-px20;
+    }
+  }
+
+  .trevor-ti-quote-open,
+  .trevor-ti-quote-close {
+    @apply text-current h-px13 text-px13;
+
+    @screen md {
+      @apply h-px16 text-px16;
+    }
+
+    @screen xl {
+      @apply h-px26 text-px26;
+    }
+  }
+
+  .trevor-ti-quote-close {
+    @apply mt-px4 ml-px6;
+
+    @screen xl {
+      @apply ml-px10;
+    }
+  }
+
+  blockquote {
+    @apply overflow-hidden overflow-ellipsis inline-flex;
+    @apply font-semibold text-px30 leading-px40 tracking-em005;
+
+    @screen md {
+      @apply text-px20 leading-px26;
+    }
+    @screen xl {
+      @apply text-px32 leading-px40;
+    }
+  }
+
+  figcaption {
+    @apply text-px18 leading-px26 mt-px24;
+
+    @screen md {
+      @apply text-px14 leading-px22 tracking-px05 mt-px20;
+    }
+
+    @screen xl {
+      @apply text-px24 leading-px32 mt-px30;
+    }
+  }
+
+  .swiper {
+    &-wrapper {
+      @apply h-auto;
+    }
+
+    &-pagination {
+      @apply flex z-2 mt-px24;
+
+      @screen md {
+        @apply mt-px20;
+      }
+
+      @screen xl {
+        @apply mt-px30;
+      }
+
+      &-bullet {
+        @apply bg-current bg-opacity-20 opacity-100;
+        @apply z-2;
+
+        &-active {
+          @apply bg-opacity-100;
+        }
+      }
+    }
+  }
+
+  .swiper-slide {
+    @apply h-auto;
+  }
+
+  .panes-container {
+    &.is-mobile-breakpoint {
+      @apply hidden;
+    }
+  }
+
+  &.text-left {
+    .carousel-testimonials-quotes {
+      @apply justify-start;
+    }
+
+    .carousel-testimonials-txt-wrap .swiper-slide {
+      @apply justify-start;
+
+      figure {
+        @screen md {
+          @apply items-start justify-start;
+        }
+      }
+    }
+  }
+
+  &.text-center {
+    .carousel-testimonials-quotes {
+      @apply justify-center;
+    }
+
+    .carousel-testimonials-txt-wrap .swiper-slide {
+      @apply justify-center;
+
+      figure {
+        @screen md {
+          @apply items-center justify-center;
+        }
+      }
+    }
+  }
+
+  &.text-right {
+    .carousel-testimonials-quotes {
+      @apply justify-end;
+    }
+
+    .carousel-testimonials-txt-wrap .swiper-slide {
+      @apply justify-end;
+
+      figure {
+        @screen md {
+          @apply items-end justify-end;
+        }
+      }
+    }
+  }
+
+  &.image-right {
+    @apply mb-px56;
+
+    @screen md {
+      @apply pb-px50;
+    }
+
+    @screen xl {
+      @apply py-px80;
+    }
+
+    .carousel-testimonials-img-wrap {
+      @screen md {
+        @apply col-start-6;
+      }
+
+      @screen xl {
+        @apply col-start-8;
+      }
+    }
+
+    .carousel-testimonials-txt-wrap {
+      @apply mt-0 mb-px65;
+
+      @screen md {
+        @apply col-start-1 mb-px20;
+      }
+    }
+  }
+
+  &.contained {
+    .carousel-testimonials-img-wrap {
+      @apply rounded-px10 overflow-hidden;
+
+      .swiper-slide {
+        @apply bg-white;
+      }
+    }
+  }
+
+  // Cover-Image variant
+  &.cover {
+    .carousel-testimonials-inner {
+      @screen xl {
+        @apply relative;
+      }
+    }
+
+    .carousel-testimonials-img-wrap {
+      @screen md {
+        @apply col-span-6;
+      }
+
+      @screen xl {
+        @apply col-span-full;
+      }
+
+      &::before {
+        @apply hidden;
+      }
+
+      .swiper-container {
+        @apply relative h-auto -ml-px28;
+        width: calc(100% + 56px);
+
+        @screen md {
+          @apply ml-0 -mr-px50;
+          width: calc(100% + 50px);
+        }
+
+        @screen xl {
+          @apply mr-0 w-full;
+        }
+
+        .swiper-slide {
+          @apply flex justify-center;
+
+          img {
+            @apply w-full h-px302;
+
+            @screen md {
+              @apply h-px412;
+            }
+
+            @screen xl {
+              @apply h-px436;
+            }
+          }
+        }
+      }
+    }
+
+    .carousel-testimonials-txt-wrap {
+      @screen md {
+        @apply col-span-6 col-start-2 -mx-px28;
+      }
+
+      @screen xl {
+        @apply relative col-span-8 col-start-1 z-2 mx-0;
+      }
+    }
+
+    blockquote {
+      @screen md {
+        @apply text-px30 leading-px40;
+      }
+      @screen xl {
+        @apply text-px34 leading-px42 tracking-em_005;
+      }
+    }
+
+    figcaption {
+      @screen md {
+        @apply text-px18 leading-px28 tracking-normal mt-px22;
+      }
+
+      @screen xl {
+        @apply text-px22 leading-px32 mt-px18;
+      }
+    }
+
+    .trevor-ti-quote-open,
+    .trevor-ti-quote-close {
+      @screen md {
+        @apply h-px24 text-px24;
+      }
+
+      @screen xl {
+        @apply h-px26 text-px26;
+      }
+    }
+
+    .trevor-ti-quote-close {
+      @screen md {
+        @apply mt-px6;
+      }
+
+      @screen xl {
+        @apply ml-px10;
+      }
+    }
+
+    &.image-right {
+      @apply pb-0;
+
+      @screen md {
+        @apply pt-px100;
+      }
+
+      @screen xl {
+        @apply py-0;
+      }
+
+      .carousel-testimonials-txt-wrap {
+        @screen xl {
+          @apply col-span-6;
+        }
+      }
+
+      .carousel-testimonials-img-wrap {
+        @screen md {
+          @apply col-start-3;
+        }
+        @screen xl {
+          @apply col-start-7 col-span-6 -ml-px28 -mr-px140;
+        }
+
+        .swiper-container {
+          @screen md {
+            @apply ml-0 -mr-px50;
+          }
+          @screen xl {
+            @apply mr-0;
+          }
+        }
+      }
+    }
+
+    &.image-left {
+      @apply pt-0 pb-px80;
+
+      @screen xl {
+        @apply py-px115;
+      }
+
+      .carousel-testimonials-txt-wrap {
+        @screen md {
+          @apply mt-px30;
+        }
+        @screen xl {
+          @apply col-start-6;
+        }
+      }
+      .carousel-testimonials-img-wrap {
+        @screen md {
+          @apply col-start-1;
+        }
+        @screen xl {
+          left: -140px;
+        }
+
+        .swiper-container {
+          @screen md {
+            @apply -ml-px50;
+          }
+          @screen xl {
+            @apply ml-0;
+          }
+        }
+      }
+    }
+  }
 }
+
+@import "./testimonials/boxed";

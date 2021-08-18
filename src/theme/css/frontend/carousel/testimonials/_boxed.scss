@@ -1,0 +1,122 @@
+.carousel-testimonials.boxed.boxed {
+  @apply py-0 mb-0;
+
+  @screen md {
+    @apply py-px80;
+  }
+
+  .carousel-testimonials-inner {
+    @apply px-px28 py-px60 mx-auto;
+
+    @screen md {
+      @apply py-px34 px-0 rounded-px10 overflow-hidden;
+      width: calc(100% - 100px);
+    }
+
+    @screen xl {
+      @apply py-px100;
+      width: calc(100% - 280px);
+      max-width: #{rem-calc(1160)};
+    }
+  }
+
+  // Boxed, Contained
+  &.contained {
+    .carousel-testimonials-img-wrap {
+      @apply rounded-px10 overflow-hidden;
+    }
+
+    // Boxed, Contained, Image Left
+    &.image-left {
+      .carousel-testimonials-img-wrap {
+        @screen md {
+          @apply col-start-1 col-span-4 mx-px30;
+        }
+
+        @screen xl {
+          @apply col-start-2 col-span-4 mx-0;
+        }
+      }
+
+      .carousel-testimonials-txt-wrap {
+        @screen md {
+          @apply col-start-5 col-span-4 mr-px24;
+        }
+
+        @screen xl {
+          @apply col-span-5 col-start-7 mr-0;
+        }
+      }
+    }
+
+    // Boxed, Contained, Image Right
+    &.image-right {
+      .carousel-testimonials-txt-wrap {
+        @screen md {
+          @apply col-start-1 col-span-4 px-px34;
+        }
+
+        @screen xl {
+          @apply col-span-5 col-start-2 px-0;
+        }
+      }
+
+      .carousel-testimonials-img-wrap {
+        @screen md {
+          @apply col-start-5 col-span-4 mr-px24;
+        }
+
+        @screen xl {
+          @apply col-start-8 col-span-4 mr-0;
+        }
+      }
+    }
+  }
+
+  // Boxed, Cover
+  &.cover {
+    .carousel-testimonials-inner {
+      @screen xl {
+        @apply py-0;
+      }
+    }
+
+    // Boxed, Cover, Image Left
+    &.image-left {
+      .carousel-testimonials-inner {
+        @apply pt-0;
+      }
+
+      .carousel-testimonials-img-wrap {
+        @screen xl {
+          @apply col-span-5 mx-0 left-0;
+        }
+      }
+
+      .carousel-testimonials-txt-wrap {
+        @screen xl {
+          @apply col-start-7 col-span-5;
+        }
+      }
+    }
+
+    // Boxed, Cover, Image Right
+    &.image-right {
+      .carousel-testimonials-inner {
+        @apply pb-0;
+      }
+
+      .carousel-testimonials-txt-wrap {
+        @screen xl {
+          @apply col-start-2 col-span-5;
+        }
+      }
+
+      .swiper-container {
+        @screen md {
+          @apply w-full mr-0;
+        }
+      }
+    }
+  }
+}
