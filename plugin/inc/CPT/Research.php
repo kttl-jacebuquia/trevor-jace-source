@@ -6,6 +6,7 @@ use TrevorWP\Theme\Helper\Sorter;
 
 class Research {
 	const POST_TYPE = Main::POST_TYPE_PREFIX . 'research';
+	const SLUG      = 'research-briefs';
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()
@@ -32,7 +33,7 @@ class Research {
 				'show_in_rest'        => true,
 				'has_archive'         => true,
 				'rewrite'             => array(
-					'slug'       => Research_Briefs::get_val( Research_Briefs::SETTING_SLUG ),
+					'slug'       => static::SLUG,
 					'with_front' => false,
 					'feeds'      => false,
 				),

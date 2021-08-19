@@ -4,6 +4,7 @@ use TrevorWP\Main;
 
 class Financial_Report {
 	const POST_TYPE = Main::POST_TYPE_PREFIX . 'fin_report';
+	const SLUG      = 'financial-reports';
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()
@@ -30,7 +31,7 @@ class Financial_Report {
 				'show_in_rest'        => false,
 				'has_archive'         => true,
 				'rewrite'             => array(
-					'slug'       => 'financial-reports',
+					'slug'       => static::SLUG,
 					'with_front' => false,
 				),
 				'supports'            => array(

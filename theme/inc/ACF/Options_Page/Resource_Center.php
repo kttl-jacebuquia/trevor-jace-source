@@ -9,6 +9,7 @@ use TrevorWP\Theme\Helper;
 class Resource_Center extends A_Options_Page {
 	const POST_TYPE = 'trevor_rc_post';
 
+	const FIELD_PAGE_SLUG          = 'rc_page_slug';
 	const FIELD_EYEBROW            = 'eyebrow';
 	const FIELD_HEADLINE           = 'headline';
 	const FIELD_SEARCH_PLACEHOLDER = 'search_placeholder';
@@ -25,6 +26,7 @@ class Resource_Center extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
+		$page_slug          = static::gen_field_key( static::FIELD_PAGE_SLUG );
 		$eyebrow            = static::gen_field_key( static::FIELD_EYEBROW );
 		$headline           = static::gen_field_key( static::FIELD_HEADLINE );
 		$search_placeholder = static::gen_field_key( static::FIELD_SEARCH_PLACEHOLDER );
@@ -37,6 +39,15 @@ class Resource_Center extends A_Options_Page {
 		$card_num           = static::gen_field_key( static::FIELD_CARD_NUM );
 
 		return array_merge(
+			array(
+				static::FIELD_PAGE_SLUG => array(
+					'key'            => $page_slug,
+					'name'           => static::FIELD_PAGE_SLUG,
+					'label'          => 'Page Slug',
+					'type'           => 'message',
+					'message'        => '/' . RC_Object::PERMALINK_BASE,
+				),
+			),
 			static::_gen_tab_field( 'General' ),
 			array(
 				static::FIELD_CARD_NUM => array(

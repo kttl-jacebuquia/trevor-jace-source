@@ -20,12 +20,14 @@ abstract class A_Post_Type extends A_Options_Page {
 
 	const PAGE_SLUG_PREFIX = 'trvr-pt-';
 	const POST_TYPE        = ''; // required
+	const SLUG             = ''; // required
 
 	# Pagination Types
 	const PAGINATION_TYPE_AJAX   = 'ajax';
 	const PAGINATION_TYPE_NORMAL = 'normal';
 
 	# Fields
+	const FIELD_PAGE_SLUG               = 'page_slug';
 	const FIELD_HEADER                  = 'header';
 	const FIELD_SORTER_ACTIVE           = 'sorter_active';
 	const FIELD_ARCHIVE_PP              = 'arc_pp';
@@ -60,8 +62,18 @@ abstract class A_Post_Type extends A_Options_Page {
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
 		$header = static::gen_field_key( static::FIELD_HEADER );
+		$page_slug = static::gen_field_key( static::FIELD_PAGE_SLUG );
 
 		return array_merge(
+			array(
+				static::FIELD_PAGE_SLUG => array(
+					'key'            => $page_slug,
+					'name'           => static::FIELD_PAGE_SLUG,
+					'label'          => 'Page Slug',
+					'type'           => 'message',
+					'message'        => '/' . static::SLUG,
+				),
+			),
 			array(
 				static::FIELD_HEADER => Page_Header::clone(
 					array(

@@ -4,6 +4,7 @@ namespace TrevorWP\Theme\ACF\Options_Page\Post_Type;
 
 class Post extends A_Post_Type {
 	const POST_TYPE = \TrevorWP\CPT\Post::POST_TYPE;
+	const SLUG      = \TrevorWP\CPT\Post::PERMALINK_BASE;
 
 	/** @inheritdoc */
 	protected static function prepare_page_register_args(): array {
