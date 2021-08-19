@@ -102,6 +102,14 @@
 
 		@screen lg {
 			@apply grid-cols-12;
+
+      .topic-cards__item-description {
+				@apply mt-px12 text-px20 leading-px30;
+			}
+
+      .topic-cards__cta {
+        @apply text-px20;
+      }
 		}
 
 		@screen xl {
