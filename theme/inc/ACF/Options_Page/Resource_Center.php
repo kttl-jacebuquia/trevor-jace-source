@@ -168,8 +168,8 @@ class Resource_Center extends A_Options_Page {
 			parent::prepare_page_register_args(),
 			array(
 				'parent_slug' => 'edit.php?post_type=' . static::POST_TYPE,
-				'menu_title'  => 'Resource Landing',
-				'page_title'  => 'Resource Landing',
+				'menu_title'  => 'Options',
+				'page_title'  => 'Resource Center Options',
 			)
 		);
 	}
