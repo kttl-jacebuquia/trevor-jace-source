@@ -5,13 +5,11 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	const FIELD_BUTTONS = 'buttons';
 	const FIELD_BUTTON  = 'button';
-	const FIELD_ATTR    = 'attr';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
 		$buttons = static::gen_field_key( static::FIELD_BUTTONS );
 		$button  = static::gen_field_key( static::FIELD_BUTTON );
-		$attr    = static::gen_field_key( static::FIELD_ATTR );
 
 		return array(
 			'title'  => 'Button Group',
@@ -34,13 +32,6 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 							)
 						),
 					),
-				),
-				static::FIELD_ATTR    => DOM_Attr::clone(
-					array(
-						'key'   => $attr,
-						'name'  => static::FIELD_ATTR,
-						'label' => '',
-					)
 				),
 			),
 		);
@@ -91,7 +82,6 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 	public static function render_block( $block, $content = '', $is_preview = false, $post_id = 0 ): void {
 		$data = array(
 			static::FIELD_BUTTONS => array(),
-			static::FIELD_ATTR    => get_field( static::FIELD_ATTR ),
 		);
 
 		if ( have_rows( static::FIELD_BUTTONS ) ) :

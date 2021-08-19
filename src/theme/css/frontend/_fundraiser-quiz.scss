@@ -29,6 +29,14 @@
 
 	&--steps {
 		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
+
+    &.visible {
+      @apply visible;
+    }
+
+    &.static {
+      @apply static;
+    }
 	}
 
 	&--form {
@@ -196,7 +204,11 @@
 	}
 
 	&__create-fundraiser-btn {
-		@apply bg-white text-teal-dark mt-px40 inline-block mx-auto;
+		@apply bg-white text-teal-dark mt-px40 inline-flex items-center justify-center mx-auto h-px46 box-border h-px46;
+
+    @screen xl {
+      @apply h-px66;
+    }
 	}
 
 	&__get-your-fundraiser {

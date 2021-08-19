@@ -133,4 +133,17 @@
 			@apply col-span-8 col-start-2;
 		}
 	}
+
+  &__large-text {
+    @apply text-px20 leading-px26 text-center col-span-full py-px80;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+      @apply text-px18 leading-px24 tracking-px_05;
+    }
+
+    @screen xl {
+      @apply col-span-8 col-start-3 py-px136;
+    }
+  }
 }

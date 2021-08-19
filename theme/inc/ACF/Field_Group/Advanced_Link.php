@@ -22,6 +22,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_TEXTONLY_POPUP     = 'textonly_popup';
 	const FIELD_PHONE              = 'phone';
 	const FIELD_SHOW_DOWNLOAD_ICON = 'show_download_icon';
+	const FIELD_SHOW_DEV_FORM_ONLY = 'show_dev_form_only';
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
@@ -40,6 +41,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$textonly_popup     = static::gen_field_key( static::FIELD_TEXTONLY_POPUP );
 		$phone              = static::gen_field_key( static::FIELD_PHONE );
 		$show_download_icon = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
+		$show_dev_form_only = static::gen_field_key( static::FIELD_SHOW_DEV_FORM_ONLY );
 
 		return array_merge(
 			static::_gen_tab_field( 'Action' ),
@@ -239,6 +241,26 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						),
 					),
 				),
+				static::FIELD_SHOW_DEV_FORM_ONLY => array(
+					'key'               => $show_dev_form_only,
+					'name'              => static::FIELD_SHOW_DEV_FORM_ONLY,
+					'label'             => 'Show Dev Form Only',
+					'type'              => 'true_false',
+					'required'          => 0,
+					'default_value'     => false,
+					'ui'                => 1,
+					'ui_on_text'        => '',
+					'ui_off_text'       => '',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $modal,
+								'operator' => '==',
+								'value'    => 'fundraise_quiz',
+							),
+						),
+					),
+				),
 			)
 		);
 	}
@@ -365,12 +387,26 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 					// FUNDRAISE MODAL
 				} elseif ( 'fundraise_quiz' === $modal_type ) {
+					$show_dev_form_only                                    = $val->get( static::FIELD_SHOW_DEV_FORM_ONLY );
 					$options['tag']                                        = 'button';
 					$options['class'][]                                    = FundraiserQuizModal::ID;
 					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
 						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
 						DOM_Attr::FIELD_ATTR_VAL => 'click to open fundraise quiz modal',
 					);
+
+					// Add attributes to trigger Fundraise Quiz Modal to show Dev Form Only
+					if ( $show_dev_form_only ) {
+						$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+							DOM_Attr::FIELD_ATTR_KEY => 'data-fundraise-vertex',
+							DOM_Attr::FIELD_ATTR_VAL => 'form',
+						);
+						$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+							DOM_Attr::FIELD_ATTR_KEY => 'data-fundraise-single',
+							DOM_Attr::FIELD_ATTR_VAL => true,
+						);
+					}
+
 					FundraiserQuizModal::create();
 
 					// TEXT ONLY POPUP

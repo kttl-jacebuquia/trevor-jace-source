@@ -343,4 +343,28 @@ abstract class A_Field_Group {
 			),
 		);
 	}
+
+	/**
+	 * @param array $conditional_logic
+	 * @param array $fields
+	 *
+	 * @return array
+	 */
+	protected static function _gen_conditional_fields( array $conditional_logic = array(), array $fields = array() ): array {
+		$fields_with_conditional = array();
+
+		foreach ( $fields as $field_name => $field_data ) {
+			$fields_with_conditional[ $field_name ] = array_merge(
+				$field_data,
+				array(
+					'conditional_logic' => array_merge(
+						$field_data['conditional_logic'] ?? array(),
+						$conditional_logic,
+					),
+				),
+			);
+		}
+
+		return $fields_with_conditional;
+	}
 }
