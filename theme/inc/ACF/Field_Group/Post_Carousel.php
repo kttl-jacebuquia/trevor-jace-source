@@ -14,7 +14,7 @@ class Post_Carousel extends Post_Grid {
 		return array_merge(
 			parent::get_block_args(),
 			array(
-				'title'      => 'Post Carousel',
+				'title'      => 'Article Card Carousel',
 				'category'   => 'common',
 				'icon'       => 'book-alt',
 				'post_types' => array( 'page' ),
