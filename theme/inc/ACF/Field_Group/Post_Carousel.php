@@ -47,11 +47,12 @@ class Post_Carousel extends Post_Grid {
 				case static::FIELD_DESCRIPTION:
 					// Inject CTA right after description
 					$updated_fields[ static::FIELD_CTA ] = array(
-						'key'           => $cta,
-						'name'          => static::FIELD_CTA,
-						'label'         => 'CTA',
-						'type'          => 'link',
-						'return_format' => 'array',
+						'key'        => $cta,
+						'name'       => static::FIELD_CTA,
+						'label'      => 'CTA',
+						'type'       => 'group',
+						'layout'     => 'block',
+						'sub_fields' => Advanced_Link::_get_fields(),
 					);
 					break;
 				case static::FIELD_SOURCE:
@@ -79,7 +80,7 @@ class Post_Carousel extends Post_Grid {
 		$post_types      = ( ! empty( $val->get( static::FIELD_QUERY_PTS ) ) ) ? $val->get( static::FIELD_QUERY_PTS ) : array();
 		$title           = $val->get( static::FIELD_HEADING );
 		$description     = $val->get( static::FIELD_DESCRIPTION );
-		$cta             = $val->get( static::FIELD_CTA );
+		$cta             = static::get_val( static::FIELD_CTA );
 		list(
 			$bg_color,
 			$text_color
@@ -144,7 +145,15 @@ class Post_Carousel extends Post_Grid {
 			<?php endif; ?>
 			<?php if ( ! empty( $cta ) ) : ?>
 				<div class="post-carousel__cta-wrap">
-					<a href="<?php echo esc_attr( $cta['title'] ); ?>" class="post-carousel__cta"><?php echo esc_html( $cta['title'] ); ?></a>
+					<?php
+						echo Advanced_Link::render(
+							null,
+							$cta,
+							array(
+								'class' => array( 'post-carousel__cta' ),
+							)
+						);
+					?>
 				</div>
 			<?php endif; ?>
 		</div>
