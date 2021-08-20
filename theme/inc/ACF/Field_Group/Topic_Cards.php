@@ -339,7 +339,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		?>
 		<div <?php echo Tools::flat_attr( $attr ); ?>>
 			<div class="topic-cards__container">
-				<h2 class="topic-cards__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php if( !empty( $title ) ) : ?>
+					<h2 class="topic-cards__heading"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
 				<?php if ( ! empty( $description ) ) : ?>
 					<p class="topic-cards__description"><?php echo esc_html( $description ); ?></p>
 				<?php endif; ?>
