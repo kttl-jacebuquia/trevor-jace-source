@@ -49,6 +49,7 @@ class Research {
 					'singular_name' => 'Research Brief',
 					'add_new'       => 'Add New Research Brief',
 				),
+				'menu_icon'           => 'dashicons-chart-pie',
 			)
 		);
 	}

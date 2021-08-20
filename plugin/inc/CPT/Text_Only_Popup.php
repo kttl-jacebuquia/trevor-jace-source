@@ -37,6 +37,7 @@ class Text_Only_Popup {
 					'name'          => 'Text Only Popups',
 					'singular_name' => 'Text Only Popup',
 				),
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

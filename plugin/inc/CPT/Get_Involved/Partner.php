@@ -32,6 +32,7 @@ class Partner extends Get_Involved_Object {
 				),
 				'has_archive'         => false,
 				'rewrite'             => false,
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

@@ -29,6 +29,7 @@ class Partner_Prod extends Donate_Object {
 				),
 				'has_archive'         => false,
 				'rewrite'             => false,
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

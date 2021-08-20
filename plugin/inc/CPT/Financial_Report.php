@@ -42,6 +42,7 @@ class Financial_Report {
 					'name'          => 'Financial Reports',
 					'singular_name' => 'Financial Report',
 				),
+				'menu_icon'           => 'dashicons-chart-line',
 			)
 		);
 	}

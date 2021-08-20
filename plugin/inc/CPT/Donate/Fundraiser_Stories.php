@@ -38,6 +38,7 @@ class Fundraiser_Stories extends Donate_Object {
 					'feeds'      => false,
 					'pages'      => false,
 				),
+				'menu_icon'    => 'dashicons-layout',
 			)
 		);
 	}

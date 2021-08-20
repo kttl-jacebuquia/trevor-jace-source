@@ -1,9 +1,19 @@
 // Menu Icons
 #adminmenu {
   // CPT
-  //-// Support Resources
+  // Pages
+  #menu-pages .wp-menu-image:before {
+    content: "\f133";
+  }
+
+  // Posts
+  #menu-posts .wp-menu-image:before {
+    content: "\f119";
+  }
+
+  // Resource Center
   #menu-posts-trevor_rc_post .wp-menu-image:before {
-	@extend .trevor-pi-hands-helping-solid:before;
+    content: "\f116";
   }
 
   // Classy

@@ -50,6 +50,7 @@ class Letter extends Get_Involved_Object {
 					),
 				),
 				'template_lock' => 'insert',
+				'menu_icon'     => 'dashicons-book',
 			)
 		);
 	}
