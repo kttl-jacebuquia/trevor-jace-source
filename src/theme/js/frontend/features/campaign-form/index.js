@@ -36,6 +36,7 @@ export default class CampaignForm {
 	static selector = '.join-the-campaign-form';
 
 	formSelector = '.join-the-campaign-form__form';
+	successSelector = '.join-the-campaign-form__success';
 	validationRules = {
 		fullname: [ 'required' ],
 		email: [ 'required', 'email' ],
@@ -53,6 +54,7 @@ export default class CampaignForm {
 
 	initializeForm() {
 		this.form = this.element.querySelector(this.formSelector);
+		this.formSuccess = this.element.querySelector(this.successSelector);
 		this.fields = [...this.form.elements].filter(element => element.name);
 
 		if ( this.form ) {
@@ -75,6 +77,10 @@ export default class CampaignForm {
 
 		if ( name === 'sms_notif' ) {
 			this.checkSMSNotif();
+		}
+
+		if (!this.formSuccess.classList.contains('hidden')) {
+			this.formSuccess.classList.add('hidden');
 		}
 	}
 
@@ -127,6 +133,10 @@ export default class CampaignForm {
 		try {
 			const response = await fetch(ENDPOINT, { method, headers, body });
 			const json = await response.json();
+
+			this.formSuccess.classList.remove('hidden');
+			this.form.reset();
+
 			console.log({ json });
 		} catch (err) {
 			console.warn(err);

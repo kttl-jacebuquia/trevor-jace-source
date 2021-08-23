@@ -69,7 +69,9 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 					</p>
 				<?php endif; ?>
 
-				<form class="join-the-campaign-form__form mx-auto w-full lg:max-w-px818">
+				<p class="text-px16 leading-px24 mb-px24 md:mb-px30 lg:text-px20 lg:leading-px26 hidden join-the-campaign-form__success">Thank you for your submission!</p>
+
+				<form class="join-the-campaign-form__form mx-auto w-full lg:max-w-px818" novalidate>
 					<div class="join-the-campaign-form__field-group md:flex md:grid md:grid-cols-2 md:gap-x-7 md:gap-y-5 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
 						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
 							<label for="fullname" class="sr-only">Full Name*</label>
