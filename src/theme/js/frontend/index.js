@@ -96,9 +96,12 @@ if ($quickExitModal.length) {
 	}
 
 	if (willShowModal) {
+		// Set the timeout longer if the page is scrolling
+		// through contents (URL with hash).
+		const modalTimeout = window.location.hash.length ? 1000 : 500;
 		const options = {
 			onInit(modal) {
-				setTimeout(() => modal.open(), 500);
+				setTimeout(() => modal.open(), modalTimeout);
 			},
 			onClose({ initiator }) {
 				if (
