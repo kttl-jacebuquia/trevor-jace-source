@@ -1,164 +1,201 @@
 import $ from 'jquery';
+import Component from '../../Component';
 
-const _frequency = $('.frequency--choices button');
-const _amount = $('.amount-choices button');
-const _donateForm = $('[id^="donate-form');
-const _customAmount = $('.custom-amount', _donateForm);
-const _displayAmount = $('.display-amount', _donateForm);
-const _fixedAmount = $('.fixed-amount');
-const _displayFormatAmount = $("input[data-type='currency']");
-const _error = $('.donation-form__error');
+const _donateTargetURL = 'https://give.thetrevorproject.org/give/63307#!/donation/checkout';
 
-const onFrequencyToggle = (freqElement) => {
-	const $freq = $(freqElement);
-	const $radio = $('#' + $freq .attr('for'));
-	_frequency.removeClass('is-selected');
-	$freq.toggleClass('is-selected');
-	$radio[0].checked = true;
-}
+export default class DonationForm extends Component {
+	// Defines the element selector which will initialize this component
+	static selector = '.donation-form';
 
-export function toggleFrequency() {
-	_frequency.click(function(){ onFrequencyToggle(this) });
-}
+	constructor(_donateForm) {
+		super(_donateForm[0]);
 
-const onAmountToggle = (amountElement) => {
-	const $amount = $(amountElement);
-	const $radio = $('#' + $amount.attr('for'));
-	_amount.removeClass('is-selected');
-	$amount.toggleClass('is-selected');
-	_customAmount.val('');
-	_displayAmount.val('');
-	$radio[0].checked = true;
-}
-
-export function toggleAmount() {
-	_amount.click(function(){ onAmountToggle(this) });
-}
-
-export function displayAmountAction() {
-	_displayAmount.on('input', function () {
-		_amount.removeClass('is-selected');
-		_fixedAmount.prop('checked', false);
-	});
-
-	_donateForm.on( 'submit', function(e){
-		e.preventDefault();
-		let _newCustomAmount = _customAmount.val();
-		let _isRecurring = $('.donation-frequency:checked');
-
-		if ( !_newCustomAmount && !(new FormData(e.currentTarget).get('amount')) ) {
-			_error.removeClass('hidden');
-			return false;
-		} else {
-			_error.addClass('hidden');
-		}
-
-		_customAmount.prop('disabled', true);
-		_displayAmount.prop('disabled', true);
-
-
-		if( _newCustomAmount !== '' ) {
-			$('.donation-frequency').prop('disabled', true);
-			let _url = 'https://give.thetrevorproject.org/give/63307/#!/donation/checkout?amount=' + _newCustomAmount;
-
-			if( _isRecurring.val() == 1 ) {
-				_url += '&recurring=1';
-			}
-
-			_donateForm.attr( 'action', _url  );
-		}
-
-		e.currentTarget.submit();
-	});
-}
-
-export function displayCurrency() {
-	_displayFormatAmount.on({
-		keyup: function() {
-			formatCurrency($(this));
-		},
-		blur: function() {
-			formatCurrency($(this), "blur");
-		}
-	});
-}
-
-function formatNumber(number) {
-	// format number 1000000 to 1,234,567
-
-	return number.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-}
-
-
-function formatCurrency(input, blur) {
-	// appends $ to value, validates decimal side
-	// and puts cursor back in right position.
-
-	let currency = input.val();
-
-	let cleanCurrency = currency.replace(/[$,]+/g,"");
-	_customAmount.val( cleanCurrency );
-
-
-	// get input value
-	let input_value = input.val();
-
-	// don't validate empty input
-	if (input_value === "") { return; }
-
-	// original length
-	let original_length = input_value.length;
-
-	// initial caret position
-	let caret_position = input.prop("selectionStart");
-
-	// check for decimal
-	if (input_value.indexOf(".") >= 0) {
-
-		// get position of first decimal
-		// this prevents multiple decimals from
-		// being entered
-		let decimal_position = input_value.indexOf(".");
-
-		// split number by decimal point
-		let left_side_whole_number = input_value.substring(0, decimal_position);
-		let right_side_decimals = input_value.substring(decimal_position);
-
-		// add commas to left side of number
-		left_side_whole_number = formatNumber(left_side_whole_number);
-
-		// validate right side
-		right_side_decimals = formatNumber(right_side_decimals);
-
-		// On blur make sure 2 numbers after decimal
-		if (blur === "blur") {
-			right_side_decimals += "00";
-		}
-
-		// Limit decimal to only 2 digits
-		right_side_decimals = right_side_decimals.substring(0, 2);
-
-		// join number by .
-		input_value = "$" + left_side_whole_number + "." + right_side_decimals;
-
-	} else {
-		// no decimal entered
-		// add commas to number
-		// remove all non-digits
-		input_value = formatNumber(input_value);
-		input_value = "$" + input_value;
-
-		// final formatting
-		if (blur === "blur") {
-			input_value += ".00";
-		}
+		this._donateForm = _donateForm;
+		this.$element = $(_donateForm);
+		this._frequency = this.$element.find('.frequency--choices button');
+		this._amount = this.$element.find('.amount-choices button');
+		this._donateForm = this.$element.find('[id^="donate-form');
+		this._customAmount = this.$element.find('.custom-amount', _donateForm);
+		this._displayAmount = this.$element.find(
+			'.display-amount',
+			_donateForm
+		);
+		this._fixedAmount = this.$element.find('.fixed-amount');
+		this._displayFormatAmount = this.$element.find(
+			"input[data-type='currency']"
+		);
+		this._error = this.$element.find('.donation-form__error');
 	}
 
-	// send updated string to input
-	input.val(input_value);
+	// Will be called upon component instantiation
+	afterInit() {
+		this.toggleFrequency();
+		this.toggleAmount();
+		this.displayAmountAction();
+		this.displayCurrency();
+	}
 
-	// put caret back in the right position
-	let updated_length = input_value.length;
-	caret_position = updated_length - original_length + caret_position;
-	input[0].setSelectionRange(caret_position, caret_position);
+	onFrequencyToggle(freqElement) {
+		const $freq = $(freqElement);
+		const $radio = $('#' + $freq.attr('for'));
+		this._frequency.removeClass('is-selected');
+		$freq.toggleClass('is-selected');
+		$radio[0].checked = true;
+	}
+
+	toggleFrequency() {
+		this._frequency.on('click', ({ currentTarget }) => {
+			this.onFrequencyToggle(currentTarget);
+		});
+	}
+
+	onAmountToggle(amountElement) {
+		const $amount = $(amountElement);
+		const $radio = $('#' + $amount.attr('for'));
+		this._amount.removeClass('is-selected');
+		$amount.toggleClass('is-selected');
+		this._customAmount.val('');
+		this._displayAmount.val('');
+		$radio[0].checked = true;
+	}
+
+	toggleAmount() {
+		this._amount.on('click', ({ currentTarget }) => {
+			this.onAmountToggle(currentTarget);
+		});
+	}
+
+	displayAmountAction() {
+		this._displayAmount.on('input', () => {
+			this._amount.removeClass('is-selected');
+			this._fixedAmount.prop('checked', false);
+		});
+
+		this._donateForm.on('submit', (e) => {
+			e.preventDefault();
+
+			// Get amount from custom amout or preset amount
+			const amount =
+				Number(
+					this._customAmount.val() || this._donateForm[0].amount.value
+				) || 0;
+			const hasError = !Boolean(amount);
+			const _isRecurring = this._donateForm.find('.donation-frequency:checked');
+
+			// Toggle error based on whether an amount is provided
+			this._error.toggleClass('hidden', !hasError);
+
+			// Don't send if there's an error
+			if (hasError) {
+				return false;
+			}
+
+			const paramsObject = { amount };
+
+			if (_isRecurring.val() == 1) {
+				paramsObject.recurring = 1;
+			}
+
+			const paramsString = Object.entries(paramsObject)
+				.reduce((all, entry) => all.concat(entry.join('=')), [])
+				.join('&');
+			const url = [_donateTargetURL, paramsString].join('?');
+
+			// Redirect to Trevor's Classy form
+			window.open(url, '_blank');
+		});
+	}
+
+	displayCurrency() {
+		this._displayFormatAmount.on({
+			keyup: ({ currentTarget }) => {
+				this.formatCurrency($(currentTarget));
+			},
+			blur: ({ currentTarget }) => {
+				this.formatCurrency($(currentTarget), 'blur');
+			},
+		});
+	}
+
+	formatNumber(number) {
+		// format number 1000000 to 1,234,567
+		return number.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+
+	formatCurrency(input, blur) {
+		// appends $ to value, validates decimal side
+		// and puts cursor back in right position.
+		let currency = input.val();
+
+		let cleanCurrency = currency.replace(/[$,]+/g, '');
+		this._customAmount.val(cleanCurrency);
+
+		// get input value
+		let input_value = input.val();
+
+		// don't validate empty input
+		if (input_value === '') {
+			return;
+		}
+
+		// original length
+		let original_length = input_value.length;
+
+		// initial caret position
+		let caret_position = input.prop('selectionStart');
+
+		// check for decimal
+		if (input_value.indexOf('.') >= 0) {
+			// get position of first decimal
+			// this prevents multiple decimals from
+			// being entered
+			let decimal_position = input_value.indexOf('.');
+
+			// split number by decimal point
+			let left_side_whole_number = input_value.substring(
+				0,
+				decimal_position
+			);
+			let right_side_decimals = input_value.substring(decimal_position);
+
+			// add commas to left side of number
+			left_side_whole_number = this.formatNumber(left_side_whole_number);
+
+			// validate right side
+			right_side_decimals = this.formatNumber(right_side_decimals);
+
+			// On blur make sure 2 numbers after decimal
+			if (blur === 'blur') {
+				right_side_decimals += '00';
+			}
+
+			// Limit decimal to only 2 digits
+			right_side_decimals = right_side_decimals.substring(0, 2);
+
+			// join number by .
+			input_value =
+				'$' + left_side_whole_number + '.' + right_side_decimals;
+		} else {
+			// no decimal entered
+			// add commas to number
+			// remove all non-digits
+			input_value = this.formatNumber(input_value);
+			input_value = '$' + input_value;
+
+			// final formatting
+			if (blur === 'blur') {
+				input_value += '.00';
+			}
+		}
+
+		// send updated string to input
+		input.val(input_value);
+
+		// put caret back in the right position
+		let updated_length = input_value.length;
+		caret_position = updated_length - original_length + caret_position;
+		input[0].setSelectionRange(caret_position, caret_position);
+	}
 }
+
+DonationForm.init();
