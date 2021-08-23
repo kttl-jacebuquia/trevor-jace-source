@@ -41,11 +41,11 @@ class Resource_Center extends A_Options_Page {
 		return array_merge(
 			array(
 				static::FIELD_PAGE_SLUG => array(
-					'key'            => $page_slug,
-					'name'           => static::FIELD_PAGE_SLUG,
-					'label'          => 'Page Slug',
-					'type'           => 'message',
-					'message'        => '/' . RC_Object::PERMALINK_BASE,
+					'key'     => $page_slug,
+					'name'    => static::FIELD_PAGE_SLUG,
+					'label'   => 'Page Slug',
+					'type'    => 'message',
+					'message' => '/' . RC_Object::PERMALINK_BASE,
 				),
 			),
 			static::_gen_tab_field( 'General' ),
@@ -381,7 +381,6 @@ class Resource_Center extends A_Options_Page {
 			$glossary,
 			array( 'post_type' => \TrevorWP\CPT\RC\Glossary::POST_TYPE )
 		);
-
 
 		if ( empty( $featured_word ) ) {
 			return;

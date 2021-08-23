@@ -142,7 +142,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 						),
 					),
 				),
-				static::FIELD_TEXT_COLOR   => Field\Color::gen_args(
+				static::FIELD_TEXT_COLOR     => Field\Color::gen_args(
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(

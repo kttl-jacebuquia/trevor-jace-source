@@ -419,7 +419,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'width' => '50',
 						),
 					),
-					static::FIELD_SMS_NUMBER => array(
+					static::FIELD_SMS_NUMBER  => array(
 						'key'     => $sms_number,
 						'name'    => static::FIELD_SMS_NUMBER,
 						'label'   => 'SMS Number',

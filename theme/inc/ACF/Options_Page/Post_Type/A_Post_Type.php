@@ -61,17 +61,17 @@ abstract class A_Post_Type extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
-		$header = static::gen_field_key( static::FIELD_HEADER );
+		$header    = static::gen_field_key( static::FIELD_HEADER );
 		$page_slug = static::gen_field_key( static::FIELD_PAGE_SLUG );
 
 		return array_merge(
 			array(
 				static::FIELD_PAGE_SLUG => array(
-					'key'            => $page_slug,
-					'name'           => static::FIELD_PAGE_SLUG,
-					'label'          => 'Page Slug',
-					'type'           => 'message',
-					'message'        => '/' . static::SLUG,
+					'key'     => $page_slug,
+					'name'    => static::FIELD_PAGE_SLUG,
+					'label'   => 'Page Slug',
+					'type'    => 'message',
+					'message' => '/' . static::SLUG,
 				),
 			),
 			array(

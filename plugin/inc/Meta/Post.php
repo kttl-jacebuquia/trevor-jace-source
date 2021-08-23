@@ -3,6 +3,7 @@
 use TrevorWP\Main;
 use TrevorWP\Theme;
 use TrevorWP\CPT;
+use TrevorWP\CPT\Page_ReCirculation;
 use TrevorWP\Util\Tools;
 
 /**
@@ -266,9 +267,8 @@ class Post {
 
 			# ReCirculation Cards
 			$config[ self::KEY_RECIRCULATION_CARDS ] = array(
-				'settings' => Theme\Helper\Circulation_Card::SETTINGS,
+				'settings' => self::get_recirculation_posts(),
 			);
-
 		}
 
 		return $config;
@@ -475,5 +475,25 @@ class Post {
 	 */
 	public static function get_pronounces( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::KEY_PRONOUNS, true );
+	}
+
+	public static function get_recirculation_posts() {
+		$settings = array();
+
+		$args = array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type'   => Page_ReCirculation::POST_TYPE,
+		);
+
+		$posts = get_posts( $args );
+
+		foreach ( $posts as $post ) {
+			$settings[ $post->ID ] = array(
+				'name' => $post->post_title,
+			);
+		}
+
+		return $settings;
 	}
 }
