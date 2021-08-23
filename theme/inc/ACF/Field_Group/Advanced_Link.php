@@ -66,13 +66,25 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						'modal'         => 'Pop-up Modal',
 						'call'          => 'Call',
 						'sms'           => 'SMS',
+						'trevor_chat'   => 'Trevor Chat',
 					),
 					'default_value' => 'page_link',
 					'allow_null'    => true,
 					'multiple'      => false,
 				),
 			),
-			static::_gen_tab_field( 'Data' ),
+			static::_gen_tab_field(
+				'Data',
+				array(
+					'conditional_logic' => array(
+						array(
+							'field'    => $action,
+							'operator' => '!=',
+							'value'    => 'trevor_chat',
+						),
+					),
+				),
+			),
 			array(
 				static::FIELD_PHONE              => array(
 					'key'               => $phone,
@@ -427,6 +439,13 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					);
 					WhatToExpectModal::create();
 				}
+				break;
+			case 'trevor_chat':
+				$options['class'][]                                    = 'tcb-link';
+				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+					DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+					DOM_Attr::FIELD_ATTR_VAL => 'click to open chat window',
+				);
 				break;
 		}
 

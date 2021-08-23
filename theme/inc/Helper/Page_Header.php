@@ -541,7 +541,7 @@ class Page_Header {
 		$ctas = array(
 			array( 'chat', 'Chat With Us' ),
 			array( 'call', 'Call Us' ),
-			array( 'smartphone', 'Text Us' ),
+			array( 'sms', 'Text Us' ),
 		);
 
 		ob_start();
@@ -556,11 +556,19 @@ class Page_Header {
 					<?php endif; ?>
 					<div class="page-header__support-ctas">
 						<?php foreach ( $ctas as $cta ) : ?>
-							<?php // TODO: Integrate What to Expect Modal ?>
-							<button type="button" class="page-header__support-cta" aria-label="click to open what to expect modal">
-								<i class="trevor-ti-<?php echo $cta[0]; ?>" aria-hidden="true"></i>
-								<span class="page-header__support-cta-text"><?php echo $cta[1]; ?></span>
-							</button>
+							<?php
+							switch ( $cta[0] ) {
+								case 'chat':
+									echo static::render_chat_button( $cta[1] );
+									break;
+								case 'call':
+									echo static::render_call_button( $cta[1], $options['call_number'] );
+									break;
+								case 'sms':
+									echo static::render_sms_button( $cta[1], $options['sms_number'] );
+									break;
+							}
+							?>
 						<?php endforeach; ?>
 					</div>
 					<aside class="page-header__bottom">
@@ -568,6 +576,43 @@ class Page_Header {
 					</aside>
 				</div>
 			</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected static function render_chat_button( $label ): string {
+		ob_start();
+		?>
+			<a class="tcb-link page-header__support-cta" class="test" role="button" aria-label="click to open chat window">
+				<i class="trevor-ti-chat" aria-hidden="true"></i>
+				<span class="page-header__support-cta-text"><?php echo $label; ?></span>
+			</a>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected static function render_call_button( $label, $call_number ): string {
+		ob_start();
+		?>
+			<?php if ( ! empty( $call_number ) ) : ?>
+				<a href="tel:<?php echo $call_number; ?>" class="page-header__support-cta" class="test" role="button" aria-label="click to call trevor support">
+					<i class="trevor-ti-call" aria-hidden="true"></i>
+					<span class="page-header__support-cta-text"><?php echo $label; ?></span>
+				</a>
+			<?php endif; ?>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected static function render_sms_button( $label, $sms_number ): string {
+		ob_start();
+		?>
+			<?php if ( ! empty( $sms_number ) ) : ?>
+				<a href="sms:<?php echo $sms_number; ?>" class="page-header__support-cta" class="test" role="button" aria-label="click to send an sms to trevor support">
+					<i class="trevor-ti-call" aria-hidden="true"></i>
+					<span class="page-header__support-cta-text"><?php echo $label; ?></span>
+				</a>
+			<?php endif; ?>
 		<?php
 		return ob_get_clean();
 	}

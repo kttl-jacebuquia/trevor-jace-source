@@ -12,6 +12,7 @@ use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
+use TrevorWP\Theme\Helper\Trevor_Chat;
 use TrevorWP\Util\StaticFiles;
 
 /**
@@ -91,6 +92,9 @@ class Hooks {
 
 		# WPSEO Title
 		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
+
+		# Trevor Chat Button
+		Trevor_Chat::init();
 
 		# Search
 		Customizer\Search::init_all();

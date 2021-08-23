@@ -20,6 +20,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_MEMBERS_COUNT     = 'members_count';
 	const FIELD_BOTTOM_TEXT       = 'bottom_text';
 	const FIELD_CONTENT_ALIGNMENT = 'content_alignment';
+	const FIELD_CALL_NUMBER       = 'call_number';
+	const FIELD_SMS_NUMBER        = 'sms_number';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -37,6 +39,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$members_count     = static::gen_field_key( static::FIELD_MEMBERS_COUNT );
 		$bottom_text       = static::gen_field_key( static::FIELD_BOTTOM_TEXT );
 		$content_alignment = static::gen_field_key( static::FIELD_CONTENT_ALIGNMENT );
+		$call_number       = static::gen_field_key( static::FIELD_CALL_NUMBER );
+		$sms_number        = static::gen_field_key( static::FIELD_SMS_NUMBER );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -384,6 +388,47 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						),
 					),
 				),
+			),
+			static::_gen_tab_field(
+				'Contacts',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'support_crisis_services',
+							),
+						),
+					),
+				),
+			),
+			static::_gen_conditional_fields(
+				array(
+					'field'    => $type,
+					'operator' => '==',
+					'value'    => 'support_crisis_services',
+				),
+				array(
+					static::FIELD_CALL_NUMBER => array(
+						'key'     => $call_number,
+						'name'    => static::FIELD_CALL_NUMBER,
+						'label'   => 'Call Number',
+						'type'    => 'text',
+						'wrapper' => array(
+							'width' => '50',
+						),
+					),
+					static::FIELD_SMS_NUMBER => array(
+						'key'     => $sms_number,
+						'name'    => static::FIELD_SMS_NUMBER,
+						'label'   => 'SMS Number',
+						'type'    => 'text',
+						'wrapper' => array(
+							'width' => '50',
+						),
+					),
+				)
 			)
 		);
 
@@ -623,6 +668,15 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			if ( ! empty( $bottom_text ) ) {
 				$args['bottom'] = $bottom_text;
 			}
+		}
+
+		# Support Crisis Services
+		if ( 'support_crisis_services' === $type ) {
+			$call_number = $val->get( static::FIELD_CALL_NUMBER );
+			$sms_number  = $val->get( static::FIELD_SMS_NUMBER );
+
+			$args['call_number'] = $call_number;
+			$args['sms_number']  = $sms_number;
 		}
 
 		return Helper\Page_Header::$type( $args );
