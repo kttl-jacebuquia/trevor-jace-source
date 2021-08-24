@@ -205,11 +205,23 @@ export const initializeCarousel = (carouselSettings) => {
 	 let breakpoint = carouselSettings.options.breakpoint;
 	 const baseContainer = document.querySelector(base_selector);
 
-	 options.on.init = function (swiper) {
+	 options.on.afterInit = function (swiper) {
 		 document.querySelectorAll('.carousel-testimonials .card-post').forEach(elem => {
 			 elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
 		 });
+
+		if ( swiper.pagination.el && swiper.pagination.el.children.length ) {
+			[...swiper.pagination.el.children].forEach((button, index) => {
+				button.setAttribute('aria-label', `click to view slide number ${index + 1}`);
+			});
+		}
+
+		applySlidesA11y(swiper);
 	 }
+
+	 options.on.slideChange = function (swiper) {
+		applySlidesA11y(swiper);
+	}
 
 	 options.on.activeIndexChange = function (swiper) {
 		 let nextButton = swiper.navigation.nextEl;
@@ -228,6 +240,19 @@ export const initializeCarousel = (carouselSettings) => {
 			 const addOrRemoveMethod = index === swiper.activeIndex ? 'add' : 'remove';
 			 bullet.classList[addOrRemoveMethod]('swiper-pagination-bullet-active');
 		 });
+	 }
+
+	 function applySlidesA11y(swiper) {
+		Array.from(swiper.slides).forEach(slide => {
+			if ( slide.classList.contains('swiper-slide-active') ) {
+				slide.removeAttribute('aria-hidden');
+				slide.removeAttribute('tabindex');
+			}
+			else {
+				slide.setAttribute('aria-hidden', true);
+				slide.setAttribute('tabindex', -1);
+			}
+		})
 	 }
 
 	 function init() {
