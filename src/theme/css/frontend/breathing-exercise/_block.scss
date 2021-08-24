@@ -1,5 +1,5 @@
 .breathing-exercise {
-  @apply bg-breathing-exercise-mobile;
+  @apply bg-breathing-exercise-mobile text-indigo;
   @apply bg-cover;
 
   @screen md {
@@ -28,7 +28,7 @@
   }
 
   &__title {
-    @apply font-semibold text-px38 leading-px48 text-indigo;
+    @apply font-semibold text-px38 leading-px48;
 
     @screen md {
       @apply text-px32  leading-px42;
@@ -54,8 +54,8 @@
   }
 
   &__cta {
-    @apply btn indigo mt-px40 h-px58 px-px48;
-    @apply text-px18 leading-px24;
+    @apply btn mt-px40 h-px58 px-px48;
+    @apply text-px18 leading-px24 bg-indigo;
 
     @screen md {
       @apply mt-px30;

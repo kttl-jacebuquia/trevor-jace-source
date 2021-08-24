@@ -102,7 +102,7 @@
     }
 
     @screen xl {
-      @apply col-span-4 col-start-8;
+      @apply col-span-5 col-start-8;
     }
   }
 
@@ -111,6 +111,16 @@
 
     @screen xl {
       @apply text-px26 leading-px36 tracking-em005;
+    }
+
+    .alternating-image-text--item-heading-large & {
+      @screen md {
+        @apply text-px28 leading-px38 tracking-px_05;
+      }
+
+      @screen xl {
+        @apply text-px40 leading-px48 tracking-px_05;
+      }
     }
   }
 
@@ -145,6 +155,14 @@
 
     @screen xl {
       @apply mt-px30 text-px18 leading-px24;
+    }
+
+    &.page-btn {
+      @apply inline-flex items-center py-0 h-px58;
+
+      @screen md {
+        @apply h-px46;
+      }
     }
   }
 

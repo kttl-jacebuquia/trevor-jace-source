@@ -754,13 +754,15 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/body_class/
 	 */
 	public static function body_class( array $classes ): array {
+		// BG Color
 		if ( Is::rc() ) {
-			$classes['general_bg']      = 'bg-indigo';
-			$classes['general_txt_clr'] = 'text-white';
+			$classes['general_bg'] = 'bg-indigo';
 		} else {
-			$classes['general_bg']      = 'bg-teal-dark';
-			$classes['general_txt_clr'] = 'text-teal-dark';
+			$classes['general_bg'] = 'bg-teal-dark';
 		}
+
+		// Text Color
+		$classes['general_txt_clr'] = 'text-' . Page_Header::get_val( Page_Header::FIELD_TEXT_CLR );
 
 		return $classes;
 	}

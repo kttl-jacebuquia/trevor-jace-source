@@ -353,17 +353,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			),
 			static::_gen_tab_field(
 				'Styling',
-				array(
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $type,
-								'operator' => '!=',
-								'value'    => 'support_crisis_services',
-							),
-						),
-					),
-				)
 			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
@@ -381,10 +370,19 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					$bg_clr,
 					static::FIELD_BG_CLR,
 					array(
-						'label'   => 'BG Color',
-						'default' => 'white',
-						'wrapper' => array(
+						'label'             => 'BG Color',
+						'default'           => 'white',
+						'wrapper'           => array(
 							'width' => '50%',
+						),
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => $type,
+									'operator' => '!=',
+									'value'    => 'support_crisis_services',
+								),
+							),
 						),
 					),
 				),
@@ -679,6 +677,13 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$args['sms_number']  = $sms_number;
 		}
 
+		\add_filter( 'body_class', array( static::class, 'body_class' ) );
+
 		return Helper\Page_Header::$type( $args );
+	}
+
+	public static function body_class( $classes ) {
+		$classes[] = 'class-name';
+		return $classes;
 	}
 }
