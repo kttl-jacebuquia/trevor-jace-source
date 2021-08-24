@@ -3,10 +3,20 @@
   @apply transform transition-transform -translate-x-1/2;
   --tw-translate-y: 125%;
 
+  body.error404 & {
+    @screen mobile {
+      --tw-translate-y: 0;
+    }
+
+    @screen lg2 {
+      @apply bottom-px50;
+    }
+  }
+
   .floating-crisis-btn {
 	@apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
-	@apply text-white font-bold text-px22 leading-px22 tracking-em001;
-	@apply whitespace-nowrap;
+	@apply text-white font-bold text-px20 leading-px20 tracking-em001;
+	@apply whitespace-nowrap inline;
   }
 
   .is-not-scrolling & {

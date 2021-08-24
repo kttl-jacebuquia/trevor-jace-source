@@ -7,7 +7,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 
 ?>
 
-<footer class="w-full flex flex-col justify-center sticky-cta-anchor">
+<footer class="w-full flex flex-col justify-center sticky-cta-anchor <?php echo is_404() ? 'hidden' : '' ?>">
 	<div class="container mx-auto site-content-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">

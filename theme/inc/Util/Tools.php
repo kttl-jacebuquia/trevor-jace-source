@@ -17,7 +17,7 @@ class Tools {
 			return null;
 		}
 
-		if ( is_page() ) {
+		if ( is_page() || is_404() ) {
 			return null;
 		}
 

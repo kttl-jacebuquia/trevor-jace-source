@@ -17,7 +17,8 @@ body {
   -webkit-font-smoothing: antialiased;
 
   // Fixed content when nav is expanded for mobile/tablet
-  &.is-fixed {
+  &.is-fixed,
+  &.error404 {
   	@screen md-max {
   		@apply fixed;
 	  	top: var(--fixed-body-top);
@@ -63,6 +64,14 @@ body {
 
   > footer {
 	@apply flex-shrink-0;
+  }
+
+  &.error404 {
+    & > main {
+      @screen md-max {
+        justify-content: flex-end;
+      }
+    }
   }
 }
 
