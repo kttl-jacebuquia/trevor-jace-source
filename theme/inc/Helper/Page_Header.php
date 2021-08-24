@@ -2,6 +2,7 @@
 
 use \TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field_Group;
+use TrevorWP\Theme\ACF\Field_Group\Page_Header as Field_GroupPage_Header;
 use TrevorWP\Util\Tools;
 
 /**
@@ -291,9 +292,13 @@ class Page_Header {
 			array(),
 			$options
 		);
+
+		$class   = $options['styles'] ?? array();
+		$class[] = 'header-container header-container--split-carousel w-full';
+
 		ob_start();
 		?>
-		<header class="header-container w-full <?php echo esc_attr( ( ! empty( $options['styles'] ) ) ? implode( ' ', $options['styles'] ) : '' ); ?>">
+		<header <?php echo Field_GroupPage_Header::render_attrs( $class ); ?>>
 			<div class="page-header type-split-carousel">
 				<div class="page-header-inner">
 					<div class="page-header-content-wrap">
