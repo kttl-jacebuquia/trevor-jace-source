@@ -609,11 +609,19 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				@screen lg2 {
 					@apply transition-transform ml-px10;
 					color: rgba(255, 255, 255, 0.44);
+
+          .error404 & {
+            color: rgba(16, 16, 102, 0.44) !important;
+          }
 				}
 			}
 
 			> .menu-link-text {
 				@screen lg2 {
+          .error404 & {
+            @apply text-indigo;
+          }
+
 					@apply transform-gpu transition-transform duration-300 ease-out;
 					@apply text-px20 leading-px26;
 				}
@@ -948,6 +956,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@screen md {
 			@apply mt-0;
 		}
+
+    body.error404 & {
+      @apply text-orange;
+    }
 	}
 
 	.logo-icon {

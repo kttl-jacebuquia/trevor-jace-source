@@ -1,0 +1,50 @@
+.error-page {
+  @apply flex justify-center;
+
+  flex-direction: column;
+
+  @screen lg {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__content {
+    @apply text-center mb-px41 md:mb-px54 lg:mb-px0 lg:mr-px28 lg:text-left;
+
+    h1 {
+      @apply font-bold text-px32 leading-px40 mb-px10 md:text-px56 md:leading-px66 md:mb-px24 lg:text-px60 lg:leading-px70 lg:mb-px28;
+    }
+
+    p {
+      @apply text-px18 leading-px26 mb-px28 md:text-px20 md:leading-px24 md:mb-px24 md:tracking-px05 lg:text-px22 lg:leading-px28;
+    }
+
+    a {
+      font-weight: 600;
+
+      @apply text-px20 leading-px26 tracking-px05 border-b-px2 border-solid border-current;
+    }
+
+    @screen lg {
+      width: 467px;
+    }
+  }
+
+  &__background {
+    @apply aspect-ratio-1-1;
+
+    margin: 0 calc(-1 * theme('container.padding.DEFAULT'));
+    width: calc(100% + (2 * theme('container.padding.DEFAULT')));
+
+    @screen md {
+      margin-left: auto;
+      margin-right: calc(-1 * theme('container.padding.md'));
+      width: 544px;
+    }
+
+    @screen lg {
+      margin: 0;
+      width: 467px;
+    }
+  }
+}

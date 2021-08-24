@@ -20,7 +20,7 @@ class Main_Header {
 
 				return $txt_color;
 			}
-		} elseif ( Is::trevorspace() || Is::get_help() ) {
+		} elseif ( Is::trevorspace() || Is::get_help() || is_404()) {
 			return Post_Header::CLR_INDIGO;
 		}
 

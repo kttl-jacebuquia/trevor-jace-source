@@ -757,12 +757,14 @@ class Hooks {
 		// BG Color
 		if ( Is::rc() ) {
 			$classes['general_bg'] = 'bg-indigo';
+		} elseif (is_404()) {
+			$classes['general_bg'] = 'bg-white';
 		} else {
 			$classes['general_bg'] = 'bg-teal-dark';
 		}
 
 		// Text Color
-		$classes['general_txt_clr'] = 'text-' . Page_Header::get_val( Page_Header::FIELD_TEXT_CLR );
+		$classes['general_txt_clr'] = is_404() ? 'text-indigo' : 'text-' . Page_Header::get_val( Page_Header::FIELD_TEXT_CLR );
 
 		return $classes;
 	}
