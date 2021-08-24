@@ -1,6 +1,13 @@
 @import '~tippy.js/dist/svg-arrow.css';
 
+.tippy-box {
+  @apply absolute -top-px20;
+}
+
 .tippy-svg-arrow {
+  @apply absolute top-px20;
+  transform: translateY(#{rem-calc(10)}) !important;
+
   svg {
 	path {
 	  fill: rgba(255, 255, 255, 0.95);
