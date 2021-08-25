@@ -28,7 +28,7 @@ class Post {
 		}
 
 		# File
-		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
+		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ]['post_types'] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
 			$out['file_button'] = self::_render_file_button( $file_id );
 		}
 
