@@ -1,90 +1,121 @@
 .wp-block-pullquote {
   &, /* To catch the default, if default changes, remove this */
   &.is-style-trevor-default {
-	@apply relative;
-	@apply text-indigo;
-	@apply my-14 py-8;
+    @apply relative;
+    @apply text-indigo;
+    @apply my-14 py-8;
 
-	&::before,
-	&::after {
-	  @apply absolute;
-	}
+    &::before,
+    &::after {
+      @apply absolute block top-0 text-px14;
+      font-family: "trevor-ti";
+      line-height: 1em;
 
-	&:before {
-	  content: $font-trevor-ti-quote-open;
-	  @apply top-0 left-0;
-	}
+      @screen md {
+        @apply text-px22;
+      }
 
-	&:after {
-	  content: font-trevor-ti-quote-close;
-	  top: .5em;
-	  left: 1.5em;
-	}
+      @screen xl {
+        @apply text-px26;
+      }
+    }
 
-	blockquote, a, p, cite {
-	  color: inherit;
-	}
+    &::before {
+      content: $font-trevor-ti-quote-open;
+      @apply top-0 left-0;
+    }
 
-	blockquote {
-	  @apply border-none p-0;
-	  @apply text-left not-italic font-bold text-px28 leading-px34;
+    &::after {
+      @apply mt-px4;
+      content: $font-trevor-ti-quote-close;
+      left: 1.5em;
 
-	  > p {
-		line-height: inherit;
-		@apply m-0 p-0 mb-4;
-	  }
-	}
+      @screen md {
+        @apply mt-px8;
+      }
+    }
 
-	cite {
-	  @apply text-px20 leading-px30 not-italic font-normal capitalize;
-	}
+    blockquote,
+    a,
+    p,
+    cite {
+      color: inherit;
+    }
 
+    blockquote {
+      @apply border-none p-0 mt-px10;
+      @apply text-left not-italic font-semibold text-px28 leading-px34;
 
+      @screen md {
+        @apply text-px28 leading-px38;
+      }
+      @screen xl {
+        @apply mt-px20;
+      }
+
+      > p {
+        @apply m-0 p-0 mb-4 mt-px10;
+        line-height: inherit;
+        font-size: inherit;
+
+        @screen md {
+          @apply mt-px15;
+        }
+
+        @screen xl {
+          @apply text-px36 leading-px46;
+        }
+
+        &::before,
+        &::after {
+          content: none !important;
+        }
+      }
+    }
+
+    cite {
+      @apply mt-px20 text-px20 leading-px30 not-italic font-normal capitalize;
+
+      @screen md {
+        @apply mt-px18 text-px18 leading-px28;
+      }
+
+      @screen xl {
+        @apply text-px22 leading-px26;
+      }
+
+      &::before {
+        @apply inline-block;
+        content: '-\00a0';
+      }
+    }
   }
 
   @screen md {
-	&, /* To catch the default, if default changes, remove this */
-	&.is-style-trevor-default {
-	  margin: rem-calc(54px) 0;
-	  padding: rem-calc(42px) 0;
+    &, /* To catch the default, if default changes, remove this */
+    &.is-style-trevor-default {
+      @apply my-px60 mx-0;
+      padding: rem-calc(42px) 0;
 
-	  &::before,
-	  &::after {
-		font-size: 1.4rem;
-	  }
+      blockquote {
+        @apply leading-px38;
+      }
 
-	  &::after {
-		top: .4em;
-	  }
-
-	  blockquote {
-		@apply leading-px38;
-	  }
-
-	  cite {
-		@apply text-px18 leading-px28;
-	  }
-	}
+      cite {
+        @apply text-px18 leading-px28;
+      }
+    }
   }
 
   @screen lg {
-	&, /* To catch the default, if default changes, remove this */
-	&.is-style-trevor-default {
-	  margin: rem-calc(60px) 0;
-	  padding: rem-calc(50px) 0;
+    &, /* To catch the default, if default changes, remove this */
+    &.is-style-trevor-default {
+      margin: rem-calc(60px) 0;
+      padding: rem-calc(50px) 0;
 
-	  &::before,
-	  &::after {
-		font-size: 1.6rem;
-	  }
-
-	  &::after {
-		top: .3em;
-	  }
-
-	  blockquote {
-		@apply text-px36 leading-px46;
-	  }
-	}
+      blockquote {
+        @apply text-px36 leading-px46;
+      }
+    }
   }
 }
