@@ -934,6 +934,14 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply hover:opacity-80;
 		}
 	}
+
+  .top-nav-inner {
+    @screen lg2 {
+      @apply px-px20;
+
+      width: calc(100% - 80px);
+    }
+  }
 }
 
 .top-nav-inner {
@@ -941,8 +949,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply mx-auto;
 
 	@screen lg2 {
-		@apply px-0 pb-0 pt-px32 items-start;
-		width: calc(100% - #{rem-calc(160px)});
+		@apply pb-0 pt-px32 items-start;
 	}
 
 	.logo-wrap {
