@@ -174,8 +174,6 @@ class Post_Header {
 		# By post type
 		if ( CPT\RC\Guide::POST_TYPE == $post->post_type ) {
 			$title_top = 'Guide';
-		} elseif ( in_array( $post->post_type, Main::BLOG_POST_TYPES ) ) {
-			$title_top = 'Blog';
 		} elseif ( CPT\RC\External::POST_TYPE == $post->post_type ) {
 			$hide_tags    = true;
 			$external_url = CPT\RC\External::obj_get_url( $post->ID );
