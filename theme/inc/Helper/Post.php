@@ -5,6 +5,7 @@ use TrevorWP\CPT\RC\External;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
 use TrevorWP\Theme\ACF\Field_Group\Page_Circulation;
+use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
 use TrevorWP\Theme\Customizer;
@@ -171,16 +172,20 @@ class Post {
 			return null;
 		}
 
-		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
-		$terms            = get_terms(
-			array(
-				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
-				'orderby'    => 'include',
-				'include'    => $featured_cat_ids,
-				'parent'     => 0,
-				'hide_empty' => false,
-			)
-		);
+		$featured_cat_ids = Resource_Center::get_featured_topics();
+
+		if ( ! empty( $featured_cat_ids ) ) {
+			$featured_cat_ids = array_column( $featured_cat_ids, 'term_id' );
+			$terms            = get_terms(
+				array(
+					'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+					'orderby'    => 'include',
+					'include'    => $featured_cat_ids,
+					'parent'     => 0,
+					'hide_empty' => false,
+				)
+			);
+		}
 
 		if ( empty( $terms ) ) {
 			return null;

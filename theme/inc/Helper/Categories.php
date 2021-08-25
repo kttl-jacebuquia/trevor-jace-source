@@ -15,16 +15,23 @@ class Categories {
 	 */
 	public static function render_rc_featured_hero(): string {
 		$featured_cat_ids = Resource_Center::get_featured_topics();
-		$featured_cat_ids = array_column( $featured_cat_ids, 'term_id' );
-		$featured_cats    = get_terms(
-			array(
-				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
-				'orderby'    => 'include',
-				'include'    => $featured_cat_ids,
-				'parent'     => 0,
-				'hide_empty' => false,
-			)
-		);
+
+		if ( ! empty( $featured_cat_ids ) ) {
+			$featured_cat_ids = array_column( $featured_cat_ids, 'term_id' );
+			$featured_cats    = get_terms(
+				array(
+					'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+					'orderby'    => 'include',
+					'include'    => $featured_cat_ids,
+					'parent'     => 0,
+					'hide_empty' => false,
+				)
+			);
+		}
+
+		if ( empty( $featured_cats ) ) {
+			return null;
+		}
 
 		ob_start();
 		?>
