@@ -2,18 +2,23 @@
   @apply py-10;
 
   & > * + * {
-	@apply mt-14;
+    @apply mt-14;
   }
 
   @screen md {
-	& > * + * {
-	  @apply mt-12;
-	}
+    & > * + * {
+      @apply mt-12;
+    }
   }
 
   @screen lg {
-	& > * + * {
-	  @apply mt-14;
-	}
+    & > * + * {
+      @apply mt-14;
+    }
+  }
+
+  // Eternal Resource Single
+  .single-trevor_rc_external & {
+    @apply py-0;
   }
 }
