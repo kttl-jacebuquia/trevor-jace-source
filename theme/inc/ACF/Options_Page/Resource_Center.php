@@ -114,7 +114,7 @@ class Resource_Center extends A_Options_Page {
 					'label'         => 'Trending',
 					'type'          => 'relationship',
 					'required'      => 1,
-					'post_type'     => RC_Object::$PUBLIC_POST_TYPES,
+					'post_type'     => array_merge( array( 'post' ), RC_Object::$PUBLIC_POST_TYPES ),
 					'taxonomy'      => '',
 					'filters'       => array(
 						0 => 'search',
