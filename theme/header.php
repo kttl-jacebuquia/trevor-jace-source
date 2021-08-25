@@ -134,7 +134,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			<?php
 			wp_nav_menu(
 				array(
-					'menu_class'      => 'main-menu',
+					'menu_class'      => 'main-menu ' . $nav_color,
 					'container_class' => 'main-menu-container main-menu-container-resources',
 					'theme_location'  => 'header-support',
 				)
@@ -144,7 +144,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			<?php
 			wp_nav_menu(
 				array(
-					'menu_class'      => 'main-menu',
+					'menu_class'      => 'main-menu ' . $nav_color,
 					'container_class' => 'main-menu-container main-menu-container-organization',
 					'theme_location'  => 'header-organization',
 				)

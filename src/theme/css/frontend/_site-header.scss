@@ -447,7 +447,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 // Menu
 /* @see: .main-menu-container */
 .menu-wrap {
-	@apply flex fixed right-0 py-px24 overflow-x-hidden;
+	@apply flex fixed right-0 py-px55 overflow-x-hidden;
 	@apply transform-gpu translate-x-full;
 	@apply transition-all duration-300 ease-out;
 	@apply bg-white text-indigo;
@@ -607,21 +607,15 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				content: $font-trevor-ti-chevron-thick-right;
 
 				@screen lg2 {
-					@apply transition-transform ml-px10;
-					color: rgba(255, 255, 255, 0.44);
+          color: inherit;
+          opacity: 0.44;
 
-          .error404 & {
-            color: rgba(16, 16, 102, 0.44) !important;
-          }
+					@apply transition-transform ml-px10;
 				}
 			}
 
 			> .menu-link-text {
 				@screen lg2 {
-          .error404 & {
-            @apply text-indigo;
-          }
-
 					@apply transform-gpu transition-transform duration-300 ease-out;
 					@apply text-px20 leading-px26;
 				}
@@ -833,7 +827,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// Back button, for mobile/tablet
 	.back-to-tier1-wrap {
-		@apply w-full absolute top-px28 left-0 pl-px24;
+		@apply w-full absolute top-px65 left-0 pl-px24;
 		@apply transition-all duration-300 ease-out opacity-0 invisible;
 		@apply transform-gpu translate-x-full;
 
@@ -892,7 +886,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 			// Chevron
 			> .menu-item > a::after {
-				@apply rotate-90 text-white text-opacity-44;
+				@apply rotate-90;
 			}
 
 			// Hover/Focus state
@@ -911,11 +905,12 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			}
 
 			> .menu-item > a {
-				@apply p-0 text-white;
+				@apply p-0;
 			}
 
 			// Tier 1 submenu
 			> .menu-item > .sub-menu {
+        @apply text-indigo;
 				@apply pt-px24 pb-px32;
 			}
 		}
