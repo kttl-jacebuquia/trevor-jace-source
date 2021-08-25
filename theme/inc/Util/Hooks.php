@@ -93,6 +93,11 @@ class Hooks {
 		# WPSEO Title
 		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
 
+		# GTM4WP
+		if (has_filter(GTM4WP_WPFILTER_COMPILE_DATALAYER)) {
+			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER , array( self::class, 'datalayer_data_update' ) );
+		}
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 
@@ -809,5 +814,34 @@ class Hooks {
 		}
 
 		return $title;
+	}
+
+	/**
+	 * Converts some of the dataLayer array values into comma-separated string.
+	 *
+	 * @param array $dataLayer
+	 *
+	 * @return array
+	 *
+	 */
+	public static function datalayer_data_update( $dataLayer ) {
+		$dataLayerKeys = ['pageCategory', 'pageAttributes', 'pagePostTerms'];
+
+		foreach($dataLayerKeys as $key) {
+			if (array_key_exists($key, $dataLayer)) {
+				$values = $dataLayer[$key];
+
+				if ($key == 'pagePostTerms') {
+					foreach($values as $subKey => $value) {
+						$dataLayer[$key][$subKey] = implode(',', $value);
+					}
+				}
+				else {
+					$dataLayer[$key] = implode(',', $values);
+				}
+			}
+		}
+
+		return $dataLayer;
 	}
 }
