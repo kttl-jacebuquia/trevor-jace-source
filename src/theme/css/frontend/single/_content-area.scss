@@ -40,6 +40,10 @@
   > :first-child {
 	@apply mt-0;
   }
+
+  p.has-medium-font-size {
+    @apply text-px20;
+  }
 }
 
 @screen md {
