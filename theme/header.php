@@ -1,8 +1,8 @@
 <!doctype html>
 <?php
 
-use TrevorWP\Theme\Customizer;
 use \TrevorWP\Theme\ACF\Options_Page;
+use TrevorWP\Theme\Helper\Main_Header;
 use \TrevorWP\Theme\Util\Is;
 
 $is_rc = Is::rc();
@@ -10,11 +10,13 @@ $is_rc = Is::rc();
 $header_data = Options_Page\Header::get_header();
 
 $counselor_link = $header_data['counselor_link'];
-$donate_link = $header_data['donate_link'];
+$donate_link    = $header_data['donate_link'];
 
-$base_url = strtok($_SERVER['REQUEST_URI'], '?' );
-$is_header_cta = strpos($counselor_link['url'], $base_url) !== false
-	|| strpos($donate_link['url'], $base_url) !== false;
+$base_url      = strtok( $_SERVER['REQUEST_URI'], '?' );
+$is_header_cta = strpos( $counselor_link['url'], $base_url ) !== false
+	|| strpos( $donate_link['url'], $base_url ) !== false;
+
+$nav_color = 'text-' . Main_Header::get_text_color();
 ?>
 
 <html class="no-js" <?php language_attributes(); ?>>
@@ -69,14 +71,14 @@ $is_header_cta = strpos($counselor_link['url'], $base_url) !== false
 			<ul class="switcher">
 				<li>
 					<a href="<?php echo esc_url( $header_data['find_support_link']['url'] ); ?>"
-					class="switcher-link-rc <?php echo $is_rc && !$is_header_cta ? 'active' : ''; ?>"
+					class="switcher-link-rc <?php echo $is_rc && ! $is_header_cta ? 'active' : ''; ?>"
 					target="<?php echo esc_attr( $header_data['find_support_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['find_support_link']['title'] ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo esc_url( $header_data['explore_trevor_link']['url'] ); ?>"
-					class="<?php echo !$is_rc && !$is_header_cta ? 'active' : ''; ?>"
+					class="<?php echo ! $is_rc && ! $is_header_cta ? 'active' : ''; ?>"
 					target="<?php echo esc_attr( $header_data['explore_trevor_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['explore_trevor_link']['title'] ); ?>
 					</a>
@@ -113,7 +115,7 @@ $is_header_cta = strpos($counselor_link['url'], $base_url) !== false
 
 <?php /* TOP NAV */ ?>
 <div id="top-nav" class="top-nav <?php echo $is_rc ? 'is_rc' : ''; ?>" role="navigation">
-	<div class="top-nav-inner container <?php echo 'text-' . \TrevorWP\Theme\Helper\Main_Header::get_text_color(); ?>">
+	<div class="top-nav-inner container <?php echo $nav_color; ?>">
 		<div class="logo-wrap">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
 				<i class="logo-text trevor-ti-logo-text"></i>

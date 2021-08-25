@@ -686,4 +686,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$classes[] = 'class-name';
 		return $classes;
 	}
+
+	public static function get_text_color() {
+		return static::get_val( static::FIELD_TEXT_CLR );
+	}
 }

@@ -1,6 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
-use TrevorWP\Theme\Util\Is;
+use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 
 /**
  * Main Header Helper
@@ -13,14 +13,22 @@ class Main_Header {
 	 * // TODO: Maybe we should use css variables for this?
 	 */
 	public static function get_text_color(): string {
-		if ( is_singular( \TrevorWP\Util\Tools::get_public_post_types() ) && ( $queried_object = get_queried_object() ) instanceof \WP_Post ) {
+		$queried_object = get_queried_object();
+
+		if ( is_singular( \TrevorWP\Util\Tools::get_public_post_types() ) && ( $queried_object ) instanceof \WP_Post ) {
 			/** @var \WP_Post $queried_object */
 			if ( \TrevorWP\Theme\Helper\Post_Header::supports_bg_color( $queried_object ) ) {
 				list( , $txt_color ) = \TrevorWP\Theme\Helper\Post_Header::get_bg_color( $queried_object );
 
 				return $txt_color;
 			}
-		} elseif ( Is::trevorspace() || Is::get_help() || is_404()) {
+		} elseif ( is_page() && ! is_page_template() ) {
+			$color = Page_Header::get_text_color();
+
+			if ( ! empty( $color ) ) {
+				return $color;
+			}
+		} elseif ( is_404() ) {
 			return Post_Header::CLR_INDIGO;
 		}
 
