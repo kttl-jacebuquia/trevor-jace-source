@@ -24,10 +24,11 @@ class Post {
 	const KEY_FILE = Main::META_KEY_PREFIX . 'file';
 
 	# Header
-	const KEY_HEADER_TYPE       = Main::META_KEY_PREFIX . 'header_type';
-	const KEY_HEADER_BG_CLR     = Main::META_KEY_PREFIX . 'header_bg_clr';
-	const KEY_HEADER_SNOW_SHARE = Main::META_KEY_PREFIX . 'show_share';
-	const KEY_HEADER_SHOW_DATE  = Main::META_KEY_PREFIX . 'show_date';
+	const KEY_HEADER_TYPE        = Main::META_KEY_PREFIX . 'header_type';
+	const KEY_HEADER_BG_CLR      = Main::META_KEY_PREFIX . 'header_bg_clr';
+	const KEY_HEADER_SNOW_SHARE  = Main::META_KEY_PREFIX . 'show_share';
+	const KEY_HEADER_SHOW_DATE   = Main::META_KEY_PREFIX . 'show_date';
+	const KEY_HEADER_SHOW_AUTHOR = Main::META_KEY_PREFIX . 'show_author';
 
 	# Length
 	const KEY_LENGTH_IND = Main::META_KEY_PREFIX . 'length_ind';
@@ -101,6 +102,11 @@ class Post {
 					'post_types' => $article_kind,
 				),
 				self::KEY_HEADER_SHOW_DATE    => array(
+					'type'       => 'boolean',
+					'default'    => true,
+					'post_types' => $article_kind,
+				),
+				self::KEY_HEADER_SHOW_AUTHOR  => array(
 					'type'       => 'boolean',
 					'default'    => true,
 					'post_types' => $article_kind,
@@ -324,6 +330,15 @@ class Post {
 	 */
 	public static function can_show_date_box( int $post_id ): bool {
 		return ! empty( get_post_meta( $post_id, self::KEY_HEADER_SHOW_DATE, true ) );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return bool
+	 */
+	public static function can_show_author_box( int $post_id ): bool {
+		return ! empty( get_post_meta( $post_id, self::KEY_HEADER_SHOW_AUTHOR, true ) );
 	}
 
 	/**

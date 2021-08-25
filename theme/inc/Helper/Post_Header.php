@@ -216,7 +216,7 @@ class Post_Header {
 		}
 
 		# Author
-		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) ) {
+		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) && Meta\Post::can_show_author_box( $post->ID ) ) {
 			ob_start();
 			?>
 			<div class="author-box mid-row-text">

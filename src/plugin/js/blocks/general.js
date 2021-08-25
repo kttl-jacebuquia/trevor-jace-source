@@ -21,6 +21,7 @@ const META_KEY_MAP = {
 	lengthInd: metaKeys.KEY_LENGTH_IND,
 	showShare: metaKeys.KEY_HEADER_SNOW_SHARE,
 	showDate: metaKeys.KEY_HEADER_SHOW_DATE,
+	showAuthor: metaKeys.KEY_HEADER_SHOW_AUTHOR,
 	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
 	billId: metaKeys.KEY_BILL_ID,
 	pronouns: metaKeys.KEY_PRONOUNS,
@@ -35,6 +36,7 @@ class PostSidebar extends React.Component {
 	handleHeaderTypeChange = (newVal) => this.props.updatePostMeta('headerType', newVal);
 	handleShowShare = (newVal) => this.props.updatePostMeta('showShare', newVal);
 	handleShowDate = (newVal) => this.props.updatePostMeta('showDate', newVal);
+	handleShowAuthor = (newVal) => this.props.updatePostMeta('showAuthor', newVal);
 	handleHeaderBgColor = (colorHex) => {
 		this.props.updatePostMeta('headerBgColor', BG_COLOR_HEX_2_NAME_MAP[colorHex] || null);
 	}
@@ -95,6 +97,7 @@ class PostSidebar extends React.Component {
 			lengthInd,
 			showShare,
 			showDate,
+			showAuthor,
 			slug,
 			reRecirculationCards,
 			billId,
@@ -163,6 +166,13 @@ class PostSidebar extends React.Component {
 				<CheckboxControl label="Show Date"
 								 checked={showDate}
 								 onChange={this.handleShowDate}/>
+				}
+
+				{/** Show Author Box */}
+				{this.canRenderField(META_KEY_MAP.showAuthor) &&
+				<CheckboxControl label="Show Author"
+								 checked={showAuthor}
+								 onChange={this.handleShowAuthor}/>
 				}
 
 				{/* Content Length */}
