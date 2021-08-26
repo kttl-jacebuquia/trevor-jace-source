@@ -20,6 +20,11 @@ class Card {
 		$post_type = get_post_type( $post );
 		$_class    = &$options['class'];
 
+		// Double check hide_cat_eyebrow settings
+		if ( empty( $options['hide_cat_eyebrow'] ) ) {
+			$options['hide_cat_eyebrow'] = ! \get_post_meta( $post->ID, PostMeta::KEY_SHOW_CARD_EYEBROW, true );
+		}
+
 		// The default class name.
 		$_class[] = 'card-post';
 
@@ -49,14 +54,10 @@ class Card {
 		} elseif ( CPT\Donate\Fundraiser_Stories::POST_TYPE === $post_type ) {
 			$title_top = 'Fundraiser Story';
 		} elseif ( CPT\RC\Article::POST_TYPE === $post_type ) {
-			if ( ! $options['hide_cat_eyebrow'] ) {
-				$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
-				$first_cat  = empty( $categories ) ? null : reset( $categories );
-				$title_top  = $first_cat ? $first_cat->name : null;
-			}
-
-			$desc = $post->post_excerpt;
-
+			$categories = Ranks\Taxonomy::get_object_terms_ordered( $post, RC_Object::TAXONOMY_CATEGORY );
+			$first_cat  = empty( $categories ) ? null : reset( $categories );
+			$title_top  = $first_cat ? $first_cat->name : null;
+			$desc       = $post->post_excerpt;
 		} elseif ( in_array( $post_type, array( CPT\RC\Post::POST_TYPE ), true ) ) {
 			$title_top = 'Blog';
 		} elseif ( CPT\Post::POST_TYPE === $post_type ) {
@@ -80,18 +81,18 @@ class Card {
 		$tags = Taxonomy::get_post_tags_distinctive( $post, array( 'filter_count_1' => false ) );
 
 		// Thumbnail variants.
-		$thumb_var   = array( self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) );
-		$thumb_var_h = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+		$thumb_var   = array();
 
 		if ( $is_bg_full ) {
 			// Prefer vertical image on full bg.
-			array_unshift( $thumb_var, $thumb_var_h );
+			$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_VERTICAL );
 		} else {
-			$thumb_var[] = $thumb_var_h;
+			$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
 		}
 
 		// Fallback to the square.
-		$thumb_var[]   = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+
 		$thumb         = Thumbnail::post( $post, ...$thumb_var );
 		$has_thumbnail = ! empty( $thumb ) && 'Press' !== $cat ? true : false;
 		if ( ! $has_thumbnail ) {
@@ -132,7 +133,7 @@ class Card {
 						<div class="icon-wrap"><i class="<?php echo esc_attr( $icon_cls ); ?>"></i></div>
 					<?php } ?>
 
-					<?php if ( ! empty( $title_top ) ) { ?>
+					<?php if ( ! $options['hide_cat_eyebrow'] && ! empty( $title_top ) ) { ?>
 						<div class="title-top uppercase"><?php echo $title_top; ?></div>
 					<?php } ?>
 

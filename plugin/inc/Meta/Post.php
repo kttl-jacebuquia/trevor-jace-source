@@ -45,6 +45,10 @@ class Post {
 	# Recirculation Cards
 	const KEY_RECIRCULATION_CARDS = Main::META_KEY_PREFIX . 'recirculation_cards';
 
+	# Card Options
+	const KEY_CARD_OPTIONS      = Main::META_KEY_PREFIX . 'card_options';
+	const KEY_SHOW_CARD_EYEBROW = Main::META_KEY_PREFIX . 'show_card_eyebrow';
+
 	# Partner
 	const PARTNER_URL = Main::META_KEY_PREFIX . 'partner_url';
 
@@ -83,6 +87,8 @@ class Post {
 			'auth_callback' => array( self::class, 'auth_check_editors' ),
 			'post_types'    => $ppt,
 		);
+
+
 
 		// Posts
 		foreach (
@@ -185,6 +191,19 @@ class Post {
 					'post_types' => array(
 						CPT\Team::POST_TYPE,
 					),
+				),
+				self::KEY_CARD_OPTIONS        => array(
+					'post_types' => array(
+						CPT\RC\Post::POST_TYPE,
+						CPT\RC\Article::POST_TYPE,
+						CPT\RC\Glossary::POST_TYPE,
+						CPT\RC\Guide::POST_TYPE,
+						'post',
+					),
+				),
+				self::KEY_SHOW_CARD_EYEBROW   => array(
+					'type'    => 'boolean',
+					'default' => true,
 				),
 			) as $meta_key => $args
 		) {
