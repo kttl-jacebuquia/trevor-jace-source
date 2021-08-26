@@ -1,9 +1,15 @@
 .card-post {
+  @apply h-px496;
+
   @screen md {
     @apply h-px450;
   }
 
-  @screen md {
+  @screen lg {
+    @apply h-px505;
+  }
+
+  @screen xl {
     @apply h-px510;
   }
 

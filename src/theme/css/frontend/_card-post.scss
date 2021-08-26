@@ -215,18 +215,6 @@
           &[hidden] {
             display: none;
           }
-
-          &:hover {
-            @apply bg-moss;
-          }
-
-          body.is-rc &:hover {
-            @apply bg-violet-lighter;
-          }
-
-          body.is-rc &.ellipsis:hover {
-            @apply bg-violet;
-          }
         }
 
         .ellipsis {
@@ -383,8 +371,13 @@
 
       // ORG Post Type
       &.type-post {
-        @apply h-px503 border-teal-dark border-opacity-16 shadow-none border-px2;
-        @apply md:min-h-px450;
+        body:not(.is-rc) & {
+          @apply border-teal-dark border-opacity-16 shadow-none border-px2;
+
+          @screen mobile {
+            @apply h-px503;
+          }
+        }
 
         &.no-thumbnail {
           .title-top {
@@ -430,7 +423,9 @@
         }
 
         .tags-box {
-          @apply flex items-center flex-wrap overflow-visible h-px30;
+          body:not(.is-rc) & {
+            @apply flex items-center flex-wrap overflow-visible h-px30;
+          }
 
           // Hide 3rd tag item onwards
           &:not(.show-all) {
@@ -441,11 +436,13 @@
         }
 
         .tag-box {
-          @apply flex items-center h-px30 px-px14 mr-0 mb-0 bg-gray-light mr-px6 mb-px6 text-teal-dark;
-          @apply xl:tracking-em001;
+          body:not(.is-rc) & {
+            @apply flex items-center px-px14 mr-0 mb-0 mr-px6 mb-px6;
+            @apply xl:tracking-em001;
 
-          &.ellipsis {
-            @apply static w-px34 h-px34 flex items-center justify-center p-0 bg-blue_green mr-0 text-white;
+            &.ellipsis {
+              @apply static w-px34 h-px34 flex items-center justify-center p-0 mr-0;
+            }
           }
         }
       }
