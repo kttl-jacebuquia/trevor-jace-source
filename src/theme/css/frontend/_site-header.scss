@@ -535,7 +535,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply transform-gpu translate-x-0;
 	@apply transition-transform duration-300 ease-out;
 
-  @screen md-max {
+  @screen lg-max {
     @apply text-indigo;
   }
 
@@ -944,7 +944,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
   .top-nav-inner {
-    @screen lg2 {
+    @screen lg {
       @apply px-px20;
 
       width: calc(100% - 80px);
