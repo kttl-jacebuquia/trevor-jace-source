@@ -1,14 +1,16 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\Block;
+use TrevorWP\CPT\RC\Article;
 use TrevorWP\CPT\RC\External;
+use TrevorWP\CPT\RC\Guide;
+use TrevorWP\CPT\RC\Post as RCPost;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
 use TrevorWP\Theme\ACF\Field_Group\Page_Circulation;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
-use TrevorWP\Theme\Customizer;
 
 /**
  * Post Helper
@@ -242,7 +244,7 @@ class Post {
 				<?php
 				return ob_get_clean();
 			case 'content_footer':
-				if ( $post->post_type != \TrevorWP\CPT\RC\Post::POST_TYPE ) {
+				if ( ! in_array( $post->post_type, array( RCPost::POST_TYPE, Guide::POST_TYPE, Article::POST_TYPE ) ) ) {
 					return null;
 				}
 				ob_start();
@@ -250,14 +252,16 @@ class Post {
 				<div class="circulation-cards">
 					<?php
 					foreach ( $cards as $card ) {
-						$method = "render_{$card}";
+						$args = Page_Circulation::get_card_args( $card );
+
+						$method = "render_{$args['type']}";
 						if ( ! method_exists( Circulation_Card::class, $method ) ) {
 							continue;
 						}
 
 						?>
 						<div class="circulation-card-wrap">
-							<?php echo Circulation_Card::$method(); ?>
+							<?php echo Circulation_Card::$method( $args ); ?>
 						</div>
 					<?php } ?>
 				</div>
