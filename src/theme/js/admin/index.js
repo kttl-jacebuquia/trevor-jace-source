@@ -1,1 +1,2 @@
 import './customize';
+import './svg';

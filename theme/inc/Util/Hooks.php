@@ -12,6 +12,7 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Ajax\ADP;
 use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
+use TrevorWP\Theme\Ajax\SVG;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Helper\Trevor_Chat;
@@ -118,6 +119,9 @@ class Hooks {
 
 		# MailChimp API
 		MailChimp::construct();
+
+		# SVG API
+		SVG::construct();
 	}
 
 	/**
@@ -239,6 +243,12 @@ class Hooks {
 			array( 'jquery' ),
 			$GLOBALS['trevor_theme_static_ver'],
 			true
+		);
+
+		wp_localize_script(
+			self::NAME_PREFIX . 'theme-admin-main',
+			'script_vars',
+			array( 'AJAXurl' => admin_url( 'admin-ajax.php' ) )
 		);
 
 		# Admin Style

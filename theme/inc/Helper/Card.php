@@ -65,9 +65,9 @@ class Card {
 			$desc      = esc_html( wp_trim_words( wp_strip_all_tags( $desc ), $options['num_words'] ) );
 
 			$cat = PostMeta::get_main_category( $post );
-			
+
 			if ( ! empty( $cat ) ) {
-				$cat = $cat->name;
+				$cat       = $cat->name;
 				$title_top = 'Press' === $cat ? $title_top : $cat;
 			}
 		}

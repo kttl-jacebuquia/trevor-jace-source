@@ -100,7 +100,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'layout'     => 'block',
 					'collapsed'  => $entry_header,
 					'sub_fields' => array(
-						static::FIELD_ENTRY_IMAGE       => array(
+						static::FIELD_ENTRY_IMAGE      => array(
 							'key'           => $entry_image,
 							'name'          => static::FIELD_ENTRY_IMAGE,
 							'label'         => 'Image',
@@ -110,20 +110,20 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 							'preview_size'  => 'thumbnail',
 							'library'       => 'all',
 						),
-						static::FIELD_ENTRY_EYEBROW     => array(
+						static::FIELD_ENTRY_EYEBROW    => array(
 							'key'   => $entry_eyebrow,
 							'name'  => static::FIELD_ENTRY_EYEBROW,
 							'label' => 'Eyebrow',
 							'type'  => 'text',
 						),
-						static::FIELD_ENTRY_HEADER      => array(
+						static::FIELD_ENTRY_HEADER     => array(
 							'key'      => $entry_header,
 							'name'     => static::FIELD_ENTRY_HEADER,
 							'label'    => 'Heading',
 							'type'     => 'text',
 							'required' => 1,
 						),
-						static::FIELD_ENTRY_BODY        => array(
+						static::FIELD_ENTRY_BODY       => array(
 							'key'          => $entry_body,
 							'name'         => static::FIELD_ENTRY_BODY,
 							'label'        => 'Body',
@@ -131,14 +131,14 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 							'toolbar'      => 'basic',
 							'media_upload' => 0,
 						),
-						static::FIELD_ENTRY_SHOW_CTA    => array(
+						static::FIELD_ENTRY_SHOW_CTA   => array(
 							'key'   => $entry_show_cta,
 							'name'  => static::FIELD_ENTRY_SHOW_CTA,
 							'label' => 'Show CTAs',
 							'type'  => 'true_false',
 							'ui'    => 1,
 						),
-						static::FIELD_ENTRY_CTA_BUTTON  => Button::clone(
+						static::FIELD_ENTRY_CTA_BUTTON => Button::clone(
 							array(
 								'key'               => $entry_cta_button,
 								'name'              => static::FIELD_ENTRY_CTA_BUTTON,
@@ -157,7 +157,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 								),
 							)
 						),
-						static::FIELD_ENTRY_CTA_LINK    => Button::clone(
+						static::FIELD_ENTRY_CTA_LINK   => Button::clone(
 							array(
 								'key'               => $entry_cta_link,
 								'name'              => static::FIELD_ENTRY_CTA_LINK,
