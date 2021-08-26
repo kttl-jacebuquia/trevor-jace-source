@@ -25,6 +25,8 @@ const META_KEY_MAP = {
 	reRecirculationCards: metaKeys.KEY_RECIRCULATION_CARDS,
 	billId: metaKeys.KEY_BILL_ID,
 	pronouns: metaKeys.KEY_PRONOUNS,
+	cardOptions: metaKeys.KEY_CARD_OPTIONS,
+	showCardEyebrow: metaKeys.KEY_SHOW_CARD_EYEBROW,
 };
 const BG_COLOR_HEX_2_NAME_MAP = (() => {
 	const out = {};
@@ -45,6 +47,7 @@ class PostSidebar extends React.Component {
 	handleSlugChange = (slug) => this.props.editPost({slug});
 	handleBillIdChange = (billId) => this.props.updatePostMeta('billId', billId);
 	handlePronounsChange = (pronouns) => this.props.updatePostMeta('pronouns', pronouns);
+	handleShowCardEyebrow = (newVal) => this.props.updatePostMeta('showCardEyebrow', newVal);
 
 	constructor(...args) {
 		super(...args);
@@ -98,6 +101,7 @@ class PostSidebar extends React.Component {
 			showShare,
 			showDate,
 			showAuthor,
+			showCardEyebrow,
 			slug,
 			reRecirculationCards,
 			billId,
@@ -105,6 +109,8 @@ class PostSidebar extends React.Component {
 		} = this.props;
 
 		const {supports: headerSupports = []} = ((editorBlocksData[META_KEY_MAP.headerType] || {}).types || {})[headerType] || {};
+
+		console.log({ META_KEY_MAP });
 
 		return <>
 			<PluginDocumentSettingPanel name="trevor-entry-general" icon="admin-settings" title="General">
@@ -194,6 +200,15 @@ class PostSidebar extends React.Component {
 							   multiple/>
 				}
 			</PluginDocumentSettingPanel>
+			{/* Card Options */}
+			{this.canRenderField(META_KEY_MAP.cardOptions) && (
+			<PluginDocumentSettingPanel name="trevor-entry-card-options" icon="admin-settings" title="Card Options">
+				{/** Show Card Options */}
+				<CheckboxControl label="Show Eyebrow on Card"
+									checked={showCardEyebrow}
+									onChange={this.handleShowCardEyebrow}/>
+			</PluginDocumentSettingPanel>
+			)}
 		</>
 	}
 }

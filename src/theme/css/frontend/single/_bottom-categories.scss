@@ -74,17 +74,17 @@
       @apply text-violet text-px16 leading-px22;
 
       @screen md {
-        @apply px-px200 w-full text-center text-px18 leading-px24 tracking-em001;
+        @apply px-px200 w-full text-center text-px18 leading-px24 tracking-em001 mb-0;
       }
 
       @screen xl {
-        @apply px-0 text-px20 leading-px24 tracking-px05;
+        @apply px-0 text-px20 leading-px24 tracking-px05 mb-0;
         max-width: #{rem-calc(413)};
       }
     }
 
     .list-container {
-      @apply block text-center tracking-px6;
+      @apply block text-center tracking-px6 -mb-px12;
 
       @screen md {
         @apply text-center px-px130 w-full mx-0 mt-px28;
