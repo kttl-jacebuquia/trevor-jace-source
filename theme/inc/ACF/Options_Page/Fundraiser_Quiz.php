@@ -9,10 +9,10 @@ class Fundraiser_Quiz extends A_Options_Page {
 	const STEP_1_CHOICES                         = 'step_1_choices';
 	const ITEM                                   = 'item';
 	const ITEM_TYPE                              = 'item_type';
+	const DEV_INQ_FORM_ID                        = 'dev_inq_form_id';
+	const DEV_INQ_FORM_SERVER_URL                = 'dev_inq_form_server_url';
 	const DEV_INQ_FORM_TITLE                     = 'dev_inq_form_title';
 	const DEV_INQ_FORM_DESCRIPTION               = 'dev_inq_form_description';
-	const DEV_INQ_FORM_REASONS                   = 'dev_inq_form_reasons';
-	const DEV_INQ_FORM_REASONS_ITEM              = 'dev_inq_form_reasons_item';
 	const CREATE_FUNDRAISER_TITLE                = 'create_fundraiser_title';
 	const CREATE_FUNDRAISER_BUTTON               = 'create_fundraiser_button';
 	const CREATE_FUNDRAISER_CARD_TITLE           = 'create_fundraiser_card_title';
@@ -46,10 +46,10 @@ class Fundraiser_Quiz extends A_Options_Page {
 		$step_1_choices                   = static::gen_field_key( static::STEP_1_CHOICES );
 		$item                             = static::gen_field_key( static::ITEM );
 		$item_type                        = static::gen_field_key( static::ITEM_TYPE );
+		$dev_inq_form_id                  = static::gen_field_key( static::DEV_INQ_FORM_ID );
+		$dev_inq_form_server_url          = static::gen_field_key( static::DEV_INQ_FORM_SERVER_URL );
 		$dev_inq_form_title               = static::gen_field_key( static::DEV_INQ_FORM_TITLE );
 		$dev_inq_form_description         = static::gen_field_key( static::DEV_INQ_FORM_DESCRIPTION );
-		$dev_inq_form_reasons             = static::gen_field_key( static::DEV_INQ_FORM_REASONS );
-		$dev_inq_form_reasons_item        = static::gen_field_key( static::DEV_INQ_FORM_REASONS_ITEM );
 		$create_fund_title                = static::gen_field_key( static::CREATE_FUNDRAISER_TITLE );
 		$create_fund_button               = static::gen_field_key( static::CREATE_FUNDRAISER_BUTTON );
 		$create_fund_card_title           = static::gen_field_key( static::CREATE_FUNDRAISER_CARD_TITLE );
@@ -123,6 +123,26 @@ class Fundraiser_Quiz extends A_Options_Page {
 			),
 			static::_gen_tab_field( 'Dev Inquiry Form' ),
 			array(
+				static::DEV_INQ_FORM_ID       => array(
+					'key'   => $dev_inq_form_id,
+					'name'  => static::DEV_INQ_FORM_ID,
+					'label' => 'Form ID',
+					'type'  => 'text',
+					'default_value' => '4840144',
+					'wrapper'       => array(
+						'width' => '50',
+					),
+				),
+				static::DEV_INQ_FORM_SERVER_URL       => array(
+					'key'   => $dev_inq_form_server_url,
+					'name'  => static::DEV_INQ_FORM_SERVER_URL,
+					'label' => 'Server URL',
+					'type'  => 'url',
+					'default_value' => 'https://trevor.tfaforms.net/',
+					'wrapper'       => array(
+						'width' => '50',
+					),
+				),
 				static::DEV_INQ_FORM_TITLE       => array(
 					'key'   => $dev_inq_form_title,
 					'name'  => static::DEV_INQ_FORM_TITLE,
@@ -136,22 +156,6 @@ class Fundraiser_Quiz extends A_Options_Page {
 					'type'          => 'textarea',
 					'placeholder'   => 'Please fill out this form, and someone from our team will reach out soon.',
 					'default_value' => 'Please fill out this form, and someone from our team will reach out soon.',
-				),
-				static::DEV_INQ_FORM_REASONS     => array(
-					'key'          => $dev_inq_form_reasons,
-					'name'         => static::DEV_INQ_FORM_REASONS,
-					'label'        => 'Inquiry Reasons',
-					'type'         => 'repeater',
-					'layout'       => 'row',
-					'button_label' => 'Add Item',
-					'sub_fields'   => array(
-						static::DEV_INQ_FORM_REASONS_ITEM => array(
-							'key'   => $dev_inq_form_reasons_item,
-							'name'  => static::DEV_INQ_FORM_REASONS_ITEM,
-							'label' => 'Item',
-							'type'  => 'text',
-						),
-					),
 				),
 			),
 			static::_gen_tab_field( 'Create Fundraiser Now' ),
@@ -354,9 +358,10 @@ class Fundraiser_Quiz extends A_Options_Page {
 		);
 
 		$dev_form_data = array(
+			'form_id'         => static::get_val( static::DEV_INQ_FORM_ID, 'option' ),
+			'server_url'      => static::get_val( static::DEV_INQ_FORM_SERVER_URL, 'option' ),
 			'title'           => static::get_val( static::DEV_INQ_FORM_TITLE, 'option' ),
 			'description'     => static::get_val( static::DEV_INQ_FORM_DESCRIPTION, 'option' ),
-			'inquiry_reasons' => static::get_val( static::DEV_INQ_FORM_REASONS, 'option' ),
 		);
 
 		$card_links     = array();
@@ -467,28 +472,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 						<p class="fundraiser-quiz__description"><?php echo esc_html( $data['description'] ); ?></p>
 					<?php } ?>
 					<div class="fundraiser-quiz__fields">
-						<div class="fundraiser-quiz__small-fields">
-							<input class="fundraiser-quiz__first-name" placeholder="First Name*" type="text" name="first-name">
-							<input class="fundraiser-quiz__last-name" placeholder="Last Name*" type="text" name="last-name">
-						</div>
-						<div class="fundraiser-quiz__small-fields">
-							<input class="fundraiser-quiz__email" placeholder="Email*" type="text" name="email">
-							<input class="fundraiser-quiz__phone" placeholder="Phone*" type="text" name="phone">
-						</div>
-						<textarea class="fundraiser-quiz__message" name="message" id="message" placeholder="Message"></textarea>
-						<select class="fundraiser-quiz__inquiry" name="inquiry-reason" id="inquiry-reason">
-							<option value="">Inquiry Reason</option>
-							<?php
-							if ( ! empty( $data['inquiry_reasons'] ) ) {
-								foreach ( $data['inquiry_reasons'] as $reason ) {
-									?>
-								<option value="<?php echo esc_attr( acf_slugify( $reason['dev_inq_form_reasons_item'] ) ); ?>"><?php echo esc_html( $reason['dev_inq_form_reasons_item'] ); ?></option>
-									<?php
-								}
-							}
-							?>
-						</select>
-						<button class="fundraiser-quiz__submit btn btn-primary">Submit</button>
+						<?php echo do_shortcode("[formassembly formid={$data['form_id']} server=\"{$data['server_url']}\"]"); ?>
 					</div>
 			</div>
 		<?php
