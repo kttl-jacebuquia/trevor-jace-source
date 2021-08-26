@@ -1,7 +1,6 @@
 <?php namespace TrevorWP\CPT;
 
 use TrevorWP\Main;
-use TrevorWP\Theme\Customizer\Research_Briefs;
 use TrevorWP\Theme\Helper\Sorter;
 
 class Research {
@@ -62,9 +61,9 @@ class Research {
 	 * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
-		if ( is_post_type_archive( self::POST_TYPE ) ) {
+		if ( ! is_admin() && is_post_type_archive( self::POST_TYPE ) ) {
 			# Set per page
-			set_query_var( 'posts_per_archive_page', Research_Briefs::get_val( Research_Briefs::SETTING_PER_PAGE ) );
+			set_query_var( 'posts_per_archive_page', 6 );
 
 			# Initiate sorter
 			new Sorter( $query, Sorter::get_options_for_date(), 'new-old' );
