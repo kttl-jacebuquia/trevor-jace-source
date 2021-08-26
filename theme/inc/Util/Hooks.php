@@ -94,7 +94,7 @@ class Hooks {
 		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
 
 		# GTM4WP
-		if (has_filter(GTM4WP_WPFILTER_COMPILE_DATALAYER)) {
+		if (defined('GTM4WP_WPFILTER_COMPILE_DATALAYER')) {
 			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER , array( self::class, 'datalayer_data_update' ) );
 		}
 
