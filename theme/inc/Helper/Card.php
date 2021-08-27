@@ -34,7 +34,6 @@ class Card {
 		$title_top  = null;
 		$is_bg_full = false;
 		$title_link = true;
-		$cat        = '';
 
 		// Determine the type.
 		if ( CPT\RC\Glossary::POST_TYPE === $post_type ) {
@@ -68,8 +67,7 @@ class Card {
 			$cat = PostMeta::get_main_category( $post );
 
 			if ( ! empty( $cat ) ) {
-				$cat       = $cat->name;
-				$title_top = 'Press' === $cat ? $title_top : $cat;
+				$title_top = $cat->name;
 			}
 		}
 
@@ -94,7 +92,7 @@ class Card {
 		$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
 
 		$thumb         = Thumbnail::post( $post, ...$thumb_var );
-		$has_thumbnail = ! empty( $thumb ) && 'Press' !== $cat ? true : false;
+		$has_thumbnail = ! empty( $thumb );
 		if ( ! $has_thumbnail ) {
 			$_class[] = 'no-thumbnail';
 		}
