@@ -1,5 +1,18 @@
+.custom-embed {
+  &__container {
+    @apply container mx-auto;
+
+    @screen xl {
+      @apply grid tw-grid-desktop;
+    }
+  }
+}
 .embed-content {
     @apply relative;
+
+    @screen xl {
+      @apply col-span-10 col-start-2;
+    }
 
     > * {
         @apply absolute top-0 left-0 w-full h-full object-cover;

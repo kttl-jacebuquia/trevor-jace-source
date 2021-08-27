@@ -74,7 +74,7 @@ class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 		$aspect_ratio = static::get_val( static::FIELD_ASPECT_RATIO );
 
 		# Build wrapper classnames
-		$wrapper_cls = 'embed flex justify-center items-center flex-nowrap';
+		$wrapper_cls = 'custom-embed flex justify-center items-center flex-nowrap';
 
 		# Build embed classnames
 		$embed_cls   = array( 'embed-content w-full' );
@@ -95,8 +95,10 @@ class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 		ob_start();
 		?>
 		<div class="<?php echo $wrapper_cls; ?>">
-			<div class="<?php echo $embed_cls; ?>" <?php echo $attrs_string; ?>>
-				<?php echo $embed; ?>
+			<div class="custom-embed__container">
+				<div class="<?php echo $embed_cls; ?>" <?php echo $attrs_string; ?>>
+					<?php echo $embed; ?>
+				</div>
 			</div>
 		</div>
 		<?php
