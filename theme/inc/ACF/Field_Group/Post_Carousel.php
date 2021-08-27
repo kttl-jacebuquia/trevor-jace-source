@@ -46,13 +46,15 @@ class Post_Carousel extends Post_Grid {
 			switch ( $key ) {
 				case static::FIELD_DESCRIPTION:
 					// Inject CTA right after description
-					$updated_fields[ static::FIELD_CTA ] = array(
-						'key'        => $cta,
-						'name'       => static::FIELD_CTA,
-						'label'      => 'CTA',
-						'type'       => 'group',
-						'layout'     => 'block',
-						'sub_fields' => Advanced_Link::_get_fields(),
+					$updated_fields[ static::FIELD_CTA ] = Button::clone(
+						array(
+							'key'           => $cta,
+							'name'          => static::FIELD_CTA,
+							'label'         => 'CTA',
+							'return_format' => 'array',
+							'display'       => 'group',
+							'layout'        => 'block',
+						)
 					);
 					break;
 				case static::FIELD_SOURCE:
@@ -145,15 +147,7 @@ class Post_Carousel extends Post_Grid {
 			<?php endif; ?>
 			<?php if ( ! empty( $cta ) ) : ?>
 				<div class="post-carousel__cta-wrap">
-					<?php
-						echo Advanced_Link::render(
-							null,
-							$cta,
-							array(
-								'class' => array( 'post-carousel__cta' ),
-							)
-						);
-					?>
+					<?php echo Button::render( false, $cta ); ?>
 				</div>
 			<?php endif; ?>
 		</div>
