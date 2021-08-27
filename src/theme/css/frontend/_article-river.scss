@@ -21,10 +21,10 @@
     @apply py-px40;
 
     @screen md {
-      @apply flex flex-nowrap pt-px50;
+      @apply flex pt-px50;
     }
 
-    @screen xl {
+    @screen lg {
       @apply flex flex-nowrap;
     }
   }
