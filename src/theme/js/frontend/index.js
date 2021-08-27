@@ -225,7 +225,10 @@ features.collapsible($('.js-accordion'), {});
  * @todo: move under is-rc
  */
 (() => {
-	const terms = ['Gay', 'Transgender', 'Bisexual', 'Suicide', 'Nonbinary'];
+	const terms = $("input[name='rc-search--keys']")
+		.text()
+		.split(',')
+		.slice(0, -1);
 	const searchCancelIcon = $('.icon-search-cancel');
 	const maxInputSize = 35;
 	const form = $('.search-form');
@@ -450,7 +453,7 @@ if (isPhoneField) {
 	}
 })();
 
-if ( $ectMap.length ) {
+if ($ectMap.length) {
 	$ectMap.each((index, element) => features.ectMap(element));
 }
 
@@ -459,4 +462,3 @@ features.BreathingExercise.init();
 features.CurrentOpenings.init();
 features.TopicCards.initializeInstances();
 features.CampaignForm.initializeInstances();
-
