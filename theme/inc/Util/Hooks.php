@@ -98,8 +98,8 @@ class Hooks {
 		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
 
 		# GTM4WP
-		if ( defined('GTM4WP_WPFILTER_COMPILE_DATALAYER') ) {
-			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER , array( self::class, 'datalayer_data_update' ) );
+		if ( defined( 'GTM4WP_WPFILTER_COMPILE_DATALAYER' ) ) {
+			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER, array( self::class, 'datalayer_data_update' ) );
 		}
 
 		# Trevor Chat Button

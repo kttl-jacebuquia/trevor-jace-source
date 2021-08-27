@@ -123,21 +123,21 @@ class Fundraiser_Quiz extends A_Options_Page {
 			),
 			static::_gen_tab_field( 'Dev Inquiry Form' ),
 			array(
-				static::DEV_INQ_FORM_ID       => array(
-					'key'   => $dev_inq_form_id,
-					'name'  => static::DEV_INQ_FORM_ID,
-					'label' => 'Form ID',
-					'type'  => 'text',
+				static::DEV_INQ_FORM_ID          => array(
+					'key'           => $dev_inq_form_id,
+					'name'          => static::DEV_INQ_FORM_ID,
+					'label'         => 'Form ID',
+					'type'          => 'text',
 					'default_value' => '4840144',
 					'wrapper'       => array(
 						'width' => '50',
 					),
 				),
-				static::DEV_INQ_FORM_SERVER_URL       => array(
-					'key'   => $dev_inq_form_server_url,
-					'name'  => static::DEV_INQ_FORM_SERVER_URL,
-					'label' => 'Server URL',
-					'type'  => 'url',
+				static::DEV_INQ_FORM_SERVER_URL  => array(
+					'key'           => $dev_inq_form_server_url,
+					'name'          => static::DEV_INQ_FORM_SERVER_URL,
+					'label'         => 'Server URL',
+					'type'          => 'url',
 					'default_value' => 'https://trevor.tfaforms.net/',
 					'wrapper'       => array(
 						'width' => '50',
@@ -358,10 +358,10 @@ class Fundraiser_Quiz extends A_Options_Page {
 		);
 
 		$dev_form_data = array(
-			'form_id'         => static::get_val( static::DEV_INQ_FORM_ID, 'option' ),
-			'server_url'      => static::get_val( static::DEV_INQ_FORM_SERVER_URL, 'option' ),
-			'title'           => static::get_val( static::DEV_INQ_FORM_TITLE, 'option' ),
-			'description'     => static::get_val( static::DEV_INQ_FORM_DESCRIPTION, 'option' ),
+			'form_id'     => static::get_val( static::DEV_INQ_FORM_ID, 'option' ),
+			'server_url'  => static::get_val( static::DEV_INQ_FORM_SERVER_URL, 'option' ),
+			'title'       => static::get_val( static::DEV_INQ_FORM_TITLE, 'option' ),
+			'description' => static::get_val( static::DEV_INQ_FORM_DESCRIPTION, 'option' ),
 		);
 
 		$card_links     = array();
@@ -472,7 +472,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 						<p class="fundraiser-quiz__description"><?php echo esc_html( $data['description'] ); ?></p>
 					<?php } ?>
 					<div class="fundraiser-quiz__fields">
-						<?php echo do_shortcode("[formassembly formid={$data['form_id']} server=\"{$data['server_url']}\"]"); ?>
+						<?php echo do_shortcode( "[formassembly formid={$data['form_id']} server=\"{$data['server_url']}\"]" ); ?>
 					</div>
 			</div>
 		<?php

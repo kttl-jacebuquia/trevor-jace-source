@@ -81,7 +81,7 @@ class Card {
 		$tags = Taxonomy::get_post_tags_distinctive( $post, array( 'filter_count_1' => false ) );
 
 		// Thumbnail variants.
-		$thumb_var   = array();
+		$thumb_var = array();
 
 		if ( $is_bg_full ) {
 			// Prefer vertical image on full bg.
