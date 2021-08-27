@@ -33,6 +33,7 @@ class Prod_Partner extends Donate_Object {
 					'with_front' => false,
 					'feeds'      => false,
 				),
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

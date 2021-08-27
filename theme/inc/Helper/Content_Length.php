@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use TrevorWP\Meta\Post;
+
 /**
  * Content Length Helper
  */
@@ -45,8 +47,10 @@ class Content_Length {
 	 * @return string|null
 	 */
 	public static function post( \WP_Post $post ): ?string {
-		if ( ! in_array( $post->post_type, \TrevorWP\Meta\Post::$KEYS_BY_POST_TYPE ) ) {
-			return null;
+		if ( ! empty( Post::$KEYS_BY_POST_TYPE[ Post::KEY_LENGTH_IND ] ) ) {
+			if ( ! in_array( $post->post_type, Post::$KEYS_BY_POST_TYPE[ Post::KEY_LENGTH_IND ] ) ) {
+				return null;
+			}
 		}
 
 		$val = \TrevorWP\Meta\Post::get_content_length_indicator( $post->ID );

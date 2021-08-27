@@ -68,26 +68,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 
 		if ( ! empty( $cards ) ) {
 			foreach ( $cards as &$card ) {
-				$val = new Field_Val_Getter( Page_Circulation_Card::class, $card );
-
-				# Additional wrapper and inner classnames.
-				$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_WRAPPER_ATTR ) );
-				$inner_attrs   = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_INNER_ATTR ) );
-
-				# Additional title and desc classnames.
-				$title_attrs = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_TITLE_ATTR ) );
-				$desc_attrs  = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_DESC_ATTR ) );
-
-				$args = array(
-					'type'      => $val->get( Page_Circulation_Card::FIELD_TYPE, $card ),
-					'title'     => $val->get( Page_Circulation_Card::FIELD_TITLE, $card ),
-					'desc'      => $val->get( Page_Circulation_Card::FIELD_DESC, $card ),
-					'button'    => $val->get( Page_Circulation_Card::FIELD_BUTTON, $card ),
-					'cls'       => array( $wrapper_attrs['class'] ),
-					'inner_cls' => array( $inner_attrs['class'] ),
-					'title_cls' => array( $title_attrs['class'] ),
-					'desc_cls'  => array( $desc_attrs['class'] ),
-				);
+				$args = static::get_card_args( $card );
 
 				$card = call_user_func( array( Circulation_Card::class, "render_{$args['type']}" ), $args );
 			}
@@ -98,5 +79,35 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 		return '<div role="list" class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">' .
 			$content .
 			'</div>';
+	}
+
+	/**
+	 * @param array $cards
+	 *
+	 * @return array
+	 */
+	public static function get_card_args( $card ) {
+		$val = new Field_Val_Getter( Page_Circulation_Card::class, $card );
+
+		# Additional wrapper and inner classnames.
+		$wrapper_attrs = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_WRAPPER_ATTR ) );
+		$inner_attrs   = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_INNER_ATTR ) );
+
+		# Additional title and desc classnames.
+		$title_attrs = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_TITLE_ATTR ) );
+		$desc_attrs  = DOM_Attr::get_attrs_of( $val->get( Page_Circulation_Card::FIELD_DESC_ATTR ) );
+
+		$args = array(
+			'type'      => $val->get( Page_Circulation_Card::FIELD_TYPE, $card ),
+			'title'     => $val->get( Page_Circulation_Card::FIELD_TITLE, $card ),
+			'desc'      => $val->get( Page_Circulation_Card::FIELD_DESC, $card ),
+			'button'    => $val->get( Page_Circulation_Card::FIELD_BUTTON, $card ),
+			'cls'       => array( $wrapper_attrs['class'] ),
+			'inner_cls' => array( $inner_attrs['class'] ),
+			'title_cls' => array( $title_attrs['class'] ),
+			'desc_cls'  => array( $desc_attrs['class'] ),
+		);
+
+		return $args;
 	}
 }

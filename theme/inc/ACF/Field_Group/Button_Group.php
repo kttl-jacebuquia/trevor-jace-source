@@ -69,7 +69,7 @@ class Button_Group extends A_Field_Group implements I_Renderable, I_Block {
 		}
 
 		ob_start(); ?>
-		<div <?php echo DOM_Attr::render_attrs_of( $val->get( static::FIELD_ATTR ), $wrap_cls ); ?>>
+		<div <?php echo static::render_attrs( $wrap_cls ); ?>>
 			<?php foreach ( $buttons_data as $button_data ) : ?>
 				<?php echo Button::render( null, (array) @$button_data[ static::FIELD_BUTTON ], compact( 'btn_cls', 'label_cls' ) ); ?>
 			<?php endforeach; ?>

@@ -1,4 +1,14 @@
 .post-file-wrap {
+  @apply mt-px40;
+
+  @screen md {
+    @apply mt-px50;
+  }
+
+  @screen xl {
+    @apply mt-px60;
+  }
+
   a {
 	@apply text-white;
 	@apply no-underline;
@@ -6,10 +16,16 @@
 }
 
 .post-file-btn {
-  @apply bg-indigo;
-  @apply rounded-full;
-  @apply text-base leading-px22;
-  padding: rem-calc(12px) rem-calc(28px);
+  @apply bg-indigo rounded-full text-px16 leading-px22;
+  @apply inline-flex items-center h-px48 px-px28 py-0;
+
+  @screen md {
+    @apply h-px44 text-px14 leading-px20 tracking-em001;
+  }
+
+  @screen xl {
+    @apply h-px46 text-px16 leading-px22 tracking-em001;
+  }
 }
 
 

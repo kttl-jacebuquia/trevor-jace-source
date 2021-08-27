@@ -44,6 +44,7 @@ class Team {
 					'name'          => 'Team',
 					'singular_name' => 'Team Member',
 				),
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 

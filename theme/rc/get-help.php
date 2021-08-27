@@ -42,7 +42,7 @@ use TrevorWP\Theme\Helper;
 				<p class="font-normal text-px20 leading-px30 md:mx-6 lg:text-px22 lg:leading-px36 lg:mx-0"><?php echo Resource_Center::get_val( Resource_Center::SETTING_GET_HELP_2_DESC ); ?></p>
 			</div>
 
-			<div class="flex flex-col mb-px72 md:flex-row xl:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-px72 md:flex-row xl:mx-px106 lg:mb-28" id="text">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?php
 					echo Thumbnail::print_img_variants(
@@ -77,7 +77,7 @@ use TrevorWP\Theme\Helper;
 						+</a>
 				</div>
 			</div>
-			<div class="flex flex-col mb-px72 md:flex-row-reverse xl:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-px72 md:flex-row-reverse xl:mx-px106 lg:mb-28" id="call">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?php
 					echo Thumbnail::print_img_variants(
@@ -112,7 +112,7 @@ use TrevorWP\Theme\Helper;
 						+</a>
 				</div>
 			</div>
-			<div class="flex flex-col mb-20 md:flex-row xl:mx-px106 lg:mb-28">
+			<div class="flex flex-col mb-20 md:flex-row xl:mx-px106 lg:mb-28" id="chat">
 				<div class="bg-white rounded-px10 mb-7 md:flex-1 md:mb-0" data-aspectRatio="1:1">
 					<?php
 					echo Thumbnail::print_img_variants(

@@ -1,9 +1,15 @@
 .card-post {
+  @apply h-px496;
+
   @screen md {
     @apply h-px450;
   }
 
-  @screen md {
+  @screen lg {
+    @apply h-px505;
+  }
+
+  @screen xl {
     @apply h-px510;
   }
 
@@ -31,6 +37,27 @@
     .post-title,
     .post-desc {
       color: inherit;
+    }
+
+    .post-title {
+      @apply text-px32 leading-px42 tracking-px_05;
+
+      @screen lg {
+        font-size: 2.125rem;
+        line-height: 2.75rem;
+      }
+    }
+
+    .post-desc {
+      @apply text-px16 leading-px24;
+
+      @screen md {
+        @apply leading-px22;
+      }
+
+      @screen lg {
+        @apply text-px20 leading-px28;
+      }
     }
   }
 }

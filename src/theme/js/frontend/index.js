@@ -19,7 +19,6 @@ const isSingle = $body.hasClass('single');
 const isPage = $body.hasClass('page');
 const isFAQPresent = $('.faq');
 const isCardPresent = $('.card-collection');
-const isDonate = !isSingle && document.querySelector('.donation-form');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.charity-navigator-container');
 const inputSearchField = $('#rc-search-main');
@@ -96,9 +95,12 @@ if ($quickExitModal.length) {
 	}
 
 	if (willShowModal) {
+		// Set the timeout longer if the page is scrolling
+		// through contents (URL with hash).
+		const modalTimeout = window.location.hash.length ? 1000 : 500;
 		const options = {
 			onInit(modal) {
-				setTimeout(() => modal.open(), 500);
+				setTimeout(() => modal.open(), modalTimeout);
 			},
 			onClose({ initiator }) {
 				if (
@@ -169,13 +171,6 @@ if (isFAQPresent) {
 		const $heading = $(this).closest('.faq-list__heading');
 		features.faqToggle($heading);
 	});
-}
-
-if (isDonate) {
-	features.toggleFrequency();
-	features.toggleAmount();
-	features.displayAmountAction();
-	features.displayCurrency();
 }
 
 if (isNavigator) {

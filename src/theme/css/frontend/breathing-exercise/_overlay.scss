@@ -22,12 +22,10 @@
 }
 
 .breathing-exercise-overlay {
-  --purple: #1d2174;
-  @apply fixed top-0 left-0 w-full h-full;
+  @apply fixed top-0 left-0 w-full h-full text-indigo;
   @include z-index(breathing-exercise-overlay);
   @apply hidden place-items-center text-center text-px18;
   background: linear-gradient(0deg, #e4e2fa, #ffffff);
-  color: var(--purple);
 
   &.show {
     @apply grid;

@@ -1,10 +1,14 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
+use TrevorWP\Theme\ACF\Field\Color;
+
 class Four_O_Four extends A_Options_Page {
-	const FIELD_HEADLINE    = 'four_o_four_headline';
-	const FIELD_DESCRIPTION = 'four_o_four_description';
-	const FIELD_LINK        = 'four_o_four_link';
-	const FIELD_IMAGE       = 'four_o_four_image';
+	const FIELD_HEADLINE_TEXT_COLOR    = 'four_o_four_headline_text_color';
+	const FIELD_DESCRIPTION_TEXT_COLOR = 'four_o_four_description_text_color';
+	const FIELD_HEADLINE               = 'four_o_four_headline';
+	const FIELD_DESCRIPTION            = 'four_o_four_description';
+	const FIELD_LINK                   = 'four_o_four_link';
+	const FIELD_IMAGE                  = 'four_o_four_image';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
@@ -30,12 +34,15 @@ class Four_O_Four extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
-		$headline    = static::gen_field_key( static::FIELD_HEADLINE );
-		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$link        = static::gen_field_key( static::FIELD_LINK );
-		$image       = static::gen_field_key( static::FIELD_IMAGE );
+		$headline_text_color    = static::gen_field_key( static::FIELD_HEADLINE_TEXT_COLOR );
+		$description_text_color = static::gen_field_key( static::FIELD_DESCRIPTION_TEXT_COLOR );
+		$headline               = static::gen_field_key( static::FIELD_HEADLINE );
+		$description            = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$link                   = static::gen_field_key( static::FIELD_LINK );
+		$image                  = static::gen_field_key( static::FIELD_IMAGE );
 
 		return array_merge(
+			static::_gen_tab_field( 'General' ),
 			array(
 				static::FIELD_HEADLINE    => array(
 					'key'           => $headline,
@@ -70,6 +77,31 @@ class Four_O_Four extends A_Options_Page {
 					'library'       => 'all',
 				),
 			),
+			static::_gen_tab_field( 'Styling' ),
+			array(
+				static::FIELD_HEADLINE_TEXT_COLOR    => Color::gen_args(
+					$headline_text_color,
+					static::FIELD_HEADLINE_TEXT_COLOR,
+					array(
+						'label'         => 'Headline Text Color',
+						'default_value' => 'indigo',
+						'wrapper'       => array(
+							'width' => '50%',
+						),
+					),
+				),
+				static::FIELD_DESCRIPTION_TEXT_COLOR => Color::gen_args(
+					$description_text_color,
+					static::FIELD_DESCRIPTION_TEXT_COLOR,
+					array(
+						'label'         => 'Description Text Color',
+						'default_value' => 'indigo',
+						'wrapper'       => array(
+							'width' => '50%',
+						),
+					),
+				),
+			)
 		);
 	}
 
@@ -78,10 +110,12 @@ class Four_O_Four extends A_Options_Page {
 	 */
 	public static function get_four_o_four() {
 		$data = array(
-			'headline'    => static::get_option( static::FIELD_HEADLINE ),
-			'description' => static::get_option( static::FIELD_DESCRIPTION ),
-			'link'        => static::get_option( static::FIELD_LINK ),
-			'image'       => static::get_option( static::FIELD_IMAGE ),
+			'headline_text_color'    => static::get_option( static::FIELD_HEADLINE_TEXT_COLOR ),
+			'description_text_color' => static::get_option( static::FIELD_DESCRIPTION_TEXT_COLOR ),
+			'headline'               => static::get_option( static::FIELD_HEADLINE ),
+			'description'            => static::get_option( static::FIELD_DESCRIPTION ),
+			'link'                   => static::get_option( static::FIELD_LINK ),
+			'image'                  => static::get_option( static::FIELD_IMAGE ),
 		);
 
 		return $data;

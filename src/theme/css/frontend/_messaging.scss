@@ -37,7 +37,7 @@
 		}
 
 		@screen xl {
-			@apply grid-cols-10 col-span-10 col-start-2 py-px122;
+			@apply grid-cols-10 col-span-10 col-start-2 py-px70;
 		}
 	}
 
@@ -65,7 +65,7 @@
 		@apply text-px18 leading-px26 tracking-px05 text-center mt-px18;
 
 		@screen xl {
-			@apply text-px20 leading-px28 mt-px14;
+			@apply text-px24 leading-px36 mt-px14;
 		}
 
 		b,

@@ -18,7 +18,6 @@ class Resource_Center extends A_Options_Page {
 	const FIELD_TRENDING           = 'trending';
 	const FIELD_GUIDES             = 'guide';
 	const FIELD_GLOSSARY_IMAGE     = 'glossary_image';
-	const FIELD_GLOSSARY           = 'glossary';
 	const FIELD_CARD_NUM           = 'card_num';
 
 	public static $used_post_ids = array();
@@ -35,17 +34,16 @@ class Resource_Center extends A_Options_Page {
 		$trending           = static::gen_field_key( static::FIELD_TRENDING );
 		$guides             = static::gen_field_key( static::FIELD_GUIDES );
 		$glossary_image     = static::gen_field_key( static::FIELD_GLOSSARY_IMAGE );
-		$glossary           = static::gen_field_key( static::FIELD_GLOSSARY );
 		$card_num           = static::gen_field_key( static::FIELD_CARD_NUM );
 
 		return array_merge(
 			array(
 				static::FIELD_PAGE_SLUG => array(
-					'key'            => $page_slug,
-					'name'           => static::FIELD_PAGE_SLUG,
-					'label'          => 'Page Slug',
-					'type'           => 'message',
-					'message'        => '/' . RC_Object::PERMALINK_BASE,
+					'key'     => $page_slug,
+					'name'    => static::FIELD_PAGE_SLUG,
+					'label'   => 'Page Slug',
+					'type'    => 'message',
+					'message' => '/' . RC_Object::PERMALINK_BASE,
 				),
 			),
 			static::_gen_tab_field( 'General' ),
@@ -114,7 +112,7 @@ class Resource_Center extends A_Options_Page {
 					'label'         => 'Trending',
 					'type'          => 'relationship',
 					'required'      => 1,
-					'post_type'     => RC_Object::$PUBLIC_POST_TYPES,
+					'post_type'     => array_merge( array( 'post' ), RC_Object::$PUBLIC_POST_TYPES ),
 					'taxonomy'      => '',
 					'filters'       => array(
 						0 => 'search',
@@ -154,20 +152,6 @@ class Resource_Center extends A_Options_Page {
 					'return_format' => 'url',
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
-				),
-				static::FIELD_GLOSSARY       => array(
-					'key'           => $glossary,
-					'name'          => static::FIELD_GLOSSARY,
-					'label'         => 'Glossary',
-					'type'          => 'post_object',
-					'post_type'     => array(
-						0 => Glossary::POST_TYPE,
-					),
-					'taxonomy'      => '',
-					'allow_null'    => 0,
-					'multiple'      => 1,
-					'return_format' => 'id',
-					'ui'            => 1,
 				),
 			),
 		);
@@ -375,13 +359,11 @@ class Resource_Center extends A_Options_Page {
 
 	public static function render_glossary() {
 		$glossary_image = static::get_option( static::FIELD_GLOSSARY_IMAGE );
-		$glossary       = static::get_option( static::FIELD_GLOSSARY );
 
 		$featured_word = Helper\Posts::get_one_from_list(
-			$glossary,
+			array(),
 			array( 'post_type' => \TrevorWP\CPT\RC\Glossary::POST_TYPE )
 		);
-
 
 		if ( empty( $featured_word ) ) {
 			return;

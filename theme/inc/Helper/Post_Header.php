@@ -174,8 +174,6 @@ class Post_Header {
 		# By post type
 		if ( CPT\RC\Guide::POST_TYPE == $post->post_type ) {
 			$title_top = 'Guide';
-		} elseif ( in_array( $post->post_type, Main::BLOG_POST_TYPES ) ) {
-			$title_top = 'Blog';
 		} elseif ( CPT\RC\External::POST_TYPE == $post->post_type ) {
 			$hide_tags    = true;
 			$external_url = CPT\RC\External::obj_get_url( $post->ID );
@@ -218,7 +216,7 @@ class Post_Header {
 		}
 
 		# Author
-		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) ) {
+		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) && Meta\Post::can_show_author_box( $post->ID ) ) {
 			ob_start();
 			?>
 			<div class="author-box mid-row-text">

@@ -34,7 +34,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 			'title'  => 'Messaging Block',
 			'fields' => array_merge(
 				array(
-					static::FIELD_BLOCK_STYLES   => Block_Styles::clone(
+					static::FIELD_BLOCK_STYLES => Block_Styles::clone(
 						array(
 							'key'     => $block_styles,
 							'name'    => static::FIELD_BLOCK_STYLES,
@@ -43,14 +43,14 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 							'layout'  => 'block',
 						)
 					),
-					static::FIELD_TYPE           => array(
+					static::FIELD_TYPE         => array(
 						'key'           => $type,
 						'name'          => static::FIELD_TYPE,
 						'label'         => 'Type',
 						'type'          => 'button_group',
 						'default_value' => 'boxed',
 						'choices'       => array(
-							'boxed'     => 'Boxed',
+							'boxed'      => 'Boxed',
 							'large_text' => 'Large Text',
 						),
 						'ui'            => 1,
@@ -147,7 +147,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						'value'    => 'large_text',
 					),
 					array(
-						static::FIELD_LARGE_TEXT    => array(
+						static::FIELD_LARGE_TEXT => array(
 							'key'   => $large_text,
 							'name'  => static::FIELD_LARGE_TEXT,
 							'label' => 'Large Text',

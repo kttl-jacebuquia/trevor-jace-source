@@ -183,7 +183,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 								<div class="staff__card" data-staff-part="<?php echo $card_ctr < 8 ? 'first' : 'last'; ?>">
 									<?php echo Helper\Tile::staff( $card, $key, $tile_options ); ?>
 								</div>
-							<?php $card_ctr++; endforeach; ?>
+								<?php $card_ctr++; ?>
+							<?php endforeach; ?>
 						</div>
 						<?php if ( 8 <= count( $cards ) ) : ?>
 							<div class="staff__load-more-container mt-px40 md:mt-px22 lg:mt-px50">

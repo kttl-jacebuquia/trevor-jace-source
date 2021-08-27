@@ -156,6 +156,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply pb-0 h-full text-indigo;
 		}
 
+    > .main-menu {
+      @apply text-indigo;
+    }
+
 		> .main-menu > .menu-item {
 			@screen lg2 {
 				@apply px-0 py-px18;
@@ -447,7 +451,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 // Menu
 /* @see: .main-menu-container */
 .menu-wrap {
-	@apply flex fixed right-0 py-px24 overflow-x-hidden;
+	@apply flex fixed right-0 py-px55 overflow-x-hidden;
 	@apply transform-gpu translate-x-full;
 	@apply transition-all duration-300 ease-out;
 	@apply bg-white text-indigo;
@@ -531,6 +535,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply transform-gpu translate-x-0;
 	@apply transition-transform duration-300 ease-out;
 
+  @screen lg-max {
+    @apply text-indigo;
+  }
+
 	// Tier-1 menu link, default state
 	> .menu-item {
 		@apply transition-all duration-300 ease-out;
@@ -607,8 +615,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				content: $font-trevor-ti-chevron-thick-right;
 
 				@screen lg2 {
+          color: inherit;
+          opacity: 0.44;
+
 					@apply transition-transform ml-px10;
-					color: rgba(255, 255, 255, 0.44);
 				}
 			}
 
@@ -825,7 +835,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// Back button, for mobile/tablet
 	.back-to-tier1-wrap {
-		@apply w-full absolute top-px28 left-0 pl-px24;
+		@apply w-full absolute top-px65 left-0 pl-px24;
 		@apply transition-all duration-300 ease-out opacity-0 invisible;
 		@apply transform-gpu translate-x-full;
 
@@ -884,7 +894,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 			// Chevron
 			> .menu-item > a::after {
-				@apply rotate-90 text-white text-opacity-44;
+				@apply rotate-90;
 			}
 
 			// Hover/Focus state
@@ -903,11 +913,12 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			}
 
 			> .menu-item > a {
-				@apply p-0 text-white;
+				@apply p-0;
 			}
 
 			// Tier 1 submenu
 			> .menu-item > .sub-menu {
+        @apply text-indigo;
 				@apply pt-px24 pb-px32;
 			}
 		}
@@ -931,6 +942,14 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply hover:opacity-80;
 		}
 	}
+
+  .top-nav-inner {
+    @screen lg {
+      @apply px-px20;
+
+      width: calc(100% - 80px);
+    }
+  }
 }
 
 .top-nav-inner {
@@ -938,8 +957,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply mx-auto;
 
 	@screen lg2 {
-		@apply px-0 pb-0 pt-px32 items-start;
-		width: calc(100% - #{rem-calc(160px)});
+		@apply pb-0 pt-px32 items-start;
 	}
 
 	.logo-wrap {
@@ -948,6 +966,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@screen md {
 			@apply mt-0;
 		}
+
+    body.error404 & {
+      @apply text-orange;
+    }
 	}
 
 	.logo-icon {

@@ -3,6 +3,7 @@
 use TrevorWP\Main;
 use TrevorWP\Theme;
 use TrevorWP\CPT;
+use TrevorWP\CPT\Page_ReCirculation;
 use TrevorWP\Util\Tools;
 
 /**
@@ -23,10 +24,11 @@ class Post {
 	const KEY_FILE = Main::META_KEY_PREFIX . 'file';
 
 	# Header
-	const KEY_HEADER_TYPE       = Main::META_KEY_PREFIX . 'header_type';
-	const KEY_HEADER_BG_CLR     = Main::META_KEY_PREFIX . 'header_bg_clr';
-	const KEY_HEADER_SNOW_SHARE = Main::META_KEY_PREFIX . 'show_share';
-	const KEY_HEADER_SHOW_DATE  = Main::META_KEY_PREFIX . 'show_date';
+	const KEY_HEADER_TYPE        = Main::META_KEY_PREFIX . 'header_type';
+	const KEY_HEADER_BG_CLR      = Main::META_KEY_PREFIX . 'header_bg_clr';
+	const KEY_HEADER_SNOW_SHARE  = Main::META_KEY_PREFIX . 'show_share';
+	const KEY_HEADER_SHOW_DATE   = Main::META_KEY_PREFIX . 'show_date';
+	const KEY_HEADER_SHOW_AUTHOR = Main::META_KEY_PREFIX . 'show_author';
 
 	# Length
 	const KEY_LENGTH_IND = Main::META_KEY_PREFIX . 'length_ind';
@@ -42,6 +44,10 @@ class Post {
 
 	# Recirculation Cards
 	const KEY_RECIRCULATION_CARDS = Main::META_KEY_PREFIX . 'recirculation_cards';
+
+	# Card Options
+	const KEY_CARD_OPTIONS      = Main::META_KEY_PREFIX . 'card_options';
+	const KEY_SHOW_CARD_EYEBROW = Main::META_KEY_PREFIX . 'show_card_eyebrow';
 
 	# Partner
 	const PARTNER_URL = Main::META_KEY_PREFIX . 'partner_url';
@@ -104,9 +110,19 @@ class Post {
 					'default'    => true,
 					'post_types' => $article_kind,
 				),
+				self::KEY_HEADER_SHOW_AUTHOR  => array(
+					'type'       => 'boolean',
+					'default'    => true,
+					'post_types' => array(
+						CPT\Post::POST_TYPE,
+					),
+				),
 				self::KEY_LENGTH_IND          => array(
 					'default'    => Theme\Helper\Content_Length::DEFAULT_OPTION,
-					'post_types' => $article_kind,
+					'post_types' => array(
+						CPT\RC\Guide::POST_TYPE,
+						CPT\RC\Article::POST_TYPE,
+					),
 				),
 				self::KEY_IMAGE_SQUARE        => array(
 					'post_types' => $article_kind,
@@ -178,6 +194,19 @@ class Post {
 					'post_types' => array(
 						CPT\Team::POST_TYPE,
 					),
+				),
+				self::KEY_CARD_OPTIONS        => array(
+					'post_types' => array(
+						CPT\RC\Post::POST_TYPE,
+						CPT\RC\Article::POST_TYPE,
+						CPT\RC\Glossary::POST_TYPE,
+						CPT\RC\Guide::POST_TYPE,
+						'post',
+					),
+				),
+				self::KEY_SHOW_CARD_EYEBROW   => array(
+					'type'    => 'boolean',
+					'default' => true,
 				),
 			) as $meta_key => $args
 		) {
@@ -266,9 +295,8 @@ class Post {
 
 			# ReCirculation Cards
 			$config[ self::KEY_RECIRCULATION_CARDS ] = array(
-				'settings' => Theme\Helper\Circulation_Card::SETTINGS,
+				'settings' => self::get_recirculation_posts(),
 			);
-
 		}
 
 		return $config;
@@ -324,6 +352,15 @@ class Post {
 	 */
 	public static function can_show_date_box( int $post_id ): bool {
 		return ! empty( get_post_meta( $post_id, self::KEY_HEADER_SHOW_DATE, true ) );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return bool
+	 */
+	public static function can_show_author_box( int $post_id ): bool {
+		return ! empty( get_post_meta( $post_id, self::KEY_HEADER_SHOW_AUTHOR, true ) );
 	}
 
 	/**
@@ -475,5 +512,25 @@ class Post {
 	 */
 	public static function get_pronounces( int $post_id ): ?string {
 		return get_post_meta( $post_id, self::KEY_PRONOUNS, true );
+	}
+
+	public static function get_recirculation_posts() {
+		$settings = array();
+
+		$args = array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type'   => Page_ReCirculation::POST_TYPE,
+		);
+
+		$posts = get_posts( $args );
+
+		foreach ( $posts as $post ) {
+			$settings[ $post->ID ] = array(
+				'name' => $post->post_title,
+			);
+		}
+
+		return $settings;
 	}
 }

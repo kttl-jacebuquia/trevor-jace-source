@@ -3,6 +3,30 @@
 		display: none !important;
 	}
 
+  &-dialog {
+    &-actions {
+      @screen lg2 {
+        width: percentage(560 / 1280);
+      }
+
+      @screen xl {
+        width: percentage(560 / 1440);
+      }
+
+      @screen 2xl {
+        width: auto;
+      }
+
+      div {
+        flex-direction: column;
+
+        @screen md {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+
 	&-theme-bar &-dialog {
 		@apply transform-gpu translate-y-full transition-transform duration-300 ease-out;
 		bottom: 0 !important;
@@ -50,7 +74,7 @@
 	&-theme-bar.ch2-style-light &-dialog {
 		@apply bg-transparent;
 		@apply font-manrope;
-		@apply pt-px30 pb-px40 md:pt-px40 pl-px28 md:pl-px50 lg2:px-px80;
+		@apply pt-px30 pb-px40 md:pt-px40 pl-px28 md:pl-px50 lg2:pl-px80 lg2:pr-px40;
 		@apply md:flex md:flex-col lg2:flex-row;
 
 		&::before {
@@ -100,22 +124,32 @@
 		&-actions {
 			@apply mt-px28 md:ml-0 lg2:mt-px6 items-start flex flex-col md:flex-row flex-wrap text-px16 md:text-px18 lg2:text-px20 font-bold;
 
+			button:first-child {
+				@apply md:mr-px14;
+			}
+
 			button {
 				font-size: inherit;
-				@apply capitalize w-auto h-auto m-0 px-px40 md:px-px40 lg2:px-px32 py-px16 text-blue_green bg-white rounded-full;
+				@apply capitalize w-auto h-auto m-0 px-px40 md:px-px40 md:mr-px14 lg2:px-px32 py-px16 text-blue_green bg-white rounded-full;
 			}
 
 			button + button {
-				@apply mt-px16 px-px50 md:px-px40 md:mt-0 md:ml-px14 bg-blue_green text-white border-2 border-solid border-white;
-			}
+				@apply mt-px16 px-px50 md:px-px40 md:mr-px14 md:mt-0 bg-blue_green text-white border-2 border-solid border-white;
 
-			button:first-child {
-				@apply mx-0;
+        &:hover {
+          text-decoration: underline;
+        }
 			}
 
 			div + div {
-				@apply md:ml-px14;
+				@apply mt-px16 md:mt-0 lg2:mt-px14 2xl:mt-0;
 			}
+
+      .ch2-open-settings-btn {
+        margin: 0!important;
+
+        @apply border-0 px-px50 md:px-px20 lg:px-px40 lg2:px-px32 py-px16;
+      }
 		}
 	}
 }

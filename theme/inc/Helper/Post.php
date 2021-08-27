@@ -1,13 +1,16 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\Block;
+use TrevorWP\CPT\RC\Article;
 use TrevorWP\CPT\RC\External;
+use TrevorWP\CPT\RC\Guide;
+use TrevorWP\CPT\RC\Post as RCPost;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
 use TrevorWP\Theme\ACF\Field_Group\Page_Circulation;
+use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
-use TrevorWP\Theme\Customizer;
 
 /**
  * Post Helper
@@ -27,7 +30,7 @@ class Post {
 		}
 
 		# File
-		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
+		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ]['post_types'] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
 			$out['file_button'] = self::_render_file_button( $file_id );
 		}
 
@@ -94,6 +97,12 @@ class Post {
 			return null;
 		}
 
+		$title_top = 'Learn more about';
+
+		if ( $post->post_type === \TrevorWP\CPT\Post::POST_TYPE ) {
+			$title_top = 'Read more from the';
+		}
+
 		$posts = Posts::get_recirculation(
 			$post,
 			2,
@@ -111,7 +120,7 @@ class Post {
 		<div class="post-bottom-recirculation">
 			<div class="post-bottom-recirculation-inner">
 				<h3 class="post-bottom-recirculation-title">
-					<span class="post-bottom-recirculation-title-top">Learn more about</span>
+					<span class="post-bottom-recirculation-title-top"><?php echo $title_top; ?></span>
 					<br>
 					<span class="post-bottom-recirculation-title-name"><?php echo $main_cat->name; ?></span>
 				</h3>
@@ -134,7 +143,7 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_bottom_tags( \WP_Post $post ): ?string {
-		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) ) {
+		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) || $post->post_type === External::POST_TYPE ) {
 			return null;
 		}
 
@@ -171,16 +180,20 @@ class Post {
 			return null;
 		}
 
-		$featured_cat_ids = wp_parse_id_list( Customizer\Resource_Center::get_val( Customizer\Resource_Center::SETTING_HOME_CATS ) );
-		$terms            = get_terms(
-			array(
-				'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
-				'orderby'    => 'include',
-				'include'    => $featured_cat_ids,
-				'parent'     => 0,
-				'hide_empty' => false,
-			)
-		);
+		$featured_cat_ids = Resource_Center::get_featured_topics();
+
+		if ( ! empty( $featured_cat_ids ) ) {
+			$featured_cat_ids = array_column( $featured_cat_ids, 'term_id' );
+			$terms            = get_terms(
+				array(
+					'taxonomy'   => RC_Object::TAXONOMY_CATEGORY,
+					'orderby'    => 'include',
+					'include'    => $featured_cat_ids,
+					'parent'     => 0,
+					'hide_empty' => false,
+				)
+			);
+		}
 
 		if ( empty( $terms ) ) {
 			return null;
@@ -237,7 +250,7 @@ class Post {
 				<?php
 				return ob_get_clean();
 			case 'content_footer':
-				if ( $post->post_type != \TrevorWP\CPT\RC\Post::POST_TYPE ) {
+				if ( ! in_array( $post->post_type, array( RCPost::POST_TYPE, Guide::POST_TYPE, Article::POST_TYPE ) ) ) {
 					return null;
 				}
 				ob_start();
@@ -245,14 +258,16 @@ class Post {
 				<div class="circulation-cards">
 					<?php
 					foreach ( $cards as $card ) {
-						$method = "render_{$card}";
+						$args = Page_Circulation::get_card_args( $card );
+
+						$method = "render_{$args['type']}";
 						if ( ! method_exists( Circulation_Card::class, $method ) ) {
 							continue;
 						}
 
 						?>
 						<div class="circulation-card-wrap">
-							<?php echo Circulation_Card::$method(); ?>
+							<?php echo Circulation_Card::$method( $args ); ?>
 						</div>
 					<?php } ?>
 				</div>

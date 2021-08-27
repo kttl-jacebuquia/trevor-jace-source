@@ -39,6 +39,7 @@ class Event {
 					'name'          => 'Events',
 					'singular_name' => 'Event',
 				),
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

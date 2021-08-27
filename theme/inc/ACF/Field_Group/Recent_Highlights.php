@@ -8,43 +8,53 @@ use TrevorWP\Theme\Helper\Thumbnail;
 use TrevorWP\Theme\ACF\Field\Color;
 
 class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_TITLE       = 'title';
-	const FIELD_DESCRIPTION = 'description';
-	const FIELD_CARDS       = 'cards';
-	const FIELD_STYLES      = 'styles';
+	const FIELD_TITLE             = 'title';
+	const FIELD_DESCRIPTION       = 'description';
+	const FIELD_PLACEHOLDER_IMAGE = 'placeholder_image';
+	const FIELD_CARDS             = 'cards';
+	const FIELD_STYLES            = 'styles';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$title       = static::gen_field_key( static::FIELD_TITLE );
-		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$cards       = static::gen_field_key( static::FIELD_CARDS );
-		$styles      = static::gen_field_key( static::FIELD_STYLES );
+		$title             = static::gen_field_key( static::FIELD_TITLE );
+		$description       = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$placeholder_image = static::gen_field_key( static::FIELD_PLACEHOLDER_IMAGE );
+		$cards             = static::gen_field_key( static::FIELD_CARDS );
+		$styles            = static::gen_field_key( static::FIELD_STYLES );
 
 		return array(
 			'title'  => 'Recent Highlights',
 			'fields' => array(
-				static::FIELD_STYLES      => Block_Styles::clone(
+				static::FIELD_STYLES            => Block_Styles::clone(
 					array(
 						'key'    => $styles,
 						'name'   => static::FIELD_STYLES,
 						'layout' => 'block',
 					),
 				),
-				static::FIELD_TITLE       => array(
+				static::FIELD_TITLE             => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
 					'label' => 'Title',
 					'type'  => 'text',
 				),
-				static::FIELD_DESCRIPTION => array(
+				static::FIELD_DESCRIPTION       => array(
 					'key'   => $description,
 					'name'  => static::FIELD_DESCRIPTION,
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
-				static::FIELD_CARDS       => array(
+				static::FIELD_PLACEHOLDER_IMAGE => array(
+					'key'          => $placeholder_image,
+					'name'         => static::FIELD_PLACEHOLDER_IMAGE,
+					'label'        => 'Placeholder Image',
+					'type'         => 'image',
+					'required'     => 1,
+					'preview_size' => 'thumbnail',
+				),
+				static::FIELD_CARDS             => array(
 					'key'       => $cards,
 					'name'      => static::FIELD_CARDS,
 					'label'     => 'Recent Highlights',
@@ -76,10 +86,11 @@ class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title       = static::get_val( static::FIELD_TITLE );
-		$description = static::get_val( static::FIELD_DESCRIPTION );
-		$cards       = static::get_val( static::FIELD_CARDS );
-		$styles      = static::get_val( static::FIELD_STYLES );
+		$title             = static::get_val( static::FIELD_TITLE );
+		$description       = static::get_val( static::FIELD_DESCRIPTION );
+		$placeholder_image = static::get_val( static::FIELD_PLACEHOLDER_IMAGE );
+		$cards             = static::get_val( static::FIELD_CARDS );
+		$styles            = static::get_val( static::FIELD_STYLES );
 
 		list(
 			$bg_color,
@@ -97,6 +108,12 @@ class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
 			),
 		);
 
+		if ( ! empty( $placeholder_image['url'] ) ) {
+			$placeholder_image = $placeholder_image['url'];
+		} else {
+			$placeholder_image = '/wp-content/themes/trevor/static/media/generic-placeholder.png';
+		}
+
 		ob_start();
 		?>
 		<div <?php echo static::render_attrs( $attr ); ?>>
@@ -113,7 +130,7 @@ class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
 					<div class="recent-highlights__carousel-container swiper-container">
 						<div class="recent-highlights__cards swiper-wrapper" role="list">
 							<?php foreach ( $cards as $card ) : ?>
-								<?php echo static::render_card( $card ); ?>
+								<?php echo static::render_card( $card, $placeholder_image ); ?>
 							<?php endforeach; ?>
 						</div>
 						<?php if ( count( $cards ) > 1 ) : ?>
@@ -134,7 +151,7 @@ class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
 	/**
 	 * @inheritDoc
 	 */
-	public static function render_card( $post ) {
+	public static function render_card( $post, $placeholder_image ) {
 		$post     = get_post( $post );
 		$title    = esc_html( $post->post_title );
 		$excerpt  = $post->post_excerpt;
@@ -161,9 +178,13 @@ class Recent_Highlights extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 			<div <?php echo static::render_attrs( $attrs ); ?>>
-				<?php if ( ! empty( $thumb ) ) : ?>
-					<div class="recent-highlights__image"><?php echo $thumb; ?></div>
-				<?php endif; ?>
+				<div class="recent-highlights__image">
+					<?php if ( ! empty( $thumb ) ) : ?>
+						<?php echo $thumb; ?>
+					<?php else : ?>
+						<img src="<?php echo $placeholder_image; ?>" alt="">
+					<?php endif; ?>
+				</div>
 				<div class="recent-highlights__body">
 					<?php if ( ! empty( $category ) ) : ?>
 						<p class="recent-highlights__eyebrow"><?php echo $category[0]->name; ?></p>

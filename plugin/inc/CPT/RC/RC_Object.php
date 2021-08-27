@@ -133,7 +133,7 @@ abstract class RC_Object {
 		);
 
 		## Tag
-		$tag_post_types = array_diff( self::$PUBLIC_POST_TYPES, array( External::POST_TYPE ) );
+		$tag_post_types = self::$PUBLIC_POST_TYPES;
 		register_taxonomy(
 			self::TAXONOMY_TAG,
 			$tag_post_types,

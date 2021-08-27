@@ -7,12 +7,6 @@ export modal from './modal';
 export faqToggle from './faqs';
 export cardToggle from './cards';
 export {
-	toggleFrequency,
-	toggleAmount,
-	displayAmountAction,
-	displayCurrency,
-} from './donate';
-export {
 	carousel,
 	carouselNavigator,
 	generateSwiperArrows,
@@ -37,3 +31,4 @@ export FeaturedCardThreeUp from './featured-card-3up';
 export OrgMission from './org-mission';
 export RecentHighlights from './recent-highlights';
 export ArticleRiver from './article-river';
+export DonationForm from './donate';

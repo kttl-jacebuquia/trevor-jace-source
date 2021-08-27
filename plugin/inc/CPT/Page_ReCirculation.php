@@ -36,6 +36,7 @@ class Page_ReCirculation {
 					'name'          => 'Recirculation Cards',
 					'singular_name' => 'Recirculation Card',
 				),
+				'menu_icon'           => 'dashicons-layout',
 			)
 		);
 	}

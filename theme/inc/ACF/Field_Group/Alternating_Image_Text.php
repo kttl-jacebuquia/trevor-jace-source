@@ -10,6 +10,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	const FIELD_ENTRY_IMAGE              = 'entry_image';
 	const FIELD_ENTRY_EYEBROW            = 'entry_eyebrow';
 	const FIELD_ENTRY_HEADER             = 'entry_header';
+	const FIELD_ENTRY_HEADER_SIZE        = 'entry_header_size';
 	const FIELD_ENTRY_BODY               = 'entry_body';
 	const FIELD_ENTRY_SHOW_CTA           = 'entry_show_cta';
 	const FIELD_ENTRY_CTA_BUTTON         = 'entry_cta_button';
@@ -29,6 +30,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$entry_image              = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
 		$entry_eyebrow            = static::gen_field_key( static::FIELD_ENTRY_EYEBROW );
 		$entry_header             = static::gen_field_key( static::FIELD_ENTRY_HEADER );
+		$entry_header_size        = static::gen_field_key( static::FIELD_ENTRY_HEADER_SIZE );
 		$entry_body               = static::gen_field_key( static::FIELD_ENTRY_BODY );
 		$entry_show_cta           = static::gen_field_key( static::FIELD_ENTRY_SHOW_CTA );
 		$entry_cta_button         = static::gen_field_key( static::FIELD_ENTRY_CTA_BUTTON );
@@ -79,6 +81,17 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 					'default_value' => 'image_first',
 					'return_format' => 'value',
 				),
+				static::FIELD_ENTRY_HEADER_SIZE        => array(
+					'key'           => $entry_header_size,
+					'name'          => static::FIELD_ENTRY_HEADER_SIZE,
+					'label'         => 'Item Heading Size',
+					'type'          => 'button_group',
+					'default_value' => 'default',
+					'choices'       => array(
+						'default' => 'Default',
+						'large'   => 'Large',
+					),
+				),
 				static::FIELD_ENTRIES                  => array(
 					'key'        => $entries,
 					'name'       => static::FIELD_ENTRIES,
@@ -106,7 +119,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 						static::FIELD_ENTRY_HEADER     => array(
 							'key'      => $entry_header,
 							'name'     => static::FIELD_ENTRY_HEADER,
-							'label'    => 'Header',
+							'label'    => 'Heading',
 							'type'     => 'text',
 							'required' => 1,
 						),
@@ -201,6 +214,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$entries                  = static::get_val( static::FIELD_ENTRIES );
 		$button                   = static::get_val( static::FIELD_BUTTON );
 		$item_alignment           = static::get_val( static::FIELD_ITEM_ALIGNMENT );
+		$item_heading_size        = static::get_val( static::FIELD_ENTRY_HEADER_SIZE );
 
 		$alignment_class = '';
 
@@ -222,6 +236,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 			array(
 				'alternating-image-text',
 				'alternating-image-text--' . $item_alignment,
+				'alternating-image-text--item-heading-' . $item_heading_size,
 			)
 		);
 

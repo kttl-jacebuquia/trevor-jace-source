@@ -4,14 +4,18 @@ use TrevorWP\CPT;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
+use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Ajax\ADP;
 use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
+use TrevorWP\Theme\Ajax\SVG;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
+use TrevorWP\Theme\Helper\Trevor_Chat;
 use TrevorWP\Util\StaticFiles;
 
 /**
@@ -60,6 +64,7 @@ class Hooks {
 		# Custom Nav Menu Item Fields
 		add_action( 'wp_nav_menu_item_custom_fields', array( self::class, 'wp_nav_menu_item_custom_fields' ), 10, 1 );
 		add_action( 'wp_update_nav_menu_item', array( self::class, 'wp_update_nav_menu_item' ), 10, 2 );
+		add_filter( 'nav_menu_link_attributes', array( self::class, 'nav_menu_link_attributes' ), 10, 2 );
 		add_filter( 'nav_menu_item_title', array( self::class, 'nav_menu_item_title' ), 10, 4 );
 
 		# Admin Bar
@@ -92,6 +97,14 @@ class Hooks {
 		# WPSEO Title
 		add_filter( 'wpseo_title', array( self::class, 'custom_seo_title' ) );
 
+		# GTM4WP
+		if ( defined( 'GTM4WP_WPFILTER_COMPILE_DATALAYER' ) ) {
+			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER, array( self::class, 'datalayer_data_update' ) );
+		}
+
+		# Trevor Chat Button
+		Trevor_Chat::init();
+
 		# Search
 		Customizer\Search::init_all();
 
@@ -106,6 +119,9 @@ class Hooks {
 
 		# MailChimp API
 		MailChimp::construct();
+
+		# SVG API
+		SVG::construct();
 	}
 
 	/**
@@ -227,6 +243,12 @@ class Hooks {
 			array( 'jquery' ),
 			$GLOBALS['trevor_theme_static_ver'],
 			true
+		);
+
+		wp_localize_script(
+			self::NAME_PREFIX . 'theme-admin-main',
+			'script_vars',
+			array( 'AJAXurl' => admin_url( 'admin-ajax.php' ) )
 		);
 
 		# Admin Style
@@ -750,13 +772,17 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/body_class/
 	 */
 	public static function body_class( array $classes ): array {
+		// BG Color
 		if ( Is::rc() ) {
-			$classes['general_bg']      = 'bg-indigo';
-			$classes['general_txt_clr'] = 'text-white';
+			$classes['general_bg'] = 'bg-indigo';
+		} elseif ( is_404() ) {
+			$classes['general_bg'] = 'bg-white';
 		} else {
-			$classes['general_bg']      = 'bg-teal-dark';
-			$classes['general_txt_clr'] = 'text-teal-dark';
+			$classes['general_bg'] = 'bg-teal-dark';
 		}
+
+		// Text Color
+		$classes['general_txt_clr'] = is_404() ? 'text-indigo' : 'text-' . Page_Header::get_val( Page_Header::FIELD_TEXT_CLR );
 
 		return $classes;
 	}
@@ -801,5 +827,54 @@ class Hooks {
 		}
 
 		return $title;
+	}
+
+	/**
+	 * Converts some of the dataLayer array values into comma-separated string.
+	 *
+	 * @param array $dataLayer
+	 *
+	 * @return array
+	 *
+	 */
+	public static function datalayer_data_update( $dataLayer ) {
+		$dataLayerKeys = array( 'pageCategory', 'pageAttributes', 'pagePostTerms' );
+
+		foreach ( $dataLayerKeys as $key ) {
+			if ( array_key_exists( $key, $dataLayer ) ) {
+				$values = $dataLayer[ $key ];
+
+				if ( $key == 'pagePostTerms' ) {
+					foreach ( $values as $subKey => $value ) {
+						$dataLayer[ $key ][ $subKey ] = implode( ',', $value );
+					}
+				} else {
+					$dataLayer[ $key ] = implode( ',', $values );
+				}
+			}
+		}
+
+		return $dataLayer;
+	}
+
+	/**
+	 * Adds the Trevor chat class to menu item link
+	 * if the chat-link option is checked.
+	 *
+	 * @param array $atts - anchor tag attributes
+	 * @param object $item - Menu item data.
+	 *
+	 * @return array
+	 *
+	 */
+	public static function nav_menu_link_attributes( $atts, $item ) {
+		$val          = new Field_Val_Getter( Chat_Link_Option::class, $item );
+		$is_chat_link = $val->get( Chat_Link_Option::FIELD_CHAT_OPTION );
+
+		if ( $is_chat_link ) {
+			$atts['class'] = 'tcb-link';
+		}
+
+		return $atts;
 	}
 }
