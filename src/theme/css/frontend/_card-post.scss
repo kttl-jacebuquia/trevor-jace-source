@@ -396,7 +396,7 @@
         }
 
         .post-thumbnail-wrap {
-          @apply -mt-px34 mb-px28 relative;
+          @apply -mt-px34 relative;
           padding-top: percentage(240/319);
 
           @screen md {
@@ -407,10 +407,6 @@
           img {
             @apply absolute top-0 left-0 h-full w-full;
           }
-        }
-
-        .title-top {
-          @apply hidden;
         }
 
         .post-title {
