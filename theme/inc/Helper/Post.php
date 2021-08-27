@@ -137,7 +137,7 @@ class Post {
 	 * @return string|null
 	 */
 	protected static function _render_bottom_tags( \WP_Post $post ): ?string {
-		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) ) {
+		if ( ! in_array( $post->post_type, RC_Object::$PUBLIC_POST_TYPES ) || $post->post_type === External::POST_TYPE ) {
 			return null;
 		}
 
