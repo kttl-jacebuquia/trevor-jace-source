@@ -35,7 +35,7 @@ body {
 	&::after {
 		@apply fixed top-0 left-1/2 grid grid-cols-6 gap-x-px12 transform -translate-x-1/2 h-full pointer-events-none;
 		@apply md:grid-cols-8 md:gap-x-px28;
-		@apply xl:grid-cols-12;
+		@apply lg:grid-cols-12;
 		content: '';
 		z-index: 1000;
 		width: calc(100% - #{rem-calc(56)});
@@ -43,6 +43,14 @@ body {
 
 		@screen md {
 			width: calc(100% - #{rem-calc(100)});
+		}
+
+    @screen lg {
+			width: calc(100% - #{rem-calc(180)});
+		}
+
+    @screen lg2 {
+			width: calc(100% - #{rem-calc(240)});
 		}
 
 		@screen xl {
