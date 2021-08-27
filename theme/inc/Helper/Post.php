@@ -97,6 +97,12 @@ class Post {
 			return null;
 		}
 
+		$title_top = 'Learn more about';
+
+		if ( $post->post_type === \TrevorWP\CPT\Post::POST_TYPE ) {
+			$title_top = 'Read more from the';
+		}
+
 		$posts = Posts::get_recirculation(
 			$post,
 			2,
@@ -114,7 +120,7 @@ class Post {
 		<div class="post-bottom-recirculation">
 			<div class="post-bottom-recirculation-inner">
 				<h3 class="post-bottom-recirculation-title">
-					<span class="post-bottom-recirculation-title-top">Learn more about</span>
+					<span class="post-bottom-recirculation-title-top"><?php echo $title_top; ?></span>
 					<br>
 					<span class="post-bottom-recirculation-title-name"><?php echo $main_cat->name; ?></span>
 				</h3>
