@@ -23,7 +23,17 @@ main > p {
 	}
 
 	&:last-child {
-		@apply mb-px100;
+		@apply mb-px100 mx-auto max-w-px319;
+
+    @screen md {
+      max-width: rem-calc(498px);
+    }
+
+    a {
+      @apply mx-auto mt-px28;
+      display: block;
+      width: fit-content
+    }
 	}
 
 	a {
