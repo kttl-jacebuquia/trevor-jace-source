@@ -9,6 +9,11 @@ use TrevorWP\Meta\Post as PostMeta;
 class Card {
 	public static function post( $post, $key = 0, array $options = array() ): string {
 		$post      = get_post( $post );
+
+		if ( empty( $post ) ) {
+			return null;
+		}
+
 		$options   = array_merge(
 			array(
 				'class'            => array(), // Additional classes.
