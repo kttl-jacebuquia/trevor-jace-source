@@ -11,7 +11,7 @@ class Card {
 		$post      = get_post( $post );
 
 		if ( empty( $post ) ) {
-			return null;
+			return '';
 		}
 
 		$options   = array_merge(
