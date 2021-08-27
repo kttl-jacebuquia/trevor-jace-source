@@ -11,11 +11,15 @@
   // TODO: Fix this on tailwind config
 
   body.is-rc & {
-	@apply text-indigo;
+    @apply text-indigo;
   }
 
-  h1, h2, h3, h4, h5 {
-	color: inherit;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: inherit;
   }
 }
 
@@ -28,7 +32,7 @@
   @apply py-10;
 
   &.empty {
-	@apply pb-0;
+    @apply pb-0;
   }
 }
 
@@ -38,7 +42,7 @@
 
 .post-content {
   > :first-child {
-	@apply mt-0;
+    @apply mt-0;
   }
 
   p.has-medium-font-size {
@@ -47,62 +51,70 @@
 }
 
 @screen md {
+  .post-content-grid {
+    @apply grid tw-grid-tablet;
+  }
+
   .post-content {
-	@apply pb-12;
+    @apply pb-12 col-span-7;
   }
 
   .post-content-sidebar {
-	@apply py-12;
+    @apply py-12 col-span-7;
   }
 
   .post-content-sidebar > * + * {
-	@apply mt-12;
+    @apply mt-12;
   }
 
   .post-content-grid {
-	@apply pb-14;
+    @apply pb-14;
   }
 
   // .post-content {
   //   width: percentage(7/8);
   // }
   .post-content-sidebar {
-	width: percentage(5/8);
+    width: percentage(5/8);
   }
 }
 
 @screen lg {
   .post-content,
   .post-content-sidebar {
-	@apply py-14;
-  }
-
-  .post-content-sidebar > * + * {
-	@apply mt-14;
-  }
-
-  .post-content-grid {
-	@apply flex-none grid grid-cols-12;
-	@apply pb-14;
+    @apply py-14;
   }
 
   .post-content {
-	@apply w-auto;
-	@apply col-span-7;
+    @apply -mr-px28;
+  }
+
+  .post-content-sidebar > * + * {
+    @apply mt-14;
+  }
+
+  .post-content-grid {
+    @apply flex-none grid grid-cols-12;
+    @apply pb-14;
+  }
+
+  .post-content {
+    @apply w-auto;
+    @apply col-span-7;
   }
 
   .post-content-sidebar {
-	@apply w-auto;
-	@apply col-start-9 col-span-4;
+    @apply w-auto;
+    @apply col-start-9 col-span-4;
   }
 }
 
 @screen xl {
   .post-content {
-	@apply col-span-7 col-start-2;
+    @apply col-span-7 col-start-2 mr-0;
   }
 
   .post-content-sidebar {
-	@apply col-start-10 col-span-3;
+    @apply col-start-10 col-span-3;
   }
 }
