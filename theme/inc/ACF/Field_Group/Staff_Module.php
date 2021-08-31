@@ -11,9 +11,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_DESCRIPTION            = 'description';
 	const FIELD_DESKTOP_TEXT_ALIGNMENT = 'desktop_text_alignment';
 	const FIELD_DISPLAY_TYPE           = 'display_type';
-	const FIELD_CARD_TYPE              = 'card_type';
-	const FIELD_RESEARCHERS            = 'researchers';
-	const FIELD_FOUNDERS               = 'founders';
+	const FIELD_GROUP                  = 'group';
+	const FIELD_ENTRIES                = 'entries';
 
 	/**
 	 * @inheritDoc
@@ -23,9 +22,38 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$description            = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$desktop_text_alignment = static::gen_field_key( static::FIELD_DESKTOP_TEXT_ALIGNMENT );
 		$display_type           = static::gen_field_key( static::FIELD_DISPLAY_TYPE );
-		$card_type              = static::gen_field_key( static::FIELD_CARD_TYPE );
-		$researchers            = static::gen_field_key( static::FIELD_RESEARCHERS );
-		$founders               = static::gen_field_key( static::FIELD_FOUNDERS );
+		$group                  = static::gen_field_key( static::FIELD_GROUP );
+		$entries                = static::gen_field_key( static::FIELD_ENTRIES );
+
+		$terms = get_terms( Team::TAXONOMY_GROUP );
+
+		$terms_options      = array();
+		$post_object_fields = array();
+
+		foreach ( $terms as $term ) {
+			$terms_options[ $term->term_id ] = $term->name;
+
+			$post_object_fields[] = array(
+				'key'               => $term->slug . $term->term_id,
+				'name'              => $term->slug,
+				'label'             => $term->name,
+				'type'              => 'post_object',
+				'required'          => 1,
+				'post_type'         => array( Team::POST_TYPE ),
+				'taxonomy'          => array( $term->term_id ),
+				'min'               => 1,
+				'multiple'          => 1,
+				'conditional_logic' => array(
+					array(
+						array(
+							'field'    => $group,
+							'operator' => '==',
+							'value'    => $term->term_id,
+						),
+					),
+				),
+			);
+		}
 
 		return array(
 			'title'  => 'Staff Module',
@@ -61,54 +89,40 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					'choices'       => array(
 						'carousel' => 'Carousel',
 						'grid'     => 'Grid',
+						'list'     => 'List',
 					),
 					'default_value' => 'carousel',
 				),
-				static::FIELD_CARD_TYPE              => array(
-					'key'           => $card_type,
-					'name'          => static::FIELD_CARD_TYPE,
-					'label'         => 'Card Type',
-					'type'          => 'button_group',
-					'choices'       => array(
-						'researchers' => 'Researchers',
-						'founders'    => 'Founders',
-					),
-					'default_value' => 'researchers',
-				),
-				static::FIELD_RESEARCHERS            => array(
-					'key'               => $researchers,
-					'name'              => static::FIELD_RESEARCHERS,
-					'label'             => 'Researchers',
-					'type'              => 'relationship',
-					'required'          => 1,
-					'post_type'         => array( Team::POST_TYPE ),
-					'taxonomy'          => array( Team::TAXONOMY_GROUP . ':researcher' ),
-					'min'               => 1,
+				static::FIELD_GROUP                  => array(
+					'key'               => $group,
+					'name'              => static::FIELD_GROUP,
+					'label'             => 'Group',
+					'type'              => 'select',
+					'choices'           => $terms_options,
+					'return_format'     => 'array',
 					'conditional_logic' => array(
 						array(
 							array(
-								'field'    => $card_type,
-								'operator' => '==',
-								'value'    => 'researchers',
+								'field'    => $display_type,
+								'operator' => '!=',
+								'value'    => 'list',
 							),
 						),
 					),
 				),
-				static::FIELD_FOUNDERS               => array(
-					'key'               => $founders,
-					'name'              => static::FIELD_FOUNDERS,
-					'label'             => 'Founders',
-					'type'              => 'relationship',
-					'required'          => 1,
-					'post_type'         => array( Team::POST_TYPE ),
-					'taxonomy'          => array( Team::TAXONOMY_GROUP . ':founder' ),
-					'min'               => 1,
+				static::FIELD_ENTRIES                => array(
+					'key'               => $entries,
+					'name'              => static::FIELD_ENTRIES,
+					'label'             => 'Entries',
+					'type'              => 'group',
+					'layout'            => 'block',
+					'sub_fields'        => $post_object_fields,
 					'conditional_logic' => array(
 						array(
 							array(
-								'field'    => $card_type,
-								'operator' => '==',
-								'value'    => 'founders',
+								'field'    => $display_type,
+								'operator' => '!=',
+								'value'    => 'list',
 							),
 						),
 					),
@@ -139,14 +153,42 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$description            = static::get_val( static::FIELD_DESCRIPTION );
 		$desktop_text_alignment = static::get_val( static::FIELD_DESKTOP_TEXT_ALIGNMENT );
 		$display_type           = static::get_val( static::FIELD_DISPLAY_TYPE );
-		$card_type              = static::get_val( static::FIELD_CARD_TYPE );
+		$group                  = static::get_val( static::FIELD_GROUP );
 
-		$cards = array();
+		$cards     = array();
+		$card_type = 'researchers';
 
-		if ( 'researchers' === $card_type ) {
-			$cards = static::get_val( static::FIELD_RESEARCHERS );
-		} elseif ( 'founders' === $card_type ) {
-			$cards = static::get_val( static::FIELD_FOUNDERS );
+		if ( ! empty( $group['label'] ) ) {
+			$term = get_term( $group['value'] );
+
+			if ( 'founder' === strtolower( $group['label'] ) ) {
+				$card_type = 'founders';
+			}
+
+			$entries = static::get_val( static::FIELD_ENTRIES );
+
+			if ( ! empty( $term ) && ! empty( $entries[ $term->slug ] ) ) {
+				$cards = $entries[ $term->slug ];
+			}
+		}
+
+		if ( 'list' === $display_type ) {
+			$args  = array(
+				'post_type'   => Team::POST_TYPE,
+				'post_status' => 'publish',
+				'orderby'     => 'title',
+				'order'       => 'ASC',
+				'tax_query'   => array(
+					array(
+						'taxonomy' => Team::TAXONOMY_GROUP,
+						'field'    => 'slug',
+						'terms'    => array( 'founder', 'researcher' ),
+						'operator' => 'NOT IN',
+					),
+				),
+			);
+			// Uncomment this if the list is available.
+			// $cards = get_posts( $args );
 		}
 
 		$styles = $desktop_text_alignment;
@@ -155,7 +197,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="staff <?php echo $card_type; ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?>">
+		<div class="staff <?php echo esc_attr( $card_type ); ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?>">
 			<div class="staff__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="staff__heading"><?php echo esc_html( $title ); ?></h2>
@@ -202,7 +244,6 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 				<?php endif; ?>
 			</div>
 		</div>
-
 		<?php
 		return ob_get_clean();
 	}

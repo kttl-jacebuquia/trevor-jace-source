@@ -15,7 +15,7 @@ class Team {
 	 * @see \TrevorWP\Util\Hooks::register_all()
 	 */
 	public static function construct(): void {
-		add_action( 'init', array( self::class, 'init' ), 10, 0 );
+		add_action( 'init', array( self::class, 'init' ), 1, 0 );
 	}
 
 	/**
