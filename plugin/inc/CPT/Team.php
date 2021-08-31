@@ -8,6 +8,7 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 class Team {
 	const POST_TYPE = Main::POST_TYPE_PREFIX . 'team';
 
+	const TAXONOMY_ROLE  = self::POST_TYPE . '_role';
 	const TAXONOMY_GROUP = self::POST_TYPE . '_group';
 
 	/**
@@ -49,6 +50,20 @@ class Team {
 		);
 
 		# Taxonomies
+		register_taxonomy(
+			self::TAXONOMY_ROLE,
+			array( self::POST_TYPE ),
+			array(
+				'public'            => false,
+				'hierarchical'      => false,
+				'show_ui'           => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'labels'            => Tools::gen_tax_labels( 'Role' ),
+			)
+		);
+
 		register_taxonomy(
 			self::TAXONOMY_GROUP,
 			array( self::POST_TYPE ),
