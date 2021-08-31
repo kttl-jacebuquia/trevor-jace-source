@@ -1,0 +1,89 @@
+.fundraiser-quiz {
+  .wFormContainer {
+    @apply mx-0;
+
+    .wFormHeader {
+      @apply hidden;
+    }
+
+    .wForm {
+      @apply mt-0 bg-transparent text-current;
+
+      .section {
+        @apply bg-transparent;
+
+        @screen md {
+          @apply grid items-end tw-grid-tablet;
+        }
+      }
+
+      .field-container-D {
+        @apply flex flex-col text-left p-0 border-0 w-full;
+
+        @screen md {
+          @apply col-span-4;
+        }
+
+        br {
+          @apply hidden;
+        }
+      }
+
+      .label {
+        @apply font-manrope text-white text-px14 leading-px20 tracking-px05;
+
+        &::after {
+          @apply text-current;
+        }
+
+        span {
+          font-size: inherit !important;
+          line-height: inherit !important;
+          color: inherit !important;
+        }
+      }
+
+      .inputWrapper.inputWrapper {
+        @apply mt-px10 w-full;
+        @apply font-manrope text-px18 leading-px26 text-blue_green;
+
+        @screen md {
+          @apply mt-px20;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select:not([multiple]),
+        input[id^="tfa_"],
+        input#tfa_1876 {
+          @apply h-px66 flex items-center justify-start border-0;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          line-height: inherit !important;
+          color: inherit !important;
+          border-radius: 10px !important;
+          width: 100% !important;
+          padding: 0 #{rem-calc(28)} !important;
+        }
+      }
+
+      .actions {
+        @apply p-0 border-0 mt-px38;
+
+        @screen md {
+          @apply grid tw-grid-tablet mt-px50;
+        }
+      }
+
+      input[type="submit"].primaryAction {
+        @apply font-manrope font-semibold flex justify-center bg-white text-blue_green h-px58 px-px20 items-center rounded-px10;
+        @apply text-px16 leading-px22 tracking-em001 mt-0;
+
+        @screen md {
+          @apply col-span-3;
+        }
+      }
+    }
+  }
+}

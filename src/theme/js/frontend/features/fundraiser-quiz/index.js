@@ -78,7 +78,7 @@ export default class FundraiserQuiz {
 
 		// Override iniial step if supplied in options
 		if ( this.options.initialVertex ) {
-			const $content = $(`[data-vertex="${this.options.initialVertex}"]:not(input)`, this.selector);
+			const $content = $(document.querySelector(`[data-vertex="${this.options.initialVertex}"]:not(input)`));
 			if ( $content.length ) {
 				$initialStepContent.hide();
 				$initialStepContent = $content;
@@ -90,6 +90,7 @@ export default class FundraiserQuiz {
 		this.choices.attr("checked", false);
 		this.backBtn.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
+		console.log($initialStepContent);
 		$initialStepContent.fadeIn(500, () => {
 			$initialStepContent.addClass(this.classes);
 		});

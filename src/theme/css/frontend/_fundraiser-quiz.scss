@@ -40,9 +40,10 @@
 	}
 
 	&--form {
-		@apply pb-px64 xl:pb-px100;
+		@apply pb-px64 xl:pb-px100 w-full;
+
 		@screen md {
-			@apply container pb-px130;
+			@apply container pb-px130 px-0;
 		}
 	}
 

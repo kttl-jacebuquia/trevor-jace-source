@@ -15,6 +15,7 @@ class FundraiserQuizModal extends Modal {
 		$content = Fundraiser_Quiz::render();
 		$options = array(
 			'target' => '.js-fundraiser-quiz',
+			'class'  => array( 'fundraiser-quiz' ),
 		);
 
 		// Ensure that modals are only rendered down the document

@@ -555,14 +555,6 @@ class Hooks {
 		// TODO:
 		// Remove these modal renders once integrated through the Advanced_Link field
 
-		// Fundraiser Quiz Modal
-		echo ( new \TrevorWP\Theme\Helper\FundraiserQuizModal(
-			Options_Page\Fundraiser_Quiz::render(),
-			array(
-				'target' => '.js-fundraiser-quiz',
-			)
-		) )->render();
-
 		// Donation Modal
 		if ( Options_Page\Donation_Modal::will_render_in( get_the_ID() ) ) {
 			echo ( new \TrevorWP\Theme\Helper\DonationModal(
