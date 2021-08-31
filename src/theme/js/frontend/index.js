@@ -226,7 +226,7 @@ features.collapsible($('.js-accordion'), {});
  */
 (() => {
 	const terms = $("input[name='rc-search--keys']")
-		.text()
+		.val()
 		.split(',')
 		.slice(0, -1);
 	const searchCancelIcon = $('.icon-search-cancel');
