@@ -1,18 +1,24 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\Theme\Helper\FundraiserQuizModal;
+
 class Address extends A_Field_Group implements I_Block {
-	const FIELD_TITLE       = 'title';
-	const FIELD_ENTRIES     = 'entries';
-	const FIELD_ENTRY_TITLE = 'entry_title';
-	const FIELD_ENTRY_LINES = 'entry_lines';
-	const FIELD_LINE        = 'line';
+	const FIELD_TITLE           = 'title';
+	const FIELD_ENTRIES         = 'entries';
+	const FIELD_ENTRY_TITLE     = 'entry_title';
+	const FIELD_ENTRY_LINES     = 'entry_lines';
+	const FIELD_ENTRY_LINE_TYPE = 'entry_line_type';
+	const FIELD_ENTRY_EMAIL     = 'entry_email';
+	const FIELD_LINE            = 'line';
 
 	protected static function prepare_register_args(): array {
-		$title       = static::gen_field_key( static::FIELD_TITLE );
-		$entries     = static::gen_field_key( static::FIELD_ENTRIES );
-		$entry_title = static::gen_field_key( static::FIELD_ENTRY_TITLE );
-		$entry_lines = static::gen_field_key( static::FIELD_ENTRY_LINES );
-		$line        = static::gen_field_key( static::FIELD_LINE );
+		$title           = static::gen_field_key( static::FIELD_TITLE );
+		$entries         = static::gen_field_key( static::FIELD_ENTRIES );
+		$entry_title     = static::gen_field_key( static::FIELD_ENTRY_TITLE );
+		$entry_lines     = static::gen_field_key( static::FIELD_ENTRY_LINES );
+		$entry_line_type = static::gen_field_key( static::FIELD_ENTRY_LINE_TYPE );
+		$entry_email     = static::gen_field_key( static::FIELD_ENTRY_EMAIL );
+		$line            = static::gen_field_key( static::FIELD_LINE );
 
 		return array(
 			'title'  => 'Contact Information Block',
@@ -44,7 +50,33 @@ class Address extends A_Field_Group implements I_Block {
 							'type'       => 'repeater',
 							'layout'     => 'block',
 							'sub_fields' => array(
-								static::FIELD_LINE => array(
+								static::FIELD_ENTRY_LINE_TYPE => array(
+									'key'           => $entry_line_type,
+									'name'          => static::FIELD_ENTRY_LINE_TYPE,
+									'label'         => 'Type',
+									'type'          => 'select',
+									'choices'       => array(
+										'text'         => 'Text',
+										'mailto'       => 'Mailto',
+										'dev_inq_form' => 'Development Inquiry Form',
+									),
+									'default_value' => 'text',
+									'return_format' => 'value',
+								),
+								static::FIELD_ENTRY_EMAIL => array(
+									'key'               => $entry_email,
+									'name'              => static::FIELD_ENTRY_EMAIL,
+									'label'             => 'Mail to:',
+									'type'              => 'email',
+									'conditional_logic' => array(
+										array(
+											'field'    => $entry_line_type,
+											'operator' => '==',
+											'value'    => 'mailto',
+										),
+									),
+								),
+								static::FIELD_LINE        => array(
 									'key'       => $line,
 									'name'      => static::FIELD_LINE,
 									'label'     => 'Line',
@@ -79,16 +111,39 @@ class Address extends A_Field_Group implements I_Block {
 		<div class="contact-information">
 			<div class="contact-information__container">
 				<h2 class="contact-information__heading">
-					<?php echo esc_html( @$title ); ?>
+					<?php echo esc_html( $title ); ?>
 				</h2>
 				<?php if ( ! empty( $entries ) ) { ?>
 					<div class="contact-information__content">
 					<?php foreach ( $entries as $entry ) : ?>
 						<div class="contact-information__card">
-							<h3 class="contact-information__title"><?php echo esc_html( @$entry[ static::FIELD_ENTRY_TITLE ] ); ?></h3>
-							<?php foreach ( @$entry['entry_lines'] as $line ) { ?>
-								<div class="contact-information__description"><?php echo $line[ static::FIELD_LINE ]; ?></div>
-							<?php } ?>
+							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_TITLE ] ) ) : ?>
+								<h3 class="contact-information__title"><?php echo esc_html( $entry[ static::FIELD_ENTRY_TITLE ] ); ?></h3>
+							<?php endif; ?>
+
+							<?php foreach ( $entry['entry_lines'] as $line ) : ?>
+								<?php if ( 'mailto' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+									<a href="mailto:<?php echo esc_attr( $line[ static::FIELD_ENTRY_EMAIL ] ); ?>">
+										<div class="contact-information__description">
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										</div>
+									</a>
+								<?php elseif ( 'dev_inq_form' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+									<?php $class = FundraiserQuizModal::ID; ?>
+									<button class="<?php echo esc_attr( $class ); ?>"
+									aria-label="click to open fundraise quiz modal"
+									data-fundraise-vertex="form"
+									data-fundraise-single="true">
+										<div class="contact-information__description">
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										</div>
+									</button>
+								<?php else : ?>
+									<?php if ( ! empty( $line[ static::FIELD_LINE ] ) ) : ?>
+										<div class="contact-information__description"><?php echo $line[ static::FIELD_LINE ]; ?></div>
+									<?php endif; ?>
+								<?php endif; ?>
+							<?php endforeach; ?>
 						</div>
 					<?php endforeach; ?>
 					</div>
