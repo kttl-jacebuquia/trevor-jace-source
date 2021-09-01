@@ -1,0 +1,22 @@
+.header-container--horizontal {
+  @screen md {
+    padding-top: $top-nav-height-tablet;
+    margin-top: -$top-nav-height-tablet;
+  }
+
+  @screen xl {
+    padding-top: $top-nav-height-desktop;
+    margin-top: -$top-nav-height-desktop;
+  }
+
+  // Add top padding to the next module to account for the image overflow
+  + main > *:first-child {
+    @screen md {
+      @apply pt-px165;
+    }
+
+    @screen xl {
+      @apply pt-px410;
+    }
+  }
+}
