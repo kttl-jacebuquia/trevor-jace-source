@@ -137,6 +137,9 @@ class Hooks {
 		# Text Only Popup
 		CPT\Text_Only_Popup::construct();
 
+		# What To Expect Popup
+		CPT\What_To_Expect_Popup::construct();
+
 		# Post Meta
 		Meta\Post::register_all();
 
@@ -682,6 +685,7 @@ class Hooks {
 			'edit.php?post_type=trevor_fin_report',
 			'edit.php?post_type=trevor_page_recirc',
 			'edit.php?post_type=trevor_text_popup',
+			'edit.php?post_type=trevor_expect_popup',
 			'edit.php?post_type=trevor_gi_grant',
 			'edit.php?post_type=trevor_gi_partner',
 			'edit.php?post_type=trevor_gi_prtnrshp',

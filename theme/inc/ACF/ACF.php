@@ -90,6 +90,7 @@ class ACF {
 		Field_Group\Product::class,
 		Field_Group\Text_Only_Popup::class,
 		Field_Group\Chat_Link_Option::class,
+		Field_Group\What_To_Expect_Popup::class,
 	);
 
 	public static function construct() {
