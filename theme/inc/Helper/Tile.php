@@ -350,12 +350,12 @@ class Tile {
 					<p class="information__name font-semibold <?php echo implode( ' ', $name_class ); ?> <?php echo ( strtolower( $group ) === 'founder' ) ? 'text-center' : ''; ?>">
 						<?php echo esc_html( $name ); ?>
 					</p>
-					<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' || ! empty( $pronoun ) ) { ?>
-						<div class="information__details <?php echo $details_class; ?>">
-							<?php if ( ! empty( $group ) && strtolower( $group ) !== 'founder' ) { ?>
+					<?php if ( ! empty( $group ) || ! empty( $pronoun ) ) { ?>
+						<div class="information__details <?php echo $details_class; ?><?php echo (strtolower( $group ) === 'founder') ? ' text-center' : '' ?>">
+							<?php if ( ! empty( $group )  ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>
-							<?php if ( ! empty( $pronoun && strtolower( $group ) !== 'founder' ) ) { ?>
+							<?php if ( ! empty( $pronoun  ) ) { ?>
 								<span class="information__pronoun font-normal pl-px12 border-l-px1 border-blue_green border-opacity-40"><?php echo esc_html( $pronoun ); ?></span>
 							<?php } ?>
 						</div>
