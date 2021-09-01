@@ -13,7 +13,6 @@
   height: auto;
   min-height: 530px;
   max-height: 1040px;
-  @apply bg-teal-dark;
 }
 
 .post-header-inner {
@@ -182,11 +181,6 @@
   --neg-top-margin: calc(var(--top-nav-top-margin) + var(--top-nav-height));
   padding-top: var(--neg-top-margin);
   margin-top: calc(-1 * var(--neg-top-margin));
-
-  // Resources Center
-  body.is-rc & {
-	@apply bg-purple;
-  }
 
   // Article
   body.single-trevor_rc_article :is(&.type-text_only, &.type-full, &.type-split, &.type-horizontal, &.type-square) {
