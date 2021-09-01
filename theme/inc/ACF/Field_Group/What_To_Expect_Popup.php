@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class What_To_Expect_Popup extends A_Field_Group {
 	const FIELD_HEADLINE      = 'expect_headline';
@@ -10,6 +11,7 @@ class What_To_Expect_Popup extends A_Field_Group {
 	const FIELD_TERMS         = 'expect_terms';
 	const FIELD_TERMS_HEADING = 'expect_terms_heading';
 	const FIELD_TERMS_CONTENT = 'expect_terms_content';
+	const MODAL_SELECTOR_PREFIX = 'js-what-to-expect-modal';
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
@@ -97,11 +99,12 @@ class What_To_Expect_Popup extends A_Field_Group {
 	/**
 	 * Renders the what to expect popup modal contents.
 	 */
-	public static function render(): string {
-		$headline      = static::get_val( static::FIELD_HEADLINE );
-		$description   = static::get_val( static::FIELD_DESCRIPTION );
-		$entries       = static::get_val( static::FIELD_ENTRIES );
-		$terms         = static::get_val( static::FIELD_TERMS );
+	public static function render( $post = null ): string {
+		$val           = new Field_Val_Getter( static::class, $post );
+		$headline      = $val->get( static::FIELD_HEADLINE );
+		$description   = $val->get( static::FIELD_DESCRIPTION );
+		$entries       = $val->get( static::FIELD_ENTRIES );
+		$terms         = $val->get( static::FIELD_TERMS );
 		$terms_heading = '';
 		$terms_content = '';
 
@@ -116,16 +119,18 @@ class What_To_Expect_Popup extends A_Field_Group {
 				<div class="what-to-expect-modal__content">
 					<h2 class="what-to-expect-modal__heading"><?php echo $headline; ?></h2>
 					<p class="what-to-expect-modal__description"><?php echo $description; ?></p>
-					<div class="what-to-expect-modal__entries" role="list">
-						<?php foreach ( $entries as $key => $entry ) : ?>
-							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_TEXT ] ) ) : ?>
-								<div class="what-to-expect-modal__entry" role="listitem">
-									<span class="what-to-expect-modal__entry-number"><?php echo $key + 1; ?></span>
-									<div class="what-to-expect-modal__entry-text"><?php echo $entry[ static::FIELD_ENTRY_TEXT ]; ?></div>
-								</div>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</div>
+					<?php if ( ! empty( $entries ) ) : ?>
+						<div class="what-to-expect-modal__entries" role="list">
+							<?php foreach ( $entries as $key => $entry ) : ?>
+								<?php if ( ! empty( $entry[ static::FIELD_ENTRY_TEXT ] ) ) : ?>
+									<div class="what-to-expect-modal__entry" role="listitem">
+										<span class="what-to-expect-modal__entry-number"><?php echo $key + 1; ?></span>
+										<div class="what-to-expect-modal__entry-text"><?php echo $entry[ static::FIELD_ENTRY_TEXT ]; ?></div>
+									</div>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</div>
 				<div class="what-to-expect-modal__terms">
 					<h3 class="what-to-expect-modal__terms-heading"><?php echo $terms_heading; ?></h3>
@@ -134,5 +139,13 @@ class What_To_Expect_Popup extends A_Field_Group {
 			</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	public static function gen_modal_id( $id ) {
+		if ( ! empty( $id ) ) {
+			return static::MODAL_SELECTOR_PREFIX . '-' . $id;
+		}
+
+		return static::MODAL_SELECTOR_PREFIX;
 	}
 }
