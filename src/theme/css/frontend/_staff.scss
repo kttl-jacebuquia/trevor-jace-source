@@ -1,5 +1,5 @@
 .staff {
-  @apply my-px80;
+  @apply my-px80 text-teal-dark;
   overflow-x: hidden;
 
   @screen lg {
@@ -244,6 +244,45 @@
     @screen lg {
       @apply max-w-none mt-px16;
       @apply text-px22 leading-px28 tracking-em_001;
+    }
+  }
+
+  &__list {
+    @apply tw-grid mt-px40;
+
+    @screen md {
+      @apply mt-px50;
+    }
+
+    @screen xl {
+      @apply mt-px60;
+    }
+
+    // Expanded state
+    &--expanded + .staff__load-more-container {
+      @apply hidden;
+    }
+  }
+
+  &__list-item {
+    @apply text-px12 leading-px26 col-span-full text-left;
+
+    @screen md {
+      @apply col-span-6 col-start-2 text-px16 leading-px26;
+    }
+
+    @screen xl {
+      @apply col-span-full col-start-1 text-px18 leading-px26;
+    }
+
+    // Show only first 30 items
+    &:nth-child(n + 51) {
+      @apply hidden;
+
+      // Show remaining items on loadmore click
+      .staff__list--expanded & {
+        @apply block;
+      }
     }
   }
 

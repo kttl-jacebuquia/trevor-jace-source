@@ -94,21 +94,12 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					'default_value' => 'carousel',
 				),
 				static::FIELD_GROUP                  => array(
-					'key'               => $group,
-					'name'              => static::FIELD_GROUP,
-					'label'             => 'Group',
-					'type'              => 'select',
-					'choices'           => $terms_options,
-					'return_format'     => 'array',
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $display_type,
-								'operator' => '!=',
-								'value'    => 'list',
-							),
-						),
-					),
+					'key'           => $group,
+					'name'          => static::FIELD_GROUP,
+					'label'         => 'Group',
+					'type'          => 'select',
+					'choices'       => $terms_options,
+					'return_format' => 'array',
 				),
 				static::FIELD_ENTRIES                => array(
 					'key'               => $entries,
@@ -155,8 +146,9 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$display_type           = static::get_val( static::FIELD_DISPLAY_TYPE );
 		$group                  = static::get_val( static::FIELD_GROUP );
 
-		$cards     = array();
-		$card_type = 'researchers';
+		$cards          = array();
+		$has_more_items = false;
+		$card_type      = 'researchers';
 
 		if ( ! empty( $group['label'] ) ) {
 			$term = get_term( $group['value'] );
@@ -187,8 +179,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					),
 				),
 			);
-			// Uncomment this if the list is available.
-			// $cards = get_posts( $args );
+			$cards          = get_posts( $args );
+			$has_more_items = count( $cards ) > 50;
 		}
 
 		$styles = $desktop_text_alignment;
@@ -197,7 +189,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="staff <?php echo esc_attr( $card_type ); ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?>">
+		<div class="staff js-staff <?php echo esc_attr( $card_type ); ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?>">
 			<div class="staff__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="staff__heading"><?php echo esc_html( $title ); ?></h2>
@@ -231,6 +223,26 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 						<?php if ( 8 <= count( $cards ) ) : ?>
 							<div class="staff__load-more-container mt-px40 md:mt-px22 lg:mt-px50">
 								<button class="staff__load-more text-center text-px24 leading-px32 tracking-em005 border-b-px4">
+									<span class="pb-px4">Load More</span>
+								</button>
+							</div>
+						<?php endif; ?>
+					<?php elseif ( 'list' === $display_type ) : ?>
+						<div class="staff__list">
+							<?php $card_ctr = 0; foreach ( $cards as $key => $card ) : ?>
+								<?php list( $role ) = wp_get_post_terms( $card->ID, Team::TAXONOMY_ROLE ); ?>
+								<div class="staff__list-item">
+									<strong class="staff__list-item-name"><?php echo esc_html( $card->post_title ); ?></strong>
+									<?php if ( ! empty( $role ) ) : ?>
+										&nbsp;<span class="staff__list-item-role"><?php echo esc_html( $role->name ); ?></span>
+									<?php endif; ?>
+								</div>
+								<?php $card_ctr++; ?>
+							<?php endforeach; ?>
+						</div>
+						<?php if ( $has_more_items ) : ?>
+							<div class="staff__load-more-container mt-px40 md:mt-px22 lg:mt-px50">
+								<button class="staff__load-more staff__list-load-more text-center text-px24 leading-px32 tracking-em005 border-b-px4">
 									<span class="pb-px4">Load More</span>
 								</button>
 							</div>

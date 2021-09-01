@@ -282,7 +282,6 @@ export const initializeCarousel = (carouselSettings) => {
 	 * @param {object} swiper
 	 */
 	function checkNavigationArrows(swiper) {
-		console.log('swiper.params', swiper.params);
 		if (swiper.navigation?.nextEl || swiper.navigation?.prevEl) {
 			const [firstSlide, ...otherSlides] = Array.from(swiper.slides);
 			const [lastSlide] = otherSlides.slice(-1);
@@ -291,8 +290,6 @@ export const initializeCarousel = (carouselSettings) => {
 				firstSlide?.getBoundingClientRect().left >= 0;
 			const isLastSlideVisible =
 				lastSlide?.getBoundingClientRect().right <= window.innerWidth;
-
-			console.log({ lastSlide, isLastSlideVisible });
 
 			swiper.navigation?.prevEl.classList.toggle(
 				'invisible',
