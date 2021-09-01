@@ -677,17 +677,14 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$args['sms_number']  = $sms_number;
 		}
 
-		\add_filter( 'body_class', array( static::class, 'body_class' ) );
-
 		return Helper\Page_Header::$type( $args );
-	}
-
-	public static function body_class( $classes ) {
-		$classes[] = 'class-name';
-		return $classes;
 	}
 
 	public static function get_text_color() {
 		return static::get_val( static::FIELD_TEXT_CLR );
+	}
+
+	public static function get_hero_type() {
+		return static::get_val( static::FIELD_TYPE );
 	}
 }
