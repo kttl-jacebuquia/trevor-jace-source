@@ -55,31 +55,42 @@ class TagBoxEllipsis extends WithState {
 	}
 
 	calc() {
-		let $firstRowLastBox = null;
+		this.resetTagBoxDisplay();
+
 		const showEllipsis = this.$boxes.length > 2;
-
-		for (let i = 0; i < this.$boxes.length; i++) {
-			const box = this.$boxes.get(i);
-
-			if (i > 1 && !this.state.expanded) {
-				box.hidden = true;
-				continue;
-			}
-
-			box.hidden = false;
-			$firstRowLastBox = $(box);
-		}
-
-		const marginR = parseInt($firstRowLastBox.css('margin-right'));
 
 		if (showEllipsis) {
 			this.$ellipsis.show();
-			// const marginL = $firstRowLastBox.get(0).offsetLeft + $firstRowLastBox.outerWidth() + marginR;
-			// this.$ellipsis.css('left', marginL);
-			// this.$ellipsis.css('right', 'auto');
 		} else {
 			this.$ellipsis.hide();
 		}
+
+		// Set the area limit around 80% of the tags-box width,
+		// to hide other tags.
+		const tagBoxAreaLimit = this.$box.width() * 0.8;
+		let totalTagsWidth = 0;
+
+		for (let i = 0; i < this.$boxes.length; i++) {
+			const box = this.$boxes.get(i);
+			const boxWidth = box.offsetWidth;
+
+			totalTagsWidth += boxWidth;
+
+			if (!this.state.expanded && (i > 1 || totalTagsWidth > tagBoxAreaLimit)) {
+				box.setAttribute('hidden', '');
+			}
+			else {
+				box.removeAttribute('hidden');
+			}
+		}
+	}
+
+	resetTagBoxDisplay() {
+		this.$boxes.each(function() {
+			if (this.hasAttribute('hidden')) {
+				this.removeAttribute('hidden');
+			}
+		});
 	}
 
 	handleResize() {
