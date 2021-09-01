@@ -310,3 +310,17 @@
     @apply bg-current;
   }
 }
+
+.tile-staff {
+  &.placeholder-thumbnail {
+    .aspect-ratio-3-4 {
+      img {
+        max-width: 8rem;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
