@@ -767,10 +767,12 @@ class Hooks {
 		// BG Color
 		if ( Is::rc() ) {
 			$classes['general_bg'] = 'bg-indigo';
-		} elseif ( is_404() ) {
-			$classes['general_bg'] = 'bg-white';
 		} else {
 			$classes['general_bg'] = 'bg-teal-dark';
+		}
+
+		if (is_404()) {
+			$classes['general_bg'] = 'bg-white';
 		}
 
 		$hero_type = Page_Header::get_hero_type();
