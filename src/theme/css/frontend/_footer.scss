@@ -18,6 +18,14 @@ footer {
 		@apply pt-px70 pb-px150;
 	}
 
+  .footer-inner {
+    @screen lg {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+      width: calc(100% - 80px);
+    }
+  }
+
 	// Logo
 	.logo-wrap {
 		@apply flex-1 mb-12;
