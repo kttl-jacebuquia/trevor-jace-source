@@ -23,16 +23,26 @@ main > p {
 	}
 
 	&:last-child {
-		@apply mb-px100 mx-auto max-w-px319;
+		@apply mb-px100 mx-auto max-w-px319 text-px18 leading-px26;
+    letter-spacing: 0.5px;
 
     @screen md {
-      max-width: rem-calc(498px);
+      max-width: rem-calc(492px);
+      letter-spacing: -0.005em;
+    }
+
+    @screen lg {
+      max-width: rem-calc(789px);
     }
 
     a {
       @apply mx-auto mt-px28;
       display: block;
-      width: fit-content
+      width: fit-content;
+
+      @screen lg {
+        display: initial;
+      }
     }
 	}
 
