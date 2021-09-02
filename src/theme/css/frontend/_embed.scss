@@ -1,4 +1,14 @@
 .custom-embed {
+  @apply -mt-px20;
+
+  @screen md {
+    @apply -mt-px30;
+  }
+
+  @screen xl {
+    @apply -mt-px10;
+  }
+
   &__container {
     @apply container mx-auto;
 
