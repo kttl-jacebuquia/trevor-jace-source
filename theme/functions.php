@@ -28,3 +28,13 @@ namespace {
 	// Register all hooks
 	\TrevorWP\Theme\Util\Hooks::register_all();
 }
+
+function remove_p_on_empty($content) {
+    if ( is_page_template( 'page-templates/technology.php' ) ) {
+        remove_filter( 'the_content', 'wpautop' );
+        remove_filter('the_content', 'wptexturize');
+        return $content;
+    } else { 
+        return $content;
+    }
+}
