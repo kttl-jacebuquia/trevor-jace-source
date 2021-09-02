@@ -100,12 +100,11 @@
       flex-flow: column wrap;
 
       @screen md {
-        flex-flow: row wrap;
-        justify-content: space-between;
+        @apply flex-row flex-wrap justify-between -mb-px28;
       }
 
       @screen lg {
-        @apply mt-px55;
+        @apply mt-px55 mb-0;
       }
     }
 
