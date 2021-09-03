@@ -22,13 +22,14 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 				</p>
 			<?php endif; ?>
 
-			<form>
+			<form class="newsletter-form">
 				<legend><?php echo esc_html( $data['newsletter_title'] ); ?></legend>
 				<fieldset>
 					<label for="newsletter" class="sr-only">Email Address</label>
 					<input type="email" id="newsletter" placeholder="Email Address"/>
 				</fieldset>
 				<button type="submit" class="btn btn-secondary">Subscribe</button>
+				<div class="newsletter-form__message"></div>
 			</form>
 		</div>
 		<div class="col">

@@ -51,8 +51,16 @@ class MailChimp {
 		$response = self::curl( $url, $headers, json_encode( $payload ) );
 		$response = json_decode( $response, true );
 
-		if ( ! empty( $response['status'] && in_array( $response['status'], array( 400, 401, 403, 429, 500 ) ) ) ) {
-			wp_die( json_encode( array( 'status' => $response['detail'] ) ), 400 );
+		if ( ! empty( $response['status'] && in_array( $response['status'], array( 400, 401, 403, 429, 500 ), true ) ) ) {
+			wp_die(
+				json_encode(
+					array(
+						'status' => $response['detail'],
+						'title'  => $response['title'],
+					),
+				),
+				400
+			);
 		}
 
 		wp_die( json_encode( array( 'status' => 'SUCCESS' ) ), 200 );
