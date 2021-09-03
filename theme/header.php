@@ -12,10 +12,6 @@ $header_data = Options_Page\Header::get_header();
 $counselor_link = $header_data['counselor_link'];
 $donate_link    = $header_data['donate_link'];
 
-$base_url      = strtok( $_SERVER['REQUEST_URI'], '?' );
-$is_header_cta = strpos( $counselor_link['url'], $base_url ) !== false
-	|| strpos( $donate_link['url'], $base_url ) !== false;
-
 $nav_color = 'text-' . Main_Header::get_text_color();
 ?>
 
@@ -71,14 +67,14 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			<ul class="switcher">
 				<li>
 					<a href="<?php echo esc_url( $header_data['find_support_link']['url'] ); ?>"
-					class="switcher-link-rc <?php echo $is_rc && ! $is_header_cta ? 'active' : ''; ?>"
+					class="switcher-link-rc <?php echo $is_rc ? 'active' : ''; ?>"
 					target="<?php echo esc_attr( $header_data['find_support_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['find_support_link']['title'] ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="<?php echo esc_url( $header_data['explore_trevor_link']['url'] ); ?>"
-					class="<?php echo ! $is_rc && ! $is_header_cta ? 'active' : ''; ?>"
+					class="<?php echo ! $is_rc ? 'active' : ''; ?>"
 					target="<?php echo esc_attr( $header_data['explore_trevor_link']['target'] ); ?>">
 						<?php echo esc_html( $header_data['explore_trevor_link']['title'] ); ?>
 					</a>
