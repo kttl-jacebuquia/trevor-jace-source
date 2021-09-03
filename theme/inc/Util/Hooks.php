@@ -25,22 +25,6 @@ class Hooks {
 	const NAME_PREFIX = 'trevor_';
 
 	/**
-	 * @deprecated
-	 */
-	const SINGLE_PAGE_FILES = array(
-		array( CPT\RC\RC_Object::QV_GET_HELP, 'rc/get-help.php' ),
-		array( CPT\RC\RC_Object::QV_TREVORSPACE, 'rc/trevor-space.php' ),
-		array( CPT\Get_Involved\Get_Involved_Object::QV_ECT, 'get-involved/ending-conversion-therapy.php' ),
-		array( CPT\Get_Involved\Get_Involved_Object::QV_VOLUNTEER, 'get-involved/volunteer.php' ),
-		array( CPT\Get_Involved\Get_Involved_Object::QV_PARTNER_W_US, 'get-involved/partner-with-us.php' ),
-		array( CPT\Get_Involved\Get_Involved_Object::QV_CORP_PARTNERSHIPS, 'get-involved/corporate-partnerships.php' ),
-		array( CPT\Get_Involved\Get_Involved_Object::QV_INSTITUTIONAL_GRANTS, 'get-involved/institutional-grants.php' ),
-		array( CPT\Donate\Donate_Object::QV_FUNDRAISE, 'donate/fundraise.php' ),
-		array( CPT\Donate\Donate_Object::QV_PROD_PARTNERSHIPS, 'donate/product-partnerships.php' ),
-		array( CPT\Org\Org_Object::QV_ORG_LP, 'org-lp.php' ),
-	);
-
-	/**
 	 * Registers all hooks
 	 */
 	public static function register_all() {
@@ -53,9 +37,6 @@ class Hooks {
 
 		# Theme Support
 		add_action( 'after_setup_theme', array( self::class, 'after_setup_theme' ), 10, 0 );
-
-		# Theme Customizers
-		add_action( 'customize_register', array( self::class, 'customize_register' ), 10, 1 );
 
 		# Open Graph Headers
 		add_action( 'wp_head', array( self::class, 'wp_head' ), 10, 0 );
@@ -314,31 +295,6 @@ class Hooks {
 	}
 
 	/**
-	 * Fires once WordPress has loaded, allowing scripts and styles to be initialized.
-	 *
-	 * @param \WP_Customize_Manager $manager
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/customize_register/
-	 */
-	public static function customize_register( \WP_Customize_Manager $manager ): void {
-		# Panels
-		new Customizer\Search( $manager );
-		new Customizer\External_Scripts( $manager );
-		new Customizer\Resource_Center( $manager );
-		new Customizer\Trevorspace( $manager );
-		new Customizer\Posts( $manager );
-		new Customizer\Advocacy( $manager );
-		new Customizer\Volunteer( $manager );
-		new Customizer\PWU( $manager );
-		new Customizer\ECT( $manager );
-		new Customizer\Product_Partnerships( $manager );
-		new Customizer\Shop_Product_Partners( $manager );
-		new Customizer\Fundraise( $manager );
-		new Customizer\Social_Media_Accounts( $manager );
-		new Customizer\Research_Briefs( $manager );
-	}
-
-	/**
 	 * Prints scripts or data in the head tag on the front end.
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
@@ -502,15 +458,6 @@ class Hooks {
 
 		$is_single = false;
 
-		# Single Pages
-		foreach ( self::SINGLE_PAGE_FILES as list( $qv, $path ) ) {
-			if ( ! empty( $wp_query->get( $qv ) ) ) {
-				$template  = locate_template( $path, false );
-				$is_single = true;
-				break;
-			}
-		}
-
 		# More specific pages
 		if ( ! $is_single ) {
 			# Resources Center
@@ -523,11 +470,6 @@ class Hooks {
 					if ( $wp_query->is_search() ) {
 						$template = locate_template( 'rc/search.php', false );
 					}
-				}
-			} elseif ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_BASE ) ) ) {
-				# Get Involved
-				if ( ! empty( $wp_query->get( CPT\Get_Involved\Get_Involved_Object::QV_ADVOCACY ) ) ) {
-					$template = locate_template( 'get-involved/advocate.php', false );
 				}
 			} elseif ( ! empty( $wp_query->get( Customizer\Search::QV_SEARCH ) ) ) {
 				$template = locate_template( 'search.php', false );

@@ -7,7 +7,7 @@ abstract class Org_Object {
 	const QV_ORG_LP = self::QV_BASE . '__lp';
 
 	/* Permalinks */
-	const PERMALINK_ORG_LP = 'explore';
+	const PERMALINK_ORG_LP = 'organization-homepage';
 
 	/**
 	 * @see \TrevorWP\Util\Hooks::register_all()

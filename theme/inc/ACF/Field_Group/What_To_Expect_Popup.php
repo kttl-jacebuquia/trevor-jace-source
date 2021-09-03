@@ -4,13 +4,13 @@ use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class What_To_Expect_Popup extends A_Field_Group {
-	const FIELD_HEADLINE      = 'expect_headline';
-	const FIELD_DESCRIPTION   = 'expect_description';
-	const FIELD_ENTRIES       = 'expect_entries';
-	const FIELD_ENTRY_TEXT    = 'expect_entry_text';
-	const FIELD_TERMS         = 'expect_terms';
-	const FIELD_TERMS_HEADING = 'expect_terms_heading';
-	const FIELD_TERMS_CONTENT = 'expect_terms_content';
+	const FIELD_HEADLINE        = 'expect_headline';
+	const FIELD_DESCRIPTION     = 'expect_description';
+	const FIELD_ENTRIES         = 'expect_entries';
+	const FIELD_ENTRY_TEXT      = 'expect_entry_text';
+	const FIELD_TERMS           = 'expect_terms';
+	const FIELD_TERMS_HEADING   = 'expect_terms_heading';
+	const FIELD_TERMS_CONTENT   = 'expect_terms_content';
 	const MODAL_SELECTOR_PREFIX = 'js-what-to-expect-modal';
 
 	/** @inheritDoc */

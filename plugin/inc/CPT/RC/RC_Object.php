@@ -3,7 +3,6 @@
 use Solarium\QueryType\Update\Query\Document\Document as SolariumDocument;
 use TrevorWP\Block\Glossary_Entry;
 use TrevorWP\Main;
-use TrevorWP\Theme\Customizer\Resource_Center;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Log;
 use TrevorWP\CPT;
@@ -42,6 +41,10 @@ abstract class RC_Object {
 
 	const PERMALINK_GET_HELP    = 'get-help';
 	const PERMALINK_TREVORSPACE = 'trevorspace';
+
+	/* Pagination */
+	const PAGINATiON_SEARCH_RESULTS = 6;
+	const PAGINATiON_TAX_ARCHIVE    = 6;
 
 	/* Collections */
 	const _ALL_ = array(
@@ -172,30 +175,6 @@ abstract class RC_Object {
 			array( self::class, 'rewrite_rules_category' ),
 			PHP_INT_MAX,
 			0
-		);
-
-		## Get Help
-		add_rewrite_rule(
-			self::PERMALINK_GET_HELP . '/?$',
-			'index.php?' . http_build_query(
-				array(
-					self::QV_BASE     => 1,
-					self::QV_GET_HELP => 1,
-				)
-			),
-			'top'
-		);
-
-		## Trevor Space
-		add_rewrite_rule(
-			self::PERMALINK_TREVORSPACE . '/?$',
-			'index.php?' . http_build_query(
-				array(
-					self::QV_BASE        => 1,
-					self::QV_TREVORSPACE => 1,
-				)
-			),
-			'top'
 		);
 
 		## Main Page
@@ -483,8 +462,6 @@ abstract class RC_Object {
 				self::QV_BASE,
 				self::QV_RESOURCES_LP,
 				self::QV_RESOURCES_NON_BLOG,
-				self::QV_GET_HELP,
-				self::QV_TREVORSPACE,
 			)
 		);
 	}
@@ -572,7 +549,7 @@ abstract class RC_Object {
 		if ( $is_rc_lp ) {
 			if ( ! empty( $query->get( 's' ) ) ) {
 				$query->is_search = true;
-				$query->set( 'posts_per_page', Resource_Center::get_val( Resource_Center::SETTING_PAGINATION_SEARCH_RESULTS ) );
+				$query->set( 'posts_per_page', self::PAGINATiON_SEARCH_RESULTS );
 			}
 
 			$query->is_single            = false;
@@ -584,7 +561,7 @@ abstract class RC_Object {
 
 		# Taxonomy Pagination
 		if ( $query->is_tax( array( self::TAXONOMY_CATEGORY, self::TAXONOMY_TAG ) ) ) {
-			$query->set( 'posts_per_page', Resource_Center::get_val( Resource_Center::SETTING_PAGINATION_TAX_ARCHIVE ) );
+			$query->set( 'posts_per_page', self::PAGINATiON_TAX_ARCHIVE );
 		}
 	}
 
@@ -636,12 +613,6 @@ abstract class RC_Object {
 
 		if ( $is_rc ) {
 			$classes[] = 'is-rc';
-
-			if ( ! empty( get_query_var( self::QV_TREVORSPACE ) ) ) {
-				$classes[] = 'is-trevorspace';
-			} elseif ( ! empty( get_query_var( self::QV_GET_HELP ) ) ) {
-				$classes[] = 'is-get-help';
-			}
 		}
 
 		return $classes;

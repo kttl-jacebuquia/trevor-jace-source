@@ -2,19 +2,22 @@
 
 use TrevorWP\Classy\Content;
 use TrevorWP\CPT\Donate\Donate_Object;
-use TrevorWP\Theme\Customizer\Fundraise;
 use TrevorWP\Util\Log;
 
 /**
  * Classy jobs.
  */
 class Classy {
+
+	const TOP_LIST_CAMPAIGN_ID = '24399';
+	const TOP_LIST_COUNT       = '10';
+
 	/**
 	 * Updates top lists.
 	 */
 	public static function update_top_fundraise(): void {
-		$campaign_id = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_CAMPAIGN_ID );
-		$count       = Fundraise::get_val( Fundraise::SETTING_TOP_LIST_COUNT );
+		$campaign_id = self::TOP_LIST_CAMPAIGN_ID;
+		$count       = self::TOP_LIST_COUNT;
 		Content::get_fundraisers( $campaign_id, $count, false );
 		Content::get_fundraising_teams( $campaign_id, $count, false );
 

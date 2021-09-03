@@ -104,9 +104,6 @@ class Hooks {
 		# Solr Index
 		add_filter( 'solr_build_document', array( self::class, 'solr_build_document' ), 10, 2 );
 
-		# Org
-		CPT\Org\Org_Object::construct();
-
 		# Resource Center
 		CPT\RC\RC_Object::construct();
 

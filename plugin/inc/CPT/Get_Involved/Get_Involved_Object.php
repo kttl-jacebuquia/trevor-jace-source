@@ -31,14 +31,8 @@ abstract class Get_Involved_Object {
 	const QV_INSTITUTIONAL_GRANTS = self::QV_BASE . 'institutional_grants';
 	const _QV_ALL                 = array(
 		self::QV_BASE,
-		self::QV_ADVOCACY,
-		self::QV_ECT,
-		self::QV_VOLUNTEER,
 		self::QV_BILL,
 		self::QV_LETTER,
-		self::QV_PARTNER_W_US,
-		self::QV_CORP_PARTNERSHIPS,
-		self::QV_INSTITUTIONAL_GRANTS,
 	);
 
 	/* Permalinks */
@@ -146,32 +140,6 @@ abstract class Get_Involved_Object {
 				'labels'            => Tools::gen_tax_labels( 'Grant Tier' ),
 			)
 		);
-
-		# Rewrites
-		## Single Pages
-		foreach (
-			array(
-				array( self::PERMALINK_ECT, self::QV_ECT ),
-				array( self::PERMALINK_VOLUNTEER, self::QV_VOLUNTEER ),
-				array( self::PERMALINK_PARTNER_W_US, self::QV_PARTNER_W_US ),
-				array( self::PERMALINK_CORP_PARTNERSHIPS, self::QV_CORP_PARTNERSHIPS ),
-				array( self::PERMALINK_INSTITUTIONAL_GRANTS, self::QV_INSTITUTIONAL_GRANTS ),
-				array( self::PERMALINK_ADVOCACY, self::QV_ADVOCACY ),
-			) as list(
-			$regex, $qv
-		)
-		) {
-			add_rewrite_rule(
-				$regex . '/?$',
-				'index.php?' . http_build_query(
-					array(
-						self::QV_BASE => 1,
-						$qv           => 1,
-					)
-				),
-				'top'
-			);
-		}
 	}
 
 	/**
