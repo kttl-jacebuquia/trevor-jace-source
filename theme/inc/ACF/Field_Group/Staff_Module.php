@@ -107,7 +107,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 						3 => '3',
 						4 => '4',
 					),
-					'default_value'     => 4,
+					'default_value'     => 3,
 					'wrapper'           => array(
 						'width' => '50%',
 					),
