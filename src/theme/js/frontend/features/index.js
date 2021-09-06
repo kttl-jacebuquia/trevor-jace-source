@@ -33,3 +33,4 @@ export RecentHighlights from './recent-highlights';
 export ArticleRiver from './article-river';
 export DonationForm from './donate';
 export Staff from './staff';
+export NewsletterForm from './newsletter-form';

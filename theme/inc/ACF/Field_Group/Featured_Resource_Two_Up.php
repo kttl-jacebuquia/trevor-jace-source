@@ -4,6 +4,8 @@ use TrevorWP\CPT\Donate\Partner_Prod;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Theme\Helper;
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+
 
 use TrevorWP\Theme\ACF\Field\Color;
 
@@ -97,7 +99,7 @@ class Featured_Resource_Two_Up extends A_Field_Group implements I_Block, I_Rende
 		$bg_color   = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
 		$eyebrow    = static::get_val( static::FIELD_EYEBROW );
 		$title      = static::get_val( static::FIELD_TITLE );
-		$cards      = static::get_val( static::FIELD_CARDS );
+		$cards      = static::get_cards();
 
 		$classnames = array(
 			'featured-resource-2up',
@@ -154,6 +156,42 @@ class Featured_Resource_Two_Up extends A_Field_Group implements I_Block, I_Rende
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	public static function get_cards(): array {
+		$cards = static::get_val( static::FIELD_CARDS );
+
+		if ( empty( $cards ) ) {
+			return array();
+		}
+
+		// Filter to show only products that are within the current date
+		$filtered_entries  = array();
+		$current_date_unix = time();
+
+		foreach ( $cards as $entry ) {
+			// Filter card only when it is a Product
+			if ( Partner_Prod::POST_TYPE !== $entry->post_type ) {
+				$filtered_entries[] = $entry;
+				continue;
+			}
+
+			// Get product's start and end dates to determine if will show in FE
+			$entry_val  = new Field_Val_Getter( Product::class, $entry );
+			$start_date = $entry_val->get( Product::FIELD_PRODUCT_START_DATE );
+			$end_date   = $entry_val->get( Product::FIELD_PRODUCT_END_DATE );
+
+			$start_unix = strtotime( $start_date );
+			$end_unix   = strtotime( $end_date );
+
+			// If start and end dates range is within the current date,
+			// include this entry to the rendered cards
+			if ( $start_unix <= $current_date_unix && $end_unix >= $current_date_unix ) {
+				$filtered_entries[] = $entry;
+			}
+		}
+
+		return $filtered_entries;
 	}
 
 	/**

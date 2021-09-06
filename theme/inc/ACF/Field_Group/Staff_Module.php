@@ -11,6 +11,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_DESCRIPTION            = 'description';
 	const FIELD_DESKTOP_TEXT_ALIGNMENT = 'desktop_text_alignment';
 	const FIELD_DISPLAY_TYPE           = 'display_type';
+	const FIELD_NUM_COLS               = 'number_columns';
+	const FIELD_NUM_DISPLAY_LIMIT      = 'number_display_limit';
 	const FIELD_GROUP                  = 'group';
 	const FIELD_ENTRIES                = 'entries';
 
@@ -22,6 +24,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$description            = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$desktop_text_alignment = static::gen_field_key( static::FIELD_DESKTOP_TEXT_ALIGNMENT );
 		$display_type           = static::gen_field_key( static::FIELD_DISPLAY_TYPE );
+		$num_cols               = static::gen_field_key( static::FIELD_NUM_COLS );
+		$num_display_limit      = static::gen_field_key( static::FIELD_NUM_DISPLAY_LIMIT );
 		$group                  = static::gen_field_key( static::FIELD_GROUP );
 		$entries                = static::gen_field_key( static::FIELD_ENTRIES );
 
@@ -93,6 +97,50 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					),
 					'default_value' => 'carousel',
 				),
+				static::FIELD_NUM_COLS               => array(
+					'key'               => $num_cols,
+					'name'              => static::FIELD_NUM_COLS,
+					'label'             => 'Number of Columns (Desktop)',
+					'type'              => 'button_group',
+					'required'          => true,
+					'choices'           => array(
+						3 => '3',
+						4 => '4',
+					),
+					'default_value'     => 3,
+					'wrapper'           => array(
+						'width' => '50%',
+					),
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $display_type,
+								'operator' => '==',
+								'value'    => 'grid',
+							),
+						),
+					),
+				),
+				static::FIELD_NUM_DISPLAY_LIMIT      => array(
+					'key'               => $num_display_limit,
+					'name'              => static::FIELD_NUM_DISPLAY_LIMIT,
+					'label'             => 'Display Limit',
+					'instructions'      => 'Number of items to be displayed before clicking <i>Load More</i>',
+					'type'              => 'number',
+					'default_value'     => 8,
+					'wrapper'           => array(
+						'width' => '50%',
+					),
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $display_type,
+								'operator' => '==',
+								'value'    => 'grid',
+							),
+						),
+					),
+				),
 				static::FIELD_GROUP                  => array(
 					'key'           => $group,
 					'name'          => static::FIELD_GROUP,
@@ -144,6 +192,8 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$description            = static::get_val( static::FIELD_DESCRIPTION );
 		$desktop_text_alignment = static::get_val( static::FIELD_DESKTOP_TEXT_ALIGNMENT );
 		$display_type           = static::get_val( static::FIELD_DISPLAY_TYPE );
+		$num_cols               = static::get_val( static::FIELD_NUM_COLS );
+		$num_display_limit      = static::get_val( static::FIELD_NUM_DISPLAY_LIMIT );
 		$group                  = static::get_val( static::FIELD_GROUP );
 
 		$cards          = array();

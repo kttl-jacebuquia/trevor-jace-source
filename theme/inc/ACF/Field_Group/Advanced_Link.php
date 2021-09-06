@@ -22,6 +22,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_TEXTONLY_POPUP       = 'textonly_popup';
 	const FIELD_WHAT_TO_EXPECT_POPUP = 'what_to_expect_popup';
 	const FIELD_PHONE                = 'phone';
+	const FIELD_EMAIL                = 'email';
 	const FIELD_SHOW_DOWNLOAD_ICON   = 'show_download_icon';
 	const FIELD_SHOW_DEV_FORM_ONLY   = 'show_dev_form_only';
 
@@ -42,6 +43,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$textonly_popup       = static::gen_field_key( static::FIELD_TEXTONLY_POPUP );
 		$what_to_expect_popup = static::gen_field_key( static::FIELD_WHAT_TO_EXPECT_POPUP );
 		$phone                = static::gen_field_key( static::FIELD_PHONE );
+		$email                = static::gen_field_key( static::FIELD_EMAIL );
 		$show_download_icon   = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
 		$show_dev_form_only   = static::gen_field_key( static::FIELD_SHOW_DEV_FORM_ONLY );
 
@@ -69,6 +71,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						'call'          => 'Call',
 						'sms'           => 'SMS',
 						'trevor_chat'   => 'Trevor Chat',
+						'email'         => 'Email',
 					),
 					'default_value' => 'page_link',
 					'allow_null'    => true,
@@ -106,6 +109,22 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 								'field'    => $action,
 								'operator' => '==',
 								'value'    => 'sms',
+							),
+						),
+					),
+				),
+				static::FIELD_EMAIL                => array(
+					'key'               => $email,
+					'name'              => static::FIELD_EMAIL,
+					'label'             => 'Email',
+					'type'              => 'email',
+					'required'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'email',
 							),
 						),
 					),
@@ -404,6 +423,18 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						array(
 							DOM_Attr::FIELD_ATTR_KEY => 'href',
 							DOM_Attr::FIELD_ATTR_VAL => 'sms://' . $phone,
+						),
+					)
+				);
+				break;
+			case 'email':
+				$email = $val->get( static::FIELD_EMAIL );
+				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ],
+					array(
+						array(
+							DOM_Attr::FIELD_ATTR_KEY => 'href',
+							DOM_Attr::FIELD_ATTR_VAL => 'mailto:' . $email,
 						),
 					)
 				);

@@ -313,8 +313,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$title          = static::get_val( static::FIELD_TITLE );
 		$description    = static::get_val( static::FIELD_DESCRIPTION );
 		$entries_source = static::get_val( static::FIELD_ENTRIES_SOURCE );
-
-		$attr = array(
+		$button_link    = static::get_val( static::FIELD_BUTTON );
+		$attr           = array(
 			'class' => 'topic-cards bg-' . $bg_color . ' ' . 'text-' . $text_color,
 		);
 
@@ -369,6 +369,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						break;
 				}
 				?>
+
+				<?php if ( isset( $button_link['url'] ) ) : ?>
+					<div class="topic-cards__block-cta-wrap">
+						<a class="topic-cards__block-cta" href="<?php echo esc_url( $button_link['url'] ); ?>" target="<?php echo esc_attr( $button_link['target'] ); ?>"><?php echo esc_html( $button_link['title'] ); ?></a>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php
@@ -485,12 +491,6 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
-				</div>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $button['url'] ) ) : ?>
-				<div class="topic-cards__block-cta-wrap">
-					<a class="topic-cards__block-cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
 				</div>
 			<?php endif; ?>
 		<?php

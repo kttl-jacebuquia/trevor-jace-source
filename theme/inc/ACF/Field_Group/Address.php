@@ -122,27 +122,26 @@ class Address extends A_Field_Group implements I_Block {
 							<?php endif; ?>
 
 							<?php foreach ( $entry['entry_lines'] as $line ) : ?>
-								<?php if ( 'mailto' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
-									<a href="mailto:<?php echo esc_attr( $line[ static::FIELD_ENTRY_EMAIL ] ); ?>">
-										<div class="contact-information__description">
+								<div class="contact-information__description">
+									<?php if ( 'mailto' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+										<a class="wave-underline" href="mailto:<?php echo esc_attr( $line[ static::FIELD_ENTRY_EMAIL ] ); ?>">
 											<?php echo $line[ static::FIELD_LINE ]; ?>
-										</div>
-									</a>
-								<?php elseif ( 'dev_inq_form' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
-									<?php $class = FundraiserQuizModal::ID; ?>
-									<button class="<?php echo esc_attr( $class ); ?>"
-									aria-label="click to open fundraise quiz modal"
-									data-fundraise-vertex="form"
-									data-fundraise-single="true">
-										<div class="contact-information__description">
+										</a>
+									<?php elseif ( 'dev_inq_form' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+										<?php FundraiserQuizModal::create(); ?>
+										<?php $class = FundraiserQuizModal::ID; ?>
+										<button class="<?php echo esc_attr( $class ); ?> wave-underline"
+										aria-label="click to open fundraise quiz modal"
+										data-fundraise-vertex="form"
+										data-fundraise-single="1">
 											<?php echo $line[ static::FIELD_LINE ]; ?>
-										</div>
-									</button>
-								<?php else : ?>
-									<?php if ( ! empty( $line[ static::FIELD_LINE ] ) ) : ?>
-										<div class="contact-information__description"><?php echo $line[ static::FIELD_LINE ]; ?></div>
+										</button>
+									<?php else : ?>
+										<?php if ( ! empty( $line[ static::FIELD_LINE ] ) ) : ?>
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										<?php endif; ?>
 									<?php endif; ?>
-								<?php endif; ?>
+								</div>
 							<?php endforeach; ?>
 						</div>
 					<?php endforeach; ?>
