@@ -67,7 +67,7 @@ class Is {
 			return true;
 		} elseif ( ! empty( $current_page->slug ) && strpos( $header['find_support_link']['url'], $current_page->slug ) ) {
 			return true;
-		} 
+		}
 
 		return false;
 	}
