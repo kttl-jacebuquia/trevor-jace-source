@@ -1,0 +1,16 @@
+.newsletter-form {
+  &--submitting {
+    .btn {
+      @apply opacity-50 cursor-not-allowed;
+    }
+  }
+
+  &__message {
+    @apply font-semibold w-full mt-px10 text-px16 leading-px22 tracking-em001;
+    margin-left: 0 !important;
+
+    @screen md {
+      @apply text-px18 leading-px24 mt-px18;
+    }
+  }
+}

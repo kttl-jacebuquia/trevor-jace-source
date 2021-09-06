@@ -38,10 +38,43 @@ class Is {
 			return true;
 		}
 
+		if ( self::is_in_menu() ) {
+			return true;
+		}
+
 		// TODO: Check search
 		// TODO: Use static cache
 
 		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) );
+	}
+
+	/**
+	 * Check if the current page / tax is in menu
+	 * 
+	 * @return bool
+	 */
+	public static function is_in_menu(): bool {
+		$menu_locations = get_nav_menu_locations();
+
+		if ( ! empty( $menu_locations['header-support'] ) ) {
+			$find_support_items = wp_get_nav_menu_items($menu_locations['header-support']);
+
+			foreach( $find_support_items as $item ) {
+				$current_page = get_queried_object();
+
+				if ( ! empty( $current_page->ID ) && $item->object_id === $current_page->ID ) {
+					return true;
+				} elseif ( ! empty( $current_page->ID ) && $item->object_id === $current_page->term_id ) {
+					return true;
+				} elseif ( ! empty( $current_page->slug ) && strpos( $item->url, $current_page->slug ) ) {
+					return true;
+				} elseif ( ! empty( $current_page->post_name ) && strpos( $item->url, $current_page->post_name ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**

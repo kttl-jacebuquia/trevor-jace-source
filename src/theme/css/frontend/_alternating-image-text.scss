@@ -105,8 +105,16 @@
   &__item-title {
     @apply font-bold text-px24 leading-px28 tracking-em001;
 
+    @screen md {
+      @apply text-px28 leading-px38 tracking-px_05;
+    }
+
+    @screen lg {
+      @apply text-px30 leading-px42 px-px32;
+    }
+
     @screen xl {
-      @apply text-px26 leading-px36 tracking-em005;
+      @apply text-px40 leading-px48;
     }
 
     .alternating-image-text--item-heading-large & {

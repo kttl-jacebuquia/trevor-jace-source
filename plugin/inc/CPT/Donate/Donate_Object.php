@@ -42,9 +42,6 @@ abstract class Donate_Object {
 	 */
 	final public static function construct(): void {
 		add_action( 'init', array( self::class, 'init' ), 10, 0 );
-		add_filter( 'query_vars', array( self::class, 'query_vars' ), PHP_INT_MAX, 1 );
-		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
-
 		add_action( 'template_redirect', array( self::class, 'template_redirect' ), 10, 0 );
 	}
 
@@ -53,60 +50,6 @@ abstract class Donate_Object {
 		Prod_Partner::register_post_type();
 		Partner_Prod::register_post_type();
 		Fundraiser_Stories::register_post_type();
-
-		# Rewrites
-		## Single Pages
-		foreach (
-			array(
-				array( self::PERMALINK_FUNDRAISE, self::QV_FUNDRAISE ),
-				array( self::PERMALINK_PROD_PARTNERSHIPS, self::QV_PROD_PARTNERSHIPS ),
-			) as list(
-			$regex, $qv
-		)
-		) {
-			add_rewrite_rule(
-				$regex . '/?$',
-				'index.php?' . http_build_query(
-					array(
-						$qv => 1,
-					)
-				),
-				'top'
-			);
-		}
-	}
-
-	/**
-	 * Filters rewrite rules used for individual permastructs.
-	 *
-	 * @param array $vars
-	 *
-	 * @return array
-	 * @see construct()
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/query_vars/
-	 */
-	public static function query_vars( array $vars ): array {
-		return array_merge( $vars, self::_QV_ALL );
-	}
-
-	/**
-	 * Filters the list of CSS body class names for the current post or page.
-	 *
-	 * @param array $classes An array of body class names.
-	 *
-	 * @return array
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/body_class/
-	 */
-	public static function body_class( array $classes ): array {
-		foreach ( self::_QV_ALL as $qv ) {
-			if ( get_query_var( $qv ) ) {
-				$classes[] = 'is-' . substr( $qv, strlen( Main::QV_PREFIX ) );
-			}
-		}
-
-		return $classes;
 	}
 
 	/**

@@ -351,11 +351,11 @@ class Tile {
 						<?php echo esc_html( $name ); ?>
 					</p>
 					<?php if ( ! empty( $group ) || ! empty( $pronoun ) ) { ?>
-						<div class="information__details <?php echo $details_class; ?><?php echo (strtolower( $group ) === 'founder') ? ' text-center' : '' ?>">
-							<?php if ( ! empty( $group )  ) { ?>
+						<div class="information__details <?php echo $details_class; ?><?php echo ( strtolower( $group ) === 'founder' ) ? ' text-center' : ''; ?>">
+							<?php if ( ! empty( $group ) ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>
-							<?php if ( ! empty( $pronoun  ) ) { ?>
+							<?php if ( ! empty( $pronoun ) ) { ?>
 								<span class="information__pronoun font-normal pl-px12 border-l-px1 border-blue_green border-opacity-40"><?php echo esc_html( $pronoun ); ?></span>
 							<?php } ?>
 						</div>

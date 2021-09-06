@@ -1,6 +1,5 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
-use \TrevorWP\Theme\Customizer\Advocacy;
 use \TrevorWP\Theme\Helper;
 
 class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
@@ -80,31 +79,27 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 		$gallery_entries = static::get_val( static::FIELD_GALLERY_ENTRIES );
 
 		ob_start();
-		// Next Step - FE
 		?>
-
-
-
-	<div class="carousel-image">
-		<div class="carousel-image__container">
-			<?php if ( ! empty( $gallery_entries ) ) : ?>
-				<div class="carousel-image__content">
-				<?php
-				echo Helper\Carousel::big_img(
-					$gallery_entries,
-					array(
-						'title'  => $title,
-						'class'  => array(),
-						'swiper' => array(
-							'centeredSlides' => true,
-						),
+		<div class="carousel-image">
+			<div class="carousel-image__container">
+				<?php if ( ! empty( $gallery_entries ) ) : ?>
+					<div class="carousel-image__content">
+					<?php
+					echo Helper\Carousel::big_img(
+						$gallery_entries,
+						array(
+							'title'  => $title,
+							'class'  => array(),
+							'swiper' => array(
+								'centeredSlides' => true,
+							),
+						)
 					)
-				)
-				?>
-				</div>
-			<?php endif; ?>
+					?>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
-	</div>
 		<?php
 		return ob_get_clean();
 	}

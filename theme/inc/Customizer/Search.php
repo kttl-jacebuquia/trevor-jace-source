@@ -2,7 +2,6 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Main;
-use TrevorWP\Theme\Util\Hooks;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Tools;
 use TrevorWP\CPT\RC\RC_Object;

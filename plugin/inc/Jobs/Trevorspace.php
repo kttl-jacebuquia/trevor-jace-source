@@ -8,13 +8,16 @@ use TrevorWP\Util\Log;
  * Trevorspace related jobs
  */
 class Trevorspace {
+
+	const COUNTER_URL = 'https://www.trevorspace.org/active-count/';
+
 	/**
 	 * Gets the latest active count.
 	 *
 	 * @return int
 	 */
 	public static function update_active_count(): int {
-		$resp = wp_remote_get( \TrevorWP\Theme\Customizer\Trevorspace::get_val( \TrevorWP\Theme\Customizer\Trevorspace::SETTING_COUNTER_URL ) );
+		$resp = wp_remote_get( self::COUNTER_URL );
 
 		if ( $resp['response']['code'] == 200 ) {
 			$count = intval( $resp['body'] );

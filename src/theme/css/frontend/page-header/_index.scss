@@ -261,7 +261,7 @@ xl: ( 414, 477, 1217, 920 ),
   // Horizontal
   &.type-horizontal {
     .page-header-image {
-      @apply relative pt-vwfull;
+      @apply relative pt-full;
 
       img {
         @apply absolute top-0 left-0 h-full;
@@ -307,9 +307,9 @@ xl: ( 414, 477, 1217, 920 ),
     }
 
     &-image {
-      @apply w-screen mb-0 mt-auto;
-      margin-left: calc( ( 100vw - 100% ) / -2 );
-
+      @apply mb-0 mt-auto;
+      width: calc(100% + (theme('container.padding.DEFAULT') * 2));
+      margin-left: calc( -1 * theme('container.padding.DEFAULT'));
 
       @screen md {
         @apply w-full ml-0 z-10;

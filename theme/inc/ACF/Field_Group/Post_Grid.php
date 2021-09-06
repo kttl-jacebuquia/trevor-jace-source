@@ -3,10 +3,10 @@
 use TrevorWP\Classy\Content;
 use TrevorWP\CPT;
 use TrevorWP\CPT\Donate\Partner_Prod;
+use TrevorWP\Theme\ACF\Options_Page\Footer;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Util\Tools;
-use \TrevorWP\Theme\Customizer\Social_Media_Accounts;
 
 class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_SOURCE            = 'source';
@@ -411,15 +411,15 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 		$social_media_accounts = array(
 			array(
-				'url'  => Social_Media_Accounts::get_val( Social_Media_Accounts::SETTING_FACEBOOK_URL ),
+				'url'  => Footer::get_option( Footer::FIELD_FACEBOOK_URL ),
 				'icon' => 'trevor-ti-facebook',
 			),
 			array(
-				'url'  => Social_Media_Accounts::get_val( Social_Media_Accounts::SETTING_TWITTER_URL ),
+				'url'  => Footer::get_option( Footer::FIELD_TWITTER_URL ),
 				'icon' => 'trevor-ti-twitter',
 			),
 			array(
-				'url'  => Social_Media_Accounts::get_val( Social_Media_Accounts::SETTING_INSTAGRAM_URL ),
+				'url'  => Footer::get_option( Footer::FIELD_INSTAGRAM_URL ),
 				'icon' => 'trevor-ti-instagram',
 			),
 		);

@@ -68,9 +68,8 @@ class Content_Length {
 		}
 
 		$wc = self::get_post_word_count( $post );
-		foreach ( array_reverse( array_keys( self::DEFAULT_LEN_VALUES ) ) as $key ) {
-			$max = \TrevorWP\Theme\Customizer\Posts::get_val( $key );
-			if ( $wc > $max ) {
+		foreach ( self::DEFAULT_LEN_VALUES as $key => $val ) {
+			if ( $wc > $val ) {
 				return self::SETTINGS[ $key ]['name'];
 			}
 		}
