@@ -45,7 +45,6 @@ abstract class RC_Object {
 
 	/* Collections */
 	const _ALL_ = array(
-		Post::class,
 		Guide::class,
 		Article::class,
 		External::class,

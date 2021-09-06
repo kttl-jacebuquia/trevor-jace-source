@@ -1,14 +1,11 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
-use TrevorWP\CPT\RC\Glossary;
 use TrevorWP\CPT\RC\Guide;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post;
 use TrevorWP\Theme\Helper;
 
 class Resource_Center extends A_Options_Page {
-	const POST_TYPE = 'trevor_rc_post';
-
 	const FIELD_PAGE_SLUG           = 'rc_page_slug';
 	const FIELD_EYEBROW             = 'eyebrow';
 	const FIELD_HEADLINE            = 'headline';
@@ -185,7 +182,7 @@ class Resource_Center extends A_Options_Page {
 		return array_merge(
 			parent::prepare_page_register_args(),
 			array(
-				'parent_slug' => 'edit.php?post_type=' . static::POST_TYPE,
+				'parent_slug' => 'edit.php?post_type=' . Guide::POST_TYPE,
 				'menu_title'  => 'Options',
 				'page_title'  => 'Resource Center Options',
 			)

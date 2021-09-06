@@ -675,7 +675,7 @@ class Hooks {
 			'separator1',
 			'edit.php?post_type=page',
 			'edit.php',
-			'edit.php?post_type=trevor_rc_post',
+			'edit.php?post_type=trevor_rc_guide',
 			'edit.php?post_type=trevor_gi_bill',
 			'edit.php?post_type=trevor_gi_letter',
 			'edit.php?post_type=trevor_research',
