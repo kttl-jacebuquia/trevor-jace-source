@@ -462,7 +462,9 @@ class Page_Header {
 							<div class="page-header-images">
 								<?php foreach ( $options['images'] as $image ) : ?>
 									<?php if ( ! empty( $image['url'] ) ) : ?>
-										<img aria-hidden="true" src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
+										<div class="page-header-image">
+											<img aria-hidden="true" src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
+										</div>
 									<?php endif; ?>
 								<?php endforeach; ?>
 							</div>

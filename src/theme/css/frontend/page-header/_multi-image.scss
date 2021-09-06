@@ -1,0 +1,212 @@
+// Image settings for Multi-Image variant
+// per item, per breakpoint
+// ( width, height, top, left, rotate
+$multi-image-images-config: (
+  // Image 1
+  1: (
+    rotate: -9.4,
+    z-index: 1,
+    sm: ( 162, 162, 74, -27 ), // 620
+    md: ( 183, 183, 477, 15 ),
+    xl: ( 377, 375, 838, -60 ),
+  ),
+  // Image 2
+  2: (
+    rotate: 7.15,
+    z-index: 2,
+    sm: ( 182, 215, 206, 37 ),
+    md: ( 174, 205, 448, 348 ),
+    xl: ( 357, 421, 784, 536 ),
+  ),
+  // Image 3
+  3: (
+    rotate: -4.53,
+    z-index: 3,
+    sm: ( 165, 220, 374, -7 ),
+    md: ( 208, 277, 590, 170 ),
+    xl: ( 428, 568, 1065, 257 ),
+  ),
+  // Image 4
+  4: (
+    rotate: -4.3,
+    z-index: 1,
+    sm: ( 219, 238, 97, 182 ),
+    md: ( 201, 218, 147, 501 ),
+    xl: ( 390, 425, 296, 900 ),
+  ),
+  // Image 5
+  5: (
+    rotate: 0,
+    z-index: 2,
+    sm: ( 168, 206, 327, 237 ),
+    md: ( 264, 323, 249, 589 ),
+    xl: ( 513, 627, 497, 1056 ),
+  ),
+  // Image 6
+  6: (
+    rotate: 7.93,
+    z-index: 3,
+    sm: ( 171, 197, 545, 170 ),
+    md: ( 201, 232, 659, 528 ),
+    xl: ( 414, 477, 1217, 920 ),
+  ),
+);
+
+.header-container {
+  &--multi-image {
+    @apply relative pb-px293;
+
+    @screen md {
+      @apply pb-px382;
+      padding-top: $top-nav-height-tablet;
+      margin-top: -$top-nav-height-tablet;
+    }
+
+    @screen xl {
+      @apply pb-px907;
+      padding-top: $top-nav-height-desktop;
+      margin-top: -$top-nav-height-desktop;
+    }
+
+    + main > :first-child {
+      @apply pt-px590;
+
+      @screen md {
+        @apply pt-px247;
+      }
+
+      @screen xl {
+        @apply pt-px279;
+      }
+    }
+  }
+}
+
+.page-header {
+  &.type-multi-image {
+    @apply pt-px50 relative;
+
+    @screen md {
+      @apply pt-px22;
+    }
+
+    @screen xl {
+      @apply pt-px95;
+    }
+
+    .page-header {
+      &-content-wrap {
+        @apply tw-grid w-full p-0;
+        z-index: 10;
+
+        @screen md {
+          @apply p-0;
+        }
+      }
+
+      &-inner {
+        @apply pb-0 md:pb-0 xl:pb-0;
+      }
+
+      &-title {
+        @apply text-px32 leading-px40 font-bold col-span-full;
+
+        @screen md {
+          @apply text-px32 leading-px42 col-span-5;
+        }
+
+        @screen xl {
+          @apply text-px70 leading-px80 col-span-9;
+        }
+
+        tilt {
+          @apply block font-bold text-px44 leading-px44 tracking-em005 mt-0 rotate-0;
+
+          @screen md {
+            @apply leading-px54;
+          }
+
+          @screen xl {
+            @apply text-px98 leading-px108;
+          }
+        }
+      }
+
+      &-desc {
+        @apply mt-px10 p-0 col-span-full;
+        @apply text-px18 leading-px26 tracking-em005;
+
+        @screen md {
+          @apply mt-px10 col-span-4 text-px18 leading-px24;
+        }
+
+        @screen xl {
+          @apply mt-px15 col-span-6 text-px24 leading-px34;
+        }
+      }
+
+      &-img-wrap {
+        @apply relative h-0 -ml-px28 overflow-visible;
+        width: calc(100% + #{rem-calc(56)});
+
+        @screen md {
+          @apply absolute left-0 -top-px140 -ml-px50;
+          width: calc(100% + #{rem-calc(100)});
+        }
+
+        @screen xl {
+          @apply w-full -top-px270 ml-0;
+        }
+      }
+
+      &-images {
+        @apply absolute top-0 left-0 right-0 w-full pointer-events-none overflow-hidden;
+        height: 200vh;
+        min-height: 2160px; // 1080p x 2
+      }
+
+      &-image {
+        @apply block absolute rounded-px10 transform rotate-0;
+        @apply w-full h-full object-cover;
+
+        @each $index, $image-config in $multi-image-images-config {
+          &:nth-child(#{$index}) {
+            @each $key, $config in $image-config {
+              @if ( $key == rotate ) {
+                --tw-rotate: #{$config + "deg"};
+              }
+              @else if ( $key == z-index ) {
+                z-index: #{$config};
+              }
+              @else {
+                $width: nth($config, 1);
+                $height: nth($config, 2);
+                $top: nth($config, 3);
+                $left: nth($config, 4);
+
+                @if $key == sm {
+                  width: rem-calc($width);
+                  height: rem-calc($height);
+                  top: rem-calc($top);
+                  left: rem-calc($left);
+                }
+                @else {
+                  @screen #{$key} {
+                    width: rem-calc($width);
+                    height: rem-calc($height);
+                    top: rem-calc($top);
+                    left: rem-calc($left);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        img {
+          @appy absolute top-0 left-0 w-full h-full object-cover;
+        }
+      }
+    }
+  }
+}
