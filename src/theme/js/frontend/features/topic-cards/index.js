@@ -40,6 +40,13 @@ class TopicCards {
 		});
 	}
 
+	/**
+	 * Initializes Load More Button
+	 *
+	 * NOTE:
+	 * There is no display limit in Topic Cards, so all cards show up on initial load.
+	 * Load More functionality pulls in additional cards aside from the ones set in the CMS.
+	 */
 	initializeLoadMore() {
 		this.loadMore = this.element.querySelector(TopicCards.loadMoreSelector);
 

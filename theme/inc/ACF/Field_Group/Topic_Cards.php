@@ -5,6 +5,7 @@ use TrevorWP\CPT\Donate;
 use TrevorWP\CPT\Get_Involved;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Util\Tools;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_BG_COLOR                = 'bg_color';
@@ -380,17 +381,41 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		<?php
 		return ob_get_clean();
 	}
+
 	/**
 	 * @inheritDoc
 	 */
 	private static function render_posts( $posts = array() ): string {
-		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE );
+		$posts          = static::filter_entries( $posts );
+		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE ) && ! empty( $posts );
 		$tile_options   = array(
 			'class' => array( 'topic-cards__item' ),
 			'attr'  => array(
 				'role' => 'listitem',
 			),
 		);
+
+		/**
+		 * Double check whether to show_load_more
+		 * if there are more items to show from the selected post_type
+		 */
+		if ( $show_load_more && array_key_exists( 'post_type', (array) $posts[0] ) ) {
+			$post_type   = ( (array) $posts[0] )['post_type'];
+			$posts_ids   = wp_list_pluck( $posts, 'ID' );
+			$other_posts = get_posts(
+				array(
+					'numberposts' => 1,
+					'exclude'     => $posts_ids,
+					'post_type'   => $post_type,
+					'post_status' => 'publish',
+				),
+			);
+
+			// If there is no more available posts, no sense to show the loadmore.
+			if ( empty( static::filter_entries( $other_posts ) ) ) {
+				$show_load_more = false;
+			}
+		}
 
 		ob_start();
 		?>
@@ -400,7 +425,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						<?php echo Helper\Tile::post( $post, $key, $tile_options ); ?>
 					<?php endforeach; ?>
 				</div>
-				<?php if ( $show_load_more ) : ?>
+				<?php if ( $show_load_more && count( $posts ) > 0 ) : ?>
 					<div class="topic-cards__block-cta-wrap">
 						<button class="topic-cards__load-more" type="button" aria-label="click to load more items">Load More</button>
 					</div>
@@ -414,7 +439,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	private static function render_entries(): string {
-		$topic_entries = static::get_val( static::FIELD_TOPIC_ENTRIES );
+		$entries       = static::get_val( static::FIELD_TOPIC_ENTRIES );
+		$topic_entries = static::filter_entries( $entries );
 		$mobile_layout = static::get_val( static::FIELD_MOBILE_LAYOUT );
 		$grid_class    = array(
 			'topic-cards__grid',
@@ -495,6 +521,36 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 			<?php endif; ?>
 		<?php
 		return ob_get_clean();
+	}
+
+	public static function filter_entries( $entries ): array {
+		$entries_source = static::get_val( static::FIELD_ENTRIES_SOURCE );
+
+		// Filter entries only if Products, otherwise just return all entries
+		if ( 'products' !== $entries_source ) {
+			return $entries;
+		}
+
+		// Filter to show only products that are within the current date
+		$filtered_entries  = array();
+		$current_date_unix = time();
+
+		foreach ( $entries as $entry ) {
+			$entry_val  = new Field_Val_Getter( Product::class, $entry );
+			$start_date = $entry_val->get( Product::FIELD_PRODUCT_START_DATE );
+			$end_date   = $entry_val->get( Product::FIELD_PRODUCT_END_DATE );
+
+			$start_unix = strtotime( $start_date );
+			$end_unix   = strtotime( $end_date );
+
+			// If start and end dates range is within the current date,
+			// include this entry to the rendered cards
+			if ( $start_unix <= $current_date_unix && $end_unix >= $current_date_unix ) {
+				$filtered_entries[] = $entry;
+			}
+		}
+
+		return $filtered_entries;
 	}
 
 	/**
