@@ -50,16 +50,16 @@ class Is {
 
 	/**
 	 * Check if the current page / tax is in menu
-	 * 
+	 *
 	 * @return bool
 	 */
 	public static function is_in_menu(): bool {
 		$menu_locations = get_nav_menu_locations();
 
 		if ( ! empty( $menu_locations['header-support'] ) ) {
-			$find_support_items = wp_get_nav_menu_items($menu_locations['header-support']);
+			$find_support_items = wp_get_nav_menu_items( $menu_locations['header-support'] );
 
-			foreach( $find_support_items as $item ) {
+			foreach ( $find_support_items as $item ) {
 				$current_page = get_queried_object();
 
 				if ( ! empty( $current_page->ID ) && $item->object_id === $current_page->ID ) {

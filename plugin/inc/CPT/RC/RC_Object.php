@@ -6,6 +6,7 @@ use TrevorWP\Main;
 use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Log;
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Tools;
 
 /**
@@ -41,10 +42,6 @@ abstract class RC_Object {
 
 	const PERMALINK_GET_HELP    = 'get-help';
 	const PERMALINK_TREVORSPACE = 'trevorspace';
-
-	/* Pagination */
-	const PAGINATiON_SEARCH_RESULTS = 6;
-	const PAGINATiON_TAX_ARCHIVE    = 6;
 
 	/* Collections */
 	const _ALL_ = array(
@@ -544,12 +541,14 @@ abstract class RC_Object {
 			return;
 		}
 
+		$pagination = Resource_Center::get_pagination();
+
 		# Fix Resources LP
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp ) {
 			if ( ! empty( $query->get( 's' ) ) ) {
 				$query->is_search = true;
-				$query->set( 'posts_per_page', self::PAGINATiON_SEARCH_RESULTS );
+				$query->set( 'posts_per_page', $pagination['search_results'] );
 			}
 
 			$query->is_single            = false;
@@ -561,7 +560,7 @@ abstract class RC_Object {
 
 		# Taxonomy Pagination
 		if ( $query->is_tax( array( self::TAXONOMY_CATEGORY, self::TAXONOMY_TAG ) ) ) {
-			$query->set( 'posts_per_page', self::PAGINATiON_TAX_ARCHIVE );
+			$query->set( 'posts_per_page', $pagination['tax_archive'] );
 		}
 	}
 

@@ -713,7 +713,7 @@ class Hooks {
 			$classes['general_bg'] = 'bg-teal-dark';
 		}
 
-		if (is_404()) {
+		if ( is_404() ) {
 			$classes['general_bg'] = 'bg-white';
 		}
 

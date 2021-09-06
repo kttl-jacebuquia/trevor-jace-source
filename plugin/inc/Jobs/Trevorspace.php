@@ -2,6 +2,7 @@
 
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
+use TrevorWP\Theme\ACF\Options_Page\Trevorspace as Options_Trevorspace;
 use TrevorWP\Util\Log;
 
 /**
@@ -9,15 +10,16 @@ use TrevorWP\Util\Log;
  */
 class Trevorspace {
 
-	const COUNTER_URL = 'https://www.trevorspace.org/active-count/';
-
 	/**
 	 * Gets the latest active count.
 	 *
 	 * @return int
 	 */
 	public static function update_active_count(): int {
-		$resp = wp_remote_get( self::COUNTER_URL );
+		$trevorspace = Options_Trevorspace::get_trevorspace();
+		$counter_url = $trevorspace['active_count_url'];
+
+		$resp = wp_remote_get( $counter_url );
 
 		if ( $resp['response']['code'] == 200 ) {
 			$count = intval( $resp['body'] );
