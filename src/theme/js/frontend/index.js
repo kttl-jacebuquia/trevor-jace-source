@@ -225,12 +225,10 @@ features.collapsible($('.js-accordion'), {});
  * @todo: move under is-rc
  */
 (() => {
-	let terms = $("input[name='rc-search--keys']").val();
-
-	if (terms && terms.length) {
-		terms = terms.trim().split(',').slice(0, -1);
-	}
-
+	const terms = $("input[name='rc-search--keys']")
+		.val()
+		?.split(',')
+		.slice(0, -1) || [];
 	const searchCancelIcon = $('.icon-search-cancel');
 	const maxInputSize = 35;
 	const form = $('.search-form');
