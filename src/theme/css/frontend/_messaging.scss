@@ -3,26 +3,26 @@
 		@apply tw-grid container mx-auto;
 
 		.messaging.extend-top & {
-			@apply mt-px58;
+			@apply pt-px58;
 
 			@screen md {
-				@apply mt-px100;
+				@apply pt-px100;
 			}
 
 			@screen xl {
-				@apply mt-px120;
+				@apply pt-px120;
 			}
 		}
 
 		.messaging.extend-bottom & {
-			@apply mb-px58;
+			@apply pb-px58;
 
 			@screen md {
-				@apply mb-px100;
+				@apply pb-px100;
 			}
 
 			@screen xl {
-				@apply mb-px120;
+				@apply pb-px120;
 			}
 		}
 	}
