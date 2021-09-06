@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Options_Page\Header;
 
 /**
  * Collection of boolean returning functions.
@@ -42,10 +43,33 @@ class Is {
 			return true;
 		}
 
+		if ( self::is_in_find_support() ) {
+			return true;
+		}
+
 		// TODO: Check search
 		// TODO: Use static cache
 
 		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) );
+	}
+
+	/**
+	 * Check if the current page / tax is in find support link
+	 *
+	 * @return bool
+	 */
+	public static function is_in_find_support(): bool {
+		$current_page = get_queried_object();
+
+		$header = Header::get_header();
+
+		if ( ! empty( $current_page->post_name ) && strpos( $header['find_support_link']['url'], $current_page->post_name ) ) {
+			return true;
+		} elseif ( ! empty( $current_page->slug ) && strpos( $header['find_support_link']['url'], $current_page->slug ) ) {
+			return true;
+		} 
+
+		return false;
 	}
 
 	/**
@@ -58,10 +82,9 @@ class Is {
 
 		if ( ! empty( $menu_locations['header-support'] ) ) {
 			$find_support_items = wp_get_nav_menu_items( $menu_locations['header-support'] );
+			$current_page       = get_queried_object();
 
 			foreach ( $find_support_items as $item ) {
-				$current_page = get_queried_object();
-
 				if ( ! empty( $current_page->ID ) && $item->object_id === $current_page->ID ) {
 					return true;
 				} elseif ( ! empty( $current_page->ID ) && $item->object_id === $current_page->term_id ) {
