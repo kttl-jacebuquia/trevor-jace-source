@@ -581,6 +581,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		# Buttons
 		$args['buttons'] = $val->get( static::FIELD_BUTTONS );
 
+		if ( ! isset( $args['buttons']['buttons'] ) && ! empty( $args['buttons'] ) ) {
+			$args['buttons']['buttons'] = $args['buttons'];
+		}
+
 		# Update button attributes according to header attributes
 		if ( ! empty( $args['buttons']['buttons'] ) ) {
 			foreach ( $args['buttons']['buttons'] as &$button ) {
