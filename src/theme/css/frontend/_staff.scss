@@ -108,7 +108,7 @@
       }
     }
 
-    .is-grid.researchers & {
+    .staff-col-4 & {
       @screen md {
         @apply mr-auto ml-auto;
         width: 83.4834834835%;
@@ -155,7 +155,7 @@
       }
     }
 
-    .founders & {
+    .staff-col-3 & {
       @apply w-full mr-auto ml-auto;
 
       @screen md {
@@ -187,7 +187,7 @@
       .information__details { display: none; }
     }
 
-    .researchers.is-grid & {
+    .staff-col-4 & {
       @apply mr-auto ml-auto;
 
       @screen md {
