@@ -53,15 +53,19 @@ class Page_Sidebar extends A_Basic_Section implements I_Renderable {
 			parent::prepare_register_args(),
 			array(
 				'title'    => 'Page Sidebar',
-				'location' => array(
-					array(
-						array(
-							'param'    => 'page_template',
-							'operator' => '==',
-							'value'    => 'template-info-page.php',
-						),
-					),
-				),
+				/**
+				 * Temporarily removing from Info Page in favor of Article Highlights sidebar logic
+				 * This block should be removed altogether once Page Sidebar is no longer needed.
+				 */
+				// 'location' => array(
+				// 	array(
+				// 		array(
+				// 			'param'    => 'page_template',
+				// 			'operator' => '==',
+				// 			'value'    => 'template-info-page.php',
+				// 		),
+				// 	),
+				// ),
 			)
 		);
 

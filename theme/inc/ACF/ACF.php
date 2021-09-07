@@ -80,6 +80,7 @@ class ACF {
 		Field_Group\Current_Openings::class,
 		Field_Group\Article_River::class,
 		Field_Group\Video_Player::class,
+		Field_Group\Custom_Heading::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,

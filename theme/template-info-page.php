@@ -15,7 +15,7 @@ Template Name: Info Page Template
 					<?php the_content(); ?>
 				</div>
 				<div class="info-page-sidebar">
-					<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Sidebar::render(); ?>
+					<?php echo TrevorWP\Theme\Helper\Page_Sidebar::render( array( 'heading' => 'QUICK LINKS' ) ); ?>
 					<div class="floating-blocks-home hidden lg:block"></div>
 				</div>
 			</div>

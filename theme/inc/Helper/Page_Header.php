@@ -616,7 +616,7 @@ class Page_Header {
 		?>
 			<?php if ( ! empty( $sms_number ) ) : ?>
 				<a href="sms:<?php echo $sms_number; ?>" class="page-header__support-cta" class="test" role="button" aria-label="click to send an sms to trevor support">
-					<i class="trevor-ti-call" aria-hidden="true"></i>
+					<i class="trevor-ti-smartphone" aria-hidden="true"></i>
 					<span class="page-header__support-cta-text"><?php echo $label; ?></span>
 				</a>
 			<?php endif; ?>
