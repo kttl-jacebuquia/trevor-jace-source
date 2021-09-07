@@ -127,12 +127,12 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 							'default_value' => 'link',
 						),
 						static::FIELD_CARD_ENTRY_INFO_LINK => array(
-							'key'        => $card_entry_info_link,
-							'name'       => static::FIELD_CARD_ENTRY_INFO_LINK,
-							'label'      => 'Link',
-							'type'       => 'group',
-							'layout'     => 'block',
-							'sub_fields' => Advanced_Link::_get_fields(),
+							'key'               => $card_entry_info_link,
+							'name'              => static::FIELD_CARD_ENTRY_INFO_LINK,
+							'label'             => 'Link',
+							'type'              => 'group',
+							'layout'            => 'block',
+							'sub_fields'        => Advanced_Link::_get_fields(),
 							'conditional_logic' => array(
 								array(
 									array(
