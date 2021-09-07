@@ -218,6 +218,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		if ( 'list' === $display_type ) {
 			$args           = array(
+				'numberposts' => -1,
 				'post_type'   => Team::POST_TYPE,
 				'post_status' => 'publish',
 				'orderby'     => 'title',
