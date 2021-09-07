@@ -199,9 +199,11 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$cards          = array();
 		$has_more_items = false;
 		$card_type      = 'researchers';
+		$terms          = array();
 
 		if ( ! empty( $group['label'] ) ) {
-			$term = get_term( $group['value'] );
+			$term  = get_term( $group['value'] );
+			$terms = array( $term->slug );
 
 			if ( 'founder' === strtolower( $group['label'] ) ) {
 				$card_type = 'founders';
@@ -216,6 +218,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		if ( 'list' === $display_type ) {
 			$args           = array(
+				'numberposts' => -1,
 				'post_type'   => Team::POST_TYPE,
 				'post_status' => 'publish',
 				'orderby'     => 'title',
@@ -224,8 +227,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					array(
 						'taxonomy' => Team::TAXONOMY_GROUP,
 						'field'    => 'slug',
-						'terms'    => array( 'founder', 'researcher' ),
-						'operator' => 'NOT IN',
+						'terms'    => $terms,
 					),
 				),
 			);
