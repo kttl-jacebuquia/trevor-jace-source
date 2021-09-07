@@ -88,6 +88,12 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 						</figcaption>
 					</figure>
 				<?php endif; ?>
+
+				<?php if ( ! empty( $button ) ) : ?>
+					<div class="center-text-with-full-image__cta-wrap">
+						<?php echo Button::render( false, $button, array( 'btn_cls' => array( 'center-text-with-full-image__cta' ) ) ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 
