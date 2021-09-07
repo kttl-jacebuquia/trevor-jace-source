@@ -45,7 +45,6 @@ export default class FundraiserQuiz {
 
 		this.classes = "visible static";
 
-		this.init();
 		this.createGraph();
 
 		/**
@@ -70,31 +69,37 @@ export default class FundraiserQuiz {
 		});
 	}
 
-	init () {
+	show (options = {}) {
 		// Default initial step
 		let $initialStepContent = $(`${this.selector}--step-one`);
 
 		this.changeContainerBackground(false);
 
 		// Override iniial step if supplied in options
-		if ( this.options.initialVertex ) {
-			const $content = $(document.querySelector(`[data-vertex="${this.options.initialVertex}"]:not(input)`));
+		if ( options.initialVertex ) {
+			const $content = $(document.querySelector(`[data-vertex="${options.initialVertex}"]:not(input)`));
 			if ( $content.length ) {
 				$initialStepContent.hide();
 				$initialStepContent = $content;
 			}
 
-			this.changeContainerBackground(this.options.initialVertex);
+			this.changeContainerBackground(options.initialVertex);
 		}
+
+		// Clear inline styles
+		$initialStepContent.removeAttr('style');
+		$initialStepContent.removeClass('hidden');
 
 		this.choices.attr("checked", false);
 		this.backBtn.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
-		console.log($initialStepContent);
-		$initialStepContent.fadeIn(500, () => {
-			$initialStepContent.addClass(this.classes);
-		});
 		this.paginationContainer.hide();
+
+		setTimeout(() => {
+			$initialStepContent.fadeIn(500, () => {
+				$initialStepContent.addClass(this.classes);
+			});
+		}, 100);;
 	}
 
 	displayNextPage (btn) {
@@ -115,13 +120,18 @@ export default class FundraiserQuiz {
 		const $content = $(`[data-vertex="${nextVertex}"]:not(input)`, this.selector);
 
 		if ($content.length) {
+			const $oldContent = $(this.containers[vertex], this.selector);
 			this.prevVertexStack.push(vertex);
 			this.handleNextContentRadioBtns($content);
-			$(this.containers[vertex], this.selector).fadeOut(400, () => {
+
+			// Hide old content
+			$oldContent.fadeOut(400, () => {
 				this.changeContainerBackground(nextVertex);
 				$content.addClass(this.classes);
-				$content.fadeIn();
 			});
+
+			// Show new content
+			$content.removeClass('hidden').fadeIn();
 		}
 	}
 
