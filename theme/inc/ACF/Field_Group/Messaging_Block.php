@@ -124,10 +124,11 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 							'type'  => 'text',
 						),
 						static::FIELD_DESCRIPTION    => array(
-							'key'   => $description,
-							'name'  => static::FIELD_DESCRIPTION,
-							'label' => 'Description',
-							'type'  => 'textarea',
+							'key'       => $description,
+							'name'      => static::FIELD_DESCRIPTION,
+							'label'     => 'Description',
+							'type'      => 'textarea',
+							'new_lines' => 'br',
 						),
 						static::FIELD_BUTTONS        => Button_Group::clone(
 							array(
