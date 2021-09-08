@@ -43,12 +43,16 @@ export default class NewsletterForm extends Component {
 		});
 	}
 
+	isValidEmail(email = '') {
+		return /^[^@]+@[^@]+\.[^.]+$/.test(email);
+	}
+
 	onSubmit(event) {
 		// Prevent page reload
 		event.preventDefault();
 
 		// Should not send if email input is empty
-		if (!this.state.email) {
+		if (!this.isValidEmail(this.state.email)) {
 			this.showError();
 			pushFormData(this.formGTMName, false);
 
