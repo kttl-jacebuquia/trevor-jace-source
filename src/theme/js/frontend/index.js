@@ -253,7 +253,7 @@ features.collapsible($('.js-accordion'), {});
 		.autocomplete({
 			source(request, response) {
 				const results = $.ui.autocomplete.filter(terms, request.term);
-				response(results.slice(0, 5)); // Limit the results to five.
+				response(results);
 			},
 			minLength: 0,
 			appendTo: '#input-suggestions',
