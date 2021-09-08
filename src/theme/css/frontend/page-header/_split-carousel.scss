@@ -157,6 +157,11 @@
 
         .swiper-button-wrapper {
           @apply flex;
+          @apply bg-white bg-opacity-90;
+
+          i {
+            @apply text-teal-dark;
+          }
         }
 
         .swiper-button-prev {

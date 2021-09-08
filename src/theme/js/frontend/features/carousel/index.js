@@ -287,14 +287,13 @@ export const initializeCarousel = (carouselSettings) => {
 			const [firstSlide, ...otherSlides] = Array.from(swiper.slides);
 			const [lastSlide] = otherSlides.slice(-1);
 
-			const isFirstSlideVisible =
-				firstSlide?.getBoundingClientRect().left >= 0;
+			const isFirstSlideVisible = swiper.activeIndex > 0;
 			const isLastSlideVisible =
 				lastSlide?.getBoundingClientRect().right <= window.innerWidth;
 
 			swiper.navigation?.prevEl.classList.toggle(
 				'invisible',
-				isFirstSlideVisible
+				!isFirstSlideVisible
 			);
 			swiper.navigation?.nextEl.classList.toggle(
 				'invisible',
