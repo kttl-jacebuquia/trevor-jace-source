@@ -240,7 +240,7 @@ features.collapsible($('.js-accordion'), {});
 	if (!inputSearchField.val()) {
 		inputSearchField.attr(
 			'size',
-			inputSearchField.attr('placeholder').length
+			inputSearchField.attr('placeholder')?.length
 		);
 	}
 

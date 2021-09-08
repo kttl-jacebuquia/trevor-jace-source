@@ -299,7 +299,7 @@
 	&--gathering,
 	&--collect-donations,
 	&--who-is-fundraising {
-		@apply flex flex-col justify-center items-center;
+		@apply container mx-auto flex flex-col justify-center items-center text-white;
 
 		.fundraiser-quiz__title {
 			@apply inline-block;
@@ -307,6 +307,14 @@
 
 		fieldset {
 			@apply self-start;
+
+      @screen md {
+        @apply self-center;
+      }
 		}
 	}
+
+  &--create-fundraiser {
+    @apply container mx-auto text-center text-white;
+  }
 }

@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import FloatingLabelInput from '../floating-label-input';
+import phoneFormat from '../contact-form';
 
 export default class FundraiserQuiz {
 	/**
@@ -130,9 +131,11 @@ export default class FundraiserQuiz {
 			// Add necessary selectors for FloatingLabelInput initialization
 			inputFields.forEach((inputField) => {
 				const options = {};
+				const input = inputField.querySelector('input');
 
 				inputField.classList.add('floating-label-input');
 
+				// Determine if field has to be activated by default
 				switch (inputField.id) {
 					case 'tfa_1885-D':
 					case 'tfa_1907-D':
@@ -140,6 +143,12 @@ export default class FundraiserQuiz {
 						options.activated = true;
 						break;
 				}
+
+				// Determine phone fields
+				if ( /phone/i.test(input?.title) ) {
+					phoneFormat($(input));
+				}
+
 
 				FloatingLabelInput.initializeWithElement(inputField, options);
 			});

@@ -1,4 +1,8 @@
 .fundraiser-quiz {
+  &--form {
+    @apply pb-0;
+  }
+
   .wFormContainer {
     @apply mx-0;
 
@@ -7,7 +11,7 @@
     }
 
     .wForm {
-      @apply mt-0 bg-transparent text-current;
+      @apply mt-0 bg-transparent text-current p-0;
 
       .section {
         @apply bg-transparent grid-cols-1;
@@ -158,6 +162,22 @@
       textarea {
         min-height: #{rem-calc(150)};
       }
+    }
+
+    .oneField {
+      &.errFld {
+        margin-bottom: #{rem-calc(37)};
+      }
+    }
+
+    .errMsg {
+      @apply font-semibold text-white text-px16 leading-px22 tracking-em001 relative top-px15;
+      height: 0;
+    }
+
+    & .wFormFooter,
+    & .supportInfo {
+      @apply hidden;
     }
   }
 
