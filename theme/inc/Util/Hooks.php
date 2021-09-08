@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT;
+use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
@@ -549,7 +550,7 @@ class Hooks {
 
 					# Pagination
 					$per_page = (int) A_Post_Type::get_option_for( $pt, A_Post_Type::FIELD_ARCHIVE_PP );
-					if ( $per_page ) {
+					if ( $per_page && empty( $query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
 						$updates[ 'post' === $pt ? 'posts_per_page' : 'posts_per_archive_page' ] = $per_page;
 					}
 
