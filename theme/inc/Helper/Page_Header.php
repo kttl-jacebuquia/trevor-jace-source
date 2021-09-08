@@ -224,10 +224,14 @@ class Page_Header {
 				<?php if ( 'video' === $options['media_type'] ) : ?>
 					<?php if ( ! empty( $options['video']['url'] ) ) : ?>
 						<div class="page-header-img-wrap overflow-hidden">
-							<video class="object-center object-cover w-full h-full" autoplay loop muted>
+							<video class="object-center object-cover w-full h-full" loop muted>
 								<source src="<?php echo esc_url( $options['video']['url'] ); ?>" type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
+							<button class="page-header__playback" aria-label="click to play background video" type="button">
+								<i class="trevor-ti-caret-down page-header__playback-icon play"></i>
+								<i class="page-header__playback-icon pause"></i>
+							</button>
 						</div>
 					<?php endif; ?>
 				<?php elseif ( 'image' === $options['media_type'] ) : ?>
