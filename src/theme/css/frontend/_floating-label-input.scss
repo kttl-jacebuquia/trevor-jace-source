@@ -1,0 +1,52 @@
+.floating-label-input {
+  --default-label-color: theme('colors.teal.dark');
+  --activated-label-color: theme('colors.white.DEFAULT');
+  @apply w-full relative;
+  @apply text-px18 leading-px26;
+
+  &[data-input-tag="select"] {
+    label {
+      @apply -translate-y-full items-end;
+    }
+  }
+
+  &[data-input-tag="textarea"],
+  &[data-input-tag="select"] {
+    label {
+      @apply h-auto items-end;
+    }
+  }
+
+  label {
+    @apply absolute top-0 left-0 w-full h-full transform-gpu transition-all origin-bottom-left text-left;
+    @apply px-px28 flex flex-wrap items-center pointer-events-none;
+    color: var(--default-label-color);
+  }
+
+  input,
+  select {
+    @apply w-full;
+
+    &::placeholder {
+      @apply text-transparent;
+    }
+  }
+
+  // Activated state
+  &--activated:not([data-input-type="checkbox"]) {
+    label {
+      @apply -translate-x-px20;
+      color: var(--activated-label-color);
+      --tw-translate-y: calc(-100% + 10px);
+      --tw-scale-x: calc(14/18);
+      --tw-scale-y: calc(14/18);
+    }
+
+    &[data-input-tag="textarea"],
+    &[data-input-tag="select"] {
+      label {
+        @apply -translate-y-full pb-px5;
+      }
+    }
+  }
+}

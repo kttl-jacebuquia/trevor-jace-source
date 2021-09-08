@@ -34,3 +34,4 @@ export ArticleRiver from './article-river';
 export DonationForm from './donate';
 export Staff from './staff';
 export NewsletterForm from './newsletter-form';
+export FloatingLabelInput from './floating-label-input';

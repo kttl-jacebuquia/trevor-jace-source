@@ -10,15 +10,33 @@
       @apply mt-0 bg-transparent text-current;
 
       .section {
-        @apply bg-transparent;
+        @apply bg-transparent grid-cols-1;
 
         @screen md {
           @apply grid items-end tw-grid-tablet;
         }
       }
 
+      .section {
+        @apply grid gap-y-px20 p-0 text-left border-0;
+
+        & + .section {
+          @apply mt-px30;
+        }
+
+        legend {
+          @apply p-0 col-span-full text-white;
+          div {
+            @apply text-current;
+          }
+        }
+      }
+
       .field-container-D {
+        --default-label-color: theme('colors.blue_green.DEFAULT');
+        --activated-label-color: theme('colors.white.DEFAULT');
         @apply flex flex-col text-left p-0 border-0 w-full;
+        color: var(--default-label-color);
 
         @screen md {
           @apply col-span-4;
@@ -29,26 +47,81 @@
         }
       }
 
+      .floating-label-input {
+        &[data-input-tag="textarea"] {
+          @apply mt-px45;
+
+          @screen md {
+            @apply col-span-full;
+          }
+
+          label {
+            @apply items-end py-px10;
+          }
+        }
+
+        &[data-input-type="checkbox"] {
+          label {
+            @apply static px-0 ml-px10 pointer-events-auto;
+          }
+        }
+
+        &--activated {
+          label {
+            width: 150%;
+            color: var(--activated-label-color);
+          }
+
+          &[data-input-tag="textarea"] {
+            label {
+              @screen md {
+                width: 135%;
+              }
+            }
+          }
+        }
+      }
+
+      .oneChoice {
+        @apply relative flex items-start mt-px10;
+
+        label {
+          @apply pl-px10;
+        }
+      }
+
       .label {
-        @apply font-manrope text-white text-px14 leading-px20 tracking-px05;
+        @apply font-manrope text-current text-px18 leading-px26 tracking-px05;
+        @apply flex items-center px-px28 font-medium max-w-none;
+        z-index: 1;
 
         &::after {
-          @apply text-current;
+          @apply text-current contents;
+        }
+
+        i {
+          @apply contents font-normal text-current;
+          font-size: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+          letter-spacing: inherit;
         }
 
         span {
-          font-size: inherit !important;
-          line-height: inherit !important;
-          color: inherit !important;
+          @apply contents;
         }
       }
 
       .inputWrapper.inputWrapper {
-        @apply mt-px10 w-full;
-        @apply font-manrope text-px18 leading-px26 text-blue_green;
+        @apply mt-0 w-full;
+        @apply font-manrope text-px18 leading-px26 text-current;
 
-        @screen md {
-          @apply mt-px20;
+        input {
+          @apply w-full;
+        }
+
+        textarea {
+          @apply px-px28 py-px20;
         }
 
         input[type="text"],
@@ -57,14 +130,11 @@
         select:not([multiple]),
         input[id^="tfa_"],
         input#tfa_1876 {
-          @apply h-px66 flex items-center justify-start border-0;
-          font-family: inherit !important;
-          font-size: inherit !important;
-          line-height: inherit !important;
-          color: inherit !important;
-          border-radius: 10px !important;
-          width: 100% !important;
-          padding: 0 #{rem-calc(28)} !important;
+          @apply h-px66 flex items-center justify-start border-0 rounded-px10 w-full px-px28;
+        }
+
+        input[type="checkbox"] {
+          @apply w-px30 h-px30 p-0;
         }
       }
 
@@ -84,6 +154,68 @@
           @apply col-span-3;
         }
       }
+
+      textarea {
+        min-height: #{rem-calc(150)};
+      }
     }
   }
+
+  /**
+    FIELD-SPECIFIC STYLES
+  */
+  .oneField {
+    label#tfa_1922-L {
+      @apply w-full;
+    }
+
+    &#tfa_1879-D {
+      @apply mt-px40;
+    }
+
+    &#tfa_1885-D {
+      @apply mt-px60;
+
+      @screen md {
+        @apply col-span-full;
+      }
+    }
+
+    &#tfa_1907-D {
+      @apply mt-px80;
+
+      @screen md {
+        @apply col-span-full mt-px50;
+      }
+    }
+
+    &#tfa_1922-D {
+      @screen md {
+        @apply col-span-full;
+      }
+    }
+
+    &#tfa_1932-D {
+      @apply mt-px100;
+
+      @screen md {
+        @apply col-span-full mt-px60;
+      }
+
+      label {
+        @screen md {
+          width: 135%;
+        }
+      }
+    }
+
+    &#tfa_1938-D {
+      @apply mt-px80;
+
+      @screen md {
+        @apply mt-px40;
+      }
+    }
+  }
+
 }

@@ -65,4 +65,18 @@
   &__error {
     @apply font-semibold text-px16 leading-px22 tracking-em001 mt-px14;
   }
+
+  .floating-label-input {
+    --activated-label-color: currentColor;
+
+    &--activated {
+      label {
+        --tw-translate-x: calc(#{rem-calc(-36)});
+      }
+    }
+
+    label {
+      @apply pl-px50;
+    }
+  }
 }

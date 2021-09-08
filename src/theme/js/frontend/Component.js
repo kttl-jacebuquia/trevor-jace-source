@@ -42,11 +42,15 @@ export default class Component extends WithState {
 				return;
 			}
 
-			this.initializeComponentWithElement(this, element);
+			this.initializeWithElement(element);
 		});
 	}
 
-	static initializeComponentWithElement(ComponentClass, element) {
+	static initializeWithElement(element, options) {
+		this.initializeComponentWithElement(this, element, options);
+	}
+
+	static initializeComponentWithElement(ComponentClass, element, options) {
 		// Add instances store to component class
 		if (!ComponentClass[instancesStore]) {
 			ComponentClass[instancesStore] = [];
@@ -55,7 +59,7 @@ export default class Component extends WithState {
 			ComponentClass.getInstances = () => ComponentClass[instancesStore];
 		}
 
-		const instance = new ComponentClass(element);
+		const instance = new ComponentClass(element, options);
 
 		// Add this instance into instances store
 		ComponentClass[instancesStore].push(instance);

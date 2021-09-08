@@ -72,7 +72,7 @@ export default class CampaignForm {
 		if ( validationRules ) {
 			const error = validateField(value, validationRules);
 			target.dataset.error = error || '';
-			target.nextElementSibling.textContent = error;
+			target.parentElement.nextElementSibling.textContent = error;
 		}
 
 		if ( name === 'sms_notif' ) {

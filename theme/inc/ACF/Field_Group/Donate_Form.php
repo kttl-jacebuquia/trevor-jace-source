@@ -124,8 +124,11 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 									<button type="button" aria-label="click to select 250 dollars" tabindex="0" for="<?php echo $uuid; ?>-amount-250">$250</button>
 								</div>
 								<div class="amount-custom">
-									<input name="custom" class="custom-amount" placeholder="$Custom amount" aria-hidden="true">
-									<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$ Custom amount">
+									<input name="custom" class="custom-amount" placeholder="$ Custom amount" aria-hidden="true">
+									<div class="floating-label-input">
+										<label for="currency-field-<?php echo $uuid; ?>">Custom amount</label>
+										<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$">
+									</div>
 								</div>
 							</div>
 

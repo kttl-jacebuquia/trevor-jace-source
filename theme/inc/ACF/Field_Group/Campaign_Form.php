@@ -72,43 +72,51 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 				<p class="text-px16 leading-px24 mb-px24 md:mb-px30 lg:text-px20 lg:leading-px26 hidden join-the-campaign-form__success">Thank you for your submission!</p>
 
 				<form class="join-the-campaign-form__form mx-auto w-full lg:max-w-px818" novalidate>
-					<div class="join-the-campaign-form__field-group md:flex md:grid md:grid-cols-2 md:gap-x-7 md:gap-y-5 md:mb-10 lg:gap-x-7 lg:gap-y-5 lg:mb-px60">
+					<div class="join-the-campaign-form__field-group md:flex md:grid md:grid-cols-2 md:gap-x-7 md:mb-10 lg:gap-x-7 lg:mb-px60">
 						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
-							<label for="fullname" class="sr-only">Full Name*</label>
-							<input
-								name="fullname"
-								required="required"
-								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
-								placeholder="Full Name*"/>
+							<div class="floating-label-input">
+								<label for="fullname">Full Name*</label>
+								<input
+									name="fullname"
+									required="required"
+									class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+									placeholder="Full Name*"/>
+							</div>
 							<div class="join-the-campaign-form__error"></div>
 						</div>
 						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
-							<label for="email" class="sr-only">Email*</label>
-							<input
-								name="email"
-								type="email"
-								required="required"
-								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
-								placeholder="Email*"/>
+							<div class="floating-label-input">
+								<label for="email">Email*</label>
+								<input
+									name="email"
+									type="email"
+									required="required"
+									class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+									placeholder="Email*"/>
+							</div>
 							<div class="join-the-campaign-form__error"></div>
 						</div>
 						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
-							<label for="mobilephone" class="sr-only">Mobile Phone</label>
-							<input
-								name="phone"
-								maxlength="16"
-								class="phone-number-format bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
-								placeholder="Mobile Phone"/>
+							<div class="floating-label-input">
+								<label for="mobilephone">Mobile Phone</label>
+								<input
+									name="phone"
+									maxlength="16"
+									class="phone-number-format bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+									placeholder="Mobile Phone"/>
+							</div>
 							<div class="join-the-campaign-form__error"></div>
 						</div>
 						<div class="join-the-campaign-form__field flex full-w relative mb-12 md:mb-0">
-							<label for="zipcode" class="sr-only">Zip Code*</label>
-							<input
-								name="zipcode"
-								maxlength="5"
-								required="required"
-								class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
-								placeholder="Zip Code*"/>
+							<div class="floating-label-input">
+								<label for="zipcode">Zip Code*</label>
+								<input
+									name="zipcode"
+									maxlength="5"
+									required="required"
+									class="bg-white text-px18 leading-px26 md:leading-px22 rounded-px10 text-teal-dark py-5 md:py-px23 lg:py-6 px-7 flex-1 placeholder-teal-dark lg:text-px20 lg:leading-px24 lg:py-6"
+									placeholder="Zip Code*"/>
+							</div>
 							<div class="join-the-campaign-form__error"></div>
 						</div>
 					</div>

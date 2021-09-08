@@ -1,15 +1,25 @@
 .join-the-campaign-form {
   &__field-group {
     @screen md {
-      @apply items-start;
+      @apply items-start gap-y-px36;
+    }
+
+    + * {
+      @apply mt-px48;
     }
   }
 
   &__field {
-    @apply flex-wrap;
+    @apply flex-wrap mb-0;
+
+    & + & {
+      @screen mobile {
+        @apply mt-px58;
+      }
+    }
   }
 
   &__error {
-    @apply w-full text-left;
+    @apply w-full text-left mt-px10;
   }
 }

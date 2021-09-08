@@ -1,7 +1,7 @@
 import $ from 'jquery';
+import FloatingLabelInput from '../floating-label-input';
 
 export default class FundraiserQuiz {
-
 	/**
 	 *
 	 * @param {object} options Fundraiser Options
@@ -10,12 +10,12 @@ export default class FundraiserQuiz {
 	 * initialVertex - Initial vertex to show when modal appears
 	 * single        - If true, hides pagination and back buttons
 	 */
-	constructor (options) {
-		this.selector = ".fundraiser-quiz";
+	constructor(options) {
+		this.selector = '.fundraiser-quiz';
 		this.parentContainer = $(`${this.selector}`);
 		this.backBtn = $(`${this.selector}__back-btn`);
 		this.choices = $(`${this.selector}__radio-btn`);
-		this.modalContainer = $("#js-fundraiser-quiz .modal-container");
+		this.modalContainer = $('#js-fundraiser-quiz .modal-container');
 		this.form = $(`form${this.selector}`);
 		this.paginationContainer = $(`${this.selector}__pagination`);
 		this.currentPageContainer = $(`${this.selector}__current-page`);
@@ -36,14 +36,24 @@ export default class FundraiserQuiz {
 			gathering: `${this.selector}--gathering`,
 		};
 
-		this.mainVerteces = ["donate", "streaming", "personal", "social"];
-		this.verteces = ["donate", "streaming", "personal", "social", "form", "create", "collect", "who", "gathering"];
+		this.mainVerteces = ['donate', 'streaming', 'personal', 'social'];
+		this.verteces = [
+			'donate',
+			'streaming',
+			'personal',
+			'social',
+			'form',
+			'create',
+			'collect',
+			'who',
+			'gathering',
+		];
 		this.graph = new Map();
 		this.prevVertexStack = [];
 		this.currentVertexStack = [];
 		this.answers = [];
 
-		this.classes = "visible static";
+		this.classes = 'visible static';
 
 		this.createGraph();
 
@@ -51,34 +61,40 @@ export default class FundraiserQuiz {
 		 * Initialize the radio button events
 		 */
 		if (this.choices.length) {
-			this.choices.on("click", e => {
+			this.choices.on('click', (e) => {
 				this.displayNextPage(e.target);
-			})
+			});
 		}
 
-		this.backBtn.on("click", () => {
+		this.backBtn.on('click', () => {
 			this.displayPreviousPage();
 		});
 
-		this.form.on("submit", e => {
+		this.form.on('submit', (e) => {
 			const [lastVertex] = this.currentVertexStack.slice(-1);
 
-			if (lastVertex !== "form") {
+			if (lastVertex !== 'form') {
 				e.preventDefault();
 			}
 		});
+
+		this.initDevInquiryForm();
 	}
 
-	show (options = {}) {
+	show(options = {}) {
 		// Default initial step
 		let $initialStepContent = $(`${this.selector}--step-one`);
 
 		this.changeContainerBackground(false);
 
 		// Override iniial step if supplied in options
-		if ( options.initialVertex ) {
-			const $content = $(document.querySelector(`[data-vertex="${options.initialVertex}"]:not(input)`));
-			if ( $content.length ) {
+		if (options.initialVertex) {
+			const $content = $(
+				document.querySelector(
+					`[data-vertex="${options.initialVertex}"]:not(input)`
+				)
+			);
+			if ($content.length) {
 				$initialStepContent.hide();
 				$initialStepContent = $content;
 			}
@@ -90,7 +106,7 @@ export default class FundraiserQuiz {
 		$initialStepContent.removeAttr('style');
 		$initialStepContent.removeClass('hidden');
 
-		this.choices.attr("checked", false);
+		this.choices.attr('checked', false);
 		this.backBtn.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
 		this.paginationContainer.hide();
@@ -99,10 +115,38 @@ export default class FundraiserQuiz {
 			$initialStepContent.fadeIn(500, () => {
 				$initialStepContent.addClass(this.classes);
 			});
-		}, 100);;
+		}, 100);
 	}
 
-	displayNextPage (btn) {
+	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
+	initDevInquiryForm() {
+		const embeddedForm = this.parentContainer
+			.find('.wFormContainer')
+			.get(0);
+
+		if (embeddedForm) {
+			const [...inputFields] = embeddedForm.querySelectorAll('.oneField');
+
+			// Add necessary selectors for FloatingLabelInput initialization
+			inputFields.forEach((inputField) => {
+				const options = {};
+
+				inputField.classList.add('floating-label-input');
+
+				switch (inputField.id) {
+					case 'tfa_1885-D':
+					case 'tfa_1907-D':
+					case 'tfa_1938-D':
+						options.activated = true;
+						break;
+				}
+
+				FloatingLabelInput.initializeWithElement(inputField, options);
+			});
+		}
+	}
+
+	displayNextPage(btn) {
 		const vertex = btn.dataset.vertex;
 		const [nextVertex] = this.graph.get(vertex);
 		this.answers.push(btn.value);
@@ -117,7 +161,10 @@ export default class FundraiserQuiz {
 		this.computeCurrentPageNumber();
 		this.paginationContainer.fadeIn();
 		// Get the new content
-		const $content = $(`[data-vertex="${nextVertex}"]:not(input)`, this.selector);
+		const $content = $(
+			`[data-vertex="${nextVertex}"]:not(input)`,
+			this.selector
+		);
 
 		if ($content.length) {
 			const $oldContent = $(this.containers[vertex], this.selector);
@@ -135,12 +182,12 @@ export default class FundraiserQuiz {
 		}
 	}
 
-	computeCurrentPageNumber () {
+	computeCurrentPageNumber() {
 		this.currentPage = 1 + this.currentVertexStack.length;
 		this.currentPageContainer.html(this.currentPage);
 	}
 
-	computeTotalPageNumber (vertex) {
+	computeTotalPageNumber(vertex) {
 		let nextVertex = this.graph.get(vertex);
 
 		while (nextVertex.length) {
@@ -158,11 +205,11 @@ export default class FundraiserQuiz {
 	 * Clears all the radio buttons of the next content
 	 * @param {jQuery object} $content
 	 */
-	handleNextContentRadioBtns ($content) {
+	handleNextContentRadioBtns($content) {
 		const $radioBtns = $(`${this.selector}__radio-btn`, $content);
 
 		if ($radioBtns.length) {
-			$radioBtns.attr("checked", false);
+			$radioBtns.attr('checked', false);
 		}
 	}
 
@@ -170,15 +217,15 @@ export default class FundraiserQuiz {
 	 * Only display the back button if not on the first content.
 	 * @param {string} vertex
 	 */
-	handleBackButtonDisplay (vertex) {
-		if (! this.mainVerteces.includes(vertex)) {
+	handleBackButtonDisplay(vertex) {
+		if (!this.mainVerteces.includes(vertex)) {
 			this.backBtn.fadeIn();
 		} else {
 			this.backBtn.fadeOut();
 		}
 	}
 
-	displayPreviousPage () {
+	displayPreviousPage() {
 		this.answers.pop();
 		let $previousContent = null;
 		let prevVertex = null;
@@ -195,45 +242,44 @@ export default class FundraiserQuiz {
 
 		if ($previousContent !== null && $previousContent.length) {
 			$(this.containers[latestVertex], this.selector).fadeOut(400, () => {
-				$(this.containers[latestVertex], this.selector).removeClass(this.classes);
+				$(this.containers[latestVertex], this.selector).removeClass(
+					this.classes
+				);
 				$previousContent.fadeIn();
 			});
 		}
 	}
 
-	changeContainerBackground (vertex) {
-		if (vertex === "form") {
-			this.modalContainer.addClass("dev-form");
+	changeContainerBackground(vertex) {
+		if (vertex === 'form') {
+			this.modalContainer.addClass('dev-form');
 		} else {
-			this.modalContainer.removeClass("dev-form");
+			this.modalContainer.removeClass('dev-form');
 		}
 	}
 
-	createGraph () {
-		this.verteces.forEach(vertex => {
+	createGraph() {
+		this.verteces.forEach((vertex) => {
 			this.addVertex(vertex);
 		});
 
-		this.addEdge("donate", "form");
-		this.addEdge("streaming", "create");
-		this.addEdge("personal", "collect");
-		this.addEdge("collect", "who");
-		this.addEdge("who", "create");
-		this.addEdge("social", "gathering");
-		this.addEdge("gathering", "collect");
-
+		this.addEdge('donate', 'form');
+		this.addEdge('streaming', 'create');
+		this.addEdge('personal', 'collect');
+		this.addEdge('collect', 'who');
+		this.addEdge('who', 'create');
+		this.addEdge('social', 'gathering');
+		this.addEdge('gathering', 'collect');
 	}
 
-	addVertex (v) {
+	addVertex(v) {
 		// set the adjacency list to an empty array.
 		this.graph.set(v, []);
 	}
 
-	addEdge (source, destination) {
+	addEdge(source, destination) {
 		if (this.graph.get(source).indexOf(destination) === -1) {
 			this.graph.get(source).push(destination);
 		}
 	}
-
 }
-

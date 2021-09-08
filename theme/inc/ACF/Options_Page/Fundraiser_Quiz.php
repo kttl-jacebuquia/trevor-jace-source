@@ -462,6 +462,14 @@ class Fundraiser_Quiz extends A_Options_Page {
 
 	protected static function form( array $data = array() ): string {
 		ob_start();
+
+		// Get FormAssembly form using shortcode
+		$form_assembly_form = do_shortcode( "[formassembly formid={$data['form_id']} server=\"{$data['server_url']}\"]" );
+
+		// Remove embedded styles
+		$pattern            = implode( '|', array( '<style[^>]*>[^<]*<\/style>', '<link[^>]*theme-51\.css[^>]*>', 'style="[^"]*"' ) );
+		$form_assembly_form = preg_replace( "/{$pattern}/", '', $form_assembly_form );
+
 		?>
 			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form">
 					<?php if ( ! empty( $data['title'] ) ) { ?>
@@ -472,7 +480,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 						<p class="fundraiser-quiz__description"><?php echo esc_html( $data['description'] ); ?></p>
 					<?php } ?>
 					<div class="fundraiser-quiz__fields">
-						<?php echo do_shortcode( "[formassembly formid={$data['form_id']} server=\"{$data['server_url']}\"]" ); ?>
+						<?php echo $form_assembly_form; ?>
 					</div>
 			</div>
 		<?php

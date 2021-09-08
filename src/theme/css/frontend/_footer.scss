@@ -83,17 +83,17 @@ footer {
 		}
 	}
 
-	fieldset {
+	fieldset.floating-label-input {
 		@apply flex flex-col mb-7;
 
 		@screen md {
-			@apply mb-0 flex-auto;
+			@apply mb-0 flex-auto w-auto;
 			margin-left: 0 !important;
 		}
 	}
 
 	legend {
-		@apply text-px16 leading-px20 mb-5 uppercase;
+		@apply text-px16 leading-px20 mb-px50 uppercase;
 
 		@screen md {
 			flex-basis: 100%;
@@ -101,7 +101,7 @@ footer {
 	}
 
 	input[type] {
-		@apply py-5 px-7 rounded-px10 placeholder-teal-dark text-teal-dark;
+		@apply py-5 px-7 rounded-px10 text-teal-dark;
 		@apply flex-grow;
 	}
 
