@@ -4,6 +4,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_IMAGE       = 'image';
+	const FIELD_BUTTON      = 'button';
 
 	/**
 	 * @inheritDoc
@@ -12,6 +13,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		$title       = static::gen_field_key( static::FIELD_TITLE );
 		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$image       = static::gen_field_key( static::FIELD_IMAGE );
+		$button      = static::gen_field_key( static::FIELD_BUTTON );
 
 		return array(
 			'title'  => 'Static Image with Copy',
@@ -44,6 +46,16 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 				),
+				static::FIELD_BUTTON => Button::clone(
+					array(
+						'key'               => $button,
+						'name'              => static::FIELD_BUTTON,
+						'label'             => 'Button',
+						'return_format'     => 'array',
+						'display'           => 'group',
+						'layout'            => 'block',
+					)
+				),
 			),
 		);
 	}
@@ -69,6 +81,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		$title       = static::get_val( static::FIELD_TITLE );
 		$description = static::get_val( static::FIELD_DESCRIPTION );
 		$image       = static::get_val( static::FIELD_IMAGE );
+		$button      = static::get_val( static::FIELD_BUTTON );
 
 		ob_start();
 		?>
