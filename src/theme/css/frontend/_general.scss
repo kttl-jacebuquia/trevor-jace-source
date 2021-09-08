@@ -61,10 +61,10 @@
 		appearance: none;
 	}
 
-	&[placeholder]::before {
-		content: attr(placeholder);
-		@apply text-violet;
-	}
+	// &[placeholder]::before {
+	// 	content: attr(placeholder);
+	// 	@apply text-violet;
+	// }
 
 	&[placeholder]:not(:empty)::before {
 		content: "";
@@ -86,7 +86,7 @@
 	  }
 
 	  .icon-search-cancel {
-		@apply flex cursor-pointer;
+		  @apply flex cursor-pointer h-full;
 	  }
 	}
   }

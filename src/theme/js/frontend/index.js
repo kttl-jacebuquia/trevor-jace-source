@@ -227,18 +227,26 @@ features.collapsible($('.js-accordion'), {});
  * @todo: move under is-rc
  */
 (() => {
-	const terms = $("input[name='rc-search--keys']")
-		.val()
-		?.split(',')
-		.slice(0, -1) || [];
+	const terms =
+		$("input[name='rc-search--keys']")
+			.val()
+			?.trim()
+			.split(',')
+			.slice(0, -1) || [];
 	const searchCancelIcon = $('.icon-search-cancel');
 	const maxInputSize = 35;
 	const form = $('.search-form');
-	const hiddenInputField = $("input[name='s']", form);
 
-	if (hiddenInputField.val()) {
+	if (!inputSearchField.val()) {
+		inputSearchField.attr(
+			'size',
+			inputSearchField.attr('placeholder').length
+		);
+	}
+
+	if (inputSearchField.val()) {
 		inputSearchField.parent().addClass('input-has-value');
-		inputSearchField.html(hiddenInputField.val());
+		inputSearchField.attr('size', inputSearchField.val().length);
 	}
 
 	inputSearchField
@@ -263,10 +271,10 @@ features.collapsible($('.js-accordion'), {});
 			select(event, ui) {
 				$(this).addClass('has-value');
 				$(this).parent().addClass('input-has-value');
-				hiddenInputField.val(ui.item.value);
+				inputSearchField.val(ui.item.value.trim());
+				inputSearchField.attr('size', ui.item.value.trim().length);
 				moveCursorToEnd($(this)[0]);
 			},
-			autoFocus: true,
 		})
 		/**
 		 * Immediately open the jQuery autocomplete
@@ -277,13 +285,13 @@ features.collapsible($('.js-accordion'), {});
 			$(this).autocomplete('search', $(this).val());
 		})
 		.on('keyup', function (event) {
-			const inputText = $(this).html();
+			const inputText = $(this).val().trim();
 			if (!inputText) {
 				$(this).parent().removeClass('input-has-value');
-				hiddenInputField.val('');
+				$(this).attr('size', $(this).attr('placeholder').length);
 			} else {
 				$(this).parent().addClass('input-has-value');
-				hiddenInputField.val(inputText);
+				$(this).attr('size', $(this).val().length);
 			}
 		})
 		.on('keypress', function (event) {
@@ -298,8 +306,12 @@ features.collapsible($('.js-accordion'), {});
 		});
 
 	searchCancelIcon.on('click', function (e) {
-		inputSearchField.html('');
+		inputSearchField.val('');
 		inputSearchField.parent().removeClass('input-has-value');
+		inputSearchField.attr(
+			'size',
+			inputSearchField.attr('placeholder').length
+		);
 		inputSearchField.focus();
 	});
 
