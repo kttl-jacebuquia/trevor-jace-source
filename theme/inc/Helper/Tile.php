@@ -261,20 +261,26 @@ class Tile {
 	 * @return string
 	 */
 	public static function staff( \WP_Post $post, int $key, array $options = array() ) :string {
-		$_class             = array( 'tile-staff', 'relative', 'shadow-darkGreen', 'overflow-hidden' );
-		$post               = get_post( $post );
-		$name               = get_the_title( $post );
-		$val                = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
-		$pronoun            = $val->get( Field_Group\Team_Member::FIELD_PRONOUN );
-		$group_terms        = get_the_terms( $post, CPT\Team::TAXONOMY_GROUP );
-		$group              = array_pop( $group_terms )->name;
-		$thumbnail_variants = array(
-			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
+		$_class                   = array( 'tile-staff', 'relative', 'shadow-darkGreen', 'overflow-hidden' );
+		$post                     = get_post( $post );
+		$name                     = get_the_title( $post );
+		$val                      = new Field_Val_Getter( Field_Group\Team_Member::class, $post );
+		$pronoun                  = $val->get( Field_Group\Team_Member::FIELD_PRONOUN );
+		$group_terms              = get_the_terms( $post, CPT\Team::TAXONOMY_GROUP );
+		$group                    = array_pop( $group_terms )->name;
+		$thumbnail_variants       = array(
 			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
 			self::_get_thumb_var( Thumbnail::TYPE_SQUARE ),
+			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
+		);
+		$modal_thumbnail_variants = array(
+			self::_get_thumb_var( Thumbnail::TYPE_SQUARE ),
+			self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ),
+			self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL ),
 		);
 
 		$thumbnail                = Thumbnail::post( $post, ...$thumbnail_variants );
+		$modal_thumbnail          = Thumbnail::post( $post, ...$modal_thumbnail_variants );
 		$is_placeholder_thumbnail = false;
 
 		$options = array_merge(
@@ -298,6 +304,12 @@ class Tile {
 			$_class[] = 'with-thumbnail';
 		}
 
+		if ( empty( $modal_thumbnail ) ) {
+			$placeholder_img_id       = $options['placeholder_image'];
+			$modal_thumbnail          = wp_get_attachment_image( $placeholder_img_id );
+			$is_placeholder_thumbnail = true;
+		}
+
 		// Merge all HTML classes
 		$_class = array_merge( $_class, $options['class'] );
 
@@ -311,10 +323,16 @@ class Tile {
 		$id = \uniqid( 'team-member-' );
 		add_action(
 			'wp_footer',
-			function () use ( $id, $post, $thumbnail, $is_placeholder_thumbnail ) {
+			function () use ( $id, $post, $modal_thumbnail, $is_placeholder_thumbnail ) {
 
 				echo ( new \TrevorWP\Theme\Helper\Modal(
-					CPT\Team::render_modal( $post, compact( 'thumbnail', 'is_placeholder_thumbnail', ) ),
+					CPT\Team::render_modal(
+						$post,
+						array(
+							'thumbnail'                => $modal_thumbnail,
+							'is_placeholder_thumbnail' => $is_placeholder_thumbnail,
+						)
+					),
 					array(
 						'target' => "#{$id} a",
 						'id'     => "{$id}-content",

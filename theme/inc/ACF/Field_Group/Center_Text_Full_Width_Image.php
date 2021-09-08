@@ -46,14 +46,14 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 				),
-				static::FIELD_BUTTON => Button::clone(
+				static::FIELD_BUTTON      => Button::clone(
 					array(
-						'key'               => $button,
-						'name'              => static::FIELD_BUTTON,
-						'label'             => 'Button',
-						'return_format'     => 'array',
-						'display'           => 'group',
-						'layout'            => 'block',
+						'key'           => $button,
+						'name'          => static::FIELD_BUTTON,
+						'label'         => 'Button',
+						'return_format' => 'array',
+						'display'       => 'group',
+						'layout'        => 'block',
 					)
 				),
 			),

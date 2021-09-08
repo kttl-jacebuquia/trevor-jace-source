@@ -25,7 +25,7 @@ class Custom_Heading extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Custom Heading',
 			'fields' => array(
-				static::FIELD_LEVEL        => array(
+				static::FIELD_LEVEL       => array(
 					'key'           => $level,
 					'name'          => static::FIELD_LEVEL,
 					'type'          => 'button_group',
@@ -47,19 +47,19 @@ class Custom_Heading extends A_Field_Group implements I_Block, I_Renderable {
 					'ui'            => 1,
 				),
 				static::FIELD_DESCRIPTION => array(
-					'key'   => $description,
-					'name'  => static::FIELD_DESCRIPTION,
-					'label' => 'Sidebar Description',
-					'type'  => 'textarea',
+					'key'               => $description,
+					'name'              => static::FIELD_DESCRIPTION,
+					'label'             => 'Sidebar Description',
+					'type'              => 'textarea',
 					'conditional_logic' => array(
 						array(
 							array(
-								'field' => $is_anchored,
+								'field'    => $is_anchored,
 								'operator' => '==',
-								'value' => 1,
-							)
-						)
-					)
+								'value'    => 1,
+							),
+						),
+					),
 				),
 			),
 		);

@@ -52,7 +52,7 @@ class Page_Sidebar extends A_Basic_Section implements I_Renderable {
 		$args = array_merge(
 			parent::prepare_register_args(),
 			array(
-				'title'    => 'Page Sidebar',
+				'title' => 'Page Sidebar',
 				/**
 				 * Temporarily removing from Info Page in favor of Article Highlights sidebar logic
 				 * This block should be removed altogether once Page Sidebar is no longer needed.

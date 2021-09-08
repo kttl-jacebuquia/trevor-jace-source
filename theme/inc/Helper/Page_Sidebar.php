@@ -20,7 +20,7 @@ class Page_Sidebar {
 		ob_start();
 		?>
 			<aside class="quick-links">
-				<?php if ( ! empty( $quick_links_header ) ): ?>
+				<?php if ( ! empty( $quick_links_header ) ) : ?>
 					<p class="quick-links__heading"><?php echo esc_html( $quick_links_header ); ?></p>
 				<?php endif; ?>
 				<?php if ( ! empty( $headings ) ) : ?>
