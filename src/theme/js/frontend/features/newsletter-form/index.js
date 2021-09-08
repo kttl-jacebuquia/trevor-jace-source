@@ -1,3 +1,4 @@
+import { pushFormData } from '../gtm';
 import Component from 'theme/js/frontend/Component';
 
 const NEWSLETTER_AJAX_ENDPOINT = '/wp-admin/admin-ajax.php?action=mailchimp';
@@ -28,6 +29,8 @@ export default class NewsletterForm extends Component {
 		submitting: false,
 	};
 
+	formGTMName = 'newsletter signup';
+
 	// Will be called upon component instantiation
 	afterInit() {
 		this.element.addEventListener('submit', this.onSubmit.bind(this));
@@ -47,6 +50,8 @@ export default class NewsletterForm extends Component {
 		// Should not send if email input is empty
 		if (!this.state.email) {
 			this.showError();
+			pushFormData(this.formGTMName, false);
+
 			return;
 		}
 
@@ -70,6 +75,7 @@ export default class NewsletterForm extends Component {
 
 		// Check if we get a success response
 		const { title, status } = await response.json();
+		let isSubmitSuccess = false;
 
 		// Error response gives out a title
 		if (title) {
@@ -81,7 +87,11 @@ export default class NewsletterForm extends Component {
 			this.setState({
 				message: 'Thank you for your submission!',
 			});
+
+			isSubmitSuccess = true;
 		}
+
+		pushFormData(this.formGTMName, isSubmitSuccess);
 
 		// Apply post-send states
 		this.setState({

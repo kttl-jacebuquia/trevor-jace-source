@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Component from '../../Component';
+import { pushFormData } from '../gtm';
 
 const _donateTargetURL = 'https://give.thetrevorproject.org/give/63307#!/donation/checkout';
 
@@ -25,6 +26,7 @@ export default class DonationForm extends Component {
 			"input[data-type='currency']"
 		);
 		this._error = this.$element.find('.donation-form__error');
+		this.formGTMName = 'donation form';
 	}
 
 	// Will be called upon component instantiation
@@ -87,6 +89,8 @@ export default class DonationForm extends Component {
 
 			// Don't send if there's an error
 			if (hasError) {
+				pushFormData(this.formGTMName, false);
+
 				return false;
 			}
 
@@ -100,6 +104,8 @@ export default class DonationForm extends Component {
 				.reduce((all, entry) => all.concat(entry.join('=')), [])
 				.join('&');
 			const url = [_donateTargetURL, paramsString].join('?');
+
+			pushFormData(this.formGTMName, true);
 
 			// Redirect to Trevor's Classy form
 			window.open(url, '_blank');

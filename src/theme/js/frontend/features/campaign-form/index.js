@@ -1,3 +1,5 @@
+import { pushFormData } from '../gtm';
+
 const ENDPOINT = '/wp-admin/admin-ajax.php?action=phone2action';
 
 const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i;
@@ -43,6 +45,7 @@ export default class CampaignForm {
 		phone: [ 'phone' ], // dynamically adds required if sms_notif is on
 		zipcode: [ 'required', 'number' ],
 	};
+	formGTMName = 'join the campaign';
 
 	constructor(element) {
 		this.element = element;
@@ -102,6 +105,8 @@ export default class CampaignForm {
 		}).some(element => element.dataset.error);
 
 		if ( hasError ) {
+			pushFormData(this.formGTMName, false);
+
 			return;
 		}
 
@@ -137,8 +142,12 @@ export default class CampaignForm {
 			this.formSuccess.classList.remove('hidden');
 			this.form.reset();
 
+			pushFormData(this.formGTMName, true);
+
 			console.log({ json });
 		} catch (err) {
+			pushFormData(this.formGTMName, false);
+
 			console.warn(err);
 		}
 	}
