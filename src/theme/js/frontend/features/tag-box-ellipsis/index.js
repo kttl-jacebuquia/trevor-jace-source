@@ -57,18 +57,11 @@ class TagBoxEllipsis extends WithState {
 	calc() {
 		this.resetTagBoxDisplay();
 
-		const showEllipsis = this.$boxes.length > 2;
-
-		if (showEllipsis) {
-			this.$ellipsis.show();
-		} else {
-			this.$ellipsis.hide();
-		}
-
 		// Set the area limit around 80% of the tags-box width,
 		// to hide other tags.
 		const tagBoxAreaLimit = this.$box.width() * 0.8;
 		let totalTagsWidth = 0;
+		let hiddenTagsCtr = 0;
 
 		for (let i = 0; i < this.$boxes.length; i++) {
 			const box = this.$boxes.get(i);
@@ -78,10 +71,18 @@ class TagBoxEllipsis extends WithState {
 
 			if (!this.state.expanded && (i > 1 || totalTagsWidth > tagBoxAreaLimit)) {
 				box.setAttribute('hidden', '');
+
+				hiddenTagsCtr++;
 			}
 			else {
 				box.removeAttribute('hidden');
 			}
+		}
+
+		if (this.state.expanded || hiddenTagsCtr > 0) {
+			this.$ellipsis.show();
+		} else {
+			this.$ellipsis.hide();
 		}
 	}
 
