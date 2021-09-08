@@ -270,8 +270,12 @@
       @apply col-span-6 col-start-2 text-px16 leading-px26;
     }
 
+    @screen lg {
+      @apply leading-px32;
+    }
+
     @screen xl {
-      @apply col-span-full col-start-1 text-px18 leading-px26;
+      @apply col-span-full col-start-1 text-px18 leading-px32;
     }
 
     // Show only first 30 items
