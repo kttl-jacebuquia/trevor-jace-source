@@ -322,7 +322,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	&-close {
-		@apply text-indigo;
+		@apply text-indigo bg-transparent;
 	}
 }
 
@@ -455,7 +455,6 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply flex fixed right-0 py-px55 overflow-x-hidden;
 	@apply transform-gpu translate-x-full;
 	@apply transition-all duration-300 ease-out;
-	@apply bg-white text-indigo;
 	@apply invisible opacity-0;
 	top: rem-calc(133px); // Just below the switcher
 	height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
@@ -636,6 +635,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply absolute left-0 w-full opacity-0 invisible overflow-auto;
 			@apply transform-gpu translate-x-full;
 			@apply transition-all duration-300 ease-out;
+      @apply bg-white text-indigo;
 			@apply px-px34;
 			top: rem-calc(128px);
 			height: calc(100% - #{rem-calc(128px)});
@@ -953,9 +953,13 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
   }
 }
 
-.top-nav-inner {
+.top-nav-inner.top-nav-inner {
 	@apply static flex flex-row items-center justify-between h-full;
 	@apply mx-auto;
+
+  @screen md {
+    @apply px-0;
+  }
 
 	@screen lg2 {
 		@apply pb-0 pt-px32 items-start;
@@ -979,6 +983,19 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		right: -0.25rem;
 	}
 
+
+  .site-logo {
+    width: #{rem-calc(154)};
+
+    @screen md {
+      width: #{rem-calc(183)};
+    }
+
+    @screen xl {
+      width: #{rem-calc(242)};
+    }
+  }
+
 	// Opener
 	.opener-wrap {
 		@apply flex items-center z-1;
@@ -1001,7 +1018,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply hidden;
 
 		@screen lg2 {
-			@apply block w-px45 h-px45 text-px28 ml-px38 -mt-px10 text-white;
+			@apply block w-px45 h-px45 text-px28 ml-px38 -mt-px10 text-current;
 		}
 	}
 

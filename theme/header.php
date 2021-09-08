@@ -29,6 +29,9 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_BOTTOM' ); ?>
 </head>
 <body <?php body_class( 'on-top' ); ?>>
+
+<?php echo Main_Header::render_logo_sprite(); ?>
+
 <?php $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type(); ?>
 <?php if ( ! empty( $gradient_type ) ) { ?>
 	<div id="bg-wrap">
@@ -114,7 +117,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<div class="top-nav-inner container <?php echo $nav_color; ?>">
 		<div class="logo-wrap">
 			<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
-				<i class="logo-text trevor-ti-logo-text"></i>
+				<?php echo Main_Header::render_logo(); ?>
 			</a>
 		</div>
 
@@ -122,7 +125,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			<button type="button" class="opener"><i class="trevor-ti-hamburger-menu"></i></button>
 		</div>
 
-		<div class="menu-wrap flex items-start">
+		<div class="menu-wrap flex items-start <?php echo $nav_color; ?>">
 			<div class="back-to-tier1-wrap">
 				<button type="button" class="back-to-tier1">BACK</button>
 			</div>

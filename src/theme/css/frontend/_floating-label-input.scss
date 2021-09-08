@@ -23,8 +23,8 @@
     color: var(--default-label-color);
   }
 
-  input,
-  select {
+  & input,
+  & select {
     @apply w-full;
 
     &::placeholder {

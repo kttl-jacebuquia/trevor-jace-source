@@ -1,5 +1,6 @@
 <?php wp_footer();
 
+use \TrevorWP\Theme\Helper\Main_Header;
 use \TrevorWP\Theme\ACF\Options_Page;
 
 $data                   = Options_Page\Footer::get_footer();
@@ -12,7 +13,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 		<div class="col">
 			<div class="logo-wrap">
 				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
-					<i class="logo-text trevor-ti-logo-text"></i>
+					<?php echo Main_Header::render_logo( array( 'footer__logo' ) ); ?>
 				</a>
 			</div>
 

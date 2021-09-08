@@ -14,28 +14,29 @@
   }
 
   .floating-crisis-btn {
-	@apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
-	@apply text-white font-bold text-px20 leading-px20 tracking-em001;
-	@apply whitespace-nowrap inline;
+    @apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
+    @apply text-white font-bold text-px20 leading-px20 tracking-em001;
+    @apply whitespace-nowrap inline;
+    -webkit-font-smoothing: auto;
   }
 
   .is-not-scrolling & {
-	@apply -translate-y-1/2;
+    @apply -translate-y-1/2;
   }
 
   @screen md {
-	@apply right-10 left-auto transform-none;
+    @apply right-10 left-auto transform-none;
 
-	.floating-crisis-btn {
-	  @apply text-px20 leading-px20 tracking-px05;
-    // lg2
-    @apply lg2:transition-all duration-300 lg2:hover:bg-orange-light lg2:hover:border-orange-light;
-	}
+    .floating-crisis-btn {
+      @apply text-px20 leading-px20 tracking-px05;
+      // lg2
+      @apply lg2:transition-all duration-300 lg2:hover:bg-orange-light lg2:hover:border-orange-light;
+    }
   }
 
   .scroll-near-bottom & {
-	@apply absolute;
-	@apply translate-y-0;
-	bottom: unset;
+    @apply absolute;
+    @apply translate-y-0;
+    bottom: unset;
   }
 }
