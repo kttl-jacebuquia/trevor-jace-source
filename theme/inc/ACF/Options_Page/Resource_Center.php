@@ -314,9 +314,7 @@ class Resource_Center extends A_Options_Page {
 					'title'        => '<a href="' . get_term_link( $cat ) . '">' . esc_html( $cat->name ) . '</a>',
 					'subtitle'     => $cat->description,
 					'class'        => 'text-white',
-					'card_options' => array(
-						'hide_cat_eyebrow' => true,
-					),
+					'card_options' => array(),
 				)
 			);
 
