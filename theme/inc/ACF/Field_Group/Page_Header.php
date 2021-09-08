@@ -14,10 +14,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_BG_CLR            = 'bg_clr';
 	const FIELD_TEXT_CLR          = 'text_clr';
 	const FIELD_IMAGE_ENTRIES     = 'image_entries';
-	const FIELD_IMAGE_ENTRY_IMAGE = 'image_entry_image';
 	const FIELD_VIDEO             = 'video';
 	const FIELD_MEDIA_TYPE        = 'media_type';
-	const FIELD_MEMBERS_COUNT     = 'members_count';
+	const FIELD_THRESHOLD_NUMBER  = 'threshold_number';
+	const FIELD_THRESHOLD_MESSAGE = 'threshold_message';
 	const FIELD_BOTTOM_TEXT       = 'bottom_text';
 	const FIELD_CONTENT_ALIGNMENT = 'content_alignment';
 	const FIELD_CALL_NUMBER       = 'call_number';
@@ -33,10 +33,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$text_clr          = static::gen_field_key( static::FIELD_TEXT_CLR );
 		$bg_clr            = static::gen_field_key( static::FIELD_BG_CLR );
 		$image_entries     = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
-		$image_entry_image = static::gen_field_key( static::FIELD_IMAGE_ENTRY_IMAGE );
 		$video             = static::gen_field_key( static::FIELD_VIDEO );
 		$media_type        = static::gen_field_key( static::FIELD_MEDIA_TYPE );
-		$members_count     = static::gen_field_key( static::FIELD_MEMBERS_COUNT );
+		$threshold_number  = static::gen_field_key( static::FIELD_THRESHOLD_NUMBER );
+		$threshold_message = static::gen_field_key( static::FIELD_THRESHOLD_MESSAGE );
 		$bottom_text       = static::gen_field_key( static::FIELD_BOTTOM_TEXT );
 		$content_alignment = static::gen_field_key( static::FIELD_CONTENT_ALIGNMENT );
 		$call_number       = static::gen_field_key( static::FIELD_CALL_NUMBER );
@@ -113,12 +113,13 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			),
 			array(
-				static::FIELD_MEMBERS_COUNT => array(
-					'key'               => $members_count,
-					'name'              => static::FIELD_MEMBERS_COUNT,
-					'label'             => 'Members Count',
+				static::FIELD_THRESHOLD_NUMBER  => array(
+					'key'               => $threshold_number,
+					'name'              => static::FIELD_THRESHOLD_NUMBER,
+					'label'             => 'Threshold Number',
 					'type'              => 'number',
 					'required'          => 1,
+					'default_value'     => '30',
 					'min'               => 0,
 					'step'              => 1,
 					'conditional_logic' => array(
@@ -131,7 +132,24 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						),
 					),
 				),
-				static::FIELD_BOTTOM_TEXT   => array(
+				static::FIELD_THRESHOLD_MESSAGE => array(
+					'key'               => $threshold_message,
+					'name'              => static::FIELD_THRESHOLD_MESSAGE,
+					'label'             => 'Threshold Message',
+					'type'              => 'text',
+					'required'          => 1,
+					'default_value'     => 'Join to our 100,000 members',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'support_trevorspace',
+							),
+						),
+					),
+				),
+				static::FIELD_BOTTOM_TEXT       => array(
 					'key'               => $bottom_text,
 					'name'              => static::FIELD_BOTTOM_TEXT,
 					'label'             => 'Members Login Text',
@@ -660,11 +678,15 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		# Support TrevorSpace
 		if ( 'support_trevorspace' === $type ) {
-			$members_count = $val->get( static::FIELD_MEMBERS_COUNT );
-			$bottom_text   = $val->get( static::FIELD_BOTTOM_TEXT );
+			$user_count        = get_option( \TrevorWP\Main::OPTION_KEY_TREVORSPACE_ACTIVE_COUNT, 0 );
+			$threshold_number  = $val->get( static::FIELD_THRESHOLD_NUMBER );
+			$threshold_message = $val->get( static::FIELD_THRESHOLD_MESSAGE );
+			$bottom_text       = $val->get( static::FIELD_BOTTOM_TEXT );
+
+			$members_count = $user_count > $threshold_number ? sprintf( '%d members currently online', $user_count ) : $threshold_message;
 
 			if ( ! empty( $members_count ) ) {
-				$args['title_top'] = $members_count . ' members currently online';
+				$args['title_top'] = $members_count;
 			}
 
 			if ( ! empty( $bottom_text ) ) {

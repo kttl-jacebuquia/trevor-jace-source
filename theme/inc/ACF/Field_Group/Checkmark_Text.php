@@ -130,8 +130,9 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 							'key'               => $card_entry_info_link,
 							'name'              => static::FIELD_CARD_ENTRY_INFO_LINK,
 							'label'             => 'Link',
-							'type'              => 'link',
-							'return_format'     => 'array',
+							'type'              => 'group',
+							'layout'            => 'block',
+							'sub_fields'        => Advanced_Link::_get_fields(),
 							'conditional_logic' => array(
 								array(
 									array(
@@ -247,8 +248,16 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 
 								<div class="checkmark-text__info">
 								<?php if ( 'link' === $entry[ static::FIELD_CARD_ENTRY_INFO_TYPE ] ) : ?>
-									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ]['url'] ) ) : ?>
-										<a class="checkmark-text__info-link" href="<?php echo esc_url( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ]['target'] ); ?>"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ]['title'] ); ?></a>
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ] ) ) : ?>
+										<?php
+											echo Advanced_Link::render(
+												null,
+												$entry[ static::FIELD_CARD_ENTRY_INFO_LINK ],
+												array(
+													'class' => array( 'checkmark-text__info-link' ),
+												)
+											);
+										?>
 									<?php endif; ?>
 								<?php endif; ?>
 

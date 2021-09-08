@@ -75,4 +75,18 @@
 			@apply hidden;
 		}
 	}
+
+  &__cta-wrap {
+    @apply text-center mt-px40 col-span-full;
+
+    @screen xl {
+      @apply mt-px50;
+    }
+  }
+
+  &__cta {
+    @screen xl {
+      @apply h-px60;
+    }
+  }
 }

@@ -49,11 +49,13 @@ features.stickyAnchor();
 features.showAllTiles($showAllTilesBtn);
 
 if ($fundraiserQuizButton.length) {
+	const fundraiserQuiz = new features.FundraiserQuiz();
+
 	$fundraiserQuizButton.on('click', (e) => {
 		const initialVertex = e.currentTarget.dataset.fundraiseVertex;
 		const single = e.currentTarget.dataset.fundraiseSingle === 'true';
 
-		new features.FundraiserQuiz({
+		fundraiserQuiz.show({
 			initialVertex,
 			single,
 		});
