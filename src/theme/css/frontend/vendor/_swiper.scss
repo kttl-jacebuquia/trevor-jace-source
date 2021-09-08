@@ -1,4 +1,5 @@
 @import "~swiper/swiper";
+@import "~swiper/components/a11y/a11y";
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -122,6 +123,18 @@
 
   @screen xl {
 	@apply hidden;
+
+  }
+
+  .recent-highlights & {
+    @screen xl {
+      @apply flex;
+      margin-left: calc( ( ( 100vw - 100% ) / 2 ) - theme('container.padding.DEFAULT') );
+    }
+
+    @screen 2xl {
+      margin-left: calc( ( ( 100vw - 100% ) / 2 ) - ( theme('container.padding.lg2') + theme('container.padding.xl') ) );
+    }
   }
 
  	.carousel-full-width-wrap & {

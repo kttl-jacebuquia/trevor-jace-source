@@ -35,6 +35,7 @@ export function carousel($element, option = {}) {
 			clickable: true,
 			bulletElement: 'button',
 		},
+		a11y: true,
 		...option,
 	});
 

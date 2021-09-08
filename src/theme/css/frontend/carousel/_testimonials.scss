@@ -121,7 +121,7 @@
       }
 
       &-bullet {
-        @apply bg-current bg-opacity-20 opacity-100;
+        @apply bg-current bg-opacity-20;
         @apply z-2;
 
         &-active {
