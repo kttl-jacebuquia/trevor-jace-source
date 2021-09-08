@@ -29,8 +29,6 @@ class Article_River extends A_Field_Group implements I_Block, I_Renderable {
 					'taxonomy'      => 'category',
 					'field_type'    => 'select',
 					'add_term'      => 0,
-					'save_terms'    => 1,
-					'load_terms'    => 1,
 					'return_format' => 'id',
 					'multiple'      => 0,
 					'allow_null'    => 1,
@@ -426,7 +424,7 @@ class Article_River extends A_Field_Group implements I_Block, I_Renderable {
 
 		// Add category arg if no category filter
 		if ( ! empty( $options['category'] ) ) {
-			$query_args['category'] = (int) $options['category'];
+			$query_args['cat'] = (int) $options['category'];
 		}
 
 		// Add search query
