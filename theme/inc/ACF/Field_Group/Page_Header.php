@@ -497,6 +497,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'operator' => '!=',
 							'value'    => 'support_crisis_services',
 						),
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'multi_image_text',
+						),
 					);
 					break;
 				case 'title_attr':
