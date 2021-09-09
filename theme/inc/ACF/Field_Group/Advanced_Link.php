@@ -344,6 +344,8 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 			$options,
 		);
 
+		$has_url = true;
+
 		$label = $val->get( static::FIELD_LABEL );
 
 		# Links
@@ -366,6 +368,10 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						);
 					}
 				}
+
+				if ( empty( $link['url'] ) ) {
+					$has_url = false;
+				}
 				break;
 			case 'page_link':
 				$page_link = $val->get( static::FIELD_PAGE_LINK );
@@ -374,11 +380,13 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						DOM_Attr::FIELD_ATTR_KEY => 'href',
 						DOM_Attr::FIELD_ATTR_VAL => $page_link,
 					);
+				} else {
+					$has_url = false;
 				}
 				break;
 			case 'file_download':
 				$file = $val->get( static::FIELD_FILE );
-				if ( ! empty( $file ) ) {
+				if ( ! empty( $file['url'] ) ) {
 					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ] = array_merge(
 						$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ],
 						array(
@@ -400,6 +408,8 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 							),
 						)
 					);
+				} else {
+					$has_url = false;
 				}
 				$options['show_download_icon'] = $val->get( static::FIELD_SHOW_DOWNLOAD_ICON );
 				break;
@@ -521,7 +531,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 		ob_start();
 		?>
-		<?php if ( ! empty( $label ) ) : ?>
+		<?php if ( ! empty( $label ) && $has_url ) : ?>
 			<<?php echo $options['tag']; ?>
 				<?php echo DOM_Attr::render_attrs_of( $options['attributes'], $options['class'] ); ?>
 			>
