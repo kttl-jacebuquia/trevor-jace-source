@@ -418,6 +418,9 @@ module.exports = {
 				'gradient-violet': `url('${theme(
 					'paths.themeGradients'
 				)}/violet.svg')`,
+				'gradient-article-recirculation': `url('${theme(
+					'paths.themeGradients'
+				)}/article-recirculation.jpg')`,
 			}),
 			opacity: {
 				16: '0.16',
