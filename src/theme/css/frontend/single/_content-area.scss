@@ -6,12 +6,18 @@
   @apply flex flex-col flex-1;
   @apply bg-white;
   @apply prose prose-teal-dark;
-  /* Should be after the prose */
   @apply max-w-none text-teal-dark;
-  // TODO: Fix this on tailwind config
 
   body.is-rc & {
     @apply text-indigo;
+  }
+
+  p,
+  a,
+  span,
+  strong,
+  em {
+    @apply text-current;
   }
 
   h1,
@@ -19,7 +25,11 @@
   h3,
   h4,
   h5 {
-    color: inherit;
+    @apply text-current;
+
+    * {
+      @apply text-current;
+    }
   }
 }
 
@@ -71,9 +81,6 @@
     @apply pb-14;
   }
 
-  // .post-content {
-  //   width: percentage(7/8);
-  // }
   .post-content-sidebar {
     width: percentage(5/8);
   }
