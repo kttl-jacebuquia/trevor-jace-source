@@ -334,9 +334,17 @@
 	&.type-horizontal {
 	  @include neg-img-btm-margin(rem-calc(-190px));
 
-	  .thumbnail-wrap {
-		@apply mt-7;
-		max-height: rem-calc(312px);
+	  .thumbnail-wrap.thumbnail-wrap { // Double selector to add specificity without !important
+      @apply mt-7;
+      max-height: rem-calc(312px);
+
+      @screen md {
+        @apply max-h-none w-full;
+      }
+
+      @screen xl {
+        @apply max-h-none;
+      }
 	  }
 	}
 
