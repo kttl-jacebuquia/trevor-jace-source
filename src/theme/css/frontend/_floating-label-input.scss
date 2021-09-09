@@ -13,7 +13,7 @@
   &[data-input-tag="textarea"],
   &[data-input-tag="select"] {
     label {
-      @apply h-auto items-end;
+      @apply h-auto items-end pointer-events-auto;
     }
   }
 

@@ -37,8 +37,8 @@
       }
 
       .field-container-D {
-        --default-label-color: theme('colors.blue_green.DEFAULT');
-        --activated-label-color: theme('colors.white.DEFAULT');
+        --default-label-color: theme("colors.blue_green.DEFAULT");
+        --activated-label-color: theme("colors.white.DEFAULT");
         @apply flex flex-col text-left p-0 border-0 w-full;
         color: var(--default-label-color);
 
@@ -103,16 +103,12 @@
           @apply text-current contents;
         }
 
-        i {
+        * {
           @apply contents font-normal text-current;
           font-size: inherit;
           font-weight: inherit;
           line-height: inherit;
           letter-spacing: inherit;
-        }
-
-        span {
-          @apply contents;
         }
       }
 
@@ -236,6 +232,13 @@
         @apply mt-px40;
       }
     }
-  }
 
+    &#tfa_1976-D {
+      @apply mt-px122;
+
+      @screen md {
+        @apply mt-px50;
+      }
+    }
+  }
 }
