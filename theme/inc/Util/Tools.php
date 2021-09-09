@@ -1,9 +1,8 @@
 <?php namespace TrevorWP\Theme\Util;
 
-use TrevorWP\CPT\Org\Org_Object;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\CPT\Get_Involved\Get_Involved_Object;
-use TrevorWP\Theme\Single_Page;
+use TrevorWP\Theme\ACF\Options_Page\Header;
 use TrevorWP\Theme\Customizer\Search;
 
 class Tools {
@@ -43,6 +42,11 @@ class Tools {
 	 * @return string
 	 */
 	public static function get_relative_home_url(): string {
-		return trailingslashit( home_url( Is::rc() ? \TrevorWP\CPT\RC\RC_Object::PERMALINK_BASE : Org_Object::PERMALINK_ORG_LP ) );
+		$header = Header::get_header();
+
+		$find_support = $header['find_support_link']['url'];
+		$explore_trevor = $header['explore_trevor_link']['url'];
+
+		return trailingslashit( Is::rc() ? $find_support : $explore_trevor );
 	}
 }

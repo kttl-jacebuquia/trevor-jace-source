@@ -61,9 +61,6 @@ class Hooks {
 		# Footer
 		add_action( 'wp_footer', array( self::class, 'wp_footer' ), 10, 0 );
 
-		# Redirects
-		add_action( 'template_redirect', array( self::class, 'template_redirect' ), 10, 0 );
-
 		# Pre Get Posts
 		add_action( 'pre_get_posts', array( self::class, 'pre_get_posts' ), 10, 1 );
 
@@ -518,18 +515,6 @@ class Hooks {
 				'class'  => array( 'quick-exit-modal', 'js-quick-exit-modal' ),
 			)
 		) )->render();
-	}
-
-	/**
-	 * Fires before determining which template to load.
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/template_redirect/
-	 */
-	public static function template_redirect(): void {
-		if ( '/' === $_SERVER['REQUEST_URI'] ) {
-			wp_redirect( home_url( CPT\RC\RC_Object::PERMALINK_BASE ), 301 );
-			exit;
-		}
 	}
 
 	/**
