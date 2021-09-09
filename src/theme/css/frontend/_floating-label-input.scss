@@ -28,7 +28,7 @@
     @apply w-full;
 
     &::placeholder {
-      @apply text-transparent;
+      color: transparent !important;
     }
   }
 

@@ -131,7 +131,6 @@ export default class FundraiserQuiz {
 			// Add necessary selectors for FloatingLabelInput initialization
 			inputFields.forEach((inputField) => {
 				const options = {};
-				const input = inputField.querySelector('input');
 
 				inputField.classList.add('floating-label-input');
 
@@ -143,12 +142,6 @@ export default class FundraiserQuiz {
 						options.activated = true;
 						break;
 				}
-
-				// Determine phone fields
-				if ( /phone/i.test(input?.title) ) {
-					phoneFormat($(input));
-				}
-
 
 				FloatingLabelInput.initializeWithElement(inputField, options);
 			});
