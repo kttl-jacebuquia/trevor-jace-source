@@ -451,9 +451,18 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
 						DOM_Attr::FIELD_ATTR_VAL => 'click to open donate form modal',
 					);
+
+					// Determines whether to show or hide dedication field
+					if ( ! $dedication_donation ) {
+						$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+							DOM_Attr::FIELD_ATTR_KEY => 'data-hide-dedication',
+							DOM_Attr::FIELD_ATTR_VAL => true,
+						);
+					}
+
 					DonationModal::create(
 						array(
-							'dedication' => $dedication_donation,
+							'dedication' => true,
 						),
 					);
 
