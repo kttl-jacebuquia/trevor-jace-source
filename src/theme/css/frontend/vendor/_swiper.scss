@@ -126,9 +126,13 @@
 
   }
 
+  .post-carousel &,
+  .recent-highlights & {
+    @apply flex;
+  }
+
   .recent-highlights & {
     @screen xl {
-      @apply flex;
       margin-left: calc( ( ( 100vw - 100% ) / 2 ) - theme('container.padding.DEFAULT') );
     }
 
