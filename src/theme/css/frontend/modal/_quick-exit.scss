@@ -8,15 +8,25 @@
   }
 
 	.modal-container {
-		@apply w-auto h-auto rounded-px10 relative;
+		@apply w-auto h-auto rounded-px10 relative pt-px58;
 		width: calc(100% - #{rem-calc(56)});
 		max-width: #{rem-calc(606)};
+
+    @screen md {
+      width: calc(100% - #{rem-calc(278)});
+    }
 	}
 
-	.modal-close {
+	.modal-close.modal-close {
+    @apply bg-indigo w-px32 h-px32 rounded-px10 p-0 text-px15;
+
 		@screen md {
 			@apply mt-px26;
 		}
+
+    @screen xl {
+      @apply w-px44 h-px44 mt-px24 mr-px24 text-px20;
+    }
 	}
 
 	&__content {
@@ -29,7 +39,7 @@
 	}
 
 	&__heading {
-		@apply font-bold;
+		@apply font-semibold;
 		@apply text-px26 leading-px32 tracking-em005;
 
 		@screen xl {
