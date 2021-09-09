@@ -35,6 +35,10 @@
     width: theme('postCard.width.DEFAULT');
   }
 
+  .carousel-wrap__content {
+    @apply pb-px20 -mb-px20;
+  }
+
   body:not(.is-rc) & .swiper-pagination-bullet {
     @apply bg-teal-dark opacity-30;
 
