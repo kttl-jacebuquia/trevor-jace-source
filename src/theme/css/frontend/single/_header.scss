@@ -30,7 +30,7 @@
 
 .post-header-content {
   @apply mx-auto flex flex-col items-center text-center;
-  @apply pt-4;
+  @apply pt-4 relative;
   @apply w-full;
   @apply z-2;
 
@@ -195,7 +195,7 @@
 	max-height: none;
 
 	.thumbnail-wrap {
-	  @apply z-10;
+	  @apply z-1;
 	  @apply overflow-hidden;
 	  @apply w-screen;
 	  max-height: rem-calc(375px);
@@ -238,10 +238,10 @@
   /* Text Only & Full */
   &.type-full,
   &.type-text_only {
-	@apply relative overflow-hidden;
+	@apply relative;
 
 	.thumbnail-wrap {
-	  @apply z-1;
+	  @apply z-1 overflow-hidden;
 	  @apply h-full absolute top-0 left-0 w-full;
 
 	  img {

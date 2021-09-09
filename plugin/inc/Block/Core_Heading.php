@@ -42,7 +42,7 @@ class Core_Heading implements Post_Save_Handler {
 				<?php foreach ( $highlights as $dom_id => $highlight ) { ?>
 					<li class="post-highlight relative">
 						<a class="highlight-link stretched-link"
-						   href="#<?php echo esc_attr( $dom_id ); ?>"><?php echo esc_html( $highlight['title'] ); ?></a>
+							href="#<?php echo esc_attr( $dom_id ); ?>"><?php echo $highlight['title']; ?></a>
 						<span><?php echo esc_html( $highlight['description'] ); ?></span>
 					</li>
 				<?php } ?>
