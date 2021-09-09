@@ -89,6 +89,7 @@
 
   &__cards-wrapper {
     @apply h-auto;
+    grid-auto-rows: 1fr;
 
     @screen lg {
       @apply grid tw-grid-desktop;
@@ -214,6 +215,7 @@
 
     .tile-staff {
       border-radius: 10px;
+      height: 100%;
     }
 
     .aspect-ratio-3-4 {
