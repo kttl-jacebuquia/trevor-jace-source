@@ -847,7 +847,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	.back-to-tier1 {
 		@apply flex items-center;
-		@apply font-bold text-px14 leading-px20 tracking-em001;
+		@apply font-bold text-px14 leading-px20 tracking-em001 text-indigo;
 
 		// Chevron
 		&::before {

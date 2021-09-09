@@ -9,22 +9,26 @@ class Search_Input {
 	 */
 	public static function render_rc( string $placeholder ): string {
 		$keys = get_terms(
-			'trevor_rc__search_key',
 			array(
+				'taxonomy'   => 'trevor_rc__search_key',
 				'hide_empty' => false,
 			)
 		);
-		ob_start();
+
+		$terms = array_map(
+			function( $item ) {
+				return $item->name;
+			},
+			$keys
+		);
+
+		$search_keys = implode( ',', $terms );
+
 		?>
 		<label class="relative block">
 			<div class="input-wrap bg-white rounded-px10 w-full flex justify-center items-center overflow-hidden">
-				<input type="hidden" name="rc-search--keys" disabled value="
-				<?php
-				foreach ( $keys as $key ) {
-					echo $key->name . ',';}
-					?>
-				" />
-				<div class="icon-wrap h-full pr-px12 md:pr-px14 lg:pr-px18" aria-hidden="true">
+				<input type="hidden" name="rc-search--keys" disabled value="<?php echo $search_keys; ?>" />
+				<div class="icon-wrap h-full pl-px24 pr-px12 md:pr-px14 lg:pl-px60 lg:pr-px18" aria-hidden="true">
 					<i class="trevor-ti-search lg:text-xl"></i>
 				</div>
 				<input

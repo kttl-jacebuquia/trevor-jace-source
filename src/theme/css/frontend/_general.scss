@@ -77,10 +77,6 @@
 	&.input-has-value {
 	  @apply justify-center;
 
-	  .search-field {
-		@apply w-auto text-center;
-	  }
-
 	  .icon-wrap {
 		@apply pl-0;
 	  }
@@ -127,17 +123,26 @@
 	}
 
 	.list-header {
-	  @apply font-semibold text-center text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
+	  @apply tracking-px05 font-semibold text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
 	}
 
 	.ui-autocomplete {
-	  @apply rounded-px10 pt-px24 mx-auto;
+	  @apply overflow-hidden rounded-px10 pt-px20 pb-px24 px-px20 mx-auto text-left md:pt-px22 md:px-px20 lg:px-px30;
 	  left: 0 !important;
 	  width: 100% !important;
+    max-height: 188px;
+
+    @screen md {
+      max-height: 210px;
+    }
 	}
 
 	.ui-menu-item {
-	  @apply font-normal text-px14 leading-px18 md:text-px16 md:leading-px22 lg:text-px18 text-center py-px4 lg:py-px6 text-indigo;
+	  @apply font-normal tracking-px05 text-px16 leading-px18 md:text-px14 md:leading-px22 lg:text-px18 lg:leading-px26 text-indigo;
+
+    &:not(:last-child) {
+      @apply pb-px8 lg:pb-px12;
+    }
 	}
 
 	.ui-state-focus {
