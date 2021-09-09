@@ -210,6 +210,8 @@ class BreathingExercise {
 
 	static restart() {
 		$(this.breathingEnd).fadeOut(() => {
+			$(this.blobCanvas).removeClass('scale-half');
+
 			this.startCountdown();
 		});
 	}
