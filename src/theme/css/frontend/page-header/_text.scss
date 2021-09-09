@@ -21,6 +21,8 @@
     .hero--inner {
       @apply tw-grid pb-px30;
 
+      grid-auto-rows: min-content;
+
       @screen xl {
         @apply w-full;
       }
@@ -42,16 +44,16 @@
 
     .hero__description {
       @apply col-span-full;
-      @apply mt-px12 text-px20 leading-px26;
+      @apply text-px20 leading-px26;
 
       @screen md {
         @apply col-start-2 col-span-6 -mx-px28;
-        @apply mt-px20 text-px16 leading-px22 tracking-em001;
+        @apply text-px16 leading-px22 tracking-em001;
       }
 
       @screen xl {
         @apply col-start-3 col-span-8 mx-0 max-w-none;
-        @apply mt-px20 text-px26 leading-px36 tracking-em005;
+        @apply text-px26 leading-px36 tracking-em005;
       }
     }
 
@@ -63,10 +65,9 @@
 
     .button-group {
       @apply col-span-full;
-      @apply mt-px40;
+      @apply mt-px30;
       @apply text-px16 leading-px22;
-      // md
-      @apply md:mt-px30;
+
       // xl
       @apply xl:mt-px40;
     }
