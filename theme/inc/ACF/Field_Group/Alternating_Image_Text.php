@@ -219,9 +219,9 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		$alignment_class = '';
 
 		if ( 'left' === $alternate_text_alignment ) {
-			$alignment_class .= 'md:text-left xl:text-left';
+			$alignment_class .= 'md:text-left xl:text-left alternating-image-text__body--left';
 		} elseif ( 'center' === $alternate_text_alignment ) {
-			$alignment_class .= 'md:text-center xl:text-center';
+			$alignment_class .= 'md:text-center xl:text-center alternating-image-text__body--center';
 		}
 
 		$cta_btn_options  = array(

@@ -100,6 +100,17 @@
     @screen xl {
       @apply col-span-5 col-start-8;
     }
+
+    &--left {
+      @screen lg {
+        .alternating-image-text__item-title {
+          @apply px-0;
+        }
+        .alternating-image-text__item-content {
+          @apply px-0;
+        }
+      }
+    }
   }
 
   &__item-title {
@@ -209,6 +220,12 @@
         @apply col-start-2;
       }
     }
+
+    .alternating-image-text__body--left {
+      @screen lg {
+        max-width: 23rem;
+      }
+    }
   }
 
   &:nth-child(odd) {
@@ -225,6 +242,13 @@
     .alternating-image-text__body {
       @screen md {
         @apply col-start-5 order-2;
+      }
+
+      &--left {
+        @screen lg {
+          max-width: 23rem;
+          margin-left: 6.1875rem;
+        }
       }
 
       @screen xl {
