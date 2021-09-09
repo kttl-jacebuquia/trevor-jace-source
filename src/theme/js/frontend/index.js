@@ -303,7 +303,12 @@ features.collapsible($('.js-accordion'), {});
 				event.preventDefault();
 				return false;
 			}
-		});
+		})
+		.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li>" )
+				.append( `<a href="/search/?s=${item.value}">${item.label}</a>`)
+				.appendTo( ul );
+		};
 
 	searchCancelIcon.on('click', function (e) {
 		inputSearchField.val('');
