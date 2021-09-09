@@ -100,7 +100,7 @@ class Post {
 		$title_top = 'Learn more about';
 
 		if ( $post->post_type === \TrevorWP\CPT\Post::POST_TYPE ) {
-			$title_top = 'Read more from the';
+			$title_top = 'Read more from';
 		}
 
 		$posts = Posts::get_recirculation(
