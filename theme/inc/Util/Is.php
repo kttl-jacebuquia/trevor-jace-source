@@ -84,14 +84,18 @@ class Is {
 			$find_support_items = wp_get_nav_menu_items( $menu_locations['header-support'] );
 			$current_page       = get_queried_object();
 
+			$url = '';
+
 			foreach ( $find_support_items as $item ) {
-				if ( ! empty( $current_page->ID ) && $item->object_id === $current_page->ID ) {
-					return true;
-				} elseif ( ! empty( $current_page->ID ) && $item->object_id === $current_page->term_id ) {
-					return true;
-				} elseif ( ! empty( $current_page->slug ) && strpos( $item->url, $current_page->slug ) ) {
-					return true;
-				} elseif ( ! empty( $current_page->post_name ) && strpos( $item->url, $current_page->post_name ) ) {
+				$menu_url = rtrim($item->url, '/') . '/';
+
+				if ( ! empty( $current_page->ID ) ) {
+					$url = get_permalink( $current_page->ID );
+				} elseif ( ! empty( $current_page->term_id ) ) {
+					$url = get_term_link( $current_page->ID );
+				}
+
+				if ( $url === $menu_url ) {
 					return true;
 				}
 			}
