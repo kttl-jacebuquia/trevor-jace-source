@@ -44,7 +44,7 @@ class Tools {
 	public static function get_relative_home_url(): string {
 		$header = Header::get_header();
 
-		$find_support = $header['find_support_link']['url'];
+		$find_support   = $header['find_support_link']['url'];
 		$explore_trevor = $header['explore_trevor_link']['url'];
 
 		return trailingslashit( Is::rc() ? $find_support : $explore_trevor );

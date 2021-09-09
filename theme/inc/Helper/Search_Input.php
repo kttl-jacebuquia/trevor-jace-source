@@ -22,7 +22,7 @@ class Search_Input {
 				<?php
 				foreach ( $keys as $key ) {
 					echo $key->name . ',';}
-					?>
+				?>
 				" />
 				<div class="icon-wrap h-full pr-px12 md:pr-px14 lg:pr-px18" aria-hidden="true">
 					<i class="trevor-ti-search lg:text-xl"></i>
