@@ -1,0 +1,39 @@
+.postbox-header {
+  @apply bg-gray-light;
+
+  .ui-sortable-handle {
+    @apply p-px15;
+  }
+}
+
+.order-higher-indicator::before {
+  content: "\f343";
+  color: #1d2327;
+  display: inline-block;
+  font: normal 20px/1 dashicons;
+}
+
+.order-lower-indicator::before {
+  content: "\f347";
+  color: inherit;
+  display: inline-block;
+  font: normal 20px/1 dashicons;
+}
+
+.handlediv {
+  .toggle-indicator {
+    &::before {
+      content: "\f140";
+      font: normal 20px/1 dashicons;
+    }
+  }
+
+  &[aria-expanded="true"] {
+    .toggle-indicator {
+      &::before {
+        content: "\f142";
+        font: normal 20px/1 dashicons;
+      }
+    }
+  }
+}
