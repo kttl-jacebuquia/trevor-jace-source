@@ -81,8 +81,16 @@
 		@apply text-px18 leading-px26 text-teal-dark font-semibold;
 		@apply md:leading-px24;
 
+    body.is-rc & {
+      @apply text-white;
+    }
+
 		&.current {
 			@apply bg-teal-dark text-white;
+
+      body.is-rc & {
+        @apply bg-white text-indigo;
+      }
 		}
 
 		&.prev,

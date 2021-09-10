@@ -33,7 +33,7 @@ $glossary_item = Page::get_glossary_item()
 
 					<?php if ( have_posts() ) : ?>
 						<?php if ( ! empty( $glossary_item ) ) : ?>
-							<div class="w-full bg-gray-light text-indigo p-px30 mb-14 md:mb-16 rounded-px10 xl:w-7/12">
+							<div class="w-full bg-gray-light text-indigo p-px30 mb-14 md:mb-16 rounded-px10 md:p-px40 xl:w-3/4">
 								<h3 class="font-bold lg:font-semibold text-px22 leading-px28 lg:text-px24 lg:leading-px34 tracking-px05 mb-px8 md:mb-px16 lg:mb-px10"><?php echo @$glossary_item->post_title_t; ?></h3>
 								<div class="text-px16 leading-px22 tracking-px05 mb-4"><?php echo @$glossary_item->post_excerpt_t; ?></div>
 								<div class="text-px16 leading-px24 md:text-px18 md:leading-px26 lg:text-px20 lg:leading-px28 lg:tracking-px_05"><?php echo ( new Parsedown() )->text( strip_tags( @$glossary_item->post_content_t ) ); ?></div>
