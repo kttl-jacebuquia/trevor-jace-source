@@ -274,6 +274,13 @@
           @apply col-start-5 order-2;
         }
 
+        &--left {
+          @screen lg {
+            max-width: 23rem;
+            margin-left: 6.1875rem;
+          }
+        }
+
         @screen xl {
           @apply col-start-7;
         }
@@ -294,6 +301,13 @@
       .alternating-image-text__body {
         @screen md {
           @apply col-start-1;
+        }
+
+        &--left {
+          @screen lg {
+            max-width: 23rem;
+            margin-left: 0;
+          }
         }
 
         @screen xl {
