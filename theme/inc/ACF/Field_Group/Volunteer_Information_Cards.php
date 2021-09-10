@@ -5,6 +5,7 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 	const FIELD_DESCRIPTION             = 'description';
 	const FIELD_NUMBER                  = 'number';
 	const FIELD_SUPPORTING_TEXT         = 'supporting_text';
+	const FIELD_SUPPORTING_TEXT_SMALL   = 'supporting_text_small';
 	const FIELD_CARDS                   = 'cards';
 	const FIELD_CARDS_ENTRY_ICON        = 'cards_entry_icon';
 	const FIELD_CARDS_ENTRY_HEADER      = 'cards_entry_header';
@@ -20,6 +21,7 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 		$description             = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$number                  = static::gen_field_key( static::FIELD_NUMBER );
 		$supporting_text         = static::gen_field_key( static::FIELD_SUPPORTING_TEXT );
+		$supporting_text_small   = static::gen_field_key( static::FIELD_SUPPORTING_TEXT_SMALL );
 		$cards                   = static::gen_field_key( static::FIELD_CARDS );
 		$cards_entry_icon        = static::gen_field_key( static::FIELD_CARDS_ENTRY_ICON );
 		$cards_entry_header      = static::gen_field_key( static::FIELD_CARDS_ENTRY_HEADER );
@@ -29,32 +31,38 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 		return array(
 			'title'  => 'Volunteer Information Cards',
 			'fields' => array(
-				static::FIELD_TITLE           => array(
+				static::FIELD_TITLE                 => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
 					'label' => 'Title',
 					'type'  => 'text',
 				),
-				static::FIELD_DESCRIPTION     => array(
+				static::FIELD_DESCRIPTION           => array(
 					'key'   => $description,
 					'name'  => static::FIELD_DESCRIPTION,
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
-				static::FIELD_NUMBER          => array(
+				static::FIELD_NUMBER                => array(
 					'key'      => $number,
 					'name'     => static::FIELD_NUMBER,
 					'label'    => 'Number',
 					'type'     => 'text',
 					'required' => 1,
 				),
-				static::FIELD_SUPPORTING_TEXT => array(
+				static::FIELD_SUPPORTING_TEXT       => array(
 					'key'   => $supporting_text,
 					'name'  => static::FIELD_SUPPORTING_TEXT,
-					'label' => 'Supporting Text',
+					'label' => 'Supporting Text (big)',
 					'type'  => 'text',
 				),
-				static::FIELD_CARDS           => array(
+				static::FIELD_SUPPORTING_TEXT_SMALL => array(
+					'key'   => $supporting_text_small,
+					'name'  => static::FIELD_SUPPORTING_TEXT_SMALL,
+					'label' => 'Supporting Text (small)',
+					'type'  => 'text',
+				),
+				static::FIELD_CARDS                 => array(
 					'key'          => $cards,
 					'name'         => static::FIELD_CARDS,
 					'label'        => 'Cards',
@@ -117,11 +125,12 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title           = static::get_val( static::FIELD_TITLE );
-		$description     = static::get_val( static::FIELD_DESCRIPTION );
-		$number          = static::get_val( static::FIELD_NUMBER );
-		$supporting_text = static::get_val( static::FIELD_SUPPORTING_TEXT );
-		$cards           = static::get_val( static::FIELD_CARDS );
+		$title                 = static::get_val( static::FIELD_TITLE );
+		$description           = static::get_val( static::FIELD_DESCRIPTION );
+		$number                = static::get_val( static::FIELD_NUMBER );
+		$supporting_text       = static::get_val( static::FIELD_SUPPORTING_TEXT );
+		$supporting_text_small = static::get_val( static::FIELD_SUPPORTING_TEXT_SMALL );
+		$cards                 = static::get_val( static::FIELD_CARDS );
 
 		ob_start();
 		?>
@@ -144,6 +153,10 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 
 				<?php if ( ! empty( $supporting_text ) ) : ?>
 					<p class="volunteer-information__supporting-text__text"><?php echo esc_html( $supporting_text ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $supporting_text_small ) ) : ?>
+					<p class="volunteer-information__supporting-text__text"><?php echo esc_html( $supporting_text_small ); ?></p>
 				<?php endif; ?>
 				</div>
 
