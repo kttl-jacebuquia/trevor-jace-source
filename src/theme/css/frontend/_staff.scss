@@ -98,14 +98,34 @@
 
     .is-grid & {
       @apply mt-px50;
-      flex-flow: column wrap;
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: 1.75rem;
+      row-gap: 1.75rem;
+      grid-auto-rows: 1fr;
 
       @screen md {
-        @apply flex-row flex-wrap justify-between -mb-px28;
+        grid-template-columns: 1fr 1fr;
       }
 
       @screen lg {
         @apply mt-px55 mb-0;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      @screen xl {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+    }
+
+    .founders & {
+      @screen lg {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      @screen xl {
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
 
@@ -151,9 +171,17 @@
     }
 
     .is-grid & {
+      width: 100% !important;
+      height: 100% !important;
+      grid-column: auto / auto !important;
+
       &[data-staff-part="last"] {
         display: none;
       }
+    }
+
+    .is-carousel & {
+      height: 100% !important;
     }
 
     .staff-col-3 & {
@@ -171,18 +199,6 @@
 
       @screen xl {
         @apply col-span-4;
-      }
-
-      & + .staff__card {
-        @apply mt-px28;
-
-        @screen md {
-          @apply mt-0 mb-px28;
-        }
-
-        @screen lg {
-          @apply mb-0;
-        }
       }
 
       .information__details { display: none; }
