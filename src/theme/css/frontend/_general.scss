@@ -113,8 +113,11 @@
   #input-suggestions {
 	@apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6 text-indigo;
 	z-index: 5;
+  max-height: 188px;
+  overflow-y: auto;
 
 	@screen md {
+    max-height: 210px;
 	  box-shadow: theme('boxShadow.indigo-md');
 	}
 
@@ -127,14 +130,9 @@
 	}
 
 	.ui-autocomplete {
-	  @apply overflow-hidden rounded-px10 pt-px20 pb-px24 px-px20 mx-auto text-left md:pt-px22 md:px-px20 lg:px-px30;
+	  @apply rounded-px10 pt-px20 pb-px24 px-px20 mx-auto text-left md:pt-px22 md:px-px20 lg:px-px30;
 	  left: 0 !important;
 	  width: 100% !important;
-    max-height: 188px;
-
-    @screen md {
-      max-height: 210px;
-    }
 	}
 
 	.ui-menu-item {

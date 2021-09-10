@@ -313,7 +313,7 @@ features.collapsible($('.js-accordion'), {});
 			})
 			.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 				return $( "<li>" )
-					.append(`<a href="/search/?s=${item.value}">${item.label}</a>`)
+					.append( `<a href="?s=${item.value}">${item.label}</a>` )
 					.appendTo( ul );
 			};
 
