@@ -377,9 +377,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					$text_clr,
 					static::FIELD_TEXT_CLR,
 					array(
-						'label'   => 'Text Color',
-						'default' => 'teal-dark',
-						'wrapper' => array(
+						'label'         => 'Text Color',
+						'default_value' => 'teal-dark',
+						'wrapper'       => array(
 							'width' => '50%',
 						),
 					),
@@ -389,7 +389,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					static::FIELD_BG_CLR,
 					array(
 						'label'             => 'BG Color',
-						'default'           => 'white',
+						'default_value'     => 'white',
 						'wrapper'           => array(
 							'width' => '50%',
 						),
@@ -590,13 +590,13 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args['styles'] = array();
 		# Text color
-		$txt_color = $val->get( static::FIELD_TEXT_CLR );
+		$txt_color = $val->get( static::FIELD_TEXT_CLR ) ?? 'white';
 		if ( ! empty( $txt_color ) ) {
 			$args['styles'][] = "text-{$txt_color}";
 		}
 
 		# BG Color
-		$bg_color = $val->get( static::FIELD_BG_CLR );
+		$bg_color = $val->get( static::FIELD_BG_CLR ) ?? 'teal-dark';
 		if ( ! empty( $bg_color ) ) {
 			$args['styles'][] = "bg-{$bg_color}";
 		}

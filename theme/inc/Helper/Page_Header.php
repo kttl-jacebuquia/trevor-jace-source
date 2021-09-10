@@ -38,7 +38,7 @@ class Page_Header {
 		$hero_cls = implode(
 			' ',
 			array(
-				'hero page-header type-text flex items-start text-white h-auto',
+				'hero page-header type-text flex items-start h-auto',
 				'min-h-px611 pt-px105',
 				'md:px-px110 md:pt-px75',
 				'xl:px-px311 xl:pt-px105 xl:justify-start xl:mt-0',
