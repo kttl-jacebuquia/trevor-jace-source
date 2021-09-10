@@ -9,7 +9,7 @@
 // @apply md:px-px140
 @mixin tailwind( $classnames ) {
 	@each $classname in $classnames {
-		#{"." + str-replace(unquote($classname), ":", "\\:")} {
+		.#{unquote($classname)} {
 			@apply #{unquote($classname)};
 		}
 	}

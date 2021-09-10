@@ -53,14 +53,16 @@ class ADPContent extends WithState {
 	}
 
 	initializeContentObserver() {
-		const observer = new MutationObserver(() => {
-			// Get current items shown in the list
-			const shownItems = this.$listingContent.find('.listing__item.show');
-			// Update listing info
-			this.populateListingInfo( this.$listingInfo, shownItems.length );
-		});
+		if ( this.$listingContent.length ) {
+			const observer = new MutationObserver(() => {
+				// Get current items shown in the list
+				const shownItems = this.$listingContent.find('.listing__item.show');
+				// Update listing info
+				this.populateListingInfo( this.$listingInfo, shownItems.length );
+			});
 
-		observer.observe(this.$listingContent.get(0), { subtree: true, attributes: true });
+			observer.observe(this.$listingContent.get(0), { subtree: true, attributes: true });
+		}
 	}
 
 	populateListingInfo($container, total) {
