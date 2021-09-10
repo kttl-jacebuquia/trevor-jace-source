@@ -29,16 +29,7 @@
 
 	&__content {
 		@apply col-span-full;
-		@apply rounded-px10 py-px60 px-px28;
-
-		@screen md {
-			@apply grid grid-cols-6 grid-cols-8 py-px80 px-0;
-			column-gap: inherit;
-		}
-
-		@screen xl {
-			@apply grid-cols-10 col-span-10 col-start-2 py-px70;
-		}
+		@apply rounded-px10 py-px60 px-0;
 	}
 
 	&__title {
@@ -62,11 +53,19 @@
 	}
 
 	&__description {
-		@apply text-px18 leading-px26 tracking-px05 text-center mt-px18;
+		@apply font-semibold text-px24 leading-px28 text-center mt-px14 mx-auto;
+    letter-spacing: -0.5px;
 
-		@screen xl {
-			@apply text-px24 leading-px36 mt-px14;
-		}
+    @screen md {
+      @apply font-normal text-px26 leading-px36 mt-px18;
+      letter-spacing: 0.005em;
+      max-width: 34.375rem;
+    }
+
+    @screen lg {
+      @apply font-normal text-px30 leading-px40 mt-px14;
+      max-width: 47.75rem;
+    }
 
 		b,
 		strong {
