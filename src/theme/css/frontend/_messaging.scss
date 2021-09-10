@@ -59,13 +59,17 @@
     @screen md {
       @apply font-normal text-px26 leading-px36 mt-px18;
       letter-spacing: 0.005em;
-      max-width: 34.375rem;
+      max-width: 494px;
     }
 
     @screen lg {
       @apply font-normal text-px30 leading-px40 mt-px14;
       max-width: 47.75rem;
     }
+
+		@screen xl {
+			@apply text-px26 leading-px36 mt-px14;
+		}
 
 		b,
 		strong {
@@ -87,14 +91,10 @@
 	}
 
 	&__header + &__description {
-		@apply mt-px14;
+		@apply mt-px18;
 
 		@screen md {
 			@apply mt-px16;
-		}
-
-		@screen xl {
-			@apply mt-px14;
 		}
 	}
 
@@ -105,6 +105,10 @@
 		@screen md {
 			@apply flex-wrap;
 		}
+
+    .page-btn-link {
+      border-bottom-width: 2px;
+    }
 	}
 
 	&__button {
@@ -139,6 +143,10 @@
     @screen md {
       @apply col-span-6 col-start-2;
       @apply text-px18 leading-px24 tracking-px_05;
+    }
+
+    @screen lg2 {
+      @apply text-px26 leading-px36 tracking-em005;
     }
 
     @screen xl {

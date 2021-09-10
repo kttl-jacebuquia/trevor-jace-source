@@ -50,7 +50,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			$block,
 			static::render_grid( (array) $val->get( static::FIELD_CARDS ) ),
 			array(
-				'wrap_cls'  => array( 'page-section page-circulation bg-white text-teal-dark', 'pt-20 pb-24 lg:pt-24' ),
+				'wrap_cls'  => array( 'page-section page-circulation bg-white', 'pt-20 pb-24 lg:pt-24' ),
 				'inner_cls' => array( 'container mx-auto' ),
 				'title_cls' => array( 'page-sub-title centered' ),
 				'desc_cls'  => array( 'page-sub-title-desc centered' ),
