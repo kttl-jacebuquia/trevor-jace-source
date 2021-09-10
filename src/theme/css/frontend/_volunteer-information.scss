@@ -69,8 +69,12 @@
 			}
 
 			@screen xl {
-				@apply text-px32 leading-px42 tracking-em001 mt-px25 px-px26;
+				@apply text-px32 leading-px42 tracking-em001 mt-px25;
 			}
+
+      & + & {
+        @apply mt-px0;
+      }
 		}
 	}
 
