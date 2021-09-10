@@ -385,7 +385,7 @@ class Search extends Abstract_Customizer {
 
 		ob_start();
 		?>
-		<div class="scope flex flex-row mb-10 mt-12 md:mt-16 lg:mt-14 text-indigo">
+		<div class="scope flex flex-row pb-10 pt-12 md:pt-16 lg:pt-14 text-indigo">
 			<?php foreach ( $all as $id => $detail ) { ?>
 				<div>
 					<a href="<?php echo esc_url( self::get_permalink( get_search_query( false ), $id == 'all' ? 'all' : $id ) ); ?>"

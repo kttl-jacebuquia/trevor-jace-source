@@ -52,7 +52,7 @@ $glossary_item = Page::get_glossary_item()
 							<?php get_template_part( 'template-parts/pagination' ); ?>
 						</div>
 					<?php else : ?>
-						<div class="container mt-px60 mb-px130 md:mt-px80 text-center text-indigo">
+						<div class="container pt-px60 pb-px110 md:pt-px80 text-center text-indigo">
 							<h2 class="font-semibold text-px26 leading-px32 md:text-px34 md:leading-px44 lg:text-px40 lg:leading-px50">There are no results for "<?php echo get_search_query(); ?>"</h2>
 							<p class="font-normal mt-4 text-px18 leading-px24 md:leading-px26 lg:text-px22 lg:leading-px32">Sorry, there are no results found for that search.</p>
 						</div>
