@@ -24,6 +24,7 @@ class Search_Input {
 
 		$search_keys = implode( ',', $terms );
 
+		ob_start();
 		?>
 		<label class="relative block">
 			<div class="input-wrap bg-white rounded-px10 w-full flex justify-center items-center overflow-hidden">
