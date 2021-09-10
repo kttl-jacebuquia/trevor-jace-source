@@ -87,10 +87,14 @@
     }
 
     i[class^="trevor-ti"] {
-      @apply flex items-center justify-center w-px45 h-px45 text-px35;
+      @apply flex items-center justify-center w-px50 h-px50 text-px50;
 
       @screen md {
-        @apply w-px50 h-px50 text-px35;
+        @apply text-px50;
+      }
+
+      @screen xl {
+        @apply w-px72 h-px72 text-px60;
       }
     }
 
