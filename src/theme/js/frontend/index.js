@@ -227,114 +227,119 @@ features.collapsible($('.js-accordion'), {});
  * @todo: move under is-rc
  */
 (() => {
-	const terms =
-		$("input[name='rc-search--keys']")
-			.val()
-			?.trim()
-			.split(',')
-			.slice(0, -1) || [];
-	const searchCancelIcon = $('.icon-search-cancel');
-	const maxInputSize = 35;
-	const form = $('.search-form');
+	if (inputSearchField.length) {
+		const terms =
+			$("input[name='rc-search--keys']")
+				.val()
+				?.trim()
+				.split(',')
+				.slice(0, -1) || [];
+		const searchCancelIcon = $('.icon-search-cancel');
+		const maxInputSize = 35;
+		const form = $('.search-form');
 
-	if (!inputSearchField.val()) {
-		inputSearchField.attr(
-			'size',
-			inputSearchField.attr('placeholder')?.length
-		);
-	}
+		if (!inputSearchField.val()) {
+			inputSearchField.attr(
+				'size',
+				inputSearchField.attr('placeholder')?.length
+			);
+		}
 
-	if (inputSearchField.val()) {
-		inputSearchField.parent().addClass('input-has-value');
-		inputSearchField.attr('size', inputSearchField.val().length);
-	}
+		if (inputSearchField.val()) {
+			inputSearchField.parent().addClass('input-has-value');
+			inputSearchField.attr('size', inputSearchField.val().length);
+		}
 
-	inputSearchField
-		.autocomplete({
-			source(request, response) {
-				const results = $.ui.autocomplete.filter(terms, request.term);
-				response(results);
-			},
-			minLength: 0,
-			appendTo: '#input-suggestions',
-			focus: () => {
-				$('.ui-helper-hidden-accessible').hide();
-			},
-			open() {
-				/**
-				 * The results will automatically show without a header
-				 * when the user starts to type anything on the search bar.
-				 */
-				if ($(this).val() == '') {
-					$('ul.ui-autocomplete').prepend(
-						'<li class="list-header"><h3>Popular Searches</h3></li>'
+		inputSearchField
+			.autocomplete({
+				source(request, response) {
+					const results = $.ui.autocomplete.filter(
+						terms,
+						request.term
 					);
+					response(results);
+				},
+				minLength: 0,
+				appendTo: '#input-suggestions',
+				focus: () => {
+					$('.ui-helper-hidden-accessible').hide();
+				},
+				open() {
+					/**
+					 * The results will automatically show without a header
+					 * when the user starts to type anything on the search bar.
+					 */
+					if ($(this).val() == '') {
+						$('ul.ui-autocomplete').prepend(
+							'<li class="list-header"><h3>Popular Searches</h3></li>'
+						);
+					}
+				},
+				select(event, ui) {
+					$(this).addClass('has-value');
+					$(this).parent().addClass('input-has-value');
+					inputSearchField.val(ui.item.value.trim());
+					inputSearchField.attr('size', ui.item.value.trim().length);
+					moveCursorToEnd($(this)[0]);
+				},
+			})
+			/**
+			 * Immediately open the jQuery autocomplete
+			 * when the user focuses the search bar
+			 * even before they start typing anyting.
+			 */
+			.focus(function () {
+				$(this).autocomplete('search', $(this).val());
+			})
+			.on('keyup', function (event) {
+				const inputText = $(this).val().trim();
+				if (!inputText) {
+					$(this).parent().removeClass('input-has-value');
+					$(this).attr('size', $(this).attr('placeholder').length);
+				} else {
+					$(this).parent().addClass('input-has-value');
+					$(this).attr('size', $(this).val().length);
 				}
-			},
-			select(event, ui) {
-				$(this).addClass('has-value');
-				$(this).parent().addClass('input-has-value');
-				inputSearchField.val(ui.item.value.trim());
-				inputSearchField.attr('size', ui.item.value.trim().length);
-				moveCursorToEnd($(this)[0]);
-			},
-		})
-		/**
-		 * Immediately open the jQuery autocomplete
-		 * when the user focuses the search bar
-		 * even before they start typing anyting.
-		 */
-		.focus(function () {
-			$(this).autocomplete('search', $(this).val());
-		})
-		.on('keyup', function (event) {
-			const inputText = $(this).val().trim();
-			if (!inputText) {
-				$(this).parent().removeClass('input-has-value');
-				$(this).attr('size', $(this).attr('placeholder').length);
-			} else {
-				$(this).parent().addClass('input-has-value');
-				$(this).attr('size', $(this).val().length);
-			}
-		})
-		.on('keypress', function (event) {
-			if (event.keyCode === 13) {
-				form.submit();
-				return false;
-			}
-			if ($(this).html().length >= maxInputSize) {
-				event.preventDefault();
-				return false;
-			}
-		})
-		.data('ui-autocomplete')._renderItem = function (ul, item) {
-		return $('<li>')
-			.append(`<a href="/search/?s=${item.value}">${item.label}</a>`)
-			.appendTo(ul);
-	};
+			})
+			.on('keypress', function (event) {
+				if (event.keyCode === 13) {
+					form.submit();
+					return false;
+				}
+				if ($(this).html().length >= maxInputSize) {
+					event.preventDefault();
+					return false;
+				}
+			})
+			.data('ui-autocomplete')._renderItem = function (ul, item) {
+			return $('<li>')
+				.append(`<a href="/search/?s=${item.value}">${item.label}</a>`)
+				.appendTo(ul);
+		};
 
-	searchCancelIcon.on('click', function (e) {
-		inputSearchField.val('');
-		inputSearchField.parent().removeClass('input-has-value');
-		inputSearchField.attr(
-			'size',
-			inputSearchField.attr('placeholder').length
-		);
-		inputSearchField.focus();
-	});
+		searchCancelIcon.on('click', function (e) {
+			inputSearchField.val('');
+			inputSearchField.parent().removeClass('input-has-value');
+			inputSearchField.attr(
+				'size',
+				inputSearchField.attr('placeholder').length
+			);
+			inputSearchField.focus();
+		});
 
-	function moveCursorToEnd(el) {
-		setTimeout(() => {
-			if (el.innerText && document.createRange) {
-				const selection = document.getSelection();
-				const range = document.createRange();
+		function moveCursorToEnd(el) {
+			setTimeout(() => {
+				if (el.innerText && document.createRange) {
+					const selection = document.getSelection();
+					const range = document.createRange();
 
-				range.setStart(el.childNodes[0], el.innerText.length);
-				range.collapse(true);
-				selection.removeAllRanges();
-				selection.addRange(range);
-			}
-		}, 100);
+					range.setStart(el.childNodes[0], el.innerText.length);
+					range.collapse(true);
+					selection.removeAllRanges();
+					selection.addRange(range);
+				}
+			}, 100);
+		}
 	}
 })();
 

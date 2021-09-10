@@ -45,10 +45,8 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 					'key'      => $number,
 					'name'     => static::FIELD_NUMBER,
 					'label'    => 'Number',
-					'type'     => 'number',
+					'type'     => 'text',
 					'required' => 1,
-					'min'      => 0,
-					'step'     => 1,
 				),
 				static::FIELD_SUPPORTING_TEXT => array(
 					'key'   => $supporting_text,
