@@ -32,6 +32,10 @@
 	  @apply transition;
 
 		@include wave-underline;
+
+    .is-rc & {
+      @include wave-underline-indigo;
+    }
 	}
 
 	.icon-external {
