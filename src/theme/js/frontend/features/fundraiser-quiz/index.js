@@ -88,6 +88,12 @@ export default class FundraiserQuiz {
 
 		this.changeContainerBackground(false);
 
+		// Reset counter
+		this.currentVertexStack = [];
+
+		// Reset form
+		this.form.get(0)?.reset();
+
 		// Override iniial step if supplied in options
 		if (options.initialVertex) {
 			const $content = $(

@@ -53,7 +53,7 @@ if ($fundraiserQuizButton.length) {
 
 	$fundraiserQuizButton.on('click', (e) => {
 		const initialVertex = e.currentTarget.dataset.fundraiseVertex;
-		const single = e.currentTarget.dataset.fundraiseSingle === 'true';
+		const single = e.currentTarget.dataset.fundraiseSingle ? true : false;
 
 		fundraiserQuiz.show({
 			initialVertex,
