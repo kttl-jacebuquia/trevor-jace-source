@@ -192,12 +192,15 @@ class PostSidebar extends React.Component {
 				}
 				{/* Recirculation Cards */}
 				{this.canRenderField(META_KEY_MAP.reRecirculationCards) &&
-				<SelectControl label="Recirculation Cards"
-							   value={reRecirculationCards}
-							   options={this.selectOptions.reRecirculationCards}
-							   onChange={this.handleReRecirculationCardsChange}
-							   help="You may use CTRL-Click (Windows) or CMD-Click (Mac) to de/select"
-							   multiple/>
+				<div class="trevor-select-multiple">
+					<SelectControl label="Recirculation Cards"
+						value={reRecirculationCards}
+						options={this.selectOptions.reRecirculationCards}
+						onChange={this.handleReRecirculationCardsChange}
+						help="You may use CTRL-Click (Windows) or CMD-Click (Mac) to de/select"
+						multiple/>
+				</div>
+				
 				}
 			</PluginDocumentSettingPanel>
 			{/* Card Options */}

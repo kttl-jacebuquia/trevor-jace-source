@@ -26,3 +26,12 @@
 	@extend .trevor-pi-google-brands:before;
   }
 }
+
+.trevor-select-multiple.trevor-select-multiple.trevor-select-multiple select[multiple] {
+	height: auto;
+	padding: 8px;
+	
+	+ .components-input-control__suffix {
+		display: none;
+	}
+}
