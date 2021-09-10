@@ -62,7 +62,7 @@
   }
 
   &__eyebrow {
-    @apply font-semibold uppercase text-px14 leading-px20 tracking-px05 mb-px14;
+    @apply font-semibold uppercase text-px14 leading-px20 tracking-px05 mb-px14 text-indigo;
 
     @screen md {
       @apply text-px14 leading-px18 tracking-em001 mb-px10;
