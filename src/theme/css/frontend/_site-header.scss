@@ -953,7 +953,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
   }
 }
 
-.top-nav-inner.top-nav-inner {
+.top-nav-inner {
 	@apply static flex flex-row items-center justify-between h-full;
 	@apply mx-auto;
 

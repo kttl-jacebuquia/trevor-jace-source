@@ -33,6 +33,12 @@
 
   .carousel-container {
     width: theme('postCard.width.DEFAULT');
+
+    &:not(.swiper-container-initialized) {
+      @screen mobile {
+        margin: auto;
+      }
+    }
   }
 
   .carousel-wrap__content {

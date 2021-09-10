@@ -115,10 +115,6 @@ class TagBoxEllipsis extends WithState {
 
 	toggleClick = (e) => {
 		e.preventDefault();
-		let mobile = window.matchMedia('(max-width: 767px)');
-		if (mobile.matches) {
-			this.$box.css('marginTop', `${this.boxTopMargin}px`);
-		}
 
 		this.setState({
 			expanded: !this.state.expanded
