@@ -1,131 +1,139 @@
 .listing {
-	&__header {
-		@apply flex flex-col gap-y-px32;
+  &__header {
+    @apply flex flex-col gap-y-px32;
 
-		@screen md {
-			@apply flex-row justify-between items-center;
-		}
-	}
+    @screen md {
+      @apply flex-row justify-between items-center;
+    }
+  }
 
-	&__content {
-		@apply flex flex-col mt-px26;
-		@apply border-t border-b border-teal-dark;
+  &__loading {
+    @apply hidden mt-px20;
 
-		@screen md {
-			@apply mt-px27;
-		}
+    .listing.loading & {
+      @apply block;
+    }
+  }
 
-		@screen xl {
-			@apply mt-px34;
-		}
-	}
+  &__content {
+    @apply flex flex-col mt-px26;
+    @apply border-t border-b border-teal-dark;
 
-	&__footer {
-		@apply text-center mt-px38;
+    @screen md {
+      @apply mt-px27;
+    }
 
-		@screen xl {
-			@apply mt-px70;
-		}
+    @screen xl {
+      @apply mt-px34;
+    }
+  }
 
-		a {
-			@apply font-semibold text-px18 leading-px34 tracking-px05;
-			@apply border-b-2 border-teal-dark;
+  &__footer {
+    @apply text-center mt-px38;
 
-			@screen xl {
-				@apply text-px20 leading-px24;
-			}
-		}
-	}
+    @screen xl {
+      @apply mt-px70;
+    }
 
-	&__info {
-		span {
-			@apply font-bold;
-		}
-	}
+    a {
+      @apply font-semibold text-px18 leading-px34 tracking-px05;
+      @apply border-b-2 border-teal-dark;
 
-	&__item {
-		@apply font-semibold text-teal-dark;
-		@apply hidden py-px24;
+      @screen xl {
+        @apply text-px20 leading-px24;
+      }
+    }
+  }
 
-		@screen md {
-			@apply justify-between py-px26;
-		}
+  &__info {
+    span {
+      @apply font-bold;
+    }
+  }
 
-		@screen xl {
-			@apply py-px28 px-px20;
-		}
+  &__item {
+    @apply font-semibold text-teal-dark;
+    @apply hidden py-px24;
 
-		&.show {
-			@apply block;
+    @screen md {
+      @apply justify-between py-px26;
+    }
 
-			@screen md {
-				@apply flex;
-			}
-		}
+    @screen xl {
+      @apply py-px28 px-px20;
+    }
 
-		& + & {
-			@apply border-t border-teal-dark border-opacity-20;
-		}
+    &.show {
+      @apply block;
 
-		&__eyebrow {
-			@apply flex uppercase text-px12 leading-px16 tracking-px05;
+      @screen md {
+        @apply flex;
+      }
+    }
 
-			@screen xl {
-				@apply text-px14 leading-px18;
-			}
+    & + & {
+      @apply border-t border-teal-dark border-opacity-20;
+    }
 
-			span {
-				@apply inline-block;
+    &__eyebrow {
+      @apply flex uppercase text-px12 leading-px16 tracking-px05;
 
-				& + span {
-					@apply border-l border-blue_green ml-px10 pl-px10;
-				}
-			}
-		}
+      @screen xl {
+        @apply text-px14 leading-px18;
+      }
 
-		&__title {
-			@apply text-px18 leading-px26 mt-px18;
+      span {
+        @apply inline-block;
 
-			@screen md {
-				@apply tracking-em_005;
-			}
+        & + span {
+          @apply border-l border-blue_green ml-px10 pl-px10;
+        }
+      }
+    }
 
-			@screen xl {
-				@apply text-px26 leading-px36 mt-px21;
-			}
+    &__title {
+      @apply text-px18 leading-px26 mt-px18;
 
-			span {
-				@apply font-normal;
-			}
-		}
+      @screen md {
+        @apply tracking-em_005;
+      }
 
-		&__date {
-			@apply font-normal text-px14 leading-px20 mt-px10;
+      @screen xl {
+        @apply text-px26 leading-px36 mt-px21;
+      }
 
-			@screen md {
-				@apply text-px12 leading-px16 mt-px8;
-			}
+      span {
+        @apply font-normal;
+      }
+    }
 
-			@screen xl {
-				@apply text-px14;
-			}
-		}
+    &__date {
+      @apply font-normal text-px14 leading-px20 mt-px10;
 
-		&__cta {
-			@apply mt-px20;
+      @screen md {
+        @apply text-px12 leading-px16 mt-px8;
+      }
 
-			@screen md {
-				@apply flex items-center mt-0;
-			}
+      @screen xl {
+        @apply text-px14;
+      }
+    }
 
-			a {
-				@apply text-px16 leading-px22 tracking-em_001;
-				@apply border-b-2 border-teal-dark;
+    &__cta {
+      @apply mt-px20;
 
-				@screen xl {
-					@apply text-px18 leading-px24;
-				}
-			}
-		}
-	}
+      @screen md {
+        @apply flex items-center mt-0;
+      }
+
+      a {
+        @apply text-px16 leading-px22 tracking-em_001;
+        @apply border-b-2 border-teal-dark;
+
+        @screen xl {
+          @apply text-px18 leading-px24;
+        }
+      }
+    }
+  }
 }

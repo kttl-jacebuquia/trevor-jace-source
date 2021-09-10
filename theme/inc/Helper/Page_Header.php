@@ -49,9 +49,9 @@ class Page_Header {
 			' ',
 			array(
 				'flex flex-col font-bold',
-				'text-px32 leading-px40 mb-px20',
-				'md:text-px36 md:leading-px42 md:mb-5 md:inline-block md:mb-px20',
-				'xl:mb-7 xl:text-px46 xl:leading-px56 xl:tracking-em005 xl:mb-px28',
+				'text-px32 leading-px40 mb-px14',
+				'md:text-px36 md:leading-px42 md:inline-block',
+				'xl:mb-px20 xl:text-px46 xl:leading-px56 xl:tracking-em005 xl:mb-px20',
 			)
 		);
 
@@ -60,7 +60,7 @@ class Page_Header {
 			array(
 				'hero__description',
 				'text-px18 leading-px24',
-				'md:tracking-px05 md:mb-px30 md:mx-px60',
+				'md:tracking-px05 md:mx-px60',
 				'xl:max-w-2xl xl:text-px24 xl:leading-px34 xl:tracking-normal',
 			)
 		);

@@ -131,6 +131,12 @@ export default class FundraiserQuiz {
 			// Add necessary selectors for FloatingLabelInput initialization
 			inputFields.forEach((inputField) => {
 				const options = {};
+				const requiredlabel = inputField.querySelector('.reqMark');
+
+				// Add asterisk on required label
+				if ( requiredlabel ) {
+					requiredlabel.innerHTML += '&nbsp;*';
+				}
 
 				inputField.classList.add('floating-label-input');
 

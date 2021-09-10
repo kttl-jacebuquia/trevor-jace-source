@@ -2,9 +2,16 @@ import $ from 'jquery';
 import { initFilterNavigation } from './filters';
 import initListing from './listing';
 import moment from 'moment';
+import WithState from '../../WithState';
 
-class ADPContent {
+class ADPContent extends WithState {
+	state = {
+		loading: false,
+	};
+
 	constructor(context) {
+		super();
+
 		this.context = context;
 		this.$context = $(this.context);
 
@@ -22,11 +29,16 @@ class ADPContent {
 	}
 
 	init() {
+		this.initializeContentObserver();
 		this.initializeContent();
 	}
 
 	initializeContent() {
+		this.setState({ loading: true });
+
 		$.getJSON(this.endpoint, (response) => {
+			this.setState({ loading: false });
+
 			const data = response.data;
 
 			this.populateListingInfo(this.$listingInfo, data.total_jobs);
@@ -38,6 +50,17 @@ class ADPContent {
 			this.populateJobItems(this.$listingContent, data.jobs);
 			initListing(this.context);
 		});
+	}
+
+	initializeContentObserver() {
+		const observer = new MutationObserver(() => {
+			// Get current items shown in the list
+			const shownItems = this.$listingContent.find('.listing__item.show');
+			// Update listing info
+			this.populateListingInfo( this.$listingInfo, shownItems.length );
+		});
+
+		observer.observe(this.$listingContent.get(0), { subtree: true, attributes: true });
 	}
 
 	populateListingInfo($container, total) {
@@ -161,6 +184,10 @@ class ADPContent {
 		return days > 1
 			? `${days} ${days === 1 ? ' day' : ' days'} ago`
 			: `just now`;
+	}
+
+	componentDidUpdate() {
+		this.$context.toggleClass('loading', this.state.loading);
 	}
 }
 

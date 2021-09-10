@@ -14,22 +14,19 @@
       @apply mt-0 bg-transparent text-current p-0;
 
       .section {
-        @apply bg-transparent grid-cols-1;
+        @apply grid gap-y-px20 gap-y-0 p-0 text-left border-0 bg-transparent grid-cols-1;
 
         @screen md {
           @apply grid items-end tw-grid-tablet items-baseline;
         }
-      }
-
-      .section {
-        @apply grid gap-y-px20 p-0 text-left border-0;
 
         & + .section {
           @apply mt-px30;
         }
 
         legend {
-          @apply p-0 col-span-full text-white;
+          @apply inline-block p-0 col-span-full text-white m-0;
+
           div {
             @apply text-current;
           }
@@ -39,7 +36,7 @@
       .field-container-D {
         --default-label-color: theme("colors.blue_green.DEFAULT");
         --activated-label-color: theme("colors.white.DEFAULT");
-        @apply flex flex-col text-left p-0 border-0 w-full;
+        @apply inline-block text-left p-0 border-0 w-full mt-px50;
         color: var(--default-label-color);
 
         @screen md {
@@ -66,7 +63,7 @@
 
         &[data-input-type="checkbox"] {
           label {
-            @apply static px-0 ml-px10 pointer-events-auto;
+            @apply static px-0 ml-px10 pointer-events-auto h-auto;
           }
         }
 
@@ -100,7 +97,7 @@
         z-index: 1;
 
         &::after {
-          @apply text-current contents;
+          @apply hidden;
         }
 
         * {
@@ -186,11 +183,11 @@
     }
 
     &#tfa_1879-D {
-      @apply mt-px40;
+      @apply mt-px50;
     }
 
     &#tfa_1885-D {
-      @apply mt-px60;
+      @apply mt-px70;
 
       @screen md {
         @apply col-span-full;
@@ -198,10 +195,10 @@
     }
 
     &#tfa_1907-D {
-      @apply mt-px80;
+      @apply mt-px100;
 
       @screen md {
-        @apply col-span-full mt-px50;
+        @apply col-span-full mt-px82;
       }
     }
 
@@ -212,10 +209,10 @@
     }
 
     &#tfa_1932-D {
-      @apply mt-px100;
+      @apply mt-px110;
 
       @screen md {
-        @apply col-span-full mt-px60;
+        @apply col-span-full mt-px70;
       }
 
       label {
@@ -226,18 +223,18 @@
     }
 
     &#tfa_1938-D {
-      @apply mt-px80;
+      @apply mt-px90;
 
       @screen md {
-        @apply mt-px40;
+        @apply mt-px60;
       }
     }
 
     &#tfa_1976-D {
-      @apply mt-px122;
+      @apply mt-px130;
 
       @screen md {
-        @apply mt-px50;
+        @apply mt-px70;
       }
     }
   }

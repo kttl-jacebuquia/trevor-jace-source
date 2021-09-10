@@ -83,21 +83,35 @@ class Is {
 		if ( ! empty( $menu_locations['header-support'] ) ) {
 			$find_support_items = wp_get_nav_menu_items( $menu_locations['header-support'] );
 			$current_page       = get_queried_object();
+			$current_slug       = '';
 
 			foreach ( $find_support_items as $item ) {
-				if ( ! empty( $current_page->ID ) && $item->object_id === $current_page->ID ) {
-					return true;
-				} elseif ( ! empty( $current_page->ID ) && $item->object_id === $current_page->term_id ) {
-					return true;
-				} elseif ( ! empty( $current_page->slug ) && strpos( $item->url, $current_page->slug ) ) {
-					return true;
-				} elseif ( ! empty( $current_page->post_name ) && strpos( $item->url, $current_page->post_name ) ) {
+				$menu_url = rtrim( $item->url, '/' ) . '/';
+
+				if ( ! empty( $current_page->slug ) ) {
+					$current_slug = self::add_forward_slash( $current_page->slug );
+				} elseif ( ! empty( $current_page->post_name ) ) {
+					$current_slug = self::add_forward_slash( $current_page->post_name );
+				}
+
+				if ( ! empty( $current_slug ) && false !== strpos( $menu_url, $current_slug ) ) {
 					return true;
 				}
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Add left/right forward slash in string
+	 */
+	public static function add_forward_slash( $string ): string {
+		$string = '/' . ltrim( $string, '/' );
+
+		$string = rtrim( $string, '/' ) . '/';
+
+		return $string;
 	}
 
 	/**
