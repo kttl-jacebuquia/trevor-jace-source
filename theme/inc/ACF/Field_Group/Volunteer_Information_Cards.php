@@ -148,7 +148,7 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 
 				<div class="volunteer-information__supporting-text">
 				<?php if ( ! empty( $number ) ) : ?>
-					<p class="volunteer-information__supporting-text__number"><?php echo esc_html( number_format( $number ) ); ?></p>
+					<p class="volunteer-information__supporting-text__number"><?php echo esc_html( $number ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $supporting_text ) ) : ?>
