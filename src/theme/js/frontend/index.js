@@ -257,6 +257,9 @@ features.collapsible($('.js-accordion'), {});
 			},
 			minLength: 0,
 			appendTo: '#input-suggestions',
+			focus: () => {
+				$('.ui-helper-hidden-accessible').hide();
+			},
 			open() {
 				/**
 				 * The results will automatically show without a header
@@ -304,11 +307,11 @@ features.collapsible($('.js-accordion'), {});
 				return false;
 			}
 		})
-		.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-			return $( "<li>" )
-				.append( `<a href="/search/?s=${item.value}">${item.label}</a>`)
-				.appendTo( ul );
-		};
+		.data('ui-autocomplete')._renderItem = function (ul, item) {
+		return $('<li>')
+			.append(`<a href="/search/?s=${item.value}">${item.label}</a>`)
+			.appendTo(ul);
+	};
 
 	searchCancelIcon.on('click', function (e) {
 		inputSearchField.val('');
