@@ -412,7 +412,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 		?>
 			<button class="fundraiser-quiz__back-btn">BACK</button>
 			<div class="fundraiser-quiz__pagination"><span class="fundraiser-quiz__current-page"></span>/<span class="fundraiser-quiz__total-page"></span></div>
-			<form class="fundraiser-quiz container mx-auto text-white text-center">
+			<div class="fundraiser-quiz container mx-auto text-white text-center">
 				<?php
 					echo self::step_one( $step_1_data );
 					echo self::form( $dev_form_data );
@@ -421,7 +421,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 					echo self::who_is_fundraising( $who_is_fundraising_data );
 					echo self::gathering( $planning_to_gather_data );
 				?>
-			</form>
+			</div>
 		<?php
 		return ob_get_clean();
 	}
