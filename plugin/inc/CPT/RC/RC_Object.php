@@ -128,7 +128,6 @@ abstract class RC_Object {
 					'hierarchical' => false,
 					'with_front'   => false,
 				),
-				'labels'            => get_taxonomy_labels( get_taxonomy( 'tag' ) ),
 			)
 		);
 
@@ -370,7 +369,7 @@ abstract class RC_Object {
 
 		return array(
 			static::PERMALINK_BASE_TAX_TAG . "/([^/]+)/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$" => 'index.php?' . static::TAXONOMY_TAG . '=$matches[1]&paged=$matches[2]',
-			static::PERMALINK_BASE_TAX_TAG . '/([^/]+)/?$'                                             => 'index.php?' . static::TAXONOMY_TAG . '=$matches[1]',
+			static::PERMALINK_BASE_TAX_TAG . '/([^/]+)/?$' => 'index.php?' . static::TAXONOMY_TAG . '=$matches[1]',
 		);
 	}
 
