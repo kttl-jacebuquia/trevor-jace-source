@@ -1,7 +1,7 @@
 .info-page-body {
 	@apply mt-px38 text-px14 leading-px20;
 	@apply md:mt-px60 md:col-span-8 md:text-px16 md:leading-px22;
-	@apply xl:mt-0 md:text-px18 md:leading-px26;
+	@apply lg2:mt-0 md:text-px18 md:leading-px26;
 
 	p:not(:first-child) {
 		@apply mt-px18;
@@ -10,13 +10,13 @@
 	h2 {
 		@apply text-px22 leading-px32 font-bold;
 		@apply md:text-px24 md:leading-px28 md:tracking-px_05;
-		@apply xl:text-px30 xl:leading-px40;
+		@apply lg2:text-px30 lg2:leading-px40;
 
 		&:not(:first-child) {
 			@apply mt-px38 md:mt-px48;
 
 			+ p {
-				@apply mt-px16 md:mt-px20 xl:mt-px18;
+				@apply mt-px16 md:mt-px20 lg2:mt-px18;
 			}
 		}
 	}
@@ -24,13 +24,13 @@
 	h3 {
 		@apply text-px20 leading-px26 font-bold;
 		@apply md:text-px22 md:leading-px30;
-		@apply xl:text-px22 xl:leading-px30;
+		@apply lg2:text-px22 lg2:leading-px30;
 
 		&:not(:first-child) {
-			@apply mt-px28 md:mt-px48 xl:mt-px28;
+			@apply mt-px28 md:mt-px48 lg2:mt-px28;
 
 			+ p {
-				@apply mt-px14 md:mt-px20 xl:mt-px14;
+				@apply mt-px14 md:mt-px20 lg2:mt-px14;
 			}
 		}
 	}
@@ -38,7 +38,7 @@
 	ul,
 	ol {
 		&:not(:first-child) {
-			@apply mt-px28 xl:mt-px30;
+			@apply mt-px28 lg2:mt-px30;
 		}
 	}
 

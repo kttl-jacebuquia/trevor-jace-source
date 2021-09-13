@@ -3,17 +3,17 @@
 		@apply container mx-auto w-full;
 		@apply bg-white text-indigo pt-px70;
 		@apply md:pt-px26;
-		@apply xl:pt-px80;
+		@apply lg2:pt-px80;
 	}
 
 	&-content {
 		@apply flex flex-col-reverse;
 		@apply md:grid md:grid-cols-8 md:gap-x-px28;
-		@apply xl:grid-cols-12;
+		@apply lg2:grid-cols-12;
 	}
 
 	&-sidebar {
 		@apply md:col-span-8 md:row-start-1;
-		@apply xl:col-span-3 xl:col-start-10;
+		@apply lg2:col-span-3 lg2:col-start-10;
 	}
 }
