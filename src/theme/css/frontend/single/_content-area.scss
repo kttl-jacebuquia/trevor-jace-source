@@ -31,6 +31,10 @@
       @apply text-current;
     }
   }
+
+  .post-single.no-thumbnail & {
+    @apply md:pt-px50 lg:pt-px45 lg2:pt-0;
+  }
 }
 
 .post-content-grid {

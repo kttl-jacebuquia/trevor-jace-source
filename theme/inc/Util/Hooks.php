@@ -18,6 +18,7 @@ use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Helper\Trevor_Chat;
 use TrevorWP\Util\StaticFiles;
+use TrevorWP\Theme\Helper\Thumbnail;
 
 /**
  * Theme Hooks
@@ -80,6 +81,9 @@ class Hooks {
 		if ( defined( 'GTM4WP_WPFILTER_COMPILE_DATALAYER' ) ) {
 			add_filter( GTM4WP_WPFILTER_COMPILE_DATALAYER, array( self::class, 'datalayer_data_update' ) );
 		}
+
+		# Single Post class
+		add_filter( 'post_class', array( self::class, 'post_class' ), 10, 3 );
 
 		# Trevor Chat Button
 		Trevor_Chat::init();
@@ -809,5 +813,44 @@ class Hooks {
 		}
 
 		return $atts;
+	}
+
+	/**
+	 * Adds custom class to Single Post classes
+	 *
+	 * @param array $atts - classes.
+	 *
+	 * @return array
+	 *
+	 */
+	public static function post_class( $classes, $class, $post_id ) {
+		$post = get_post( $post_id );
+
+		# Thumbnail variants
+		$thumb_variants   = array( self::_get_thumb_var( Thumbnail::TYPE_VERTICAL ) );
+		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+		$thumb_variants[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
+		$thumb            = Thumbnail::post( $post, ...$thumb_variants );
+		$has_thumbnail    = ! empty( $thumb );
+
+		if ( ! $has_thumbnail ) {
+			$classes[] = 'no-thumbnail';
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return array
+	 */
+	protected static function _get_thumb_var( string $type ): array {
+		return Thumbnail::variant(
+			Thumbnail::SCREEN_SM,
+			$type,
+			Thumbnail::SIZE_MD,
+			array( 'class' => 'post-header-bg' )
+		);
 	}
 }
