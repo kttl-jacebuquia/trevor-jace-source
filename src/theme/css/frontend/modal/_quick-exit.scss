@@ -58,7 +58,7 @@
 		&--mobile {
 			@apply block;
 
-      @screen xl {
+      @screen lg {
         @apply hidden;
       }
 		}
@@ -66,7 +66,7 @@
 		&--desktop {
 			@apply hidden;
 
-      @screen xl {
+      @screen lg {
         @apply block;
       }
 		}
