@@ -14,6 +14,26 @@
 		@apply px-px20;
 	}
 
+  &:first-child {
+    @screen md {
+      width: 180px;
+    }
+
+    @screen xl {
+      width: 205px;
+    }
+  }
+
+  &:last-child {
+    @screen md {
+      width: 210px;
+    }
+
+    @screen xl {
+      width: 240px;
+    }
+  }
+
 	&:hover,
 	&:focus,
 	&[aria-expanded='true'] {
@@ -37,6 +57,12 @@
 		i {
 			@apply text-px12 leading-px6 h-px6;
 		}
+
+    span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
 	}
 
 	&__content {
