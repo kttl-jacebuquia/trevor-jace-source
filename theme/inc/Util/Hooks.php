@@ -650,7 +650,7 @@ class Hooks {
 		}
 
 		# Long waiting banner
-		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, true );
+		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, false );
 		$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
 
 		if ( $force_show ) {

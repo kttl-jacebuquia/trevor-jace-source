@@ -1,10 +1,13 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
+use TrevorWP\Main;
+
 class Site_Banners extends A_Options_Page {
 	const FIELD_LONG_WAIT_URL           = 'long_wait_url';
 	const FIELD_LONG_WAIT_FORCE_SHOW    = 'force_show';
 	const FIELD_LONG_WAIT_TITLE         = 'long_wait_title';
 	const FIELD_LONG_WAIT_DESCRIPTION   = 'long_wait_description';
+	const FIELD_LONG_WAIT_CURRENT       = 'long_wait_current';
 	const FIELD_CUSTOM_ENTRIES          = 'custom_entries';
 	const FIELD_CUSTOM_ENTRY_ACTIVE     = 'custom_entry_active';
 	const FIELD_CUSTOM_ENTRY_TITLE      = 'custom_entry_title';
@@ -28,12 +31,14 @@ class Site_Banners extends A_Options_Page {
 		$long_wait_force_show    = static::gen_field_key( static::FIELD_LONG_WAIT_FORCE_SHOW );
 		$long_wait_title         = static::gen_field_key( static::FIELD_LONG_WAIT_TITLE );
 		$long_wait_description   = static::gen_field_key( static::FIELD_LONG_WAIT_DESCRIPTION );
+		$long_wait_current       = static::gen_field_key( static::FIELD_LONG_WAIT_CURRENT );
 		$custom_entries          = static::gen_field_key( static::FIELD_CUSTOM_ENTRIES );
 		$custom_entry_active     = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_ACTIVE );
 		$custom_entry_start_date = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_START_DATE );
 		$custom_entry_end_date   = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_END_DATE );
 		$custom_entry_title      = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_TITLE );
 		$custom_entry_message    = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_MESSAGE );
+		$current_long_wait_value = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT ) ? 'TRUE' : 'FALSE';
 
 		return array_merge(
 			static::_gen_tab_field( 'Long Wait' ),
@@ -79,6 +84,20 @@ class Site_Banners extends A_Options_Page {
 					'wrapper' => array(
 						'width' => '50%',
 					),
+				),
+				static::FIELD_LONG_WAIT_DESCRIPTION => array(
+					'key'     => $long_wait_description,
+					'name'    => static::FIELD_LONG_WAIT_DESCRIPTION,
+					'label'   => 'Description',
+					'type'    => 'text',
+					'wrapper' => array(
+						'width' => '50%',
+					),
+				),
+				static::FIELD_LONG_WAIT_CURRENT => array(
+					'key' => $long_wait_current,
+					'name' => static::FIELD_LONG_WAIT_CURRENT,
+					'label' => "Current Value: <strong>{$current_long_wait_value}</strong>",
 				),
 			),
 			static::_gen_tab_field( 'Custom' ),
