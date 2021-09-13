@@ -35,6 +35,7 @@ abstract class RC_Object {
 	/* Permalinks */
 	const PERMALINK_BASE              = 'resources';
 	const PERMALINK_BASE_TAX_CATEGORY = self::PERMALINK_BASE . '/category';
+	const PERMALINK_BASE_TAX_TAG      = self::PERMALINK_BASE . '/tag';
 	const PERMALINK_BLOG              = self::PERMALINK_BASE . '/blog';
 	const PERMALINK_GUIDE             = self::PERMALINK_BASE . '/guide';
 	const PERMALINK_ARTICLE           = self::PERMALINK_BASE . '/article';
@@ -111,6 +112,26 @@ abstract class RC_Object {
 			$cls::register_post_type();
 		}
 
+		## Tag
+		$tag_post_types = self::$PUBLIC_POST_TYPES;
+		register_taxonomy(
+			self::TAXONOMY_TAG,
+			$tag_post_types,
+			array(
+				'public'            => true,
+				'hierarchical'      => false,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'rewrite'           => array(
+					'slug'         => self::PERMALINK_BASE_TAX_TAG,
+					'hierarchical' => false,
+					'with_front'   => false,
+				),
+				'labels'            => get_taxonomy_labels( get_taxonomy( 'tag' ) ),
+			)
+		);
+
 		# Taxonomies
 		## Category
 		register_taxonomy(
@@ -128,22 +149,6 @@ abstract class RC_Object {
 					'with_front'   => false,
 				),
 				'labels'            => get_taxonomy_labels( get_taxonomy( 'category' ) ),
-			)
-		);
-
-		## Tag
-		$tag_post_types = self::$PUBLIC_POST_TYPES;
-		register_taxonomy(
-			self::TAXONOMY_TAG,
-			$tag_post_types,
-			array(
-				'public'            => false,
-				'hierarchical'      => false,
-				'show_ui'           => true,
-				'show_in_rest'      => true,
-				'show_tagcloud'     => false,
-				'show_admin_column' => true,
-				'rewrite'           => false,
 			)
 		);
 
@@ -169,6 +174,12 @@ abstract class RC_Object {
 		add_filter(
 			self::TAXONOMY_CATEGORY . '_rewrite_rules',
 			array( self::class, 'rewrite_rules_category' ),
+			PHP_INT_MAX,
+			0
+		);
+		add_filter(
+			self::TAXONOMY_TAG . '_rewrite_rules',
+			array( self::class, 'rewrite_rules_tag' ),
 			PHP_INT_MAX,
 			0
 		);
@@ -343,6 +354,23 @@ abstract class RC_Object {
 		return array(
 			self::PERMALINK_BASE_TAX_CATEGORY . "/([^/]+)/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$" => 'index.php?' . self::TAXONOMY_CATEGORY . '=$matches[1]&paged=$matches[2]',
 			self::PERMALINK_BASE_TAX_CATEGORY . '/([^/]+)/?$'                                             => 'index.php?' . self::TAXONOMY_CATEGORY . '=$matches[1]',
+		);
+	}
+
+	/**
+	 * Filters rewrite rules used for individual permastructs.
+	 *
+	 * @return string[]
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/permastructname_rewrite_rules/
+	 * @see construct()
+	 */
+	public static function rewrite_rules_tag(): array {
+		global $wp_rewrite;
+
+		return array(
+			static::PERMALINK_BASE_TAX_TAG . "/([^/]+)/{$wp_rewrite->pagination_base}/?([0-9]{1,})/?$" => 'index.php?' . static::TAXONOMY_TAG . '=$matches[1]&paged=$matches[2]',
+			static::PERMALINK_BASE_TAX_TAG . '/([^/]+)/?$'                                             => 'index.php?' . static::TAXONOMY_TAG . '=$matches[1]',
 		);
 	}
 
