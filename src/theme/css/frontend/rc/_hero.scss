@@ -44,7 +44,7 @@
   }
 
   .search-field {
-    @apply text-px14 leading-px18 tracking-em005 pl-0 ml-0 h-auto;
+    @apply text-px14 leading-px18 tracking-em005 pl-0 ml-0 h-auto min-w-0;
 
     @screen md {
       @apply text-px16 leading-px22 pl-px94 ml-0 mr-px16 pl-0 pr-0;
