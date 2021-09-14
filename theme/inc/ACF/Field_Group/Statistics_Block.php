@@ -89,10 +89,12 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 					),
 				),
 				static::FIELD_BUTTON             => array(
-					'key'   => $button,
-					'name'  => static::FIELD_BUTTON,
-					'label' => 'Button',
-					'type'  => 'link',
+					'key'        => $button,
+					'name'       => static::FIELD_BUTTON,
+					'label'      => 'Button',
+					'type'       => 'group',
+					'layout'     => 'block',
+					'sub_fields' => Advanced_Link::_get_fields(),
 				),
 			),
 		);
@@ -164,9 +166,17 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 						<div class="swiper-pagination"></div>
 					</div>
 				<?php endif; ?>
-				<?php if ( ! empty( $button['url'] ) ) : ?>
+				<?php if ( ! empty( $button ) ) : ?>
 					<div class="statistics__cta-wrap">
-						<a class="statistics__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+						<?php
+							echo Advanced_Link::render(
+								null,
+								$button,
+								array(
+									'class' => array( 'statistics__cta' ),
+								)
+							);
+						?>
 					</div>
 				<?php endif; ?>
 			</div>

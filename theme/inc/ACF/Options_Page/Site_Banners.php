@@ -94,9 +94,9 @@ class Site_Banners extends A_Options_Page {
 						'width' => '50%',
 					),
 				),
-				static::FIELD_LONG_WAIT_CURRENT => array(
-					'key' => $long_wait_current,
-					'name' => static::FIELD_LONG_WAIT_CURRENT,
+				static::FIELD_LONG_WAIT_CURRENT     => array(
+					'key'   => $long_wait_current,
+					'name'  => static::FIELD_LONG_WAIT_CURRENT,
 					'label' => "Current Value: <strong>{$current_long_wait_value}</strong>",
 				),
 			),
