@@ -20,7 +20,7 @@ class Word_Of_The_Day {
 
 		ob_start();
 		?>
-			<div class="word-of-the-day">
+			<div class="word-of-the-day <?php echo $options['image'] ? '' : 'no-image'; ?>">
 				<div class="word-of-the-day__container">
 					<div class="word-of-the-day__content">
 						<h2 class="word-of-the-day__eyebrow">WORD OF THE DAY</h2>
@@ -30,9 +30,11 @@ class Word_Of_The_Day {
 							<?php echo nl2br( esc_html( $options['description'] ) ); ?>
 						</p>
 					</div>
-					<div class="word-of-the-day__image">
-					<img src="<?php echo $options['image']; ?>" class="word-of-the-day__img" aria-hidden="true" />
-					</div>
+					<?php if ( $options['image'] ) : ?>
+						<div class="word-of-the-day__image">
+							<img src="<?php echo $options['image']; ?>" class="word-of-the-day__img" aria-hidden="true" />
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php

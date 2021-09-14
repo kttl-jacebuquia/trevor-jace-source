@@ -1,19 +1,27 @@
 .word-of-the-day {
-  @apply bg-gradient-trevorspace pt-px80 text-indigo text-center w-full max-w-none;
+  @apply bg-gradient-trevorspace pt-px80 pb-px60 text-indigo text-center w-full max-w-none;
   background-size: cover;
   @apply mt-20;
 
   @screen md {
-    @apply mt-px120
+    @apply mt-px120 pb-0;
   }
 
-  @screen xl {
+  @screen lg {
     @apply pt-0 text-left;
+  }
+
+  &.no-image {
+    @apply md:pb-px60; lg:pb-0;
   }
 
   &__container {
     @apply tw-grid items-center;
     @apply container mx-auto;
+
+    @screen lg {
+      @apply tw-grid-desktop;
+    }
   }
 
   &__content {
@@ -23,8 +31,16 @@
       @apply col-span-4 col-start-3;
     }
 
+    @screen lg {
+      @apply col-span-7 col-start-1 px-px40 py-px45;
+    }
+
     @screen xl {
-      @apply col-span-7 col-start-1 pl-px40 py-px130;
+      @apply px-px70;
+    }
+
+    .no-image & {
+      @apply lg:py-px125 xl:py-px135;
     }
   }
 
@@ -73,21 +89,29 @@
   }
 
   &__image {
-    @apply col-span-full mt-px38 -ml-px28;
-    width: calc(100% + #{rem-calc(56)});
+    @apply col-span-full mt-px72 aspect-ratio-1-1;
 
     @screen md {
-      @apply mt-px54 mx-0;
+      @apply mt-px54 mx-px70 col-span-6 col-start-2;
+    }
+
+    @screen lg {
+      @apply col-start-8 col-span-5 mt-px45;
+
+      margin-left: calc( -1 * #{theme('container.padding.DEFAULT')} );
+      margin-right: -70px;
     }
 
     @screen xl {
-      @apply mt-px75 col-start-9 col-span-4 self-end;
-      width: calc(100% + #{rem-calc(68)});
+      @apply mx-0 mt-px45 mb-px40;
     }
   }
 
   &__img {
     @apply block w-full mx-auto max-w-none;
+
+    object-fit: cover;
+    border-radius: 10px;
 
     @screen md {
       @apply h-px392 w-auto;
