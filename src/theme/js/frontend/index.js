@@ -298,7 +298,9 @@ features.collapsible($('.js-accordion'), {});
 					$(this).attr('size', $(this).attr('placeholder').length);
 				} else {
 					$(this).parent().addClass('input-has-value');
-					$(this).attr('size', $(this).val().length);
+					const size =
+						$(this).val().length > 32 ? 32 : $(this).val().length;
+					$(this).attr('size', size);
 				}
 			})
 			.on('keypress', function (event) {
@@ -311,11 +313,11 @@ features.collapsible($('.js-accordion'), {});
 					return false;
 				}
 			})
-			.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-				return $( "<li>" )
-					.append( `<a href="?s=${item.value}">${item.label}</a>` )
-					.appendTo( ul );
-			};
+			.data('ui-autocomplete')._renderItem = function (ul, item) {
+			return $('<li>')
+				.append(`<a href="?s=${item.value}">${item.label}</a>`)
+				.appendTo(ul);
+		};
 
 		searchCancelIcon.on('click', function (e) {
 			inputSearchField.val('');
@@ -341,8 +343,7 @@ features.collapsible($('.js-accordion'), {});
 			}, 100);
 		}
 	}
-}
-)();
+})();
 
 /**
  * Bouncing Arrow function
