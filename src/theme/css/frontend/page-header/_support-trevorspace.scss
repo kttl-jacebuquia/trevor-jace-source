@@ -7,7 +7,7 @@
       margin-top: -$top-nav-height-tablet;
     }
 
-    @screen xl {
+    @screen lg2 {
       padding-top: $top-nav-height-desktop;
       margin-top: -$top-nav-height-desktop;
       @apply pb-px150;
@@ -26,7 +26,7 @@
         @apply col-span-6 col-start-2;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply col-span-8 col-start-3;
       }
     }
@@ -42,7 +42,7 @@
         @apply mb-px16 text-px14 leading-px18;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply mb-px23 text-px16 leading-px22;
       }
 
@@ -62,7 +62,7 @@
         @apply text-px36 leading-px46 tracking-em005;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply text-px50 leading-px60 tracking-em001;
       }
 
@@ -73,7 +73,7 @@
           @apply inline-block;
         }
 
-        @screen xl {
+        @screen lg2 {
           @apply text-px72 leading-px82 tracking-em_003;
         }
       }
@@ -94,7 +94,7 @@
         @apply mt-px16 text-px20 leading-px30 tracking-em005;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply text-px22 leading-px34 tracking-em005;
       }
     }
@@ -106,7 +106,7 @@
         @apply mt-px22;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply mt-px32;
       }
     }
@@ -130,7 +130,7 @@
         @apply mt-px22 text-px18 leading-px24 tracking-px025;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply mt-px36;
       }
 

@@ -316,6 +316,7 @@ module.exports = {
 			gap: {
 				sm: px2rem(12),
 				md: px2rem(28),
+				lg2: px2rem(28),
 				xl: px2rem(28),
 				...px2remMap(divisibles(10, 10, 0, 100)),
 			},

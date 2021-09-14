@@ -771,8 +771,16 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 // NAV
 //
 #top-nav {
-	height: var(--top-nav-height);
 	z-index: var(--z-index-nav-base);
+  height: $top-nav-height;
+
+  @screen md {
+    height: $top-nav-height-tablet;
+  }
+
+  @screen xl {
+    height: $top-nav-height-desktop;
+  }
 
 	// Background blur and fill, for mobile/tablet
 	@screen lg-max {

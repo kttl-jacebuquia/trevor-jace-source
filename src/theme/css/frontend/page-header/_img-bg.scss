@@ -80,7 +80,7 @@
       @apply left-px28 bottom-px28;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply w-px28 h-px28 left-px32 bottom-px28 text-px28;
     }
   }
@@ -131,14 +131,14 @@
       @apply mt-px30;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px30;
     }
   }
 }
 
 // With content alignment on Full Bleed Video type
-@screen xl {
+@screen lg2 {
   .type-img-bg {
     // Left Alignment
     &.content-left {
