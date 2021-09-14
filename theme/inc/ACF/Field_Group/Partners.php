@@ -157,6 +157,7 @@ class Partners extends A_Field_Group implements I_Block, I_Renderable {
 								<?php else : ?>
 									<div class="partners-block__name">
 										<a href="<?php echo $url; ?>"
+										class="wave-underline"
 										rel="nofollow noreferrer noopener"
 										target="_blank">
 											<?php echo $partner->post_title; ?>
