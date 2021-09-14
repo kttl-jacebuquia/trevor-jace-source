@@ -121,11 +121,17 @@
     }
 
     @screen lg2 {
-      @apply col-span-7 mt-0 pl-px35 -mr-px120;
+      @apply col-span-7 mt-0 ml-px35 -mr-px120;
     }
 
     @screen xl {
       @apply -mr-px140;
+    }
+
+    // Tilted variant
+    &--tilted {
+      @apply rounded-px10 overflow-hidden;
+      transform: rotate(5.34deg);
     }
 
     img {
@@ -151,7 +157,7 @@
       }
 
       @screen lg2 {
-        @apply col-span-6 col-start-7 -ml-px48 -mr-px58;
+        @apply col-span-6 col-start-7 -ml-px20 -mr-px58;
       }
     }
   }

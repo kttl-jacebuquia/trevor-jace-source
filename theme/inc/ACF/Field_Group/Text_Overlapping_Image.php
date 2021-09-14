@@ -7,6 +7,7 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 	const FIELD_DESCRIPTION    = 'description';
 	const FIELD_BUTTON         = 'button';
 	const FIELD_IMAGE          = 'image';
+	const FIELD_IMAGE_TILTED   = 'image_titled';
 	const FIELD_NUMBERS        = 'numbers';
 	const FIELD_NUMBER_VALUE   = 'number_value';
 	const FIELD_NUMBER_CAPTION = 'number_caption';
@@ -25,6 +26,7 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 		$description    = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$button         = static::gen_field_key( static::FIELD_BUTTON );
 		$image          = static::gen_field_key( static::FIELD_IMAGE );
+		$image_tilted   = static::gen_field_key( static::FIELD_IMAGE_TILTED );
 		$numbers        = static::gen_field_key( static::FIELD_NUMBERS );
 		$number_value   = static::gen_field_key( static::FIELD_NUMBER_VALUE );
 		$number_caption = static::gen_field_key( static::FIELD_NUMBER_CAPTION );
@@ -121,6 +123,14 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 						'preview_size'  => 'thumbnail',
 						'library'       => 'all',
 					),
+					static::FIELD_IMAGE_TILTED         => array(
+						'key'           => $image_tilted,
+						'name'          => static::FIELD_IMAGE_TILTED,
+						'label'         => 'Tilted Image',
+						'type'          => 'true_false',
+						'default_value' => 0,
+						'ui'            => 1,
+					),
 					static::FIELD_NUMBERS       => array(
 						'key'          => $numbers,
 						'name'         => static::FIELD_NUMBERS,
@@ -168,13 +178,14 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title       = static::get_val( static::FIELD_TITLE );
-		$description = static::get_val( static::FIELD_DESCRIPTION );
-		$button      = static::get_val( static::FIELD_BUTTON );
-		$image       = static::get_val( static::FIELD_IMAGE );
-		$numbers     = static::get_val( static::FIELD_NUMBERS );
-		$styles      = static::get_val( static::FIELD_STYLES );
-		$btn_styles  = static::get_val( static::FIELD_BUTTON_STYLES );
+		$title        = static::get_val( static::FIELD_TITLE );
+		$description  = static::get_val( static::FIELD_DESCRIPTION );
+		$button       = static::get_val( static::FIELD_BUTTON );
+		$image        = static::get_val( static::FIELD_IMAGE );
+		$image_tilted = static::get_val( static::FIELD_IMAGE_TILTED );
+		$numbers      = static::get_val( static::FIELD_NUMBERS );
+		$styles       = static::get_val( static::FIELD_STYLES );
+		$btn_styles   = static::get_val( static::FIELD_BUTTON_STYLES );
 
 		list(
 			$btn_bgcolor,
@@ -207,6 +218,14 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 			'href'   => esc_url( $button['url'] ),
 			'target' => esc_attr( $button['target'] ),
 		);
+
+		$image_classnames = array(
+			'text-overlapping-image__image',
+		);
+
+		if ( $image_tilted ) {
+			$image_classnames[] = 'text-overlapping-image__image--tilted';
+		}
 
 		ob_start();
 		?>
@@ -243,7 +262,7 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 					<?php endif; ?>
 				</div>
 				<?php if ( ! empty( $image['url'] ) ) : ?>
-					<div class="text-overlapping-image__image">
+					<div <?php echo static::render_attrs( $image_classnames ); ?>>
 						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>">
 					</div>
 				<?php endif; ?>
