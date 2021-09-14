@@ -17,7 +17,7 @@
 		}
 
 		@screen lg2 {
-			@apply px-0;
+			@apply px-px40;
 			@apply max-w-screen-lg2;
 
 			width: calc(100% - 80px);
@@ -53,6 +53,7 @@
 		background-repeat: no-repeat;
 		width: rem-calc(30px);
 		height: rem-calc(25px);
+    flex-shrink: 0;
 		@apply mb-px15 md:mb-0 md:mr-px20;
 	}
 
