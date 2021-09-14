@@ -180,10 +180,6 @@
       }
     }
 
-    .is-carousel & {
-      height: 100% !important;
-    }
-
     .staff-col-3 & {
       @apply w-full mr-auto ml-auto;
 
@@ -244,6 +240,10 @@
         object-fit: cover;
         object-position: center center;
       }
+    }
+
+    .is-carousel & {
+      height: auto;
     }
   }
 
