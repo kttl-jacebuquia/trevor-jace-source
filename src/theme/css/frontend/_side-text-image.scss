@@ -11,7 +11,7 @@
       @apply col-span-4 py-px10 text-left;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply col-span-5;
     }
   }
@@ -23,7 +23,7 @@
       @apply text-px32 leading-px42;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px46 leading-px56 tracking-em_001;
     }
   }
@@ -35,7 +35,7 @@
       @apply mt-px12 text-px18 leading-px26;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px20 text-px26 leading-px36 tracking-em005;
     }
   }
@@ -49,24 +49,43 @@
       @apply text-px16 leading-px22 px-px24;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply h-px66 px-px40 text-px20 leading-px26 tracking-px05;
     }
   }
 
   &__image {
-    @apply col-span-full -mx-px28;
+    @apply relative col-span-full -mx-px28;
 
     @screen md {
       @apply col-span-4 col-start-5 ml-0 -mr-px50;
     }
 
+    @screen lg2 {
+      @apply col-span-6 col-start-7 -mr-px120;
+    }
+
     @screen xl {
-      @apply col-span-6 col-start-7 -mr-px140;
+      @apply -mr-px140;
+    }
+
+    // Aspect Ratio
+    &::before {
+      @apply block;
+      content: '';
+      padding-top: percentage(425 / 375);
+
+      @screen md {
+        padding-top: percentage(419 / 370);
+      }
+
+      @screen lg2 {
+        padding-top: percentage(800 / 706);
+      }
     }
 
     img {
-      @apply w-full;
+      @apply w-full h-full absolute top-0 left-0 object-cover;
     }
   }
 }
