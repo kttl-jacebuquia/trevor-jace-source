@@ -1,4 +1,13 @@
 .messaging {
+  // With heading variant
+  &--with-heading {
+    .messaging__description {
+      @screen lg2 {
+        @apply text-px30 leading-px40;
+      }
+    }
+  }
+
 	&__container {
 		@apply tw-grid container mx-auto;
 
