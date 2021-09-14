@@ -139,6 +139,7 @@
 
         a {
           @apply text-sm font-semibold w-full mt-px30;
+          @include wave-underline;
 
           @screen md {
             @apply text-base;
