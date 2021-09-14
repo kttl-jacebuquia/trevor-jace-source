@@ -4,11 +4,11 @@
   @apply mt-20;
 
   @screen md {
-    @apply mt-px120 pb-0;
+    @apply mt-px120 pb-px65;
   }
 
   @screen lg {
-    @apply pt-0 text-left;
+    @apply py-0 text-left;
   }
 
   &.no-image {
@@ -92,7 +92,7 @@
     @apply col-span-full mt-px72 aspect-ratio-1-1;
 
     @screen md {
-      @apply mt-px54 mx-px70 col-span-6 col-start-2;
+      @apply mt-px54 col-span-4 col-start-3;
     }
 
     @screen lg {
