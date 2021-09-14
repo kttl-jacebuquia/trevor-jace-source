@@ -73,6 +73,7 @@
 			}
 
       & + & {
+        @apply text-px16 md:text-px18 lg:text-px26;
         @apply mt-px0;
       }
 		}
