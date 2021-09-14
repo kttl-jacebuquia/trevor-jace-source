@@ -199,7 +199,7 @@ class Resource_Center extends A_Options_Page {
 		ob_start();
 		?>
 		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 resource-center-hero">
-			<div class="mx-auto lg:w-3/4">
+			<div class="mx-auto lg:w-3/4 w-full">
 				<?php if ( ! empty( $eyebrow ) ) : ?>
 					<h2 class="resource-center-hero__eyebrow font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">
 						<?php echo esc_html( $eyebrow ); ?>
