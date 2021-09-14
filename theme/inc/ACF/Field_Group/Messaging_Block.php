@@ -179,6 +179,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$type                          = static::get_val( static::FIELD_TYPE );
+		$header                        = static::get_val( static::FIELD_HEADER );
 		$extend_padding                = static::get_val( static::FIELD_EXTEND_PADDING );
 		$extend_padding_top            = $extend_padding['top'] ?? 'no';
 		$extend_padding_bottom         = $extend_padding['bottom'] ?? 'no';
@@ -194,6 +195,10 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 			if ( 'yes' === $extend_padding_bottom ) {
 				$class[] = ' extend-bottom';
 			}
+		}
+
+		if ( ! empty( $header ) ) {
+			$class[] = 'messaging--with-heading';
 		}
 
 		ob_start();
