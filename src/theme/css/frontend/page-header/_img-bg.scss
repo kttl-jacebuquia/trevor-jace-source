@@ -1,7 +1,7 @@
 .type-img-bg {
   @apply relative mb-pxn5 px-0;
   @apply w-full max-w-none;
-  @apply h-px737 lg:h-px737 flex items-center text-white;
+  @apply h-px737 lg2:h-px737 flex items-center text-white;
 
   @screen mobile {
     padding-top: $top-nav-height;
@@ -15,7 +15,7 @@
     margin-top: calc(-1 * var(--top-nav-height));
   }
 
-  @screen xl {
+  @screen lg2 {
     @apply min-h-px800;
   }
 
@@ -72,6 +72,18 @@
     }
   }
 
+  .page-header-desc {
+    @apply text-px18 leading-px26 tracking-em005;
+
+    @screen md {
+      @apply text-px20 leading-px26;
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px26;
+    }
+  }
+
   .page-header__playback {
     @apply absolute flex items-center justify-center w-px24 h-px24 left-px20 bottom-px38 cursor-pointer text-px24;
     z-index: 1;
@@ -110,7 +122,7 @@
     }
   }
 
-  @screen lg {
+  @screen lg2 {
     .page-header-title {
       @apply text-px56 leading-px66;
       tilt,

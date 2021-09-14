@@ -49,6 +49,18 @@
       @apply lg2:text-px46 lg2:leading-px56;
     }
 
+    &-desc {
+      @apply text-px18 leading-px26;
+
+      @screen md {
+        @apply text-px18 leading-px26;
+      }
+
+      @screen lg2 {
+        @apply text-px26 leading-px36;
+      }
+    }
+
     &-inner {
       @apply flex flex-col justify-center h-full;
     }

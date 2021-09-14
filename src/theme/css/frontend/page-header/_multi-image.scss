@@ -64,22 +64,20 @@ $screen-widths: (
 
 .header-container {
   &--multi-image {
-    @apply relative pb-px293;
+    @apply pt-0;
 
     @screen md {
-      @apply pb-px382;
-      padding-top: $top-nav-height-tablet;
+      @apply pt-0;
       margin-top: -$top-nav-height-tablet;
     }
 
     @screen lg2 {
-      padding-top: $top-nav-height-desktop;
+      @apply pt-0;
       margin-top: -$top-nav-height-desktop;
-      padding-bottom: rem-calc(680);
     }
 
     @screen xl {
-      @apply pb-px907;
+      @apply pt-0 overflow-hidden pb-px500 -mb-px500;
     }
 
     + main > :first-child {
@@ -94,11 +92,29 @@ $screen-widths: (
       }
     }
   }
+
+  &__wrap {
+    @apply relative pb-px293;
+
+    @screen md {
+      @apply pb-px382;
+      padding-top: $top-nav-height-tablet;
+    }
+
+    @screen lg2 {
+      padding-top: $top-nav-height-desktop;
+      padding-bottom: rem-calc(680);
+    }
+
+    @screen xl {
+      @apply pb-px907;
+    }
+  }
 }
 
 .page-header {
   &.type-multi-image {
-    @apply pt-px50 relative;
+    @apply pt-px50 relative mt-px136;
 
     @screen md {
       @apply pt-px22;
@@ -176,6 +192,10 @@ $screen-widths: (
         @apply absolute top-0 left-0 right-0 w-full pointer-events-none overflow-hidden;
         height: 200vh;
         min-height: 2160px; // 1080p x 2
+
+        @screen xl {
+          @apply overflow-visible;
+        }
       }
 
       &-image {

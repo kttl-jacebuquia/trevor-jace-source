@@ -2,6 +2,7 @@
 
 use \TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field_Group;
+use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header as Field_GroupPage_Header;
 use TrevorWP\Util\Tools;
 
@@ -442,7 +443,7 @@ class Page_Header {
 
 		$container_classnames = implode(
 			' ',
-			array( 'header-container', 'w-full', 'header-container--multi-image', $text_color, $bg_color ),
+			array( 'header-container', 'w-full', 'header-container--multi-image', $text_color ),
 		);
 
 		$header_classnames = implode(
@@ -453,27 +454,29 @@ class Page_Header {
 		ob_start();
 		?>
 		<header class="<?php echo esc_attr( $container_classnames ); ?>">
-			<div class="<?php echo esc_attr( $header_classnames ); ?>">
-				<div class="page-header-inner">
-					<div class="page-header-content-wrap">
-						<h1 class="heading-lg-tilted page-header-title">
-							<?php echo $options['title']; ?>
-						</h1>
-						<p class="page-header-desc"><?php echo $options['desc']; ?></p>
-					</div>
-					<?php if ( ! empty( $options['images'] ) ) : ?>
-						<div class="page-header-img-wrap">
-							<div class="page-header-images">
-								<?php foreach ( $options['images'] as $image ) : ?>
-									<?php if ( ! empty( $image['url'] ) ) : ?>
-										<div class="page-header-image">
-											<img aria-hidden="true" src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
-										</div>
-									<?php endif; ?>
-								<?php endforeach; ?>
-							</div>
+			<div <?php echo A_Field_Group::render_attrs( array( 'header-container__wrap', $bg_color ) ) ?>>
+				<div class="<?php echo esc_attr( $header_classnames ); ?>">
+					<div class="page-header-inner">
+						<div class="page-header-content-wrap">
+							<h1 class="heading-lg-tilted page-header-title">
+								<?php echo $options['title']; ?>
+							</h1>
+							<p class="page-header-desc"><?php echo $options['desc']; ?></p>
 						</div>
-					<?php endif; ?>
+						<?php if ( ! empty( $options['images'] ) ) : ?>
+							<div class="page-header-img-wrap">
+								<div class="page-header-images">
+									<?php foreach ( $options['images'] as $image ) : ?>
+										<?php if ( ! empty( $image['url'] ) ) : ?>
+											<div class="page-header-image">
+												<img aria-hidden="true" src="<?php echo esc_url( $image['url'] ); ?>" class="block mx-auto" alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $options['title'] ); ?>">
+											</div>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
 		</header>
