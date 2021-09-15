@@ -32,7 +32,11 @@
   }
 
   .carousel-container {
-    width: theme('postCard.width.DEFAULT');
+    width: theme("postCard.width.DEFAULT");
+
+    @screen mobile {
+      @apply mx-auto;
+    }
 
     &:not(.swiper-container-initialized) {
       @screen mobile {
@@ -87,7 +91,6 @@
     }
   }
 
-
   body.is-rc & {
     .page-sub-title,
     .page-sub-title-desc {
@@ -96,6 +99,10 @@
   }
 
   .swiper-slide {
+    &:first-child:last-child {
+      @apply mr-0;
+    }
+
     @apply self-stretch h-auto;
     .tile.staff {
       @apply h-full;
@@ -117,8 +124,8 @@
           --number-of-cards: 3;
         }
 
-        --container-padding: theme('container.padding.#{$size}');
-        --carousel-left-padding: calc( ( 100vw - ( theme('screens.#{$size}') - ( 2 * var(--container-padding) ) ) ) / 2 );
+        --container-padding: theme("container.padding.#{$size}");
+        --carousel-left-padding: calc((100vw - (theme("screens.#{$size}") - (2 * var(--container-padding)))) / 2);
       }
     }
 
@@ -136,10 +143,9 @@
         @screen #{$size} {
           @apply flex;
 
-          left: calc( var(--carousel-left-padding) - 2.5rem );
+          left: calc(var(--carousel-left-padding) - 2.5rem);
         }
       }
-
     }
 
     body.is-rc &-prev {
@@ -168,7 +174,7 @@
           }
 
           @apply flex;
-          left: calc( var(--carousel-left-padding) + ( var(--number-of-cards) * theme('postCard.width.#{$size}') ) );
+          left: calc(var(--carousel-left-padding) + (var(--number-of-cards) * theme("postCard.width.#{$size}")));
         }
       }
     }
@@ -178,17 +184,15 @@
 
       @each $size in $breakpoints {
         @screen #{$size} {
-          --container-padding: theme('container.padding.#{$size}');
+          --container-padding: theme("container.padding.#{$size}");
         }
       }
     }
   }
 
-
-
   @screen md {
     .carousel-container {
-      width: theme('postCard.width.md');
+      width: theme("postCard.width.md");
     }
   }
 
@@ -196,7 +200,7 @@
     @apply mb-24;
 
     .carousel-container {
-      width: theme('postCard.width.lg');
+      width: theme("postCard.width.lg");
     }
 
     // Hide arrows if there are only 3 cards
@@ -210,28 +214,27 @@
 
   @screen lg2 {
     .carousel-container {
-      width: theme('postCard.width.lg2');
+      width: theme("postCard.width.lg2");
     }
   }
 
   @screen xl {
     .carousel-container {
-      width: theme('postCard.width.xl');
+      width: theme("postCard.width.xl");
     }
   }
 
   // Only Md fixes
   &.only-md {
     // Small
-    @media screen and (max-width: theme('carousel.w3Card.minWidth') /*500px*/
-    ) {
+    @media screen and (max-width: theme("carousel.w3Card.minWidth") /*500px*/) {
       .swiper-pagination {
         @apply hidden;
       }
 
       .carousel-container,
       .carousel-full-width-wrap {
-        width: theme('postCard.width.DEFAULT');
+        width: theme("postCard.width.DEFAULT");
       }
 
       .carousel-container,
@@ -254,8 +257,7 @@
     }
 
     // large
-    @media screen and (min-width: theme('carousel.w3Card.maxWidth') /*1275px*/
-    ) {
+    @media screen and (min-width: theme("carousel.w3Card.maxWidth") /*1275px*/) {
       .carousel-full-width-wrap {
         @apply mx-auto px-0 w-screen;
         margin-left: calc((100vw - 100%) / -2);
@@ -286,112 +288,111 @@
 
     @screen md {
       .swiper-slide {
-        width: theme('postCard.width.md');
+        width: theme("postCard.width.md");
       }
 
       //  .carousel-title,
       //  .carousel-subtitle {
-        // @apply text-center;
-        //  }
-      }
-
-      @screen lg {
-        .swiper-slide {
-          width: theme('postCard.width.lg');
-        }
-      }
-
+      // @apply text-center;
+      //  }
     }
 
-    &--staff {
-      .carousel-container {
-        width: theme('staffCard.width.DEFAULT');
-
-        @screen xl {
-          width: theme('staffCard.width.xl');
-        }
-      }
-
-      .tile {
-        @apply p-0;
-      }
-
-      .post-thumbnail-wrap {
-        @apply rounded-t-px10;
-
-        img {
-          @apply object-center object-cover rounded-t-px10 mx-auto w-full;
-          height: rem-calc(180px);
-
-          @screen xl {
-            height: rem-calc(200px);
-          }
-        }
-      }
-
-      .swiper-button {
-        @apply hidden;
-        &-next {
-          @screen lg {
-            --carousel-card-size: theme('staffCard.width.DEFAULT');
-            --number-of-cards: 3;
-          }
-
-          @screen xl {
-            --carousel-card-size: theme('staffCard.width.xl');
-            --number-of-cards: 3;
-          }
-        }
-      }
-    }
-
-    &--event {
-      .carousel-header {
-        @apply mb-px30;
-      }
-
-      .page-sub-title {
-        @apply md:w-full;
-      }
-
-      .carousel-full-width-wrap {
-        @apply py-0;
-      }
-
-      .carousel-container {
-        @apply xl:w-px368;
-      }
-
-      .swiper-pagination {
-        @apply mt-px30;
-      }
-
+    @screen lg {
       .swiper-slide {
-        @apply xl:w-px368;
-      }
-
-      .card-post {
-        @apply xl:w-px368 xl:mx-0;
-      }
-    }
-
-    &--attachment {
-      .carousel-container,
-      .swiper-slide {
-        @apply w-px264 h-px328;
-        @apply xl:h-px440;
-      }
-
-      .carousel-container {
-        @apply xl:w-px370;
-      }
-
-      .swiper-slide {
-        @apply mr-px12 xl:w-auto;
-      }
-
-      .card-post {
-        height: 100%;
+        width: theme("postCard.width.lg");
       }
     }
   }
+
+  &--staff {
+    .carousel-container {
+      width: theme("staffCard.width.DEFAULT");
+
+      @screen xl {
+        width: theme("staffCard.width.xl");
+      }
+    }
+
+    .tile {
+      @apply p-0;
+    }
+
+    .post-thumbnail-wrap {
+      @apply rounded-t-px10;
+
+      img {
+        @apply object-center object-cover rounded-t-px10 mx-auto w-full;
+        height: rem-calc(180px);
+
+        @screen xl {
+          height: rem-calc(200px);
+        }
+      }
+    }
+
+    .swiper-button {
+      @apply hidden;
+      &-next {
+        @screen lg {
+          --carousel-card-size: theme("staffCard.width.DEFAULT");
+          --number-of-cards: 3;
+        }
+
+        @screen xl {
+          --carousel-card-size: theme("staffCard.width.xl");
+          --number-of-cards: 3;
+        }
+      }
+    }
+  }
+
+  &--event {
+    .carousel-header {
+      @apply mb-px30;
+    }
+
+    .page-sub-title {
+      @apply md:w-full;
+    }
+
+    .carousel-full-width-wrap {
+      @apply py-0;
+    }
+
+    .carousel-container {
+      @apply xl:w-px368;
+    }
+
+    .swiper-pagination {
+      @apply mt-px30;
+    }
+
+    .swiper-slide {
+      @apply xl:w-px368;
+    }
+
+    .card-post {
+      @apply xl:w-px368 xl:mx-0;
+    }
+  }
+
+  &--attachment {
+    .carousel-container,
+    .swiper-slide {
+      @apply w-px264 h-px328;
+      @apply xl:h-px440;
+    }
+
+    .carousel-container {
+      @apply xl:w-px370;
+    }
+
+    .swiper-slide {
+      @apply mr-px12 xl:w-auto;
+    }
+
+    .card-post {
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+.search-form {
+  .input-wrap {
+    &.input-has-value {
+      @apply justify-center;
+
+      .icon-wrap {
+        @apply pl-0;
+      }
+
+      .icon-search-cancel {
+        @apply flex cursor-pointer h-full;
+      }
+    }
+  }
+
+  .search-field {
+    border: none;
+    @apply text-left;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .trevor-ti-search,
+  .trevor-ti-x {
+    @apply text-violet;
+  }
+
+  .trevor-ti-x {
+    @apply text-px30;
+
+    @screen lg {
+      @apply text-px32;
+    }
+  }
+
+  #input-suggestions {
+    @apply absolute bg-white rounded-px10 transform translate-y-px4 md:translate-y-px6 text-indigo;
+    z-index: 5;
+    max-height: 188px;
+    overflow-y: auto;
+
+    @screen md {
+      max-height: 210px;
+      box-shadow: theme("boxShadow.indigo-md");
+    }
+
+    @screen lg {
+      box-shadow: theme("boxShadow.indigo-lg");
+    }
+
+    .list-header {
+      @apply tracking-px05 font-semibold text-px14 leading-px22 md:leading-px18 lg:leading-px20 mb-px8 lg:mb-px6;
+    }
+
+    .ui-autocomplete {
+      @apply rounded-px10 pt-px20 pb-px24 px-px20 mx-auto text-center
+       md:pt-px22 md:px-px20 lg:px-px30;
+      left: 0 !important;
+      width: 100% !important;
+    }
+
+    .ui-menu-item {
+      @apply font-normal tracking-px05 text-px16 leading-px18 md:text-px14 md:leading-px22 lg:text-px18 lg:leading-px26 text-indigo;
+
+      &:not(:last-child) {
+        @apply pb-px8 lg:pb-px12;
+      }
+    }
+
+    .ui-state-focus {
+      @apply text-indigo cursor-pointer font-normal m-0 border-0;
+      background: none;
+    }
+  }
+}
