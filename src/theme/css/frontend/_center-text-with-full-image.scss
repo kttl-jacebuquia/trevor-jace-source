@@ -59,6 +59,10 @@
     }
 	}
 
+  &__image {
+    border-radius: 0.625rem;
+  }
+
 	&__caption {
 		@apply col-span-full text-left;
 		@apply mt-px24 text-px12 leading-px16 tracking-px05;
