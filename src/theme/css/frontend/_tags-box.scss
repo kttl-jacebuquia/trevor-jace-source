@@ -10,7 +10,8 @@
     @apply bg-moss;
   }
 
-  body.is-rc & {
+  body.is-rc &,
+  body.is-site-search & {
     @apply bg-violet-light text-indigo;
 
     &:hover {
@@ -23,7 +24,8 @@
   }
 
   &.ellipsis {
-    body.is-rc & {
+    body.is-rc &,
+    body.is-site-search & {
       @apply bg-violet-tint text-white;
 
       &:hover {

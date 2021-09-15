@@ -45,7 +45,7 @@ class Search_Input {
 					value="<?php echo get_search_query( true ); ?>"
 				/>
 				<label for="rc-search-main" hidden>Search box</label>
-				<button type="button" aria-label='click to clear the your search input' class="icon-wrap icon-search-cancel hidden absolute h-full top-0 right-0 flex items-center pr-px12 pr-px14 pr-px18">
+				<button type="button" aria-label='click to clear the your search input' class="icon-wrap icon-search-cancel hidden absolute h-full top-0 right-0 flex items-center bg-white px-px12 md:px-px14 lg:px-px18">
 					<i class="trevor-ti-x"></i>
 				</button>
 			</div>

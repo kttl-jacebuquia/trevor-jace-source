@@ -131,6 +131,10 @@
     @apply flex;
   }
 
+  body.is-site-search .post-carousel & {
+    @apply lg:hidden;
+  }
+
   .recent-highlights & {
     @screen xl {
       margin-left: calc( ( ( 100vw - 100% ) / 2 ) - theme('container.padding.DEFAULT') );

@@ -3,7 +3,7 @@
     &.input-has-value {
       @apply justify-center;
 
-      .icon-wrap {
+      .icon-wrap:not(.icon-search-cancel) {
         @apply pl-0;
       }
 

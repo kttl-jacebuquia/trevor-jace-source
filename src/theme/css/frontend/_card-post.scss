@@ -42,6 +42,10 @@
     @apply hidden;
   }
 
+  body.is-site-search & {
+    @apply text-indigo;
+  }
+
   :not(.bg-full) .post-thumbnail-wrap + * {
     @apply pt-px24 lg:pt-px28;
   }
