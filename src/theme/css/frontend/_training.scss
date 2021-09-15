@@ -5,7 +5,7 @@
     @apply py-px80;
   }
 
-  @screen xl {
+  @screen lg2 {
     @apply py-px120;
   }
 
@@ -20,14 +20,14 @@
       @apply col-span-6 col-start-2;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply col-span-6 col-start-1 text-left;
     }
 
     .training__cta {
       @apply hidden;
 
-      @screen xl {
+      @screen lg2 {
         @apply inline-flex mt-px40;
       }
     }
@@ -40,7 +40,7 @@
       @apply text-px32 leading-px42;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px42 leading-px52 tracking-em_001;
     }
   }
@@ -53,7 +53,7 @@
       @apply mt-px15 text-px18 leading-px24 tracking-px05;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px17 text-px24 leading-px34 tracking-em005;
     }
   }
@@ -66,7 +66,7 @@
       @apply col-span-6 col-start-2 mt-px50 py-px90 px-px50;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply col-span-5 col-start-8 py-px80 px-px36;
     }
   }
@@ -78,7 +78,7 @@
       @apply text-px32 leading-px42;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px36 leading-px46;
     }
   }
@@ -90,7 +90,7 @@
       @apply mt-px14 text-px18 leading-px26;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px12 text-px20 leading-px30;
     }
   }
@@ -107,7 +107,7 @@
   &__bottom {
     @apply col-span-full mt-px50 text-center;
 
-    @screen xl {
+    @screen lg2 {
       @apply hidden;
     }
   }
