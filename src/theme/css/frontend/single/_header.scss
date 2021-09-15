@@ -255,12 +255,10 @@
 	}
   }
 
-  // < XL
-  @media (max-width: theme('screens.xl')) {
-	.mid-row > .mid-row-v-separator:nth-child(4) {
-	  @apply w-full bg-transparent;
-	  @apply h-3;
-	}
+  @screen mobile {
+    .mid-row > .mid-row-v-separator:nth-child(4) {
+      @apply w-full bg-transparent h-3;
+    }
   }
 
   // Medium

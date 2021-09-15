@@ -254,7 +254,7 @@ class Post_Header {
 					<i class="share-icon trevor-ti-twitter hover:text-melrose"></i>
 				</a>
 				<span>
-					<a href="#" class="post-share-more-btn" aria-expanded="true">
+					<a href="javascript:void(0)" role="button" class="post-share-more-btn" aria-expanded="true">
 						<i class="share-icon trevor-ti-share-others hover:text-melrose"></i>
 					</a>
 					<span class="hidden">
