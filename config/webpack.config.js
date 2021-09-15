@@ -19,7 +19,6 @@ const appPackageJson = require(paths.appPackageJson);
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
-
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -48,7 +47,7 @@ module.exports = function (webpackEnv) {
 			},
 			{
 				loader: require.resolve('css-loader'),
-				options: {...cssOptions, url: false},
+				options: { ...cssOptions, url: false },
 			},
 			{
 				// Options for PostCSS as we reference these options twice
@@ -72,7 +71,7 @@ module.exports = function (webpackEnv) {
 						],
 						sourceMap: isEnvProduction && shouldUseSourceMap,
 					},
-				}
+				},
 			},
 		].filter(Boolean);
 		if (preProcessor) {
@@ -87,9 +86,10 @@ module.exports = function (webpackEnv) {
 					loader: require.resolve(preProcessor),
 					options: {
 						sourceMap: true,
-						prependData: preProcessor === 'sass-loader'
-							? ('$env: ' + process.env.NODE_ENV + ';')
-							: undefined,
+						prependData:
+							preProcessor === 'sass-loader'
+								? '$env: ' + process.env.NODE_ENV + ';'
+								: undefined,
 					},
 				}
 			);
@@ -109,7 +109,9 @@ module.exports = function (webpackEnv) {
 
 	if (isEnvDevelopment) {
 		// - Hot Loader
-		entry.webpackHot = require.resolve('react-dev-utils/webpackHotDevClient');
+		entry.webpackHot = require.resolve(
+			'react-dev-utils/webpackHotDevClient'
+		);
 		// - Plugin
 		entry['plugin/css/main'] = paths.pluginCSSDevMain;
 		// - Theme
@@ -126,7 +128,9 @@ module.exports = function (webpackEnv) {
 	}
 
 	return {
-		mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
+		mode: isEnvProduction
+			? 'production'
+			: isEnvDevelopment && 'development',
 		// Stop compilation early in production
 		bail: isEnvProduction,
 		devtool: isEnvProduction
@@ -210,17 +214,20 @@ module.exports = function (webpackEnv) {
 						parser: safePostCssParser,
 						map: shouldUseSourceMap
 							? {
-								// `inline: false` forces the sourcemap to be output into a
-								// separate file
-								inline: false,
-								// `annotation: true` appends the sourceMappingURL to the end of
-								// the css file, helping the browser find the sourcemap
-								annotation: true,
-							}
+									// `inline: false` forces the sourcemap to be output into a
+									// separate file
+									inline: false,
+									// `annotation: true` appends the sourceMappingURL to the end of
+									// the css file, helping the browser find the sourcemap
+									annotation: true,
+							  }
 							: false,
 					},
 					cssProcessorPluginOptions: {
-						preset: ['default', {minifyFontValues: {removeQuotes: false}}],
+						preset: [
+							'default',
+							{ minifyFontValues: { removeQuotes: false } },
+						],
 					},
 				}),
 			],
@@ -235,39 +242,41 @@ module.exports = function (webpackEnv) {
 			// https://twitter.com/wSokra/status/969679223278505985
 			// https://github.com/facebook/create-react-app/issues/5358
 			runtimeChunk: {
-				name: 'runtime'
+				name: 'runtime',
 			},
 		},
 		externals: {
 			jquery: 'jQuery',
-			"@wordpress/blocks": "wp.blocks",
-			"@wordpress/block-editor": "wp.blockEditor",
-			"@wordpress/components": "wp.components",
-			"@wordpress/api-fetch": "wp.apiFetch",
-			"@wordpress/hooks": "wp.hooks",
-			"@wordpress/element": "wp.element",
-			"@wordpress/edit-post": "wp.editPost",
-			"@wordpress/plugins": "wp.plugins",
-			"@wordpress/compose": "wp.compose",
-			"@wordpress/data": "wp.data",
-			"lodash": "lodash",
+			'@wordpress/blocks': 'wp.blocks',
+			'@wordpress/block-editor': 'wp.blockEditor',
+			'@wordpress/components': 'wp.components',
+			'@wordpress/api-fetch': 'wp.apiFetch',
+			'@wordpress/hooks': 'wp.hooks',
+			'@wordpress/element': 'wp.element',
+			'@wordpress/edit-post': 'wp.editPost',
+			'@wordpress/plugins': 'wp.plugins',
+			'@wordpress/compose': 'wp.compose',
+			'@wordpress/data': 'wp.data',
+			lodash: 'lodash',
 		},
 		resolve: {
 			mainFiles: ['index'],
 			alias: {
-				'assets': path.join(paths.src, 'assets'),
-				'plugin': path.join(paths.src, 'plugin'),
-				'theme': path.join(paths.src, 'theme'),
-				'config$': path.join(paths.src, 'config'),
-				...(isEnvDevelopment ? {
-					// Dev aliases
-					'react-dom': '@hot-loader/react-dom',
-				} : {})
+				assets: path.join(paths.src, 'assets'),
+				plugin: path.join(paths.src, 'plugin'),
+				theme: path.join(paths.src, 'theme'),
+				config$: path.join(paths.src, 'config'),
+				...(isEnvDevelopment
+					? {
+							// Dev aliases
+							'react-dom': '@hot-loader/react-dom',
+					  }
+					: {}),
 			},
 			plugins: [
 				// Adds support for installing with Plug'n'Play, leading to faster installs and adding
 				// guards against forgotten dependencies and such.
-				PnpWebpackPlugin
+				PnpWebpackPlugin,
 			],
 		},
 		resolveLoader: {
@@ -281,7 +290,7 @@ module.exports = function (webpackEnv) {
 			strictExportPresence: true,
 			rules: [
 				// Disable require.ensure as it's not a standard language feature.
-				{parser: {requireEnsure: false}},
+				{ parser: { requireEnsure: false } },
 
 				// First, run the linter.
 				// It's important to do this before Babel processes the JS.
@@ -292,10 +301,11 @@ module.exports = function (webpackEnv) {
 						{
 							options: {
 								cache: true,
-								formatter: require.resolve('react-dev-utils/eslintFormatter'),
+								formatter: require.resolve(
+									'react-dev-utils/eslintFormatter'
+								),
 								eslintPath: require.resolve('eslint'),
 								resolvePluginsRelativeTo: __dirname,
-
 							},
 							loader: require.resolve('eslint-loader'),
 						},
@@ -319,10 +329,12 @@ module.exports = function (webpackEnv) {
 								),
 
 								plugins: [
-									"react-hot-loader/babel",
-									"@babel/plugin-proposal-export-default-from",
+									'react-hot-loader/babel',
+									'@babel/plugin-proposal-export-default-from',
 									[
-										require.resolve('babel-plugin-named-asset-import'),
+										require.resolve(
+											'babel-plugin-named-asset-import'
+										),
 										{
 											loaderMap: {
 												svg: {
@@ -354,8 +366,10 @@ module.exports = function (webpackEnv) {
 								compact: false,
 								presets: [
 									[
-										require.resolve('babel-preset-react-app/dependencies'),
-										{helpers: true},
+										require.resolve(
+											'babel-preset-react-app/dependencies'
+										),
+										{ helpers: true },
 									],
 								],
 								cacheDirectory: true,
@@ -381,7 +395,8 @@ module.exports = function (webpackEnv) {
 							exclude: cssModuleRegex,
 							use: getStyleLoaders({
 								importLoaders: 1,
-								sourceMap: isEnvProduction && shouldUseSourceMap,
+								sourceMap:
+									isEnvProduction && shouldUseSourceMap,
 							}),
 							// Don't consider CSS imports dead code even if the
 							// containing package claims to have no side effects.
@@ -395,7 +410,8 @@ module.exports = function (webpackEnv) {
 							test: cssModuleRegex,
 							use: getStyleLoaders({
 								importLoaders: 1,
-								sourceMap: isEnvProduction && shouldUseSourceMap,
+								sourceMap:
+									isEnvProduction && shouldUseSourceMap,
 								modules: {
 									getLocalIdent: getCSSModuleLocalIdent,
 								},
@@ -410,7 +426,8 @@ module.exports = function (webpackEnv) {
 							use: getStyleLoaders(
 								{
 									importLoaders: 3,
-									sourceMap: isEnvProduction && shouldUseSourceMap,
+									sourceMap:
+										isEnvProduction && shouldUseSourceMap,
 								},
 								'sass-loader'
 							),
@@ -427,7 +444,8 @@ module.exports = function (webpackEnv) {
 							use: getStyleLoaders(
 								{
 									importLoaders: 3,
-									sourceMap: isEnvProduction && shouldUseSourceMap,
+									sourceMap:
+										isEnvProduction && shouldUseSourceMap,
 									modules: {
 										getLocalIdent: getCSSModuleLocalIdent,
 									},
@@ -446,7 +464,11 @@ module.exports = function (webpackEnv) {
 							// its runtime that would otherwise be processed through "file" loader.
 							// Also exclude `html` and `json` extensions so they get processed
 							// by webpacks internal loaders.
-							exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+							exclude: [
+								/\.(js|mjs|jsx|ts|tsx)$/,
+								/\.html$/,
+								/\.json$/,
+							],
 							options: {
 								name: 'static/media/[name].[hash:8].[ext]',
 							},
@@ -478,15 +500,15 @@ module.exports = function (webpackEnv) {
 			// makes the discovery automatic so you don't have to restart.
 			// See https://github.com/facebook/create-react-app/issues/186
 			isEnvDevelopment &&
-			new WatchMissingNodeModulesPlugin(paths.nodeModules),
+				new WatchMissingNodeModulesPlugin(paths.nodeModules),
 			isEnvProduction &&
-			new MiniCssExtractPlugin({
-				// Options similar to the same options in webpackOptions.output
-			}),
+				new MiniCssExtractPlugin({
+					// Options similar to the same options in webpackOptions.output
+				}),
 			new webpack.DefinePlugin({
 				DEVELOPMENT: JSON.stringify(isEnvDevelopment),
 				PRODUCTION: JSON.stringify(isEnvProduction),
-				BLOCKS_NS: 'trevorwp'
+				BLOCKS_NS: 'trevorwp',
 			}),
 		].filter(Boolean),
 		// Some libraries import Node modules but don't use them in the browser.
