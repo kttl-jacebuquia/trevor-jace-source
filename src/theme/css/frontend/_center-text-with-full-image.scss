@@ -1,14 +1,10 @@
 .center-text-with-full-image {
 	&__container {
 		@apply container mx-auto;
-		@apply tw-grid pt-px100 pb-px74;
-
-		@screen md {
-			@apply pt-px80 pb-px100;
-		}
+		@apply tw-grid py-px40;
 
 		@screen xl {
-			@apply pt-px188 pb-px190;
+			@apply py-px60;
 		}
 	}
 
