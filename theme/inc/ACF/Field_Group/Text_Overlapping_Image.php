@@ -123,7 +123,7 @@ class Text_Overlapping_Image extends A_Field_Group implements I_Block, I_Rendera
 						'preview_size'  => 'thumbnail',
 						'library'       => 'all',
 					),
-					static::FIELD_IMAGE_TILTED         => array(
+					static::FIELD_IMAGE_TILTED  => array(
 						'key'           => $image_tilted,
 						'name'          => static::FIELD_IMAGE_TILTED,
 						'label'         => 'Tilted Image',

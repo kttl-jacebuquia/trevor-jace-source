@@ -252,6 +252,10 @@ class Search extends Abstract_Customizer {
 	 * @return string
 	 */
 	public static function render_post( \WP_Post $post ): ?string {
+		if ( CPT\RC\Post::POST_TYPE === $post->post_type ) {
+			return '';
+		}
+
 		$_class = array(
 			'pb-10',
 			'lg:pb-px50',

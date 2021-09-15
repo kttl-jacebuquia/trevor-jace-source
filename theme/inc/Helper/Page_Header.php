@@ -454,7 +454,7 @@ class Page_Header {
 		ob_start();
 		?>
 		<header class="<?php echo esc_attr( $container_classnames ); ?>">
-			<div <?php echo A_Field_Group::render_attrs( array( 'header-container__wrap', $bg_color ) ) ?>>
+			<div <?php echo A_Field_Group::render_attrs( array( 'header-container__wrap', $bg_color ) ); ?>>
 				<div class="<?php echo esc_attr( $header_classnames ); ?>">
 					<div class="page-header-inner">
 						<div class="page-header-content-wrap">
