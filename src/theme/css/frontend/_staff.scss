@@ -89,49 +89,26 @@
 
   &__cards-wrapper {
     @apply h-auto;
-    grid-auto-rows: 1fr;
 
     @screen lg {
       @apply grid tw-grid-desktop;
       row-gap: 1.75rem;
+      grid-auto-rows: 1fr;
     }
 
     .is-grid & {
-      @apply mt-px50;
-      display: grid;
-      grid-template-columns: 1fr;
-      column-gap: 1.75rem;
+      @apply mt-px40 grid tw-grid;
       row-gap: 1.75rem;
       grid-auto-rows: 1fr;
 
       @screen md {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      @screen lg {
-        @apply mt-px55 mb-0;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-
-      @screen xl {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-
-    }
-
-    .founders & {
-      @screen lg {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-
-      @screen xl {
-        grid-template-columns: 1fr 1fr 1fr;
+        @apply mt-px50;
       }
     }
 
     .staff-col-4 & {
       @screen md {
-        @apply mr-auto ml-auto;
+        @apply mx-auto;
         width: 83.4834834835%;
       }
 
@@ -143,10 +120,11 @@
 
   &__card {
     width: 82.7586206897%;
-    @apply mr-px12;
+    height: auto;
+    @apply w-px264 mr-px12 text-left;
 
     @screen md {
-      @apply w-px264 mr-px18;
+      @apply mr-px18;
     }
 
     @screen lg {
@@ -171,9 +149,11 @@
     }
 
     .is-grid & {
-      width: 100% !important;
-      height: 100% !important;
-      grid-column: auto / auto !important;
+      @apply col-span-full w-auto m-0;
+
+      @screen md {
+        @apply col-span-4;
+      }
 
       &[data-staff-part="last"] {
         display: none;
@@ -181,47 +161,22 @@
     }
 
     .staff-col-3 & {
-      @apply w-full mr-auto ml-auto;
-
-      @screen md {
-        @apply mr-0 ml-0;
-        width: calc((100% - 28px) / 2);
+      .information {
+        @apply text-center;
       }
 
-      @screen lg {
-        @apply col-span-6;
-        width: auto;
+      .information__details {
+        display: none;
       }
-
-      @screen xl {
-        @apply col-span-4;
-      }
-
-      .information__details { display: none; }
     }
 
     .staff-col-4 & {
-      @apply mr-auto ml-auto;
-
-      @screen md {
-        @apply mr-0 ml-0;
-        width: calc((100% - 28px) / 2);
+      .information {
+        @apply text-left;
       }
 
-      @screen lg {
-        width: unset;
-      }
-
-      & + .staff__card {
-        @apply mt-px28;
-
-        @screen md {
-          @apply mt-0 mb-px28;
-        }
-
-        @screen lg {
-          @apply mb-0;
-        }
+      @screen lg2 {
+        @apply col-span-3;
       }
     }
 
@@ -240,10 +195,6 @@
         object-fit: cover;
         object-position: center center;
       }
-    }
-
-    .is-carousel & {
-      height: auto;
     }
   }
 
