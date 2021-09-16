@@ -140,8 +140,7 @@
 		}
 
     .page-btn-link {
-      border-bottom-width: 2px;
-      border-color: currentColor;
+      @apply h-px35;
     }
 
     .page-btn:not(.page-btn-link) {
