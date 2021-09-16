@@ -1,24 +1,28 @@
 @layer utilities {
-	@variants responsive {
-		.tw-grid-mobile {
-			@apply grid-cols-6 gap-x-sm;
-		}
-		.tw-grid-tablet {
-			@apply grid-cols-8 gap-x-md;
-		}
+  @variants responsive {
+    .tw-grid-mobile {
+      @apply grid-cols-6 gap-x-sm;
+    }
+    .tw-grid-tablet {
+      @apply grid-cols-8 gap-x-md;
+    }
     .tw-grid-small-desktop {
-			@apply grid-cols-12 gap-x-md;
-		}
-		.tw-grid-desktop {
-			@apply grid-cols-12 gap-x-xl;
-		}
-	}
+      @apply grid-cols-12 gap-x-md;
+    }
+    .tw-grid-medium-desktop {
+      @apply grid-cols-12 gap-x-md;
+    }
+    .tw-grid-desktop {
+      @apply grid-cols-12 gap-x-xl;
+    }
+  }
 
   .tw-grid {
-		@apply grid gap-y-0;
-		@apply tw-grid-mobile;
-		@apply md:tw-grid-tablet;
-    @apply lg2:tw-grid-small-desktop;
-		@apply xl:tw-grid-desktop;
-	}
+    @apply grid gap-y-0;
+    @apply tw-grid-mobile;
+    @apply md:tw-grid-tablet;
+    @apply lg:tw-grid-small-desktop;
+    @apply lg2:tw-grid-medium-desktop;
+    @apply xl:tw-grid-desktop;
+  }
 }

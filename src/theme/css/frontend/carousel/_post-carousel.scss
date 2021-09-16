@@ -14,6 +14,10 @@
       @apply text-px32 leading-px42 col-span-6 col-start-2;
     }
 
+    @screen lg {
+      @apply text-left;
+    }
+
     @screen xl {
       @apply w-full text-px46 leading-px56 tracking-em_001 text-left col-span-full col-start-1;
     }
@@ -58,7 +62,7 @@
   }
 
   .carousel-full-width-wrap {
-    @apply pt-3;
+    @apply pt-px12 -mt-px12;
   }
 
   .carousel-header {

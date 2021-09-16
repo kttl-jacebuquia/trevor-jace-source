@@ -9,6 +9,50 @@
     }
   }
 
+  .carousel-header {
+    @screen lg {
+      @apply mb-px50
+    }
+  }
+
+  .page-sub-title {
+    @apply mb-0;
+
+    @screen lg {
+      @apply text-px40 leading-px50 tracking-em_001;
+      @apply col-span-10 col-start-1;
+    }
+
+    @screen xl {
+      @apply text-px46 leading-px56;
+    }
+
+    &.lg\:no-centered {
+      @screen lg {
+        @apply text-left;
+      }
+    }
+  }
+
+  .page-sub-title-desc {
+    @apply font-semibold mt-px12 mb-0;
+
+    @screen lg {
+      @apply text-px22 leading-px32 tracking-px05;
+      @apply col-span-10 col-start-1;
+    }
+
+    @screen xl {
+      @apply text-px24 leading-px34;
+    }
+
+    &.lg\:no-centered {
+      @screen lg {
+        @apply text-left;
+      }
+    }
+  }
+
   .carousel-wrap__content {
     @apply overflow-hidden;
   }
@@ -28,6 +72,11 @@
         display: none;
       }
     }
+  }
+
+  // Category Post Carousel
+  &.resource-center-category {
+
   }
 }
 

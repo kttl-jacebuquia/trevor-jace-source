@@ -35,7 +35,7 @@
       @apply col-span-7 col-start-1 px-px40 py-px45;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply px-px70;
     }
 
@@ -59,7 +59,7 @@
       @apply text-px40 leading-px50 mt-px4;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px46 leading-px56 tracking-em_001 mt-px16;
     }
   }
