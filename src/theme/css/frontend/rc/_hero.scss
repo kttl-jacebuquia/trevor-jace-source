@@ -1,4 +1,6 @@
 .resource-center-hero {
+  @apply tw-grid;
+
   @screen md {
     @apply mb-px32;
   }
@@ -7,15 +9,64 @@
     @apply mb-px17;
   }
 
+  &__content {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen lg {
+      @apply col-span-10 col-start-2 -mx-px20;
+    }
+
+    @screen lg2 {
+      @apply col-span-8 col-start-3 -mx-px24;
+    }
+  }
+
   &__eyebrow {
+    @apply text-px14 leading-px18 tracking-em001;
+
+    @screen lg {
+      @apply text-px14 leading-px20 tracking-px05;
+    }
+
     @screen xl {
       @apply text-px16 leading-px20 tracking-px05 uppercase font-semibold;
     }
   }
 
+  .heading {
+    @apply text-px30 leading-px50 tracking-em005;
+
+    @screen lg {
+      @apply text-px40 leading-px50;
+    }
+
+    @screen lg2 {
+      @apply text-px40 leading-px50;
+    }
+
+    tilt {
+      @apply text-px44 leading-px54 tracking-em005;
+    }
+  }
+
   .search-container {
+    @apply my-px30 mx-auto;
+    width: calc(100% - #{rem-calc(92)});
+
     @screen md {
       @apply w-px405;
+    }
+
+    @screen lg {
+      width: calc(100% - #{rem-calc(128)});
+    }
+
+    @screen lg2 {
+      width: calc(100% - #{rem-calc(128)})
     }
 
     @screen xl {
@@ -36,6 +87,10 @@
 
     @screen md {
       @apply h-px62;
+    }
+
+    @screen lg {
+      @apply h-px78;
     }
 
     @screen xl {

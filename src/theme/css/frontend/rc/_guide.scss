@@ -1,0 +1,21 @@
+.resource-center-guide {
+  &__eyebrow {
+    @screen lg {
+      @apply text-px16 leading-px22 tracking-em002;
+    }
+
+    @screen lg2 {
+      @apply text-px16 leading-px22 tracking-em002;
+    }
+  }
+
+  &__heading {
+    @screen lg {
+      @apply text-px42 leading-px52 my-px25;
+    }
+
+    @screen lg2 {
+      @apply text-px42 leading-px52;
+    }
+  }
+}
