@@ -46,7 +46,11 @@ class Tier {
 
 									foreach ( $tier->posts as $i => $post ) :
 										?>
-										<a href="<?php echo Post::get_partner_url( $post->ID ); ?>" rel="nofollow noreferrer noopener" target="_blank"><?php echo esc_html( $post->post_title ); ?></a>
+										<a href="<?php echo Post::get_partner_url( $post->ID ); ?>" rel="nofollow noreferrer noopener" target="_blank">
+											<span>
+												<?php echo esc_html( $post->post_title ); ?>
+											</span>
+										</a>
 									<?php endforeach ?>
 								<?php endif ?>
 							</td>
