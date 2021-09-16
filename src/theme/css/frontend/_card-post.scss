@@ -472,7 +472,10 @@
 
       // Icon
       .icon-wrap {
-        @apply absolute top-6 right-5;
+        @apply absolute;
+        padding-right: 0;
+        top: 2.125rem;
+        right: 1.5rem;
         font-size: 1.5rem;
       }
 
