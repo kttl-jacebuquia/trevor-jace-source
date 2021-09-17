@@ -219,7 +219,7 @@ class Search extends Abstract_Customizer {
 	 * @param \WP_Query $query
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
-		if ( $query->is_main_query() ) {
+		if ( $query->is_main_query() && ! is_admin() ) {
 			if ( ! Is::rc() && $query->is_search() ) {
 				$query->set( 'post_type', self::get_scope_post_types( self::get_current_scope() ) );
 			}

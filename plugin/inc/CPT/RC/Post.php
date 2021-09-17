@@ -98,7 +98,7 @@ class Post extends RC_Object {
 	 * @see Post::register_post_type()
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
-		if ( ! $query->is_main_query() ) {
+		if ( ! $query->is_main_query() && ! is_admin() ) {
 			return;
 		}
 
