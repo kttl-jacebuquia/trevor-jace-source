@@ -376,7 +376,7 @@ class Hooks {
 	public static function admin_head(): void {
 		$screen = get_current_screen();
 
-		if ( $screen->is_block_editor && in_array( $screen->post_type, array_merge( Tools::get_public_post_types(), array( CPT\Team::POST_TYPE ) ) ) ) {
+		if ( $screen->is_block_editor && in_array( $screen->post_type, array_merge( Tools::get_public_post_types(), array( CPT\Team::POST_TYPE, CPT\Research::POST_TYPE ) ) ) ) {
 			?>
 			<script>
 				Object.assign(window.TrevorWP.screen, {editorBlocksData: <?php echo json_encode( apply_filters( 'trevor_editor_blocks_data', array() ) ); ?>})
