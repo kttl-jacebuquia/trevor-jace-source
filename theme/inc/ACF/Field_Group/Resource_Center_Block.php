@@ -37,7 +37,7 @@ class Resource_Center_Block extends A_Field_Group implements I_Block, I_Renderab
 					'name'          => static::FIELD_TOPICS,
 					'label'         => 'Taxonomy',
 					'type'          => 'taxonomy',
-					'taxonomy'      => RC_Object::TAXONOMY_TAG,
+					'taxonomy'      => RC_Object::TAXONOMY_CATEGORY,
 					'field_type'    => 'multi_select',
 					'return_format' => 'object',
 					'multiple'      => 1,

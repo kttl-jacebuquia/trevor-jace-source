@@ -9,6 +9,7 @@ class Address extends A_Field_Group implements I_Block {
 	const FIELD_ENTRY_LINES     = 'entry_lines';
 	const FIELD_ENTRY_LINE_TYPE = 'entry_line_type';
 	const FIELD_ENTRY_EMAIL     = 'entry_email';
+	const FIELD_ENTRY_PHONE     = 'entry_phone';
 	const FIELD_LINE            = 'line';
 
 	protected static function prepare_register_args(): array {
@@ -18,6 +19,7 @@ class Address extends A_Field_Group implements I_Block {
 		$entry_lines     = static::gen_field_key( static::FIELD_ENTRY_LINES );
 		$entry_line_type = static::gen_field_key( static::FIELD_ENTRY_LINE_TYPE );
 		$entry_email     = static::gen_field_key( static::FIELD_ENTRY_EMAIL );
+		$entry_phone     = static::gen_field_key( static::FIELD_ENTRY_PHONE );
 		$line            = static::gen_field_key( static::FIELD_LINE );
 
 		return array(
@@ -57,6 +59,7 @@ class Address extends A_Field_Group implements I_Block {
 									'type'          => 'select',
 									'choices'       => array(
 										'text'         => 'Text',
+										'call'         => 'Call',
 										'mailto'       => 'Mailto',
 										'dev_inq_form' => 'Development Inquiry Form',
 									),
@@ -73,6 +76,19 @@ class Address extends A_Field_Group implements I_Block {
 											'field'    => $entry_line_type,
 											'operator' => '==',
 											'value'    => 'mailto',
+										),
+									),
+								),
+								static::FIELD_ENTRY_PHONE => array(
+									'key'               => $entry_phone,
+									'name'              => static::FIELD_ENTRY_PHONE,
+									'label'             => 'Phone',
+									'type'              => 'text',
+									'conditional_logic' => array(
+										array(
+											'field'    => $entry_line_type,
+											'operator' => '==',
+											'value'    => 'call',
 										),
 									),
 								),
@@ -125,6 +141,10 @@ class Address extends A_Field_Group implements I_Block {
 								<div class="contact-information__description">
 									<?php if ( 'mailto' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
 										<a class="wave-underline" href="mailto:<?php echo esc_attr( $line[ static::FIELD_ENTRY_EMAIL ] ); ?>">
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										</a>
+									<?php elseif ( 'call' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+										<a class="wave-underline" href="tel://<?php echo esc_attr( $line[ static::FIELD_ENTRY_PHONE ] ); ?>">
 											<?php echo $line[ static::FIELD_LINE ]; ?>
 										</a>
 									<?php elseif ( 'dev_inq_form' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>

@@ -183,6 +183,10 @@
         @apply h-px46;
       }
     }
+
+    &.page-btn-link {
+      @apply inline-block h-px30;
+    }
   }
 
   &__cta-wrap {

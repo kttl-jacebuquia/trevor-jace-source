@@ -5,7 +5,7 @@
       margin-top: -$top-nav-height-tablet;
     }
 
-    @screen xl {
+    @screen lg2 {
       padding-top: $top-nav-height-desktop;
       margin-top: -$top-nav-height-desktop;
     }
@@ -16,14 +16,14 @@
   &.type-text {
     @apply container mx-auto;
     @apply md:min-h-px445;
-    @apply xl:min-h-px546;
+    @apply lg2:min-h-px546;
 
     .hero--inner {
       @apply tw-grid pb-px30;
 
       grid-auto-rows: min-content;
 
-      @screen xl {
+      @screen lg2 {
         @apply w-full;
       }
     }
@@ -36,7 +36,7 @@
         @apply text-px32 leading-px40;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply col-start-3 col-span-8;
         @apply text-px46 leading-px56 tracking-em_001;
       }
@@ -51,7 +51,7 @@
         @apply text-px16 leading-px22 tracking-em001;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply col-start-3 col-span-8 mx-0 max-w-none;
         @apply text-px26 leading-px36 tracking-em005;
       }
@@ -69,7 +69,7 @@
       @apply text-px16 leading-px22;
 
       // xl
-      @apply xl:mt-px40;
+      @apply lg2:mt-px40;
     }
 
     .page-btn {
@@ -78,8 +78,8 @@
       // md
       @apply md:h-px44 md:px-px24;
       // xl
-      @apply xl:h-px66 xl:px-px40;
-      @apply xl:text-px20 xl:leading-px26 xl:tracking-px05;
+      @apply lg2:h-px66 lg2:px-px40;
+      @apply lg2:text-px20 lg2:leading-px26 lg2:tracking-px05;
     }
   }
 }

@@ -353,7 +353,7 @@ class Tile {
 			$name_class    = explode( ' ', 'text-px22 leading-px28 tracking-em005 md:text-px20 md:leading-px30 xl:text-px22 xl:leading-px32' );
 			$details_class = 'text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		} else {
-			$name_class    = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32 text-left' );
+			$name_class    = explode( ' ', 'text-px18 leading-px26 tracking-em005 xl:text-px22 xl:leading-px32' );
 			$details_class = 'text-left text-px14 leading-px18 xl:text-px16 xl:leading-px22 mt-px9 md:tracking-em005';
 		}
 
@@ -365,11 +365,11 @@ class Tile {
 					<?php echo $thumbnail; ?>
 				</div>
 				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px24">
-					<p class="information__name font-semibold <?php echo implode( ' ', $name_class ); ?> <?php echo ( strtolower( $group ) === 'founder' ) ? 'text-center' : ''; ?>">
+					<p class="information__name font-semibold <?php echo implode( ' ', $name_class ); ?>">
 						<?php echo esc_html( $name ); ?>
 					</p>
 					<?php if ( ! empty( $group ) || ! empty( $pronoun ) ) { ?>
-						<div class="information__details <?php echo $details_class; ?><?php echo ( strtolower( $group ) === 'founder' ) ? ' text-center' : ''; ?>">
+						<div class="information__details <?php echo $details_class; ?>">
 							<?php if ( ! empty( $group ) ) { ?>
 								<span class="information__group font-medium pr-px12"><?php echo esc_html( $group ); ?></span>
 							<?php } ?>

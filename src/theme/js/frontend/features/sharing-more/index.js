@@ -6,7 +6,9 @@ const hasNavigatorShare = !!navigator.share;
 
 export default function sharingMore(button, content, tippyOptions = {}) {
 	// Use native sharing if available and for mobile.
-	if (hasNavigatorShare && window.matchMedia(`screen and (max-width: 767px)`)) {
+	const isMobileOnly = window.matchMedia(`screen and (max-width: 767px)`);
+
+	if (hasNavigatorShare && isMobileOnly.matches) {
 		$(button).on('click', () =>
 			navigator.share({
 				url:

@@ -6,7 +6,7 @@
     @apply py-20;
   }
 
-  @screen xl {
+  @screen lg2 {
     @apply pt-px90 pb-px150;
   }
 
@@ -21,7 +21,7 @@
       @apply tracking-em_001;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px46 leading-px56;
     }
   }
@@ -33,7 +33,7 @@
       @apply tracking-em_005;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px26 leading-px36;
     }
   }
@@ -46,7 +46,7 @@
       @apply col-start-2 col-span-6;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply col-start-3 col-span-8;
     }
   }
@@ -66,7 +66,7 @@
       @apply col-start-2 col-span-6;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply col-start-2 col-span-10;
     }
   }
@@ -78,14 +78,14 @@
       @apply gap-y-px100 gap-x-md mt-px77;
     }
 
-    @screen xl {
-      @apply grid-cols-12 gap-x-xl;
+    @screen lg2 {
+      @apply grid-cols-12 gap-x-lg2;
       @apply mt-px85;
     }
   }
 
   &__entry {
-    @apply col-span-3;
+    @apply col-span-6;
 
     @screen md {
       @apply col-span-3;
@@ -108,11 +108,11 @@
       @apply font-semibold text-px18 leading-px24 tracking-wider;
       @apply text-center mt-7;
 
-      @screen xl {
+      @screen lg2 {
         @apply mt-8 text-px20 leading-px30;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply text-px20 leading-px26 mt-10;
       }
     }
@@ -125,7 +125,7 @@
       @apply mt-px50;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply hidden;
     }
   }
@@ -139,7 +139,7 @@
         @apply col-span-full col-start-1 -mx-px50;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply mx-0;
       }
     }
@@ -157,14 +157,14 @@
         @apply px-px173;
       }
 
-      @screen xl {
+      @screen lg2 {
         @apply p-0;
       }
     }
   }
 
   // Desktop columns layout
-  @screen xl {
+  @screen lg2 {
     &--3-columns {
       .text-icon__entry {
         @apply col-span-4;

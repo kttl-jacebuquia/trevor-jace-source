@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\Block;
+use TrevorWP\CPT\Post as CPTPost;
 use TrevorWP\CPT\RC\Article;
 use TrevorWP\CPT\RC\External;
 use TrevorWP\CPT\RC\Guide;
@@ -8,6 +9,7 @@ use TrevorWP\CPT\RC\Post as RCPost;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta;
 use TrevorWP\Theme\ACF\Field_Group\Page_Circulation;
+use TrevorWP\Theme\ACF\Field_Group\Post_Details;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
@@ -32,6 +34,11 @@ class Post {
 		# File
 		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ]['post_types'] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
 			$out['file_button'] = self::_render_file_button( $file_id );
+		}
+
+		# Multiple Files
+		if ( is_singular( array( CPTPost::POST_TYPE, Article::POST_TYPE, Guide::POST_TYPE ) ) ) {
+			$out['multiple_files'] = Post_Details::render_multiple_files( $post );
 		}
 
 		return implode( "\n", array_filter( $out ) );

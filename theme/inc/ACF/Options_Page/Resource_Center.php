@@ -199,7 +199,7 @@ class Resource_Center extends A_Options_Page {
 		ob_start();
 		?>
 		<div class="container mx-auto text-center site-content-inner mt-8 md:mt-0 resource-center-hero">
-			<div class="mx-auto lg:w-3/4 w-full">
+			<div class="resource-center-hero__content">
 				<?php if ( ! empty( $eyebrow ) ) : ?>
 					<h2 class="resource-center-hero__eyebrow font-semibold text-white text-px14 leading-px18 tracking-em001 mb-2 md:tracking-px05 lg:font-bold lg:leading-px20">
 						<?php echo esc_html( $eyebrow ); ?>
@@ -307,13 +307,18 @@ class Resource_Center extends A_Options_Page {
 				)
 			);
 
+			// Ensure there is at lease one post in carousel
+			if ( count( $cat_posts ) === 0 ) {
+				continue;
+			}
+
 			$cat_rows[] = Helper\Carousel::posts(
 				$cat_posts,
 				array(
 					'id'           => "cat-{$cat->slug}",
 					'title'        => '<a href="' . get_term_link( $cat ) . '">' . esc_html( $cat->name ) . '</a>',
 					'subtitle'     => $cat->description,
-					'class'        => 'text-white',
+					'class'        => 'text-white resource-center-category',
 					'card_options' => array(),
 				)
 			);
@@ -343,6 +348,7 @@ class Resource_Center extends A_Options_Page {
 			'md:justify-center',
 			'xl:h-px737',
 			'lg:mb-20',
+			'resource-center-guide',
 		);
 
 		$guide = Helper\Posts::get_one_from_list(
@@ -356,9 +362,9 @@ class Resource_Center extends A_Options_Page {
 		?>
 		<div class="mx-auto lg:w-3/4">
 			<?php if ( ! empty( $main_cat ) ) : ?>
-				<a class="text-px14 leading-px18 tracking-em002 font-semibold uppercase lg:text-px18 lg:leading-px22 z-10" href="<?php echo esc_url( get_the_permalink( $guide ) ); ?>"><?php echo esc_html( $guide->post_title ); ?></a>
+				<a class="resource-center-guide__eyebrow text-px14 leading-px18 tracking-em002 font-semibold uppercase lg:text-px18 lg:leading-px22 z-10" href="<?php echo esc_url( get_the_permalink( $guide ) ); ?>"><?php echo esc_html( $guide->post_title ); ?></a>
 			<?php endif; ?>
-			<h2 class="text-px32 leading-px42 font-semibold my-3 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?php echo strip_tags( $guide->post_excerpt, '<tilt>' ); ?></h2>
+			<h2 class="resource-center-guide__heading text-px32 leading-px42 font-semibold my-3 lg:my-10 lg:text-px42 lg:leading-px52 xl:text-px60 xl:leading-px70"><?php echo strip_tags( $guide->post_excerpt, '<tilt>' ); ?></h2>
 			<a class="stretched-link border-b font-semibold tracking-px05 text-px20 leading-px26 lg:text-px20 lg:leading-px26" href="<?php echo get_the_permalink( $guide ); ?>">Read Guide</a>
 		</div>
 		<?php
