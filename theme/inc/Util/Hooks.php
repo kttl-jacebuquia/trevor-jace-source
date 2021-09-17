@@ -531,7 +531,7 @@ class Hooks {
 	public static function pre_get_posts( \WP_Query $query ): void {
 		$updates = array();
 
-		if ( $query->is_main_query() ) {
+		if ( $query->is_main_query() && ! is_admin() ) {
 			if ( ! $query->is_admin ) {
 				if ( $query->is_post_type_archive || $query->is_home ) {
 					$qo = $query->get_queried_object();
