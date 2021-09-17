@@ -5,14 +5,16 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node scripts/start.js",
-		"build": "node scripts/build.js",
+		"build": "node scripts/build.js && npm run copy-foundation",
 		"gen-safelist": "node scripts/gen-tailwind-safelist.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"eslint": "eslint \"src/theme/**/*.{js,jsx}\" --quiet; exit 0",
 		"eslint:fix": "eslint \"src/theme/**/*.{js,jsx}\" --quiet --fix; exit 0",
 		"stylelint": "stylelint \"src/theme/**/*.{css,scss}\"; exit 0",
 		"stylelint:fix": "stylelint \"src/theme/**/*.{css,scss}\" --fix; exit 0",
-		"lint:fix": "npm run eslint:fix && npm run stylelint:fix"
+		"lint:fix": "npm run eslint:fix && npm run stylelint:fix",
+		"ls": "ls",
+		"copy-foundation": "cp src/theme/css/foundation/foundation.css /app/theme/static/css"
 	},
 	"license": "UNLICENSED",
 	"private": true,
