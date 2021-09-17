@@ -80,7 +80,7 @@ class Post_Header {
 
 	/* Defaults */
 	const DEFAULT_TYPE     = self::TYPE_TEXT_ONLY;
-	const DEFAULT_BG_COLOR = self::CLR_INDIGO;
+	const DEFAULT_BG_COLOR = self::CLR_DARK_TEAL;
 
 	/**
 	 * Renders the post header.
