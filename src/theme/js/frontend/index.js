@@ -299,7 +299,9 @@ features.collapsible($('.js-accordion'), {});
 				} else {
 					$(this).parent().addClass('input-has-value');
 					const size =
-						$(this).val().length > 32 ? 32 : $(this).val().length;
+						$(this).val().length > 32
+							? 32
+							: $(this).val().length + 2;
 					$(this).attr('size', size);
 				}
 			})
