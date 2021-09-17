@@ -55,7 +55,6 @@
 
   .search-container {
     @apply my-px30 mx-auto;
-    width: calc(100% - #{rem-calc(92)});
 
     @screen md {
       @apply w-px405;
@@ -99,7 +98,7 @@
   }
 
   .search-field {
-    @apply text-px14 leading-px18 tracking-em005 pl-0 ml-0 h-auto min-w-0;
+    @apply text-px14 leading-px18 tracking-em005 pl-px4 ml-0 h-auto min-w-0;
 
     @screen md {
       @apply text-px16 leading-px22 pl-px94 ml-0 mr-px16 pl-0 pr-0;
