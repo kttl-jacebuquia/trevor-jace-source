@@ -1,0 +1,30 @@
+@mixin icon-font-face() {
+  font-family: "trevor-ti";
+  -webkit-font-smoothing: antialiased;
+  font-weight: lighter;
+}
+
+@mixin apply-icon-content($icon-content) {
+  @include icon-font-face;
+  @apply inline-flex ml-px10;
+  content: $icon-content;
+}
+
+// Refer to icon-font/_vars.scss
+@mixin icon-font($icon, $position: null) {
+  @if not(map-has-key($map: $font-icons, $key: $icon)) {
+    @error "#{$icon} does not exist! Refer to icon-font/_vars.scss";
+  }
+
+  $icon-content: map-get($font-icons, $icon);
+
+  // If $position is not supplied,
+  // the parent selector must be already be a ::before or ::after
+  @if ($position == null) {
+    @include apply-icon-content($icon-content);
+  } @else if ($position == before or $position == after) {
+    &::#{$position} {
+      @include apply-icon-content($icon-content);
+    }
+  }
+}

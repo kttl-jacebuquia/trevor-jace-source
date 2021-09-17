@@ -1,0 +1,49 @@
+// Applies theme's background color as rgba() value
+// USAGE:
+//   background-color: theme-background(); // Does not use opacity variable
+//   background-color: theme-background( true ); // Uses opacity variable
+//   color: theme-foreground();
+@function theme-background( $with-opacity: false ) {
+  @return rgba(
+    var(--site-theme-background-r),
+    var(--site-theme-background-g),
+    var(--site-theme-background-b),
+    if( $with-opacity, var(--tw-bg-opacity), 1 )
+  );
+}
+
+@function theme-foreground() {
+  @return var(--site-theme-foreground);
+}
+
+/**
+  Defines theme color settings for the site
+*/
+body {
+  // Site-wide background theme (for button backgrounds, secondary button text colors, etc.)
+  // Deep Teal as default
+  --site-theme-background-r: theme('colors.teal.dark-r');
+  --site-theme-background-g: theme('colors.teal.dark-g');
+  --site-theme-background-b: theme('colors.teal.dark-b');
+
+  // Descendants should use this variable
+  // to apply the background theme above as rgba() color.
+  --site-theme-background: rgba(
+    var(--site-theme-background-r),
+    var(--site-theme-background-g),
+    var(--site-theme-background-b),
+    var(--tw-bg-opacity)
+  );
+
+  // Site-wide foreground theme (for text colors, etc.)
+  // White as default
+  --site-theme-foreground: theme('colors.white.DEFAULT');
+
+  // RC Theme (Indigo)
+  &.single-trevor_research,
+  &.single.is-rc {
+    --site-theme-background-r: theme('colors.indigo.DEFAULT-r');
+    --site-theme-background-g: theme('colors.indigo.DEFAULT-g');
+    --site-theme-background-b: theme('colors.indigo.DEFAULT-b');
+  }
+}

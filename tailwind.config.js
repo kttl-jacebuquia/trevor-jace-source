@@ -5,6 +5,16 @@ const px2rem = (px, root = 16) => {
 	return String(+remVal.toFixed(2)) + 'rem';
 };
 
+// Converts a hex color to RGB
+const hexToRgb = (hex) => {
+    var result = /^#?([0-9a-f\d]{2})([0-9a-f\d]{2})([0-9a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+}
+
 /**
  * Builds object containing px 2 rem key-value for tailwind, e.g.:
  * {
@@ -52,7 +62,7 @@ const divisibles = (
 
 const DARK_TEAL = '#003A48';
 
-module.exports = {
+const config = {
 	purge: {
 		preserveHtmlElements: true,
 		content: [
@@ -442,3 +452,26 @@ module.exports = {
 		require('@tailwindcss/line-clamp'),
 	],
 };
+
+// Add rgba variants to theme colors
+Object.entries(config.theme.colors).forEach(([ color, colorConfig ]) => {
+	if ( typeof colorConfig === 'object' ) {
+		// Cycle through the color variants
+		Object.entries(colorConfig).forEach(([ variantKey, variantValue ]) => {
+			const rgb = hexToRgb(variantValue);
+
+			// Add rgba variant, as well as red-blue-green segments
+			// See theme.scss for sample usage
+			if ( rgb ) {
+				const { r, g, b } = rgb;
+				const rgba = [ r, g, b, 'var(--tw-bg-opacity)' ].join(', ');
+				config.theme.colors[color][variantKey + '-rgba'] = `rgba(${rgba})`;
+				config.theme.colors[color][variantKey + '-r'] = r;
+				config.theme.colors[color][variantKey + '-g'] = g;
+				config.theme.colors[color][variantKey + '-b'] = b;
+			}
+		});
+	}
+});
+
+module.exports = config;

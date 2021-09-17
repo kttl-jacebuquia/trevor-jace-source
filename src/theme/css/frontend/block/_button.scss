@@ -1,0 +1,39 @@
+.wp-block-buttons {
+  > .wp-block-button {
+      display: inline;
+
+      .wp-block-button__link {
+        &,
+        &[class|="has-"] {
+          @apply btn;
+          @apply inline-flex items-center no-underline transition-colors rounded-full;
+          @apply text-px16 leading-px22 tracking-em001;
+          @apply h-px48 px-px28;
+          background-color: theme-background( true );
+          color: var(--site-theme-foreground);
+
+          @screen md {
+            @apply h-px44 text-px14 leading-px19;
+          }
+
+          @screen lg {
+            @apply h-px46 text-px16 leading-px22;
+          }
+
+          // Downloadable file links should have a download icon
+          &[href$="\.pdf"],
+          &[href$="\.PDF"] {
+            &::after {
+              @include icon-font( download );
+            }
+          }
+
+          &:hover {
+            --tw-bg-opacity: 0.9;
+          }
+        }
+      }
+    }
+
+}
+
