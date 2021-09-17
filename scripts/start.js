@@ -7,7 +7,7 @@ process.env.NODE_ENV = 'development';
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
 	throw err;
 });
 
@@ -32,14 +32,12 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const isInteractive = process.stdout.isTTY;
 
-
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
-choosePort(HOST, DEFAULT_PORT).then(port => {
-
-	if (port == null) {
+choosePort(HOST, DEFAULT_PORT).then((port) => {
+	if (port === null) {
 		// We have not found a port.
 		return;
 	}
@@ -47,17 +45,12 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
 	const config = configFactory('development');
 	const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 	const appName = require(paths.appPackageJson).name;
-	const urls = prepareUrls(
-		protocol,
-		HOST,
-		port,
-		'/'
-	);
+	const urls = prepareUrls(protocol, HOST, port, '/');
 
 	const devSocket = {
-		warnings: warnings =>
+		warnings: (warnings) =>
 			devServer.sockWrite(devServer.sockets, 'warnings', warnings),
-		errors: errors =>
+		errors: (errors) =>
 			devServer.sockWrite(devServer.sockets, 'errors', errors),
 	};
 	// Create a webpack compiler that is configured with custom messages.
@@ -72,7 +65,7 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
 	const serverConfig = createDevServerConfig('trevor-node.lndo.site');
 	const devServer = new WebpackDevServer(compiler, serverConfig);
 	// Launch WebpackDevServer.
-	devServer.listen(port, HOST, err => {
+	devServer.listen(port, HOST, (err) => {
 		if (err) {
 			return console.log(err);
 		}
@@ -96,7 +89,10 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
 		openBrowser(urls.localUrlForBrowser);
 
 		// Write Tailwind's config to a JSON file
-		fs.writeFileSync(paths.tailwindConfJSONOut, JSON.stringify(resolveConfig(require(paths.tailwindCssConf))));
+		fs.writeFileSync(
+			paths.tailwindConfJSONOut,
+			JSON.stringify(resolveConfig(require(paths.tailwindCssConf)))
+		);
 	});
 
 	['SIGINT', 'SIGTERM'].forEach(function (sig) {

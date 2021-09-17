@@ -24,7 +24,6 @@ module.exports = {
 	themeJSFrontEnd: resolveApp('src/theme/js/frontend'),
 	themeJSFSiteBanners: resolveApp('src/theme/js/site-banners'),
 	themeCSSFrontend: resolveApp('src/theme/css/frontend/main.scss'),
-	themeCSSFoundation: resolveApp('src/theme/css/frontend/foundation.scss'),
 	themeCSSDevFrontend: resolveApp('src/theme/css-dev/frontend.js'),
 	themeCSSAdmin: resolveApp('src/theme/css/admin/main.scss'),
 	themeCSSDevAdmin: resolveApp('src/theme/css-dev/admin.js'),

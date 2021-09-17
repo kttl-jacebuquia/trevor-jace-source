@@ -4,7 +4,7 @@ const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware')
 const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 // const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
-const chokidar = require("chokidar");
+const chokidar = require('chokidar');
 const paths = require('./paths');
 
 const host = process.env.HOST || '0.0.0.0';
@@ -88,9 +88,11 @@ module.exports = function (allowedHost) {
 			ignored: ignoredFiles(paths.src),
 		},
 		headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods':
+				'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+			'Access-Control-Allow-Headers':
+				'X-Requested-With, content-type, Authorization',
 		},
 		https: false,
 		host,
@@ -113,22 +115,25 @@ module.exports = function (allowedHost) {
 			// Theme file watcher
 			const fileWatcherPool = 1000; //milliseconds
 			chokidar
-				.watch([
-					`${paths.themePHP}/*.php`,
-					`${paths.themePHP}/template-parts/**/*.php`,
-				], {
-					alwaysStat: true,
-					atomic: false,
-					followSymlinks: false,
-					ignoreInitial: true,
-					ignorePermissionErrors: true,
-					// ignored,
-					interval: fileWatcherPool,
-					persistent: true,
-					usePolling: Boolean(fileWatcherPool)
-				})
-				.on("all", () => {
-					server.sockWrite(server.sockets, "content-changed");
+				.watch(
+					[
+						`${paths.themePHP}/*.php`,
+						`${paths.themePHP}/template-parts/**/*.php`,
+					],
+					{
+						alwaysStat: true,
+						atomic: false,
+						followSymlinks: false,
+						ignoreInitial: true,
+						ignorePermissionErrors: true,
+						// ignored,
+						interval: fileWatcherPool,
+						persistent: true,
+						usePolling: Boolean(fileWatcherPool),
+					}
+				)
+				.on('all', () => {
+					server.sockWrite(server.sockets, 'content-changed');
 				});
 		},
 		after(app) {
