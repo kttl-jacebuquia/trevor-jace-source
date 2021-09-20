@@ -6,6 +6,14 @@
   &__box {
     @apply rounded-px10 bg-violet text-center text-white py-px80;
 
+    @screen lg {
+      @apply py-px100;
+    }
+
+    @screen lg2 {
+      @apply py-px140;
+    }
+
     @screen xl {
       @apply py-px170;
     }
@@ -18,8 +26,12 @@
       @apply text-px32 leading-px40 px-px105;
     }
 
-    @screen xl {
-      @apply text-px42 leading-px52 tracking-em_001 px-px200;
+    @screen lg {
+      @apply text-px40 leading-px48 px-px69;
+    }
+
+    @screen lg2 {
+      @apply text-px42 leading-px52 tracking-em_001 px-px203;
     }
   }
 
@@ -31,8 +43,12 @@
       @apply mt-px14 px-px135 text-px18 leading-px26 tracking-em001;
     }
 
-    @screen xl {
-      @apply px-px132 mt-px18 text-px24 leading-px34 tracking-em005;
+    @screen lg {
+      @apply px-px120 mt-px18 text-px22 leading-px32 tracking-em005;
+    }
+
+    @screen lg2 {
+      @apply px-px132 text-px24 leading-px34;
     }
   }
 
@@ -43,8 +59,18 @@
       @apply mt-px30 -mb-px12 px-px62 tracking-px10;
     }
 
+    @screen lg {
+      @apply mt-px50 -mb-px24 tracking-px05;
+      padding-left: 97px;
+      padding-right: 97px;
+    }
+
+    @screen lg2 {
+      @apply px-px150;
+    }
+
     @screen xl {
-      @apply mt-px50 px-px206 -mb-px24;
+      @apply px-px208;
     }
   }
 
@@ -56,15 +82,15 @@
       @apply mb-px12 h-px34 px-px14 text-px14 leading-px18 tracking-em001;
     }
 
-    @screen xl {
-      @apply h-px36 text-px16 leading-px20 tracking-px05 mb-px24;
+    @screen lg {
+      @apply mb-px24 h-px36 px-px14 text-px16 leading-px20 tracking-px05;
     }
   }
 
   &__cta-wrap {
     @apply mt-px40 text-center;
 
-    @screen xl {
+    @screen lg {
       @apply mt-px60;
     }
   }

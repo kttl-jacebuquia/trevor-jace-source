@@ -219,6 +219,10 @@
   max-width: theme('postCard.width.DEFAULT');
 	@apply h-auto;
 
+  body.is-rc & {
+    @apply text-indigo;
+  }
+
   [data-whatintent='mouse'] &:hover {
 	@apply bg-gray-light transition-colors;
   }

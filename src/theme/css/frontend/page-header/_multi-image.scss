@@ -8,7 +8,9 @@ $multi-image-images-config: (
     z-index: 1,
     sm: ( 162, 162, 74, -27 ), // 620
     md: ( 183, 183, 477, -45 ),
-    lg2: ( 377, 375, 838, -60 ),
+    lg: ( 253, 253, 527, -50 ),
+    lg2: ( 315, 315, 668, -82 ),
+    xl: ( 377, 375, 838, -60 ),
   ),
   // Image 2
   2: (
@@ -16,7 +18,9 @@ $multi-image-images-config: (
     z-index: 2,
     sm: ( 182, 215, 206, 37 ),
     md: ( 174, 205, 448, 262 ),
-    lg2: ( 357, 421, 784, 536 ),
+    lg: ( 243, 283, 488, 375 ),
+    lg2: ( 299, 352, 619, 447 ),
+    xl: ( 357, 421, 784, 536 ),
   ),
   // Image 3
   3: (
@@ -24,7 +28,9 @@ $multi-image-images-config: (
     z-index: 3,
     sm: ( 165, 220, 374, -7 ),
     md: ( 208, 277, 590, 110 ),
-    lg2: ( 428, 568, 1065, 257 ),
+    lg: ( 287, 382, 684, 165 ),
+    lg2: ( 358, 476, 863, 184 ),
+    xl: ( 428, 568, 1065, 257 ),
   ),
   // Image 4
   4: (
@@ -32,7 +38,9 @@ $multi-image-images-config: (
     z-index: 1,
     sm: ( 219, 238, 97, 182 ),
     md: ( 201, 218, 147, 441 ),
-    lg2: ( 390, 425, 296, 900 ),
+    lg: ( 262, 285, 141, 600 ),
+    lg2: ( 327, 356, 186, 726 ),
+    xl: ( 390, 425, 296, 900 ),
   ),
   // Image 5
   5: (
@@ -40,7 +48,9 @@ $multi-image-images-config: (
     z-index: 2,
     sm: ( 168, 206, 327, 237 ),
     md: ( 264, 323, 249, 529 ),
-    lg2: ( 513, 627, 497, 1056 ),
+    lg: ( 344, 422, 274, 713 ),
+    lg2: ( 428, 526, 352, 870 ),
+    xl: ( 513, 627, 497, 1056 ),
   ),
   // Image 6
   6: (
@@ -48,7 +58,9 @@ $multi-image-images-config: (
     z-index: 3,
     sm: ( 171, 197, 545, 170 ),
     md: ( 201, 232, 659, 436 ),
-    lg2: ( 414, 477, 1217, 920 ),
+    lg: ( 278, 320, 779, 615 ),
+    lg2: ( 346, 399, 982, 746 ),
+    xl: ( 414, 477, 1217, 920 ),
   ),
 );
 
@@ -58,7 +70,8 @@ $multi-image-images-config: (
 $screen-widths: (
   sm: rem-calc(375),
   md: rem-calc(768),
-  lg2: rem-calc(1440), // Only using 1440 as reference to compute for ratio
+  lg: rem-calc(1024),
+  lg2: rem-calc(1280),
   xl: rem-calc(1440),
 );
 
@@ -71,12 +84,16 @@ $screen-widths: (
       margin-top: -$top-nav-height-tablet;
     }
 
-    @screen lg2 {
-      @apply pt-0;
+    @screen lg {
       margin-top: -$top-nav-height-desktop;
     }
 
+    @screen lg2 {
+      margin-top: -$top-nav-height-tablet; // Back to 144px;
+    }
+
     @screen xl {
+      margin-top: -$top-nav-height-desktop;
       @apply pt-0 overflow-hidden pb-px500 -mb-px500;
     }
 
@@ -101,9 +118,13 @@ $screen-widths: (
       padding-top: $top-nav-height-tablet;
     }
 
-    @screen lg2 {
+    @screen lg {
       padding-top: $top-nav-height-desktop;
-      padding-bottom: rem-calc(680);
+      padding-bottom: 588px;
+    }
+
+    @screen lg2 {
+      padding-bottom: rem-calc(729);
     }
 
     @screen xl {
@@ -117,7 +138,7 @@ $screen-widths: (
     @apply pt-px50 relative mt-px136;
 
     @screen md {
-      @apply pt-px22;
+      @apply pt-px22 mt-0;
     }
 
     @screen lg2 {
@@ -145,18 +166,30 @@ $screen-widths: (
           @apply text-px32 leading-px42 col-span-5;
         }
 
+        @screen lg {
+          @apply text-px40 leading-px48 col-span-7;
+        }
+
         @screen lg2 {
+          @apply text-px52 leading-px62 col-span-8;
+        }
+
+        @screen xl {
           @apply text-px70 leading-px80 col-span-9;
         }
 
         tilt {
-          @apply block font-bold text-px44 leading-px44 tracking-em005 mt-0 rotate-0;
+          @apply block font-bold text-px44 leading-px54 tracking-em005 mt-0 rotate-0;
 
-          @screen md {
-            @apply leading-px54;
+          @screen lg {
+            @apply text-px50 leading-px60;
           }
 
           @screen lg2 {
+            @apply text-px78 leading-px98;
+          }
+
+          @screen xl {
             @apply text-px98 leading-px108;
           }
         }
@@ -170,8 +203,16 @@ $screen-widths: (
           @apply mt-px10 col-span-4 text-px18 leading-px24;
         }
 
+        @screen lg {
+          @apply col-span-7 text-px20;
+        }
+
         @screen lg2 {
-          @apply mt-px15 col-span-6 text-px24 leading-px34;
+          @apply mt-px15 text-px22 leading-px32;
+        }
+
+        @screen xl {
+          @apply text-px24 col-span-6 leading-px34;
         }
       }
 
@@ -230,6 +271,12 @@ $screen-widths: (
                   left: rem-calc($left);
                 }
                 @else {
+                  $top: rem-calc($top);
+
+                  @if $screen == 'lg2' {
+                    $top: calc(#{$top} + #{$top-nav-height-desktop});
+                  }
+
                   @screen #{$screen} {
                     $unitless-screen-rem: strip-unit($screen-width);
                     $unitless-width-rem: strip-unit(rem-calc($width));
@@ -238,12 +285,10 @@ $screen-widths: (
                     $width-ratio: $unitless-width-rem / $unitless-screen-rem;
                     $height-ratio: $unitless-height-rem / $unitless-width-rem;
                     $left-ratio: $unitless-left-rem / $unitless-screen-rem;
-                    // width: rem-calc($width);
-                    // height: rem-calc($height);
+
                     width: percentage($width-ratio);
                     height: auto;
-                    top: rem-calc($top);
-                    // left: rem-calc($left);
+                    top: $top;
                     left: percentage($left-ratio);
 
                     &::after {

@@ -8,6 +8,14 @@
       @apply py-px100;
     }
 
+    @screen lg {
+      @apply py-px140;
+    }
+
+    @screen lg2 {
+      @apply py-px170;
+    }
+
     @screen xl {
       @apply pt-px178 pb-px118;
     }
@@ -18,6 +26,14 @@
 
     @screen md {
       @apply text-px32 leading-px42;
+    }
+
+    @screen lg {
+      @apply text-px36 leading-px46;
+    }
+
+    @screen lg2 {
+      @apply col-span-10 col-start-2 text-px60 leading-px70;
     }
 
     @screen xl {
@@ -32,15 +48,23 @@
       @apply -mx-px50 px-px50;
     }
 
+    @screen lg {
+      @apply -mx-px90 px-px90 mt-px80;
+    }
+
+    @screen lg2 {
+      @apply mt-px150 mx-0 px-0;
+    }
+
     @screen xl {
-      @apply mt-px140 mx-0 px-0;
+      @apply mt-px140;
     }
   }
 
   &__cards {
     @apply h-auto flex items-stretch;
 
-    @screen xl {
+    @screen lg2 {
       @apply grid tw-grid-desktop gap-y-px28;
     }
   }
@@ -53,8 +77,17 @@
       width: calc(( 100% - 28px ) / 2);
     }
 
-    @screen xl {
-      @apply col-span-6 w-full py-px116 px-px99;
+    @screen lg {
+      width: 335px;
+      @apply px-px34;
+    }
+
+    @screen lg2 {
+      @apply col-span-6 w-full py-px116 px-px69;
+    }
+
+    @screen lg2 {
+      @apply px-px99;
     }
   }
 
@@ -103,6 +136,15 @@
       @apply text-px16 leading-px22 tracking-em001;
     }
 
+    @screen lg {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    @screen lg2 {
+      @apply mt-px40;
+    }
+
     @screen xl {
       @apply h-px66 text-px20 leading-px26 tracking-px05;
     }
@@ -113,6 +155,14 @@
 
     @screen md {
       @apply mt-px30;
+    }
+
+    @screen lg {
+      @apply mt-px70;
+    }
+
+    @screen lg2 {
+      @apply mt-px90;
     }
 
     @screen xl {
@@ -132,6 +182,10 @@
     @screen xl {
       @apply text-px26 leading-px36 tracking-em005;
     }
+  }
+
+  .swiper-pagination {
+    @apply lg2:hidden;
   }
 
   .swiper-pagination-bullet {

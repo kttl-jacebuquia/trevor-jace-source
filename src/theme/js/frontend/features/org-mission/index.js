@@ -23,6 +23,10 @@ export default class OrgMission extends Component {
 				slidesPerView: 2,
 				spaceBetween: 28,
 			},
+			1024: {
+				slidesPerView: 2.4,
+				spaceBetween: 28,
+			}
 		},
 		on: {
 			init: this.onSwiperInit.bind(this),

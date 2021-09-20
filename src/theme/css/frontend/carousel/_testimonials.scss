@@ -6,7 +6,7 @@
     @apply py-px50;
   }
 
-  @screen xl {
+  @screen lg {
     @apply py-px80;
   }
 
@@ -25,7 +25,7 @@
       @apply col-span-3;
     }
 
-    @screen xl {
+    @screen lg {
       @apply col-span-5;
     }
 
@@ -41,7 +41,7 @@
       @apply col-span-5 mt-0;
     }
 
-    @screen xl {
+    @screen lg {
       @apply col-span-6 col-start-7;
     }
   }
@@ -54,7 +54,7 @@
       @apply mb-px30;
     }
 
-    @screen xl {
+    @screen lg {
       @apply mb-px20;
     }
   }
@@ -67,7 +67,7 @@
       @apply h-px16 text-px16;
     }
 
-    @screen xl {
+    @screen lg {
       @apply h-px26 text-px26;
     }
   }
@@ -75,7 +75,7 @@
   .trevor-ti-quote-close {
     @apply mt-px4 ml-px6;
 
-    @screen xl {
+    @screen lg {
       @apply ml-px10;
     }
   }
@@ -87,7 +87,12 @@
     @screen md {
       @apply text-px20 leading-px26;
     }
-    @screen xl {
+
+    @screen lg {
+      @apply text-px26 leading-px36;
+    }
+
+    @screen lg2 {
       @apply text-px32 leading-px40;
     }
   }
@@ -99,8 +104,12 @@
       @apply text-px14 leading-px22 tracking-px05 mt-px20;
     }
 
-    @screen xl {
-      @apply text-px24 leading-px32 mt-px30;
+    @screen lg {
+      @apply text-px18 leading-px26;
+    }
+
+    @screen lg2 {
+      @apply text-px24 leading-px32;
     }
   }
 
@@ -116,7 +125,7 @@
         @apply mt-px20;
       }
 
-      @screen xl {
+      @screen lg {
         @apply mt-px30;
       }
 
@@ -196,7 +205,7 @@
       @apply pb-px50;
     }
 
-    @screen xl {
+    @screen lg {
       @apply py-px80;
     }
 
@@ -205,7 +214,7 @@
         @apply col-start-6;
       }
 
-      @screen xl {
+      @screen lg {
         @apply col-start-8;
       }
     }
@@ -232,7 +241,7 @@
   // Cover-Image variant
   &.cover {
     .carousel-testimonials-inner {
-      @screen xl {
+      @screen lg {
         @apply relative;
       }
     }
@@ -242,7 +251,7 @@
         @apply col-span-6;
       }
 
-      @screen xl {
+      @screen lg {
         @apply col-span-full;
       }
 
@@ -259,7 +268,7 @@
           width: calc(100% + 50px);
         }
 
-        @screen xl {
+        @screen lg {
           @apply mr-0 w-full;
         }
 
@@ -273,7 +282,7 @@
               @apply h-px412;
             }
 
-            @screen xl {
+            @screen lg {
               @apply h-px436;
             }
           }
@@ -286,7 +295,7 @@
         @apply col-span-6 col-start-2 -mx-px28;
       }
 
-      @screen xl {
+      @screen lg {
         @apply relative col-span-8 col-start-1 z-2 mx-0;
       }
     }
@@ -295,7 +304,8 @@
       @screen md {
         @apply text-px30 leading-px40;
       }
-      @screen xl {
+
+      @screen lg {
         @apply text-px34 leading-px42 tracking-em_005;
       }
     }
@@ -305,7 +315,7 @@
         @apply text-px18 leading-px28 tracking-normal mt-px22;
       }
 
-      @screen xl {
+      @screen lg {
         @apply text-px22 leading-px32 mt-px18;
       }
     }
@@ -316,7 +326,7 @@
         @apply h-px24 text-px24;
       }
 
-      @screen xl {
+      @screen lg {
         @apply h-px26 text-px26;
       }
     }
@@ -326,7 +336,7 @@
         @apply mt-px6;
       }
 
-      @screen xl {
+      @screen lg {
         @apply ml-px10;
       }
     }
@@ -338,12 +348,12 @@
         @apply pt-px100;
       }
 
-      @screen xl {
+      @screen lg {
         @apply py-0;
       }
 
       .carousel-testimonials-txt-wrap {
-        @screen xl {
+        @screen lg {
           @apply col-span-6;
         }
       }
@@ -352,7 +362,8 @@
         @screen md {
           @apply col-start-3;
         }
-        @screen xl {
+
+        @screen lg {
           @apply col-start-7 col-span-6 -ml-px28 -mr-px140;
         }
 
@@ -360,7 +371,8 @@
           @screen md {
             @apply ml-0 -mr-px50;
           }
-          @screen xl {
+
+          @screen lg {
             @apply mr-0;
           }
         }
@@ -370,7 +382,7 @@
     &.image-left {
       @apply pt-0 pb-px80;
 
-      @screen xl {
+      @screen lg {
         @apply py-px115;
       }
 
@@ -378,7 +390,7 @@
         @screen md {
           @apply mt-px30;
         }
-        @screen xl {
+        @screen lg {
           @apply col-start-6;
         }
       }
@@ -386,7 +398,8 @@
         @screen md {
           @apply col-start-1;
         }
-        @screen xl {
+
+        @screen lg {
           left: -140px;
         }
 
@@ -394,7 +407,8 @@
           @screen md {
             @apply -ml-px50;
           }
-          @screen xl {
+
+          @screen lg {
             @apply ml-0;
           }
         }

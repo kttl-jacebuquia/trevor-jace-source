@@ -17,11 +17,16 @@ export default class FeaturedCardThreeUp extends Component {
 		breakpoints: {
 			300: {
 				slidesPerView: 1,
+				spaceBetween: 18,
 			},
 			768: {
 				slidesPerView: 2,
 				spaceBetween: 28,
 			},
+			1024: {
+				slidesPerView: 2.4,
+				spaceBetween: 28,
+			}
 		},
 		on: {
 			init: this.onSwiperInit.bind(this),

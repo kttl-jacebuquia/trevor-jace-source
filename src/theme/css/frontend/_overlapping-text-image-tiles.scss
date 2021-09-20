@@ -14,11 +14,22 @@
     @apply px-px24 text-center;
 
     @screen md {
-      @apply col-start-3 col-span-6 -mr-px102 pl-px76 pr-px130;
+      @apply col-start-3 col-span-6 -mr-px102 pl-px76 pr-px130 rounded-r-none;
+    }
+
+    @screen lg {
+      @apply col-start-3 col-span-10 pl-px145 pr-px90 py-px100;
+      margin-right: calc(-1 * theme('container.padding.lg'));
+    }
+
+    @screen lg2 {
+      @apply col-start-4 col-span-9 pl-px178 pr-px209 py-px140;
+      margin-right: calc(-1 * theme('container.padding.lg2'));
     }
 
     @screen xl {
-      @apply col-span-9 col-start-4 -mr-px140 pt-px180 pb-px190 pl-px198 pr-px240 rounded-r-none;
+      @apply pt-px180 pb-px190 pl-px198 pr-px240;
+      margin-right: calc(-1 * theme('container.padding.xl'));
     }
   }
 
@@ -29,8 +40,13 @@
       @apply text-px32 leading-px42;
     }
 
-    @screen xl {
-      @apply text-px42 leading-px48 tracking-em_001;
+    @screen lg {
+      @apply text-px40 leading-px48;
+    }
+
+    @screen lg2 {
+      @apply text-px42 tracking-em_001;
+
     }
   }
 
@@ -41,8 +57,12 @@
       @apply mt-px14 text-px18 leading-px26;
     }
 
-    @screen xl {
-      @apply mt-px22 text-px24 leading-px35 tracking-em005;
+    @screen lg {
+      @apply mt-px22 text-px22 leading-px32;
+    }
+
+    @screen lg2 {
+      @apply text-px24 leading-px35 tracking-em005;
     }
   }
 
@@ -54,20 +74,31 @@
       @apply mt-px32;
     }
 
-    @screen xl {
-      @apply mt-px40 h-px66 text-px20 leading-px26;
+    @screen lg {
+      @apply h-auto text-px20 leading-px26 mt-px40 py-px20 px-px40;
     }
   }
 
   &__image {
-    @apply col-span-5 -ml-px55 relative -mt-px40 rounded-px10 overflow-hidden;
+    @apply col-span-5 -ml-px55 relative -mt-px40 rounded-l-none rounded-px10 overflow-hidden;
 
     @screen md {
       @apply col-span-3 -ml-px90 -mt-px255;
     }
 
+    @screen lg {
+      margin-left: calc(-1 * theme('container.padding.lg'));
+      @apply col-span-4 -mt-px318;
+    }
+
+    @screen lg2 {
+      margin-left: calc(-1 * theme('container.padding.lg2'));
+      @apply col-span-5 -mt-px350 mr-px60;
+    }
+
     @screen xl {
-      @apply col-span-5 -ml-px230 -mt-px480;
+      margin-left: calc(-1 * theme('container.padding.xl'));
+      @apply -mt-px480 mr-0;
     }
 
     &::before {
@@ -77,6 +108,14 @@
 
       @screen md {
         padding-top: calc(100% * 326 / 322);
+      }
+
+      @screen lg {
+        padding-top: calc(100% * 372 / 366);
+      }
+
+      @screen lg2 {
+        padding-top: calc(100% * 525 / 519);
       }
 
       @screen xl {
@@ -93,23 +132,46 @@
   &--image-on-right {
     .overlapping-text-image-tiles__box {
       @screen md {
-        @apply rounded-l-none col-span-6 col-start-1 -ml-px90 mr-0 pl-px154 pr-px116;
+        @apply rounded-px10 rounded-l-none col-span-6 col-start-1 -ml-px90 mr-0 pl-px154 pr-px116;
+      }
+
+      @screen lg {
+        @apply col-span-10 col-start-1 mr-0 pl-px135 pr-px145;
+        margin-left: calc(-1 * theme('container.padding.lg'));
+      }
+
+      @screen lg2 {
+        @apply col-span-9 pl-px120 pr-px178;
+        margin-left: calc(-1 * theme('container.padding.lg2'));
       }
 
       @screen xl {
-        @apply -ml-px140 col-span-8 pl-px240 pr-px198 rounded-r-px10;
+        @apply col-span-8 pl-px240 pr-px198;
+        padding-top: 176px;
+        padding-bottom: 167px;
+        margin-left: calc(-1 * theme('container.padding.xl'));
       }
     }
 
     .overlapping-text-image-tiles__image {
-      @apply col-start-2 col-span-5 ml-0 -mr-px90;
+      @apply col-start-2 col-span-5 ml-0 -mr-px90 rounded-r-none rounded-px10;
 
       @screen md {
-        @apply col-span-3 col-start-6 -mr-px90;
+        @apply col-span-3 col-start-6 -mr-px90 rounded-r-none rounded-px10;
+      }
+
+      @screen lg {
+        @apply col-span-4 col-start-9;
+        margin-right: calc(-1 * theme('container.padding.lg'));
+      }
+
+      @screen lg2 {
+        @apply col-span-5 col-start-8;
+        margin-right: calc(-1 * theme('container.padding.lg2'));
       }
 
       @screen xl {
-        @apply col-span-5 col-start-8 -mr-px220;
+        margin-right: calc(-1 * theme('container.padding.xl'));
       }
     }
   }
