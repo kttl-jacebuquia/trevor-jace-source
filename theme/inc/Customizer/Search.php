@@ -6,6 +6,7 @@ use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Tools;
 use TrevorWP\CPT\RC\RC_Object;
 use \TrevorWP\Ranks;
+use TrevorWP\Theme\ACF\Options_Page\Search as OP_Search;
 use TrevorWP\Theme\Helper\Thumbnail;
 use TrevorWP\Theme\Helper\Taxonomy;
 
@@ -34,8 +35,7 @@ class Search extends Abstract_Customizer {
 		'blogs'     => array(
 			'name'      => 'Blogs',
 			'post_type' => array(
-				// CPT\Post::POST_TYPE,
-				CPT\RC\Post::POST_TYPE,
+				CPT\Post::POST_TYPE,
 			),
 		),
 	);
@@ -221,7 +221,10 @@ class Search extends Abstract_Customizer {
 	public static function pre_get_posts( \WP_Query $query ): void {
 		if ( $query->is_main_query() && ! is_admin() ) {
 			if ( ! Is::rc() && $query->is_search() ) {
+				$search = OP_Search::get_search();
 				$query->set( 'post_type', self::get_scope_post_types( self::get_current_scope() ) );
+				$query->set( 'posts_per_page', $search['posts_per_page'] );
+				$query->set( 'post_status', 'publish' );
 			}
 		}
 	}
@@ -356,6 +359,10 @@ class Search extends Abstract_Customizer {
 	 * @return \WP_Post|null
 	 */
 	public static function get_glossary_item(): ?\WP_Post {
+		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
+			return null;
+		}
+
 		$q = new \WP_Query(
 			array(
 				's'              => get_search_query( false ),

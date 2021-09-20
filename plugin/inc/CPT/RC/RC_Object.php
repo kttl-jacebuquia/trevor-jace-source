@@ -536,6 +536,7 @@ abstract class RC_Object {
 				$posts = get_posts(
 					array(
 						'post_type'     => $blog_pts,
+						'post_status'   => 'publish',
 						'numberposts'   => 1,
 						'post_name__in' => array( $wp->query_vars['name'] ),
 					)
@@ -575,6 +576,7 @@ abstract class RC_Object {
 			if ( ! empty( $query->get( 's' ) ) ) {
 				$query->is_search = true;
 				$query->set( 'posts_per_page', $pagination['search_results'] );
+				$query->set( 'post_status', 'publish' );
 			}
 
 			$query->is_single            = false;
@@ -605,6 +607,7 @@ abstract class RC_Object {
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp && $query->is_search() ) {
 			$query->set( 'post_type', array_merge( self::$PUBLIC_POST_TYPES, array( Glossary_Entry::POST_TYPE ) ) );
+			$query->set( 'post_status', 'publish' );
 		}
 
 		return $request;
