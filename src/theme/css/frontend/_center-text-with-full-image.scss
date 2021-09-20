@@ -1,11 +1,17 @@
 .center-text-with-full-image {
+  @apply my-px40;
+
+  @screen lg {
+    @apply my-px120;
+  }
+
+  @screen lg2 {
+    @apply my-px160;
+  }
+
 	&__container {
 		@apply container mx-auto;
-		@apply tw-grid py-px40;
-
-		@screen xl {
-			@apply py-px60;
-		}
+		@apply tw-grid;
 	}
 
 	&__title {
@@ -17,9 +23,19 @@
 			@apply text-px30 leading-px40;
 		}
 
+    @screen lg {
+      @apply col-span-10 col-start-2;
+      @apply text-px38 leading-px48 tracking-em_001;
+    }
+
+    @screen lg2 {
+      @apply col-span-8 col-start-3;
+      @apply text-px44 leading-px54 tracking-em_001;
+    }
+
 		@screen xl {
 			@apply col-span-8 col-start-3 -mx-px56;
-			@apply text-px40 leading-px46 tracking-em_001;
+			@apply text-px46 leading-px56 tracking-em_001;
 		}
 	}
 
@@ -32,9 +48,19 @@
 			@apply mt-px8 text-px18 leading-px26;
 		}
 
+    @screen lg {
+      @apply col-span-10 col-start-2;
+      @apply text-px20 leading-px30 mt-px14;
+    }
+
+    @screen lg2 {
+      @apply col-span-8 col-start-3 mt-px16;
+      @apply text-px24 leading-px34 tracking-px05;
+    }
+
 		@screen xl {
 			@apply col-span-8 col-start-3 -mx-px28;
-			@apply text-px24 leading-px34 mt-px15;
+			@apply text-px24 leading-px34 mt-px14;
 		}
 	}
 
@@ -45,8 +71,16 @@
 			@apply mt-px40;
 		}
 
+    @screen lg {
+      @apply col-span-10 col-start-2;
+    }
+
+    @screen lg2 {
+      @apply mt-px70;
+    }
+
 		@screen xl {
-			@apply mt-px70 col-span-10 col-start-2;
+			@apply mt-px40 col-span-10 col-start-2;
 		}
 
     img {
@@ -79,14 +113,18 @@
   &__cta-wrap {
     @apply text-center mt-px40 col-span-full;
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px50;
     }
   }
 
   &__cta {
-    @screen xl {
-      @apply h-px60;
+    @screen lg {
+      @apply h-px60 text-px20 leading-px20 tracking-px05 px-px40;
+    }
+
+    &.page-btn {
+      @apply inline-flex items-center;
     }
   }
 }

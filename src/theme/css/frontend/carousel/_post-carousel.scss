@@ -1,11 +1,5 @@
 .post-carousel {
-  &-container {
-    @apply pb-px80;
-
-    @screen xl {
-      @apply pb-px120;
-    }
-  }
+  @apply my-0;
 
   .page-sub-title {
     @apply w-full font-semibold text-px32 leading-px40 text-center col-span-full;
@@ -30,8 +24,12 @@
       @apply text-px22 leading-px32 tracking-px05 col-span-6 col-start-2;
     }
 
+    @screen lg {
+      @apply text-left;
+    }
+
     @screen xl {
-      @apply w-full text-px22 leading-px32 tracking-px05 text-left col-span-full col-start-1;
+      @apply w-full text-px22 leading-px32 tracking-px05 col-span-full col-start-1;
     }
   }
 
@@ -397,6 +395,18 @@
 
     .card-post {
       height: 100%;
+    }
+  }
+
+  // Centered Desktop Heading
+  &--heading-desktop-center {
+
+    // Duplicated selector to have higher specificity over .carousel-wrap
+    & .page-sub-title.page-sub-title,
+    & .page-sub-title-desc.page-sub-title-desc {
+      @screen lg {
+        @apply text-center col-span-8 col-start-3;
+      }
     }
   }
 }

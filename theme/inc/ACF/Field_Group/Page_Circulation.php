@@ -50,10 +50,11 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			$block,
 			static::render_grid( (array) $val->get( static::FIELD_CARDS ) ),
 			array(
-				'wrap_cls'  => array( 'page-section page-circulation bg-white', 'pt-20 pb-24 lg:pt-24' ),
-				'inner_cls' => array( 'container mx-auto' ),
-				'title_cls' => array( 'page-sub-title centered' ),
-				'desc_cls'  => array( 'page-sub-title-desc centered' ),
+				'wrap_cls'       => array( 'page-section page-circulation bg-white', 'pt-20 pb-24 lg:pt-24' ),
+				'inner_cls'      => array( 'container mx-auto page-circulation__container' ),
+				'title_wrap_cls' => array( 'page-circulation__heading' ),
+				'title_cls'      => array( 'page-sub-title centered' ),
+				'desc_cls'       => array( 'page-sub-title-desc centered' ),
 			)
 		);
 	}
@@ -76,7 +77,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			$content = implode( "\n", $cards );
 		}
 
-		return '<div role="list" class="grid grid-cols-1 gap-y-6 max-w-lg mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:grid-cols-2 lg:gap-x-7 lg:max-w-none xl:max-w-px1240">' .
+		return '<div role="list" class="page-circulation__cards mx-auto mt-px60 md:mt-px50 lg:mt-px80 lg:max-w-none xl:max-w-px1240">' .
 			$content .
 			'</div>';
 	}

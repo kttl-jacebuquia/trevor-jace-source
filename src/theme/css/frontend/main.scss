@@ -14,8 +14,9 @@
 
 // Vendors, Utils & Base Rules
 @import './what-input';
-@import './misc/index';
+@import '../colors/colors';
 @import '../utils/index';
+@import './misc/index';
 @import './vendor/index';
 @import './general';
 @import './fonts';
@@ -106,6 +107,7 @@
 @import './newsletter-form';
 @import './floating-label-input';
 @import './search-form';
+@import './page-circulation';
 
 // Page specific
 @import './rc'; // Resources Center

@@ -6,8 +6,9 @@ use TrevorWP\Util\Tools;
 use TrevorWP\CPT;
 
 class Post_Carousel extends Post_Grid {
-	const FIELD_CTA          = 'cta';
-	const FIELD_BLOCK_STYLES = 'block_styles';
+	const FIELD_CTA           = 'cta';
+	const FIELD_BLOCK_STYLES  = 'block_styles';
+	const FIELD_HEADING_ALIGN = 'heading_align';
 
 	/** @inheritdoc */
 	public static function get_block_args(): array {
@@ -24,9 +25,10 @@ class Post_Carousel extends Post_Grid {
 
 	/** @inheritdoc */
 	protected static function prepare_register_args(): array {
-		$cta    = static::gen_field_key( static::FIELD_CTA );
-		$args   = parent::prepare_register_args();
-		$fields = $args['fields'];
+		$cta           = static::gen_field_key( static::FIELD_CTA );
+		$heading_align = static::gen_field_key( static::FIELD_HEADING_ALIGN );
+		$args          = parent::prepare_register_args();
+		$fields        = $args['fields'];
 
 		// Remove unnecessary fields
 		unset( $fields[ static::FIELD_NUM_COLS ] );
@@ -62,6 +64,19 @@ class Post_Carousel extends Post_Grid {
 					unset( $field['choices']['custom'] );
 					$updated_fields[ static::FIELD_SOURCE ] = $field;
 					break;
+				// Add heading aligment option under Styles Tab
+				case static::FIELD_BLOCK_STYLES:
+					$updated_fields[ static::FIELD_HEADING_ALIGN ] = array(
+						'key'           => $heading_align,
+						'name'          => static::FIELD_HEADING_ALIGN,
+						'label'         => 'Heading Alignment (Desktop)',
+						'type'          => 'button_group',
+						'default_value' => 'left',
+						'choices'       => array(
+							'left'   => 'Left',
+							'center' => 'Center',
+						),
+					);
 			}
 		}
 
@@ -83,6 +98,7 @@ class Post_Carousel extends Post_Grid {
 		$title           = $val->get( static::FIELD_HEADING );
 		$description     = $val->get( static::FIELD_DESCRIPTION );
 		$cta             = static::get_val( static::FIELD_CTA );
+		$heading_align   = static::get_val( static::FIELD_HEADING_ALIGN );
 		list(
 			$bg_color,
 			$text_color
@@ -92,6 +108,7 @@ class Post_Carousel extends Post_Grid {
 			$val->get( static::FIELD_WRAPPER_ATTR ),
 			array(
 				'post-carousel-container',
+				'block-spacer',
 				'bg-' . $bg_color,
 				'text-' . $text_color,
 			),
@@ -101,6 +118,8 @@ class Post_Carousel extends Post_Grid {
 			'title'    => $title,
 			'subtitle' => $description,
 		);
+
+		$options['class'][] = 'post-carousel--heading-desktop-' . $heading_align;
 
 		if ( static::SOURCE_TOP_INDIVIDUALS === $source || static::SOURCE_TOP_TEAMS === $source ) {
 			$posts              = static::_get_fundraisers( $val );
@@ -115,7 +134,10 @@ class Post_Carousel extends Post_Grid {
 				}
 			}
 
-			$class     = array( 'mt-12', 'mb-0' );
+			$class     = array_merge(
+				array( 'mt-12', 'mb-0' ),
+				$options['class'],
+			);
 			$title_cls = array();
 
 			if ( in_array( CPT\Team::POST_TYPE, $post_types, true ) && 'query' === $source ) {

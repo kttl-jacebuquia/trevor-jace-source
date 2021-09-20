@@ -1,0 +1,124 @@
+// Applies vertical spacing for a block
+// Dynamically determines whether to use margin or padding
+// Depending on the background
+//
+// USAGE
+// 1. Add block-spacer classname on the block
+// 2. For the block's styles, override the CSS variables for spacing per breakpoint:
+//   @include block-spacer-settings(
+//     $default: ( 80 ), // Same top and bottom spacing
+//     $md: ( 80, 100 ), // Different top and bottom spacing
+//     $lg: ( 120, 0 ), // Top only
+//     $lg2: ( 0, 120 ), // Bottom only
+//     $xl: (), // Will not override default setting
+//   );
+
+@mixin block-spacer-settings(
+  $default: (),
+  $md: (),
+  $lg: (),
+  $lg2: (),
+  $xl: (),
+) {
+  @if ( length($default) > 0 ) {
+    @include apply-space-settings(
+      null,
+      nth($default, 1),
+      if(length($default) > 1, nth($default, 2), null)
+    );
+  }
+
+  @each $bp, $spacings in ( md: $md, lg: $lg, lg2: $lg2, xl: $xl ) {
+    @if length($spacings) > 0 {
+      @if ( length($spacings) < 2 ) {
+        $spacings: join($spacings , ( null ) , comma);
+      }
+      @include apply-space-settings($bp, nth($spacings, 1), nth($spacings, 2));
+    }
+  }
+}
+
+@mixin apply-space-settings( $bp: null, $top: null, $bottom: null ) {
+  @if ( $top != null ) {
+    $bottom: if( $bottom == null, $top, $bottom );
+  }
+
+  @if ( $bp != null ) {
+    @screen #{$bp} {
+      --spacer-top--#{$bp}: #{rem-calc($top)};
+      --spacer-bottom--#{$bp}: #{rem-calc($bottom)};
+    }
+  }
+  @else {
+    --spacer-top--default: #{rem-calc($top)};
+    --spacer-bottom--default: #{rem-calc($bottom)};
+  }
+}
+
+
+@mixin apply-spacing-variables( $screen: default ) {
+  @if ( $screen == default ) {
+    margin-top: var(--spacer-top--default);
+    margin-bottom: var(--spacer-bottom--default);
+
+    &[class*="bg-"]:not(.bg-transparent) {
+      @apply my-0;
+      padding-top: var(--spacer-top--default);
+      padding-bottom: var(--spacer-bottom--default);
+    }
+  }
+  @else {
+    @screen #{$screen} {
+      margin-top: var(--spacer-top--#{$screen});
+      margin-bottom: var(--spacer-bottom--#{$screen});
+
+      &[class*="bg-"]:not(.bg-transparent) {
+        @apply my-0;
+        padding-top: var(--spacer-top--#{$screen});
+        padding-bottom: var(--spacer-bottom--#{$screen});
+      }
+    }
+  }
+}
+
+.block-spacer {
+  // Top Spacing
+  --spacer-top--default: #{rem-calc(80)};
+  --spacer-top--md: #{rem-calc(100)};
+  --spacer-top--lg: #{rem-calc(120)};
+  --spacer-top--lg2: #{rem-calc(140)};
+  --spacer-top--xl: #{rem-calc(160)};
+  // Bottom Spacing
+  --spacer-bottom--default: #{rem-calc(80)};
+  --spacer-bottom--md: #{rem-calc(100)};
+  --spacer-bottom--lg: #{rem-calc(120)};
+  --spacer-bottom--lg2: #{rem-calc(140)};
+  --spacer-bottom--xl: #{rem-calc(160)};
+
+  // Default mobile spacing
+  @include apply-spacing-variables;
+
+  // Tablet and up spacing
+  @each $screen in ( md, lg, lg2, xl ) {
+    @include apply-spacing-variables( $screen );
+  }
+
+  // If next block has the same background,
+  // Remove its top padding so as not to add extra space between them
+  @each $color-name, $color-value in $colors {
+    @if (
+      ($color-name != transparent)
+      and ($color-name != current)
+      and ($color-name != black)
+      and ($color-name != white)
+      ) {
+        &.bg-#{$color-name} + &.bg-#{$color-name} {
+          --spacer-top--default: 0;
+          --spacer-top--md: 0;
+          --spacer-top--lg: 0;
+          --spacer-top--lg2: 0;
+          --spacer-top--xl: 0;
+        }
+      }
+  }
+}

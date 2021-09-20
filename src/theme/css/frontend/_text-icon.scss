@@ -1,13 +1,25 @@
 .text-icon {
-  @apply pt-px70 pb-px132;
+  // Block Spacer Settings
+  @include block-spacer-settings(
+    $default: ( 70, 132 ),
+    $md: ( 20 ),
+    $lg: ( 120 ),
+    $lg2: ( 140 ),
+    $xl: ( 140 ),
+  );
+
   @apply bg-blue_green text-white;
 
   @screen md {
     @apply py-20;
   }
 
+  @screen lg {
+    @apply py-px120;
+  }
+
   @screen lg2 {
-    @apply pt-px90 pb-px150;
+    @apply py-px140;
   }
 
   &__container {
@@ -21,7 +33,11 @@
       @apply tracking-em_001;
     }
 
-    @screen lg2 {
+    @screen lg {
+      @apply text-px44 leading-px54 tracking-em_001;
+    }
+
+    @screen xl {
       @apply text-px46 leading-px56;
     }
   }
@@ -44,6 +60,10 @@
 
     @screen md {
       @apply col-start-2 col-span-6;
+    }
+
+    @screen lg {
+      @apply col-span-8 col-start-3;
     }
 
     @screen lg2 {
@@ -78,6 +98,10 @@
       @apply gap-y-px100 gap-x-md mt-px77;
     }
 
+    @screen lg {
+      @apply tw-grid-small-desktop mt-px60;
+    }
+
     @screen lg2 {
       @apply grid-cols-12 gap-x-lg2;
       @apply mt-px85;
@@ -89,6 +113,10 @@
 
     @screen md {
       @apply col-span-3;
+    }
+
+    @screen lg {
+      @apply col-span-4 px-0;
     }
 
     &-image {
@@ -115,6 +143,10 @@
       @screen lg2 {
         @apply text-px20 leading-px26 mt-10;
       }
+
+      @screen xl {
+        @apply text-px22 leading-px32;
+      }
     }
   }
 
@@ -139,6 +171,10 @@
         @apply col-span-full col-start-1 -mx-px50;
       }
 
+      @screen lg {
+        @apply mx-0;
+      }
+
       @screen lg2 {
         @apply mx-0;
       }
@@ -157,8 +193,27 @@
         @apply px-px173;
       }
 
+      @screen lg {
+        @apply px-0;
+      }
+
       @screen lg2 {
         @apply p-0;
+      }
+    }
+  }
+
+  // Small desktop
+  @screen lg {
+    &--3-columns {
+      .text-icon__entry {
+        @apply col-span-4;
+      }
+    }
+
+    &--4-columns {
+      .text-icon__entry {
+        @apply col-span-3;
       }
     }
   }

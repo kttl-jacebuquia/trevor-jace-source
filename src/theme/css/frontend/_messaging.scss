@@ -1,13 +1,4 @@
 .messaging {
-  // With heading variant
-  &--with-heading {
-    .messaging__description {
-      @screen lg2 {
-        @apply text-px30 leading-px40;
-      }
-    }
-  }
-
 	&__container {
 		@apply tw-grid container mx-auto;
 
@@ -45,7 +36,7 @@
     }
 
     @screen lg {
-      @apply py-px84 mx-0 col-span-6 col-start-2;
+      @apply py-px120 mx-0 col-span-8 col-start-3;
     }
 
     @screen lg2 {
@@ -84,7 +75,7 @@
     }
 
     @screen lg {
-      @apply font-normal text-px30 leading-px40 mt-px14;
+      @apply font-normal text-px30 leading-px40 mt-px18;
       max-width: 47.75rem;
     }
 
@@ -211,6 +202,19 @@
 
     @screen xl {
       @apply col-span-8 col-start-3 py-px136;
+    }
+  }
+
+  // With heading variant
+  &--with-heading {
+    .messaging__description {
+      @screen lg {
+        @apply text-px26 leading-px36 tracking-em005 w-full;
+      }
+
+      @screen lg2 {
+        @apply text-px30 leading-px40;
+      }
     }
   }
 }

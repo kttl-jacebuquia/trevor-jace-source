@@ -1,7 +1,7 @@
 const carouselWith3CardsQ = window.matchMedia(`screen and (min-width: 415px) and (max-width: 1275px)`);
 const onlyLargeQ = window.matchMedia(`screen and (min-width: 1024px)`);
 const onlyXLargeQ = window.matchMedia(`screen and (min-width: 1440px)`);
-const mobileAndTabletQ = window.matchMedia(`screen and (max-width: 1279px)`);
+const mobileAndTabletQ = window.matchMedia(`screen and (max-width: 1023px)`);
 const tabletAndUpQ = window.matchMedia(`screen and (min-width: 768px)`);
 
 const watcherFactory = (q) => (matches, noMatches) => {

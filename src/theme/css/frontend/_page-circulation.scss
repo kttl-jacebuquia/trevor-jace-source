@@ -1,0 +1,18 @@
+.page-circulation {
+  &__cards {
+    @apply w-full tw-grid;
+    row-gap: #{rem-calc(30)};
+  }
+
+  .circulation-card {
+    @apply col-span-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen lg {
+      @apply col-span-6 col-start-auto;
+    }
+  }
+}
