@@ -255,8 +255,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'key'               => $button,
 					'name'              => static::FIELD_BUTTON,
 					'label'             => 'Button',
-					'type'              => 'link',
-					'return_format'     => 'array',
+					'type'              => 'group',
+					'layout'            => 'block',
+					'sub_fields'        => Advanced_Link::_get_fields(),
 					'conditional_logic' => array(
 						array(
 							array(
@@ -371,9 +372,17 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				}
 				?>
 
-				<?php if ( isset( $button_link['url'] ) ) : ?>
+				<?php if ( ! empty( $button_link ) ) : ?>
 					<div class="topic-cards__block-cta-wrap">
-						<a class="topic-cards__block-cta" href="<?php echo esc_url( $button_link['url'] ); ?>" target="<?php echo esc_attr( $button_link['target'] ); ?>"><?php echo esc_html( $button_link['title'] ); ?></a>
+						<?php
+							echo Advanced_Link::render(
+								null,
+								$button_link,
+								array(
+									'class' => array( 'topic-cards__block-cta' ),
+								)
+							);
+						?>
 					</div>
 				<?php endif; ?>
 			</div>
