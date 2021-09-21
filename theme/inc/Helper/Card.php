@@ -5,6 +5,7 @@ use \TrevorWP\Ranks;
 use TrevorWP\CPT;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post as PostMeta;
+use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
 
 class Card {
 	public static function post( $post, $key = 0, array $options = array() ): string {
@@ -74,6 +75,8 @@ class Card {
 			if ( ! empty( $cat ) ) {
 				$title_top = $cat->name;
 			}
+		} elseif ( 'post' === $post_type ) {
+			$desc = '';
 		}
 
 		if ( $is_bg_full ) {
@@ -112,11 +115,21 @@ class Card {
 			$desc = esc_html( wp_trim_words( wp_strip_all_tags( $desc ), $options['num_words'] ) );
 		}
 
+		if ( empty( $desc ) ) {
+			$_class[] = 'no-excerpt';
+		}
+
 		$title = get_the_title( $post );
+		$title = static::_wrap_words( $title );
+		$desc  = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
+
+		$attrs = array(
+			'data-post-type' => $post_type,
+		);
 
 		ob_start();
 		?>
-		<article class="<?php echo esc_attr( implode( ' ', get_post_class( $_class, $post->ID ) ) ); ?>">
+		<article <?php echo A_Field_Group::render_attrs( get_post_class( $_class, $post->ID ), $attrs ); ?>>
 			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
 					<a href="<?php echo $title; ?>" aria-label="click to read <?php echo $title; ?>">
@@ -409,6 +422,20 @@ class Card {
 			Thumbnail::SIZE_MD,
 			array( 'class' => 'post-header-bg' )
 		);
+	}
+
+	protected static function _wrap_words( string $string ): string {
+		// Ensure there's no multiple spaces
+		$string = preg_replace( '/\s+/', ' ', $string );
+
+		// Wrap each word around a span
+		$wrapped_words = array();
+		foreach ( explode( ' ', $string ) as $word ) {
+			$wrapped_words[] = '<span>' . $word . '</span>';
+		}
+
+		// Join all wrapped words
+		return implode( ' ', $wrapped_words );
 	}
 
 } ?>

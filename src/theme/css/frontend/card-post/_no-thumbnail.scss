@@ -1,0 +1,12 @@
+.card-post.no-thumbnail {
+  .title-top {
+    @apply block font-normal mb-px20;
+    @apply xl:mb-px24;
+  }
+
+  .post-desc {
+    @apply block tracking-em_005;
+    @apply md:text-px16 md:leading-px22;
+    @include max-height( 5 * 22 )
+  }
+}

@@ -1,0 +1,40 @@
+.card-post[data-post-type="trevor_rc_guide"] {
+  .post-title {
+    @include max-height(42 * 4);
+
+    @screen md {
+      @include max-height(40 * 4);
+    }
+
+    @screen lg {
+      @include max-height(44 * 4);
+    }
+
+    @screen lg2 {
+    }
+
+    @screen xl {
+      @include max-height(48 * 4);
+    }
+  }
+
+  .post-desc {
+    @include max-height(24 * 5);
+
+    @screen md {
+      @include max-height(22 * 5);
+    }
+
+    @screen lg {
+      @include max-height(26 * 5);
+    }
+
+    @screen lg2 {
+      @include max-height(22 * 5);
+    }
+
+    @screen xl {
+      @include max-height(28 * 5);
+    }
+  }
+}

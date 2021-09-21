@@ -1,0 +1,19 @@
+.card-post.has-post-thumbnail {
+  .post-title {
+    @apply text-px24 leading-px28 tracking-px_05;
+    @include max-height( 2 * 28 );
+
+    > a {
+      @apply block w-full;
+    }
+  }
+
+  .post-desc {
+    @apply text-px16 leading-px22 tracking-em001;
+    @include max-height( 2 * 22 );
+
+    @screen xl {
+      @include max-height( 2 * 26 );
+    }
+  }
+}

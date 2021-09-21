@@ -1,0 +1,66 @@
+// Full Bg
+.card-post.bg-full {
+  @apply text-white;
+
+  &.no-thumbnail {
+    @apply text-indigo bg-white;
+  }
+
+  .post-thumbnail-wrap {
+    @apply absolute top-0 left-0 w-full h-full;
+    @apply rounded-px10;
+    @apply -z-1;
+  }
+
+  .card-content {
+    @apply bg-transparent;
+  }
+
+  .title_top {
+    @apply mb-2;
+  }
+
+  .card-text-container {
+    @apply pt-px38;
+  }
+
+  .post-title {
+    @apply text-px32 leading-px42;
+
+    @screen md {
+      @apply leading-px40;
+    }
+
+    @screen lg {
+      @apply leading-px44;
+    }
+
+    @screen lg2 {
+      @apply text-px36;
+    }
+
+    @screen xl {
+      @apply text-px34 leading-px44;
+    }
+  }
+
+  .post-desc {
+    @apply text-px16 leading-px24 relative;
+
+    @screen md {
+      @apply text-px16 leading-px22 tracking-em_005;
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px26 tracking-px_05;
+    }
+
+    @screen lg2 {
+      @apply text-px16 leading-px22;
+    }
+
+    @screen xl {
+      @apply text-px20 leading-px28;
+    }
+  }
+}
