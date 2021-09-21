@@ -227,6 +227,16 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 								<?php endforeach; ?>
 							</div>
 							<?php if ( 'carousel' === $layout ) : ?>
+								<div class="swiper-button swiper-button-prev">
+									<div class="swiper-button-wrapper">
+										<i class="trevor-ti-arrow-left"></i>
+									</div>
+								</div>
+								<div class="swiper-button swiper-button-next">
+									<div class="swiper-button-wrapper">
+										<i class="trevor-ti-arrow-right"></i>
+									</div>
+								</div>
 								<div class="swiper-pagination"></div>
 							<?php endif; ?>
 						</div>

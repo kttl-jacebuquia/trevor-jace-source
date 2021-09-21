@@ -135,6 +135,16 @@ class Organization_Mission extends A_Field_Group implements I_Block, I_Renderabl
 								</div>
 							<?php endforeach; ?>
 						</div>
+						<div class="swiper-button swiper-button-prev">
+							<div class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-left"></i>
+							</div>
+						</div>
+						<div class="swiper-button swiper-button-next">
+							<div class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-right"></i>
+							</div>
+						</div>
 						<div class="swiper-pagination"></div>
 					</div>
 				<?php endif; ?>

@@ -195,4 +195,40 @@
   .swiper-pagination-bullet {
     @apply bg-current;
   }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    &:not(.swiper-button-disabled) {
+      @screen lg {
+        display: flex;
+      }
+    }
+
+    @screen lg {
+      --arrow-button-width: calc(50% - #{theme("screens.lg")} / 2 * (5 / 6) + 2rem);
+
+      width: var(--arrow-button-width);
+
+      .swiper-button-wrapper {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    @screen lg2 {
+      display: none!important;
+    }
+  }
+
+  .swiper-button-prev {
+    @screen lg {
+      left: calc( theme("container.padding.lg") / 2 );
+    }
+  }
+
+  .swiper-button-next {
+    @screen lg {
+      right: calc( theme("container.padding.lg") + ( var(--arrow-button-width) / 2 ) );
+    }
+  }
 }

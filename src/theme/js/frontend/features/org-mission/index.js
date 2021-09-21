@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Component from '../../Component';
 import { carousel } from '../carousel';
-import { mobileAndTablet } from './../../match-media';
+import { mobileAndSmallDesktop } from './../../match-media';
 
 export default class OrgMission extends Component {
 	static selector = '.org-mission';
@@ -14,6 +14,10 @@ export default class OrgMission extends Component {
 
 	swiperOptions = {
 		loop: false,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
 		breakpoints: {
 			300: {
 				slidesPerView: 1,
@@ -39,7 +43,7 @@ export default class OrgMission extends Component {
 		const $swiperContainer = $(this.children.carouselContainer);
 
 		if (this.children.carouselSlides.length) {
-			mobileAndTablet(
+			mobileAndSmallDesktop(
 				() => (
 					!this.swiper &&
 					carousel($swiperContainer, this.swiperOptions)

@@ -35,7 +35,9 @@
 	@apply bg-teal-dark bg-opacity-100 text-white;
   }
 
-	body.is-rc .post-carousel & {
+	body.is-rc .post-carousel &,
+  .featured-card-3up--carousel &,
+  .org-mission & {
 		@apply bg-violet-lighter bg-opacity-80 text-indigo;
 	}
 
