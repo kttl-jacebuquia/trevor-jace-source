@@ -97,22 +97,10 @@
 			border-left: 1px solid rgba(16, 16, 102, 0.16);
 		}
 
-		.tags-box {
-			@apply mt-px28 md:mt-auto;
-
-			a {
-				@apply inline-block;
-			}
-		}
-
 		&.no-thumbnail {
 
 			.text-content {
 				@apply w-full md:w-auto;
-			}
-
-			.tags-box {
-				@apply mt-px28 md:mt-px20 lg:mt-px30;
 			}
 		}
 	}

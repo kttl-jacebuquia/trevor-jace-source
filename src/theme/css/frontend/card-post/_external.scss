@@ -1,0 +1,59 @@
+// External Resource Card
+.card-post.trevor_rc_external {
+  .card-text-container {
+    @apply text-indigo;
+  }
+
+  .trevor-ti-link-out {
+    @apply flex w-px24 h-px24;
+  }
+
+  .title-top,
+  .post-title,
+  .post-desc {
+    color: inherit;
+  }
+
+  .title-top {
+    @apply pr-px48;
+  }
+
+  .post-title {
+    @apply text-px32 leading-px42 tracking-px_05;
+    @include max-height( 42 * 4 );
+
+    @screen lg2 {
+      @apply text-px36 leading-px42;
+    }
+
+    @screen xl {
+      @apply text-px34 leading-px44;
+      @include max-height(44 * 4);
+    }
+  }
+
+  .post-desc {
+    @apply text-px16 leading-px24;
+    @include max-height(24 * 5);
+
+    @screen md {
+      @apply leading-px22;
+      @include max-height(22 * 5);
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px26 tracking-px_05;
+      @include max-height(26 * 5)
+    }
+
+    @screen lg2 {
+      @apply text-px16 leading-px22;
+      @include max-height( 22 * 5 );
+    }
+
+    @screen xl {
+      @apply text-px20 leading-px28 tracking-px_05;
+      @include max-height(28 * 5);
+    }
+  }
+}

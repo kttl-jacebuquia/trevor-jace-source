@@ -1,4 +1,5 @@
 .card-post {
+  --card-background: theme('colors.white.DEFAULT');
   @apply flex flex-col relative;
   @apply overflow-hidden;
   @apply shadow-light rounded-px10;
@@ -8,9 +9,10 @@
   @apply mx-auto;
   @apply w-full;
 
-  &.show-tags {
-    @screen lg {
-      height: rem-calc(510px);
+  // Assign bg color to CSS variable so it can be used by the tags box
+  @each $color-name, $color-value in $colors {
+    &.bg-#{$color-name} {
+      --card-background: #{$color-value};
     }
   }
 
@@ -25,7 +27,7 @@
     -moz-transform: translate3d(0, 0, 0);
 
     img {
-      @apply h-full;
+      @apply w-full h-full;
       @apply object-center object-cover;
       @apply transition-transform duration-500;
       @apply pointer-events-none;
@@ -46,8 +48,8 @@
     @apply text-indigo;
   }
 
-  :not(.bg-full) .post-thumbnail-wrap + * {
-    @apply pt-px24 lg:pt-px28;
+  &:not(.bg-full) .post-thumbnail-wrap + * {
+    @apply mt-px24 lg:mt-px28;
   }
 
   &.type-trevor_rc_glossary .card-text-container {
@@ -141,32 +143,6 @@
 
   }
 
-  // Visible Tags
-  &.show-tags {
-    .post-desc {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    &.bg-full {
-      .post-desc {
-        -webkit-line-clamp: 4;
-
-        @screen lg2 {
-          -webkit-line-clamp: 6;
-        }
-      }
-    }
-
-    &:not(.bg-full) {
-      .post-desc {
-        -webkit-line-clamp: 1;
-      }
-    }
-  }
-
   .post-desc {
     @apply overflow-hidden break-words;
     @apply flex-initial font-normal leading-px22 md:text-px16 md:leading-px24 lg:text-px18 lg:leading-px26 mt-3;
@@ -184,62 +160,6 @@
     @apply inline-block;
     @apply underline uppercase;
     @apply mb-3;
-  }
-
-  .tags-box {
-    @apply flex flex-row flex-nowrap items-start justify-start w-auto;
-    @apply overflow-visible;
-    @apply z-1 h-px34 mt-auto;
-    @apply mx-6 mb-5;
-    max-width: calc(100% - #{rem-calc(24)});
-
-    &.show-all {
-      @apply flex-wrap;
-      height: auto !important;
-      // padding-right: 0 !important;
-
-      @screen md {
-        padding-right: 0 !important;
-        padding-top: rem-calc(10px);
-        margin-bottom: rem-calc(12px);
-        // @apply -mb-2;
-      }
-
-      .ellipsis {
-        @apply font-bold;
-
-        @screen md {
-          position: initial !important;
-        }
-
-        &::after {
-          content: "–" !important;
-        }
-      }
-    }
-
-    .tag-box {
-      @apply inline-block whitespace-nowrap;
-      @apply mr-2 mb-2;
-
-      &[hidden] {
-        display: none;
-      }
-    }
-
-    .ellipsis {
-      @apply font-medium text-px24;
-      @apply px-3;
-
-      &::after {
-        @apply flex items-center;
-        content: "+";
-      }
-
-      &:hover {
-        @apply bg-moss-dark;
-      }
-    }
   }
 
   // Fundraise
@@ -383,42 +303,6 @@
         @apply absolute top-0 left-0 h-full w-full;
       }
     }
-
-    .tags-box {
-      body:not(.is-rc) & {
-        @apply flex items-center flex-wrap overflow-visible h-px30;
-      }
-
-      // Hide 3rd tag item onwards
-      &:not(.show-all) {
-        .tag-box:nth-child(n + 3):not(.ellipsis) {
-          @apply hidden;
-        }
-      }
-    }
-
-    .tag-box {
-      body:not(.is-rc) & {
-        @apply flex items-center px-px14 mr-0 mb-0 mr-px6 mb-px6;
-        @apply xl:tracking-em001;
-
-        &.ellipsis {
-          @apply static w-px34 h-px34 flex items-center justify-center p-0 mr-0;
-        }
-      }
-    }
-
-    &.show-tags .post-title {
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      @screen lg2 {
-        -webkit-line-clamp: 2;
-      }
-    }
   }
 
   // RC Post type
@@ -486,3 +370,4 @@
 @import "./no-excerpt";
 @import "./full-bg";
 @import "./guide";
+@import "./external";

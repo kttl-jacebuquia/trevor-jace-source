@@ -1,4 +1,6 @@
-const carouselWith3CardsQ = window.matchMedia(`screen and (min-width: 415px) and (max-width: 1275px)`);
+const carouselWith3CardsQ = window.matchMedia(
+	`screen and (min-width: 415px) and (max-width: 1275px)`
+);
 const onlyLargeQ = window.matchMedia(`screen and (min-width: 1024px)`);
 const onlyXLargeQ = window.matchMedia(`screen and (min-width: 1440px)`);
 const mobileAndTabletQ = window.matchMedia(`screen and (max-width: 1023px)`);
@@ -16,13 +18,13 @@ export const singleBreakpoints = {
 };
 
 const watcherFactory = (q) => (matches, noMatches) => {
-	const test = (e) => q.matches ? (matches && matches(e)) : (noMatches && noMatches(e));
+	const test = (e) =>
+		q.matches ? matches && matches(e) : noMatches && noMatches(e);
 	q.addListener(test);
 	test();
 
 	return () => q.removeListener(test);
-}
-
+};
 
 export const carouselWith3Cards = watcherFactory(carouselWith3CardsQ);
 export const mobileAndTablet = watcherFactory(mobileAndTabletQ);
@@ -32,24 +34,33 @@ export const tabletAndUp = watcherFactory(tabletAndUpQ);
 export const mobileAndSmallDesktop = watcherFactory(mobileAndSmallDesktopQ);
 
 // Single breakpoints queries
-const buildSingleBreakpointMedia = ( singleBreakpointSettings ) => {
+const buildSingleBreakpointMedia = (singleBreakpointSettings) => {
 	const widths = [];
 
-	if ( 'min' in singleBreakpointSettings ) {
+	if ('min' in singleBreakpointSettings) {
 		widths.push(`(min-width: ${singleBreakpointSettings.min}px)`);
 	}
 
-	if ( 'max' in singleBreakpointSettings ) {
+	if ('max' in singleBreakpointSettings) {
 		widths.push(`(max-width: ${singleBreakpointSettings.max}px)`);
 	}
 
 	const mediaQuery = `screen and ${widths.join(' and ')}`;
 	return watcherFactory(window.matchMedia(mediaQuery));
-}
+};
 
-export const mobileOnly = buildSingleBreakpointMedia(singleBreakpoints.mobileOnly);
-export const tabletOnly = buildSingleBreakpointMedia(singleBreakpoints.tabletOnly);
-export const smallDesktopOnly = buildSingleBreakpointMedia(singleBreakpoints.smallDesktopOnly);
-export const mediumDesktopOnly = buildSingleBreakpointMedia(singleBreakpoints.mediumDesktopOnly);
-export const largeDesktopOnly = buildSingleBreakpointMedia(singleBreakpoints.largeDesktopOnly);
-
+export const mobileOnly = buildSingleBreakpointMedia(
+	singleBreakpoints.mobileOnly
+);
+export const tabletOnly = buildSingleBreakpointMedia(
+	singleBreakpoints.tabletOnly
+);
+export const smallDesktopOnly = buildSingleBreakpointMedia(
+	singleBreakpoints.smallDesktopOnly
+);
+export const mediumDesktopOnly = buildSingleBreakpointMedia(
+	singleBreakpoints.mediumDesktopOnly
+);
+export const largeDesktopOnly = buildSingleBreakpointMedia(
+	singleBreakpoints.largeDesktopOnly
+);

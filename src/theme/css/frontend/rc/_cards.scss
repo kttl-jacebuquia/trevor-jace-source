@@ -20,38 +20,4 @@
       @apply h-px205;
     }
   }
-
-  // External Resource Card
-  &.trevor_rc_external {
-    .card-text-container {
-      @apply text-indigo;
-    }
-
-    .title-top,
-    .post-title,
-    .post-desc {
-      color: inherit;
-    }
-
-    .post-title {
-      @apply text-px32 leading-px42 tracking-px_05;
-
-      @screen lg {
-        font-size: 2.125rem;
-        line-height: 2.75rem;
-      }
-    }
-
-    .post-desc {
-      @apply text-px16 leading-px24;
-
-      @screen md {
-        @apply leading-px22;
-      }
-
-      @screen lg {
-        @apply text-px20 leading-px28;
-      }
-    }
-  }
 }

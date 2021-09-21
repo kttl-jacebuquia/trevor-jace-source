@@ -81,6 +81,7 @@ class Card {
 
 		if ( $is_bg_full ) {
 			$_class[] = 'bg-full'; // Full img bg.
+			$_class[] = 'bg-transparent';
 		}
 
 		// Tags.
@@ -119,8 +120,8 @@ class Card {
 			$_class[] = 'no-excerpt';
 		}
 
-		$title = get_the_title( $post );
-		$title = static::_wrap_words( $title );
+		$title         = get_the_title( $post );
+		$wrapped_title = static::_wrap_words( $title );
 		$desc  = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
 
 		$attrs = array(
@@ -159,10 +160,10 @@ class Card {
 					<h3 class="post-title font-semibold text-px24 leading-px28">
 						<?php if ( $title_link ) { ?>
 							<a href="<?php echo get_the_permalink( $post ); ?>" class="stretched-link">
-								<?php echo $title; ?>
+								<?php echo $wrapped_title; ?>
 							</a>
 						<?php } else { ?>
-							<?php echo $title; ?>
+							<?php echo $wrapped_title; ?>
 						<?php } ?>
 					</h3>
 
@@ -177,14 +178,16 @@ class Card {
 
 				<?php if ( ! empty( $tags ) ) { ?>
 					<aside class="tags-box" data-title="<?php echo esc_attr( $title ); ?>" aria-label="tags for <?php echo esc_attr( $title ); ?>">
-						<?php foreach ( $tags as $tag ) { ?>
-							<a
-								href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
-								class="tag-box"
-								aria-label="<?php echo $tag->name; ?> tag">
-									<?php echo $tag->name; ?>
-							</a>
-						<?php } ?>
+						<div class="tags-box__contents">
+							<?php foreach ( $tags as $tag ) { ?>
+								<a
+									href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+									class="tag-box"
+									aria-label="<?php echo $tag->name; ?> tag">
+										<span><?php echo $tag->name; ?></span>
+								</a>
+							<?php } ?>
+						</div>
 					</aside>
 				<?php } ?>
 			</div>

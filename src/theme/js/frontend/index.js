@@ -38,7 +38,7 @@ const $staffGrid = $('.staff.is-grid');
 const faqTrigger = $('.faq-list__toggle');
 
 // Tag Box Ellipsis
-features.tagBoxEllipsis($('.card-post'));
+// features.tagBoxEllipsis($('.card-post'));
 
 // Ajax Pagination
 features.ajaxPagination();

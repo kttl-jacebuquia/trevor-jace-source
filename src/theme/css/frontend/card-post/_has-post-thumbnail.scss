@@ -3,6 +3,11 @@
     @apply text-px24 leading-px28 tracking-px_05;
     @include max-height( 2 * 28 );
 
+    @screen lg {
+      @apply text-px26 leading-px32 tracking-em_005;
+      @include max-height( 32 * 2 );
+    }
+
     > a {
       @apply block w-full;
     }

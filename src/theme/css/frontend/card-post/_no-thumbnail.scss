@@ -1,12 +1,33 @@
 .card-post.no-thumbnail {
+  &.trevor_rc_article .card-content {
+    @apply pt-px24;
+  }
+
   .title-top {
     @apply block font-normal mb-px20;
     @apply xl:mb-px24;
   }
 
+  .post-title {
+    @include max-height( 5 * 28 );
+
+    @screen md {
+      @include max-height( 5 * 28 );
+    }
+
+    @screen lg {
+      @apply text-px26 leading-px32 tracking-em_005;
+      @include max-height( 32 * 5 );
+    }
+  }
+
   .post-desc {
     @apply block tracking-em_005;
     @apply md:text-px16 md:leading-px22;
-    @include max-height( 5 * 22 )
+    @include max-height( 5 * 22 );
+
+    @screen xl {
+      @include max-height( 5 * 26 );
+    }
   }
 }
