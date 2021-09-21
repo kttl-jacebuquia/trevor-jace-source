@@ -79,13 +79,17 @@
     }
   }
 
-  &__cta {
+  &__cta.page-btn {
     @apply btn;
     @apply inline-flex min-h-px46 h-auto pl-px32;
     @apply font-semibold text-px16 leading-px22 tracking-em001;
 
     @screen md {
       @apply leading-px20 min-h-px44 px-px24;
+    }
+
+    @screen lg2 {
+      @apply h-px60 px-px42 text-px20 leading-px20 tracking-px05;
     }
 
     @screen xl {

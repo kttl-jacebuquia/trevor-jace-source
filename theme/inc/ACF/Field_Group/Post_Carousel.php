@@ -160,6 +160,10 @@ class Post_Carousel extends Post_Grid {
 
 		$options['class'] = implode( ' ', $options['class'] );
 
+		$cta_options = array(
+			'btn_cls' => array( 'post-carousel__cta' ),
+		);
+
 		ob_start(); ?>
 		<div <?php echo Tools::flat_attr( $wrapper_attrs ); ?>>
 			<?php if ( static::SOURCE_TOP_INDIVIDUALS === $source || static::SOURCE_TOP_TEAMS === $source ) : ?>
@@ -169,7 +173,7 @@ class Post_Carousel extends Post_Grid {
 			<?php endif; ?>
 			<?php if ( ! empty( $cta ) ) : ?>
 				<div class="post-carousel__cta-wrap">
-					<?php echo Button::render( false, $cta ); ?>
+					<?php echo Button::render( false, $cta, $cta_options ); ?>
 				</div>
 			<?php endif; ?>
 		</div>
