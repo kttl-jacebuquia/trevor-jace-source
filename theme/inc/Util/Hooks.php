@@ -8,6 +8,8 @@ use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
+use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
+use TrevorWP\Theme\ACF\Options_Page\SEO_Details;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Ajax\ADP;
@@ -84,6 +86,9 @@ class Hooks {
 
 		# Single Post class
 		add_filter( 'post_class', array( self::class, 'post_class' ), 10, 3 );
+
+		# Remove SEO meta tags for specific page
+		add_action( 'template_redirect', array( self::class, 'remove_wpseo_for_specific_page' ) );
 
 		# Trevor Chat Button
 		Trevor_Chat::init();
@@ -297,33 +302,37 @@ class Hooks {
 	}
 
 	/**
+	 * Remove SEO for specific page
+	 */
+	public static function remove_wpseo_for_specific_page() {
+		global $wp_query;
+
+		if ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
+			if ( class_exists( \Yoast\WP\SEO\Integrations\Front_End_Integration::class ) ) {
+				$front_end = YoastSEO()->classes->get( \Yoast\WP\SEO\Integrations\Front_End_Integration::class );
+
+				remove_action( 'wpseo_head', array( $front_end, 'present_head' ), -9999 );
+			}
+		}
+	}
+
+	/**
 	 * Prints scripts or data in the head tag on the front end.
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/wp_head/
 	 */
 	public static function wp_head(): void {
-		if ( is_front_page() ) {
-			echo '<meta name="description" content="' . esc_attr( get_option( 'blogdescription' ) ) . '"/>' . PHP_EOL;
-			echo '<meta property="og:title" content="' . esc_attr( get_option( 'blogname' ) ) . '"/>' . PHP_EOL;
-			echo '<meta property="og:url" content="' . home_url() . '"/>' . PHP_EOL;
-			echo '<meta property="og:description" content="' . esc_attr( get_option( 'blogdescription' ) ) . '"/>' . PHP_EOL;
-			echo '<meta property="og:site_name" content="' . esc_attr( get_option( 'blogname' ) ) . '"/>' . PHP_EOL;
+		global $wp_query;
 
-			return;
-		}
-
-		if ( ! is_singular( \TrevorWP\Util\Tools::get_public_post_types() ) ) {
-			return;
-		}
-
-		echo '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '"/>' . PHP_EOL;
-		echo '<meta property="og:type" content="article"/>' . PHP_EOL;
-		echo '<meta property="og:url" content="' . get_permalink() . '"/>' . PHP_EOL;
-		echo '<meta property="og:site_name" content="' . esc_attr( get_option( 'blogname' ) ) . '"/>' . PHP_EOL;
-
-		if ( has_post_thumbnail() ) {
-			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'medium' );
-			echo '<meta property="og:image" content="' . esc_attr( $thumbnail_src[0] ) . '"/>' . PHP_EOL;
+		if ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'option',
+					'prefix' => Resource_Center::PREFIX,
+				)
+			);
 		}
 	}
 

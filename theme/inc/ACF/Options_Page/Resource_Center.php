@@ -6,6 +6,8 @@ use TrevorWP\Meta\Post;
 use TrevorWP\Theme\Helper;
 
 class Resource_Center extends A_Options_Page {
+	const PREFIX = 'rc_option';
+
 	const FIELD_PAGE_SLUG           = 'rc_page_slug';
 	const FIELD_EYEBROW             = 'eyebrow';
 	const FIELD_HEADLINE            = 'headline';
@@ -174,6 +176,7 @@ class Resource_Center extends A_Options_Page {
 					'default_value' => 6,
 				),
 			),
+			SEO_Details::_get_fields( static::PREFIX )
 		);
 	}
 

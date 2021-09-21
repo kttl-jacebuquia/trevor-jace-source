@@ -122,7 +122,7 @@ class Card {
 
 		$title         = get_the_title( $post );
 		$wrapped_title = static::_wrap_words( $title );
-		$desc  = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
+		$desc          = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
 
 		$attrs = array(
 			'data-post-type' => $post_type,
