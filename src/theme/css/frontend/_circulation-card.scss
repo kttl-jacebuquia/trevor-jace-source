@@ -8,8 +8,9 @@
   }
 
   .bg-inner {
-    @apply w-full h-full absolute top-0;
+    @apply h-full absolute top-0;
     @apply rounded-px10;
+    width: calc(100% + 5px);
   }
 
   .circulation-card-title {
@@ -26,8 +27,8 @@
   }
 
   .circulation-card-cta {
-    @apply inline-block rounded-px10 bg-white text-teal-dark no-underline;
-    @apply mt-4 py-4 px-8;
+    @apply inline-flex items-center justify-center rounded-px10 bg-white text-teal-dark no-underline;
+    @apply mt-4 h-px46 px-px24;
     @apply font-bold text-base leading-px22 tracking-em001;
   }
 
@@ -65,10 +66,6 @@
   @screen md {
     min-height: rem-calc(451px);
 
-    & > .inner {
-      max-width: 75%;
-    }
-
     .circulation-card-title {
       @apply tracking-em005;
 
@@ -83,7 +80,7 @@
     }
 
     .circulation-card-cta {
-      @apply py-3 px-8;
+      @apply px-8 h-px46;
     }
 
     &.type-get_help {
@@ -94,6 +91,35 @@
   }
 
   @screen lg {
+    @apply pl-px38 pr-px34;
+    min-height: rem-calc(617px);
+
+    .circulation-card-title {
+      @apply text-px42 leading-px52 tracking-em005;
+
+      tilt {
+        @apply text-px60 leading-px70 tracking-em001 -mt-px38;
+      }
+    }
+
+    .circulation-card-desc {
+      @apply text-px20 leading-px30 tracking-em005;
+    }
+
+    .circulation-card-cta {
+      @apply mt-px40 px-px40 h-px60;
+      @apply text-px20 leading-px20 tracking-px05;
+    }
+
+    &.type-rc {
+      .circulation-card-title {
+        @apply text-px46 leading-px62;
+      }
+    }
+  }
+
+  @screen lg2 {
+    @apply px-px38;
     min-height: rem-calc(706px);
 
     .circulation-card-title {
@@ -118,6 +144,12 @@
       .circulation-card-title {
         @apply text-px46 leading-px62;
       }
+    }
+  }
+
+  @screen xl {
+    .circulation-card-cta {
+      @apply h-px66;
     }
   }
 }

@@ -1,4 +1,14 @@
 .page-circulation {
+  .page-sub-title {
+    @screen lg {
+      @apply text-px44 leading-px54 tracking-em_001;
+    }
+
+    @screen xl {
+      @apply text-px46 leading-px56;
+    }
+  }
+
   &__cards {
     @apply w-full tw-grid;
     row-gap: #{rem-calc(30)};
