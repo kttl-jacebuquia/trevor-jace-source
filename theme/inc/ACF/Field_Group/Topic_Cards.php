@@ -436,7 +436,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				</div>
 				<?php if ( $show_load_more && count( $posts ) > 0 ) : ?>
 					<div class="topic-cards__block-cta-wrap">
-						<button class="topic-cards__load-more" type="button" aria-label="click to load more items">Load More</button>
+						<button class="topic-cards__load-more wave-underline" type="button" aria-label="click to load more items">Load More</button>
 					</div>
 				<?php endif; ?>
 			<?php endif; ?>

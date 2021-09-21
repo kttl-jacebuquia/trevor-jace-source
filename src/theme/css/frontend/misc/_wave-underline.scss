@@ -25,15 +25,16 @@
 .wave-underline {
 	@include wave-underline;
 
-  @apply pb-px5;
-
-  border: 0;
+  border: 0!important;
+  padding-bottom: 7px!important;
   position: relative;
 
   &::after {
     content: '';
+    height: 2px;
+    bottom: 6px;
 
-    @apply block w-full absolute bottom-px5 h-px2 bg-teal-dark;
+    @apply block w-full absolute bg-teal-dark;
   }
 
   &:hover {

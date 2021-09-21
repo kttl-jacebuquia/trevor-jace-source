@@ -217,9 +217,7 @@
 	}
 
 	&__load-more {
-		@apply pb-px5 border-b-px2 border-current border-solid;
 		@apply font-semibold text-px24 leading-px34 tracking-px05;
-		@include wave-underline;
 
 		@screen xl {
 			@apply text-px20 leading-px24 tracking-em005;
