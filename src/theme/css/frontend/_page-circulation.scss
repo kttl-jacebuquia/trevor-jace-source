@@ -11,18 +11,22 @@
 
   &__cards {
     @apply w-full tw-grid;
-    row-gap: #{rem-calc(30)};
-  }
-
-  .circulation-card {
-    @apply col-span-full;
+    row-gap: #{rem-calc(40)};
 
     @screen md {
-      @apply col-span-6 col-start-2;
+      row-gap: #{rem-calc(30)};
     }
 
-    @screen lg {
-      @apply col-span-6 col-start-auto;
+    .circulation-card {
+      @apply col-span-full;
+
+      @screen md {
+        @apply col-span-6 col-start-2;
+      }
+
+      @screen lg {
+        @apply col-span-6 col-start-auto;
+      }
     }
   }
 }

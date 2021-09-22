@@ -21,4 +21,40 @@
   .single-trevor_rc_external & {
     @apply py-0;
   }
+
+  .circulation-cards {
+    @apply flex flex-wrap;
+
+    & > * + * {
+      @apply mt-px40;
+
+      @screen md {
+        @apply mt-px30;
+      }
+
+      @screen lg {
+        @apply mt-px50;
+      }
+    }
+  }
+
+  .circulation-card-wrap {
+    @apply w-full;
+
+    @screen md {
+      max-width: 582px;
+    }
+
+    @screen lg {
+      max-width: 553px;
+    }
+
+    @screen lg2 {
+      max-width: 665px;
+    }
+
+    @screen xl {
+      max-width: 686px;
+    }
+  }
 }
