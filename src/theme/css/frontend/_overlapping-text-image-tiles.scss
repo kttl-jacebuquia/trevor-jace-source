@@ -7,29 +7,53 @@
 
   &__container {
     @apply tw-grid container mx-auto;
+
+    @screen md {
+      @apply max-w-none;
+    }
+
+    @screen xl {
+      @apply max-w-screen-xl;
+    }
+
+    @screen 2xl {
+      @apply max-w-screen-2xl;
+    }
   }
 
   &__box {
     @apply col-span-full rounded-px10 py-px80 text-indigo;
     @apply px-px24 text-center;
 
+    @each $screen in md, lg, lg2, xl, 2xl {
+      @screen #{$screen} {
+        @if $screen == xl or $screen == 2xl {
+          margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+        } @else {
+          margin-right: calc(-1 * theme('container.padding.#{$screen}'));
+        }
+      }
+    }
+
     @screen md {
-      @apply col-start-3 col-span-6 -mr-px102 pl-px76 pr-px130 rounded-r-none;
+      @apply col-start-3 col-span-6 px-px76 rounded-r-none;
     }
 
     @screen lg {
       @apply col-start-3 col-span-10 pl-px145 pr-px90 py-px100;
-      margin-right: calc(-1 * theme('container.padding.lg'));
     }
 
     @screen lg2 {
       @apply col-start-4 col-span-9 pl-px178 pr-px209 py-px140;
-      margin-right: calc(-1 * theme('container.padding.lg2'));
     }
 
     @screen xl {
       @apply pt-px180 pb-px190 pl-px198 pr-px240;
-      margin-right: calc(-1 * theme('container.padding.xl'));
+    }
+
+    // Max container expand.
+    @media only screen and (min-width: 1920px) {
+      margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
     }
   }
 
@@ -82,23 +106,39 @@
   &__image {
     @apply col-span-5 -ml-px55 relative -mt-px40 rounded-l-none rounded-px10 overflow-hidden;
 
+    @each $screen in md, lg, lg2, xl, 2xl {
+      @screen #{$screen} {
+        @if $screen == xl or $screen == 2xl {
+          margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+        } @else  {
+          margin-left: calc(-1 * theme('container.padding.#{$screen}'));
+        }
+      }
+    }
+
     @screen md {
-      @apply col-span-3 -ml-px90 -mt-px255;
+      @apply col-span-3 -mt-px255;
+      max-height: 326px;
     }
 
     @screen lg {
-      margin-left: calc(-1 * theme('container.padding.lg'));
       @apply col-span-4 -mt-px318;
+      max-height: 372px;
     }
 
     @screen lg2 {
-      margin-left: calc(-1 * theme('container.padding.lg2'));
       @apply col-span-5 -mt-px350 mr-px60;
+      max-height: 525px;
     }
 
     @screen xl {
-      margin-left: calc(-1 * theme('container.padding.xl'));
       @apply -mt-px480 mr-0;
+      max-height: 706px;
+    }
+
+    // Max container expand.
+    @media only screen and (min-width: 1920px) {
+      margin-left: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
     }
 
     &::before {
@@ -107,19 +147,19 @@
       content: '';
 
       @screen md {
-        padding-top: calc(100% * 326 / 322);
+        padding-top: calc(100% * 326 / 283);
       }
 
       @screen lg {
-        padding-top: calc(100% * 372 / 366);
+        padding-top: calc(100% * 372 / 353);
       }
 
       @screen lg2 {
-        padding-top: calc(100% * 525 / 519);
+        padding-top: calc(100% * 525 / 476);
       }
 
       @screen xl {
-        padding-top: calc(100% * 706 / 697);
+        padding-top: calc(100% * 706 / 607);
       }
     }
 
@@ -131,47 +171,68 @@
   // Image On Right Layout
   &--image-on-right {
     .overlapping-text-image-tiles__box {
+      @each $screen in md, lg, lg2, xl, 2xl {
+        @screen #{$screen} {
+          @if $screen == xl or $screen == 2xl {
+            margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+          } @else  {
+            margin-left: calc(-1 * theme('container.padding.#{$screen}'));
+          }
+        }
+      }
+
       @screen md {
-        @apply rounded-px10 rounded-l-none col-span-6 col-start-1 -ml-px90 mr-0 pl-px154 pr-px116;
+        @apply rounded-px10 rounded-l-none col-span-6 col-start-1 mr-0 px-px116;
       }
 
       @screen lg {
         @apply col-span-10 col-start-1 mr-0 pl-px135 pr-px145;
-        margin-left: calc(-1 * theme('container.padding.lg'));
       }
 
       @screen lg2 {
         @apply col-span-9 pl-px120 pr-px178;
-        margin-left: calc(-1 * theme('container.padding.lg2'));
       }
 
       @screen xl {
         @apply col-span-8 pl-px240 pr-px198;
         padding-top: 176px;
         padding-bottom: 167px;
-        margin-left: calc(-1 * theme('container.padding.xl'));
+      }
+
+      // Max container expand.
+      @media only screen and (min-width: 1920px) {
+        margin-left: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
       }
     }
 
     .overlapping-text-image-tiles__image {
       @apply col-start-2 col-span-5 ml-0 -mr-px90 rounded-r-none rounded-px10;
 
+      @each $screen in md, lg, lg2, xl, 2xl {
+        @screen #{$screen} {
+          @if $screen == xl or $screen == 2xl {
+            margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+          } @else  {
+            margin-right: calc(-1 * theme('container.padding.#{$screen}'));
+          }
+        }
+      }
+
       @screen md {
-        @apply col-span-3 col-start-6 -mr-px90 rounded-r-none rounded-px10;
+        @apply col-span-3 col-start-6 rounded-r-none rounded-px10;
       }
 
       @screen lg {
         @apply col-span-4 col-start-9;
-        margin-right: calc(-1 * theme('container.padding.lg'));
       }
 
       @screen lg2 {
         @apply col-span-5 col-start-8;
-        margin-right: calc(-1 * theme('container.padding.lg2'));
       }
 
-      @screen xl {
-        margin-right: calc(-1 * theme('container.padding.xl'));
+      // Max container expand.
+      @media only screen and (min-width: 1920px) {
+        margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
       }
     }
   }

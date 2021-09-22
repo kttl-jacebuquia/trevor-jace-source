@@ -5,7 +5,7 @@
     @apply container mx-auto tw-grid py-px80;
 
     @screen md {
-      @apply py-px100;
+      @apply max-w-none py-px100;
     }
 
     @screen lg {
@@ -17,7 +17,11 @@
     }
 
     @screen xl {
-      @apply pt-px178 pb-px118;
+      @apply pt-px178 pb-px118 max-w-screen-xl;
+    }
+
+    @screen 2xl {
+      @apply max-w-screen-2xl;
     }
   }
 

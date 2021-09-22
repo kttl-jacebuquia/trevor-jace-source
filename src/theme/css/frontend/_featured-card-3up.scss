@@ -51,11 +51,19 @@
     @apply container mx-auto py-px80;
 
     @screen md {
-      @apply py-px100;
+      @apply py-px100 max-w-none;
     }
 
     @screen lg2 {
       @apply py-px140;
+    }
+
+    @screen xl {
+      @apply max-w-screen-xl;
+    }
+
+    @screen 2xl {
+      @apply max-w-screen-2xl;
     }
   }
 
