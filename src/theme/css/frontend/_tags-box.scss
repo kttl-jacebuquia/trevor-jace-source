@@ -11,7 +11,7 @@
   }
 
   &__contents {
-    @apply tracking-px6 px-px24 pt-px24 -mt-px24 -mb-px8;
+    @apply tracking-px6 px-px24 pt-px24 -mt-px24 -mb-px8 w-full;
     background-color: var(--card-background);
   }
 
@@ -40,7 +40,12 @@
     @apply items-end overflow-visible;
 
     .tag-box {
-      max-width: calc(100% - #{rem-calc(48)}) !important;
+      @apply h-auto;
+      max-width: 100% !important;
+
+      span {
+        @apply whitespace-pre-wrap;
+      }
     }
 
     .tags-box__toggle {
@@ -52,17 +57,23 @@
 }
 
 .tag-box {
-  @apply text-teal-dark font-medium text-px14 leading-px18 tracking-px05 mb-px8;
+  @apply text-teal-dark font-medium text-px14 leading-px18 tracking-px05 mb-px8 py-px10;
   @apply bg-gray-light;
   @apply cursor-pointer;
   @apply rounded-full;
   @apply transition-colors;
   @apply h-px30 px-px14 inline-flex items-center;
   max-width: #{rem-calc(170)};
+  min-height: #{rem-calc(32)};
 
   @screen lg2 {
     @apply h-px34 px-px18;
     max-width: #{rem-calc(184)};
+    min-height: #{rem-calc(34)};
+  }
+
+  @screen xl {
+    min-height: #{rem-calc(35)};
   }
 
   span {

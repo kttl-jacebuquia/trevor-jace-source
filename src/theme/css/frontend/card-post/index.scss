@@ -1,9 +1,9 @@
 .card-post {
   --card-background: theme('colors.white.DEFAULT');
+  color: var(--site-theme-background);
   @apply flex flex-col relative;
   @apply overflow-hidden;
   @apply shadow-light rounded-px10;
-  @apply text-teal-dark;
   @apply h-px503;
   @apply max-w-full;
   @apply mx-auto;
@@ -42,10 +42,6 @@
 
   body.is-rc &.type-trevor_rc_glossary .hover-hit-area {
     @apply hidden;
-  }
-
-  body.is-site-search & {
-    @apply text-indigo;
   }
 
   &:not(.bg-full) .post-thumbnail-wrap + * {
@@ -136,11 +132,6 @@
     @screen xl {
       @apply text-px18 leading-px26 tracking-em005;
     }
-  }
-
-  // No Excerpt
-  &.no-excerpt {
-
   }
 
   .post-desc {
@@ -319,14 +310,6 @@
     top: 2.125rem;
     right: 1.5rem;
     font-size: 1.5rem;
-  }
-
-  body.is-rc & {
-    @apply text-indigo;
-
-    &.bg-full {
-      @apply text-white;
-    }
   }
 
   @screen md {

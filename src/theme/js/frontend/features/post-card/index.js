@@ -15,6 +15,11 @@ export default class PostCard extends Component {
 		titleWords: ['.post-title > a span'],
 		excerpt: '.post-desc > span',
 		excerptWords: ['.post-desc > span span'],
+		tagsBox: '.tags-box',
+	};
+
+	state = {
+		tagsExpanded: false,
 	};
 
 	// Will be called upon component instantiation
@@ -29,6 +34,9 @@ export default class PostCard extends Component {
 
 		// Listen to resize changes
 		this.handleCardResize();
+
+		// Listen to tags box state changes
+		this.handleTagsBoxState();
 	}
 
 	handleCardResize() {
@@ -105,9 +113,25 @@ export default class PostCard extends Component {
 		}
 	}
 
+	handleTagsBoxState() {
+		if (this.children.tagsBox) {
+			const observer = new MutationObserver(
+				this.onTagsBoxMutate.bind(this)
+			);
+			observer.observe(this.children.tagsBox, { attributes: true });
+		}
+	}
+
+	onTagsBoxMutate() {
+		const tagsExpanded = this.children.tagsBox.classList.contains('tags-box--expanded');
+		this.setState({ tagsExpanded });
+	}
+
 	// Triggers when state is change by calling this.setState()
-	componentDidUpdate(changedState) {
-		// State change updates
+	componentDidUpdate() {
+		const { tagsExpanded } = this.state;
+
+		this.element.classList.toggle('card-post--tags-expanded', tagsExpanded);
 	}
 }
 

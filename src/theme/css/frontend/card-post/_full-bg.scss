@@ -3,7 +3,8 @@
   @apply text-white;
 
   &.no-thumbnail {
-    @apply text-indigo bg-white;
+    @apply bg-white;
+    color: var(--site-theme-background);
   }
 
   .post-thumbnail-wrap {

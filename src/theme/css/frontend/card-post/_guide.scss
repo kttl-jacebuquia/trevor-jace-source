@@ -1,4 +1,12 @@
 .card-post[data-post-type="trevor_rc_guide"] {
+  // Expanded tags underlay
+  &::after {
+    @apply absolute bottom-0 left-0 right-0 top-0 block;
+    @apply transition-opacity opacity-0 pointer-events-none bg-indigo;
+    content: '';
+    --tw-bg-opacity: .78;
+  }
+
   .post-title {
     @include max-height(42 * 4);
 
@@ -35,6 +43,13 @@
 
     @screen xl {
       @include max-height(28 * 5);
+    }
+  }
+
+  // Expanded tags state
+  &.card-post--tags-expanded {
+    &::after {
+      @apply opacity-100;
     }
   }
 }

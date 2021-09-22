@@ -1,5 +1,7 @@
 // External Resource Card
 .card-post.trevor_rc_external {
+  --card-background: theme('colors.white.DEFAULT');
+
   .card-text-container {
     @apply text-indigo;
   }
