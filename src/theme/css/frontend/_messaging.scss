@@ -45,10 +45,18 @@
 
     @screen md {
       @apply pt-px130 pb-px117 mx-px59;
+
+      body.is-rc & {
+        @apply mx-0;
+      }
     }
 
     @screen lg {
       @apply py-px120 mx-0 col-span-8 col-start-3;
+
+      body.is-rc & {
+        @apply col-span-10 col-start-2;
+      }
     }
 
     @screen lg2 {

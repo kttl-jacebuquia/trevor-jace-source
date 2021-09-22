@@ -33,15 +33,15 @@
     }
 
     @screen lg {
-      @apply text-px36 leading-px46;
+      @apply text-px46 leading-px56;
     }
 
     @screen lg2 {
-      @apply col-span-10 col-start-2 text-px60 leading-px70;
+      @apply col-span-8 col-start-3 text-px60 leading-px70;
     }
 
     @screen xl {
-      @apply col-span-8 col-start-3 -ml-px28 text-px66 leading-px76;
+      @apply text-px66 leading-px76;
     }
   }
 
@@ -87,16 +87,16 @@
     }
 
     @screen lg2 {
-      @apply col-span-6 w-full py-px116 px-px69;
+      @apply col-span-6 w-full py-px100 px-px69;
     }
 
-    @screen lg2 {
-      @apply px-px99;
+    @screen xl {
+      @apply px-px99 py-px116;
     }
   }
 
   &__image {
-    @apply w-px118 h-px118 py-px20 px-px12 inline-flex justify-center items-center;
+    @apply w-px118 h-px118 inline-flex justify-center items-center;
 
     @screen xl {
       @apply w-px200 h-px200;
@@ -115,7 +115,7 @@
       @apply mt-px10 text-px24 leading-px28 tracking-px_05;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px20 text-px36 leading-px46;
     }
   }
@@ -127,7 +127,7 @@
       @apply text-px16 leading-px24;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply mt-px12 text-px20 leading-px30 tracking-em001;
     }
   }
@@ -146,11 +146,7 @@
     }
 
     @screen lg2 {
-      @apply mt-px40;
-    }
-
-    @screen xl {
-      @apply h-px66 text-px20 leading-px26 tracking-px05;
+      @apply h-px66 text-px20 leading-px26 tracking-px05 mt-px40;
     }
   }
 
