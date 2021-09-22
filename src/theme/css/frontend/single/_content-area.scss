@@ -45,6 +45,18 @@
 .post-content-sidebar {
   @apply py-10;
 
+  @screen md {
+    @apply col-span-5 w-full order-1;
+  }
+
+  @screen lg {
+    @apply col-span-4 order-2 col-start-9;
+  }
+
+  @screen lg2 {
+    @apply col-span-3 col-start-10;
+  }
+
   &.empty {
     @apply pb-0;
   }
@@ -55,6 +67,17 @@
 }
 
 .post-content {
+  @screen md {
+    @apply order-2 col-span-full;
+  }
+
+  @screen lg {
+    @apply col-span-7 -mr-px28 order-1;
+  }
+  @screen lg2 {
+    @apply col-span-7 col-start-2;
+  }
+
   > :first-child {
     @apply mt-0;
   }
@@ -69,12 +92,8 @@
     @apply grid tw-grid-tablet;
   }
 
-  .post-content {
-    @apply pb-12 col-span-8;
-  }
-
   .post-content-sidebar {
-    @apply py-12 col-span-7;
+    @apply py-12;
   }
 
   .post-content-sidebar > * + * {
@@ -83,10 +102,6 @@
 
   .post-content-grid {
     @apply pb-14;
-  }
-
-  .post-content-sidebar {
-    width: percentage(5/8);
   }
 }
 
@@ -110,21 +125,16 @@
   }
 
   .post-content {
-    @apply w-auto col-span-12;
+    @apply w-auto;
   }
 
   .post-content-sidebar {
     @apply w-auto;
-    @apply col-start-9 col-span-4;
   }
 }
 
 @screen xl {
   .post-content {
-    @apply col-span-10 col-start-2 mr-0;
-  }
-
-  .post-content-sidebar {
-    @apply col-start-10 col-span-3;
+    @apply mr-0;
   }
 }
