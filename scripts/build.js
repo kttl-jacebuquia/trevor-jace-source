@@ -27,16 +27,6 @@ console.log('Creating an optimized production build...');
 const config = configFactory('production');
 const compiler = webpack(config);
 
-fs.copyFileSync(
-	'src/theme/css/foundation/foundation.css',
-	'theme/static/css/foundation.css'
-);
-
-fs.copyFileSync(
-	'src/theme/css/foundation/foundation.css',
-	'/app/theme/static/css/foundation.css'
-);
-
 return new Promise((resolve, reject) => {
 	compiler.run((err, stats) => {
 		let messages;
