@@ -44,7 +44,7 @@
       max-width: 100% !important;
 
       span {
-        @apply whitespace-pre-wrap;
+        @apply whitespace-pre-wrap overflow-visible;
       }
     }
 

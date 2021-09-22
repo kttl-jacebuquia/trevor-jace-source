@@ -1,5 +1,5 @@
 .post-file-wrap {
-  @apply mt-px40;
+  @apply mt-px40 -mb-px20; // Nullifies the extra bottom margin of the last file btn
 
   @screen md {
     @apply mt-px50;
@@ -16,7 +16,7 @@
 }
 
 .post-file-btn {
-  @apply bg-indigo rounded-full text-px16 leading-px22;
+  @apply bg-indigo rounded-full text-px16 leading-px22 mb-px20;
   @apply inline-flex items-center h-px48 px-px28 py-0;
 
   @screen md {

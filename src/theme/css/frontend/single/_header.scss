@@ -16,7 +16,6 @@
 .post-header {
   height: auto;
   min-height: 530px;
-  max-height: 1040px;
 }
 
 .post-header-inner {
@@ -83,11 +82,15 @@
   // Tags
   .tags-box {
     @apply flex justify-center flex-wrap;
-    @apply -mx-1;
+    @apply -mx-1 h-auto;
     // take back tag-box's x margins
 
     > * {
       @apply m-1 block h-auto w-auto whitespace-nowrap;
+    }
+
+    .tag-box {
+      @apply max-w-none h-auto whitespace-pre-wrap;
     }
   }
 
