@@ -133,7 +133,7 @@ class Card {
 		<article <?php echo A_Field_Group::render_attrs( get_post_class( $_class, $post->ID ), $attrs ); ?>>
 			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
-					<a href="<?php echo $title; ?>" aria-label="click to read <?php echo $title; ?>">
+					<a href="<?php echo esc_url( get_the_permalink( $post ) ); ?>" aria-label="click to read <?php echo $title; ?>">
 						<?php echo $thumb; ?>
 					</a>
 				</div>
@@ -143,7 +143,7 @@ class Card {
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
 					<?php if ( $has_thumbnail && ! in_array( 'bg-full', $_class, true ) ) { ?>
 						<div class="post-thumbnail-wrap">
-							<a href="<?php echo $title; ?>" aria-label="click to read <?php echo $title; ?>">
+							<a href="<?php echo esc_url( get_the_permalink( $post ) ); ?>" aria-label="click to read <?php echo $title; ?>">
 								<?php echo $thumb; ?>
 							</a>
 						</div>
