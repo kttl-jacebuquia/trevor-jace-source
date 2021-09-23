@@ -9,6 +9,7 @@ use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
+use TrevorWP\Theme\ACF\Options_Page\Search as Options_Search;
 use TrevorWP\Theme\ACF\Options_Page\SEO_Details;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
@@ -17,6 +18,7 @@ use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
 use TrevorWP\Theme\Customizer;
+use TrevorWP\Theme\Customizer\Search;
 use TrevorWP\Theme\Helper\Sorter;
 use TrevorWP\Theme\Helper\Trevor_Chat;
 use TrevorWP\Util\StaticFiles;
@@ -308,11 +310,20 @@ class Hooks {
 		global $wp_query;
 
 		if ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
-			if ( class_exists( \Yoast\WP\SEO\Integrations\Front_End_Integration::class ) ) {
-				$front_end = YoastSEO()->classes->get( \Yoast\WP\SEO\Integrations\Front_End_Integration::class );
+			static::remove_wpseo_action();
+		} else if ( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) {
+			static::remove_wpseo_action();
+		}
+	}
 
-				remove_action( 'wpseo_head', array( $front_end, 'present_head' ), -9999 );
-			}
+	/**
+	 * Remove SEO action
+	 */
+	public static function remove_wpseo_action() {
+		if ( class_exists( \Yoast\WP\SEO\Integrations\Front_End_Integration::class ) ) {
+			$front_end = YoastSEO()->classes->get( \Yoast\WP\SEO\Integrations\Front_End_Integration::class );
+
+			remove_action( 'wpseo_head', array( $front_end, 'present_head' ), -9999 );
 		}
 	}
 
@@ -331,6 +342,15 @@ class Hooks {
 				array(
 					'type'   => 'option',
 					'prefix' => Resource_Center::PREFIX,
+				)
+			);
+		} else if ( ! empty( $wp_query->get( Search::QV_SEARCH ) ) && empty( get_search_query( false ) ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'option',
+					'prefix' => Options_Search::PREFIX,
 				)
 			);
 		}

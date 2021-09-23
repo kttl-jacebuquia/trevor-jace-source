@@ -1,6 +1,8 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 class Search extends A_Options_Page {
+	const PREFIX = 'search_option';
+
 	const FIELD_POSTS_PER_PAGE     = 'search_posts_per_page';
 	const FIELD_HEADLINE           = 'search_headline';
 	const FIELD_SEARCH_PLACEHOLDER = 'search_placeholder';
@@ -73,6 +75,7 @@ class Search extends A_Options_Page {
 					'default_value' => 'Explore the latest from The Trevor Project.',
 				),
 			),
+			SEO_Details::_get_fields( static::PREFIX )
 		);
 	}
 
