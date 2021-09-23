@@ -105,12 +105,7 @@ if ($quickExitModal.length) {
 				setTimeout(() => modal.open(), modalTimeout);
 			},
 			onClose({ initiator }) {
-				if (
-					initiator &&
-					initiator.classList.contains('quick-exit-modal__cta')
-				) {
-					localStorage.setItem('quick-exit-modal-dismissed', true);
-				}
+				localStorage.setItem('quick-exit-modal-dismissed', true);
 			},
 		};
 
