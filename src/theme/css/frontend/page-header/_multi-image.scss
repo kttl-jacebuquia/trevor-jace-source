@@ -1,12 +1,12 @@
 // Image settings for Multi-Image variant
 // per item, per breakpoint
-// ( width, height, top, left, rotate
+// ( width, height, top, left_or_right (left or right for mobile, left for the rest)
 $multi-image-images-config: (
   // Image 1
   1: (
     rotate: -9.4,
     z-index: 1,
-    sm: ( 162, 162, 74, -27 ), // 620
+    sm: ( 162, 162, 74, -27 ), // left for mobile
     md: ( 183, 183, 477, -45 ),
     lg: ( 253, 253, 527, -50 ),
     lg2: ( 315, 315, 668, -82 ),
@@ -16,7 +16,7 @@ $multi-image-images-config: (
   2: (
     rotate: 7.15,
     z-index: 2,
-    sm: ( 182, 215, 206, 37 ),
+    sm: ( 182, 215, 206, 37 ), // left for mobile
     md: ( 174, 205, 448, 262 ),
     lg: ( 243, 283, 488, 375 ),
     lg2: ( 299, 352, 619, 447 ),
@@ -26,7 +26,7 @@ $multi-image-images-config: (
   3: (
     rotate: -4.53,
     z-index: 3,
-    sm: ( 165, 220, 374, -7 ),
+    sm: ( 165, 220, 374, -7 ), // left for mobile
     md: ( 208, 277, 590, 110 ),
     lg: ( 287, 382, 684, 165 ),
     lg2: ( 358, 476, 863, 184 ),
@@ -36,7 +36,7 @@ $multi-image-images-config: (
   4: (
     rotate: -4.3,
     z-index: 1,
-    sm: ( 219, 238, 97, 182 ),
+    sm: ( 219, 238, 97, -43 ), // right for mobile
     md: ( 201, 218, 147, 441 ),
     lg: ( 262, 285, 141, 600 ),
     lg2: ( 327, 356, 186, 726 ),
@@ -46,7 +46,7 @@ $multi-image-images-config: (
   5: (
     rotate: 0,
     z-index: 2,
-    sm: ( 168, 206, 327, 237 ),
+    sm: ( 168, 206, 327, -30 ), // right for mobile
     md: ( 264, 323, 249, 529 ),
     lg: ( 344, 422, 274, 713 ),
     lg2: ( 428, 526, 352, 870 ),
@@ -56,7 +56,7 @@ $multi-image-images-config: (
   6: (
     rotate: 7.93,
     z-index: 3,
-    sm: ( 171, 197, 545, 170 ),
+    sm: ( 171, 197, 545, 30 ), // right for mobile
     md: ( 201, 232, 659, 436 ),
     lg: ( 278, 320, 779, 615 ),
     lg2: ( 346, 399, 982, 746 ),
@@ -77,7 +77,9 @@ $screen-widths: (
 
 .header-container {
   &--multi-image {
-    @apply pt-0;
+    @apply pt-0 overflow-hidden;
+    padding-bottom: #{rem-calc(500)};
+    margin-bottom: #{rem-calc(-500)};
 
     @screen md {
       @apply pt-0;
@@ -94,7 +96,7 @@ $screen-widths: (
 
     @screen xl {
       margin-top: -$top-nav-height-desktop;
-      @apply pt-0 overflow-hidden pb-px500 -mb-px500;
+      @apply pt-0;
     }
 
     + main > :first-child {
@@ -230,13 +232,9 @@ $screen-widths: (
       }
 
       &-images {
-        @apply absolute top-0 left-0 right-0 w-full pointer-events-none overflow-hidden;
+        @apply absolute top-0 left-0 right-0 w-full pointer-events-none overflow-visible;
         height: 200vh;
         min-height: 2160px; // 1080p x 2
-
-        @screen xl {
-          @apply overflow-visible;
-        }
       }
 
       &-image {
@@ -262,41 +260,53 @@ $screen-widths: (
                 $width: nth($config, 1);
                 $height: nth($config, 2);
                 $top: nth($config, 3);
-                $left: nth($config, 4);
+                $left_or_right: nth($config, 4);
+
+                // Calculations
+                $unitless-screen-rem: strip-unit($screen-width);
+                $unitless-width-rem: strip-unit(rem-calc($width));
+                $unitless-height-rem: strip-unit(rem-calc($height));
+                $width-ratio: $unitless-width-rem / $unitless-screen-rem;
+                $height-ratio: $unitless-height-rem / $unitless-width-rem;
+
+                $final-width: percentage($width-ratio);
+                $final-top: rem-calc($top);
 
                 @if $screen == sm {
-                  width: rem-calc($width);
-                  height: rem-calc($height);
-                  top: rem-calc($top);
-                  left: rem-calc($left);
+                  // Calculate left and right depending on the item index
+                  $final-left: if( $index < 4, #{rem-calc($left_or_right)}, auto );
+                  $final-right: if( $index < 4, auto, #{rem-calc($left_or_right)} );
+
+                  width: #{rem-calc($width)};
+                  height: auto;
+                  top: $final-top;
+                  left: auto;
+                  left: $final-left;
+                  right: $final-right;
                 }
                 @else {
-                  $top: rem-calc($top);
+                  // Calculations
+                  $unitless-left-rem: strip-unit(rem-calc($left_or_right));
+                  $left-ratio: $unitless-left-rem / $unitless-screen-rem;
+                  $final-left: percentage($left-ratio);
 
                   @if $screen == 'lg2' {
-                    $top: calc(#{$top} + #{$top-nav-height-desktop});
+                    $final-top: calc(#{$final-top} + #{$top-nav-height-desktop});
                   }
 
                   @screen #{$screen} {
-                    $unitless-screen-rem: strip-unit($screen-width);
-                    $unitless-width-rem: strip-unit(rem-calc($width));
-                    $unitless-height-rem: strip-unit(rem-calc($height));
-                    $unitless-left-rem: strip-unit(rem-calc($left));
-                    $width-ratio: $unitless-width-rem / $unitless-screen-rem;
-                    $height-ratio: $unitless-height-rem / $unitless-width-rem;
-                    $left-ratio: $unitless-left-rem / $unitless-screen-rem;
-
-                    width: percentage($width-ratio);
+                    width: $final-width;
                     height: auto;
-                    top: $top;
-                    left: percentage($left-ratio);
-
-                    &::after {
-                      content: '';
-                      width: 100%;
-                      padding-top: percentage($height-ratio);
-                    }
+                    top: $final-top;
+                    left: $final-left;
+                    right: auto;
                   }
+                }
+
+                &::after {
+                  content: '';
+                  width: 100%;
+                  padding-top: percentage($height-ratio);
                 }
               }
             }
