@@ -1,18 +1,6 @@
 .resource-center-block {
   &__container {
     @apply container mx-auto;
-
-    @screen md {
-      @apply max-w-none;
-    }
-
-    @screen xl {
-      @apply max-w-screen-xl;
-    }
-
-    @screen 2xl {
-      @apply max-w-screen-2xl;
-    }
   }
 
   &__box {

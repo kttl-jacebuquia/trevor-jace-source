@@ -5,7 +5,7 @@
     @apply container mx-auto tw-grid py-px80;
 
     @screen md {
-      @apply max-w-none py-px100;
+      @apply py-px100;
     }
 
     @screen lg {
@@ -17,11 +17,7 @@
     }
 
     @screen xl {
-      @apply pt-px178 pb-px118 max-w-screen-xl;
-    }
-
-    @screen 2xl {
-      @apply max-w-screen-2xl;
+      @apply pt-px178 pb-px118;
     }
   }
 
@@ -48,12 +44,19 @@
   &__cards-container {
     @apply col-span-full mt-px60 -mx-px28 px-px28;
 
-    @screen md {
-      @apply -mx-px50 px-px50;
+    @each $screen in md, lg {
+      @screen #{$screen} {
+        $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
+
+        margin-left: calc(-1 * #{$offset-value});
+        margin-right: calc(-1 * #{$offset-value});
+        padding-left: $offset-value;
+        padding-right: $offset-value;
+      }
     }
 
     @screen lg {
-      @apply -mx-px90 px-px90 mt-px80;
+      @apply mt-px80;
     }
 
     @screen lg2 {

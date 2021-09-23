@@ -7,18 +7,6 @@
 
   &__container {
     @apply tw-grid container mx-auto;
-
-    @screen md {
-      @apply max-w-none;
-    }
-
-    @screen xl {
-      @apply max-w-screen-xl;
-    }
-
-    @screen 2xl {
-      @apply max-w-screen-2xl;
-    }
   }
 
   &__box {
@@ -27,11 +15,7 @@
 
     @each $screen in md, lg, lg2, xl, 2xl {
       @screen #{$screen} {
-        @if $screen == xl or $screen == 2xl {
-          margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-        } @else {
-          margin-right: calc(-1 * theme('container.padding.#{$screen}'));
-        }
+        margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
       }
     }
 
@@ -108,11 +92,7 @@
 
     @each $screen in md, lg, lg2, xl, 2xl {
       @screen #{$screen} {
-        @if $screen == xl or $screen == 2xl {
-          margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-        } @else  {
-          margin-left: calc(-1 * theme('container.padding.#{$screen}'));
-        }
+        margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
       }
     }
 
@@ -173,11 +153,7 @@
     .overlapping-text-image-tiles__box {
       @each $screen in md, lg, lg2, xl, 2xl {
         @screen #{$screen} {
-          @if $screen == xl or $screen == 2xl {
-            margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-          } @else  {
-            margin-left: calc(-1 * theme('container.padding.#{$screen}'));
-          }
+          margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
         }
       }
 
@@ -210,11 +186,7 @@
 
       @each $screen in md, lg, lg2, xl, 2xl {
         @screen #{$screen} {
-          @if $screen == xl or $screen == 2xl {
-            margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-          } @else  {
-            margin-right: calc(-1 * theme('container.padding.#{$screen}'));
-          }
+          margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
         }
       }
 

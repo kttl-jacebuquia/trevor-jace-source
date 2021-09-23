@@ -10,13 +10,28 @@
   }
 
   &--carousel {
+    .featured-card-3up__items-container {
+      @each $screen in md, lg {
+        @screen #{$screen} {
+          $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
+
+          margin-left: calc(-1 * #{$offset-value});
+          margin-right: calc(-1 * #{$offset-value});
+          padding-left: $offset-value;
+          padding-right: $offset-value;
+        }
+      }
+    }
+
     @screen lg-max {
       .featured-card-3up__items-container {
-        @apply -mx-px50 px-px50 py-px20 -my-px20 overflow-hidden;
+        @apply -my-px20 overflow-hidden;
       }
+
       .featured-card-3up__items {
         @apply flex gap-x-0;
       }
+
       .featured-card-3up__item {
         width: calc((100% - 28px) / 2);
         height: auto;
@@ -25,10 +40,6 @@
     }
 
     @screen lg {
-      .featured-card-3up__items-container {
-        @apply -mx-px90 px-px90;
-      }
-
       .featured-card-3up__item {
         width: auto;
       }
@@ -51,19 +62,11 @@
     @apply container mx-auto py-px80;
 
     @screen md {
-      @apply py-px100 max-w-none;
+      @apply py-px100;
     }
 
     @screen lg2 {
       @apply py-px140;
-    }
-
-    @screen xl {
-      @apply max-w-screen-xl;
-    }
-
-    @screen 2xl {
-      @apply max-w-screen-2xl;
     }
   }
 

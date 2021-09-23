@@ -14,15 +14,7 @@
     @apply tw-grid container mx-auto;
 
     @screen md {
-      @apply items-center max-w-none;
-    }
-
-    @sreen xl {
-      @apply max-w-screen-xl;
-    }
-
-    @sreen 2xl {
-      @apply max-w-screen-2xl;
+      @apply items-center;
     }
   }
 

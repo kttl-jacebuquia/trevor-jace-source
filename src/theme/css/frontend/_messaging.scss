@@ -2,18 +2,6 @@
 	&__container {
 		@apply tw-grid container mx-auto;
 
-    @screen md {
-      @apply max-w-none;
-    }
-
-    @sreen xl {
-      @apply max-w-screen-xl;
-    }
-
-    @sreen 2xl {
-      @apply max-w-screen-2xl;
-    }
-
 		.messaging.extend-top & {
 			@apply pt-px58;
 
@@ -47,7 +35,7 @@
       @apply pt-px130 pb-px117 mx-px59;
 
       body.is-rc & {
-        @apply mx-0;
+        @apply mx-0 py-px80;
       }
     }
 
@@ -55,7 +43,7 @@
       @apply py-px120 mx-0 col-span-8 col-start-3;
 
       body.is-rc & {
-        @apply col-span-10 col-start-2;
+        @apply col-span-10 col-start-2 py-px138;
       }
     }
 
@@ -70,6 +58,12 @@
 		@screen md {
 			@apply text-px32 leading-px42 tracking-px_05;
 		}
+
+    @screen lg {
+      body.is-rc & {
+        @apply text-px40 leading-px48;
+      }
+    }
 
 		@screen xl {
 			@apply text-px40 leading-px48;
@@ -112,11 +106,11 @@
       @apply font-normal text-px16 leading-px22;
 
       @screen md {
-        @apply text-px18 leading-px24;
+        @apply text-px18 leading-px26 mt-px14;
       }
 
-      @screen md {
-        @apply text-px20 leading-px28;
+      @screen lg {
+        @apply text-px20 leading-px28 mt-px18;
       }
     }
 	}
@@ -160,7 +154,7 @@
       }
 
       @screen lg {
-        @apply px-px40 tracking-px05;
+        @apply py-px20 px-px40 tracking-px05;
       }
     }
 	}
@@ -198,12 +192,20 @@
         @apply mx-auto;
 
         width: percentage( 317 / 550 );
+
+        body.is-rc & {
+          width: percentage( 494 / 668 );
+        }
       }
 
       @screen lg {
         @apply mx-auto;
 
         width: percentage( 564 / 962 );
+
+        body.is-rc & {
+          width: percentage( 554 / 698 );
+        }
       }
     }
 	}
