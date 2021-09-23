@@ -4,6 +4,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 	const FIELD_TITLE       = 'title';
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_IMAGE       = 'image';
+	const FIELD_CAPTION     = 'caption';
 	const FIELD_BUTTON      = 'button';
 
 	/**
@@ -13,6 +14,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		$title       = static::gen_field_key( static::FIELD_TITLE );
 		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$image       = static::gen_field_key( static::FIELD_IMAGE );
+		$caption     = static::gen_field_key( static::FIELD_CAPTION );
 		$button      = static::gen_field_key( static::FIELD_BUTTON );
 
 		return array(
@@ -45,6 +47,13 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 					'return_format' => 'array',
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
+				),
+				static::FIELD_CAPTION       => array(
+					'key'         => $caption,
+					'name'        => static::FIELD_CAPTION,
+					'label'       => 'Caption (Mobile and Tablet only)',
+					'type'        => 'text',
+					'placeholder' => 'e.g., Pinch to zoom',
 				),
 				static::FIELD_BUTTON      => Button::clone(
 					array(
@@ -82,6 +91,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		$description = static::get_val( static::FIELD_DESCRIPTION );
 		$image       = static::get_val( static::FIELD_IMAGE );
 		$button      = static::get_val( static::FIELD_BUTTON );
+		$caption     = static::get_val( static::FIELD_CAPTION );
 
 		ob_start();
 		?>
@@ -96,9 +106,11 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 							src="<?php echo esc_url( $image['url'] ); ?>""
 							alt="<?php echo ( ! empty( $image['alt'] ) ) ? esc_attr( $image['alt'] ) : esc_attr( $title ); ?>"
 							class="center-text-with-full-image__image" />
-						<figcaption class="center-text-with-full-image__caption">
-							Pinch to zoom into this image.
-						</figcaption>
+						<?php if ( ! empty( $caption ) ) : ?>
+							<figcaption class="center-text-with-full-image__caption">
+								<?php echo $caption; ?>
+							</figcaption>
+						<?php endif; ?>
 					</figure>
 				<?php endif; ?>
 

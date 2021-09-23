@@ -103,13 +103,13 @@
 		@apply col-span-full text-left;
 		@apply mt-px24 text-px12 leading-px16 tracking-px05;
 
-    @media screen and (min-width: 376px) {
-      @apply hidden;
-    }
-
 		@screen md {
 			@apply mt-px20;
 		}
+
+    @screen lg {
+      @apply hidden;
+    }
 	}
 
   &__cta-wrap {
