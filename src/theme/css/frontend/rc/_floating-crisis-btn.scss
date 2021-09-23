@@ -1,42 +1,40 @@
 .floating-crisis-btn-wrap {
-  @apply fixed z-10 bottom-10 left-1/2;
-  @apply transform transition-transform -translate-x-1/2;
-  --tw-translate-y: 125%;
+  // Defining bottom offsets as CSS variable
+  // In order for JS to pick this up
+  --button-bottom-offset: #{rem-calc(40)};
+  @apply sticky z-10 h-0 flex justify-center items-end;
+  bottom: #{rem-calc(20)};
 
-  body.error404 & {
-    @screen mobile {
-      --tw-translate-y: 0;
-    }
-
-    @screen lg2 {
-      @apply bottom-px50;
-    }
+  @screen md {
+    --button-bottom-offset: #{rem-calc(50)};
+    @apply justify-end pr-px40;
   }
 
   .floating-crisis-btn {
-    @apply py-3 px-6 rounded-full border-2 border-orange bg-orange shadow-2xl;
-    @apply text-white font-bold text-px20 leading-px20 tracking-em001;
-    @apply whitespace-nowrap inline;
+    @apply flex h-px55 justify-center items-center box-border;
+    @apply px-6 rounded-full border-2 border-orange bg-orange text-white shadow-2xl;
+    @apply font-bold text-px20 leading-px20 tracking-em001;
+    @apply whitespace-nowrap mb-px20 transition-all duration-150;
+    @apply lg:hover:bg-orange-light lg:hover:border-orange-light;
     -webkit-font-smoothing: auto;
-  }
+    margin-bottom: calc(var(--button-bottom-offset) - #{rem-calc(20)});
 
-  .is-not-scrolling & {
-    @apply -translate-y-1/2;
-  }
+    // Light variant
+    &--light {
+      @apply bg-white border-white text-orange;
+      @apply lg:hover:bg-white lg:hover:border-white lg:hover:text-orange-light;
+    }
 
-  @screen md {
-    @apply right-10 left-auto transform-none;
-
-    .floating-crisis-btn {
-      @apply text-px20 leading-px20 tracking-px05;
-      // lg2
-      @apply lg2:transition-all duration-300 lg2:hover:bg-orange-light lg2:hover:border-orange-light;
+    body.error404 & {
+      @screen lg2 {
+        @apply mb-px30;
+      }
     }
   }
 
-  .scroll-near-bottom & {
-    @apply absolute;
-    @apply translate-y-0;
-    bottom: unset;
+  @screen md {
+    .floating-crisis-btn {
+      @apply text-px20 leading-px20 tracking-px05;
+    }
   }
 }

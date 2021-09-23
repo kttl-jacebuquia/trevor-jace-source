@@ -43,9 +43,6 @@ const faqTrigger = $('.faq-list__toggle');
 // Ajax Pagination
 features.ajaxPagination();
 
-// Sticky Anchor
-features.stickyAnchor();
-
 features.showAllTiles($showAllTilesBtn);
 
 if ($fundraiserQuizButton.length) {

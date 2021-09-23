@@ -1,66 +1,113 @@
-import $ from 'jquery';
+import Component from '../Component';
+import { all as handleBreakpointChange } from '../match-media';
 
-export default () => {
-	// fixme: this function should work when executed, wrap with event listeners at the above
-	$(() => {
-		/**
-		 * Crisis Button docking
-		 */
-		const $body = $('body');
-		const stickyAnchors = $('.sticky-cta-anchor');
-		const crisisButton = $('.floating-crisis-btn-wrap');
-		const distanceFromElement = 40;
-		const btnVerticalPadding = 24;
-		let intersectedElement = undefined;
-		let intersectingY = undefined;
-		let leavingY = undefined;
+export default class StickyAnchor extends Component {
+	// Defines the element selector which will initialize this component
+	static selector = '.floating-crisis-btn';
 
-		let options = {
-			root: null,
-			rootMargin: '0px',
-			threshold: 0
+	// Defines initial State
+	state = {
+		hasCollision: false,
+	};
+
+	constructor(element) {
+		super(element);
+	}
+
+	// Will be called upon component instantiation
+	afterInit() {
+		this.initializeIntersections();
+	}
+
+	initializeIntersections() {
+		handleBreakpointChange(this.onBreakpointChange.bind(this));
+	}
+
+	onBreakpointChange() {
+		// Disconnect any existing observers
+		if (this.intersectionObserver instanceof IntersectionObserver) {
+			this.intersectionObserver.disconnect();
 		}
 
-		let callback = (entries, observer) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					intersectingY = entry.boundingClientRect.y;
-					if (typeof intersectedElement === 'undefined') {
-						intersectedElement = entry.target;
-					}
+		// Get viewport data to compute for intersection margins
+		const { innerWidth: viewportWidth, innerHeight: viewportHeight } =
+			window;
 
-					if (entry.target === intersectedElement) {
-						const targetRect = intersectedElement.getBoundingClientRect();
-						const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-						$body.addClass('scroll-near-bottom');
-						crisisButton.offset({
-							top: (targetRect.top + scrollTop) - (distanceFromElement + btnVerticalPadding),
-						});
-					}
-				} else {
-					leavingY = entry.boundingClientRect.y;
-					/**
-					* Reset the crisis button if the user is scrolling up
-					* AND leaves the intersected element.
-					*/
-					if (leavingY > intersectingY && entry.target === intersectedElement) {
-						$body.removeClass('scroll-near-bottom');
-						crisisButton.removeAttr('style');
-					}
-				}
-			});
-		}
+		// Get button's box data to compute for intersections
+		const bottomOffset = this.getBottomOffsetStyle();
+		const {
+			height: buttonHeight,
+			left: buttonLeft,
+			right,
+		} = this.element.getBoundingClientRect();
 
-		let observer = new IntersectionObserver(callback, options);
-		/**
-		* Intersection Observer runs asynchronously
-		* so you can just add an item in the array (i.e., [element1, elment2, ...]).
-		* The crisis button will dock on the first element it intersects based on the DOM structure.
-		*/
-		if (stickyAnchors.length) {
-			$.each(stickyAnchors, (index, element) => {
-				if (element) observer.observe(element);
-			});
+		// Compute intersection margins
+		const intersectionMargins = [
+			-(viewportHeight - buttonHeight - bottomOffset) + 'px',
+			-(viewportWidth - right) + 'px',
+			-(bottomOffset) + 'px',
+			-buttonLeft + 'px',
+		].join(' ');
+
+		// Get all elements having bg-orange classnames,
+		// track their intersection with the button
+		// to determine the button theme to apply
+		const [...orangeElements] = document.querySelectorAll('.bg-orange');
+
+		// Filter only orange elements that can possibly intersect with the button
+		// this allows for a more accurate list of elements to observe.
+		const possibleCollisions = orangeElements.filter((element) => {
+			const { right: elementRight } = element.getBoundingClientRect();
+			return elementRight > buttonLeft;
+		});
+
+		// Create a new intersectionObserver
+		this.intersectionObserver = new IntersectionObserver(
+			this.onCollision.bind(this),
+			{
+				rootMargin: intersectionMargins,
+			}
+		);
+
+		// Observe possible colliding elements
+		possibleCollisions.forEach((element) =>
+			this.intersectionObserver.observe(element)
+		);
+	}
+
+	// Gets the bottom offset from computed CSS styles
+	// Since button will stop being sticky when scrolled down to the footer,
+	// getBoundingClientRect() will not be reliable for the bottom offset
+	getBottomOffsetStyle() {
+		const rootFontSizePx = window.getComputedStyle(document.body).getPropertyValue('font-size');
+		const buttonStyles = window.getComputedStyle(this.element);
+		const bottomOffsetRem = buttonStyles.getPropertyValue(
+			'--button-bottom-offset'
+		);''
+
+		// Return value as pixels
+		return parseFloat(bottomOffsetRem) * parseFloat(rootFontSizePx);
+	}
+
+	onCollision(intersectionEntries) {
+		const hasCollision = intersectionEntries.some(
+			({ isIntersecting }) => isIntersecting
+		);
+
+		this.setState({ hasCollision });
+	}
+
+	// Triggers when state is change by calling this.setState()
+	componentDidUpdate(stateChange) {
+		if ('hasCollision' in stateChange) {
+			this.element.classList.toggle(
+				'floating-crisis-btn--light',
+				stateChange.hasCollision
+			);
 		}
-	});
+	}
 }
+
+// Uncomment this section if this component is intended
+// to initialize on DOM load.
+StickyAnchor.init();

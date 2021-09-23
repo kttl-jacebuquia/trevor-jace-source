@@ -64,3 +64,14 @@ export const mediumDesktopOnly = buildSingleBreakpointMedia(
 export const largeDesktopOnly = buildSingleBreakpointMedia(
 	singleBreakpoints.largeDesktopOnly
 );
+
+// Allows to listen to each of all the breakpoint changes
+export const all = (match, noMatch) => {
+	// Listen to every breakpoint change
+	const watchersCancel = Object.values(singleBreakpoints).map(breakpointSettings => (
+		buildSingleBreakpointMedia(breakpointSettings)(match, noMatch)
+	));
+
+	// Cancels each breakpoint watcher
+	return () => watchersCancel.forEach(cancelWatcher => cancelWatcher());
+}
