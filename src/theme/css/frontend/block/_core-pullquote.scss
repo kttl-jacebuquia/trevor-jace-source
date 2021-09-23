@@ -2,7 +2,7 @@
   &, /* To catch the default, if default changes, remove this */
   &.is-style-trevor-default {
     @apply relative;
-    @apply text-indigo;
+    @apply text-current;
     @apply my-14 py-8;
 
     &::before,

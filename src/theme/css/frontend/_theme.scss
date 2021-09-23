@@ -40,7 +40,6 @@ body {
   --site-theme-foreground: theme('colors.white.DEFAULT');
 
   // RC Theme (Indigo)
-  &.single-trevor_research,
   &.single.is-rc {
     --site-theme-background-r: theme('colors.indigo.DEFAULT-r');
     --site-theme-background-g: theme('colors.indigo.DEFAULT-g');
