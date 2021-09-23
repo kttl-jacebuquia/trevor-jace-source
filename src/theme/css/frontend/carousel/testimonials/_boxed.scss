@@ -13,8 +13,15 @@
       width: calc(100% - 100px);
     }
 
+    @screen lg {
+      @apply py-px86;
+    }
+
+    @screen lg2 {
+      @apply py-px105;
+    }
+
     @screen xl {
-      @apply py-px100;
       width: calc(100% - 280px);
       max-width: #{rem-calc(1160)};
     }
@@ -33,8 +40,12 @@
           @apply col-start-1 col-span-4 mx-px30;
         }
 
+        @screen lg {
+          @apply col-start-2 col-span-4 ml-0 -mr-px30;
+        }
+
         @screen xl {
-          @apply col-start-2 col-span-4 mx-0;
+          @apply mr-0;
         }
       }
 
@@ -43,8 +54,16 @@
           @apply col-start-5 col-span-4 mr-px24;
         }
 
+        @screen lg {
+          @apply col-span-7 col-start-6 ml-px28 mr-px45;
+        }
+
+        @screen lg2 {
+          @apply mx-px60;
+        }
+
         @screen xl {
-          @apply col-span-5 col-start-7 mr-0;
+          @apply col-span-5 col-start-7 mx-0;
         }
       }
     }
@@ -53,11 +72,19 @@
     &.image-right {
       .carousel-testimonials-txt-wrap {
         @screen md {
-          @apply col-start-1 col-span-4 px-px34;
+          @apply col-start-1 col-span-4 mr-px34;
+        }
+
+        @screen lg {
+          @apply col-span-7 mr-px28 ml-px45;
+        }
+
+        @screen lg2 {
+          @apply mx-px60;
         }
 
         @screen xl {
-          @apply col-span-5 col-start-2 px-0;
+          @apply col-span-5 col-start-2 mx-0;
         }
       }
 
@@ -66,8 +93,8 @@
           @apply col-start-5 col-span-4 mr-px24;
         }
 
-        @screen xl {
-          @apply col-start-8 col-span-4 mr-0;
+        @screen lg {
+          @apply col-start-8 col-span-4 mr-0 -ml-px30;
         }
       }
     }
@@ -76,7 +103,7 @@
   // Boxed, Cover
   &.cover {
     .carousel-testimonials-inner {
-      @screen xl {
+      @screen lg {
         @apply py-0;
       }
     }
@@ -88,13 +115,13 @@
       }
 
       .carousel-testimonials-img-wrap {
-        @screen xl {
+        @screen lg {
           @apply col-span-5 mx-0 left-0;
         }
       }
 
       .carousel-testimonials-txt-wrap {
-        @screen xl {
+        @screen lg {
           @apply col-start-7 col-span-5;
         }
       }
@@ -107,7 +134,7 @@
       }
 
       .carousel-testimonials-txt-wrap {
-        @screen xl {
+        @screen lg {
           @apply col-start-2 col-span-5;
         }
       }
