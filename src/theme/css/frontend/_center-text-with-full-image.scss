@@ -94,7 +94,9 @@
 	}
 
   &__image {
-    border-radius: 0.625rem;
+    @screen md {
+      @apply rounded-px10;
+    }
   }
 
 	&__caption {
