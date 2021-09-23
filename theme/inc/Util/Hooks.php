@@ -311,7 +311,7 @@ class Hooks {
 
 		if ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
 			static::remove_wpseo_action();
-		} else if ( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) {
+		} elseif ( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) {
 			static::remove_wpseo_action();
 		}
 	}
@@ -344,7 +344,7 @@ class Hooks {
 					'prefix' => Resource_Center::PREFIX,
 				)
 			);
-		} else if ( ! empty( $wp_query->get( Search::QV_SEARCH ) ) && empty( get_search_query( false ) ) ) {
+		} elseif ( ! empty( $wp_query->get( Search::QV_SEARCH ) ) && empty( get_search_query( false ) ) ) {
 			echo SEO_Details::render(
 				null,
 				null,
