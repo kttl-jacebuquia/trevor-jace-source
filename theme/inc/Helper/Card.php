@@ -128,9 +128,15 @@ class Card {
 			'data-post-type' => $post_type,
 		);
 
+		$post_class = get_post_class( $_class, $post->ID );
+
+		if ( $has_thumbnail && ! in_array( 'has-post-thumbnail', $post_class, true ) ) {
+			array_push( $post_class, 'has-post-thumbnail' );
+		}
+
 		ob_start();
 		?>
-		<article <?php echo A_Field_Group::render_attrs( get_post_class( $_class, $post->ID ), $attrs ); ?>>
+		<article <?php echo A_Field_Group::render_attrs( $post_class, $attrs ); ?>>
 			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
 					<a href="<?php echo esc_url( get_the_permalink( $post ) ); ?>" aria-label="click to read <?php echo $title; ?>">
