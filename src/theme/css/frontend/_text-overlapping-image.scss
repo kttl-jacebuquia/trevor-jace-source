@@ -5,6 +5,10 @@
     @apply pt-px80 pb-px100;
   }
 
+  @screen lg {
+    @apply py-px120;
+  }
+
   &__container {
     @apply container mx-auto;
     @apply tw-grid items-center;
@@ -17,20 +21,25 @@
       @apply col-span-6 col-start-2;
     }
 
-    @screen lg2 {
-      @apply col-span-5 col-start-1 text-left;
+    @screen lg {
+      @apply col-start-1 col-span-5 text-left;
     }
   }
 
   &__heading {
-    @apply font-semibold text-px36 leading-px40;
+    @apply font-semibold text-px30 leading-px40;
 
     @screen md {
       @apply text-px32 leading-px42;
     }
 
+    @screen lg {
+      @apply text-px46 leading-px56 tracking-em_001;
+    }
+
     @screen lg2 {
       @apply text-px56 leading-px66;
+      letter-spacing: 0;
     }
   }
 
@@ -38,11 +47,15 @@
     @apply text-px20 leading-px26 mt-px12;
 
     @screen md {
-      @apply text-px22 leading-px32 tracking-em005;
+      @apply text-px22 leading-px32 mt-px14;
+    }
+
+    @screen lg {
+      @apply mt-px20 text-px20 leading-px30 tracking-px05;
     }
 
     @screen lg2 {
-      @apply mt-px20 text-px24 leading-px34;
+      @apply text-px24 leading-px34 tracking-em005;
     }
   }
 
@@ -50,10 +63,10 @@
     @apply mt-px50;
 
     @screen md {
-      @apply mt-px40 flex justify-between;
+      @apply mt-px0 flex justify-between;
     }
 
-    @screen lg2 {
+    @screen lg {
       @apply mt-px60 -mr-px100;
     }
   }
@@ -108,29 +121,36 @@
       @apply px-px24;
     }
 
-    @screen lg2 {
-      @apply px-px40 h-px66;
+    @screen lg {
+      @apply px-px40 h-px66 text-px20 leading-px26 tracking-px05;
     }
   }
 
   &__image {
-    @apply col-span-full mt-px145;
+    @apply col-span-full mt-px50 -mx-px28;
 
     @screen md {
-      @apply mt-px80;
+      @apply mt-px80 mx-0;
     }
 
-    @screen lg2 {
-      @apply col-span-7 mt-0 ml-px35 -mr-px120;
+    @screen lg {
+      @apply col-span-6 col-start-7 mt-0;
     }
 
-    @screen xl {
-      @apply -mr-px140;
+    @each $screen in lg2, xl, 2xl {
+      @screen #{$screen} {
+        margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+      }
+    }
+
+    // Max container expand.
+    @media only screen and (min-width: 1920px) {
+      margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
     }
 
     // Tilted variant
     &--tilted {
-      @apply rounded-px10 overflow-hidden;
+      @apply rounded-px10 overflow-hidden mx-0;
       transform: rotate(5.34deg);
     }
 
@@ -143,11 +163,47 @@
   &--no-numbers {
     .text-overlapping-image__body {
       @screen md {
-        @apply col-span-4 text-left;
+        @apply col-span-4 col-start-1 text-left;
+      }
+
+      @screen lg {
+        @apply col-span-5;
       }
 
       @screen lg2 {
-        @apply col-span-5 -mr-px28;
+        @apply col-span-6;
+      }
+
+      @screen xl {
+        @apply pr-px60;
+      }
+    }
+
+    .text-overlapping-image__heading {
+      @screen lg {
+        @apply text-px38 leading-px46 tracking-px05;
+      }
+
+      @screen lg2 {
+        @apply text-px46 leading-px56 tracking-em_001;
+      }
+    }
+
+    .text-overlapping-image__description {
+      @screen md {
+        @apply text-px18 leading-px26;
+      }
+
+      @screen lg {
+        @apply text-px20 leading-px30 tracking-px05;
+      }
+
+      @screen lg2 {
+        @apply text-px24 leading-px34 tracking-em005;
+      }
+
+      @screen xl {
+        @apply text-px26 leading-px36;
       }
     }
 
@@ -156,9 +212,13 @@
         @apply col-span-4 mt-0;
       }
 
-      @screen lg2 {
-        @apply col-span-6 col-start-7 -ml-px20 -mr-px58;
+      @screen lg {
+        @apply col-span-6 col-start-7;
       }
+    }
+
+    .text-overlapping-image__cta-wrap {
+      @apply mt-px40;
     }
   }
 }

@@ -11,7 +11,7 @@
       @apply col-span-4 py-px10 text-left;
     }
 
-    @screen lg2 {
+    @screen lg {
       @apply col-span-5;
     }
   }
@@ -21,6 +21,10 @@
 
     @screen md {
       @apply text-px32 leading-px42;
+    }
+
+    @screen lg {
+      @apply text-px38 leading-px48;
     }
 
     @screen lg2 {
@@ -35,8 +39,12 @@
       @apply mt-px12 text-px18 leading-px26;
     }
 
+    @screen lg {
+      @apply mt-px20 text-px20 leading-px30 tracking-px05;
+    }
+
     @screen lg2 {
-      @apply mt-px20 text-px26 leading-px36 tracking-em005;
+      @apply text-px26 leading-px36 tracking-em005;
     }
   }
 
@@ -49,24 +57,35 @@
       @apply text-px16 leading-px22 px-px24;
     }
 
+    @screen lg {
+      @apply text-px18 leading-px24 h-px66 px-px40 tracking-px05;
+    }
+
     @screen lg2 {
-      @apply h-px66 px-px40 text-px20 leading-px26 tracking-px05;
+      @apply text-px20 leading-px26;
     }
   }
 
   &__image {
     @apply relative col-span-full -mx-px28;
 
+    @each $screen in md, lg, lg2, xl, 2xl {
+      @screen #{$screen} {
+        margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
+      }
+    }
+
     @screen md {
-      @apply col-span-4 col-start-5 ml-0 -mr-px50;
+      @apply col-span-4 col-start-5 ml-0;
     }
 
-    @screen lg2 {
-      @apply col-span-6 col-start-7 -mr-px120;
+    @screen lg {
+      @apply col-span-6 col-start-7;
     }
 
-    @screen xl {
-      @apply -mr-px140;
+    // Max container expand.
+    @media only screen and (min-width: 1920px) {
+      margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
     }
 
     // Aspect Ratio
@@ -79,7 +98,15 @@
         padding-top: percentage(419 / 370);
       }
 
+      @screen lg {
+        padding-top: percentage(600 / 498);
+      }
+
       @screen lg2 {
+        padding-top: percentage(700 / 626);
+      }
+
+      @screen xl {
         padding-top: percentage(800 / 706);
       }
     }
