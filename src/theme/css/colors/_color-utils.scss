@@ -1,0 +1,15 @@
+// Allows to output rgba value for a given tw theme color
+// Refer to tailwind config for the $tw_color_name
+//
+// USAGE
+// background-color: tw-rgba(teal-dark);
+//
+// OUTPUT
+// background-color: rgba(0,58,72,var(--tw-bg-opacity));
+@function tw-color( $tw_color_name ) {
+  @debug $tw_color_name;
+  @if ( map-has-key($colors, $tw_color_name) ) {
+    @return map-get($colors, #{$tw_color_name}-rgba);
+  }
+  @error "Supplied color does not exist from the colors config. Please refer to your tailwind config.";
+}
