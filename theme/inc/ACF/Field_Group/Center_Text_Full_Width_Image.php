@@ -48,7 +48,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 					'preview_size'  => 'thumbnail',
 					'library'       => 'all',
 				),
-				static::FIELD_CAPTION       => array(
+				static::FIELD_CAPTION     => array(
 					'key'         => $caption,
 					'name'        => static::FIELD_CAPTION,
 					'label'       => 'Caption (Mobile and Tablet only)',
