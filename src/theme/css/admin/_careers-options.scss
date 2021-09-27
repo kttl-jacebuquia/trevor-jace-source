@@ -1,0 +1,32 @@
+.careers-options {
+  &__overview {
+    @apply grid grid-cols-2 items-center;
+  }
+
+  &__action-wrap {
+    @apply justify-self-end;
+  }
+
+  &__action {
+    @apply inline-flex h-px40 items-center justify-center px-px28;
+    @apply rounded-px10 bg-teal-dark text-white;
+    @apply cursor-pointer appearance-none border-0;
+  }
+
+  &__table {
+    @apply mt-px50 border-collapse table-fixed w-full;
+
+    thead {
+      @apply sticky top-px32;
+    }
+
+    th {
+      @apply bg-teal-tint uppercase py-px15 py-px20;
+    }
+
+    tr td {
+      @apply border-solid border-teal-tint border-b-px1 border-t-0 border-l-0 border-r-0;
+      @apply px-px20 py-px15;
+    }
+  }
+}

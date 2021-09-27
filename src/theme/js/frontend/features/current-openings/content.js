@@ -102,10 +102,14 @@ class ADPContent extends WithState {
 						${this.getDateAgo(item.requisitionStatusCode.effectiveDate)}
 					</time>
 				</div>
-				<div class="listing__item__cta">
-					<a href="${item.links[item.links.length - 1].href}"
-					target="_blank">Apply Now</a>
-				</div>
+				${
+					item?.links?.length && (
+						`<div class="listing__item__cta">
+							<a href="${item.links[item.links.length - 1].href}"
+							target="_blank">Apply Now</a>
+						</div>`
+					)
+				}
 			</div>
 		`;
 	}

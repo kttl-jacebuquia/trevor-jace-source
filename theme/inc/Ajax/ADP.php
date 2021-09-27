@@ -16,47 +16,17 @@ class ADP {
 		add_action( 'wp_ajax_adp', array( self::class, 'adp' ) );
 	}
 
+	/**
+	 * Retrives cached jobs data from the transient
+	 */
 	public static function adp() {
-		$api_settings = array(
-			'grant_type'    => 'client_credentials',
-			'client_id'     => '3fa636f4-4704-4ef2-9f79-a49973718b33',
-			'client_secret' => 'a535b1ba-b16e-4916-a65f-6da3d8a5fc94',
-			'pem_file'      => dirname( __FILE__ ) . '/Keys/thetrevorproject_auth.pem',
-			'key_file'      => dirname( __FILE__ ) . '/Keys/thetrevorproject_auth.key',
-		);
-
 		$page                 = isset( $_GET['page'] ) ? $_GET['page'] : 1;
 		$count                = isset( $_GET['count'] ) ? $_GET['count'] : 0;
 		$filter['location']   = isset( $_GET['location'] ) ? $_GET['location'] : '';
 		$filter['department'] = isset( $_GET['department'] ) ? $_GET['department'] : '';
 
-		$job_requisitions = get_transient( 'adp_job_requisitions' );
-
-		if ( empty( $job_requisitions ) ) {
-			# get token
-			$response = self::get_token( $api_settings );
-			$response = json_decode( $response, true );
-
-			if ( ! empty( $response['error'] ) ) {
-				wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
-			}
-
-			$access_token = $response['access_token'];
-
-			# get job requisitions
-			$response = self::get_job_requisitions( $access_token, $api_settings );
-			$response = json_decode( $response, true );
-
-			if ( ! empty( $response['error'] ) ) {
-				wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
-			}
-
-			$job_requisitions = $response['jobRequisitions'];
-
-			set_transient( 'adp_job_requisitions', $job_requisitions, 12 * HOUR_IN_SECONDS );
-		}
-
-		$data = self::paginate_job_requisitions( $job_requisitions, $filter, $page, $count );
+		$job_requisitions = array_slice( static::get_jobs(), 0, 50 );
+		$data             = self::paginate_job_requisitions( $job_requisitions, $filter, $page, $count );
 
 		wp_die(
 			json_encode(
@@ -67,6 +37,69 @@ class ADP {
 			),
 			200
 		);
+	}
+
+	/**
+	 * Clears jobs data from transient to fetch for a new one
+	 */
+	public static function adp_refresh() {
+		$api_settings = array(
+			'grant_type'    => 'client_credentials',
+			'client_id'     => '3fa636f4-4704-4ef2-9f79-a49973718b33',
+			'client_secret' => 'a535b1ba-b16e-4916-a65f-6da3d8a5fc94',
+			'pem_file'      => dirname( __FILE__ ) . '/Keys/thetrevorproject_auth.pem',
+			'key_file'      => dirname( __FILE__ ) . '/Keys/thetrevorproject_auth.key',
+		);
+
+		# get token
+		$response = self::get_token( $api_settings );
+		$response = json_decode( $response, true );
+
+		if ( ! empty( $response['error'] ) ) {
+			wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
+		}
+
+		$access_token = $response['access_token'];
+
+		# get job requisitions
+		# ADP always show maximum of 20 items, so we need to make paginated requests
+		$page = 1;
+		$jobs = array();
+
+		# NOTE: "break" should be present inside the loop, to avoid infinite loop.
+		while ( true ) {
+			$response = self::get_job_requisitions( $access_token, $api_settings, $page );
+			$response = json_decode( $response, true );
+
+			if ( empty( $response ) ) {
+				// No more results for the page
+				break;
+			}
+
+			if ( ! empty( $response['error'] ) ) {
+				wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
+				break;
+			}
+
+			// Filter jobs to include only positions with openings
+			foreach ( $response['jobRequisitions'] as $job ) {
+				if ( $job['openingsQuantity'] > 0 ) {
+					$jobs[] = $job;
+				}
+			}
+
+			// Increment page request
+			$page++;
+		}
+
+		set_transient( 'adp_job_requisitions', $jobs, 12 * HOUR_IN_SECONDS );
+	}
+
+	/**
+	 * Get jobs data from cache
+	 */
+	public static function get_jobs(): array {
+		return get_transient( 'adp_job_requisitions' );
 	}
 
 	/**
@@ -106,7 +139,7 @@ class ADP {
 	 *
 	 * @return string $response
 	 */
-	public static function get_job_requisitions( $access_token, $settings ) {
+	public static function get_job_requisitions( $access_token, $settings, $page = 1 ) {
 		/*
 			ADP: https://developers.adp.com/
 			Get Job Requisitions api reference: https://accounts.adp.com/staffing/v1/job-requisitions
@@ -119,7 +152,17 @@ class ADP {
 			"Authorization: Bearer $access_token",
 		);
 
-		$payload = array();
+		$payload = array(
+			'$skip' => ( $page - 1 ) * 20,
+		);
+
+		$search_params = '';
+		foreach ( $payload as $key => $value ) {
+			$search_params .= implode( '=', array( $key, $value) );
+		}
+
+		// Append request parameters
+		$url .= '?' . $search_params;
 
 		return self::curl( $url, $headers, $payload, $settings, 'GET', true );
 	}
