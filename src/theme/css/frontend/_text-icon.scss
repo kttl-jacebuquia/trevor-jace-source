@@ -86,6 +86,10 @@
       @apply col-start-2 col-span-6;
     }
 
+    @screen lg {
+      @apply col-start-3 col-span-8;
+    }
+
     @screen lg2 {
       @apply col-start-2 col-span-10;
     }
@@ -99,7 +103,7 @@
     }
 
     @screen lg {
-      @apply tw-grid-small-desktop mt-px60;
+      @apply grid-cols-8 mt-px60;
     }
 
     @screen lg2 {
@@ -213,7 +217,7 @@
 
     &--4-columns {
       .text-icon__entry {
-        @apply col-span-3;
+        @apply col-span-4;
       }
     }
   }

@@ -5,13 +5,17 @@
 		@apply tw-grid;
 		@apply container mx-auto py-px80;
 
-		@screen md {
+		@screen lg {
 			@apply py-px100;
 		}
 
-		@screen xl {
+		@screen lg2 {
 			@apply py-px120;
 		}
+
+    @screen xl {
+      @apply py-px140;
+    }
 	}
 
 	&__headline {
@@ -22,8 +26,12 @@
 			@apply text-px32 leading-px42;
 		}
 
-		@screen xl {
-			@apply text-px46 leading-px56 col-span-8 col-start-3 -mx-px56;
+    @screen lg {
+      @apply text-px40 leading-px48 col-span-10 col-start-2 tracking-em_001;
+    }
+
+		@screen lg2 {
+			@apply text-px46 leading-px56 col-span-8 col-start-3 -mx-px56 tracking-px_05;
 		}
 	}
 
@@ -34,37 +42,45 @@
 			@apply text-px18 leading-px24;
 		}
 
-		@screen xl {
-			@apply mt-px14 text-px26 leading-px36 col-span-8 col-start-3 -mx-px28;
+    @screen lg {
+      @apply mt-px20 text-px24 leading-px34 col-span-10 col-start-2 -mx-px28 tracking-px05;
+    }
+
+		@screen lg2 {
+			@apply text-px26 leading-px36 col-span-8 col-start-3 -mx-px28 tracking-em005;
 		}
 	}
 
 	&__cards {
-		@apply grid gap-7 mt-px54 text-left col-span-full;
+		@apply tw-grid mt-px54 text-left col-span-full;
+    grid-row-gap: 30px;
 
 		@screen md {
-			@apply mt-px50 col-span-6 col-start-2;
-		}
-
-		@screen xl {
-			@apply mt-px48 col-span-6 col-start-4 -mx-px10;
-		}
-
-		&--white {
 			@apply mt-px50;
-
-			@screen xl {
-				@apply grid grid-cols-12 col-span-12 col-start-1 mx-0 mt-px60;
-				column-gap: inherit;
-			}
 		}
+
+    @screen lg {
+      @apply mt-px60;
+    }
 	}
 
 	&__card {
-		@apply col-span-6;
+		@apply col-span-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
+
+    @screen lg {
+      @apply col-span-8 col-start-3;
+    }
+
+    @screen lg2 {
+      @apply col-span-6;
+      grid-column-start: auto;
+    }
 
 		.checkmark-text__cards--white & {
-			@apply col-span-6;
 			@apply bg-white text-teal-dark rounded-px10;
 			@apply py-px38 px-px28;
 
@@ -72,7 +88,7 @@
 				@apply px-px38;
 			}
 
-			@screen xl {
+			@screen lg {
 				@apply p-px48;
 			}
 		}
@@ -80,7 +96,7 @@
 		&-header {
 			@apply text-center font-semibold text-px26 leading-px36 tracking-em005;
 
-			@screen xl {
+			@screen lg {
 				@apply text-px30 leading-px40 tracking-normal;
 			}
 		}
@@ -92,7 +108,7 @@
 				@apply text-px14 leading-px18 tracking-em005;
 			}
 
-			@screen xl {
+			@screen lg {
 				@apply text-px18 leading-px26 tracking-normal;
 			}
 		}
@@ -113,7 +129,7 @@
 				@apply mt-px12;
 			}
 
-			@screen xl {
+			@screen lg {
 				@apply mt-px8;
 			}
 		}
@@ -132,7 +148,7 @@
 			@apply min-h-px45;
 		}
 
-		@screen xl {
+		@screen lg {
 			@apply text-px18 leading-px26 tracking-px05;
 		}
 
@@ -174,7 +190,7 @@
 					@apply mt-px16;
 				}
 
-				@screen xl {
+				@screen lg {
 					@apply mt-px24;
 				}
 			}
@@ -221,7 +237,7 @@
 				@apply text-px18 leading-px24 tracking-em001 mt-px28 ml-px14;
 			}
 
-			@screen xl {
+			@screen lg {
 				@apply text-px20 leading-px26 ml-0;
 			}
 
@@ -237,18 +253,26 @@
 				@apply leading-px20 mt-px28;
 			}
 
-			@screen xl {
+			@screen lg {
 				@apply leading-px18;
 			}
 		}
 	}
 
 	&__cta-wrap {
-		@apply col-span-full mt-px60 text-center;
+		@apply col-span-full mt-px50 text-center;
 
-		@screen xl {
-			@apply mt-px50;
+		@screen lg {
+			@apply mt-px60;
 		}
+
+    @screen lg2 {
+      @apply mt-px70;
+    }
+
+    @screen lg2 {
+      @apply mt-px90;
+    }
 	}
 
 	&__cta {

@@ -43,7 +43,7 @@
   }
 
   .page-header-content {
-    @apply col-span-full;
+    @apply col-span-4 col-start-2;
   }
 
   .page-header-img-wrap {
@@ -108,6 +108,9 @@
   }
 
   @screen md {
+    .page-header-content {
+      @apply col-start-3;
+    }
 
     .page-header-title {
       @apply text-px32 leading-px42;
@@ -143,27 +146,38 @@
       @apply mt-px30;
     }
 
-    @screen lg2 {
+    @screen lg {
+      @apply mt-px40;
+    }
+
+    @screen xl {
       @apply mt-px30;
+    }
+
+    .page-btn {
+      @screen lg {
+        @apply py-px20 px-px40 text-px16 leading-px26 tracking-px05;
+      }
     }
   }
 }
 
-// With content alignment on Full Bleed Video type
-@screen lg2 {
+@screen lg {
   .type-img-bg {
-    // Left Alignment
-    &.content-left {
-      .page-header-content {
-        @apply col-span-4;
-
+    .page-header-content {
         h1 {
-          @apply text-px46 leading-px56;
+          @apply text-px40 leading-px48 tracking-px_05;
         }
 
         tilt {
-          @apply text-px70 leading-px80;
+          @apply text-px50 leading-px60 tracking-em005;
         }
+    }
+
+    // Left Alignment
+    &.content-left {
+      .page-header-content {
+        @apply col-span-5 col-start-1;
       }
     }
 
@@ -178,14 +192,52 @@
     &.content-right {
       .page-header-content {
         @apply col-span-4 col-start-9;
+      }
+    }
+  }
+}
 
-        h1 {
-          @apply text-px46 leading-px56;
-        }
+// With content alignment on Full Bleed Video type
+@screen lg2 {
+  .type-img-bg {
+    .page-header-content {
+      h1 {
+        @apply text-px40 leading-px50 tracking-normal;
+      }
 
-        tilt {
-          @apply text-px70 leading-px80;
-        }
+      tilt {
+        @apply text-px70 leading-px80;
+      }
+    }
+
+    // Left Alignment
+    &.content-left {
+      .page-header-content {
+        @apply col-span-4;
+      }
+    }
+
+    // Center Alignment
+    &.content-center {
+      .page-header-content {
+        @apply col-span-6 col-start-4;
+      }
+    }
+
+    // Right Alignment
+    &.content-right {
+      .page-header-content {
+        @apply col-span-4 col-start-9;
+      }
+    }
+  }
+}
+
+@screen xl {
+  .type-img-bg {
+    .page-header-content {
+      h1 {
+        @apply text-px46 leading-px56 tracking-normal;
       }
     }
   }
