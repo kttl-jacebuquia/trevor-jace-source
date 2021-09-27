@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
+use \TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type as PT;
+
 class SEO_Details extends A_Options_Page {
 	const FIELD_SEARCH_APPEARANCE_GROUP       = '_seo_search_appearance_group';
 	const FIELD_SEARCH_APPEARANCE_KEYWORDS    = '_seo_search_appearance_keywords';
@@ -134,14 +136,28 @@ class SEO_Details extends A_Options_Page {
 		);
 	}
 
-	/** @inheritdoc */
-	public static function render_seo_option( $post, $data, $options = array() ) {
-		global $wp;
+	public static function render_seo_meta_tags( $post, $data, $options = array() ) {
+		global $wp, $wp_query;
 
-		$prefix                  = $options['prefix'];
-		$search_appearance_group = static::get_option( $prefix . static::FIELD_SEARCH_APPEARANCE_GROUP );
-		$facebook_group          = static::get_option( $prefix . static::FIELD_FACEBOOK_GROUP );
-		$twitter_group           = static::get_option( $prefix . static::FIELD_TWITTER_GROUP );
+		$prefix         = $options['prefix'];
+		$fallback_title = $options['title'];
+
+		$search_appearance_group = array();
+		$facebook_group          = array();
+		$twitter_group           = array();
+
+		if ( 'option' === $options['type'] ) {
+			$search_appearance_group = static::get_option( $prefix . static::FIELD_SEARCH_APPEARANCE_GROUP );
+			$facebook_group          = static::get_option( $prefix . static::FIELD_FACEBOOK_GROUP );
+			$twitter_group           = static::get_option( $prefix . static::FIELD_TWITTER_GROUP );
+		} elseif ( 'archive' === $options['type'] ) {
+			$post_type   = ( empty( $qo = $wp_query->get_queried_object() ) || empty( $qo->name ) ) ? 'post' : $qo->name;
+			$header_data = PT::get_option_for( $post_type, PT::FIELD_HEADER );
+
+			$search_appearance_group = ! empty( $header_data[ static::FIELD_SEARCH_APPEARANCE_GROUP ] ) ? $header_data[ static::FIELD_SEARCH_APPEARANCE_GROUP ] : array();
+			$facebook_group          = ! empty( $header_data[ static::FIELD_FACEBOOK_GROUP ] ) ? $header_data[ static::FIELD_FACEBOOK_GROUP ] : array();
+			$twitter_group           = ! empty( $header_data[ static::FIELD_TWITTER_GROUP ] ) ? $header_data[ static::FIELD_TWITTER_GROUP ] : array();
+		}
 
 		if ( empty( $search_appearance_group ) & empty( $facebook_group ) & empty( $twitter_group ) ) {
 			return '';
@@ -149,9 +165,23 @@ class SEO_Details extends A_Options_Page {
 
 		$site_name   = get_bloginfo( 'name' );
 		$keywords    = $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_KEYWORDS ];
-		$title       = $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_TITLE ] . ' - ' . $site_name;
-		$description = $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_DESCRIPTION ];
+		$title       = ! empty( $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_TITLE ] ) ? $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_TITLE ] : $fallback_title;
+		$title       = strpos( $title, ' - ' . $site_name ) !== false ? $title : $title . ' - ' . $site_name;
+		$description = ! empty( $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_DESCRIPTION ] ) ? $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_DESCRIPTION ] : get_bloginfo( 'description' );
 		$image       = $search_appearance_group[ $prefix . static::FIELD_SEARCH_APPEARANCE_IMAGE ];
+
+		// get the site icon for image fallback
+		if ( empty( $image ) ) {
+			$image = get_site_icon_url();
+			$image = attachment_url_to_postid( $image );
+			$image = wp_get_attachment_image_src( $image, 'full' );
+
+			if ( ! empty( $image[0] ) ) {
+				$image['url']    = $image[0];
+				$image['width']  = $image[1];
+				$image['height'] = $image[2];
+			}
+		}
 
 		$fb_title       = ! empty( $facebook_group[ $prefix . static::FIELD_FACEBOOK_TITLE ] ) ? $facebook_group[ $prefix . static::FIELD_FACEBOOK_TITLE ] : $title;
 		$fb_description = ! empty( $facebook_group[ $prefix . static::FIELD_FACEBOOK_DESCRIPTION ] ) ? $facebook_group[ $prefix . static::FIELD_FACEBOOK_DESCRIPTION ] : $description;
@@ -174,7 +204,7 @@ class SEO_Details extends A_Options_Page {
 		<meta property="og:title" content="<?php echo esc_attr( esc_html( $fb_title ) ); ?>" />
 		<meta property="og:description" content="<?php echo esc_attr( esc_html( $fb_description ) ); ?>" />
 		<meta property="og:url" content="<?php echo esc_url( home_url( $wp->request ) ); ?>" />
-		<meta property="og:site_name" content="<?php esc_attr( esc_html( $site_name ) ); ?>">
+		<meta property="og:site_name" content="<?php echo esc_attr( esc_html( $site_name ) ); ?>">
 		<?php if ( ! empty( $fb_image['url'] ) ) : ?>
 			<meta property="og:image" content="<?php echo esc_url( $fb_image['url'] ); ?>" />
 			<meta property="og:image:width" content="<?php echo esc_attr( $fb_image['width'] ); ?>">
@@ -203,12 +233,14 @@ class SEO_Details extends A_Options_Page {
 			array_fill_keys(
 				array(
 					'prefix',
+					'type',
+					'title',
 				),
-				null
+				''
 			),
 			$options
 		);
 
-		return static::render_seo_option( $post, $data, $options );
+		return static::render_seo_meta_tags( $post, $data, $options );
 	}
 }

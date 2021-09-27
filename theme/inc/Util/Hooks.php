@@ -1,7 +1,11 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT;
+use TrevorWP\CPT\Financial_Report;
+use TrevorWP\CPT\Get_Involved\Bill;
+use TrevorWP\CPT\Get_Involved\Letter;
 use TrevorWP\CPT\RC\RC_Object;
+use TrevorWP\CPT\Research;
 use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
@@ -310,7 +314,10 @@ class Hooks {
 		global $wp_query;
 
 		if ( ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) ||
-			( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) )
+			( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) ||
+			( 'post' === get_post_type() && ! is_single() ) || is_post_type_archive( Bill::POST_TYPE ) ||
+			is_post_type_archive( Letter::POST_TYPE ) || is_post_type_archive( Research::POST_TYPE ) ||
+			is_post_type_archive( Financial_Report::POST_TYPE )
 		) {
 			static::remove_wpseo_action();
 		}
@@ -351,6 +358,56 @@ class Hooks {
 				array(
 					'type'   => 'option',
 					'prefix' => Options_Search::PREFIX,
+				)
+			);
+		} elseif ( 'post' === get_post_type() && ! is_single() ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'archive',
+					'prefix' => '',
+					'title'  => 'Blogs',
+				)
+			);
+		} elseif ( is_post_type_archive( Bill::POST_TYPE ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'archive',
+					'prefix' => '',
+					'title'  => 'State Priorities',
+				)
+			);
+		} elseif ( is_post_type_archive( Letter::POST_TYPE ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'archive',
+					'prefix' => '',
+					'title'  => 'Federal Priorities',
+				)
+			);
+		} elseif ( is_post_type_archive( Research::POST_TYPE ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'archive',
+					'prefix' => '',
+					'title'  => 'Research Briefs',
+				)
+			);
+		} elseif ( is_post_type_archive( Financial_Report::POST_TYPE ) ) {
+			echo SEO_Details::render(
+				null,
+				null,
+				array(
+					'type'   => 'archive',
+					'prefix' => '',
+					'title'  => 'Financial Reports',
 				)
 			);
 		}

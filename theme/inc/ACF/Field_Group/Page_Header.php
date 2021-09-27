@@ -4,6 +4,7 @@ use TrevorWP\Exception;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Theme\ACF\Field;
+use TrevorWP\Theme\ACF\Options_Page\SEO_Details;
 
 class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TYPE              = 'header_type';
@@ -447,6 +448,10 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			)
 		);
+
+		if ( isset( $_GET['page'] ) || ! is_admin() ) {
+			$return = array_merge( $return, SEO_Details::_get_fields() );
+		}
 
 		$return[ static::FIELD_TITLE ]['instructions'] = 'Leave empty to use Post`s title.';
 
