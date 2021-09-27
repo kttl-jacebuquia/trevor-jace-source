@@ -551,6 +551,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'operator' => '!=',
 							'value'    => 'template-info-page.php',
 						),
+						array(
+							'param'    => 'page_template',
+							'operator' => '!=',
+							'value'    => 'template-thank-you.php',
+						),
 					),
 				),
 			)
