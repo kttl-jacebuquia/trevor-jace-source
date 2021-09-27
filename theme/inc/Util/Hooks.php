@@ -309,9 +309,9 @@ class Hooks {
 	public static function remove_wpseo_for_specific_page() {
 		global $wp_query;
 
-		if ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) {
-			static::remove_wpseo_action();
-		} elseif ( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) {
+		if ( ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) ||
+			( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) )
+		) {
 			static::remove_wpseo_action();
 		}
 	}
