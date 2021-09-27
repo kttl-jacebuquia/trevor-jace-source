@@ -16,8 +16,16 @@
 }
 
 .post-file-btn {
-  @apply bg-indigo rounded-full text-px16 leading-px22 mb-px20;
+  @apply bg-teal-dark rounded-full text-px16 leading-px22;
   @apply inline-flex items-center h-px48 px-px28 py-0;
+
+  body.is-rc & {
+    @apply bg-indigo;
+  }
+
+  &:not(:last-child) {
+    @apply mb-px20;
+  }
 
   @screen md {
     @apply h-px44 text-px14 leading-px20 tracking-em001;

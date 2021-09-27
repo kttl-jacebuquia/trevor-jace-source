@@ -105,14 +105,9 @@ class Post_Details extends A_Field_Group {
 	public static function render_multiple_files( \WP_Post $post ): string {
 		$val          = new Field_Val_Getter( self::class, $post );
 		$file_entries = $val->get( static::FIELD_FILE_ENTRIES );
-		$bg_color     = 'bg-indigo';
 
 		if ( empty( $file_entries ) ) {
 			return '';
-		}
-
-		if ( CPT\Post::POST_TYPE === $post->post_type ) {
-			$bg_color = 'bg-teal-dark';
 		}
 
 		ob_start();
