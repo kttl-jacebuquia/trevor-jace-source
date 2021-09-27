@@ -7,7 +7,7 @@ $data                   = Options_Page\Footer::get_footer();
 $footer_external_script = Options_Page\External_Scripts::get_external_script( 'BODY_BOTTOM' );
 
 ?>
-
+<?php if ( ! is_page_template( 'template-thank-you.php' ) ) : ?>
 <footer class="w-full flex flex-col justify-center sticky-cta-anchor <?php echo is_404() ? 'hidden' : ''; ?>">
 	<div class="container mx-auto site-content-inner footer-inner lg:flex lg:flex-row">
 		<div class="col">
@@ -41,7 +41,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 						'theme_location' => 'footer',
 					)
 				)
-				?>
+			?>
 			<?php if ( ! empty( $data['social_media_links'] ) ) : ?>
 				<ul class="social-links">
 					<?php foreach ( $data['social_media_links'] as $link ) : ?>
@@ -70,7 +70,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 		</div>
 	</div>
 </footer>
-
+<?php endif; ?>
 <?php echo $footer_external_script; ?>
 </body>
 </html>

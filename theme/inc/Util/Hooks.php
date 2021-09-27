@@ -516,7 +516,7 @@ class Hooks {
 	 * @link https://developer.wordpress.org/reference/hooks/wp_footer/
 	 */
 	public static function wp_footer(): void {
-		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) ) {
+		if ( empty( get_query_var( CPT\RC\RC_Object::QV_GET_HELP ) ) && ! is_page_template( 'template-thank-you.php' ) ) {
 			?>
 			<aside class="floating-crisis-btn-wrap">
 				<a class="btn floating-crisis-btn" href="<?php echo esc_attr( home_url( \TrevorWP\CPT\RC\RC_Object::PERMALINK_GET_HELP ) ); ?>">
@@ -748,6 +748,11 @@ class Hooks {
 			$classes['general_txt_clr'] = 'text-indigo';
 		} else {
 			$classes['general_txt_clr'] = 'text-teal-dark';
+		}
+
+		if ( is_page_template( 'template-thank-you.php' ) ) {
+			$classes['general_bg']      = 'bg-white';
+			$classes['general_txt_clr'] = 'text-black';
 		}
 
 		return $classes;
