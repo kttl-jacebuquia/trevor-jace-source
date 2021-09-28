@@ -2,9 +2,6 @@
 
 use TrevorWP;
 
-// FIXME: This should change only on deployments
-$GLOBALS['trevor_plugin_static_ver'] = WP_DEBUG ? uniqid( TrevorWP\VERSION . '-' ) : TrevorWP\VERSION;
-
 class StaticFiles {
 	const NAME_PREFIX     = 'trevor_';
 	const NAME_JS_RUNTIME = self::NAME_PREFIX . 'runtime';

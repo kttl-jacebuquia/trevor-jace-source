@@ -14,6 +14,7 @@ composer.phar
 /theme/static/js
 /theme/static/css
 /theme/static/icon-font
+/theme/build.php
 # Icon Fonts
 /src/plugin/css/icon-font
 /src/theme/css/icon-font

@@ -186,9 +186,6 @@ class Hooks {
 	public static function wp_enqueue_scripts(): void {
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
 
-		// FIXME: This should change only on deployments
-		$GLOBALS['trevor_theme_static_ver'] = WP_DEBUG ? uniqid( \TrevorWP\Theme\VERSION . '-' ) : \TrevorWP\Theme\VERSION;
-
 		# Theme's frontend JS package
 		wp_enqueue_script(
 			self::NAME_PREFIX . 'theme-frontend-main',

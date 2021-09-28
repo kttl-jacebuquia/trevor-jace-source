@@ -1,8 +1,16 @@
 <?php
 
 namespace TrevorWP\Theme {
-	# Theme version
-	const VERSION = '1.0.0-alpha';
+	// Override version if provided
+	$version_file = dirname( __FILE__ ) . '/build.php';
+	if ( file_exists( $version_file ) ) {
+		require_once $version_file;
+	} else {
+		define( 'TREVORWP_STATIC_VERSION', '1.0.0-alpha' ); // Default version
+	}
+
+	$GLOBALS['trevor_theme_static_ver']  = WP_DEBUG ? uniqid( TREVORWP_STATIC_VERSION . '-' ) : TREVORWP_STATIC_VERSION;
+	$GLOBALS['trevor_plugin_static_ver'] = WP_DEBUG ? uniqid( TREVORWP_STATIC_VERSION . '-' ) : TREVORWP_STATIC_VERSION;
 }
 
 namespace {

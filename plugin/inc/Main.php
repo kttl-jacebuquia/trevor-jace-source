@@ -2,8 +2,6 @@
 
 use TrevorWP\Util\Activate;
 
-const VERSION = '1.0.0-alpha';
-
 class Main {
 	/*
 	 * Global Keys
@@ -61,6 +59,8 @@ class Main {
 	 * Main constructor.
 	 */
 	public function __construct() {
+		$version = get_defined_constants()['TREVORWP_STATIC_VERSION'] ?? wp_unique_id();
+
 		# Check for previously initiated class
 		if ( self::is_initiated() ) {
 			throw new Exception\Internal( 'Already initiated.' );
@@ -72,12 +72,12 @@ class Main {
 		# Register hooks
 		Util\Hooks::register_all();
 
-		if ( version_compare( $old = get_option( self::OPTION_KEY_VERSION ), VERSION, '<' ) ) {
+		if ( version_compare( $old = get_option( self::OPTION_KEY_VERSION ), $version, '<' ) ) {
 			Util\Log::info(
 				'Looks like plugin is updated. Starting upgrading process.',
 				array(
 					'old' => $old,
-					'new' => VERSION,
+					'new' => $version,
 				)
 			);
 

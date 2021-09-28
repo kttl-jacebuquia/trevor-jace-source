@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node scripts/start.js",
-		"build": "node scripts/build.js",
+		"build": "node scripts/build.js && node scripts/post-build.js",
 		"gen-safelist": "node scripts/gen-tailwind-safelist.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"eslint": "eslint \"src/theme/**/*.{js,jsx}\" --quiet; exit 0",
