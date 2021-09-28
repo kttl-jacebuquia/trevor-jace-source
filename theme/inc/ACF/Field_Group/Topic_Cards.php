@@ -372,7 +372,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				}
 				?>
 
-				<?php if ( ! empty( $button_link ) ) : ?>
+				<?php if ( ! empty( $button_link ) && $button_link['label'] != '' && $button_link['action'] != '' ) : ?>
 					<div class="topic-cards__block-cta-wrap">
 						<?php
 							echo Advanced_Link::render(

@@ -5,9 +5,13 @@
 		@apply pt-px80 pb-px100;
 	}
 
-	@screen xl {
+	@screen lg2 {
 		@apply pt-px100 pb-px120;
 	}
+
+  & + .guiding-principles {
+    @apply mt-0;
+  }
 
 	&__container {
 		@apply container mx-auto;
