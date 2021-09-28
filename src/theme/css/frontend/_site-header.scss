@@ -1036,7 +1036,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		}
 
 		.menu-wrap {
-			@apply flex;
+			@apply flex text-current;
 			margin-top: -4rem;
 			margin-right: -1.5rem;
 		}

@@ -32,6 +32,8 @@ class Main_Header {
 			if ( ! empty( $color ) ) {
 				return $color;
 			}
+		} elseif ( is_page_template( 'template-info-page.php' ) ) {
+			return 'indigo';
 		} elseif ( is_404() ) {
 			return Post_Header::CLR_INDIGO;
 		}
