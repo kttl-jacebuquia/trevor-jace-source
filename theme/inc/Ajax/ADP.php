@@ -99,7 +99,8 @@ class ADP {
 	 * Get jobs data from cache
 	 */
 	public static function get_jobs(): array {
-		return get_transient( 'adp_job_requisitions' );
+		$jobs = get_transient( 'adp_job_requisitions' );
+		return ! empty( $jobs ) ? $jobs : array();
 	}
 
 	/**

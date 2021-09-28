@@ -65,6 +65,13 @@ class Careers {
 														<th>Department</th>
 													</thead>
 													<tbody>
+														<?php if ( empty( $jobs) ) : ?>
+															<tr>
+																<td colspan="3">
+																	<p><strong>No data.</strong></p>
+																</td>
+															</tr>
+														<?php endif; ?>
 														<?php foreach ( $jobs as $job ): ?>
 															<tr>
 																<td>
