@@ -65,6 +65,15 @@ export default function testimonialsCarousel(id) {
 				prevEl: '.carousel-left-arrow-pane',
 			};
 
+			options.breakpoints = {
+				300: {
+					autoHeight: true
+				},
+				768: {
+					autoHeight: false
+				},
+			};
+
 			options.on = {
 				init: () => {
 					checkArrow();

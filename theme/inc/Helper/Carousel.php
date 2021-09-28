@@ -431,7 +431,9 @@ class Carousel {
 						</div>
 					<?php endforeach; ?>
 				</div>
-				<div class="swiper-pagination"></div>
+				<?php if ( count( $data ) > 1 ) : ?>
+					<div class="swiper-pagination"></div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php
