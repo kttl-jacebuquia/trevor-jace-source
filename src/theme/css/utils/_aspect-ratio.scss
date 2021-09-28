@@ -13,15 +13,12 @@ $aspect-ratios: (
 			--aspect-ratio: #{$value};
 			position: relative;
 
-			& > img,
-      & > video {
-        &:first-of-type {
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-        }
+      & > :first-of-type:not(script) {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
       }
 
       & > img {
