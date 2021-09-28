@@ -226,6 +226,12 @@ features.collapsible($('.js-accordion'), {});
 				?.trim()
 				.split(',')
 				.slice(0, -1) || [];
+		const tags =
+				$("input[name='rc-search--tags']")
+					.val()
+					?.trim()
+					.split(',')
+					.slice(0, -1) || [];
 		const searchCancelIcon = $('.icon-search-cancel');
 		const maxInputSize = 35;
 		const form = $('.search-form');
@@ -245,8 +251,9 @@ features.collapsible($('.js-accordion'), {});
 		inputSearchField
 			.autocomplete({
 				source(request, response) {
+					const dataSource = request.term ? tags : terms;
 					const results = $.ui.autocomplete.filter(
-						terms,
+						dataSource,
 						request.term
 					);
 					response(results);
@@ -283,7 +290,7 @@ features.collapsible($('.js-accordion'), {});
 			.focus(function () {
 				$(this).autocomplete('search', $(this).val());
 			})
-			.on('keyup', function (event) {
+			.on('input', function (event) {
 				const inputText = $(this).val().trim();
 				if (!inputText) {
 					$(this).parent().removeClass('input-has-value');

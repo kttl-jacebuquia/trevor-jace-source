@@ -1,17 +1,19 @@
 .is-site-search {
+  @include set-theme-vars(indigo);
+  color: var(--site-theme-background);
 
-	h3 {
-		@apply font-semibold;
-	}
+  h3 {
+    @apply font-semibold;
+  }
 
-	.top-nav-inner {
-		@apply text-indigo;
+  .top-nav-inner {
+    @apply text-indigo;
 
-		.logo {
-			i {
-				@apply text-orange;
-			}
-		}
+    .logo {
+      i {
+        @apply text-orange;
+      }
+    }
 
     .menu-item {
       @apply text-indigo;
@@ -19,95 +21,78 @@
       > .menu-item > a::after {
         // @apply text-indigo;
       }
-  		.menu-link-text {
-  			color: inherit;
-  		}
+      .menu-link-text {
+        color: inherit;
+      }
     }
-	}
+  }
 
-	:is(.trevor-ti-search, .trevor-ti-x) {
-		@apply text-indigo;
-	}
-
-	.search-field {
-		@apply text-indigo;
-		@apply pl-0 ml-0;
-
-    &::placeholder {
-      @apply text-indigo tracking-em005;
+  .scope {
+    div:not(:first-child) {
+      border-left: 1px solid rgba(16, 16, 102, 0.16);
     }
-	}
 
+    &-link {
+      @apply px-px14 md:px-px20 text-px18 leading-px26 lg:text-px20 lg:leading-px26;
 
-	.scope {
+      &--first {
+        @apply pl-0;
+      }
+    }
 
-		div:not(:first-child) {
-			border-left: 1px solid rgba(16, 16, 102, 0.16);
-		}
+    &-link:not(.current) {
+      @apply font-normal;
+    }
+  }
 
-		&-link {
-			@apply px-px14 md:px-px20 text-px18 leading-px26 lg:text-px20 lg:leading-px26;
+  .search-result-item {
+    .thumbnail-wrap {
+      @apply w-full md:w-auto md:flex mb-px30 md:mb-0 md:mr-px28;
 
-			&--first {
-				@apply pl-0;
-			}
-		}
+      width: calc(100 / 319 * 100%);
 
-		&-link:not(.current) {
-			@apply font-normal;
-		}
-	}
+      @screen md {
+        $imageWidth: rem-calc(183px);
+        width: $imageWidth;
+      }
 
-	.search-result-item {
+      img {
+        @apply rounded-px10 object-cover object-center h-full;
+      }
+    }
 
-		.thumbnail-wrap {
-			@apply w-full md:w-auto md:flex mb-px30 md:mb-0 md:mr-px28;
+    .text-content {
+      @apply relative flex flex-col justify-start w-full;
 
-			width: calc(100 / 319 * 100%);
+      @screen md {
+        $imageWidth: rem-calc(183px);
+        $imageMarginRight: rem-calc(28px);
+        width: calc(100% - #{$imageWidth} - #{$imageMarginRight});
+      }
+    }
 
-			@screen md {
-				$imageWidth: rem-calc(183px);
-				width: $imageWidth;
-			}
+    .icon-wrap {
+      @apply absolute right-0 -top-px50 md:-right-px30 md:top-0;
+    }
 
-			img {
-				@apply rounded-px10 object-cover object-center h-full;
-			}
-		}
+    .eyebrow {
+      @apply lg:text-px14;
+    }
 
-		.text-content {
-			@apply relative flex flex-col justify-start w-full;
+    time {
+      border-left: 1px solid rgba(16, 16, 102, 0.16);
+    }
 
-			@screen md {
-				$imageWidth: rem-calc(183px);
-				$imageMarginRight: rem-calc(28px);
-				width: calc(100% - #{$imageWidth} - #{$imageMarginRight});
-			}
-		}
+    &.no-thumbnail {
+      .text-content {
+        @apply w-full md:w-auto;
+      }
+    }
+  }
 
-		.icon-wrap {
-			@apply absolute right-0 -top-px50 md:-right-px30 md:top-0;
-		}
-
-		.eyebrow {
-			@apply lg:text-px14;
-		}
-
-		time {
-			border-left: 1px solid rgba(16, 16, 102, 0.16);
-		}
-
-		&.no-thumbnail {
-
-			.text-content {
-				@apply w-full md:w-auto;
-			}
-		}
-	}
-
-	.ui-helper-hidden-accessible {
-		@apply hidden;
-	}
+  .ui-helper-hidden-accessible {
+    @apply hidden;
+  }
 
   .post-carousel.carousel-wrap {
     @apply my-0 pt-px60 pb-px100 md:pt-px70 lg2:pt-px80 lg2:pb-px120;

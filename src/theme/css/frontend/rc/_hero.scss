@@ -71,42 +71,19 @@
     @screen xl {
       @apply w-px606;
     }
-
-    .icon-wrap {
-      @apply pr-px12 h-auto;
-
-      @screen md {
-        @apply pr-px14;
-      }
-    }
-  }
-
-  .input-wrap {
-    @apply h-px60;
-
-    @screen md {
-      @apply h-px62;
-    }
-
-    @screen lg {
-      @apply h-px78;
-    }
-
-    @screen xl {
-      @apply h-px78;
-    }
   }
 
   .search-field {
-    @apply text-px14 leading-px18 tracking-em005 pl-px4 ml-0 h-auto min-w-0;
+    @apply text-indigo;
 
-    @screen md {
-      @apply text-px16 leading-px22 pl-px94 ml-0 mr-px16 pl-0 pr-0;
+    &::placeholder {
+      @apply text-violet;
     }
+  }
 
-    @screen xl {
-      @apply text-px22 leading-px32 tracking-px05;
-    }
+  .trevor-ti-search,
+  .trevor-ti-x {
+    @apply text-violet;
   }
 
   &__description {

@@ -16,15 +16,21 @@
   @return var(--site-theme-foreground);
 }
 
+// Applies theme variables in a page
+@mixin set-theme-vars( $color, $variant: null ) {
+  $variant: if( type-of($variant) == string, $variant, DEFAULT);
+  --site-theme-background-r: theme("colors.#{$color}.#{$variant}-r");
+  --site-theme-background-g: theme("colors.#{$color}.#{$variant}-g");
+  --site-theme-background-b: theme("colors.#{$color}.#{$variant}-b");
+}
+
 /**
   Defines theme color settings for the site
 */
 body {
   // Site-wide background theme (for button backgrounds, secondary button text colors, etc.)
   // Deep Teal as default
-  --site-theme-background-r: theme('colors.teal.dark-r');
-  --site-theme-background-g: theme('colors.teal.dark-g');
-  --site-theme-background-b: theme('colors.teal.dark-b');
+  @include set-theme-vars(teal, dark);
 
   // Descendants should use this variable
   // to apply the background theme above as rgba() color.
@@ -41,8 +47,6 @@ body {
 
   // RC Theme (Indigo)
   &.single.is-rc {
-    --site-theme-background-r: theme('colors.indigo.DEFAULT-r');
-    --site-theme-background-g: theme('colors.indigo.DEFAULT-g');
-    --site-theme-background-b: theme('colors.indigo.DEFAULT-b');
+    @include set-theme-vars(indigo);
   }
 }
