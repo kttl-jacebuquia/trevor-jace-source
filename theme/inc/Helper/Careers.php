@@ -45,7 +45,7 @@ class Careers {
 									<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 										<div id="acf-trvr-quick-exit" class="postbox acf-postbox">
 											<div class="postbox-header">
-												<h2 class="hndle ui-sortable-handle">Current Data</h2>
+												<h2 class="hndle ui-sortable-handle">Current Openings</h2>
 											</div>
 											<div class="inside acf-fields">
 												<div class="careers-options__overview">
@@ -65,14 +65,14 @@ class Careers {
 														<th>Department</th>
 													</thead>
 													<tbody>
-														<?php if ( empty( $jobs) ) : ?>
+														<?php if ( empty( $jobs ) ) : ?>
 															<tr>
 																<td colspan="3">
 																	<p><strong>No data.</strong></p>
 																</td>
 															</tr>
 														<?php endif; ?>
-														<?php foreach ( $jobs as $job ): ?>
+														<?php foreach ( $jobs as $job ) : ?>
 															<tr>
 																<td>
 																	<?php echo $job['itemID']; ?>
@@ -105,15 +105,15 @@ class Careers {
 	}
 
 	protected static function get_job_department( $job ): string {
-		$org_units  = wp_list_pluck( $job['organizationalUnits'], 'nameCode' );
+		$org_unit   = $job['organizationalUnits'];
 		$department = array();
 
-		foreach ( $org_units as $org_unit ) {
-			if ( ! empty( $org_unit['shortName'] ) ) {
-				$department[] = $org_unit['shortName'];
+		foreach ( $org_unit as $v ) {
+			if ( 'Department' === $v['typeCode']['codeValue'] ) {
+				$department = ! empty( $v['nameCode']['longName'] ) ? $v['nameCode']['longName'] : $v['nameCode']['shortName'];
 			}
 		}
 
-		return implode( ' - ', $department );
+		return $department;
 	}
 }

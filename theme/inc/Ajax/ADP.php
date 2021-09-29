@@ -25,7 +25,7 @@ class ADP {
 		$filter['location']   = isset( $_GET['location'] ) ? $_GET['location'] : '';
 		$filter['department'] = isset( $_GET['department'] ) ? $_GET['department'] : '';
 
-		$job_requisitions = array_slice( static::get_jobs(), 0, 50 );
+		$job_requisitions = self::get_jobs();
 		$data             = self::paginate_job_requisitions( $job_requisitions, $filter, $page, $count );
 
 		wp_die(
@@ -81,10 +81,19 @@ class ADP {
 				break;
 			}
 
-			// Filter jobs to include only positions with openings
+			// Filter jobs to include only positions with posting channel ID "19000101_000001" and "Open" Job Status
+			// Referrence: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=0a93e956-1064-47e3-9771-6768b425b346&ccId=19000101_000001&type=MP&lang=en_US
 			foreach ( $response['jobRequisitions'] as $job ) {
-				if ( $job['openingsQuantity'] > 0 ) {
-					$jobs[] = $job;
+				foreach ( $job['postingInstructions'] as $post ) {
+					if ( '19000101_000001' === $post['postingChannel']['channelID'] && 'ON' === $job['requisitionStatusCode']['codeValue'] ) {
+						if ( $post['nameCode']['codeValue'] !== $job['job']['jobTitle'] ) {
+							$job['job']['jobTitle'] = $post['nameCode']['codeValue'];
+						}
+
+						$job['requisitionStatusCode']['effectiveDate'] = gmdate( 'Y-m-d H:i:s', strtotime( $post['postDate'] ) );
+
+						$jobs[] = $job;
+					}
 				}
 			}
 
@@ -92,14 +101,14 @@ class ADP {
 			$page++;
 		}
 
-		set_transient( 'adp_job_requisitions', $jobs, 12 * HOUR_IN_SECONDS );
+		update_option( 'trevor_adp_job_requisitions', $jobs );
 	}
 
 	/**
 	 * Get jobs data from cache
 	 */
 	public static function get_jobs(): array {
-		$jobs = get_transient( 'adp_job_requisitions' );
+		$jobs = get_option( 'trevor_adp_job_requisitions' );
 		return ! empty( $jobs ) ? $jobs : array();
 	}
 
@@ -157,13 +166,8 @@ class ADP {
 			'$skip' => ( $page - 1 ) * 20,
 		);
 
-		$search_params = '';
-		foreach ( $payload as $key => $value ) {
-			$search_params .= implode( '=', array( $key, $value) );
-		}
-
 		// Append request parameters
-		$url .= '?' . $search_params;
+		$url .= '?' . http_build_query( $payload );
 
 		return self::curl( $url, $headers, $payload, $settings, 'GET', true );
 	}

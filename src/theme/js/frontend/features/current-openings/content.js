@@ -183,13 +183,19 @@ class ADPContent extends WithState {
 	}
 
 	getDateAgo(value) {
-		const date = moment(value),
+		const date = moment(value).format('YYYY-MM-DD'),
 			now = moment(),
 			days = now.diff(date, 'days');
 
-		return days > 1
-			? `${days} ${days === 1 ? ' day' : ' days'} ago`
-			: `just now`;
+		let ago = `just now`;
+
+		if (days > 30) {
+			ago = `30+ days ago`;
+		} else if (days > 1) {
+			ago = `${days} ${days === 1 ? ' day' : ' days'} ago`;
+		}
+
+		return ago;
 	}
 
 	componentDidUpdate() {
