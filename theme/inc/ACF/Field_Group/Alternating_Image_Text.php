@@ -244,7 +244,9 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		?>
 		<div class="<?php echo $classname; ?>">
 			<div class="alternating-image-text__container">
-				<h2 class="alternating-image-text__heading"><?php echo $headline; ?></h3>
+				<?php if ( ! empty( $headline ) ) : ?>
+					<h2 class="alternating-image-text__heading"><?php echo $headline; ?></h3>
+				<?php endif; ?>
 				<?php if ( ! empty( $description ) ) : ?>
 					<div class="alternating-image-text__description"><?php echo $description; ?></div>
 				<?php endif; ?>
