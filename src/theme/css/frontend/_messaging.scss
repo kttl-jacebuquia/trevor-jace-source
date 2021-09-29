@@ -32,11 +32,19 @@
 		@apply rounded-px10 py-px128;
 
     @screen md {
-      @apply py-px80;
+      @apply pt-px130 pb-px117 mx-px59;
+
+      body.is-rc & {
+        @apply mx-0 py-px80;
+      }
     }
 
     @screen lg {
-      @apply col-span-10 col-start-2 py-px138;
+      @apply py-px120 mx-0 col-span-8 col-start-3;
+
+      body.is-rc & {
+        @apply col-span-10 col-start-2 py-px138;
+      }
     }
 
     @screen lg2 {
@@ -52,7 +60,9 @@
 		}
 
     @screen lg {
-      @apply text-px40 leading-px48;
+      body.is-rc & {
+        @apply text-px40 leading-px48;
+      }
     }
 
 		@screen xl {
@@ -113,7 +123,7 @@
 			@apply mt-px15;
 		}
 
-		@screen lg {
+		@screen xl {
 			@apply mt-px18;
 		}
 	}
@@ -144,7 +154,7 @@
       }
 
       @screen lg {
-        @apply py-px20 px-px40 tracking-px05 text-px20 leading-px26;
+        @apply py-px20 px-px40 tracking-px05;
       }
     }
 	}
@@ -181,13 +191,21 @@
       @screen md {
         @apply mx-auto;
 
-        width: percentage( 494 / 668 );
+        width: percentage( 317 / 550 );
+
+        body.is-rc & {
+          width: percentage( 494 / 668 );
+        }
       }
 
       @screen lg {
         @apply mx-auto;
 
-        width: percentage( 554 / 698 );
+        width: percentage( 564 / 962 );
+
+        body.is-rc & {
+          width: percentage( 554 / 698 );
+        }
       }
     }
 	}
