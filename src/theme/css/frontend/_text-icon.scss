@@ -1,16 +1,25 @@
 .text-icon {
-  @apply pt-px70 pb-px132 bg-blue_green text-white;
+  // Block Spacer Settings
+  @include block-spacer-settings(
+    $default: ( 70, 132 ),
+    $md: ( 20 ),
+    $lg: ( 120 ),
+    $lg2: ( 140 ),
+    $xl: ( 140 ),
+  );
+
+  @apply bg-blue_green text-white;
 
   @screen md {
-    @apply py-px80;
+    @apply py-20;
   }
 
   @screen lg {
-    @apply py-px100;
+    @apply py-px120;
   }
 
   @screen lg2 {
-    @apply pt-px90 pb-px150;
+    @apply py-px140;
   }
 
   &__container {
@@ -104,7 +113,11 @@
   }
 
   &__entry {
-    @apply col-span-3;
+    @apply col-span-6;
+
+    @screen md {
+      @apply col-span-3;
+    }
 
     @screen lg {
       @apply col-span-4 px-0;
