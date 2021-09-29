@@ -812,6 +812,10 @@ class Hooks {
 			$classes['general_txt_clr'] = 'text-black';
 		}
 
+		if ( $hero_type == 'support_crisis_services' ) {
+			array_push( $classes, 'is-crisis-support' );
+		}
+
 		return $classes;
 	}
 
