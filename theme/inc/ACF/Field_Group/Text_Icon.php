@@ -154,7 +154,6 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 		)      = array_values( $block_styles );
 		$class = array(
 			'text-icon',
-			'block-spacer',
 			'bg-' . $bg_color,
 			'text-' . $text_color,
 			'text-icon--' . $mobile_tablet_layout,
