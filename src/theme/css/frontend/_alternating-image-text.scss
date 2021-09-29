@@ -52,21 +52,12 @@
     }
   }
 
-  &__heading + &__items,
-  &__description + &__items {
-    @apply mt-px60;
+  &__items {
+    @apply col-span-full mt-px60;
 
-    @screen md {
-      @apply mt-px80;
-    }
-
-    @screen lg2 {
+    @screen lg {
       @apply mt-px120;
     }
-  }
-
-  &__items {
-    @apply col-span-full;
   }
 
   &__item {
@@ -80,21 +71,21 @@
         @apply mt-px80;
       }
 
-      @screen lg {
+      @screen xl {
         @apply mt-px120;
       }
     }
   }
 
   &__eyebrow {
-    @apply font-semibold uppercase text-px14 leading-px18 tracking-px05 mb-px14 text-indigo;
+    @apply font-semibold uppercase text-px14 leading-px20 tracking-px05 mb-px14 text-indigo;
 
     @screen md {
-      @apply tracking-em001 mb-px10;
+      @apply text-px14 leading-px18 tracking-em001 mb-px10;
     }
 
-    @screen lg2 {
-      @apply mb-px18;
+    @screen xl {
+      @apply text-px14 leading-px18 tracking-em001 mb-px18;
     }
   }
 
@@ -172,11 +163,11 @@
     }
 
     @screen lg {
-      @apply px-px32 mt-px14;
+      @apply text-px22 leading-px32 px-px32;
     }
 
-    @screen lg2 {
-      @apply text-px22 leading-px32 mt-px16;
+    @screen xl {
+      @apply mt-px16;
     }
   }
 

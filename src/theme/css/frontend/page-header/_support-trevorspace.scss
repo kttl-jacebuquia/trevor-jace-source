@@ -1,25 +1,16 @@
 .header-container {
   &--support-trevorspace {
-    @apply pb-px128;
+    @apply pb-px100;
 
     @screen md {
       padding-top: $top-nav-height-tablet;
       margin-top: -$top-nav-height-tablet;
-      @apply pb-px110;
-    }
-
-    @screen lg {
-      @apply pb-px120;
     }
 
     @screen lg2 {
       padding-top: $top-nav-height-desktop;
       margin-top: -$top-nav-height-desktop;
-      @apply pb-px95;
-    }
-
-    @screen xl {
-      @apply pb-px145;
+      @apply pb-px150;
     }
   }
 }
@@ -35,7 +26,7 @@
         @apply col-span-6 col-start-2;
       }
 
-      @screen lg {
+      @screen lg2 {
         @apply col-span-8 col-start-3;
       }
     }
@@ -45,7 +36,7 @@
     }
 
     .page-header-title-top {
-      @apply flex items-center flex-wrap justify-center text-px14 leading-px20;
+      @apply flex items-center justify-center text-px14 leading-px20;
 
       @screen md {
         @apply mb-px16 text-px14 leading-px18;
@@ -56,14 +47,10 @@
       }
 
       &__icon {
-        @apply flex items-center text-px16 mb-px16 mb-px15 w-full justify-center;
+        @apply flex items-center text-px16 mb-px16 mb-px14;
 
         @screen md {
-          @apply mr-px10 inline-flex mb-0 w-auto;
-        }
-
-        @screen lg {
-          @apply text-px18;
+          @apply mr-px8 inline-flex mb-0;
         }
       }
     }
@@ -75,10 +62,6 @@
         @apply text-px36 leading-px46 tracking-em005;
       }
 
-      @screen lg {
-        @apply text-px40 leading-px50;
-      }
-
       @screen lg2 {
         @apply text-px50 leading-px60 tracking-em001;
       }
@@ -87,11 +70,7 @@
         @apply font-bold block text-px65 leading-px75 tracking-em_003;
 
         @screen md {
-          @apply inline-block text-px48 leading-px58 tracking-em005;
-        }
-
-        @screen lg {
-          @apply text-px50 leading-px60;
+          @apply inline-block;
         }
 
         @screen lg2 {
@@ -109,22 +88,14 @@
     }
 
     .page-header-desc {
-      @apply text-px18 leading-px24 p-0 mt-px20 tracking-em005;
+      @apply p-0 mt-px20;
 
       @screen md {
-        @apply mt-px16 text-px20 leading-px30;
-      }
-
-      @screen lg {
-        @apply mt-px20;
+        @apply mt-px16 text-px20 leading-px30 tracking-em005;
       }
 
       @screen lg2 {
-        @apply text-px22 leading-px34 mt-px32;
-      }
-
-      @screen xl {
-        @apply mt-px22;
+        @apply text-px22 leading-px34 tracking-em005;
       }
     }
 
@@ -135,7 +106,7 @@
         @apply mt-px22;
       }
 
-      @screen lg {
+      @screen lg2 {
         @apply mt-px32;
       }
     }
@@ -147,20 +118,20 @@
         @apply min-w-px135;
       }
 
-      @screen lg2 {
+      @screen md {
         @apply min-w-px176;
       }
     }
 
     .page-header-bottom {
-      @apply mt-px20 leading-px24;
+      @apply mt-px20;
 
       @screen md {
-        @apply mt-px22 text-px18 leading-px20 tracking-px025;
+        @apply mt-px22 text-px18 leading-px24 tracking-px025;
       }
 
       @screen lg2 {
-        @apply mt-px36 leading-px24;
+        @apply mt-px36;
       }
 
       a {
