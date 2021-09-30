@@ -43,7 +43,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		--nav-menu-width: #{rem-calc(370px)};
 	}
 
-	@screen lg2 {
+	@screen lg {
 		--top-bar-height: #{rem-calc(78px)};
 		--top-nav-height: 11rem;
 
@@ -68,7 +68,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply h-px106;
 	}
 
-	@screen lg2 {
+	@screen lg {
 		@apply sticky mt-0 pt-0 -top-px2;
 		@apply h-px80 max-h-none;
 		@apply border-b-px6 border-orange;
@@ -83,7 +83,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply absolute left-0 w-full bg-white -bottom-px3 h-full;
 		@apply transform-gpu translate-y-0 transition-all duration-300 ease-out;
 
-		@screen lg2 {
+		@screen lg {
 			@apply static bottom-0;
 		}
 	}
@@ -96,7 +96,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply px-px40;
 		}
 
-		@screen lg2 {
+		@screen lg {
 			@apply relative px-0 m-auto;
 			width: calc(100% - 80px);
 		}
@@ -113,7 +113,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply w-px50 h-px50;
 		}
 
-		@screen lg2 {
+		@screen lg {
 			@apply w-px42 h-px42 overflow-hidden mr-px28;
 		}
 
@@ -122,7 +122,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply w-full h-full;
 			@apply transform-gpu;
 
-			@screen lg2 {
+			@screen lg {
 				@apply -translate-x-full text-px38;
 			}
 		}
@@ -135,7 +135,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				@apply text-px50;
 			}
 
-			@screen lg2 {
+			@screen lg {
 				@apply text-px42;
 			}
 		}
@@ -144,7 +144,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	.topbar-nav-wrap {
 		@apply hidden;
 
-		@screen lg2 {
+		@screen lg {
 			@apply block overflow-visible;
 			@apply transition-all duration-300 ease-out;
 			@apply opacity-0 invisible;
@@ -152,7 +152,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	.main-menu-container {
-		@screen lg2 {
+		@screen lg {
 			@apply pb-0 h-full text-indigo;
 		}
 
@@ -161,7 +161,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
     }
 
 		> .main-menu > .menu-item {
-			@screen lg2 {
+			@screen lg {
 				@apply px-0 py-px18;
 
 				&:not(:first-child) {
@@ -193,7 +193,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 		// First tier link
 		> .main-menu > .menu-item > a {
-			@screen lg2 {
+			@screen lg {
 				@apply flex items-center whitespace-nowrap;
 				@apply overflow-hidden py-0 h-full;
 				@apply px-0;
@@ -207,7 +207,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 		// First tier submenu
 		> .main-menu > .menu-item > .sub-menu {
-			@screen lg2 {
+			@screen lg {
 				border: 1px solid rgba(16, 16, 102, 0.16);
 
 				// Submenu caret
@@ -220,7 +220,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		}
 
 		> .main-menu > .menu-item > a > .menu-link-text {
-			@screen lg2 {
+			@screen lg {
 				@apply block;
 				@apply transition-transform duration-300 ease-out;
 				@apply transform translate-y-full;
@@ -231,7 +231,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		.submenu-icon {
 			@apply hidden;
 
-			@screen lg2 {
+			@screen lg {
 				@apply inline-block;
 				@apply ml-2;
 				@apply transition-all duration-300 ease-out;
@@ -246,7 +246,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply transform-gpu translate-y-0;
 		z-index: var(--z-index-nav-controls);
 
-		@screen lg2 {
+		@screen lg {
 			@apply overflow-hidden;
 		}
 	}
@@ -258,7 +258,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply mr-px15 text-px22;
 		@apply transition-all duration-300 ease-out invisible opacity-0;
 
-		@screen lg2 {
+		@screen lg {
 			@apply transform-gpu translate-y-full visible opacity-100;
 			@apply bg-transparent text-indigo;
 			@apply mr-0 ml-px24;
@@ -280,7 +280,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		width: rem-calc(45px);
 		height: rem-calc(45px);
 
-		@screen lg2 {
+		@screen lg {
 			@apply hidden;
 		}
 	}
@@ -333,7 +333,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	width: var(--nav-menu-width);
 	z-index: var(--z-index-nav-cta);
 
-	@screen lg2 {
+	@screen lg {
 		@apply opacity-100 visible overflow-hidden;
 		@apply h-full w-auto pointer-events-auto;
 		@apply absolute;
@@ -345,7 +345,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply transition-all duration-300 ease-out;
 		@apply pb-px30 px-px43 mt-px30;
 
-		@screen lg2 {
+		@screen lg {
 			@apply flex-row items-center;
 			@apply h-full translate-x-0;
 			@apply bg-transparent border-0;
@@ -360,7 +360,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply transition-all duration-300;
     -webkit-font-smoothing: auto;
 
-		@screen lg2 {
+		@screen lg {
 			@apply min-w-px145 h-px48 px-px24 py-0;
 
 			&:first-child {
@@ -371,7 +371,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		& + .btn {
 			@apply mt-px18;
 
-			@screen lg2 {
+			@screen lg {
 				@apply mt-0 ml-px10;
 				@apply hover:bg-orange hover:text-white;
 			}
@@ -393,7 +393,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply top-px106;
 	}
 
-	@screen lg2 {
+	@screen lg {
 		@apply static w-auto h-auto top-0 mr-auto pointer-events-auto;
 		@apply -translate-x-px70;
 	}
@@ -409,7 +409,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		z-index: var(--z-index-nav-switcher);
 		background-color: rgba(16, 16, 102, 0.04);
 
-		@screen lg2 {
+		@screen lg {
 			@apply translate-x-0 bg-transparent;
 			@apply opacity-100 visible;
 		}
@@ -420,7 +420,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			height: rem-calc(50);
 
 			&:not(:first-child) {
-				@screen lg2 {
+				@screen lg {
 					@apply ml-px18;
 				}
 			}
@@ -432,7 +432,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				@apply px-2;
 				background-color: rgba(16, 16, 102, 0.04);
 
-				@screen lg2 {
+				@screen lg {
 					@apply px-0 bg-transparent transition-opacity duration-300;
 					@apply text-px16 leading-px20;
 
@@ -461,7 +461,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	width: var(--nav-menu-width);
 	z-index: var(--z-index-nav-menu);
 
-	@screen lg2 {
+	@screen lg {
 		@apply visible opacity-100;
 	}
 }
@@ -470,7 +470,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 .main-menu-container {
 	@apply transition-all opacity-0 invisible w-full h-full pointer-events-none;
 
-	@screen lg2 {
+	@screen lg {
 		@apply visible opacity-100;
 	}
 
@@ -485,7 +485,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	// Dropdowns
-	@screen lg2 {
+	@screen lg {
 		@apply pb-4;
 		$general-transition: 280ms all 120ms ease-out;
 
@@ -511,7 +511,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 }
 
 .main-menu-container-resources {
-	@screen lg2 {
+	@screen lg {
 		body:not(.is-rc) & {
 			@apply hidden;
 		}
@@ -521,7 +521,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 .main-menu-container-organization {
 	@apply opacity-100 visible h-full pointer-events-auto -ml-full;
 
-	@screen lg2 {
+	@screen lg {
 		@apply ml-0;
 
 		body.is-rc & {
@@ -535,7 +535,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@apply transform-gpu translate-x-0;
 	@apply transition-transform duration-300 ease-out;
 
-  @screen lg-max {
+  @screen md-max {
     @apply text-indigo;
   }
 
@@ -543,7 +543,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	> .menu-item {
 		@apply transition-all duration-300 ease-out;
 
-		@screen lg2 {
+		@screen lg {
 			@apply relative;
 			@apply pb-px18;
 
@@ -564,7 +564,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 		// First submenu is left-aligned with the main menu
 		&:first-child > .sub-menu {
-			@screen lg2 {
+			@screen lg {
 				@apply left-0 right-auto translate-x-0;
 
 				// Submenu caret
@@ -576,7 +576,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 		// Last submenu is left-aligned with the main menu
 		&:last-child > .sub-menu {
-			@screen lg2 {
+			@screen lg {
 				@apply left-auto -right-px6 translate-x-0;
 
 				// Submenu caret
@@ -593,8 +593,8 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply transition-all invisible opacity-0;
 			// md
 			@apply md:text-px26 md:leading-px32 md:tracking-em001 md:top-px50 md:py-0;
-			// lg2
-			@apply lg2:hidden;
+			// lg
+			@apply lg:hidden;
 		}
 
 		> a {
@@ -604,8 +604,8 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			@apply font-bold text-px24 leading-px30 tracking-em001;
 			// md
 			@apply md:text-px26 md:leading-px32 md:tracking-em001;
-			// lg2
-			@apply lg2:pointer-events-none;
+			// lg
+			@apply lg:pointer-events-none;
 
 			// Chevron icon
 			&::after {
@@ -614,7 +614,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				font-family: 'trevor-ti';
 				content: $font-trevor-ti-chevron-thick-right;
 
-				@screen lg2 {
+				@screen lg {
           color: inherit;
           opacity: 0.44;
 
@@ -623,7 +623,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			}
 
 			> .menu-link-text {
-				@screen lg2 {
+				@screen lg {
 					@apply transform-gpu transition-transform duration-300 ease-out;
 					@apply text-px20 leading-px26;
 				}
@@ -645,7 +645,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				height: calc(100% - #{rem-calc(106px)});
 			}
 
-			@screen lg2 {
+			@screen lg {
 				@apply h-auto top-full w-auto p-0 overflow-visible;
 				@apply left-1/2 -translate-x-1/2;
 				@apply bg-white rounded-px10 p-px24 pr-px32;
@@ -666,13 +666,13 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			// be clickable on desktop
 			& a[href='#'],
 			a[href=''] {
-				@apply lg2:pointer-events-none lg2:inline-block;
+				@apply lg:pointer-events-none lg:inline-block;
 			}
 
 			// Tier-2 menu link
 			> .menu-item {
 				&:not(:first-child) {
-					@screen lg-max {
+					@screen md-max {
 						@apply mt-px22;
 					}
 				}
@@ -680,7 +680,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 				> a > .menu-link-text .title-wrap {
 					@apply font-bold text-px20 leading-px26 tracking-em005;
 
-					@screen lg2 {
+					@screen lg {
 						@apply flex items-center text-px18 leading-px24;
 						@apply whitespace-nowrap;
 					}
@@ -688,7 +688,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 					// Chevron
 					&::after {
 						@apply transform inline-block ml-px14 text-px14;
-						@apply lg2:text-px10 lg2:ml-px11;
+						@apply lg:text-px10 lg:ml-px11;
 						font-family: 'trevor-ti';
 						content: $font-trevor-ti-chevron-thick-right;
 					}
@@ -696,7 +696,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 				> a .subtitle {
 					@apply text-px14 leading-px20 tracking-em001 mt-px6;
-					@apply lg2:min-w-px200;
+					@apply lg:min-w-px200;
 				}
 			}
 
@@ -708,11 +708,11 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 					@apply mt-px26;
 				}
 
-				@screen lg2 {
+				@screen lg {
 					@apply mt-px22;
 				}
 
-				@screen lg2 {
+				@screen lg {
 					@apply relative;
 				}
 
@@ -720,19 +720,19 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 					&:not(:first-child) {
 						@apply mt-px14;
 
-						@screen lg2 {
+						@screen lg {
 							@apply mt-0;
 						}
 					}
 
-					@screen lg2 {
+					@screen lg {
 						@apply mt-0;
 					}
 
 					.title-wrap {
 						@apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
 						@apply md:whitespace-nowrap md:text-px18 md:leading-px24 md:tracking-em001;
-						@apply lg2:text-px16 lg2:font-semibold;
+						@apply lg:text-px16 lg:font-semibold;
 					}
 				}
 			}
@@ -741,20 +741,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// Tier-1 menu link, active state
 	> .menu-item.active {
-		@screen lg-max {
-			// // Accounting for up to 5 sub-menu
-			// // Animating into the same position
-			// @for $i from 1 through 5 {
-			// 	&:nth-child(#{$i}) > a {
-			// 		@apply translate-x-full opacity-100 visible;
-			// 		--tw-translate-y: calc(#{($i - 1) * -100%} + 50px);
-
-			// 		@screen md {
-			// 			--tw-translate-y: calc(#{($i - 1) * -100%} + 38px);
-			// 		}
-			// 	}
-			// }
-
+		@screen md-max {
 			> a {
 				@apply opacity-0 invisible;
 			}
@@ -783,7 +770,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
   }
 
 	// Background blur and fill, for mobile/tablet
-	@screen lg-max {
+	@screen md-max {
 		&::before {
 			@apply fixed top-0 left-0 w-full h-full bg-white;
 			@apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
@@ -806,13 +793,13 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	.top-nav__underlay {
 		@apply absolute top-0 left-0 w-full h-full;
 		@apply transition-all opacity-0 invisible duration-300 ease-out;
-		@apply lg2:hidden;
+		@apply lg:hidden;
 		z-index: var(--z-index-nav-blur);
 	}
 
 	// Tier-2 submenu state, for mobile/tablet
 	&.tier-two-visible {
-		@screen lg-max {
+		@screen md-max {
 			.back-to-tier1-wrap {
 				@apply opacity-100 visible translate-x-0;
 			}
@@ -848,7 +835,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply transition-all duration-300 ease-out opacity-0 invisible;
 		@apply transform-gpu translate-x-full;
 
-		@screen lg2 {
+		@screen lg {
 			@apply hidden;
 		}
 	}
@@ -869,7 +856,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// Menu for desktop
 	.menu-wrap {
-		@screen lg2 {
+		@screen lg {
 			@apply static m-0 top-0 h-auto overflow-visible w-auto;
 			@apply transform-gpu;
 			@apply transition-all duration-300 opacity-100 visible;
@@ -879,14 +866,14 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	.main-menu-container {
-		@screen lg2 {
+		@screen lg {
 			@apply pointer-events-auto p-0;
 		}
 	}
 
 	// Main menu large breakpoint
 	.main-menu {
-		@screen lg2 {
+		@screen lg {
 			// Caret, hidden in top-nav
 			.submenu-icon {
 				@apply hidden;
@@ -911,7 +898,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 			& > .menu-item:focus-within {
 				// Rotate chevron
 				> a::after {
-					@screen lg2 {
+					@screen lg {
 						@apply -rotate-90 text-opacity-100;
 					}
 				}
@@ -935,7 +922,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// Resources/Support menu, for mobile/tablet
 	&.is_rc {
-		@screen lg-max {
+		@screen md-max {
 			.main-menu-container-resources {
 				@apply visible opacity-100 pointer-events-auto;
 			}
@@ -947,7 +934,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
 	.search-button {
-		@screen lg2 {
+		@screen lg {
 			@apply hover:opacity-80;
 		}
 	}
@@ -969,7 +956,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
     @apply px-0;
   }
 
-	@screen lg2 {
+	@screen lg {
 		@apply pb-0 pt-px32 items-start;
 	}
 
@@ -1008,7 +995,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	.opener-wrap {
 		@apply flex items-center z-1;
 
-		@screen lg2 {
+		@screen lg {
 			@apply hidden;
 		}
 	}
@@ -1025,12 +1012,12 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	.search-button {
 		@apply hidden;
 
-		@screen lg2 {
+		@screen lg {
 			@apply block w-px45 h-px45 text-px28 ml-px38 -mt-px10 text-current;
 		}
 	}
 
-	@screen lg2 {
+	@screen lg {
 		.opener {
 			@apply hidden;
 		}
@@ -1061,13 +1048,13 @@ body:not(.on-top) {
 				--tw-translate-y: calc(100% - #{rem-calc(6px)});
 			}
 
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-0;
 			}
 		}
 
 		.switcher-wrap {
-			@screen lg2 {
+			@screen lg {
 				@apply translate-x-0;
 			}
 		}
@@ -1079,43 +1066,43 @@ body:not(.on-top) {
 				--tw-translate-y: #{$top--bar-height-tablet};
 			}
 
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-0;
 			}
 
 			> a {
-				@screen lg2 {
+				@screen lg {
 					@apply translate-x-0;
 				}
 			}
 		}
 
 		.topbar-nav-wrap {
-			@screen lg2 {
+			@screen lg {
 				@apply visible opacity-100;
 			}
 		}
 
 		.main-menu-container {
-			@screen lg2 {
+			@screen lg {
 				@apply pointer-events-auto;
 			}
 
 			> .main-menu > .menu-item > a > .menu-link-text {
-				@screen lg2 {
+				@screen lg {
 					@apply translate-y-0;
 				}
 			}
 		}
 
 		.cta-wrap {
-			@screen lg2 {
+			@screen lg {
 				@apply pointer-events-none;
 			}
 		}
 
 		.cta-links {
-			@screen lg2 {
+			@screen lg {
 				@apply -translate-y-full pointer-events-auto;
 			}
 		}
@@ -1123,19 +1110,19 @@ body:not(.on-top) {
 		.topbar-controls {
 			--tw-translate-y: var(--top-bar-height);
 
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-0;
 			}
 		}
 
 		.topbar-control-search {
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-0;
 			}
 		}
 
 		.topbar-control-opener {
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-0;
 			}
 		}
@@ -1143,7 +1130,7 @@ body:not(.on-top) {
 
 	#top-nav {
 		.menu-wrap {
-			@screen lg2 {
+			@screen lg {
 				@apply -translate-y-full invisible opacity-0;
 			}
 		}
@@ -1154,31 +1141,31 @@ body:not(.on-top) {
 body.is-navigation-open {
 	#top-bar {
 		&::before {
-			@screen lg-max {
+			@screen md-max {
 				@apply opacity-0;
 			}
 		}
 
 		.logo-icon {
-			@screen lg-max {
+			@screen md-max {
 				@apply opacity-0 invisible;
 			}
 		}
 
 		.topbar-controls {
-			@screen lg-max {
+			@screen md-max {
 				@apply invisible opacity-0;
 			}
 		}
 
 		.switcher-wrap {
-			@screen lg-max {
+			@screen md-max {
 				@apply pointer-events-auto;
 			}
 		}
 
 		.switcher {
-			@screen lg-max {
+			@screen md-max {
 				@apply transform translate-x-0;
 				@apply visible opacity-100;
 			}
@@ -1186,7 +1173,7 @@ body.is-navigation-open {
 	}
 
 	.burger-nav-controls {
-		@apply lg-max:visible lg-max:opacity-100 lg-max:translate-x-0;
+		@apply md-max:visible md-max:opacity-100 md-max:translate-x-0;
 	}
 
 	.opener {
@@ -1194,7 +1181,7 @@ body.is-navigation-open {
 	}
 
 	#top-nav {
-		@screen lg-max {
+		@screen md-max {
 			// Blur
 			&::before {
 				@apply opacity-100 visible;
@@ -1206,31 +1193,31 @@ body.is-navigation-open {
 		}
 
 		.top-nav__underlay {
-			@apply lg-max:visible lg-max:opacity-100;
+			@apply md-max:visible md-max:opacity-100;
 		}
 	}
 
 	.cta-wrap {
-		@screen lg-max {
+		@screen md-max {
 			@apply opacity-100 visible;
 		}
 	}
 
 	.cta-links {
-		@screen lg-max {
+		@screen md-max {
 			@apply translate-x-0;
 		}
 	}
 
 	.menu-wrap {
-		@screen lg-max {
+		@screen md-max {
 			@apply translate-x-0 visible opacity-100;
 		}
 	}
 }
 
 // Dropdown logic for desktop
-@screen lg2 {
+@screen lg {
 	.main-menu > .menu-item > .sub-menu {
 		@apply grid gap-x-px38 gap-y-px22 items-start;
 
