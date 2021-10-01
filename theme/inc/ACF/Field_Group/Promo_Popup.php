@@ -21,10 +21,11 @@ class Promo_Popup extends A_Field_Group {
 			'title'    => 'Promo',
 			'fields'   => array(
 				static::FIELD_IMAGE       => array(
-					'key'   => $image,
-					'name'  => static::FIELD_IMAGE,
-					'label' => 'Image',
-					'type'  => 'image',
+					'key'          => $image,
+					'name'         => static::FIELD_IMAGE,
+					'label'        => 'Image',
+					'type'         => 'image',
+					'preview_size' => 'thumbnail',
 				),
 				static::FIELD_HEADLINE    => array(
 					'key'       => $headline,
