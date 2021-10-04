@@ -86,14 +86,14 @@
   --spacer-top--default: #{rem-calc(80)};
   --spacer-top--md: #{rem-calc(100)};
   --spacer-top--lg: #{rem-calc(120)};
-  --spacer-top--lg2: #{rem-calc(140)};
-  --spacer-top--xl: #{rem-calc(160)};
+  --spacer-top--lg2: #{rem-calc(120)};
+  --spacer-top--xl: #{rem-calc(120)};
   // Bottom Spacing
   --spacer-bottom--default: #{rem-calc(80)};
   --spacer-bottom--md: #{rem-calc(100)};
   --spacer-bottom--lg: #{rem-calc(120)};
-  --spacer-bottom--lg2: #{rem-calc(140)};
-  --spacer-bottom--xl: #{rem-calc(160)};
+  --spacer-bottom--lg2: #{rem-calc(120)};
+  --spacer-bottom--xl: #{rem-calc(120)};
 
   // Default mobile spacing
   @include apply-spacing-variables;

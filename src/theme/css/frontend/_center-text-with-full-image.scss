@@ -1,13 +1,8 @@
 .center-text-with-full-image {
-  @apply my-px40;
-
-  @screen lg {
-    @apply my-px120;
-  }
-
-  @screen lg2 {
-    @apply my-px160;
-  }
+  @include block-spacer-settings(
+    40,
+    $md: 40,
+  );
 
 	&__container {
 		@apply container mx-auto;

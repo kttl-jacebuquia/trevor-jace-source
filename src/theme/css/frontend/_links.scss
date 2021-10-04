@@ -4,12 +4,8 @@
 
 */
 
-.links {
-  @apply mt-px120 mb-px28;
-
-  @screen md {
-    @apply mb-px60;
-  }
+.tw-links {
+  @include block-spacer-settings;
 
   &__container {
     @apply container mx-auto;
