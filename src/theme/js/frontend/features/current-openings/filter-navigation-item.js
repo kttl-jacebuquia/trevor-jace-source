@@ -38,5 +38,6 @@ export default class FilterNavigationItem {
 		const itemLabel = $(item).text();
 		$header.attr('aria-label', itemLabel);
 		$header.find('span').text(itemLabel);
+		$headerContainer.removeClass('filter--expanded');
 	}
 }
