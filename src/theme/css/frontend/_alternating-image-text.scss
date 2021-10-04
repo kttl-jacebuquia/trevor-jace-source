@@ -14,6 +14,22 @@
     @screen lg2 {
       @apply py-px120;
     }
+
+    body.is-crisis-support & {
+      @screen mobile {
+        max-width: 375px;
+      }
+
+      @screen lg {
+        padding-left: theme('container.padding.md');
+        padding-right: theme('container.padding.md');
+      }
+
+      @screen lg2 {
+        padding-left: theme('container.padding.lg2');
+        padding-right: theme('container.padding.lg2');
+      }
+    }
   }
 
   &__heading {
@@ -37,25 +53,33 @@
   }
 
   &__description {
-    @apply col-span-full text-center text-px18 leading-px24 tracking-px05 mt-px16;
+    @apply col-span-full text-center text-px18 leading-px26 mt-px14;
 
     @screen md {
-      @apply mt-px20 text-px22 leading-px32;
+      @apply mt-px16 text-px20 leading-px30 tracking-em005;
     }
 
     @screen lg {
-      @apply text-px22 leading-px32 tracking-px05 mt-px16 col-span-10 col-start-2;
+      @apply text-px22 leading-px32 tracking-px05 col-span-10 col-start-2;
     }
 
-    @screen xl {
+    @screen lg2 {
       @apply text-px26 leading-px36 tracking-em005 col-span-8 col-start-3;
     }
 
     body.is-rc & {
-      @apply text-px20 leading-px30;
+      @apply text-px20 leading-px30 mt-px16;
 
-      @screen md-minmax {
+      @screen md {
         @apply tracking-em005;
+      }
+
+      @screen lg {
+        @apply text-px22 leading-px32 tracking-px05 mt-px30;
+      }
+
+      @screen lg2 {
+        @apply text-px26 leading-px36 tracking-em005 mt-px20;
       }
     }
   }
@@ -149,6 +173,18 @@
       }
     }
 
+    &--center {
+      @screen xl {
+        @apply -mx-px13;
+      }
+
+      body.is-crisis-support & {
+        @screen xl {
+          @apply mx-0;
+        }
+      }
+    }
+
     body.is-crisis-support & {
       @screen lg2 {
         @apply col-span-5;
@@ -157,14 +193,18 @@
   }
 
   &__item-title {
-    @apply font-semibold text-px32 leading-px42 tracking-em001 text-indigo;
+    @apply font-semibold text-px28 leading-px38 tracking-em001 text-teal-dark;
 
     @screen md {
       @apply text-px30 leading-px40 tracking-px_05;
     }
 
     @screen lg {
-      @apply text-px40 leading-px50 px-px32;
+      @apply text-px24 leading-px32 tracking-px05;
+    }
+
+    @screen lg2 {
+      @apply text-px26 leading-px36 tracking-em005;
     }
 
     .alternating-image-text--item-heading-large & {
@@ -176,26 +216,82 @@
         @apply text-px40 leading-px48 tracking-px_05;
       }
     }
+
+    body.is-rc & {
+      @apply text-px32 leading-px42 tracking-normal text-indigo;
+
+      @screen md {
+        @apply tracking-em001;
+      }
+
+      @screen lg {
+        @apply text-px30 leading-px40;
+      }
+
+      @screen lg2 {
+        @apply text-px40 leading-px50;
+      }
+    }
+
+    body.is-crisis-support & {
+      @apply text-px24 leading-px28;
+
+      @screen md {
+        @apply text-px28 leading-px38 tracking-px_05;
+      }
+
+      @screen lg {
+        @apply text-px30 leading-px40 mx-px40 mx-px32;
+      }
+
+      @screen lg2 {
+        @apply text-px40 leading-px48 mx-0;
+      }
+    }
   }
 
   &__item-content {
-    @apply mt-px10 text-px20 leading-px30 font-medium text-indigo;
+    @apply mt-px10 text-px16 leading-px24 font-medium text-teal-dark;
 
     @screen md {
       @apply text-px18 leading-px26;
     }
 
-    @screen lg {
-      @apply px-px32 mt-px14;
+    @screen lg2 {
+      @apply text-px18 leading-px26 mt-px16;
     }
 
-    @screen lg2 {
-      @apply text-px22 leading-px32 mt-px16;
+    body.is-rc & {
+      @apply text-indigo mt-px6 text-px20 leading-px30 tracking-em005;
+
+      @screen md {
+        @apply text-px18 leading-px26 tracking-px05 mt-px14;
+      }
+
+      @screen lg2 {
+        @apply text-px22 leading-px32;
+      }
+    }
+
+    body.is-crisis-support & {
+      @apply text-px18 leading-px24 mt-px20;
+
+      @screen md {
+        @apply text-px16 leading-px24 mt-px10;
+      }
+
+      @screen lg {
+        @apply text-px18 leading-px26 tracking-em_005 mx-px43 mt-px16;
+      }
+
+      @screen lg2 {
+        @apply text-px22 leading-px32 tracking-px05 mx-0;
+      }
     }
   }
 
   &__cta-button {
-    @apply inline-flex items-center mt-px24 h-px58 max-w-px276 min-w-px187 py-0 text-center;
+    @apply inline-flex items-center justify-center mt-px24 h-px58 max-w-px276 min-w-px187 py-0 text-center;
     @apply text-px18 leading-px24;
 
     @screen md {

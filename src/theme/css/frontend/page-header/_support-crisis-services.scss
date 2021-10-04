@@ -16,8 +16,20 @@
 .page-header.type-support-crisis-services {
   @apply tw-grid container mx-auto text-center pb-px50;
 
+  @screen mobile {
+    max-width: 375px;
+  }
+
+  @screen lg {
+    padding-left: theme('container.padding.md');
+    padding-right: theme('container.padding.md');
+  }
+
   @screen lg2 {
     @apply pb-px60;
+
+    padding-left: theme('container.padding.lg2');
+    padding-right: theme('container.padding.lg2');
   }
 
   .page-header-title {
