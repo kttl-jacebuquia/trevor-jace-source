@@ -10,6 +10,10 @@
     }
   }
 
+  .modal-close {
+    top: 20px;
+  }
+
   &__container {
     @apply tw-grid mx-auto text-left;
     width: calc(100% - #{rem-calc(56)});
@@ -126,7 +130,7 @@
       @apply px-0 mx-0 mt-px60;
     }
 
-    @screen xl {
+    @screen lg {
       @apply mt-px78;
     }
   }
@@ -138,7 +142,7 @@
       @apply col-span-6 col-start-2 text-px18 leading-px24;
     }
 
-    @screen xl {
+    @screen lg {
       @apply col-span-8 col-start-3 text-px18 leading-px24;
     }
   }
@@ -152,7 +156,7 @@
       @apply text-px14 leading-px18;
     }
 
-    @screen xl {
+    @screen lg {
       @apply mt-px10;
       @apply col-span-8 col-start-3 text-px14 leading-px18;
     }
