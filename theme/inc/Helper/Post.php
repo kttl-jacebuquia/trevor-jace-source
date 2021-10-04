@@ -13,6 +13,7 @@ use TrevorWP\Theme\ACF\Field_Group\Post_Details;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Log;
 use TrevorWP\Util\Tools;
+use TrevorWP\Theme\ACF\Field_Group\Custom_Heading;
 
 /**
  * Post Helper
@@ -24,12 +25,31 @@ class Post {
 	 * @return string
 	 */
 	public static function render_side_blocks( \WP_Post $post ): string {
-		$out = array();
+		$out        = array();
+		$highlights = array();
 
 		# Highlight Block
-		if ( is_singular( Block\Core_Heading::HIGHLIGHT_POST_TYPES ) && ! empty( $highlights = Meta\Post::get_highlights( $post->ID ) ) ) {
-			$out['highlights'] = Block\Core_Heading::render_highlights_block( $post, $highlights );
+		$article_highlights = Meta\Post::get_highlights( $post->ID );
+		if ( is_singular( Block\Core_Heading::HIGHLIGHT_POST_TYPES ) && ! empty( $article_highlights ) ) {
+			$highlights = array_merge( $highlights, $article_highlights );
 		}
+
+		# Custom Headings, to be used as Highligh Block
+		$headings = Custom_Heading::get_all();
+		if ( ! empty( $headings ) ) {
+			$custom_headings = array();
+
+			foreach ( $headings as $custom_heading ) {
+				$custom_headings[ $custom_heading['anchor'] ] = array(
+					'title'       => $custom_heading['text'],
+					'description' => $custom_heading['description'],
+				);
+			}
+
+			$highlights = array_merge( $highlights, $custom_headings );
+		}
+
+		$out['highlights'] .= Block\Core_Heading::render_highlights_block( $post, $highlights );
 
 		# File
 		if ( is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ]['post_types'] ) && ! empty( $file_id = Meta\Post::get_file_id( $post->ID ) ) ) {
