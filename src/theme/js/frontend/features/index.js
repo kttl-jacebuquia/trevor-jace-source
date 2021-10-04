@@ -38,3 +38,4 @@ export FloatingLabelInput from './floating-label-input';
 export PageHeader from './page-header';
 export PostCard from './post-card';
 export TagsBox from './tags-box';
+export PromoPopup from './promo-popup';

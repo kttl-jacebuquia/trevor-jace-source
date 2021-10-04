@@ -38,13 +38,15 @@ class Modal {
 		ob_start();
 		?>
 		<div class="modal <?php echo implode( ' ', $this->_options['class'] ); ?>" id="<?php echo esc_attr( $this->_selector ); ?>" role="dialog">
-			<div class="modal-container" tabindex="0">
-				<div class="modal-content-wrap">
-					<?php echo $this->_content; ?>
+			<div class="modal-wrap">
+				<div class="modal-container" tabindex="0">
+					<div class="modal-content-wrap">
+						<?php echo $this->_content; ?>
+					</div>
+					<button class="modal-close js-modal-close cursor-pointer z-50" aria-label="click to close this modal">
+						<i class="trevor-ti-close" aria-hidden="true"></i>
+					</button>
 				</div>
-				<button class="modal-close js-modal-close cursor-pointer z-50" aria-label="click to close this modal">
-					<i class="trevor-ti-close" aria-hidden="true"></i>
-				</button>
 			</div>
 		</div>
 		<?php $this->print_js(); ?>

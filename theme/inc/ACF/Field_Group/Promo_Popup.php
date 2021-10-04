@@ -78,15 +78,19 @@ class Promo_Popup extends A_Field_Group {
 
 		ob_start();
 		?>
-			<div>
-				<div>
-					<?php if ( ! empty( $image['url'] ) ) : ?>
+			<div class="promo-popup-modal__content">
+				<?php if ( ! empty( $image['url'] ) ) : ?>
+					<figure class="promo-popup-modal__image">
 						<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>">
-					<?php endif; ?>
-					<h2><?php echo $headline; ?></h2>
-					<p><?php echo $description; ?></p>
+					</figure>
+				<?php endif; ?>
+				<div class="promo-popup-modal__body">
+					<h2 class="promo-popup-modal__headline"><?php echo $headline; ?></h2>
+					<p class="promo-popup-modal__description"><?php echo $description; ?></p>
 					<?php if ( ! empty( $button ) ) : ?>
-						<?php echo Button::render( false, $button, array() ); ?>
+						<div class="promo-popup-modal__button-wrap">
+							<?php echo Button::render( false, $button, array( 'btn_cls' => array( 'promo-popup-modal__button' ) ) ); ?>
+						</div>
 					<?php endif; ?>
 				</div>
 			</div>

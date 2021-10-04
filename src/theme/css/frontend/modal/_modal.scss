@@ -9,7 +9,9 @@
   }
 
   .modal-overlay {
-    @apply absolute w-full h-full bg-teal-dark opacity-30 z-40;
+    @apply absolute w-full h-full z-40;
+    background-color: rgba(0, 58, 72, 0.1);
+    backdrop-filter: blur(10px);
   }
 
   &.team {
@@ -19,9 +21,14 @@
     }
   }
 
+  .modal-wrap {
+    @apply container mx-auto;
+    @apply tw-grid h-full items-center;
+  }
+
   .modal-container {
     @apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
-    @apply pt-px100;
+    @apply col-span-full w-auto pt-px100;
 
     @screen md {
       @apply pt-px57;
@@ -34,8 +41,9 @@
 
   .modal-close {
     @apply absolute top-0 right-0 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
-    @apply bg-teal-dark text-white;
+    @apply text-white;
     @apply w-px45 h-px45 rounded-px18;
+    background-color: theme-background();
 
     @screen xl {
       @apply w-px50 h-px50;
@@ -44,12 +52,6 @@
 
   .modal-content-wrap {
     @apply h-full;
-  }
-
-  body.is-rc & {
-    .modal-close {
-      @apply bg-indigo;
-    }
   }
 
   // todo: move this

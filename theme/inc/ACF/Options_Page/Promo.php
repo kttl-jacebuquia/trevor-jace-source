@@ -1,6 +1,8 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 use TrevorWP\CPT\Promo_Popup as CPT_PROMO;
+use TrevorWP\Theme\ACF\Field_Group\Promo_Popup as FG_PROMO;
+use TrevorWP\Theme\Util\Is;
 
 class Promo extends A_Options_Page {
 	const FIELD_SUPPORT      = 'promo_support';
@@ -50,5 +52,13 @@ class Promo extends A_Options_Page {
 				),
 			),
 		);
+	}
+
+	public static function render(): string {
+		$is_support  = Is::rc();
+		$promo_field = $is_support ? static::FIELD_SUPPORT : static::FIELD_ORGANIZATION;
+		$promo_popup = static::get_option( $promo_field );
+
+		return FG_PROMO::render( $promo_popup );
 	}
 }

@@ -613,6 +613,16 @@ class Hooks {
 				'class'  => array( 'quick-exit-modal', 'js-quick-exit-modal' ),
 			)
 		) )->render();
+
+		// Quick Exit Modal
+		echo ( new \TrevorWP\Theme\Helper\Modal(
+			Options_Page\Promo::render(),
+			array(
+				'target' => '.promo-popup-modal',
+				'id'     => 'js-promo-popup-modal',
+				'class'  => array( 'promo-popup-modal' ),
+			)
+		) )->render();
 	}
 
 	/**

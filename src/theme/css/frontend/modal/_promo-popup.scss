@@ -1,0 +1,101 @@
+.promo-popup-modal {
+  .modal-container {
+    @apply h-auto rounded-px10 pb-px48 max-w-none w-full;
+
+    @screen md {
+      @apply col-span-6 col-start-2 pb-px54;
+    }
+
+    @screen lg {
+      @apply col-span-8 col-start-3 py-px58;
+    }
+  }
+
+  .modal-close {
+    @apply rounded-px10 mt-px18 mr-px18;
+
+    @screen lg2 {
+      @apply mt-px24 mr-px24;
+    }
+  }
+
+  &__content {
+    @apply tw-grid items-start;
+
+    @screen md {
+      @apply grid-cols-6;
+    }
+
+    @screen lg {
+      @apply grid-cols-8;
+    }
+  }
+
+  &__image {
+    @apply col-span-2 col-start-3 rounded-px10 overflow-hidden;
+
+    @screen lg {
+      @apply col-span-3 justify-self-end w-px118;
+    }
+  }
+
+  &__body {
+    @apply col-span-4 col-start-2 -mx-px12 text-center mt-px24;
+
+    @screen md {
+      @apply mt-px30;
+    }
+
+    @screen lg {
+      @apply col-span-4 col-start-4 mt-0 text-left mx-0;
+    }
+  }
+
+  &__headline {
+    @apply font-semibold text-px26 leading-px32 tracking-em005;
+
+    @screen md {
+      @apply text-px26 leading-px32;
+    }
+
+    @screen lg {
+      @apply text-px30 leading-px40 tracking-px_05;
+    }
+
+    @screen xl {
+      @apply text-px34 leading-px44;
+    }
+  }
+
+  &__description {
+    @apply mt-px14 text-px16 leading-px22 tracking-em001;
+
+    @screen md {
+      @apply mt-px14 text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen lg {
+      @apply mt-px14 text-px16 leading-px24;
+    }
+
+    @screen lg2 {
+      @apply text-px16 leading-px24;
+    }
+
+    @screen xl {
+      @apply text-px18 leading-px26;
+    }
+  }
+
+  &__button-wrap {
+    @apply mt-px30;
+  }
+
+  .page-btn {
+    @apply h-px44 inline-flex items-center justify-center;
+
+    @screen lg {
+      @apply h-px66 text-px18 leading-px24;
+    }
+  }
+}

@@ -7,12 +7,15 @@
 
   &.primary /* deprecated, use: page-btn-primary */
   , &-primary {
-	@apply text-white bg-teal-dark;
+	@apply text-white;
+  background-color: theme-background();
   }
 
   &.secondary /* deprecated, use: page-btn-secondary */
   , &-secondary {
-	@apply text-teal-dark bg-white border-2 border-teal-dark;
+	@apply bg-white border-2;
+  color: theme-background();
+  border-color: theme-background();
   }
 
   @screen xl {
@@ -21,7 +24,8 @@
   }
 
 	&-link {
-		@apply p-0 text-px24 leading-px34 tracking-px05 pb-px2 border-teal-dark border-b-px2 pb-px6 rounded-none;
+		@apply p-0 text-px24 leading-px34 tracking-px05 pb-px2 border-b-px2 pb-px6 rounded-none;
 		@apply text-px18 leading-px34 border-b-px1 pb-px5;
+    border-color: theme-background();
 	}
 }

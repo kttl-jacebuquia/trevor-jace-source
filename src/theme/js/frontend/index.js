@@ -103,10 +103,13 @@ if ($quickExitModal.length) {
 			},
 			onClose({ initiator }) {
 				localStorage.setItem('quick-exit-modal-dismissed', true);
+				features.PromoPopup.showWhenAvailable();
 			},
 		};
 
 		modal($quickExitModal, options);
+	} else {
+		features.PromoPopup.showWhenAvailable();
 	}
 }
 
