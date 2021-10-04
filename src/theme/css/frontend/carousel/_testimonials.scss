@@ -199,8 +199,6 @@
   }
 
   &.image-right {
-    @apply mb-px56;
-
     @screen md {
       @apply pb-px50;
     }
@@ -349,6 +347,10 @@
       }
 
       @screen lg {
+        @apply pt-px115;
+      }
+
+      @screen lg2 {
         @apply py-0;
       }
 

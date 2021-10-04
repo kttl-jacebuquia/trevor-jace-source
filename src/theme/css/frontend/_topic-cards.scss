@@ -1,12 +1,16 @@
 .topic-cards {
-	@apply py-px80;
+	@apply pt-px80 pb-px40;
 
 	@screen md {
 		@apply pt-px80 pb-px100;
 	}
 
+  @screen lg {
+    @apply py-px100;
+  }
+
 	@screen lg2 {
-		@apply pt-px100 pb-px120;
+		@apply py-px140;
 	}
 
   & + .guiding-principles {
@@ -18,31 +22,43 @@
 	}
 
 	&__heading {
-		@apply font-bold text-px30 leading-px38 tracking-em005 text-center;
+		@apply font-bold text-px32 leading-px40 text-center;
 
 		@screen md {
-			@apply text-px30 leading-px38;
+			@apply text-px32 leading-px42;
 		}
 
-		@screen xl {
+    @screen lg {
+      @apply text-px40 leading-px50;
+    }
+
+		@screen lg2 {
 			@apply text-px46 leading-px56 tracking-em_001;
 		}
 
 		& + .topic-cards__accordion {
-			@apply mt-px60;
+			@apply mt-px50;
 		}
 	}
 
 	&__description {
-		@apply text-px20 leading-px28 tracking-px05 mt-px8 text-center;
+		@apply text-px20 leading-px26 tracking-px05 mt-px14 text-center;
 
 		@screen md {
-			@apply tracking-px_05 mt-px14;
+			@apply tracking-px05 mt-px8 text-px16 leading-px22;
 		}
 
-		@screen xl {
-			@apply mt-px20 text-px24 leading-px34 tracking-px05;
+    @screen lg {
+      @apply text-px22 leading-px32 mt-px14;
+    }
+
+		@screen lg2 {
+			@apply text-px24 leading-px34;
 		}
+
+    @screen xl {
+      @apply text-px26 leading-px36;
+    }
 	}
 
 	&__accordion {
@@ -100,7 +116,7 @@
 		}
 
 		@screen md {
-			@apply mt-px70 gap-y-px30;
+			@apply mt-px50 gap-y-px30;
 			grid-auto-rows: 1fr;
 		}
 
@@ -116,7 +132,7 @@
       }
 		}
 
-		@screen xl {
+		@screen lg2 {
 			@apply mt-px80 gap-y-px28;
 		}
 	}
@@ -128,48 +144,50 @@
 			@apply col-span-4;
 		}
 
+    &:nth-child(odd) {
+      @screen lg {
+        @apply col-start-2;
+      }
+
+      @screen lg2 {
+        @apply col-start-auto;
+      }
+    }
+
+    @screen md {
+      @apply min-h-px320;
+    }
+
+    @screen lg {
+      @apply col-span-5;
+    }
+
+    @screen lg2 {
+      @apply col-span-4;
+    }
+
+    @screen xl {
+      @apply min-h-px402;
+    }
+
+    &:nth-child(even) {
+      @screen lg {
+        @apply col-start-7;
+      }
+
+      @screen lg2 {
+        @apply col-start-auto;
+      }
+    }
+
 		&--bordered {
-			@apply card-sm md:card-md lg:card-lg xl:card-xl bg-white text-teal-dark;
+			@apply card-sm md:card-md lg:card-lg lg2:card-xl bg-white text-teal-dark;
 			@apply md:shadow-none lg:shadow-none xl:shadow-none;
 			border: 1px solid rgba(0, 94, 103, 0.5);
 
       &:hover{
         @apply bg-gray-light;
       }
-
-			@screen md {
-				@apply min-h-px320;
-			}
-
-			@screen lg {
-				@apply col-span-5;
-			}
-
-			@screen lg2 {
-				@apply col-span-4;
-			}
-
-			@screen xl {
-				@apply min-h-px402;
-			}
-
-			&:nth-child(odd) {
-				@screen lg {
-					@apply col-start-2;
-				}
-				@screen lg2 {
-					@apply col-start-auto;
-				}
-			}
-
-			&:nth-child(even) {
-				@screen lg {
-					@apply col-start-7;
-				}
-				@screen lg2 {
-					@apply col-start-auto;
-				}
-			}
 		}
 	}
 
@@ -178,17 +196,33 @@
 		@apply font-semibold text-px20 leading-px26;
 
 		@screen md {
-			@apply text-px30 leading-px40;
+			@apply text-px24 leading-px28 tracking-em001;
 		}
+
+    @screen lg {
+      @apply text-px26 leading-px32 tracking-em005;
+    }
+
+    @screen xl {
+      @apply leading-px36;
+    }
 	}
 
 	&__item-description {
 		@apply card-description;
-		@apply text-px16 leading-px22;
+		@apply text-px18 leading-px28;
 
 		@screen md {
-			@apply mt-px12 text-px18 leading-px26 tracking-px05;
+			@apply mt-px12 text-px16 leading-px24;
 		}
+
+    @screen lg {
+      @apply leading-px22;
+    }
+
+    @screen xl {
+      @apply leading-px26;
+    }
 	}
 
 	&__cta {
@@ -196,7 +230,7 @@
 		@apply text-px18 leading-px24 tracking-em001 mt-px24;
 
 		@screen md {
-			@apply mt-px18;
+			@apply mt-px18 text-px20 leading-px26;
 		}
 
 		.trevor-ti-download {
@@ -205,13 +239,13 @@
 	}
 
 	&__block-cta-wrap {
-		@apply mt-px50 text-center;
+		@apply mt-px40 text-center;
 
 		@screen md {
-			@apply mt-px64;
+			@apply mt-px50;
 		}
 
-		@screen xl {
+		@screen lg {
 			@apply mt-px60;
 		}
 	}
@@ -223,7 +257,15 @@
 	&__load-more {
 		@apply font-semibold text-px24 leading-px34 tracking-px05;
 
-		@screen xl {
+    @screen md {
+      @apply text-px18 leading-px24 tracking-px025;
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px26 tracking-em001;
+    }
+
+		@screen lg2 {
 			@apply text-px20 leading-px24 tracking-em005;
 		}
 	}

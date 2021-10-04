@@ -16,7 +16,11 @@
   }
 
   .page-sub-title {
-    @apply mb-0;
+    @apply mb-0 w-auto;
+
+    &.centered {
+      @apply mx-0 text-center col-start-2;
+    }
 
     @screen lg {
       @apply text-px40 leading-px50 tracking-em_001;
