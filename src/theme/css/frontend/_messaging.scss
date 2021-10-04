@@ -2,6 +2,22 @@
 	&__container {
 		@apply tw-grid container mx-auto;
 
+    body.is-crisis-support & {
+      @screen mobile {
+        max-width: 375px;
+      }
+
+      @screen lg {
+        padding-left: theme('container.padding.md');
+        padding-right: theme('container.padding.md');
+      }
+
+      @screen lg2 {
+        padding-left: theme('container.padding.lg2');
+        padding-right: theme('container.padding.lg2');
+      }
+    }
+
 		.messaging.extend-top & {
 			@apply pt-px58;
 

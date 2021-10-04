@@ -13,6 +13,22 @@
   &__container {
     @apply container mx-auto;
     @apply tw-grid;
+
+    body.is-crisis-support & {
+      @screen mobile {
+        max-width: 375px;
+      }
+
+      @screen lg {
+        padding-left: theme('container.padding.md');
+        padding-right: theme('container.padding.md');
+      }
+
+      @screen lg2 {
+        padding-left: theme('container.padding.lg2');
+        padding-right: theme('container.padding.lg2');
+      }
+    }
   }
 
   &__content {
