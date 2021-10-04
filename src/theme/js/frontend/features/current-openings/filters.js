@@ -8,6 +8,21 @@ export function initFilterNavigation(context) {
 		.find(SELECTOR)
 		.each((index, el) => {
 			const filterOptions = el.querySelector(`${SELECTOR}__navigation`);
+			const filterButton = el.querySelector(`${SELECTOR}__header`);
+
+			$(el).hover(function() {
+				$(this).addClass('filter--expanded');
+
+				filterButton.setAttribute(
+					'aria-expanded',
+					el.classList.contains('filter--expanded')
+				);
+			}, function() {
+				$(this).removeClass('filter--expanded');
+
+				filterButton.setAttribute('filter--expanded', false);
+			});
+
 			const filterDropdown = new FilterNavigationItem(filterOptions);
 			filterDropdown.init();
 		});

@@ -1,5 +1,5 @@
 .filters {
-	@apply flex flex-col gap-y-px16 gap-x-px20;
+	@apply flex flex-col;
 
 	@screen md {
 		@apply flex-row;
@@ -15,11 +15,15 @@
 	}
 
   &:first-child {
+    @apply mb-px16;
+
     @screen md {
       width: 180px;
+
+      @apply mr-px20 mb-0;
     }
 
-    @screen xl {
+    @screen lg {
       width: 205px;
     }
   }
@@ -29,14 +33,12 @@
       width: 210px;
     }
 
-    @screen xl {
+    @screen lg {
       width: 240px;
     }
   }
 
-	&:hover,
-	&:focus,
-	&[aria-expanded='true'] {
+	&--expanded {
 		.filter__header i {
 			@apply transform rotate-180;
 		}
