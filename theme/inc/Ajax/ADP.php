@@ -25,8 +25,13 @@ class ADP {
 		$filter['location']   = isset( $_GET['location'] ) ? $_GET['location'] : '';
 		$filter['department'] = isset( $_GET['department'] ) ? $_GET['department'] : '';
 
+		if ( empty( self::get_jobs() ) ) {
+			self::adp_refresh();
+		}
+
 		$job_requisitions = self::get_jobs();
-		$data             = self::paginate_job_requisitions( $job_requisitions, $filter, $page, $count );
+
+		$data = self::paginate_job_requisitions( $job_requisitions, $filter, $page, $count );
 
 		wp_die(
 			json_encode(
@@ -81,34 +86,23 @@ class ADP {
 				break;
 			}
 
-			// Filter jobs to include only positions with posting channel ID "19000101_000001" and "Open" Job Status
-			// Referrence: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=0a93e956-1064-47e3-9771-6768b425b346&ccId=19000101_000001&type=MP&lang=en_US
-			foreach ( $response['jobRequisitions'] as $job ) {
-				foreach ( $job['postingInstructions'] as $post ) {
-					if ( '19000101_000001' === $post['postingChannel']['channelID'] && 'ON' === $job['requisitionStatusCode']['codeValue'] ) {
-						if ( $post['nameCode']['codeValue'] !== $job['job']['jobTitle'] ) {
-							$job['job']['jobTitle'] = $post['nameCode']['codeValue'];
-						}
-
-						$job['requisitionStatusCode']['effectiveDate'] = gmdate( 'Y-m-d H:i:s', strtotime( $post['postDate'] ) );
-
-						$jobs[] = $job;
-					}
-				}
-			}
+			$jobs = array_merge( $jobs, $response['jobRequisitions'] );
 
 			// Increment page request
 			$page++;
 		}
 
-		update_option( 'trevor_adp_job_requisitions', $jobs );
+		$jobs = self::filter_active_jobs( $jobs );
+
+		set_transient( 'trevor_adp_job_requisitions', $jobs, 12 * HOUR_IN_SECONDS );
 	}
 
 	/**
 	 * Get jobs data from cache
 	 */
 	public static function get_jobs(): array {
-		$jobs = get_option( 'trevor_adp_job_requisitions' );
+		$jobs = get_transient( 'trevor_adp_job_requisitions' );
+
 		return ! empty( $jobs ) ? $jobs : array();
 	}
 
@@ -159,11 +153,14 @@ class ADP {
 		$url = 'https://accounts.adp.com/staffing/v1/job-requisitions';
 
 		$headers = array(
+			'Connection: keep-alive',
 			"Authorization: Bearer $access_token",
+			'sm_transactionid: reques12',
 		);
 
 		$payload = array(
-			'$skip' => ( $page - 1 ) * 20,
+			'$skip'   => ( $page - 1 ) * 20,
+			'$filter' => 'requisitionStatusCode/codeValue eq ON',
 		);
 
 		// Append request parameters
@@ -183,6 +180,10 @@ class ADP {
 	 * @return array $data
 	 */
 	public static function paginate_job_requisitions( $job_requisitions, $filter, $page = 1, $count = 0 ) {
+		if ( empty( $job_requisitions ) ) {
+			return array();
+		}
+
 		$departments = self::get_departments( $job_requisitions );
 		$locations   = self::get_locations( $job_requisitions );
 
@@ -228,6 +229,40 @@ class ADP {
 			'count'        => $count,
 			'jobs'         => $jobs,
 		);
+
+		return $data;
+	}
+
+	/**
+	 * Filter active Job Requisitions
+	 *
+	 * @param array $data
+	 * @param array $filter
+	 *
+	 * @return array $data
+	 */
+	public static function filter_active_jobs( $jobs ) {
+		if ( empty( $jobs ) ) {
+			return array();
+		}
+
+		$data = array();
+
+		// Filter jobs to include only positions with posting channel ID "19000101_000001"
+		// Referrence: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=0a93e956-1064-47e3-9771-6768b425b346&ccId=19000101_000001&type=MP&lang=en_US
+		foreach ( $jobs as $job ) {
+			foreach ( $job['postingInstructions'] as $post ) {
+				if ( '19000101_000001' === $post['postingChannel']['channelID'] ) {
+					if ( $post['nameCode']['codeValue'] !== $job['job']['jobTitle'] ) {
+						$job['job']['jobTitle'] = $post['nameCode']['codeValue'];
+					}
+
+					$job['requisitionStatusCode']['effectiveDate'] = gmdate( 'Y-m-d H:i:s', strtotime( $post['postDate'] ) );
+
+					$data[] = $job;
+				}
+			}
+		}
 
 		return $data;
 	}

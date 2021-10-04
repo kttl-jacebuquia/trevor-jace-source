@@ -41,9 +41,6 @@ class Hooks {
 		add_action( 'init', array( self::class, 'init' ), 10, 0 );
 		add_action( 'admin_init', array( self::class, 'admin_init' ), 10, 0 );
 
-		// Add a custom menu for Careers Option Page
-		add_action( 'admin_menu', array( self::class, '_register_careers_option_page' ), 99, 0 );
-
 		# Media
 		add_action( 'wp_enqueue_scripts', array( self::class, 'wp_enqueue_scripts' ), 10, 0 );
 		add_action( 'admin_enqueue_scripts', array( self::class, 'admin_enqueue_scripts' ), 10, 0 );
