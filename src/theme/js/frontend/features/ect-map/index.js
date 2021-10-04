@@ -1,14 +1,8 @@
-/* https://codepen.io/jsilff/pen/ZEpdjqB */
+/* https://codepen.io/jsilff/full/ZEpdjqB */
 import $ from 'jquery';
 import proj4 from 'proj4';
-import Highcharts from 'highcharts/highmaps';
 import mapData from '@highcharts/map-collection/countries/us/us-all.geo.json';
-// Load required modules
-require('highcharts/modules/data')(Highcharts);
-require('highcharts/modules/map')(Highcharts);
-require('highcharts/modules/exporting')(Highcharts);
-require('highcharts/modules/offline-exporting')(Highcharts);
-require('highcharts/modules/pattern-fill')(Highcharts);
+
 window.proj4 = window.proj4 || proj4;
 
 /*
@@ -16,120 +10,142 @@ Fixme: Do not hardcode keys
 Fixme: Get elements via arguments, do not use hardcoded id selectors
  */
 export default function (moduleElement) {
+	const Highcharts = window.Highcharts;
+
 	const ectMapContainer = moduleElement.querySelector('.ect-map__map');
 	const downloadButton = moduleElement.querySelector('.ect-map__download');
 	const mapForm = moduleElement.querySelector('.ect-map__search');
 	const [...filters] = moduleElement.querySelectorAll('.ect-map__filter');
 	const PDF_FILENAME = 'Ending Conversion Therapy Map';
 
-	const regulationPattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARhJREFUeNqs1MkKwjAQBuD2t2rBi6KIeih48f3fxbMIggvuKMW11gFFSrSTmdg55JDlYxLa3x+OJl5OlYBB1KXRE1R8voxny+wMdyx5PBabvcSlnfP1zpi0dLQ7xtPV1upSv+frTUdb9TxXRDM640rpnzrvKmhDt7pUgacp0mnsNOtW902HlXK31Zgs1tSLRD/EJ8lOkNvvtWthlUbh3yFxqfx7knxEuiPdVHiSL+rYT9M0O1WI/noJ/JwVvgzjkgBm7R8397t2041TYPZFnZbcJdHoBqqcVCUwtHkmzxkU5X7rKNA19KBYN5tiUOWkSg9UOamqQJWTqgSGKidVCQy3/1iSBHDLB4kON1eiw9m1ruIfl9/zFGAA/6QAGrgarkQAAAAASUVORK5CYII=';
-	const introducedPattern = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNq01ssOwiAQBdBCWttqXFgf0YX//1kuXPhKNDGpj1qCEE21BCiFmbtkcXIDyQyEcx4Zci1v+/MlckuaJOvFnFLSnFA4d/bvGmkvV6U09P1Zhbsa+lXX2+Mp3FVp4W52BxC3RcO6IjHgu2laY7iSRnIljeSKxhTJFY0pkmubIYFuN+3tdtAhro0OdI10uKunQVwNDeWqNKDbomHdHw3ufmkMV66CPB2I/4PjkHpUPTYyYYyB9/3cBLH8nrzd8TBfFpMYw11NC6eh6ud2073cUZY1rshbgAEADd+9Bu55XrUAAAAASUVORK5CYII=';
-	let stateFilter, updatedDate, data1 = [],
-		data2 = [], data3 = [], chart,
-		align, verticalAlign, floating, layout, tooltipW,
-		statesList, municipalitiesList1, municipalitiesList2;
-
+	var regulationPattern =
+		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARhJREFUeNqs1MkKwjAQBuD2t2rBi6KIeih48f3fxbMIggvuKMW11gFFSrSTmdg55JDlYxLa3x+OJl5OlYBB1KXRE1R8voxny+wMdyx5PBabvcSlnfP1zpi0dLQ7xtPV1upSv+frTUdb9TxXRDM640rpnzrvKmhDt7pUgacp0mnsNOtW902HlXK31Zgs1tSLRD/EJ8lOkNvvtWthlUbh3yFxqfx7knxEuiPdVHiSL+rYT9M0O1WI/noJ/JwVvgzjkgBm7R8397t2041TYPZFnZbcJdHoBqqcVCUwtHkmzxkU5X7rKNA19KBYN5tiUOWkSg9UOamqQJWTqgSGKidVCQy3/1iSBHDLB4kON1eiw9m1ruIfl9/zFGAA/6QAGrgarkQAAAAASUVORK5CYII=';
+	var introducedPattern =
+		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNq01ssOwiAQBdBCWttqXFgf0YX//1kuXPhKNDGpj1qCEE21BCiFmbtkcXIDyQyEcx4Zci1v+/MlckuaJOvFnFLSnFA4d/bvGmkvV6U09P1Zhbsa+lXX2+Mp3FVp4W52BxC3RcO6IjHgu2laY7iSRnIljeSKxhTJFY0pkmubIYFuN+3tdtAhro0OdI10uKunQVwNDeWqNKDbomHdHw3ufmkMV66CPB2I/4PjkHpUPTYyYYyB9/3cBLH8nrzd8TBfFpMYw11NC6eh6ud2073cUZY1rshbgAEADd+9Bu55XrUAAAAASUVORK5CYII=';
+	var mapData = Highcharts.maps['countries/us/us-all'],
+		updatedDate,
+		data1 = [],
+		data2 = [],
+		data3 = [],
+		chart;
 	if ($(window).width() > 560) {
-		align = 'left';
-		verticalAlign = 'bottom';
-		floating = true;
-		layout = 'vertical';
-		tooltipW = 550;
+		var align = 'left',
+			verticalAlign = 'bottom',
+			floating = true,
+			layout = 'vertical',
+			tooltipW = 550;
 	} else {
-		align = 'center';
-		verticalAlign = 'top';
-		floating = false;
-		layout = 'horizontal';
-		tooltipW = $(window).width() - 60;
+		var align = 'center',
+			verticalAlign = 'top',
+			floating = false,
+			layout = 'horizontal',
+			tooltipW = $(window).width() - 60;
 	}
-
-	const statesData = Highcharts.data({
+	var statesData = Highcharts.data({
+		googleAPIKey: 'AIzaSyCOzdvfQ1qJLSk2MtqbuvTMVfzU0CBDDB0',
+		googleSpreadsheetRange: "'States'",
 		googleSpreadsheetKey: '1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo',
 		googleSpreadsheetWorksheet: 1,
 		parsed: function (columns) {
 			$.each(columns[0], function (i, code) {
 				var legType = columns[2][i];
 				data1.push({
-					code: "us-" + code.toLowerCase(),
+					code: 'us-' + code.toLowerCase(),
 					valueName: columns[2][i],
 					stateName: columns[1][i],
 					note: columns[4][i],
-					id: "us-" + code.toLowerCase(),
+					id: 'us-' + code.toLowerCase(),
 				});
-				if (legType === "Protected") {
+				if (legType == 'Protected') {
 					data1[i].value = 2;
-					data1[i].explainer = 'protects LGBTQ young people from the dangers of conversion therapy.';
-				} else if (legType === "Introduced") {
+					data1[i].explainer =
+						'protects LGBTQ young people from the dangers of conversion therapy.';
+				} else if (legType == 'Introduced') {
 					data1[i].value = 1;
-					data1[i].explainer = 'has legislation introduced in the state house that would protect LGBTQ young people from conversion therapy, if it passes.';
-				} else if (legType === "Partially Protected") {
+					data1[i].explainer =
+						'has legislation introduced in the state house that would protect LGBTQ young people from conversion therapy, if it passes.';
+				} else if (legType == 'Partially Protected') {
 					data1[i].value = 3;
-					data1[i].explainer = 'partially protects LGBTQ young people from conversion therapy.';
+					data1[i].explainer =
+						'partially protects LGBTQ young people from conversion therapy.';
 				}
 				if (columns[2][i] == null) {
-					data1[i].valueName = "No Legislation";
+					data1[i].valueName = 'No Legislation';
 					data1[i].value = 0;
-					data1[i].explainer = 'offers no state-wide protections for LGBTQ young people and they can be subjected to conversion therapy.';
+					data1[i].explainer =
+						'offers no state-wide protections for LGBTQ young people and they can be subjected to conversion therapy.';
 				}
 				if (columns[3][i] != null) {
-					data1[i].yearPassed = "in " + columns[3][i];
+					data1[i].yearPassed = 'in ' + columns[3][i];
 				}
 			});
+			var options = {
+				weekday: 'long',
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+			};
 			var updated = data1[52]['note'];
 			updatedDate = formatDate(updated);
 			complete: createChart();
 		},
 		error: function () {
-			$('#container').html('<div class="loading">' +
-				'<i class="icon-frown icon-large"></i> ' +
-				'Error loading data; please try again or check back later.' +
-				'</div>');
+			$('#container').html(
+				'<div class="loading">' +
+					'<i class="icon-frown icon-large"></i> ' +
+					'Error loading data; please try again or check back later.' +
+					'</div>'
+			);
 		},
 	});
-	const municiplaityData = Highcharts.data({
+	var municiplaityData = Highcharts.data({
+		googleAPIKey: 'AIzaSyCOzdvfQ1qJLSk2MtqbuvTMVfzU0CBDDB0',
+		googleSpreadsheetRange: "'Municipalities'",
 		googleSpreadsheetKey: '1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo',
 		googleSpreadsheetWorksheet: 2,
 		parsed: function (columns2) {
 			$.each(columns2[0], function (i, code) {
-				if (columns2[2][i] === 'Local Protections') {
+				if (columns2[2][i] == 'Local Protections') {
 					data2.push({
 						lat: columns2[11][i],
 						lon: columns2[12][i],
 						ST: columns2[0][i],
 						locale: columns2[1][i],
 						note2: columns2[4][i],
-						explainer: "protects LGBTQ young people who live in the community from the dangers of conversion therapy.",
+						explainer:
+							'protects LGBTQ young people who live in the community from the dangers of conversion therapy.',
 					});
 				}
-				if (columns2[2][i] === 'Blocked by Courts') {
+				if (columns2[2][i] == 'Blocked by Courts') {
 					data3.push({
 						lat: columns2[11][i],
 						lon: columns2[12][i],
 						ST: columns2[0][i],
 						locale: columns2[1][i],
 						note2: columns2[4][i],
-						explainer: "has laws to protect LGBTQ young people from the dangers of conversion therapy but they are currently not in effect by order of the courts.",
+						explainer:
+							'has laws to protect LGBTQ young people from the dangers of conversion therapy but they are currently not in effect by order of the courts.',
 					});
 				}
-
 			});
-			complete: createChart()
+			complete: createChart();
 		},
 		error: function () {
-			$('#container').html('<div class="loading">' +
-				'<i class="icon-frown icon-large"></i> ' +
-				'Error loading data from Google Spreadsheets' +
-				'</div>');
+			$('#container').html(
+				'<div class="loading">' +
+					'<i class="icon-frown icon-large"></i> ' +
+					'Error loading data from Google Spreadsheets' +
+					'</div>'
+			);
 		},
 	});
-
 	function createChart() {
-		$(ectMapContainer).highcharts('Map', {
+		chart = $('#container').highcharts('Map', {
 			title: {
-				text: ''
+				text: '',
 			},
 			credits: {
-				enabled: false
+				enabled: false,
 			},
 			chart: {
 				backgroundColor: 'transparent',
@@ -137,7 +153,6 @@ export default function (moduleElement) {
 				animation: false,
 				events: {
 					render: renderLabel,
-					load: onChartLoad,
 				},
 				style: {
 					fontFamily: 'Manrope',
@@ -152,22 +167,20 @@ export default function (moduleElement) {
 						color: '#000',
 						y: -6,
 						style: {
-							fontWeight: "bold",
-						}
+							fontWeight: 'bold',
+						},
 					},
-				}
+				},
 			},
 			mapNavigation: {
-				enableButtons: true,
-				enableTouchZoom: true,
-				enableMouseWheelZoom: false,
+				enabled: true,
 			},
 			legend: {
 				margin: 0,
 				title: {
 					style: {
 						color: '#003A48',
-						fontWeight: "bold",
+						fontWeight: 'bold',
 					},
 				},
 				itemStyle: {
@@ -184,39 +197,41 @@ export default function (moduleElement) {
 				layout: layout,
 			},
 			colorAxis: {
-				dataClasses: [{
-					from: 2,
-					to: 2,
-					name: 'Protected',
-					color: '#D3DDE2',
-				}, {
-					from: 3,
-					to: 3,
-					name: 'Partially Protected',
-					color: {
-						pattern: {
-							image: regulationPattern,
+				dataClasses: [
+					{
+						from: 2,
+						to: 2,
+						name: 'Protected',
+						color: '#D3DDE2',
+					},
+					{
+						from: 3,
+						to: 3,
+						name: 'Partially Protected',
+						color: {
+							pattern: regulationPattern,
 							width: 6,
-							height: 6
+							height: 6,
 						},
 					},
-				}, {
-					from: 1,
-					to: 1,
-					name: 'Introduced',
-					color: {
-						pattern: {
-							image: introducedPattern,
+					{
+						from: 1,
+						to: 1,
+						color: {
+							color: 'rgba(0,94,103,0.5)',
+							pattern: introducedPattern,
 							width: 6,
-							height: 6
+							height: 6,
 						},
+						name: 'Introduced',
 					},
-				}, {
-					from: 0,
-					to: 0,
-					color: '#FFF',
-					name: 'No Legislation'
-				},],
+					{
+						from: 0,
+						to: 0,
+						color: '#FFF',
+						name: 'No Legislation',
+					},
+				],
 			},
 			tooltip: {
 				backgroundColor: '#003A48',
@@ -225,8 +240,8 @@ export default function (moduleElement) {
 				padding: 15,
 				borderRadius: 10,
 				style: {
-					fontSize: "16px",
-					color: "white",
+					fontSize: '16px',
+					color: 'white',
 					zIndex: 10,
 					width: tooltipW,
 				},
@@ -237,15 +252,23 @@ export default function (moduleElement) {
 				menuItemDefinitions: {
 					tabular: {
 						onclick: function () {
-							window.open('https://docs.google.com/spreadsheets/d/1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo/view')
+							window.open(
+								'https://docs.google.com/spreadsheets/d/1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo/view'
+							);
 						},
-						text: 'View Data in Table View'
-					}
+						text: 'View Data in Table View',
+					},
 				},
 				buttons: {
 					contextButton: {
-						menuItems: ['tabular', 'separator', 'downloadPNG', 'downloadSVG', 'downloadPDF',]
-					}
+						menuItems: [
+							'tabular',
+							'separator',
+							'downloadPNG',
+							'downloadSVG',
+							'downloadPDF',
+						],
+					},
 				},
 				chartOptions: {
 					chart: {
@@ -253,19 +276,20 @@ export default function (moduleElement) {
 						height: 630,
 						style: {
 							fontFamily: 'Helvetica',
-						}
+						},
 					},
 				},
 			},
-			series: [{
-				name: 'Basemap',
-				type: 'map',
-				mapData: mapData,
-				allAreas: true,
-				showInLegend: false,
-				zIndex: 1,
-				color: 'white',
-			},
+			series: [
+				{
+					name: 'Basemap',
+					type: 'map',
+					mapData: mapData,
+					allAreas: true,
+					showInLegend: false,
+					zIndex: 1,
+					color: 'white',
+				},
 				{
 					data: data2,
 					zIndex: 4,
@@ -276,10 +300,12 @@ export default function (moduleElement) {
 					color: 'rgba(0,94,103,0.5)',
 					showInLegend: true,
 					tooltip: {
-						pointFormat: '{point.locale}, {point.ST}<br>' +
+						pointFormat:
+							'{point.locale}, {point.ST}<br>' +
 							'<div style="font-size:.8em;"><div class="explainer">{point.locale} {point.explainer}</div><div class="note">{point.note2}</div></div>',
 					},
-				}, {
+				},
+				{
 					data: data3,
 					zIndex: 4,
 					type: 'mappoint',
@@ -289,7 +315,8 @@ export default function (moduleElement) {
 					color: '#FFD215',
 					showInLegend: true,
 					tooltip: {
-						pointFormat: '{point.locale}, {point.ST}<br>' +
+						pointFormat:
+							'{point.locale}, {point.ST}<br>' +
 							'<div style="font-size:.8em;"><div class="explainer">{point.locale} {point.explainer}</div><div class="note">{point.note2}</div></div>',
 					},
 				},
@@ -305,8 +332,8 @@ export default function (moduleElement) {
 					name: 'State-Wide Legislation',
 					states: {
 						hover: {
-							color: 'rgba(0,0,0,0.1)'
-						}
+							color: 'rgba(0,0,0,0.1)',
+						},
 					},
 					dataLabels: {
 						enabled: true,
@@ -319,33 +346,42 @@ export default function (moduleElement) {
 						// useHTML: true,
 					},
 					tooltip: {
-						pointFormat: '{point.stateName} — {point.valueName} {point.yearPassed}<div style="font-size:.8em;"><div class="explainer">{point.stateName} {point.explainer}</div><div class="note">{point.note}</div></div>'
+						pointFormat:
+							'{point.stateName} — {point.valueName} {point.yearPassed}<div style="font-size:.8em;"><div class="explainer">{point.stateName} {point.explainer}</div><div class="note">{point.note}</div></div>',
 					},
 				},
 			],
 		});
 	}
-
 	function renderLabel() {
-		const label = this.renderer.label("<b>TheTrevorProject.org/CTMap</b><br>Last Updated: <i>" + updatedDate + "</i>")
+		var label = this.renderer
+			.label(
+				'<b>TheTrevorProject.org/CTMap</b><br>Last Updated: <i>' +
+					updatedDate +
+					'</i>'
+			)
 			.css({
-				'color': '#003B4A',
+				color: '#003B4A',
 			})
 			.attr({
-				'padding': 0,
+				padding: 0,
 				'font-size': '0.8em',
 				'text-align': 'right',
 			})
 			.add();
 
-		label.align(Highcharts.extend(label.getBBox(), {
-			align: 'right',
-			textAlign: 'right',
-			useHTML: true,
-			x: 0, // offset
-			verticalAlign: 'bottom',
-			y: 0, // offset
-		}), null, 'spacingBox');
+		label.align(
+			Highcharts.extend(label.getBBox(), {
+				align: 'right',
+				textAlign: 'right',
+				useHTML: true,
+				x: 0, // offset
+				verticalAlign: 'bottom',
+				y: 0, // offset
+			}),
+			null,
+			'spacingBox'
+		);
 	}
 
 	function onChartLoad(event) {
@@ -357,11 +393,11 @@ export default function (moduleElement) {
 
 	function onDownloadClick(e) {
 		e.preventDefault();
-		if ( chart ) {
+		if (chart) {
 			chart.exportChart({
 				type: 'application/pdf',
 				filename: PDF_FILENAME,
-			})
+			});
 		}
 	}
 
@@ -370,12 +406,14 @@ export default function (moduleElement) {
 		e.preventDefault();
 
 		// Active filter
-		e.currentTarget.classList.add('ect-map__filter--active')
+		e.currentTarget.classList.add('ect-map__filter--active');
 
 		// Deactivate other filters
 		filters
-		.filter(button => button !== e.currentTarget)
-		.forEach(button => button.classList.remove('ect-map__filter--active'))
+			.filter((button) => button !== e.currentTarget)
+			.forEach((button) =>
+				button.classList.remove('ect-map__filter--active')
+			);
 
 		filterMap();
 	}
@@ -383,24 +421,34 @@ export default function (moduleElement) {
 	function filterMap() {
 		const statePattern = new RegExp(stateFilter, 'i');
 		const filteredStateBySearch = stateFilter
-			? statesList.filter(({ stateName, ...stateData }) => statePattern.test(stateName))
+			? statesList.filter(({ stateName, ...stateData }) =>
+					statePattern.test(stateName)
+			  )
 			: statesList;
-		const matchedStateAbbrevs = filteredStateBySearch.map(({ code }) => code.split('-')[1].toUpperCase());
+		const matchedStateAbbrevs = filteredStateBySearch.map(({ code }) =>
+			code.split('-')[1].toUpperCase()
+		);
 
 		chart.series.forEach((series, index) => {
 			let seriesData;
 
-			switch ( index ) {
+			switch (index) {
 				// Filter Municipalities
 				case 1:
-					seriesData = municipalitiesList1.filter(({ ST }) => matchedStateAbbrevs.includes(ST));
+					seriesData = municipalitiesList1.filter(({ ST }) =>
+						matchedStateAbbrevs.includes(ST)
+					);
 					break;
 				case 2:
-					seriesData = municipalitiesList2.filter(({ ST }) => matchedStateAbbrevs.includes(ST));
+					seriesData = municipalitiesList2.filter(({ ST }) =>
+						matchedStateAbbrevs.includes(ST)
+					);
 					break;
 				// Filter states
 				case 3:
-					seriesData = statesList.filter(({ stateName }) => statePattern.test(stateName));
+					seriesData = statesList.filter(({ stateName }) =>
+						statePattern.test(stateName)
+					);
 					break;
 			}
 
@@ -415,13 +463,34 @@ export default function (moduleElement) {
 	}
 
 	downloadButton.addEventListener('click', onDownloadClick);
-	filters.forEach(filterButton => filterButton.addEventListener('click', onFilterClick));
+	filters.forEach((filterButton) =>
+		filterButton.addEventListener('click', onFilterClick)
+	);
 	mapForm.addEventListener('submit', onFormSubmit);
 	mapForm.addEventListener('change', onFormSubmit);
 }
 
 function formatDate(timestamp) {
 	const date = new Date(timestamp);
-	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	];
+	return (
+		months[date.getMonth()] +
+		' ' +
+		date.getDate() +
+		', ' +
+		date.getFullYear()
+	);
 }
