@@ -173,7 +173,7 @@ class BreathingExercise {
 			}, 1000);
 
 			setTimeout(() => {
-			  $(this.rotateCopy).text('You should be feeling more calm, relaxed, focused');
+			  $(this.rotateCopy).text('You might be feeling more calm, relaxed, focused');
 			  $(this.copyWrapper).css('opacity', '1');
 			}, 3000);
 
