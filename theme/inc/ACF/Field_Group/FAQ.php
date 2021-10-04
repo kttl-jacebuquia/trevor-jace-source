@@ -91,7 +91,7 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 		<div class="faqs">
-			<div class="container mx-auto">
+			<div class="container mx-auto faqs__container">
 				<h3 class="faqs-heading"><?php echo $title; ?></h3>
 
 				<?php if ( ! empty( $faq_entries ) ) : ?>

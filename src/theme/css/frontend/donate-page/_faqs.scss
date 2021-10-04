@@ -5,32 +5,47 @@
     @apply pb-px120 pt-px120;
   }
 
+  &__container {
+    @apply tw-grid;
+  }
+
   &-heading {
-    @apply mb-px50 text-center text-px32 leading-px42 font-semibold text-teal-dark;
+    @apply mb-px50 text-center text-px32 leading-px42 font-semibold text-teal-dark col-span-full;
 
     @screen md {
       @apply mb-px30 text-left text-px30 leading-px40;
-
     }
 
     @screen lg {
       @apply mb-px40 text-px40 leading-px28;
     }
+
+    @screen lg2 {
+      @apply col-span-10 col-start-2;
+    }
   }
 
   .faq {
     &-list {
+      @apply col-span-full mr-pxn25 ml-pxn25;
       border-top: 1px solid theme('colors.teal.dark');
-      @apply mr-pxn25 ml-pxn25;
 
       @screen md {
-        @apply mr-auto ml-auto;
+        @apply mx-0;
+      }
+
+      @screen lg2 {
+        @apply col-span-10 col-start-2 -mr-px28;
+      }
+
+      @screen xl {
+        @apply mr-0;
       }
 
       &__toggle {
         @apply flex flex-shrink-0 w-px45 h-px45 justify-center items-center order-1 -mr-px20;
 
-        @screen xl {
+        @screen lg {
           @apply mr-0;
         }
       }
@@ -51,7 +66,7 @@
           }
 
           @screen lg {
-            @apply text-px26 leading-px36;
+            @apply text-px26 leading-px36 px-px10;
           }
 
           .minus {
@@ -89,10 +104,14 @@
     }
 
     &-footer {
-      @apply mt-px40;
+      @apply mt-px40 col-span-full;
 
       @screen lg {
         @apply mt-px30;
+      }
+
+      @screen lg2 {
+        @apply col-span-10 col-start-2;
       }
 
       p {

@@ -1,4 +1,12 @@
 .text-icon {
+  // Block Spacer Settings
+  @include block-spacer-settings(
+    $default: ( 70, 132 ),
+    $md: ( 80 ),
+    $lg: ( 120 ),
+    $lg2: ( 140 ),
+    $xl: ( 140 ),
+  );
   @apply pt-px70 pb-px132 bg-blue_green text-white;
 
   @screen md {
@@ -78,11 +86,7 @@
     }
 
     @screen lg {
-      @apply col-start-3 col-span-8;
-    }
-
-    @screen lg2 {
-      @apply col-start-2 col-span-10;
+      @apply col-start-1 col-span-full;
     }
   }
 
@@ -94,7 +98,7 @@
     }
 
     @screen lg {
-      @apply grid-cols-8 mt-px60;
+      @apply tw-grid-small-desktop mt-px60;
     }
 
     @screen lg2 {
@@ -204,7 +208,7 @@
 
     &--4-columns {
       .text-icon__entry {
-        @apply col-span-4;
+        @apply col-span-3;
       }
     }
   }

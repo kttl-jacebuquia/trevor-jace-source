@@ -1,53 +1,48 @@
 .donation-form {
-  @apply bg-white;
-
-  @screen lg {
-    @apply flex justify-between items-stretch;
-  }
+  @include tw-respond(
+    bg-white container mx-auto,
+    $lg2: grid tw-grid-medium-desktop,
+  );
 
   &__content {
-    @apply px-px28 pt-px80 pb-px80;
+    @apply tw-grid;
+    @apply pt-px80 pb-px80;
 
-    @screen md {
-      @apply px-0;
-    }
-
-    @screen lg {
-      @apply pt-0 pb-px30 px-0 flex flex-auto justify-end ;
+    @screen lg2 {
+      @apply col-span-7 grid-cols-7;
     }
 
     &-wrapper {
-      @apply mr-auto ml-auto max-w-px493;
+      @apply mr-auto ml-auto w-full col-span-12;
+
+      @screen md {
+        @apply col-span-6 col-start-2;
+      }
 
       @screen lg {
-        width: 72%;
-        margin-left: rem-calc(100px);
-        @apply mr-auto;
+        @apply col-span-8 col-start-3;
         @apply flex flex-col justify-center max-w-none;
       }
 
+      @screen lg2 {
+        @apply col-span-full;
+      }
+
       h2 {
-        @apply font-bold text-px32 leading-px40 mb-px20 text-teal-dark;
-
-        @screen md {
-          @apply leading-px42 mb-px8;
-        }
-
-        @screen lg {
-          @apply text-px40 leading-px48 mb-px20;
-        }
+        @include tw-respond(
+          font-bold text-px32 leading-px40 mb-px20 text-teal-dark text-left,
+          $md: leading-px42 mb-px8 text-center,
+          $lg: text-px34 leading-px44 tracking-px_05 mb-px20,
+          $lg2: text-left text-px40 leading-px48 tracking-px_05 mb-px20,
+        );
       }
 
       p {
-        @apply font-normal text-px20 leading-px26 mb-px40 text-teal-dark;
-
-        @screen md {
-          @apply text-px18 leading-px24 mb-px50;
-        }
-
-        @screen lg {
-          @apply text-px20 leading-px28 mb-px58;
-        }
+        @include tw-respond(
+          font-normal text-px20 leading-px26 mb-px40 text-teal-dark text-left,
+          $md: text-px18 leading-px24 tracking-em005 mb-px50 text-center,
+          $lg2: text-left text-px20 leading-px28  tracking-em005 mt-px20 mb-px58,
+        );
       }
 
       form {
@@ -187,8 +182,22 @@
   }
 
   &__image {
+    @apply col-span-5 col-start-8 -mx-px28;
+
+    @screen md {
+      @apply -mx-px50;
+    }
+
     @screen lg {
-      flex: 0 0 42%;
+      @apply -mx-px90;
+    }
+
+    @screen lg2 {
+      @apply col-span-5 ml-0 -mr-px120;
+    }
+
+    @screen xl {
+      @apply -mr-px140;
     }
 
     .image-wrapper {

@@ -218,11 +218,17 @@
       @apply text-px18 leading-px24 tracking-px_05;
     }
 
+    @screen lg {
+      @apply col-span-10 col-start-2 py-px100;
+      @apply text-px22 leading-px32 tracking-px05;
+    }
+
     @screen lg2 {
-      @apply text-px26 leading-px36 tracking-em005;
+      @apply text-px24 leading-px34 tracking-px05 py-px140;
     }
 
     @screen xl {
+      @apply text-px26 leading-px36 tracking-em005;
       @apply col-span-8 col-start-3 py-px136;
     }
   }

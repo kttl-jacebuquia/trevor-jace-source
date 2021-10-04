@@ -1,0 +1,23 @@
+$text-settings-parts: (
+  text, // tailwind's text-{font-size}
+  leading, // tailwind's leading-{linee-height}
+  tracking, // tailwind's tracking-{letter-spacing}
+);
+
+// Defines text-styles
+@mixin tw-text($settings-list: ()) {
+  $tailwind-expression: "";
+  @for $index from 1 through length(($text-settings-parts)) {
+    @if ( length($settings-list) >= $index ) {
+      $tailwind-rule: nth($text-settings-parts, $index);
+      $value: nth($settings-list, $index);
+
+      @if ($value != null) {
+        $tailwind-expression: $tailwind-expression + " " + $tailwind-rule + "-" + $value;
+      }
+    }
+  }
+
+  // Apply tailwind styles
+  @apply #{$tailwind-expression};
+}

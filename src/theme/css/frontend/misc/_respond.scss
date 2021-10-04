@@ -1,0 +1,50 @@
+/**
+  Allows shorthand notation for responsive styles
+
+  USAGE:
+
+  .element {
+    @include tw-respond(
+      text-px12 leading-px22 font-bold,    // First argument is always unnamed, for mobile styles
+      $md: text-px14 leading-px24,         // Succeeding arguments should be named with screen variable
+      $lg2: text-px16 leading-px26
+    );
+  }
+
+  OUTPUTS
+
+  .element {
+    @apply text-px12 leading-px22 font-bold;
+    @apply md:text-px14 md:leading-px24;
+    @apply lg2:text-px16 lg2:leading-px26;
+  }
+
+*/
+@mixin tw-respond(
+  $default: (),
+  $md: (),
+  $lg: (),
+  $lg2: (),
+  $xl: (),
+) {
+  @include evaluate-tw-styles($default, null);
+  @include evaluate-tw-styles($md, md);
+  @include evaluate-tw-styles($lg, lg);
+  @include evaluate-tw-styles($lg2, lg2);
+  @include evaluate-tw-styles($xl, xl);
+}
+
+@mixin evaluate-tw-styles($tw-styles: (), $screen: null) {
+  @if ( length($tw-styles) > 0 ) {
+    $styles: if( type-of($tw-styles) == list, $tw-styles, append((), $tw-styles) );
+
+    @if ( $screen != null ) {
+      @screen #{$screen} {
+        @apply #{$styles};
+      }
+    }
+    @else {
+      @apply #{$styles};
+    }
+  }
+}
