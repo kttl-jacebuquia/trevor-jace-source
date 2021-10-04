@@ -125,8 +125,12 @@
     }
 
     &-title {
-      @apply font-semibold text-px18 leading-px24 tracking-wider;
+      @apply font-medium text-px18 leading-px24 tracking-wider;
       @apply text-center mt-7;
+
+      @screen md {
+        @apply text-px18 leading-px22;
+      }
 
       @screen lg2 {
         @apply mt-8 text-px20 leading-px30;
