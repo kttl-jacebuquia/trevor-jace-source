@@ -75,24 +75,24 @@ class URL_File_List extends A_Field_Group implements I_Block, I_Renderable {
 		$url_file_entries = static::get_val( static::FIELD_URL_FILE_ENTRIES );
 
 		$attrs = array(
-			'class' => 'links',
+			'class' => 'tw-links block-spacer',
 		);
 
 		ob_start();
 		?>
 		<div <?php echo Tools::flat_attr( $attrs ); ?> >
-			<div class="links__container">
-				<div class="links__content">
+			<div class="tw-links__container">
+				<div class="tw-links__content">
 					<?php if ( ! empty( $title ) ) : ?>
-						<h2 class="links__heading"><?php echo $title; ?></h2>
+						<h2 class="tw-links__heading"><?php echo $title; ?></h2>
 					<?php endif; ?>
 					<?php if ( ! empty( $description ) ) : ?>
-						<p class="links__description"><?php echo $description; ?></p>
+						<p class="tw-links__description"><?php echo $description; ?></p>
 					<?php endif; ?>
 					<?php if ( ! empty( $url_file_entries ) ) : ?>
-						<ul class="links__items">
+						<ul class="tw-links__items">
 							<?php foreach ( $url_file_entries as $entry ) : ?>
-								<li class="links__item"><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_attr( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
+								<li class="tw-links__item"><a href="<?php echo esc_url( $entry['url_file_entry_link']['url'] ); ?>" target="<?php echo esc_attr( $entry['url_file_entry_link']['target'] ); ?>"><?php echo esc_attr( $entry['url_file_entry_link']['title'] ); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					<?php endif; ?>

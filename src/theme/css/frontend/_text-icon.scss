@@ -3,9 +3,6 @@
   @include block-spacer-settings(
     $default: ( 70, 132 ),
     $md: ( 80 ),
-    $lg: ( 120 ),
-    $lg2: ( 140 ),
-    $xl: ( 140 ),
   );
   @apply pt-px70 pb-px132 bg-blue_green text-white;
 

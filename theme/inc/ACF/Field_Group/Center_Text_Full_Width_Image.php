@@ -96,7 +96,7 @@ class Center_Text_Full_Width_Image extends A_Field_Group implements I_Block, I_R
 		ob_start();
 		?>
 
-		<div class="center-text-with-full-image">
+		<div class="center-text-with-full-image block-spacer">
 			<div class="center-text-with-full-image__container">
 				<h2 class="center-text-with-full-image__title"><?php echo esc_html( $title ); ?></h2>
 				<p class="center-text-with-full-image__description"><?php echo esc_html( $description ); ?></p>
