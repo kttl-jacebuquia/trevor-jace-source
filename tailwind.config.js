@@ -99,7 +99,6 @@ const config = {
 				lg: px2rem(1024),
 				lg2: px2rem(1280),
 				xl: px2rem(1440),
-				'2xl': px2rem(1600),
 			},
 		},
 		colors: {
