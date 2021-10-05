@@ -1,5 +1,5 @@
 .quick-exit-modal {
-	@apply justify-center items-center;
+  @apply justify-center items-center;
 
   .modal-overlay {
     background: rgba(0, 0, 102, 0.1);
@@ -7,78 +7,80 @@
     opacity: 1;
   }
 
-	.modal-container {
-		@apply w-auto h-auto rounded-px10 relative pt-px58;
-		width: calc(100% - #{rem-calc(56)});
-		max-width: #{rem-calc(606)};
+  .modal-container {
+    @apply w-auto h-auto rounded-px10 relative pt-px58;
 
     @screen md {
-      width: calc(100% - #{rem-calc(278)});
+      @apply col-span-6 col-start-2;
     }
-	}
 
-	.modal-close.modal-close {
+    @screen lg {
+      @apply col-start-4 col-span-6;
+    }
+  }
+
+  .modal-close.modal-close {
     @apply bg-indigo w-px32 h-px32 rounded-px10 p-0 text-px15;
 
-		@screen md {
-			@apply mt-px26;
-		}
+    @screen md {
+      @apply mt-px26;
+    }
 
     @screen xl {
       @apply w-px44 h-px44 mt-px24 mr-px24 text-px20;
     }
-	}
+  }
 
-	&__content {
-		@apply pl-px32 pr-px55 pb-px58;
-		@apply text-indigo;
+  &__content {
+    @apply pl-px32 pr-px55 pb-px58;
+    @apply text-indigo;
 
-		@screen xl {
-			@apply pl-px56 pr-px106;
-		}
-	}
+    @screen xl {
+      @apply pl-px56 pr-px106;
+    }
+  }
 
-	&__heading {
-		@apply font-semibold;
-		@apply text-px26 leading-px32 tracking-em005;
+  &__heading {
+    @apply font-semibold;
+    @apply text-px26 leading-px32 tracking-em005;
 
-		@screen xl {
-			@apply text-px34 leading-px44 tracking-px_05;
-		}
-	}
+    @screen xl {
+      @apply text-px34 leading-px44 tracking-px_05;
+    }
+  }
 
-	&__description {
-		@apply mt-px14;
-		@apply text-px16 leading-px22 tracking-em001;
+  &__description {
+    @apply mt-px14;
+    @apply text-px16 leading-px22 tracking-em001;
 
-		@screen xl {
-			@apply mt-px13 text-px18 leading-px26;
-		}
+    @screen xl {
+      @apply mt-px13 text-px18 leading-px26;
+    }
 
-		&--mobile {
-			@apply block;
+    &--mobile {
+      @apply block;
 
       @screen lg {
         @apply hidden;
       }
-		}
+    }
 
-		&--desktop {
-			@apply hidden;
+    &--desktop {
+      @apply hidden;
 
       @screen lg {
         @apply block;
       }
-		}
-	}
+    }
+  }
 
-	&__cta {
-		@apply table mt-px23 font-bold;
-		@apply text-px16 leading-px22 tracking-px05;
-		@apply pb-px4 border-indigo border-b-px2 border-solid;
+  &__cta {
+    @apply table mt-px23 font-bold;
+    @apply text-px16 leading-px22 tracking-px05;
+    @apply pb-px4 border-indigo border-b-px2 border-solid;
 
-		@screen xl {
-			@apply mt-px24 text-px18 leading-px26;
-		}
-	}
+    @screen xl {
+      @apply mt-px24 text-px18 leading-px26;
+    }
+  }
 }
