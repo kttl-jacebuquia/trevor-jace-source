@@ -1,3 +1,5 @@
+const { outputSync, outputFileSync } = require('fs-extra');
+const path = require('path');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const px2rem = (px, root = 16) => {
@@ -5,15 +7,25 @@ const px2rem = (px, root = 16) => {
 	return String(+remVal.toFixed(2)) + 'rem';
 };
 
-// Converts a hex color to RGB
-const hexToRgb = (hex) => {
-    var result = /^#?([0-9a-f\d]{2})([0-9a-f\d]{2})([0-9a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-}
+// Converts a hex color to RGBA with tailwind's opacity bg variable
+const hexToTwRgba = (hex) => {
+	var result = /^#?([0-9a-f\d]{2})([0-9a-f\d]{2})([0-9a-f\d]{2})$/i.exec(hex);
+	return result
+		? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16),
+				a: 'var(--tw-bg-opacity)',
+		  }
+		: null;
+};
+
+// Expands rgba color segments into separate r, g, b, a values
+const rgbaSegments = (rgba) => {
+	const rgbaMatch = rgba.replace(/[^0-9,.]+/g, '');
+	const [r, g, b, a = 1] = rgbaMatch.split(',');
+	return { r, g, b, a };
+};
 
 /**
  * Builds object containing px 2 rem key-value for tailwind, e.g.:
@@ -452,25 +464,76 @@ const config = {
 	],
 };
 
+// Create color maps to be rendered into an scss file
+const themeColors = {};
+const extendedColors = {};
+
 // Add rgba variants to theme colors
-Object.entries(config.theme.colors).forEach(([ color, colorConfig ]) => {
-	if ( typeof colorConfig === 'object' ) {
+Object.entries(config.theme.colors).forEach(([color, colorConfig]) => {
+	if (typeof colorConfig === 'object') {
 		// Cycle through the color variants
-		Object.entries(colorConfig).forEach(([ variantKey, variantValue ]) => {
-			const rgb = hexToRgb(variantValue);
+		Object.entries(colorConfig).forEach(([key, variantValue]) => {
+			const rgbaObject = /rgb?a\([^)]+\)/.test(variantValue)
+				? rgbaSegments(variantValue)
+				: hexToTwRgba(variantValue);
+			const variantKey = /default/i.test(key) ? '' : key.toLowerCase();
 
 			// Add rgba variant, as well as red-blue-green segments
 			// See theme.scss for sample usage
-			if ( rgb ) {
-				const { r, g, b } = rgb;
-				const rgba = [ r, g, b, 'var(--tw-bg-opacity)' ].join(', ');
-				config.theme.colors[color][variantKey + '-rgba'] = `rgba(${rgba})`;
-				config.theme.colors[color][variantKey + '-r'] = r;
-				config.theme.colors[color][variantKey + '-g'] = g;
-				config.theme.colors[color][variantKey + '-b'] = b;
+			if (rgbaObject) {
+				const { r, g, b, a } = rgbaObject;
+				const rgba = [r, g, b, a].join(', ');
+
+				config.theme.colors[color][
+					[variantKey, 'rgba'].filter(Boolean).join('-')
+				] = `rgba(${rgba})`;
+				extendedColors[
+					[color, variantKey, 'rgba'].filter(Boolean).join('-')
+				] = `rgba(${rgba})`;
+
+				Object.entries({ r, g, b }).forEach(
+					([colorSegment, segmentValue]) => {
+						config.theme.colors[color][
+							[variantKey, colorSegment].filter(Boolean).join('-')
+						] = segmentValue;
+						extendedColors[
+							[color, variantKey, colorSegment]
+								.filter(Boolean)
+								.join('-')
+						] = segmentValue;
+					}
+				);
 			}
+
+			const colorVariantKey =
+				color + (variantKey ? `-${variantKey}` : '');
+			themeColors[colorVariantKey] = variantValue;
+			extendedColors[colorVariantKey] = variantValue;
 		});
+	} else {
+		themeColors[color] = colorConfig;
+		extendedColors[color] = colorConfig;
 	}
 });
+
+// Render colors scss file
+const scssColorsOutputPath = path.resolve(
+	__dirname,
+	'src/theme/css/colors/_colors.scss'
+);
+const outputContents = `
+$colors: (
+  ${Object.entries(extendedColors)
+		.map(([key, value]) => `${key}: ${value}`)
+		.join(',\n  ')}
+);
+
+$theme-colors: (
+	${Object.entries(themeColors)
+		.map(([key, value]) => `${key}: ${value}`)
+		.join(',\n  ')}
+);
+`;
+outputFileSync(scssColorsOutputPath, outputContents);
 
 module.exports = config;
