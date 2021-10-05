@@ -131,6 +131,9 @@ class Hooks {
 		# Event
 		CPT\Event::construct();
 
+		# Form
+		CPT\Form::construct();
+
 		# Text Only Popup
 		CPT\Text_Only_Popup::construct();
 
@@ -684,6 +687,7 @@ class Hooks {
 			'edit.php?post_type=trevor_research',
 			'edit.php?post_type=trevor_fin_report',
 			'edit.php?post_type=trevor_page_recirc',
+			'edit.php?post_type=trevor_form',
 			'edit.php?post_type=trevor_text_popup',
 			'edit.php?post_type=trevor_expect_popup',
 			'edit.php?post_type=trevor_promo_popup',

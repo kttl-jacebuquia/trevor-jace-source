@@ -97,6 +97,7 @@ class ACF {
 		Field_Group\What_To_Expect_Popup::class,
 		Field_Group\Post_Details::class,
 		Field_Group\Promo_Popup::class,
+		Field_Group\Form::class,
 	);
 
 	public static function construct() {
