@@ -90,12 +90,7 @@ $screen-widths: (
       margin-top: -$top-nav-height-desktop;
     }
 
-    @screen lg2 {
-      margin-top: -$top-nav-height-tablet; // Back to 144px;
-    }
-
     @screen xl {
-      margin-top: -$top-nav-height-desktop;
       @apply pt-0;
     }
 
@@ -162,7 +157,7 @@ $screen-widths: (
       }
 
       &-title {
-        @apply text-px32 leading-px40 font-bold col-span-full;
+        @apply text-px32 leading-px40 font-semibold col-span-full;
 
         @screen md {
           @apply text-px32 leading-px42 col-span-5;
@@ -227,7 +222,11 @@ $screen-widths: (
         }
 
         @screen lg2 {
-          @apply w-full -top-px270 ml-0;
+          @apply w-full -top-px320 ml-0;
+        }
+
+        @screen xl {
+          @apply -top-px270;
         }
       }
 
