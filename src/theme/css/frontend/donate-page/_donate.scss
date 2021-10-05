@@ -185,19 +185,20 @@
     @apply col-span-5 col-start-8 -mx-px28;
 
     @screen md {
-      @apply -mx-px50;
+      @include bleed(md);
     }
 
     @screen lg {
-      @apply -mx-px90;
+      @include bleed(lg);
     }
 
     @screen lg2 {
-      @apply col-span-5 ml-0 -mr-px120;
+      @apply col-span-5 ml-0;
+      @include bleed-r(lg2);
     }
 
     @screen xl {
-      @apply -mr-px140;
+      @include bleed-r(xl);
     }
 
     .image-wrapper {
@@ -205,17 +206,17 @@
       @apply block relative overflow-hidden w-full h-auto;
 
       @screen md {
-        padding-top: calc((450 / 768) * 100%);
+        @apply pt-0 h-px450;
       }
 
-      @screen lg {
+      @screen lg2 {
         height: rem-calc(892px);
         padding-top: calc((892 / 600) * 100%);
       }
 
 
       img {
-        @apply block absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full;
+        @apply block absolute top-0 bottom-0 left-0 right-0 object-cover object-top w-full h-full;
       }
     }
 
