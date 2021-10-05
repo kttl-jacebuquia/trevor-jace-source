@@ -1,8 +1,8 @@
 // General styles
 body.is-rc {
-  --site-theme-background-r: theme('colors.indigo.DEFAULT-r');
-  --site-theme-background-g: theme('colors.indigo.DEFAULT-g');
-  --site-theme-background-b: theme('colors.indigo.DEFAULT-b');
+  --site-theme-background-r: theme('colors.indigo.r');
+  --site-theme-background-g: theme('colors.indigo.g');
+  --site-theme-background-b: theme('colors.indigo.b');
 }
 
 @import "./floating-crisis-btn";

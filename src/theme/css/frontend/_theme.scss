@@ -18,10 +18,10 @@
 
 // Applies theme variables in a page
 @mixin set-theme-vars( $color, $variant: null ) {
-  $variant: if( type-of($variant) == string, $variant, DEFAULT);
-  --site-theme-background-r: theme("colors.#{$color}.#{$variant}-r");
-  --site-theme-background-g: theme("colors.#{$color}.#{$variant}-g");
-  --site-theme-background-b: theme("colors.#{$color}.#{$variant}-b");
+  $variant: if( type-of($variant) == string, $variant + '-', '');
+  --site-theme-background-r: theme("colors.#{$color}.#{$variant}r");
+  --site-theme-background-g: theme("colors.#{$color}.#{$variant}g");
+  --site-theme-background-b: theme("colors.#{$color}.#{$variant}b");
 }
 
 /**

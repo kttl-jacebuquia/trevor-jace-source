@@ -30,6 +30,15 @@
     @apply bg-white w-full h-full z-50 overflow-y-auto overflow-x-hidden relative flex flex-col;
     @apply col-span-full w-auto pt-px100;
 
+    // Apply CMS BG color
+    &:not(.bg-transparent):not(.bg-current) {
+      @each $color-name, $color-value in $theme-colors {
+        &.bg-#{$color-name} {
+          @apply bg-#{$color-name};
+        }
+      }
+    }
+
     @screen md {
       @apply pt-px57;
     }
