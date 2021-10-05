@@ -26,13 +26,13 @@
 	@include wave-underline;
 
   border: 0!important;
-  padding-bottom: 7px!important;
+  padding-bottom: 17px!important;
   position: relative;
 
   &::after {
     content: '';
     height: 2px;
-    bottom: 6px;
+    bottom: 12px;
 
     @apply block w-full absolute bg-teal-dark;
   }
