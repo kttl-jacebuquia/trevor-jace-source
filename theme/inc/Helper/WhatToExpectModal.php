@@ -1,7 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
 use TrevorWP\Theme\ACF\Field_Group\What_To_Expect_Popup;
-use TrevorWP\Theme\ACF\Options_Page\What_To_Expect;
 
 class WhatToExpectModal extends Modal {
 	const ID = 'js-what-to-expect-modal';
@@ -13,14 +12,12 @@ class WhatToExpectModal extends Modal {
 	}
 
 	public static function create( $post = null ): void {
-		$id = static::ID;
-
-		if ( ! empty( $post ) ) {
-			$content = What_To_Expect_Popup::render( $post );
-			$id      = What_To_Expect_Popup::gen_modal_id( $post->ID );
-		} else {
-			$content = What_To_Expect::render();
+		if ( empty( $post ) ) {
+			return;
 		}
+
+		$content = What_To_Expect_Popup::render( $post );
+		$id      = What_To_Expect_Popup::gen_modal_id( $post->ID );
 
 		$options = array(
 			'id'     => $id,
