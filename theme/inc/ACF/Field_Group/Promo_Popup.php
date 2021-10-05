@@ -4,6 +4,7 @@ use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Promo_Popup extends A_Field_Group {
+	const FIELD_BLOCK_STYLES    = 'block_styles';
 	const FIELD_IMAGE           = 'promo_image';
 	const FIELD_HEADLINE        = 'promo_headline';
 	const FIELD_DESCRIPTION     = 'promo_description';
@@ -12,22 +13,32 @@ class Promo_Popup extends A_Field_Group {
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
-		$image       = static::gen_field_key( static::FIELD_IMAGE );
-		$headline    = static::gen_field_key( static::FIELD_HEADLINE );
-		$description = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$button      = static::gen_field_key( static::FIELD_BUTTON );
+		$block_styles = static::gen_field_key( static::FIELD_BLOCK_STYLES );
+		$image        = static::gen_field_key( static::FIELD_IMAGE );
+		$headline     = static::gen_field_key( static::FIELD_HEADLINE );
+		$description  = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$button       = static::gen_field_key( static::FIELD_BUTTON );
 
 		return array(
 			'title'    => 'Promo',
 			'fields'   => array(
-				static::FIELD_IMAGE       => array(
+				static::FIELD_BLOCK_STYLES => Block_Styles::clone(
+					array(
+						'key'     => $block_styles,
+						'name'    => static::FIELD_BLOCK_STYLES,
+						'label'   => 'Block Styles',
+						'display' => 'seamless',
+						'layout'  => 'block',
+					)
+				),
+				static::FIELD_IMAGE        => array(
 					'key'          => $image,
 					'name'         => static::FIELD_IMAGE,
 					'label'        => 'Image',
 					'type'         => 'image',
 					'preview_size' => 'thumbnail',
 				),
-				static::FIELD_HEADLINE    => array(
+				static::FIELD_HEADLINE     => array(
 					'key'       => $headline,
 					'name'      => static::FIELD_HEADLINE,
 					'label'     => 'Headline',
@@ -35,14 +46,14 @@ class Promo_Popup extends A_Field_Group {
 					'required'  => true,
 					'maxlength' => 50,
 				),
-				static::FIELD_DESCRIPTION => array(
+				static::FIELD_DESCRIPTION  => array(
 					'key'       => $description,
 					'name'      => static::FIELD_DESCRIPTION,
 					'label'     => 'Description',
 					'type'      => 'textarea',
 					'maxlength' => 200,
 				),
-				static::FIELD_BUTTON      => Button::clone(
+				static::FIELD_BUTTON       => Button::clone(
 					array(
 						'key'           => $button,
 						'name'          => static::FIELD_BUTTON,

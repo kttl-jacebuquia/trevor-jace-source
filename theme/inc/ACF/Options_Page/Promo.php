@@ -54,10 +54,16 @@ class Promo extends A_Options_Page {
 		);
 	}
 
-	public static function render(): string {
+	public static function get_promo_popup() {
 		$is_support  = Is::rc();
 		$promo_field = $is_support ? static::FIELD_SUPPORT : static::FIELD_ORGANIZATION;
 		$promo_popup = static::get_option( $promo_field );
+
+		return $promo_popup;
+	}
+
+	public static function render(): string {
+		$promo_popup = self::get_promo_popup();
 
 		return FG_PROMO::render( $promo_popup );
 	}

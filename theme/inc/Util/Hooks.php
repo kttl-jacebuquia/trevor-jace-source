@@ -10,6 +10,7 @@ use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
+use TrevorWP\Theme\ACF\Field_Group\Promo_Popup;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
@@ -611,13 +612,20 @@ class Hooks {
 			)
 		) )->render();
 
-		// Quick Exit Modal
+		// Promo Modal
+		$promo_popup  = Options_Page\Promo::get_promo_popup();
+		$val          = new Field_Val_Getter( Promo_Popup::class, $promo_popup );
+		$block_styles = $val->get( Promo_Popup::FIELD_BLOCK_STYLES );
+
+		list( $bg_color, $text_color ) = array_values( $block_styles );
+
 		echo ( new \TrevorWP\Theme\Helper\Modal(
 			Options_Page\Promo::render(),
 			array(
-				'target' => '.promo-popup-modal',
-				'id'     => 'js-promo-popup-modal',
-				'class'  => array( 'promo-popup-modal' ),
+				'target'          => '.promo-popup-modal',
+				'id'              => 'js-promo-popup-modal',
+				'class'           => array( 'promo-popup-modal' ),
+				'container_class' => array( "bg-{$bg_color}", "text-{$text_color}" ),
 			)
 		) )->render();
 	}
