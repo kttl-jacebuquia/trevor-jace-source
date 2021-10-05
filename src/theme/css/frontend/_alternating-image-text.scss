@@ -305,7 +305,7 @@
   }
 
   &__cta-link {
-    @apply mt-px24 font-extrabold text-px18 leading-px24 tracking-px025 pb-px2;
+    @apply mt-px24 font-extrabold text-px18 leading-px24 tracking-px025;
 
     @screen md {
       @apply mt-px20 font-semibold text-px18 leading-px24;
@@ -328,7 +328,7 @@
     }
 
     &.page-btn-link {
-      @apply inline-block h-px30;
+      @apply inline-block h-auto;
     }
   }
 

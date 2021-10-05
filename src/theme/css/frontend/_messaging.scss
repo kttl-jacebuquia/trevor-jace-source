@@ -169,7 +169,15 @@
 		}
 
     .page-btn-link {
-      @apply h-px35;
+      @apply text-px18 leading-px24 tracking-px025;
+
+      @screen lg {
+        @apply text-px20;
+      }
+
+      @screen lg2 {
+        @apply text-px22 leading-px26;
+      }
     }
 
     .page-btn:not(.page-btn-link) {
