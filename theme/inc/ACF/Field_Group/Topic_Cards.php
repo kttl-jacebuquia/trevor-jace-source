@@ -26,6 +26,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_LETTERS          = 'letters';
 	const FIELD_SHOW_LOAD_MORE   = 'show_load_more';
 
+	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -396,13 +398,21 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	private static function render_posts( $posts = array() ): string {
 		$posts          = static::filter_entries( $posts );
-		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE ) && ! empty( $posts );
+		$display_limit  = static::DEFAULT_NUM_DISPLAY_LIMIT;
+		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE )
+			&& ! empty( $posts )
+			&& count( $posts ) > $display_limit;
 		$tile_options   = array(
 			'class' => array( 'topic-cards__item' ),
 			'attr'  => array(
 				'role' => 'listitem',
 			),
 		);
+
+		// Limit the display to 6 posts only if showing load more.
+		if ( $show_load_more ) {
+			$posts = array_slice( $posts, 0, $display_limit );
+		}
 
 		/**
 		 * Double check whether to show_load_more
