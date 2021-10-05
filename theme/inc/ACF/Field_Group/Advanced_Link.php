@@ -23,6 +23,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_WHAT_TO_EXPECT_POPUP = 'what_to_expect_popup';
 	const FIELD_PHONE                = 'phone';
 	const FIELD_EMAIL                = 'email';
+	const FIELD_FORM                 = 'form';
 	const FIELD_SHOW_DOWNLOAD_ICON   = 'show_download_icon';
 	const FIELD_SHOW_DEV_FORM_ONLY   = 'show_dev_form_only';
 
@@ -44,6 +45,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$what_to_expect_popup = static::gen_field_key( static::FIELD_WHAT_TO_EXPECT_POPUP );
 		$phone                = static::gen_field_key( static::FIELD_PHONE );
 		$email                = static::gen_field_key( static::FIELD_EMAIL );
+		$form                 = static::gen_field_key( static::FIELD_FORM );
 		$show_download_icon   = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
 		$show_dev_form_only   = static::gen_field_key( static::FIELD_SHOW_DEV_FORM_ONLY );
 
@@ -72,6 +74,7 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						'sms'           => 'SMS',
 						'trevor_chat'   => 'Trevor Chat',
 						'email'         => 'Email',
+						'form'          => 'Forms',
 					),
 					'default_value' => 'page_link',
 					'allow_null'    => true,
@@ -272,6 +275,31 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'post_type'         => array(
 						0 => CPT\What_To_Expect_Popup::POST_TYPE,
 					),
+					'filters'           => array(
+						0 => 'search',
+					),
+					'taxonomy'          => '',
+					'allow_null'        => 0,
+					'multiple'          => 0,
+					'return_format'     => 'object',
+					'ui'                => 1,
+				),
+				static::FIELD_FORM                 => array(
+					'key'               => $form,
+					'name'              => static::FIELD_FORM,
+					'label'             => 'Form',
+					'type'              => 'post_object',
+					'required'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $action,
+								'operator' => '==',
+								'value'    => 'form',
+							),
+						),
+					),
+					'post_type'         => array( CPT\Form::POST_TYPE ),
 					'filters'           => array(
 						0 => 'search',
 					),
@@ -525,6 +553,14 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
 					DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
 					DOM_Attr::FIELD_ATTR_VAL => 'click to open chat window',
+				);
+				break;
+			case 'form':
+				$form           = $val->get( static::FIELD_FORM );
+				$options['tag'] = 'button';
+				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+					DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+					DOM_Attr::FIELD_ATTR_VAL => 'click to open Form',
 				);
 				break;
 		}
