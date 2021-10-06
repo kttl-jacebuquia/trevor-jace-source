@@ -3,6 +3,8 @@
 class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_LESSON                    = 'lesson';
 	const FIELD_VIDEO_ENTRIES             = 'video_entries';
+	const FIELD_VIDEO_ENTRY_THUMBNAIL     = 'video_entry_thumbnail';
+	const FIELD_VIDEO_ENTRY_VIMEO         = 'video_entry_vimeo';
 	const FIELD_VIDEO_ENTRY_HEADER        = 'video_entry_header';
 	const FIELD_VIDEO_ENTRY_DESCRIPTION   = 'video_entry_description';
 	const FIELD_VIDEO_ENTRY_FILE_LABEL    = 'video_entry_file_label';
@@ -14,13 +16,15 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 	protected static function prepare_register_args(): array {
 		$lesson                    = static::gen_field_key( static::FIELD_LESSON );
 		$video_entries             = static::gen_field_key( static::FIELD_VIDEO_ENTRIES );
+		$video_entry_thumbnail     = static::gen_field_key( static::FIELD_VIDEO_ENTRY_THUMBNAIL );
+		$video_entry_vimeo         = static::gen_field_key( static::FIELD_VIDEO_ENTRY_VIMEO );
 		$video_entry_header        = static::gen_field_key( static::FIELD_VIDEO_ENTRY_HEADER );
 		$video_entry_description   = static::gen_field_key( static::FIELD_VIDEO_ENTRY_DESCRIPTION );
 		$video_entry_file_label    = static::gen_field_key( static::FIELD_VIDEO_ENTRY_FILE_LABEL );
 		$video_entry_file_download = static::gen_field_key( static::FIELD_VIDEO_ENTRY_FILE_DOWNLOAD );
 
 		return array(
-			'title'  => 'Video Player',
+			'title'  => 'Lessons Video Player',
 			'fields' => array(
 				static::FIELD_LESSON        => array(
 					'key'           => $lesson,
@@ -40,6 +44,20 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 					'max'        => 6,
 					'collapsed'  => $video_entry_header,
 					'sub_fields' => array(
+						static::FIELD_VIDEO_ENTRY_THUMBNAIL => array(
+							'key'          => $video_entry_thumbnail,
+							'name'         => static::FIELD_VIDEO_ENTRY_THUMBNAIL,
+							'label'        => 'Thumbnail',
+							'type'         => 'image',
+							'preview_size' => 'thumbnail',
+						),
+						static::FIELD_VIDEO_ENTRY_VIMEO  => array(
+							'key'      => $video_entry_vimeo,
+							'name'     => static::FIELD_VIDEO_ENTRY_VIMEO,
+							'label'    => 'Vimeo',
+							'type'     => 'oembed',
+							'required' => 1,
+						),
 						static::FIELD_VIDEO_ENTRY_HEADER => array(
 							'key'      => $video_entry_header,
 							'name'     => static::FIELD_VIDEO_ENTRY_HEADER,
@@ -85,7 +103,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 			parent::get_block_args(),
 			array(
 				'name'       => static::get_key(),
-				'title'      => 'Video Player',
+				'title'      => 'Lessons Video Player',
 				'post_types' => array( 'page' ),
 			)
 		);
@@ -98,7 +116,9 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 		$lesson        = static::get_val( static::FIELD_LESSON );
 		$video_entries = static::get_val( static::FIELD_VIDEO_ENTRIES );
 
-		$lesson = count( $video_entries ) . ' ' . $lesson;
+		if ( ! empty( $video_entries ) ) {
+			$lesson = count( $video_entries ) . ' ' . $lesson;
+		}
 
 		ob_start();
 		// Next Step: FE
@@ -107,6 +127,14 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 			<p><?php echo esc_html( $lesson ); ?></p>
 			<?php if ( ! empty( $video_entries ) ) : ?>
 				<?php foreach ( $video_entries as $video ) : ?>
+					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
+						<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'] ) ) : ?>
+							<img src="<?php echo esc_url( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'] ); ?>" alt="<?php echo esc_attr( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['alt'] ); ?>">
+						<?php endif; ?>
+
+						<div><?php echo $video[ static::FIELD_VIDEO_ENTRY_VIMEO ]; ?></div>
+					<?php endif; ?>
+
 					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ) ) : ?>
 						<h1><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></h1>
 					<?php endif; ?>
