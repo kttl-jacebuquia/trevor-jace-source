@@ -41,14 +41,14 @@ class Sorter {
 
 		ob_start();
 		?>
-		<div class="custom-select">
+		<div class="custom-select ajax-sorter">
 			<ul>
 				<li class="label">
-					<button>Sort By: <?php echo $current['title']; ?></button>
+					<button class="sort-select">Sort By: <?php echo $current['title']; ?></button>
 					<ul class="dropdown">
 						<?php foreach ( $this->_options as $key => $option ) : ?>
 							<li class="<?php echo $this->_current == $key ? 'active' : ''; ?>">
-								<a href="<?php echo add_query_arg( self::$GET_key, $key, home_url( $wp->request ) ); ?>">
+								<a class="sort-link" href="<?php echo add_query_arg( self::$GET_key, $key, home_url( $wp->request ) ); ?>">
 									Sort By: <?php echo $option['title']; ?>
 								</a>
 							</li>
