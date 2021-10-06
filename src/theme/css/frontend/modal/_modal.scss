@@ -34,7 +34,7 @@
     &:not(.bg-transparent):not(.bg-current) {
       @each $color-name, $color-value in $theme-colors {
         &.bg-#{$color-name} {
-          @apply bg-#{$color-name};
+          background-color: $color-value;
         }
       }
     }
