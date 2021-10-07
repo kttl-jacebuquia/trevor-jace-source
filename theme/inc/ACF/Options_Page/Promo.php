@@ -5,8 +5,10 @@ use TrevorWP\Theme\ACF\Field_Group\Promo_Popup as FG_PROMO;
 use TrevorWP\Theme\Util\Is;
 
 class Promo extends A_Options_Page {
-	const FIELD_SUPPORT      = 'promo_support';
-	const FIELD_ORGANIZATION = 'promo_organization';
+	const FIELD_SUPPORT             = 'promo_support';
+	const FIELD_SUPPORT_TOGGLE      = 'promo_support_toggle';
+	const FIELD_ORGANIZATION        = 'promo_organization';
+	const FIELD_ORGANIZATION_TOGGLE = 'promo_organization_toggle';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
@@ -21,12 +23,14 @@ class Promo extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
-		$support      = static::gen_field_key( static::FIELD_SUPPORT );
-		$organization = static::gen_field_key( static::FIELD_ORGANIZATION );
+		$support             = static::gen_field_key( static::FIELD_SUPPORT );
+		$support_toggle      = static::gen_field_key( static::FIELD_SUPPORT_TOGGLE );
+		$organization        = static::gen_field_key( static::FIELD_ORGANIZATION );
+		$organization_toggle = static::gen_field_key( static::FIELD_ORGANIZATION_TOGGLE );
 
 		return array_merge(
 			array(
-				static::FIELD_SUPPORT      => array(
+				static::FIELD_SUPPORT             => array(
 					'key'        => $support,
 					'name'       => static::FIELD_SUPPORT,
 					'label'      => 'Support',
@@ -37,8 +41,23 @@ class Promo extends A_Options_Page {
 					'allow_null' => 0,
 					'multiple'   => 0,
 					'ui'         => 1,
+					'wrapper'    => array(
+						'width' => '50',
+					),
 				),
-				static::FIELD_ORGANIZATION => array(
+				static::FIELD_SUPPORT_TOGGLE      => array(
+					'key'         => $support_toggle,
+					'name'        => static::FIELD_SUPPORT_TOGGLE,
+					'label'       => 'Show Promo?',
+					'type'        => 'true_false',
+					'ui'          => 1,
+					'ui_on_text'  => 'Yes',
+					'ui_off_text' => 'No',
+					'wrapper'     => array(
+						'width' => '50',
+					),
+				),
+				static::FIELD_ORGANIZATION        => array(
 					'key'        => $organization,
 					'name'       => static::FIELD_ORGANIZATION,
 					'label'      => 'Organization',
@@ -49,6 +68,21 @@ class Promo extends A_Options_Page {
 					'allow_null' => 0,
 					'multiple'   => 0,
 					'ui'         => 1,
+					'wrapper'    => array(
+						'width' => '50',
+					),
+				),
+				static::FIELD_ORGANIZATION_TOGGLE => array(
+					'key'         => $organization_toggle,
+					'name'        => static::FIELD_ORGANIZATION_TOGGLE,
+					'label'       => 'Show Promo?',
+					'type'        => 'true_false',
+					'ui'          => 1,
+					'ui_on_text'  => 'Yes',
+					'ui_off_text' => 'No',
+					'wrapper'     => array(
+						'width' => '50',
+					),
 				),
 			),
 		);
@@ -59,12 +93,20 @@ class Promo extends A_Options_Page {
 		$promo_field = $is_support ? static::FIELD_SUPPORT : static::FIELD_ORGANIZATION;
 		$promo_popup = static::get_option( $promo_field );
 
-		return $promo_popup;
+		$promo_state = $is_support ? static::FIELD_SUPPORT_TOGGLE : static::FIELD_ORGANIZATION_TOGGLE;
+		$promo_state = static::get_option( $promo_state );
+
+		$data = array(
+			'promo' => $promo_popup,
+			'state' => $promo_state,
+		);
+
+		return $data;
 	}
 
 	public static function render(): string {
 		$promo_popup = self::get_promo_popup();
 
-		return FG_PROMO::render( $promo_popup );
+		return FG_PROMO::render( $promo_popup['promo'] );
 	}
 }

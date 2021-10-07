@@ -618,21 +618,24 @@ class Hooks {
 		) )->render();
 
 		// Promo Modal
-		$promo_popup  = Options_Page\Promo::get_promo_popup();
-		$val          = new Field_Val_Getter( Promo_Popup::class, $promo_popup );
-		$block_styles = $val->get( Promo_Popup::FIELD_BLOCK_STYLES );
+		$promo_popup = Options_Page\Promo::get_promo_popup();
 
-		list( $bg_color, $text_color ) = array_values( $block_styles );
+		if ( $promo_popup['state'] ) {
+			$val          = new Field_Val_Getter( Promo_Popup::class, $promo_popup['promo'] );
+			$block_styles = $val->get( Promo_Popup::FIELD_BLOCK_STYLES );
 
-		echo ( new \TrevorWP\Theme\Helper\Modal(
-			Options_Page\Promo::render(),
-			array(
-				'target'          => '.promo-popup-modal',
-				'id'              => 'js-promo-popup-modal',
-				'class'           => array( 'promo-popup-modal' ),
-				'container_class' => array( "bg-{$bg_color}", "text-{$text_color}" ),
-			)
-		) )->render();
+			list( $bg_color, $text_color ) = array_values( $block_styles );
+
+			echo ( new \TrevorWP\Theme\Helper\Modal(
+				Options_Page\Promo::render(),
+				array(
+					'target'          => '.promo-popup-modal',
+					'id'              => 'js-promo-popup-modal',
+					'class'           => array( 'promo-popup-modal' ),
+					'container_class' => array( "bg-{$bg_color}", "text-{$text_color}" ),
+				)
+			) )->render();
+		}
 	}
 
 	/**
