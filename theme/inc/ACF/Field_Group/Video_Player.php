@@ -120,35 +120,112 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 			$lesson = count( $video_entries ) . ' ' . $lesson;
 		}
 
+		// Extract embed info from embed html
+		foreach ( $video_entries as &$video_entry ) {
+			$embed_html = $video_entry[ static::FIELD_VIDEO_ENTRY_VIMEO ];
+			preg_match_all( '/(src|width|height)="([^"]+)"/i', $embed_html, $matches );
+
+			foreach ( $matches[1] as $index => $matched_key ) {
+				$video_entry[ $matched_key ] = $matches[2][ $index ];
+			}
+
+			// Thumbnail
+			if ( ! empty( $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ] ) ) {
+				$video_entry['thumbnail_id'] = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'];
+				$video_entry['thumbnail']    = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'];
+				$video_entry['poster']       = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'];
+			}
+
+			// File Download
+			if ( ! empty( $video_entry[ static::FIELD_VIDEO_ENTRY_FILE_DOWNLOAD ]['url'] ) ) {
+				$video_entry['download_url']   = $video_entry[ static::FIELD_VIDEO_ENTRY_FILE_DOWNLOAD ]['url'];
+				$video_entry['download_label'] = $video_entry[ static::FIELD_VIDEO_ENTRY_FILE_LABEL ];
+			}
+		}
+
+		$first_video = $video_entries[0];
+
 		ob_start();
 		// Next Step: FE
 		?>
-		<div>
-			<p><?php echo esc_html( $lesson ); ?></p>
-			<?php if ( ! empty( $video_entries ) ) : ?>
-				<?php foreach ( $video_entries as $video ) : ?>
-					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
-						<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'] ) ) : ?>
-							<img src="<?php echo esc_url( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'] ); ?>" alt="<?php echo esc_attr( $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['alt'] ); ?>">
-						<?php endif; ?>
+		<?php if ( ! empty( $video_entries ) ) : ?>
+			<div class="lessons-video-player">
+				<div class="lessons-video-player__container">
 
-						<div><?php echo $video[ static::FIELD_VIDEO_ENTRY_VIMEO ]; ?></div>
-					<?php endif; ?>
+					<!-- Player -->
+					<div class="lessons-video-player__lesson">
+						<div class="lessons-video-player__player">
+							<!-- IFrame -->
+							<iframe src="https://player.vimeo.com/video/226053498?h=a1599a8ee9&dnt=1&app_id=122963" frameborder="0" class="lessons-video-player__iframe"></iframe>
+							<!-- Poster -->
+							<figure class="lessons-video-player__player-poster">
+								<img src="http://trevor-web.lndo.site/wp-content/uploads/2021/09/Test-Image-PNG-30mb.png" alt="">
+							</figure>
+							<!-- Play button -->
+							<button class="lessons-video-player__play trevor-ti-play"></button>
+						</div>
+						<div class="lessons-video-player__title" data-number="1">Welcome</div>
+						<div class="lessons-video-player__body">In the introductory video to the course, we’ll define mental health and dispel some common related myths. We’ll also explain what suicide is, why it’s a public health crisis in this country, and some of the reasons someone might consider it.</div>
+						<div class="lessons-video-player__download">
+							<a href="test.pdf" class="wave-underline" download>Download Lesson Plan 1</a>
+						</div>
+					</div>
 
-					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ) ) : ?>
-						<h1><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></h1>
-					<?php endif; ?>
+					<!-- List -->
+					<div class="lessons-video-player__playlist">
+						<h3 class="lessons-video-player__playlist-title"><?php echo esc_html( $lesson ); ?></h3>
+						<div class="lessons-video-player__playlist-items" role="list">
+							<?php foreach ( $video_entries as $video ) : ?>
+								<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
+									<button
+										<?php
+											echo self::render_attrs(
+												array( 'lessons-video-player__playlist-item' ),
+												array(
+													'data-src' => $video['src'],
+													'data-thumbnail' => $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'],
+													'data-poster' => $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'],
+													'data-download-url' => $video_entry['download_url'],
+													'data-download-label' => $video_entry['download_label'],
+													'aria-label' => $video[ static::FIELD_VIDEO_ENTRY_HEADER ] . ', click to select this video',
+													'role' => 'listitem',
+												),
+											);
+										?>
+									>
+										<figure class="lessons-video-player__playlist-item-thumbnail trevor-ti-play">
+											<?php
+											if ( ! empty( $video['thumbnail_id'] ) ) {
+												echo wp_get_attachment_image(
+													$video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['ID'],
+													'thumbnail',
+													false,
+													array(
+														'class' => 'lessons-video-player__playlist-thumbnail',
+													),
+												);
+											} else {
+												echo '<img src="" class="lessons-video-player__playlist-thumbnail" />';
+											}
+											?>
+											<span class="trevor-ti-play lessons-video-player__playlist-thumbnail-icon"></span>
+										</figure>
+										<div class="lessons-video-player__playlist-item-content">
+											<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ) ) : ?>
+												<h4 class="lessons-video-player__playlist-item-title"><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></h4>
+											<?php endif; ?>
+											<aside class="lessons-video-player__playlist-item-duration">8:08</aside>
+										</div>
+										<div class="lessons-video-player__playlist-icon trevor-ti-checkmark"></div>
+									</button>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
+					</div>
 
-					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_DESCRIPTION ] ) ) : ?>
-						<p><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_DESCRIPTION ] ); ?></p>
-					<?php endif; ?>
-
-					<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_FILE_DOWNLOAD ]['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $video[ static::FIELD_VIDEO_ENTRY_FILE_DOWNLOAD ]['url'] ); ?>" download><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_FILE_LABEL ] ); ?></a>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</div>
+				</div>
+			</div>
+		<?php endif; ?>
 		<?php
 		return ob_get_clean();
 	}
