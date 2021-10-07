@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import FilterNavigationItem from './filter-navigation-item';
+import { mobileAndTablet } from './../../match-media';
 
 const SELECTOR = `.filter`;
 
@@ -10,22 +11,58 @@ export function initFilterNavigation(context) {
 			const filterOptions = el.querySelector(`${SELECTOR}__navigation`);
 			const filterButton = el.querySelector(`${SELECTOR}__header`);
 
-			$(el).hover(function() {
-				$(this).addClass('filter--expanded');
+			mobileAndTablet(
+				() => {
+					$(filterButton).on('click', function(e) {
+						e.stopPropagation();
 
-				filterButton.setAttribute(
-					'aria-expanded',
-					el.classList.contains('filter--expanded')
-				);
-			}, function() {
-				$(this).removeClass('filter--expanded');
+						$(el).toggleClass('filter--expanded');
 
-				filterButton.setAttribute('filter--expanded', false);
-			});
+						if ($(el).siblings('.filter').hasClass('filter--expanded')) {
+							$(el).siblings('.filter').removeClass('filter--expanded');
+						}
+					});
+				},
+				() => {
+					$(el).hover(function() {
+						$(this).addClass('filter--expanded');
+
+						filterButton.setAttribute(
+							'aria-expanded',
+							el.classList.contains('filter--expanded')
+						);
+					}, function() {
+						$(this).removeClass('filter--expanded');
+
+						filterButton.setAttribute('filter--expanded', false);
+					});
+				}
+			)
 
 			const filterDropdown = new FilterNavigationItem(filterOptions);
 			filterDropdown.init();
 		});
+
+	// Handle click outside.
+	mobileAndTablet(
+		() => {
+			$(document).click(function(e) {
+				if ($('.filter--expanded').length) {
+					const elemClasses = e.target.classList;
+
+					if (
+						!elemClasses.contains('filter')
+						&& !elemClasses.contains('filter__navigation__item')
+						&& !elemClasses.contains('filter__header')
+						&& !elemClasses.contains('trevor-ti-caret-down')
+					) {
+						$('.filter--expanded').removeClass('filter--expanded');
+					}
+				}
+			});
+		},
+		() => {}
+	);
 }
 
 export function getFiltersByGroup(context, group) {
