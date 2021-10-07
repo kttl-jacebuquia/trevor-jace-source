@@ -1,6 +1,13 @@
 .promo-popup-modal {
+  .modal-wrap {
+    @screen xl {
+      padding-left: rem-calc(100px);
+      padding-right: rem-calc(100px);
+    }
+  }
+
   .modal-container {
-    @apply h-auto rounded-px10 pb-px48 max-w-none w-full;
+    @apply h-auto rounded-px10 pt-px68 pb-px48 max-w-none w-full;
 
     @screen md {
       @apply col-span-6 col-start-2 pb-px54;
@@ -8,6 +15,10 @@
 
     @screen lg {
       @apply col-span-8 col-start-3 py-px58;
+    }
+
+    @screen lg2 {
+      @apply col-span-8 col-start-3 py-px78;
     }
   }
 
@@ -35,7 +46,16 @@
     @apply col-span-2 col-start-3 rounded-px10 overflow-hidden;
 
     @screen lg {
-      @apply col-span-3 justify-self-end w-px118;
+      @apply col-span-3 justify-self-end w-px118 mr-px12;
+    }
+
+    @screen lg2 {
+      @apply w-px150 mr-px21;
+    }
+
+    @screen xl {
+      @apply w-px183;
+      margin-right: 47px;
     }
   }
 
@@ -79,11 +99,11 @@
     }
 
     @screen lg2 {
-      @apply text-px16 leading-px24;
+      @apply text-px16 leading-px24 mt-px12;
     }
 
     @screen xl {
-      @apply text-px18 leading-px26;
+      @apply text-px18 leading-px26 mt-px16;
     }
   }
 
