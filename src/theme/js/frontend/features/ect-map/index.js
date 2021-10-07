@@ -1,9 +1,13 @@
-/* https://codepen.io/jsilff/full/ZEpdjqB */
+/*
+	Map generation codes provided by the client.
+	Changes applied to the original codes:
+	- Extracted hardcoded google sheets credentials and moved to BE
+	- Moved Google Sheets request from Highcharts.data to WP AJAX
+	- Updated null equations which are now empty strings due to AJAX implementation
+	- Added chart load event handler
+	- Disable mapNavigation.enableMouseWheelZoom option
+*/
 import $ from 'jquery';
-import proj4 from 'proj4';
-import mapData from '@highcharts/map-collection/countries/us/us-all.geo.json';
-
-window.proj4 = window.proj4 || proj4;
 
 /*
 Fixme: Do not hardcode keys
@@ -23,11 +27,16 @@ export default function (moduleElement) {
 	var introducedPattern =
 		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNq01ssOwiAQBdBCWttqXFgf0YX//1kuXPhKNDGpj1qCEE21BCiFmbtkcXIDyQyEcx4Zci1v+/MlckuaJOvFnFLSnFA4d/bvGmkvV6U09P1Zhbsa+lXX2+Mp3FVp4W52BxC3RcO6IjHgu2laY7iSRnIljeSKxhTJFY0pkmubIYFuN+3tdtAhro0OdI10uKunQVwNDeWqNKDbomHdHw3ufmkMV66CPB2I/4PjkHpUPTYyYYyB9/3cBLH8nrzd8TBfFpMYw11NC6eh6ud2073cUZY1rshbgAEADd+9Bu55XrUAAAAASUVORK5CYII=';
 	var mapData = Highcharts.maps['countries/us/us-all'],
+		stateFilter,
 		updatedDate,
 		data1 = [],
 		data2 = [],
 		data3 = [],
-		chart;
+		chart,
+		statesList,
+		municipalitiesList1,
+		municipalitiesList2;
+
 	if ($(window).width() > 560) {
 		var align = 'left',
 			verticalAlign = 'bottom',
@@ -41,106 +50,90 @@ export default function (moduleElement) {
 			layout = 'horizontal',
 			tooltipW = $(window).width() - 60;
 	}
-	var statesData = Highcharts.data({
-		googleAPIKey: 'AIzaSyCOzdvfQ1qJLSk2MtqbuvTMVfzU0CBDDB0',
-		googleSpreadsheetRange: "'States'",
-		googleSpreadsheetKey: '1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo',
-		googleSpreadsheetWorksheet: 1,
-		parsed: function (columns) {
-			$.each(columns[0], function (i, code) {
-				var legType = columns[2][i];
-				data1.push({
-					code: 'us-' + code.toLowerCase(),
-					valueName: columns[2][i],
-					stateName: columns[1][i],
-					note: columns[4][i],
-					id: 'us-' + code.toLowerCase(),
+
+	const onSheetsFetchError = (err) => {
+		console.error(err);
+
+		$('#container').html(
+			'<div class="loading">' +
+				'<i class="icon-frown icon-large"></i> ' +
+				'Error loading data from Google Spreadsheets' +
+				'</div>'
+		);
+	};
+
+	const processStatesDataColumns = (columns) => {
+		$.each(columns[0], function (i, code) {
+			var legType = columns[2][i];
+			data1.push({
+				code: 'us-' + code.toLowerCase(),
+				valueName: columns[2][i],
+				stateName: columns[1][i],
+				note: columns[4][i],
+				id: 'us-' + code.toLowerCase(),
+			});
+			if (legType == 'Protected') {
+				data1[i].value = 2;
+				data1[i].explainer =
+					'protects LGBTQ young people from the dangers of conversion therapy.';
+			} else if (legType == 'Introduced') {
+				data1[i].value = 1;
+				data1[i].explainer =
+					'has legislation introduced in the state house that would protect LGBTQ young people from conversion therapy, if it passes.';
+			} else if (legType == 'Partially Protected') {
+				data1[i].value = 3;
+				data1[i].explainer =
+					'partially protects LGBTQ young people from conversion therapy.';
+			}
+			if (!columns[2][i]) {
+				data1[i].valueName = 'No Legislation';
+				data1[i].value = 0;
+				data1[i].explainer =
+					'offers no state-wide protections for LGBTQ young people and they can be subjected to conversion therapy.';
+			}
+			if (columns[3][i]) {
+				data1[i].yearPassed = 'in ' + columns[3][i];
+			}
+		});
+		var options = {
+			weekday: 'long',
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		};
+		var updated = data1[52]['note'];
+		updatedDate = formatDate(updated);
+	};
+
+	const processMunicipalitiesDataColumns = (columns2) => {
+		$.each(columns2[0], function (i, code) {
+			if (columns2[2][i] == 'Local Protections') {
+				data2.push({
+					lat: columns2[11][i],
+					lon: columns2[12][i],
+					ST: columns2[0][i],
+					locale: columns2[1][i],
+					note2: columns2[4][i],
+					explainer:
+						'protects LGBTQ young people who live in the community from the dangers of conversion therapy.',
 				});
-				if (legType == 'Protected') {
-					data1[i].value = 2;
-					data1[i].explainer =
-						'protects LGBTQ young people from the dangers of conversion therapy.';
-				} else if (legType == 'Introduced') {
-					data1[i].value = 1;
-					data1[i].explainer =
-						'has legislation introduced in the state house that would protect LGBTQ young people from conversion therapy, if it passes.';
-				} else if (legType == 'Partially Protected') {
-					data1[i].value = 3;
-					data1[i].explainer =
-						'partially protects LGBTQ young people from conversion therapy.';
-				}
-				if (columns[2][i] == null) {
-					data1[i].valueName = 'No Legislation';
-					data1[i].value = 0;
-					data1[i].explainer =
-						'offers no state-wide protections for LGBTQ young people and they can be subjected to conversion therapy.';
-				}
-				if (columns[3][i] != null) {
-					data1[i].yearPassed = 'in ' + columns[3][i];
-				}
-			});
-			var options = {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric',
-			};
-			var updated = data1[52]['note'];
-			updatedDate = formatDate(updated);
-			complete: createChart();
-		},
-		error: function () {
-			$('#container').html(
-				'<div class="loading">' +
-					'<i class="icon-frown icon-large"></i> ' +
-					'Error loading data; please try again or check back later.' +
-					'</div>'
-			);
-		},
-	});
-	var municiplaityData = Highcharts.data({
-		googleAPIKey: 'AIzaSyCOzdvfQ1qJLSk2MtqbuvTMVfzU0CBDDB0',
-		googleSpreadsheetRange: "'Municipalities'",
-		googleSpreadsheetKey: '1L0pIBS2QJOKz1nMkHzo_ZvdB8oOYkXVEPKHpm2kswDo',
-		googleSpreadsheetWorksheet: 2,
-		parsed: function (columns2) {
-			$.each(columns2[0], function (i, code) {
-				if (columns2[2][i] == 'Local Protections') {
-					data2.push({
-						lat: columns2[11][i],
-						lon: columns2[12][i],
-						ST: columns2[0][i],
-						locale: columns2[1][i],
-						note2: columns2[4][i],
-						explainer:
-							'protects LGBTQ young people who live in the community from the dangers of conversion therapy.',
-					});
-				}
-				if (columns2[2][i] == 'Blocked by Courts') {
-					data3.push({
-						lat: columns2[11][i],
-						lon: columns2[12][i],
-						ST: columns2[0][i],
-						locale: columns2[1][i],
-						note2: columns2[4][i],
-						explainer:
-							'has laws to protect LGBTQ young people from the dangers of conversion therapy but they are currently not in effect by order of the courts.',
-					});
-				}
-			});
-			complete: createChart();
-		},
-		error: function () {
-			$('#container').html(
-				'<div class="loading">' +
-					'<i class="icon-frown icon-large"></i> ' +
-					'Error loading data from Google Spreadsheets' +
-					'</div>'
-			);
-		},
-	});
+			}
+			if (columns2[2][i] == 'Blocked by Courts') {
+				data3.push({
+					lat: columns2[11][i],
+					lon: columns2[12][i],
+					ST: columns2[0][i],
+					locale: columns2[1][i],
+					note2: columns2[4][i],
+					explainer:
+						'has laws to protect LGBTQ young people from the dangers of conversion therapy but they are currently not in effect by order of the courts.',
+				});
+			}
+		});
+	};
+
 	function createChart() {
-		chart = $('#container').highcharts('Map', {
+		$('#container').highcharts('Map', {
 			title: {
 				text: '',
 			},
@@ -153,6 +146,7 @@ export default function (moduleElement) {
 				animation: false,
 				events: {
 					render: renderLabel,
+					load: onChartLoad,
 				},
 				style: {
 					fontFamily: 'Manrope',
@@ -174,6 +168,7 @@ export default function (moduleElement) {
 			},
 			mapNavigation: {
 				enabled: true,
+				enableMouseWheelZoom: false,
 			},
 			legend: {
 				margin: 0,
@@ -456,7 +451,7 @@ export default function (moduleElement) {
 		});
 	}
 
-	function onFormSubmit(e) {
+	function onFormInput(e) {
 		e.preventDefault();
 		stateFilter = e.currentTarget.ect_map_search.value;
 		filterMap();
@@ -466,8 +461,24 @@ export default function (moduleElement) {
 	filters.forEach((filterButton) =>
 		filterButton.addEventListener('click', onFilterClick)
 	);
-	mapForm.addEventListener('submit', onFormSubmit);
-	mapForm.addEventListener('change', onFormSubmit);
+	mapForm.addEventListener('input', onFormInput);
+
+	// Get states data
+	Promise.all([
+		fetch(
+			'/wp-admin/admin-ajax.php?action=google_sheets&range=States'
+		).then((response) => response.json()),
+		fetch(
+			'/wp-admin/admin-ajax.php?action=google_sheets&range=Municipalities'
+		).then((response) => response.json()),
+	])
+		.then((responsesData) => responsesData.map(({ data }) => data.values))
+		.then(([statesDataColumns, municipalitiesDataColumns]) => {
+			processStatesDataColumns(statesDataColumns);
+			processMunicipalitiesDataColumns(municipalitiesDataColumns);
+		})
+		.then(createChart)
+		.catch(onSheetsFetchError);
 }
 
 function formatDate(timestamp) {

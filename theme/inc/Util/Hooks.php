@@ -22,6 +22,7 @@ use TrevorWP\Theme\Ajax\ADP;
 use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
+use TrevorWP\Theme\Ajax\GoogleSheets;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Customizer\Search;
 use TrevorWP\Theme\Helper\Sorter;
@@ -117,6 +118,9 @@ class Hooks {
 
 		# SVG API
 		SVG::construct();
+
+		# Google Sheets API
+		GoogleSheets::construct();
 	}
 
 	/**
@@ -185,6 +189,7 @@ class Hooks {
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
 
 		// Highcharts
+		wp_enqueue_script( 'proj4', '//cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js' );
 		wp_enqueue_script( 'highmaps-main', '//code.highcharts.com/maps/highmaps.js' );
 		wp_enqueue_script( 'highmaps-module-data', '//code.highcharts.com/maps/modules/data.js' );
 		wp_enqueue_script( 'highmaps-module-exporting', '//code.highcharts.com/maps/modules/exporting.js' );

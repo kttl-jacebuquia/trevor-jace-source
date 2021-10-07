@@ -1,9 +1,12 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 class API_Keys extends A_Options_Page {
-	const FIELD_MAILCHIMP_API_KEY     = 'mailchimp_api_key';
-	const FIELD_MAILCHIMP_LIST_ID     = 'mailchimp_list_id';
-	const FIELD_MAILCHIMP_DATA_CENTER = 'mailchimp_data_center';
+	const FIELD_MAILCHIMP_API_KEY       = 'mailchimp_api_key';
+	const FIELD_MAILCHIMP_LIST_ID       = 'mailchimp_list_id';
+	const FIELD_MAILCHIMP_DATA_CENTER   = 'mailchimp_data_center';
+	const FIELD_GOOGLE_SHEETS_MESSAGE   = 'google_sheets_message';
+	const FIELD_GOOGLE_SHEETS_API_KEY   = 'google_sheets_api_key';
+	const FIELD_GOOGLE_SHEETS_SHEET_KEY = 'google_sheets_sheet_key';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
@@ -17,9 +20,12 @@ class API_Keys extends A_Options_Page {
 
 	/** @inheritDoc */
 	protected static function prepare_fields(): array {
-		$mailchimp_api_key     = static::gen_field_key( static::FIELD_MAILCHIMP_API_KEY );
-		$mailchimp_list_id     = static::gen_field_key( static::FIELD_MAILCHIMP_LIST_ID );
-		$mailchimp_data_center = static::gen_field_key( static::FIELD_MAILCHIMP_DATA_CENTER );
+		$mailchimp_api_key       = static::gen_field_key( static::FIELD_MAILCHIMP_API_KEY );
+		$mailchimp_list_id       = static::gen_field_key( static::FIELD_MAILCHIMP_LIST_ID );
+		$mailchimp_data_center   = static::gen_field_key( static::FIELD_MAILCHIMP_DATA_CENTER );
+		$google_sheets_message   = static::gen_field_key( static::FIELD_GOOGLE_SHEETS_MESSAGE );
+		$google_sheets_api_key   = static::gen_field_key( static::FIELD_GOOGLE_SHEETS_API_KEY );
+		$google_sheets_sheet_key = static::gen_field_key( static::FIELD_GOOGLE_SHEETS_SHEET_KEY );
 
 		return array_merge(
 			static::_gen_tab_field( 'MailChimp' ),
@@ -47,6 +53,29 @@ class API_Keys extends A_Options_Page {
 					'type'          => 'text',
 					'required'      => 1,
 					'default_value' => 'us12',
+				),
+			),
+			static::_gen_tab_field( 'Google Sheets' ),
+			array(
+				static::FIELD_GOOGLE_SHEETS_MESSAGE   => array(
+					'key'     => $google_sheets_message,
+					'name'    => static::FIELD_GOOGLE_SHEETS_MESSAGE,
+					'message' => 'Credentials used for the Ending Conversion Map data source.',
+					'type'    => 'message',
+				),
+				static::FIELD_GOOGLE_SHEETS_API_KEY   => array(
+					'key'      => $google_sheets_api_key,
+					'name'     => static::FIELD_GOOGLE_SHEETS_API_KEY,
+					'label'    => 'API Key',
+					'type'     => 'text',
+					'required' => 1,
+				),
+				static::FIELD_GOOGLE_SHEETS_SHEET_KEY => array(
+					'key'      => $google_sheets_sheet_key,
+					'name'     => static::FIELD_GOOGLE_SHEETS_SHEET_KEY,
+					'label'    => 'Spreadsheet Key',
+					'type'     => 'text',
+					'required' => 1,
 				),
 			),
 		);
