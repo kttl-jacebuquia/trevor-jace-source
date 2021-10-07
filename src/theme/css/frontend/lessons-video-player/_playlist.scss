@@ -1,0 +1,110 @@
+.lessons-video-player {
+  &__playlist {
+    @include tw-respond(
+      col-span-full mt-px60,
+      $md: col-span-1 col-start-2,
+      $lg: col-span-4 col-start-9 mt-0 overflow-auto,
+    );
+
+    @screen lg {
+      max-height: #{rem-calc(700)};
+    }
+  }
+
+  &__playlist-title {
+    @apply font-semibold text-px18 leading-px26;
+  }
+
+  &__playlist-items {
+    @apply border-solid border-current border-t-px1 border-b-px1 mt-px12;
+  }
+
+  &__playlist-item {
+    @include tw-respond(
+      flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
+      $md: p-px30,
+      $lg: py-px30 px-px0 gap-x-px10,
+      $lg2: px-px20,
+    );
+    -webkit-appearance: none;
+
+    &:not(:first-child) {
+      &::before {
+        @apply absolute top-0 left-0 w-full block border-solid border-t-px1;
+        border-color: rgba(0, 58, 72, 0.2);
+        content: "";
+      }
+    }
+
+    &--active {
+      @apply bg-gray-light;
+    }
+  }
+
+  &__playlist-item-thumbnail {
+    @apply hidden;
+
+    @screen md {
+      @apply block relative w-px150 overflow-hidden rounded-px10;
+      @include aspect-ratio(150, 84);
+    }
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
+  &__playlist-thumbnail-icon {
+    @apply absolute flex items-center justify-center bg-current z-2 w-px40 h-px40 rounded-px100;
+    @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+
+    // Play icon background
+    &::before {
+      @apply text-white;
+    }
+  }
+
+  &__playlist-item-content {
+    @apply text-left;
+  }
+
+  &__playlist-item-title {
+    @include tw-respond(
+      font-semibold text-px14 leading-px18 tracking-em001,
+      $md: text-px16 leading-px22
+    );
+  }
+
+  &__playlist-item-duration {
+    @include tw-respond(
+      text-px12 leading-px16 tracking-em001 mt-px6,
+      $md: text-px14 leading-px20,
+    );
+  }
+
+  &__playlist-icon {
+    @apply flex w-px26 h-px26 items-center justify-center ml-px10 flex-shrink-0;
+    @apply bg-white border-current border-px1 border-solid rounded-px100;
+
+    @screen lg {
+      @apply ml-0;
+    }
+
+    &::before {
+      @apply text-current text-px22;
+    }
+  }
+
+  // Active item
+  &__playlist-item--active {
+    @apply bg-gray-light;
+
+    .lessons-video-player__playlist-icon {
+      @apply bg-current;
+
+      &::before {
+        @apply text-white;
+      }
+    }
+  }
+}

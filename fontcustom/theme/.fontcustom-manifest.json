@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "4916b83619d608e5265c2cd987308fa0e3bf7a6ad65e3dc13967a9c417d27b39",
-    "current": "4916b83619d608e5265c2cd987308fa0e3bf7a6ad65e3dc13967a9c417d27b39"
+    "previous": "5277782d49264af649e8f51b3e722aa75b2bac11dca062a7e0ceb4f20e45d888",
+    "current": "5277782d49264af649e8f51b3e722aa75b2bac11dca062a7e0ceb4f20e45d888"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_4916b83619d608e5265c2cd987308fa0.ttf",
-    "../../theme/static/icon-font/trevor-ti_4916b83619d608e5265c2cd987308fa0.svg",
-    "../../theme/static/icon-font/trevor-ti_4916b83619d608e5265c2cd987308fa0.woff",
-    "../../theme/static/icon-font/trevor-ti_4916b83619d608e5265c2cd987308fa0.eot",
-    "../../theme/static/icon-font/trevor-ti_4916b83619d608e5265c2cd987308fa0.woff2"
+    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.ttf",
+    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.svg",
+    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.woff",
+    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.eot",
+    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -102,6 +102,10 @@
     "online": {
       "codepoint": 61720,
       "source": "./vectors/online.svg"
+    },
+    "play": {
+      "codepoint": 61730,
+      "source": "./vectors/play.svg"
     },
     "plus": {
       "codepoint": 61726,

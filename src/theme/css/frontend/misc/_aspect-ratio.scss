@@ -1,17 +1,17 @@
 [data-aspectRatio="1:1"] {
-	@apply aspect-ratio-1-1;
+  @apply aspect-ratio-1-1;
 }
 
 [data-aspectRatio="2:1"] {
-	@apply aspect-ratio-2-1;
+  @apply aspect-ratio-2-1;
 }
 
 [data-aspectRatio="4:3"] {
-	@apply aspect-ratio-4-3;
+  @apply aspect-ratio-4-3;
 }
 
 [data-aspectRatio="3:4"] {
-	@apply aspect-ratio-3-4;
+  @apply aspect-ratio-3-4;
 }
 
 [data-aspectRatio="16:9"] {
@@ -20,4 +20,24 @@
 
 [data-aspectRatio="9:16"] {
   @apply aspect-ratio-9-16;
+}
+
+// Custom aspect ratios
+@mixin aspect-ratio($width, $height) {
+  // Default to padding approach
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: percentage($height / $width);
+  }
+
+  // If CSS aspect-ratio is supported, discard the padding approach
+  @supports (aspect-ratio: 1) {
+    aspect-ratio: #{$width / $height};
+
+    &::before {
+      display: none;
+    }
+  }
 }
