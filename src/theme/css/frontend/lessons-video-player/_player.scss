@@ -7,38 +7,76 @@
   }
 
   &__lesson {
-    @include tw-respond(
-      col-span-full,
-      $md: col-span-6 col-start-2,
-      $lg: col-span-8 col-start-1,
-    );
+    @include tw-respond(col-span-full, $md: col-span-6 col-start-2, $lg: col-span-8 col-start-1);
   }
 
   &__player {
-    @apply relative overflow-hidden rounded-px10;
-    @include aspect-ratio( 319, 180);
+    @apply relative overflow-hidden rounded-px10 transition-all;
+    @include aspect-ratio(319, 180);
 
     > * {
       @apply absolute;
     }
+
+    // Iframe cover
+    &::after {
+      @apply block absolute top-0 left-0 w-full h-full bg-white;
+      @apply transition-all z-2;
+      content: "";
+    }
+
+    &--loading {
+      @apply invisible opacity-0;
+    }
+
+    &--playing {
+      &::after {
+        @apply opacity-0 invisible;
+      }
+
+      @each $type in (vimeo, youtube) {
+        &[data-video-type="#{$type}"] .lessons-video-player__#{$type}-placeholder {
+          opacity: 1 !important;
+          visibility: visible;
+        }
+      }
+
+      .lessons-video-player__player-poster {
+        @apply invisible opacity-0;
+      }
+
+      .lessons-video-player__play {
+        @apply invisible opacity-0;
+      }
+    }
   }
 
   &__player-poster {
-    @apply top-0 left-0 w-full h-full;
+    @apply top-0 left-0 w-full h-full transition-all;
+    z-index: 3;
 
     img {
       @apply w-full h-full object-cover;
     }
   }
 
-  &__iframe {
-    @apply w-full h-full top-0 left-0;
+  &__vimeo-placeholder {
+    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+  }
+
+  &__youtube-placeholder {
+    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+  }
+
+  iframe {
+    @apply absolute w-full h-full top-0 left-0 bg-black z-1;
   }
 
   &__play {
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-    @apply w-px60 flex items-center justify-center;
-    @apply bg-current rounded-px100 text-px20;
+    @apply w-px60 h-px60 flex items-center justify-center;
+    @apply bg-current rounded-px100 text-px20 transition-all;
+    z-index: 4;
 
     @screen lg2 {
       @apply w-px100 h-px100;
@@ -58,7 +96,7 @@
     @include tw-respond(
       font-bold mt-px30 text-px22 leading-px28 tracking-em005,
       $md: mt-px32,
-      $lg2: text-px26 leading-px32,
+      $lg2: text-px26 leading-px32
     );
 
     &::before {
@@ -69,14 +107,14 @@
   &__body {
     @include tw-respond(
       text-px16 leading-px22 tracking-em001 mt-px12,
-      $lg2: text-px18 leading-px26 tracking-em_005 mt-px18,
+      $lg2: text-px18 leading-px26 tracking-em_005 mt-px18
     );
   }
 
   &__download {
     @include tw-respond(
       font-bold text-px16 leading-px22 tracking-px025 mt-px20,
-      $lg2: text-px20 leading-px24 tracking-em005,
+      $lg2: text-px20 leading-px24 tracking-em005
     );
-  };
+  }
 }

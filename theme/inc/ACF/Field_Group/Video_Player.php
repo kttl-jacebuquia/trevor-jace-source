@@ -131,7 +131,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 
 			// Thumbnail
 			if ( ! empty( $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ] ) ) {
-				$video_entry['thumbnail_id'] = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'];
+				$video_entry['thumbnail_id'] = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['ID'];
 				$video_entry['thumbnail']    = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'];
 				$video_entry['poster']       = $video_entry[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'];
 			}
@@ -154,18 +154,21 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 
 					<!-- Player -->
 					<div class="lessons-video-player__lesson">
-						<div class="lessons-video-player__player">
+						<div class="lessons-video-player__player" data-lesson-id="">
 							<!-- IFrame -->
-							<iframe src="https://player.vimeo.com/video/226053498?h=a1599a8ee9&dnt=1&app_id=122963" frameborder="0" class="lessons-video-player__iframe"></iframe>
+							<div class="lessons-video-player__vimeo-placeholder"></div>
+							<div class="lessons-video-player__youtube-placeholder">
+								<div class="lessons-video-player__youtube-iframe-replacement"></div>
+							</div>
 							<!-- Poster -->
-							<figure class="lessons-video-player__player-poster">
-								<img src="http://trevor-web.lndo.site/wp-content/uploads/2021/09/Test-Image-PNG-30mb.png" alt="">
+							<figure class="lessons-video-player__player-poster" aria-hidden="true">
+								<img src="<?php echo $first_video['thumbnail_id']; ?>" />
 							</figure>
 							<!-- Play button -->
 							<button class="lessons-video-player__play trevor-ti-play"></button>
 						</div>
-						<div class="lessons-video-player__title" data-number="1">Welcome</div>
-						<div class="lessons-video-player__body">In the introductory video to the course, we’ll define mental health and dispel some common related myths. We’ll also explain what suicide is, why it’s a public health crisis in this country, and some of the reasons someone might consider it.</div>
+						<div class="lessons-video-player__title" data-number="1"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
+						<div class="lessons-video-player__body"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
 						<div class="lessons-video-player__download">
 							<a href="test.pdf" class="wave-underline" download>Download Lesson Plan 1</a>
 						</div>
@@ -175,39 +178,44 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 					<div class="lessons-video-player__playlist">
 						<h3 class="lessons-video-player__playlist-title"><?php echo esc_html( $lesson ); ?></h3>
 						<div class="lessons-video-player__playlist-items" role="list">
-							<?php foreach ( $video_entries as $video ) : ?>
+							<?php foreach ( $video_entries as $number => $video ) : ?>
 								<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
 									<button
 										<?php
 											echo self::render_attrs(
 												array( 'lessons-video-player__playlist-item' ),
 												array(
-													'data-src' => $video['src'],
-													'data-thumbnail' => $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['sizes']['thumbnail'],
-													'data-poster' => $video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['url'],
-													'data-download-url' => $video_entry['download_url'],
-													'data-download-label' => $video_entry['download_label'],
-													'aria-label' => $video[ static::FIELD_VIDEO_ENTRY_HEADER ] . ', click to select this video',
+													'data-number' => esc_attr( $number + 1 ),
+													'data-src' => esc_attr( $video['src'] ),
+													'data-thumbnail-id' => esc_attr( $video['thumbnail_id'] ),
+													'data-thumbnail' => esc_attr( $video['thumbnail'] ),
+													'data-poster' => esc_attr( $video['poster'] ),
+													'data-title' => esc_attr( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ),
+													'data-description' => esc_attr( $video[ static::FIELD_VIDEO_ENTRY_DESCRIPTION ] ),
+													'data-download-url' => esc_attr( $video['download_url'] ),
+													'data-download-label' => esc_attr( $video['download_label'] ),
+													'data-lesson-id' => esc_attr( uniqid( 'lesson_' ) ),
+													'aria-label' => esc_attr( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] . ', click to select this video' ),
 													'role' => 'listitem',
 												),
 											);
 										?>
 									>
 										<figure class="lessons-video-player__playlist-item-thumbnail trevor-ti-play">
-											<?php
-											if ( ! empty( $video['thumbnail_id'] ) ) {
-												echo wp_get_attachment_image(
-													$video[ static::FIELD_VIDEO_ENTRY_THUMBNAIL ]['ID'],
-													'thumbnail',
-													false,
-													array(
-														'class' => 'lessons-video-player__playlist-thumbnail',
-													),
-												);
-											} else {
-												echo '<img src="" class="lessons-video-player__playlist-thumbnail" />';
-											}
-											?>
+											<?php if ( ! empty( $video['thumbnail_id'] ) ): ?>
+												<?php
+													echo wp_get_attachment_image(
+														$video['thumbnail_id'],
+														'thumbnail',
+														false,
+														array(
+															'class' => 'lessons-video-player__playlist-thumbnail',
+														),
+													);
+												?>
+											<?php else: ?>
+												<img class="lessons-video-player__playlist-thumbnail">
+											<?php endif; ?>
 											<span class="trevor-ti-play lessons-video-player__playlist-thumbnail-icon"></span>
 										</figure>
 										<div class="lessons-video-player__playlist-item-content">
