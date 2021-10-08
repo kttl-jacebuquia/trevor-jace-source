@@ -1,5 +1,9 @@
 .promo-popup-modal {
   .modal-wrap {
+    @screen mobile {
+      max-width: 375px;
+    }
+
     @screen xl {
       padding-left: rem-calc(100px);
       padding-right: rem-calc(100px);
