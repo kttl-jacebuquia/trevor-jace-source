@@ -1,9 +1,5 @@
 .promo-popup-modal {
   .modal-wrap {
-    @screen mobile {
-      max-width: 375px;
-    }
-
     @screen xl {
       padding-left: rem-calc(100px);
       padding-right: rem-calc(100px);
@@ -117,9 +113,14 @@
 
   .page-btn {
     @apply h-px44 inline-flex items-center justify-center;
+    @apply leading-px20 tracking-em001;
 
     @screen lg {
-      @apply h-px66 text-px18 leading-px24;
+      @apply h-px66 text-px18 leading-px24 tracking-px05 px-px40 py-px20;
+    }
+
+    @screen lg2 {
+      @apply text-px20 leading-px26;
     }
   }
 }
