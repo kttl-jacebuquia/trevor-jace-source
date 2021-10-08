@@ -55,4 +55,12 @@ export default class WithState {
 	componentDidUpdate(changedState) {
 		// Override this method in child class
 	}
+
+	onStateChange(callback) {
+		if ( typeof callback === 'function' ) {
+			document.addEventListener(this[STATE_CHANGE_EVENT], () =>
+				callback(this.state)
+			);
+		}
+	}
 }

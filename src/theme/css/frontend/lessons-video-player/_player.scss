@@ -15,30 +15,66 @@
   }
 
   &__player {
-    @apply relative overflow-hidden rounded-px10;
+    @apply relative overflow-hidden rounded-px10 transition-all;
     @include aspect-ratio( 319, 180);
 
     > * {
       @apply absolute;
     }
+
+    // Iframe cover
+    &::after {
+      @apply block absolute top-0 left-0 w-full h-full bg-white;
+      @apply transition-all z-2;
+      content: '';
+    }
+
+    &--loading {
+      @apply invisible opacity-0;
+    }
+
+    &--playing {
+      &::after {
+        @apply opacity-0 invisible;
+      }
+
+      iframe {
+        opacity: 1 !important;
+      }
+
+      .lessons-video-player__player-poster {
+        @apply invisible opacity-0;
+      }
+
+      .lessons-video-player__play {
+        @apply invisible opacity-0;
+      }
+    }
   }
 
   &__player-poster {
-    @apply top-0 left-0 w-full h-full;
+    @apply top-0 left-0 w-full h-full transition-all;
+    z-index: 3;
 
     img {
       @apply w-full h-full object-cover;
     }
   }
 
-  &__iframe {
+  &__vimeo-placeholder {
     @apply w-full h-full top-0 left-0;
+
+    iframe {
+      @apply absolute w-full h-full top-0 left-0 bg-black z-1;
+      @apply transition-opacity opacity-0;
+    }
   }
 
   &__play {
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-    @apply w-px60 flex items-center justify-center;
-    @apply bg-current rounded-px100 text-px20;
+    @apply w-px60 h-px60 flex items-center justify-center;
+    @apply bg-current rounded-px100 text-px20 transition-all;
+    z-index: 4;
 
     @screen lg2 {
       @apply w-px100 h-px100;

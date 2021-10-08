@@ -2,7 +2,7 @@
   &__playlist {
     @include tw-respond(
       col-span-full mt-px60,
-      $md: col-span-1 col-start-2,
+      $md: col-span-6 col-start-2,
       $lg: col-span-4 col-start-9 mt-0 overflow-auto,
     );
 
@@ -51,12 +51,21 @@
 
     img {
       @apply w-full h-full object-cover;
+
+      &:not([src]) {
+        @apply opacity-0;
+
+        & + .lessons-video-player__playlist-thumbnail-icon {
+          opacity: 0;
+        }
+      }
     }
   }
 
   &__playlist-thumbnail-icon {
     @apply absolute flex items-center justify-center bg-current z-2 w-px40 h-px40 rounded-px100;
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+    @apply transition-opacity opacity-0;
 
     // Play icon background
     &::before {
