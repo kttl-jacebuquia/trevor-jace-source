@@ -157,6 +157,9 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 						<div class="lessons-video-player__player" data-lesson-id="">
 							<!-- IFrame -->
 							<div class="lessons-video-player__vimeo-placeholder"></div>
+							<div class="lessons-video-player__youtube-placeholder">
+								<div class="lessons-video-player__youtube-iframe-replacement"></div>
+							</div>
 							<!-- <iframe src="" frameborder="0" class="lessons-video-player__iframe" allow="autoplay"></iframe> -->
 							<!-- Poster -->
 							<figure class="lessons-video-player__player-poster" aria-hidden="true">

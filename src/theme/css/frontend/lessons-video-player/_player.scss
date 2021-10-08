@@ -38,8 +38,11 @@
         @apply opacity-0 invisible;
       }
 
-      iframe {
-        opacity: 1 !important;
+      @each $type in (vimeo, youtube) {
+        &[data-video-type="#{$type}"] .lessons-video-player__#{$type}-placeholder {
+          opacity: 1 !important;
+          visibility: visible;
+        }
       }
 
       .lessons-video-player__player-poster {
@@ -62,12 +65,15 @@
   }
 
   &__vimeo-placeholder {
-    @apply w-full h-full top-0 left-0;
+    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+  }
 
-    iframe {
-      @apply absolute w-full h-full top-0 left-0 bg-black z-1;
-      @apply transition-opacity opacity-0;
-    }
+  &__youtube-placeholder {
+    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+  }
+
+  iframe {
+    @apply absolute w-full h-full top-0 left-0 bg-black z-1;
   }
 
   &__play {

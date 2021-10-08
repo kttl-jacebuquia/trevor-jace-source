@@ -15,7 +15,9 @@ export default class LessonsVideoPlayer extends Component {
 	// Will be called upon component instantiation
 	afterInit() {
 		// Initialize playlist
-		this.members.playlist.onStateChange(this.onPlaylistItemStateChange.bind(this));
+		this.members.playlist.onStateChange(
+			this.onPlaylistItemStateChange.bind(this)
+		);
 
 		// Initialize lesson player
 		const firstItem = this.members.playlist.getItemByIndex(0);
@@ -28,15 +30,18 @@ export default class LessonsVideoPlayer extends Component {
 	}
 
 	async loadLesson(lessonData) {
-		if ( !lessonData.videoId ) {
-			const itemElement = this.members.playlist.getItemById(lessonData.lessonId, true);
-			const updatedData = await this.members.playlist.populateItemDetails(itemElement);
+		if (!lessonData.videoId) {
+			const itemElement = this.members.playlist.getItemById(
+				lessonData.lessonId,
+				true
+			);
+			const updatedData = await this.members.playlist.populateItemDetails(
+				itemElement
+			);
 			this.members.lesson.loadLessonData(updatedData);
-		}
-		else {
+		} else {
 			this.members.lesson.loadLessonData(lessonData);
 		}
-
 	}
 }
 

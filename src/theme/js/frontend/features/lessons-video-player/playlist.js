@@ -1,5 +1,6 @@
 import Component from '../../Component';
 import { isVimeoVideo, getVimeoVideoData } from '../vimeo';
+import { isYoutubeVideo, getYoutubeVideoData, loadYTPlayerAPI } from '../youtube';
 
 export default class Playlist extends Component {
 	// Defines the element selector which will initialize this component
@@ -26,7 +27,7 @@ export default class Playlist extends Component {
 
 	// Will be called upon component instantiation
 	afterInit() {
-		this.children.items.forEach(item => {
+		this.children.items.forEach((item) => {
 			this.populateItemDetails(item);
 		});
 	}
@@ -34,17 +35,19 @@ export default class Playlist extends Component {
 	getItemByIndex(index, returnElement = false) {
 		const matchedItem = this.children.items[index];
 
-		if ( !matchedItem ) {
+		if (!matchedItem) {
 			return null;
 		}
 
 		return returnElement ? matchedItem : matchedItem.dataset;
 	}
 
-	getItemById(itemId, returnElement = false ) {
-		const matchedItem = this.children.items.find(item => item.dataset.lessonId === itemId);
+	getItemById(itemId, returnElement = false) {
+		const matchedItem = this.children.items.find(
+			(item) => item.dataset.lessonId === itemId
+		);
 
-		if ( !matchedItem ) {
+		if (!matchedItem) {
 			return null;
 		}
 
@@ -64,11 +67,17 @@ export default class Playlist extends Component {
 	// Fetches the video's poster/thumbnail if none is given in the CMS
 	populateItemDetails(itemElement) {
 		// YT is not actually supported yet
-		const videoType = isVimeoVideo(itemElement.dataset.src) ? 'vimeo' : 'youtube';
+		const videoType = isVimeoVideo(itemElement.dataset.src)
+			? 'vimeo'
+			: isYoutubeVideo(itemElement.dataset.src)
+			? 'youtube'
+			: null;
 
 		switch (videoType) {
 			case 'vimeo':
 				return this.populateVimeoItemDetails(itemElement);
+			case 'youtube':
+				return this.populateYoutubeItemDetails(itemElement);
 		}
 	}
 
@@ -76,13 +85,35 @@ export default class Playlist extends Component {
 		const { poster, src } = itemElement.dataset;
 		const videoData = await getVimeoVideoData(src);
 
-		if ( videoData ) {
+		if (videoData) {
 			itemElement.dataset.videoType = 'vimeo';
 			itemElement.dataset.videoId = videoData.video_id;
 
-			if ( !poster ) {
+			if (!poster) {
 				itemElement.dataset.thumbnail = videoData.thumbnail_url;
 				itemElement.dataset.poster = videoData.thumbnail_url;
+
+				const itemImage = itemElement.querySelector('img');
+				itemImage.src = videoData.thumbnail_url;
+			}
+		}
+
+		return itemElement.dataset;
+	}
+
+	async populateYoutubeItemDetails(itemElement) {
+		const { poster, src } = itemElement.dataset;
+		const videoData = await getYoutubeVideoData(src);
+
+		if (videoData) {
+			await loadYTPlayerAPI();
+
+			itemElement.dataset.videoType = 'youtube';
+			itemElement.dataset.videoId = videoData.video_id;
+
+			if (!poster) {
+				itemElement.dataset.thumbnail = videoData.thumbnail_url;
+				itemElement.dataset.poster = videoData.poster_url;
 
 				const itemImage = itemElement.querySelector('img');
 				itemImage.src = videoData.thumbnail_url;
