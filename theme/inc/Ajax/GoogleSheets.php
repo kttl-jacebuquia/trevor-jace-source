@@ -45,7 +45,6 @@ class GoogleSheets {
 		$response = self::curl( $url, $headers );
 		$response = json_decode( $response, true );
 
-
 		if ( ! empty( $response['error'] ) ) {
 			wp_die( json_encode( array( 'status' => $response['error'] ) ), 400 );
 		}
