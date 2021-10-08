@@ -2,7 +2,7 @@
   @apply w-full flex overflow-hidden box-content relative;
   @apply z-1 h-px32 mt-auto mb-px25 flex-shrink-0;
 
-  @screen lg2 {
+  @screen lg {
     @apply h-px34;
   }
 
@@ -17,11 +17,17 @@
 
   &__toggle {
     @apply inline-flex items-center justify-center rounded-px100 w-px32 h-px32;
-    @apply text-px24 leading-px28 font-semibold bg-violet-tint align-middle;
+    @apply text-px24 leading-px28 font-semibold bg-blue_green align-middle;
     @apply transition-colors hover:bg-opacity-80;
 
-    @screen lg2 {
-      @apply w-px34 h-px34;
+    margin-top: -1px;
+
+    body.is-rc & {
+      @apply bg-violet-tint;
+    }
+
+    @screen lg {
+      @apply w-px34 h-px34 -mt-px2;
     }
 
     &::after {
@@ -57,7 +63,7 @@
 }
 
 .tag-box {
-  @apply text-teal-dark font-medium text-px14 leading-px18 tracking-px05 mb-px8 py-px10;
+  @apply text-teal-dark font-medium text-px14 leading-px18 tracking-px05 mb-px8 py-px6;
   @apply bg-gray-light;
   @apply cursor-pointer;
   @apply rounded-full;
@@ -66,14 +72,13 @@
   max-width: #{rem-calc(170)};
   min-height: #{rem-calc(32)};
 
-  @screen lg2 {
-    @apply h-px34 px-px18;
+  @screen lg {
+    @apply h-px34 py-px8 px-px18;
     max-width: #{rem-calc(184)};
-    min-height: #{rem-calc(34)};
   }
 
   @screen xl {
-    min-height: #{rem-calc(35)};
+    @apply h-px35;
   }
 
   span {
@@ -95,9 +100,5 @@
 
   .is-gi & {
     @apply bg-gray-light text-teal-dark;
-
-    &.ellipsis {
-      @apply bg-blue_green text-white;
-    }
   }
 }
