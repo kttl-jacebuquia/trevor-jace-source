@@ -7,16 +7,12 @@
   }
 
   &__lesson {
-    @include tw-respond(
-      col-span-full,
-      $md: col-span-6 col-start-2,
-      $lg: col-span-8 col-start-1,
-    );
+    @include tw-respond(col-span-full, $md: col-span-6 col-start-2, $lg: col-span-8 col-start-1);
   }
 
   &__player {
     @apply relative overflow-hidden rounded-px10 transition-all;
-    @include aspect-ratio( 319, 180);
+    @include aspect-ratio(319, 180);
 
     > * {
       @apply absolute;
@@ -26,7 +22,7 @@
     &::after {
       @apply block absolute top-0 left-0 w-full h-full bg-white;
       @apply transition-all z-2;
-      content: '';
+      content: "";
     }
 
     &--loading {
@@ -100,7 +96,7 @@
     @include tw-respond(
       font-bold mt-px30 text-px22 leading-px28 tracking-em005,
       $md: mt-px32,
-      $lg2: text-px26 leading-px32,
+      $lg2: text-px26 leading-px32
     );
 
     &::before {
@@ -111,14 +107,14 @@
   &__body {
     @include tw-respond(
       text-px16 leading-px22 tracking-em001 mt-px12,
-      $lg2: text-px18 leading-px26 tracking-em_005 mt-px18,
+      $lg2: text-px18 leading-px26 tracking-em_005 mt-px18
     );
   }
 
   &__download {
     @include tw-respond(
       font-bold text-px16 leading-px22 tracking-px025 mt-px20,
-      $lg2: text-px20 leading-px24 tracking-em005,
+      $lg2: text-px20 leading-px24 tracking-em005
     );
-  };
+  }
 }

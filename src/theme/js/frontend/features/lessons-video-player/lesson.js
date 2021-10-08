@@ -51,7 +51,6 @@ export default class Lesson extends Component {
 
 	loadLessonData(lessonData) {
 		if (lessonData.lessonId) {
-			console.log({ lessonData });
 			const lesson = this.sanitizeLessonData(lessonData);
 			const lessonId = lessonData.lessonId;
 			this.setState({
@@ -128,10 +127,16 @@ export default class Lesson extends Component {
 		await loadYTPlayerAPI();
 
 		if (!this.youtubePlayer) {
-			this.youtubePlayer = new window.YT.Player(this.children.youtubePlaceholder, {
-				videoId: videoID,
-			});
-			this.youtubePlayer.addEventListener('onStateChange', this.onYoutubeVideoStateChange.bind(this));
+			this.youtubePlayer = new window.YT.Player(
+				this.children.youtubePlaceholder,
+				{
+					videoId: videoID,
+				}
+			);
+			this.youtubePlayer.addEventListener(
+				'onStateChange',
+				this.onYoutubeVideoStateChange.bind(this)
+			);
 		} else {
 			this.youtubePlayer.cueVideoById(videoID);
 		}
@@ -140,7 +145,7 @@ export default class Lesson extends Component {
 	onPlayClick(e) {
 		e.preventDefault();
 
-		switch ( this.state.lesson.videoType ) {
+		switch (this.state.lesson.videoType) {
 			case 'vimeo':
 				this.vimeoPlayer && this.vimeoPlayer.play();
 				this.youtubePlayer && this.youtubePlayer.stopVideo();
@@ -155,7 +160,6 @@ export default class Lesson extends Component {
 	}
 
 	onYoutubeVideoStateChange({ data }) {
-		console.log({ data });
 		switch (data) {
 			case -1:
 				this.onVideoLoaded();

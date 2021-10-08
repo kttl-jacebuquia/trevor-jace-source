@@ -1,6 +1,10 @@
 import Component from '../../Component';
 import { isVimeoVideo, getVimeoVideoData } from '../vimeo';
-import { isYoutubeVideo, getYoutubeVideoData, loadYTPlayerAPI } from '../youtube';
+import {
+	isYoutubeVideo,
+	getYoutubeVideoData,
+	loadYTPlayerAPI,
+} from '../youtube';
 
 export default class Playlist extends Component {
 	// Defines the element selector which will initialize this component

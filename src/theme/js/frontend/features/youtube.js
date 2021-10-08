@@ -24,19 +24,19 @@ export const isYoutubeVideo = async (youtubeVideoURL) =>
 
 export const loadYTPlayerAPI = function () {
 	return new Promise((resolve) => {
-		if ( window.YT && window.YT.loaded ) {
+		if (window.YT && window.YT.loaded) {
 			return resolve();
 		}
 
 		// Check until YT is loaded
 		const loaderInterval = setInterval(() => {
-			if ( window.YT ) {
+			if (window.YT) {
 				clearInterval(loaderInterval);
 				window.YT.ready(resolve);
 			}
 		}, 100);
 
-		if ( !youtubeScriptInjected ) {
+		if (!youtubeScriptInjected) {
 			youtubeScriptInjected = true;
 
 			// Inject YT script

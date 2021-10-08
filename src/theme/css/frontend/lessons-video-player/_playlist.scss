@@ -3,7 +3,7 @@
     @include tw-respond(
       col-span-full mt-px60,
       $md: col-span-6 col-start-2,
-      $lg: col-span-4 col-start-9 mt-0 overflow-auto,
+      $lg: col-span-4 col-start-9 mt-0 overflow-auto
     );
 
     @screen lg {
@@ -24,7 +24,7 @@
       flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
       $md: p-px30,
       $lg: py-px30 px-px0 gap-x-px10,
-      $lg2: px-px20,
+      $lg2: px-px20
     );
     -webkit-appearance: none;
 
@@ -78,17 +78,11 @@
   }
 
   &__playlist-item-title {
-    @include tw-respond(
-      font-semibold text-px14 leading-px18 tracking-em001,
-      $md: text-px16 leading-px22
-    );
+    @include tw-respond(font-semibold text-px14 leading-px18 tracking-em001, $md: text-px16 leading-px22);
   }
 
   &__playlist-item-duration {
-    @include tw-respond(
-      text-px12 leading-px16 tracking-em001 mt-px6,
-      $md: text-px14 leading-px20,
-    );
+    @include tw-respond(text-px12 leading-px16 tracking-em001 mt-px6, $md: text-px14 leading-px20);
   }
 
   &__playlist-icon {
