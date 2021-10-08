@@ -58,6 +58,11 @@
   &.type-get_help {
     @apply text-indigo;
 
+    .circulation-card-title {
+      @apply mx-auto;
+      width: percentage( 167 / 270 );
+    }
+
     .circulation-card-cta {
       @apply text-white bg-orange;
     }
@@ -85,7 +90,7 @@
 
     &.type-get_help {
       .circulation-card-title {
-        @apply mx-10;
+        @apply mx-10 w-auto;
       }
     }
   }
@@ -145,11 +150,24 @@
         @apply text-px46 leading-px62;
       }
     }
+
+    &.type-get_help {
+      .circulation-card-title {
+        @apply mx-auto;
+        width: 70%;
+      }
+    }
   }
 
   @screen xl {
     .circulation-card-cta {
       @apply h-px66;
+    }
+
+    &.type-get_help {
+      .circulation-card-title {
+        width: 65%;
+      }
     }
   }
 }

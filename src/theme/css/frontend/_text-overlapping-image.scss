@@ -38,7 +38,6 @@
     }
 
     @screen lg2 {
-      @apply text-px56 leading-px66;
       letter-spacing: 0;
     }
   }
@@ -122,7 +121,11 @@
     }
 
     @screen lg {
-      @apply px-px40 h-px66 text-px20 leading-px26 tracking-px05;
+      @apply px-px40 h-px66 text-px20 leading-px26 tracking-px05 font-bold;
+    }
+
+    @screen xl {
+      @apply font-semibold;
     }
   }
 

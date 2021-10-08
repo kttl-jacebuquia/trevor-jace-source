@@ -11,6 +11,14 @@ class Promo extends A_Options_Page {
 	const FIELD_ORGANIZATION_TOGGLE = 'promo_organization_toggle';
 
 	/** @inheritDoc */
+	public static function register(): bool {
+		add_filter( 'acf/fields/post_object/query/name=' . static::FIELD_SUPPORT, array( self::class, 'include_only_publish_post' ), 10, 3 );
+		add_filter( 'acf/fields/post_object/query/name=' . static::FIELD_ORGANIZATION, array( self::class, 'include_only_publish_post' ), 10, 3 );
+
+		return parent::register();
+	}
+
+	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
 		return array_merge(
 			parent::prepare_page_register_args(),
@@ -108,5 +116,13 @@ class Promo extends A_Options_Page {
 		$promo_popup = self::get_promo_popup();
 
 		return FG_PROMO::render( $promo_popup['promo'] );
+	}
+
+	public static function include_only_publish_post( $args, $field, $post_id ) {
+
+		// Include only 'publish' post
+		$args['post_status'] = 'publish';
+
+		return $args;
 	}
 }

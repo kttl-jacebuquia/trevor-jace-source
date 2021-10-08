@@ -24,6 +24,10 @@
   .modal-wrap {
     @apply container mx-auto;
     @apply tw-grid h-full items-center;
+
+    @screen mobile {
+      max-width: 375px;
+    }
   }
 
   .modal-container {
