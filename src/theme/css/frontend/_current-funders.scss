@@ -64,9 +64,11 @@
       }
 
       a.funder-name {
-        @apply underline;
-        text-underline-offset: 6px;
-        text-decoration-thickness: 1px;
+        @extend .wave-underline;
+      }
+
+      div.funder-name {
+        @apply pb-px12;
       }
     }
 

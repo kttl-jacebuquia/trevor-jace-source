@@ -1,6 +1,13 @@
 .what-to-expect-modal {
   @apply text-indigo;
 
+  .modal-wrap {
+    @screen mobile {
+      @apply px-0;
+      max-width: none;
+    }
+  }
+
   .modal-container {
     @apply mx-auto;
     max-width: #{rem-calc(1160)};
