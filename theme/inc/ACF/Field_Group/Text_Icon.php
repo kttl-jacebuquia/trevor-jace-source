@@ -157,8 +157,7 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 			'bg-' . $bg_color,
 			'text-' . $text_color,
 			'text-icon--' . $mobile_tablet_layout,
-			'text-icon--' . $desktop_columns . '-columns',
-			'block-spacer',
+			'text-icon--' . $desktop_columns . '-columns'
 		);
 
 		ob_start();

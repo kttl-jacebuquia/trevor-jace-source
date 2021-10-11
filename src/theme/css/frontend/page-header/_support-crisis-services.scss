@@ -84,7 +84,7 @@
   }
 
   .page-header__support-ctas {
-    @apply col-span-full flex flex-col items-center;
+    @apply col-span-full flex flex-col items-center mt-px40;
 
     @screen md {
       @apply mt-px50 grid grid-cols-3;
