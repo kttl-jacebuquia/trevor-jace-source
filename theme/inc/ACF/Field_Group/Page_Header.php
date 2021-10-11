@@ -449,7 +449,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		// Parent fields override
 		foreach ( $parent_fields as $key => &$field ) {
-			var_dump( $key );
 			switch ( $key ) {
 				case 'tab_inner':
 				case 'tab_wrapper':
