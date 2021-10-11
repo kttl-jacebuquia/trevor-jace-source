@@ -110,6 +110,11 @@ $screen-widths: (
   &__wrap {
     @apply relative pb-px293;
 
+    @screen mobile {
+      max-width: none;
+      width: 100vw;
+    }
+
     @screen md {
       @apply pb-px382;
       padding-top: $top-nav-height-tablet;

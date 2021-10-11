@@ -53,7 +53,12 @@
 
     @screen mobile {
       .featured-card-3up__items-container {
-        @apply -mx-px28 px-px28;
+        $mobile-offset: calc(((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT'));
+
+        margin-left: calc(-1 * #{$mobile-offset});
+        margin-right: calc(-1 * #{$mobile-offset});
+        padding-left: $mobile-offset;
+        padding-right: $mobile-offset;
       }
     }
   }
