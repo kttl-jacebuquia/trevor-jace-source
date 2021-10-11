@@ -32,10 +32,6 @@
   }
 
   &__container {
-    @screen mobile {
-      max-width: 375px;
-    }
-
     body.is-crisis-support & {
       @screen lg {
         padding-left: theme('container.padding.md');

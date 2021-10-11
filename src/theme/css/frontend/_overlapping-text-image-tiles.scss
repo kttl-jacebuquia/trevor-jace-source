@@ -54,7 +54,22 @@
 
     @screen lg2 {
       @apply text-px42 tracking-em_001;
+    }
 
+    tilt {
+      @apply text-px40 leading-px50 tracking-px_02;
+
+      @screen md {
+        @apply text-px48 leading-px68 tracking-em005;
+      }
+
+      @screen lg {
+        @apply text-px56 leading-px80;
+      }
+
+      @screen lg2 {
+        @apply text-px60;
+      }
     }
   }
 
@@ -94,6 +109,10 @@
       @screen #{$screen} {
         margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
       }
+    }
+
+    @screen mobile {
+      margin-left: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
     }
 
     @screen md {
@@ -188,6 +207,10 @@
         @screen #{$screen} {
           margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
         }
+      }
+
+      @screen mobile {
+        margin-right: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
       }
 
       @screen md {

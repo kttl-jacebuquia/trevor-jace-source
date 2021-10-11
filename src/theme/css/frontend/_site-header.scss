@@ -92,6 +92,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		@apply static flex mx-auto items-center h-full justify-between;
 		@apply pl-px20 pr-px30;
 
+    @screen mobile {
+      max-width: none;
+    }
+
 		@screen md {
 			@apply px-px40;
 		}
@@ -940,6 +944,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	}
 
   .top-nav-inner {
+    @screen mobile {
+      max-width: none;
+    }
+
     @screen lg {
       @apply px-px20;
 

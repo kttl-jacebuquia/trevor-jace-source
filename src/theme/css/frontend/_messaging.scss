@@ -3,10 +3,6 @@
 		@apply tw-grid container mx-auto;
 
     body.is-crisis-support & {
-      @screen mobile {
-        max-width: 375px;
-      }
-
       @screen lg {
         padding-left: theme('container.padding.md');
         padding-right: theme('container.padding.md');

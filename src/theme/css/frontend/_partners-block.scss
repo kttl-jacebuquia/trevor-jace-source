@@ -185,6 +185,8 @@
   }
 
   a {
-    @apply border-b-px1 border-teal-dark pb-px2;
+    &::after {
+      left: 0;
+    }
   }
 }

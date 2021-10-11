@@ -106,7 +106,7 @@ const config = {
 		container: {
 			screens: {
 				// set the max-width per breakpoint
-				sm: '100%',
+				sm: px2rem(375),
 				md: px2rem(768),
 				lg: px2rem(1024),
 				lg2: px2rem(1280),
