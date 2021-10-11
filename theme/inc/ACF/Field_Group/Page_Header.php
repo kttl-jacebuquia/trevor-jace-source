@@ -9,7 +9,6 @@ use TrevorWP\Theme\ACF\Options_Page\SEO_Details;
 class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TYPE              = 'header_type';
 	const FIELD_TITLE_TOP         = 'title_top';
-	const FIELD_TITLE_TOP_ATTR    = 'title_top_attr';
 	const FIELD_CAROUSEL          = 'carousel';
 	const FIELD_IMAGE             = 'image';
 	const FIELD_BG_CLR            = 'bg_clr';
@@ -28,7 +27,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	public static function _get_fields(): array {
 		$type              = static::gen_field_key( static::FIELD_TYPE );
 		$title_top         = static::gen_field_key( static::FIELD_TITLE_TOP );
-		$title_top_attr    = static::gen_field_key( static::FIELD_TITLE_TOP_ATTR );
 		$carousel          = static::gen_field_key( static::FIELD_CAROUSEL );
 		$image             = static::gen_field_key( static::FIELD_IMAGE );
 		$text_clr          = static::gen_field_key( static::FIELD_TEXT_CLR );
@@ -209,20 +207,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							),
 						),
 					),
-				),
-				static::FIELD_TITLE_TOP_ATTR => DOM_Attr::clone(
-					array(
-						'key'               => $title_top_attr,
-						'name'              => static::FIELD_TITLE_TOP_ATTR,
-						'conditional_logic' => array(
-							array(
-								array(
-									'field'    => $title_top,
-									'operator' => '!=empty',
-								),
-							),
-						),
-					)
 				),
 			),
 			static::_get_parent_fields(),
@@ -465,26 +449,13 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		// Parent fields override
 		foreach ( $parent_fields as $key => &$field ) {
+			var_dump( $key );
 			switch ( $key ) {
 				case 'tab_inner':
 				case 'tab_wrapper':
-					$field['conditional_logic'] = array(
-						array(
-							'field'    => $type_field_key,
-							'operator' => '!=',
-							'value'    => 'support_crisis_services',
-						),
-						array(
-							'field'    => $type_field_key,
-							'operator' => '!=',
-							'value'    => 'support_trevorspace',
-						),
-						array(
-							'field'    => $type_field_key,
-							'operator' => '!=',
-							'value'    => 'split_carousel',
-						),
-					);
+				case 'title_attr':
+				case 'desc_attr':
+					unset( $parent_fields[ $key ] );
 					break;
 				case 'tab_title-top':
 					$field['conditional_logic'] = array(
@@ -509,24 +480,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						),
 					);
 					break;
-				case 'title_attr':
-				case 'desc_attr':
-					$field['display']           = 'group';
-					$field['conditional_logic'] = array(
-						array(
-							'field'    => $type_field_key,
-							'operator' => '!=',
-							'value'    => 'support_trevorspace',
-						),
-						array(
-							'field'    => $type_field_key,
-							'operator' => '!=',
-							'value'    => 'support_crisis_services',
-						),
-					);
-					break;
-				default:
-					;
 			}
 		}
 
@@ -593,9 +546,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		);
 
 		# Additional title and desc classnames.
-		$title_attrs         = DOM_Attr::get_attrs_of( $val->get( static::FIELD_TITLE_ATTR ) );
+		$title_attrs         = array();
 		$args['title_cls'][] = $title_attrs['class'];
-		$desc_attrs          = DOM_Attr::get_attrs_of( $val->get( static::FIELD_DESC_ATTR ) );
+		$desc_attrs          = array();
 		$args['desc_cls'][]  = $desc_attrs['class'];
 
 		$args['styles'] = array();
