@@ -170,7 +170,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 						<div class="lessons-video-player__title" data-number="1"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
 						<div class="lessons-video-player__body"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
 						<div class="lessons-video-player__download">
-							<a href="test.pdf" class="wave-underline" download>Download Lesson Plan 1</a>
+							<a href="test.pdf" class="lessons-video-player__download-link wave-underline" download>Download Lesson Plan 1</a>
 						</div>
 					</div>
 
@@ -178,14 +178,15 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 					<div class="lessons-video-player__playlist">
 						<h3 class="lessons-video-player__playlist-title"><?php echo esc_html( $lesson ); ?></h3>
 						<div class="lessons-video-player__playlist-items" role="list">
-							<?php foreach ( $video_entries as $number => $video ) : ?>
+							<?php $counter = 1; ?>
+							<?php foreach ( $video_entries as $video ) : ?>
 								<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
 									<button
 										<?php
 											echo self::render_attrs(
 												array( 'lessons-video-player__playlist-item' ),
 												array(
-													'data-number' => esc_attr( $number + 1 ),
+													'data-number' => esc_attr( $counter++ ),
 													'data-src' => esc_attr( $video['src'] ),
 													'data-thumbnail-id' => esc_attr( $video['thumbnail_id'] ),
 													'data-thumbnail' => esc_attr( $video['thumbnail'] ),

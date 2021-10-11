@@ -14,7 +14,7 @@ export default class Lesson extends Component {
 		play: '.lessons-video-player__play',
 		title: '.lessons-video-player__title',
 		body: '.lessons-video-player__body',
-		download: '.lessons-video-player__download',
+		download: '.lessons-video-player__download-link',
 		vimeoPlaceholder: '.lessons-video-player__vimeo-placeholder',
 		youtubePlaceholder: '.lessons-video-player__youtube-iframe-replacement',
 	};
@@ -34,6 +34,7 @@ export default class Lesson extends Component {
 	state = {
 		lesson: {
 			lessonId: '',
+			number: '',
 			src: '',
 			poster: '',
 			title: '',
@@ -184,6 +185,7 @@ export default class Lesson extends Component {
 			this.children.player.dataset.videoType = lesson.videoType;
 			this.children.player.dataset.lessonId = lessonId;
 			this.children.title.innerText = lesson.title;
+			this.children.title.dataset.number = lesson.number;
 			this.children.body.innerText = lesson.description;
 			this.children.download.innerText = lesson.downloadLabel;
 			this.children.download.href = lesson.downloadURL;

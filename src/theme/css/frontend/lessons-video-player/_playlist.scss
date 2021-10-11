@@ -17,9 +17,11 @@
 
   &__playlist-items {
     @apply border-solid border-current border-t-px1 border-b-px1 mt-px12;
+    counter-reset: playlist-item;
   }
 
   &__playlist-item {
+    counter-increment: playlist-item;
     @include tw-respond(
       flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
       $md: p-px30,
@@ -47,6 +49,10 @@
     @screen md {
       @apply block relative w-px150 overflow-hidden rounded-px10;
       @include aspect-ratio(150, 84);
+    }
+
+    @screen lg {
+      @apply w-px150;
     }
 
     img {
@@ -79,6 +85,10 @@
 
   &__playlist-item-title {
     @include tw-respond(font-semibold text-px14 leading-px18 tracking-em001, $md: text-px16 leading-px22);
+
+    &::before {
+      content: counter(playlist-item) ". ";
+    }
   }
 
   &__playlist-item-duration {
