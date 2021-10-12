@@ -8,7 +8,7 @@
   @screen lg {
     @apply py-px100;
 
-    body.is-rc {
+    body.is-rc & {
       @apply pt-px120;
     }
   }
@@ -16,18 +16,57 @@
   @screen lg2 {
     @apply py-px120;
 
-    body.is-rc {
-      @apply pt-px140;
+    body.is-rc & {
+      @apply pt-px148;
     }
   }
 
   .page-sub-title {
+    @apply mb-0;
+
+    @screen md {
+      width: 85%;
+    }
+
     @screen lg {
       @apply text-px44 leading-px54 tracking-em_001;
     }
 
     @screen xl {
       @apply text-px46 leading-px56;
+    }
+
+    body.is-rc & {
+      @screen lg {
+        @apply text-px40 leading-px50;
+      }
+
+      @screen lg2 {
+        @apply text-px46 leading-px56;
+      }
+    }
+
+    & + .page-sub-title-desc {
+      @apply mt-px18 mb-0 text-px20 leading-px30 tracking-em005;
+
+      @screen md {
+        @apply text-px16 leading-px22;
+        width: percentage( 494 / 667 );
+      }
+
+      @screen lg {
+        @apply mt-px20 text-px22 leading-px32 tracking-px05;
+        width: percentage( 661 / 843 );
+      }
+
+      @screen lg2 {
+        @apply text-px26 leading-px36 tracking-em005;
+        width: percentage( 718 / 1040 );
+      }
+
+      @screen xl {
+        width: percentage( 718 / 1160 );
+      }
     }
   }
 

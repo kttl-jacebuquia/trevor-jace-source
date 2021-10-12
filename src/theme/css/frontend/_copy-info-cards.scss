@@ -1,9 +1,5 @@
 .copy-info-cards {
-  @apply text-center my-px80;
-
-  @screen xl {
-    @apply my-px100;
-  }
+  @apply text-center;
 
   &[class*=bg]:not(.bg-transparent) {
     @apply py-px80;

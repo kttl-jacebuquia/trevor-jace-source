@@ -90,10 +90,10 @@
     }
 
     .page-header-img-wrap {
-      @apply relative mt-auto my-auto;
+      @apply relative mt-auto mt-auto mb-0;
 
       @screen md {
-        @apply col-span-4 w-full;
+        @apply col-span-4 w-full my-auto;
       }
 
       @screen lg {

@@ -27,7 +27,7 @@
       @apply relative pt-full;
 
       img {
-        @apply absolute top-0 left-0 h-full;
+        @apply absolute top-0 left-0 h-full w-full;
       }
     }
 
@@ -99,7 +99,6 @@
 
       img {
         object-position: center 30%;
-        max-height: rem-calc(375px);
 
         @screen md {
           @apply rounded-px10;
