@@ -73,7 +73,11 @@
     }
 
     @screen xl {
-      @apply -mr-px140;
+      @include bleed-r(xl);
+    }
+
+    @media only screen and (min-width: 1920px) {
+      margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
     }
   }
 
@@ -168,6 +172,10 @@
     min-width: 310px;
     margin: 0 auto;
     background-color: #f3f3f7;
+
+    @screen xl {
+      max-height: 750px;
+    }
   }
 
   .highcharts-series-0 path {

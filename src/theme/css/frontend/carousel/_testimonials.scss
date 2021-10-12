@@ -366,7 +366,21 @@
         }
 
         @screen lg {
-          @apply col-start-7 col-span-6 -ml-px28 -mr-px140;
+          @apply col-start-7 col-span-6 -ml-px28;
+          @include bleed-r(lg);
+        }
+
+        @screen lg2 {
+          @include bleed-r(lg2);
+        }
+
+        @screen xl {
+          @include bleed-r(xl);
+        }
+
+        // Max breakpoint for bleed is 1920px.
+        @media only screen and (min-width: 1920px) {
+          margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
         }
 
         .swiper-container {
@@ -402,7 +416,20 @@
         }
 
         @screen lg {
-          left: -140px;
+          @include bleed-l(lg);
+        }
+
+        @screen lg2 {
+          @include bleed-l(lg2);
+        }
+
+        @screen xl {
+          @include bleed-l(xl);
+        }
+
+        // Max breakpoint for bleed is 1920px.
+        @media only screen and (min-width: 1920px) {
+          margin-left: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
         }
 
         .swiper-container {

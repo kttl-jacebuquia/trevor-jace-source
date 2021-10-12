@@ -140,15 +140,17 @@
       @apply col-span-6 col-start-7 mt-0;
     }
 
-    @each $screen in lg2, xl, 2xl {
-      @screen #{$screen} {
-        margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-      }
+    @screen lg2 {
+      @include bleed-r(lg2);
+    }
+
+    @screen xl {
+      @include bleed-r(xl);
     }
 
     // Max container expand.
     @media only screen and (min-width: 1920px) {
-      margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
+      margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
     }
 
     // Tilted variant

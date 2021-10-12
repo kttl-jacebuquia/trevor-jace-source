@@ -13,31 +13,29 @@
     @apply col-span-full rounded-px10 py-px80 text-indigo;
     @apply px-px24 text-center;
 
-    @each $screen in md, lg, lg2, xl, 2xl {
-      @screen #{$screen} {
-        margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-      }
-    }
-
     @screen md {
       @apply col-start-3 col-span-6 px-px76 rounded-r-none;
+      @include bleed-r(md);
     }
 
     @screen lg {
       @apply col-start-3 col-span-10 pl-px145 pr-px90 py-px100;
+      @include bleed-r(lg);
     }
 
     @screen lg2 {
       @apply col-start-4 col-span-9 pl-px178 pr-px209 py-px140;
+      @include bleed-r(lg2);
     }
 
     @screen xl {
       @apply pt-px180 pb-px190 pl-px198 pr-px240;
+      @include bleed-r(xl);
     }
 
-    // Max container expand.
+    // Max breakpoint for bleed is 1920px.
     @media only screen and (min-width: 1920px) {
-      margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
+      margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
     }
   }
 
@@ -105,39 +103,41 @@
   &__image {
     @apply col-span-5 -ml-px55 relative -mt-px40 rounded-l-none rounded-px10 overflow-hidden;
 
-    @each $screen in md, lg, lg2, xl, 2xl {
-      @screen #{$screen} {
-        margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-      }
-    }
-
     @screen mobile {
       margin-left: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
     }
 
     @screen md {
       @apply col-span-3 -mt-px255;
+      @include bleed-l(md);
+
       max-height: 326px;
     }
 
     @screen lg {
       @apply col-span-4 -mt-px318;
+      @include bleed-l(lg);
+
       max-height: 372px;
     }
 
     @screen lg2 {
       @apply col-span-5 -mt-px350 mr-px60;
+      @include bleed-l(lg2);
+
       max-height: 525px;
     }
 
     @screen xl {
       @apply -mt-px480 mr-0;
+      @include bleed-l(xl);
+
       max-height: 706px;
     }
 
-    // Max container expand.
+    // Max breakpoint for bleed is 1920px.
     @media only screen and (min-width: 1920px) {
-      margin-left: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
+      margin-left: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
     }
 
     &::before {
@@ -170,44 +170,37 @@
   // Image On Right Layout
   &--image-on-right {
     .overlapping-text-image-tiles__box {
-      @each $screen in md, lg, lg2, xl, 2xl {
-        @screen #{$screen} {
-          margin-left: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-        }
-      }
-
       @screen md {
         @apply rounded-px10 rounded-l-none col-span-6 col-start-1 mr-0 px-px116;
+        @include bleed-l(md);
       }
 
       @screen lg {
         @apply col-span-10 col-start-1 mr-0 pl-px135 pr-px145;
+        @include bleed-l(lg);
       }
 
       @screen lg2 {
         @apply col-span-9 pl-px120 pr-px178;
+        @include bleed-l(lg2);
       }
 
       @screen xl {
         @apply col-span-8 pl-px240 pr-px198;
+        @include bleed-l(xl);
+
         padding-top: 176px;
         padding-bottom: 167px;
       }
 
-      // Max container expand.
+      // Max breakpoint for bleed is 1920px.
       @media only screen and (min-width: 1920px) {
-        margin-left: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
+        margin-left: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
       }
     }
 
     .overlapping-text-image-tiles__image {
       @apply col-start-2 col-span-5 ml-0 -mr-px90 rounded-r-none rounded-px10;
-
-      @each $screen in md, lg, lg2, xl, 2xl {
-        @screen #{$screen} {
-          margin-right: calc(-1 * (((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}')));
-        }
-      }
 
       @screen mobile {
         margin-right: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
@@ -215,19 +208,26 @@
 
       @screen md {
         @apply col-span-3 col-start-6 rounded-r-none rounded-px10;
+        @include bleed-r(md);
       }
 
       @screen lg {
         @apply col-span-4 col-start-9;
+        @include bleed-r(lg);
       }
 
       @screen lg2 {
         @apply col-span-5 col-start-8;
+        @include bleed-r(lg2);
       }
 
-      // Max container expand.
+      @screen xl {
+        @include bleed-r(xl);
+      }
+
+      // Max breakpoint for bleed is 1920px.
       @media only screen and (min-width: 1920px) {
-        margin-right: calc( -1 * ( (theme('container.padding.xl') * 2) + 20px ) );
+        margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
       }
     }
   }

@@ -11,6 +11,12 @@
 		}
 	}
 
+  .frequency--choices {
+    @screen lg2 {
+      margin-right: 167px;
+    }
+  }
+
 	.dedication {
 		@apply flex flex-nowrap items-start mt-px50;
 		@apply text-px18 leading-px26 tracking-px05;
@@ -47,6 +53,14 @@
 
   .amount {
     margin-bottom: 0 !important;
+
+    @screen lg2 {
+      margin-right: 115px;
+    }
+
+    @screen xl {
+      margin-right: 100px;
+    }
   }
 
 	&__submit,
