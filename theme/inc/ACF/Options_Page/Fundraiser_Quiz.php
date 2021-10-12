@@ -2,6 +2,7 @@
 
 use TrevorWP\Theme\ACF\Field_Group;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Ajax\Dev_Inquiry;
 
 class Fundraiser_Quiz extends A_Options_Page {
 	const STEP_1_TITLE                           = 'step_1_title';
@@ -412,7 +413,14 @@ class Fundraiser_Quiz extends A_Options_Page {
 		?>
 			<button class="fundraiser-quiz__back-btn">BACK</button>
 			<div class="fundraiser-quiz__pagination"><span class="fundraiser-quiz__current-page"></span>/<span class="fundraiser-quiz__total-page"></span></div>
-			<div class="fundraiser-quiz container mx-auto text-white text-center">
+			<div
+			<?php
+				echo static::render_attrs(
+					array( 'fundraiser-quiz container mx-auto text-white text-center' ),
+					array( 'data-ajax-action' => Dev_Inquiry::ACTION ),
+				);
+			?>
+			>
 				<?php
 					echo self::step_one( $step_1_data );
 					echo self::form( $dev_form_data );
@@ -477,7 +485,9 @@ class Fundraiser_Quiz extends A_Options_Page {
 					<?php } ?>
 
 					<?php if ( ! empty( $data['description'] ) ) { ?>
-						<p class="fundraiser-quiz__description"><?php echo esc_html( $data['description'] ); ?></p>
+						<p class="fundraiser-quiz__description">
+							<?php echo esc_html( $data['description'] ); ?>
+						</p>
 					<?php } ?>
 					<div class="fundraiser-quiz__fields">
 						<?php echo $form_assembly_form; ?>

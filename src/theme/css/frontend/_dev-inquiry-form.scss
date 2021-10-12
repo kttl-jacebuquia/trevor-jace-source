@@ -1,4 +1,10 @@
 .fundraiser-quiz {
+  &.modal {
+    .modal-overlay {
+      @apply bg-blue_green;
+    }
+  }
+
   &--form {
     @apply pb-0;
   }

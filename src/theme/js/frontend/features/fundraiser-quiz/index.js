@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import FloatingLabelInput from '../floating-label-input';
 import phoneFormat from '../contact-form';
+import { WPAjax } from '../wp-ajax';
 
 export default class FundraiserQuiz {
 	/**
@@ -12,7 +13,7 @@ export default class FundraiserQuiz {
 	 * single        - If true, hides pagination and back buttons
 	 */
 	constructor(options) {
-		this.selector = '.fundraiser-quiz';
+		this.selector = '.fundraiser-quiz.container';
 		this.parentContainer = $(`${this.selector}`);
 		this.backBtn = $(`${this.selector}__back-btn`);
 		this.choices = $(`${this.selector}__radio-btn`);
@@ -24,6 +25,15 @@ export default class FundraiserQuiz {
 		this.totalPages = 1;
 		this.currentPage = 0;
 		this.options = options;
+
+		this.ajaxAction = this.parentContainer.data('ajax-action');
+		this.$devInquirySlide = this.parentContainer.find(
+			'[data-vertex="form"]'
+		);
+		this.devInquiryForm = this.$devInquirySlide.find('form').get(0);
+		this.devInquiryFieldsContainer = this.$devInquirySlide
+			.find('.fundraiser-quiz__fields')
+			.get(0);
 
 		this.containers = {
 			donate: `${this.selector}--step-one`,
@@ -127,9 +137,7 @@ export default class FundraiserQuiz {
 
 	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
 	initDevInquiryForm() {
-		const embeddedForm = this.parentContainer
-			.find('.wFormContainer')
-			.get(0);
+		const embeddedForm = this.devInquiryForm;
 
 		if (embeddedForm) {
 			const [...inputFields] = embeddedForm.querySelectorAll('.oneField');
@@ -140,7 +148,7 @@ export default class FundraiserQuiz {
 				const requiredlabel = inputField.querySelector('.reqMark');
 
 				// Add asterisk on required label
-				if ( requiredlabel ) {
+				if (requiredlabel) {
 					requiredlabel.innerHTML += '&nbsp;*';
 				}
 
@@ -157,7 +165,36 @@ export default class FundraiserQuiz {
 
 				FloatingLabelInput.initializeWithElement(inputField, options);
 			});
+
+			embeddedForm.addEventListener(
+				'submit',
+				this.onDevInquirySubmit.bind(this)
+			);
 		}
+	}
+
+	async onDevInquirySubmit(e) {
+		e.preventDefault();
+
+		const formData = [
+			...new FormData(this.devInquiryForm).entries(),
+		].reduce((all, [key, value]) => {
+			all[key] = value;
+			return all;
+		}, {});
+
+		const response = await WPAjax({
+			action: this.ajaxAction,
+			data: formData
+		});
+
+		if ( /success/i.test(response?.status || '')) {
+			this.onFormSubmitSuccess();
+		}
+	}
+
+	onFormSubmitSuccess() {
+		this.devInquiryFieldsContainer.outerHTML = `<p>Thank you for your submission!</p>`;
 	}
 
 	displayNextPage(btn) {

@@ -278,6 +278,7 @@ module.exports = function (webpackEnv) {
 				// guards against forgotten dependencies and such.
 				PnpWebpackPlugin,
 			],
+			extensions: [ '.js', '.ts', '.tsx', '.jsx' ],
 		},
 		resolveLoader: {
 			plugins: [
