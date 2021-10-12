@@ -54,7 +54,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 						static::FIELD_VIDEO_ENTRY_VIMEO  => array(
 							'key'      => $video_entry_vimeo,
 							'name'     => static::FIELD_VIDEO_ENTRY_VIMEO,
-							'label'    => 'Vimeo',
+							'label'    => 'Vimeo or Youtube URL',
 							'type'     => 'oembed',
 							'required' => 1,
 						),
@@ -203,7 +203,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 										?>
 									>
 										<figure class="lessons-video-player__playlist-item-thumbnail trevor-ti-play">
-											<?php if ( ! empty( $video['thumbnail_id'] ) ): ?>
+											<?php if ( ! empty( $video['thumbnail_id'] ) ) : ?>
 												<?php
 													echo wp_get_attachment_image(
 														$video['thumbnail_id'],
@@ -214,7 +214,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 														),
 													);
 												?>
-											<?php else: ?>
+											<?php else : ?>
 												<img class="lessons-video-player__playlist-thumbnail">
 											<?php endif; ?>
 											<span class="trevor-ti-play lessons-video-player__playlist-thumbnail-icon"></span>

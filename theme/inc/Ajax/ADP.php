@@ -248,11 +248,14 @@ class ADP {
 
 		$data = array();
 
+		$current_date = current_datetime();
+		$current_date = wp_date( 'Y-m-d H:i:s', $current_date->date, $current_date->timezone );
+
 		// Filter jobs to include only positions with posting channel ID "19000101_000001"
 		// Referrence: https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=0a93e956-1064-47e3-9771-6768b425b346&ccId=19000101_000001&type=MP&lang=en_US
 		foreach ( $jobs as $job ) {
 			foreach ( $job['postingInstructions'] as $post ) {
-				if ( '19000101_000001' === $post['postingChannel']['channelID'] ) {
+				if ( '19000101_000001' === $post['postingChannel']['channelID'] && $current_date <= $post['expireDate'] ) {
 					if ( $post['nameCode']['codeValue'] !== $job['job']['jobTitle'] ) {
 						$job['job']['jobTitle'] = $post['nameCode']['codeValue'];
 					}

@@ -193,7 +193,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				)
 			),
 			array(
-				static::FIELD_TITLE_TOP      => array(
+				static::FIELD_TITLE_TOP => array(
 					'key'               => $title_top,
 					'name'              => static::FIELD_TITLE_TOP,
 					'label'             => 'Title Top',

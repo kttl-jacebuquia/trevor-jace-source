@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { initFilterNavigation } from './filters';
 import initListing from './listing';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import WithState from '../../WithState';
 
 class ADPContent extends WithState {
@@ -184,8 +184,9 @@ class ADPContent extends WithState {
 
 	getDateAgo(value) {
 		const date = moment(value).format('YYYY-MM-DD'),
-			now = moment(),
-			days = now.diff(date, 'days');
+			timezone = scriptVars.wp_timezone,
+			now = moment().tz(timezone).format('YYYY-MM-DD'),
+			days = moment(now).diff(date, 'days');
 
 		let ago = `just now`;
 

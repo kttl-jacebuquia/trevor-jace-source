@@ -210,6 +210,12 @@ class Hooks {
 			true
 		);
 
+		wp_localize_script(
+			self::NAME_PREFIX . 'theme-frontend-main',
+			'scriptVars',
+			array( 'wp_timezone' => ! empty( get_option( 'timezone_string' ) ) ? get_option( 'timezone_string' ) : 'America/New_York' )
+		);
+
 		# Site Banners JS
 		wp_enqueue_script(
 			self::NAME_PREFIX . 'theme-site-banners',
