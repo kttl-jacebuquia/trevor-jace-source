@@ -6,6 +6,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE          = 'title';
 	const FIELD_HEADER         = 'header';
 	const FIELD_DESCRIPTION    = 'description';
+	const FIELD_EYEBROW        = 'eyebrow';
 	const FIELD_LARGE_TEXT     = 'large_text';
 	const FIELD_BLOCK_STYLES   = 'block_styles';
 	const FIELD_BG_COLOR       = 'bg_color';
@@ -23,6 +24,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$title          = static::gen_field_key( static::FIELD_TITLE );
 		$header         = static::gen_field_key( static::FIELD_HEADER );
 		$description    = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$eyebrow        = static::gen_field_key( static::FIELD_EYEBROW );
 		$large_text     = static::gen_field_key( static::FIELD_LARGE_TEXT );
 		$block_styles   = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 		$box_color      = static::gen_field_key( static::FIELD_BOX_COLOR );
@@ -148,6 +150,12 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						'value'    => 'large_text',
 					),
 					array(
+						static::FIELD_EYEBROW => array(
+							'key'   => $eyebrow,
+							'name'  => static::FIELD_EYEBROW,
+							'label' => 'Header',
+							'type'  => 'text',
+						),
 						static::FIELD_LARGE_TEXT => array(
 							'key'   => $large_text,
 							'name'  => static::FIELD_LARGE_TEXT,
@@ -267,10 +275,14 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render_large_text(): string {
+		$eyebrow    = static::get_val( static::FIELD_EYEBROW );
 		$large_text = static::get_val( static::FIELD_LARGE_TEXT );
 
 		ob_start();
 		?>
+		<?php if ( ! empty( $eyebrow ) ) : ?>
+			<p class="messaging__eyebrow"><?php echo $eyebrow; ?></p>
+		<?php endif; ?>
 		<?php if ( ! empty( $large_text ) ) : ?>
 			<p class="messaging__large-text"><?php echo $large_text; ?></p>
 		<?php endif; ?>
