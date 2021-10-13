@@ -46,5 +46,9 @@
       margin: 0;
       width: 467px;
     }
+
+    img {
+      @apply rounded-px10;
+    }
   }
 }
