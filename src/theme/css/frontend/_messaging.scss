@@ -37,6 +37,14 @@
 				@apply pb-px120;
 			}
 		}
+
+    .messaging--large_text & {
+      @apply py-px120;
+
+      @screen lg2 {
+        @apply py-px135;
+      }
+    }
 	}
 
 	&__content {
@@ -53,6 +61,18 @@
 
     @screen lg2 {
       @apply col-span-10 col-start-2;
+    }
+
+    body.is-crisis-support & {
+      @apply py-px60;
+
+      @screen md {
+        @apply py-px50;
+      }
+
+      @screen lg {
+        @apply py-px70;
+      }
     }
 	}
 
@@ -78,6 +98,18 @@
 		@screen md {
 			@apply text-px18 leading-px26 tracking-px05;
 		}
+
+    body.is-crisis-support & {
+      @apply mb-px14;
+
+      @screen md {
+        @apply mb-px18;
+      }
+
+      @screen lg2 {
+        @apply mb-px14;
+      }
+    }
 	}
 
 	&__description {
@@ -116,8 +148,10 @@
       }
 
       body.is-crisis-support & {
+        @apply mt-0;
+
         @screen md {
-          @apply text-px20 leading-px30 mt-0 tracking-em005;
+          @apply text-px20 leading-px30 tracking-em005;
         }
 
         @screen lg {
@@ -231,25 +265,40 @@
 	}
 
   &__large-text {
-    @apply text-px20 leading-px26 text-center col-span-full py-px80;
+    @apply text-px24 leading-px28 tracking-px_05 font-semibold;
+    @apply text-center col-span-full;
 
     @screen md {
       @apply col-span-6 col-start-2;
-      @apply text-px18 leading-px24 tracking-px_05;
+      @apply text-px26 leading-px36 tracking-em_005 font-normal;
     }
 
     @screen lg {
-      @apply col-span-10 col-start-2 py-px100;
-      @apply text-px22 leading-px32 tracking-px05;
+      @apply col-span-8 col-start-3;
     }
 
     @screen lg2 {
-      @apply text-px24 leading-px34 tracking-px05 py-px140;
+      @apply text-px30 leading-px40 tracking-normal;
     }
 
-    @screen xl {
-      @apply text-px26 leading-px36 tracking-em005;
-      @apply col-span-8 col-start-3 py-px136;
+    strong {
+      @apply font-semibold;
+    }
+  }
+
+  &__eyebrow {
+    @apply text-px16 leading-px24 uppercase text-center col-span-full mb-px14;
+
+    @screen md {
+      @apply text-px18 leading-px26 tracking-px05 col-span-4 col-start-3 mb-px18;
+    }
+
+    @screen lg {
+      @apply col-start-5;
+    }
+
+    @screen lg2 {
+      @apply mb-px14;
     }
   }
 
