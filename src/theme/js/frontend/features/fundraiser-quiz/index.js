@@ -13,8 +13,8 @@ export default class FundraiserQuiz {
 	 * single        - If true, hides pagination and back buttons
 	 */
 	constructor(options) {
-		this.selector = '.fundraiser-quiz.container';
-		this.parentContainer = $(`${this.selector}`);
+		this.selector = '.fundraiser-quiz';
+		this.parentContainer = $(`${this.selector}.container`);
 		this.backBtn = $(`${this.selector}__back-btn`);
 		this.choices = $(`${this.selector}__radio-btn`);
 		this.modalContainer = $('#js-fundraiser-quiz .modal-container');
