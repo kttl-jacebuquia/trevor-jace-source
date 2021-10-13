@@ -8,6 +8,11 @@ import WithState from './WithState';
 const instancesStore = Symbol('instancesStore');
 
 export default class Component extends WithState {
+	element?: HTMLElement;
+	children?: { [key: string]: HTMLElement | HTMLElement[] };
+	members?: { [key: string]: any };
+	static selector: string;
+
 	static isDOMReady = false;
 
 	// Should be called static through child component
@@ -46,7 +51,7 @@ export default class Component extends WithState {
 		});
 	}
 
-	static initializeWithElement(element, options) {
+	static initializeWithElement(element, options?: { [key: string]: any }) {
 		this.initializeComponentWithElement(this, element, options);
 	}
 
@@ -189,14 +194,23 @@ export default class Component extends WithState {
 		});
 	}
 
+	on(event: string, eventHandler: (args: any) => any) {
+		this.element?.addEventListener(event, eventHandler);
+	}
+
+	emit(event: string, data: any) {
+		const newEvent = new window.CustomEvent(event, { detail: data });
+		this.element?.dispatchEvent(newEvent);
+	}
+
 	getClass() {
 		return this.constructor;
 	}
 }
 
 /**
-  // Sample Component
-  // components/SomeComponent/index.js
+ // Sample Component
+ // components/SomeComponent/index.js
 
   import Component from '@base/js/component';
 

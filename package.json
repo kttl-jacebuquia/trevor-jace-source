@@ -108,6 +108,9 @@
 		"yup": "^0.29.3"
 	},
 	"devDependencies": {
+		"@types/vimeo__player": "^2.10.1",
+		"@types/youtube": "0.0.46",
+		"@types/yt-player": "^3.5.1",
 		"@wordpress/eslint-plugin": "^9.0.6",
 		"@wordpress/prettier-config": "^1.0.5",
 		"@wordpress/stylelint-config": "^19.0.5",

@@ -1,6 +1,14 @@
 .lessons-video-player {
   @apply mt-px60 mb-px80;
 
+  @screen md {
+    @apply mt-px80 mb-px120;
+  }
+
+  @screen lg {
+    @apply mt-px114 mb-px140;
+  }
+
   &__container {
     @apply mx-auto container;
     @apply tw-grid;
@@ -13,6 +21,7 @@
   &__player {
     @apply relative overflow-hidden rounded-px10 transition-all;
     @include aspect-ratio(319, 180);
+    will-change: transform; // Layer composition to make rounded corners work for iframe in safari
 
     > * {
       @apply absolute;

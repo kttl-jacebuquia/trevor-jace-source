@@ -1,8 +1,49 @@
 import VimeoPlayer from '@vimeo/player';
 import Component from '../../Component';
 import { loadYTPlayerAPI } from '../youtube';
+import { VideoType } from './playlist';
+
+export interface LessonDataFragment {
+	videoType?: VideoType;
+	videoId?: string;
+}
+
+export interface LessonData extends LessonDataFragment {
+	lessonId?: string;
+	number?: number | string;
+	src?: string;
+	poster?: string;
+	title?: string;
+	description?: string;
+	downloadLabel?: string;
+	downloadURL?: string;
+}
+
+export interface LessonState {
+	lesson: LessonData;
+	lessonId?: string;
+	posterLoaded: boolean;
+	iframeLoaded: boolean;
+	playing: boolean;
+}
+
+export const LESSONS_WATCHED_KEY = 'TW_LESSONS_WATCHED';
 
 export default class Lesson extends Component {
+	youtubePlayer?: YT.Player;
+	vimeoPlayer?: VimeoPlayer;
+	children?: {
+		poster: HTMLImageElement;
+		player: HTMLElement;
+		iframe: HTMLIFrameElement;
+		play: HTMLButtonElement;
+		title: HTMLElement;
+		body: HTMLElement;
+		download: HTMLButtonElement;
+		vimeoPlaceholder: HTMLElement;
+		youtubePlaceholder: HTMLElement;
+	};
+
 	// Defines the element selector which will initialize this component
 	static selector = '.lessons-video-player__lesson';
 
@@ -31,7 +72,7 @@ export default class Lesson extends Component {
 	playerPlayingClassname = 'lessons-video-player__player--playing';
 
 	// Defines initial State
-	state = {
+	state: LessonState = {
 		lesson: {
 			lessonId: '',
 			number: '',
@@ -41,7 +82,7 @@ export default class Lesson extends Component {
 			description: '',
 			downloadLabel: '',
 			downloadURL: '',
-			videoType: '',
+			videoType: null,
 			videoId: '',
 		},
 		lessonId: '',
@@ -50,7 +91,7 @@ export default class Lesson extends Component {
 		playing: false,
 	};
 
-	loadLessonData(lessonData) {
+	loadLessonData(lessonData: LessonData, willAutoplay: boolean = false) {
 		if (lessonData.lessonId) {
 			const lesson = this.sanitizeLessonData(lessonData);
 			const lessonId = lessonData.lessonId;
@@ -59,7 +100,7 @@ export default class Lesson extends Component {
 				lessonId,
 				posterLoaded: false,
 				iframeLoaded: false,
-				playing: false,
+				playing: willAutoplay,
 			});
 
 			this.loadLessonVideo(lesson);
@@ -67,7 +108,7 @@ export default class Lesson extends Component {
 	}
 
 	// Ensures a valid lesson data being passed
-	sanitizeLessonData(rawLessonData) {
+	sanitizeLessonData(rawLessonData: LessonData) {
 		const curatedLessonData = {};
 
 		Object.keys(this.state.lesson).forEach((dataKey) => {
@@ -80,7 +121,8 @@ export default class Lesson extends Component {
 	onPlayerTransitionEnd(e) {
 		if (e.currentTarget === e.target) {
 			if (!this.state.posterLoaded) {
-				this.children.poster.src = this.state.lesson.poster;
+				(this.children?.poster as HTMLImageElement).src =
+					this.state.lesson.poster || '';
 			}
 		}
 	}
@@ -90,37 +132,61 @@ export default class Lesson extends Component {
 	}
 
 	onVideoLoaded() {
+		const { playing } = this.state;
 		this.setState({ iframeLoaded: true });
+
+		if (playing) {
+			this.playVideo();
+		}
 	}
 
-	async loadLessonVideo(lesson) {
+	playVideo() {
+		const { lesson } = this.state;
+
+		switch (lesson.videoType) {
+			case 'youtube':
+				this.youtubePlayer?.playVideo();
+				break;
+			case 'vimeo':
+				this.vimeoPlayer?.play();
+		}
+	}
+
+	async loadLessonVideo(lesson: LessonData) {
 		// Supports vimeo video for now
 		switch (lesson.videoType) {
 			case 'vimeo':
-				this.loadVimeoVideo(lesson.videoId);
+				this.loadVimeoVideo(lesson.videoId || '');
+				break;
 			case 'youtube':
-				this.loadYoutubeVideo(lesson.videoId);
+				this.loadYoutubeVideo(lesson.videoId || '');
 				break;
 		}
 	}
 
-	async loadVimeoVideo(videoID) {
+	async loadVimeoVideo(videoID: string | number) {
 		if (!videoID) {
 			return;
 		}
 
 		if (!this.vimeoPlayer) {
-			this.vimeoPlayer = new VimeoPlayer(this.children.vimeoPlaceholder, {
-				id: videoID,
-			});
+			this.vimeoPlayer = new VimeoPlayer(
+				this.children?.vimeoPlaceholder as HTMLElement,
+				{
+					id: videoID,
+				}
+			);
 			this.vimeoPlayer.on('loaded', this.onVideoLoaded.bind(this));
 			this.vimeoPlayer.on('play', this.onVideoPlay.bind(this));
+			this.vimeoPlayer.on('ended', this.onVideoEnd.bind(this));
 		} else {
-			this.vimeoPlayer.loadVideo(videoID);
+			this.vimeoPlayer
+				.loadVideo(videoID as number)
+				.then(this.onVideoLoaded.bind(this));
 		}
 	}
 
-	async loadYoutubeVideo(videoID) {
+	async loadYoutubeVideo(videoID: string) {
 		if (!videoID) {
 			return;
 		}
@@ -129,9 +195,14 @@ export default class Lesson extends Component {
 
 		if (!this.youtubePlayer) {
 			this.youtubePlayer = new window.YT.Player(
-				this.children.youtubePlaceholder,
+				this.children?.youtubePlaceholder as HTMLElement,
 				{
 					videoId: videoID,
+					events: {
+						onReady: () => {
+							this.youtubePlayer?.cueVideoById(videoID);
+						},
+					},
 				}
 			);
 			this.youtubePlayer.addEventListener(
@@ -143,27 +214,30 @@ export default class Lesson extends Component {
 		}
 	}
 
-	onPlayClick(e) {
+	onPlayClick(e: Event) {
 		e.preventDefault();
 
 		switch (this.state.lesson.videoType) {
 			case 'vimeo':
 				this.vimeoPlayer && this.vimeoPlayer.play();
-				this.youtubePlayer && this.youtubePlayer.stopVideo();
+				this.youtubePlayer?.stopVideo && this.youtubePlayer.stopVideo();
 				break;
 			case 'youtube':
 				this.youtubePlayer && this.youtubePlayer.playVideo();
-				this.vimeoPlayer && this.vimeoPlayer.pause();
+				this.vimeoPlayer?.pause && this.vimeoPlayer.pause();
 				break;
 		}
 
 		this.setState({ playing: true });
 	}
 
-	onYoutubeVideoStateChange({ data }) {
+	onYoutubeVideoStateChange({ data }: YT.PlayerEvent & { data: number }) {
 		switch (data) {
 			case -1:
 				this.onVideoLoaded();
+				break;
+			case YT.PlayerState.ENDED:
+				this.onVideoEnd();
 				break;
 			case YT.PlayerState.PLAYING:
 				this.onVideoPlay();
@@ -172,7 +246,19 @@ export default class Lesson extends Component {
 	}
 
 	onVideoPlay() {
-		// On video play
+		const { lesson } = this.state;
+		this.emit('videoPlayed', {
+			videoType: lesson.videoType,
+			videoId: lesson.videoId,
+		});
+	}
+
+	onVideoEnd() {
+		const { lesson } = this.state;
+		this.emit('videoEnded', {
+			videoType: lesson.videoType,
+			videoId: lesson.videoId,
+		});
 	}
 
 	// Triggers when state is change by calling this.setState()

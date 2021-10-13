@@ -3,16 +3,18 @@
  */
 const STATE_CHANGE_EVENT = Symbol();
 
+type State = { [key: string]: any };
+
 export default class WithState {
 	// Define this in child class
-	state = {};
+	state: State = {};
 
 	constructor() {
 		// Will serve as custom event name for each instance
 		this[STATE_CHANGE_EVENT] = String(Math.random());
 
-		document.addEventListener(this[STATE_CHANGE_EVENT], ({ detail }) =>
-			this.componentDidUpdate(detail)
+		document.addEventListener(this[STATE_CHANGE_EVENT], ({ detail }: CustomEventInit) =>
+			this.componentDidUpdate(detail as State)
 		);
 	}
 
@@ -20,7 +22,7 @@ export default class WithState {
 	 *
 	 * @param {object} stateMap
 	 */
-	setState(stateMap) {
+	setState(stateMap: State) {
 		const statesToChange = Object.entries(stateMap)
 			.filter(
 				([stateKey, stateValue]) =>
@@ -57,7 +59,7 @@ export default class WithState {
 	}
 
 	onStateChange(callback) {
-		if ( typeof callback === 'function' ) {
+		if (typeof callback === 'function') {
 			document.addEventListener(this[STATE_CHANGE_EVENT], () =>
 				callback(this.state)
 			);

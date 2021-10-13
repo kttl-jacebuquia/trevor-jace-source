@@ -202,7 +202,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 											);
 										?>
 									>
-										<figure class="lessons-video-player__playlist-item-thumbnail trevor-ti-play">
+										<figure class="lessons-video-player__playlist-item-thumbnail">
 											<?php if ( ! empty( $video['thumbnail_id'] ) ) : ?>
 												<?php
 													echo wp_get_attachment_image(

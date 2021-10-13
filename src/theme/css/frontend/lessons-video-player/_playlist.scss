@@ -3,7 +3,7 @@
     @include tw-respond(
       col-span-full mt-px60,
       $md: col-span-6 col-start-2,
-      $lg: col-span-4 col-start-9 mt-0 overflow-auto
+      $lg: col-span-4 col-start-9 mt-0 overflow-auto -mr-px20 pr-px20
     );
 
     @screen lg {
@@ -23,7 +23,7 @@
   &__playlist-item {
     counter-increment: playlist-item;
     @include tw-respond(
-      flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
+      flex justify-start items-center py-px18 px-px10 relative rounded-none w-full,
       $md: p-px30,
       $lg: py-px30 px-px0 gap-x-px10,
       $lg2: px-px20
@@ -37,26 +37,17 @@
         content: "";
       }
     }
-
-    &--active {
-      @apply bg-gray-light;
-    }
   }
 
   &__playlist-item-thumbnail {
     @apply hidden;
 
     @screen md {
-      @apply block relative w-px150 overflow-hidden rounded-px10;
-      @include aspect-ratio(150, 84);
-    }
-
-    @screen lg {
-      @apply w-px150;
+      @apply block relative w-px150 overflow-hidden rounded-px10 w-px150 flex-shrink-0 mr-px20;
     }
 
     img {
-      @apply w-full h-full object-cover;
+      @apply w-full;
 
       &:not([src]) {
         @apply opacity-0;
@@ -71,7 +62,6 @@
   &__playlist-thumbnail-icon {
     @apply absolute flex items-center justify-center bg-current z-2 w-px40 h-px40 rounded-px100;
     @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-    @apply transition-opacity opacity-0;
 
     // Play icon background
     &::before {
@@ -84,7 +74,8 @@
   }
 
   &__playlist-item-title {
-    @include tw-respond(font-semibold text-px14 leading-px18 tracking-em001, $md: text-px16 leading-px22);
+    @include tw-respond(font-semibold text-px14 leading-px18 tracking-em001, $md: text-px16 leading-px22 break-words);
+    word-break: break-word;
 
     &::before {
       content: counter(playlist-item) ". ";
@@ -97,10 +88,11 @@
 
   &__playlist-icon {
     @apply flex w-px26 h-px26 items-center justify-center ml-px10 flex-shrink-0;
-    @apply bg-white border-current border-px1 border-solid rounded-px100;
+    @apply bg-white border-current border-px1 border-solid rounded-px100 ml-auto;
 
     @screen lg {
-      @apply ml-0;
+      @apply ml-0 -mb-px12;
+      align-self: flex-end;
     }
 
     &::before {
@@ -109,7 +101,8 @@
   }
 
   // Active item
-  &__playlist-item--active {
+  &__playlist-item--active,
+  &__playlist-item[data-watched] {
     @apply bg-gray-light;
 
     .lessons-video-player__playlist-icon {
