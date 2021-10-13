@@ -6,6 +6,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TITLE          = 'title';
 	const FIELD_HEADER         = 'header';
 	const FIELD_DESCRIPTION    = 'description';
+	const FIELD_LARGE_TITLE    = 'large_title';
 	const FIELD_EYEBROW        = 'eyebrow';
 	const FIELD_LARGE_TEXT     = 'large_text';
 	const FIELD_BLOCK_STYLES   = 'block_styles';
@@ -24,6 +25,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$title          = static::gen_field_key( static::FIELD_TITLE );
 		$header         = static::gen_field_key( static::FIELD_HEADER );
 		$description    = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$large_title    = static::gen_field_key( static::FIELD_LARGE_TITLE );
 		$eyebrow        = static::gen_field_key( static::FIELD_EYEBROW );
 		$large_text     = static::gen_field_key( static::FIELD_LARGE_TEXT );
 		$block_styles   = static::gen_field_key( static::FIELD_BLOCK_STYLES );
@@ -150,13 +152,19 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						'value'    => 'large_text',
 					),
 					array(
-						static::FIELD_EYEBROW => array(
+						static::FIELD_LARGE_TITLE => array(
+							'key'   => $large_title,
+							'name'  => static::FIELD_LARGE_TITLE,
+							'label' => 'Title',
+							'type'  => 'text',
+						),
+						static::FIELD_EYEBROW     => array(
 							'key'   => $eyebrow,
 							'name'  => static::FIELD_EYEBROW,
 							'label' => 'Header',
 							'type'  => 'text',
 						),
-						static::FIELD_LARGE_TEXT => array(
+						static::FIELD_LARGE_TEXT  => array(
 							'key'   => $large_text,
 							'name'  => static::FIELD_LARGE_TEXT,
 							'label' => 'Large Text',
@@ -275,11 +283,15 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render_large_text(): string {
-		$eyebrow    = static::get_val( static::FIELD_EYEBROW );
-		$large_text = static::get_val( static::FIELD_LARGE_TEXT );
+		$large_title = static::get_val( static::FIELD_LARGE_TITLE );
+		$eyebrow     = static::get_val( static::FIELD_EYEBROW );
+		$large_text  = static::get_val( static::FIELD_LARGE_TEXT );
 
 		ob_start();
 		?>
+		<?php if ( ! empty( $large_title ) ) : ?>
+			<p class="messaging__title"><?php echo $large_title; ?></p>
+		<?php endif; ?>
 		<?php if ( ! empty( $eyebrow ) ) : ?>
 			<p class="messaging__eyebrow"><?php echo $eyebrow; ?></p>
 		<?php endif; ?>
