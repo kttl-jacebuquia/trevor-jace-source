@@ -59,11 +59,11 @@
         @apply flex items-center text-px16 mb-px16 mb-px15 w-full justify-center;
 
         @screen md {
-          @apply mr-px10 inline-flex mb-0 w-auto;
-        }
+          @apply mr-px10 inline-flex mb-0 w-auto text-px22;
 
-        @screen lg {
-          @apply text-px18;
+          &::before {
+            @apply h-px15;
+          }
         }
       }
     }
