@@ -1,13 +1,13 @@
 .tags-box {
   @apply w-full flex overflow-hidden box-content relative;
-  @apply z-1 h-px32 mt-auto mb-px25 flex-shrink-0;
+  @apply z-1 h-px33 mt-auto mb-px25 flex-shrink-0;
 
   @screen lg {
-    @apply h-px34;
+    @apply h-px35;
   }
 
   @screen xl {
-    @apply h-px35;
+    @apply h-px36;
   }
 
   &__contents {
@@ -20,14 +20,12 @@
     @apply text-px24 leading-px28 font-semibold bg-blue_green align-middle;
     @apply transition-colors hover:bg-opacity-80;
 
-    margin-top: -1px;
-
     body.is-rc & {
       @apply bg-violet-tint;
     }
 
     @screen lg {
-      @apply w-px34 h-px34 -mt-px2;
+      @apply w-px34 h-px34;
     }
 
     &::after {
