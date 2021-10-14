@@ -302,10 +302,16 @@ export default class FundraiserQuiz {
 	}
 
 	changeContainerBackground(vertex) {
+		const modalOverlay = $('#js-fundraiser-quiz .modal-overlay');
+
 		if (vertex === 'form') {
 			this.modalContainer.addClass('dev-form');
+
+			modalOverlay.addClass('dev-form');
 		} else {
 			this.modalContainer.removeClass('dev-form');
+
+			modalOverlay.removeClass('dev-form');
 		}
 	}
 
