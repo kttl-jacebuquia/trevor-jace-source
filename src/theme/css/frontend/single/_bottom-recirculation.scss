@@ -2,7 +2,9 @@
   @apply bg-teal-dark;
 
   body.is-rc & {
-	@apply bg-gradient-article-recirculation;
+    @apply bg-gradient-article-recirculation;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 
