@@ -90,6 +90,29 @@
 		@screen xl {
 			@apply text-px40 leading-px48;
 		}
+
+    .messaging--large_text & {
+      @apply text-px36 leading-px40;
+      @apply col-span-4 col-start-2 mb-px16;
+
+      @screen md {
+        @apply col-span-6 col-start-2;
+      }
+
+      @screen lg {
+        @apply text-px40 leading-px48 tracking-px_05;
+        @apply col-span-6 col-start-4;
+      }
+
+      @screen lg2 {
+        @apply text-px56 leading-px66 tracking-normal;
+      }
+
+      @screen xl {
+        @apply text-px70 leading-px80 tracking-px05;
+        @apply col-span-8 col-start-3 mb-px18;
+      }
+    }
 	}
 
 	&__header {
