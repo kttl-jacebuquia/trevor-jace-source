@@ -1,0 +1,27 @@
+$fade-height: #{rem-calc(80)};
+$fade-width: #{rem-calc(80)};
+
+.overflow-fade {
+
+  // Vertical Fades
+  &--top {
+    mask-image: linear-gradient(to bottom, transparent, white #{$fade-height});
+  }
+  &--bottom {
+    mask-image: linear-gradient(to top, transparent, white #{$fade-height});
+  }
+  &--top:is(&--bottom) {
+    mask-image: linear-gradient(to bottom, transparent, white #{$fade-height}, white calc(100% - #{$fade-height}), transparent 100%);
+  }
+
+  // Horizontal Fades
+  &--left {
+    mask-image: linear-gradient(to right, transparent, white #{$fade-height});
+  }
+  &--right {
+    mask-image: linear-gradient(to left, transparent, white #{$fade-height});
+  }
+  &--left:is(&--right) {
+    mask-image: linear-gradient(to right, transparent, white #{$fade-height}, white calc(100% - #{$fade-height}), transparent 100%);
+  }
+}

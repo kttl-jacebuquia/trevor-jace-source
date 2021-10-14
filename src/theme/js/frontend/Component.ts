@@ -8,12 +8,15 @@ import WithState from './WithState';
 const instancesStore = Symbol('instancesStore');
 
 export default class Component extends WithState {
-	element?: HTMLElement;
 	children?: { [key: string]: HTMLElement | HTMLElement[] };
 	members?: { [key: string]: any };
 	static selector: string;
 
 	static isDOMReady = false;
+
+	constructor(public element?: HTMLElement) {
+		super();
+	}
 
 	// Should be called static through child component
 	// in order to load component in DOM

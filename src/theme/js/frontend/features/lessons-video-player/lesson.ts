@@ -39,7 +39,7 @@ export default class Lesson extends Component {
 		play: HTMLButtonElement;
 		title: HTMLElement;
 		body: HTMLElement;
-		download: HTMLButtonElement;
+		download: HTMLAnchorElement;
 		vimeoPlaceholder: HTMLElement;
 		youtubePlaceholder: HTMLElement;
 	};
@@ -176,7 +176,9 @@ export default class Lesson extends Component {
 					id: videoID,
 				}
 			);
-			this.vimeoPlayer.on('loaded', this.onVideoLoaded.bind(this));
+			this.vimeoPlayer.on('loaded', () => {
+				this.onVideoLoaded();
+			});
 			this.vimeoPlayer.on('play', this.onVideoPlay.bind(this));
 			this.vimeoPlayer.on('ended', this.onVideoEnd.bind(this));
 		} else {
@@ -194,23 +196,26 @@ export default class Lesson extends Component {
 		await loadYTPlayerAPI();
 
 		if (!this.youtubePlayer) {
-			this.youtubePlayer = new window.YT.Player(
-				this.children?.youtubePlaceholder as HTMLElement,
-				{
-					videoId: videoID,
-					events: {
-						onReady: () => {
-							this.youtubePlayer?.cueVideoById(videoID);
+			this.youtubePlayer = await new Promise<YT.Player>((resolve) => {
+				const player = new window.YT.Player(
+					this.children?.youtubePlaceholder as HTMLElement,
+					{
+						videoId: videoID,
+						events: {
+							onReady: () => {
+								resolve(player);
+							},
 						},
-					},
-				}
-			);
-			this.youtubePlayer.addEventListener(
+					}
+				);
+			});
+			this.youtubePlayer?.addEventListener(
 				'onStateChange',
 				this.onYoutubeVideoStateChange.bind(this)
 			);
+			this.youtubePlayer?.cueVideoById(videoID);
 		} else {
-			this.youtubePlayer.cueVideoById(videoID);
+			this.youtubePlayer?.cueVideoById(videoID);
 		}
 	}
 
@@ -234,6 +239,7 @@ export default class Lesson extends Component {
 	onYoutubeVideoStateChange({ data }: YT.PlayerEvent & { data: number }) {
 		switch (data) {
 			case -1:
+			case YT.PlayerState.CUED:
 				this.onVideoLoaded();
 				break;
 			case YT.PlayerState.ENDED:
@@ -262,18 +268,20 @@ export default class Lesson extends Component {
 	}
 
 	// Triggers when state is change by calling this.setState()
-	componentDidUpdate() {
-		const { lesson, lessonId, iframeLoaded, posterLoaded, playing } =
-			this.state;
+	componentDidUpdate({
+		iframeLoaded: iframeloaded,
+		posterLoaded: posterloaded,
+	}) {
+		const { lesson, iframeLoaded, posterLoaded, playing } = this.state;
 
 		// If current lesson has changed
-		if (this.children.player.dataset.lessonId !== lessonId) {
-			this.children.player.dataset.videoType = lesson.videoType;
-			this.children.player.dataset.lessonId = lessonId;
-			this.children.title.innerText = lesson.title;
-			this.children.title.dataset.number = lesson.number;
-			this.children.body.innerText = lesson.description;
-			this.children.download.innerText = lesson.downloadLabel;
+		if (this.children) {
+			this.children.player.dataset.videoType = lesson.videoType || '';
+			this.children.player.dataset.lessonId = lesson.lessonId;
+			this.children.title.innerText = lesson.title || '';
+			this.children.title.dataset.number = lesson.number as string;
+			this.children.body.innerText = lesson.description || '';
+			this.children.download.innerText = lesson.downloadLabel || '';
 			this.children.download.href = lesson.downloadURL;
 
 			// Hide empty elements
@@ -287,17 +295,17 @@ export default class Lesson extends Component {
 					element.textContent.trim() ? false : true
 				)
 			);
+
+			this.children.player.classList.toggle(
+				this.playerLoadingClassname,
+				iframeLoaded && posterLoaded ? false : true
+			);
+
+			this.children.player.classList.toggle(
+				this.playerPlayingClassname,
+				playing
+			);
 		}
-
-		this.children.player.classList.toggle(
-			this.playerLoadingClassname,
-			iframeLoaded && posterLoaded ? false : true
-		);
-
-		this.children.player.classList.toggle(
-			this.playerPlayingClassname,
-			playing
-		);
 	}
 }
 

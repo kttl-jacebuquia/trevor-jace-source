@@ -23,9 +23,9 @@
   &__playlist-item {
     counter-increment: playlist-item;
     @include tw-respond(
-      flex justify-start items-center py-px18 px-px10 relative rounded-none w-full,
+      flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
       $md: p-px30,
-      $lg: py-px30 px-px0 gap-x-px10,
+      $lg: py-px30 px-px0 gap-x-px10 items-start,
       $lg2: px-px20
     );
     -webkit-appearance: none;
@@ -43,11 +43,11 @@
     @apply hidden;
 
     @screen md {
-      @apply block relative w-px150 overflow-hidden rounded-px10 w-px150 flex-shrink-0 mr-px20;
+      @apply block relative w-px150 h-px84 overflow-hidden rounded-px10 flex-shrink-0 mr-px25;
     }
 
     img {
-      @apply w-full;
+      @apply w-full h-full object-cover;
 
       &:not([src]) {
         @apply opacity-0;
@@ -70,7 +70,7 @@
   }
 
   &__playlist-item-content {
-    @apply text-left;
+    @apply text-left mr-auto;
   }
 
   &__playlist-item-title {
@@ -87,11 +87,15 @@
   }
 
   &__playlist-icon {
-    @apply flex w-px26 h-px26 items-center justify-center ml-px10 flex-shrink-0;
-    @apply bg-white border-current border-px1 border-solid rounded-px100 ml-auto;
+    @apply flex w-px26 h-px26 items-center justify-center flex-shrink-0 ml-px18 mr-0;
+    @apply bg-white border-current border-px1 border-solid rounded-px100;
+
+    @screen md {
+      @apply ml-px30;
+    }
 
     @screen lg {
-      @apply ml-0 -mb-px12;
+      @apply -mb-px12;
       align-self: flex-end;
     }
 

@@ -1,13 +1,23 @@
-let youtubeScriptInjected = false;
+/* eslint-disable camelcase */
+const INACTIVE_DUMMY_PLAYER_TIMEOUT = 10000;
 
+let youtubeScriptInjected = false;
 let creatingDummyPlayer = false;
-let dummyPlayer: YT.Player;
+let dummyPlayer: YT.Player | null;
+let dummyPlayerIdleTimer: number;
+let dummyElement: HTMLElement | null;
 
 interface WindowWithYT {
 	YT?: {
 		Player: (args: any) => any;
 		loaded: number;
 		ready: (args: any) => any;
+	};
+}
+
+interface YTPlayerExtended extends YT.Player {
+	getVideoData: () => {
+		video_id: string;
 	};
 }
 
@@ -21,34 +31,49 @@ const getDummyYoutubePlayer = async () => {
 			await loadYTPlayerAPI();
 
 			// Create a hidden, dummy element to use as player ifram
-			const dummyElement = Object.assign(document.createElement('div'), {
+			dummyElement = Object.assign(document.createElement('div'), {
 				hidden: true,
 			});
 			const dummyYTPlaceholder = document.createElement('div');
 			dummyElement.appendChild(dummyYTPlaceholder);
 			document.body.appendChild(dummyElement);
 
-			await new Promise((onReady) => {
-				dummyPlayer = new YT.Player(dummyYTPlaceholder, {
-					videoId: '',
-					events: { onReady },
-				});
+			const player = new YT.Player(dummyYTPlaceholder, {
+				videoId: '',
+				events: {
+					onReady: () => {
+						dummyPlayer = player;
+					},
+				},
 			});
 		}
 		await new Promise<void>((resolve) => {
 			const checkerInterval = setInterval(() => {
 				if (dummyPlayer) {
 					clearInterval(checkerInterval);
+					creatingDummyPlayer = false;
 					resolve();
 				}
 			}, 100);
 		});
 	}
 
+	resetInactiveDummyPlayerTimeout();
+
 	return dummyPlayer;
 };
 
-export const getYoutubeVideoData = async (youtubeVideoURL) => {
+const resetInactiveDummyPlayerTimeout = () => {
+	clearTimeout(dummyPlayerIdleTimer);
+	dummyPlayerIdleTimer = window.setTimeout(() => {
+		dummyElement?.parentElement?.removeChild(dummyElement);
+		dummyPlayer = null;
+		dummyElement = null;
+		clearTimeout(dummyPlayerIdleTimer);
+	}, INACTIVE_DUMMY_PLAYER_TIMEOUT);
+};
+
+export const getYoutubeVideoData = async (youtubeVideoURL: string) => {
 	if (!isYoutubeVideo(youtubeVideoURL)) {
 		return null;
 	}
@@ -59,21 +84,30 @@ export const getYoutubeVideoData = async (youtubeVideoURL) => {
 	if (youtubeID) {
 		const youtubePlayer = await getDummyYoutubePlayer();
 
-		console.log({ youtubePlayer });
-
-		await new Promise((resolve) => {
+		const duration: number = await new Promise<number>((resolve) => {
 			youtubePlayer.addEventListener(
 				'onStateChange',
-				({ data, ...event }) => {
-					console.log({ data, event });
+				({
+					data,
+					target: player,
+				}: YT.PlayerEvent & { data: number }) => {
+					if (data === 5) {
+						const { video_id } = (
+							player as YTPlayerExtended
+						).getVideoData();
+						const _duration = player.getDuration();
+						if (video_id === youtubeID) {
+							resolve(_duration);
+						}
+					}
 				}
 			);
-			resolve();
-			// youtubePlayer.loadVideoById(youtubeID);
+			youtubePlayer.cueVideoById(youtubeID, 1);
 		});
 
 		return {
 			video_id: youtubeID,
+			duration,
 			thumbnail_url: `https://img.youtube.com/vi/${youtubeID}/mqdefault.jpg`,
 			poster_url: `https://img.youtube.com/vi/${youtubeID}/maxresdefault.jpg`,
 		};

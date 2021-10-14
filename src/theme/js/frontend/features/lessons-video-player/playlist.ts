@@ -1,4 +1,4 @@
-import Component from '../../Component';
+import OverflowFade from '../overflow-fade';
 import { isVimeoVideo, getVimeoVideoData } from '../vimeo';
 import {
 	isYoutubeVideo,
@@ -22,7 +22,7 @@ export interface PlaylistItemData {
 	videoType: VideoType;
 }
 
-export default class Playlist extends Component {
+export default class Playlist extends OverflowFade {
 	// Defines the element selector which will initialize this component
 	static selector = '.lessons-video-player__playlist';
 
@@ -44,6 +44,10 @@ export default class Playlist extends Component {
 	};
 
 	activeItemClass = 'lessons-video-player__playlist-item--active';
+
+	constructor(element: HTMLElement, config: object) {
+		super(element, config);
+	}
 
 	// Will be called upon component instantiation
 	async afterInit() {
@@ -146,13 +150,21 @@ export default class Playlist extends Component {
 
 	async populateYoutubeItemDetails(itemElement: HTMLElement) {
 		const { poster, src } = itemElement.dataset;
-		const videoData = await getYoutubeVideoData(src);
+		const videoData = await getYoutubeVideoData(src || '');
 
 		if (videoData) {
 			await loadYTPlayerAPI();
 
 			itemElement.dataset.videoType = 'youtube';
 			itemElement.dataset.videoId = videoData.video_id;
+			itemElement.dataset.duration = this.formatDurationSeconds(
+				videoData.duration
+			);
+
+			const durationElement = itemElement.querySelector(
+				'.lessons-video-player__playlist-item-duration'
+			) as HTMLElement;
+			durationElement.textContent = itemElement.dataset.duration;
 
 			if (!poster) {
 				itemElement.dataset.thumbnail = videoData.thumbnail_url;

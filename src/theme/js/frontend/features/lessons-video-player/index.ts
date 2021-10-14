@@ -99,8 +99,6 @@ export default class LessonsVideoPlayer extends Component {
 			currentItemIndex + 1
 		);
 
-		console.log({ nextItem });
-
 		if (nextItem) {
 			this.members?.lesson.loadLessonData(nextItem, true);
 		}
