@@ -29,14 +29,14 @@
 			}
 		}
 
-		@screen xl {
+		@screen lg {
 			@apply col-span-4;
 
 			&:last-child:nth-child(odd) {
 				@apply col-start-auto;
 			}
 
-      // 2-items-only layout in XL
+      // 2-items-only layout in Desktop
       &:nth-last-child(2):first-child,
       &:nth-child(2):last-child {
         @apply col-span-6;

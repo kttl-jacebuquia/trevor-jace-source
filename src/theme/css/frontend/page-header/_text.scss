@@ -51,8 +51,11 @@
         @apply text-px16 leading-px22 tracking-em001;
       }
 
-      @screen lg2 {
+      @screen lg {
         @apply col-start-3 col-span-8 mx-0 max-w-none;
+      }
+
+      @screen lg2 {
         @apply text-px26 leading-px36 tracking-em005;
       }
     }
