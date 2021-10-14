@@ -19,7 +19,11 @@
     @apply mb-0 w-auto;
 
     &.centered {
-      @apply mx-0 text-center col-start-2;
+      @apply mx-0 text-center col-span-4 col-start-2;
+
+      @screen md {
+        @apply col-span-6 col-start-2;
+      }
     }
 
     @screen lg {
@@ -33,7 +37,7 @@
 
     &.lg\:no-centered {
       @screen lg {
-        @apply text-left;
+        @apply text-left col-span-10 col-start-1;
       }
     }
   }
@@ -52,7 +56,7 @@
 
     &.lg\:no-centered {
       @screen lg {
-        @apply text-left;
+        @apply text-left col-span-10 col-start-1;
       }
     }
   }
