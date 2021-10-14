@@ -547,7 +547,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 		// Filter entries only if Products, otherwise just return all entries
 		if ( 'products' !== $entries_source ) {
-			return $entries;
+			return is_array( $entries ) ? $entries : array();
 		}
 
 		// Filter to show only products that are within the current date
