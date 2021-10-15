@@ -80,6 +80,12 @@
       grid-column-start: auto;
     }
 
+    &:only-child {
+      @screen lg2 {
+        @apply col-span-6 col-start-4;
+      }
+    }
+
 		.checkmark-text__cards--white & {
 			@apply bg-white text-teal-dark rounded-px10;
 			@apply py-px38 px-px28;
@@ -268,10 +274,6 @@
 
     @screen lg2 {
       @apply mt-px70;
-    }
-
-    @screen lg2 {
-      @apply mt-px90;
     }
 	}
 
