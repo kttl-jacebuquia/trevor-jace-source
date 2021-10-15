@@ -403,7 +403,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$empty_message   = $val->get( static::FIELD_EMPTY_MESSAGE );
 
 		$cls = array(
-			'tile-grid-container mx-auto',
+			'tile-grid-container container mx-auto',
 			'mb-px38 mt-px40',
 			'md:mt-px30',
 			'xl:mt-0',
