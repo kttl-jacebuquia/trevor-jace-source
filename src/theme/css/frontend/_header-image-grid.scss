@@ -216,11 +216,12 @@
     }
 
     @screen lg2 {
-      @apply py-px40 px-px20;
+      @apply p-0;
+      max-width: 190px;
     }
 
     @screen xl {
-      @apply py-px34 px-px17;
+      max-width: 200px;
     }
   }
 }
