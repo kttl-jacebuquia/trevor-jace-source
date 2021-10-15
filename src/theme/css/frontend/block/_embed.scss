@@ -1,0 +1,27 @@
+.wp-block-embed {
+  &__wrapper {
+    @apply container mx-auto;
+    @apply tw-grid;
+  }
+
+  iframe {
+    @apply w-full rounded-px10 overflow-hidden col-span-full;
+    will-change: transform;
+
+    @screen lg {
+      @apply col-span-10 col-start-2;
+    }
+  }
+
+  &.wp-has-aspect-ratio {
+    iframe {
+      height: auto;
+    }
+
+    &.wp-embed-aspect-16-9 {
+      iframe {
+        aspect-ratio: 16 / 9;
+      }
+    }
+  }
+}

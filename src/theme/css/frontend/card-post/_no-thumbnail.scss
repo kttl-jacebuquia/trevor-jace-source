@@ -3,6 +3,12 @@
     @apply pt-px24;
   }
 
+  &.event {
+    .card-label + .card-content {
+      @apply pt-px42;
+    }
+  }
+
   .title-top {
     @apply block font-normal mb-px20;
     @apply xl:mb-px24;

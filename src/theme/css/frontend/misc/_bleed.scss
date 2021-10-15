@@ -3,11 +3,11 @@ Allows a container's child to bleed out
 on the sides, touch the edges of the viewpor
 */
 $bleed-margins: (
-  default: calc( -(#{theme('container.padding.DEFAULT')} * 2) ),
+  default: calc( -1 * #{theme('container.padding.DEFAULT')} ),
   md: calc((100vw - theme('container.screens.md') + (theme('container.padding.md') * 2)) / -2 ),
   lg: calc((100vw - theme('container.screens.lg') + (theme('container.padding.lg') * 2)) / -2 ),
   lg2: calc((100vw - theme('container.screens.lg2') + (theme('container.padding.lg2') * 2)) / -2 ),
-  xl: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 ),
+  xl: calc( -1 * theme('container.padding.xl')),
 );
 
 $single-bleed-widths: (
@@ -36,10 +36,24 @@ $single-bleed-widths: (
   }
 }
 
-// Applies both sides bleed
+// Applies both sides bleed on specific screen supplied
 @mixin bleed($screen: default, $width: false) {
   @if ( map-has-key($bleed-margins, $screen) ) {
     $width: if( $width == true, 100vw, auto );
     margin-inline: #{map-get($bleed-margins, $screen)};
+  }
+}
+
+// Applies bleed for all screens
+@mixin bleed-always {
+  @each $screen in ( default, md, lg, lg2, xl ) {
+    @if ( $screen == default ) {
+      @include bleed($screen);
+    }
+    @else {
+      @screen #{$screen} {
+        @include bleed($screen);
+      }
+    }
   }
 }

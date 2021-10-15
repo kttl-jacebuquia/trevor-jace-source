@@ -19,3 +19,10 @@ body.post-type-archive-trevor_fin_report .container {
 		@apply max-w-screen-xl;
 	}
 }
+
+.container {
+  // Legacy post grid
+  .post-grid {
+    @include bleed-always;
+  }
+}

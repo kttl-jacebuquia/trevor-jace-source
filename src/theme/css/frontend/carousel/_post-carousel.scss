@@ -48,7 +48,7 @@
   }
 
   .carousel-wrap__content {
-    @apply pb-px20 -mb-px20;
+    @apply py-px20 -my-px20;
   }
 
   body:not(.is-rc) & .swiper-pagination-bullet {
@@ -57,10 +57,6 @@
     &.swiper-pagination-bullet-active {
       @apply opacity-100;
     }
-  }
-
-  .carousel-full-width-wrap {
-    @apply pt-px12 -mt-px12;
   }
 
   .carousel-header {
@@ -398,7 +394,6 @@
 
   // Centered Desktop Heading
   &--heading-desktop-center {
-
     // Duplicated selector to have higher specificity over .carousel-wrap
     & .page-sub-title.page-sub-title,
     & .page-sub-title-desc.page-sub-title-desc {
