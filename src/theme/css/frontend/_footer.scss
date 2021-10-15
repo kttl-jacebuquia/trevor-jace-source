@@ -56,6 +56,7 @@ footer {
 
     @screen md {
       @apply flex-row flex-wrap space-x-5 mr-10;
+      align-items: flex-start;
     }
 
     @screen lg {
@@ -76,21 +77,22 @@ footer {
     @apply text-px16 leading-px20 mb-px50 uppercase;
 
     @screen md {
+      @apply mb-px20;
       flex-basis: 100%;
     }
   }
 
   input[type] {
     @apply py-5 px-7 rounded-px10 text-teal-dark;
-    @apply flex-grow;
   }
 
   .btn {
-    @apply bg-white text-teal-dark transition-all duration-300;
+    @apply h-auto py-px18 bg-white text-teal-dark transition-all duration-300;
+    box-sizing: border-box;
 
     @screen md {
-      @apply flex-auto;
-      @apply text-px18 leading-px26;
+      @apply py-px20 px-px40;
+      @apply text-px20 leading-px26;
     }
 
     @screen lg {
