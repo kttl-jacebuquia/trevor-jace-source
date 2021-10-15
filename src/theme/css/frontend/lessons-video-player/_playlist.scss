@@ -3,7 +3,9 @@
     @include tw-respond(
       col-span-full mt-px60,
       $md: col-span-6 col-start-2,
-      $lg: col-span-4 col-start-9 mt-0 overflow-auto -mr-px20 pr-px20
+      $lg: col-span-6 col-start-7 mt-0 overflow-auto -mr-px20 pr-px20,
+      $lg2: col-span-5 col-start-8 mt-0,
+      $xl: col-span-4 col-start-9,
     );
 
     @screen lg {
@@ -26,7 +28,7 @@
       flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
       $md: p-px30,
       $lg: py-px30 px-px0 gap-x-px10 items-start,
-      $lg2: px-px20
+      $lg2: pl-px20 gap-x-px28,
     );
     -webkit-appearance: none;
 
@@ -44,6 +46,10 @@
 
     @screen md {
       @apply block relative w-px150 h-px84 overflow-hidden rounded-px10 flex-shrink-0 mr-px25;
+    }
+
+    @screen lg {
+      @apply mr-0;
     }
 
     img {
@@ -95,8 +101,7 @@
     }
 
     @screen lg {
-      @apply -mb-px12;
-      align-self: flex-end;
+      @apply absolute bottom-px12 right-px15;
     }
 
     &::before {

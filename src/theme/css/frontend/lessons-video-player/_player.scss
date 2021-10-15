@@ -15,7 +15,13 @@
   }
 
   &__lesson {
-    @include tw-respond(col-span-full, $md: col-span-6 col-start-2, $lg: col-span-8 col-start-1);
+    @include tw-respond(
+      col-span-full,
+      $md: col-span-6 col-start-2,
+      $lg: col-span-6 col-start-1,
+      $lg2: col-span-7 col-start-1,
+      $xl: col-span-8 col-start-1,
+    );
   }
 
   &__player {
