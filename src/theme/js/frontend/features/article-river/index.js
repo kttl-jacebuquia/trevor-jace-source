@@ -20,6 +20,7 @@ export default class ArticleRiver extends Component {
 		loop: false,
 		slidesPerView: 4,
 		slidesPerGroup: 4,
+		pagination: false,
 		navigation: {
 			nextEl: '.swiper-button-next',
 			prevEl: '.swiper-button-prev',

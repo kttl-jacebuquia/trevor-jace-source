@@ -131,16 +131,6 @@
       margin-left: calc( ( ( 100vw - 100% ) / 2 ) - ( theme('container.padding.lg2') + theme('container.padding.xl') ) );
     }
   }
-
- 	.carousel-full-width-wrap & {
-		$breakpoints: md, lg, lg2, xl, 2xl;
-
-		@each $size in $breakpoints {
-			@screen #{$size} {
-				margin-left: calc( ( 100vw - theme( 'screens.#{$size}' ) ) / 2 );
-			}
-		}
-	}
 }
 
 .swiper-pagination-bullet {

@@ -220,13 +220,7 @@
 
   @screen lg2 {
     .carousel-container {
-      width: theme("postCard.width.lg2");
-    }
-  }
-
-  @screen xl {
-    .carousel-container {
-      width: theme("postCard.width.xl");
+      width: auto;
     }
   }
 
@@ -366,7 +360,7 @@
     }
 
     .carousel-container {
-      @apply xl:w-px368;
+      @apply lg2:w-auto;
     }
 
     .swiper-pagination {

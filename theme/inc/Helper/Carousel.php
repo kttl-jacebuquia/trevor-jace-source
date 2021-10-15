@@ -32,7 +32,17 @@ class Carousel {
 				'title_cls'    => '',
 				'print_js'     => true,
 				'card_options' => array(),
-				'swiper'       => array(), // swiper options
+				'swiper'       => array(
+					'breakpoints' => array(
+						768  => array( 'spaceBetween' => 28 ),
+						1280 => array(
+							'spaceBetween'   => 28,
+							'slidesPerView'  => 3,
+							'slidesPerGroup' => 3,
+							'watchOverflow'  => true,
+						),
+					),
+				), // swiper options
 			),
 			$options
 		);
