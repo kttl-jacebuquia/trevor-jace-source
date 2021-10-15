@@ -13,4 +13,8 @@
       @apply text-px18 leading-px24 mt-px18;
     }
   }
+
+  label {
+    --default-label-color: #{theme-background()};
+  }
 }
