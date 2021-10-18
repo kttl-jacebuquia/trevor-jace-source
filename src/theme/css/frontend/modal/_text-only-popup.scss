@@ -1,0 +1,7 @@
+.modal.text-only-popup {
+  .modal-close {
+    @screen lg {
+      @apply m-0 top-px20 right-px20;
+    }
+  }
+}
