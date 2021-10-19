@@ -53,7 +53,7 @@
   }
 
   .modal-close {
-    @apply absolute top-0 right-0 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
+    @apply absolute top-px20 right-0 py-2 px-3 rounded-px10 self-end mr-5 mt-5 mb-10;
     @apply text-white;
     @apply w-px45 h-px45 rounded-px18;
     background-color: theme-background();
@@ -111,6 +111,10 @@
       max-width: rem-calc(668px);
       max-height: 75%;
       @apply shadow-lg rounded-px10 mx-auto;
+
+      body.post-type-archive-trevor_gi_bill & {
+        max-height: none;
+      }
     }
   }
 

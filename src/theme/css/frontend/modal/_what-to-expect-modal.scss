@@ -18,10 +18,6 @@
     }
   }
 
-  .modal-close {
-    top: 20px;
-  }
-
   &__container {
     @apply tw-grid mx-auto text-left;
     width: calc(100% - #{rem-calc(56)});
