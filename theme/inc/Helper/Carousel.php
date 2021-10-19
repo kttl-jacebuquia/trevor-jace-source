@@ -34,7 +34,18 @@ class Carousel {
 				'card_options' => array(),
 				'swiper'       => array(
 					'breakpoints' => array(
-						768  => array( 'spaceBetween' => 28 ),
+						768  => array(
+							'spaceBetween'   => 28,
+							'slidesPerView'  => 1,
+							'slidesPerGroup' => 1,
+							'watchOverflow'  => false,
+						),
+						1024  => array(
+							'spaceBetween'   => 28,
+							'slidesPerView'  => 1,
+							'slidesPerGroup' => 1,
+							'watchOverflow'  => false,
+						),
 						1280 => array(
 							'spaceBetween'   => 28,
 							'slidesPerView'  => 3,
@@ -468,6 +479,7 @@ class Carousel {
 		$options = array_merge(
 			array(
 				'slidesPerView' => 1,
+				'slidesPerGroup' => 1,
 				'spaceBetween'  => 20,
 				'centerSlides'  => true,
 				'simulateTouch' => true,
