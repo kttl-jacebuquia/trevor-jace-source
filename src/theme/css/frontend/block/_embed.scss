@@ -24,4 +24,24 @@
       }
     }
   }
+
+  & + & {
+    @apply mt-px30;
+
+    @screen md {
+      @apply mt-px40;
+    }
+
+    @screen lg {
+      @apply mt-px60;
+    }
+  }
+}
+
+p + .wp-block-embed {
+  @apply mt-px40;
+
+  @screen lg {
+    @apply mt-px60;
+  }
 }
