@@ -1,8 +1,6 @@
 /**
  * Once this is complete, consider dropping out features/cards.js
  */
-import { singleBreakpoints } from '../../match-media';
-import * as matchMedia from '../../match-media';
 import Component from '../../Component';
 
 export default class PostCard extends Component {
@@ -11,11 +9,12 @@ export default class PostCard extends Component {
 
 	// Defines children that needs to be queried as part of this component
 	static children = {
-		title: '.post-title > a',
 		titleWords: ['.post-title > a span'],
 		excerpt: '.post-desc > span',
 		excerptWords: ['.post-desc > span span'],
 		tagsBox: '.tags-box',
+		// Map this into this.title with whichever is matched by the query
+		possibleTitleElement: ['.post-title > a, .post-title'],
 	};
 
 	state = {
@@ -24,6 +23,8 @@ export default class PostCard extends Component {
 
 	// Will be called upon component instantiation
 	afterInit() {
+		this.children.title = this.children.possibleTitleElement.pop();
+
 		// Cache each word's original text
 		this.children.titleWords.forEach((word) => {
 			word.originalText = word.innerText;
@@ -40,7 +41,9 @@ export default class PostCard extends Component {
 	}
 
 	handleCardResize() {
-		const resizeObserver = new ResizeObserver(this.onCardResize.bind(this));
+		const resizeObserver = new window.ResizeObserver(
+			this.onCardResize.bind(this)
+		);
 		resizeObserver.observe(this.element);
 	}
 
@@ -55,10 +58,8 @@ export default class PostCard extends Component {
 		const titleWords = this.children.titleWords;
 
 		// Loop through each title word
-		for (let span of titleWords) {
-			if (
-				span.offsetTop + span.offsetHeight / 2 > titleHeight
-			) {
+		for (const span of titleWords) {
+			if (span.offsetTop + span.offsetHeight / 2 > titleHeight) {
 				span.classList.add('invisible');
 
 				// Add ellipsis to the previous visible span
@@ -67,11 +68,14 @@ export default class PostCard extends Component {
 					previousSpan &&
 					!previousSpan.classList.contains('invisible')
 				) {
-					const willTrim = previousSpan.offsetLeft + previousSpan.offsetWidth >= titleWidth - 30;
+					const willTrim =
+						previousSpan.offsetLeft + previousSpan.offsetWidth >=
+						titleWidth - 30;
 					previousSpan.textContent =
 						previousSpan.originalText.substr(
 							0,
-							previousSpan.originalText.length - ( willTrim ? 2 : 0 )
+							previousSpan.originalText.length -
+								(willTrim ? 2 : 0)
 						) + '...';
 				}
 			} else {
@@ -90,7 +94,7 @@ export default class PostCard extends Component {
 		const exceprtWords = this.children.excerptWords;
 
 		// Loop through each title word
-		for (let span of exceprtWords) {
+		for (const span of exceprtWords) {
 			if (span.offsetTop + span.offsetHeight > excerptHeight) {
 				span.classList.add('invisible');
 
@@ -115,7 +119,7 @@ export default class PostCard extends Component {
 
 	handleTagsBoxState() {
 		if (this.children.tagsBox) {
-			const observer = new MutationObserver(
+			const observer = new window.MutationObserver(
 				this.onTagsBoxMutate.bind(this)
 			);
 			observer.observe(this.children.tagsBox, { attributes: true });
@@ -123,7 +127,8 @@ export default class PostCard extends Component {
 	}
 
 	onTagsBoxMutate() {
-		const tagsExpanded = this.children.tagsBox.classList.contains('tags-box--expanded');
+		const tagsExpanded =
+			this.children.tagsBox.classList.contains('tags-box--expanded');
 		this.setState({ tagsExpanded });
 	}
 

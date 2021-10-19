@@ -14,7 +14,7 @@ export default class Component extends WithState {
 
 	static isDOMReady = false;
 
-	constructor(public element?: HTMLElement) {
+	constructor(public element: HTMLElement) {
 		super();
 	}
 
