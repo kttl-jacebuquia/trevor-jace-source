@@ -94,3 +94,8 @@ input[aria-hidden="true"]::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+b,
+strong {
+  @apply font-semibold;
+}
