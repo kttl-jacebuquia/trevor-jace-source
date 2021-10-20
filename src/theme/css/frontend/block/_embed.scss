@@ -19,8 +19,28 @@
     }
 
     &.wp-embed-aspect-16-9 {
-      iframe {
-        aspect-ratio: 16 / 9;
+      @supports (aspect-ratio: 16 / 9) {
+        iframe {
+          aspect-ratio: 16 / 9;
+        }
+      }
+
+      @supports not (aspect-ratio: 16 / 9) {
+        .wp-block-embed__wrapper {
+          @include aspect-ratio(16, 9);
+
+          &::before {
+            @apply col-span-full;
+
+            @screen lg {
+              @apply col-span-10 col-start-2;
+            }
+          }
+
+          iframe {
+            @apply absolute w-full h-full top-0 left-0;
+          }
+        }
       }
     }
   }
