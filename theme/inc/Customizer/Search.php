@@ -6,7 +6,9 @@ use TrevorWP\Theme\Util\Is;
 use TrevorWP\Util\Tools;
 use TrevorWP\CPT\RC\RC_Object;
 use \TrevorWP\Ranks;
+use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Options_Page\Search as OP_Search;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper\Thumbnail;
 use TrevorWP\Theme\Helper\Taxonomy;
 
@@ -30,6 +32,12 @@ class Search extends Abstract_Customizer {
 				CPT\RC\Article::POST_TYPE,
 				CPT\RC\External::POST_TYPE,
 				CPT\RC\Guide::POST_TYPE,
+			),
+		),
+		'pages'     => array(
+			'name'      => 'Pages',
+			'post_type' => array(
+				'page',
 			),
 		),
 		'blogs'     => array(
@@ -158,7 +166,7 @@ class Search extends Abstract_Customizer {
 	public static function get_permalink( string $search_term = null, string $scope = 'all' ): string {
 		$permalink = home_url( trailingslashit( static::get_val( static::SETTING_GENERAL_SLUG ) ) );
 
-		if ( $scope != 'all' ) {
+		if ( 'all' !== $scope ) {
 			$permalink .= $scope . '/';
 		}
 
@@ -268,7 +276,9 @@ class Search extends Abstract_Customizer {
 			'border-opacity-20',
 		);
 
-		$title_top = $desc = $img = null;
+		$title_top = null;
+		$title_btm = $post->post_title;
+		$desc      = $post->post_excerpt;
 
 		switch ( $post->post_type ) {
 			case CPT\RC\External::POST_TYPE:
@@ -292,6 +302,12 @@ class Search extends Abstract_Customizer {
 				break;
 			case CPT\Post::POST_TYPE:
 				$title_top = 'Blog';
+				break;
+			case 'page':
+				$val       = new Field_Val_Getter( Page_Header::class, $post );
+				$title_top = ! empty( $val->get( Page_Header::FIELD_TITLE_TOP ) ) ? $val->get( Page_Header::FIELD_TITLE_TOP ) : $title_top;
+				$title_btm = ! empty( $val->get( Page_Header::FIELD_TITLE ) ) ? $val->get( Page_Header::FIELD_TITLE ) : $title_btm;
+				$desc      = ! empty( $val->get( Page_Header::FIELD_DESC ) ) ? $val->get( Page_Header::FIELD_DESC ) : $desc;
 				break;
 		}
 
@@ -333,12 +349,12 @@ class Search extends Abstract_Customizer {
 						<div class="icon-wrap"><i class="<?php echo esc_attr( $icon_cls ); ?>"></i></div>
 					<?php } ?>
 					<h3 class="w-full text-px24 leading-px30 lg:text-px30 lg:leading-px40">
-						<a href="<?php echo get_the_permalink( $post ); ?>"><?php echo $post->post_title; ?></a>
+						<a href="<?php echo get_the_permalink( $post ); ?>"><?php echo wp_strip_all_tags( $title_btm ); ?></a>
 					</h3>
 				</div>
 
 				<?php if ( ! $has_thumbnail ) { ?>
-					<p><?php echo $post->post_excerpt; ?></p>
+					<p><?php echo $desc; ?></p>
 				<?php } ?>
 
 				<?php if ( ! empty( $tags ) ) { ?>

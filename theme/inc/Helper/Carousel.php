@@ -40,7 +40,7 @@ class Carousel {
 							'slidesPerGroup' => 1,
 							'watchOverflow'  => false,
 						),
-						1024  => array(
+						1024 => array(
 							'spaceBetween'   => 28,
 							'slidesPerView'  => 1,
 							'slidesPerGroup' => 1,
@@ -478,24 +478,24 @@ class Carousel {
 	public static function print_js( string $base_selector, array $options = array() ): void {
 		$options = array_merge(
 			array(
-				'slidesPerView' => 1,
+				'slidesPerView'  => 1,
 				'slidesPerGroup' => 1,
-				'spaceBetween'  => 20,
-				'centerSlides'  => true,
-				'simulateTouch' => true,
-				'pagination'    => array(
+				'spaceBetween'   => 20,
+				'centerSlides'   => true,
+				'simulateTouch'  => true,
+				'pagination'     => array(
 					'el'            => "{$base_selector} .swiper-pagination",
 					'clickable'     => true,
 					'bulletElement' => 'button',
 				),
-				'breakpoints'   => array(
+				'breakpoints'    => array(
 					768 => array( 'spaceBetween' => 28 ),
 				),
-				'navigation'    => array(
+				'navigation'     => array(
 					'nextEl' => "{$base_selector} .swiper-button-next",
 					'prevEl' => "{$base_selector} .swiper-button-prev",
 				),
-				'on'            => new \stdClass(),
+				'on'             => new \stdClass(),
 			),
 			$options
 		);
