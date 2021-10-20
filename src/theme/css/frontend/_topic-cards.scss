@@ -29,10 +29,16 @@
 		}
 
     @screen lg {
-      @apply text-px40 leading-px50;
+      @apply text-px34 leading-px44 tracking-px_05 mx-auto;
+      max-width: #{rem-calc(552)};
     }
 
 		@screen lg2 {
+			@apply text-px40 leading-px50 tracking-normal;
+      max-width: #{rem-calc(900)};
+		}
+
+    @screen xl {
 			@apply text-px46 leading-px56 tracking-em_001;
 		}
 
@@ -49,11 +55,13 @@
 		}
 
     @screen lg {
-      @apply text-px22 leading-px32 mt-px14;
+      @apply text-px22 leading-px32 mt-px14 mx-auto;
+      max-width: #{rem-calc(552)};
     }
 
 		@screen lg2 {
 			@apply text-px24 leading-px34;
+      max-width: #{rem-calc(900)};
 		}
 
     @screen xl {
