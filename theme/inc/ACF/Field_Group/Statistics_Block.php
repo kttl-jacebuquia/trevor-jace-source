@@ -11,6 +11,7 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_STATISTICS_ENTRY_HEADER = 'statistics_entry_header';
 	const FIELD_STATISTICS_ENTRY_BODY   = 'statistics_entry_body';
 	const FIELD_BUTTON                  = 'button';
+	const FIELD_CAROUSEL_LAYOUT         = 'carousel_layout';
 
 	/**
 	 * @inheritDoc
@@ -24,6 +25,7 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$statistics_entry_header = static::gen_field_key( static::FIELD_STATISTICS_ENTRY_HEADER );
 		$statistics_entry_body   = static::gen_field_key( static::FIELD_STATISTICS_ENTRY_BODY );
 		$button                  = static::gen_field_key( static::FIELD_BUTTON );
+		$carousel_layout         = static::gen_field_key( static::FIELD_CAROUSEL_LAYOUT );
 
 		return array(
 			'title'  => 'Statistics Block',
@@ -61,6 +63,17 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 					'name'  => static::FIELD_DESCRIPTION,
 					'label' => 'Description',
 					'type'  => 'textarea',
+				),
+				static::FIELD_CAROUSEL_LAYOUT         => array(
+					'key'           => $carousel_layout,
+					'name'          => static::FIELD_CAROUSEL_LAYOUT,
+					'label'         => 'Carousel Layout',
+					'type'          => 'button_group',
+					'default_value' => 'mobile_only',
+					'choices'       => array(
+						'mobile_only'       => 'Mobile Only',
+						'mobile_and_tablet' => 'Mobile and Tablet',
+					),
 				),
 				static::FIELD_STATISTICS_ENTRIES => array(
 					'key'        => $statistics_entries,
@@ -124,6 +137,7 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$description        = static::get_val( static::FIELD_DESCRIPTION );
 		$button             = static::get_val( static::FIELD_BUTTON );
 		$statistics_entries = static::get_val( static::FIELD_STATISTICS_ENTRIES );
+		$carousel_layout    = static::get_val( static::FIELD_CAROUSEL_LAYOUT );
 
 		$class = implode(
 			' ',
@@ -137,7 +151,7 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		// Next Step: FE
 		?>
-		<div class="<?php echo $class; ?>">
+		<div class="<?php echo $class; ?>" data-carousel-layout="<?php echo $carousel_layout; ?>">
 			<div class="statistics__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="statistics__heading"><?php echo esc_html( $title ); ?></h2>

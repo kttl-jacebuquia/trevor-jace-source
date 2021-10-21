@@ -41,3 +41,4 @@ export TagsBox from './tags-box';
 export PromoPopup from './promo-popup';
 export ajaxSorter from './ajax-sorter';
 export LessonsVideoPlayer from './lessons-video-player';
+import './statistics';
