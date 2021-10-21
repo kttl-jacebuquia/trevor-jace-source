@@ -39,6 +39,11 @@
     @screen xl {
       @apply w-px184 h-px184 mr-px24 mb-0;
     }
+
+    img {
+      @apply rounded-px10 w-full object-contain object-top;
+      will-change: transform;
+    }
   }
 
   .text-content {

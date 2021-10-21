@@ -44,6 +44,10 @@
       @apply max-w-screen-sm;
     }
 
+    @screen lg {
+      @apply tw-grid-small-desktop;
+    }
+
     .staff {
       @apply h-auto p-0;
 
@@ -149,12 +153,7 @@
     }
 
     &-container {
-      @apply justify-center;
-      grid-template-columns: repeat(2, minmax(0, rem-calc(355px)));
-
-      &.desktop-3-columns {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      @apply justify-center tw-grid-small-desktop;
 
       .post-type-archive & {
         @apply justify-start;
@@ -169,6 +168,10 @@
 
       &.desktop-autofit-columns {
         grid-template-columns: repeat(auto-fit, minmax(0, rem-calc(355px)));
+      }
+
+      &.desktop-3-columns {
+        grid-template-columns: repeat(3, 1fr);
       }
 
       &.desktop-4-columns {
@@ -381,7 +384,7 @@
   }
 
   @screen lg {
-    max-width: theme("postCard.width.lg");
+    @apply col-span-5 w-full max-w-none;
 
     .post-type-archive-trevor_fin_report & {
       @apply pt-px48 px-px38 pb-px140 min-h-px402;
@@ -392,7 +395,7 @@
     }
 
     &-title {
-      @apply text-px26 leading-px36 mb-3;
+      @apply text-px26 leading-px36 mb-3 line-clamp-4;
 
       .post-type-archive-trevor_fin_report & {
         @apply text-px30 leading-px40 mb-px28;
@@ -428,6 +431,20 @@
         @apply text-px20 leading-px26;
       }
     }
+  }
+
+  @screen lg-only {
+    &:nth-child(odd) {
+      @apply col-start-2;
+    }
+
+    &:nth-child(even) {
+      @apply col-start-7;
+    }
+  }
+
+  @screen lg2 {
+    @apply col-span-1 col-start-auto;
   }
 
   @screen xl {

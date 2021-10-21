@@ -137,6 +137,12 @@
     }
   }
 
+  @screen md-minmax {
+    .mid-row-v-separator:nth-child(4) {
+      display: none;
+    }
+  }
+
   // Large
   @screen lg {
     .title-top {

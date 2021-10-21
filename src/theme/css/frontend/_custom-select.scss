@@ -74,4 +74,11 @@
       }
     }
   }
+
+  // Research Briefs Archive Page
+  .post-type-archive-trevor_research & {
+    @screen lg-only {
+      @apply ml-px72;
+    }
+  }
 }

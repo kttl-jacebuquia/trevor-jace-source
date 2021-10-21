@@ -10,7 +10,7 @@
   }
 
   &__container {
-    @apply tw-grid container items-center;
+    @apply tw-grid container mx-auto items-center;
   }
 
   &__main {
@@ -18,6 +18,10 @@
 
     @screen md {
       @apply col-span-6 col-start-2;
+    }
+
+    @screen lg {
+      @apply col-span-10 col-start-2;
     }
 
     @screen lg2 {
@@ -40,6 +44,10 @@
       @apply text-px32 leading-px42;
     }
 
+    @screen lg {
+      @apply text-px34 leading-px44 tracking-px_05;
+    }
+
     @screen lg2 {
       @apply text-px42 leading-px52 tracking-em_001;
     }
@@ -51,6 +59,10 @@
 
     @screen md {
       @apply mt-px15 text-px18 leading-px24 tracking-px05;
+    }
+
+    @screen lg-only {
+      @apply mx-px72 text-px20 leading-px28 tracking-em005;
     }
 
     @screen lg2 {
@@ -66,6 +78,10 @@
       @apply col-span-6 col-start-2 mt-px50 py-px90 px-px50;
     }
 
+    @screen lg {
+      @apply col-span-8 col-start-3;
+    }
+
     @screen lg2 {
       @apply col-span-5 col-start-8 py-px80 px-px36;
     }
@@ -78,6 +94,10 @@
       @apply text-px32 leading-px42;
     }
 
+    @screen lg {
+      @apply text-px34 leading-px44 tracking-px_05;
+    }
+
     @screen lg2 {
       @apply text-px36 leading-px46;
     }
@@ -88,6 +108,10 @@
 
     @screen md {
       @apply mt-px14 text-px18 leading-px26;
+    }
+
+    @screen lg {
+      @apply text-px20 leading-px30;
     }
 
     @screen lg2 {
