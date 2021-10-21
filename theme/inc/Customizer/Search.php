@@ -305,9 +305,16 @@ class Search extends Abstract_Customizer {
 				break;
 			case 'page':
 				$val       = new Field_Val_Getter( Page_Header::class, $post );
-				$title_top = ! empty( $val->get( Page_Header::FIELD_TITLE_TOP ) ) ? $val->get( Page_Header::FIELD_TITLE_TOP ) : $title_top;
+				$title_top = ! empty( $val->get( Page_Header::FIELD_TITLE_TOP ) ) ? $val->get( Page_Header::FIELD_TITLE_TOP ) : static::get_post_title( $post->post_title );
 				$title_btm = ! empty( $val->get( Page_Header::FIELD_TITLE ) ) ? $val->get( Page_Header::FIELD_TITLE ) : $title_btm;
 				$desc      = ! empty( $val->get( Page_Header::FIELD_DESC ) ) ? $val->get( Page_Header::FIELD_DESC ) : $desc;
+
+				$yoast_title = static::get_yoast_title( $post );
+				$yoast_desc  = static::get_yoast_description( $post );
+
+				$title_btm = ! empty( $yoast_title ) ? $yoast_title : $title_btm;
+				$desc      = ! empty( $yoast_desc ) ? $yoast_desc : $desc;
+
 				break;
 		}
 
@@ -337,7 +344,7 @@ class Search extends Abstract_Customizer {
 			<div class="text-content">
 				<div class="eyebrow text-indigo uppercase mb-px23">
 					<p>
-						<strong class="pr-px12"><?php echo $title_top; ?></strong>
+						<strong class="pr-px12"><?php echo wp_strip_all_tags( $title_top ); ?></strong>
 						<?php if ( in_array( $post->post_type, array( CPT\RC\Post::POST_TYPE, CPT\Post::POST_TYPE ) ) ) { ?>
 							<time class="pl-px12" datetime="<?php echo $post->post_date; ?>"><?php echo date( 'F j, Y', strtotime( $post->post_date ) ); ?></time>
 						<?php } ?>
@@ -475,5 +482,36 @@ class Search extends Abstract_Customizer {
 			Thumbnail::SIZE_MD,
 			array( 'class' => 'post-header-bg' )
 		);
+	}
+
+	public static function get_post_title( $post_title ) {
+		if ( false !== strpos( $post_title, '—' ) ) {
+			$pos        = strpos( $post_title, '—' ) + 1;
+			$post_title = mb_substr( $post_title, $pos );
+		}
+
+		return $post_title;
+	}
+
+	public static function get_yoast_title( \WP_Post $post ) {
+		$yoast_title = get_post_meta( $post->ID, '_yoast_wpseo_title', true );
+		if ( empty( $yoast_title ) ) {
+			$wpseo_titles = get_option( 'wpseo_titles', array() );
+			$yoast_title  = isset( $wpseo_titles[ 'title-' . $post->post_type ] ) ? $wpseo_titles[ 'title-' . $post->post_type ] : get_the_title();
+		}
+
+		$yoast_title = str_replace( ' - ' . get_bloginfo( 'name' ), '', wpseo_replace_vars( $yoast_title, $post ) );
+
+		return $yoast_title;
+	}
+
+	public static function get_yoast_description( \WP_Post $post ): string {
+		$yoast_post_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true );
+		if ( empty( $yoast_post_description ) ) {
+			$wpseo_titles           = get_option( 'wpseo_titles', array() );
+			$yoast_post_description = isset( $wpseo_titles[ 'metadesc-' . $post->post_type ] ) ? $wpseo_titles[ 'metadesc-' . $post->post_type ] : '';
+		}
+
+		return wpseo_replace_vars( $yoast_post_description, $post );
 	}
 }
