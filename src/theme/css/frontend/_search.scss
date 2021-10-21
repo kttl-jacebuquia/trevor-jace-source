@@ -104,6 +104,10 @@
     .page-sub-title,
     .page-sub-title-desc {
       @apply text-center;
+
+      @screen lg {
+        @apply col-span-10 col-start-2;
+      }
     }
 
     .page-sub-title-desc {
