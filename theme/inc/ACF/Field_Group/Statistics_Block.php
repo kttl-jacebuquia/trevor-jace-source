@@ -64,7 +64,7 @@ class Statistics_Block extends A_Field_Group implements I_Block, I_Renderable {
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
-				static::FIELD_CAROUSEL_LAYOUT         => array(
+				static::FIELD_CAROUSEL_LAYOUT    => array(
 					'key'           => $carousel_layout,
 					'name'          => static::FIELD_CAROUSEL_LAYOUT,
 					'label'         => 'Carousel Layout',

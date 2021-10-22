@@ -336,9 +336,9 @@ class Hooks {
 
 		if ( ( ! empty( $wp_query->get( RC_Object::QV_RESOURCES_LP ) ) ) ||
 			( ! empty( $wp_query->get( Search::QV_SEARCH ) && empty( get_search_query( false ) ) ) ) ||
-			( 'post' === get_post_type() && ! is_single() ) || is_post_type_archive( Bill::POST_TYPE ) ||
-			is_post_type_archive( Letter::POST_TYPE ) || is_post_type_archive( Research::POST_TYPE ) ||
-			is_post_type_archive( Financial_Report::POST_TYPE )
+			( 'post' === get_post_type() && ! is_single() && ! is_404() && empty( $wp_query->get( Search::QV_SEARCH ) ) && empty( $wp_query->get( Search::QV_SEARCH_SCOPE ) ) ) ||
+			is_post_type_archive( Bill::POST_TYPE ) || is_post_type_archive( Letter::POST_TYPE ) ||
+			is_post_type_archive( Research::POST_TYPE ) || is_post_type_archive( Financial_Report::POST_TYPE )
 		) {
 			static::remove_wpseo_action();
 		}
@@ -381,7 +381,7 @@ class Hooks {
 					'prefix' => Options_Search::PREFIX,
 				)
 			);
-		} elseif ( 'post' === get_post_type() && ! is_single() ) {
+		} elseif ( 'post' === get_post_type() && ! is_single() && ! is_404() && empty( $wp_query->get( Search::QV_SEARCH ) ) && empty( $wp_query->get( Search::QV_SEARCH_SCOPE ) ) ) {
 			echo SEO_Details::render(
 				null,
 				null,
