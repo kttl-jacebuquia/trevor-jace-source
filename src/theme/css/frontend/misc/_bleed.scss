@@ -40,7 +40,8 @@ $single-bleed-widths: (
 @mixin bleed($screen: default, $width: false) {
   @if ( map-has-key($bleed-margins, $screen) ) {
     $width: if( $width == true, 100vw, auto );
-    margin-inline: #{map-get($bleed-margins, $screen)};
+    margin-left: #{map-get($bleed-margins, $screen)};
+    margin-right: #{map-get($bleed-margins, $screen)};
   }
 }
 
