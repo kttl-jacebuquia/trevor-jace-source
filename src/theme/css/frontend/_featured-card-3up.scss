@@ -131,6 +131,18 @@
       @apply col-span-4;
     }
 
+    @screen lg-only {
+      @apply col-span-5;
+
+      &:nth-child(odd) {
+        @apply col-start-2;
+      }
+
+      &:nth-child(even) {
+        @apply col-start-7;
+      }
+    }
+
     .tile {
       @apply h-full w-full;
       max-width: none;

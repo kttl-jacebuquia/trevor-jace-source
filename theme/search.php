@@ -2,6 +2,7 @@
 
 use TrevorWP\Parsedown\Parsedown;
 use \TrevorWP\Theme\Customizer\Search as Page;
+use \TrevorWP\Theme\ACF\Field_Group\Featured_Card_Three_Up;
 
 $search_data = \TrevorWP\Theme\ACF\Options_Page\Search::get_search();
 
@@ -59,23 +60,26 @@ $glossary_item = Page::get_glossary_item()
 					<?php endif; ?>
 				</div>
 				<?php else : # Search Home ?>
-					<?php // TODO: Finish carousel, this has the same functionality with RC:Home:Trending Carousel ?>
 					<?php
-					echo \TrevorWP\Theme\Helper\Carousel::posts(
-						get_posts(
-							array(
-								'post_type'      => \TrevorWP\Util\Tools::get_public_post_types(),
-								'posts_per_page' => 3,
-							)
+					echo Featured_Card_Three_Up::render(
+						null,
+						array(
+							'title'       => $search_data['carousel']['title'],
+							'description' => $search_data['carousel']['description'],
+							'card_type'   => 'articles',
+							'cards'       => get_posts(
+								array(
+									'post_type'      => \TrevorWP\Util\Tools::get_public_post_types(),
+									'posts_per_page' => 3,
+								),
+							),
 						),
 						array(
-							'title'     => $search_data['carousel']['title'],
-							'subtitle'  => $search_data['carousel']['description'],
-							'class'     => 'text-indigo',
-							'title_cls' => 'centered',
-							'onlyMd'    => false,
-						)
-					)
+							'text_color' => 'current',
+							'layout'     => 'grid',
+							'class'      => 'search-featured-3-up',
+						),
+					);
 					?>
 				<?php endif; ?>
 		</div>

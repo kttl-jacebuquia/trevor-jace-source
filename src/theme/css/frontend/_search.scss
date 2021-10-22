@@ -114,4 +114,10 @@
       margin: 0;
     }
   }
+
+  .search-featured-3-up {
+    .featured-card-3up__heading {
+      @apply mb-0;
+    }
+  }
 }

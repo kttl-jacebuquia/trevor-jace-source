@@ -172,19 +172,22 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 	/**
 	 * @inheritDoc
 	 */
-	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$text_color  = ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark';
-		$bg_color    = ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white';
-		$title       = static::get_val( static::FIELD_TITLE );
-		$description = static::get_val( static::FIELD_DESCRIPTION );
-		$card_type   = static::get_val( static::FIELD_CARD_TYPE );
-		$button      = static::get_val( static::FIELD_BUTTON );
-		$alignment   = static::get_val( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
-		$layout      = static::get_val( static::FIELD_MOBILE_TABLET_LAYOUT );
+	public static function render( $post = false, $data = array(), array $options = array() ): ?string {
+		// Prioritize data passed through the $data and $options
+		$title       = ! empty( $data ) ? $data['title'] : static::get_val( static::FIELD_TITLE );
+		$description = ! empty( $data ) ? $data['description'] : static::get_val( static::FIELD_DESCRIPTION );
+		$card_type   = ! empty( $data ) ? $data['card_type'] : static::get_val( static::FIELD_CARD_TYPE );
+		$button      = ! empty( $data ) ? $data['button'] : static::get_val( static::FIELD_BUTTON );
+		$text_color  = ! empty( $options['text_color'] ) ? $options['text_color'] : ( ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark' );
+		$bg_color    = ! empty( $options['bg_color'] ) ? $options['bg_color'] : ( ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white' );
+		$alignment   = ! empty( $options['alignment'] ) ? $options['alignment'] : static::get_val( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
+		$layout      = ! empty( $options['layout'] ) ? $options['layout'] : static::get_val( static::FIELD_MOBILE_TABLET_LAYOUT );
 
 		$cards = array();
 
-		if ( 'articles' === $card_type ) {
+		if ( ! empty( $data ) ) {
+			$cards = $data['cards'] ?? array();
+		} elseif ( 'articles' === $card_type ) {
 			$cards = static::get_val( static::FIELD_ARTICLES );
 		} elseif ( 'product_partners' === $card_type ) {
 			$cards = static::get_val( static::FIELD_PRODUCT_PARTNERS );
@@ -201,6 +204,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 					'featured-card-3up--' . $layout,
 					'bg-' . $bg_color,
 					'text-' . $text_color,
+					$options['class'] ?? '',
 				),
 			),
 		);
