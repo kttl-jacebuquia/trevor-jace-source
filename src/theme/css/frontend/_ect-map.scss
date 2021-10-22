@@ -14,17 +14,17 @@
     }
 
     @screen lg {
-      @apply col-span-5 -mr-px28 py-0 px-px50;
+      @apply col-span-5 py-0 pl-px50 pr-px55;
       @include bleed-l(lg);
     }
 
     @screen lg2 {
-      @apply px-px120;
+      @apply col-span-4 px-px60;
       @include bleed-l(lg2);
     }
 
     @screen xl {
-      @apply -ml-px140 px-px140;
+      @apply -ml-px140 px-px80;
     }
   }
 
@@ -64,16 +64,17 @@
     }
 
     @screen lg {
-      @apply col-start-6 col-span-7 ml-0;
+      @apply col-start-6 col-span-7 -ml-px32;
       @include bleed-r(lg);
     }
 
     @screen lg2 {
+      @apply col-start-5 col-span-8 -ml-px28;
       @include bleed-r(lg2);
     }
 
     @screen xl {
-      @include bleed-r(xl);
+      margin-right: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 )
     }
 
     @media only screen and (min-width: 1920px) {
