@@ -57,7 +57,8 @@
   }
 
   &__map-container {
-    @apply col-span-full -mx-px28 relative;
+    @apply col-span-full relative;
+    @include bleed;
 
     @screen md {
       @include bleed(md);

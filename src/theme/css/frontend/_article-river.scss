@@ -27,6 +27,10 @@
     @screen lg {
       @apply flex flex-nowrap;
     }
+
+    .text-content {
+      @apply w-full;
+    }
   }
 
   &__thumbnail-wrap {
@@ -96,10 +100,6 @@
     @apply mt-px28;
   }
 
-  .tag-box {
-    @apply mb-px5 inline-flex items-center justify-center;
-  }
-
   &__pagination {
     @apply flex items-center mt-px60 mx-auto relative;
 
@@ -130,6 +130,14 @@
       &.swiper-button-prev {
         @apply transform rotate-180;
       }
+    }
+  }
+
+  .tags-box {
+    @apply gap-x-px10 gap-y-px5 flex-wrap h-auto overflow-hidden overflow-ellipsis;
+
+    .tag-box {
+      @apply whitespace-nowrap inline-block max-w-full;
     }
   }
 }

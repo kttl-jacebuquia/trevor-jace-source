@@ -3,16 +3,49 @@ import FloatingLabelInput from '../floating-label-input';
 import phoneFormat from '../contact-form';
 import { WPAjax } from '../wp-ajax';
 
+interface FundraiserQuizOptions {
+	[key: string]: any;
+}
+
 export default class FundraiserQuiz {
+	selector: string = '.fundraiser-quiz';
+	options?: FundraiserQuizOptions;
+	totalPages: number = 1;
+	currentPage: number = 0;
+	ajaxAction?: string;
+	classes: string = 'visible static';
+	containers: { [key: string]: string } = {};
+	mainVerteces: string[] = [];
+	verteces: string[] = [];
+	prevVertexStack?: string[] = [];
+	currentVertexStack?: string[] = [];
+	answers?: string[] = [];
+	graph?: any;
+
+	// jQuery elements
+	parentContainer?: JQuery;
+	backBtn?: JQuery;
+	choices?: JQuery;
+	modalContainer?: JQuery;
+	form?: JQuery;
+	paginationContainer?: JQuery;
+	currentPageContainer?: JQuery;
+	totalPageContainer?: JQuery;
+	$devInquirySlide?: JQuery;
+
+	// HTMLElements
+	devInquiryForm?: HTMLElement;
+	devInquiryFieldsContainer?: HTMLElement;
+
 	/**
 	 *
-	 * @param {object} options Fundraiser Options
+	 * @param {Object} options Fundraiser Options
 	 *
 	 * Available options
 	 * initialVertex - Initial vertex to show when modal appears
 	 * single        - If true, hides pagination and back buttons
 	 */
-	constructor(options) {
+	constructor(options: FundraiserQuizOptions) {
 		this.selector = '.fundraiser-quiz';
 		this.parentContainer = $(`${this.selector}.container`);
 		this.backBtn = $(`${this.selector}__back-btn`);
@@ -59,7 +92,7 @@ export default class FundraiserQuiz {
 			'who',
 			'gathering',
 		];
-		this.graph = new Map();
+		this.graph = new window.Map();
 		this.prevVertexStack = [];
 		this.currentVertexStack = [];
 		this.answers = [];
@@ -72,7 +105,7 @@ export default class FundraiserQuiz {
 		 * Initialize the radio button events
 		 */
 		if (this.choices.length) {
-			this.choices.on('click', (e) => {
+			this.choices.on('click' as any, (e) => {
 				this.displayNextPage(e.target);
 			});
 		}
@@ -81,8 +114,8 @@ export default class FundraiserQuiz {
 			this.displayPreviousPage();
 		});
 
-		this.form.on('submit', (e) => {
-			const [lastVertex] = this.currentVertexStack.slice(-1);
+		this.form.on('submit' as any, (e) => {
+			const [lastVertex] = this.currentVertexStack?.slice(-1);
 
 			if (lastVertex !== 'form') {
 				e.preventDefault();
@@ -96,13 +129,13 @@ export default class FundraiserQuiz {
 		// Default initial step
 		let $initialStepContent = $(`${this.selector}--step-one`);
 
+		// Clear inputs
+		this.clearContentInputs(`${this.selector}--step-one`);
+
 		this.changeContainerBackground(false);
 
 		// Reset counter
 		this.currentVertexStack = [];
-
-		// Reset form
-		this.form.get(0)?.reset();
 
 		// Override iniial step if supplied in options
 		if (options.initialVertex) {
@@ -114,6 +147,7 @@ export default class FundraiserQuiz {
 			if ($content.length) {
 				$initialStepContent.hide();
 				$initialStepContent = $content;
+				this.clearContentInputs(options.initialVertex);
 			}
 
 			this.changeContainerBackground(options.initialVertex);
@@ -141,6 +175,10 @@ export default class FundraiserQuiz {
 
 		if (embeddedForm) {
 			const [...inputFields] = embeddedForm.querySelectorAll('.oneField');
+
+			embeddedForm.addEventListener('reset', () =>
+				this.onDevInquiryReset(embeddedForm)
+			);
 
 			// Add necessary selectors for FloatingLabelInput initialization
 			inputFields.forEach((inputField) => {
@@ -171,6 +209,16 @@ export default class FundraiserQuiz {
 				this.onDevInquirySubmit.bind(this)
 			);
 		}
+	}
+
+	onDevInquiryReset(form: HTMLFormElement) {
+		const inputFields: HTMLElement[] = $(form).find('.oneField').toArray();
+
+		inputFields.forEach((floatingLabelElement: HTMLElement) => {
+			floatingLabelElement.classList.remove(
+				'floating-label-input--activated'
+			);
+		});
 	}
 
 	async onDevInquirySubmit(e) {
@@ -238,9 +286,35 @@ export default class FundraiserQuiz {
 				$content.addClass(this.classes);
 			});
 
+			this.clearContentInputs(nextVertex);
+
 			// Show new content
 			$content.removeClass('hidden').fadeIn();
 		}
+	}
+
+	clearContentInputs(vertexOrSelector: string) {
+		const selector = /[^a-z_0-9\-]/gi.test(vertexOrSelector)
+			? vertexOrSelector
+			: `[data-vertex="${vertexOrSelector}"]:not(input)`;
+		const $content = (this.parentContainer as JQuery).find(selector);
+
+		// Reset next page inputs
+		$content.find('input,select').each((index, input) => {
+			switch (input.type) {
+				case 'text':
+				case 'number':
+					input.value = '';
+					break;
+				case 'radio':
+				case 'checkbox':
+					input.checked = false;
+					break;
+			}
+		});
+
+		// Reset next page formss
+		$content.find('form')?.get(0)?.reset();
 	}
 
 	computeCurrentPageNumber() {

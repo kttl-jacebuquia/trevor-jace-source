@@ -32,7 +32,7 @@ export default class FloatingLabelInput extends Component {
 	constructor(element, options) {
 		super(element);
 
-		const dataOptions = JSON.parse(element.dataset.options || "{}");
+		const dataOptions = JSON.parse(element.dataset.options || '{}');
 
 		const mergedOptions = {
 			...options,
@@ -47,14 +47,18 @@ export default class FloatingLabelInput extends Component {
 		if (this.children.input) {
 			this.element.dataset.inputTag =
 				this.children.input.tagName.toLowerCase();
-				this.element.dataset.inputType =
+			this.element.dataset.inputType =
 				this.children.input.type?.toLowerCase() || '';
 		}
 
 		// Textarea inputs area activated always.
-		if ( /textarea/.test(this.element.dataset.inputTag) ) {
+		if (/textarea/.test(this.element.dataset.inputTag)) {
 			this.options.activated = true;
 		}
+
+		// Pickup classname changes brought by external components
+		const observer = new window.MutationObserver(this.onMutate.bind(this));
+		observer.observe(this.element, { attributes: true });
 
 		this.onInputBlur();
 	}
@@ -73,6 +77,14 @@ export default class FloatingLabelInput extends Component {
 	onInputFocus() {
 		this.setState({
 			activated: true,
+		});
+	}
+
+	onMutate() {
+		this.setState({
+			activated: this.element.classList.contains(
+				'floating-label-input--activated'
+			),
 		});
 	}
 
