@@ -23,10 +23,10 @@
   }
 
   .modal-close {
-    @apply rounded-px10 mt-px18 mr-px18;
+    @apply rounded-px10 mr-px18;
 
     @screen lg2 {
-      @apply mt-px24 mr-px24;
+      @apply mr-px24;
     }
   }
 
@@ -43,7 +43,7 @@
   }
 
   &__image {
-    @apply col-span-2 col-start-3 rounded-px10 overflow-hidden;
+    @apply col-span-2 col-start-3 rounded-px10 overflow-hidden aspect-ratio-1-1;
 
     @screen lg {
       @apply col-span-3 justify-self-end w-px118 mr-px12;
@@ -56,6 +56,10 @@
     @screen xl {
       @apply w-px183;
       margin-right: 47px;
+    }
+
+    img {
+      @apply object-cover object-center w-full h-full;
     }
   }
 

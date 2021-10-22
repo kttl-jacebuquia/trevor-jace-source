@@ -22,12 +22,8 @@
   .modal-close.modal-close {
     @apply bg-indigo w-px32 h-px32 rounded-px10 p-0 text-px15;
 
-    @screen md {
-      @apply mt-px26;
-    }
-
     @screen xl {
-      @apply w-px44 h-px44 mt-px24 mr-px24 text-px20;
+      @apply w-px44 h-px44 mr-px24 text-px20;
     }
   }
 

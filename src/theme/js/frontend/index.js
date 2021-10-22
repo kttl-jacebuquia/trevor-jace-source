@@ -85,6 +85,7 @@ if ($quickExitModal.length) {
 		'quick-exit-modal-dismissed'
 	);
 	let willShowModal = !isQuickExitModalDismissed;
+	let willDelayPromo = false;
 
 	if (isQuickExitModalDismissed) {
 		siteVisitCount++;
@@ -96,6 +97,8 @@ if ($quickExitModal.length) {
 	}
 
 	if (willShowModal) {
+		willDelayPromo = true;
+
 		// Set the timeout longer if the page is scrolling
 		// through contents (URL with hash).
 		const modalTimeout = window.location.hash.length ? 1000 : 500;
@@ -105,13 +108,13 @@ if ($quickExitModal.length) {
 			},
 			onClose({ initiator }) {
 				localStorage.setItem('quick-exit-modal-dismissed', true);
-				features.PromoPopup.showWhenAvailable();
+				features.PromoPopup.showWhenAvailable(willDelayPromo);
 			},
 		};
 
 		modal($quickExitModal, options);
 	} else {
-		features.PromoPopup.showWhenAvailable();
+		features.PromoPopup.showWhenAvailable(willDelayPromo);
 	}
 }
 

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import modal from './modal';
 
-const MODAL_DELAY = 5000;
+const MODAL_DELAY = 2000;
 const POPUP_MODAL_DISMISSED_KEY = 'promo-popup-modal-dismissed';
 
 class PromoPopup {
@@ -20,9 +20,14 @@ class PromoPopup {
 		}
 	}
 
-	static showWhenAvailable() {
+	static showWhenAvailable(withDelay = false) {
 		if ( this.modal && this.canShow ) {
-			setTimeout(() => this.modal.open(), MODAL_DELAY)
+			if (withDelay) {
+				setTimeout(() => this.modal.open(), MODAL_DELAY)
+			}
+			else {
+				this.modal.open();
+			}
 		}
 	}
 
