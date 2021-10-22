@@ -176,21 +176,31 @@ export default class FundraiserQuiz {
 	async onDevInquirySubmit(e) {
 		e.preventDefault();
 
-		const formData = [
-			...new FormData(this.devInquiryForm).entries(),
-		].reduce((all, [key, value]) => {
-			all[key] = value;
-			return all;
-		}, {});
+		// Delayed process in order for FormAssembly's validator to fire first
+		setTimeout(async () => {
+			const errorFields = this.devInquiryForm.querySelectorAll('.errFld');
 
-		const response = await WPAjax({
-			action: this.ajaxAction,
-			data: formData
-		});
+			// Don't submit if there's any error
+			if (errorFields.length) {
+				return;
+			}
 
-		if ( /success/i.test(response?.status || '')) {
-			this.onFormSubmitSuccess();
-		}
+			const formData = [
+				...new window.FormData(this.devInquiryForm).entries(),
+			].reduce((all, [key, value]) => {
+				all[key] = value;
+				return all;
+			}, {});
+
+			const response = await WPAjax({
+				action: this.ajaxAction,
+				data: formData,
+			});
+
+			if (/success/i.test(response?.status || '')) {
+				this.onFormSubmitSuccess();
+			}
+		}, 100);
 	}
 
 	onFormSubmitSuccess() {
@@ -253,8 +263,9 @@ export default class FundraiserQuiz {
 	}
 
 	/**
-	 * Clears all the radio buttons of the next content
-	 * @param {jQuery object} $content
+	 * Clears all the radio buttons of the next content.
+	 *
+	 * @param {JQuery.JQuery} $content
 	 */
 	handleNextContentRadioBtns($content) {
 		const $radioBtns = $(`${this.selector}__radio-btn`, $content);
@@ -266,6 +277,7 @@ export default class FundraiserQuiz {
 
 	/**
 	 * Only display the back button if not on the first content.
+	 *
 	 * @param {string} vertex
 	 */
 	handleBackButtonDisplay(vertex) {
