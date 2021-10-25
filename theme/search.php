@@ -75,9 +75,11 @@ $glossary_item = Page::get_glossary_item()
 							),
 						),
 						array(
-							'text_color' => 'current',
-							'layout'     => 'grid',
-							'class'      => 'search-featured-3-up',
+							'text_color'          => 'current',
+							'carousel_breakpoint' => array(
+								'tablet',
+							),
+							'class'               => 'search-featured-3-up',
 						),
 					);
 					?>
