@@ -168,10 +168,13 @@
 
       @each $size in $breakpoints {
         @screen #{$size} {
+          @apply justify-end;
+
           @if $size == lg {
-            @apply justify-start;
-          } @else {
-            @apply justify-end;
+            @apply ml-px100;
+          }
+          @else {
+            @apply ml-auto;
           }
 
           @apply flex;
