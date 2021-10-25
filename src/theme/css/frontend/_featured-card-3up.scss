@@ -10,8 +10,10 @@
   }
 
   &--carousel {
-    .featured-card-3up__items-container {
-      @each $screen in md, lg {
+    .featured-card-3up__items-container.featured-card-3up__items-container {
+      @apply mb-0;
+
+      @each $screen in sm, md, lg {
         @screen #{$screen} {
           $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
 
@@ -33,7 +35,7 @@
       }
 
       .featured-card-3up__item {
-        width: calc((100% - 28px) / 2);
+        @apply w-full;
         height: auto;
         align-self: stretch;
       }
@@ -51,15 +53,30 @@
       }
     }
 
-    @screen mobile {
-      .featured-card-3up__items-container {
-        $mobile-offset: calc(((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT'));
+    & .swiper-button-next.swiper-button-next,
+    & .swiper-button-prev.swiper-button-prev {
+      @screen lg {
+        --arrow-button-width: calc(50% - #{theme("screens.lg")} / 2 * (5 / 6) + 2rem);
 
-        margin-left: calc(-1 * #{$mobile-offset});
-        margin-right: calc(-1 * #{$mobile-offset});
-        padding-left: $mobile-offset;
-        padding-right: $mobile-offset;
+        width: var(--arrow-button-width);
+
+        &:not(.swiper-button-disabled) {
+          display: flex;
+        }
+
+        .swiper-button-wrapper {
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
+
+      @screen lg2 {
+        display: none!important;
+      }
+    }
+
+    .swiper-pagination.swiper-pagination {
+      @apply flex;
     }
   }
 
@@ -161,13 +178,8 @@
     }
   }
 
-  &__cta {
-    @apply btn;
-    @apply bg-white text-indigo;
-  }
-
   .swiper-pagination {
-    @apply lg2:hidden;
+    @apply hidden;
   }
 
   .swiper-pagination-bullet {
@@ -176,34 +188,19 @@
 
   .swiper-button-next,
   .swiper-button-prev {
-    @screen lg {
-      --arrow-button-width: calc(50% - #{theme("screens.lg")} / 2 * (5 / 6) + 2rem);
-
-      width: var(--arrow-button-width);
-
-      &:not(.swiper-button-disabled) {
-        display: flex;
-      }
-
-      .swiper-button-wrapper {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-
-    @screen lg2 {
-      display: none!important;
-    }
+    @apply hidden;
   }
 
   .swiper-button-prev {
     @screen lg {
+      @apply justify-start;
       left: calc( theme("container.padding.lg") / 2 );
     }
   }
 
   .swiper-button-next {
     @screen lg {
+      @apply justify-end;
       right: calc( theme("container.padding.lg") + ( var(--arrow-button-width) / 2 ) );
     }
   }

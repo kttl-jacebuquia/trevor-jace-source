@@ -3,6 +3,7 @@
 use TrevorWP\CPT\Donate\Prod_Partner;
 use TrevorWP\CPT\RC;
 use TrevorWP\Theme\Helper;
+use TrevorWP\Theme\ACF\Field_Group\Button;
 
 use TrevorWP\Theme\ACF\Field\Color;
 
@@ -16,7 +17,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 	const FIELD_BUTTON                    = 'button';
 	const FIELD_DESCRIPTION               = 'description';
 	const FIELD_DESKTOP_HEADING_ALIGNMENT = 'desktop_heading_alignment';
-	const FIELD_MOBILE_TABLET_LAYOUT      = 'mobile_tablet_layout';
+	const FIELD_CAROUSEL_BREAKPOINT       = 'carousel_breakpoint';
 
 	/**
 	 * @inheritDoc
@@ -31,7 +32,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 		$button                    = static::gen_field_key( static::FIELD_BUTTON );
 		$description               = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$desktop_heading_alignment = static::gen_field_key( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
-		$mobile_tablet_layout      = static::gen_field_key( static::FIELD_MOBILE_TABLET_LAYOUT );
+		$carousel_breakpoint      = static::gen_field_key( static::FIELD_CAROUSEL_BREAKPOINT );
 
 		return array(
 			'title'  => 'Featured Card 3-Up Block',
@@ -94,17 +95,21 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 					),
 					'default_value' => 'articles',
 				),
-				static::FIELD_MOBILE_TABLET_LAYOUT      => array(
-					'key'           => $mobile_tablet_layout,
-					'name'          => static::FIELD_MOBILE_TABLET_LAYOUT,
-					'label'         => 'Cards Layout on Tablet/Mobile',
-					'type'          => 'radio',
-					'layout'        => 'horizontal',
+				static::FIELD_CAROUSEL_BREAKPOINT       => array(
+					'key'           => $carousel_breakpoint,
+					'name'          => static::FIELD_CAROUSEL_BREAKPOINT,
+					'label'         => 'Carousel Breakpoints',
+					'type'          => 'checkbox',
+					'allow_custom'  => 0,
 					'choices'       => array(
-						'grid'     => 'Grid',
-						'carousel' => 'Carousel',
+						'mobile'        => 'Mobile',
+						'tablet'        => 'Tablet',
+						'small-desktop' => 'Small Desktop',
 					),
-					'default_value' => 'grid',
+					'layout'        => 'vertical',
+					'toggle'        => 0,
+					'return_format' => 'value',
+					'save_custom'   => 0,
 				),
 				static::FIELD_ARTICLES                  => array(
 					'key'               => $articles,
@@ -144,12 +149,14 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 						),
 					),
 				),
-				static::FIELD_BUTTON                    => array(
-					'key'           => $button,
-					'name'          => static::FIELD_BUTTON,
-					'label'         => 'Button',
-					'type'          => 'link',
-					'return_format' => 'array',
+				static::FIELD_BUTTON                    => Button::clone(
+					array(
+						'key'     => $button,
+						'name'    => static::FIELD_BUTTON,
+						'label'   => 'Button',
+						'display' => 'group',
+						'layout'  => 'block',
+					)
 				),
 			),
 		);
@@ -174,14 +181,14 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 	 */
 	public static function render( $post = false, $data = array(), array $options = array() ): ?string {
 		// Prioritize data passed through the $data and $options
-		$title       = ! empty( $data ) ? $data['title'] : static::get_val( static::FIELD_TITLE );
-		$description = ! empty( $data ) ? $data['description'] : static::get_val( static::FIELD_DESCRIPTION );
-		$card_type   = ! empty( $data ) ? $data['card_type'] : static::get_val( static::FIELD_CARD_TYPE );
-		$button      = ! empty( $data ) ? $data['button'] : static::get_val( static::FIELD_BUTTON );
-		$text_color  = ! empty( $options['text_color'] ) ? $options['text_color'] : ( ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark' );
-		$bg_color    = ! empty( $options['bg_color'] ) ? $options['bg_color'] : ( ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white' );
-		$alignment   = ! empty( $options['alignment'] ) ? $options['alignment'] : static::get_val( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
-		$layout      = ! empty( $options['layout'] ) ? $options['layout'] : static::get_val( static::FIELD_MOBILE_TABLET_LAYOUT );
+		$title               = ! empty( $data ) ? $data['title'] : static::get_val( static::FIELD_TITLE );
+		$description         = ! empty( $data ) ? $data['description'] : static::get_val( static::FIELD_DESCRIPTION );
+		$card_type           = ! empty( $data ) ? $data['card_type'] : static::get_val( static::FIELD_CARD_TYPE );
+		$button              = ! empty( $data ) ? $data['button'] : static::get_val( static::FIELD_BUTTON );
+		$text_color          = ! empty( $options['text_color'] ) ? $options['text_color'] : ( ! empty( static::get_val( static::FIELD_TEXT_COLOR ) ) ? static::get_val( static::FIELD_TEXT_COLOR ) : 'teal-dark' );
+		$bg_color            = ! empty( $options['bg_color'] ) ? $options['bg_color'] : ( ! empty( static::get_val( static::FIELD_BG_COLOR ) ) ? static::get_val( static::FIELD_BG_COLOR ) : 'white' );
+		$alignment           = ! empty( $options['alignment'] ) ? $options['alignment'] : static::get_val( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
+		$carousel_breakpoint = ! empty( $options['carousel_breakpoint'] ) ? $options['carousel_breakpoint'] : static::get_val( static::FIELD_CAROUSEL_BREAKPOINT );
 
 		$cards = array();
 
@@ -195,23 +202,33 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 
 		$tile_options = array();
 
+		$classnames = array(
+			'featured-card-3up',
+			'featured-card-3up--' . $alignment,
+			'bg-' . $bg_color,
+			'text-' . $text_color,
+			$options['class'] ?? '',
+		);
+
+		$data_carousel_layout = array();
+
+		if ( ! empty( $carousel_breakpoint ) ) {
+			foreach ( $carousel_breakpoint as $breakpoint ) {
+				array_push( $data_carousel_layout, $breakpoint );
+			}
+		}
+
 		$attrs = array(
 			'class' => implode(
 				' ',
-				array(
-					'featured-card-3up',
-					'featured-card-3up--' . $alignment,
-					'featured-card-3up--' . $layout,
-					'bg-' . $bg_color,
-					'text-' . $text_color,
-					$options['class'] ?? '',
-				),
+				$classnames,
 			),
+			'data-carousel-breakpoint' => implode( ',', $data_carousel_layout ),
 		);
 
 		ob_start();
 		?>
-		<div <?php echo static::render_attrs( $attrs ); ?>>
+		<div <?php echo static::render_attrs( array(), $attrs ); ?>>
 			<div class="featured-card-3up__container">
 				<div class="featured-card-3up__content">
 					<?php if ( ! empty( $title ) ) : ?>
@@ -230,25 +247,23 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 									</div>
 								<?php endforeach; ?>
 							</div>
-							<?php if ( 'carousel' === $layout ) : ?>
-								<div class="swiper-button swiper-button-prev">
-									<div class="swiper-button-wrapper">
-										<i class="trevor-ti-arrow-left"></i>
-									</div>
+							<div class="swiper-button swiper-button-prev">
+								<div class="swiper-button-wrapper">
+									<i class="trevor-ti-arrow-left"></i>
 								</div>
-								<div class="swiper-button swiper-button-next">
-									<div class="swiper-button-wrapper">
-										<i class="trevor-ti-arrow-right"></i>
-									</div>
+							</div>
+							<div class="swiper-button swiper-button-next">
+								<div class="swiper-button-wrapper">
+									<i class="trevor-ti-arrow-right"></i>
 								</div>
-								<div class="swiper-pagination"></div>
-							<?php endif; ?>
+							</div>
+							<div class="swiper-pagination"></div>
 						</div>
 					<?php endif; ?>
 
-					<?php if ( ! empty( $button['url'] ) ) : ?>
+					<?php if ( ! empty( $button['label'] ) ) : ?>
 						<div class="featured-card-3up__cta-wrap">
-							<a class="featured-card-3up__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+							<?php echo Button::render( null, $button, array( 'btn_cls' => array( 'featured-card-3up__cta' ) ) ); ?>
 						</div>
 					<?php endif; ?>
 				</div>

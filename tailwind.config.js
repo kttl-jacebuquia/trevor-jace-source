@@ -222,6 +222,7 @@ const config = {
 			container: {
 				padding: {
 					DEFAULT: px2rem(28),
+					sm: px2rem(28),
 					md: px2rem(50),
 					lg: px2rem(90),
 					lg2: px2rem(120),
