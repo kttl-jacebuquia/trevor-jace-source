@@ -59,7 +59,7 @@ class BreathingExercise {
 		this.rotateCopy = this.overlay.querySelector('.rotate-copy');
 		// Breathing End
 		this.breathingEnd = this.overlay.querySelector('.breathing-end');
-		this.repeatCTA = this.overlay.querySelector('.repeat');
+		this.repeatCTA = this.overlay.querySelectorAll('.repeat');
 
 		// Blob
 		this.blobCanvas = this.overlay.querySelector('#blob');
