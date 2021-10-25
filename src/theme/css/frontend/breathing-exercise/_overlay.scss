@@ -151,6 +151,11 @@
       @screen md {
         @apply text-px30 leading-px40;
       }
+
+      &--icon {
+        @apply border-0;
+        appearance: none;
+      }
     }
   }
 
@@ -241,6 +246,11 @@
 
       @screen xl {
         @apply text-px30 leading-px40;
+      }
+
+      &--icon {
+        @apply border-0 m-0;
+        appearance: none;
       }
     }
   }
