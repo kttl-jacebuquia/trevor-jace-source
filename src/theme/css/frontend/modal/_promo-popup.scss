@@ -1,3 +1,4 @@
+
 .promo-popup-modal {
   .modal-wrap {
     @screen xl {
@@ -19,6 +20,17 @@
 
     @screen lg2 {
       @apply col-span-8 col-start-3 py-px78;
+    }
+
+    // Apply text color override to close button and CTA
+    @each $color, $color-value in $theme-colors {
+      @debug $color;
+      &.text-#{$color} {
+        & .modal-close,
+        & .page-btn-primary {
+          @apply bg-#{$color};
+        }
+      }
     }
   }
 
