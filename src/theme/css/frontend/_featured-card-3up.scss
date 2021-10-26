@@ -167,15 +167,7 @@
   }
 
   &__cta-wrap {
-    @apply text-center mt-px30;
-
-    @screen md {
-      @apply mt-px40;
-    }
-
-    @screen lg2 {
-      @apply mt-px70;
-    }
+    @apply text-center mt-px40;
   }
 
   .swiper-pagination {

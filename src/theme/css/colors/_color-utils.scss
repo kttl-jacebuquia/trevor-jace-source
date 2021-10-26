@@ -7,7 +7,6 @@
 // OUTPUT
 // background-color: rgba(0,58,72,var(--tw-bg-opacity));
 @function tw-color( $tw_color_name ) {
-  @debug $tw_color_name;
   @if ( map-has-key($colors, $tw_color_name) ) {
     @return map-get($colors, #{$tw_color_name}-rgba);
   }
