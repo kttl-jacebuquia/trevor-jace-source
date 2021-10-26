@@ -23,12 +23,18 @@
     }
 
     // Apply text color override to close button and CTA
-    @each $color, $color-value in $theme-colors {
-      @debug $color;
-      &.text-#{$color} {
-        & .modal-close,
-        & .page-btn-primary {
-          @apply bg-#{$color};
+    @each $color-name, $color-value in $theme-colors {
+      @if (
+      ($color-name != transparent)
+      and ($color-name != current)
+      and ($color-name != black)
+      and ($color-name != white)
+      ) {
+        &.text-#{$color-name} {
+          & .modal-close,
+          & .page-btn-primary {
+            @apply bg-#{$color-name};
+          }
         }
       }
     }
