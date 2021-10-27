@@ -1,156 +1,156 @@
 .topic-cards {
-	@apply pt-px80 pb-px40;
+  @apply pt-px80 pb-px40;
 
-	@screen md {
-		@apply pt-px80 pb-px100;
-	}
+  @screen md {
+    @apply pt-px80 pb-px100;
+  }
 
   @screen lg {
     @apply py-px100;
   }
 
-	@screen lg2 {
-		@apply py-px140;
-	}
+  @screen lg2 {
+    @apply py-px140;
+  }
 
   & + .guiding-principles {
     @apply mt-0;
   }
 
-	&__container {
-		@apply container mx-auto;
-	}
+  &__container {
+    @apply container mx-auto;
+  }
 
-	&__heading {
-		@apply font-bold text-px32 leading-px40 text-center;
+  &__heading {
+    @apply font-bold text-px32 leading-px40 text-center;
 
-		@screen md {
-			@apply text-px32 leading-px42;
-		}
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
 
     @screen lg {
       @apply text-px34 leading-px44 tracking-px_05 mx-auto;
       max-width: #{rem-calc(552)};
     }
 
-		@screen lg2 {
-			@apply text-px40 leading-px50 tracking-normal;
+    @screen lg2 {
+      @apply text-px40 leading-px50 tracking-normal;
       max-width: #{rem-calc(900)};
-		}
+    }
 
     @screen xl {
-			@apply text-px46 leading-px56 tracking-em_001;
-		}
+      @apply text-px46 leading-px56 tracking-em_001;
+    }
 
-		& + .topic-cards__accordion {
-			@apply mt-px50;
-		}
-	}
+    & + .topic-cards__accordion {
+      @apply mt-px50;
+    }
+  }
 
-	&__description {
-		@apply text-px20 leading-px26 tracking-px05 mt-px14 text-center;
+  &__description {
+    @apply text-px20 leading-px26 tracking-px05 mt-px14 text-center;
 
-		@screen md {
-			@apply tracking-px05 mt-px8 text-px16 leading-px22;
-		}
+    @screen md {
+      @apply tracking-px05 mt-px8 text-px16 leading-px22;
+    }
 
     @screen lg {
       @apply text-px22 leading-px32 mt-px14 mx-auto;
       max-width: #{rem-calc(552)};
     }
 
-		@screen lg2 {
-			@apply text-px24 leading-px34;
+    @screen lg2 {
+      @apply text-px24 leading-px34;
       max-width: #{rem-calc(900)};
-		}
+    }
 
     @screen xl {
       @apply text-px26 leading-px36;
     }
-	}
+  }
 
-	&__accordion {
-		@apply mt-px38 -ml-px28 -mr-px28;
-		@apply border-blue_green border-solid border-t-px1 border-b-px1;
+  &__accordion {
+    @apply mt-px38 -ml-px28 -mr-px28;
+    @apply border-blue_green border-solid border-t-px1 border-b-px1;
 
-		@screen md {
-			@apply hidden;
-		}
-	}
+    @screen md {
+      @apply hidden;
+    }
+  }
 
-	&__accordion-item {
-		@apply bg-white text-teal-dark;
+  &__accordion-item {
+    @apply bg-white text-teal-dark;
 
-		&:not(:last-child) {
-			border-bottom: 1px solid rgba(0, 94, 103, 0.2);
-		}
-	}
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 94, 103, 0.2);
+    }
+  }
 
-	&__accordion-header {
-		@apply flex items-center justify-between px-px28 h-px86;
-	}
+  &__accordion-header {
+    @apply flex items-center justify-between px-px28 h-px86;
+  }
 
-	&__accordion-toggle {
-		@apply flex items-center justify-center w-px45 h-px45 -mr-px20;
+  &__accordion-toggle {
+    @apply flex items-center justify-center w-px45 h-px45 -mr-px20;
 
-		&::before {
-			@apply flex items-center justify-center m-auto;
-			margin-top: auto !important;
-		}
-	}
+    &::before {
+      @apply flex items-center justify-center m-auto;
+      margin-top: auto !important;
+    }
+  }
 
-	&__accordion-content {
-		@apply hidden;
-		@apply px-px28 bg-gray-light pt-px24 pb-px38;
-	}
+  &__accordion-content {
+    @apply hidden;
+    @apply px-px28 bg-gray-light pt-px24 pb-px38;
+  }
 
-	&__grid {
-		@apply tw-grid mt-px30;
-		@apply gap-y-px28;
+  &__grid {
+    @apply tw-grid mt-px30;
+    @apply gap-y-px28;
 
-		// Need to override accordion styles on mobile
-		@screen mobile {
-			.topic-cards__item-title {
-				@apply font-semibold text-px24 leading-px28 tracking-em001;
-			}
-
-			.topic-cards__item-description {
-				@apply mt-px14 text-px16 leading-px24;
-			}
-
-			.topic-cards__item-cta {
-				@apply mt-px18 text-px18 leading-px24 tracking-em001;
-			}
-		}
-
-		@screen md {
-			@apply mt-px50 gap-y-px30;
-			grid-auto-rows: 1fr;
-		}
-
-		@screen lg {
-			@apply grid-cols-12;
+    // Need to override accordion styles on mobile
+    @screen mobile {
+      .topic-cards__item-title {
+        @apply font-semibold text-px24 leading-px28 tracking-em001;
+      }
 
       .topic-cards__item-description {
-				@apply mt-px12 text-px20 leading-px30;
-			}
+        @apply mt-px14 text-px16 leading-px24;
+      }
+
+      .topic-cards__item-cta {
+        @apply mt-px18 text-px18 leading-px24 tracking-em001;
+      }
+    }
+
+    @screen md {
+      @apply mt-px50 gap-y-px30;
+      grid-auto-rows: 1fr;
+    }
+
+    @screen lg {
+      @apply grid-cols-12;
+
+      .topic-cards__item-description {
+        @apply mt-px12 text-px20 leading-px30;
+      }
 
       .topic-cards__cta {
         @apply text-px20;
       }
-		}
+    }
 
-		@screen lg2 {
-			@apply mt-px80 gap-y-px28;
-		}
-	}
+    @screen lg2 {
+      @apply mt-px80 gap-y-px28;
+    }
+  }
 
-	&__item {
-		@apply col-span-full;
+  &__item {
+    @apply col-span-full;
 
-		@screen md {
-			@apply col-span-4;
-		}
+    @screen md {
+      @apply col-span-4;
+    }
 
     &:nth-child(odd) {
       @screen lg {
@@ -188,23 +188,19 @@
       }
     }
 
-		&--bordered {
-			@apply card-sm md:card-md lg:card-lg lg2:card-xl bg-white text-teal-dark;
-			border: 1px solid rgba(0, 94, 103, 0.5);
+    &--bordered {
+      @apply card-sm md:card-md lg:card-lg lg2:card-xl bg-white text-teal-dark;
+      border: 1px solid rgba(0, 94, 103, 0.5);
+    }
+  }
 
-      &:hover{
-        @apply bg-gray-light;
-      }
-		}
-	}
+  &__item-title {
+    @apply card-heading;
+    @apply font-semibold text-px20 leading-px26;
 
-	&__item-title {
-		@apply card-heading;
-		@apply font-semibold text-px20 leading-px26;
-
-		@screen md {
-			@apply text-px24 leading-px28 tracking-em001;
-		}
+    @screen md {
+      @apply text-px24 leading-px28 tracking-em001;
+    }
 
     @screen lg {
       @apply text-px26 leading-px32 tracking-em005;
@@ -213,15 +209,15 @@
     @screen xl {
       @apply leading-px36;
     }
-	}
+  }
 
-	&__item-description {
-		@apply card-description;
-		@apply text-px18 leading-px28;
+  &__item-description {
+    @apply card-description;
+    @apply text-px18 leading-px28;
 
-		@screen md {
-			@apply mt-px12 text-px16 leading-px24;
-		}
+    @screen md {
+      @apply mt-px12 text-px16 leading-px24;
+    }
 
     @screen lg {
       @apply leading-px22;
@@ -230,35 +226,35 @@
     @screen xl {
       @apply leading-px26;
     }
-	}
+  }
 
-	&__cta {
-		@apply card-cta;
-		@apply text-px18 leading-px24 tracking-em001 mt-px24;
+  &__cta {
+    @apply card-cta;
+    @apply text-px18 leading-px24 tracking-em001 mt-px24;
 
-		@screen md {
-			@apply mt-px18 text-px20 leading-px26;
-		}
+    @screen md {
+      @apply mt-px18 text-px20 leading-px26;
+    }
 
-		.trevor-ti-download {
-			@apply text-px16 ml-px5;
-		}
-	}
+    .trevor-ti-download {
+      @apply text-px16 ml-px5;
+    }
+  }
 
-	&__block-cta-wrap {
-		@apply mt-px40 text-center;
+  &__block-cta-wrap {
+    @apply mt-px40 text-center;
 
-		@screen md {
-			@apply mt-px50;
-		}
+    @screen md {
+      @apply mt-px50;
+    }
 
-		@screen lg {
-			@apply mt-px60;
-		}
-	}
+    @screen lg {
+      @apply mt-px60;
+    }
+  }
 
-	&__block-cta {
-		@apply btn;
+  &__block-cta {
+    @apply btn;
 
     @screen lg {
       @apply text-px20 leading-px26 tracking-px05;
@@ -266,8 +262,8 @@
     }
   }
 
-	&__load-more {
-		@apply font-semibold text-px24 leading-px34 tracking-px05;
+  &__load-more {
+    @apply font-semibold text-px24 leading-px34 tracking-px05;
 
     @screen md {
       @apply text-px18 leading-px24 tracking-px025;
@@ -277,18 +273,18 @@
       @apply text-px20 leading-px26 tracking-em001;
     }
 
-		@screen lg2 {
-			@apply text-px20 leading-px24 tracking-em005;
-		}
-	}
+    @screen lg2 {
+      @apply text-px20 leading-px24 tracking-em005;
+    }
+  }
 
-	// Expanded accordion
-	&__accordion-item.show &__accordion-content {
-		@apply block;
-	}
+  // Expanded accordion
+  &__accordion-item.show &__accordion-content {
+    @apply block;
+  }
 
-	// Tile overrides
-	.tile {
-		@apply h-full;
-	}
+  // Tile overrides
+  .tile {
+    @apply h-full;
+  }
 }
