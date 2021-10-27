@@ -162,7 +162,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 							</div>
 							<!-- Poster -->
 							<figure class="lessons-video-player__player-poster" aria-hidden="true">
-								<img src="<?php echo $first_video['thumbnail_id']; ?>" />
+								<img src="<?php echo $first_video['poster']; ?>" />
 							</figure>
 							<!-- Play button -->
 							<button class="lessons-video-player__play trevor-ti-play"></button>

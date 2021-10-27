@@ -29,6 +29,11 @@
     @include aspect-ratio(319, 180);
     will-change: transform; // Layer composition to make rounded corners work for iframe in safari
 
+    @screen mobile {
+      width: calc(100vw - #{rem-calc(56)});
+      margin-left: calc(50% - 50vw + #{rem-calc(28)});
+    }
+
     > * {
       @apply absolute;
     }
