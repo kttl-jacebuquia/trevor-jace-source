@@ -10,10 +10,17 @@
   }
 
   &--carousel {
-    .featured-card-3up__items-container.featured-card-3up__items-container {
+    .featured-card-3up__items-container {
+      $offset-value: calc(((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT'));
+
+      margin-left: calc(-1 * #{$offset-value});
+      margin-right: calc(-1 * #{$offset-value});
+      padding-left: $offset-value;
+      padding-right: $offset-value;
+
       @apply mb-0;
 
-      @each $screen in sm, md, lg {
+      @each $screen in md, lg {
         @screen #{$screen} {
           $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
 

@@ -1,7 +1,13 @@
 import $ from 'jquery';
 import Component from '../../Component';
 import { carousel } from '../carousel';
-import { mobileAndTablet, mobileOnly, tabletOnly, smallDesktopOnly } from '../../match-media';
+import {
+	mobileAndTablet,
+	mobileAndSmallDesktop,
+	mobileOnly,
+	tabletOnly,
+	smallDesktopOnly
+} from '../../match-media';
 import Swiper from 'swiper';
 
 const CLASSNAME_CAROUSEL = 'featured-card-3up--carousel';
@@ -63,7 +69,9 @@ export default class FeaturedCardThreeUp extends Component {
 			onNoMatch: (args: any) => any
 		) => any;
 
-		if (carouselBreakpoint.length === 2) {
+		if (carouselBreakpoint.length === 3) {
+			matchMediaScreen = mobileAndSmallDesktop;
+		} else if (carouselBreakpoint.length === 2) {
 			matchMediaScreen = mobileAndTablet;
 		} else if (carouselBreakpoint.length === 1) {
 			switch (carouselBreakpoint[0]) {
