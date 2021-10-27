@@ -204,4 +204,9 @@
     margin: 5px -15px 0px -15px;
     padding: 15px;
   }
+
+  // Unnecessary elements
+  & .highcharts-a11y-proxy-button {
+    display: none !important;
+  }
 }

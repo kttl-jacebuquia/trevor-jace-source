@@ -197,9 +197,11 @@ class Hooks {
 		wp_enqueue_script( 'highmaps-main', '//code.highcharts.com/maps/highmaps.js' );
 		wp_enqueue_script( 'highmaps-module-data', '//code.highcharts.com/maps/modules/data.js' );
 		wp_enqueue_script( 'highmaps-module-exporting', '//code.highcharts.com/maps/modules/exporting.js' );
+		wp_enqueue_script( 'highmaps-module-exporting', '//code.highcharts.com/modules/export-data.js' );
 		wp_enqueue_script( 'highmaps-module-offline-exporting', '//code.highcharts.com/maps/modules/offline-exporting.js' );
 		wp_enqueue_script( 'highmaps-mapdata', '//code.highcharts.com/mapdata/countries/us/us-all.js' );
 		wp_enqueue_script( 'highcharts-patternfill', '//highcharts.github.io/pattern-fill/pattern-fill.js' );
+		wp_enqueue_script( 'highcharts-accessibility', '//code.highcharts.com/modules/accessibility.js' );
 
 		# Theme's frontend JS package
 		wp_enqueue_script(

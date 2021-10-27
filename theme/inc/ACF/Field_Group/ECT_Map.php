@@ -75,7 +75,7 @@ class ECT_Map extends A_Field_Group implements I_Block, I_Renderable {
 						</div>
 					</div>
 					<div class="button ect-map__download" type="button" aria-label="click to download this map">
-						Download Map <i class="trevor-ti-download"></i>
+						<span aria-hidden="true">Download Map <i class="trevor-ti-download"></i></span>
 					</div>
 				</div>
 			</div>

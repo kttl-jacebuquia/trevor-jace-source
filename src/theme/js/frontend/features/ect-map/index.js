@@ -1,3 +1,4 @@
+
 /*
 	Map generation codes provided by the client.
 	Changes applied to the original codes:
@@ -49,7 +50,33 @@ export default function (moduleElement) {
 			floating = false,
 			layout = 'horizontal',
 			tooltipW = $(window).width() - 60;
-	}
+	};
+
+	const chartAccessibilityOptions = {
+		description:
+			'Interactive map showing legislation status across different states and localities.',
+	};
+
+	const mapPointAccessibilityOptions = {
+		point: {
+			descriptionFormatter: (pointData) => {
+				const { explainer, stateName, locale, ST, index } = pointData;
+
+				// Statewide Legislation
+				if ( stateName ) {
+					return `${stateName} ${explainer}`;
+				}
+
+				// Local Protection
+				if ( locale ) {
+					const state = data1.find(({ code }) => code === `us-${ST.toLowerCase()}`);
+					return `${locale} ${state?.stateName || ''} ${explainer}`;
+				}
+
+				return '';
+			},
+		},
+	};
 
 	const onSheetsFetchError = (err) => {
 		console.error(err);
@@ -134,6 +161,7 @@ export default function (moduleElement) {
 
 	function createChart() {
 		$('#container').highcharts('Map', {
+			accessibility: chartAccessibilityOptions,
 			title: {
 				text: '',
 			},
@@ -299,6 +327,7 @@ export default function (moduleElement) {
 							'{point.locale}, {point.ST}<br>' +
 							'<div style="font-size:.8em;"><div class="explainer">{point.locale} {point.explainer}</div><div class="note">{point.note2}</div></div>',
 					},
+					accessibility: mapPointAccessibilityOptions,
 				},
 				{
 					data: data3,
@@ -314,6 +343,7 @@ export default function (moduleElement) {
 							'{point.locale}, {point.ST}<br>' +
 							'<div style="font-size:.8em;"><div class="explainer">{point.locale} {point.explainer}</div><div class="note">{point.note2}</div></div>',
 					},
+					accessibility: mapPointAccessibilityOptions,
 				},
 				{
 					data: data1,
@@ -344,6 +374,7 @@ export default function (moduleElement) {
 						pointFormat:
 							'{point.stateName} — {point.valueName} {point.yearPassed}<div style="font-size:.8em;"><div class="explainer">{point.stateName} {point.explainer}</div><div class="note">{point.note}</div></div>',
 					},
+					accessibility: mapPointAccessibilityOptions,
 				},
 			],
 		});
