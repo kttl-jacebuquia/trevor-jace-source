@@ -190,7 +190,6 @@
 
 		&--bordered {
 			@apply card-sm md:card-md lg:card-lg lg2:card-xl bg-white text-teal-dark;
-			@apply md:shadow-none lg:shadow-none xl:shadow-none;
 			border: 1px solid rgba(0, 94, 103, 0.5);
 
       &:hover{
@@ -260,7 +259,12 @@
 
 	&__block-cta {
 		@apply btn;
-	}
+
+    @screen lg {
+      @apply text-px20 leading-px26 tracking-px05;
+      @apply py-px20 px-px40 h-px66;
+    }
+  }
 
 	&__load-more {
 		@apply font-semibold text-px24 leading-px34 tracking-px05;
