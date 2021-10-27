@@ -128,8 +128,15 @@
 
   &__download {
     @include tw-respond(
-      font-bold text-px16 leading-px22 tracking-px025 mt-px20,
+      font-bold text-px16 leading-px22 tracking-px025,
       $lg2: text-px20 leading-px24 tracking-em005
+    );
+  }
+
+  &__download-link {
+    @include tw-respond(
+      mt-px20 inline-block -mb-px12,
+      $lg: mt-px30
     );
   }
 }

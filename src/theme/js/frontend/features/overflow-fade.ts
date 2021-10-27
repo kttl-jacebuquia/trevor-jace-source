@@ -46,7 +46,7 @@ export default class OverflowFade extends Component {
 		);
 		this.element.classList.toggle(
 			OverflowFade.CLASS_OVERFLOW_RIGHT,
-			scrollLeft < scrollWidth - width
+			scrollLeft < scrollWidth - Math.ceil(width)
 		);
 	}
 }
