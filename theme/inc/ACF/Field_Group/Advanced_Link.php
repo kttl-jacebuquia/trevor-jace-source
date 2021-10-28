@@ -556,12 +556,15 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 				);
 				break;
 			case 'form':
-				$form           = $val->get( static::FIELD_FORM );
-				$options['tag'] = 'button';
+				$form               = $val->get( static::FIELD_FORM );
+				$options['tag']     = 'button';
+				$options['class'][] = Form::gen_modal_id( $form->ID );
 				$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
 					DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
 					DOM_Attr::FIELD_ATTR_VAL => 'click to open Form',
 				);
+
+				Form::create_modal( $form );
 				break;
 		}
 

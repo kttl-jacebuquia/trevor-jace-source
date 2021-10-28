@@ -51,11 +51,6 @@ export default class FloatingLabelInput extends Component {
 				this.children.input.type?.toLowerCase() || '';
 		}
 
-		// Textarea inputs area activated always.
-		if (/textarea/.test(this.element.dataset.inputTag)) {
-			this.options.activated = true;
-		}
-
 		// Pickup classname changes brought by external components
 		const observer = new window.MutationObserver(this.onMutate.bind(this));
 		observer.observe(this.element, { attributes: true });

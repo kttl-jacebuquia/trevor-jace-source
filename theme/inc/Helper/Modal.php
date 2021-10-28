@@ -2,6 +2,7 @@
 
 
 class Modal {
+	const MODAL_SELECTOR_PREFIX    = 'js-modal-';
 	public static $rendered_modals = array();
 
 	protected $_selector;
@@ -80,5 +81,13 @@ class Modal {
 			10,
 			0
 		);
+	}
+
+	public static function gen_modal_id( $id ) {
+		if ( ! empty( $id ) ) {
+			return static::MODAL_SELECTOR_PREFIX . '-' . $id;
+		}
+
+		return static::MODAL_SELECTOR_PREFIX;
 	}
 }

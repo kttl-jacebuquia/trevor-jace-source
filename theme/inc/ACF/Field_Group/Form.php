@@ -2,12 +2,14 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Helper\Modal;
 
 class Form extends A_Field_Group {
-	const FIELD_FORM_ID     = 'form_id';
-	const FIELD_SERVER_URL  = 'form_server_url';
-	const FIELD_TITLE       = 'form_title';
-	const FIELD_DESCRIPTION = 'form_description';
+	const MODAL_SELECTOR_PREFIX = 'js-form-modal-';
+	const FIELD_FORM_ID         = 'form_id';
+	const FIELD_SERVER_URL      = 'form_server_url';
+	const FIELD_TITLE           = 'form_title';
+	const FIELD_DESCRIPTION     = 'form_description';
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
@@ -66,6 +68,31 @@ class Form extends A_Field_Group {
 		);
 	}
 
+	public static function create_modal( $post = null ) {
+		if ( ! $post ) {
+			return;
+		}
+
+		$content = static::render( $post );
+		$id      = static::gen_modal_id( $post->ID );
+
+		$options = array(
+			'id'     => $id,
+			'target' => '.' . $id,
+			'class'  => array( 'form-modal' ),
+		);
+
+		// Ensure that modals are only rendered down the document
+		add_action(
+			'wp_footer',
+			function() use ( $content, $options ) {
+				echo ( new Modal( $content, $options ) )->render();
+			},
+			10,
+			0
+		);
+	}
+
 	public static function render( $post = null ) {
 		$val         = new Field_Val_Getter( static::class, $post );
 		$form_id     = $val->get( static::FIELD_FORM_ID );
@@ -82,20 +109,25 @@ class Form extends A_Field_Group {
 
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form">
+			<div class="form-modal__content">
 				<?php if ( ! empty( $title ) ) : ?>
-					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="form-modal__heading"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $description ) ) : ?>
-					<p class="fundraiser-quiz__description"><?php echo esc_html( $title ); ?></p>
+					<p class="form-modal__description"><?php echo esc_html( $title ); ?></p>
 				<?php endif; ?>
 
-				<div class="fundraiser-quiz__fields">
+				<div class="form-modal__fields">
 					<?php echo $form_assembly_form; ?>
 				</div>
 			</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	public static function gen_modal_id( $id = null ) {
+		$new_id = $id ?? wp_generate_uuid4();
+		return static::MODAL_SELECTOR_PREFIX . '-' . $new_id;
 	}
 }

@@ -1,0 +1,116 @@
+.form-modal .wFormContainer {
+  @apply text-current mx-0 w-full max-w-none;
+
+  .wFormHeader {
+    @apply hidden;
+  }
+
+  .wForm {
+    @apply bg-transparent text-current p-0;
+  }
+
+  .wFormTitle {
+    @apply hidden;
+  }
+
+  .htmlSection {
+    @apply hidden;
+  }
+
+  form {
+    @apply flex flex-wrap gap-y-px30 m-0 w-full;
+
+    @screen md {
+      @apply gap-x-md justify-between items-baseline;
+    }
+  }
+
+  .section.group {
+    @apply flex flex-wrap gap-y-px30 m-0 w-full;
+    @apply border-b-px1 border-solid border-white pb-px40;
+
+    @screen md {
+      @apply gap-x-md justify-between items-baseline;
+    }
+
+    > .section:last-child {
+      @apply pb-0 border-0;
+      margin-bottom: rem-calc(-1);
+    }
+  }
+
+  .field-container-D {
+    @apply p-0 m-0 border-0;
+
+    @screen md {
+      @apply text-px18 leading-px22 tracking-px05;
+      width: calc( (100% - theme('gap.md')) / 2);
+    }
+
+    &.errFld {
+      @apply mb-px30;
+
+      .errMsg {
+        @apply absolute text-white py-0;
+      }
+    }
+
+    &[data-input-tag="textarea"] {
+      @screen md {
+        @apply w-full;
+      }
+
+      label {
+        @apply pt-px20;
+      }
+    }
+
+    br {
+      @apply hidden;
+    }
+  }
+
+  .label.label {
+    --default-label-color: theme('colors.blue_green.DEFAULT');
+    --activated-label-color: theme('colors.white.DEFAULT');
+    @apply py-0 flex items-center w-full max-w-none;
+    @apply text-px18 leading-px26 pl-px28 pr-px10;
+
+    &.reqMark::after {
+      @apply hidden;
+    }
+  }
+
+  .floating-label-input--activated .label {
+    width: 140%;
+  }
+
+  .inputWrapper {
+    @apply h-full w-full;
+
+    input:not([type="submit"]) {
+      @apply h-px66 rounded-px10 border-0 w-full;
+    }
+
+    select {
+      @apply h-px66 text-blue_green pl-px28 pr-px10 rounded-px10 w-full;
+    }
+
+    textarea {
+      @apply min-h-px240 rounded-px10 w-full;
+    }
+  }
+
+  .actions {
+    @apply p-0 m-0 border-0 w-full;
+
+    [type="submit"] {
+      @apply btn;
+      @apply font-bold mt-0 bg-white text-blue_green w-full h-px58 text-px16 leading-px22 tracking-em001 border-0;
+
+      &:hover {
+        @apply bg-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+// Request a Speaker form with Form ID 4840164
+
+form[id="4840164"] {
+  // Yes/No
+  #tfa_1913-D {
+    @apply mt-px24;
+
+    @screen md {
+      @apply mt-px20;
+    }
+  }
+}
