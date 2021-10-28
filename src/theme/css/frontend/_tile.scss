@@ -44,6 +44,16 @@
       @apply max-w-screen-sm;
     }
 
+    @screen lg-only {
+      .card-post {
+        @apply col-span-5 col-start-2;
+
+        &:nth-child(even) {
+          @apply col-start-7;
+        }
+      }
+    }
+
     @screen lg {
       @apply tw-grid-small-desktop;
     }

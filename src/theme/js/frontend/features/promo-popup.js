@@ -25,7 +25,7 @@ class PromoPopup {
 	}
 
 	static handleInnerLinks() {
-		this.$innerLinks.on('click', this.onClose.bind(this));
+		this.$innerLinks.on('click', this.onLinkClick.bind(this));
 	}
 
 	static showWhenAvailable(withDelay = false) {
@@ -38,27 +38,30 @@ class PromoPopup {
 		}
 	}
 
+	static onLinkClick(e) {
+		e.preventDefault();
+		const { target, href } = e.currentTarget;
+
+		if (!href) {
+			return false;
+		}
+
+		this.onClose();
+
+		// Determine if link loads in the same window or not
+		if (target === '_blank') {
+			window.open(e.currentTarget);
+		} else {
+			window.location.href = href;
+		}
+	}
+
 	static onInit(_modal) {
 		this.modal = _modal;
 	}
 
-	static onClose(e) {
-		e.preventDefault();
-		const { target, href } = e.currentTarget;
-
-		if ( !href ) {
-			return false;
-		}
-
-		localStorage.setItem(POPUP_MODAL_DISMISSED_KEY, true);
-
-		// Determine if link loads in the same window or not
-		if ( target === '_blank' ) {
-			window.open(e.currentTarget);
-		}
-		else {
-			window.location.href = href;
-		}
+	static onClose() {
+		window.localStorage.setItem(POPUP_MODAL_DISMISSED_KEY, true);
 	}
 }
 
