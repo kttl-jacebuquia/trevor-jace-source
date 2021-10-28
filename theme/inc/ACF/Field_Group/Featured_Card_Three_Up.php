@@ -32,7 +32,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 		$button                    = static::gen_field_key( static::FIELD_BUTTON );
 		$description               = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$desktop_heading_alignment = static::gen_field_key( static::FIELD_DESKTOP_HEADING_ALIGNMENT );
-		$carousel_breakpoint      = static::gen_field_key( static::FIELD_CAROUSEL_BREAKPOINT );
+		$carousel_breakpoint       = static::gen_field_key( static::FIELD_CAROUSEL_BREAKPOINT );
 
 		return array(
 			'title'  => 'Featured Card 3-Up Block',
@@ -219,7 +219,7 @@ class Featured_Card_Three_Up extends A_Field_Group implements I_Block, I_Rendera
 		}
 
 		$attrs = array(
-			'class' => implode(
+			'class'                    => implode(
 				' ',
 				$classnames,
 			),
