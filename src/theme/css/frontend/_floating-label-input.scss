@@ -19,7 +19,7 @@
 
   label {
     @apply absolute top-0 left-0 w-full h-full transform-gpu transition-all origin-bottom-left text-left;
-    @apply px-px28 flex flex-wrap items-center pointer-events-none;
+    @apply px-px28 flex flex-wrap items-center pointer-events-none z-1;
     color: var(--default-label-color);
   }
 

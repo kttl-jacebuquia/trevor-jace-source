@@ -111,14 +111,14 @@ class Form extends A_Field_Group {
 		?>
 			<div class="form-modal__content">
 				<?php if ( ! empty( $title ) ) : ?>
-					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="form-modal__heading"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $description ) ) : ?>
-					<p class="fundraiser-quiz__description"><?php echo esc_html( $title ); ?></p>
+					<p class="form-modal__description"><?php echo esc_html( $title ); ?></p>
 				<?php endif; ?>
 
-				<div class="fundraiser-quiz__fields">
+				<div class="form-modal__fields">
 					<?php echo $form_assembly_form; ?>
 				</div>
 			</div>

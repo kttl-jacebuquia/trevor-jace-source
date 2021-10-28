@@ -1,0 +1,60 @@
+.form-modal {
+  @apply bg-blue_green text-white;
+
+  .modal-overlay {
+    @apply hidden;
+  }
+
+  .modal-close {
+    @apply bg-white text-blue_green;
+  }
+
+  .modal-container {
+    @apply bg-transparent max-w-none max-h-full;
+    @include bleed-always( true );
+  }
+
+  .modal-content-wrap {
+    @apply container mx-auto;
+    @apply tw-grid;
+  }
+
+  &__content {
+    @apply col-span-full;
+
+    @screen lg {
+      @apply col-span-10 col-start-2;
+    }
+
+    @screen lg2 {
+      @apply col-span-8 col-start-3;
+    }
+  }
+
+  &__heading {
+    @apply font-semibold text-px32 leading-px40 text-center;
+
+    @screen md {
+      @apply text-px40 leading-px50 mx-px88;
+    }
+
+    @screen lg2 {
+      @apply text-px46 leading-px56 tracking-em_001;
+    }
+  }
+
+  &__description {
+    @apply text-px18 leading-px24 text-center tracking-px05 mt-px12;
+
+    @screen md {
+      @apply text-px18 leading-px24 tracking-px05 mx-px88;
+    }
+
+    @screen lg2 {
+      @apply text-px22 leading-px32 tracking-px05;
+    }
+  }
+}
+
+// Vendor-specific style overrides
+@import "./forms/form-assembly";

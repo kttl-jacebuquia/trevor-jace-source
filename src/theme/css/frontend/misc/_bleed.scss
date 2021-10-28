@@ -46,14 +46,14 @@ $single-bleed-widths: (
 }
 
 // Applies bleed for all screens
-@mixin bleed-always {
+@mixin bleed-always( $include-width: false ) {
   @each $screen in ( default, md, lg, lg2, xl ) {
     @if ( $screen == default ) {
-      @include bleed($screen);
+      @include bleed($screen, $include-width);
     }
     @else {
       @screen #{$screen} {
-        @include bleed($screen);
+        @include bleed($screen, $include-width);
       }
     }
   }
