@@ -12,6 +12,8 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_CARD_ENTRY_DESCRIPTION              = 'card_entry_description';
 	const FIELD_CARD_ENTRY_BULLET_TYPE              = 'card_entry_bullet_type';
 	const FIELD_CARD_ENTRY_BULLET_ENTRIES           = 'card_entry_bullet_entries';
+	const FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT = 'card_entry_bullet_entry_with_format';
+	const FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT = 'card_entry_bullet_entry_format_text';
 	const FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT = 'card_entry_bullet_entry_bullet_text';
 	const FIELD_CARD_ENTRY_INFO_TYPE                = 'card_entry_info_type';
 	const FIELD_CARD_ENTRY_INFO_LINK                = 'card_entry_info_link';
@@ -30,6 +32,8 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 		$card_entry_description              = static::gen_field_key( static::FIELD_CARD_ENTRY_DESCRIPTION );
 		$card_entry_bullet_type              = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_TYPE );
 		$card_entry_bullet_entries           = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_ENTRIES );
+		$card_entry_bullet_entry_with_format = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT );
+		$card_entry_bullet_entry_format_text = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT );
 		$card_entry_bullet_entry_bullet_text = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT );
 		$card_entry_info_type                = static::gen_field_key( static::FIELD_CARD_ENTRY_INFO_TYPE );
 		$card_entry_info_link                = static::gen_field_key( static::FIELD_CARD_ENTRY_INFO_LINK );
@@ -107,11 +111,50 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 							'collapsed'    => $card_entry_bullet_entry_bullet_text,
 							'button_label' => 'Add Bullet',
 							'sub_fields'   => array(
+								static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT => array(
+									'key'           => $card_entry_bullet_entry_with_format,
+									'name'          => static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT,
+									'label'         => 'With Format?',
+									'type'          => 'button_group',
+									'choices'       => array(
+										'yes' => 'Yes',
+										'no'  => 'No',
+									),
+									'default_value' => 'no',
+								),
+								static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT => array(
+									'key'               => $card_entry_bullet_entry_format_text,
+									'name'              => static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT,
+									'label'             => 'Text',
+									'type'              => 'wysiwyg',
+									'tabs'              => 'all',
+									'toolbar'           => 'basic',
+									'media_upload'      => 0,
+									'delay'             => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => $card_entry_bullet_entry_with_format,
+												'operator' => '==',
+												'value'    => 'yes',
+											),
+										),
+									),
+								),
 								static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT             => array(
-									'key'   => $card_entry_bullet_entry_bullet_text,
-									'name'  => static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT,
-									'label' => 'Text',
-									'type'  => 'text',
+									'key'               => $card_entry_bullet_entry_bullet_text,
+									'name'              => static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT,
+									'label'             => 'Text',
+									'type'              => 'text',
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => $card_entry_bullet_entry_with_format,
+												'operator' => '==',
+												'value'    => 'no',
+											),
+										),
+									),
 								),
 							),
 						),
@@ -227,7 +270,7 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 								<<?php echo $list_element; ?> class="checkmark-text__list" role="list">
 								<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] ) ) : ?>
 									<?php foreach ( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] as $index => $bullet ) : ?>
-										<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) ) : ?>
+										<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) || ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
 											<li class="checkmark-text__item" role="listitem">
 												<?php if ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) : ?>
 													<span aria-hidden="true" class="checkmark-text__number"><?php echo esc_html( $index + 1 ); ?></span>
@@ -235,10 +278,18 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 													<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
 												<?php endif ?>
 
-												<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) ) : ?>
-													<div class="checkmark-text__item-text">
-														<?php echo esc_html( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ); ?>
-													</div>
+												<?php if ( 'yes' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
+													<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
+														<div class="checkmark-text__item-text">
+															<?php echo $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ]; ?>
+														</div>
+													<?php endif; ?>
+												<?php elseif ( 'no' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
+													<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) ) : ?>
+														<div class="checkmark-text__item-text">
+															<?php echo esc_html( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ); ?>
+														</div>
+													<?php endif; ?>
 												<?php endif; ?>
 											</li>
 										<?php endif; ?>
