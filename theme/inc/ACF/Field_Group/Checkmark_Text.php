@@ -4,6 +4,7 @@ namespace TrevorWP\Theme\ACF\Field_Group;
 
 class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 
+	const FIELD_ANCHOR_ID                           = 'anchor_id';
 	const FIELD_HEADLINE                            = 'headline';
 	const FIELD_DESCRIPTION                         = 'description';
 	const FIELD_CARD_BACKGROUND                     = 'card_background';
@@ -24,6 +25,7 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
+		$anchor_id                           = static::gen_field_key( static::FIELD_ANCHOR_ID );
 		$headline                            = static::gen_field_key( static::FIELD_HEADLINE );
 		$description                         = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$card_background                     = static::gen_field_key( static::FIELD_CARD_BACKGROUND );
@@ -43,6 +45,13 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Checkmark + Text',
 			'fields' => array(
+				static::FIELD_ANCHOR_ID       => array(
+					'key'          => $anchor_id,
+					'name'         => static::FIELD_ANCHOR_ID,
+					'label'        => 'Anchor ID',
+					'type'         => 'text',
+					'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+				),
 				static::FIELD_HEADLINE        => array(
 					'key'   => $headline,
 					'name'  => static::FIELD_HEADLINE,
@@ -232,6 +241,7 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		$anchor_id       = static::get_val( static::FIELD_ANCHOR_ID );
 		$headline        = static::get_val( static::FIELD_HEADLINE );
 		$description     = static::get_val( static::FIELD_DESCRIPTION );
 		$card_background = static::get_val( static::FIELD_CARD_BACKGROUND );
@@ -246,105 +256,107 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="checkmark-text">
-			<div class="checkmark-text__container">
-				<h3 class="checkmark-text__headline"><?php echo esc_html( $headline ); ?></h3>
+		<section id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>">
+			<div class="checkmark-text">
+				<div class="checkmark-text__container">
+					<h3 class="checkmark-text__headline"><?php echo esc_html( $headline ); ?></h3>
 
-				<?php if ( ! empty( $description ) ) : ?>
-				<div class="checkmark-text__description"><?php echo $description; ?></div>
-				<?php endif; ?>
+					<?php if ( ! empty( $description ) ) : ?>
+					<div class="checkmark-text__description"><?php echo $description; ?></div>
+					<?php endif; ?>
 
-				<?php if ( ! empty( $card_entries ) ) : ?>
-					<div class="<?php echo esc_attr( implode( ' ', $cards_container_classes ) ); ?>">
-						<?php foreach ( $card_entries as $entry ) : ?>
-							<div class="checkmark-text__card">
-								<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_HEADER ] ) ) : ?>
-									<h2 class="checkmark-text__card-header"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_HEADER ] ); ?></h2>
-								<?php endif; ?>
+					<?php if ( ! empty( $card_entries ) ) : ?>
+						<div class="<?php echo esc_attr( implode( ' ', $cards_container_classes ) ); ?>">
+							<?php foreach ( $card_entries as $entry ) : ?>
+								<div class="checkmark-text__card">
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_HEADER ] ) ) : ?>
+										<h2 class="checkmark-text__card-header"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_HEADER ] ); ?></h2>
+									<?php endif; ?>
 
-								<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ) ) : ?>
-									<p class="checkmark-text__card-description"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ); ?></p>
-								<?php endif; ?>
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ) ) : ?>
+										<p class="checkmark-text__card-description"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ); ?></p>
+									<?php endif; ?>
 
-								<?php $list_element = ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) ? 'ol' : 'ul'; ?>
-								<<?php echo $list_element; ?> class="checkmark-text__list" role="list">
-								<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] ) ) : ?>
-									<?php foreach ( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] as $index => $bullet ) : ?>
-										<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) || ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
-											<li class="checkmark-text__item" role="listitem">
-												<?php if ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) : ?>
-													<span aria-hidden="true" class="checkmark-text__number"><?php echo esc_html( $index + 1 ); ?></span>
-												<?php else : ?>
-													<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
-												<?php endif ?>
+									<?php $list_element = ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) ? 'ol' : 'ul'; ?>
+									<<?php echo $list_element; ?> class="checkmark-text__list" role="list">
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] ) ) : ?>
+										<?php foreach ( $entry[ static::FIELD_CARD_ENTRY_BULLET_ENTRIES ] as $index => $bullet ) : ?>
+											<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) || ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
+												<li class="checkmark-text__item" role="listitem">
+													<?php if ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) : ?>
+														<span aria-hidden="true" class="checkmark-text__number"><?php echo esc_html( $index + 1 ); ?></span>
+													<?php else : ?>
+														<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
+													<?php endif ?>
 
-												<?php if ( 'yes' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
-													<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
-														<div class="checkmark-text__item-text">
-															<?php echo $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ]; ?>
-														</div>
+													<?php if ( 'yes' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
+														<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ] ) ) : ?>
+															<div class="checkmark-text__item-text">
+																<?php echo $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_FORMAT_TEXT ]; ?>
+															</div>
+														<?php endif; ?>
+													<?php elseif ( 'no' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
+														<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) ) : ?>
+															<div class="checkmark-text__item-text">
+																<?php echo esc_html( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ); ?>
+															</div>
+														<?php endif; ?>
 													<?php endif; ?>
-												<?php elseif ( 'no' === $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_WITH_FORMAT ] ) : ?>
-													<?php if ( ! empty( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ) ) : ?>
-														<div class="checkmark-text__item-text">
-															<?php echo esc_html( $bullet[ static::FIELD_CARD_ENTRY_BULLET_ENTRY_BULLET_TEXT ] ); ?>
-														</div>
-													<?php endif; ?>
-												<?php endif; ?>
-											</li>
+												</li>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									<?php endif; ?>
+									</<?php echo $list_element; ?>>
+
+									<div class="checkmark-text__info">
+									<?php if ( 'link' === $entry[ static::FIELD_CARD_ENTRY_INFO_TYPE ] ) : ?>
+										<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ] ) ) : ?>
+											<?php
+												echo Advanced_Link::render(
+													null,
+													$entry[ static::FIELD_CARD_ENTRY_INFO_LINK ],
+													array(
+														'class' => array( 'checkmark-text__info-link' ),
+													)
+												);
+											?>
 										<?php endif; ?>
-									<?php endforeach; ?>
-								<?php endif; ?>
-								</<?php echo $list_element; ?>>
-
-								<div class="checkmark-text__info">
-								<?php if ( 'link' === $entry[ static::FIELD_CARD_ENTRY_INFO_TYPE ] ) : ?>
-									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_LINK ] ) ) : ?>
-										<?php
-											echo Advanced_Link::render(
-												null,
-												$entry[ static::FIELD_CARD_ENTRY_INFO_LINK ],
-												array(
-													'class' => array( 'checkmark-text__info-link' ),
-												)
-											);
-										?>
 									<?php endif; ?>
-								<?php endif; ?>
 
-								<?php if ( 'text' === $entry[ static::FIELD_CARD_ENTRY_INFO_TYPE ] ) : ?>
-									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_TEXT ] ) ) : ?>
-										<p class="checkmark-text__info-text"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_INFO_TEXT ] ); ?></p>
+									<?php if ( 'text' === $entry[ static::FIELD_CARD_ENTRY_INFO_TYPE ] ) : ?>
+										<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_INFO_TEXT ] ) ) : ?>
+											<p class="checkmark-text__info-text"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_INFO_TEXT ] ); ?></p>
+										<?php endif; ?>
 									<?php endif; ?>
-								<?php endif; ?>
-								</div>
-
-							</div>
-						<?php endforeach; ?>
-					</div>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $checkmark_entries ) ) : ?>
-					<ul role="list">
-						<?php foreach ( $checkmark_entries as $entry ) : ?>
-							<li class="checkmark-text__item" role="listitem">
-								<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
-								<?php if ( ! empty( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ) ) : ?>
-									<div class="checkmark-text__item-text">
-										<?php echo esc_html( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ); ?>
 									</div>
-								<?php endif; ?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-				<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
-					<div class="checkmark-text__cta-wrap">
-						<a class="checkmark-text__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
-					</div>
-				<?php endif; ?>
+
+								</div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $checkmark_entries ) ) : ?>
+						<ul role="list">
+							<?php foreach ( $checkmark_entries as $entry ) : ?>
+								<li class="checkmark-text__item" role="listitem">
+									<span aria-hidden="true" class="trevor-ti-checkmark checkmark-text__icon"></span>
+									<?php if ( ! empty( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ) ) : ?>
+										<div class="checkmark-text__item-text">
+											<?php echo esc_html( $entry[ static::FIELD_CHECKMARK_ENTRY_TEXT ] ); ?>
+										</div>
+									<?php endif; ?>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+					<?php if ( ! empty( $button['url'] ) && ! empty( $button['title'] ) ) : ?>
+						<div class="checkmark-text__cta-wrap">
+							<a class="checkmark-text__cta" href="<?php echo esc_url( $button['url'] ); ?>" target="<?php echo esc_attr( $button['target'] ); ?>"><?php echo esc_html( $button['title'] ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
 			</div>
-		</div>
+		</section>
 		<?php
 		return ob_get_clean();
 	}
