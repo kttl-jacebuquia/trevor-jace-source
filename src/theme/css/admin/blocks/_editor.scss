@@ -3,6 +3,10 @@
 		padding: 0 !important;
 	}
 
+  .block-editor-writing-flow {
+    @apply pb-px2;
+  }
+
 	.editor-post-title__block {
 		padding: 0 20px;
 	}
@@ -15,6 +19,10 @@
 		max-width: 900px;
 		margin: 50px auto;
 	}
+
+  .interface-interface-skeleton__content {
+    @apply block;
+  }
 
 	.interface-interface-skeleton__sidebar {
 		.edit-post-sidebar {
