@@ -93,7 +93,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 								<div class="header-image-grid__item">
 									<div class="header-image-grid__image">
 										<img
-											class="header-image-grid__image"
+											class="header-image-grid__img"
 											src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>"
 											alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>"
 										/>

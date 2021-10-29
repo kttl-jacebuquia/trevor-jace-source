@@ -1,0 +1,21 @@
+// Provides granular grid functionalities
+// when built-in grid utilities are not applicable
+$column-counts: (
+  sm: 6,
+  md: 8,
+  lg: 12,
+  lg2: 12,
+  xl: 12,
+);
+
+@mixin col-span( $span: 1, $screen: sm ) {
+  $gap: "theme('gap.#{$screen}')";
+  $total-columns-count: map-get($column-counts, $screen);
+  $total-gaps-count: $total-columns-count - 1;
+  $total-gap: "#{$total-gaps-count} * #{$gap}";
+
+  // Apply width
+  width: calc(((100% - (#{$total-gap})) / #{$total-columns-count}) * #{$span} + (#{$gap} * #{$span - 1}));
+}
+
+
