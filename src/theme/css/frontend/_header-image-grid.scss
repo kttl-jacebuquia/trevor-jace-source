@@ -80,7 +80,7 @@
     @apply flex flex-wrap justify-center mt-px30 col-span-full;
 
     @screen md {
-      @apply mt-px50 col-span-6 col-start-2;
+      @apply mt-px50 col-span-6 col-start-2 gap-x-md;
     }
 
     @screen lg {
@@ -124,73 +124,18 @@
     }
 
     @screen md-minmax {
-      @apply mx-px14;
-      width: calc((100% - (28px * 2) - 1px) / 3);
-
-      // 2nd row onwards
-      &:nth-child(n + 4) {
-        @apply mt-px28;
-      }
-
-      // First item in each row
-      &:nth-child(3n + 1) {
-        @apply ml-0;
-      }
-
-      // Last item in each row
-      &:nth-child(3n) {
-        @apply mr-0;
-      }
-
-      // First item in last row with items < 4
-      &:nth-child(3n + 1):not(:nth-last-child(n + 3)) {
-        @apply ml-auto;
-      }
-
-      // Last child in last row with items < 4
-      &:last-child:not(:nth-child(3n)) {
-        @apply mr-auto;
-      }
-
-      // Only child in last row
-      &:last-child:nth-child(3n + 1) {
-        @apply mx-auto;
-      }
+      @apply mx-0 gap-x-md;
+      @include col-span(2, md);
     }
 
     @screen lg {
-      @apply mx-px14;
-      width: calc((100% - (28px * 3) - 1px) / 4);
+      @apply mx-0 gap-x-lg;
+      @include col-span(3, lg);
+    }
 
-      // 2nd row onwards
-      &:nth-child(n + 5) {
-        @apply mt-px40;
-      }
-
-      // First item in each row
-      &:nth-child(4n + 1) {
-        @apply ml-0;
-      }
-
-      // Last item in each row
-      &:nth-child(4n) {
-        @apply mr-0;
-      }
-
-      // First item in last row with items < 4
-      &:nth-child(4n + 1):not(:nth-last-child(n + 4)) {
-        @apply ml-auto;
-      }
-
-      // Last child in last row with items < 4
-      &:last-child:not(:nth-child(4n)) {
-        @apply mr-auto;
-      }
-
-      // Only child in last row
-      &:last-child:nth-child(4n + 1) {
-        @apply mx-auto;
-      }
+    @screen lg2 {
+      @apply gap-x-lg2;
+      @include col-span(3, lg2);
     }
   }
 
@@ -199,6 +144,11 @@
 
     img {
       @apply block max-w-full max-h-full object-contain;
+
+      @screen lg2 {
+        max-width: calc(100% - #{rem-calc(40)});
+        max-height: calc(100% - #{rem-calc(40)});
+      }
     }
   }
 }
