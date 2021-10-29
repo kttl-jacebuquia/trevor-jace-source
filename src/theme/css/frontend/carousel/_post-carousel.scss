@@ -149,12 +149,6 @@
       }
     }
 
-    body.is-rc &-prev {
-      @screen lg {
-        @apply justify-end;
-      }
-    }
-
     &-next {
       &.should-hide {
         @apply hidden;
@@ -205,6 +199,18 @@
 
     .carousel-container {
       width: theme("postCard.width.lg");
+    }
+
+    .swiper-button {
+      &.swiper-button-prev {
+        @apply right-auto justify-start;
+        left: theme('container.padding.lg');
+      }
+
+      &.swiper-button-next {
+        @apply left-auto justify-end;
+        right: theme('container.padding.lg');
+      }
     }
 
     // Hide arrows if there are only 3 cards
