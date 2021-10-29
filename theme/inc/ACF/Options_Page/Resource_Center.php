@@ -238,7 +238,7 @@ class Resource_Center extends A_Options_Page {
 					</div>
 				<?php endif; ?>
 
-				<div class="mt-8 animate-bounce hidden md:block">
+				<div class="mt-8 animate-bounce block">
 					<i class="trevor-ti-chevron-down text-4xl text-white bouncing-arrow cursor-pointer"></i>
 				</div>
 			</div>

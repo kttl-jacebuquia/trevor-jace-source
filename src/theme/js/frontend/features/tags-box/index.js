@@ -99,7 +99,7 @@ export default class TagsBox extends Component {
 				const tagOffsetRight = tag.offsetLeft + tag.offsetWidth;
 				if (
 					tag.offsetTop > containerHeight ||
-					tagOffsetRight > containerWidth - 65
+					tagOffsetRight >= containerWidth - 65
 				) {
 					tag.insertAdjacentElement('beforebegin', this.toggleButton);
 					return true;
