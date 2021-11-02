@@ -137,7 +137,7 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 									'label'             => 'Text',
 									'type'              => 'wysiwyg',
 									'tabs'              => 'all',
-									'toolbar'           => 'basic',
+									'toolbar'           => 'common',
 									'media_upload'      => 0,
 									'delay'             => 0,
 									'conditional_logic' => array(

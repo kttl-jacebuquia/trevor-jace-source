@@ -99,6 +99,9 @@ class Hooks {
 		# Remove SEO meta tags for specific page
 		add_action( 'template_redirect', array( self::class, 'remove_wpseo_for_specific_page' ) );
 
+		# Add WYSIWYG Toolbars
+		add_filter( 'acf/fields/wysiwyg/toolbars', array( self::class, 'acf_wysiwyg_toolbars' ) );
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 
@@ -1008,5 +1011,16 @@ class Hooks {
 			array( 'TrevorWP\Theme\Helper\Careers', 'render_option_page' ),
 			'',
 		);
+	}
+
+	/**
+	 * Additional WYSIWYG toolbars.
+	 */
+	function acf_wysiwyg_toolbars( $toolbars ) {
+		// toolbars for homepage modules
+		$toolbars['Common']    = array();
+		$toolbars['Common'][1] = array( 'bold', 'italic', 'underline', 'link' );
+
+		return $toolbars;
 	}
 }
