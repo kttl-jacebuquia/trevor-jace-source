@@ -60,6 +60,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'split_carousel'          => 'Text + Carousel',
 						'support_trevorspace'     => 'Support Trevorspace',
 						'support_crisis_services' => 'Support Crisis Services',
+						'breathing_exercise'      => 'Breathing Exercise',
 					),
 				),
 			),
@@ -188,6 +189,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'operator' => '!=',
 								'value'    => 'support_crisis_services',
 							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'breathing_exercise',
+							),
 						),
 					),
 				)
@@ -229,6 +235,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'field'    => $type,
 								'operator' => '!=',
 								'value'    => 'support_crisis_services',
+							),
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'breathing_exercise',
 							),
 						),
 					),

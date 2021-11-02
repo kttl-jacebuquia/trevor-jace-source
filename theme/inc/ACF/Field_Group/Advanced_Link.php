@@ -7,6 +7,7 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Helper\Breathing_Exercise;
 use TrevorWP\Theme\Helper\DonationModal;
 use TrevorWP\Theme\Helper\FundraiserQuizModal;
 use TrevorWP\Theme\Helper\WhatToExpectModal;
@@ -224,10 +225,11 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						),
 					),
 					'choices'           => array(
-						'donate'          => 'Donate Modal',
-						'fundraise_quiz'  => 'Fundraise Quiz Modal',
-						'text_only_popup' => 'Text Only Pop-up',
-						'what_to_expect'  => 'What to Expect Pop-up',
+						'donate'             => 'Donate Modal',
+						'fundraise_quiz'     => 'Fundraise Quiz Modal',
+						'text_only_popup'    => 'Text Only Pop-up',
+						'what_to_expect'     => 'What to Expect Pop-up',
+						'breathing_exercise' => 'Breathing Exercise',
 					),
 				),
 				static::FIELD_TEXTONLY_POPUP       => array(
@@ -546,6 +548,16 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						DOM_Attr::FIELD_ATTR_VAL => 'click to open what to expect modal',
 					);
 					WhatToExpectModal::create( $what_to_expect_popup );
+
+					// Breathing Exercise
+				} elseif ( 'breathing_exercise' === $modal_type ) {
+					$options['tag']                                        = 'button';
+					$options['class'][]                                    = Breathing_Exercise::TRIGGER_ELEMENT_CLASS;
+					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
+						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
+						DOM_Attr::FIELD_ATTR_VAL => 'click to open breathing exercise modal',
+					);
+					Breathing_Exercise::render_overlay();
 				}
 				break;
 			case 'trevor_chat':

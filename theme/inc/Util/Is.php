@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\Util;
 
 use TrevorWP\CPT;
+use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Options_Page\Header;
 
 /**
@@ -47,10 +48,29 @@ class Is {
 			return true;
 		}
 
+		if ( self::is_hero_type_support() ) {
+			return true;
+		}
+
 		// TODO: Check search
 		// TODO: Use static cache
 
 		return ! empty( $wp_query->get( CPT\RC\RC_Object::QV_BASE ) );
+	}
+
+	/**
+	 * Check if the specific hero type is support
+	 *
+	 * @return bool
+	 */
+	public static function is_hero_type_support(): bool {
+		$hero_type = Page_Header::get_hero_type();
+
+		if ( 'breathing_exercise' === $hero_type ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

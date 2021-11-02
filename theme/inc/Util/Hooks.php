@@ -835,11 +835,11 @@ class Hooks {
 			$classes['general_bg'] = 'bg-teal-dark';
 		}
 
-		if ( is_404() ) {
+		$hero_type = Page_Header::get_hero_type();
+
+		if ( is_404() || 'breathing_exercise' === $hero_type ) {
 			$classes['general_bg'] = 'bg-white';
 		}
-
-		$hero_type = Page_Header::get_hero_type();
 
 		// If RC, Trevorspace or Crisis pages, set text-color to indigo.
 		if (
