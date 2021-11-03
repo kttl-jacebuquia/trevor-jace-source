@@ -58,21 +58,28 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$title       = static::get_val( static::FIELD_TITLE );
-		$description = static::get_val( static::FIELD_DESCRIPTION );
-		$cta_text    = static::get_val( static::FIELD_CTA_TEXT );
+		$title       = ! empty( $data['title'] ) ? $data['title'] : static::get_val( static::FIELD_TITLE );
+		$description = ! empty( $data['description'] ) ? $data['description'] : static::get_val( static::FIELD_DESCRIPTION );
+		$cta_text    = ! empty( $data['cta_text'] ) ? $data['cta_text'] : static::get_val( static::FIELD_CTA_TEXT );
 
 		$cta_class = array(
 			'breathing-exercise__cta',
 			Helper\Breathing_Exercise::TRIGGER_ELEMENT_CLASS,
 		);
 
+		$class = array( 'breathing-exercise' );
+		if ( ! empty( $options['class'] ) ) {
+			array_push( $class, $options['class'] );
+		}
+
+		$attributes = ! empty( $options['attributes'] ) ? $options['attributes'] : array();
+
 		// Overlay will render in footer
 		Helper\Breathing_Exercise::render_overlay();
 
 		ob_start();
 		?>
-		<div class="breathing-exercise">
+		<div <?php echo static::render_attrs( $class, $attributes ); ?>>
 			<div class="breathing-exercise__container">
 				<div class="breathing-exercise__content">
 					<?php if ( ! empty( $title ) ) : ?>

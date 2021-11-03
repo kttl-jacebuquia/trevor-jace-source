@@ -1,13 +1,13 @@
-import DrawBlob, { generatePoints } from "blob-animated";
+import DrawBlob, { generatePoints } from 'blob-animated';
 import $ from 'jquery';
+import * as focusTrap from 'focus-trap';
 
-const animateElement = (element, properties, duration, delay = 0) => (
-	new Promise(resolve => {
-		$(element)
-		.delay(delay)
-		.animate(properties, duration, '', resolve)
-	})
-)
+import { toggleBodyFix, onEscapePress } from './global-ui';
+
+const animateElement = (element, properties, duration, delay = 0) =>
+	new Promise((resolve) => {
+		$(element).delay(delay).animate(properties, duration, '', resolve);
+	});
 
 class BreathingExercise {
 	static toggleSelector = '.js-breathing-exercise-toggle';
@@ -21,19 +21,18 @@ class BreathingExercise {
 		'Breathe in',
 		'Breathe out',
 		'In',
-		'Out'
+		'Out',
 	];
 
 	countDownActive = false; // Determines if countdown should continue or is skipped
 	breathingActive = false;
 
-	constructor() {}
-
 	static init() {
 		const $toggles = $(this.toggleSelector);
 
-		if ( $toggles.length ) {
+		if ($toggles.length) {
 			this.initializeOverlay();
+			this.initializeFocusTrap();
 
 			$toggles.on('click', (e) => {
 				e.preventDefault();
@@ -45,8 +44,12 @@ class BreathingExercise {
 	static initializeOverlay() {
 		// Elements
 		this.overlay = $(this.overlaySelector)[0];
-		this.container = this.overlay.querySelector('.breathing-exercise-overlay__container');
-		this.close = this.overlay.querySelector('.breathing-exercise-overlay__close');
+		this.container = this.overlay.querySelector(
+			'.breathing-exercise-overlay__container'
+		);
+		this.close = this.overlay.querySelector(
+			'.breathing-exercise-overlay__close'
+		);
 		this.start = this.overlay.querySelectorAll('.start');
 		this.stepOne = this.overlay.querySelector('.step-one');
 		// Countdown
@@ -69,29 +72,43 @@ class BreathingExercise {
 			canvas: this.blobCanvas,
 			speed: 120,
 			scramble: 0.1,
-			colorFunction: this.colorFunction
+			colorFunction: this.colorFunction,
 		});
 
 		$(this.start).on('click', () => this.onStart());
 		$(this.close).on('click', () => this.hideOverlay());
 		$(this.countdownSkip).on('click', () => this.skipCountdown());
 		$(this.repeatCTA).on('click', () => this.restart());
+
+		onEscapePress(this.hideOverlay.bind(this));
+	}
+
+	static initializeFocusTrap() {
+		// Create focus trap
+		this.focustTrap = focusTrap.createFocusTrap(this.overlay, {
+			initialFocus: this.overlay,
+		});
 	}
 
 	static showOverlay() {
+		toggleBodyFix(true);
 		$(this.overlay).fadeIn();
 		this.startCountdown();
+		this.focustTrap?.activate();
 	}
 
 	static hideOverlay() {
 		this.countDownActive = false;
 		this.breathingActive = false;
 
+		toggleBodyFix(false);
 		$(this.overlay).fadeOut(() => {
 			$(this.coundown).hide();
 			$(this.breathing).hide();
 			$(this.breathingEnd).hide();
 		});
+
+		this.focustTrap?.deactivate();
 	}
 
 	// @returns Promise
@@ -100,19 +117,26 @@ class BreathingExercise {
 
 		$(this.countdown).fadeIn();
 
-		new Promise(resolve => {
-			let runAnimation = (currentCount) => {
+		new Promise((resolve) => {
+			const runAnimation = (currentCount) => {
 				$(this.countdownNumber).text(currentCount);
 				animateElement(this.countdownNumber, { opacity: 1 }, 500)
-					.then(() => animateElement(this.countdownNumber, { opacity: 0 }, 500, 1000))
+					.then(() =>
+						animateElement(
+							this.countdownNumber,
+							{ opacity: 0 },
+							500,
+							1000
+						)
+					)
 					.then(() => {
-						if ( !this.countDownActive ) {
+						if (!this.countDownActive) {
 							return;
 						}
 
 						--currentCount;
 
-						if ( currentCount ) {
+						if (currentCount) {
 							runAnimation(currentCount);
 							return;
 						}
@@ -125,7 +149,7 @@ class BreathingExercise {
 			};
 
 			runAnimation(5);
-		})
+		});
 	}
 
 	static skipCountdown() {
@@ -146,7 +170,7 @@ class BreathingExercise {
 		return gradient;
 	}
 
-	static rotateWords () {
+	static rotateWords() {
 		let count = 0;
 
 		this.breathingActive = true;
@@ -154,43 +178,46 @@ class BreathingExercise {
 		$(this.rotateCopy).text(this.wordsArray[0]);
 
 		const runWords = setInterval(() => {
-		  count++;
+			count++;
 
-		  if ( !this.breathingActive ) {
-			clearInterval(runWords);
-			  return;
-		  }
+			if (!this.breathingActive) {
+				clearInterval(runWords);
+				return;
+			}
 
-		  if ((count % this.wordsArray.length) == 1) {
-			$(this.blobCanvas).addClass('scale');
-		  }
+			if (count % this.wordsArray.length == 1) {
+				$(this.blobCanvas).addClass('scale');
+			}
 
-		  if ((count % this.wordsArray.length) == 0) {
-			clearInterval(runWords);
+			if (count % this.wordsArray.length == 0) {
+				clearInterval(runWords);
 
-			setTimeout(() => {
-			  $(this.copyWrapper).css('opacity', '0');
-			}, 1000);
+				setTimeout(() => {
+					$(this.copyWrapper).css('opacity', '0');
+				}, 1000);
 
-			setTimeout(() => {
-			  $(this.rotateCopy).text('You might be feeling more calm, relaxed, focused');
-			  $(this.copyWrapper).css('opacity', '1');
-			}, 3000);
+				setTimeout(() => {
+					$(this.rotateCopy).text(
+						'You might be feeling more calm, relaxed, focused'
+					);
+					$(this.copyWrapper).css('opacity', '1');
+				}, 3000);
 
-			setTimeout(() => {
-				this.showBreathingEnd();
-			}, 6000);
+				setTimeout(() => {
+					this.showBreathingEnd();
+				}, 6000);
 
-			setTimeout(() => {
-				$(this.blobCanvas).addClass('scale-half');
-			}, 5000);
-
-		  } else {
-			$(this.rotateCopy).fadeOut(400, () => {
-				$(this.rotateCopy).text(this.wordsArray[count % this.wordsArray.length]).fadeIn(400);
-			});
-		  }
-		}, 5000)
+				setTimeout(() => {
+					$(this.blobCanvas).addClass('scale-half');
+				}, 5000);
+			} else {
+				$(this.rotateCopy).fadeOut(400, () => {
+					$(this.rotateCopy)
+						.text(this.wordsArray[count % this.wordsArray.length])
+						.fadeIn(400);
+				});
+			}
+		}, 5000);
 	}
 
 	static showBreathingEnd() {

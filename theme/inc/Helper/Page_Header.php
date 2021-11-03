@@ -595,14 +595,12 @@ class Page_Header {
 	}
 
 	public static function breathing_exercise( array $options ): string {
-		$options = array_merge(
+		$data = array_merge(
 			array_fill_keys(
 				array(
 					'title',
-					'desc',
-					'buttons',
-					'styles',
-					'buttons',
+					'description',
+					'cta_text',
 				),
 				null
 			),
@@ -610,29 +608,11 @@ class Page_Header {
 			$options
 		);
 
-		ob_start();
-		?>
-		<div class="breathing-exercise <?php echo esc_attr( implode( ' ', (array) $options['styles'] ) ); ?>">
-			<div class="breathing-exercise__container">
-				<div class="breathing-exercise__content">
-					<?php if ( ! empty( $options['title'] ) ) : ?>
-						<h2 class="breathing-exercise__title"><?php echo esc_html( $options['title'] ); ?></h2>
-					<?php endif; ?>
+		$render_options = array(
+			'class' => 'breathing-exercise-header',
+		);
 
-					<?php if ( ! empty( $options['desc'] ) ) : ?>
-						<p class="breathing-exercise__description"><?php echo esc_html( $options['desc'] ); ?></p>
-					<?php endif; ?>
-
-					<?php
-					if ( ! empty( $options['buttons'] ) ) {
-						echo Field_Group\Button_Group::render( false, $options['buttons'], array() );
-					}
-					?>
-				</div>
-			</div>
-		</div>
-		<?php
-		return ob_get_clean();
+		return Field_Group\Breathing_Exercise::render( false, $data, $render_options );
 	}
 
 	protected static function render_chat_button( $label ): string {

@@ -23,6 +23,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_CALL_NUMBER       = 'call_number';
 	const FIELD_SMS_NUMBER        = 'sms_number';
 
+	const FIELD_BREATHING_EXERCISE_CTA_TEXT = 'breathing_exercise_cta_text';
+
 	/** @inheritdoc */
 	public static function _get_fields(): array {
 		$type              = static::gen_field_key( static::FIELD_TYPE );
@@ -40,6 +42,8 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$content_alignment = static::gen_field_key( static::FIELD_CONTENT_ALIGNMENT );
 		$call_number       = static::gen_field_key( static::FIELD_CALL_NUMBER );
 		$sms_number        = static::gen_field_key( static::FIELD_SMS_NUMBER );
+
+		$breathing_exercise_cta_text = static::gen_field_key( static::FIELD_BREATHING_EXERCISE_CTA_TEXT );
 
 		$return = array_merge(
 			static::_gen_tab_field( 'General' ),
@@ -367,6 +371,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			),
 			static::_gen_tab_field(
 				'Styling',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '!=',
+								'value'    => 'breathing_exercise',
+							),
+						),
+					),
+				),
 			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
@@ -441,7 +456,36 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						),
 					),
 				)
-			)
+			),
+			static::_gen_tab_field(
+				'CTA Button',
+				array(
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'breathing_exercise',
+							),
+						),
+					),
+				),
+			),
+			static::_gen_conditional_fields(
+				array(
+					'field'    => $type,
+					'operator' => '==',
+					'value'    => 'breathing_exercise',
+				),
+				array(
+					static::FIELD_BREATHING_EXERCISE_CTA_TEXT => array(
+						'key'   => $breathing_exercise_cta_text,
+						'name'  => static::FIELD_BREATHING_EXERCISE_CTA_TEXT,
+						'label' => 'CTA Text',
+						'type'  => 'text',
+					),
+				),
+			),
 		);
 
 		if ( isset( $_GET['page'] ) || ! is_admin() ) {
@@ -487,6 +531,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 							'field'    => $type_field_key,
 							'operator' => '!=',
 							'value'    => 'multi_image_text',
+						),
+						array(
+							'field'    => $type_field_key,
+							'operator' => '!=',
+							'value'    => 'breathing_exercise',
 						),
 					);
 					break;
@@ -679,6 +728,12 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 			$args['call_number'] = $call_number;
 			$args['sms_number']  = $sms_number;
+		}
+
+		# Breathing Exercise
+		if ( 'breathing_exercise' === $type ) {
+			$args['description'] = $args['desc'];
+			$args['cta_text']    = $val->get( static::FIELD_BREATHING_EXERCISE_CTA_TEXT );
 		}
 
 		return Helper\Page_Header::$type( $args );

@@ -1,0 +1,11 @@
+.breathing-exercise-header {
+  margin-top: -#{$top-nav-height};
+
+  @screen md {
+    margin-top: -#{$top-nav-height-tablet};
+  }
+
+  @screen lg {
+    margin-top:- #{$top-nav-height-desktop};
+  }
+}
