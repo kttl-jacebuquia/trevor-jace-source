@@ -62,7 +62,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<div id="top-bar" class="top-bar">
 		<div class="top-bar-inner container" role="navigation" aria-label="Top Bar Navigation">
 			<div class="logo-icon">
-				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>">
+				<a href="<?php echo get_home_url(); ?>">
 					<i class="trevor-ti-logo-icon"></i>
 				</a>
 			</div>
@@ -116,7 +116,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<div id="top-nav" class="top-nav <?php echo $is_rc ? 'is_rc' : ''; ?>" role="navigation">
 		<div class="top-nav-inner container <?php echo $nav_color; ?>">
 			<div class="logo-wrap">
-				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
+				<a href="<?php echo get_home_url(); ?>" class="logo" rel="home">
 					<?php echo Main_Header::render_logo(); ?>
 				</a>
 			</div>

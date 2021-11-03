@@ -13,7 +13,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 	<div class="container mx-auto site-content-inner footer-inner lg:flex lg:flex-row">
 		<div class="col">
 			<div class="logo-wrap">
-				<a href="<?php echo \TrevorWP\Theme\Util\Tools::get_relative_home_url(); ?>" class="logo" rel="home">
+				<a href="<?php echo get_home_url(); ?>" class="logo" rel="home">
 					<?php echo Main_Header::render_logo( array( 'footer__logo' ) ); ?>
 				</a>
 			</div>
