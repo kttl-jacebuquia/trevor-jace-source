@@ -1019,7 +1019,7 @@ class Hooks {
 	function acf_wysiwyg_toolbars( $toolbars ) {
 		// toolbars for homepage modules
 		$toolbars['Common']    = array();
-		$toolbars['Common'][1] = array( 'bold', 'italic', 'underline', 'link' );
+		$toolbars['Common'][1] = array( 'bold', 'underline', 'link' );
 
 		return $toolbars;
 	}
