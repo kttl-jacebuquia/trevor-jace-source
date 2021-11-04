@@ -70,7 +70,7 @@ class Tier {
 		?>
 		<div class="current-funders bg-white flex flex-col">
 			<?php if ( ! empty( $data['title'] ) ) : ?>
-				<h2 class="current-funders__title text-px32 leading-px40 md:leading-px42 lg:text-px40 lg:leading-px48 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
+				<h2 class="current-funders__title text-px32 leading-px40 md:leading-px42 mt-px60 mb-px50 md:mb-px40 lg:mt-px100 lg:mb-px50 text-center font-bold">
 					<?php echo esc_html( $data['title'] ); ?></h2>
 			<?php endif; ?>
 
@@ -81,8 +81,8 @@ class Tier {
 						<?php foreach ( $data['tiers'] as $tier ) : ?>
 							<tr class="flex flex-col md:flex-row text-center">
 								<th>
-									<div class="tier-name text-px20 leading-px26 md:text-left font-semibold lg:mb-0 lg:text-px26 lg:leading-px36"><?php echo esc_html( $tier->name ); ?></div>
-									<div class="tier-value font-normal text-px20 md:text-left leading-px26 lg:text-px22 lg:leading-px32"><?php echo esc_html( get_term_meta( $tier->term_id, Taxonomy::KEY_PARTNER_TIER_NAME, true ) ); ?></div>
+									<div class="tier-name text-px20 leading-px26 md:text-left font-semibold lg:mb-0"><?php echo esc_html( $tier->name ); ?></div>
+									<div class="tier-value font-normal text-px20 md:text-left leading-px26 "><?php echo esc_html( get_term_meta( $tier->term_id, Taxonomy::KEY_PARTNER_TIER_NAME, true ) ); ?></div>
 
 								</th>
 								<td class="logo-size flex flex-col md:flex-row">

@@ -1,6 +1,14 @@
 .current-funders {
   &__title {
     @apply text-teal-dark;
+
+    @screen lg2 {
+      @apply text-px40 leading-px48;
+    }
+
+    @screen xl {
+      @apply text-px40 leading-px48;
+    }
   }
 
   .table-container {
@@ -82,8 +90,16 @@
       }
 
       @screen lg {
-        flex: 0 0 289px;
+        flex: 0 0 190px;
         padding: 70px 0 0 0;
+      }
+
+      @screen lg2 {
+        flex: 0 0 240px;
+      }
+
+      @screen lg2 {
+        flex: 0 0 270px;
       }
 
       & > * {
@@ -97,6 +113,24 @@
 
       .tier-name {
         margin-bottom: 4px;
+
+        @screen lg {
+          @apply text-px24 leading-px34;
+        }
+
+        @screen lg2 {
+          @apply text-px26 leading-px36;
+        }
+      }
+
+      .tier-value {
+        @screen lg {
+          @apply text-px20 leading-px26;
+        }
+
+        @screen lg2 {
+          @apply text-px22 leading-px32;
+        }
       }
 
       .tier-name,
@@ -130,11 +164,17 @@
         @apply pt-px70 pb-px100 -mt-px40 mr-0 mb-0 -ml-px40;
 
         .funder-name {
-          @apply mt-px40 mr-0 mb-0 ml-px40;
+          @apply mt-px40 mr-0 mb-0 ml-px40 text-px18 leading-px26;
         }
 
         .funder-name + .funder-name  {
           @apply mt-px40;
+        }
+      }
+
+      @screen lg2 {
+        .funder-name {
+          @apply text-px20 leading-px26;
         }
       }
     }
