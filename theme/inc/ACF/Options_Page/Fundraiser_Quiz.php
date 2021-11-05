@@ -2,7 +2,7 @@
 
 use TrevorWP\Theme\ACF\Field_Group;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
-use TrevorWP\Theme\Ajax\Dev_Inquiry;
+use TrevorWP\Theme\Ajax\Form_Assembly;
 
 class Fundraiser_Quiz extends A_Options_Page {
 	const STEP_1_TITLE                           = 'step_1_title';
@@ -417,7 +417,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 			<?php
 				echo static::render_attrs(
 					array( 'fundraiser-quiz container mx-auto text-white text-center' ),
-					array( 'data-ajax-action' => Dev_Inquiry::ACTION ),
+					array( 'data-ajax-action' => Form_Assembly::ACTION ),
 				);
 			?>
 			>

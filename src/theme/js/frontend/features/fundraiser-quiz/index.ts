@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import FloatingLabelInput from '../floating-label-input';
-import phoneFormat from '../contact-form';
-import { WPAjax } from '../wp-ajax';
+import FormAssemblyForm from '../form-assembly-form';
 
 interface FundraiserQuizOptions {
 	[key: string]: any;
@@ -63,7 +62,8 @@ export default class FundraiserQuiz {
 		this.$devInquirySlide = this.parentContainer.find(
 			'[data-vertex="form"]'
 		);
-		this.devInquiryForm = this.$devInquirySlide.find('form').get(0);
+		this.devInquiryForm =
+			this.parentContainer?.get(0)?.querySelector('form') || undefined;
 		this.devInquiryFieldsContainer = this.$devInquirySlide
 			.find('.fundraiser-quiz__fields')
 			.get(0);
@@ -171,88 +171,20 @@ export default class FundraiserQuiz {
 
 	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
 	initDevInquiryForm() {
-		const embeddedForm = this.devInquiryForm;
+		const embeddedForm = this.devInquiryForm as HTMLFormElement;
 
 		if (embeddedForm) {
-			const [...inputFields] = embeddedForm.querySelectorAll('.oneField');
+			const formAssemblyForm =
+				FormAssemblyForm.initializeWithElement(embeddedForm);
 
-			embeddedForm.addEventListener('reset', () =>
-				this.onDevInquiryReset(embeddedForm)
-			);
-
-			// Add necessary selectors for FloatingLabelInput initialization
-			inputFields.forEach((inputField) => {
-				const options = {};
-				const requiredlabel = inputField.querySelector('.reqMark');
-
-				// Add asterisk on required label
-				if (requiredlabel) {
-					requiredlabel.innerHTML += '&nbsp;*';
-				}
-
-				inputField.classList.add('floating-label-input');
-
-				// Determine if field has to be activated by default
-				switch (inputField.id) {
-					case 'tfa_1885-D':
-					case 'tfa_1907-D':
-					case 'tfa_1938-D':
-						options.activated = true;
-						break;
-				}
-
-				FloatingLabelInput.initializeWithElement(inputField, options);
-			});
-
-			embeddedForm.addEventListener(
-				'submit',
-				this.onDevInquirySubmit.bind(this)
-			);
+			formAssemblyForm.on('submit', () => this.onFormSubmitSuccess());
 		}
 	}
 
-	onDevInquiryReset(form: HTMLFormElement) {
-		const inputFields: HTMLElement[] = $(form).find('.oneField').toArray();
-
-		inputFields.forEach((floatingLabelElement: HTMLElement) => {
-			floatingLabelElement.classList.remove(
-				'floating-label-input--activated'
-			);
-		});
-	}
-
-	async onDevInquirySubmit(e) {
-		e.preventDefault();
-
-		// Delayed process in order for FormAssembly's validator to fire first
-		setTimeout(async () => {
-			const errorFields = this.devInquiryForm.querySelectorAll('.errFld');
-
-			// Don't submit if there's any error
-			if (errorFields.length) {
-				return;
-			}
-
-			const formData = [
-				...new window.FormData(this.devInquiryForm).entries(),
-			].reduce((all, [key, value]) => {
-				all[key] = value;
-				return all;
-			}, {});
-
-			const response = await WPAjax({
-				action: this.ajaxAction,
-				data: formData,
-			});
-
-			if (/success/i.test(response?.status || '')) {
-				this.onFormSubmitSuccess();
-			}
-		}, 100);
-	}
-
 	onFormSubmitSuccess() {
-		this.devInquiryFieldsContainer.outerHTML = `<p>Thank you for your submission!</p>`;
+		if (this.devInquiryFieldsContainer) {
+			this.devInquiryFieldsContainer.outerHTML = `<p>Thank you for your submission!</p>`;
+		}
 	}
 
 	displayNextPage(btn) {

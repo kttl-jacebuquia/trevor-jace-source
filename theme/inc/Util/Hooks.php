@@ -23,7 +23,7 @@ use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
 use TrevorWP\Theme\Ajax\GoogleSheets;
-use TrevorWP\Theme\Ajax\Dev_Inquiry;
+use TrevorWP\Theme\Ajax\Form_Assembly;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Customizer\Search;
 use TrevorWP\Theme\Helper\Sorter;
@@ -127,7 +127,7 @@ class Hooks {
 		GoogleSheets::construct();
 
 		# Dev Inquiry
-		Dev_Inquiry::construct();
+		Form_Assembly::construct();
 	}
 
 	/**

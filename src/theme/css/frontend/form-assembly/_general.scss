@@ -1,0 +1,21 @@
+.wForm.wForm {
+  .oneField.oneField {
+    &[data-input-type="checkbox"] {
+      label {
+        @apply text-white;
+      }
+
+      input[type="checkbox"]:checked {
+        background-image: url(/wp-content/themes/trevor/static/media/checkmark.svg);
+        background-position: center;
+      }
+    }
+  }
+
+  .inputWrapper.inputWrapper {
+    textarea {
+      @apply w-full;
+    }
+  }
+
+}

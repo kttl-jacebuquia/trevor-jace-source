@@ -54,8 +54,11 @@ export default class Component extends WithState {
 		});
 	}
 
-	static initializeWithElement(element, options?: { [key: string]: any }) {
-		this.initializeComponentWithElement(this, element, options);
+	static initializeWithElement(
+		element: HTMLElement,
+		options?: { [key: string]: any }
+	) {
+		return this.initializeComponentWithElement(this, element, options);
 	}
 
 	static initializeComponentWithElement(ComponentClass, element, options) {

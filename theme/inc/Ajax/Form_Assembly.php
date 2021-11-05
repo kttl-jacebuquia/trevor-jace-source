@@ -3,8 +3,8 @@
 /**
  * Dev Inquiry AJAX Endpoint
  */
-class Dev_Inquiry {
-	const ACTION = 'dev_inquiry';
+class Form_Assembly {
+	const ACTION = 'form_assembly';
 
 	public static function construct() {
 		/**
@@ -14,7 +14,7 @@ class Dev_Inquiry {
 		add_action( 'wp_ajax_' . static::ACTION, array( self::class, static::ACTION ) );
 	}
 
-	public static function dev_inquiry() {
+	public static function form_assembly() {
 		$url = 'https://trevor.tfaforms.net/rest/responses/processor';
 
 		$headers = array(
