@@ -30,7 +30,7 @@ class Main_Header {
 			$color     = Page_Header::get_text_color();
 			$hero_type = Page_Header::get_hero_type();
 
-			if ( 'breathing_exercise' === $hero_type ) {
+			if ( 'breathing_exercise' === $hero_type && empty( $color ) ) {
 				$color = 'indigo';
 			}
 

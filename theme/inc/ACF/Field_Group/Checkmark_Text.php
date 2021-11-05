@@ -10,6 +10,8 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_CARD_BACKGROUND                     = 'card_background';
 	const FIELD_CARD_ENTRIES                        = 'card_entries';
 	const FIELD_CARD_ENTRY_HEADER                   = 'card_entry_header';
+	const FIELD_CARD_ENTRY_WITH_FORMAT              = 'card_entry_with_format';
+	const FIELD_CARD_ENTRY_FORMAT_DESCRIPTION       = 'card_entry_format_description';
 	const FIELD_CARD_ENTRY_DESCRIPTION              = 'card_entry_description';
 	const FIELD_CARD_ENTRY_BULLET_TYPE              = 'card_entry_bullet_type';
 	const FIELD_CARD_ENTRY_BULLET_ENTRIES           = 'card_entry_bullet_entries';
@@ -31,6 +33,8 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 		$card_background                     = static::gen_field_key( static::FIELD_CARD_BACKGROUND );
 		$card_entries                        = static::gen_field_key( static::FIELD_CARD_ENTRIES );
 		$card_entry_header                   = static::gen_field_key( static::FIELD_CARD_ENTRY_HEADER );
+		$card_entry_with_format              = static::gen_field_key( static::FIELD_CARD_ENTRY_WITH_FORMAT );
+		$card_entry_format_description       = static::gen_field_key( static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION );
 		$card_entry_description              = static::gen_field_key( static::FIELD_CARD_ENTRY_DESCRIPTION );
 		$card_entry_bullet_type              = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_TYPE );
 		$card_entry_bullet_entries           = static::gen_field_key( static::FIELD_CARD_ENTRY_BULLET_ENTRIES );
@@ -93,11 +97,50 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 							'label' => 'Header',
 							'type'  => 'text',
 						),
+						static::FIELD_CARD_ENTRY_WITH_FORMAT => array(
+							'key'           => $card_entry_with_format,
+							'name'          => static::FIELD_CARD_ENTRY_WITH_FORMAT,
+							'label'         => 'With Format?',
+							'type'          => 'button_group',
+							'choices'       => array(
+								'yes' => 'Yes',
+								'no'  => 'No',
+							),
+							'default_value' => 'no',
+						),
+						static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION => array(
+							'key'               => $card_entry_format_description,
+							'name'              => static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION,
+							'label'             => 'Description',
+							'type'              => 'wysiwyg',
+							'tabs'              => 'all',
+							'toolbar'           => 'common',
+							'media_upload'      => 0,
+							'delay'             => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => $card_entry_with_format,
+										'operator' => '==',
+										'value'    => 'yes',
+									),
+								),
+							),
+						),
 						static::FIELD_CARD_ENTRY_DESCRIPTION => array(
-							'key'   => $card_entry_description,
-							'name'  => static::FIELD_CARD_ENTRY_DESCRIPTION,
-							'label' => 'Description',
-							'type'  => 'textarea',
+							'key'               => $card_entry_description,
+							'name'              => static::FIELD_CARD_ENTRY_DESCRIPTION,
+							'label'             => 'Description',
+							'type'              => 'textarea',
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => $card_entry_with_format,
+										'operator' => '==',
+										'value'    => 'no',
+									),
+								),
+							),
 						),
 						static::FIELD_CARD_ENTRY_BULLET_TYPE => array(
 							'key'           => $card_entry_bullet_type,
@@ -273,8 +316,16 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 										<h2 class="checkmark-text__card-header"><?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_HEADER ] ); ?></h2>
 									<?php endif; ?>
 
-									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ) ) : ?>
-										<p class="checkmark-text__card-description"><?php echo $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ]; ?></p>
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ) && 'no' === $entry[ static::FIELD_CARD_ENTRY_WITH_FORMAT ] ) : ?>
+										<p class="checkmark-text__card-description">
+											<?php echo esc_html( $entry[ static::FIELD_CARD_ENTRY_DESCRIPTION ] ); ?>
+										</p>
+									<?php endif; ?>
+
+									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION ] ) && 'yes' === $entry[ static::FIELD_CARD_ENTRY_WITH_FORMAT ] ) : ?>
+										<p class="checkmark-text__card-description">
+											<?php echo $entry[ static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION ]; ?>
+										</p>
 									<?php endif; ?>
 
 									<?php $list_element = ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) ? 'ol' : 'ul'; ?>
