@@ -123,6 +123,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						'name'              => static::FIELD_CAMPAIGN_ID,
 						'label'             => 'Campaign ID',
 						'type'              => 'text',
+						'default_value'     => '24399',
 						'conditional_logic' => array(
 							array(
 								array(

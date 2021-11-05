@@ -27,7 +27,12 @@ class Main_Header {
 				return $txt_color;
 			}
 		} elseif ( is_page() && ! is_page_template() ) {
-			$color = Page_Header::get_text_color();
+			$color     = Page_Header::get_text_color();
+			$hero_type = Page_Header::get_hero_type();
+
+			if ( 'breathing_exercise' === $hero_type ) {
+				$color = 'indigo';
+			}
 
 			if ( ! empty( $color ) ) {
 				return $color;
