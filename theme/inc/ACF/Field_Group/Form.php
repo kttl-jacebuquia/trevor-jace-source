@@ -115,7 +115,7 @@ class Form extends A_Field_Group {
 				<?php endif; ?>
 
 				<?php if ( ! empty( $description ) ) : ?>
-					<p class="form-modal__description"><?php echo esc_html( $title ); ?></p>
+					<p class="form-modal__description"><?php echo esc_html( $description ); ?></p>
 				<?php endif; ?>
 
 				<div class="form-modal__fields">
