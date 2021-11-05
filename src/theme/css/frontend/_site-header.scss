@@ -1,5 +1,6 @@
 $top--bar-height-mobile: rem-calc(84px);
 $top--bar-height-tablet: rem-calc(106px);
+$top--bar-height-desktop: rem-calc(80px);
 
 $top-nav-height: #{rem-calc(136px)};
 $top-nav-height-tablet: #{rem-calc(144px)};
@@ -34,7 +35,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	// fixes anchor link connections
 	* {
-		scroll-margin-top: var(--tr-wp-admin-bar-h);
+		scroll-margin-top: var(--top-bar-height);
 	}
 
 	@screen md {
@@ -46,11 +47,6 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	@screen lg {
 		--top-bar-height: #{rem-calc(78px)};
 		--top-nav-height: 11rem;
-
-		// fixes anchor link connections
-		* {
-			scroll-margin-top: var(--top-nav-top-margin);
-		}
 	}
 }
 
