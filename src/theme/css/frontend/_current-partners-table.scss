@@ -98,12 +98,12 @@
       }
 
       @screen lg2 {
-        flex: 0 0 rem-calc(240px);
+        flex: 0 0 rem-calc(239px);
         padding: rem-calc(70px) rem-calc(28) 0;
       }
 
       @screen xl {
-        flex: 0 0 rem-calc(289px);
+        flex: 0 0 rem-calc(269px);
         padding: rem-calc(70px) rem-calc(40) 0;
       }
 
@@ -238,7 +238,7 @@
         }
 
         img {
-          @apply mx-auto max-w-px170;
+          @apply mx-auto max-w-px170 w-auto;
 
           @screen md {
             @apply w-auto max-w-full max-h-px62;
