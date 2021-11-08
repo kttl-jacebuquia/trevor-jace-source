@@ -3,6 +3,7 @@
 use TrevorWP\Main;
 use TrevorWP\Theme;
 use TrevorWP\CPT;
+use TrevorWP\CPT\Donate\Fundraiser_Stories;
 use TrevorWP\CPT\Page_ReCirculation;
 use TrevorWP\CPT\Team;
 use TrevorWP\Util\Tools;
@@ -126,10 +127,10 @@ class Post {
 					),
 				),
 				self::KEY_IMAGE_SQUARE        => array(
-					'post_types' => array_merge( $article_kind, array( Team::POST_TYPE ) ),
+					'post_types' => array_merge( $article_kind, array( Team::POST_TYPE, Fundraiser_Stories::POST_TYPE ) ),
 				),
 				self::KEY_IMAGE_HORIZONTAL    => array(
-					'post_types' => array_merge( $article_kind, array( Team::POST_TYPE ) ),
+					'post_types' => array_merge( $article_kind, array( Team::POST_TYPE, Fundraiser_Stories::POST_TYPE ) ),
 				),
 				self::KEY_HIGHLIGHTS          => array(
 					'type'         => 'array',

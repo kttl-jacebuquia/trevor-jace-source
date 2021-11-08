@@ -753,6 +753,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				break;
 			case CPT\Post::POST_TYPE:
 			case CPT\RC\Post::POST_TYPE:
+			case CPT\Donate\Fundraiser_Stories::POST_TYPE:
 				echo Helper\Card::post( $post_object, $key, $tile_options );
 				break;
 			// TODO: Add other post types
