@@ -44,11 +44,6 @@
 		&:not(:checked)::after {
 			@apply hidden;
 		}
-
-		&:focus {
-			@apply outline-none;
-			box-shadow: none;
-		}
 	}
 
   .amount {

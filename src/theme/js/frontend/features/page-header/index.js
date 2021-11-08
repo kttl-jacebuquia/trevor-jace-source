@@ -44,10 +44,14 @@ export default class PageHeader extends Component {
 
 	// Triggers when state is change by calling this.setState()
 	componentDidUpdate() {
+		const playOrPause = this.state.playing ? 'pause' : 'play';
+		const ariaLabel = `Click to ${playOrPause} background video`;
+
 		this.element.classList.toggle(
 			'type-img-bg--playing',
 			this.state.playing
 		);
+		this.children.playPause.setAttribute('aria-label', ariaLabel);
 	}
 }
 

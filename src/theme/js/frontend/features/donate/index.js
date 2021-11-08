@@ -114,7 +114,7 @@ export default class DonationForm extends Component {
 
 	displayCurrency() {
 		this._displayFormatAmount.on({
-			keyup: ({ currentTarget }) => {
+			input: ({ currentTarget }) => {
 				this.formatCurrency($(currentTarget));
 			},
 			blur: ({ currentTarget }) => {
@@ -197,10 +197,13 @@ export default class DonationForm extends Component {
 		// send updated string to input
 		input.val(input_value);
 
-		// put caret back in the right position
-		let updated_length = input_value.length;
-		caret_position = updated_length - original_length + caret_position;
-		input[0].setSelectionRange(caret_position, caret_position);
+		if ( blur !== 'blur' ) {
+			// put caret back in the right position
+			let updated_length = input_value.length;
+			caret_position = updated_length - original_length + caret_position;
+			input[0].setSelectionRange(caret_position, caret_position);
+		}
+
 	}
 }
 
