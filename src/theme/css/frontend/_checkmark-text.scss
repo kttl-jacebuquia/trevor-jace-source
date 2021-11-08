@@ -174,11 +174,6 @@
 
     a {
       @apply underline font-semibold pb-px10;
-      @include wave-underline;
-
-      &:hover {
-        @apply no-underline;
-      }
     }
 
     & + & {
