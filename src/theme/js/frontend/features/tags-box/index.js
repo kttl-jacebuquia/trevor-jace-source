@@ -90,6 +90,7 @@ export default class TagsBox extends Component {
 		if (expanded) {
 			// Move toggle button to the end of the box
 			this.children.content.appendChild(this.toggleButton);
+			this.toggleButton.setAttribute('aria-label', 'click to collapse tags group');
 		}
 		// Collapsed
 		else {
@@ -106,6 +107,7 @@ export default class TagsBox extends Component {
 				}
 				tag.dataset.withinView = true;
 			});
+			this.toggleButton.setAttribute('aria-label', 'click to expand tags group');
 		}
 	}
 }

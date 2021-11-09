@@ -410,4 +410,8 @@
       }
     }
   }
+
+  .swiper-notification {
+    @apply hidden;
+  }
 }

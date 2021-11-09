@@ -1,81 +1,80 @@
 .carousel {
-
   &--resource-landing-page &-title {
-	@screen lg {
-	  @apply text-px38;
-	}
+    @screen lg {
+      @apply text-px38;
+    }
   }
 
   &--resource-landing-page &-subtitle {
-	@screen lg {
-	  @apply text-px22 font-medium;
-	}
+    @screen lg {
+      @apply text-px22 font-medium;
+    }
   }
 
   &-wrap {
-	@apply mx-auto mt-20 mb-10;
-	@apply w-full;
+    @apply mx-auto mt-20 mb-10;
+    @apply w-full;
   }
 
   &-header {
-	@apply mb-10;
+    @apply mb-10;
   }
 
   &-title {
-	@apply mb-4 text-center font-extrabold text-px32 leading-px40;
+    @apply mb-4 text-center font-extrabold text-px32 leading-px40;
   }
 
   &-subtitle {
-	@apply mb-10 text-center text-px20 leading-px26;
+    @apply mb-10 text-center text-px20 leading-px26;
   }
 
   @screen md {
+    &-header {
+      @apply mb-px50;
+    }
 
-	&-header {
-	  @apply mb-px50;
-	}
+    &-title {
+      @apply font-bold leading-px42;
+    }
 
-	&-title {
-	  @apply font-bold leading-px42
-	}
-
-	&-subtitle {
-	  @apply text-px22 leading-px32 mb-14;
-	}
+    &-subtitle {
+      @apply text-px22 leading-px32 mb-14;
+    }
   }
 
   @screen lg {
-	&-title {
-	  @apply text-px40 leading-px50;
-	}
+    &-title {
+      @apply text-px40 leading-px50;
+    }
 
-	&-header {
-	  @apply mb-px60;
-	}
+    &-header {
+      @apply mb-px60;
+    }
 
-	&-title,
-	&-subtitle {
-	  @apply text-left;
-	}
+    &-title,
+    &-subtitle {
+      @apply text-left;
+    }
 
-	&-wrap {
-	  @apply mb-48 mt-px120;
-	}
+    &-wrap {
+      @apply mb-48 mt-px120;
+    }
 
-	&-title {
-	  @apply text-px46 leading-px56 tracking-em_001;
-	}
+    &-title {
+      @apply text-px46 leading-px56 tracking-em_001;
+    }
 
-	&-subtitle {
-	}
+    &-subtitle {
+    }
   }
 
   @screen xl {
-	&-title {
-	  @apply text-px46 leading-px56;
-	}
+    &-title {
+      @apply text-px46 leading-px56;
+    }
+  }
+
+  .swiper-notification {
+    @apply hidden;
   }
 }
-
-
-

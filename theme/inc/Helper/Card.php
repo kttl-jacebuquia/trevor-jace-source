@@ -122,7 +122,7 @@ class Card {
 
 		$title         = get_the_title( $post );
 		$wrapped_title = static::_wrap_words( $title );
-		$desc          = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
+		$desc_wrapped  = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
 
 		$attrs = array(
 			'data-post-type' => $post_type,
@@ -178,7 +178,7 @@ class Card {
 					<?php } ?>
 
 					<?php if ( ! empty( $desc ) ) { ?>
-						<div class="post-desc"><span><?php echo $desc; /* Sanitized above */ ?></span></div>
+						<div class="post-desc" aria-label="<?php echo $desc; ?>"><span aria-hidden="true"><?php echo $desc_wrapped; /* Sanitized above */ ?></span></div>
 					<?php } ?>
 				</div>
 
@@ -189,7 +189,7 @@ class Card {
 								<a
 									href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
 									class="tag-box"
-									aria-label="<?php echo $tag->name; ?> tag">
+									aria-label="<?php echo $tag->name; ?> tag. Click here to view content under <?php echo $tag->name; ?> tag">
 										<span><?php echo $tag->name; ?></span>
 								</a>
 							<?php } ?>

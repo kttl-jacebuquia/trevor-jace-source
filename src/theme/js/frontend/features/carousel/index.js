@@ -16,7 +16,7 @@ export function carousel($element, option = {}) {
 	} else if (typeof $element === 'object') {
 		if ('jquery' in $element) {
 			_el = $element[0];
-		} else if ($element instanceof HTMLElement) {
+		} else if ($element instanceof window.HTMLElement) {
 			_el = $element;
 		} else {
 			return null;
@@ -42,7 +42,7 @@ export function carousel($element, option = {}) {
 	return swiper;
 }
 
-export function carouselNavigator($element, $option) {
+export function carouselNavigator($element) {
 	const onAfterInit = (swiper) => {
 		Array.from(swiper.pagination.bullets).forEach((bullet, index) => {
 			bullet.setAttribute(
@@ -52,7 +52,7 @@ export function carouselNavigator($element, $option) {
 		});
 	};
 
-	const swiper = new Swiper($element, {
+	new Swiper($element, {
 		// Optional parameters
 		slidesPerView: 1,
 		pagination: {
@@ -76,9 +76,9 @@ export function generateSwiperArrows(
 	const panesContainer = $(leftPaneSelector, eBase).parent();
 	const iconTopOffset = 5;
 	const iconLeftOffset = 25;
-	let iconWrapper = undefined;
 	const leftPane = eBase.querySelector(leftPaneSelector);
 	const rightPane = eBase.querySelector(rightPaneSelector);
+	let iconWrapper;
 	leftPane.innerHTML = '';
 	rightPane.innerHTML = '';
 
@@ -97,7 +97,7 @@ export function generateSwiperArrows(
 	 * is inside the panes because pane.onmousemove will not
 	 * work properly as the icon is directly under the cursor.
 	 */
-	document.addEventListener('mousemove', (e) => {
+	window.document.addEventListener('mousemove', (e) => {
 		const leftPaneRect = eBase
 			.querySelector(leftPaneSelector)
 			.getBoundingClientRect();
@@ -200,25 +200,37 @@ export function generateSwiperArrows(
 	});
 }
 
+const onSwiperBreakpointChange = (swiper, breakpointParams) => {
+	// If all slides are visible in a single view,
+	// remove aria-hidden
+	if (breakpointParams.slidesPerView === swiper.slides.length) {
+		swiper.slides.each((slide) => {
+			slide.removeAttribute('aria-hidden');
+		});
+	}
+};
+
 export const initializeCarousel = (carouselSettings) => {
 	/**
 	 * Initialize remaining carousels
 	 */
 	let swiper;
-	let base_selector = carouselSettings.base_selector;
-	let options = carouselSettings.options || {};
-	let breakpoint = carouselSettings.options.breakpoint;
-	const baseContainer = document.querySelector(base_selector);
+	const baseSelector = carouselSettings.base_selector;
+	const options = carouselSettings.options || {};
+	const breakpoint = carouselSettings.options.breakpoint;
+	const baseContainer = document.querySelector(baseSelector);
 
-	options.on.afterInit = function (swiper) {
+	options.on.afterInit = function (_swiper) {
 		document
 			.querySelectorAll('.carousel-testimonials .card-post')
 			.forEach((elem) => {
-				elem.tagBoxEllipsis && elem.tagBoxEllipsis.calc();
+				if (elem.tagBoxEllipsis) {
+					elem.tagBoxEllipsis.calc();
+				}
 			});
 
-		if (swiper.pagination.el && swiper.pagination.el.children.length) {
-			[...swiper.pagination.el.children].forEach((button, index) => {
+		if (_swiper.pagination.el && _swiper.pagination.el.children.length) {
+			[..._swiper.pagination.el.children].forEach((button, index) => {
 				button.setAttribute(
 					'aria-label',
 					`click to view slide number ${index + 1}`
@@ -226,21 +238,31 @@ export const initializeCarousel = (carouselSettings) => {
 			});
 		}
 
-		applySlidesA11y(swiper);
-		checkNavigationArrows(swiper);
+		applySlidesA11y(_swiper);
+		checkNavigationArrows(_swiper);
 	};
 
-	options.on.slideChange = function (swiper) {
-		applySlidesA11y(swiper);
+	options.on.slidePrevTransitionEnd = (_swiper) => {
+		applySlidesA11y(_swiper);
+		// Focus on the first focusable slide
+		const firstFocusableSlide = [..._swiper.slides].find(
+			(el) => !el.ariaHidden
+		);
+		firstFocusableSlide?.focus();
 	};
 
-	options.on.slideChangeTransitionEnd = function (swiper) {
-		checkNavigationArrows(swiper);
+	options.on.slideNextTransitionEnd = (_swiper) => {
+		applySlidesA11y(_swiper);
 	};
 
-	options.on.activeIndexChange = function (swiper) {
-		let nextButton = swiper.navigation.nextEl;
-		let carouselParentContainer = swiper.$el[0].parentElement.parentElement;
+	options.on.slideChangeTransitionEnd = function (_swiper) {
+		checkNavigationArrows(_swiper);
+	};
+
+	options.on.activeIndexChange = function (_swiper) {
+		const nextButton = _swiper.navigation.nextEl;
+		const carouselParentContainer =
+			_swiper.$el[0].parentElement.parentElement;
 
 		// only apply hide the next button on 2nd to the last index on post-carousels
 		if (
@@ -248,14 +270,14 @@ export const initializeCarousel = (carouselSettings) => {
 				'post-carousel'
 			)
 		) {
-			if (swiper.activeIndex === swiper.slides.length - 2) {
+			if (_swiper.activeIndex === _swiper.slides.length - 2) {
 				nextButton.classList.add('should-hide');
 			} else {
 				nextButton.classList.remove('should-hide');
 			}
 		}
 
-		jQuery(swiper.el.parentElement)
+		$(_swiper.el.parentElement)
 			.find('.swiper-pagination-bullet')
 			.each(function (index, bullet) {
 				const addOrRemoveMethod =
@@ -266,36 +288,50 @@ export const initializeCarousel = (carouselSettings) => {
 			});
 	};
 
-	function applySlidesA11y(swiper) {
-		Array.from(swiper.slides).forEach((slide) => {
-			if (slide.classList.contains('swiper-slide-active')) {
-				slide.removeAttribute('aria-hidden');
-				slide.removeAttribute('tabindex');
-			} else {
+	options.on.breakpoint = onSwiperBreakpointChange;
+
+	function applySlidesA11y(_swiper) {
+		const windowWidth = window.innerWidth;
+
+		// aria-hide slides that are not fully displayed
+		Array.from(_swiper.slides).forEach((slide) => {
+			const { left, right } = slide.getBoundingClientRect();
+
+			if (left < 0 || right > windowWidth) {
 				slide.setAttribute('aria-hidden', true);
 				slide.setAttribute('tabindex', -1);
+				// Make contents untabbable
+				[...slide.querySelectorAll('a,button')].forEach((el) =>
+					el.setAttribute('tabindex', -1)
+				);
+			} else {
+				slide.removeAttribute('aria-hidden');
+				slide.setAttribute('tabindex', 0);
+				[...slide.querySelectorAll('a,button')].forEach((el) =>
+					el.removeAttribute('tabindex')
+				);
 			}
 		});
 	}
 
 	/**
 	 * Show/Hide prev/next nav button depending on whether the first/last slides are visible in the view
-	 * @param {object} swiper
+	 * @param {object} _swiper
 	 */
-	function checkNavigationArrows(swiper) {
-		if (swiper.navigation?.nextEl || swiper.navigation?.prevEl) {
-			const [firstSlide, ...otherSlides] = Array.from(swiper.slides);
+	function checkNavigationArrows(_swiper) {
+		if (_swiper.navigation?.nextEl || _swiper.navigation?.prevEl) {
+			const [, ...otherSlides] = Array.from(_swiper.slides);
 			const [lastSlide] = otherSlides.slice(-1);
 
-			const isFirstSlideVisible = swiper.activeIndex > 0;
+			const isFirstSlideVisible = _swiper.activeIndex > 0;
 			const isLastSlideVisible =
 				lastSlide?.getBoundingClientRect().right <= window.innerWidth;
 
-			swiper.navigation?.prevEl.classList.toggle(
+			_swiper.navigation?.prevEl.classList.toggle(
 				'invisible',
 				!isFirstSlideVisible
 			);
-			swiper.navigation?.nextEl.classList.toggle(
+			_swiper.navigation?.nextEl.classList.toggle(
 				'invisible',
 				isLastSlideVisible
 			);
@@ -307,13 +343,18 @@ export const initializeCarousel = (carouselSettings) => {
 			const carouselContainer = baseContainer.querySelector(
 				'.carousel-container'
 			);
-			swiper = new trevorWP.vendors.Swiper(carouselContainer, options);
+			swiper = new window.trevorWP.vendors.Swiper(
+				carouselContainer,
+				options
+			);
 		}
 	}
 
-	if (breakpoint && breakpoint in trevorWP.matchMedia) {
-		trevorWP.matchMedia[breakpoint](init, function () {
-			swiper && swiper.destroy(true, true);
+	if (breakpoint && breakpoint in window.trevorWP.matchMedia) {
+		window.trevorWP.matchMedia[breakpoint](init, function () {
+			if (swiper) {
+				swiper.destroy(true, true);
+			}
 		});
 	} else {
 		init();
