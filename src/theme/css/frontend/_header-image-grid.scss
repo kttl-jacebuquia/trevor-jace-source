@@ -146,8 +146,8 @@
       @apply block max-w-full max-h-full object-contain;
 
       @screen lg2 {
-        max-width: calc(100% - #{rem-calc(40)});
-        max-height: calc(100% - #{rem-calc(40)});
+        max-width: calc((100% - #{rem-calc(40)}) * .8);
+        max-height: calc((100% - #{rem-calc(40)}) * .8);
       }
     }
   }
