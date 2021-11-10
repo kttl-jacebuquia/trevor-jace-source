@@ -782,19 +782,31 @@ class Hooks {
 		}
 
 		# Long waiting banner
-		$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, false );
-		$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
+		# Use Trevor_Chat_Button_Public implementation if available
+		if ( class_exists( 'Trevor_Chat_Button_Public' ) ) {
+			$long_wait_message = do_shortcode( '[trevor-wait-time]' );
 
-		if ( $force_show ) {
-			$is_long_wait = true;
-		}
+			if ( ! empty( $long_wait_message ) ) {
+				$banners[] = array(
+					'desc' => $long_wait_message,
+					'type' => 'long_wait',
+				);
+			}
+		} else {
+			$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, false );
+			$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
 
-		if ( $is_long_wait && empty( $banners ) ) {
-			$banners[] = array(
-				'title' => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_TITLE ),
-				'desc'  => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_DESCRIPTION ),
-				'type'  => 'long_wait',
-			);
+			if ( $force_show ) {
+				$is_long_wait = true;
+			}
+
+			if ( $is_long_wait && empty( $banners ) ) {
+				$banners[] = array(
+					'title' => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_TITLE ),
+					'desc'  => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_DESCRIPTION ),
+					'type'  => 'long_wait',
+				);
+			}
 		}
 
 		# Add their signatures
