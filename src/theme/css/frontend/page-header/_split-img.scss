@@ -149,7 +149,15 @@
       }
 
       .page-btn {
-        @apply h-px60 px-px40 text-px20 leading-px20;
+        @apply inline-flex h-px46 items-center;
+
+        @screen md {
+          @apply h-px44;
+        }
+
+        @screen lg2 {
+          @apply h-px60 px-px40 text-px20 leading-px20;
+        }
       }
     }
   }
