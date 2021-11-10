@@ -1,115 +1,147 @@
-.form-modal .wFormContainer {
-  @apply text-current mx-0 w-full max-w-none;
-
-  .wFormHeader {
-    @apply hidden;
+.form-modal {
+  .modal-container {
+    @apply shadow-none;
   }
 
-  .wForm {
-    @apply bg-transparent text-current p-0;
-  }
-
-  .wFormTitle {
-    @apply hidden;
-  }
-
-  .htmlSection {
-    @apply hidden;
-  }
-
-  form {
-    @apply flex flex-wrap gap-y-px30 m-0 w-full;
-
-    @screen md {
-      @apply gap-x-md justify-between items-baseline;
+  &__heading {
+    @screen lg {
+      @apply mx-0;
     }
   }
 
-  .section.group {
-    @apply flex flex-wrap gap-y-px30 m-0 w-full;
-    @apply border-b-px1 border-solid border-white pb-px40;
-
-    @screen md {
-      @apply gap-x-md justify-between items-baseline;
-    }
-
-    > .section:last-child {
-      @apply pb-0 border-0;
-      margin-bottom: rem-calc(-1);
+  &__description {
+    @screen lg {
+      @apply mx-0;
     }
   }
 
-  .field-container-D {
-    @apply p-0 m-0 border-0;
+  .wFormContainer {
+    @apply text-current mx-0 w-full max-w-none;
 
-    @screen md {
-      @apply text-px18 leading-px22 tracking-px05;
-      width: calc( (100% - theme('gap.md')) / 2);
+    .wFormHeader {
+      @apply hidden;
     }
 
-    &.errFld {
-      @apply mb-px30;
-
-      .errMsg {
-        @apply absolute text-white py-0;
-      }
+    .wForm {
+      @apply bg-transparent text-current p-0;
     }
 
-    &[data-input-tag="textarea"] {
+    .wFormTitle {
+      @apply hidden;
+    }
+
+    .htmlSection {
+      @apply hidden;
+    }
+
+    form {
+      @apply flex flex-wrap gap-y-px30 m-0 w-full;
+
       @screen md {
-        @apply w-full;
-      }
-
-      label {
-        @apply pt-px20;
+        @apply gap-x-md justify-between items-baseline;
       }
     }
 
-    br {
-      @apply hidden;
-    }
-  }
+    .section.group {
+      @apply flex flex-wrap gap-y-px30 m-0 w-full;
+      @apply border-b-px1 border-solid border-white pb-px40;
 
-  .label.label {
-    --default-label-color: theme('colors.blue_green.DEFAULT');
-    --activated-label-color: theme('colors.white.DEFAULT');
-    @apply py-0 flex items-center w-full max-w-none;
-    @apply text-px18 leading-px26 pl-px28 pr-px10;
+      @screen md {
+        @apply gap-x-md gap-y-px58 justify-between items-baseline;
+      }
 
-    &.reqMark::after {
-      @apply hidden;
-    }
-  }
-
-  .floating-label-input--activated .label {
-    width: 140%;
-  }
-
-  .inputWrapper {
-    @apply h-full w-full;
-
-    input:not([type="submit"]) {
-      @apply h-px66 rounded-px10 border-0 w-full;
+      > .section:last-child {
+        @apply pb-0 border-0;
+        margin-bottom: rem-calc(-1);
+      }
     }
 
-    select {
-      @apply h-px66 text-blue_green pl-px28 pr-px10 rounded-px10 w-full;
+    .field-container-D {
+      @apply p-0 m-0 border-0;
+
+      @screen md {
+        @apply text-px18 leading-px22 tracking-px05;
+        width: calc((100% - theme("gap.md")) / 2);
+      }
+
+      &.errFld {
+        @apply mb-px30;
+
+        .errMsg {
+          @apply absolute py-0;
+        }
+
+        input {
+          border: 0 !important;
+        }
+      }
+
+      &[data-input-tag="textarea"] {
+        @screen md {
+          @apply w-full;
+          @apply mt-px30;
+        }
+
+        label {
+          @apply pt-px20;
+        }
+      }
+
+      br {
+        @apply hidden;
+      }
     }
 
-    textarea {
-      @apply min-h-px240 rounded-px10 w-full;
+    .label.label {
+      --default-label-color: theme("colors.blue_green.DEFAULT");
+      --activated-label-color: theme("colors.white.DEFAULT");
+      @apply py-0 flex items-center w-full max-w-none;
+      @apply text-px18 leading-px26 pl-px28 pr-px10;
+
+      &.reqMark::after {
+        @apply hidden;
+      }
     }
-  }
 
-  .actions {
-    @apply p-0 m-0 border-0 w-full;
+    .floating-label-input--activated .label {
+      width: 140%;
+    }
 
-    [type="submit"] {
-      @apply btn;
-      @apply font-bold mt-0 bg-white text-blue_green w-full h-px58 text-px16 leading-px22 tracking-em001 border-0;
+    .inputWrapper {
+      @apply h-full w-full;
 
-      &:hover {
-        @apply bg-white;
+      input:not([type="submit"]) {
+        @apply h-px66 rounded-px10 border-0 w-full text-blue_green;
+      }
+
+      select {
+        @apply h-px66 text-blue_green pl-px28 pr-px10 rounded-px10 w-full;
+      }
+
+      textarea {
+        @apply min-h-px240 rounded-px10 w-full text-blue_green;
+      }
+    }
+
+    .actions {
+      @apply p-0 m-0 border-0 w-full;
+
+      [type="submit"] {
+        @apply btn;
+        @apply font-bold mt-0 bg-white text-blue_green w-full h-px58 text-px16 leading-px22 tracking-em001 border-0;
+
+        &:hover {
+          @apply bg-white;
+        }
+
+        @screen md {
+          @apply w-auto h-px58;
+          min-width: rem-calc(137);
+        }
+
+        @screen lg {
+          @apply mt-px90;
+        }
       }
     }
   }
