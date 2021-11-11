@@ -42,16 +42,20 @@ export default class SiteBanner {
 		const $text = $("<p class='site-banner__text'></p>").appendTo($container);
 
 		// Title
-		$("<span/>", {
-			class: 'site-banner__title',
-			text: `${bannerObj.title} `,
-		}).appendTo($text);
+		if ( bannerObj.title ) {
+			$("<span/>", {
+				class: 'site-banner__title',
+				text: `${bannerObj.title} `,
+			}).appendTo($text);
+		}
 
 		// Description
-		$("<span/>", {
-			class: 'site-banner__description',
-			text: bannerObj.desc,
-		}).appendTo($text);
+		if (bannerObj.desc) {
+			$("<span/>", {
+				class: 'site-banner__description',
+				html: bannerObj.desc,
+			}).appendTo($text);
+		}
 
 		$("<button aria-label='click to close banner' class='site-banner__close-btn'>" +
 			"<i class='trevor-ti-x text-indigo'></i>" +

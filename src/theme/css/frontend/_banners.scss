@@ -46,6 +46,27 @@
 		&.active {
 			@apply block;
 		}
+
+    // Content from Trevor Chat Button plugin
+    .long-wait-time {
+      @apply block w-full text-left;
+
+      &-msg {
+        @apply bg-transparent;
+
+        p {
+          @apply font-semibold;
+        }
+
+        br {
+          @apply hidden;
+        }
+
+        span {
+          @apply font-normal;
+        }
+      }
+    }
 	}
 
 	&__warning {
