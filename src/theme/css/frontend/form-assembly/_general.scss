@@ -13,6 +13,10 @@
   }
 
   .inputWrapper.inputWrapper {
+    input {
+      @apply pl-px28;
+    }
+
     textarea {
       @apply w-full;
     }
