@@ -231,7 +231,10 @@ class Resource_Center extends A_Options_Page {
 				<?php if ( ! empty( $featured_topics ) ) : ?>
 					<div class="resource-center-hero__topics flex flex-wrap justify-center mt-4 -mx-6 md:mx-auto">
 						<?php foreach ( $featured_topics as $topic ) : ?>
-							<a href="<?php echo get_term_link( $topic ); ?>" class="resource-center-hero__topic rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5 hover:bg-persian_blue-lighter">
+							<a
+								href="<?php echo get_term_link( $topic ); ?>"
+								class="resource-center-hero__topic rounded-full py-1 px-3 bg-violet mx-1 mb-3 tracking-px05 text-white md:px-5 hover:bg-persian_blue-lighter"
+								aria-label="<?php echo $topic->name; ?> tag, click here to view content under <?php echo $topic->name; ?> tag">
 								<?php echo esc_html( $topic->name ); ?>
 							</a>
 						<?php endforeach; ?>

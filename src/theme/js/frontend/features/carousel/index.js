@@ -245,14 +245,19 @@ export const initializeCarousel = (carouselSettings) => {
 	options.on.slidePrevTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
 		// Focus on the first focusable slide
-		const firstFocusableSlide = [..._swiper.slides].find(
-			(el) => !el.ariaHidden
-		);
+		const firstFocusableSlide = [..._swiper.slides]
+			.filter((el) => !el.ariaHidden)
+			.shift();
 		firstFocusableSlide?.focus();
 	};
 
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
+		// Focus on the last focusable slide
+		const lastFocusableSlide = [..._swiper.slides]
+			.filter((el) => !el.ariaHidden)
+			.pop();
+		lastFocusableSlide?.focus();
 	};
 
 	options.on.slideChangeTransitionEnd = function (_swiper) {
@@ -296,6 +301,7 @@ export const initializeCarousel = (carouselSettings) => {
 		// aria-hide slides that are not fully displayed
 		Array.from(_swiper.slides).forEach((slide) => {
 			const { left, right } = slide.getBoundingClientRect();
+			const tagsBox = slide.querySelector('.tags-box');
 
 			if (left < 0 || right > windowWidth) {
 				slide.setAttribute('aria-hidden', true);
@@ -304,12 +310,14 @@ export const initializeCarousel = (carouselSettings) => {
 				[...slide.querySelectorAll('a,button')].forEach((el) =>
 					el.setAttribute('tabindex', -1)
 				);
+				tagsBox?.setAttribute('aria-hidden', true);
 			} else {
 				slide.removeAttribute('aria-hidden');
 				slide.setAttribute('tabindex', 0);
 				[...slide.querySelectorAll('a,button')].forEach((el) =>
 					el.removeAttribute('tabindex')
 				);
+				tagsBox?.removeAttribute('aria-hidden');
 			}
 		});
 	}

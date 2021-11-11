@@ -38,7 +38,7 @@
       @apply flex flex-wrap gap-y-px30 m-0 w-full;
 
       @screen md {
-        @apply gap-x-md justify-between items-baseline;
+        @apply gap-y-px58 justify-between items-baseline;
       }
     }
 
@@ -83,7 +83,13 @@
         }
 
         label {
-          @apply pt-px20;
+          @apply pt-px20 pb-px10;
+        }
+      }
+
+      &[data-input-tag="select"] {
+        label {
+          @apply text-blue_green;
         }
       }
 

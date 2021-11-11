@@ -22,15 +22,32 @@ export default class TagsBox extends Component {
 		expanded: false,
 	};
 
-	constructor(element) {
-		super(element);
-	}
-
 	// Will be called upon component instantiation
 	afterInit() {
 		this.generateToggleButton();
 		this.bindToggle();
+		this.handleMutation();
 		this.bindResize();
+	}
+
+	handleMutation() {
+		// Listen to change in the aria-hidden attribute in order to hide
+		// focusable elements as well
+		const observer = new window.MutationObserver(this.onMutate.bind(this));
+		observer.observe(this.element, { attributes: true });
+
+		// Initial call
+		this.onMutate();
+	}
+
+	onMutate() {
+		const ariaHidden = this.element.getAttribute('aria-hidden');
+
+		if (ariaHidden) {
+			this.toggleButton?.setAttribute('tabindex', -1);
+		} else {
+			this.toggleButton?.removeAttribute('tabindex');
+		}
 	}
 
 	generateToggleButton() {
@@ -57,7 +74,9 @@ export default class TagsBox extends Component {
 	}
 
 	bindResize() {
-		const observer = new ResizeObserver(this.computeLayout.bind(this));
+		const observer = new window.ResizeObserver(
+			this.computeLayout.bind(this)
+		);
 		observer.observe(this.element);
 	}
 
@@ -90,7 +109,10 @@ export default class TagsBox extends Component {
 		if (expanded) {
 			// Move toggle button to the end of the box
 			this.children.content.appendChild(this.toggleButton);
-			this.toggleButton.setAttribute('aria-label', 'click to collapse tags group');
+			this.toggleButton.setAttribute(
+				'aria-label',
+				'click to collapse tags group'
+			);
 		}
 		// Collapsed
 		else {
@@ -107,7 +129,10 @@ export default class TagsBox extends Component {
 				}
 				tag.dataset.withinView = true;
 			});
-			this.toggleButton.setAttribute('aria-label', 'click to expand tags group');
+			this.toggleButton.setAttribute(
+				'aria-label',
+				'click to expand tags group'
+			);
 		}
 	}
 }
