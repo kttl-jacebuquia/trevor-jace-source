@@ -31,7 +31,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 					<input type="email" id="newsletter" placeholder="Email Address" />
 				</fieldset>
 				<button type="submit" class="btn btn-secondary">Subscribe</button>
-				<div class="newsletter-form__message"></div>
+				<div class="newsletter-form__message" role="alert" aria-live="polite"></div>
 			</form>
 		</div>
 		<div class="col">

@@ -1,4 +1,10 @@
 .newsletter-form {
+  legend {
+    @screen lg {
+      @apply mb-px40;
+    }
+  }
+
   &--submitting {
     .btn {
       @apply opacity-50 cursor-not-allowed;

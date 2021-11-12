@@ -83,7 +83,7 @@ class Main_Header {
 		ob_start();
 		?>
 			<div class="<?php echo $classnames; ?>">
-				<svg viewBox="<?php echo static::$logo_view_box; ?>">
+				<svg viewBox="<?php echo static::$logo_view_box; ?>" aria-label="The Trevor Project Logo">
 					<use xlink:href="#<?php echo static::$logo_symbol_id; ?>" />
 				</svg>
 			</div>
