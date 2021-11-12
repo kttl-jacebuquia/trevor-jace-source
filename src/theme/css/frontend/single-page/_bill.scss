@@ -1,0 +1,23 @@
+.single-trevor_gi_bill {
+  .post-content {
+    @apply col-span-10 col-start-2 mr-0;
+  }
+
+  .trevor-block-bottom-list {
+    @screen lg {
+      @apply py-px54 px-px72;
+    }
+
+    @screen lg2 {
+      @apply py-px50 px-px90;
+    }
+
+    @screen xl {
+      @apply pt-px48 pb-px60 px-px100;
+    }
+
+    .list-title {
+      @apply mt-px0;
+    }
+  }
+}

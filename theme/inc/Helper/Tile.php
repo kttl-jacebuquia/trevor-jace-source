@@ -62,6 +62,11 @@ class Tile {
 
 		if ( CPT\Get_Involved\Bill::POST_TYPE === $post->post_type ) {
 			$data['title_top'] = \TrevorWP\Meta\Post::get_bill_id( $post->ID );
+			$data['cta_txt']   = 'Read the Bill';
+		}
+
+		if ( CPT\Get_Involved\Letter::POST_TYPE === $post->post_type ) {
+			$data['cta_txt'] = 'Read the Letter';
 		}
 
 		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
