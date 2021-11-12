@@ -131,9 +131,17 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       @apply absolute top-0 left-0 bottom-0 right-0 text-transparent select-none;
     }
 
-    @screen xl {
-      @apply mt-px32 text-px18 leading-px24 tracking-em001 pb-px4 border-b-px2 border-solid border-current;
+    @screen lg {
+      @apply border-b-px2 border-solid border-current;
       @include wave-underline;
+
+      &:hover {
+        @apply border-none pb-px10;
+      }
+    }
+
+    @screen xl {
+      @apply mt-px32 text-px18 leading-px24 tracking-em001 pb-px4;
     }
   }
 
@@ -167,6 +175,14 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       .recent-highlights--at-last & {
         @apply hidden;
       }
+    }
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-teal-dark opacity-30;
+
+    &-active {
+      @apply opacity-100;
     }
   }
 }
