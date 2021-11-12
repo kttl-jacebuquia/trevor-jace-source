@@ -25,6 +25,9 @@ class FormAssemblyForm extends Component {
 		this.element.addEventListener('reset', () => this.onReset());
 		this.element.addEventListener('submit', (e) => this.onSubmit(e));
 
+		// Remove autocomplete/autofill
+		this.element.setAttribute('autocomplete', 'off');
+
 		// Add necessary selectors for FloatingLabelInput initialization
 		this.children?.inputFields.forEach((inputField: HTMLElement) => {
 			const options = {};
