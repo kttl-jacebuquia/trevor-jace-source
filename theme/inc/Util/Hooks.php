@@ -729,9 +729,10 @@ class Hooks {
 	 * Check if custom site banner is active.
 	 */
 	public static function is_custom_site_banner_entry_active( array $entry, string $current_date ): bool {
-		$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
-		$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
-		$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
+		$active       = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
+		$start_date   = ! empty( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ] ) ? strtotime( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ] ) : '';
+		$end_date     = ! empty( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ] ) ? strtotime( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ] ) : '';
+		$current_date = strtotime( $current_date );
 
 		if ( $active && empty( $start_date ) && empty( $end_date ) ) {
 			return true;
@@ -786,7 +787,7 @@ class Hooks {
 		if ( class_exists( 'Trevor_Chat_Button_Public' ) ) {
 			$long_wait_message = do_shortcode( '[trevor-wait-time]' );
 
-			if ( ! empty( $long_wait_message ) ) {
+			if ( ! empty( $long_wait_message ) && empty( $banners ) ) {
 				$banners[] = array(
 					'desc' => $long_wait_message,
 					'type' => 'long_wait',

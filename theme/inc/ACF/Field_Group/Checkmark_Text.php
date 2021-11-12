@@ -67,7 +67,7 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 					'name'         => static::FIELD_DESCRIPTION,
 					'label'        => 'Description',
 					'type'         => 'wysiwyg',
-					'toolbar'      => 'basic',
+					'toolbar'      => 'common',
 					'media_upload' => 0,
 				),
 				static::FIELD_CARD_BACKGROUND => array(
