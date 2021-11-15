@@ -323,9 +323,9 @@ class Checkmark_Text extends A_Field_Group implements I_Block, I_Renderable {
 									<?php endif; ?>
 
 									<?php if ( ! empty( $entry[ static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION ] ) && 'yes' === $entry[ static::FIELD_CARD_ENTRY_WITH_FORMAT ] ) : ?>
-										<p class="checkmark-text__card-description">
+										<div class="checkmark-text__card-description">
 											<?php echo $entry[ static::FIELD_CARD_ENTRY_FORMAT_DESCRIPTION ]; ?>
-										</p>
+										</div>
 									<?php endif; ?>
 
 									<?php $list_element = ( 'number' === $entry[ static::FIELD_CARD_ENTRY_BULLET_TYPE ] ) ? 'ol' : 'ul'; ?>

@@ -141,7 +141,10 @@
     }
   }
 
-  &__card-title + &__list,
+  &__card-header + &__list {
+    @apply mt-px35;
+  }
+
   &__card-description + &__list {
     @apply mt-px28;
   }
@@ -208,6 +211,15 @@
 
     &-text {
       @apply flex items-center self-stretch;
+      @apply font-medium text-px14 leading-px20 tracking-px05;
+
+      @screen lg {
+        @apply text-px18 leading-px26;
+      }
+
+      strong {
+        @apply font-bold;
+      }
     }
   }
 
@@ -228,8 +240,16 @@
   &__number {
     @apply flex flex-shrink-0 justify-center items-center;
     @apply font-semibold text-px11 leading-px14;
-    @apply text-center h-px22 w-px22 mr-px10 mt-px2;
+    @apply text-center h-px28 w-px28 mr-px10 mt-px2;
     @apply rounded-full border-2 border-solid border-teal-dark;
+
+    @screen md {
+      @apply w-px22 h-px22;
+    }
+
+    @screen lg {
+      @apply w-px28 h-px28;
+    }
   }
 
   &__info {
