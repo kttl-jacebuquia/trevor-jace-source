@@ -99,11 +99,11 @@
 
   .page-header__playback-icon {
     &.play {
-      @apply block transform -rotate-90;
+      @apply block;
     }
 
     &.pause {
-      @apply hidden block border-solid border-white border-l-px8 border-r-px8 w-px22 h-px24;
+      @apply hidden block text-px20;
     }
   }
 

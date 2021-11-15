@@ -230,8 +230,8 @@ class Page_Header {
 								Your browser does not support the video tag.
 							</video>
 							<button class="page-header__playback" aria-label="click to play background video" type="button">
-								<i class="trevor-ti-caret-down page-header__playback-icon play"></i>
-								<i class="page-header__playback-icon pause"></i>
+								<i class="trevor-ti-play page-header__playback-icon play"></i>
+								<i class="trevor-ti-pause page-header__playback-icon pause"></i>
 							</button>
 						</div>
 					<?php endif; ?>

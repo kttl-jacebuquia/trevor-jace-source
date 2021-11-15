@@ -91,6 +91,14 @@
       @apply pb-10;
     }
   }
+
+  .page-btn {
+    @apply px-px32;
+
+    @screen lg {
+      @apply px-px40;
+    }
+  }
 }
 
 
