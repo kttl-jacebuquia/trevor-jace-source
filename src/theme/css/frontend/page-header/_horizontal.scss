@@ -40,6 +40,17 @@
         padding-top: rem-calc(567px);
       }
     }
+
+    & tilt,
+    & tiltb {
+      @screen lg2 {
+        @apply text-px72 leading-px82;
+      }
+
+      @screen xl {
+        @apply text-px82 leading-px92;
+      }
+    }
   }
 
   &.type-horizontal & {
@@ -47,6 +58,10 @@
     &-title {
       @apply md:text-px32 md:leading-px42;
       @apply lg2:text-px46 lg2:leading-px56;
+
+      @screen xl {
+        @apply text-px56 leading-px66;
+      }
     }
 
     &-desc {
