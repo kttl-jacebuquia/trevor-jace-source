@@ -1,6 +1,10 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 use TrevorWP\CPT;
+use TrevorWP\Meta;
+use TrevorWP\CPT\Post as CPTPost;
+use TrevorWP\CPT\RC\Article;
+use TrevorWP\CPT\RC\Guide;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Post_Details extends A_Field_Group {
@@ -104,15 +108,22 @@ class Post_Details extends A_Field_Group {
 	 */
 	public static function render_multiple_files( \WP_Post $post ): string {
 		$val          = new Field_Val_Getter( self::class, $post );
-		$file_entries = $val->get( static::FIELD_FILE_ENTRIES );
+		$file_entries = is_singular( array( CPTPost::POST_TYPE, Article::POST_TYPE, Guide::POST_TYPE ) ) ? $val->get( static::FIELD_FILE_ENTRIES ) : array();
+		$file_id      = is_singular( Meta\Post::$ARGS_BY_KEY[ Meta\Post::KEY_FILE ]['post_types'] ) ? Meta\Post::get_file_id( $post->ID ) : null;
 
-		if ( empty( $file_entries ) ) {
+		if ( empty( $file_entries ) && empty( $file_id ) ) {
 			return '';
 		}
 
 		ob_start();
 		?>
 		<div class="post-file-wrap">
+			<?php if ( ! empty( $file_id ) ) : ?>
+				<a class="btn post-file-btn" href="<?php echo esc_attr( wp_get_attachment_url( $attachment_id ) ); ?>">
+					<span class="post-file-btn-cta">Download PDF Format</span> <i
+						class="trevor-ti-download post-file-btn-icn"></i>
+				</a>
+			<?php endif; ?>
 			<?php foreach ( $file_entries as $file ) : ?>
 				<?php if ( ! empty( $file[ static::FIELD_FILE_ENTRY_FILE ] ) && ! empty( $file[ static::FIELD_FILE_ENTRY_LABEL ] ) ) : ?>
 					<a class="btn post-file-btn <?php echo esc_attr( $bg_color ); ?>" href="<?php echo esc_url( $file[ static::FIELD_FILE_ENTRY_FILE ] ); ?>">
