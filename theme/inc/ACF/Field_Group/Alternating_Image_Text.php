@@ -276,7 +276,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_BUTTON ] ) ) : ?>
 										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_BUTTON ], $cta_btn_options ); ?>
 									<?php endif; ?>
-									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ] ) ) : ?>
+									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ] ) && ! empty( $entry[ static::FIELD_ENTRY_CTA_LINK ]['label'] ) ) : ?>
 										<br />
 										<?php echo Button::render( false, $entry[ static::FIELD_ENTRY_CTA_LINK ], $cta_link_options ); ?>
 									<?php endif; ?>
