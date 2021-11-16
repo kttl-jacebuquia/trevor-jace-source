@@ -10,7 +10,7 @@
   }
 
   .modal-container {
-    @apply bg-transparent max-w-none max-h-full;
+    @apply bg-blue_green max-w-none max-h-full;
     @include bleed-always( true );
   }
 
