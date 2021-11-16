@@ -1,4 +1,18 @@
 .messaging {
+  // Block spacer variables
+  // Top Spacing
+  --spacer-top--default: #{rem-calc(58)};
+  --spacer-top--md: #{rem-calc(100)};
+  --spacer-top--lg: #{rem-calc(120)};
+  --spacer-top--lg2: #{rem-calc(120)};
+  --spacer-top--xl: #{rem-calc(120)};
+  // Bottom Spacing
+  --spacer-bottom--default: #{rem-calc(58)};
+  --spacer-bottom--md: #{rem-calc(100)};
+  --spacer-bottom--lg: #{rem-calc(120)};
+  --spacer-bottom--lg2: #{rem-calc(120)};
+  --spacer-bottom--xl: #{rem-calc(120)};
+
 	&__container {
 		@apply tw-grid container mx-auto;
 
@@ -56,7 +70,7 @@
     }
 
     @screen lg {
-      @apply col-span-10 col-start-2 py-px138;
+      @apply col-span-10 col-start-2 py-px120;
     }
 
     @screen lg2 {
@@ -341,6 +355,15 @@
       @screen lg2 {
         @apply text-px30 leading-px40;
       }
+    }
+  }
+
+  // Background color logic
+  // If container and inner box has the same color, remove inner box's padding
+  @each $color-name, $color in $theme-colors {
+    &.#{unquote("bg-#{$color-name}")} &__content.#{unquote("bg-#{$color-name}")},
+    &.#{unquote("bg-#{$color-name}")} &__content.bg-transparent {
+      @apply py-0;
     }
   }
 }

@@ -202,7 +202,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$block_styles                  = static::get_val( static::FIELD_BLOCK_STYLES );
 		list( $bg_color, $text_color ) = array_values( $block_styles );
 
-		$class = array( 'messaging', "messaging--{$type}", "bg-{$bg_color}", "text-{$text_color}" );
+		$class = array( 'messaging', "messaging--{$type}", "bg-{$bg_color}", "text-{$text_color}", 'block-spacer' );
 
 		if ( 'boxed' === $type ) {
 			if ( 'yes' === $extend_padding_top ) {

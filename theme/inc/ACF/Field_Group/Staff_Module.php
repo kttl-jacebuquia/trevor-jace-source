@@ -241,7 +241,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div class="staff js-staff <?php echo esc_attr( $card_type ); ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?> <?php echo ( 'grid' === $display_type ) ? 'staff-col-' . $num_cols : ''; ?>">
+		<div class="staff js-staff block-spacer <?php echo esc_attr( $card_type ); ?> <?php echo esc_attr( $styles ); ?> is-<?php echo $display_type; ?> text-<?php echo $desktop_text_alignment; ?> <?php echo ( 'grid' === $display_type ) ? 'staff-col-' . $num_cols : ''; ?>">
 			<div class="staff__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h2 class="staff__heading"><?php echo esc_html( $title ); ?></h2>
