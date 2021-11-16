@@ -22,6 +22,18 @@
       @apply container mx-auto;
     }
 
+    .page-header-desc {
+      @apply pb-0;
+
+      @screen lg {
+        @apply text-px18 leading-px24 tracking-px05;
+      }
+
+      @screen lg2 {
+        @apply text-px26 leading-px36 tracking-em005;
+      }
+    }
+
     .big-img-carousel {
       .swiper-wrapper {
         @apply w-full;
@@ -41,6 +53,31 @@
       letter-spacing: rem-calc(1px);
     }
 
+    .page-header-img-wrap {
+      @apply mt-px60;
+
+      @screen md {
+        @apply col-span-4 col-start-5 w-full mt-0;
+      }
+
+      @screen lg {
+        @apply col-span-5 col-start-7;
+        width: calc(100% + #{rem-calc(28)});
+      }
+    }
+
+    .button-group {
+      @apply mt-px40;
+
+      @screen md {
+        @apply justify-start mt-px30;
+      }
+
+      @screen lg {
+        @apply mt-px40;
+      }
+    }
+
     @screen md {
       .page-header-inner {
         @apply grid tw-grid-tablet items-start;
@@ -48,14 +85,6 @@
 
       .page-header-content-wrap {
         @apply col-span-4 col-start-1 w-full mt-px60;
-      }
-
-      .button-group {
-        @apply justify-start;
-      }
-
-      .page-header-img-wrap {
-        @apply col-span-4 col-start-5 w-full;
       }
 
       .carousel-wrap {
@@ -124,10 +153,6 @@
         @apply text-px32 leading-px40;
       }
 
-      .page-header-desc {
-        @apply text-px18 leading-px24 tracking-px05;
-      }
-
       .page-header-cta {
         @apply text-px18 leading-px26;
       }
@@ -140,11 +165,6 @@
         @apply w-full col-span-5 col-start-1;
         width: calc(100% + #{rem-calc(28)});
         padding-bottom: 15%;
-      }
-
-      .page-header-img-wrap {
-        @apply col-span-5 col-start-7;
-        width: calc(100% + #{rem-calc(28)});
       }
 
       .big-img-carousel {
@@ -207,10 +227,6 @@
 
       .page-header-title {
         @apply text-px46 leading-px56;
-      }
-
-      .page-header-desc {
-        @apply text-px26 leading-px36 tracking-em005;
       }
 
       .big-img-carousel {
