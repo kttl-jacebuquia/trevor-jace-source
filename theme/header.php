@@ -84,6 +84,17 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					</li>
 				</ul>
 			</div>
+			<div class="topbar-nav-wrap">
+				<?php /* Will contain menu for desktop, for seamless transition */ ?>
+			</div>
+			<div class="topbar-controls">
+				<a class="topbar-control-search" href="<?php echo get_search_link(); ?>">
+					<i class="trevor-ti-search"></i>
+				</a>
+				<button class="topbar-control-opener">
+					<i class="trevor-ti-hamburger-menu"></i>
+				</button>
+			</div>
 			<div class="cta-wrap">
 				<div class="cta-links">
 					<a href="<?php echo esc_url( $counselor_link['url'] ); ?>"
@@ -98,17 +109,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					</a>
 				</div>
 			</div>
-			<div class="topbar-nav-wrap">
-				<?php /* Will contain menu for desktop, for seamless transition */ ?>
-			</div>
-			<div class="topbar-controls">
-				<a class="topbar-control-search" href="<?php echo get_search_link(); ?>">
-					<i class="trevor-ti-search"></i>
-				</a>
-				<button class="topbar-control-opener">
-					<i class="trevor-ti-hamburger-menu"></i>
-				</button>
-			</div>
+
 		</div>
 	</div>
 

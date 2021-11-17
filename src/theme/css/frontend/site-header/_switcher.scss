@@ -1,0 +1,70 @@
+// Switcher
+.switcher-wrap {
+	@apply fixed right-0 overflow-x-hidden pointer-events-none flex-shrink-0;
+	@apply transform-gpu;
+	@apply transition-all duration-300 ease-out;
+	@apply top-px84;
+	width: var(--nav-menu-width);
+	height: rem-calc(133px);
+	z-index: var(--z-index-nav-switcher);
+
+	@screen md {
+		@apply top-px106;
+	}
+
+	@screen lg2 {
+    @apply absolute left-px30 right-auto top-1/2;
+		@apply w-auto h-auto mr-auto pointer-events-auto;
+		@apply -translate-y-1/2;
+	}
+
+	.switcher {
+		@apply list-none;
+		@apply flex items-end w-full h-full flex-1;
+		@apply transform-gpu translate-x-full;
+		@apply transition-all duration-300 ease-out;
+		@apply opacity-0 invisible;
+		@apply bg-white;
+		top: $top--bar-height-mobile;
+		z-index: var(--z-index-nav-switcher);
+		background-color: rgba(16, 16, 102, 0.04);
+
+		@screen lg2 {
+			@apply translate-x-0 bg-transparent;
+			@apply opacity-100 visible;
+		}
+
+		> li {
+			@apply bg-white flex-1;
+			line-height: rem-calc(16);
+			height: rem-calc(50);
+
+			&:not(:first-child) {
+				@screen lg2 {
+					@apply ml-px18;
+				}
+			}
+
+			> a {
+				@apply flex justify-center items-center h-full whitespace-nowrap;
+				@apply font-manrope font-light text-px16 leading-px16 tracking-em002;
+				@apply text-indigo;
+				@apply px-2;
+				background-color: rgba(16, 16, 102, 0.04);
+
+				@screen lg2 {
+					@apply px-0 bg-transparent transition-opacity duration-300;
+					@apply text-px16 leading-px20;
+
+					&:hover {
+						@apply opacity-80;
+					}
+				}
+
+				&.active {
+					@apply font-extrabold bg-white;
+				}
+			}
+		}
+	}
+}

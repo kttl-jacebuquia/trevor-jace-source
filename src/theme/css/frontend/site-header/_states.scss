@@ -1,0 +1,178 @@
+// Collapased nav state
+body:not(.on-top) {
+  #top-bar {
+    &::before {
+      @screen mobile {
+        --tw-translate-y: calc(100% - #{rem-calc(4px)});
+      }
+
+      @screen md {
+        --tw-translate-y: calc(100% - #{rem-calc(6px)});
+      }
+
+      @screen lg2 {
+        @apply translate-y-0;
+      }
+    }
+
+    .switcher-wrap {
+      @screen lg2 {
+        @apply opacity-0 invisible;
+
+        > .switcher {
+          @apply -translate-y-full;
+        }
+      }
+    }
+
+    .logo-icon {
+      @apply opacity-100 visible;
+
+      @screen mobile {
+        --tw-translate-y: #{$top--bar-height-mobile};
+      }
+
+      @screen md-minmax {
+        --tw-translate-y: #{$top--bar-height-tablet};
+      }
+
+      @screen lg-only {
+        --tw-translate-y: #{$top--bar-height-tablet};
+      }
+
+      > a {
+        @screen lg2 {
+          @apply translate-y-0;
+        }
+      }
+    }
+
+    .topbar-nav-wrap {
+      @screen lg {
+        @apply visible opacity-100;
+      }
+    }
+
+    .main-menu-container {
+      @screen lg {
+        @apply pointer-events-auto;
+      }
+
+      > .main-menu > .menu-item > a > .menu-link-text {
+        @screen lg2 {
+          @apply translate-y-0;
+        }
+      }
+    }
+
+    .topbar-controls {
+      --tw-translate-y: var(--top-bar-height);
+
+      @screen lg2 {
+        @apply translate-y-0;
+      }
+    }
+
+    .topbar-control-search {
+      @screen lg2 {
+        @apply translate-y-0;
+      }
+    }
+
+    .topbar-control-opener {
+      @screen lg2 {
+        @apply translate-y-0;
+      }
+    }
+
+    .cta-wrap {
+      @apply opacity-100 visible;
+      --tw-translate-y: var(--top-bar-height);
+
+      @screen lg2 {
+        --tw-translate-y: 0;
+      }
+    }
+  }
+
+  #top-nav {
+    .menu-wrap {
+      @screen lg2 {
+        @apply -translate-y-full invisible opacity-0;
+      }
+    }
+  }
+}
+
+// Expanded Navigation State On Mobile and Tablet
+body.is-navigation-open {
+  #top-bar {
+    &::before {
+      @screen lg-max {
+        @apply opacity-0;
+      }
+    }
+
+    .logo-icon {
+      @screen lg-max {
+        @apply opacity-0 invisible;
+      }
+    }
+
+    .cta-wrap {
+      @screen lg-max {
+        @apply opacity-0 invisible;
+      }
+    }
+
+    .topbar-controls {
+      @screen lg-max {
+        @apply invisible opacity-0;
+      }
+    }
+
+    .switcher-wrap {
+      @screen lg-max {
+        @apply pointer-events-auto;
+      }
+    }
+
+    .switcher {
+      @screen lg-max {
+        @apply transform translate-x-0;
+        @apply visible opacity-100;
+      }
+    }
+  }
+
+  .burger-nav-controls {
+    @apply lg-max:visible lg-max:opacity-100 lg-max:translate-x-0;
+  }
+
+  .opener {
+    @apply visible opacity-0;
+  }
+
+  #top-nav {
+    @screen lg-max {
+      // Blur
+      &::before {
+        @apply opacity-100 visible;
+      }
+      // White background
+      &::after {
+        @apply translate-x-0;
+      }
+    }
+
+    .top-nav__underlay {
+      @apply lg-max:visible lg-max:opacity-100;
+    }
+  }
+
+  .menu-wrap {
+    @screen lg-max {
+      @apply translate-x-0 visible opacity-100;
+    }
+  }
+}

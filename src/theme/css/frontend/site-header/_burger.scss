@@ -1,0 +1,27 @@
+// Burger nav controls for mobile/tablet
+.burger-nav-controls {
+	@apply fixed top-0 right-0;
+	@apply flex items-center justify-center;
+	@apply invisible opacity-0;
+	@apply transition-all duration-300 ease-out;
+	@apply py-px11 px-px8;
+	@apply transform-gpu translate-x-full;
+	z-index: var(--z-index-nav-switcher);
+}
+
+.btn.burger-nav-control {
+	@apply flex items-center justify-center;
+	@apply w-px45 h-px45 p-0 text-px25;
+
+	~ .btn {
+		@apply ml-px15;
+	}
+
+	&-search {
+		@apply rounded-px100 bg-indigo text-white;
+	}
+
+	&-close {
+		@apply text-indigo bg-transparent;
+	}
+}

@@ -1,0 +1,51 @@
+$top--bar-height-mobile: rem-calc(84px);
+$top--bar-height-tablet: rem-calc(106px);
+$top--bar-height-desktop: rem-calc(80px);
+
+$top-nav-height: #{rem-calc(136px)};
+$top-nav-height-tablet: #{rem-calc(144px)};
+$top-nav-height-desktop: #{rem-calc(176px)};
+
+$nav-base-z-index: z-index(nav-base);
+$z-index-nav-blur: $nav-base-z-index;
+$z-index-nav-white-bg: $z-index-nav-blur + 1;
+$z-index-nav-menu: $z-index-nav-blur + 4;
+$z-index-nav-switcher: $z-index-nav-blur + 5;
+$z-index-nav-controls: $z-index-nav-blur + 6;
+$z-index-nav-cta: $z-index-nav-blur + 5;
+$z-index-topbar: $z-index-nav-white-bg + 1;
+
+:root {
+	--site-banner-height: 0px;
+	--top-bar-height: #{$top--bar-height-mobile};
+	--top-nav-height: #{$top-nav-height};
+	--top-nav-top-margin: calc(
+		var(--top-bar-height) + var(--tr-wp-admin-bar-h) +
+			var(--site-banner-height)
+	);
+	--nav-menu-width: #{percentage(327/375)};
+	--z-index-nav-base: #{$nav-base-z-index};
+	--z-index-nav-blur: #{$z-index-nav-blur};
+	--z-index-nav-white-bg: #{$z-index-nav-white-bg};
+	--z-index-nav-menu: #{$z-index-nav-menu};
+	--z-index-nav-switcher: #{$z-index-nav-switcher};
+	--z-index-nav-controls: #{$z-index-nav-controls};
+	--z-index-nav-cta: #{$z-index-nav-cta};
+	--z-index-topbar: #{$z-index-topbar};
+
+	// fixes anchor link connections
+	* {
+		scroll-margin-top: var(--top-bar-height);
+	}
+
+	@screen md {
+		--top-bar-height: #{$top--bar-height-tablet};
+		--top-nav-height: 9rem;
+		--nav-menu-width: #{rem-calc(370px)};
+	}
+
+	@screen lg2 {
+		--top-bar-height: #{rem-calc(78px)};
+		--top-nav-height: 11rem;
+	}
+}

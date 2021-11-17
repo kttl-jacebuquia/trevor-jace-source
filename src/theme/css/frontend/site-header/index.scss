@@ -1,0 +1,24 @@
+@import "./settings";
+@import "./top-bar";
+@import "./cta";
+@import "./burger";
+@import "./switcher";
+@import "./menu";
+@import "./top-nav";
+@import "./states";
+
+// Fix top bar for wp admin bar
+body.admin-bar {
+	margin-top: var(--tr-wp-admin-bar-h);
+
+	#top-bar {
+		top: var(--tr-wp-admin-bar-h);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed !important; // Reverse
+		top: 0;
+	}
+}

@@ -1,0 +1,260 @@
+//
+// Top Bar
+//
+#top-bar {
+	@apply fixed top-0 left-0;
+	@apply w-full h-px84;
+	@apply transition-transform duration-300 ease-out;
+	@apply transform-gpu -translate-y-full bg-white;
+	z-index: var(--z-index-topbar);
+
+	@screen md {
+		@apply h-px106;
+	}
+
+	@screen lg2 {
+		@apply sticky mt-0 pt-0 -top-px2;
+		@apply h-px80 max-h-none;
+		@apply border-b-px6 border-orange;
+		@apply translate-y-0;
+	}
+
+	// Place the border and background on a pseudo element,
+	// Allows to minimize complicated offset computations acounting for the border
+	&::before {
+		content: '';
+		border-bottom: rem-calc(4px) solid theme('colors.orange.DEFAULT');
+		@apply absolute left-0 w-full bg-white -bottom-px3 h-full;
+		@apply transform-gpu translate-y-0 transition-all duration-300 ease-out;
+
+		@screen lg2 {
+			@apply static bottom-0;
+		}
+	}
+
+	.top-bar-inner {
+		@apply static flex mx-auto items-center h-full justify-between;
+		@apply pl-px20 pr-px30;
+
+    @screen mobile {
+      max-width: none;
+    }
+
+		@screen md {
+			@apply px-px40;
+		}
+
+		@screen lg {
+			@apply relative px-0 m-auto;
+			width: calc(100% - 80px);
+		}
+
+    @screen lg2 {
+      @apply gap-x-px24 justify-end;
+    }
+	}
+
+	.logo-icon {
+		@apply flex items-center justify-center w-px45 h-px45;
+		@apply text-orange text-px40;
+		@apply transform-gpu translate-y-0;
+		@apply transition-all duration-300 ease-out;
+		z-index: var(--z-index-nav-controls);
+
+		@screen md {
+			@apply w-px50 h-px50;
+		}
+
+		@screen lg {
+			@apply w-px42 h-px42 overflow-hidden mr-px28;
+		}
+
+    @screen lg2 {
+      @apply absolute left-0 top-1/2 -translate-y-1/2;
+      @apply opacity-0 invisible;
+    }
+
+		> a {
+			@apply flex items-center transition-transform duration-300 ease-out;
+			@apply w-full h-full;
+			@apply transform-gpu;
+
+			@screen lg2 {
+				@apply translate-y-full text-px38;
+			}
+		}
+
+		.trevor-ti-logo-icon {
+			@apply flex items-center justify-center w-full h-full text-px45;
+			@apply overflow-hidden;
+
+			@screen md {
+				@apply text-px50;
+			}
+
+			@screen lg {
+				@apply text-px42;
+			}
+		}
+	}
+
+	.topbar-nav-wrap {
+		@apply hidden;
+
+		@screen lg2 {
+			@apply block overflow-visible ml-auto;
+			@apply transition-all duration-300 ease-out;
+			@apply opacity-0 invisible;
+		}
+	}
+
+	.main-menu-container {
+		@screen lg {
+			@apply pb-0 h-full text-indigo;
+		}
+
+    > .main-menu {
+      @apply text-indigo;
+    }
+
+		> .main-menu > .menu-item {
+			@screen lg {
+				@apply px-0 py-px18;
+
+				&:not(:first-child) {
+					@apply ml-px24;
+				}
+
+				&:first-child .sub-menu::before {
+					@apply ml-px5;
+				}
+
+				&:last-child .sub-menu {
+					@apply -mr-px10;
+
+					&::before {
+						@apply mr-px5;
+					}
+				}
+
+				// Hover/focus state
+				&:hover,
+				&:focus-within {
+					> a .submenu-icon {
+						@apply -rotate-180;
+						@apply text-indigo;
+					}
+				}
+			}
+		}
+
+		// First tier link
+		> .main-menu > .menu-item > a {
+			@screen lg {
+				@apply flex items-center whitespace-nowrap;
+				@apply overflow-hidden py-0 h-full;
+				@apply px-0;
+
+				// Chevron
+				&::after {
+					@apply hidden;
+				}
+			}
+		}
+
+		// First tier submenu
+		> .main-menu > .menu-item > .sub-menu {
+			@screen lg {
+				border: 1px solid rgba(16, 16, 102, 0.16);
+
+				// Submenu caret
+				&::before {
+					@apply w-px13 h-px13 transform rotate-45 bg-white -top-px7;
+					@apply border-t-px1 border-l-px1 border-r-0 border-b-0;
+					border-color: rgba(16, 16, 102, 0.16);
+				}
+			}
+		}
+
+		> .main-menu > .menu-item > a > .menu-link-text {
+			@screen lg {
+				@apply block;
+				@apply transition-transform duration-300 ease-out;
+				@apply transform translate-y-full;
+			}
+		}
+
+		// Submenu icon
+		.submenu-icon {
+			@apply hidden;
+
+			@screen lg {
+				@apply inline-block;
+				@apply ml-2;
+				@apply transition-all duration-300 ease-out;
+				color: rgba(16, 16, 102, 0.44);
+			}
+		}
+	}
+
+	// Top Bar Controls
+	.topbar-controls {
+		@apply flex transition-transform duration-300 ease-out;
+		@apply transform-gpu translate-y-0 flex-shrink-0;
+		z-index: var(--z-index-nav-controls);
+
+    @screen lg-max {
+      @apply -ml-px40;
+    }
+
+		@screen lg2 {
+			@apply overflow-hidden;
+		}
+	}
+
+	.topbar-control-search {
+		@apply block rounded-full bg-indigo text-white;
+		@apply w-px45 h-px45;
+		@apply flex justify-center items-center;
+		@apply mr-px15 text-px22;
+		@apply transition-all duration-300 ease-out invisible opacity-0;
+
+		@screen lg2 {
+			@apply transform-gpu translate-y-full visible opacity-100;
+			@apply bg-transparent text-indigo;
+			@apply mx-0;
+			@apply hover:opacity-80;
+		}
+
+		.trevor-ti-search {
+			color: inherit;
+		}
+
+		.trevor-ti-search {
+			color: inherit;
+		}
+	}
+
+	.topbar-control-opener {
+		@apply flex justify-center items-center relative;
+		@apply text-px40 text-indigo;
+		width: rem-calc(45px);
+		height: rem-calc(45px);
+
+		@screen lg2 {
+			@apply hidden;
+		}
+	}
+
+	.trevor-ti-hamburger-menu {
+		@apply block absolute transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+		@apply transition-all duration-300 opacity-100 visible;
+	}
+
+	.trevor-ti-nav-close {
+		@apply block absolute transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+		@apply opacity-0 invisible;
+		@apply transition-all duration-300 opacity-0 invisible;
+		font-size: rem-calc(25);
+	}
+}

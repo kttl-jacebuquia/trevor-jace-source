@@ -1,0 +1,285 @@
+//
+// NAV
+//
+#top-nav {
+	z-index: var(--z-index-nav-base);
+  height: $top-nav-height;
+
+  @screen md {
+    height: $top-nav-height-tablet;
+  }
+
+  @screen xl {
+    height: $top-nav-height-desktop;
+  }
+
+	// Background blur and fill, for mobile/tablet
+	@screen lg-max {
+		&::before {
+			@apply fixed top-0 left-0 w-full h-full bg-white;
+			@apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
+			content: '';
+			background-color: rgba(16, 16, 102, 0.2);
+			backdrop-filter: blur(4px);
+			z-index: var(--z-index-nav-blur);
+		}
+
+		&::after {
+			@apply fixed top-0 right-0 h-full bg-white;
+			@apply transform-gpu translate-x-full transition-transform duration-300 ease-out;
+			width: var(--nav-menu-width);
+			content: '';
+			z-index: var(--z-index-nav-white-bg);
+		}
+	}
+
+	// Underlay
+	.top-nav__underlay {
+		@apply absolute top-0 left-0 w-full h-full;
+		@apply transition-all opacity-0 invisible duration-300 ease-out;
+		@apply lg:hidden;
+		z-index: var(--z-index-nav-blur);
+	}
+
+	// Tier-2 submenu state, for mobile/tablet
+	&.tier-two-visible {
+		@screen lg-max {
+			.back-to-tier1-wrap {
+				@apply opacity-100 visible translate-x-0;
+			}
+
+			.main-menu {
+				@apply -translate-x-full;
+
+				// Animate tier-1 chevron out
+				> .menu-item {
+					&:not(.active) {
+						@apply invisible opacity-0;
+					}
+
+					> a::after {
+						@apply opacity-0 invisible;
+					}
+				}
+			}
+
+			.cta-wrap {
+				@apply opacity-0 invisible;
+			}
+
+			.cta-links {
+				@apply -translate-x-full;
+			}
+		}
+	}
+
+	// Back button, for mobile/tablet
+	.back-to-tier1-wrap {
+		@apply w-full absolute top-px65 left-0 pl-px24;
+		@apply transition-all duration-300 ease-out opacity-0 invisible;
+		@apply transform-gpu translate-x-full;
+
+		@screen lg2 {
+			@apply hidden;
+		}
+	}
+
+	.back-to-tier1 {
+		@apply flex items-center;
+		@apply font-bold text-px14 leading-px20 tracking-em001 text-indigo;
+
+		// Chevron
+		&::before {
+			@apply leading-px20 transform rotate-180;
+			font-family: 'trevor-ti';
+			font-size: rem-calc(10px);
+			content: $font-trevor-ti-chevron-thick-right;
+			margin-right: rem-calc(9px);
+		}
+	}
+
+	// Menu for desktop
+	.menu-wrap {
+		@screen lg2 {
+			@apply static m-0 top-0 h-auto overflow-visible w-auto;
+			@apply transform-gpu;
+			@apply transition-all duration-300 opacity-100 visible;
+			@apply py-0 translate-x-0 -mr-px30;
+			@apply bg-transparent;
+		}
+	}
+
+	.main-menu-container {
+		@screen lg2 {
+			@apply pointer-events-auto p-0;
+		}
+	}
+
+	// Main menu large breakpoint
+	.main-menu {
+		@screen lg2 {
+			// Caret, hidden in top-nav
+			.submenu-icon {
+				@apply hidden;
+			}
+
+			// Tier 1 menu
+			> .menu-item {
+				@apply pr-px10;
+
+				&:not(:first-child) {
+					@apply ml-px38;
+				}
+			}
+
+			// Chevron
+			> .menu-item > a::after {
+				@apply rotate-90;
+			}
+
+			// Hover/Focus state
+			& > .menu-item:hover,
+			& > .menu-item:focus-within {
+				// Rotate chevron
+				> a::after {
+					@screen lg2 {
+						@apply -rotate-90 text-opacity-100;
+					}
+				}
+			}
+
+			.trevor-ti-caret-down {
+				@apply hidden;
+			}
+
+			> .menu-item > a {
+				@apply p-0;
+			}
+
+			// Tier 1 submenu
+			> .menu-item > .sub-menu {
+        @apply text-indigo;
+				@apply pt-px24 pb-px32;
+			}
+		}
+	}
+
+	// Resources/Support menu, for mobile/tablet
+	&.is_rc {
+		@screen lg-max {
+			.main-menu-container-resources {
+				@apply visible opacity-100 pointer-events-auto;
+			}
+
+			.main-menu-container-organization {
+				@apply invisible opacity-0 pointer-events-none;
+			}
+		}
+	}
+
+	.search-button {
+		@screen lg2 {
+			@apply hover:opacity-80;
+		}
+	}
+
+  .top-nav-inner {
+    @screen mobile {
+      max-width: none;
+    }
+
+    @screen lg2 {
+      @apply px-px20;
+
+      width: calc(100% - 80px);
+    }
+  }
+}
+
+.top-nav-inner {
+	@apply static flex flex-row items-center justify-between h-full;
+	@apply mx-auto;
+
+  @screen md {
+    @apply px-0;
+  }
+
+	@screen lg {
+		@apply pb-0 pt-px32 items-start;
+	}
+
+	.logo-wrap {
+		@apply -mt-px10;
+
+		@screen md {
+			@apply mt-0;
+		}
+
+    body.error404 & {
+      @apply text-orange;
+    }
+	}
+
+	.logo-icon {
+		@apply absolute;
+		top: -0.75rem;
+		right: -0.25rem;
+	}
+
+
+  .site-logo {
+    width: #{rem-calc(154)};
+
+    @screen md {
+      width: #{rem-calc(183)};
+    }
+
+    @screen xl {
+      width: #{rem-calc(242)};
+    }
+  }
+
+	// Opener
+	.opener-wrap {
+		@apply flex items-center z-1;
+
+		@screen lg2 {
+			@apply hidden;
+		}
+	}
+
+	.opener {
+		font-size: 3rem;
+		padding-bottom: 1.75rem;
+		@apply cursor-pointer;
+		@apply transition-all duration-300 ease-out;
+		@apply visible opacity-100;
+	}
+
+	// Search Button
+	.search-button {
+		@apply hidden;
+
+		@screen lg2 {
+			@apply block w-px45 h-px45 text-px28 ml-px38 -mt-px10 text-current;
+		}
+	}
+
+	@screen lg2 {
+		.opener {
+			@apply hidden;
+		}
+
+		.menu-wrap {
+			@apply flex text-current;
+			margin-top: -4rem;
+			margin-right: -1.5rem;
+		}
+
+		.logo-icon {
+			@apply block absolute;
+			top: 0.5rem;
+			right: -1rem;
+		}
+	}
+}

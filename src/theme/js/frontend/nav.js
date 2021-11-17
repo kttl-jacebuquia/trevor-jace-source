@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/debounce';
-import { mobileAndTablet } from './match-media';
+import { mobileAndSmallDesktop } from './match-media';
 
 const $window = $(window);
 const $root = $('html');
@@ -14,6 +14,7 @@ const $switcherLinks = $switcher.find('a');
 const $topBar = $('#top-bar');
 const $topbarControls = $topBar.find('.topbar-controls');
 const $topbarNavWrap = $topBar.find('.topbar-nav-wrap');
+const $topbarInner = $topBar.find('.top-bar-inner');
 const $topNav = $('#top-nav');
 const $mainMenus = $('.main-menu');
 const $tier1Links = $mainMenus.find('> .menu-item');
@@ -104,7 +105,7 @@ const onSmallBreakpointsMatch = () => {
 	isLargeBreakpoint = false;
 
 	// Moving some elements for accessibility
-	$ctaLinks.detach().appendTo($topNav);
+	$ctaLinks.detach().insertBefore($topbarControls);
 	$switcher.detach().insertAfter($topbarControls);
 
 	// Remove duplicate nav
@@ -114,7 +115,7 @@ const onNotSmallBreakpointsMatch = () => {
 	isLargeBreakpoint = true;
 
 	// Moving some elements for accessibility
-	$ctaLinks.detach().insertAfter($topbarLogo);
+	$ctaLinks.detach().appendTo($topbarInner);
 	$switcher.detach().insertAfter($topbarLogo);
 
 	// Duplicate nav
@@ -176,4 +177,4 @@ $switcherLinks.on('click', onSwitcherClick); // Switch link click
 $tier1Links.find('> a').on('click', onTier1LinkClick); // Tier-1 link click
 $backToTier1.on('click', onBackToTier1Click);
 
-mobileAndTablet(onSmallBreakpointsMatch, onNotSmallBreakpointsMatch);
+mobileAndSmallDesktop(onSmallBreakpointsMatch, onNotSmallBreakpointsMatch);

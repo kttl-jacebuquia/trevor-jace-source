@@ -19,7 +19,7 @@ body {
   // Fixed content when nav is expanded for mobile/tablet
   &.is-fixed,
   &.error404 {
-  	@screen md-max {
+  	@screen lg-max {
   		@apply fixed;
 	  	top: var(--fixed-body-top);
   	}
