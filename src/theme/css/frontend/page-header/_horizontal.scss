@@ -12,11 +12,11 @@
   // Add top padding to the next module to account for the image overflow
   + main > *:first-child {
     @screen md {
-      @apply pt-px165;
+      @apply pt-px165 mt-0;
     }
 
     @screen lg2 {
-      @apply pt-px410;
+      @apply pt-px410 mt-0;
     }
   }
 }
