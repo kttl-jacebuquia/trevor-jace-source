@@ -109,8 +109,18 @@
       }
     }
 
-    .floating-label-input--activated .label {
-      width: 140%;
+    .floating-label-input--activated {
+      .label {
+        width: 140%;
+      }
+
+      &[data-input-tag="textarea"] {
+        .label {
+          @screen md {
+            width: 132%;
+          }
+        }
+      }
     }
 
     .inputWrapper {
