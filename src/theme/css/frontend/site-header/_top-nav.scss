@@ -63,13 +63,9 @@
 				}
 			}
 
-			.cta-wrap {
-				@apply opacity-0 invisible;
-			}
-
-			.cta-links {
-				@apply -translate-x-full;
-			}
+      .top-nav__cta-wrap {
+        @apply -translate-x-full opacity-0 invisible;
+      }
 		}
 	}
 
@@ -192,6 +188,28 @@
       @apply px-px20;
 
       width: calc(100% - 80px);
+    }
+  }
+
+  // CTA
+  .top-nav__cta-wrap {
+    @apply flex w-full justify-center bg-white transform-gpu;
+    @apply fixed bottom-px50;
+    @apply transition-all duration-300 py-0;
+    will-change: transform;
+
+    @screen md {
+      @apply hidden;
+    }
+
+    // Landscape mobile-tablet
+    @media (orientation: landscape) {
+      @apply static mt-px20;
+    }
+
+    .btn.bg-orange {
+      @apply bg-orange rounded-px100 h-px52;
+      @apply text-px20 leading-px20 font-bold py-0;
     }
   }
 }

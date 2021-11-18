@@ -151,6 +151,14 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				);
 				?>
 
+				<div class="top-nav__cta-wrap">
+					<a href="<?php echo esc_url( $counselor_link['url'] ); ?>"
+						class="btn bg-orange text-white"
+						target="<?php echo esc_attr( $counselor_link['target'] ); ?>">
+						<?php echo esc_html( $counselor_link['title'] ); ?>
+					</a>
+				</div>
+
 				<a class="search-button" href="<?php echo get_search_link(); ?>">
 					<i class="trevor-ti-search"></i>
 				</a>
