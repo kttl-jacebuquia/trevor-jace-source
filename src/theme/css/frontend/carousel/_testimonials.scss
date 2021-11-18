@@ -10,6 +10,15 @@
     @apply py-px80;
   }
 
+  // Text color variants
+  @each $color-name in map-keys($theme-colors) {
+    &.#{unquote("text-" + $color-name)} {
+      .swiper-pagination-bullet {
+        background-color: tw-color($color-name);
+      }
+    }
+  }
+
   &-inner {
     @apply tw-grid container mx-auto;
 
@@ -130,7 +139,7 @@
       }
 
       &-bullet {
-        @apply bg-current bg-opacity-20;
+        @apply bg-opacity-20 opacity-100;
         @apply z-2;
 
         &-active {

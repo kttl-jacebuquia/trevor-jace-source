@@ -43,6 +43,10 @@ export default function testimonialsCarousel(id) {
 		return new Swiper(imgWrap.querySelector('.swiper-container'), {
 			slidesPerView: 1,
 			effect: 'fade',
+			on: {
+				afterInit: onSlideChange,
+				slideChange: onSlideChange,
+			},
 		});
 	}
 
