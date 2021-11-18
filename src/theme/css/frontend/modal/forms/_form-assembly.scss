@@ -64,18 +64,6 @@
         width: calc((100% - theme("gap.md")) / 2);
       }
 
-      &.errFld {
-        @apply mb-px30;
-
-        .errMsg {
-          @apply absolute py-0;
-        }
-
-        input {
-          border: 0 !important;
-        }
-      }
-
       &[data-input-tag="textarea"] {
         @screen md {
           @apply w-full;

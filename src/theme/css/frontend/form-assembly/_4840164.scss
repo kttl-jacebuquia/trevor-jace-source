@@ -9,4 +9,11 @@ form[id="4840164"] {
       @apply mt-px20;
     }
   }
+
+  // Speaker textarea
+  #tfa_1899-D {
+    @screen mobile {
+      @apply mt-px45;
+    }
+  }
 }

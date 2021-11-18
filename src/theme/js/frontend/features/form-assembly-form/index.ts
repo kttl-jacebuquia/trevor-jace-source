@@ -52,8 +52,12 @@ class FormAssemblyForm extends Component {
 		e.preventDefault();
 		const form = e.currentTarget as HTMLFormElement;
 
+		this.preValidation();
+
 		// Delayed process in order for FormAssembly's validator to fire first
 		setTimeout(async () => {
+			this.postValidation();
+
 			const errorFields = form.querySelectorAll('.errFld');
 
 			// Don't submit if there's any error
@@ -84,7 +88,7 @@ class FormAssemblyForm extends Component {
 			if (/success/i.test(response?.status || '')) {
 				this.onSubmitSuccess();
 			}
-		}, 100);
+		}, 300);
 	}
 
 	onSubmitSuccess() {
@@ -108,6 +112,70 @@ class FormAssemblyForm extends Component {
 		});
 
 		this.emit('reset');
+	}
+
+	// Runs before the FormAssembly validator kicks in
+	preValidation() {
+		// Ensures that we clear out the manual errors we inserted,
+		// which are possibly left out by the FormAssembly script
+		this.clearOutErrorMessages();
+	}
+
+	clearOutErrorMessages() {
+		const errorMessages = this.element.querySelectorAll(
+			'.errMsg'
+		) as unknown as FormAssemblyElementCollection;
+
+		errorMessages.forEach((errorMessage: FormAssemblyElement) => {
+			errorMessage.innerHTML = '';
+		});
+	}
+
+	// For some FormAssembly embeds,
+	// Not all errors are showing up on empty required fields.
+	// We'll be manually adding them as workaround
+	postValidation() {
+		const requiredLabels = this.element.querySelectorAll(
+			'.label.reqMark'
+		) as unknown as FormAssemblyElementCollection;
+		const requiredFields = requiredLabels.map(
+			(label: FormAssemblyElement) => label?.parentElement
+		) as Array<FormAssemblyElement | null>;
+
+		const requiredFieldsWithoutErrors = requiredFields.filter(
+			(requiredField: FormAssemblyElement | null) => {
+				if (
+					!requiredField ||
+					requiredField.classList.contains('offstate')
+				) {
+					return false;
+				}
+
+				const field:
+					| HTMLInputElement
+					| HTMLTextAreaElement
+					| HTMLSelectElement
+					| null =
+					requiredField?.querySelector('[name^="tfa_"]') || null;
+				const errorMsg: HTMLElement | null =
+					requiredField?.querySelector('.errMsg') || null;
+				return !field?.value && !errorMsg;
+			}
+		);
+
+		// Manually add errors
+		if (requiredFieldsWithoutErrors.length) {
+			requiredFieldsWithoutErrors.forEach(
+				(requiredField: FormAssemblyElement | null) => {
+					if (requiredField) {
+						const [id] = requiredField.id.split('-');
+						const errorMsg = `<div id="${id}-E" class="errMsg" tabindex="-1"><span>This field is required.</span></div>`;
+						requiredField.insertAdjacentHTML('beforeend', errorMsg);
+						requiredField.classList.add('errFld');
+					}
+				}
+			);
+		}
 	}
 
 	// Attaches event listener
