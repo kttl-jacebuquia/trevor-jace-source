@@ -212,14 +212,6 @@
         right: theme('container.padding.lg');
       }
     }
-
-    // Hide arrows if there are only 3 cards
-    &.card-count-3 {
-      .swiper-button-next,
-      .swiper-button-prev {
-        @apply hidden;
-      }
-    }
   }
 
   @screen lg2 {
