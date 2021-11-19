@@ -1,8 +1,4 @@
 .form-modal {
-  .modal-container {
-    @apply shadow-none;
-  }
-
   &__heading {
     @screen lg {
       @apply mx-0;
@@ -16,7 +12,7 @@
   }
 
   .wFormContainer {
-    @apply text-current mx-0 w-full max-w-none;
+    @apply text-current mx-0 mb-0 w-full max-w-none;
 
     .wFormHeader {
       @apply hidden;
@@ -72,12 +68,6 @@
 
         label {
           @apply pt-px20 pb-px10;
-        }
-      }
-
-      &[data-input-tag="select"] {
-        label {
-          @apply text-blue_green;
         }
       }
 
@@ -148,5 +138,10 @@
         }
       }
     }
+  }
+
+  & .wFormFooter,
+  & .supportInfo {
+    @apply hidden;
   }
 }

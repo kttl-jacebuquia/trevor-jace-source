@@ -9,14 +9,18 @@
     @apply bg-white text-blue_green;
   }
 
+  .modal-wrap {
+    @apply flex container mx-auto;
+  }
+
   .modal-container {
-    @apply bg-blue_green max-w-none max-h-full;
+    @apply bg-blue_green max-w-none max-h-full shadow-none;
     @include bleed-always( true );
   }
 
   .modal-content-wrap {
-    @apply container mx-auto;
     @apply tw-grid;
+    @apply container mx-auto shadow-none items-start;
   }
 
   &__content {
