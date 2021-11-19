@@ -1,5 +1,9 @@
 .newsletter-form {
   legend {
+    @screen md {
+      @apply mb-px50;
+    }
+
     @screen lg {
       @apply mb-px40;
     }
