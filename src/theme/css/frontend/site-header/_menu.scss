@@ -10,6 +10,11 @@
 	width: var(--nav-menu-width);
 	z-index: var(--z-index-nav-menu);
 
+  // Landscape
+  @media (orientation: landscape) {
+    @apply flex-wrap;
+  }
+
 	@screen lg2 {
 		@apply visible opacity-100;
 	}
@@ -186,7 +191,7 @@
 
 		// Tier-1 submenu
 		> .sub-menu {
-			@apply absolute left-0 w-full opacity-0 invisible overflow-auto;
+			@apply absolute hidden left-0 w-full opacity-0 invisible overflow-auto;
 			@apply transform-gpu translate-x-full;
 			@apply transition-all duration-300 ease-out;
       @apply bg-white text-indigo;

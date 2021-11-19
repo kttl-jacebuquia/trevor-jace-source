@@ -175,4 +175,10 @@ body.is-navigation-open {
       @apply translate-x-0 visible opacity-100;
     }
   }
+
+  .main-menu > .menu-item.active > .sub-menu {
+    @screen lg-max {
+      @apply block;
+    }
+  }
 }
