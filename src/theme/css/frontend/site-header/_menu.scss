@@ -1,7 +1,7 @@
 // Menu
 /* @see: .main-menu-container */
 .menu-wrap {
-	@apply flex flex-wrap fixed right-0 py-px55 overflow-x-hidden;
+	@apply flex fixed right-0 py-px55 overflow-x-hidden;
 	@apply transform-gpu translate-x-full;
 	@apply transition-all duration-300 ease-out;
 	@apply invisible opacity-0;

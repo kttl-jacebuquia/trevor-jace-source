@@ -13,7 +13,7 @@
 	}
 
 	@screen lg2 {
-    @apply absolute left-px30 right-auto top-1/2;
+    @apply absolute left-0 right-auto top-1/2;
 		@apply w-auto h-auto mr-auto pointer-events-auto;
 		@apply -translate-y-1/2;
 	}
