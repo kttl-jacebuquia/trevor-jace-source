@@ -102,6 +102,9 @@ class Hooks {
 		# Add WYSIWYG Toolbars
 		add_filter( 'acf/fields/wysiwyg/toolbars', array( self::class, 'acf_wysiwyg_toolbars' ) );
 
+		# Remove unnecessary ids from navigation items
+		add_filter( 'nav_menu_item_id', '__return_null', 10, 3 );
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 

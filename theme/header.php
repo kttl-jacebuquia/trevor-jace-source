@@ -62,7 +62,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<div id="top-bar" class="top-bar">
 		<div class="top-bar-inner container" role="navigation" aria-label="Top Bar Navigation">
 			<div class="logo-icon">
-				<a href="<?php echo get_home_url(); ?>">
+				<a href="<?php echo get_home_url(); ?>" aria-label="trevor star icon, click to go to the homepage">
 					<i class="trevor-ti-logo-icon"></i>
 				</a>
 			</div>
@@ -88,7 +88,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				<?php /* Will contain menu for desktop, for seamless transition */ ?>
 			</div>
 			<div class="topbar-controls">
-				<a class="topbar-control-search" href="<?php echo get_search_link(); ?>">
+				<a class="topbar-control-search" href="<?php echo get_search_link(); ?>" aria-label="click to search the site">
 					<i class="trevor-ti-search"></i>
 				</a>
 				<button class="topbar-control-opener">
@@ -134,9 +134,10 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				<?php
 				wp_nav_menu(
 					array(
-						'menu_class'      => 'main-menu ' . $nav_color,
+						// 'menu_class'      => 'main-menu ' . $nav_color,
 						'container_class' => 'main-menu-container main-menu-container-resources',
 						'theme_location'  => 'header-support',
+						'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
 					)
 				);
 				?>
@@ -144,9 +145,9 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				<?php
 				wp_nav_menu(
 					array(
-						'menu_class'      => 'main-menu ' . $nav_color,
 						'container_class' => 'main-menu-container main-menu-container-organization',
 						'theme_location'  => 'header-organization',
+						'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
 					)
 				);
 				?>
