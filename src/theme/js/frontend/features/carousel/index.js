@@ -210,6 +210,14 @@ const onSwiperBreakpointChange = (swiper, breakpointParams) => {
 	}
 };
 
+const onSlideMutation = (mutations) => {
+	mutations.forEach(({ target }) => {
+		if (target.getAttribute('role') !== 'article') {
+			target.setAttribute('role', 'article');
+		}
+	});
+};
+
 export const initializeCarousel = (carouselSettings) => {
 	/**
 	 * Initialize remaining carousels
@@ -221,6 +229,13 @@ export const initializeCarousel = (carouselSettings) => {
 	const baseContainer = document.querySelector(baseSelector);
 
 	options.on.afterInit = function (_swiper) {
+		const slideMutationObserver = new window.MutationObserver(
+			onSlideMutation
+		);
+		_swiper.slides.forEach((slide) =>
+			slideMutationObserver.observe(slide, { attributes: true })
+		);
+
 		document
 			.querySelectorAll('.carousel-testimonials .card-post')
 			.forEach((elem) => {
@@ -240,24 +255,35 @@ export const initializeCarousel = (carouselSettings) => {
 
 		applySlidesA11y(_swiper);
 		checkNavigationArrows(_swiper);
+		handleNavigationArrows(_swiper);
 	};
 
 	options.on.slidePrevTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
-		// Focus on the first focusable slide
-		const firstFocusableSlide = [..._swiper.slides]
-			.filter((el) => !el.ariaHidden)
-			.shift();
-		firstFocusableSlide?.focus();
+		// Focus on the last focusable slide
+		if (_swiper.navigatedByNav) {
+			const lastFocusableSlide = [..._swiper.slides]
+				.filter((el) => !el.ariaHidden)
+				.pop();
+			lastFocusableSlide?.focus();
+		} else {
+			_swiper.slides[_swiper.activeIndex]?.focus();
+		}
+		_swiper.navigatedByNav = false;
 	};
 
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
-		// Focus on the last focusable slide
-		const lastFocusableSlide = [..._swiper.slides]
-			.filter((el) => !el.ariaHidden)
-			.pop();
-		lastFocusableSlide?.focus();
+		// Focus on the first focusable slide
+		if (_swiper.navigatedByNav) {
+			const firstFocusableSlide = [..._swiper.slides]
+				.filter((el) => !el.ariaHidden)
+				.shift();
+			firstFocusableSlide?.focus();
+		} else {
+			_swiper.slides[_swiper.activeIndex]?.focus();
+		}
+		_swiper.navigatedByNav = false;
 	};
 
 	options.on.slideChangeTransitionEnd = function (_swiper) {
@@ -338,11 +364,24 @@ export const initializeCarousel = (carouselSettings) => {
 				'invisible',
 				isFirstSlideActive
 			);
+
 			_swiper.navigation?.nextEl.classList.toggle(
 				'invisible',
 				isLastSlideActive
 			);
 		}
+	}
+
+	/**
+	 * Handles additional operations for the navigation
+	 */
+	function handleNavigationArrows(_swiper) {
+		_swiper.navigation?.prevEl?.addEventListener('click', () => {
+			_swiper.navigatedByNav = true;
+		});
+		_swiper.navigation?.nextEl?.addEventListener('click', () => {
+			_swiper.navigatedByNav = true;
+		});
 	}
 
 	function init() {
