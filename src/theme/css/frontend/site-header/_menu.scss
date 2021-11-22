@@ -1,333 +1,335 @@
 // Menu
 /* @see: .main-menu-container */
 .menu-wrap {
-	@apply flex fixed right-0 py-px55 overflow-x-hidden;
-	@apply transform-gpu translate-x-full;
-	@apply transition-all duration-300 ease-out;
-	@apply invisible opacity-0;
-	top: rem-calc(133px); // Just below the switcher
-	height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
-	width: var(--nav-menu-width);
-	z-index: var(--z-index-nav-menu);
+  @apply flex fixed right-0 py-px55 overflow-x-hidden;
+  @apply transform-gpu translate-x-full;
+  @apply transition-all duration-300 ease-out;
+  @apply invisible opacity-0;
+  top: rem-calc(133px); // Just below the switcher
+  height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
+  width: var(--nav-menu-width);
+  z-index: var(--z-index-nav-menu);
 
   // Landscape
-  @media (orientation: landscape) {
-    @apply flex-wrap;
+  @screen lg-max {
+    @media (orientation: landscape) {
+      @apply flex-wrap;
+    }
   }
 
-	@screen lg2 {
-		@apply visible opacity-100;
-	}
+  @screen lg2 {
+    @apply visible opacity-100;
+  }
 }
 
 // Main Menu
 .main-menu-container {
-	@apply transition-all opacity-0 invisible w-full h-full pointer-events-none;
+  @apply transition-all opacity-0 invisible w-full h-full pointer-events-none;
 
   // Landscape
   @media (orientation: landscape) {
     @apply h-auto;
   }
 
-	@screen lg2 {
-		@apply visible opacity-100;
-	}
+  @screen lg2 {
+    @apply visible opacity-100;
+  }
 
-	.submenu-icon {
-		@apply hidden transform-gpu transition-transform duration-300 ease-out;
+  .submenu-icon {
+    @apply hidden transform-gpu transition-transform duration-300 ease-out;
 
-		&:before {
-			font-size: 0.5rem;
-			display: inline-block;
-			vertical-align: middle;
-		}
-	}
+    &:before {
+      font-size: 0.5rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
 
-	// Dropdowns
-	@screen lg2 {
-		@apply pb-4;
-		$general-transition: 280ms all 120ms ease-out;
+  // Dropdowns
+  @screen lg2 {
+    @apply pb-4;
+    $general-transition: 280ms all 120ms ease-out;
 
-		// Convert lists to grid
-		ul {
-			@apply flex items-center;
-			@apply list-none m-0 p-0;
+    // Convert lists to grid
+    ul {
+      @apply flex items-center;
+      @apply list-none m-0 p-0;
 
-			li {
-				@apply p-0;
-			}
-		}
+      li {
+        @apply p-0;
+      }
+    }
 
-		li {
-			@apply block;
-			@apply cursor-pointer;
-		}
+    li {
+      @apply block;
+      @apply cursor-pointer;
+    }
 
-		.logo-wrap {
-			@apply block;
-		}
-	}
+    .logo-wrap {
+      @apply block;
+    }
+  }
 }
 
 .main-menu-container-resources {
-	@screen lg2 {
-		body:not(.is-rc) & {
-			@apply hidden;
-		}
-	}
+  @screen lg2 {
+    body:not(.is-rc) & {
+      @apply hidden;
+    }
+  }
 }
 
 .main-menu-container-organization {
-	@apply opacity-100 visible h-full pointer-events-auto -ml-full;
+  @apply opacity-100 visible h-full pointer-events-auto -ml-full;
 
-	@screen lg2 {
-		@apply ml-0;
+  @screen lg2 {
+    @apply ml-0;
 
-		body.is-rc & {
-			@apply hidden;
-		}
-	}
+    body.is-rc & {
+      @apply hidden;
+    }
+  }
 }
 
 .main-menu {
-	@apply h-full;
-	@apply transform-gpu translate-x-0;
-	@apply transition-transform duration-300 ease-out;
+  @apply h-full;
+  @apply transform-gpu translate-x-0;
+  @apply transition-transform duration-300 ease-out;
 
   @screen lg-max {
     @apply text-indigo;
   }
 
-	// Tier-1 menu link, default state
-	> .menu-item {
-		@apply transition-all duration-300 ease-out;
+  // Tier-1 menu link, default state
+  > .menu-item {
+    @apply transition-all duration-300 ease-out;
 
-		@screen lg2 {
-			@apply relative;
-			@apply pb-px18;
+    @screen lg2 {
+      @apply relative;
+      @apply pb-px18;
 
-			// Desktop styles for hover and show submenu
-			&:hover,
-			&:focus-within {
-				> .sub-menu {
-					@apply scale-y-100 visible opacity-100;
-				}
-			}
-		}
+      // Desktop styles for hover and show submenu
+      &:hover,
+      &:focus-within {
+        > .sub-menu {
+          @apply scale-y-100 visible opacity-100;
+        }
+      }
+    }
 
-		&:not(:first-child) {
-			@screen xl {
-				@apply ml-px38;
-			}
-		}
+    &:not(:first-child) {
+      @screen xl {
+        @apply ml-px38;
+      }
+    }
 
-		// First submenu is left-aligned with the main menu
-		&:first-child > .sub-menu {
-			@screen lg2 {
-				@apply left-0 right-auto translate-x-0;
+    // First submenu is left-aligned with the main menu
+    &:first-child > .sub-menu {
+      @screen lg2 {
+        @apply left-0 right-auto translate-x-0;
 
-				// Submenu caret
-				&::before {
-					@apply left-px10 right-auto translate-x-0;
-				}
-			}
-		}
+        // Submenu caret
+        &::before {
+          @apply left-px10 right-auto translate-x-0;
+        }
+      }
+    }
 
-		// Last submenu is left-aligned with the main menu
-		&:last-child > .sub-menu {
-			@screen lg2 {
-				@apply left-auto -right-px6 translate-x-0;
+    // Last submenu is left-aligned with the main menu
+    &:last-child > .sub-menu {
+      @screen lg2 {
+        @apply left-auto -right-px6 translate-x-0;
 
-				// Submenu caret
-				&::before {
-					@apply left-auto right-px10 translate-x-0;
-				}
-			}
-		}
+        // Submenu caret
+        &::before {
+          @apply left-auto right-px10 translate-x-0;
+        }
+      }
+    }
 
-		.sub-menu__heading {
-			@apply absolute top-px50 left-full w-full;
-			@apply flex justify-start py-px14 px-px24;
-			@apply font-bold text-px24 leading-px30 tracking-em001;
-			@apply transition-all invisible opacity-0;
-			// md
-			@apply md:text-px26 md:leading-px32 md:tracking-em001 md:top-px50 md:py-0;
-			// lg
-			@apply lg:hidden;
-		}
+    .sub-menu__heading {
+      @apply absolute top-px50 left-full w-full;
+      @apply flex justify-start py-px14 px-px24;
+      @apply font-bold text-px24 leading-px30 tracking-em001;
+      @apply transition-all invisible opacity-0;
+      // md
+      @apply md:text-px26 md:leading-px32 md:tracking-em001 md:top-px50 md:py-0;
+      // lg
+      @apply lg:hidden;
+    }
 
-		> a {
-			@apply flex justify-between py-px14 px-px24;
-			@apply transition-all duration-300 ease-out;
-			@apply transform-gpu translate-y-0 translate-x-0;
-			@apply font-bold text-px24 leading-px30 tracking-em001;
-			// md
-			@apply md:text-px26 md:leading-px32 md:tracking-em001;
-			// lg
-			@apply lg:pointer-events-none;
+    > a {
+      @apply flex justify-between py-px14 px-px24;
+      @apply transition-all duration-300 ease-out;
+      @apply transform-gpu translate-y-0 translate-x-0;
+      @apply font-bold text-px24 leading-px30 tracking-em001;
+      // md
+      @apply md:text-px26 md:leading-px32 md:tracking-em001;
+      // lg
+      @apply lg:pointer-events-none;
 
-			// Chevron icon
-			&::after {
-				@apply block transform text-px14 font-bold;
-				@apply transition-opacity duration-300 ease-out opacity-100;
-				font-family: 'trevor-ti';
-				content: $font-trevor-ti-chevron-thick-right;
+      // Chevron icon
+      &::after {
+        @apply block transform text-px14 font-bold;
+        @apply transition-opacity duration-300 ease-out opacity-100;
+        font-family: "trevor-ti";
+        content: $font-trevor-ti-chevron-thick-right;
 
-				@screen lg2 {
+        @screen lg2 {
           color: inherit;
           opacity: 0.44;
 
-					@apply transition-transform ml-px10;
-				}
-			}
+          @apply transition-transform ml-px10;
+        }
+      }
 
-			> .menu-link-text {
-				@screen lg2 {
-					@apply transform-gpu transition-transform duration-300 ease-out;
-					@apply text-px20 leading-px26;
-				}
-			}
-		}
+      > .menu-link-text {
+        @screen lg2 {
+          @apply transform-gpu transition-transform duration-300 ease-out;
+          @apply text-px20 leading-px26;
+        }
+      }
+    }
 
-		// Tier-1 submenu
-		> .sub-menu {
-			@apply absolute hidden left-0 w-full opacity-0 invisible overflow-auto;
-			@apply transform-gpu translate-x-full;
-			@apply transition-all duration-300 ease-out;
+    // Tier-1 submenu
+    > .sub-menu {
+      @apply absolute hidden left-0 w-full opacity-0 invisible overflow-auto;
+      @apply transform-gpu translate-x-full;
+      @apply transition-all duration-300 ease-out;
       @apply bg-white text-indigo;
-			@apply px-px34;
-			top: rem-calc(128px);
-			// height: calc(100% - #{rem-calc(128px)});
+      @apply px-px34;
+      top: rem-calc(128px);
+      // height: calc(100% - #{rem-calc(128px)});
 
       // Landscape
       @media (orientation: landscape) {
         @apply h-auto;
       }
 
-			@screen md {
-				@apply top-px106;
-				// height: calc(100% - #{rem-calc(106px)});
-			}
+      @screen md {
+        @apply top-px106;
+        // height: calc(100% - #{rem-calc(106px)});
+      }
 
-			@screen lg2 {
-				@apply h-auto top-full w-auto p-0 overflow-visible;
-				@apply left-1/2 -translate-x-1/2;
-				@apply bg-white rounded-px10 p-px24 pr-px32;
+      @screen lg2 {
+        @apply h-auto top-full w-auto p-0 overflow-visible;
+        @apply left-1/2 -translate-x-1/2;
+        @apply bg-white rounded-px10 p-px24 pr-px32;
 
-				// submenu caret
-				&::before {
-					@apply block absolute -top-px12 left-1/2;
-					@apply transform-gpu -translate-x-1/2;
-					@apply border-b-px12 border-l-px10 border-r-px10;
-					border-bottom-color: rgba(255, 255, 255, 0.44);
-					border-left-color: transparent;
-					border-right-color: transparent;
-					content: '';
-				}
-			}
+        // submenu caret
+        &::before {
+          @apply block absolute -top-px12 left-1/2;
+          @apply transform-gpu -translate-x-1/2;
+          @apply border-b-px12 border-l-px10 border-r-px10;
+          border-bottom-color: rgba(255, 255, 255, 0.44);
+          border-left-color: transparent;
+          border-right-color: transparent;
+          content: "";
+        }
+      }
 
-			// Empty or not configured links should not
-			// be clickable on desktop
-			& a[href='#'],
-			a[href=''] {
-				@apply lg:pointer-events-none lg:inline-block;
-			}
+      // Empty or not configured links should not
+      // be clickable on desktop
+      & a[href="#"],
+      a[href=""] {
+        @apply lg:pointer-events-none lg:inline-block;
+      }
 
-			// Tier-2 menu link
-			> .menu-item {
-				&:not(:first-child) {
-					@screen lg-max {
-						@apply mt-px22;
-					}
-				}
+      // Tier-2 menu link
+      > .menu-item {
+        &:not(:first-child) {
+          @screen lg-max {
+            @apply mt-px22;
+          }
+        }
 
-				> a > .menu-link-text .title-wrap {
-					@apply font-bold text-px20 leading-px26 tracking-em005;
+        > a > .menu-link-text .title-wrap {
+          @apply font-bold text-px20 leading-px26 tracking-em005;
 
-					@screen lg2 {
-						@apply flex items-center text-px18 leading-px24;
-						@apply whitespace-nowrap;
-					}
+          @screen lg2 {
+            @apply flex items-center text-px18 leading-px24;
+            @apply whitespace-nowrap;
+          }
 
-					// Chevron
-					&::after {
-						@apply transform inline-block ml-px14 text-px14;
-						@apply lg:text-px10 lg:ml-px11;
-						font-family: 'trevor-ti';
-						content: $font-trevor-ti-chevron-thick-right;
-					}
-				}
+          // Chevron
+          &::after {
+            @apply transform inline-block ml-px14 text-px14;
+            @apply lg:text-px10 lg:ml-px11;
+            font-family: "trevor-ti";
+            content: $font-trevor-ti-chevron-thick-right;
+          }
+        }
 
-				> a .subtitle {
-					@apply text-px14 leading-px20 tracking-em001 mt-px6;
-					@apply lg:min-w-px200;
-				}
-			}
+        > a .subtitle {
+          @apply text-px14 leading-px20 tracking-em001 mt-px6;
+          @apply lg:min-w-px200;
+        }
+      }
 
-			// Tier-2 submenu
-			.sub-menu {
-				@apply mt-px22;
+      // Tier-2 submenu
+      .sub-menu {
+        @apply mt-px22;
 
-				@screen md {
-					@apply mt-px26;
-				}
+        @screen md {
+          @apply mt-px26;
+        }
 
-				@screen lg2 {
+        @screen lg2 {
           @apply mt-px22;
-					@apply relative;
-				}
+          @apply relative;
+        }
 
-				.menu-item {
-					&:not(:first-child) {
-						@apply mt-px14;
+        .menu-item {
+          &:not(:first-child) {
+            @apply mt-px14;
 
-						@screen lg2 {
-							@apply mt-0;
-						}
-					}
+            @screen lg2 {
+              @apply mt-0;
+            }
+          }
 
-					@screen lg2 {
-						@apply mt-0;
-					}
+          @screen lg2 {
+            @apply mt-0;
+          }
 
-					.title-wrap {
-						@apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
-						@apply md:whitespace-nowrap md:text-px18 md:leading-px24 md:tracking-em001;
-						@apply lg:text-px16 lg:font-semibold;
-					}
-				}
-			}
-		}
-	}
+          .title-wrap {
+            @apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
+            @apply md:whitespace-nowrap md:text-px18 md:leading-px24 md:tracking-em001;
+            @apply lg:text-px16 lg:font-semibold;
+          }
+        }
+      }
+    }
+  }
 
-	// Tier-1 menu link, active state
-	> .menu-item.active {
-		@screen lg-max {
-			> a {
-				@apply opacity-0 invisible;
-			}
+  // Tier-1 menu link, active state
+  > .menu-item.active {
+    @screen lg-max {
+      > a {
+        @apply opacity-0 invisible;
+      }
 
-			> .sub-menu__heading,
-			> .sub-menu {
-				@apply opacity-100 visible;
-			}
-		}
-	}
+      > .sub-menu__heading,
+      > .sub-menu {
+        @apply opacity-100 visible;
+      }
+    }
+  }
 }
 
 // Dropdown logic for desktop
 @screen lg2 {
-	.main-menu > .menu-item > .sub-menu {
-		@apply grid gap-x-px38 gap-y-px22 items-start;
+  .main-menu > .menu-item > .sub-menu {
+    @apply grid gap-x-px38 gap-y-px22 items-start;
 
-		// Apply 2-column grid when items are >= 4 on tier-1
-		.menu-item:nth-last-child(n + 4) ~ .menu-item:nth-child(even) {
-			@apply col-start-2;
-		}
+    // Apply 2-column grid when items are >= 4 on tier-1
+    .menu-item:nth-last-child(n + 4) ~ .menu-item:nth-child(even) {
+      @apply col-start-2;
+    }
 
-		// Apply 2-column grid when items are >= 4 on tier-2
-		.sub-menu {
-			@apply grid gap-y-px12 gap-x-px38;
-		}
-	}
+    // Apply 2-column grid when items are >= 4 on tier-2
+    .sub-menu {
+      @apply grid gap-y-px12 gap-x-px38;
+    }
+  }
 }
