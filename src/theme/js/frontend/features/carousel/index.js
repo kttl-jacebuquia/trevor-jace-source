@@ -328,21 +328,19 @@ export const initializeCarousel = (carouselSettings) => {
 	 */
 	function checkNavigationArrows(_swiper) {
 		if (_swiper.navigation?.nextEl || _swiper.navigation?.prevEl) {
-			const [firstSlide, ...otherSlides] = Array.from(_swiper.slides);
-			const [lastSlide] = otherSlides.slice(-1);
+			const slidesCount = _swiper.slides.length;
+			const { activeIndex } = _swiper;
 
-			const isFirstSlideVisible =
-				firstSlide?.getBoundingClientRect().left > 0;
-			const isLastSlideVisible =
-				lastSlide?.getBoundingClientRect().right <= window.innerWidth;
+			const isFirstSlideActive = activeIndex === 0;
+			const isLastSlideActive = activeIndex === slidesCount - 1;
 
 			_swiper.navigation?.prevEl.classList.toggle(
 				'invisible',
-				isFirstSlideVisible
+				isFirstSlideActive
 			);
 			_swiper.navigation?.nextEl.classList.toggle(
 				'invisible',
-				isLastSlideVisible
+				isLastSlideActive
 			);
 		}
 	}
