@@ -228,7 +228,7 @@ class Search extends Abstract_Customizer {
 	 */
 	public static function pre_get_posts( \WP_Query $query ): void {
 		if ( $query->is_main_query() && ! is_admin() ) {
-			if ( ! Is::rc() && $query->is_search() ) {
+			if ( ! Is::rc() && $query->is_search() && ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
 				$search = OP_Search::get_search();
 				$query->set( 'post_type', self::get_scope_post_types( self::get_current_scope() ) );
 				$query->set( 'posts_per_page', $search['posts_per_page'] );
@@ -398,6 +398,81 @@ class Search extends Abstract_Customizer {
 		return $q->have_posts()
 				? reset( $q->posts )
 				: null;
+	}
+
+	public static function get_pages() {
+		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
+			return null;
+		}
+
+		$q = new \WP_Query(
+			array(
+				's'              => get_search_query( false ),
+				'post_type'      => 'page',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+			)
+		);
+
+		return $q->have_posts()
+				? $q->posts
+				: array();
+	}
+
+	public static function get_all_posts() {
+		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
+			return null;
+		}
+
+		$q = new \WP_Query(
+			array(
+				's'              => get_search_query( false ),
+				'post_type'      => array(
+					CPT\RC\Article::POST_TYPE,
+					CPT\RC\External::POST_TYPE,
+					CPT\RC\Guide::POST_TYPE,
+					CPT\Post::POST_TYPE,
+				),
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+			)
+		);
+
+		return $q->have_posts()
+				? $q->posts
+				: array();
+	}
+
+	public static function paginate_search_results() {
+		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
+			return null;
+		}
+
+		$search_results = array_merge( self::get_pages(), self::get_all_posts() );
+
+		$page   = ! empty( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		$search = OP_Search::get_search();
+
+		$total = count( $search_results );
+		$limit = $search['posts_per_page'];
+
+		$totalPages = ceil( $total / $limit );
+
+		$page = max( $page, 1 );
+		$page = min( $page, $totalPages );
+
+		$offset = ( $page - 1 ) * $limit;
+
+		if ( $offset < 0 ) {
+			$offset = 0;
+		}
+
+		$posts = array_slice( $search_results, $offset, $limit );
+
+		return array(
+			'posts' => $posts,
+			'total' => $total,
+		);
 	}
 
 	/**

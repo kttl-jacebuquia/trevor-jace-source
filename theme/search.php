@@ -3,11 +3,22 @@
 use TrevorWP\Parsedown\Parsedown;
 use \TrevorWP\Theme\Customizer\Search as Page;
 use \TrevorWP\Theme\ACF\Field_Group\Featured_Card_Three_Up;
+use TrevorWP\Theme\Customizer\Search;
 
 $search_data = \TrevorWP\Theme\ACF\Options_Page\Search::get_search();
 
-$glossary_item = Page::get_glossary_item()
+$glossary_item = Page::get_glossary_item();
 
+$posts         = $wp_query->posts;
+$total_results = $wp_query->found_posts;
+
+if ( empty( get_query_var( Search::QV_SEARCH_SCOPE ) ) ) {
+	$search_results = Search::paginate_search_results();
+	if ( ! empty( $search_results ) ) {
+		$posts         = $search_results['posts'];
+		$total_results = $search_results['total'];
+	}
+}
 ?>
 <?php get_header(); ?>
 	<main id="site-content" role="main">
@@ -28,11 +39,11 @@ $glossary_item = Page::get_glossary_item()
 				<div class="container mx-auto">
 					<?php echo Page::render_scopes(); ?>
 					<div class="text-indigo text-px18 leading-px26 lg:text-px20 lg:leading-px30 mb-px30 lg:mb-px40">
-						<strong><?php echo $wp_query->found_posts; ?> Results</strong> for
+						<strong><?php echo $total_results; ?> Results</strong> for
 						<strong>“<?php echo get_search_query( false ); ?>”</strong>
 					</div>
 
-					<?php if ( have_posts() ) : ?>
+					<?php if ( ! empty( $posts ) ) : ?>
 						<?php if ( ! empty( $glossary_item ) ) : ?>
 							<div class="w-full bg-gray-light text-indigo p-px30 mb-14 md:mb-16 rounded-px10 md:p-px40 xl:w-3/4">
 								<h3 class="font-bold lg:font-semibold text-px22 leading-px28 lg:text-px24 lg:leading-px34 tracking-px05 mb-px8 md:mb-px16 lg:mb-px10"><?php echo @$glossary_item->post_title_t; ?></h3>
@@ -42,9 +53,8 @@ $glossary_item = Page::get_glossary_item()
 						<?php endif; ?>
 						<div class="grid grid-cols-1 gap-8 md:gap-10">
 							<?php
-							while ( have_posts() ) {
-								the_post();
-								echo Page::render_post( get_post() );
+							foreach ( $posts as $post ) {
+								echo Page::render_post( $post );
 							}
 							?>
 						</div>

@@ -23,7 +23,7 @@ get_header();
 						<?php the_content(); ?>
 						<?php echo \TrevorWP\Theme\Helper\Post::render_content_footer( $post ); ?>
 					</div>
-					<?php if ( $with_sidebar ): ?>
+					<?php if ( $with_sidebar ) : ?>
 						<?php $side_blocks = \TrevorWP\Theme\Helper\Post::render_side_blocks( $post ); ?>
 						<div class="post-content-sidebar<?php echo empty( $side_blocks ) ? ' empty' : ''; ?>">
 							<?php echo $side_blocks; ?>
