@@ -6,7 +6,7 @@
 	@apply transition-all duration-300 ease-out;
 	@apply py-px11 px-px8;
 	@apply transform-gpu translate-x-full;
-	z-index: var(--z-index-nav-switcher);
+	z-index: var(--z-index-nav-burger);
 }
 
 .btn.burger-nav-control {

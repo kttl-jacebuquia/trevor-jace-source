@@ -4,7 +4,7 @@
 #top-bar {
 	@apply fixed top-0 left-0;
 	@apply w-full h-px84;
-	@apply transition-transform duration-300 ease-out;
+	@apply transition-all duration-300 ease-out;
 	@apply transform-gpu -translate-y-full bg-white;
 	z-index: var(--z-index-topbar);
 
@@ -12,7 +12,7 @@
 		@apply h-px106;
 	}
 
-	@screen lg2 {
+	@screen lg {
 		@apply sticky mt-0 pt-0 -top-px2;
 		@apply h-px80 max-h-none;
 		@apply border-b-px6 border-orange;
@@ -27,7 +27,7 @@
 		@apply absolute left-0 w-full bg-white -bottom-px3 h-full;
 		@apply transform-gpu translate-y-0 transition-all duration-300 ease-out;
 
-		@screen lg2 {
+		@screen lg {
 			@apply static bottom-0;
 		}
 	}
@@ -45,12 +45,12 @@
 		}
 
 		@screen lg {
-			@apply relative px-0 m-auto;
+			@apply relative px-0 m-auto justify-end;
 			width: calc(100% - 80px);
 		}
 
     @screen lg2 {
-      @apply gap-x-px24 justify-end;
+      @apply gap-x-px24;
     }
 	}
 
@@ -65,11 +65,12 @@
 			@apply w-px50 h-px50;
 		}
 
-		@screen lg {
-			@apply w-px42 h-px42 overflow-hidden mr-px28;
+		@screen lg-only {
+			@apply hidden;
 		}
 
     @screen lg2 {
+      @apply w-px42 h-px42 overflow-hidden mr-px28;
       @apply absolute left-0 top-1/2 -translate-y-1/2;
       @apply opacity-0 invisible;
     }
@@ -79,7 +80,7 @@
 			@apply w-full h-full;
 			@apply transform-gpu;
 
-			@screen lg2 {
+			@screen lg {
 				@apply translate-y-full text-px38;
 			}
 		}
@@ -101,12 +102,69 @@
 	.topbar-nav-wrap {
 		@apply hidden;
 
-		@screen lg2 {
+		@screen lg {
 			@apply block overflow-visible ml-auto;
 			@apply transition-all duration-300 ease-out;
 			@apply opacity-0 invisible;
 		}
 	}
+
+  .switcher-wrap {
+    @apply overflow-x-hidden pointer-events-none flex-shrink-0;
+    @apply transform-gpu;
+    @apply transition-all duration-300 ease-out;
+    z-index: var(--z-index-nav-switcher);
+
+    @screen lg {
+      @apply absolute left-0 right-auto top-1/2;
+      @apply w-auto h-auto mr-auto pointer-events-auto;
+      @apply -translate-y-1/2;
+    }
+
+    .switcher {
+      @apply list-none;
+      @apply flex items-end w-full h-full flex-1;
+      @apply transform-gpu translate-x-full;
+      @apply transition-all duration-300 ease-out;
+      @apply opacity-0 invisible;
+      top: $top--bar-height-mobile;
+      z-index: var(--z-index-nav-switcher);
+
+      @screen lg {
+        @apply translate-x-0 bg-transparent;
+        @apply opacity-100 visible;
+      }
+
+      > li {
+        @apply flex-1;
+        line-height: rem-calc(16);
+        height: rem-calc(50);
+
+        &:not(:first-child) {
+          @screen lg {
+            @apply ml-px18;
+          }
+        }
+
+        > a {
+          @screen lg {
+            @apply flex justify-center items-center h-full whitespace-nowrap;
+            @apply font-manrope font-light text-indigo;
+            @apply px-0 bg-transparent transition-opacity duration-300;
+            @apply text-px16 leading-px20;
+
+            &:hover {
+              @apply opacity-80;
+            }
+          }
+
+          &.active {
+            @apply font-extrabold bg-white;
+          }
+        }
+      }
+    }
+  }
 
 	.main-menu-container {
 		@screen lg {
@@ -197,6 +255,14 @@
 		}
 	}
 
+  // CTAs
+  .cta-wrap {
+    @screen lg-only {
+      @apply transform-gpu translate-x-px50;
+      @apply transition-transform duration-300 ease-out;
+    }
+  }
+
 	// Top Bar Controls
 	.topbar-controls {
 		@apply flex transition-transform duration-300 ease-out;
@@ -207,7 +273,7 @@
       @apply -ml-px40;
     }
 
-		@screen lg2 {
+		@screen lg {
 			@apply overflow-hidden;
 		}
 	}
@@ -219,7 +285,7 @@
 		@apply mr-px15 text-px22;
 		@apply transition-all duration-300 ease-out invisible opacity-0;
 
-		@screen lg2 {
+		@screen lg {
 			@apply transform-gpu translate-y-full visible opacity-100;
 			@apply bg-transparent text-indigo;
 			@apply mx-0;
@@ -240,6 +306,11 @@
 		@apply text-px40 text-indigo;
 		width: rem-calc(45px);
 		height: rem-calc(45px);
+
+    @screen lg-only {
+      @apply invisible opacity-0 transition-all duration-300 ease-out;
+      @apply transform-gpu translate-x-full;
+    }
 
 		@screen lg2 {
 			@apply hidden;

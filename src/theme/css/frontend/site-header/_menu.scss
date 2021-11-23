@@ -1,38 +1,28 @@
 // Menu
 /* @see: .main-menu-container */
 .menu-wrap {
-  @apply flex fixed right-0 py-px55 overflow-x-hidden;
+  @apply py-px55 overflow-x-hidden;
   @apply transform-gpu translate-x-full;
   @apply transition-all duration-300 ease-out;
   @apply invisible opacity-0;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   top: rem-calc(133px); // Just below the switcher
   height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
   width: var(--nav-menu-width);
   z-index: var(--z-index-nav-menu);
 
-  // Landscape
-  @screen lg-max {
-    @media (orientation: landscape) {
-      @apply flex-wrap;
-    }
-  }
-
-  @screen lg2 {
+  @screen lg {
     @apply visible opacity-100;
   }
 }
 
 // Main Menu
 .main-menu-container {
-  @apply transition-all opacity-0 invisible w-full h-full pointer-events-none;
+  @apply transition-all opacity-0 invisible w-full h-auto pointer-events-none;
 
-  // Landscape
-  @media (orientation: landscape) {
-    @apply h-auto;
-  }
-
-  @screen lg2 {
-    @apply visible opacity-100;
+  @screen lg {
+    @apply visible opacity-100 ml-auto w-auto;
   }
 
   .submenu-icon {
@@ -46,19 +36,9 @@
   }
 
   // Dropdowns
-  @screen lg2 {
+  @screen lg {
     @apply pb-4;
     $general-transition: 280ms all 120ms ease-out;
-
-    // Convert lists to grid
-    ul {
-      @apply flex items-center;
-      @apply list-none m-0 p-0;
-
-      li {
-        @apply p-0;
-      }
-    }
 
     li {
       @apply block;
@@ -72,39 +52,43 @@
 }
 
 .main-menu-container-resources {
-  @screen lg2 {
-    body:not(.is-rc) & {
+  @screen lg {
+    body:not(.is-rc) #top-nav & {
       @apply hidden;
     }
   }
 }
 
 .main-menu-container-organization {
-  @apply opacity-100 visible h-full pointer-events-auto -ml-full;
+  @apply opacity-100 visible h-full pointer-events-auto;
 
-  @screen lg2 {
+  @screen lg {
     @apply ml-0;
 
-    body.is-rc & {
+    body.is-rc #top-nav & {
       @apply hidden;
     }
   }
 }
 
 .main-menu {
-  @apply h-full;
-  @apply transform-gpu translate-x-0;
-  @apply transition-transform duration-300 ease-out;
+  @apply transform-gpu;
+  @apply transition-all duration-300 ease-out;
 
-  @screen lg-max {
-    @apply text-indigo;
+  @screen lg {
+    @apply flex items-center;
+    @apply list-none m-0 p-0;
+
+    li {
+      @apply p-0;
+    }
   }
 
   // Tier-1 menu link, default state
   > .menu-item {
     @apply transition-all duration-300 ease-out;
 
-    @screen lg2 {
+    @screen lg {
       @apply relative;
       @apply pb-px18;
 
@@ -125,7 +109,7 @@
 
     // First submenu is left-aligned with the main menu
     &:first-child > .sub-menu {
-      @screen lg2 {
+      @screen lg {
         @apply left-0 right-auto translate-x-0;
 
         // Submenu caret
@@ -137,7 +121,7 @@
 
     // Last submenu is left-aligned with the main menu
     &:last-child > .sub-menu {
-      @screen lg2 {
+      @screen lg {
         @apply left-auto -right-px6 translate-x-0;
 
         // Submenu caret
@@ -152,10 +136,14 @@
       @apply flex justify-start py-px14 px-px24;
       @apply font-bold text-px24 leading-px30 tracking-em001;
       @apply transition-all invisible opacity-0;
-      // md
-      @apply md:text-px26 md:leading-px32 md:tracking-em001 md:top-px50 md:py-0;
-      // lg
-      @apply lg:hidden;
+
+      @screen md {
+        @apply text-px26 leading-px32 tracking-em001 top-px50 py-0;
+      }
+
+      @screen lg {
+        @apply hidden;
+      }
     }
 
     > a {
@@ -163,10 +151,14 @@
       @apply transition-all duration-300 ease-out;
       @apply transform-gpu translate-y-0 translate-x-0;
       @apply font-bold text-px24 leading-px30 tracking-em001;
-      // md
-      @apply md:text-px26 md:leading-px32 md:tracking-em001;
-      // lg
-      @apply lg:pointer-events-none;
+
+      @screen md {
+        @apply text-px26 leading-px32 tracking-em001;
+      }
+
+      @screen lg {
+        @apply pointer-events-none;
+      }
 
       // Chevron icon
       &::after {
@@ -175,7 +167,7 @@
         font-family: "trevor-ti";
         content: $font-trevor-ti-chevron-thick-right;
 
-        @screen lg2 {
+        @screen lg {
           color: inherit;
           opacity: 0.44;
 
@@ -184,7 +176,7 @@
       }
 
       > .menu-link-text {
-        @screen lg2 {
+        @screen lg {
           @apply transform-gpu transition-transform duration-300 ease-out;
           @apply text-px20 leading-px26;
         }
@@ -211,7 +203,7 @@
         // height: calc(100% - #{rem-calc(106px)});
       }
 
-      @screen lg2 {
+      @screen lg {
         @apply h-auto top-full w-auto p-0 overflow-visible;
         @apply left-1/2 -translate-x-1/2;
         @apply bg-white rounded-px10 p-px24 pr-px32;
@@ -238,7 +230,7 @@
       // Tier-2 menu link
       > .menu-item {
         &:not(:first-child) {
-          @screen lg-max {
+          @screen md-max {
             @apply mt-px22;
           }
         }
@@ -246,7 +238,7 @@
         > a > .menu-link-text .title-wrap {
           @apply font-bold text-px20 leading-px26 tracking-em005;
 
-          @screen lg2 {
+          @screen lg {
             @apply flex items-center text-px18 leading-px24;
             @apply whitespace-nowrap;
           }
@@ -274,7 +266,7 @@
           @apply mt-px26;
         }
 
-        @screen lg2 {
+        @screen lg {
           @apply mt-px22;
           @apply relative;
         }
@@ -283,12 +275,12 @@
           &:not(:first-child) {
             @apply mt-px14;
 
-            @screen lg2 {
+            @screen lg {
               @apply mt-0;
             }
           }
 
-          @screen lg2 {
+          @screen lg {
             @apply mt-0;
           }
 
@@ -301,24 +293,10 @@
       }
     }
   }
-
-  // Tier-1 menu link, active state
-  > .menu-item.active {
-    @screen lg-max {
-      > a {
-        @apply opacity-0 invisible;
-      }
-
-      > .sub-menu__heading,
-      > .sub-menu {
-        @apply opacity-100 visible;
-      }
-    }
-  }
 }
 
 // Dropdown logic for desktop
-@screen lg2 {
+@screen lg {
   .main-menu > .menu-item > .sub-menu {
     @apply grid gap-x-px38 gap-y-px22 items-start;
 

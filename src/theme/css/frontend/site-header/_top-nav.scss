@@ -33,71 +33,12 @@
 		}
 	}
 
-	// Underlay
-	.top-nav__underlay {
-		@apply absolute top-0 left-0 w-full h-full;
-		@apply transition-all opacity-0 invisible duration-300 ease-out;
-		@apply lg:hidden;
-		z-index: var(--z-index-nav-blur);
-	}
-
-	// Tier-2 submenu state, for mobile/tablet
-	&.tier-two-visible {
-		@screen lg-max {
-			.back-to-tier1-wrap {
-				@apply opacity-100 visible translate-x-0;
-			}
-
-			.main-menu {
-				@apply -translate-x-full;
-
-				// Animate tier-1 chevron out
-				> .menu-item {
-					&:not(.active) {
-						@apply invisible opacity-0;
-					}
-
-					> a::after {
-						@apply opacity-0 invisible;
-					}
-				}
-			}
-
-      .top-nav__cta-wrap {
-        @apply -translate-x-full opacity-0 invisible;
-      }
-		}
-	}
-
-	// Back button, for mobile/tablet
-	.back-to-tier1-wrap {
-		@apply w-full absolute top-px65 left-0 pl-px24;
-		@apply transition-all duration-300 ease-out opacity-0 invisible;
-		@apply transform-gpu translate-x-full;
-
-		@screen lg2 {
-			@apply hidden;
-		}
-	}
-
-	.back-to-tier1 {
-		@apply flex items-center;
-		@apply font-bold text-px14 leading-px20 tracking-em001 text-indigo;
-
-		// Chevron
-		&::before {
-			@apply leading-px20 transform rotate-180;
-			font-family: 'trevor-ti';
-			font-size: rem-calc(10px);
-			content: $font-trevor-ti-chevron-thick-right;
-			margin-right: rem-calc(9px);
-		}
-	}
-
 	// Menu for desktop
 	.menu-wrap {
-		@screen lg2 {
-			@apply static m-0 top-0 h-auto overflow-visible w-auto;
+    @apply hidden;
+
+		@screen lg {
+			@apply flex static m-0 top-0 h-auto overflow-visible w-auto;
 			@apply transform-gpu;
 			@apply transition-all duration-300 opacity-100 visible;
 			@apply py-0 translate-x-0 -mr-px30;
@@ -106,14 +47,14 @@
 	}
 
 	.main-menu-container {
-		@screen lg2 {
+		@screen lg {
 			@apply pointer-events-auto p-0;
 		}
 	}
 
 	// Main menu large breakpoint
 	.main-menu {
-		@screen lg2 {
+		@screen lg {
 			// Caret, hidden in top-nav
 			.submenu-icon {
 				@apply hidden;
@@ -124,7 +65,13 @@
 				@apply pr-px10;
 
 				&:not(:first-child) {
-					@apply ml-px38;
+          @screen lg {
+            @apply ml-px20;
+          }
+
+          @screen lg2 {
+            @apply ml-px38;
+          }
 				}
 			}
 
@@ -138,7 +85,7 @@
 			& > .menu-item:focus-within {
 				// Rotate chevron
 				> a::after {
-					@screen lg2 {
+					@screen lg {
 						@apply -rotate-90 text-opacity-100;
 					}
 				}
@@ -160,21 +107,8 @@
 		}
 	}
 
-	// Resources/Support menu, for mobile/tablet
-	&.is_rc {
-		@screen lg-max {
-			.main-menu-container-resources {
-				@apply visible opacity-100 pointer-events-auto;
-			}
-
-			.main-menu-container-organization {
-				@apply invisible opacity-0 pointer-events-none;
-			}
-		}
-	}
-
 	.search-button {
-		@screen lg2 {
+		@screen lg {
 			@apply hover:opacity-80;
 		}
 	}
@@ -184,32 +118,13 @@
       max-width: none;
     }
 
-    @screen lg2 {
-      @apply px-px20;
-
+    @screen lg {
+      @apply px-0;
       width: calc(100% - 80px);
     }
-  }
 
-  // CTA
-  .top-nav__cta-wrap {
-    @apply flex w-full justify-center bg-white transform-gpu;
-    @apply fixed bottom-px50;
-    @apply transition-all duration-300 py-0;
-    will-change: transform;
-
-    @screen md {
-      @apply hidden;
-    }
-
-    // Landscape mobile-tablet
-    @media (orientation: landscape) {
-      @apply static mt-px20;
-    }
-
-    .btn.bg-orange {
-      @apply bg-orange rounded-px100 h-px52;
-      @apply text-px20 leading-px20 font-bold py-0;
+    @screen lg2 {
+      @apply px-px20;
     }
   }
 }
@@ -223,7 +138,11 @@
   }
 
 	@screen lg {
-		@apply pb-0 pt-px32 items-start;
+		@apply pb-0 pt-px28 items-start;
+	}
+
+  @screen lg2 {
+		@apply pt-px32;
 	}
 
 	.logo-wrap {
@@ -261,7 +180,7 @@
 	.opener-wrap {
 		@apply flex items-center z-1;
 
-		@screen lg2 {
+		@screen lg {
 			@apply hidden;
 		}
 	}
@@ -278,18 +197,22 @@
 	.search-button {
 		@apply hidden;
 
-		@screen lg2 {
-			@apply block w-px45 h-px45 text-px28 ml-px38 -mt-px10 text-current;
+		@screen lg {
+			@apply block w-px45 h-px45 text-px28 ml-px20 -mt-px10 text-current;
 		}
+
+    @screen lg2 {
+      @apply ml-px38;
+    }
 	}
 
-	@screen lg2 {
+	@screen lg {
 		.opener {
 			@apply hidden;
 		}
 
 		.menu-wrap {
-			@apply flex text-current;
+			@apply text-current;
 			margin-top: -4rem;
 			margin-right: -1.5rem;
 		}

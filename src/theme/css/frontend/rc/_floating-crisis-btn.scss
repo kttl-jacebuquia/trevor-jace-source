@@ -1,0 +1,39 @@
+.floating-crisis-btn-wrap {
+  // Defining bottom offsets as CSS variable
+  // In order for JS to pick this up
+  --button-bottom-offset: var(--floating-crisis-button-bottom);
+  @apply sticky z-10 h-0 flex justify-center items-end;
+  bottom: var(--button-bottom-offset);
+
+  @screen md {
+    @apply hidden;
+  }
+
+  .floating-crisis-btn {
+    @apply flex h-px55 justify-center items-center box-border;
+    @apply px-6 rounded-full border-2 border-orange bg-orange text-white shadow-2xl;
+    @apply font-bold text-px20 leading-px20 tracking-em001;
+    @apply whitespace-nowrap mb-px20 transition-all duration-150;
+    @apply lg:hover:bg-orange-light lg:hover:border-orange-light;
+    -webkit-font-smoothing: auto;
+    margin-bottom: rem-calc(20);
+
+    // Light variant
+    &--light {
+      @apply bg-white border-white text-orange;
+      @apply lg:hover:bg-white lg:hover:border-white lg:hover:text-orange-light;
+    }
+
+    body.error404 & {
+      @screen lg2 {
+        @apply mb-px30;
+      }
+    }
+  }
+
+  @screen md {
+    .floating-crisis-btn {
+      @apply text-px20 leading-px20 tracking-px05;
+    }
+  }
+}

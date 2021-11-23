@@ -5,6 +5,7 @@ body.is-rc {
   --site-theme-background-b: theme('colors.indigo.b');
 }
 
+@import "./floating-crisis-btn";
 @import "./cards";
 @import "./hero";
 @import "./carousel";

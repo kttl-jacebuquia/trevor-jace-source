@@ -30,6 +30,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 	--z-index-nav-menu: #{$z-index-nav-menu};
 	--z-index-nav-switcher: #{$z-index-nav-switcher};
 	--z-index-nav-controls: #{$z-index-nav-controls};
+	--z-index-nav-burger: #{$z-index-nav-controls};
 	--z-index-nav-cta: #{$z-index-nav-cta};
 	--z-index-topbar: #{$z-index-topbar};
 
@@ -44,7 +45,7 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 		--nav-menu-width: #{rem-calc(370px)};
 	}
 
-	@screen lg2 {
+	@screen lg {
 		--top-bar-height: #{rem-calc(78px)};
 		--top-nav-height: 11rem;
 	}

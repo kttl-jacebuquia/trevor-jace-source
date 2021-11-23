@@ -1,0 +1,294 @@
+.burger-nav {
+  @screen lg2 {
+    @apply hidden;
+  }
+
+  // Background blur and fill, for mobile/tablet
+  @screen lg-max {
+    &::before {
+      @apply fixed top-0 left-0 w-full h-full bg-white;
+      @apply transform-gpu transition-all duration-300 ease-out opacity-0 invisible;
+      content: "";
+      background-color: rgba(16, 16, 102, 0.2);
+      backdrop-filter: blur(4px);
+      z-index: var(--z-index-nav-blur);
+    }
+
+    &::after {
+      @apply fixed top-0 right-0 h-full bg-white;
+      @apply transform-gpu translate-x-full transition-transform duration-300 ease-out;
+      width: var(--nav-menu-width);
+      content: "";
+      z-index: var(--z-index-nav-white-bg);
+    }
+  }
+
+  // Resources/Support menu, for mobile/tablet
+  &:not(.is_rc) {
+		@screen lg-max {
+			.main-menu-container-organization {
+				@apply visible opacity-100 pointer-events-auto;
+			}
+
+			.main-menu-container-resources {
+				@apply invisible opacity-0 pointer-events-none;
+			}
+		}
+	}
+
+	&.is_rc {
+		@screen lg-max {
+			.main-menu-container-resources {
+				@apply visible opacity-100 pointer-events-auto;
+			}
+
+			.main-menu-container-organization {
+				@apply invisible opacity-0 pointer-events-none;
+			}
+		}
+	}
+
+  // Underlay
+	&__underlay {
+		@apply absolute top-0 left-0 w-full h-full;
+		@apply transition-all opacity-0 invisible duration-300 ease-out;
+		@apply lg:hidden;
+		z-index: var(--z-index-nav-blur);
+	}
+
+  // Switcher
+  .switcher-wrap {
+    @apply fixed right-0 top-0 overflow-x-hidden pointer-events-none flex-shrink-0;
+    @apply transform-gpu;
+    @apply transition-all duration-300 ease-out;
+    width: var(--nav-menu-width);
+    height: rem-calc(133px);
+    z-index: var(--z-index-nav-switcher);
+
+    .switcher {
+      @apply list-none;
+      @apply flex items-end w-full h-full flex-1;
+      @apply transform-gpu translate-x-full;
+      @apply transition-all duration-300 ease-out;
+      @apply opacity-0 invisible;
+      @apply bg-white;
+      top: $top--bar-height-mobile;
+      z-index: var(--z-index-nav-switcher);
+      background-color: rgba(16, 16, 102, 0.04);
+
+      > li {
+        @apply bg-white flex-1;
+        line-height: rem-calc(16);
+        height: rem-calc(50);
+
+        > a {
+          @apply flex justify-center items-center h-full whitespace-nowrap;
+          @apply font-manrope font-light text-px16 leading-px16 tracking-em002;
+          @apply text-indigo;
+          @apply px-2;
+          background-color: rgba(16, 16, 102, 0.04);
+
+          &.active {
+            @apply font-extrabold bg-white;
+          }
+        }
+      }
+    }
+  }
+
+  .menu-wrap {
+    @screen lg-max {
+      @apply grid grid-cols-1 fixed right-0 py-px55 overflow-x-hidden;
+      @apply transform-gpu translate-x-full;
+      @apply transition-all duration-300 ease-out;
+      @apply invisible opacity-0;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      top: rem-calc(133px); // Just below the switcher
+      height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
+      width: var(--nav-menu-width);
+      z-index: var(--z-index-nav-menu);
+    }
+  }
+
+  .main-menu-container {
+    @screen lg-max {
+      @apply col-start-1 row-start-1 ml-0;
+    }
+  }
+
+  .main-menu-container-organization {
+    @apply opacity-100 visible h-full pointer-events-auto;
+  }
+
+  // Back button, for mobile/tablet
+	.back-to-tier1-wrap {
+		@apply w-full absolute top-px65 left-0 pl-px24;
+		@apply transition-all duration-300 ease-out opacity-0 invisible;
+		@apply transform-gpu translate-x-full;
+	}
+
+	.back-to-tier1 {
+		@apply flex items-center;
+		@apply font-bold text-px14 leading-px20 tracking-em001 text-indigo;
+
+		// Chevron
+		&::before {
+			@apply leading-px20 transform rotate-180;
+			font-family: 'trevor-ti';
+			font-size: rem-calc(10px);
+			content: $font-trevor-ti-chevron-thick-right;
+			margin-right: rem-calc(9px);
+		}
+	}
+
+  // MAIN MENU
+  .main-menu {
+    @apply h-full translate-x-0;
+
+    @screen lg-max {
+      @apply text-indigo block;
+    }
+
+    // Tier-1 menu link, default state
+    > .menu-item {
+      @screen lg-max {
+        @apply pb-0 static;
+      }
+
+      .sub-menu__heading {
+        @apply transition-all invisible opacity-0;
+        @apply flex justify-start py-px14 px-px24;
+
+        @screen lg-max {
+          @apply font-bold text-px24 leading-px30 tracking-em001;
+          @apply absolute top-px50 left-full w-full;
+        }
+      }
+
+      > a {
+        @apply flex justify-between py-px14 px-px24;
+        @apply transition-all duration-300 ease-out;
+        @apply transform-gpu translate-y-0 translate-x-0 font-bold;
+
+        @screen lg-max {
+          @apply pointer-events-auto;
+        }
+
+        > .menu-link-text {
+          @screen mobile {
+            @apply text-px24 leading-px30 tracking-em001;
+          }
+
+          @screen lg-max {
+            @apply text-px26 leading-px32 tracking-em001;
+          }
+        }
+
+        // Chevron icon
+        &::after {
+          @apply block transform text-px14 font-bold;
+          @apply transition-opacity duration-300 ease-out opacity-100;
+          font-family: "trevor-ti";
+          content: $font-trevor-ti-chevron-thick-right;
+        }
+      }
+
+      > .sub-menu {
+        @apply absolute hidden left-0 w-full opacity-0 invisible overflow-auto;
+        @apply transform-gpu translate-x-full;
+        @apply transition-all duration-300 ease-out;
+        @apply bg-white text-indigo;
+        @apply px-px34;
+        top: rem-calc(128px);
+
+        // Landscape
+        @media (orientation: landscape) {
+          @apply h-auto;
+        }
+
+        @screen md {
+          @apply top-px106;
+          // height: calc(100% - #{rem-calc(106px)});
+        }
+
+        // Empty or not configured links should not
+        // be clickable on desktop
+        & a[href="#"],
+        a[href=""] {
+          @apply lg:pointer-events-none lg:inline-block;
+        }
+
+        // Tier-2 menu link
+        > .menu-item {
+          &:not(:first-child) {
+            @screen lg-max {
+              @apply mt-px22;
+            }
+          }
+
+          > a > .menu-link-text .title-wrap {
+            @apply font-bold text-px20 leading-px26 tracking-em005;
+
+            // Chevron
+            &::after {
+              @apply transform inline-block ml-px14 text-px14;
+              @apply lg:text-px10 lg:ml-px11;
+              font-family: "trevor-ti";
+              content: $font-trevor-ti-chevron-thick-right;
+            }
+          }
+
+          > a .subtitle {
+            @apply text-px14 leading-px20 tracking-em001 mt-px6;
+            @apply lg:min-w-px200;
+          }
+        }
+
+        // Tier-2 submenu
+        .sub-menu {
+          @apply mt-px22;
+
+          @screen md {
+            @apply mt-px26;
+          }
+
+          .menu-item {
+            &:not(:first-child) {
+              @apply mt-px14;
+            }
+
+            .title-wrap {
+              @apply whitespace-nowrap text-px20 leading-px26 tracking-em001;
+              @apply md:whitespace-nowrap md:text-px18 md:leading-px24 md:tracking-em001;
+              @apply lg:text-px16 lg:font-semibold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // CTA
+  &__cta-wrap {
+    @apply flex flex-col w-full items-center self-end bg-white transform-gpu;
+    @apply row-start-2 col-start-1 gap-y-px18;
+    @apply transition-all duration-300 py-0;
+    will-change: transform;
+
+    // Landscape mobile-tablet
+    @media (orientation: landscape) {
+      @apply static mt-px20;
+    }
+
+    .btn {
+      @apply rounded-px100 h-px52 w-px240 bg-white text-orange;
+      @apply text-px20 leading-px20 font-bold py-0 whitespace-nowrap;
+      box-sizing: border-box;
+
+      &.bg-orange {
+        @apply bg-orange text-white;
+      }
+    }
+  }
+}
