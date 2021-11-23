@@ -253,22 +253,14 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
-				static::FIELD_BUTTON           => array(
-					'key'               => $button,
-					'name'              => static::FIELD_BUTTON,
-					'label'             => 'Button',
-					'type'              => 'group',
-					'layout'            => 'block',
-					'sub_fields'        => Advanced_Link::_get_fields(),
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $entries_source,
-								'operator' => '==',
-								'value'    => 'custom',
-							),
-						),
-					),
+				static::FIELD_BUTTON           => Button::clone(
+					array(
+						'key'     => $button,
+						'name'    => static::FIELD_BUTTON,
+						'label'   => 'Button',
+						'display' => 'group',
+						'layout'  => 'block',
+					)
 				),
 				static::FIELD_SHOW_LOAD_MORE   => array(
 					'key'               => $show_load_more,
@@ -374,14 +366,14 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				}
 				?>
 
-				<?php if ( ! empty( $button_link ) && $button_link['label'] != '' && $button_link['action'] != '' ) : ?>
+				<?php if ( ! empty( $button_link ) && '' !== $button_link['label'] && '' !== $button_link['action'] ) : ?>
 					<div class="topic-cards__block-cta-wrap">
 						<?php
-							echo Advanced_Link::render(
+							echo Button::render(
 								null,
 								$button_link,
 								array(
-									'class' => array( 'topic-cards__block-cta' ),
+									'btn_cls' => array(),
 								)
 							);
 						?>
