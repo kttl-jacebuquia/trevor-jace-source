@@ -658,7 +658,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$carousel_arr  = $val->get( static::FIELD_CAROUSEL );
 			$carousel_data = array();
 
-			if ( 'custom' === $carousel_arr['type'] ) {
+			if ( ! empty( $carousel_arr['data'] ) ) {
 				foreach ( $carousel_arr['data'] as $item ) {
 					$carousel_data[] = array(
 						'img'      => $item['data_img'],
@@ -666,13 +666,6 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 						'subtitle' => $item['data_subtitle'],
 						'cta_txt'  => $item['data_cta'] ? $item['data_cta']['title'] : '',
 						'cta_url'  => $item['data_cta'] ? $item['data_cta']['url'] : '',
-					);
-				}
-			} else {
-				foreach ( $carousel_arr['posts'] as $post_item ) {
-					$carousel_data[] = array(
-						'img'     => array( 'id' => get_post_thumbnail_id( $post_item ) ),
-						'caption' => $post_item->post_title,
 					);
 				}
 			}

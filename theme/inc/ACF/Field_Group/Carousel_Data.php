@@ -11,29 +11,15 @@ class Carousel_Data extends A_Field_Group {
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
-		$type          = static::gen_field_key( static::FIELD_TYPE );
 		$data          = static::gen_field_key( static::FIELD_DATA );
 		$data_img      = static::gen_field_key( static::FIELD_DATA_IMG );
 		$data_title    = static::gen_field_key( static::FIELD_DATA_TITLE );
 		$data_subtitle = static::gen_field_key( static::FIELD_DATA_SUBTITLE );
-		$data_posts    = static::gen_field_key( static::FIELD_POSTS );
 		$data_cta      = static::gen_field_key( static::FIELD_DATA_CTA );
 
 		return array(
 			'title'  => 'Carousel Data',
 			'fields' => array(
-				static::FIELD_TYPE  => array(
-					'key'           => $type,
-					'name'          => static::FIELD_TYPE,
-					'label'         => 'Type',
-					'type'          => 'select',
-					'choices'       => array(
-						'custom' => 'custom',
-						'posts'  => 'posts',
-					),
-					'default_value' => 'custom',
-					'return_format' => 'value',
-				),
 				static::FIELD_DATA  => array(
 					'key'               => $data,
 					'name'              => static::FIELD_DATA,
@@ -42,15 +28,6 @@ class Carousel_Data extends A_Field_Group {
 					'required'          => true,
 					'layout'            => 'table',
 					'max'               => 4,
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $type,
-								'operator' => '==',
-								'value'    => 'custom',
-							),
-						),
-					),
 					'sub_fields'        => array(
 						static::FIELD_DATA_IMG      => array(
 							'key'           => $data_img,
@@ -80,31 +57,6 @@ class Carousel_Data extends A_Field_Group {
 							'label' => 'CTA',
 							'type'  => 'link',
 						),
-					),
-				),
-				static::FIELD_POSTS => array(
-					'key'               => $data_posts,
-					'name'              => static::FIELD_POSTS,
-					'label'             => 'Posts',
-					'type'              => 'relationship',
-					'required'          => true,
-					'return_format'     => 'object',
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $type,
-								'operator' => '==',
-								'value'    => 'posts',
-							),
-						),
-					),
-					'filters'           => array(
-						0 => 'search',
-						1 => 'post_type',
-						2 => 'taxonomy',
-					),
-					'elements'          => array(
-						0 => 'featured_image',
 					),
 				),
 			),
