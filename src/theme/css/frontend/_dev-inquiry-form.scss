@@ -35,7 +35,7 @@
         }
 
         legend {
-          @apply inline-block p-0 col-span-full text-white m-0;
+          @apply inline-block p-0 col-span-full text-white m-0 mt-px20;
 
           div {
             @apply text-current;
@@ -71,9 +71,16 @@
           }
         }
 
-        &[data-input-type="checkbox"] {
+        &[data-input-tag="select"] {
           label {
-            @apply static px-0 ml-px10 pointer-events-auto h-auto;
+            @apply text-white;
+          }
+        }
+
+        &[data-input-type="checkbox"],
+        &[data-input-type="radio"] {
+          label {
+            @apply static px-0 ml-px10 pointer-events-auto h-auto text-white;
           }
         }
 

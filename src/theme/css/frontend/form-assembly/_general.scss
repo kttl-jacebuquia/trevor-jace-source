@@ -1,10 +1,18 @@
 .wForm.wForm {
   .oneField.oneField {
-    &[data-input-type="checkbox"] {
-      label {
-        @apply text-white;
-      }
+    &.offstate {
+      @apply hidden;
+    }
 
+    &[role="group"] {
+      @apply col-span-full;
+
+      > .label {
+        @apply ml-0;
+      }
+    }
+
+    &[data-input-type="checkbox"] {
       input[type="checkbox"]:checked {
         background-image: url(/wp-content/themes/trevor/static/media/checkmark.svg);
         background-position: center;
@@ -22,6 +30,20 @@
       & select,
       & textarea {
         border: 0 !important;
+      }
+    }
+
+    &.floating-label-input--activated {
+      .label {
+        width: 140%;
+      }
+
+      &[data-input-tag="textarea"] {
+        .label {
+          @screen md {
+            width: 132%;
+          }
+        }
       }
     }
   }

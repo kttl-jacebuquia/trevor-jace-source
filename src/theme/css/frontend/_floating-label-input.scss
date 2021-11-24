@@ -33,7 +33,8 @@
   }
 
   // Activated state
-  &--activated:not([data-input-type="checkbox"]) {
+  &--activated:not([data-input-type="checkbox"]),
+  &[data-input-tag="select"] {
     label {
       @apply -translate-x-px20;
       color: var(--activated-label-color);

@@ -3,11 +3,18 @@
 
 import Component from '../../Component';
 
+const ACTIVATED_CLASSLIST = 'floating-label-input--activated';
+
 /**
  * @param {Boolean} options.activated - Whether the field will be activated always
  */
 
 export default class FloatingLabelInput extends Component {
+	options: { [key: string]: any } = {};
+	children?: {
+		input?: HTMLInputElement | HTMLElement;
+	};
+
 	// Defines the element selector which will initialize this component
 	static selector = '.floating-label-input';
 
@@ -29,7 +36,7 @@ export default class FloatingLabelInput extends Component {
 		activated: false,
 	};
 
-	constructor(element, options) {
+	constructor(element: HTMLElement, options: { [key: string]: any }) {
 		super(element);
 
 		const dataOptions = JSON.parse(element.dataset.options || '{}');
@@ -44,28 +51,31 @@ export default class FloatingLabelInput extends Component {
 
 	// Will be called upon component instantiation
 	afterInit() {
-		if (this.children.input) {
+		if (this.children?.input) {
 			this.element.dataset.inputTag =
-				this.children.input.tagName.toLowerCase();
+				this.children?.input?.tagName?.toLowerCase();
 			this.element.dataset.inputType =
-				this.children.input.type?.toLowerCase() || '';
+				this.children?.input?.type?.toLowerCase() || '';
+		}
+
+		// Select tag always activated
+		if (/select/i.test(this.element?.dataset.inputTag || '')) {
+			this.options.activated = true;
+		}
+
+		if (this.options.activated || this.children?.input?.value) {
+			this.state.activated = true;
+			this.element.classList.add(ACTIVATED_CLASSLIST);
 		}
 
 		// Pickup classname changes brought by external components
-		const observer = new window.MutationObserver(this.onMutate.bind(this));
+		const observer = new window.MutationObserver(() => this.onMutate());
 		observer.observe(this.element, { attributes: true });
-
-		this.onInputBlur();
 	}
 
 	onInputBlur() {
 		this.setState({
-			activated:
-				this.options.activated ||
-				this.children.input?.value ||
-				/select/.test(this.element.dataset.inputType)
-					? true
-					: false,
+			activated: this.options.activated || this.children?.input?.value,
 		});
 	}
 
@@ -77,16 +87,16 @@ export default class FloatingLabelInput extends Component {
 
 	onMutate() {
 		this.setState({
-			activated: this.element.classList.contains(
-				'floating-label-input--activated'
-			),
+			activated:
+				this.options.activated ||
+				this.element.classList.contains(ACTIVATED_CLASSLIST),
 		});
 	}
 
 	// Triggers when state is change by calling this.setState()
 	componentDidUpdate() {
 		this.element.classList.toggle(
-			'floating-label-input--activated',
+			ACTIVATED_CLASSLIST,
 			this.state.activated
 		);
 	}

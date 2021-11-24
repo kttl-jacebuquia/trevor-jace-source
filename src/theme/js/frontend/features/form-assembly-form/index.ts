@@ -42,6 +42,9 @@ class FormAssemblyForm extends Component {
 
 			FloatingLabelInput.initializeWithElement(inputField, options);
 		});
+
+		// Cleanup default TFA styles
+		this.removeTFAStylesheets();
 	}
 
 	reset() {
@@ -141,12 +144,18 @@ class FormAssemblyForm extends Component {
 		const requiredFields = requiredLabels.map(
 			(label: FormAssemblyElement) => label?.parentElement
 		) as Array<FormAssemblyElement | null>;
+		const offstateSections = this.element.querySelectorAll(
+			'.section.offstate'
+		) as unknown as FormAssemblyElementCollection;
 
 		const requiredFieldsWithoutErrors = requiredFields.filter(
 			(requiredField: FormAssemblyElement | null) => {
 				if (
 					!requiredField ||
-					requiredField.classList.contains('offstate')
+					requiredField.classList.contains('offstate') ||
+					offstateSections.some((section) =>
+						section.contains(requiredField)
+					)
 				) {
 					return false;
 				}
@@ -192,6 +201,15 @@ class FormAssemblyForm extends Component {
 			`${FormAssemblyForm.customEventPrefix}${eventName}`
 		);
 		this.element.dispatchEvent(customEvent);
+	}
+
+	// Removes TFA stylesheets.
+	// Some stylesheets have !important in different places that makes
+	// style housekeeping difficult, so removing them instead
+	removeTFAStylesheets() {
+		[...document.querySelectorAll('link[href*="tfaforms"]')].forEach(
+			(link) => link.remove()
+		);
 	}
 }
 
