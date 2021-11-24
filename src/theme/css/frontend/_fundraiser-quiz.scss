@@ -2,6 +2,9 @@
 	@apply bg-teal-dark;
 
   .modal-wrap {
+    @apply block bg-teal-dark;
+    height: 100vh;
+
     @screen mobile {
       @apply max-w-none px-0;
     }
