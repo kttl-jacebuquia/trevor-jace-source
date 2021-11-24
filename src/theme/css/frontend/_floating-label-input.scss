@@ -1,3 +1,15 @@
+@mixin floating-label-active {
+  label {
+    @apply -translate-x-px20;
+    color: var(--activated-label-color);
+    --tw-translate-y: calc(-100% + 10px);
+    --tw-scale-x: calc(14/18);
+    --tw-scale-y: calc(14/18);
+  }
+
+  @content;
+}
+
 .floating-label-input {
   --default-label-color: theme('colors.teal.dark');
   --activated-label-color: theme('colors.white.DEFAULT');
@@ -33,21 +45,23 @@
   }
 
   // Activated state
-  &--activated:not([data-input-type="checkbox"]),
-  &[data-input-tag="select"] {
-    label {
-      @apply -translate-x-px20;
-      color: var(--activated-label-color);
-      --tw-translate-y: calc(-100% + 10px);
-      --tw-scale-x: calc(14/18);
-      --tw-scale-y: calc(14/18);
-    }
+  &--activated:not([data-input-type="checkbox"]) {
+    @include floating-label-active;
 
     &[data-input-tag="textarea"],
     &[data-input-tag="select"] {
       label {
         @apply -translate-y-full pb-px5;
       }
+    }
+  }
+
+  &[data-input-tag="select"] {
+    @include floating-label-active;
+
+    label {
+      --tw-translate-y: calc(-100% - 5px);
+      width: 150%;
     }
   }
 }

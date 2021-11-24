@@ -7,6 +7,10 @@
         @apply bg-blue_green;
       }
     }
+
+    .modal-container.dev-form {
+      height: 100vh;
+    }
   }
 
   &--form {
@@ -24,18 +28,10 @@
       @apply mt-0 bg-transparent text-current p-0;
 
       .section {
-        @apply grid gap-y-px20 gap-y-0 p-0 text-left border-0 bg-transparent grid-cols-1;
-
-        @screen md {
-          @apply grid items-end tw-grid-tablet items-baseline;
-        }
-
-        & + .section {
-          @apply mt-px30;
-        }
+        @apply p-0 text-left border-0 bg-transparent;
 
         legend {
-          @apply inline-block p-0 col-span-full text-white m-0 mt-px20;
+          @apply inline-block p-0 col-span-full text-white m-0 my-px20;
 
           div {
             @apply text-current;
@@ -46,12 +42,8 @@
       .field-container-D {
         --default-label-color: theme("colors.blue_green.DEFAULT");
         --activated-label-color: theme("colors.white.DEFAULT");
-        @apply inline-block text-left p-0 border-0 w-full mt-px50;
+        @apply inline-block text-left p-0 border-0 w-full;
         color: var(--default-label-color);
-
-        @screen md {
-          @apply col-span-4;
-        }
 
         br {
           @apply hidden;
@@ -150,6 +142,14 @@
         input[type="checkbox"] {
           @apply w-px30 h-px30 p-0;
         }
+
+        input,
+        select,
+        textarea {
+          &:disabled {
+            @apply opacity-70;
+          }
+        }
       }
 
       .actions {
@@ -204,7 +204,7 @@
     }
 
     &#tfa_1885-D {
-      @apply mt-px70;
+      @apply mt-px40;
 
       @screen md {
         @apply col-span-full;
@@ -253,6 +253,57 @@
       @screen md {
         @apply mt-px70;
       }
+    }
+
+    &#tfa_1997-D {
+      @apply mt-px40;
+
+      @include floating-label-active {
+        @apply mt-px10;
+
+        label {
+          width: 150%;
+          --tw-translate-y: calc(-100% - 5px);
+        }
+      };
+    }
+
+    &#tfa_1998-D {
+      @apply mt-px70;
+    }
+
+    &#tfa_2015-D {
+      @apply mt-px20;
+    }
+
+    &#tfa_2022-D {
+      @include floating-label-active {
+        @apply mt-px20;
+
+        label {
+          width: 150%;
+        }
+      };
+    }
+
+    &#tfa_2025-D {
+      @apply mt-px50;
+    }
+
+    &#tfa_2082-D {
+      textarea {
+        @apply h-px300;
+      }
+    }
+  }
+
+  legend {
+    &#tfa_1884-L {
+      @apply mb-px50;
+    }
+
+    &#tfa_2072-L {
+      @apply mb-px40;
     }
   }
 }

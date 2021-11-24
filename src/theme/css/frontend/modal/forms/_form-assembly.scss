@@ -1,4 +1,10 @@
 .form-modal {
+  .modal-content-wrap {
+    @screen mobile {
+      @apply max-w-none;
+    }
+  }
+
   &__heading {
     @screen lg {
       @apply mx-0;
@@ -31,24 +37,10 @@
     }
 
     form {
-      @apply flex flex-wrap gap-y-px30 m-0 w-full;
+      @apply flex flex-wrap gap-y-px30 m-0 w-full mt-px40;
 
       @screen md {
-        @apply gap-y-px58 justify-between items-baseline;
-      }
-    }
-
-    .section.group {
-      @apply flex flex-wrap gap-y-px30 m-0 w-full;
-      @apply border-b-px1 border-solid border-white pb-px40;
-
-      @screen md {
-        @apply gap-x-md gap-y-px58 justify-between items-baseline;
-      }
-
-      > .section:last-child {
-        @apply pb-0 border-0;
-        margin-bottom: rem-calc(-1);
+        @apply gap-y-px58 justify-between items-baseline mt-px50;
       }
     }
 
@@ -122,7 +114,7 @@
     }
 
     legend {
-      @apply mt-px20;
+      @apply my-px20;
     }
 
     .actions {

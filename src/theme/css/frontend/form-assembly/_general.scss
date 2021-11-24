@@ -1,5 +1,31 @@
 .wForm.wForm {
+  form {
+    @apply grid grid-cols-1 gap-y-px30;
+
+    @screen md {
+      @apply grid-cols-2 gap-x-md gap-y-px58 justify-between items-baseline;
+    }
+  }
+
+  .section {
+    @apply grid grid-cols-1 gap-y-px38 m-0 w-full col-span-full;;
+    @apply border-b-px1 border-solid border-white pb-px40;
+
+    @screen md {
+      @apply grid-cols-2 gap-x-md gap-y-px58 justify-between items-baseline;
+    }
+
+    > .section:last-child {
+      @apply pb-0 border-0;
+      margin-bottom: rem-calc(-1);
+    }
+  }
+
   .oneField.oneField {
+    @screen md {
+      @apply w-full;
+    }
+
     &.offstate {
       @apply hidden;
     }
@@ -19,6 +45,10 @@
       }
     }
 
+    &[data-input-tag="textarea"] {
+      @apply col-span-full;
+    }
+
     &.errFld {
       @apply mb-px30;
 
@@ -30,6 +60,10 @@
       & select,
       & textarea {
         border: 0 !important;
+
+        &:disabled {
+          @apply opacity-70;
+        }
       }
     }
 
@@ -56,6 +90,14 @@
     textarea {
       @apply w-full;
     }
+  }
+
+  legend {
+    @apply my-px20;
+  }
+
+  .actions {
+    @apply col-span-full;
   }
 
   // Autocomplete styles

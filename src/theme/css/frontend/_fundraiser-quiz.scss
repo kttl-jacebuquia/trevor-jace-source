@@ -1,6 +1,12 @@
 .modal#js-fundraiser-quiz {
 	@apply bg-teal-dark;
 
+  .modal-wrap {
+    @screen mobile {
+      @apply max-w-none px-0;
+    }
+  }
+
 	.modal-container {
 		@apply max-w-none h-full min-h-full w-full justify-start rounded-none bg-teal-dark p-0 shadow-none;
 
@@ -10,7 +16,7 @@
 	}
 
 	.modal-content-wrap {
-		@apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0;
+		@apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0 px-0;
 		@apply py-px130;
 	}
 
@@ -25,7 +31,13 @@
 }
 
 .fundraiser-quiz {
-	@apply flex flex-col items-center justify-start;
+	@apply flex flex-col items-center justify-start px-0;
+
+  &.container {
+    @screen mobile {
+      @apply max-w-none;
+    }
+  }
 
 	&--steps {
 		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
