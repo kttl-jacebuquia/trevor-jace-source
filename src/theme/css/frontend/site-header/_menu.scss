@@ -297,17 +297,19 @@
 
 // Dropdown logic for desktop
 @screen lg {
-  .main-menu > .menu-item > .sub-menu {
-    @apply grid gap-x-px38 gap-y-px22 items-start;
+  #top-nav {
+    .main-menu > .menu-item > .sub-menu {
+      @apply grid gap-x-px38 gap-y-px22 items-start;
 
-    // Apply 2-column grid when items are >= 4 on tier-1
-    .menu-item:nth-last-child(n + 4) ~ .menu-item:nth-child(even) {
-      @apply col-start-2;
-    }
+      // Apply 2-column grid when items are >= 4 on tier-1
+      .menu-item:nth-last-child(n + 4) ~ .menu-item:nth-child(even) {
+        @apply col-start-2;
+      }
 
-    // Apply 2-column grid when items are >= 4 on tier-2
-    .sub-menu {
-      @apply grid gap-y-px12 gap-x-px38;
+      // Apply 2-column grid when items are >= 4 on tier-2
+      .sub-menu {
+        @apply grid gap-y-px12 gap-x-px38;
+      }
     }
   }
 }

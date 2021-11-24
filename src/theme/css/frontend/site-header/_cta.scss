@@ -1,8 +1,3 @@
-.test {
-	@apply transition-all opacity-0 invisible;
-	z-index: var(--z-index-nav-cta);
-}
-
 .cta-wrap {
   @apply transform-gpu translate-y-0 ml-auto;
   @apply transition-all duration-300 ease-out;
@@ -13,7 +8,7 @@
   }
 
 	.cta-links {
-		@apply flex flex-row items-center w-full bg-white;
+		@apply flex flex-row items-center w-full bg-white gap-x-px10;
     @apply h-full transform-gpu translate-x-0;
 		@apply transition-all duration-300 ease-out;
     @apply bg-transparent border-0;
@@ -48,8 +43,6 @@
 		}
 
 		& + .btn {
-			@apply ml-px10;
-
 			@screen lg {
 				@apply hover:bg-orange hover:text-white;
 			}

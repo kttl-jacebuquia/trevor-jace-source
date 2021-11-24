@@ -115,6 +115,10 @@
     @apply transition-all duration-300 ease-out;
     z-index: var(--z-index-nav-switcher);
 
+    @screen md-max {
+      @apply hidden;
+    }
+
     @screen lg {
       @apply absolute left-0 right-auto top-1/2;
       @apply w-auto h-auto mr-auto pointer-events-auto;
