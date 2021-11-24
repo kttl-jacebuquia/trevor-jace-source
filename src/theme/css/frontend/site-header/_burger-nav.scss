@@ -271,10 +271,11 @@
 
   // CTA
   &__cta-wrap {
-    @apply flex flex-col w-full items-center self-end bg-white transform-gpu;
-    @apply row-start-2 col-start-1 gap-y-px18;
+    @apply grid grid-cols-1 w-full items-center justify-center self-end bg-white transform-gpu;
+    @apply gap-y-px18;
     @apply transition-all duration-300 py-0;
     will-change: transform;
+    justify-items: center;
 
     // Landscape mobile-tablet
     @media (orientation: landscape) {
