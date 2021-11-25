@@ -1,5 +1,5 @@
 import Swiper from 'theme/js/frontend/vendors/swiper';
-import {generateSwiperArrows} from '../carousel/index';
+import { generateSwiperArrows } from '../carousel/index';
 import $ from 'jquery';
 import debounce from 'lodash/debounce';
 
@@ -14,7 +14,6 @@ export default function testimonialsCarousel(id) {
 	const rightPaneSelector = '.carousel-right-arrow-pane';
 	const panesContainer = $('.panes-container', eBase);
 
-
 	const imgWrap = eBase.querySelector('.carousel-testimonials-img-wrap');
 	const txtWrap = eBase.querySelector('.carousel-testimonials-txt-wrap');
 
@@ -25,8 +24,9 @@ export default function testimonialsCarousel(id) {
 	/**
 	 * reinitialize the swiper on resize
 	 */
-	$(window).on('resize', debounce(
-		() => {
+	$(window).on(
+		'resize',
+		debounce(() => {
 			currentSlide = textSwiper.activeIndex;
 			imgSwiper.destroy(true, true);
 			imgSwiper = initImageSwiper();
@@ -35,11 +35,10 @@ export default function testimonialsCarousel(id) {
 			imgSwiper.controller.control = textSwiper;
 			textSwiper.controller.control = imgSwiper;
 			textSwiper.slideTo(currentSlide, 300, false);
-		},
-		500
-	));
+		}, 500)
+	);
 
-	function initImageSwiper () {
+	function initImageSwiper() {
 		return new Swiper(imgWrap.querySelector('.swiper-container'), {
 			slidesPerView: 1,
 			effect: 'fade',
@@ -50,19 +49,22 @@ export default function testimonialsCarousel(id) {
 		});
 	}
 
-	function initTextSwiper () {
+	function initTextSwiper() {
 		const options = {
 			slidesPerView: 1,
 			autoplay: true,
 			updateOnWindowResize: true,
 		};
 
-		if (txtWrap.querySelectorAll(".swiper-container .swiper-slide").length > 1) {
+		if (
+			txtWrap.querySelectorAll('.swiper-container .swiper-slide').length >
+			1
+		) {
 			options.pagination = {
 				el: txtWrap.querySelector('.swiper-pagination'),
 				clickable: true,
 				bulletElement: 'button',
-			}
+			};
 
 			options.navigation = {
 				nextEl: '.carousel-right-arrow-pane',
@@ -71,10 +73,10 @@ export default function testimonialsCarousel(id) {
 
 			options.breakpoints = {
 				300: {
-					autoHeight: true
+					autoHeight: true,
 				},
 				768: {
-					autoHeight: false
+					autoHeight: false,
 				},
 			};
 
@@ -84,20 +86,23 @@ export default function testimonialsCarousel(id) {
 				},
 				afterInit: (swiper) => {
 					applyA11y();
-					onSlideChange(swiper)
+					onSlideChange(swiper);
 				},
 				slideChange: (swiper) => {
 					onSlideChange(swiper);
+				},
+				slideChangeTransitionEnd: (swiper) => {
+					onSlideChangeTransitionEnd(swiper);
 				},
 				resize: () => {
 					checkArrow();
 				},
 			};
 		} else {
-			panesContainer.addClass("hidden");
+			panesContainer.addClass('hidden');
 		}
 
-		return new Swiper(txtWrap.querySelector(".swiper-container"), options);
+		return new Swiper(txtWrap.querySelector('.swiper-container'), options);
 	}
 
 	function checkArrow() {
@@ -114,26 +119,25 @@ export default function testimonialsCarousel(id) {
 
 		$bullets.each((index, bullet) => {
 			$(bullet)
-				.attr('tabindex', "0")
-				.attr('aria-label', 'click to go to slide ' + (index + 1))
+				.attr('tabindex', '0')
+				.attr('aria-label', 'click to go to slide ' + (index + 1));
 		});
 	}
 
-	function onSlideChange (swiper) {
+	function onSlideChange(swiper) {
 		[...swiper.slides].forEach((slide, index) => {
 			const isActiveIndex = index === swiper.activeIndex;
 
-			if ( isActiveIndex ) {
-				$(slide)
-					.attr('tabindex', 0)
-					.removeAttr('aria-hidden');
-			}
-			else {
-				$(slide)
-					.attr('tabindex', -1)
-					.attr('aria-hidden', true);
+			if (isActiveIndex) {
+				$(slide).attr('tabindex', 0).removeAttr('aria-hidden');
+			} else {
+				$(slide).attr('tabindex', -1).attr('aria-hidden', true);
 			}
 		});
+	}
+
+	function onSlideChangeTransitionEnd(swiper) {
+		swiper.slides[swiper.activeIndex].focus();
 	}
 
 	/**
