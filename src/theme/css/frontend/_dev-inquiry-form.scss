@@ -31,7 +31,7 @@
         @apply p-0 text-left border-0 bg-transparent;
 
         legend {
-          @apply inline-block p-0 col-span-full text-white m-0 my-px20;
+          @apply p-0 col-span-full text-white;
 
           div {
             @apply text-current;
@@ -52,7 +52,7 @@
 
       .floating-label-input {
         &[data-input-tag="textarea"] {
-          @apply mt-px45;
+          // @apply mt-px45;
 
           @screen md {
             @apply col-span-full;
@@ -75,6 +75,8 @@
             @apply static px-0 ml-px10 pointer-events-auto h-auto text-white;
           }
         }
+
+        // Active label overrides
 
         &--activated {
           label {
@@ -168,10 +170,6 @@
           @apply col-span-3;
         }
       }
-
-      textarea {
-        min-height: #{rem-calc(150)};
-      }
     }
 
     .oneField {
@@ -200,11 +198,11 @@
     }
 
     &#tfa_1879-D {
-      @apply mt-px50;
+      // @apply mt-px50;
     }
 
     &#tfa_1885-D {
-      @apply mt-px40;
+      // @apply mt-px40;
 
       @screen md {
         @apply col-span-full;
@@ -212,10 +210,11 @@
     }
 
     &#tfa_1907-D {
-      @apply mt-px100;
+      // @apply mt-px100;
 
       @screen md {
-        @apply col-span-full mt-px82;
+        @apply col-span-full;
+        // @apply mt-px82;
       }
     }
 
@@ -226,10 +225,11 @@
     }
 
     &#tfa_1932-D {
-      @apply mt-px110;
+      // @apply mt-px110;
 
       @screen md {
-        @apply col-span-full mt-px70;
+        @apply col-span-full;
+        // @apply mt-px70;
       }
 
       label {
@@ -240,54 +240,54 @@
     }
 
     &#tfa_1938-D {
-      @apply mt-px90;
+      // @apply mt-px90;
 
-      @screen md {
-        @apply mt-px60;
-      }
+      // @screen md {
+      //   @apply mt-px60;
+      // }
     }
 
     &#tfa_1976-D {
-      @apply mt-px130;
+      // @apply mt-px130;
 
-      @screen md {
-        @apply mt-px70;
-      }
+      // @screen md {
+      //   @apply mt-px70;
+      // }
     }
 
     &#tfa_1997-D {
-      @apply mt-px40;
+      // @apply mt-px40;
 
-      @include floating-label-active {
-        @apply mt-px10;
+      // @include floating-label-active {
+      //   @apply mt-px10;
 
-        label {
-          width: 150%;
-          --tw-translate-y: calc(-100% - 5px);
-        }
-      };
+      //   label {
+      //     width: 150%;
+      //     --tw-translate-y: calc(-100% - 5px);
+      //   }
+      // };
     }
 
     &#tfa_1998-D {
-      @apply mt-px70;
+      // @apply mt-px70;
     }
 
     &#tfa_2015-D {
-      @apply mt-px20;
+      // @apply mt-px20;
     }
 
     &#tfa_2022-D {
-      @include floating-label-active {
-        @apply mt-px20;
+      // @include floating-label-active {
+      //   @apply mt-px20;
 
-        label {
-          width: 150%;
-        }
-      };
+      //   label {
+      //     width: 150%;
+      //   }
+      // };
     }
 
     &#tfa_2025-D {
-      @apply mt-px50;
+      // @apply mt-px50;
     }
 
     &#tfa_2082-D {
@@ -299,11 +299,11 @@
 
   legend {
     &#tfa_1884-L {
-      @apply mb-px50;
+      // @apply mb-px50;
     }
 
     &#tfa_2072-L {
-      @apply mb-px40;
+      // @apply mb-px40;
     }
   }
 }

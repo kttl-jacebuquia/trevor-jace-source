@@ -55,7 +55,6 @@
       &[data-input-tag="textarea"] {
         @screen md {
           @apply w-full;
-          @apply mt-px30;
         }
 
         label {
@@ -84,7 +83,7 @@
     .label.label {
       --default-label-color: theme("colors.blue_green.DEFAULT");
       --activated-label-color: theme("colors.white.DEFAULT");
-      @apply py-0 flex items-center w-full max-w-none;
+      @apply flex items-center w-full max-w-none;
       @apply text-px18 leading-px26 pl-px28 pr-px10;
 
       * {

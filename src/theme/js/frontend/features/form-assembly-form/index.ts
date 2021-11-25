@@ -30,7 +30,7 @@ class FormAssemblyForm extends Component {
 
 		// Add necessary selectors for FloatingLabelInput initialization
 		this.children?.inputFields.forEach((inputField: HTMLElement) => {
-			const options = {};
+			const options: { [key: string]: any } = {};
 			const requiredlabel = inputField.querySelector('.reqMark');
 
 			// Add asterisk on required label
@@ -45,6 +45,9 @@ class FormAssemblyForm extends Component {
 
 		// Cleanup default TFA styles
 		this.removeTFAStylesheets();
+
+		// Handle resize
+		this.handleResize();
 	}
 
 	reset() {
@@ -139,7 +142,7 @@ class FormAssemblyForm extends Component {
 	// We'll be manually adding them as workaround
 	postValidation() {
 		const requiredLabels = this.element.querySelectorAll(
-			'.label.reqMark'
+			'label.reqMark'
 		) as unknown as FormAssemblyElementCollection;
 		const requiredFields = requiredLabels.map(
 			(label: FormAssemblyElement) => label?.parentElement
@@ -185,6 +188,48 @@ class FormAssemblyForm extends Component {
 				}
 			);
 		}
+	}
+
+	handleResize() {
+		const resizeObserver = new window.ResizeObserver(
+			([{ target }]: ResizeObserverEntry[]) => {
+				// Make sure resize is only triggered by the form element
+				// and not its children
+				if (target === this.element) {
+					this.onResize();
+				}
+			}
+		);
+		resizeObserver.observe(this.element);
+	}
+
+	/* Handle form resize */
+	onResize() {
+		/* Will store the maximum scaled height from the fields */
+		let maxScaledHeight = 0;
+
+		/* Check non-checkbox/radio input fields */
+		this.children?.inputFields.forEach((inputGroup: HTMLElement) => {
+			const label = inputGroup.querySelector(
+				FloatingLabelInput.children.label
+			) as HTMLElement;
+			const dummyLabelActive: HTMLElement | null = inputGroup.querySelector(
+				FloatingLabelInput.children.dummyLabelActive
+			);
+			const scaledLabelHeight = dummyLabelActive
+				? dummyLabelActive.offsetHeight
+				: label.offsetHeight;
+
+			maxScaledHeight =
+				scaledLabelHeight > maxScaledHeight
+					? scaledLabelHeight
+					: maxScaledHeight;
+		});
+
+		this.element.style.setProperty(
+			'--max-scaled-label-height',
+			`${maxScaledHeight}px`
+		);
 	}
 
 	// Attaches event listener

@@ -1,18 +1,24 @@
 .wForm.wForm {
   form {
-    @apply grid grid-cols-1 gap-y-px30;
+    --max-scaled-label-height-extra: #{rem-calc(20)};
+    /* Computed and updated through JS. Refer to form-assembly-form/_index.ts */
+    --max-scaled-label-height: #{rem-calc(30)};
+    @apply grid grid-cols-1;
+    row-gap: var(--max-scaled-label-height);
 
     @screen md {
-      @apply grid-cols-2 gap-x-md gap-y-px58 justify-between items-baseline;
+      @apply grid-cols-2 gap-x-md justify-between items-baseline;
+      --max-scaled-label-height: #{rem-calc(58)};
     }
   }
 
   .section {
-    @apply grid grid-cols-1 gap-y-px38 m-0 w-full col-span-full;;
+    @apply grid grid-cols-1 m-0 w-full col-span-full;
     @apply border-b-px1 border-solid border-white pb-px40;
+    row-gap: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
 
     @screen md {
-      @apply grid-cols-2 gap-x-md gap-y-px58 justify-between items-baseline;
+      @apply grid-cols-2 gap-x-md justify-between items-baseline;
     }
 
     > .section:last-child {
@@ -45,6 +51,17 @@
       }
     }
 
+    // Nullifying the extra space brought by --max-scaled-label-height
+    // For checkbox/radio since they don't implement scaled labels
+    &[data-input-type="checkbox"],
+    &[data-input-type="radio"] {
+      margin-top: calc(-1 * var(--max-scaled-label-height));
+
+      label {
+        transform: none;
+      }
+    }
+
     &[data-input-tag="textarea"] {
       @apply col-span-full;
     }
@@ -67,16 +84,16 @@
       }
     }
 
-    &.floating-label-input--activated {
-      .label {
-        width: 140%;
-      }
+    // Active label states (General)
+    @include active-label-state {
+      width: 140%;
+    }
 
-      &[data-input-tag="textarea"] {
-        .label {
-          @screen md {
-            width: 132%;
-          }
+    // Active label states (TextArea)
+    &[data-input-tag="textarea"] {
+      @include active-label-state {
+        @screen md {
+          width: 132%;
         }
       }
     }
@@ -93,7 +110,9 @@
   }
 
   legend {
-    @apply my-px20;
+    // Detaches legend from the special layout treatment from the fieldset
+    // source: https://stackoverflow.com/a/5630621
+    @apply relative float-left;
   }
 
   .actions {

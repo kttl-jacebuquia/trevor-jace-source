@@ -1,37 +1,80 @@
-@mixin floating-label-active {
-  label {
-    @apply -translate-x-px20;
+@mixin active-label-styles {
+  @apply -translate-x-px20;
     color: var(--activated-label-color);
-    --tw-translate-y: calc(-100% + 10px);
+    top: 0;
+    --tw-translate-y: -100%;
     --tw-scale-x: calc(14/18);
     --tw-scale-y: calc(14/18);
+    width: 140%;
+}
+
+@mixin floating-label-active {
+  label:not([class*="dummy"]) {
+    @include active-label-styles;
+    @content;
   }
 
-  @content;
+  .floating-label-input__dummy-label-active {
+    @include active-label-styles;
+    @content;
+  }
+}
+
+// Applies active label styles
+// @content - Override styles for label and dummy-label
+@mixin active-label-state {
+  &.floating-label-input--activated {
+    label:not([class*="dummy"]) {
+      @include active-label-styles;
+      @content;
+    }
+  }
+
+  .floating-label-input__dummy-label-active {
+    @include active-label-styles;
+    @content;
+  }
 }
 
 .floating-label-input {
   --default-label-color: theme('colors.teal.dark');
   --activated-label-color: theme('colors.white.DEFAULT');
+  --label-height-default: #{rem-calc(150)};
   @apply w-full relative;
   @apply text-px18 leading-px26;
 
   &[data-input-tag="select"] {
-    label {
-      @apply -translate-y-full items-end;
+    @include floating-label-active {
+      @apply items-end;
+    }
+  }
+
+  &[data-input-tag="textarea"] {
+    label:not([class*="dummy-active"]) {
+      @apply top-0 translate-y-0;
     }
   }
 
   &[data-input-tag="textarea"],
   &[data-input-tag="select"] {
-    label {
+    label:not([class*="dummy-active"]) {
       @apply h-auto items-end pointer-events-auto inline-block;
     }
   }
 
+  &[data-input-type="radio"],
+  &[data-input-type="checkbox"] {
+    label {
+      @apply py-0;
+    }
+  }
+
   label {
-    @apply absolute top-0 left-0 w-full h-full transform-gpu transition-all origin-bottom-left text-left;
-    @apply px-px28 flex flex-wrap items-center pointer-events-none z-1;
+    @apply absolute top-1/2 left-0;
+    @apply transform-gpu origin-bottom-left -translate-y-1/2;
+    @apply transition-all;
+    @apply w-full h-auto text-left;
+    @apply px-px28 py-px10 flex flex-wrap items-center pointer-events-none z-1;
     color: var(--default-label-color);
   }
 
@@ -44,24 +87,26 @@
     }
   }
 
+  & textarea {
+    min-height: var(--label-height-default);
+  }
+
   // Activated state
   &--activated:not([data-input-type="checkbox"]) {
     @include floating-label-active;
-
-    &[data-input-tag="textarea"],
-    &[data-input-tag="select"] {
-      label {
-        @apply -translate-y-full pb-px5;
-      }
-    }
   }
 
   &[data-input-tag="select"] {
     @include floating-label-active;
+  }
 
-    label {
-      --tw-translate-y: calc(-100% - 5px);
-      width: 150%;
-    }
+  // Dummy labels
+  & &__dummy-label-active {
+    @include active-label-styles;
+    @apply invisible transition-none;
+  }
+
+  & &__dummy-label-default {
+    @apply invisible transition-none;
   }
 }
