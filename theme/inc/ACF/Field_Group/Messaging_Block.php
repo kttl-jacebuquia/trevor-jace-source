@@ -13,7 +13,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_BG_COLOR       = 'bg_color';
 	const FIELD_BOX_COLOR      = 'box_color';
 	const FIELD_TEXT_COLOR     = 'text_color';
-	const FIELD_EXTEND_PADDING = 'extend_padding';
 	const FIELD_BUTTONS        = 'buttons';
 	const FIELD_BUTTON         = 'button';
 	const FIELD_TYPE           = 'type';
@@ -30,7 +29,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 		$large_text     = static::gen_field_key( static::FIELD_LARGE_TEXT );
 		$block_styles   = static::gen_field_key( static::FIELD_BLOCK_STYLES );
 		$box_color      = static::gen_field_key( static::FIELD_BOX_COLOR );
-		$extend_padding = static::gen_field_key( static::FIELD_EXTEND_PADDING );
 		$buttons        = static::gen_field_key( static::FIELD_BUTTONS );
 		$type           = static::gen_field_key( static::FIELD_TYPE );
 
@@ -77,43 +75,6 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 									'width' => '50%',
 								),
 							)
-						),
-						static::FIELD_EXTEND_PADDING => array(
-							'key'        => $extend_padding,
-							'name'       => static::FIELD_EXTEND_PADDING,
-							'label'      => 'Extend Padding',
-							'type'       => 'group',
-							'layout'     => 'block',
-							'sub_fields' => array(
-								'top'    => array(
-									'key'           => 'top',
-									'name'          => 'top',
-									'label'         => 'Top',
-									'type'          => 'button_group',
-									'choices'       => array(
-										'yes' => 'Yes',
-										'no'  => 'No',
-									),
-									'default_value' => 'no',
-									'wrapper'       => array(
-										'width' => '50',
-									),
-								),
-								'bottom' => array(
-									'key'           => 'bottom',
-									'name'          => 'bottom',
-									'label'         => 'Bottom ',
-									'type'          => 'button_group',
-									'choices'       => array(
-										'yes' => 'Yes',
-										'no'  => 'No',
-									),
-									'default_value' => 'no',
-									'wrapper'       => array(
-										'width' => '50',
-									),
-								),
-							),
 						),
 						static::FIELD_TITLE          => array(
 							'key'   => $title,
@@ -196,22 +157,10 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$type                          = static::get_val( static::FIELD_TYPE );
 		$header                        = static::get_val( static::FIELD_HEADER );
-		$extend_padding                = static::get_val( static::FIELD_EXTEND_PADDING );
-		$extend_padding_top            = $extend_padding['top'] ?? 'no';
-		$extend_padding_bottom         = $extend_padding['bottom'] ?? 'no';
 		$block_styles                  = static::get_val( static::FIELD_BLOCK_STYLES );
 		list( $bg_color, $text_color ) = array_values( $block_styles );
 
 		$class = array( 'messaging', "messaging--{$type}", "bg-{$bg_color}", "text-{$text_color}", 'block-spacer' );
-
-		if ( 'boxed' === $type ) {
-			if ( 'yes' === $extend_padding_top ) {
-				$class[] = ' extend-top';
-			}
-			if ( 'yes' === $extend_padding_bottom ) {
-				$class[] = ' extend-bottom';
-			}
-		}
 
 		if ( ! empty( $header ) ) {
 			$class[] = 'messaging--with-heading';

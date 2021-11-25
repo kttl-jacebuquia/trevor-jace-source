@@ -28,30 +28,6 @@
       }
     }
 
-		.messaging.extend-top & {
-			@apply pt-px58;
-
-			@screen md {
-				@apply pt-px100;
-			}
-
-			@screen lg {
-				@apply pt-px120;
-			}
-		}
-
-		.messaging.extend-bottom & {
-			@apply pb-px58;
-
-			@screen md {
-				@apply pb-px100;
-			}
-
-			@screen lg {
-				@apply pb-px120;
-			}
-		}
-
     .messaging--large_text & {
       @apply py-px120;
 
