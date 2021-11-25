@@ -185,13 +185,12 @@
 
     // Tier-1 submenu
     > .sub-menu {
-      @apply absolute hidden left-0 w-full opacity-0 invisible overflow-auto;
+      @apply absolute left-0 w-full opacity-0 invisible overflow-auto;
       @apply transform-gpu translate-x-full;
       @apply transition-all duration-300 ease-out;
       @apply bg-white text-indigo;
       @apply px-px34;
       top: rem-calc(128px);
-      // height: calc(100% - #{rem-calc(128px)});
 
       // Landscape
       @media (orientation: landscape) {
@@ -200,7 +199,10 @@
 
       @screen md {
         @apply top-px106;
-        // height: calc(100% - #{rem-calc(106px)});
+      }
+
+      @screen md-max {
+        @apply hidden;
       }
 
       @screen lg {
@@ -297,6 +299,7 @@
 
 // Dropdown logic for desktop
 @screen lg {
+  #top-bar,
   #top-nav {
     .main-menu > .menu-item > .sub-menu {
       @apply grid gap-x-px38 gap-y-px22 items-start;
