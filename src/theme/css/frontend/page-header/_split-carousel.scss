@@ -54,7 +54,7 @@
     }
 
     .page-header-img-wrap {
-      @apply mt-px60;
+      @apply mt-px60 z-0;
 
       @screen md {
         @apply col-span-4 col-start-5 w-full mt-0;
