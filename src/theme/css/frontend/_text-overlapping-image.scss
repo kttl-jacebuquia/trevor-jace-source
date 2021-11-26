@@ -121,11 +121,11 @@
     }
 
     @screen lg {
-      @apply px-px40 h-px66 text-px20 leading-px26 tracking-px05 font-bold;
+      @apply px-px40 h-px66 text-px20 leading-px26 tracking-px05 font-semibold;
     }
 
     @screen xl {
-      @apply font-semibold;
+      @apply font-bold;
     }
   }
 
