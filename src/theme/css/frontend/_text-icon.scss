@@ -3,20 +3,9 @@
   @include block-spacer-settings(
     $default: ( 70, 132 ),
     $md: ( 80 ),
+    $lg: ( 100 ),
+    $lg2: ( 90, 150 ),
   );
-  @apply pt-px70 pb-px132 bg-blue_green text-white;
-
-  @screen md {
-    @apply py-px80;
-  }
-
-  @screen lg {
-    @apply py-px100;
-  }
-
-  @screen lg2 {
-    @apply pt-px90 pb-px150;
-  }
 
   &__container {
     @apply tw-grid container mx-auto;
