@@ -55,14 +55,14 @@
     }
 
     tilt {
-      @apply text-px40 leading-px50 tracking-px_02;
+      @apply text-px40 leading-px50 tracking-px_02 mx-px8;
 
       @screen md {
         @apply text-px48 leading-px68 tracking-em005;
       }
 
       @screen lg {
-        @apply text-px56 leading-px80;
+        @apply text-px56 leading-px80 mx-px12;
       }
 
       @screen lg2 {
