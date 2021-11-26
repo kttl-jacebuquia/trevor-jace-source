@@ -16,6 +16,14 @@ body {
   @apply bg-white;
   -webkit-font-smoothing: antialiased;
 
+  // Removing font-smoothing for links and CTAs
+  // To prevent them looking lighter than they should
+  a[href],
+  button,
+  input[type="submit"] {
+    -webkit-font-smoothing: unset;
+  }
+
   // Fixed content when nav is expanded for mobile/tablet
   &.is-fixed,
   &.error404 {
