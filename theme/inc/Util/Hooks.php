@@ -1033,9 +1033,11 @@ class Hooks {
 	 * Additional WYSIWYG toolbars.
 	 */
 	function acf_wysiwyg_toolbars( $toolbars ) {
-		// toolbars for homepage modules
 		$toolbars['Common']    = array();
 		$toolbars['Common'][1] = array( 'bold', 'underline', 'link' );
+
+		$toolbars['Link']    = array();
+		$toolbars['Link'][1] = array( 'link' );
 
 		return $toolbars;
 	}

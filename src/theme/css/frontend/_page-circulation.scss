@@ -1,23 +1,20 @@
 .page-circulation {
-  @apply pt-px80 pb-px100;
-
-  @screen md {
-    @apply py-px80;
-  }
+  @include block-spacer-settings(
+    $default: ( 80, 100 ),
+    $md: ( 80 ),
+    $lg: ( 100 ),
+    $lg2: ( 120 ),
+  );
 
   @screen lg {
-    @apply py-px100;
-
     body.is-rc & {
-      @apply pt-px120;
+      @include apply-space-settings($top: 120);
     }
   }
 
   @screen lg2 {
-    @apply py-px120;
-
     body.is-rc & {
-      @apply pt-px148;
+      @include apply-space-settings($top: 148);
     }
   }
 
