@@ -5,15 +5,19 @@ if (getComputedStyle(document.body).scrollBehavior !== 'smooth') {
 	const $scrollableRoot = $('html,body');
 	const $jumpLinks = $('a[href^="#"]');
 
-	$jumpLinks.on('click', e => {
+	$jumpLinks.on('click', (e) => {
 		e.preventDefault();
-		const sectionSelector = e.currentTarget.getAttribute('href');
+		const sectionSelector: string =
+			e.currentTarget.getAttribute('href') || '';
 		const $targetSection = $(sectionSelector);
 
 		if ($targetSection.length) {
 			// Get section's scroll amount
 			const targetScroll = $targetSection.offset()?.top;
-			$scrollableRoot.animate({ scrollTop: targetScroll });
+			$scrollableRoot.animate({ scrollTop: targetScroll }, 500, 'swing');
+
+			// Add history entry
+			window.history.pushState(null, '', sectionSelector);
 		}
 	});
 }
