@@ -117,13 +117,13 @@ abstract class A_Basic_Section extends A_Field_Group {
 	 * @param array $cls
 	 * @param $content
 	 */
-	public static function render_block_part_wrap( $block, array $cls = array(), $content ): void {
+	public static function render_block_part_wrap( $block, array $cls = array(), $content, $anchor_id = '' ): void {
 		# Add block's classnames
 		if ( ! empty( $block['className'] ) ) {
 			$cls[] = $block['className'];
 		}
 		?>
-		<div <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_WRAPPER_ATTR ), $cls ); ?>>
+		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" <?php echo DOM_Attr::render_attrs_of( static::get_val( static::FIELD_WRAPPER_ATTR ), $cls ); ?>>
 			<?php echo $content; ?>
 		</div>
 		<?php
@@ -177,6 +177,7 @@ abstract class A_Basic_Section extends A_Field_Group {
 		$desc       = $options['desc_cls'] ?? array();
 		$btn        = $options['btn_cls'] ?? array();
 		$btn_inside = $options['btn_inside'] ?? false;
+		$anchor_id  = $options['anchor_id'] ?? '';
 
 		ob_start();
 		echo '<div ' . DOM_Attr::render_attrs_of( static::get_val( static::FIELD_INNER_ATTR ), $inner ) . '>';
@@ -192,6 +193,6 @@ abstract class A_Basic_Section extends A_Field_Group {
 			static::render_block_part_buttons( $btn );
 		}
 		echo '</div>';
-		static::render_block_part_wrap( $block, $wrap, ob_get_clean() );
+		static::render_block_part_wrap( $block, $wrap, ob_get_clean(), $anchor_id );
 	}
 }

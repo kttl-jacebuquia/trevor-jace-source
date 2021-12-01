@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 class FAQ extends A_Field_Group implements I_Block, I_Renderable {
+	const FIELD_ANCHOR_ID         = 'anchor_id';
 	const FIELD_TITLE             = 'title';
 	const FIELD_FAQ_ENTRIES       = 'faq_entries';
 	const FIELD_FAQ_ENTRY_LABEL   = 'faq_entry_label';
@@ -11,6 +12,7 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
+		$anchor_id         = static::gen_field_key( static::FIELD_ANCHOR_ID );
 		$title             = static::gen_field_key( static::FIELD_TITLE );
 		$faq_entries       = static::gen_field_key( static::FIELD_FAQ_ENTRIES );
 		$faq_entry_label   = static::gen_field_key( static::FIELD_FAQ_ENTRY_LABEL );
@@ -20,6 +22,13 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'FAQ Drawer',
 			'fields' => array(
+				static::FIELD_ANCHOR_ID   => array(
+					'key'          => $anchor_id,
+					'name'         => static::FIELD_ANCHOR_ID,
+					'label'        => 'Anchor ID',
+					'type'         => 'text',
+					'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+				),
 				static::FIELD_TITLE       => array(
 					'key'   => $title,
 					'name'  => static::FIELD_TITLE,
@@ -84,13 +93,14 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		$anchor_id   = static::get_val( static::FIELD_ANCHOR_ID );
 		$title       = static::get_val( static::FIELD_TITLE );
 		$faq_entries = static::get_val( static::FIELD_FAQ_ENTRIES );
 		$footer      = static::get_val( static::FIELD_FOOTER );
 
 		ob_start();
 		?>
-		<div class="faqs">
+		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" class="faqs">
 			<div class="container mx-auto faqs__container">
 				<h3 class="faqs-heading"><?php echo $title; ?></h3>
 

@@ -20,15 +20,15 @@ class Carousel_Data extends A_Field_Group {
 		return array(
 			'title'  => 'Carousel Data',
 			'fields' => array(
-				static::FIELD_DATA  => array(
-					'key'               => $data,
-					'name'              => static::FIELD_DATA,
-					'label'             => 'Data',
-					'type'              => 'repeater',
-					'required'          => true,
-					'layout'            => 'table',
-					'max'               => 4,
-					'sub_fields'        => array(
+				static::FIELD_DATA => array(
+					'key'        => $data,
+					'name'       => static::FIELD_DATA,
+					'label'      => 'Data',
+					'type'       => 'repeater',
+					'required'   => true,
+					'layout'     => 'table',
+					'max'        => 4,
+					'sub_fields' => array(
 						static::FIELD_DATA_IMG      => array(
 							'key'           => $data_img,
 							'name'          => static::FIELD_DATA_IMG,

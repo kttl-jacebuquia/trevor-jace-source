@@ -337,9 +337,11 @@ class Carousel {
 			'bg-' . $options['box_bg_color'],
 		);
 
+		$anchor_id = $options['anchor_id'];
+
 		ob_start();
 		?>
-		<div <?php echo A_Field_Group::render_attrs( $carousel_cls, $attrs ); ?>>
+		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" <?php echo A_Field_Group::render_attrs( $carousel_cls, $attrs ); ?>>
 			<div <?php echo A_Field_Group::render_attrs( $box_class ); ?>>
 				<?php if ( 'left' === $options['image_position'] ) : ?>
 					<?php echo self::render_testimonials_image( $data, $options ); ?>

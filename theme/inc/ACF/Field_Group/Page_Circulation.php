@@ -5,11 +5,24 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper\Circulation_Card;
 
 class Page_Circulation extends A_Basic_Section implements I_Block {
-	const FIELD_CARDS = 'cards';
+	const FIELD_ANCHOR_ID = 'anchor_id';
+	const FIELD_CARDS     = 'cards';
 
 	/** @inheritdoc */
 	protected static function _get_fields(): array {
+		$anchor_id = static::gen_field_key( static::FIELD_ANCHOR_ID );
+
 		return array_merge(
+			static::_gen_tab_field( 'General' ),
+			array(
+				static::FIELD_ANCHOR_ID => array(
+					'key'          => $anchor_id,
+					'name'         => static::FIELD_ANCHOR_ID,
+					'label'        => 'Anchor ID',
+					'type'         => 'text',
+					'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+				),
+			),
 			parent::_get_fields(),
 			static::_gen_tab_field( 'Cards' ),
 			array(
@@ -50,6 +63,7 @@ class Page_Circulation extends A_Basic_Section implements I_Block {
 			$block,
 			static::render_grid( (array) $val->get( static::FIELD_CARDS ) ),
 			array(
+				'anchor_id'      => $val->get( static::FIELD_ANCHOR_ID ),
 				'wrap_cls'       => array( 'page-section page-circulation block-spacer' ),
 				'inner_cls'      => array( 'container mx-auto page-circulation__container' ),
 				'title_wrap_cls' => array( 'page-circulation__heading' ),

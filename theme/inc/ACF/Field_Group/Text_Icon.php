@@ -3,6 +3,7 @@
 
 
 class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
+	const FIELD_ANCHOR_ID            = 'anchor_id';
 	const FIELD_TITLE                = 'title';
 	const FIELD_DESCRIPTION          = 'description';
 	const FIELD_ENTRIES              = 'entries';
@@ -16,6 +17,7 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
+		$anchor_id            = static::gen_field_key( static::FIELD_ANCHOR_ID );
 		$title                = static::gen_field_key( static::FIELD_TITLE );
 		$description          = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$entries              = static::gen_field_key( static::FIELD_ENTRIES );
@@ -30,6 +32,13 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 			'fields' => array_merge(
 				static::_gen_tab_field( 'General' ),
 				array(
+					static::FIELD_ANCHOR_ID   => array(
+						'key'          => $anchor_id,
+						'name'         => static::FIELD_ANCHOR_ID,
+						'label'        => 'Anchor ID',
+						'type'         => 'text',
+						'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+					),
 					static::FIELD_TITLE       => array(
 						'key'      => $title,
 						'name'     => static::FIELD_TITLE,
@@ -141,6 +150,7 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		$anchor_id            = static::get_val( static::FIELD_ANCHOR_ID );
 		$title                = static::get_val( static::FIELD_TITLE );
 		$description          = static::get_val( static::FIELD_DESCRIPTION );
 		$entries              = static::get_val( static::FIELD_ENTRIES );
@@ -163,7 +173,7 @@ class Text_Icon extends A_Field_Group implements I_Block, I_Renderable {
 
 		ob_start();
 		?>
-		<div <?php echo static::render_attrs( $class ); ?>>
+		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" <?php echo static::render_attrs( $class ); ?>>
 			<div class="text-icon__container">
 				<?php if ( ! empty( $title ) ) : ?>
 					<h3 class="text-icon__heading"><?php echo esc_html( $title ); ?></h3>

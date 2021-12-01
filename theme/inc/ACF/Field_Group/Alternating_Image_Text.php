@@ -3,6 +3,7 @@
 namespace TrevorWP\Theme\ACF\Field_Group;
 
 class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Renderable {
+	const FIELD_ANCHOR_ID                = 'anchor_id';
 	const FIELD_HEADLINE                 = 'headline';
 	const FIELD_DESCRIPTION              = 'description';
 	const FIELD_ALTERNATE_TEXT_ALIGNMENT = 'alternate_text_alignment';
@@ -23,6 +24,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
+		$anchor_id                = static::gen_field_key( static::FIELD_ANCHOR_ID );
 		$headline                 = static::gen_field_key( static::FIELD_HEADLINE );
 		$description              = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$alternate_text_alignment = static::gen_field_key( static::FIELD_ALTERNATE_TEXT_ALIGNMENT );
@@ -41,6 +43,13 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 		return array(
 			'title'  => 'Alternating Image + Text Lockup',
 			'fields' => array(
+				static::FIELD_ANCHOR_ID                => array(
+					'key'          => $anchor_id,
+					'name'         => static::FIELD_ANCHOR_ID,
+					'label'        => 'Anchor ID',
+					'type'         => 'text',
+					'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+				),
 				static::FIELD_HEADLINE                 => array(
 					'key'       => $headline,
 					'name'      => static::FIELD_HEADLINE,
@@ -208,6 +217,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 	 * @inheritDoc
 	 */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
+		$anchor_id                = static::get_val( static::FIELD_ANCHOR_ID );
 		$headline                 = static::get_val( static::FIELD_HEADLINE );
 		$description              = static::get_val( static::FIELD_DESCRIPTION );
 		$alternate_text_alignment = static::get_val( static::FIELD_ALTERNATE_TEXT_ALIGNMENT ) ?? 'left';
@@ -242,7 +252,7 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 
 		ob_start();
 		?>
-		<div class="<?php echo $classname; ?>">
+		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" class="<?php echo $classname; ?>">
 			<div class="alternating-image-text__container">
 				<?php if ( ! empty( $headline ) ) : ?>
 					<h2 class="alternating-image-text__heading"><?php echo $headline; ?></h3>

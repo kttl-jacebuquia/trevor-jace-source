@@ -4,6 +4,7 @@ use TrevorWP\Theme\ACF\Field;
 use TrevorWP\Theme\Helper;
 
 class Testimonials_Carousel extends A_Field_Group implements I_Block {
+	const FIELD_ANCHOR_ID      = 'anchor_id';
 	const FIELD_TEXT_ALIGNMENT = 'text_alignment';
 	const FIELD_IMAGE_POSITION = 'image_position';
 	const FIELD_IMAGE_TYPE     = 'image_type';
@@ -18,6 +19,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
+		$anchor_id      = static::gen_field_key( static::FIELD_ANCHOR_ID );
 		$text_alignment = static::gen_field_key( static::FIELD_TEXT_ALIGNMENT );
 		$image_type     = static::gen_field_key( static::FIELD_IMAGE_POSITION );
 		$image_position = static::gen_field_key( static::FIELD_IMAGE_TYPE );
@@ -33,6 +35,13 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		return array(
 			'title'  => 'Testimonials Carousel',
 			'fields' => array(
+				static::FIELD_ANCHOR_ID      => array(
+					'key'          => $anchor_id,
+					'name'         => static::FIELD_ANCHOR_ID,
+					'label'        => 'Anchor ID',
+					'type'         => 'text',
+					'instructions' => 'Please use dash (-) and lowercase letters (a-z) only.',
+				),
 				static::FIELD_IMAGE_POSITION => array(
 					'key'           => $image_position,
 					'name'          => static::FIELD_IMAGE_POSITION,
@@ -181,6 +190,7 @@ class Testimonials_Carousel extends A_Field_Group implements I_Block {
 		}
 
 		$options = array(
+			'anchor_id'      => static::get_val( static::FIELD_ANCHOR_ID ),
 			'text_alignment' => static::get_val( static::FIELD_TEXT_ALIGNMENT ) ?? 'center',
 			'image_position' => static::get_val( static::FIELD_IMAGE_POSITION ) ?? 'left',
 			'image_type'     => static::get_val( static::FIELD_IMAGE_TYPE ) ?? 'contained',
