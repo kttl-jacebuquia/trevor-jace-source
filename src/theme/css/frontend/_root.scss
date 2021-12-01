@@ -15,6 +15,7 @@ body {
   min-height: calc(100vh - var(--tr-wp-admin-bar-h));
   @apply bg-white;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 
   // Removing font-smoothing for links and CTAs
   // To prevent them looking lighter than they should
