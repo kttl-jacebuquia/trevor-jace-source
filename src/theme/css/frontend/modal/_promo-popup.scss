@@ -127,6 +127,12 @@
     @screen xl {
       @apply text-px18 leading-px26 mt-px16;
     }
+
+    a {
+      @apply underline;
+      text-underline-offset: rem-calc(5);
+      text-decoration-thickness: rem-calc(2);
+    }
   }
 
   &__button-wrap {
