@@ -72,7 +72,10 @@
       }
 
       a.funder-name {
-        @extend .wave-underline;
+        @apply underline;
+        text-underline-offset: rem-calc(4);
+        text-decoration-thickness: rem-calc(2);
+        text-decoration-skip: none;
       }
 
       div.funder-name {
@@ -152,7 +155,7 @@
         @apply pl-px30 pr-px30 flex-wrap pt-px30 pb-px80 -mt-px20 mr-0 mb-0 -ml-px20;
 
         .funder-name {
-          @apply mt-px20 mr-0 mb-0 ml-px20;
+          @apply mt-px20 mr-0 mb-0 ml-px20 text-left;
         }
 
         .funder-name + .funder-name {

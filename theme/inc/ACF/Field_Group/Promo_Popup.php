@@ -164,7 +164,7 @@ class Promo_Popup extends A_Field_Group {
 				<?php endif; ?>
 				<div class="promo-popup-modal__body">
 					<h2 class="promo-popup-modal__headline"><?php echo $headline; ?></h2>
-					<p class="promo-popup-modal__description"><?php echo $description; ?></p>
+					<div class="promo-popup-modal__description"><?php echo $description; ?></div>
 					<?php if ( ! empty( $button ) ) : ?>
 						<div class="promo-popup-modal__button-wrap">
 							<?php echo Button::render( false, $button, array( 'btn_cls' => array( 'promo-popup-modal__button' ) ) ); ?>
