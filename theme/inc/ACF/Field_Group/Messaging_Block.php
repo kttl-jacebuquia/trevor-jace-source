@@ -3,34 +3,34 @@
 use TrevorWP\Theme\ACF\Field\Color;
 
 class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_TITLE          = 'title';
-	const FIELD_HEADER         = 'header';
-	const FIELD_DESCRIPTION    = 'description';
-	const FIELD_LARGE_TITLE    = 'large_title';
-	const FIELD_EYEBROW        = 'eyebrow';
-	const FIELD_LARGE_TEXT     = 'large_text';
-	const FIELD_BLOCK_STYLES   = 'block_styles';
-	const FIELD_BG_COLOR       = 'bg_color';
-	const FIELD_BOX_COLOR      = 'box_color';
-	const FIELD_TEXT_COLOR     = 'text_color';
-	const FIELD_BUTTONS        = 'buttons';
-	const FIELD_BUTTON         = 'button';
-	const FIELD_TYPE           = 'type';
+	const FIELD_TITLE        = 'title';
+	const FIELD_HEADER       = 'header';
+	const FIELD_DESCRIPTION  = 'description';
+	const FIELD_LARGE_TITLE  = 'large_title';
+	const FIELD_EYEBROW      = 'eyebrow';
+	const FIELD_LARGE_TEXT   = 'large_text';
+	const FIELD_BLOCK_STYLES = 'block_styles';
+	const FIELD_BG_COLOR     = 'bg_color';
+	const FIELD_BOX_COLOR    = 'box_color';
+	const FIELD_TEXT_COLOR   = 'text_color';
+	const FIELD_BUTTONS      = 'buttons';
+	const FIELD_BUTTON       = 'button';
+	const FIELD_TYPE         = 'type';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$title          = static::gen_field_key( static::FIELD_TITLE );
-		$header         = static::gen_field_key( static::FIELD_HEADER );
-		$description    = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$large_title    = static::gen_field_key( static::FIELD_LARGE_TITLE );
-		$eyebrow        = static::gen_field_key( static::FIELD_EYEBROW );
-		$large_text     = static::gen_field_key( static::FIELD_LARGE_TEXT );
-		$block_styles   = static::gen_field_key( static::FIELD_BLOCK_STYLES );
-		$box_color      = static::gen_field_key( static::FIELD_BOX_COLOR );
-		$buttons        = static::gen_field_key( static::FIELD_BUTTONS );
-		$type           = static::gen_field_key( static::FIELD_TYPE );
+		$title        = static::gen_field_key( static::FIELD_TITLE );
+		$header       = static::gen_field_key( static::FIELD_HEADER );
+		$description  = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$large_title  = static::gen_field_key( static::FIELD_LARGE_TITLE );
+		$eyebrow      = static::gen_field_key( static::FIELD_EYEBROW );
+		$large_text   = static::gen_field_key( static::FIELD_LARGE_TEXT );
+		$block_styles = static::gen_field_key( static::FIELD_BLOCK_STYLES );
+		$box_color    = static::gen_field_key( static::FIELD_BOX_COLOR );
+		$buttons      = static::gen_field_key( static::FIELD_BUTTONS );
+		$type         = static::gen_field_key( static::FIELD_TYPE );
 
 		return array(
 			'title'  => 'Messaging Block',
@@ -65,7 +65,7 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 						'value'    => 'boxed',
 					),
 					array(
-						static::FIELD_BOX_COLOR      => Color::gen_args(
+						static::FIELD_BOX_COLOR   => Color::gen_args(
 							$box_color,
 							static::FIELD_BOX_COLOR,
 							array(
@@ -76,26 +76,26 @@ class Messaging_Block extends A_Field_Group implements I_Block, I_Renderable {
 								),
 							)
 						),
-						static::FIELD_TITLE          => array(
+						static::FIELD_TITLE       => array(
 							'key'   => $title,
 							'name'  => static::FIELD_TITLE,
 							'label' => 'Title',
 							'type'  => 'text',
 						),
-						static::FIELD_HEADER         => array(
+						static::FIELD_HEADER      => array(
 							'key'   => $header,
 							'name'  => static::FIELD_HEADER,
 							'label' => 'Header',
 							'type'  => 'text',
 						),
-						static::FIELD_DESCRIPTION    => array(
+						static::FIELD_DESCRIPTION => array(
 							'key'       => $description,
 							'name'      => static::FIELD_DESCRIPTION,
 							'label'     => 'Description',
 							'type'      => 'textarea',
 							'new_lines' => 'br',
 						),
-						static::FIELD_BUTTONS        => Button_Group::clone(
+						static::FIELD_BUTTONS     => Button_Group::clone(
 							array(
 								'key'     => $buttons,
 								'name'    => static::FIELD_BUTTONS,
