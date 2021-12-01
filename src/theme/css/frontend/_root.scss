@@ -79,13 +79,9 @@ body {
 
 :root {
   --fixed-body-top: 0px;
-  --floating-crisis-button-bottom: #{rem-calc(40)};
+  --floating-crisis-button-bottom: #{rem-calc(10)};
   --tr-screen-br-sm: theme('screens.sm');
   --tr-screen-br-md: theme('screens.md');
   --tr-screen-br-lg: theme('screens.lg');
   --tr-screen-br-xl: theme('screens.xl');
-
-  @screen md {
-    --floating-crisis-button-bottom: #{rem-calc(50)};
-  }
 }
