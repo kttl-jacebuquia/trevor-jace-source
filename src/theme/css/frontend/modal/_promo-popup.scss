@@ -61,7 +61,7 @@
   }
 
   &__image {
-    @apply col-span-2 col-start-3 rounded-px10 overflow-hidden aspect-ratio-1-1;
+    @apply col-span-2 col-start-3 rounded-px10 overflow-visible aspect-ratio-1-1;
 
     @screen lg {
       @apply col-span-3 justify-self-end w-px118 mr-px12;

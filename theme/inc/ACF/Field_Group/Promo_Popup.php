@@ -154,7 +154,7 @@ class Promo_Popup extends A_Field_Group {
 				<?php if ( ! empty( $image['url'] ) ) : ?>
 					<figure class="promo-popup-modal__image">
 						<?php if ( ! empty( $image_link ) ) : ?>
-							<a href="<?php echo esc_url( $image_link ); ?>">
+							<a href="<?php echo esc_url( $image_link ); ?>" target="_blank">
 								<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>">
 							</a>
 						<?php else : ?>
