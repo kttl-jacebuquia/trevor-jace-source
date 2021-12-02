@@ -260,11 +260,11 @@ export const initializeCarousel = (carouselSettings) => {
 
 	options.on.slidePrevTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
-		// Focus on the last focusable slide
+		// Focus on the first focusable slide
 		if (_swiper.navigatedByNav) {
 			const lastFocusableSlide = [..._swiper.slides]
 				.filter((el) => !el.ariaHidden)
-				.pop();
+				.shift();
 			lastFocusableSlide?.focus();
 		} else {
 			_swiper.slides[_swiper.activeIndex]?.focus();
@@ -274,11 +274,11 @@ export const initializeCarousel = (carouselSettings) => {
 
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
-		// Focus on the first focusable slide
+		// Focus on the last focusable slide
 		if (_swiper.navigatedByNav) {
 			const firstFocusableSlide = [..._swiper.slides]
 				.filter((el) => !el.ariaHidden)
-				.shift();
+				.pop();
 			firstFocusableSlide?.focus();
 		} else {
 			_swiper.slides[_swiper.activeIndex]?.focus();
