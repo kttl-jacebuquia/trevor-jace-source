@@ -117,7 +117,11 @@
     }
 
     .actions {
-      @apply p-0 m-0 border-0 w-full;
+      @apply p-0 mt-px30 border-0 w-full;
+
+      @screen md {
+        @apply mt-0;
+      }
 
       [type="submit"] {
         @apply btn;

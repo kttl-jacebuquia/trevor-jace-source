@@ -213,13 +213,21 @@ class FormAssemblyForm extends Component {
 			const label = inputGroup.querySelector(
 				FloatingLabelInput.children.label
 			) as HTMLElement;
-			const dummyLabelActive: HTMLElement | null = inputGroup.querySelector(
-				FloatingLabelInput.children.dummyLabelActive
-			);
+			const dummyLabelActive: HTMLElement | null =
+				inputGroup.querySelector(
+					FloatingLabelInput.children.dummyLabelActive
+				);
 			const scaledLabelHeight = dummyLabelActive
 				? dummyLabelActive.offsetHeight
 				: label.offsetHeight;
 
+			// Apply individual label heights
+			inputGroup.style.setProperty(
+				'--active-label-height',
+				scaledLabelHeight + 'px'
+			);
+
+			// Save maximum label height
 			maxScaledHeight =
 				scaledLabelHeight > maxScaledHeight
 					? scaledLabelHeight

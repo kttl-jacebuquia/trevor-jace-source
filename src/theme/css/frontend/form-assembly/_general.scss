@@ -4,10 +4,11 @@
     /* Computed and updated through JS. Refer to form-assembly-form/_index.ts */
     --max-scaled-label-height: #{rem-calc(30)};
     @apply grid grid-cols-1;
-    row-gap: var(--max-scaled-label-height);
+    row-gap: 0;
 
     @screen md {
       @apply grid-cols-2 gap-x-md justify-between items-baseline;
+      row-gap: var(--max-scaled-label-height);
       --max-scaled-label-height: #{rem-calc(58)};
     }
   }
@@ -15,10 +16,12 @@
   .section {
     @apply grid grid-cols-1 m-0 w-full col-span-full;
     @apply border-b-px1 border-solid border-white pb-px40;
-    row-gap: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
+    row-gap: 0;
+
 
     @screen md {
       @apply grid-cols-2 gap-x-md justify-between items-baseline;
+      row-gap: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
     }
 
     > .section:last-child {
@@ -113,10 +116,26 @@
     // Detaches legend from the special layout treatment from the fieldset
     // source: https://stackoverflow.com/a/5630621
     @apply relative float-left;
+
+    @screen mobile {
+      @apply my-px30;
+    }
   }
 
   .actions {
     @apply col-span-full;
+  }
+
+  // Floating Label Input Overrides
+  .floating-label-input {
+    @screen mobile {
+      margin-top: var(--active-label-height) !important;
+
+      &[data-input-type="checkbox"],
+      &[data-input-type="radio"] {
+        margin-top: 0 !important;
+      }
+    }
   }
 
   // Autocomplete styles
