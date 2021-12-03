@@ -177,6 +177,10 @@
       }
     }
 
+    &-disabled {
+      @apply hidden;
+    }
+
     body.is-rc &-next {
       $breakpoints: lg, lg2, xl, 2xl;
 
@@ -328,6 +332,7 @@
 
     .swiper-button {
       @apply hidden;
+
       &-next {
         @screen lg {
           --carousel-card-size: theme("staffCard.width.DEFAULT");

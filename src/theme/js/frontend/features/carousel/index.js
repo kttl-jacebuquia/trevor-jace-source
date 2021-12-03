@@ -210,14 +210,6 @@ const onSwiperBreakpointChange = (swiper, breakpointParams) => {
 	}
 };
 
-const onSlideMutation = (mutations) => {
-	mutations.forEach(({ target }) => {
-		if (target.getAttribute('role') !== 'article') {
-			target.setAttribute('role', 'article');
-		}
-	});
-};
-
 export const initializeCarousel = (carouselSettings) => {
 	/**
 	 * Initialize remaining carousels
@@ -229,13 +221,6 @@ export const initializeCarousel = (carouselSettings) => {
 	const baseContainer = document.querySelector(baseSelector);
 
 	options.on.afterInit = function (_swiper) {
-		const slideMutationObserver = new window.MutationObserver(
-			onSlideMutation
-		);
-		_swiper.slides.forEach((slide) =>
-			slideMutationObserver.observe(slide, { attributes: true })
-		);
-
 		document
 			.querySelectorAll('.carousel-testimonials .card-post')
 			.forEach((elem) => {
@@ -261,29 +246,25 @@ export const initializeCarousel = (carouselSettings) => {
 	options.on.slidePrevTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
 		// Focus on the first focusable slide
-		if (_swiper.navigatedByNav) {
+		setTimeout(() => {
 			const lastFocusableSlide = [..._swiper.slides]
 				.filter((el) => !el.ariaHidden)
 				.shift();
-			lastFocusableSlide?.focus();
-		} else {
-			_swiper.slides[_swiper.activeIndex]?.focus();
-		}
-		_swiper.navigatedByNav = false;
+			lastFocusableSlide?.firstElementChild.focus();
+			_swiper.navigatedByNav = false;
+		}, 300);
 	};
 
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
 		// Focus on the last focusable slide
-		if (_swiper.navigatedByNav) {
+		setTimeout(() => {
 			const firstFocusableSlide = [..._swiper.slides]
 				.filter((el) => !el.ariaHidden)
 				.pop();
-			firstFocusableSlide?.focus();
-		} else {
-			_swiper.slides[_swiper.activeIndex]?.focus();
-		}
-		_swiper.navigatedByNav = false;
+			firstFocusableSlide?.firstElementChild.focus();
+			_swiper.navigatedByNav = false;
+		}, 300);
 	};
 
 	options.on.slideChangeTransitionEnd = function (_swiper) {
@@ -327,11 +308,12 @@ export const initializeCarousel = (carouselSettings) => {
 		// aria-hide slides that are not fully displayed
 		Array.from(_swiper.slides).forEach((slide) => {
 			const { left, right } = slide.getBoundingClientRect();
+			const slideContent = slide.firstElementChild;
 			const tagsBox = slide.querySelector('.tags-box');
 
 			if (left < 0 || right > windowWidth) {
-				slide.setAttribute('aria-hidden', true);
-				slide.setAttribute('tabindex', -1);
+				slide.setAttribute('aria-hidden', 'true');
+				slideContent.setAttribute('tabindex', -1);
 				// Make contents untabbable
 				[...slide.querySelectorAll('a,button')].forEach((el) =>
 					el.setAttribute('tabindex', -1)
@@ -339,8 +321,8 @@ export const initializeCarousel = (carouselSettings) => {
 				tagsBox?.setAttribute('aria-hidden', true);
 			} else {
 				slide.removeAttribute('aria-hidden');
-				slide.setAttribute('tabindex', 0);
-				[...slide.querySelectorAll('a,button')].forEach((el) =>
+				slideContent.setAttribute('tabindex', 0);
+				[...slideContent.querySelectorAll('a,button')].forEach((el) =>
 					el.removeAttribute('tabindex')
 				);
 				tagsBox?.removeAttribute('aria-hidden');
