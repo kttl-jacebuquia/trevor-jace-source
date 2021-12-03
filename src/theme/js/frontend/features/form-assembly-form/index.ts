@@ -217,9 +217,9 @@ class FormAssemblyForm extends Component {
 				inputGroup.querySelector(
 					FloatingLabelInput.children.dummyLabelActive
 				);
-			const scaledLabelHeight = dummyLabelActive
-				? dummyLabelActive.offsetHeight
-				: label.offsetHeight;
+			const labelHeightReference = dummyLabelActive || label;
+			const scaledLabelHeight =
+				labelHeightReference?.getBoundingClientRect().height || 0;
 
 			// Apply individual label heights
 			inputGroup.style.setProperty(

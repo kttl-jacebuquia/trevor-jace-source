@@ -50,14 +50,14 @@
   }
 
   &[data-input-tag="textarea"] {
-    label:not([class*="dummy-active"]) {
+    label:not([class*="dummy-label-active"]) {
       @apply top-0 translate-y-0;
     }
   }
 
   &[data-input-tag="textarea"],
   &[data-input-tag="select"] {
-    label:not([class*="dummy-active"]) {
+    label:not([class*="dummy-label-active"]) {
       @apply h-auto items-end pointer-events-auto inline-block;
     }
   }
@@ -76,6 +76,13 @@
     @apply w-full h-auto text-left;
     @apply px-px28 py-px10 flex flex-wrap items-center pointer-events-none z-1;
     color: var(--default-label-color);
+
+    &[class*="dummy-label-default"] {
+      width: 100% !important;
+      --tw-translate-y: -50% !important;
+      --tw-scale-x: 1 !important;
+      --tw-scale-y: 1 !important;
+    }
   }
 
   & input,

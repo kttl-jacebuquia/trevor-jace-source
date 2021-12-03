@@ -110,7 +110,6 @@ export default class FloatingLabelInput extends Component {
 			/input/i.test(this.element?.dataset.inputTag || '') &&
 			!/radio|checkbox/i.test(this.element?.dataset.inputType || '')
 		) {
-			console.log('checking heights');
 			if (
 				(this.children?.label?.offsetHeight || 0) >
 				(this.children?.input?.offsetHeight || 0)
@@ -167,7 +166,7 @@ export default class FloatingLabelInput extends Component {
 			// This allows textarea to expand on very long labels
 			this.element.style.setProperty(
 				'--label-height-default',
-				this.children.dummyLabelDefault.offsetHeight + 'px'
+				this.children.dummyLabelDefault.getBoundingClientRect().height + 'px'
 			);
 		}
 	}

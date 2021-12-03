@@ -52,8 +52,6 @@
 
       .floating-label-input {
         &[data-input-tag="textarea"] {
-          // @apply mt-px45;
-
           @screen md {
             @apply col-span-full;
           }
@@ -155,10 +153,10 @@
       }
 
       .actions {
-        @apply p-0 border-0 mt-px38;
+        @apply p-0 border-0;
 
         @screen md {
-          @apply grid tw-grid-tablet mt-px50;
+          @apply grid tw-grid-tablet;
         }
       }
 
@@ -197,24 +195,15 @@
       @apply w-full;
     }
 
-    &#tfa_1879-D {
-      // @apply mt-px50;
-    }
-
     &#tfa_1885-D {
-      // @apply mt-px40;
-
       @screen md {
         @apply col-span-full;
       }
     }
 
     &#tfa_1907-D {
-      // @apply mt-px100;
-
       @screen md {
         @apply col-span-full;
-        // @apply mt-px82;
       }
     }
 
@@ -225,11 +214,8 @@
     }
 
     &#tfa_1932-D {
-      // @apply mt-px110;
-
       @screen md {
         @apply col-span-full;
-        // @apply mt-px70;
       }
 
       label {
@@ -237,73 +223,6 @@
           width: 135%;
         }
       }
-    }
-
-    &#tfa_1938-D {
-      // @apply mt-px90;
-
-      // @screen md {
-      //   @apply mt-px60;
-      // }
-    }
-
-    &#tfa_1976-D {
-      // @apply mt-px130;
-
-      // @screen md {
-      //   @apply mt-px70;
-      // }
-    }
-
-    &#tfa_1997-D {
-      // @apply mt-px40;
-
-      // @include floating-label-active {
-      //   @apply mt-px10;
-
-      //   label {
-      //     width: 150%;
-      //     --tw-translate-y: calc(-100% - 5px);
-      //   }
-      // };
-    }
-
-    &#tfa_1998-D {
-      // @apply mt-px70;
-    }
-
-    &#tfa_2015-D {
-      // @apply mt-px20;
-    }
-
-    &#tfa_2022-D {
-      // @include floating-label-active {
-      //   @apply mt-px20;
-
-      //   label {
-      //     width: 150%;
-      //   }
-      // };
-    }
-
-    &#tfa_2025-D {
-      // @apply mt-px50;
-    }
-
-    &#tfa_2082-D {
-      textarea {
-        @apply h-px300;
-      }
-    }
-  }
-
-  legend {
-    &#tfa_1884-L {
-      // @apply mb-px50;
-    }
-
-    &#tfa_2072-L {
-      // @apply mb-px40;
     }
   }
 }

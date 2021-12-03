@@ -17,6 +17,12 @@
     }
   }
 
+  &__fields {
+    @screen md {
+      @apply mt-px50;
+    }
+  }
+
   .wFormContainer {
     @apply text-current mx-0 mb-0 w-full max-w-none;
 
@@ -117,11 +123,7 @@
     }
 
     .actions {
-      @apply p-0 mt-px30 border-0 w-full;
-
-      @screen md {
-        @apply mt-0;
-      }
+      @apply p-0 border-0 w-full;
 
       [type="submit"] {
         @apply btn;

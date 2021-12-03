@@ -1,6 +1,6 @@
 .wForm.wForm {
   form {
-    --max-scaled-label-height-extra: #{rem-calc(20)};
+    --max-scaled-label-height-extra: #{rem-calc(10)};
     /* Computed and updated through JS. Refer to form-assembly-form/_index.ts */
     --max-scaled-label-height: #{rem-calc(30)};
     @apply grid grid-cols-1;
@@ -8,8 +8,10 @@
 
     @screen md {
       @apply grid-cols-2 gap-x-md justify-between items-baseline;
-      row-gap: var(--max-scaled-label-height);
+      // row-gap: var(--max-scaled-label-height);
       --max-scaled-label-height: #{rem-calc(58)};
+      // Negate the top space brought by the first input groups
+      margin-top: calc(-1 * var(--max-scaled-label-height));
     }
   }
 
@@ -18,10 +20,8 @@
     @apply border-b-px1 border-solid border-white pb-px40;
     row-gap: 0;
 
-
     @screen md {
       @apply grid-cols-2 gap-x-md justify-between items-baseline;
-      row-gap: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
     }
 
     > .section:last-child {
@@ -58,10 +58,14 @@
     // For checkbox/radio since they don't implement scaled labels
     &[data-input-type="checkbox"],
     &[data-input-type="radio"] {
-      margin-top: calc(-1 * var(--max-scaled-label-height));
+      margin-top: var(--max-scaled-label-height-extra);
 
       label {
         transform: none;
+      }
+
+      @screen md {
+        margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
       }
     }
 
@@ -116,25 +120,50 @@
     // Detaches legend from the special layout treatment from the fieldset
     // source: https://stackoverflow.com/a/5630621
     @apply relative float-left;
+    @apply mt-px30 mb-px20;
 
-    @screen mobile {
-      @apply my-px30;
+    @screen md {
+      margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
+    }
+
+    + .oneField.oneField {
+      margin-top: calc(var(--active-label-height));
+
+      &[data-input-type="checkbox"],
+      &[data-input-type="radio"] {
+        margin-top: var(--max-scaled-label-height-extra);
+      }
+
+      @screen md {
+        &[data-input-type="checkbox"],
+        &[data-input-type="radio"] {
+          margin-top: 0;
+        }
+      }
     }
   }
 
   .actions {
-    @apply col-span-full;
+    @apply col-span-full mt-px30;
+
+    @screen md {
+      margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
+    }
   }
 
   // Floating Label Input Overrides
   .floating-label-input {
-    @screen mobile {
-      margin-top: var(--active-label-height) !important;
+    margin-top: calc(var(--active-label-height) + var(--max-scaled-label-height-extra));
 
+    @screen mobile {
       &[data-input-type="checkbox"],
       &[data-input-type="radio"] {
-        margin-top: 0 !important;
+        margin-top: 0;
       }
+    }
+
+    @screen md {
+      margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
     }
   }
 
