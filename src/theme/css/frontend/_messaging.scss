@@ -27,14 +27,6 @@
         padding-right: theme('container.padding.lg2');
       }
     }
-
-    .messaging--large_text & {
-      @apply py-px120;
-
-      @screen lg2 {
-        @apply py-px135;
-      }
-    }
 	}
 
 	&__content {
