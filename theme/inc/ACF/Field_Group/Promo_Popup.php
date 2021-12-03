@@ -5,6 +5,9 @@ use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Promo_Popup extends A_Field_Group {
 	const FIELD_BLOCK_STYLES       = 'block_styles';
+	const FIELD_PROMO_SCHEDULE     = 'promo_schedule';
+	const FIELD_PROMO_START_DATE   = 'promo_start_date';
+	const FIELD_PROMO_END_DATE     = 'promo_end_date';
 	const FIELD_IMAGE              = 'promo_image';
 	const FIELD_IMAGE_LINK         = 'image_link';
 	const FIELD_HEADLINE           = 'promo_headline';
@@ -17,6 +20,9 @@ class Promo_Popup extends A_Field_Group {
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
 		$block_styles       = static::gen_field_key( static::FIELD_BLOCK_STYLES );
+		$promo_schedule     = static::gen_field_key( static::FIELD_PROMO_SCHEDULE );
+		$promo_start_date   = static::gen_field_key( static::FIELD_PROMO_START_DATE );
+		$promo_end_date     = static::gen_field_key( static::FIELD_PROMO_END_DATE );
 		$image              = static::gen_field_key( static::FIELD_IMAGE );
 		$image_link         = static::gen_field_key( static::FIELD_IMAGE_LINK );
 		$headline           = static::gen_field_key( static::FIELD_HEADLINE );
@@ -36,6 +42,57 @@ class Promo_Popup extends A_Field_Group {
 						'display' => 'seamless',
 						'layout'  => 'block',
 					)
+				),
+				static::FIELD_PROMO_SCHEDULE     => array(
+					'key'         => $promo_schedule,
+					'name'        => static::FIELD_PROMO_SCHEDULE,
+					'label'       => 'Add Schedule',
+					'type'        => 'true_false',
+					'ui'          => 1,
+					'ui_on_text'  => '',
+					'ui_off_text' => '',
+				),
+				static::FIELD_PROMO_START_DATE   => array(
+					'key'               => $promo_start_date,
+					'name'              => static::FIELD_PROMO_START_DATE,
+					'label'             => 'Start Date',
+					'type'              => 'date_time_picker',
+					'wrapper'           => array(
+						'width' => '50%',
+					),
+					'display_format'    => 'M j, Y g:i:s a',
+					'return_format'     => 'M j, Y H:i:s',
+					'first_day'         => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $promo_schedule,
+								'operator' => '==',
+								'value'    => '1',
+							),
+						),
+					),
+				),
+				static::FIELD_PROMO_END_DATE     => array(
+					'key'               => $promo_end_date,
+					'name'              => static::FIELD_PROMO_END_DATE,
+					'label'             => 'End Date',
+					'type'              => 'date_time_picker',
+					'wrapper'           => array(
+						'width' => '50%',
+					),
+					'display_format'    => 'M j, Y g:i:s a',
+					'return_format'     => 'M j, Y H:i:s',
+					'first_day'         => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $promo_schedule,
+								'operator' => '==',
+								'value'    => '1',
+							),
+						),
+					),
 				),
 				static::FIELD_IMAGE              => array(
 					'key'          => $image,
@@ -182,5 +239,61 @@ class Promo_Popup extends A_Field_Group {
 		}
 
 		return static::MODAL_SELECTOR_PREFIX;
+	}
+
+	public static function get_promo_schedule( $post ) {
+		$val = new Field_Val_Getter( static::class, $post );
+
+		$schedule   = $val->get( static::FIELD_PROMO_SCHEDULE );
+		$start_date = $val->get( static::FIELD_PROMO_START_DATE );
+		$end_date   = $val->get( static::FIELD_PROMO_END_DATE );
+
+		if ( ! $schedule ) {
+			return false;
+		}
+
+		$data = array(
+			'schedule'   => $schedule,
+			'start_date' => $start_date,
+			'end_date'   => $end_date,
+		);
+
+		return self::is_promo_active( $data );
+	}
+
+	/**
+	 * Check if promo popup is active
+	 */
+	public static function is_promo_active( array $data ): bool {
+		$current_date = current_datetime();
+		$current_date = wp_date( 'M j, Y H:i:s', $current_date->date, $current_date->timezone );
+		$current_date = strtotime( $current_date );
+
+		$start_date = ! empty( $data['start_date'] ) ? strtotime( $data['start_date'] ) : '';
+		$end_date   = ! empty( $data['end_date'] ) ? strtotime( $data['end_date'] ) : '';
+
+		if ( empty( $start_date ) && empty( $end_date ) ) {
+			return true;
+		}
+
+		if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( $current_date >= $start_date && $current_date <= $end_date ) {
+				return true;
+			}
+		}
+
+		if ( ! empty( $start_date ) && empty( $end_date ) ) {
+			if ( $current_date >= $start_date ) {
+				return true;
+			}
+		}
+
+		if ( empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( $current_date <= $end_date ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
