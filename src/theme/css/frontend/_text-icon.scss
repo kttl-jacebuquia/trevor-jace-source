@@ -1,7 +1,7 @@
 .text-icon {
   // Block Spacer Settings
   @include block-spacer-settings(
-    $default: ( 70, 80 ),
+    $default: ( 80 ),
     $md: ( 80 ),
     $lg: ( 100 ),
     $lg2: ( 90, 150 ),

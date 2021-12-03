@@ -13,6 +13,16 @@
   --spacer-bottom--lg2: #{rem-calc(120)};
   --spacer-bottom--xl: #{rem-calc(120)};
 
+  &--large_text {
+    @include block-spacer-settings(
+      $default: 120,
+      $md: 120,
+      $lg: 120,
+      $lg2: 135,
+      $xl: 135,
+    );
+  }
+
 	&__container {
 		@apply tw-grid container mx-auto;
 
