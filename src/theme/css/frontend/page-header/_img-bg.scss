@@ -5,6 +5,7 @@
 
   @screen mobile {
     padding-top: $top-nav-height;
+    padding-bottom: $top-nav-height;
     margin-top: -$top-nav-height;
     min-height: 100vh;
   }
