@@ -1,4 +1,14 @@
 .wForm.wForm {
+  @apply font-medium text-px18 leading-px26;
+
+  @screen md {
+    @apply leading-px22;
+  }
+
+  @screen lg2 {
+    @apply text-px20 leading-px24;
+  }
+
   form {
     --max-scaled-label-height-extra: #{rem-calc(10)};
     /* Computed and updated through JS. Refer to form-assembly-form/_index.ts */
@@ -30,6 +40,17 @@
     }
   }
 
+  // Base label styles
+  .label {
+    * {
+      @apply contents font-normal text-current;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+    }
+  }
+
   .oneField.oneField {
     @screen md {
       @apply w-full;
@@ -48,9 +69,21 @@
     }
 
     &[data-input-type="checkbox"] {
+      input[type="checkbox"] {
+        @apply w-px30 h-px30 p-0;
+      }
+
       input[type="checkbox"]:checked {
         background-image: url(/wp-content/themes/trevor/static/media/checkmark.svg);
         background-position: center;
+      }
+    }
+
+    .oneChoice {
+      @apply relative flex items-start mt-px10;
+
+      label {
+        @apply pl-px10;
       }
     }
 
@@ -61,7 +94,9 @@
       margin-top: var(--max-scaled-label-height-extra);
 
       label {
+        @apply static px-0 ml-px10 pointer-events-auto h-auto text-white;
         transform: none;
+        width: 100% !important;
       }
 
       @screen md {
@@ -114,16 +149,32 @@
     textarea {
       @apply w-full;
     }
+
+    input,
+    select,
+    textarea {
+      &:disabled {
+        @apply opacity-70;
+      }
+    }
   }
 
-  legend {
+  .legend {
     // Detaches legend from the special layout treatment from the fieldset
     // source: https://stackoverflow.com/a/5630621
     @apply relative float-left;
     @apply mt-px30 mb-px20;
+    @apply p-0 col-span-full text-white;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
 
     @screen md {
       margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
+    }
+
+    div {
+      @apply text-current;
     }
 
     + .oneField.oneField {

@@ -29,14 +29,6 @@
 
       .section {
         @apply p-0 text-left border-0 bg-transparent;
-
-        legend {
-          @apply p-0 col-span-full text-white;
-
-          div {
-            @apply text-current;
-          }
-        }
       }
 
       .field-container-D {
@@ -67,13 +59,6 @@
           }
         }
 
-        &[data-input-type="checkbox"],
-        &[data-input-type="radio"] {
-          label {
-            @apply static px-0 ml-px10 pointer-events-auto h-auto text-white;
-          }
-        }
-
         // Active label overrides
 
         &--activated {
@@ -92,14 +77,6 @@
         }
       }
 
-      .oneChoice {
-        @apply relative flex items-start mt-px10;
-
-        label {
-          @apply pl-px10;
-        }
-      }
-
       .label {
         @apply font-manrope text-current text-px18 leading-px26 tracking-px05;
         @apply flex items-center px-px28 font-medium max-w-none;
@@ -107,14 +84,6 @@
 
         &::after {
           @apply hidden;
-        }
-
-        * {
-          @apply contents font-normal text-current;
-          font-size: inherit;
-          font-weight: inherit;
-          line-height: inherit;
-          letter-spacing: inherit;
         }
       }
 
@@ -137,18 +106,6 @@
         input[id^="tfa_"],
         input#tfa_1876 {
           @apply h-px66 flex items-center justify-start border-0 rounded-px10 w-full px-px28;
-        }
-
-        input[type="checkbox"] {
-          @apply w-px30 h-px30 p-0;
-        }
-
-        input,
-        select,
-        textarea {
-          &:disabled {
-            @apply opacity-70;
-          }
         }
       }
 

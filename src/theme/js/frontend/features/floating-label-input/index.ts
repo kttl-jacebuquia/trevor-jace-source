@@ -114,7 +114,11 @@ export default class FloatingLabelInput extends Component {
 				(this.children?.label?.offsetHeight || 0) >
 				(this.children?.input?.offsetHeight || 0)
 			) {
-				console.log(this.children?.label?.offsetHeight, this.children?.input?.offsetHeight, this.element);
+				console.log(
+					this.children?.label?.offsetHeight,
+					this.children?.input?.offsetHeight,
+					this.element
+				);
 				this.options.activated = true;
 			}
 		}
@@ -166,7 +170,8 @@ export default class FloatingLabelInput extends Component {
 			// This allows textarea to expand on very long labels
 			this.element.style.setProperty(
 				'--label-height-default',
-				this.children.dummyLabelDefault.getBoundingClientRect().height + 'px'
+				this.children.dummyLabelDefault.getBoundingClientRect().height +
+					'px'
 			);
 		}
 	}
@@ -221,10 +226,12 @@ export default class FloatingLabelInput extends Component {
 
 	// Triggers when state is change by calling this.setState()
 	componentDidUpdate() {
-		this.element.classList.toggle(
-			ACTIVATED_CLASSLIST,
-			this.state.activated
-		);
+		if (!/checkbox|radio/i.test(this.element.dataset.inputType)) {
+			this.element.classList.toggle(
+				ACTIVATED_CLASSLIST,
+				this.state.activated
+			);
+		}
 	}
 }
 

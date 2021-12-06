@@ -48,6 +48,9 @@ class FormAssemblyForm extends Component {
 
 		// Handle resize
 		this.handleResize();
+
+		// Handle legends
+		this.handleLegends();
 	}
 
 	reset() {
@@ -263,6 +266,24 @@ class FormAssemblyForm extends Component {
 		[...document.querySelectorAll('link[href*="tfaforms"]')].forEach(
 			(link) => link.remove()
 		);
+	}
+
+	// Replacing legend elements with div instead, in order to
+	// workaround style inconsistencies with legend in Safari
+	handleLegends() {
+		const legends: HTMLLegendElement[] = [
+			...this.element.querySelectorAll('legend'),
+		];
+
+		legends.forEach((legend) => {
+			const div = document.createElement('div');
+			div.id = legend.id;
+			div.textContent = legend.textContent;
+			div.classList.add('legend');
+
+			legend.insertAdjacentElement('beforebegin', div);
+			legend.remove();
+		});
 	}
 }
 
