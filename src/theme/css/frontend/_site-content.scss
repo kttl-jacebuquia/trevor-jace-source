@@ -3,9 +3,9 @@
 
   // Add extra bottom space for the last child,
   // giving way for the sticky button
-  > :last-child > :last-child {
+  > :last-child {
     @screen mobile {
-      @apply mb-px50;
+      @apply pb-px80 mb-0;
     }
   }
 }
