@@ -15,16 +15,21 @@
 .page-header {
   &.type-text {
     @apply container mx-auto;
-    @apply md:min-h-px445;
-    @apply lg2:min-h-px546;
 
     .hero--inner {
-      @apply tw-grid pb-px30;
-
+      @apply tw-grid pb-px164;
       grid-auto-rows: min-content;
 
+      @screen md {
+        @apply pb-px142;
+      }
+
+      @screen lg {
+        @apply pb-px118;
+      }
+
       @screen lg2 {
-        @apply w-full;
+        @apply w-full pb-px171;
       }
     }
 
@@ -117,6 +122,29 @@
 
       @screen xl {
         @apply tracking-px05;
+      }
+    }
+
+    // With CTA variant
+    &.page-header--with-cta {
+      .hero--inner {
+        @apply pb-px160;
+
+        @screen md {
+          @apply pb-px120;
+        }
+
+        @screen lg {
+          @apply pb-px120;
+        }
+
+        @screen lg2 {
+          padding-bottom: rem-calc(111);
+        }
+
+        @screen xl {
+          @apply pb-px124;
+        }
       }
     }
   }
