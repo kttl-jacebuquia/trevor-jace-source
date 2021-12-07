@@ -122,6 +122,14 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				</a>
 			</div>
 
+			<div class="top-nav-cta-wrap">
+				<a href="<?php echo esc_url( $donate_link['url'] ); ?>"
+					class="btn" rel="noopener nofollow"
+					target="<?php echo esc_attr( $donate_link['target'] ); ?>">
+						<?php echo esc_html( $donate_link['title'] ); ?>
+				</a>
+			</div>
+
 			<div class="opener-wrap">
 				<button type="button" class="opener"><i class="trevor-ti-hamburger-menu"></i></button>
 			</div>

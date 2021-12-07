@@ -262,7 +262,7 @@
   // CTAs
   .cta-wrap {
     @screen lg-only {
-      @apply transform-gpu translate-x-px50;
+      @apply transform-gpu translate-x-px50 mr-px10;
       @apply transition-transform duration-300 ease-out;
     }
   }
@@ -270,7 +270,7 @@
 	// Top Bar Controls
 	.topbar-controls {
 		@apply flex transition-transform duration-300 ease-out;
-		@apply transform-gpu translate-y-0 flex-shrink-0;
+		@apply will-transform transform-gpu translate-y-0 flex-shrink-0;
 		z-index: var(--z-index-nav-controls);
 
     @screen lg-max {
@@ -307,8 +307,8 @@
 
 	.topbar-control-opener {
 		@apply flex justify-center items-center relative;
-		@apply text-px40 text-indigo;
-		width: rem-calc(45px);
+		@apply text-px40 text-indigo flex-shrink-0;
+    width: rem-calc(45px);
 		height: rem-calc(45px);
 
     @screen lg-only {
@@ -324,6 +324,12 @@
 	.trevor-ti-hamburger-menu {
 		@apply block absolute transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 		@apply transition-all duration-300 opacity-100 visible;
+    width: rem-calc(45px);
+		height: rem-calc(45px);
+
+    &::before {
+      @apply h-px30;
+    }
 	}
 
 	.trevor-ti-nav-close {

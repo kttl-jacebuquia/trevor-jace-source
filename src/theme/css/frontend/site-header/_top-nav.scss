@@ -115,6 +115,7 @@
 
   .top-nav-inner {
     @screen mobile {
+      @apply items-start;
       max-width: none;
     }
 
@@ -131,7 +132,11 @@
 
 .top-nav-inner {
 	@apply static flex flex-row items-center justify-between h-full;
-	@apply mx-auto;
+	@apply mx-auto pt-px18;
+
+  @screen mobile {
+    @apply gap-x-px18;
+  }
 
   @screen md {
     @apply px-0;
@@ -146,8 +151,6 @@
 	}
 
 	.logo-wrap {
-		@apply -mt-px10;
-
 		@screen md {
 			@apply mt-0;
 		}
@@ -165,7 +168,7 @@
 
 
   .site-logo {
-    width: #{rem-calc(154)};
+    width: #{rem-calc(132)};
 
     @screen md {
       width: #{rem-calc(183)};
@@ -173,6 +176,20 @@
 
     @screen xl {
       width: #{rem-calc(242)};
+    }
+  }
+
+  .top-nav-cta-wrap {
+    @apply ml-auto mt-px5;
+
+    @screen md {
+      @apply hidden;
+    }
+
+    .btn {
+      @apply h-px35 px-px16 py-0 flex items-center rounded-px100 min-h-0;
+      @apply border-2 bg-transparent text-current border-current;
+      @apply font-bold text-px16 leading-px20;
     }
   }
 
@@ -186,11 +203,9 @@
 	}
 
 	.opener {
-		font-size: 3rem;
-		padding-bottom: 1.75rem;
-		@apply cursor-pointer;
+    @apply cursor-pointer w-px45 h-px45;
 		@apply transition-all duration-300 ease-out;
-		@apply visible opacity-100;
+		@apply visible opacity-100 text-px40;
 	}
 
 	// Search Button

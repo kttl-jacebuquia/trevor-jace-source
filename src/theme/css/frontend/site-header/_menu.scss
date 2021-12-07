@@ -5,6 +5,7 @@
   @apply transform-gpu translate-x-full;
   @apply transition-all duration-300 ease-out;
   @apply invisible opacity-0;
+  will-change: transform;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   top: rem-calc(133px); // Just below the switcher
