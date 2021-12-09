@@ -94,14 +94,8 @@ export default class FloatingLabelInput extends Component {
 	// Performs input type check to determine
 	// Whether the field should be activated by default
 	determineActivatedOption() {
-		// Select tag always activated
-		if (/select/i.test(this.element?.dataset.inputTag || '')) {
-			this.options.activated = true;
-		}
 		// Checkbox/Radio doesn't need activated state
-		else if (
-			/radio|checkbox/i.test(this.element?.dataset.inputType || '')
-		) {
+		if (/radio|checkbox/i.test(this.element?.dataset.inputType || '')) {
 			this.options.activated = false;
 		}
 		// For input non-radio/checkbox tags,
@@ -114,11 +108,6 @@ export default class FloatingLabelInput extends Component {
 				(this.children?.label?.offsetHeight || 0) >
 				(this.children?.input?.offsetHeight || 0)
 			) {
-				console.log(
-					this.children?.label?.offsetHeight,
-					this.children?.input?.offsetHeight,
-					this.element
-				);
 				this.options.activated = true;
 			}
 		}

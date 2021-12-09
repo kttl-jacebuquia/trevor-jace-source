@@ -47,39 +47,12 @@
           @screen md {
             @apply col-span-full;
           }
-
-          label {
-            @apply items-end py-px10;
-          }
-        }
-
-        &[data-input-tag="select"] {
-          label {
-            @apply text-white;
-          }
-        }
-
-        // Active label overrides
-
-        &--activated {
-          label {
-            width: 150%;
-            color: var(--activated-label-color);
-          }
-
-          &[data-input-tag="textarea"] {
-            label {
-              @screen md {
-                width: 135%;
-              }
-            }
-          }
         }
       }
 
-      .label {
-        @apply font-manrope text-current text-px18 leading-px26 tracking-px05;
-        @apply flex items-center px-px28 font-medium max-w-none;
+      .label:not([class*="dummy-label-active"]) {
+        @apply font-manrope text-px18 leading-px26 tracking-px05;
+        @apply px-px28 font-medium max-w-none;
         z-index: 1;
 
         &::after {

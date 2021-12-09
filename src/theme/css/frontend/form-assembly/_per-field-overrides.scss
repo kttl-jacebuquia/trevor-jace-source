@@ -1,0 +1,23 @@
+$full-width-fields: (
+  "tfa_1878-D",
+  "tfa_1879-D",
+  "tfa_1886-D",
+  "tfa_1997-D",
+  "tfa_1998-D",
+  "tfa_2015-D",
+  "tfa_2022-D",
+  "tfa_2023-D",
+  "tfa_2025-D",
+  "tfa_2073-D",
+  "tfa_2063-D",
+  "tfa_2064-D",
+  "tfa_2065-D"
+);
+
+@each $field_id in $full-width-fields {
+  .oneField#{"#" + $field_id} {
+    @screen md {
+      @apply col-span-full;
+    }
+  }
+}

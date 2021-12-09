@@ -183,7 +183,7 @@ export default class FundraiserQuiz {
 
 	onFormSubmitSuccess() {
 		if (this.devInquiryFieldsContainer) {
-			this.devInquiryFieldsContainer.outerHTML = `<p>Thank you for your submission!</p>`;
+			this.devInquiryFieldsContainer.outerHTML = '';
 		}
 	}
 

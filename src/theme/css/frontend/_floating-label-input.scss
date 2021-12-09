@@ -1,41 +1,3 @@
-@mixin active-label-styles {
-  @apply -translate-x-px20;
-    color: var(--activated-label-color);
-    top: 0;
-    --tw-translate-y: -100%;
-    --tw-scale-x: calc(14/18);
-    --tw-scale-y: calc(14/18);
-    width: 140%;
-}
-
-@mixin floating-label-active {
-  label:not([class*="dummy"]) {
-    @include active-label-styles;
-    @content;
-  }
-
-  .floating-label-input__dummy-label-active {
-    @include active-label-styles;
-    @content;
-  }
-}
-
-// Applies active label styles
-// @content - Override styles for label and dummy-label
-@mixin active-label-state {
-  &.floating-label-input--activated {
-    label:not([class*="dummy"]) {
-      @include active-label-styles;
-      @content;
-    }
-  }
-
-  .floating-label-input__dummy-label-active {
-    @include active-label-styles;
-    @content;
-  }
-}
-
 .floating-label-input {
   --default-label-color: theme('colors.teal.dark');
   --activated-label-color: theme('colors.white.DEFAULT');
@@ -43,45 +5,47 @@
   @apply w-full relative;
   @apply text-px18 leading-px26;
 
-  &[data-input-tag="select"] {
-    @include floating-label-active {
-      @apply items-end;
-    }
-  }
-
   &[data-input-tag="textarea"] {
     label:not([class*="dummy-label-active"]) {
       @apply top-0 translate-y-0;
     }
   }
 
-  &[data-input-tag="textarea"],
-  &[data-input-tag="select"] {
-    label:not([class*="dummy-label-active"]) {
-      @apply h-auto items-end pointer-events-auto inline-block;
-    }
-  }
-
   &[data-input-type="radio"],
   &[data-input-type="checkbox"] {
     label {
-      @apply py-0;
+      &:not([class*="dummy-label-active"]) {
+        @apply whitespace-normal;
+      }
     }
   }
 
   label {
+    @apply block w-full overflow-ellipsis overflow-hidden;
     @apply absolute top-1/2 left-0;
     @apply transform-gpu origin-bottom-left -translate-y-1/2;
     @apply transition-all;
     @apply w-full h-auto text-left;
-    @apply px-px28 py-px10 flex flex-wrap items-center pointer-events-none z-1;
+    @apply px-px28 py-px10 items-center pointer-events-none z-1;
     color: var(--default-label-color);
 
-    &[class*="dummy-label-default"] {
-      width: 100% !important;
-      --tw-translate-y: -50% !important;
-      --tw-scale-x: 1 !important;
-      --tw-scale-y: 1 !important;
+    &:not([class*="dummy-label-active"]) {
+      @apply whitespace-nowrap;
+    }
+
+    // Dummy labels
+    &.floating-label-input__dummy-label-active {
+      @apply bottom-full w-full px-0 py-0 mb-px10;
+      @apply transition-all translate-y-full transform-gpu invisible opacity-0;
+      color: var(--activated-label-color);
+      top: unset;
+      font-size: (14em/18);
+      line-height: (24em/18);
+      will-change: transform;
+    }
+
+    &.floating-label-input__dummy-label-default {
+      @apply invisible transition-none;
     }
   }
 
@@ -99,21 +63,40 @@
   }
 
   // Activated state
-  &--activated:not([data-input-type="checkbox"]) {
-    @include floating-label-active;
+  &--activated {
+    &:not([data-input-type="checkbox"]),
+    &:not([data-input-type="radio"]) {
+      label:not([class*="dummy-label"]) {
+        @apply -translate-y-full opacity-0 invisible;
+      }
+
+      .floating-label-input__dummy-label-active {
+        @apply translate-y-0 opacity-100 visible pointer-events-auto;
+      }
+    }
   }
 
   &[data-input-tag="select"] {
-    @include floating-label-active;
+    select {
+      @apply overflow-ellipsis block overflow-hidden;
+    }
+
+    &:not([class*="--activated"]) {
+      .label:not([class*="dummy-label-active"]) {
+        color: var(--default-label-color);
+      }
+
+      select {
+        @apply text-transparent;
+      }
+    }
   }
 
-  // Dummy labels
-  & &__dummy-label-active {
-    @include active-label-styles;
-    @apply invisible transition-none;
-  }
-
-  & &__dummy-label-default {
-    @apply invisible transition-none;
+  &[data-input-tag="textarea"] {
+    label {
+      &:not([class*="label-active"]) {
+        @apply whitespace-normal;
+      }
+    }
   }
 }

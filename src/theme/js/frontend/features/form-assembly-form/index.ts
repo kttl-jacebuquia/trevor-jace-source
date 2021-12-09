@@ -7,7 +7,11 @@ class FormAssemblyForm extends Component {
 		inputFields: HTMLElement[];
 		conditionalSections: HTMLElement[];
 		submitButton: HTMLButtonElement;
+		dynamicFields: HTMLElement[];
+		requiredFields: HTMLElement[];
 	};
+
+	requiredFields: HTMLElement[] = [];
 
 	static ajaxAction = 'form_assembly';
 
@@ -19,14 +23,22 @@ class FormAssemblyForm extends Component {
 		inputFields: ['.oneField'],
 		conditionalSections: ['.section[data-condition]'],
 		submitButton: '#submit_button',
+		dynamicFields: ['[data-condition'],
 	};
 
 	afterInit() {
+		this.element.addEventListener('change', (e) => this.onChange());
 		this.element.addEventListener('reset', () => this.onReset());
 		this.element.addEventListener('submit', (e) => this.onSubmit(e));
 
 		// Remove autocomplete/autofill
 		this.element.setAttribute('autocomplete', 'off');
+
+		// Get requried fields
+		this.requiredFields =
+			this.children?.inputFields.filter((inputField) =>
+				inputField.querySelector('.required')
+			) || [];
 
 		// Add necessary selectors for FloatingLabelInput initialization
 		this.children?.inputFields.forEach((inputField: HTMLElement) => {
@@ -51,10 +63,55 @@ class FormAssemblyForm extends Component {
 
 		// Handle legends
 		this.handleLegends();
+
+		// Initially run onchange
+		this.onChange();
 	}
 
 	reset() {
 		this.onReset();
+	}
+
+	getFormData() {
+		const [...formDataEntries] = new FormData(
+			this.element as HTMLFormElement
+		).entries();
+		const formData = formDataEntries.reduce(
+			(data: { [key: string]: any }, [key, value]) => {
+				if (value) {
+					data[key] = value;
+				}
+				return data;
+			},
+			{}
+		);
+
+		return formData;
+	}
+
+	onChange() {
+		const formData = this.getFormData();
+
+		// Check for visible required fields
+		// If there are missing user input
+		const someFieldsMising = this.requiredFields.some((inputField) => {
+			if (!inputField.offsetParent) {
+				return false;
+			}
+
+			// Get input field, account for checkbox options
+			const fields: HTMLInputElement[] | HTMLElement = Array.from(
+				inputField.querySelectorAll('[name]')
+			);
+
+			const isInputProvided = fields.some(
+				(inputElement) => inputElement.name in formData
+			);
+
+			return !isInputProvided;
+		});
+
+		this.toggleSubmitButton(!someFieldsMising);
 	}
 
 	onSubmit(e: Event) {
@@ -98,6 +155,14 @@ class FormAssemblyForm extends Component {
 				this.onSubmitSuccess();
 			}
 		}, 300);
+	}
+
+	toggleSubmitButton(isEnabled: boolean = false) {
+		if (isEnabled) {
+			this.children?.submitButton.removeAttribute('disabled');
+		} else {
+			this.children?.submitButton.setAttribute('disabled', 'true');
+		}
 	}
 
 	onSubmitSuccess() {
@@ -213,6 +278,11 @@ class FormAssemblyForm extends Component {
 
 		/* Check non-checkbox/radio input fields */
 		this.children?.inputFields.forEach((inputGroup: HTMLElement) => {
+			// Exclude checkbox and radio from computation
+			if (/checkbox|radio/i.test(inputGroup.dataset.inputType || '')) {
+				return;
+			}
+
 			const label = inputGroup.querySelector(
 				FloatingLabelInput.children.label
 			) as HTMLElement;

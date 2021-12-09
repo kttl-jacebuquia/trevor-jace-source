@@ -62,10 +62,6 @@
         @screen md {
           @apply w-full;
         }
-
-        label {
-          @apply pt-px20 pb-px10;
-        }
       }
 
       &[data-input-tag="select"] {
@@ -89,8 +85,6 @@
     .label.label {
       --default-label-color: theme("colors.blue_green.DEFAULT");
       --activated-label-color: theme("colors.white.DEFAULT");
-      @apply flex items-center w-full max-w-none;
-      @apply text-px18 leading-px26 pl-px28 pr-px10;
 
       * {
         color: currentColor !important;
@@ -110,7 +104,7 @@
       }
 
       select {
-        @apply h-px66 text-blue_green pl-px28 pr-px10 rounded-px10 w-full;
+        @apply h-px66 text-blue_green pl-px28 rounded-px10 w-full;
       }
 
       textarea {
@@ -136,10 +130,6 @@
         @screen md {
           @apply w-auto h-px58;
           min-width: rem-calc(137);
-        }
-
-        @screen lg {
-          @apply mt-px90;
         }
       }
     }
