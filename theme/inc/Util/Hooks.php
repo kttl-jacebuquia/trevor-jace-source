@@ -636,9 +636,10 @@ class Hooks {
 		) )->render();
 
 		// Promo Modal
-		$promo_popup = Options_Page\Promo::get_promo_popup();
+		$promo_popup     = Options_Page\Promo::get_promo_popup();
+		$is_promo_active = Promo_Popup::get_promo_schedule( $promo_popup['promo'] );
 
-		if ( $promo_popup['state'] ) {
+		if ( $promo_popup['state'] && $is_promo_active ) {
 			$val          = new Field_Val_Getter( Promo_Popup::class, $promo_popup['promo'] );
 			$block_styles = $val->get( Promo_Popup::FIELD_BLOCK_STYLES );
 
