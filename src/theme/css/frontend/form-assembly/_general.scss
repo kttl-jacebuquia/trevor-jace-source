@@ -10,7 +10,7 @@
   }
 
   form {
-    --max-scaled-label-height-extra: #{rem-calc(10)};
+    --max-scaled-label-height-extra: #{rem-calc(40)};
     /* Computed and updated through JS. Refer to form-assembly-form/_index.ts */
     --max-scaled-label-height: #{rem-calc(30)};
     @apply grid grid-cols-1;
@@ -18,8 +18,8 @@
 
     @screen md {
       @apply grid-cols-2 gap-x-md justify-between items-baseline;
-      // row-gap: var(--max-scaled-label-height);
       --max-scaled-label-height: #{rem-calc(58)};
+      --max-scaled-label-height-extra: #{rem-calc(30)};
       // Negate the top space brought by the first input groups
       margin-top: calc(-1 * var(--max-scaled-label-height));
     }
@@ -56,10 +56,6 @@
       @apply w-full;
     }
 
-    &.offstate {
-      @apply hidden;
-    }
-
     &[role="group"] {
       @apply col-span-full;
 
@@ -80,7 +76,7 @@
     }
 
     .oneChoice {
-      @apply relative flex items-start mt-px10;
+      @apply relative flex items-center;
 
       label {
         @apply pl-px10;
@@ -97,10 +93,6 @@
         @apply static px-0 ml-px10 pointer-events-auto h-auto text-white;
         transform: none;
         width: 100% !important;
-      }
-
-      @screen md {
-        margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
       }
     }
 
@@ -122,20 +114,6 @@
 
         &:disabled {
           @apply opacity-70;
-        }
-      }
-    }
-
-    // Active label states (General)
-    @include active-label-state {
-      width: 140%;
-    }
-
-    // Active label states (TextArea)
-    &[data-input-tag="textarea"] {
-      @include active-label-state {
-        @screen md {
-          width: 132%;
         }
       }
     }
@@ -216,6 +194,19 @@
     @screen md {
       margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
     }
+  }
+
+  #submit_button {
+    @apply cursor-pointer;
+
+    &[disabled] {
+      @apply bg-opacity-80 cursor-not-allowed;
+    }
+  }
+
+  // Hidden fields
+  .offstate {
+    display: none !important;
   }
 
   // Autocomplete styles
