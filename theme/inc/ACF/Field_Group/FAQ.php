@@ -1,23 +1,27 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 class FAQ extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_ANCHOR_ID         = 'anchor_id';
-	const FIELD_TITLE             = 'title';
-	const FIELD_FAQ_ENTRIES       = 'faq_entries';
-	const FIELD_FAQ_ENTRY_LABEL   = 'faq_entry_label';
-	const FIELD_FAQ_ENTRY_CONTENT = 'faq_entry_content';
-	const FIELD_FOOTER            = 'footer';
+	const FIELD_ANCHOR_ID                = 'anchor_id';
+	const FIELD_TITLE                    = 'title';
+	const FIELD_FAQ_ENTRIES              = 'faq_entries';
+	const FIELD_FAQ_ENTRY_LABEL          = 'faq_entry_label';
+	const FIELD_FAQ_ENTRY_WITH_FORMAT    = 'faq_entry_with_format';
+	const FIELD_FAQ_ENTRY_FORMAT_CONTENT = 'faq_entry_format_content';
+	const FIELD_FAQ_ENTRY_CONTENT        = 'faq_entry_content';
+	const FIELD_FOOTER                   = 'footer';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$anchor_id         = static::gen_field_key( static::FIELD_ANCHOR_ID );
-		$title             = static::gen_field_key( static::FIELD_TITLE );
-		$faq_entries       = static::gen_field_key( static::FIELD_FAQ_ENTRIES );
-		$faq_entry_label   = static::gen_field_key( static::FIELD_FAQ_ENTRY_LABEL );
-		$faq_entry_content = static::gen_field_key( static::FIELD_FAQ_ENTRY_CONTENT );
-		$footer            = static::gen_field_key( static::FIELD_FOOTER );
+		$anchor_id                = static::gen_field_key( static::FIELD_ANCHOR_ID );
+		$title                    = static::gen_field_key( static::FIELD_TITLE );
+		$faq_entries              = static::gen_field_key( static::FIELD_FAQ_ENTRIES );
+		$faq_entry_label          = static::gen_field_key( static::FIELD_FAQ_ENTRY_LABEL );
+		$faq_entry_with_format    = static::gen_field_key( static::FIELD_FAQ_ENTRY_WITH_FORMAT );
+		$faq_entry_format_content = static::gen_field_key( static::FIELD_FAQ_ENTRY_FORMAT_CONTENT );
+		$faq_entry_content        = static::gen_field_key( static::FIELD_FAQ_ENTRY_CONTENT );
+		$footer                   = static::gen_field_key( static::FIELD_FOOTER );
 
 		return array(
 			'title'  => 'FAQ Drawer',
@@ -44,21 +48,54 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 					'layout'     => 'block',
 					'sub_fields' => array(
 						static::FIELD_FAQ_ENTRY_LABEL   => array(
-							'key'     => $faq_entry_label,
-							'name'    => static::FIELD_FAQ_ENTRY_LABEL,
-							'label'   => 'Label',
-							'type'    => 'text',
-							'wrapper' => array(
-								'width' => '50%',
+							'key'   => $faq_entry_label,
+							'name'  => static::FIELD_FAQ_ENTRY_LABEL,
+							'label' => 'Label',
+							'type'  => 'text',
+						),
+						static::FIELD_FAQ_ENTRY_WITH_FORMAT => array(
+							'key'           => $faq_entry_with_format,
+							'name'          => static::FIELD_FAQ_ENTRY_WITH_FORMAT,
+							'label'         => 'With Format?',
+							'type'          => 'button_group',
+							'choices'       => array(
+								'yes' => 'Yes',
+								'no'  => 'No',
+							),
+							'default_value' => 'no',
+						),
+						static::FIELD_FAQ_ENTRY_FORMAT_CONTENT => array(
+							'key'               => $faq_entry_format_content,
+							'name'              => static::FIELD_FAQ_ENTRY_FORMAT_CONTENT,
+							'label'             => 'Content',
+							'type'              => 'wysiwyg',
+							'tabs'              => 'all',
+							'toolbar'           => 'bullink',
+							'media_upload'      => 0,
+							'delay'             => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => $faq_entry_with_format,
+										'operator' => '==',
+										'value'    => 'yes',
+									),
+								),
 							),
 						),
 						static::FIELD_FAQ_ENTRY_CONTENT => array(
-							'key'     => $faq_entry_content,
-							'name'    => static::FIELD_FAQ_ENTRY_CONTENT,
-							'label'   => 'Content',
-							'type'    => 'textarea',
-							'wrapper' => array(
-								'width' => '50%',
+							'key'               => $faq_entry_content,
+							'name'              => static::FIELD_FAQ_ENTRY_CONTENT,
+							'label'             => 'Content',
+							'type'              => 'textarea',
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => $faq_entry_with_format,
+										'operator' => '==',
+										'value'    => 'no',
+									),
+								),
 							),
 						),
 					),
@@ -127,7 +164,11 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 									</div>
 								</div>
 								<div class="faq-list__content">
-									<?php echo $faq['faq_entry_content']; ?>
+									<?php if ( 'yes' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
+										<?php echo $faq[ static::FIELD_FAQ_ENTRY_FORMAT_CONTENT ]; ?>
+									<?php elseif ( 'no' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
+										<?php echo $faq['faq_entry_content']; ?>
+									<?php endif; ?>
 								</div>
 							</div>
 						<?php endforeach; ?>
