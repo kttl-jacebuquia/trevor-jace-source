@@ -1040,6 +1040,9 @@ class Hooks {
 		$toolbars['Link']    = array();
 		$toolbars['Link'][1] = array( 'link' );
 
+		$toolbars['Bullink']    = array();
+		$toolbars['Bullink'][1] = array( 'bullist', 'link' );
+
 		return $toolbars;
 	}
 }
