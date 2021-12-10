@@ -1,6 +1,7 @@
 .btn {
   @apply box-content;
   @apply font-bold py-4 px-6 rounded-px10;
+  box-sizing: border-box;
 
   &-link {
 	@apply inline-flex text-indigo font-bold border-b-2 pb-0.5;
