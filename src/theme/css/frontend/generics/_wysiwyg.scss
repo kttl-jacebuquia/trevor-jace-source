@@ -1,0 +1,13 @@
+@mixin wysiwyg {
+  p {
+    @include paragraph;
+  }
+
+  ul {
+    @include unordered-list;
+  }
+
+  a {
+    @include link;
+  }
+}
