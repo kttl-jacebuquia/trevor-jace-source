@@ -1,0 +1,7 @@
+@mixin unordered-list {
+  @apply list-disc list-outside pl-px20;
+
+  li {
+    margin-top: .2em;
+  }
+}

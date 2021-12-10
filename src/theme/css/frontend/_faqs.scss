@@ -88,6 +88,7 @@
       &__content {
         border-bottom: 1px solid rgba(149, 163, 167, 0.4);
         @apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22 text-teal-dark bg-gray-light;
+        @include wysiwyg;
 
         @screen md {
           @apply pt-px40 pr-px30 pb-px40 pl-px30 text-px18 leading-px26;

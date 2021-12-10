@@ -20,6 +20,7 @@
 @import './general';
 @import './fonts';
 @import './root';
+@import './generics/index';
 
 // Theme
 @import './theme';
@@ -110,6 +111,7 @@
 @import './lessons-video-player';
 @import './overflow-fade';
 @import './form-assembly/index';
+@import './faqs';
 
 // Page specific
 @import './rc'; // Resources Center
