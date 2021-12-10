@@ -3,7 +3,7 @@
 //
 #top-bar {
 	@apply fixed top-0 left-0;
-	@apply w-full h-px84;
+	@apply w-full h-px84 pb-px4;
 	@apply transition-all duration-300 ease-out;
 	@apply transform-gpu -translate-y-full bg-white;
 	z-index: var(--z-index-topbar);
@@ -23,9 +23,9 @@
 	// Allows to minimize complicated offset computations acounting for the border
 	&::before {
 		content: '';
-		border-bottom: rem-calc(4px) solid theme('colors.orange.DEFAULT');
-		@apply absolute left-0 w-full bg-white -bottom-px3 h-full;
+		@apply absolute left-0 w-full bg-white h-full;
 		@apply transform-gpu translate-y-0 transition-all duration-300 ease-out;
+    @apply border-b-px4 border-solid border-orange-lighter;
 
 		@screen lg {
 			@apply static bottom-0;
@@ -308,8 +308,7 @@
 	.topbar-control-opener {
 		@apply flex justify-center items-center relative;
 		@apply text-px40 text-indigo flex-shrink-0;
-    width: rem-calc(45px);
-		height: rem-calc(45px);
+    @apply w-px45 h-px45;
 
     @screen lg-only {
       @apply invisible opacity-0 transition-all duration-300 ease-out;
@@ -319,16 +318,18 @@
 		@screen lg2 {
 			@apply hidden;
 		}
+
+    [class*="trevor-ti"] {
+      @apply flex items-center justify-center w-px45 h-px45;
+    }
 	}
 
 	.trevor-ti-hamburger-menu {
 		@apply block absolute transform-gpu top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 		@apply transition-all duration-300 opacity-100 visible;
-    width: rem-calc(45px);
-		height: rem-calc(45px);
 
     &::before {
-      @apply h-px30;
+      @apply h-px32;
     }
 	}
 

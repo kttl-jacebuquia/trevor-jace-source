@@ -136,7 +136,8 @@ const config = {
 			},
 			orange: {
 				DEFAULT: '#FF5A3D',
-				light: '#FF674D', //fixme?
+				light: '#FF674D',
+				lighter: '#FF6950',
 			},
 			indigo: {
 				DEFAULT: '#101066',

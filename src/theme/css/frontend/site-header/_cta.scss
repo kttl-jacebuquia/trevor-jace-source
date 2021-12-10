@@ -16,7 +16,7 @@
 	}
 
 	.btn {
-		@apply flex items-center justify-center h-px52;
+		@apply flex items-center justify-center min-w-px135 h-px52;
 		@apply font-bold text-px20 leading-px20 tracking-px05;
 		@apply rounded-full border-orange p-0;
 		@apply transition-all duration-300;

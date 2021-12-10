@@ -134,10 +134,6 @@
 	@apply static flex flex-row items-center justify-between h-full;
 	@apply mx-auto pt-px18;
 
-  @screen mobile {
-    @apply gap-x-px18;
-  }
-
   @screen md {
     @apply px-0;
   }
@@ -180,14 +176,14 @@
   }
 
   .top-nav-cta-wrap {
-    @apply ml-auto mt-px5;
+    @apply ml-auto mt-px5 mr-px18;
 
     @screen md {
       @apply hidden;
     }
 
     .btn {
-      @apply h-px35 px-px16 py-0 flex items-center rounded-px100 min-h-0;
+      @apply w-px90 h-px35 px-px16 py-0 flex items-center rounded-px100 min-h-0;
       @apply border-2 bg-transparent text-current border-current;
       @apply font-bold text-px16 leading-px20;
     }
@@ -206,6 +202,14 @@
     @apply cursor-pointer w-px45 h-px45;
 		@apply transition-all duration-300 ease-out;
 		@apply visible opacity-100 text-px40;
+
+    [class*="trevor-ti"] {
+      @apply w-px45 h-px45 flex items-center justify-center;
+
+      &::before {
+        @apply h-px32;
+      }
+    }
 	}
 
 	// Search Button
