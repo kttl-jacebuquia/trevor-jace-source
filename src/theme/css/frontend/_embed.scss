@@ -18,7 +18,7 @@
   }
 }
 .embed-content {
-    @apply relative;
+    @apply relative rounded-px10;
 
     @screen xl {
       @apply col-span-10 col-start-2;

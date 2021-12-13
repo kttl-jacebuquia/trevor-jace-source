@@ -1,0 +1,9 @@
+.post-content .custom-embed {
+  &__container {
+    @apply block w-full px-0;
+  }
+
+  .embed-content {
+    @apply rounded-none;
+  }
+}
