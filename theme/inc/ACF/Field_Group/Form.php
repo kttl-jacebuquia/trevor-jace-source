@@ -103,9 +103,17 @@ class Form extends A_Field_Group {
 		// Get FormAssembly form using shortcode
 		$form_assembly_form = do_shortcode( "[formassembly formid={$form_id} server=\"{$server_url}\"]" );
 
-		// Remove embedded styles
-		$pattern            = implode( '|', array( '<style[^>]*>[^<]*<\/style>', '<link[^>]*theme-51\.css[^>]*>', 'style="[^"]*"' ) );
-		$form_assembly_form = preg_replace( "/{$pattern}/", '', $form_assembly_form );
+		// Remove embedded styles and extra gtm scripts
+		$pattern            = implode(
+			'|',
+			array(
+				'<style[^>]*>[^<]*<\/style>',
+				'<link[^>]*theme-51\.css[^>]*>',
+				'style="[^"]*"',
+				'[^>]+GTM-[a-z\d]+[^<]+',
+			),
+		);
+		$form_assembly_form = preg_replace( "/{$pattern}/i", '', $form_assembly_form );
 
 		ob_start();
 		?>
