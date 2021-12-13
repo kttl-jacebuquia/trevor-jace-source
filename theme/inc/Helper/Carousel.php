@@ -308,17 +308,6 @@ class Carousel {
 			$id = uniqid( 'big-img-carousel-' );
 		}
 
-		if ( $options['print_js'] ) {
-			add_action(
-				'wp_footer',
-				function () use ( $id ) {
-					self::print_testimonials_js( $id, array() );
-				},
-				PHP_INT_MAX >> 2,
-				0
-			);
-		}
-
 		$carousel_cls = array(
 			'carousel-testimonials',
 			'bg-' . $options['outer_bg_color'],
@@ -508,18 +497,6 @@ class Carousel {
 				base_selector: '<?php echo esc_js( $base_selector ); ?>',
 				onlyMd: <?php echo ! empty( $options['onlyMd'] ) ? 'true' : 'false'; ?>,
 			});
-		</script>
-		<?php
-	}
-
-	/**
-	 * @param string $id
-	 * @param array $options
-	 */
-	public static function print_testimonials_js( string $id, array $options = array() ): void {
-		?>
-		<script>
-			trevorWP.features.testimonialsCarousel('<?php echo esc_js( $id ); ?>')
 		</script>
 		<?php
 	}

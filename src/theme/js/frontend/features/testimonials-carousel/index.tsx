@@ -2,14 +2,9 @@ import Swiper from 'theme/js/frontend/vendors/swiper';
 import { generateSwiperArrows } from '../carousel/index';
 import $ from 'jquery';
 import debounce from 'lodash/debounce';
+import { SwiperOptions } from 'swiper';
 
-export default function testimonialsCarousel(id) {
-	const eBase = document.getElementById(id);
-	if (!eBase) {
-		console.log('Missing element:', id);
-		return;
-	}
-
+export default function testimonialsCarousel(eBase: HTMLElement) {
 	const leftPaneSelector = '.carousel-left-arrow-pane';
 	const rightPaneSelector = '.carousel-right-arrow-pane';
 	const panesContainer = $('.panes-container', eBase);
@@ -39,29 +34,34 @@ export default function testimonialsCarousel(id) {
 	);
 
 	function initImageSwiper() {
-		return new Swiper(imgWrap.querySelector('.swiper-container'), {
+		return new Swiper(imgWrap?.querySelector('.swiper-container'), {
 			slidesPerView: 1,
 			effect: 'fade',
 			on: {
-				afterInit: onSlideChange,
-				slideChange: onSlideChange,
+				afterInit: (swiper: Swiper) => {
+					onImageSliderInit(swiper);
+					onImageSlideChange(swiper);
+				},
+				slideChange: onImageSlideChange,
 			},
 		});
 	}
 
 	function initTextSwiper() {
-		const options = {
+		const options: SwiperOptions = {
 			slidesPerView: 1,
 			autoplay: true,
 			updateOnWindowResize: true,
 		};
 
 		if (
-			txtWrap.querySelectorAll('.swiper-container .swiper-slide').length >
-			1
+			(txtWrap?.querySelectorAll('.swiper-container .swiper-slide')
+				?.length || 0) > 1
 		) {
 			options.pagination = {
-				el: txtWrap.querySelector('.swiper-pagination'),
+				el: txtWrap?.querySelector(
+					'.swiper-pagination'
+				) as HTMLElement | null,
 				clickable: true,
 				bulletElement: 'button',
 			};
@@ -102,11 +102,11 @@ export default function testimonialsCarousel(id) {
 			panesContainer.addClass('hidden');
 		}
 
-		return new Swiper(txtWrap.querySelector('.swiper-container'), options);
+		return new Swiper(txtWrap?.querySelector('.swiper-container'), options);
 	}
 
 	function checkArrow() {
-		let desktop = window.matchMedia('(min-width: 1024px)');
+		const desktop = window.matchMedia('(min-width: 1024px)');
 		if (desktop.matches) {
 			panesContainer.removeClass('is-mobile-breakpoint');
 		} else {
@@ -117,14 +117,14 @@ export default function testimonialsCarousel(id) {
 	function applyA11y() {
 		const $bullets = $(eBase).find('.swiper-pagination-bullet');
 
-		$bullets.each((index, bullet) => {
+		$bullets.each((index: number, bullet: HTMLElement) => {
 			$(bullet)
 				.attr('tabindex', '0')
 				.attr('aria-label', 'click to go to slide ' + (index + 1));
 		});
 	}
 
-	function onSlideChange(swiper) {
+	function onSlideChange(swiper: Swiper) {
 		[...swiper.slides].forEach((slide, index) => {
 			const isActiveIndex = index === swiper.activeIndex;
 
@@ -136,7 +136,37 @@ export default function testimonialsCarousel(id) {
 		});
 	}
 
-	function onSlideChangeTransitionEnd(swiper) {
+	function onImageSliderInit(swiper: Swiper) {
+		[...swiper.slides].forEach((slide, index) => {
+			// Remove aria attributes from each slide container to allow
+			// Direct focus on the image
+			slide.removeAttribute('role');
+			slide.removeAttribute('aria-hidden');
+			slide.removeAttribute('aria-label');
+			slide.removeAttribute('tabindex');
+		});
+	}
+
+	function onImageSlideChange(swiper: Swiper) {
+		[...swiper.slides].forEach((slide, index) => {
+			const isActiveIndex = index === swiper.activeIndex;
+
+			// Remove aria attributes from each slide container to allow
+			// Direct focus on the image
+			slide.removeAttribute('role');
+			slide.removeAttribute('aria-hidden');
+			slide.removeAttribute('aria-label');
+			slide.removeAttribute('tabindex');
+
+			if (isActiveIndex) {
+				$('img', slide).attr('tabindex', 0).removeAttr('aria-hidden');
+			} else {
+				$('img', slide).attr('tabindex', 0).removeAttr('aria-hidden');
+			}
+		});
+	}
+
+	function onSlideChangeTransitionEnd(swiper: Swiper) {
 		swiper.slides[swiper.activeIndex].focus();
 	}
 
@@ -148,3 +178,15 @@ export default function testimonialsCarousel(id) {
 	imgSwiper.controller.control = textSwiper;
 	textSwiper.controller.control = imgSwiper;
 }
+
+export const initialize = () => {
+	const testimonials: HTMLElement[] = Array.from(
+		document.querySelectorAll('.carousel-testimonials')
+	);
+
+	testimonials.forEach((element) => {
+		testimonialsCarousel(element);
+	});
+};
+
+initialize();
