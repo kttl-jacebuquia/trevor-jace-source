@@ -155,8 +155,8 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				);
 				?>
 
-				<a class="search-button" href="<?php echo get_search_link(); ?>">
-					<i class="trevor-ti-search"></i>
+				<a role="button" aria-label="click to search in the website" class="search-button" href="<?php echo get_search_link(); ?>">
+					<i class="trevor-ti-search" aria-hidden></i>
 				</a>
 			</div>
 		</div>

@@ -48,10 +48,14 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 					<?php foreach ( $data['social_media_links'] as $link ) : ?>
 						<?php if ( ! empty( $link['url'] ) ) : ?>
 							<li>
-								<a href="<?php echo esc_url( $link['url'] ); ?>">
-									<i class="
-									<?php
-									echo esc_attr(
+								<a
+									href="<?php echo esc_url( $link['url'] ); ?>"
+									aria-label='<?php echo esc_html( array_pop( explode( '-', $link['icon'] ) ) ); ?> link'
+									>
+									<i
+									aria-hidden="true"
+									class="
+									<?php echo esc_attr(
 										implode(
 											' ',
 											array(
@@ -61,7 +65,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 										)
 									);
 									?>
-										"></i>
+									"></i>
 								</a>
 							</li>
 						<?php endif; ?>
