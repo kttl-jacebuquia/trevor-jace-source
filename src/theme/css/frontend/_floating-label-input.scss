@@ -35,7 +35,7 @@
 
     // Dummy labels
     &.floating-label-input__dummy-label-active {
-      @apply bottom-full w-full px-0 py-0 mb-px10;
+      @apply bottom-full w-full px-0 py-0 mb-px5;
       @apply transition-all translate-y-full transform-gpu invisible opacity-0;
       color: var(--activated-label-color);
       top: unset;

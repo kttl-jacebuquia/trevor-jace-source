@@ -17,7 +17,7 @@
     row-gap: 0;
 
     @screen md {
-      @apply grid-cols-2 gap-x-md justify-between items-baseline;
+      @apply grid-cols-2 gap-x-md justify-between items-end;
       --max-scaled-label-height: #{rem-calc(58)};
       --max-scaled-label-height-extra: #{rem-calc(30)};
       // Negate the top space brought by the first input groups
@@ -31,7 +31,7 @@
     row-gap: 0;
 
     @screen md {
-      @apply grid-cols-2 gap-x-md justify-between items-baseline;
+      @apply grid-cols-2 gap-x-md justify-between items-end;
     }
 
     > .section:last-child {
@@ -101,10 +101,8 @@
     }
 
     &.errFld {
-      @apply mb-px30;
-
       .errMsg {
-        @apply absolute py-0 top-full mt-px10 text-orange;
+        @apply absolute py-0 top-full mt-px5 text-orange;
       }
 
       & input,

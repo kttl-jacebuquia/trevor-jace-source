@@ -100,14 +100,8 @@
       }
     }
 
-    .oneField {
-      &.errFld {
-        margin-bottom: #{rem-calc(37)};
-      }
-    }
-
     .errMsg {
-      @apply font-semibold text-white text-px16 leading-px22 tracking-em001 relative top-px15;
+      @apply font-semibold text-white text-px16 leading-px22 tracking-em001;
       height: 0;
     }
 

@@ -1,0 +1,31 @@
+#google-captcha {
+  @apply w-full col-span-full mt-px30 mb-px50;
+
+  @screen md {
+    @apply mt-0;
+  }
+
+  br {
+    @apply hidden;
+  }
+
+  .oneField {
+    @apply mt-0;
+  }
+
+  .captcha {
+    @apply text-left text-px16 leading-px22;
+  }
+
+  .captchaHelp {
+    @apply mt-px20;
+  }
+}
+
+// Recaptcha validation popup (Select images)
+iframe[src*="bframe"] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

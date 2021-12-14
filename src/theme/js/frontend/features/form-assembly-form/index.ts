@@ -9,6 +9,7 @@ class FormAssemblyForm extends Component {
 		submitButton: HTMLButtonElement;
 		dynamicFields: HTMLElement[];
 		requiredFields: HTMLElement[];
+		recaptchaResponse: HTMLTextAreaElement;
 	};
 
 	requiredFields: HTMLElement[] = [];
@@ -24,6 +25,7 @@ class FormAssemblyForm extends Component {
 		conditionalSections: ['.section[data-condition]'],
 		submitButton: '#submit_button',
 		dynamicFields: ['[data-condition'],
+		recaptchaResponse: '.g-recaptcha-response',
 	};
 
 	afterInit() {
@@ -64,6 +66,9 @@ class FormAssemblyForm extends Component {
 		// Handle legends
 		this.handleLegends();
 
+		// Handle form mutation
+		this.handleMutation();
+
 		// Initially run onchange
 		this.onChange();
 	}
@@ -91,10 +96,14 @@ class FormAssemblyForm extends Component {
 
 	onChange() {
 		const formData = this.getFormData();
+		const recaptchaResponse: HTMLTextAreaElement | null =
+			this.element.querySelector(
+				FormAssemblyForm.children.recaptchaResponse
+			);
 
 		// Check for visible required fields
 		// If there are missing user input
-		const someFieldsMising = this.requiredFields.some((inputField) => {
+		let willEnableSubmit = !this.requiredFields.some((inputField) => {
 			if (!inputField.offsetParent) {
 				return false;
 			}
@@ -111,7 +120,12 @@ class FormAssemblyForm extends Component {
 			return !isInputProvided;
 		});
 
-		this.toggleSubmitButton(!someFieldsMising);
+		// Check for recaptcha
+		willEnableSubmit =
+			willEnableSubmit &&
+			(recaptchaResponse ? Boolean(recaptchaResponse.value) : true);
+
+		this.toggleSubmitButton(willEnableSubmit);
 	}
 
 	onSubmit(e: Event) {
@@ -353,6 +367,16 @@ class FormAssemblyForm extends Component {
 
 			legend.insertAdjacentElement('beforebegin', div);
 			legend.remove();
+		});
+	}
+
+	// Listens to form mutation:
+	// - When grecaptcha is rendered/responded, etc.
+	handleMutation() {
+		const observer = new window.MutationObserver(this.onChange.bind(this));
+		observer.observe(this.element, {
+			childList: true,
+			attributes: true,
 		});
 	}
 }
