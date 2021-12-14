@@ -60,7 +60,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       width: calc((100% - #{rem-calc(28)}) / 2);
     }
 
-    @screen xl {
+    @screen lg {
       @apply flex flex-nowrap w-full ;
     }
   }
@@ -68,7 +68,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
   &__image {
     @apply rounded-t-px10 overflow-hidden relative;
 
-    @screen xl {
+    @screen lg {
       @apply flex-shrink-0 rounded-l-px10 rounded-tr-none;
       width: percentage( 467 / 962 );
     }
@@ -79,7 +79,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       content: '';
       padding-top: calc(100% * 240 / 319);
 
-      @screen xl {
+      @screen lg {
         padding-top: calc(100% * 522 / 467);
       }
     }
@@ -96,7 +96,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
   &__body {
     @apply pt-px30 pb-px75 px-px24;
 
-    @screen xl {
+    @screen lg {
       @apply py-px60 pl-px40 pr-px17;
     }
   }
@@ -108,8 +108,12 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
   &__title {
     @apply font-semibold mt-px20 text-px24 leading-px30 tracking-em005;
 
-    @screen xl {
-      @apply mt-px14 text-px28 leading-px34 tracking-em_005;
+    @screen lg {
+      @apply mt-px14 text-px26 leading-px32 tracking-em_005;
+    }
+
+    @screen lg2 {
+      @apply text-px28 leading-px34 tracking-em_005;
     }
   }
 
@@ -118,7 +122,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       @apply hidden;
     }
 
-    @screen xl {
+    @screen lg {
       @apply mt-px20 text-px18 leading-px26 tracking-em_001;
     }
   }
@@ -132,16 +136,13 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     }
 
     @screen lg {
+      @apply mt-px32 text-px18 leading-px24 tracking-em001 pb-px4;
       @apply border-b-px2 border-solid border-current;
       @include wave-underline;
 
       &:hover {
         @apply border-none pb-px10;
       }
-    }
-
-    @screen xl {
-      @apply mt-px32 text-px18 leading-px24 tracking-em001 pb-px4;
     }
   }
 
@@ -150,7 +151,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       @apply hidden;
     }
 
-    @screen xl {
+    @screen lg {
       display: contents;
     }
   }

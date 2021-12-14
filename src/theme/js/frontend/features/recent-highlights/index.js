@@ -23,7 +23,7 @@ export default class RecentHighlights extends Component {
 				slidesPerView: 2,
 				spaceBetween: 28,
 			},
-			1440: {
+			1024: {
 				slidesPerView: 1,
 				spaceBetween: 28,
 			},
