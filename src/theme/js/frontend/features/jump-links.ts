@@ -23,8 +23,22 @@ if (getComputedStyle(document.body).scrollBehavior !== 'smooth') {
 
 		if ($targetSection.length) {
 			// Get section's scroll amount
-			const targetScroll = $targetSection.offset()?.top;
-			$scrollableRoot.animate({ scrollTop: targetScroll }, 500, 'swing');
+			const targetScroll =
+				$targetSection.offset()?.top || window.pageYOffset;
+
+			// Compute for scroll duration
+			// Max 3000ms scroll duration
+			const scrollDuration = Math.min(
+				(150 * (targetScroll - window.pageYOffset)) / 300,
+				2000
+			);
+
+			// Animate scroll
+			$scrollableRoot.animate(
+				{ scrollTop: targetScroll },
+				scrollDuration,
+				'swing'
+			);
 
 			// Add history entry
 			window.history.pushState(null, '', sectionSelector);
