@@ -45,3 +45,4 @@ import './statistics';
 import './cookiehub';
 import './form-modal';
 import './jump-links';
+import './g-recaptcha';

@@ -110,8 +110,9 @@
       & textarea {
         border: 0 !important;
 
-        &:disabled {
-          @apply opacity-70;
+        &:disabled,
+        &.disabled {
+          @apply opacity-70 pointer-events-none;
         }
       }
     }

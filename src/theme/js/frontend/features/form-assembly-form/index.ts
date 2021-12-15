@@ -69,6 +69,9 @@ class FormAssemblyForm extends Component {
 		// Handle form mutation
 		this.handleMutation();
 
+		// Handle Recaptcha, if there is any
+		this.handleRecaptcha();
+
 		// Initially run onchange
 		this.onChange();
 	}
@@ -148,7 +151,7 @@ class FormAssemblyForm extends Component {
 			// Don't submit if submit button is not disabled
 			// This might happen when there's there's an error alert
 			// but no actual error message in the form
-			if (!this.children?.submitButton?.disabled) {
+			if (this.children?.submitButton?.disabled) {
 				return;
 			}
 
@@ -174,8 +177,16 @@ class FormAssemblyForm extends Component {
 	toggleSubmitButton(isEnabled: boolean = false) {
 		if (isEnabled) {
 			this.children?.submitButton.removeAttribute('disabled');
+			this.children?.submitButton.classList.toggle(
+				'disabled',
+				!isEnabled
+			);
 		} else {
 			this.children?.submitButton.setAttribute('disabled', 'true');
+			this.children?.submitButton.classList.toggle(
+				'disabled',
+				!isEnabled
+			);
 		}
 	}
 
@@ -370,10 +381,26 @@ class FormAssemblyForm extends Component {
 		});
 	}
 
+	onMutation() {
+		this.onChange();
+	}
+
+	handleRecaptcha() {
+		setTimeout(() => {
+			const recaptchaResponse = this.element.querySelector('.captcha');
+			const response = recaptchaResponse?.querySelector(
+				'.g-recaptcha-response'
+			);
+			console.log({ recaptchaResponse, response });
+		}, 1000);
+	}
+
 	// Listens to form mutation:
 	// - When grecaptcha is rendered/responded, etc.
 	handleMutation() {
-		const observer = new window.MutationObserver(this.onChange.bind(this));
+		const observer = new window.MutationObserver(
+			this.onMutation.bind(this)
+		);
 		observer.observe(this.element, {
 			childList: true,
 			attributes: true,

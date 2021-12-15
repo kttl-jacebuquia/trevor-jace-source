@@ -90,6 +90,10 @@
         @apply text-transparent;
       }
     }
+
+    option {
+      color: var(--default-label-color);
+    }
   }
 
   &[data-input-tag="textarea"] {

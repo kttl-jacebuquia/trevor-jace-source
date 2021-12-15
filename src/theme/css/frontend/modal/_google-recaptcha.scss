@@ -1,0 +1,12 @@
+// Adjust recaptcha image select when modal is open
+body.is-modal-open {
+  .g-recaptcha-bubble-arrow {
+    transform: translateY(calc(var(--fixed-body-top) * -1));
+  }
+
+  // Recaptcha validation popup (Select images)
+  // This is an injected classname, see features/g-recaptcha.ts
+  .g-recaptcha-image-select-container {
+    transform: translateY(calc(var(--fixed-body-top) * -1));
+  }
+}
