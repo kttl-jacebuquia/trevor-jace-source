@@ -66,9 +66,6 @@ class FormAssemblyForm extends Component {
 		// Handle legends
 		this.handleLegends();
 
-		// Handle form mutation
-		this.handleMutation();
-
 		// Handle Recaptcha, if there is any
 		this.handleRecaptcha();
 
@@ -386,23 +383,12 @@ class FormAssemblyForm extends Component {
 	}
 
 	handleRecaptcha() {
-		setTimeout(() => {
-			const recaptchaResponse = this.element.querySelector('.captcha');
-			const response = recaptchaResponse?.querySelector(
-				'.g-recaptcha-response'
-			);
-			console.log({ recaptchaResponse, response });
-		}, 1000);
-	}
-
-	// Listens to form mutation:
-	// - When grecaptcha is rendered/responded, etc.
-	handleMutation() {
-		const observer = new window.MutationObserver(
-			this.onMutation.bind(this)
-		);
-		observer.observe(this.element, {
-			childList: true,
+		const recaptchaContainer = this.element.querySelector(
+			'.captcha'
+		) as HTMLElement;
+		const observer = new window.MutationObserver(this.onChange.bind(this));
+		observer.observe(recaptchaContainer.parentElement as Node, {
+			subtree: true,
 			attributes: true,
 		});
 	}
