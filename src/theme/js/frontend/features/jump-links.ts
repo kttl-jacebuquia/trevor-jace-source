@@ -29,7 +29,7 @@ if (getComputedStyle(document.body).scrollBehavior !== 'smooth') {
 			// Compute for scroll duration
 			// Max 3000ms scroll duration
 			const scrollDuration = Math.min(
-				(150 * (targetScroll - window.pageYOffset)) / 300,
+				(150 * Math.abs(targetScroll - window.pageYOffset)) / 300,
 				2000
 			);
 
