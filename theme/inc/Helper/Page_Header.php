@@ -43,7 +43,7 @@ class Page_Header {
 				'min-h-px611 pt-px105',
 				'md:px-px110 md:pt-px75',
 				'xl:px-px311 xl:pt-px105 xl:justify-start xl:mt-0',
-				! empty( $options['buttons'] ) ? 'page-header--with-cta' : '',
+				! empty( $options['buttons']['buttons'] ) ? 'page-header--with-cta' : '',
 			)
 		);
 
