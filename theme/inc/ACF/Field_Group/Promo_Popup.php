@@ -248,8 +248,9 @@ class Promo_Popup extends A_Field_Group {
 		$start_date = $val->get( static::FIELD_PROMO_START_DATE );
 		$end_date   = $val->get( static::FIELD_PROMO_END_DATE );
 
+		// Consider active if no schedule is set
 		if ( ! $schedule ) {
-			return false;
+			return true;
 		}
 
 		$data = array(
