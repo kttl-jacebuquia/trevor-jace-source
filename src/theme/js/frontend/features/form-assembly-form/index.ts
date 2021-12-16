@@ -145,10 +145,12 @@ class FormAssemblyForm extends Component {
 				return;
 			}
 
-			// Don't submit if submit button is not disabled
-			// This might happen when there's there's an error alert
-			// but no actual error message in the form
-			if (this.children?.submitButton?.disabled) {
+			// Only submit if button says "Please wait"
+			// This is the only part we can check since there is no
+			// other flags in the DOM that tells the form is sending
+			if (
+				!/please wait/i.test(this.children?.submitButton?.value || '')
+			) {
 				return;
 			}
 
