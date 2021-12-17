@@ -51,6 +51,14 @@
     @apply py-px20 -my-px20;
   }
 
+  .swiper-pagination {
+    @apply flex-wrap -mb-px10;
+  }
+
+  .swiper-pagination-bullet {
+    @apply flex-shrink-0 mb-px10;
+  }
+
   body:not(.is-rc) & .swiper-pagination-bullet {
     @apply bg-teal-dark opacity-30;
 
