@@ -19,7 +19,7 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 			</div>
 
 			<?php if ( ! empty( $data['description'] ) ) : ?>
-				<p class="mb-9 text-px18 leading-px26 tracking-em_001 md:mr-10 lg:mr-60">
+				<p class="mb-9 text-px18 leading-px26 tracking-em_001 md:mr-10 lg:mr-px145">
 					<?php echo esc_html( $data['description'] ); ?>
 				</p>
 			<?php endif; ?>

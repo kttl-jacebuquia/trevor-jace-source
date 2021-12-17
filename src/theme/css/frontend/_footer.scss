@@ -23,12 +23,6 @@ footer {
       max-width: none;
       width: 100vw;
     }
-
-    @screen lg {
-      padding-left: 1.25rem !important;
-      padding-right: 1.25rem !important;
-      width: calc(100% - 80px);
-    }
   }
 
   // Logo
@@ -60,7 +54,7 @@ footer {
     }
 
     @screen lg {
-      @apply mr-36;
+      @apply mr-px275;
     }
   }
 
@@ -139,6 +133,10 @@ footer {
         li {
           flex-basis: 50%;
         }
+      }
+
+      @screen lg-only {
+        margin-right: rem-calc(460);
       }
 
       @screen lg2 {
