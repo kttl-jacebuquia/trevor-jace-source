@@ -67,7 +67,8 @@
   }
 
   &__image {
-    @apply relative col-span-full -mx-px28;
+    @apply relative col-span-full;
+    @include bleed;
 
     @screen md {
       @apply col-span-4 col-start-5 ml-0;
