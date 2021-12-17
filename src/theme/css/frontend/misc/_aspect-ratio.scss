@@ -22,6 +22,14 @@
   @apply aspect-ratio-9-16;
 }
 
+[data-aspectRatio="21:9"] {
+  @apply aspect-ratio-21-9;
+}
+
+[data-aspectRatio="9:21"] {
+  @apply aspect-ratio-9-21;
+}
+
 // Custom aspect ratios
 @mixin aspect-ratio($width, $height) {
   // Default to padding approach

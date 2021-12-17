@@ -33,6 +33,8 @@ class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 					'type'          => 'select',
 					'choices'       => array(
 						''     => '',
+						'9:21' => '9:21',
+						'21:9' => '21:9',
 						'9:16' => '9:16',
 						'16:9' => '16:9',
 						'4:3'  => '4:3',
@@ -40,7 +42,7 @@ class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 						'2:1'  => '2:1',
 						'1:1'  => 'Square',
 					),
-					'default_value' => '9:16',
+					'default_value' => '21:9',
 				),
 				static::FIELD_ATTR         => DOM_Attr::clone(
 					array(
