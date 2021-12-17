@@ -91,6 +91,9 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 				slideChange: (swiper) => {
 					onSlideChange(swiper);
 				},
+				slideChangeTransitionStart: (swiper) => {
+					onSlideChangeTransitionStart(swiper);
+				},
 				slideChangeTransitionEnd: (swiper) => {
 					onSlideChangeTransitionEnd(swiper);
 				},
@@ -166,8 +169,16 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 		});
 	}
 
+	function onSlideChangeTransitionStart() {
+		eBase.classList.add('carousel-testimonials--transitioning');
+	}
+
 	function onSlideChangeTransitionEnd(swiper: Swiper) {
 		swiper.slides[swiper.activeIndex].focus();
+
+		setTimeout(() => {
+			eBase.classList.remove('carousel-testimonials--transitioning');
+		}, 500);
 	}
 
 	/**

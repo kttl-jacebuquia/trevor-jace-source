@@ -19,6 +19,13 @@
     }
   }
 
+  // Disables interaction while transitioning
+  // This allows JS logic to work properly which relies
+  // on slide transition, due to a11y considerations
+  &--transitioning {
+    pointer-events: none;
+  }
+
   &-inner {
     @apply tw-grid container mx-auto;
 
@@ -91,7 +98,7 @@
 
   blockquote {
     @apply overflow-hidden overflow-ellipsis inline-flex;
-    @apply font-semibold text-px30 leading-px40 tracking-em005;
+    @apply font-semibold text-px28 leading-px40 tracking-em005;
 
     @screen md {
       @apply text-px20 leading-px26;
@@ -114,11 +121,7 @@
     }
 
     @screen lg {
-      @apply text-px18 leading-px26;
-    }
-
-    @screen lg2 {
-      @apply text-px24 leading-px32;
+      @apply text-px22 leading-px26;
     }
   }
 
@@ -238,6 +241,7 @@
   &.contained {
     .carousel-testimonials-img-wrap {
       @apply rounded-px10 overflow-hidden;
+      will-change: transform;
 
       .swiper-slide {
         @apply bg-white;
