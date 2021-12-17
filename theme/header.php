@@ -123,6 +123,11 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			</div>
 
 			<div class="top-nav-cta-wrap">
+				<a href="<?php echo esc_url( $counselor_link['url'] ); ?>"
+					class="btn"
+					target="<?php echo esc_attr( $counselor_link['target'] ); ?>">
+						<?php echo esc_html( $counselor_link['title'] ); ?>
+				</a>
 				<a href="<?php echo esc_url( $donate_link['url'] ); ?>"
 					class="btn" rel="noopener nofollow"
 					target="<?php echo esc_attr( $donate_link['target'] ); ?>">

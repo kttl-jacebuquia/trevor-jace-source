@@ -176,16 +176,29 @@
   }
 
   .top-nav-cta-wrap {
-    @apply ml-auto mt-px5 mr-px18;
+    @apply flex ml-auto mt-px5 mr-px18;
 
     @screen md {
+      @apply mt-0;
+    }
+
+    @screen lg {
       @apply hidden;
     }
 
     .btn {
-      @apply w-px90 h-px35 px-px16 py-0 flex items-center rounded-px100 min-h-0;
+      @apply min-w-px90 h-px35 px-px16 py-0 flex items-center rounded-px100 min-h-0;
       @apply border-2 bg-transparent text-current border-current;
-      @apply font-bold text-px16 leading-px20;
+      @apply font-bold text-px16 leading-px20 whitespace-nowrap;
+      @apply hidden;
+
+      @screen md {
+        @apply flex;
+      }
+
+      & + .btn {
+        @apply ml-px10 flex;
+      }
     }
   }
 
