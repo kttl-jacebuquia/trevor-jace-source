@@ -336,6 +336,62 @@
     }
   }
 
+  // Boxed Variant
+  &--boxed {
+    .messaging__title {
+      @screen lg {
+        @apply mx-px145 w-auto;
+      }
+
+      @screen lg2 {
+        @apply mx-px178;
+      }
+
+      @screen xl {
+        @apply mx-px198 text-px40 leading-px48;
+      }
+
+      tilt {
+        @screen lg {
+          @apply text-px54 leading-px64 mx-px5;
+        }
+
+        @screen lg2 {
+          @apply text-px54 leading-px64 tracking-em005;
+        }
+
+        @screen xl {
+          @apply text-px54 leading-px64 tracking-em005;
+        }
+      }
+    }
+
+    .messaging__description {
+      @screen lg {
+        @apply mx-px145 w-auto mt-px18;
+        @apply text-px18 leading-px24 tracking-em005;
+      }
+
+      @screen lg2 {
+        @apply mx-px178 text-px20 leading-px28 tracking-em005;
+      }
+
+      @screen xl {
+        @apply mx-px198;
+      }
+    }
+
+    .messaging__buttons {
+      @screen lg {
+        @apply mt-px48;
+      }
+
+      @screen lg2 {
+        @apply mt-px30;
+      }
+    }
+  }
+
   // Background color logic
   // If container and inner box has the same color, remove inner box's padding
   @each $color-name, $color in $theme-colors {
