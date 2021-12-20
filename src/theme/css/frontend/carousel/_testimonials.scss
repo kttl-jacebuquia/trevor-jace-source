@@ -98,18 +98,18 @@
 
   blockquote {
     @apply overflow-hidden overflow-ellipsis inline-flex;
-    @apply font-semibold text-px28 leading-px40 tracking-em005;
+    @apply font-semibold text-px30 leading-px40 tracking-em005;
 
     @screen md {
       @apply text-px20 leading-px26;
     }
 
     @screen lg {
-      @apply text-px26 leading-px36;
+      @apply text-px24 leading-px34;
     }
 
     @screen lg2 {
-      @apply text-px32 leading-px40;
+      @apply text-px30 leading-px40;
     }
   }
 
@@ -121,7 +121,15 @@
     }
 
     @screen lg {
-      @apply text-px22 leading-px26;
+      @apply text-px18 leading-px26;
+    }
+
+    @screen lg2 {
+      @apply text-px24 leading-px32;
+    }
+
+    @screen xl {
+      @apply text-px22 leading-px32;
     }
   }
 

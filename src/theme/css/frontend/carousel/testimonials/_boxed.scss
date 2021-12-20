@@ -6,19 +6,21 @@
   }
 
   .carousel-testimonials-inner {
-    @apply px-px28 py-px60 mx-auto;
+    @apply py-px60 max-w-none mx-0;
 
     @screen md {
-      @apply py-px34 px-0 rounded-px10 overflow-hidden;
+      @apply py-px34 px-0 rounded-px10 overflow-hidden mx-auto;
       width: calc(100% - 100px);
     }
 
     @screen lg {
       @apply py-px86;
+      width: calc(100% - (theme('container.padding.lg') * 2));
     }
 
     @screen lg2 {
       @apply py-px105;
+      width: calc(100% - (theme('container.padding.lg2') * 2));
     }
 
     @screen xl {
@@ -29,6 +31,38 @@
 
   // Boxed, Contained
   &.contained {
+    blockquote {
+      @apply text-px28 leading-px38 tracking-em005;
+
+      @screen md {
+        @apply text-px20 leading-px26;
+      }
+
+      @screen lg {
+        @apply text-px24 leading-px34;
+      }
+
+      @screen lg2 {
+        @apply text-px32 leading-px40;
+      }
+    }
+
+    figcaption {
+      @apply text-px18 leading-px26;
+
+      @screen md {
+        @apply text-px14 leading-px22;
+      }
+
+      @screen lg {
+        @apply text-px18 leading-px26;
+      }
+
+      @screen lg2 {
+        @apply font-medium text-px22 leading-px32 tracking-px05;
+      }
+    }
+
     .carousel-testimonials-img-wrap {
       @apply rounded-px10 overflow-hidden;
     }
