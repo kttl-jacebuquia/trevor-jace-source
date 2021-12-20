@@ -352,6 +352,8 @@
       }
 
       tilt {
+        @apply font-bold;
+
         @screen lg {
           @apply text-px54 leading-px64 mx-px5;
         }
