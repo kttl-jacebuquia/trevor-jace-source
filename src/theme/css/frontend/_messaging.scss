@@ -83,6 +83,14 @@
 			@apply text-px40 leading-px48;
 		}
 
+    tilt {
+      @apply mx-px8;
+
+      @screen lg {
+        @apply mx-px12;
+      }
+    }
+
     .messaging--large_text & {
       @apply text-px36 leading-px40;
       @apply col-span-4 col-start-2 mb-px16;
@@ -352,10 +360,10 @@
       }
 
       tilt {
-        @apply font-bold;
+        @apply font-bold text-px44 leading-px54;
 
         @screen lg {
-          @apply text-px54 leading-px64 mx-px5;
+          @apply text-px54 leading-px64;
         }
 
         @screen lg2 {
