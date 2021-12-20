@@ -171,7 +171,7 @@ if (isFAQPresent) {
 	faqTrigger.on('click', function (e) {
 		e.preventDefault();
 		const $heading = $(this).closest('.faq-list__heading');
-		features.faqToggle($heading);
+		// features.faqToggle($heading);
 	});
 }
 

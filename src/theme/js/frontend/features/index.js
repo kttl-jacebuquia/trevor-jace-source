@@ -4,7 +4,6 @@ export articleHighlights from './article-highlights';
 export sharingMore from './sharing-more';
 export sharingPopUp from './sharing-popup';
 export modal from './modal';
-export faqToggle from './faqs';
 export cardToggle from './cards';
 export {
 	carousel,
@@ -46,3 +45,4 @@ import './cookiehub';
 import './form-modal';
 import './jump-links';
 import './g-recaptcha';
+import './faqs';

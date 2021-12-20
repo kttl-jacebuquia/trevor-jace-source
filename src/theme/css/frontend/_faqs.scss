@@ -28,7 +28,7 @@
   .faq {
     &-list {
       @apply col-span-full mr-pxn25 ml-pxn25;
-      border-top: 1px solid theme('colors.teal.dark');
+      border-top: 1px solid theme("colors.teal.dark");
 
       @screen md {
         @apply mx-0;
@@ -40,6 +40,22 @@
 
       @screen xl {
         @apply mr-0;
+      }
+
+      &__item {
+        &.is-open {
+          .plus {
+            @apply hidden;
+          }
+
+          .minus {
+            @apply block;
+          }
+
+          .faq-list__content {
+            @apply opacity-100 visible;
+          }
+        }
       }
 
       &__toggle {
@@ -73,21 +89,18 @@
             @apply hidden translate-y-10;
           }
         }
-
-        &.is-open {
-          .plus {
-            @apply hidden;
-          }
-
-          .minus {
-            @apply block;
-          }
-        }
       }
 
       &__content {
         border-bottom: 1px solid rgba(149, 163, 167, 0.4);
-        @apply hidden pt-px28 pr-px40 pb-px38 pl-px40 text-px16 leading-px22 text-teal-dark bg-gray-light;
+        @apply h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 invisible;
+        will-change: height;
+      }
+
+      &__body {
+        @apply text-px16 leading-px22 text-teal-dark bg-gray-light;
+        @apply pt-px28 pr-px40 pb-px38 pl-px40;
+
         @include wysiwyg;
 
         @screen md {
@@ -96,10 +109,6 @@
 
         @screen lg {
           @apply pt-px50 pr-px48 pb-px58 pl-px38 text-px20 leading-px28;
-        }
-
-        &.is-open {
-          @apply block;
         }
       }
     }
@@ -126,8 +135,8 @@
           @apply relative block mt-px20 font-bold ml-px10 text-teal-dark;
 
           &:after {
-            content: '';
-            border-bottom: 1px solid theme('colors.teal.dark');
+            content: "";
+            border-bottom: 1px solid theme("colors.teal.dark");
             @apply absolute bottom-0 left-0 right-0 mx-auto w-px127;
           }
 

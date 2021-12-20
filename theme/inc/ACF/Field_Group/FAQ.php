@@ -164,11 +164,13 @@ class FAQ extends A_Field_Group implements I_Block, I_Renderable {
 									</div>
 								</div>
 								<div class="faq-list__content">
-									<?php if ( 'yes' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
-										<?php echo $faq[ static::FIELD_FAQ_ENTRY_FORMAT_CONTENT ]; ?>
-									<?php elseif ( 'no' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
-										<?php echo $faq['faq_entry_content']; ?>
-									<?php endif; ?>
+									<div class="faq-list__body">
+										<?php if ( 'yes' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
+											<?php echo $faq[ static::FIELD_FAQ_ENTRY_FORMAT_CONTENT ]; ?>
+										<?php elseif ( 'no' === $faq[ static::FIELD_FAQ_ENTRY_WITH_FORMAT ] ) : ?>
+											<?php echo $faq['faq_entry_content']; ?>
+										<?php endif; ?>
+									</div>
 								</div>
 							</div>
 						<?php endforeach; ?>
