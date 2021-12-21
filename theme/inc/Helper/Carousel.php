@@ -96,6 +96,7 @@ class Carousel {
 			'post-carousel',
 			( 'card-count-' . count( $posts ) ),
 			$options['class'],
+			'block-spacer',
 		);
 		if ( ! empty( $options['onlyMd'] ) ) {
 			$ext_cls[] = 'only-md';

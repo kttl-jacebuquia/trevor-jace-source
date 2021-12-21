@@ -1,18 +1,18 @@
 .word-of-the-day {
-  @apply bg-gradient-trevorspace pt-px80 pb-px60 text-indigo text-center w-full max-w-none;
+  @apply bg-gradient-trevorspace text-indigo text-center w-full max-w-none;
+  @apply py-px80;
   background-size: cover;
-  @apply mt-20;
 
   @screen md {
-    @apply mt-px120 pb-px65;
+    @apply py-px80;
   }
 
   @screen lg {
-    @apply py-0 text-left;
+    @apply py-px100 text-left;
   }
 
   &.no-image {
-    @apply md:pb-px60; lg:pb-0;
+    @apply md:pb-px60 lg:pb-0;
   }
 
   &__container {
@@ -32,7 +32,7 @@
     }
 
     @screen lg {
-      @apply col-span-7 col-start-1 px-px40 py-px45;
+      @apply col-span-7 col-start-1 px-px40;
     }
 
     @screen lg2 {
@@ -96,14 +96,14 @@
     }
 
     @screen lg {
-      @apply col-start-8 col-span-5 mt-px45;
+      @apply col-start-8 col-span-5 mt-0;
 
       margin-left: calc( -1 * #{theme('container.padding.DEFAULT')} );
       margin-right: -70px;
     }
 
     @screen xl {
-      @apply mx-0 mt-px45 mb-px40;
+      @apply mx-0;
     }
   }
 

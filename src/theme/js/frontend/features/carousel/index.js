@@ -229,18 +229,18 @@ export const initializeCarousel = (carouselSettings) => {
 				}
 			});
 
-		if (_swiper.pagination.el && _swiper.pagination.el.children.length) {
-			[..._swiper.pagination.el.children].forEach((button, index) => {
-				button.setAttribute(
-					'aria-label',
-					`click to view slide number ${index + 1}`
-				);
-			});
-		}
-
 		applySlidesA11y(_swiper);
 		checkNavigationArrows(_swiper);
 		handleNavigationArrows(_swiper);
+		checkPagination(_swiper);
+	};
+
+	options.on.destroy = (_swiper) => {
+		checkPagination(_swiper);
+	};
+
+	options.on.resize = (_swiper) => {
+		checkPagination(_swiper);
 	};
 
 	options.on.slidePrevTransitionEnd = (_swiper) => {
@@ -301,6 +301,26 @@ export const initializeCarousel = (carouselSettings) => {
 	};
 
 	options.on.breakpoint = onSwiperBreakpointChange;
+
+	function checkPagination(_swiper) {
+		if (
+			_swiper.pagination.el &&
+			_swiper.pagination.el.children.length > 1
+		) {
+			[..._swiper.pagination.el.children].forEach((button, index) => {
+				button.setAttribute(
+					'aria-label',
+					`click to view slide number ${index + 1}`
+				);
+			});
+
+			_swiper.el.classList.add('carousel--paginated');
+			_swiper.el.parentElement?.classList.add('carousel--paginated');
+		} else {
+			_swiper.el.classList.remove('carousel--paginated');
+			_swiper.el.parentElement?.classList.remove('carousel--paginated');
+		}
+	}
 
 	function applySlidesA11y(_swiper) {
 		const windowWidth = window.innerWidth;

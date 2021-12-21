@@ -1,14 +1,6 @@
 .resource-center-hero {
   @apply tw-grid;
 
-  @screen md {
-    @apply mb-px32;
-  }
-
-  @screen xl {
-    @apply mb-px17;
-  }
-
   &__content {
     @apply col-span-full;
 

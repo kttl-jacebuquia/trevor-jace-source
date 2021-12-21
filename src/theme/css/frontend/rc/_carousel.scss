@@ -1,13 +1,5 @@
 .carousel-wrap {
-  @apply overflow-visible mb-0;
-
-  & + & {
-    @apply mt-px80;
-
-    @screen xl {
-      @apply mt-px120;
-    }
-  }
+  @apply overflow-visible;
 
   .carousel-header {
     @screen lg {

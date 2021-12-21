@@ -268,7 +268,7 @@ class Resource_Center extends A_Options_Page {
 				'subtitle'   => 'Explore the latest articles, resources, and guides.',
 				'title_cls'  => 'centered lg:no-centered',
 				'breakpoint' => 'tabletAndUp',
-				'class'      => 'text-white mobile:mt-px156 md:mt-12 lg:mt-18 resource-center-trending',
+				'class'      => 'text-white resource-center-trending',
 			)
 		);
 	}
@@ -344,16 +344,11 @@ class Resource_Center extends A_Options_Page {
 
 		$root_cls = array(
 			'text-white',
+			'justify-center',
 			'h-px600',
-			'mt-10',
-			'mb-24',
-			'mb-32',
 			'text-center',
-			'pt-20',
 			'md:h-px490',
-			'md:justify-center',
 			'xl:h-px737',
-			'lg:mb-20',
 			'resource-center-guide',
 		);
 

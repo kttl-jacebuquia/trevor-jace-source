@@ -21,7 +21,6 @@ class Hero {
 		$cls = array_merge(
 			array(
 				'w-full',
-				'py-10',
 				'flex',
 				'flex-col',
 				'items-center',

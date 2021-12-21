@@ -12,7 +12,7 @@
   }
 
   &-wrap {
-    @apply mx-auto mt-20 mb-10;
+    @apply mx-auto;
     @apply w-full;
   }
 
@@ -54,10 +54,6 @@
     &-title,
     &-subtitle {
       @apply text-left;
-    }
-
-    &-wrap {
-      @apply mb-48 mt-px120;
     }
 
     &-title {

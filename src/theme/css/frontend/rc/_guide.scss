@@ -1,4 +1,6 @@
 .resource-center-guide {
+  @apply my-0;
+
   &__eyebrow {
     @screen lg {
       @apply text-px16 leading-px22 tracking-em002;

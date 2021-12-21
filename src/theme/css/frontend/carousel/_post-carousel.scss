@@ -1,5 +1,21 @@
 .post-carousel {
-  @apply my-0;
+  @include block-spacer-settings(
+    $default: (
+      80,
+    ),
+    $md: (
+      80,
+    ),
+    $lg: (
+      100,
+    ),
+    $lg2: (
+      100,
+    ),
+    $xl: (
+      100,
+    )
+  );
 
   .page-sub-title {
     @apply w-full font-semibold text-px32 leading-px40 text-center col-span-full;
@@ -30,6 +46,14 @@
 
     @screen xl {
       @apply w-full text-px22 leading-px32 tracking-px05 col-span-full col-start-1;
+    }
+  }
+
+  .carousel-full-width-wrap {
+    &:not(.carousel--paginated) {
+      .swiper-pagination {
+        @apply hidden;
+      }
     }
   }
 
@@ -174,8 +198,7 @@
 
           @if $size == lg {
             @apply ml-px100;
-          }
-          @else {
+          } @else {
             @apply ml-auto;
           }
 
@@ -207,8 +230,6 @@
   }
 
   @screen lg {
-    @apply mb-24;
-
     .carousel-container {
       width: theme("postCard.width.lg");
     }
@@ -216,12 +237,12 @@
     .swiper-button {
       &.swiper-button-prev {
         @apply right-auto justify-start;
-        left: theme('container.padding.lg');
+        left: theme("container.padding.lg");
       }
 
       &.swiper-button-next {
         @apply left-auto justify-end;
-        right: theme('container.padding.lg');
+        right: theme("container.padding.lg");
       }
     }
   }
