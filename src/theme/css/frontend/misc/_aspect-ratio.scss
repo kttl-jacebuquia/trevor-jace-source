@@ -32,6 +32,12 @@
 
 // Custom aspect ratios
 @mixin aspect-ratio($width, $height) {
+  @apply overflow-hidden relative;
+
+  > * {
+    @apply absolute top-0 left-0;
+  }
+
   // Default to padding approach
   &::before {
     content: '';
@@ -43,6 +49,10 @@
   // If CSS aspect-ratio is supported, discard the padding approach
   @supports (aspect-ratio: 1) {
     aspect-ratio: #{$width / $height};
+
+    > * {
+      @apply static;
+    }
 
     &::before {
       display: none;
