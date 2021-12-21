@@ -366,7 +366,7 @@ class Tile {
 		?>
 		<article <?php echo Tools::flat_attr( $attr ); ?>>
 			<a href="<?php echo get_permalink( $post ); ?>">
-				<div class="post-thumbnail-wrap bg-gray-light aspect-ratio-3-4">
+				<div class="post-thumbnail-wrap bg-gray-light">
 					<?php echo $thumbnail; ?>
 				</div>
 				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px24">

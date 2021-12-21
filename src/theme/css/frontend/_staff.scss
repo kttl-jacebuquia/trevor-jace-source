@@ -185,13 +185,19 @@
       height: 100%;
     }
 
-    .aspect-ratio-3-4 {
+    .post-thumbnail-wrap {
       background-color: rgba(243, 243, 247, var(--tw-bg-opacity));
       background-image: url("/wp-content/themes/trevor/static/media/staff-placeholder.png");
       background-position: center center;
       background-repeat: no-repeat;
+      @include aspect-ratio(319, 220);
+
+      @screen lg {
+        @include aspect-ratio(368, 245);
+      }
 
       img {
+        @apply w-full h-full;
         object-fit: cover;
         object-position: center center;
       }
