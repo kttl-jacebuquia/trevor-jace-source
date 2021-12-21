@@ -14,13 +14,6 @@
     backdrop-filter: blur(10px);
   }
 
-  &.team {
-    .modal-overlay {
-      @apply bg-white;
-      opacity: 8%;
-    }
-  }
-
   .modal-wrap {
     @apply container mx-auto;
     @apply tw-grid h-full items-center;

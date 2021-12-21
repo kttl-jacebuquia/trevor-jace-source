@@ -127,7 +127,7 @@ class Team {
 					<span class="team-member__pronoun font-normal text-px16 leading-px22"><?php echo esc_html( $pronoun ); ?></span>
 				<?php } ?>
 			</div>
-			<?php if ( ! empty( $options['thumbnail'] ) && ! $is_founder ) { ?>
+			<?php if ( ! empty( $options['thumbnail'] ) ) { ?>
 				<div class="team-member__thumbnail-wrap <?php echo $options['is_placeholder_thumbnail'] ? 'placeholder' : ''; ?> bg-gray-light mb-px28">
 					<?php echo $options['thumbnail']; ?>
 				</div>
