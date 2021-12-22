@@ -3,7 +3,7 @@
  */
 import $ from 'jquery';
 
-const $window: JQuery = $(window);
+const $window: JQuery<Window> = $(window);
 const $root: JQuery = $(document.documentElement);
 const $body: JQuery = $(document.body);
 
@@ -41,3 +41,6 @@ export const onEscapePress = (callback: (args?: any) => any) => {
 		});
 	}
 };
+
+export const IS_SUPPORT = document.body.classList.contains('is-rc');
+export const IS_RC = IS_SUPPORT;

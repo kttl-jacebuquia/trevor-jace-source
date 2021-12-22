@@ -29,7 +29,7 @@ class Modal {
 		unset( $this->_options['id'] );
 	}
 
-	public function render(): string {
+	public function render( $print_js = true ): string {
 		// Don't render the same modal id twice
 		if ( $this->_selector && in_array( $this->_selector, static::$rendered_modals, true ) ) {
 			return '';
@@ -51,7 +51,9 @@ class Modal {
 				</div>
 			</div>
 		</div>
-		<?php $this->print_js(); ?>
+		<?php if ( $print_js ): ?>
+			<?php $this->print_js(); ?>
+		<?php endif; ?>
 		<?php
 		return ob_get_clean();
 	}

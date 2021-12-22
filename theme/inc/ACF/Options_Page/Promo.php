@@ -1,6 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Options_Page;
 
 use TrevorWP\CPT\Promo_Popup as CPT_PROMO;
+use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Theme\ACF\Field_Group\Promo_Popup as FG_PROMO;
 use TrevorWP\Theme\Util\Is;
 
@@ -96,8 +97,8 @@ class Promo extends A_Options_Page {
 		);
 	}
 
-	public static function get_promo_popup() {
-		$is_support  = Is::rc();
+	public static function get_promo_popup( string $type ) {
+		$is_support  = 'support' === $type;
 		$promo_field = $is_support ? static::FIELD_SUPPORT : static::FIELD_ORGANIZATION;
 		$promo_popup = static::get_option( $promo_field );
 
@@ -112,14 +113,13 @@ class Promo extends A_Options_Page {
 		return $data;
 	}
 
-	public static function render(): string {
-		$promo_popup = self::get_promo_popup();
-
+	public static function render( string $type = '' ): string {
+		$type        = ! empty( $type ) ? $type : ( Is::rc() ? 'support' : 'org' );
+		$promo_popup = self::get_promo_popup( $type );
 		return FG_PROMO::render( $promo_popup['promo'] );
 	}
 
 	public static function include_only_publish_post( $args, $field, $post_id ) {
-
 		// Include only 'publish' post
 		$args['post_status'] = 'publish';
 

@@ -10,7 +10,6 @@ use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
-use TrevorWP\Theme\ACF\Field_Group\Promo_Popup;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
@@ -24,6 +23,7 @@ use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
 use TrevorWP\Theme\Ajax\GoogleSheets;
 use TrevorWP\Theme\Ajax\Form_Assembly;
+use TrevorWP\Theme\Ajax\Promo_Popup;
 use TrevorWP\Theme\Customizer;
 use TrevorWP\Theme\Customizer\Search;
 use TrevorWP\Theme\Helper\Sorter;
@@ -131,6 +131,9 @@ class Hooks {
 
 		# Dev Inquiry
 		Form_Assembly::construct();
+
+		# Promo PopUp
+		Promo_Popup::construct();
 	}
 
 	/**
@@ -634,27 +637,6 @@ class Hooks {
 				'class'  => array( 'quick-exit-modal', 'js-quick-exit-modal' ),
 			)
 		) )->render();
-
-		// Promo Modal
-		$promo_popup     = Options_Page\Promo::get_promo_popup();
-		$is_promo_active = Promo_Popup::get_promo_schedule( $promo_popup['promo'] );
-
-		if ( $promo_popup['state'] && $is_promo_active ) {
-			$val          = new Field_Val_Getter( Promo_Popup::class, $promo_popup['promo'] );
-			$block_styles = $val->get( Promo_Popup::FIELD_BLOCK_STYLES );
-
-			list( $bg_color, $text_color ) = array_values( $block_styles );
-
-			echo ( new \TrevorWP\Theme\Helper\Modal(
-				Options_Page\Promo::render(),
-				array(
-					'target'          => '.promo-popup-modal',
-					'id'              => 'js-promo-popup-modal',
-					'class'           => array( 'promo-popup-modal' ),
-					'container_class' => array( "bg-{$bg_color}", "text-{$text_color}" ),
-				)
-			) )->render();
-		}
 	}
 
 	/**

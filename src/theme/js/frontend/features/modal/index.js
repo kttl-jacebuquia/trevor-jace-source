@@ -13,7 +13,7 @@ const FOCUS_TRAP_KEY = Symbol();
  * onOpen - Callback when modal opens
  * onClose - Callback when modal closes
  */
-class Modal {
+export class Modal {
 	static bodyActiveClass = 'modal-active';
 	static modalActiveClass = 'is-active';
 	static overlayClass = 'modal-overlay';
