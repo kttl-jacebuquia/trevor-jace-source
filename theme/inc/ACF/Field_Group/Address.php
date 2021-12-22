@@ -1,5 +1,7 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
+use TrevorWP\CPT\Form;
+use TrevorWP\Theme\ACF\Field_Group\Form as FG_Form;
 use TrevorWP\Theme\Helper\FundraiserQuizModal;
 
 class Address extends A_Field_Group implements I_Block {
@@ -10,6 +12,7 @@ class Address extends A_Field_Group implements I_Block {
 	const FIELD_ENTRY_LINE_TYPE = 'entry_line_type';
 	const FIELD_ENTRY_EMAIL     = 'entry_email';
 	const FIELD_ENTRY_PHONE     = 'entry_phone';
+	const FIELD_ENTRY_FORM      = 'entry_form';
 	const FIELD_LINE            = 'line';
 
 	protected static function prepare_register_args(): array {
@@ -20,6 +23,7 @@ class Address extends A_Field_Group implements I_Block {
 		$entry_line_type = static::gen_field_key( static::FIELD_ENTRY_LINE_TYPE );
 		$entry_email     = static::gen_field_key( static::FIELD_ENTRY_EMAIL );
 		$entry_phone     = static::gen_field_key( static::FIELD_ENTRY_PHONE );
+		$entry_form      = static::gen_field_key( static::FIELD_ENTRY_FORM );
 		$line            = static::gen_field_key( static::FIELD_LINE );
 
 		return array(
@@ -62,6 +66,7 @@ class Address extends A_Field_Group implements I_Block {
 										'call'         => 'Call',
 										'mailto'       => 'Mailto',
 										'dev_inq_form' => 'Development Inquiry Form',
+										'forms'        => 'Forms',
 									),
 									'default_value' => 'text',
 									'return_format' => 'value',
@@ -91,6 +96,33 @@ class Address extends A_Field_Group implements I_Block {
 											'value'    => 'call',
 										),
 									),
+								),
+								static::FIELD_ENTRY_FORM  => array(
+									'key'               => $entry_form,
+									'name'              => static::FIELD_ENTRY_FORM,
+									'label'             => 'Select Form',
+									'type'              => 'post_object',
+									'required'          => 1,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => $entry_line_type,
+												'operator' => '==',
+												'value'    => 'forms',
+											),
+										),
+									),
+									'post_type'         => array(
+										0 => Form::POST_TYPE,
+									),
+									'filters'           => array(
+										0 => 'search',
+									),
+									'taxonomy'          => '',
+									'allow_null'        => 0,
+									'multiple'          => 0,
+									'return_format'     => 'object',
+									'ui'                => 1,
 								),
 								static::FIELD_LINE        => array(
 									'key'       => $line,
@@ -154,6 +186,17 @@ class Address extends A_Field_Group implements I_Block {
 										aria-label="click to open fundraise quiz modal"
 										data-fundraise-vertex="form"
 										data-fundraise-single="1">
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										</button>
+									<?php elseif ( 'forms' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+										<?php
+											$form  = $line[ static::FIELD_ENTRY_FORM ];
+											$class = ! empty( $form->ID ) ? FG_Form::gen_modal_id( $form->ID ) : '';
+
+											FG_Form::create_modal( $form );
+										?>
+										<button class="<?php echo esc_attr( $class ); ?> wave-underline"
+										aria-label="click to open Form">
 											<?php echo $line[ static::FIELD_LINE ]; ?>
 										</button>
 									<?php else : ?>

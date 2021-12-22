@@ -55,7 +55,8 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 									<i
 									aria-hidden="true"
 									class="
-									<?php echo esc_attr(
+									<?php
+									echo esc_attr(
 										implode(
 											' ',
 											array(
