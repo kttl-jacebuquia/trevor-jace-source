@@ -115,10 +115,6 @@
     FIELD-SPECIFIC STYLES
   */
   .oneField {
-    label#tfa_1922-L {
-      @apply w-full;
-    }
-
     &#tfa_1885-D {
       @screen md {
         @apply col-span-full;
@@ -140,12 +136,6 @@
     &#tfa_1932-D {
       @screen md {
         @apply col-span-full;
-      }
-
-      label {
-        @screen md {
-          width: 135%;
-        }
       }
     }
   }
