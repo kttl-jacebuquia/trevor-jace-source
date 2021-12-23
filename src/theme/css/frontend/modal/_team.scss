@@ -1,4 +1,9 @@
 .modal.team {
+  .team-member__thumbnail-wrap {
+    @apply overflow-hidden rounded-px10;
+    will-change: transform;
+  }
+
   .modal-overlay {
     @apply bg-white;
     --tw-bg-opacity: 0.08;
