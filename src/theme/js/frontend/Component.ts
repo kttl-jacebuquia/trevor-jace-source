@@ -81,6 +81,9 @@ export default class Component extends WithState {
 		// Add reference to the component's class
 		instance.componentClass = ComponentClass;
 
+		// Add reference to the instance object
+		instance.element.component = instance;
+
 		// Query children if supplied
 		if (ComponentClass.children) {
 			instance.children = {};
