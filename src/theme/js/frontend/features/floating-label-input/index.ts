@@ -74,6 +74,11 @@ export default class FloatingLabelInput extends Component {
 
 		this.determineActivatedOption();
 
+		console.log({
+			option: this.options,
+			element: this.element,
+		});
+
 		if (this.options.activated || this.children?.input?.value) {
 			this.state.activated = true;
 			this.element.classList.add(ACTIVATED_CLASSLIST);
@@ -97,19 +102,6 @@ export default class FloatingLabelInput extends Component {
 		// Checkbox/Radio doesn't need activated state
 		if (/radio|checkbox/i.test(this.element?.dataset.inputType || '')) {
 			this.options.activated = false;
-		}
-		// For input non-radio/checkbox tags,
-		// always activate if label is too long
-		else if (
-			/input/i.test(this.element?.dataset.inputTag || '') &&
-			!/radio|checkbox/i.test(this.element?.dataset.inputType || '')
-		) {
-			if (
-				(this.children?.label?.offsetHeight || 0) >
-				(this.children?.input?.offsetHeight || 0)
-			) {
-				this.options.activated = true;
-			}
 		}
 	}
 
