@@ -7,16 +7,19 @@ if (getComputedStyle(document.body).scrollBehavior !== 'smooth') {
 	const [url] = window.location.href.split('#');
 
 	$jumpLinks.on('click', (e) => {
-		e.preventDefault();
-		const hrefSegments = e.currentTarget.href.split('#');
+		const hrefSegments = (e.currentTarget as HTMLAnchorElement).href.split(
+			'#'
+		);
 
 		if (
 			!hrefSegments[1] ||
 			(hrefSegments[0] &&
 				url.replace(/\/$/, '') !== hrefSegments[0].replace(/\/$/, ''))
 		) {
-			return;
+			return true;
 		}
+
+		e.preventDefault();
 
 		const sectionSelector: string = `#${hrefSegments[1]}`;
 		const $targetSection = $(sectionSelector);
