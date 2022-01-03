@@ -74,11 +74,6 @@ export default class FloatingLabelInput extends Component {
 
 		this.determineActivatedOption();
 
-		console.log({
-			option: this.options,
-			element: this.element,
-		});
-
 		if (this.options.activated || this.children?.input?.value) {
 			this.state.activated = true;
 			this.element.classList.add(ACTIVATED_CLASSLIST);

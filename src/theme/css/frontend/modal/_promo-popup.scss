@@ -15,11 +15,17 @@
     }
 
     @screen lg {
-      @apply col-span-8 col-start-3 py-px58;
+      @apply col-span-full col-start-1 py-px58;
+      width: rem-calc(626);
     }
 
     @screen lg2 {
-      @apply col-span-8 col-start-3 py-px78;
+      @apply py-px78;
+      width: rem-calc(773);
+    }
+
+    @screen xl {
+      width: rem-calc(923);
     }
 
     // Apply text color override to close button and CTA
@@ -56,28 +62,43 @@
     }
 
     @screen lg {
-      @apply grid-cols-8;
+      @apply flex flex-nowrap pl-px50 pr-px74 gap-x-0;
+    }
+
+    @screen lg {
+      @apply pr-px90;
+    }
+
+    @screen xl {
+      @apply pl-px60 pr-px106;
     }
   }
 
   &__image {
-    @apply col-span-2 col-start-3 rounded-px10 overflow-visible aspect-ratio-1-1;
+    @apply col-span-full rounded-px10 overflow-hidden aspect-ratio-1-1;
+    @apply w-px154 h-px154 m-auto;
+    will-change: transform;
+
+    @screen md {
+      width: rem-calc(233);
+      height: rem-calc(233);
+    }
 
     @screen lg {
-      @apply col-span-3 justify-self-end w-px118 mr-px12;
+      @apply w-px190 h-px190 mr-px50 ml-0 flex-shrink-0;
     }
 
     @screen lg2 {
-      @apply w-px150 mr-px21;
+      @apply w-px240 h-px240 mr-px65;
     }
 
     @screen xl {
-      @apply w-px183;
-      margin-right: 47px;
+      @apply w-px290 h-px290 mr-px74;
     }
 
     img {
       @apply object-cover object-center w-full h-full;
+      display: block !important;
     }
   }
 
@@ -89,7 +110,7 @@
     }
 
     @screen lg {
-      @apply col-span-4 col-start-4 mt-0 text-left mx-0;
+      @apply mt-0 text-left mx-0 flex-1;
     }
   }
 

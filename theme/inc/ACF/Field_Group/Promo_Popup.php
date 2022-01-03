@@ -2,6 +2,7 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Theme\Helper\Thumbnail;
 
 class Promo_Popup extends A_Field_Group {
 	const FIELD_BLOCK_STYLES       = 'block_styles';
@@ -205,6 +206,11 @@ class Promo_Popup extends A_Field_Group {
 		$button             = $val->get( static::FIELD_BUTTON );
 
 		$description = ( 'yes' === $with_format ) ? $format_description : $description;
+
+		$images_data = (! empty( $image['url'] )) ? array(
+			array( $image['id'], 'sm', null, 'thumbnail', array( 'alt' => $image['alt'] ) ),
+		) : array();
+
 		ob_start();
 		?>
 			<div class="promo-popup-modal__content">
@@ -212,10 +218,10 @@ class Promo_Popup extends A_Field_Group {
 					<figure class="promo-popup-modal__image">
 						<?php if ( ! empty( $image_link ) ) : ?>
 							<a href="<?php echo esc_url( $image_link ); ?>" target="_blank">
-								<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>">
+								<?php echo Thumbnail::render_img_variants( $images_data )[0][0]; ?>
 							</a>
 						<?php else : ?>
-							<img src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>">
+							<?php echo Thumbnail::render_img_variants( $images_data )[0][0]; ?>
 						<?php endif; ?>
 					</figure>
 				<?php endif; ?>
