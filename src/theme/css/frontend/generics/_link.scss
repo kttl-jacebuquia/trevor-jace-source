@@ -4,5 +4,6 @@
   &:visited {
     @apply text-current underline;
     text-underline-offset: .2em;
+    text-decoration-thickness: rem-calc(1);
   }
 }
