@@ -52,6 +52,7 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 			slidesPerView: 1,
 			autoplay: true,
 			updateOnWindowResize: true,
+			simulateTouch: false,
 		};
 
 		if (
@@ -169,7 +170,7 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 		});
 	}
 
-	function onSlideChangeTransitionStart() {
+	function onSlideChangeTransitionStart(_swiper: Swiper) {
 		eBase.classList.add('carousel-testimonials--transitioning');
 	}
 
@@ -178,7 +179,7 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 
 		setTimeout(() => {
 			eBase.classList.remove('carousel-testimonials--transitioning');
-		}, 500);
+		});
 	}
 
 	/**
