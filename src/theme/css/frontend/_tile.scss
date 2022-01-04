@@ -293,6 +293,10 @@
     .research-card & {
       @apply xl:text-px20 xl:leading-px26 xl:tracking-em001;
     }
+
+    .post-type-archive-trevor_fin_report & {
+      @apply font-semibold;
+    }
   }
 
   &.product-card &-title-top {
