@@ -144,6 +144,7 @@ const config = {
 			},
 			purple: {
 				DEFAULT: '#40009A',
+				dark: '#040463',
 			},
 			cobalt_blue: {
 				DEFAULT: '#00479C',

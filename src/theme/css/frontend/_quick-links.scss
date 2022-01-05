@@ -1,4 +1,6 @@
 .quick-links {
+  @apply text-purple-dark;
+
 	@screen xl {
 		@apply -ml-px55;
 		width: calc(100% + #{rem-calc(55)});
