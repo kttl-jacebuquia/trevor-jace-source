@@ -18,23 +18,23 @@ class Promo_Popup {
 	}
 
 	public static function promo_popup() {
-		$type = $_GET['type'];
+		$type              = $_GET['type'];
 		$promo_popup_modal = static::get_promo_popup( $type );
 
 		wp_die(
 			json_encode(
 				array(
 					'status' => 'SUCCESS',
-					'data' => $promo_popup_modal,
+					'data'   => $promo_popup_modal,
 				),
 			),
 			200,
 		);
 	}
 
-	public static function get_promo_popup( string $promo_type  ) {
+	public static function get_promo_popup( string $promo_type ) {
 		// Promo Modal
-		$promo_popup = Options_Page\Promo::get_promo_popup($promo_type);
+		$promo_popup     = Options_Page\Promo::get_promo_popup( $promo_type );
 		$is_promo_active = Field_Group\Promo_Popup::get_promo_schedule( $promo_popup['promo'] );
 
 		if ( $promo_popup['state'] && $is_promo_active ) {
@@ -55,7 +55,7 @@ class Promo_Popup {
 
 			return array(
 				'markup' => $markup,
-				'id' => $promo_popup['promo']->ID,
+				'id'     => $promo_popup['promo']->ID,
 			);
 		}
 

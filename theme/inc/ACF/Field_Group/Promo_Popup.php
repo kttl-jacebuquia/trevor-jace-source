@@ -207,7 +207,7 @@ class Promo_Popup extends A_Field_Group {
 
 		$description = ( 'yes' === $with_format ) ? $format_description : $description;
 
-		$images_data = (! empty( $image['url'] )) ? array(
+		$images_data = ( ! empty( $image['url'] ) ) ? array(
 			array( $image['id'], 'sm', null, 'thumbnail', array( 'alt' => $image['alt'] ) ),
 		) : array();
 

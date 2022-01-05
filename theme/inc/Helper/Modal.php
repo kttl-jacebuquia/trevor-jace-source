@@ -51,7 +51,7 @@ class Modal {
 				</div>
 			</div>
 		</div>
-		<?php if ( $print_js ): ?>
+		<?php if ( $print_js ) : ?>
 			<?php $this->print_js(); ?>
 		<?php endif; ?>
 		<?php

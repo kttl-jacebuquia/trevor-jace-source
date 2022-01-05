@@ -13,6 +13,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_DISPLAY_TYPE           = 'display_type';
 	const FIELD_NUM_COLS               = 'number_columns';
 	const FIELD_NUM_DISPLAY_LIMIT      = 'number_display_limit';
+	const FIELD_ORDER                  = 'order';
 	const FIELD_GROUP                  = 'group';
 	const FIELD_ENTRIES                = 'entries';
 
@@ -27,6 +28,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$num_cols               = static::gen_field_key( static::FIELD_NUM_COLS );
 		$num_display_limit      = static::gen_field_key( static::FIELD_NUM_DISPLAY_LIMIT );
 		$group                  = static::gen_field_key( static::FIELD_GROUP );
+		$order                  = static::gen_field_key( static::FIELD_ORDER );
 		$entries                = static::gen_field_key( static::FIELD_ENTRIES );
 
 		$terms = get_terms( Team::TAXONOMY_GROUP );
@@ -41,12 +43,11 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 				'key'               => $term->slug . $term->term_id,
 				'name'              => $term->slug,
 				'label'             => $term->name,
-				'type'              => 'post_object',
+				'type'              => 'relationship',
 				'required'          => 1,
 				'post_type'         => array( Team::POST_TYPE ),
 				'taxonomy'          => array( $term->term_id ),
 				'min'               => 1,
-				'multiple'          => 1,
 				'conditional_logic' => array(
 					array(
 						array(
@@ -149,6 +150,26 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 					'choices'       => $terms_options,
 					'return_format' => 'array',
 				),
+				static::FIELD_ORDER                  => array(
+					'key'               => $order,
+					'name'              => static::FIELD_ORDER,
+					'label'             => 'Order',
+					'type'              => 'button_group',
+					'choices'           => array(
+						'alphabetical' => 'Alphabetical',
+						'custom'       => 'Custom',
+					),
+					'default_value'     => 'alphabetical',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $display_type,
+								'operator' => '!=',
+								'value'    => 'list',
+							),
+						),
+					),
+				),
 				static::FIELD_ENTRIES                => array(
 					'key'               => $entries,
 					'name'              => static::FIELD_ENTRIES,
@@ -195,6 +216,7 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 		$num_cols               = static::get_val( static::FIELD_NUM_COLS );
 		$num_display_limit      = static::get_val( static::FIELD_NUM_DISPLAY_LIMIT );
 		$group                  = static::get_val( static::FIELD_GROUP );
+		$order                  = static::get_val( static::FIELD_ORDER );
 
 		$cards          = array();
 		$has_more_items = false;
@@ -213,6 +235,15 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 
 			if ( ! empty( $term ) && ! empty( $entries[ $term->slug ] ) ) {
 				$cards = $entries[ $term->slug ];
+			}
+
+			if ( 'alphabetical' === $order && ! empty( $cards ) ) {
+				usort(
+					$cards,
+					function ( $a, $b ) {
+						return strcmp( $a->post_title, $b->post_title );
+					}
+				);
 			}
 		}
 
