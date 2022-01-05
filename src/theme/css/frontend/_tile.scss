@@ -241,6 +241,11 @@
     @apply px-px28 py-px38 min-h-px370 max-w-none;
   }
 
+  .post-type-archive-trevor_gi_bill &,
+  .post-type-archive-trevor_gi_letter & {
+    @apply shadow-none md:shadow-none lg:shadow-none lg2:shadow-none xl:shadow-none;
+  }
+
   &-title-top {
     @apply text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5;
   }
