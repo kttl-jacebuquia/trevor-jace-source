@@ -19,6 +19,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_TOPIC_ENTRY_LINK        = 'topic_entry_link';
 	const FIELD_BUTTON                  = 'button';
 	const FIELD_MOBILE_LAYOUT           = 'show_mobile_accordion';
+	const FIELD_ORDER                   = 'order';
 	// Source dependent fields
 	const FIELD_PRODUCTS         = 'products';
 	const FIELD_PRODUCT_PARTNERS = 'product_partners';
@@ -43,6 +44,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$topic_entry_link        = static::gen_field_key( static::FIELD_TOPIC_ENTRY_LINK );
 		$button                  = static::gen_field_key( static::FIELD_BUTTON );
 		$mobile_layout           = static::gen_field_key( static::FIELD_MOBILE_LAYOUT );
+		$order                   = static::gen_field_key( static::FIELD_ORDER );
 		$products                = static::gen_field_key( static::FIELD_PRODUCTS );
 		$product_partners        = static::gen_field_key( static::FIELD_PRODUCT_PARTNERS );
 		$bills                   = static::gen_field_key( static::FIELD_BILLS );
@@ -127,6 +129,26 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'return_format' => 'value',
 					'ui'            => 1,
 				),
+				static::FIELD_ORDER            => array(
+					'key'               => $order,
+					'name'              => static::FIELD_ORDER,
+					'label'             => 'Order',
+					'type'              => 'button_group',
+					'choices'           => array(
+						'alphabetical' => 'Alphabetical',
+						'custom'       => 'Custom',
+					),
+					'default_value'     => 'alphabetical',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $entries_source,
+								'operator' => '==',
+								'value'    => 'products',
+							),
+						),
+					),
+				),
 				static::FIELD_TOPIC_ENTRIES    => array(
 					'key'               => $topic_entries,
 					'name'              => static::FIELD_TOPIC_ENTRIES,
@@ -173,13 +195,13 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'key'               => $products,
 					'name'              => static::FIELD_PRODUCTS,
 					'label'             => 'Products',
-					'type'              => 'post_object',
+					'type'              => 'relationship',
 					'post_type'         => array(
 						Donate\Partner_Prod::POST_TYPE,
 					),
-					'multiple'          => 1,
+					'taxonomy'          => array(),
+					'min'               => 1,
 					'return_format'     => 'object',
-					'ui'                => 1,
 					'conditional_logic' => array(
 						array(
 							array(
@@ -346,6 +368,17 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				switch ( $entries_source ) {
 					case 'products':
 						$posts = static::get_val( static::FIELD_PRODUCTS );
+						$order = static::get_val( static::FIELD_ORDER );
+
+						if ( 'alphabetical' === $order && ! empty( $posts ) ) {
+							usort(
+								$posts,
+								function ( $a, $b ) {
+									return strcmp( $a->post_title, $b->post_title );
+								}
+							);
+						}
+
 						echo static::render_posts( $posts );
 						break;
 					case 'partners':
