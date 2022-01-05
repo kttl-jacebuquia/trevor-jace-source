@@ -2,7 +2,10 @@ import $ from 'jquery';
 import Component from '../../Component';
 import { pushFormData } from '../gtm';
 
-const _donateTargetURL = 'https://give.thetrevorproject.org/give/63307#!/donation/checkout';
+const _donateTargetURL =
+	'https://give.thetrevorproject.org/give/63307#!/donation/checkout';
+
+const MAX_DIGITS = 10;
 
 export default class DonationForm extends Component {
 	// Defines the element selector which will initialize this component
@@ -82,7 +85,9 @@ export default class DonationForm extends Component {
 					this._customAmount.val() || this._donateForm[0].amount.value
 				) || 0;
 			const hasError = !Boolean(amount);
-			const _isRecurring = this._donateForm.find('.donation-frequency:checked');
+			const _isRecurring = this._donateForm.find(
+				'.donation-frequency:checked'
+			);
 
 			// Toggle error based on whether an amount is provided
 			this._error.toggleClass('hidden', !hasError);
@@ -123,9 +128,16 @@ export default class DonationForm extends Component {
 		});
 	}
 
-	formatNumber(number) {
+	formatNumber(number: string) {
+		// Limit number to 10 digits
+		const limitedNumber = number
+			.replace(/\D/g, '')
+			.substring(0, MAX_DIGITS);
+
 		// format number 1000000 to 1,234,567
-		return number.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		return limitedNumber
+			.replace(/\D/g, '')
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 
 	formatCurrency(input, blur) {
@@ -197,13 +209,12 @@ export default class DonationForm extends Component {
 		// send updated string to input
 		input.val(input_value);
 
-		if ( blur !== 'blur' ) {
+		if (blur !== 'blur') {
 			// put caret back in the right position
 			let updated_length = input_value.length;
 			caret_position = updated_length - original_length + caret_position;
 			input[0].setSelectionRange(caret_position, caret_position);
 		}
-
 	}
 }
 

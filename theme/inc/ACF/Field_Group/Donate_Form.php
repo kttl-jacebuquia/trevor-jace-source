@@ -127,7 +127,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 									<input name="custom" class="custom-amount" placeholder="$ Custom amount" aria-hidden="true">
 									<div class="floating-label-input">
 										<label for="currency-field-<?php echo $uuid; ?>">Custom amount</label>
-										<input type="text" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$">
+										<input type="text" inputmode="decimal" name="currency-field" class="display-amount" id="currency-field-<?php echo $uuid; ?>" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$">
 									</div>
 								</div>
 							</div>
