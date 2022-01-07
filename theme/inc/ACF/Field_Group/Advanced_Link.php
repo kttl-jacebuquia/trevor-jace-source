@@ -6,7 +6,6 @@
  */
 
 use TrevorWP\CPT;
-use TrevorWP\CPT\Research;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Helper\Breathing_Exercise;
 use TrevorWP\Theme\Helper\DonationModal;
@@ -26,16 +25,8 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 	const FIELD_PHONE                = 'phone';
 	const FIELD_EMAIL                = 'email';
 	const FIELD_FORM                 = 'form';
-	const FIELD_LATEST_RESEARCH      = 'latest_research';
 	const FIELD_SHOW_DOWNLOAD_ICON   = 'show_download_icon';
 	const FIELD_SHOW_DEV_FORM_ONLY   = 'show_dev_form_only';
-
-	/** @inheritDoc */
-	public static function register(): bool {
-		add_filter( 'acf/load_field/name=' . static::FIELD_LATEST_RESEARCH, array( static::class, 'load_field_latest_research' ) );
-
-		return parent::register();
-	}
 
 	/** @inheritDoc */
 	public static function prepare_register_args(): array {
@@ -56,7 +47,6 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		$phone                = static::gen_field_key( static::FIELD_PHONE );
 		$email                = static::gen_field_key( static::FIELD_EMAIL );
 		$form                 = static::gen_field_key( static::FIELD_FORM );
-		$latest_research      = static::gen_field_key( static::FIELD_LATEST_RESEARCH );
 		$show_download_icon   = static::gen_field_key( static::FIELD_SHOW_DOWNLOAD_ICON );
 		$show_dev_form_only   = static::gen_field_key( static::FIELD_SHOW_DEV_FORM_ONLY );
 
@@ -77,16 +67,15 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'type'          => 'select',
 					'required'      => true,
 					'choices'       => array(
-						'link'            => 'Link',
-						'page_link'       => 'Page Link',
-						'file_download'   => 'File Download',
-						'modal'           => 'Pop-up Modal',
-						'call'            => 'Call',
-						'sms'             => 'SMS',
-						'trevor_chat'     => 'Trevor Chat',
-						'email'           => 'Email',
-						'form'            => 'Forms',
-						'latest_research' => 'Latest Research Report',
+						'link'          => 'Link',
+						'page_link'     => 'Page Link',
+						'file_download' => 'File Download',
+						'modal'         => 'Pop-up Modal',
+						'call'          => 'Call',
+						'sms'           => 'SMS',
+						'trevor_chat'   => 'Trevor Chat',
+						'email'         => 'Email',
+						'form'          => 'Forms',
 					),
 					'default_value' => 'page_link',
 					'allow_null'    => true,
@@ -321,23 +310,6 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 					'multiple'          => 0,
 					'return_format'     => 'object',
 					'ui'                => 1,
-				),
-				static::FIELD_LATEST_RESEARCH      => array(
-					'key'               => $latest_research,
-					'name'              => static::FIELD_LATEST_RESEARCH,
-					'label'             => 'Latest Research Report',
-					'type'              => 'select',
-					'choices'           => array( /* @see load_field_latest_research() */ ),
-					'ui'                => true,
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $action,
-								'operator' => '==',
-								'value'    => 'latest_research',
-							),
-						),
-					),
 				),
 				static::FIELD_DONATE_DEDICATION    => array(
 					'key'               => $donate_dedication,
@@ -606,17 +578,6 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 
 				Form::create_modal( $form );
 				break;
-			case 'latest_research':
-				$research = $val->get( static::FIELD_LATEST_RESEARCH );
-				if ( ! empty( $research ) ) {
-					$options['attributes'][ DOM_Attr::FIELD_ATTRIBUTES ][] = array(
-						DOM_Attr::FIELD_ATTR_KEY => 'href',
-						DOM_Attr::FIELD_ATTR_VAL => get_permalink( $research ),
-					);
-				} else {
-					$has_url = false;
-				}
-				break;
 		}
 
 		ob_start();
@@ -648,34 +609,5 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 		}
 
 		return static::render_link( $options, $post, $data );
-	}
-
-	/**
-	 * @param $field
-	 *
-	 * @return mixed
-	 */
-	public static function load_field_latest_research( $field ) {
-		if ( $field && ! empty( $field['key'] ) && static::gen_field_key( static::FIELD_LATEST_RESEARCH ) === $field['key'] ) {
-			$choices = array();
-
-			$posts = get_posts(
-				array(
-					'post_type'     => Research::POST_TYPE,
-					'post_per_page' => -1,
-					'post_status'   => 'publish',
-					'orderby'       => 'post_date',
-					'order'         => 'DESC',
-				)
-			);
-
-			foreach ( $posts as $post ) {
-				$choices[ $post->ID ] = $post->post_title . ' — ' . date( 'F j, Y', strtotime( $post->post_date ) );
-			}
-
-			$field['choices'] = $choices;
-		}
-
-		return $field;
 	}
 }
