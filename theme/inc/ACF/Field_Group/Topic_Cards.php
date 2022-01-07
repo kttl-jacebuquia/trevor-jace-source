@@ -3,6 +3,7 @@
 use TrevorWP\Theme\ACF\Field\Color;
 use TrevorWP\CPT\Donate;
 use TrevorWP\CPT\Get_Involved;
+use TrevorWP\CPT\Research;
 use TrevorWP\Theme\Helper;
 use TrevorWP\Util\Tools;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
@@ -119,11 +120,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'label'         => 'Entries Source',
 					'type'          => 'select',
 					'choices'       => array(
-						'custom'   => 'Custom',
-						'products' => 'Products',
-						'partners' => 'Product Partners',
-						'bills'    => 'Bills',
-						'letters'  => 'Letters',
+						'custom'          => 'Custom',
+						'products'        => 'Products',
+						'partners'        => 'Product Partners',
+						'bills'           => 'Bills',
+						'letters'         => 'Letters',
+						'research_briefs' => 'Research Briefs',
 					),
 					'default_value' => 'custom',
 					'return_format' => 'value',
@@ -350,6 +352,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				case 'letters':
 					$attr['data-post-type'] = Get_Involved\Letter::POST_TYPE;
 					break;
+				case 'research_briefs':
+					$attr['data-post-type'] = Research::POST_TYPE;
+					break;
 			}
 		}
 
@@ -391,6 +396,10 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						break;
 					case 'letters':
 						$posts = static::get_val( static::FIELD_LETTERS );
+						echo static::render_posts( $posts );
+						break;
+					case 'research_briefs':
+						$posts = static::get_latest_research_briefs();
 						echo static::render_posts( $posts );
 						break;
 					default:
@@ -595,6 +604,19 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		}
 
 		return $filtered_entries;
+	}
+
+	public static function get_latest_research_briefs() {
+		$data = get_posts(
+			array(
+				'post_type'   => Research::POST_TYPE,
+				'numberposts' => 6,
+				'orderby'     => 'date',
+				'order'       => 'DESC',
+			)
+		);
+
+		return $data;
 	}
 
 	/**

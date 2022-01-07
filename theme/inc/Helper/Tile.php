@@ -118,6 +118,8 @@ class Tile {
 
 		if ( CPT\Research::POST_TYPE === $post->post_type ) {
 			$data['cta_txt']    = 'Learn More';
+			$formatted_date     = '<strong>' . strtoupper( gmdate( 'M. j, Y —', strtotime( $post->post_date ) ) ) . '</strong>';
+			$data['desc']       = $formatted_date . ' ' . $data['desc'];
 			$options['class'][] = 'research-card';
 		}
 		return self::custom( $data, $key, $options );
