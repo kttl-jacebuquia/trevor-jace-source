@@ -129,6 +129,8 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 	}
 
 	function onSlideChange(swiper: Swiper) {
+		applyArrowsA11y(swiper);
+
 		[...swiper.slides].forEach((slide, index) => {
 			const isActiveIndex = index === swiper.activeIndex;
 
@@ -138,6 +140,24 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 				$(slide).attr('tabindex', -1).attr('aria-hidden', true);
 			}
 		});
+	}
+
+	// Toggles a11y on arrow panes
+	function applyArrowsA11y(_swiper: Swiper) {
+		const leftPane = eBase.querySelector(leftPaneSelector);
+		const rightPane = eBase.querySelector(rightPaneSelector);
+
+		if (_swiper.isBeginning) {
+			leftPane?.setAttribute('aria-hidden', 'true');
+		} else {
+			leftPane?.removeAttribute('aria-hidden');
+		}
+
+		if (_swiper.isEnd) {
+			rightPane?.setAttribute('aria-hidden', 'true');
+		} else {
+			rightPane?.removeAttribute('aria-hidden');
+		}
 	}
 
 	function onImageSliderInit(swiper: Swiper) {
