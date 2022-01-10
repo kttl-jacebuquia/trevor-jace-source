@@ -809,8 +809,6 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				'success'        => true,
 				'cards_rendered' => $cards_rendered,
 				'cards_ids'      => wp_list_pluck( $posts, 'ID' ),
-				'post_in'        => $include,
-				'exclude'        => $exclude,
 			),
 			200
 		);
