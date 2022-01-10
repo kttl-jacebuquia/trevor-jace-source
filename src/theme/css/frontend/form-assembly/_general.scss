@@ -201,6 +201,10 @@
     &[disabled] {
       @apply bg-opacity-80 cursor-not-allowed;
     }
+
+    @screen lg {
+      @apply font-bold;
+    }
   }
 
   // Hidden fields
