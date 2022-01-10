@@ -765,18 +765,30 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 	public static function ajax_post_cards( $request ) {
 		$params       = $request->get_params();
+		$include      = ! empty( $params['include'] ) ? explode( ',', $params['include'] ) : array();
 		$exclude      = ! empty( $params['exclude'] ) ? explode( ',', $params['exclude'] ) : array();
 		$post_type    = $params['post_type'];
 		$limit        = (int) $params['count'];
 		$card_options = ! empty( $params['card_options'] ) ? $params['card_options'] : array();
 
 		$tile_options = (array) json_decode( $card_options );
+		$post_in      = array();
+
+		// Include ids that are not in $exclude
+		if ( ! empty( $include ) ) {
+			foreach ( $include as $in ) {
+				if ( ! in_array( $in, $exclude, true ) ) {
+					$post_in[] = $in;
+				}
+			}
+		}
 
 		// Get posts
 		$posts = get_posts(
 			array(
 				'posts_per_page' => $limit,
 				'post_type'      => $post_type,
+				'post__in'       => $post_in,
 				'post__not_in'   => $exclude,
 				'post_status'    => 'publish',
 				'orderby'        => 'publish_date',

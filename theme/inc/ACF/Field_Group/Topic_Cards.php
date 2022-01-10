@@ -432,6 +432,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	 */
 	private static function render_posts( $posts = array() ): string {
 		$posts          = static::filter_entries( $posts );
+		$post_ids       = ! empty( $posts ) ? wp_list_pluck( $posts, 'ID' ) : array();
 		$display_limit  = static::DEFAULT_NUM_DISPLAY_LIMIT;
 		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE )
 			&& ! empty( $posts )
@@ -473,7 +474,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 			<?php if ( ! empty( $posts ) && count( $posts ) > 0 ) : ?>
-				<div class="topic-cards__grid" role="list">
+				<div class="topic-cards__grid" role="list" data-post-ids="<?php echo implode( ',', $post_ids ); ?>">
 					<?php foreach ( $posts as $key => $post ) : ?>
 						<?php echo Helper\Tile::post( $post, $key, $tile_options ); ?>
 					<?php endforeach; ?>
