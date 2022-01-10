@@ -100,6 +100,10 @@
       @apply col-span-full;
     }
 
+    &[data-input-tag="select"] {
+      @apply col-span-full;
+    }
+
     &.errFld {
       .errMsg {
         @apply absolute py-0 top-full mt-px5 text-orange;
@@ -192,6 +196,22 @@
 
     @screen md {
       margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
+    }
+  }
+
+  // HTML Section
+  .htmlSection {
+    @apply col-span-full;
+    margin-top: var(--max-scaled-label-height-extra);
+    line-height: 1.3;
+
+    i {
+      font-style: normal;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: .2em;
     }
   }
 

@@ -385,9 +385,12 @@ class FormAssemblyForm extends Component {
 	}
 
 	handleRecaptcha() {
-		const recaptchaContainer = this.element.querySelector(
-			'.captcha'
-		) as HTMLElement;
+		const recaptchaContainer = this.element.querySelector('.captcha');
+
+		if (!recaptchaContainer) {
+			return;
+		}
+
 		const observer = new window.MutationObserver(this.onChange.bind(this));
 		observer.observe(recaptchaContainer.parentElement as Node, {
 			subtree: true,
