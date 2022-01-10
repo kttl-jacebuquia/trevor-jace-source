@@ -81,7 +81,9 @@ class Text_Only_Popup extends A_Field_Group {
 		<div class="text-only-popup">
 			<div class="text-only-popup__content">
 				<h1 class="text-only-popup__title"><?php echo esc_html( $header ); ?></h1>
-				<h2 class="text-only-popup__subtitle"><?php echo esc_html( $subheader ); ?></h2>
+				<?php if ( ! empty( $subheader ) ) : ?>
+					<h2 class="text-only-popup__subtitle"><?php echo esc_html( $subheader ); ?></h2>
+				<?php endif; ?>
 				<div class="text-only-popup__body"><?php echo $body; ?></div>
 			</div>
 		</div>
