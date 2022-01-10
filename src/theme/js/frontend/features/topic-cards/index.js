@@ -26,10 +26,15 @@ class TopicCards {
 
 	saveInitialPosts() {
 		const { postType } = this.element.dataset;
+		const { postIds } = this.cardsContainer.dataset
 		const [...items] = this.element.querySelectorAll(TopicCards.itemSelector);
 
 		if ( postType ) {
 			this.postType = postType;
+		}
+
+		if ( postIds ) {
+			this.postIds = postIds;
 		}
 
 		items.forEach(itemElement => {
@@ -66,6 +71,7 @@ class TopicCards {
 	async loadMoreItems() {
 		// Build out GET params
 		const paramsObj = {
+			include: this.postIds,
 			exclude: TopicCards.loadedPosts.join(','),
 			post_type: this.postType,
 			card_options: JSON.stringify({
