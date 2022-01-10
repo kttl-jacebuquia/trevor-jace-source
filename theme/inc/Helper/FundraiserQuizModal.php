@@ -11,11 +11,14 @@ class FundraiserQuizModal extends Modal {
 		$this->_selector = static::ID;
 	}
 
-	static public function create( $content_options = array() ): void {
+	static public function create( $options = array() ): void {
 		$content = Fundraiser_Quiz::render();
-		$options = array(
-			'target' => '.js-fundraiser-quiz',
-			'class'  => array( 'fundraiser-quiz' ),
+		$options = array_merge(
+			array(
+				'target' => '.js-fundraiser-quiz',
+				'class'  => array( 'fundraiser-quiz' ),
+			),
+			$options
 		);
 
 		// Ensure that modals are only rendered down the document

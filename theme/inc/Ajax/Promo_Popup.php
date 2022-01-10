@@ -40,6 +40,7 @@ class Promo_Popup {
 		if ( $promo_popup['state'] && $is_promo_active ) {
 			$val          = new Field_Val_Getter( Field_Group\Promo_Popup::class, $promo_popup['promo'] );
 			$block_styles = $val->get( Field_Group\Promo_Popup::FIELD_BLOCK_STYLES );
+			$title        = $val->get( Field_Group\Promo_Popup::FIELD_HEADLINE );
 
 			list( $bg_color, $text_color ) = array_values( $block_styles );
 
@@ -50,6 +51,7 @@ class Promo_Popup {
 					'id'              => 'js-promo-popup-modal-' . $promo_popup['promo']->ID,
 					'class'           => array( 'promo-popup-modal' ),
 					'container_class' => array( "bg-{$bg_color}", "text-{$text_color}" ),
+					'title'           => $title,
 				)
 			) )->render( false );
 

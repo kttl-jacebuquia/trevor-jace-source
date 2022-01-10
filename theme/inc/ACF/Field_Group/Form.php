@@ -73,6 +73,8 @@ class Form extends A_Field_Group {
 			return;
 		}
 
+		$val     = new Field_Val_Getter( static::class, $post );
+		$title   = $val->get( static::FIELD_TITLE );
 		$content = static::render( $post );
 		$id      = static::gen_modal_id( $post->ID );
 
@@ -80,6 +82,7 @@ class Form extends A_Field_Group {
 			'id'     => $id,
 			'target' => '.' . $id,
 			'class'  => array( 'form-modal' ),
+			'title'  => $title,
 		);
 
 		// Ensure that modals are only rendered down the document

@@ -55,11 +55,13 @@ class Text_Only_Popup extends A_Field_Group {
 		}
 
 		$post    = get_post( $post );
+		$title   = get_the_title( $post );
 		$id      = static::gen_modal_id( $post->ID );
 		$options = array(
 			'id'     => $id,
 			'target' => '.' . $id,
 			'class'  => array( 'text-only-popup' ),
+			'title'  => $title,
 		);
 		$content = static::render_content_for( $post );
 		Modal::create_and_render( $content, $options );
