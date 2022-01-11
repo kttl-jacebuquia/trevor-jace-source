@@ -109,6 +109,7 @@
 		"yup": "^0.29.3"
 	},
 	"devDependencies": {
+		"@types/highcharts": "^7.0.0",
 		"@types/jquery": "^3.5.8",
 		"@types/lodash": "^4.14.178",
 		"@types/swiper": "^5.4.3",

@@ -75,11 +75,31 @@
     }
 
     @screen xl {
-      margin-right: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 )
+      margin-right: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
     }
 
     @media only screen and (min-width: 1920px) {
       margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
+    }
+  }
+
+  &__map {
+    min-height: rem-calc(600);
+
+    @screen md {
+      min-height: rem-calc(430);
+    }
+
+    @screen lg {
+      min-height: rem-calc(616);
+    }
+
+    @screen lg2 {
+      min-height: rem-calc(586);
+    }
+
+    @screen xl {
+      min-height: rem-calc(670);
     }
   }
 
@@ -99,35 +119,15 @@
     @apply absolute top-0 left-0 h-full text-px20 flex items-center pl-px28 pr-px10;
   }
 
-  // Uncomment for now, in case client wants to revert this back
-  // &__filters {
-  //   @apply flex items-center bg-teal-tint pl-px28 overflow-auto h-px54;
-  //   @apply w-full justify-center;
-
-  //   @screen xl {
-  //     @apply h-px80;
-  //   }
-  // }
-
-  // &__filter {
-  //   @apply btn;
-  //   @apply bg-transparent text-teal-dark whitespace-nowrap rounded-px100;
-  //   @apply min-h-px35 px-px14 py-0 flex-shrink-0;
-  //   @apply text-px14 leading-px18 tracking-em001;
-
-  //   @screen xl {
-  //     @apply h-px40 px-px20 text-px16 leading-px20;
-  //   }
-
-  //   &--active {
-  //     @apply bg-teal-dark text-white;
-  //   }
-  // }
-
   &__download {
-    @apply absolute btn bottom-px42 transform -translate-x-1/2 whitespace-nowrap;
-    @apply rounded-px100;
+    @apply hidden;
+    @apply absolute bottom-px42 transform -translate-x-1/2;
+    @apply overflow-visible;
     left: 50%;
+
+    .ect-map--loaded & {
+      @apply block;
+    }
 
     @screen md {
       @apply bottom-px30 right-px50 translate-x-0;
@@ -137,10 +137,36 @@
     i {
       @apply ml-px10;
     }
+
+    &:focus,
+    &:focus-within,
+    &:hover {
+      .ect-map__export-options {
+        @apply block;
+      }
+    }
+  }
+
+  &__download-text {
+    @apply btn relative;
+    @apply flex whitespace-nowrap rounded-px100;
+  }
+
+  &__export-options {
+    @apply absolute left-0 w-full bg-teal-tint hidden bottom-px24 pb-px24;
+    @apply border-l-px1 border-r-px1 border-solid border-teal-dark;
+
+    @screen xl {
+      @apply bottom-px30 pb-px30;
+    }
+  }
+
+  &__export {
+    @apply block w-full py-px10 text-center text-teal-dark border-teal-dark border-t-px2 border-solid font-bold;
   }
 
   .highcharts-container {
-    @apply bg-gray h-px600;
+    @apply bg-gray-light h-px600 mx-auto;
     width: 100% !important;
 
     @screen md {

@@ -17,8 +17,24 @@ class GoogleSheets {
 
 	public static function google_sheets( $a ) {
 		$range           = $_GET['range'];
+		$get_option      = $_GET['get_option'];
 		$api_key         = API_Keys::get_option( API_Keys::FIELD_GOOGLE_SHEETS_API_KEY );
 		$spreadsheet_key = API_Keys::get_option( API_Keys::FIELD_GOOGLE_SHEETS_SHEET_KEY );
+
+		// Only send public option values when requested
+		if ( ! empty( $get_option ) ) {
+			wp_die(
+				json_encode(
+					array(
+						'status' => 'SUCCESS',
+						'data'   => array(
+							'sheet_key' => $spreadsheet_key,
+						),
+					),
+				),
+				200,
+			);
+		}
 
 		$url = implode(
 			'',
@@ -33,8 +49,8 @@ class GoogleSheets {
 		);
 
 		$headers = array(
-			'origin: https://cdpn.io',
-			'referer: https://cdpn.io/',
+			'origin: https://www.thetrevorproject.org/',
+			'referer: https://www.thetrevorproject.org/',
 		);
 
 		if ( empty( $range ) ) {

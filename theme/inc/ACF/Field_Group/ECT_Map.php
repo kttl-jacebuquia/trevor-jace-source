@@ -69,13 +69,19 @@ class ECT_Map extends A_Field_Group implements I_Block, I_Renderable {
 					</form>
 				</div>
 				<div class="ect-map__map-container">
-					<div class="ect-map__map" id="container">
-						<div class="w-full h-full flex justify-center items-center">
+					<div class="ect-map__map">
+						<div class="w-full h-full flex justify-center items-center bg-gray-light">
 							<div class="text-blue_green">Loading data...</div>
 						</div>
 					</div>
-					<div class="button ect-map__download" type="button" aria-label="click to download this map">
-						<span aria-hidden="true">Download Map <i class="trevor-ti-download"></i></span>
+					<div class="ect-map__download" tabindex="0">
+						<div class="ect-map__export-options">
+							<button data-export-type="tabular" class="ect-map__export" type="button" aria-label="click to view map data in table view">View Data in Table View</button>
+							<button data-export-type="png" class="ect-map__export" type="button" aria-label="click to download map in png image format">Download PNG</button>
+							<button data-export-type="pdf" class="ect-map__export" type="button" aria-label="click to download map in pdf format">Download PDF</button>
+							<button data-export-type="svg" class="ect-map__export" type="button" aria-label="click to download map in SVG image format">Download SVG</button>
+						</div>
+						<span class="button ect-map__download-text" aria-hidden="true">Download Map <i class="trevor-ti-download"></i></span>
 					</div>
 				</div>
 			</div>
