@@ -205,13 +205,18 @@
     margin-top: var(--max-scaled-label-height-extra);
     line-height: 1.3;
 
-    i {
+    i,
+    em {
       font-style: normal;
     }
 
     a {
       text-decoration: underline;
       text-underline-offset: .2em;
+    }
+
+    br {
+      @apply hidden;
     }
   }
 
