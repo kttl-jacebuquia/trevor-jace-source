@@ -1,8 +1,12 @@
 .wForm.wForm {
-  @apply font-medium text-px18 leading-px26;
+  @apply font-medium text-px18 leading-px26 pb-px204;
 
   @screen md {
-    @apply leading-px22;
+    @apply leading-px22 pb-px228;
+  }
+
+  @screen lg {
+    @apply mb-px108;
   }
 
   @screen lg2 {
@@ -98,6 +102,10 @@
 
     &[data-input-tag="textarea"] {
       @apply col-span-full;
+
+      label:not([class*="dummy-label-active"]) {
+        @apply py-px24;
+      }
     }
 
     &[data-input-tag="select"] {
