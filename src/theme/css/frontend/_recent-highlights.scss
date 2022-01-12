@@ -40,7 +40,16 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     @apply col-span-full -mx-px28 px-px28 mt-px50 overflow-visible relative;
 
     @screen md {
-      @apply mt-px60 -mx-px50 px-px50;
+      @apply mt-px60 -mx-px20 px-px20 overflow-hidden;
+    }
+
+    @screen lg {
+      @apply px-0 mx-0 overflow-visible;
+      width: rem-calc(700);
+    }
+
+    @screen lg2 {
+      width: rem-calc(862);
     }
 
     @screen xl {
@@ -58,11 +67,15 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
 
     @screen md {
       height: rem-calc(450);
-      width: calc((100% - #{rem-calc(28)}) / 2);
     }
 
     @screen lg {
-      @apply flex flex-nowrap w-full ;
+      @apply flex flex-nowrap w-full;
+      height: rem-calc(440);
+    }
+
+    @screen lg2 {
+      height: rem-calc(464);
     }
   }
 
@@ -70,8 +83,12 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     @apply rounded-t-px10 overflow-hidden relative;
 
     @screen lg {
-      @apply flex-shrink-0 rounded-l-px10 rounded-tr-none;
-      width: percentage( 467 / 962 );
+      @apply flex-shrink-0 rounded-l-px10 rounded-tr-none h-full;
+      width: rem-calc(335);
+    }
+
+    @screen lg2 {
+      width: rem-calc(418);
     }
 
     // Aspect ratio
@@ -85,7 +102,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       }
 
       @screen lg {
-        padding-top: calc(100% * 522 / 467);
+        @apply hidden;
       }
     }
 
@@ -118,11 +135,11 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     @apply font-semibold mt-px20 text-px24 leading-px30 tracking-em005;
 
     @screen lg {
-      @apply mt-px14 text-px26 leading-px32 tracking-em_005;
+      @apply mt-px12 text-px26 leading-px32 tracking-em_005;
     }
 
     @screen lg2 {
-      @apply text-px28 leading-px34 tracking-em_005;
+      @apply mt-px16 text-px28 leading-px34 tracking-em_005;
     }
   }
 
@@ -145,13 +162,17 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     }
 
     @screen lg {
-      @apply mt-px32 text-px18 leading-px24 tracking-em001 pb-px4;
+      @apply mt-px20 text-px18 leading-px24 tracking-em001 pb-px4;
       @apply border-b-px2 border-solid border-current;
       @include wave-underline;
 
       &:hover {
         @apply border-none pb-px10;
       }
+    }
+
+    @screen lg2 {
+      @apply mt-px30;
     }
   }
 
@@ -185,6 +206,14 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       .recent-highlights--at-last & {
         @apply hidden;
       }
+    }
+  }
+
+  .swiper-pagination {
+    @apply mt-px50;
+
+    @screen lg {
+      @apply mt-px30 -mr-px144;
     }
   }
 
