@@ -3,7 +3,7 @@
 use TrevorWP\CPT\RC\Article;
 
 class Intro_Text extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_TEXT       = 'title';
+	const FIELD_TEXT = 'title';
 
 	/**
 	 * @inheritDoc
@@ -14,7 +14,7 @@ class Intro_Text extends A_Field_Group implements I_Block, I_Renderable {
 		return array(
 			'title'  => 'Intro Text',
 			'fields' => array(
-				static::FIELD_TEXT       => array(
+				static::FIELD_TEXT => array(
 					'key'   => $text,
 					'name'  => static::FIELD_TEXT,
 					'label' => 'Intro Text',
