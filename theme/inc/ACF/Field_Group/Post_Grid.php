@@ -783,18 +783,23 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 			}
 		}
 
-		// Get posts
-		$posts = get_posts(
-			array(
-				'posts_per_page' => $limit,
-				'post_type'      => $post_type,
-				'post__in'       => $post_in,
-				'post__not_in'   => $exclude,
-				'post_status'    => 'publish',
-				'orderby'        => 'publish_date',
-				'order'          => 'DESC',
-			)
+		$args = array(
+			'posts_per_page' => $limit,
+			'post_type'      => $post_type,
+			'post__in'       => $post_in,
+			'post__not_in'   => $exclude,
+			'post_status'    => 'publish',
+			'orderby'        => 'publish_date',
+			'order'          => 'DESC',
 		);
+
+		if ( ! empty( $post_in ) ) {
+			$args['orderby'] = 'post__in';
+			$args['order']   = 'ASC';
+		}
+
+		// Get posts
+		$posts = get_posts( $args );
 
 		// Build cards html
 		$cards_rendered = array();
