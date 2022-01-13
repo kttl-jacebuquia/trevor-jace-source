@@ -31,6 +31,14 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
       @apply text-px18 leading-px24 mt-px14;
     }
 
+    @screen lg {
+      @apply mt-px12;
+    }
+
+    @screen lg2 {
+      @apply mt-px16;
+    }
+
     @screen xl {
       @apply text-px22 leading-px32 tracking-px05;
     }
