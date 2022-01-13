@@ -55,11 +55,13 @@ class Text_Only_Popup extends A_Field_Group {
 		}
 
 		$post    = get_post( $post );
+		$title   = get_the_title( $post );
 		$id      = static::gen_modal_id( $post->ID );
 		$options = array(
 			'id'     => $id,
 			'target' => '.' . $id,
 			'class'  => array( 'text-only-popup' ),
+			'title'  => $title,
 		);
 		$content = static::render_content_for( $post );
 		Modal::create_and_render( $content, $options );
@@ -79,7 +81,9 @@ class Text_Only_Popup extends A_Field_Group {
 		<div class="text-only-popup">
 			<div class="text-only-popup__content">
 				<h1 class="text-only-popup__title"><?php echo esc_html( $header ); ?></h1>
-				<h2 class="text-only-popup__subtitle"><?php echo esc_html( $subheader ); ?></h2>
+				<?php if ( ! empty( $subheader ) ) : ?>
+					<h2 class="text-only-popup__subtitle"><?php echo esc_html( $subheader ); ?></h2>
+				<?php endif; ?>
 				<div class="text-only-popup__body"><?php echo $body; ?></div>
 			</div>
 		</div>

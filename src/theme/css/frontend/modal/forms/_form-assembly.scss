@@ -38,10 +38,6 @@
       @apply hidden;
     }
 
-    .htmlSection {
-      @apply hidden;
-    }
-
     form {
       @apply flex flex-wrap gap-y-px30 m-0 w-full mt-px40;
 
@@ -96,7 +92,7 @@
     }
 
     .inputWrapper {
-      @apply h-full w-full;
+      @apply w-full;
 
       input:not([type="submit"]) {
         @apply h-px66 border-0 w-full text-blue_green;

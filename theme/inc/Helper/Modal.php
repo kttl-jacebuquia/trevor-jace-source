@@ -1,5 +1,6 @@
 <?php namespace TrevorWP\Theme\Helper;
 
+use TrevorWP\Theme\ACF\Field_Group\DOM_Attr;
 
 class Modal {
 	const MODAL_SELECTOR_PREFIX    = 'js-modal-';
@@ -18,6 +19,7 @@ class Modal {
 					'target',
 					'class',
 					'container_class',
+					'title',
 				),
 				array()
 			),
@@ -37,9 +39,25 @@ class Modal {
 
 		array_push( static::$rendered_modals, $this->_selector );
 
+		// Setup classname
+		$class = array_merge(
+			$this->_options['class'],
+			array( 'modal' ),
+		);
+
+		// Setup modal attributes
+		$attributes = array(
+			'id'   => esc_attr( $this->_selector ),
+			'role' => 'dialog',
+		);
+
+		if ( ! empty( $this->_options['title'] ) ) {
+			$attributes['title'] = $this->_options['title'];
+		}
+
 		ob_start();
 		?>
-		<div class="modal <?php echo implode( ' ', $this->_options['class'] ); ?>" id="<?php echo esc_attr( $this->_selector ); ?>" role="dialog">
+		<div <?php echo DOM_Attr::render_attrs( $class, $attributes ); ?>>
 			<div class="modal-wrap">
 				<div class="modal-container <?php echo implode( ' ', $this->_options['container_class'] ); ?>" tabindex="0">
 					<div class="modal-content-wrap">

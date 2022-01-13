@@ -635,6 +635,7 @@ class Hooks {
 				'target' => '.js-quick-exit-modal',
 				'id'     => 'js-quick-exit-modal',
 				'class'  => array( 'quick-exit-modal', 'js-quick-exit-modal' ),
+				'title'  => Options_Page\Quick_Exit::get_option( Options_Page\Quick_Exit::FIELD_HEADLINE ),
 			)
 		) )->render();
 	}

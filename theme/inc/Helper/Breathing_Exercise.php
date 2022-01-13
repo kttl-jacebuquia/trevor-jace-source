@@ -26,7 +26,7 @@ class Breathing_Exercise {
 
 	static public function render_overlay_contents(): void {
 		ob_start(); ?>
-		<div class="breathing-exercise-overlay" tabindex="0" aria-role="dialog" aria-label="Breathing Exercise">
+		<div class="breathing-exercise-overlay" tabindex="0" aria-role="dialog" title="Breathing Exercise">
 			<div class="breathing-exercise-overlay__container">
 				<div class="breathing-exercise-overlay__content content">
 					<div class="countdown">

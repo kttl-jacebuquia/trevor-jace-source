@@ -1,0 +1,11 @@
+.intro-text {
+  @apply text-px22 leading-px32 font-medium mt-px40;
+
+  @screen md {
+    @apply font-normal;
+  }
+
+  @screen lg2 {
+    @apply text-px26 leading-px36;
+  }
+}

@@ -1,8 +1,12 @@
 .wForm.wForm {
-  @apply font-medium text-px18 leading-px26;
+  @apply font-medium text-px18 leading-px26 pb-px204;
 
   @screen md {
-    @apply leading-px22;
+    @apply leading-px22 pb-px228;
+  }
+
+  @screen lg {
+    @apply mb-px108;
   }
 
   @screen lg2 {
@@ -97,6 +101,14 @@
     }
 
     &[data-input-tag="textarea"] {
+      @apply col-span-full;
+
+      label:not([class*="dummy-label-active"]) {
+        @apply py-px24;
+      }
+    }
+
+    &[data-input-tag="select"] {
       @apply col-span-full;
     }
 
@@ -195,11 +207,36 @@
     }
   }
 
+  // HTML Section
+  .htmlSection {
+    @apply col-span-full;
+    margin-top: var(--max-scaled-label-height-extra);
+    line-height: 1.3;
+
+    i,
+    em {
+      font-style: normal;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: .2em;
+    }
+
+    br {
+      @apply hidden;
+    }
+  }
+
   #submit_button {
     @apply cursor-pointer;
 
     &[disabled] {
       @apply bg-opacity-80 cursor-not-allowed;
+    }
+
+    @screen lg {
+      @apply font-bold;
     }
   }
 

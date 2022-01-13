@@ -515,6 +515,9 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 						DOM_Attr::FIELD_ATTR_KEY => 'aria-label',
 						DOM_Attr::FIELD_ATTR_VAL => 'click to open fundraise quiz modal',
 					);
+					$modal_options = array(
+						'title' => 'Fundraise Quiz Modal',
+					);
 
 					// Add attributes to trigger Fundraise Quiz Modal to show Dev Form Only
 					if ( $show_dev_form_only ) {
@@ -526,9 +529,10 @@ class Advanced_Link extends A_Field_Group implements I_Renderable {
 							DOM_Attr::FIELD_ATTR_KEY => 'data-fundraise-single',
 							DOM_Attr::FIELD_ATTR_VAL => true,
 						);
+						$modal_options['title']                                = 'Dev Inquiry Form';
 					}
 
-					FundraiserQuizModal::create();
+					FundraiserQuizModal::create( $modal_options );
 
 					// TEXT ONLY POPUP
 				} elseif ( 'text_only_popup' === $modal_type ) {

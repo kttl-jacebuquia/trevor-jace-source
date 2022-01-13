@@ -81,7 +81,8 @@
 
 	&__navigation {
 		@apply relative overflow-hidden w-full mt-px12;
-		@apply bg-white border border-teal-dark rounded-px10;
+		@apply bg-white border border-teal-dark rounded-px10 overflow-auto;
+    max-height: rem-calc(310);
 
 		&__item {
 			@apply text-center py-px22 px-px14;

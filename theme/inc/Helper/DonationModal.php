@@ -16,6 +16,7 @@ class DonationModal extends Modal {
 		$options = array(
 			'target'     => '.js-donation-modal',
 			'dedication' => $content_options['dedication'],
+			'title'      => 'Donation Form Modal',
 		);
 
 		// Ensure that modals are only rendered down the document
