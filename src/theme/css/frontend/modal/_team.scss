@@ -9,4 +9,56 @@
     --tw-bg-opacity: 0.08;
     backdrop-filter: blur(10px);
   }
+
+  .modal-container {
+    @include bleed;
+
+    @screen md {
+      @apply mx-auto;
+    }
+
+    @screen lg {
+      @apply col-start-2 col-span-10 max-w-none;
+    }
+
+    @screen lg2 {
+      @apply max-w-none;
+    }
+
+    @screen xl {
+      @apply max-w-none;
+    }
+  }
+
+  .team-member {
+    @apply pb-px58;
+
+    @screen md {
+      @apply px-px32;
+    }
+
+    @screen lg {
+      @apply px-px58 max-w-none w-auto;
+    }
+
+    @screen lg2 {
+      @apply max-w-none w-auto;
+    }
+
+    &__thumbnail-wrap {
+      @apply w-full h-px220;
+
+      @screen md {
+        @apply w-px200 h-px200;
+      }
+
+      @screen lg2 {
+        @apply w-px236 h-px236;
+      }
+
+      img {
+        @apply w-full h-full object-cover;
+      }
+    }
+  }
 }
