@@ -11,6 +11,7 @@
   }
 
   .modal-container {
+    @apply py-0;
     @include bleed;
 
     @screen md {
@@ -31,10 +32,10 @@
   }
 
   .team-member {
-    @apply pb-px58;
+    @apply pb-px58 pt-px95;
 
     @screen md {
-      @apply px-px32;
+      @apply px-px32 py-px80;
     }
 
     @screen lg {
