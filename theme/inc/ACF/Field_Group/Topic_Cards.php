@@ -32,6 +32,13 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
 
+	/** @inheritDoc */
+	public static function register(): bool {
+		add_filter( 'acf/fields/relationship/query/name=' . static::FIELD_PRODUCTS, array( static::class, 'relationship_query_products' ), 10, 3 );
+
+		return parent::register();
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -690,6 +697,34 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * Remove Products that are inactive
+	 */
+	public static function relationship_query_products( $args, $field, $post_id ) {
+		if ( $field && ! empty( $field['key'] ) && static::gen_field_key( static::FIELD_PRODUCTS ) === $field['key'] ) {
+			$current_date = current_datetime();
+			$current_date = wp_date( 'Ymd', $current_date->date, $current_date->timezone );
+
+			$args['meta_query'] = array(
+				'relation' => 'AND',
+				array(
+					'key' => Product::FIELD_PRODUCT_START_DATE,
+					'value' => $current_date,
+					'compare' => '<=',
+					'type' => 'DATE',
+				),
+				array(
+					'key' => Product::FIELD_PRODUCT_END_DATE,
+					'value' => $current_date,
+					'compare' => '>=',
+					'type' => 'DATE',
+				),
+			);
+		}
+
+		return $args;
 	}
 
 	/**
