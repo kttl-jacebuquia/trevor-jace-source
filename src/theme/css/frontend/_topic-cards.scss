@@ -299,7 +299,16 @@
     @apply overflow-hidden;
 
     .topic-cards__grid {
-      @apply flex overflow-visible;
+      @apply flex flex-wrap overflow-visible;
+
+      @screen md {
+        @apply mr-auto ml-0;
+        width: calc((100% - theme('gap.md')) / 2);
+      }
+
+      @screen lg {
+        width: calc((100% - (theme('gap.lg') * 2)) / 3);
+      }
     }
 
     .topic-cards__swiper-wrapper {
@@ -328,10 +337,26 @@
 
     .swiper-button-next {
       @apply mr-px20;
+
+      @screen lg {
+        left: calc(300% + theme('gap.lg'));
+      }
     }
 
     .swiper-button-wrapper {
       width: rem-calc(80);
+    }
+
+    .swiper-pagination {
+      @apply w-full mt-px50;
+
+      @screen xl {
+        @apply flex;
+      }
+    }
+
+    .swiper-pagination-bullet {
+      @apply bg-current;
     }
   }
 
