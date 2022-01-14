@@ -1,10 +1,22 @@
 .header-container--split-carousel {
+  @apply pb-px50;
+
   @screen md {
+    @apply pb-px80;
     padding-top: $top-nav-height-tablet;
     margin-top: -$top-nav-height-tablet;
   }
 
+  @screen lg {
+    @apply pb-px90;
+  }
+
+  @screen lg2 {
+    @apply pb-px80;
+  }
+
   @screen xl {
+    @apply pb-px90;
     padding-top: $top-nav-height-desktop;
     margin-top: -$top-nav-height-desktop;
   }
