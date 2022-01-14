@@ -25,6 +25,9 @@ class TopicCards {
 			TopicCards.cardsContainer
 		);
 
+		this.carouselPagination =
+			this.element.querySelector('.swiper-pagination');
+
 		const isCarousel = this.element.classList.contains(
 			TopicCards.CLASSNAME_CAROUSEL
 		);
@@ -47,17 +50,15 @@ class TopicCards {
 			},
 			simulateTouch: false,
 			pagination: {
-				el: '.swiper-pagination',
+				el: this.carouselPagination,
 				clickable: true,
 				bulletElement: 'button',
 			},
 			breakpoints: {
 				768: {
-					slidesPerView: 2,
 					spaceBetween: 28,
 				},
 				1024: {
-					slidesPerView: 3,
 					spaceBetween: 28,
 				},
 			},

@@ -648,9 +648,11 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 								<i class="trevor-ti-arrow-right"></i>
 							</button>
 						</div>
-						<div class="swiper-pagination"></div>
 					<?php endif; ?>
 				</div>
+				<?php if ( 'carousel' === $layout ) : ?>
+				<div class="swiper-pagination"></div>
+				<?php endif; ?>
 			<?php endif; ?>
 		<?php
 		return ob_get_clean();
