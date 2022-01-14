@@ -8,46 +8,54 @@ export default class OrgMission extends Component {
 
 	// Defines children that needs to be queried as part of this component
 	static children = {
-		carouselContainer: ".swiper-container",
-		carouselSlides: [".swiper-slide"],
+		carouselContainer: '.swiper-container',
+		carouselSlides: ['.swiper-slide'],
+		prevEl: '.swiper-button-prev',
+		nextEl: '.swiper-button-next',
+		pagination: '.swiper-pagination',
 	};
 
 	swiperOptions = {
 		loop: false,
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		},
+		slidesPerView: 1,
+		simulateTouch: false,
 		breakpoints: {
 			300: {
-				slidesPerView: 1,
 				spaceBetween: 18,
 			},
 			768: {
-				slidesPerView: 2,
 				spaceBetween: 28,
 			},
 			1024: {
-				slidesPerView: 2.4,
 				spaceBetween: 28,
-			}
+			},
 		},
 		on: {
 			init: this.onSwiperInit.bind(this),
 			destroy: this.onSwiperDestroy.bind(this),
 		},
-	}
+	};
 
 	// Will be called upon component instantiation
 	afterInit() {
 		const $swiperContainer = $(this.children.carouselContainer);
 
+		this.swiperOptions.navigation = {
+			nextEl: this.children.nextEl,
+			prevEl: this.children.prevEl,
+		};
+
+		this.swiperOptions.pagination = {
+			el: this.children.pagination,
+			clickable: true,
+			bulletElement: 'button',
+		};
+
 		if (this.children.carouselSlides.length) {
 			mobileAndSmallDesktop(
-				() => (
+				() =>
 					!this.swiper &&
-					carousel($swiperContainer, this.swiperOptions)
-				),
+					carousel($swiperContainer, this.swiperOptions),
 				() => this.swiper && this.swiper.destroy()
 			);
 		}

@@ -1,5 +1,5 @@
 .org-mission {
-  @apply bg-purple text-white text-center;
+  @apply bg-purple text-white text-center overflow-hidden;
 
   &__container {
     @apply container mx-auto tw-grid py-px80;
@@ -42,34 +42,18 @@
   }
 
   &__cards-container {
-    @apply col-span-full mt-px60 -mx-px28 px-px28;
+    @apply col-span-full mt-px60 -mx-px28 px-px28 overflow-visible;
 
-    @each $screen in md, lg {
-      @screen #{$screen} {
-        $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
-
-        margin-left: calc(-1 * #{$offset-value});
-        margin-right: calc(-1 * #{$offset-value});
-        padding-left: $offset-value;
-        padding-right: $offset-value;
-      }
-    }
-
-    @screen mobile {
-      $mobile-offset: calc(((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT'));
-
-      margin-left: calc(-1 * #{$mobile-offset});
-      margin-right: calc(-1 * #{$mobile-offset});
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
+    @screen md {
+      @apply col-span-4;
     }
 
     @screen lg {
-      @apply mt-px80;
+      @apply col-span-5 mt-px80;
     }
 
     @screen lg2 {
-      @apply mt-px150 mx-0 px-0;
+      @apply mt-px150 mx-0 px-0 col-span-full;
     }
 
     @screen xl {
@@ -240,7 +224,12 @@
 
   .swiper-button-next {
     @screen lg {
-      right: calc( theme("container.padding.lg") + ( var(--arrow-button-width) / 2 ) );
+      right: -100%;
+      margin-right: rem-calc(80);
     }
+  }
+
+  .swiper-pagination {
+    @apply col-span-full;
   }
 }

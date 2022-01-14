@@ -1,5 +1,6 @@
-const MORE_CARDS_ENDPOINT = '/wp-json/trevor/v1/post-cards';
+import Swiper from 'swiper';
 
+const MORE_CARDS_ENDPOINT = '/wp-json/trevor/v1/post-cards';
 class TopicCards {
 	static selector = '.topic-cards';
 	static cardsContainer = '.topic-cards__grid';
@@ -7,39 +8,80 @@ class TopicCards {
 	static itemSelector = '.topic-cards__item';
 	static itemsPerView = 6;
 
+	static CLASSNAME_CAROUSEL = 'topic-cards--carousel';
+
 	// Loaded posts for all instances
 	static loadedPosts = [];
 
 	// Loaded posts for current instance
-	currentPosts = []
+	currentPosts = [];
 
 	constructor(element) {
 		this.element = element;
 	}
 
 	init() {
-		this.cardsContainer = this.element.querySelector(TopicCards.cardsContainer);
+		this.cardsContainer = this.element.querySelector(
+			TopicCards.cardsContainer
+		);
+
+		const isCarousel = this.element.classList.contains(
+			TopicCards.CLASSNAME_CAROUSEL
+		);
+
+		if (isCarousel) {
+			this.initializeCarousel();
+		}
 
 		this.saveInitialPosts();
 		this.initializeLoadMore();
 	}
 
+	initializeCarousel() {
+		new Swiper(this.cardsContainer, {
+			slidesPerView: 1,
+			spaceBetween: 12,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			simulateTouch: false,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+				bulletElement: 'button',
+			},
+			breakpoints: {
+				768: {
+					slidesPerView: 2,
+					spaceBetween: 28,
+				},
+				1024: {
+					slidesPerView: 3,
+					spaceBetween: 28,
+				},
+			},
+		});
+	}
+
 	saveInitialPosts() {
 		const { postType } = this.element.dataset;
-		const { postIds } = this.cardsContainer.dataset
-		const [...items] = this.element.querySelectorAll(TopicCards.itemSelector);
+		const { postIds } = this.cardsContainer.dataset;
+		const [...items] = this.element.querySelectorAll(
+			TopicCards.itemSelector
+		);
 
-		if ( postType ) {
+		if (postType) {
 			this.postType = postType;
 		}
 
-		if ( postIds ) {
+		if (postIds) {
 			this.postIds = postIds;
 		}
 
-		items.forEach(itemElement => {
+		items.forEach((itemElement) => {
 			const { post } = itemElement.dataset;
-			if ( post ) {
+			if (post) {
 				this.savePostID(Number(post));
 			}
 		});
@@ -55,8 +97,8 @@ class TopicCards {
 	initializeLoadMore() {
 		this.loadMore = this.element.querySelector(TopicCards.loadMoreSelector);
 
-		if ( this.loadMore ) {
-			this.loadMore.addEventListener('click', e => {
+		if (this.loadMore) {
+			this.loadMore.addEventListener('click', (e) => {
 				e.preventDefault();
 				this.loadMoreItems();
 			});
@@ -80,27 +122,34 @@ class TopicCards {
 			}),
 			count: TopicCards.itemsPerView + 1, // Extra 1 just to determine if there's any post to load next
 		};
-		const paramsString = Object.entries(paramsObj).reduce((allParams, keyValuePair) => {
-			allParams.push(keyValuePair.join('='));
-			return allParams;
-		}, []).join('&');
+		const paramsString = Object.entries(paramsObj)
+			.reduce((allParams, keyValuePair) => {
+				allParams.push(keyValuePair.join('='));
+				return allParams;
+			}, [])
+			.join('&');
 
 		try {
-			const response = await fetch([MORE_CARDS_ENDPOINT, paramsString].join('?'));
+			const response = await fetch(
+				[MORE_CARDS_ENDPOINT, paramsString].join('?')
+			);
 			const data = await response.json();
 			this.processResponse(data);
-		}
-		catch( err ) {
+		} catch (err) {
 			console.warn(err);
 		}
-
 	}
 
 	processResponse(responseData) {
-		if ( !responseData.success || !responseData.cards_rendered.length ) { return; }
+		if (!responseData.success || !responseData.cards_rendered.length) {
+			return;
+		}
 
 		// Exclude the extra last card. it's only needed for checking for more available items
-		const newCards = responseData.cards_rendered.slice(0, TopicCards.itemsPerView);
+		const newCards = responseData.cards_rendered.slice(
+			0,
+			TopicCards.itemsPerView
+		);
 		const newCardsHtml = newCards.join('');
 		this.cardsContainer.innerHTML += newCardsHtml;
 
@@ -109,16 +158,21 @@ class TopicCards {
 		this.savePostID(...newIDs);
 
 		// Check if will remove load more button
-		if ( responseData.cards_rendered.length <= TopicCards.itemsPerView && this.loadMore ) {
+		if (
+			responseData.cards_rendered.length <= TopicCards.itemsPerView &&
+			this.loadMore
+		) {
 			// Remove load more including its parent wrapper
-			this.loadMore.parentElement.parentElement.removeChild(this.loadMore.parentElement);
+			this.loadMore.parentElement.parentElement.removeChild(
+				this.loadMore.parentElement
+			);
 		}
 	}
 
 	static initializeInstances() {
 		const [...elements] = document.querySelectorAll(this.selector);
 
-		elements.forEach(element => {
+		elements.forEach((element) => {
 			const instance = new TopicCards(element);
 			instance.init();
 		});

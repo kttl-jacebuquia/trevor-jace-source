@@ -14,6 +14,7 @@ export default class RecentHighlights extends Component {
 
 	swiperOptions = {
 		loop: false,
+		simulateTouch: false,
 		breakpoints: {
 			300: {
 				slidesPerView: 1,

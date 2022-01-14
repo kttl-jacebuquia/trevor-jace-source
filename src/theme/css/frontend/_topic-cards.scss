@@ -145,6 +145,10 @@
     }
   }
 
+  &__swiper-wrapper {
+    display: contents;
+  }
+
   &__item {
     @apply col-span-full;
 
@@ -194,9 +198,17 @@
     }
   }
 
+  &__item-eyebrow {
+    @apply text-px14 leading-px18 tracking-px05 mb-px18 uppercase;
+  }
+
   &__item-title {
     @apply card-heading;
     @apply font-semibold text-px20 leading-px26;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @screen md {
       @apply text-px24 leading-px28 tracking-em001;
@@ -214,6 +226,10 @@
   &__item-description {
     @apply card-description;
     @apply text-px18 leading-px28;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @screen md {
       @apply mt-px12 text-px16 leading-px24;
@@ -275,6 +291,47 @@
 
     @screen lg2 {
       @apply text-px20 leading-px24 tracking-em005;
+    }
+  }
+
+  // Carousel Layout
+  &--carousel {
+    @apply overflow-hidden;
+
+    .topic-cards__grid {
+      @apply flex overflow-visible;
+    }
+
+    .topic-cards__swiper-wrapper {
+      @apply flex flex-nowrap w-full;
+    }
+
+    .topic-cards__item {
+      @apply w-full flex-shrink-0;
+      height: rem-calc(375);
+    }
+
+    .swiper-button {
+      @apply absolute top-1/2 transform -translate-y-1/2;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      @screen lg {
+        @apply flex;
+      }
+    }
+
+    .swiper-button-prev {
+      @apply ml-px20;
+    }
+
+    .swiper-button-next {
+      @apply mr-px20;
+    }
+
+    .swiper-button-wrapper {
+      width: rem-calc(80);
     }
   }
 

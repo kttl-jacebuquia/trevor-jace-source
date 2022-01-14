@@ -15,12 +15,14 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_DESCRIPTION             = 'description';
 	const FIELD_ENTRIES_SOURCE          = 'entries_source';
 	const FIELD_TOPIC_ENTRIES           = 'topic_entries';
+	const FIELD_TOPIC_ENTRY_EYEBROW     = 'topic_entry_eyebrow';
 	const FIELD_TOPIC_ENTRY_TITLE       = 'topic_entry_title';
 	const FIELD_TOPIC_ENTRY_DESCRIPTION = 'topic_entry_description';
 	const FIELD_TOPIC_ENTRY_LINK        = 'topic_entry_link';
 	const FIELD_BUTTON                  = 'button';
 	const FIELD_MOBILE_LAYOUT           = 'show_mobile_accordion';
 	const FIELD_ORDER                   = 'order';
+	const FIELD_LAYOUT                  = 'layout';
 	// Source dependent fields
 	const FIELD_PRODUCTS         = 'products';
 	const FIELD_PRODUCT_PARTNERS = 'product_partners';
@@ -40,6 +42,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$description             = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$entries_source          = static::gen_field_key( static::FIELD_ENTRIES_SOURCE );
 		$topic_entries           = static::gen_field_key( static::FIELD_TOPIC_ENTRIES );
+		$topic_entry_eyebrow     = static::gen_field_key( static::FIELD_TOPIC_ENTRY_EYEBROW );
 		$topic_entry_title       = static::gen_field_key( static::FIELD_TOPIC_ENTRY_TITLE );
 		$topic_entry_description = static::gen_field_key( static::FIELD_TOPIC_ENTRY_DESCRIPTION );
 		$topic_entry_link        = static::gen_field_key( static::FIELD_TOPIC_ENTRY_LINK );
@@ -51,6 +54,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$bills                   = static::gen_field_key( static::FIELD_BILLS );
 		$letters                 = static::gen_field_key( static::FIELD_LETTERS );
 		$show_load_more          = static::gen_field_key( static::FIELD_SHOW_LOAD_MORE );
+		$layout                  = static::gen_field_key( static::FIELD_LAYOUT );
 
 		return array(
 			'title'  => 'Topic Cards',
@@ -89,6 +93,18 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					'label' => 'Description',
 					'type'  => 'textarea',
 				),
+				static::FIELD_LAYOUT           => array(
+					'key'           => $layout,
+					'name'          => static::FIELD_LAYOUT,
+					'label'         => 'Layout Type',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'grid'     => 'Grid',
+						'carousel' => 'Carousel',
+					),
+					'default_value' => 'grid',
+					'return_format' => 'value',
+				),
 				static::FIELD_MOBILE_LAYOUT    => array(
 					'key'               => $mobile_layout,
 					'name'              => static::FIELD_MOBILE_LAYOUT,
@@ -110,6 +126,11 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 								'field'    => $entries_source,
 								'operator' => '==',
 								'value'    => 'custom',
+							),
+							array(
+								'field'    => $layout,
+								'operator' => '==',
+								'value'    => 'grid',
 							),
 						),
 					),
@@ -170,6 +191,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					),
 					'sub_fields'        => array_merge(
 						array(
+							static::FIELD_TOPIC_ENTRY_EYEBROW => array(
+								'key'   => $topic_entry_eyebrow,
+								'name'  => static::FIELD_TOPIC_ENTRY_EYEBROW,
+								'label' => 'Eyebrow',
+								'type'  => 'text',
+							),
 							static::FIELD_TOPIC_ENTRY_TITLE => array(
 								'key'   => $topic_entry_title,
 								'name'  => static::FIELD_TOPIC_ENTRY_TITLE,
@@ -334,9 +361,14 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$description    = static::get_val( static::FIELD_DESCRIPTION );
 		$entries_source = static::get_val( static::FIELD_ENTRIES_SOURCE );
 		$button_link    = static::get_val( static::FIELD_BUTTON );
+		$layout         = static::get_val( static::FIELD_LAYOUT );
 		$attr           = array(
 			'class' => 'topic-cards bg-' . $bg_color . ' ' . 'text-' . $text_color,
 		);
+
+		if ( 'carousel' === $layout ) {
+			$attr['class'] .= ' topic-cards--carousel';
+		}
 
 		if ( 'custom' !== $entries_source ) {
 			switch ( $entries_source ) {
@@ -495,24 +527,46 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	private static function render_entries(): string {
 		$entries       = static::get_val( static::FIELD_TOPIC_ENTRIES );
 		$topic_entries = static::filter_entries( $entries );
+		$layout        = static::get_val( static::FIELD_LAYOUT );
 		$mobile_layout = static::get_val( static::FIELD_MOBILE_LAYOUT );
 		$grid_class    = array(
 			'topic-cards__grid',
 		);
+		// If carousel
+		$swiper_button_class = array();
 
-		if ( 'drawers' === $mobile_layout ) {
+		if ( 'grid' === $layout && 'drawers' === $mobile_layout ) {
 			$grid_class[] = 'mobile:hidden';
 		}
 
-		$grid_class = implode( ' ', $grid_class );
+		if ( 'carousel' === $layout ) {
+			$grid_class[]          = 'swiper-container';
+			$swiper_button_class[] = 'swiper-button';
+
+			// mobile
+			$swiper_button_class[] = 'hidden';
+
+			// desktop
+			if ( $entries > 3 ) {
+				$swiper_button_class[] = 'lg:inline-flex';
+			} else {
+				$swiper_button_class[] = 'lg:hidden';
+			}
+		}
+
+		$grid_class            = implode( ' ', $grid_class );
+		$will_render_accordion = ! empty( $topic_entries ) && 'grid' === $layout && 'drawers' === $mobile_layout;
 
 		ob_start();
 		?>
-			<?php if ( ! empty( $topic_entries ) && 'drawers' === $mobile_layout ) : ?>
+			<?php if ( $will_render_accordion ) : ?>
 				<div class="topic-cards__accordion" role="list">
 					<?php foreach ( $topic_entries as $topic ) : ?>
 						<div class="topic-cards__accordion-item js-accordion" role="listitem">
 							<div class="topic-cards__accordion-header">
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_EYEBROW ] ) ) : ?>
+									<p class="topic-cards__item-eyebrow"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_EYEBROW ] ); ?></p>
+								<?php endif; ?>
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
 									<h3 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h3>
 								<?php endif; ?>
@@ -545,32 +599,50 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 			<?php if ( ! empty( $topic_entries ) ) : ?>
 				<div class="<?php echo $grid_class; ?>" role="list">
-					<?php foreach ( $topic_entries as $topic ) : ?>
-						<div class="topic-cards__item topic-cards__item--bordered" role="listitem">
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
-								<h2 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h2>
-							<?php endif; ?>
+					<div class="topic-cards__swiper-wrapper swiper-wrapper" >
+						<?php foreach ( $topic_entries as $topic ) : ?>
+							<div class="topic-cards__item topic-cards__item--bordered swiper-slide" role="listitem">
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_EYEBROW ] ) ) : ?>
+									<p class="topic-cards__item-eyebrow"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_EYEBROW ] ); ?></p>
+								<?php endif; ?>
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ) ) : ?>
+									<h2 class="topic-cards__item-title"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?></h2>
+								<?php endif; ?>
 
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
-								<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
-							<?php endif; ?>
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
+									<p class="topic-cards__item-description"><?php echo esc_html( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ); ?></p>
+								<?php endif; ?>
 
-							<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['label'] ) ) : ?>
-								<?php
-									echo Advanced_Link::render(
-										null,
-										$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
-										array(
-											'class'      => array( 'topic-cards__cta wave-underline' ),
-											'attributes' => array(
-												'aria-label' => 'click to learn more about ' . $topic[ static::FIELD_TOPIC_ENTRY_TITLE ],
-											),
-										)
-									);
-								?>
-							<?php endif; ?>
+								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['label'] ) ) : ?>
+									<?php
+										echo Advanced_Link::render(
+											null,
+											$topic[ static::FIELD_TOPIC_ENTRY_LINK ],
+											array(
+												'class'      => array( 'topic-cards__cta wave-underline' ),
+												'attributes' => array(
+													'aria-label' => 'click to learn more about ' . $topic[ static::FIELD_TOPIC_ENTRY_TITLE ],
+												),
+											)
+										);
+									?>
+								<?php endif; ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<?php if ( 'carousel' === $layout ) : ?>
+						<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-prev' ))); ?>>
+							<button type="button" class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-left"></i>
+							</button>
 						</div>
-					<?php endforeach; ?>
+						<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-next' ))); ?>>
+							<button type="button" class="swiper-button-wrapper">
+								<i class="trevor-ti-arrow-right"></i>
+							</button>
+						</div>
+						<div class="swiper-pagination"></div>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		<?php
