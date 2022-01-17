@@ -278,6 +278,81 @@ class Carousel {
 	}
 
 	/**
+	 * Auto Width Image carousel.
+	 *
+	 * @param array $data
+	 * @param array $options
+	 *
+	 * @return string
+	 */
+	public static function auto_width_img( array $data, array $options = array() ): string {
+		$options = array_merge(
+			array_fill_keys(
+				array(
+					'title',
+					'class',
+				),
+				null
+			),
+			$options,
+		);
+
+		# Classes
+		$class = array_merge(
+			array(
+				'auto-width-img-carousel',
+			),
+			$options['class'],
+		);
+
+		ob_start();
+		?>
+
+		<div class="<?php echo implode( ' ', $class ); ?>">
+			<?php if ( ! empty( $options['title'] ) ) { ?>
+				<div class="carousel-header">
+					<?php if ( ! empty( $options['title'] ) ) { ?>
+						<h2 class="page-sub-title centered <?php echo $options['title_cls']; ?>"><?php echo $options['title']; ?></h2>
+					<?php } ?>
+				</div>
+			<?php } ?>
+			<div class="carousel-full-width-wrap">
+				<div class="carousel-container auto-width-img-carousel__carousel-container">
+					<div class="auto-width-img-carousel__carousel">
+						<?php
+						foreach ( $data as $entry ) {
+							if ( empty( $entry['img'] ) || empty( $entry['img']['id'] ) || ! wp_attachment_is_image( $entry['img']['id'] ) ) {
+								continue;
+							}
+							?>
+							<div class="auto-width-img-carousel__slide">
+								<figure>
+									<div class="img-wrap">
+										<?php echo wp_get_attachment_image( $entry['img']['id'], 'large' ); ?>
+									</div>
+									<?php if ( ! empty( $entry['caption'] ) ) { ?>
+										<figcaption>
+											<?php echo $entry['caption']; ?>
+											<?php if ( ! empty( $entry['cta_txt'] ) && ! empty( $entry['cta_url'] ) ) : ?>
+												<a href="<?php echo $entry['cta_url']; ?>"><?php echo $entry['cta_txt']; ?></a>
+											<?php endif; ?>
+										</figcaption>
+									<?php } ?>
+								</figure>
+							</div>
+						<?php } ?>
+					</div>
+					<button class="auto-width-img-carousel__arrow auto-width-img-carousel__prev trevor-ti-arrow-left"></button>
+					<button class="auto-width-img-carousel__arrow auto-width-img-carousel__next trevor-ti-arrow-right"></button>
+				</div>
+				<div class="auto-width-img-carousel__dots"></div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * Testimonials carousel
 	 *
 	 * @param array|null $data

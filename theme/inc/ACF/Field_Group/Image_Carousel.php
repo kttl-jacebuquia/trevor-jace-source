@@ -7,6 +7,7 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_GALLERY_ENTRIES       = 'gallery_entries';
 	const FIELD_GALLERY_ENTRY_IMAGE   = 'img';
 	const FIELD_GALLERY_ENTRY_CAPTION = 'caption';
+	const FIELD_IMAGE_SIZE            = 'image_size';
 
 	/**
 	 * @inheritDoc
@@ -16,6 +17,7 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 		$gallery_entries       = static::gen_field_key( static::FIELD_GALLERY_ENTRIES );
 		$gallery_entry_image   = static::gen_field_key( static::FIELD_GALLERY_ENTRY_IMAGE );
 		$gallery_entry_caption = static::gen_field_key( static::FIELD_GALLERY_ENTRY_CAPTION );
+		$image_size            = static::gen_field_key( static::FIELD_IMAGE_SIZE );
 
 		return array(
 			'title'  => 'Image Carousel',
@@ -26,6 +28,18 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 					'label'    => 'Title',
 					'type'     => 'text',
 					'required' => 1,
+				),
+				static::FIELD_IMAGE_SIZE      => array(
+					'key'           => $image_size,
+					'name'          => static::FIELD_IMAGE_SIZE,
+					'label'         => 'Image Size',
+					'type'          => 'button_group',
+					'required'      => 1,
+					'default_value' => 'big',
+					'choices'  => array(
+						'big'   => 'Big',
+						'small' => 'Small',
+					),
 				),
 				static::FIELD_GALLERY_ENTRIES => array(
 					'key'        => $gallery_entries,
@@ -77,24 +91,45 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
 		$title           = static::get_val( static::FIELD_TITLE );
 		$gallery_entries = static::get_val( static::FIELD_GALLERY_ENTRIES );
+		$image_size      = static::get_val( static::FIELD_IMAGE_SIZE );
+
+		$class = implode(
+			' ',
+			array(
+				'carousel-image',
+				'carousel-image--' . $image_size,
+			),
+		);
 
 		ob_start();
 		?>
-		<div class="carousel-image">
+		<div class="<?php echo $class; ?>">
 			<div class="carousel-image__container">
 				<?php if ( ! empty( $gallery_entries ) ) : ?>
 					<div class="carousel-image__content">
 					<?php
-					echo Helper\Carousel::big_img(
-						$gallery_entries,
-						array(
-							'title'  => $title,
-							'class'  => array(),
-							'swiper' => array(
-								'centeredSlides' => true,
-							),
-						)
-					)
+
+					if ( 'big' === $image_size ) {
+						echo Helper\Carousel::big_img(
+							$gallery_entries,
+							array(
+								'title'  => $title,
+								'class'  => array(),
+								'swiper' => array(
+									'centeredSlides' => true,
+								),
+							)
+						);
+					}
+					else {
+						echo Helper\Carousel::auto_width_img(
+							$gallery_entries,
+							array(
+								'title'  => $title,
+								'class'  => array(),
+							)
+						);
+					}
 					?>
 					</div>
 				<?php endif; ?>

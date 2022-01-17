@@ -46,3 +46,4 @@ import './form-modal';
 import './jump-links';
 import './g-recaptcha';
 import './faqs';
+import './carousel/auto-width-image';

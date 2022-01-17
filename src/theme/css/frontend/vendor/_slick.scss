@@ -1,0 +1,43 @@
+.slick-arrow {
+  @apply hidden;
+
+  @screen lg {
+    @apply inline-flex items-center justify-center bg-current;
+    @apply absolute top-1/2 transform -translate-y-1/2;
+    @apply w-px80 h-px64 rounded-px100 overflow-hidden;
+
+    &.slick-disabled {
+      @apply invisible;
+    }
+  }
+
+  &::before {
+    @apply text-white text-px22;
+  }
+}
+
+.slick-dots {
+  @apply flex justify-center gap-x-px20;
+
+  > li {
+    @apply h-px14 overflow-visible;
+
+    &.slick-active {
+      // Dot color
+      > button::before {
+        @apply opacity-100;
+      }
+    }
+
+    > button {
+      @apply block relative w-px14 h-px14 rounded-px10 overflow-hidden;
+      font-size: 0;
+
+      // Dot color
+      &::before {
+        content: '';
+        @apply absolute top-0 left-0 w-full h-full bg-current opacity-30;
+      }
+    }
+  }
+}
