@@ -8,7 +8,7 @@
   }
 
   @screen lg {
-    @apply pb-px90;
+    @apply pb-px84;
   }
 
   @screen lg2 {
@@ -76,6 +76,10 @@
         @apply col-span-5 col-start-7;
         width: calc(100% + #{rem-calc(28)});
       }
+    }
+
+    .carousel-container {
+      @apply mx-auto;
     }
 
     .button-group {
@@ -158,7 +162,7 @@
       @apply mt-0;
 
       .page-header-inner {
-        @apply tw-grid-small-desktop;
+        @apply tw-grid-small-desktop pb-0;
       }
 
       .page-header-title {
@@ -167,10 +171,6 @@
 
       .page-header-cta {
         @apply text-px18 leading-px26;
-      }
-
-      .page-header-inner {
-        @apply pb-px120;
       }
 
       .page-header-content-wrap {
@@ -192,7 +192,7 @@
 
         .swiper-pagination {
           @apply flex;
-          @apply pl-0 ml-auto mr-px80;
+          @apply pl-0 mx-auto;
           width: var(--img-height);
         }
 
