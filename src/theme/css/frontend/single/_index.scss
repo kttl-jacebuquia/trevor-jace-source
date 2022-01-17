@@ -1,3 +1,28 @@
+.single {
+  // Override bottom padding from _site-content.scss
+  .site-content {
+    > :last-child {
+      @screen mobile {
+        @apply pb-0;
+      }
+    }
+
+    &:not(.with-post-recirc) {
+      @screen mobile {
+        .post-single {
+          @apply pb-px80;
+        }
+      }
+    }
+
+    .recirculation-section {
+      @screen mobile {
+        @apply pb-px80;
+      }
+    }
+  }
+}
+
 @import "./content-area";
 @import "./header";
 @import "./block";

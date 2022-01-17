@@ -6,13 +6,12 @@ $no_sidebar_singles = array(
 );
 $post_type          = get_post_type();
 $with_sidebar       = ! in_array( $post_type, $no_sidebar_singles );
+$after_post_content = \TrevorWP\Theme\Helper\Post::render_after_post( $post );
 
 get_header();
 ?>
 
-
-
-<main id="site-content" role="main" class="site-content">
+<main id="site-content" role="main" class="<?php echo apply_filters( 'main_class', 'site-content' ); ?>">
 	<div class="site-content-inner">
 		<article <?php post_class( array( 'post-single' ) ); ?> id="post-<?php the_ID(); ?>">
 			<?php echo \TrevorWP\Theme\Helper\Post_Header::render( $post ); ?>
@@ -34,9 +33,11 @@ get_header();
 			</div><!-- .post-content-wrap -->
 			<?php echo \TrevorWP\Theme\Helper\Post::render_bottom_blocks( $post ); ?>
 		</article><!-- .post -->
-		<div class="recirculation-section">
-			<?php echo \TrevorWP\Theme\Helper\Post::render_after_post( $post ); ?>
-		</div>
+		<?php if ( ! empty( $after_post_content ) ) : ?>
+			<div class="recirculation-section">
+				<?php echo $after_post_content; ?>
+			</div>
+		<?php endif; ?>
 	</div>
 </main> <!-- #site-content -->
 

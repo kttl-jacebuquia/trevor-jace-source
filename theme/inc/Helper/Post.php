@@ -85,6 +85,13 @@ class Post {
 			self::_render_page_recirculation( $post, 'after_post' ),
 		);
 
+		$out = array_filter( $out );
+
+		// Add <main> class if there's a recirc item for CSS styling
+		if ( ! empty( $out ) ) {
+			add_filter( 'main_class', array( self::class, 'main_class_filter_with_recirc' ) );
+		}
+
 		return implode( "\n", array_filter( $out ) );
 	}
 
@@ -307,5 +314,9 @@ class Post {
 		$inner = implode( "\n", $rows );
 
 		return "<div class='post-content-footer'>{$inner}</div>";
+	}
+
+	public static function main_class_filter_with_recirc( $main_class ) {
+		return $main_class . ' with-post-recirc';
 	}
 }

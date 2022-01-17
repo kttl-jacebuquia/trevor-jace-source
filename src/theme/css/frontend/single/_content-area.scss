@@ -1,10 +1,10 @@
 .post-single {
   @apply flex flex-col flex-1;
+  @apply bg-white;
 }
 
 .post-content-wrap {
   @apply flex flex-col flex-1;
-  @apply bg-white;
   @apply prose prose-teal-dark;
   @apply max-w-none text-teal-dark;
 
