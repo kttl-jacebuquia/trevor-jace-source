@@ -587,7 +587,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 							</div>
 							<div class="topic-cards__accordion-content accordion-collapse">
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
-									<p class="topic-cards__item-description"><?php echo $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ]; ?></p>
+									<div class="topic-cards__item-description"><?php echo $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ]; ?></div>
 								<?php endif; ?>
 								<?php
 									echo Advanced_Link::render(
@@ -620,7 +620,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 								<?php endif; ?>
 
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ] ) ) : ?>
-									<p class="topic-cards__item-description"><?php echo $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ]; ?></p>
+									<div class="topic-cards__item-description"><?php echo $topic[ static::FIELD_TOPIC_ENTRY_DESCRIPTION ]; ?></div>
 								<?php endif; ?>
 
 								<?php if ( ! empty( $topic[ static::FIELD_TOPIC_ENTRY_LINK ]['label'] ) ) : ?>
