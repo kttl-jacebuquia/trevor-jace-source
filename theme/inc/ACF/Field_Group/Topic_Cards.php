@@ -32,6 +32,8 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 
 	const DEFAULT_NUM_DISPLAY_LIMIT = 6;
 
+	public static $entries_count = 0;
+
 	/** @inheritDoc */
 	public static function register(): bool {
 		add_filter( 'acf/fields/relationship/query/name=' . static::FIELD_PRODUCTS, array( static::class, 'relationship_query_products' ), 10, 3 );
@@ -70,9 +72,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					$bg_color,
 					static::FIELD_BG_COLOR,
 					array(
-						'label'   => 'Background Color',
-						'default' => 'white',
-						'wrapper' => array(
+						'label'         => 'Background Color',
+						'default_value' => 'white',
+						'wrapper'       => array(
 							'width' => '50%',
 						),
 					)
@@ -81,9 +83,9 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					$text_color,
 					static::FIELD_TEXT_COLOR,
 					array(
-						'label'   => 'Text Color',
-						'default' => 'teal-dark',
-						'wrapper' => array(
+						'label'         => 'Text Color',
+						'default_value' => 'current',
+						'wrapper'       => array(
 							'width' => '50%',
 						),
 					),
@@ -476,6 +478,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$posts          = static::filter_entries( $posts );
 		$post_ids       = ! empty( $posts ) ? wp_list_pluck( $posts, 'ID' ) : array();
 		$display_limit  = static::DEFAULT_NUM_DISPLAY_LIMIT;
+		$layout         = static::get_val( static::FIELD_LAYOUT );
 		$show_load_more = static::get_val( static::FIELD_SHOW_LOAD_MORE )
 			&& ! empty( $posts )
 			&& count( $posts ) > $display_limit;
@@ -485,6 +488,17 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 				'role' => 'listitem',
 			),
 		);
+
+		static::$entries_count = count( $posts );
+
+		$grid_class = array( 'topic-cards__grid' );
+
+		if ( 'carousel' === $layout ) {
+			$grid_class[]            = 'swiper-container';
+			$tile_options['class'][] = 'swiper-slide';
+		}
+
+		$grid_class = implode( ' ', $grid_class );
 
 		// Limit the display to 6 posts only if showing load more.
 		if ( $show_load_more ) {
@@ -516,11 +530,19 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 			<?php if ( ! empty( $posts ) && count( $posts ) > 0 ) : ?>
-				<div class="topic-cards__grid" role="list" data-post-ids="<?php echo implode( ',', $post_ids ); ?>">
-					<?php foreach ( $posts as $key => $post ) : ?>
-						<?php echo Helper\Tile::post( $post, $key, $tile_options ); ?>
-					<?php endforeach; ?>
+				<div class="<?php echo $grid_class; ?>" role="list" data-post-ids="<?php echo implode( ',', $post_ids ); ?>">
+					<div class="topic-cards__swiper-wrapper swiper-wrapper" >
+						<?php foreach ( $posts as $key => $post ) : ?>
+							<?php echo Helper\Tile::post( $post, $key, $tile_options ); ?>
+						<?php endforeach; ?>
+					</div>
+					<?php if ( 'carousel' === $layout ) : ?>
+						<?php static::render_carousel_pagination(); ?>
+					<?php endif; ?>
 				</div>
+				<?php if ( 'carousel' === $layout ) : ?>
+					<div class="swiper-pagination"></div>
+				<?php endif; ?>
 				<?php if ( $show_load_more && count( $posts ) > 0 ) : ?>
 					<div class="topic-cards__block-cta-wrap">
 						<button class="topic-cards__load-more wave-underline" type="button" aria-label="click to load more items">Load More</button>
@@ -542,26 +564,15 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		$grid_class    = array(
 			'topic-cards__grid',
 		);
-		// If carousel
-		$swiper_button_class = array();
 
 		if ( 'grid' === $layout && 'drawers' === $mobile_layout ) {
 			$grid_class[] = 'mobile:hidden';
 		}
 
+		static::$entries_count = count( $entries );
+
 		if ( 'carousel' === $layout ) {
-			$grid_class[]          = 'swiper-container';
-			$swiper_button_class[] = 'swiper-button';
-
-			// mobile
-			$swiper_button_class[] = 'hidden';
-
-			// desktop
-			if ( $entries > 3 ) {
-				$swiper_button_class[] = 'lg:inline-flex';
-			} else {
-				$swiper_button_class[] = 'lg:hidden';
-			}
+			$grid_class[] = 'swiper-container';
 		}
 
 		$grid_class            = implode( ' ', $grid_class );
@@ -641,20 +652,11 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						<?php endforeach; ?>
 					</div>
 					<?php if ( 'carousel' === $layout ) : ?>
-						<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-prev' ))); ?>>
-							<button type="button" class="swiper-button-wrapper">
-								<i class="trevor-ti-arrow-left"></i>
-							</button>
-						</div>
-						<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-next' ))); ?>>
-							<button type="button" class="swiper-button-wrapper">
-								<i class="trevor-ti-arrow-right"></i>
-							</button>
-						</div>
+						<?php static::render_carousel_pagination(); ?>
 					<?php endif; ?>
 				</div>
 				<?php if ( 'carousel' === $layout ) : ?>
-				<div class="swiper-pagination"></div>
+					<div class="swiper-pagination"></div>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php
@@ -730,6 +732,35 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		}
 
 		return $args;
+	}
+
+	public static function render_carousel_pagination() {
+		$swiper_button_class = array( 'swiper-button' );
+
+		// mobile
+		$swiper_button_class[] = 'hidden';
+
+		// desktop
+		if ( static::$entries_count > 3 ) {
+			$swiper_button_class[] = 'lg:inline-flex';
+		} else {
+			$swiper_button_class[] = 'lg:hidden';
+		}
+
+		ob_start();
+		?>
+			<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-prev' ))); ?>>
+				<button type="button" class="swiper-button-wrapper">
+					<i class="trevor-ti-arrow-left"></i>
+				</button>
+			</div>
+			<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-next' ))); ?>>
+				<button type="button" class="swiper-button-wrapper">
+					<i class="trevor-ti-arrow-right"></i>
+				</button>
+			</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
