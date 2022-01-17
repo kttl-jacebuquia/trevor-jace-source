@@ -1,0 +1,17 @@
+body.single-trevor_rc_external {
+  .site-content-inner {
+    padding-bottom: 0 !important;
+  }
+
+  .post-content-wrap.post-content-wrap {
+    @screen md {
+      @apply pt-0;
+    }
+  }
+
+  .post-bottom-categories {
+    @screen mobile {
+      @apply pb-px100;
+    }
+  }
+}

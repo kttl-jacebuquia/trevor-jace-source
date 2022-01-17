@@ -60,7 +60,7 @@
 
   // External Resource Article Override
   .single-trevor_rc_external & {
-    @apply container bg-white mx-0 px-0;
+    @apply container bg-white mx-auto px-0;
 
     @screen md {
       @apply items-center px-0 py-px80;
@@ -71,7 +71,7 @@
     }
 
     .list-title {
-      @apply text-violet text-px16 leading-px22;
+      @apply text-violet text-px16 leading-px22 text-center mx-auto;
 
       @screen md {
         @apply px-px200 w-full text-center text-px18 leading-px24 tracking-em001 mb-0;

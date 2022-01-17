@@ -59,12 +59,7 @@
 
 	&::-webkit-search-cancel-button {
 		appearance: none;
-	}
-
-	// &[placeholder]::before {
-	// 	content: attr(placeholder);
-	// 	@apply text-violet;
-	// }
+  }
 
 	&[placeholder]:not(:empty)::before {
 		content: "";
