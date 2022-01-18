@@ -90,8 +90,6 @@
     }
   }
 
-
-
   @screen md {
     @apply w-full;
 
@@ -124,6 +122,13 @@
       .prose {
         @apply max-w-full;
       }
+    }
+  }
+
+  // .prose overrides
+  .prose {
+    h2, h3 {
+      @apply text-current;
     }
   }
 }

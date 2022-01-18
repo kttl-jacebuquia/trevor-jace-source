@@ -24,11 +24,19 @@ export const toggleBodyFix = (willFix: boolean) => {
 		$body[0].style.setProperty('--fixed-body-top', `-${fixedBodyScroll}px`);
 		setTimeout(() => $body.addClass('is-modal-open'), 0);
 	} else {
-		$body.removeClass('is-modal-open');
-		$root[0].style.setProperty('--fixed-body-top', `0px`);
 		$root.css('scroll-behavior', 'auto');
-		window.scrollTo(0, fixedBodyScroll || 0);
-		$root.css('scroll-behavior', '');
+
+		// Ensures scroll-behavior is applied before updating the page layout
+		setTimeout(() => {
+			$body.removeClass('is-modal-open');
+			window.scrollTo(0, fixedBodyScroll || 0);
+			$root[0].style.setProperty('--fixed-body-top', `0px`);
+		}, 0);
+
+		// Ensures page layout has been updated before reverting the smooth scroll back
+		setTimeout(() => {
+			$root.css('scroll-behavior', '');
+		}, 10);
 	}
 };
 
