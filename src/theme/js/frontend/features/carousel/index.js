@@ -28,6 +28,7 @@ export function carousel($element, option = {}) {
 	const swiper = new Swiper(_el, {
 		// Optional parameters
 		direction: 'horizontal',
+		simulateTouch: false,
 		loop: true,
 		// If we need pagination
 		pagination: {

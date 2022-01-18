@@ -73,6 +73,10 @@
     }
   }
 
+  .input-wrap {
+    box-shadow: 0px 8px 6px rgba(16, 16, 102, 0.1);
+  }
+
   .trevor-ti-search,
   .trevor-ti-x {
     @apply text-violet;

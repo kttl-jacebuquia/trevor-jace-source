@@ -550,7 +550,7 @@ class Carousel {
 				'slidesPerGroup' => 1,
 				'spaceBetween'   => 20,
 				'centerSlides'   => true,
-				'simulateTouch'  => true,
+				'simulateTouch'  => false,
 				'pagination'     => array(
 					'el'            => "{$base_selector} .swiper-pagination",
 					'clickable'     => true,

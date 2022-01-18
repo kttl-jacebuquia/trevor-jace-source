@@ -30,6 +30,18 @@
       @apply h-px78;
     }
 
+    &:not(.input-has-value) {
+      .search-field {
+        @screen md {
+          @apply w-px350;
+        }
+
+        @screen xl {
+          @apply w-px460;
+        }
+      }
+    }
+
     &.input-has-value {
       .icon-wrap--cancel {
         @apply visible;
