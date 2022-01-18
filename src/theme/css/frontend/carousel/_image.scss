@@ -153,7 +153,7 @@
     }
 
     &__carousel {
-      @apply flex;
+      @apply flex w-full;
     }
 
     &__slide {
@@ -163,6 +163,10 @@
 
       @screen lg {
         height: rem-calc(440);
+      }
+
+      figure {
+        @apply block h-full;
       }
     }
 

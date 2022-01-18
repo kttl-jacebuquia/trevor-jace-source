@@ -1,3 +1,7 @@
+.slick-list {
+  @apply w-full;
+}
+
 .slick-arrow {
   @apply hidden;
 
@@ -17,10 +21,10 @@
 }
 
 .slick-dots {
-  @apply flex justify-center gap-x-px20;
+  @apply flex justify-center;
 
   > li {
-    @apply h-px14 overflow-visible;
+    @apply h-px14 overflow-visible mx-px10;
 
     &.slick-active {
       // Dot color

@@ -600,7 +600,7 @@ class Carousel {
 		$next_button_class = array(
 			$options['class'],
 			'swiper-button-next',
-		),
+		);
 
 		ob_start();
 		?>

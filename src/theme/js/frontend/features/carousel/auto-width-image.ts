@@ -15,7 +15,9 @@ export class AutoWidthImageCarousel extends Component {
 
 	afterInit() {
 		if (this.children?.carouselContainer) {
-			$(this.children.carouselContainer).slick({
+			const $slickElement = $(this.children.carouselContainer);
+
+			$slickElement.slick({
 				variableWidth: true,
 				slidesToShow: 1,
 				infinite: false,
