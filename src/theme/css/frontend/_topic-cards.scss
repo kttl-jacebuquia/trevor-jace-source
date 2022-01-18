@@ -205,10 +205,7 @@
   &__item-title {
     @apply card-heading;
     @apply font-semibold text-px20 leading-px26;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    @apply line-clamp-3;
 
     @screen md {
       @apply text-px24 leading-px28 tracking-em001;
@@ -224,12 +221,8 @@
   }
 
   &__item-description {
-    @apply card-description;
+    @apply card-description line-clamp-5;
     @apply text-px18 leading-px28;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 
     @screen md {
       @apply mt-px12 text-px16 leading-px24;
@@ -312,7 +305,7 @@
     }
 
     .topic-cards__swiper-wrapper {
-      @apply flex flex-nowrap w-full;
+      @apply flex flex-nowrap items-stretch w-full h-auto;
     }
 
     .topic-cards__item {
@@ -368,5 +361,9 @@
   // Tile overrides
   .tile {
     @apply h-full;
+
+    &-title {
+      @apply line-clamp-3;
+    }
   }
 }

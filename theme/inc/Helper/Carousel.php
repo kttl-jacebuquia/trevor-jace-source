@@ -2,6 +2,7 @@
 
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
+use TrevorWP\Theme\ACF\Field_Group\DOM_Attr;
 
 /**
  * Carousel Helper
@@ -575,5 +576,45 @@ class Carousel {
 			});
 		</script>
 		<?php
+	}
+
+	/**
+	 * Renders swiper arrows
+	 * @param string $options.class - Button classname
+	 */
+	public static function render_arrows( $options = array() ) {
+		$options = array_merge(
+			array(
+				'class' => '',
+			),
+			$options
+		);
+
+		$options['class'] .= ' swiper-button';
+
+		$prev_button_class = array(
+			$options['class'],
+			'swiper-button-prev',
+		);
+
+		$next_button_class = array(
+			$options['class'],
+			'swiper-button-next',
+		),
+
+		ob_start();
+		?>
+			<button <?php echo DOM_Attr::render_attrs( $prev_button_class ); ?>>
+				<div class="swiper-button-wrapper">
+					<i class="trevor-ti-arrow-left" aria-hidden="true"></i>
+				</div>
+			</button>
+			<button <?php echo DOM_Attr::render_attrs( $next_button_class ); ?>>
+				<div class="swiper-button-wrapper">
+					<i class="trevor-ti-arrow-right" aria-hidden="true"></i>
+				</div>
+			</button>
+		<?php
+		return ob_get_clean();
 	}
 }
