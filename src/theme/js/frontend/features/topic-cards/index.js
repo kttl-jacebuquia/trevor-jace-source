@@ -62,10 +62,6 @@ class TopicCards {
 					spaceBetween: 28,
 				},
 			},
-			on: {
-				slideChangeTransitionEnd:
-					this.onSlideChangeTransitionEnd.bind(this),
-			},
 		});
 	}
 
@@ -135,7 +131,7 @@ class TopicCards {
 			.join('&');
 
 		try {
-			const response = await fetch(
+			const response = await window.fetch(
 				[MORE_CARDS_ENDPOINT, paramsString].join('?')
 			);
 			const data = await response.json();
@@ -172,17 +168,6 @@ class TopicCards {
 				this.loadMore.parentElement
 			);
 		}
-	}
-
-	onSlideChangeTransitionEnd(swiper) {
-		const windowWidth = window.innerWidth;
-		const [lastSlide] = swiper.slides.slice(-1);
-		const lastSlideBounds = lastSlide.getBoundingClientRect();
-
-		swiper.navigation?.nextEl?.classList.toggle(
-			'invisible',
-			lastSlideBounds.right <= windowWidth
-		);
 	}
 
 	static initializeInstances() {
