@@ -66,15 +66,18 @@ class Bill extends Get_Involved_Object {
 
 		ob_start();
 		?>
-		<div class="container mx-auto text-teal-dark text-left md:px-10 lg:pl-px60 lg:pr-px120">
+		<div class="container bill-content mx-auto text-teal-dark text-left md:px-10 lg:pl-px60 lg:pr-px120">
 			<?php if ( ! empty( $bill_id ) ) { ?>
-				<div class="text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5 text-teal-light"><?php echo $bill_id; ?></div>
+				<div class="bill-content__code text-px16 leading-px24 tracking-em_001 font-semibold mb-3.5 text-teal-light"><?php echo $bill_id; ?></div>
 			<?php } ?>
-			<h2 class="text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px40 lg:leading-px48 flex flex-row items-center">
+			<h2 class="bill-content__heading text-px24 leading-px28 tracking-em001 font-semibold mb-3 lg:text-px40 lg:leading-px48 flex flex-row items-center">
 				<?php echo $post->post_title; ?>
 
-				<span class="text-white bg-teal-dark rounded-full cursor-pointer ml-3 hidden md:inline-flex w-9 h-9 items-center justify-center">
-					<button class="post-share-more-btn" aria-expanded="true">
+				<span class="bill-content__share text-white bg-teal-dark rounded-full cursor-pointer ml-3 hidden md:inline-flex w-9 h-9 items-center justify-center flex-shrink-0">
+					<button
+						class="post-share-more-btn" aria-expanded="true"
+						data-tippy-options='{ "placement": "bottom" }'
+					>
 						<i class="share-icon trevor-ti-share-others md:text-px14 lg:text-px16 flex"></i>
 					</button>
 

@@ -1,0 +1,188 @@
+.bill-modal {
+  .modal-wrap {
+    @apply flex flex-col items-center justify-center px-0 max-w-none;
+  }
+
+  .modal-container {
+    @apply items-center w-full pt-px75;
+
+    @screen md {
+      @apply pt-px57;
+    }
+
+    @screen lg {
+      @apply max-w-none pt-px48;
+      width: rem-calc(924);
+    }
+
+    @screen lg2 {
+      width: rem-calc(1028);
+    }
+  }
+
+  .modal-content-wrap {
+    @apply container;
+
+    @screen md {
+      @apply px-px40;
+    }
+
+    @screen lg {
+      @apply pl-px64 pr-px80;
+    }
+
+    > .container {
+      @apply px-0;
+    }
+  }
+
+  .prose {
+    @apply max-w-none;
+
+    .wp-block-columns {
+      @apply mb-0 pb-px50;
+
+      @screen md {
+        @apply pb-px60;
+      }
+
+      @screen lg {
+        @apply pb-px50;
+      }
+    }
+
+    .wp-block-column {
+      > :first-child {
+        @apply mt-0;
+      }
+
+      > :last-child {
+        @apply mb-0;
+      }
+    }
+
+    & h3,
+    & h4 {
+      @apply mb-px20;
+
+      @screen md {
+        @apply mb-px30;
+      }
+
+      @screen lg {
+        @apply mb-px16;
+      }
+    }
+
+    p {
+      @screen lg {
+        @apply mb-px30;
+      }
+
+      @screen lg2 {
+        @apply mb-px20;
+      }
+    }
+  }
+
+  .post-share-more-content {
+    @apply bg-teal-dark;
+    --tw-bg-opacity: 0.12;
+
+    tr[data-row] {
+      &:hover {
+        @apply bg-teal-dark bg-opacity-90 text-white;
+
+        td {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+
+  .tippy-box {
+    @apply pt-px30 -ml-px20;
+  }
+
+  .tippy-svg-arrow {
+    @apply mt-px20 ml-px15;
+
+    svg path {
+      @include set-theme-vars(teal, dark);
+      fill: theme-background(true);
+      --tw-bg-opacity: 0.12;
+    }
+  }
+}
+
+.bill-content {
+  &__share {
+    @screen md {
+      @apply ml-px20;
+    }
+  }
+
+  &__code {
+    @apply mb-px14;
+
+    @screen md {
+      @apply mb-px10;
+    }
+
+    @screen lg {
+      @apply mb-px12;
+    }
+  }
+
+  &__heading {
+    @apply mb-px14;
+
+    @screen md {
+      @apply mb-px30;
+    }
+
+    @screen lg {
+      @apply mb-px32;
+    }
+  }
+
+  .trevor-block-bottom-list.trevor-block-bottom-list {
+    @apply rounded-none pt-px38;
+    @include bleed;
+    padding-left: calc((100vw - theme("container.screens.sm") + (theme("container.padding.DEFAULT") * 2)) / 2);
+    padding-right: calc((100vw - theme("container.screens.sm") + (theme("container.padding.DEFAULT") * 2)) / 2);
+
+    @screen md {
+      @apply py-px30;
+    }
+
+    @screen lg {
+      @apply -ml-px64 -mr-px80;
+      @apply pl-px64 pr-px80 pt-px38 pb-px62;
+    }
+
+    > :first-child {
+      @apply mt-0;
+    }
+
+    .list-title {
+      @apply mb-px16;
+    }
+
+    li {
+      @apply mt-0 mb-px16;
+
+      @screen lg {
+        @apply mb-px26;
+      }
+
+      @screen lg2 {
+        @apply mb-px14;
+      }
+
+      &:first-child {
+        @apply mt-0;
+      }
+    }
+  }
+}
