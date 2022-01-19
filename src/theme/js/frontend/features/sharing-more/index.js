@@ -2,15 +2,20 @@ import $ from 'jquery';
 import tippy, { roundArrow } from 'tippy.js';
 import { copyToClipboard } from 'plugin/js/main/utils';
 
-const hasNavigatorShare = !!navigator.share;
+const hasNavigatorShare = !!window.navigator.share;
 
 export default function sharingMore(button, content, tippyOptions = {}) {
 	// Use native sharing if available and for mobile.
 	const isMobileOnly = window.matchMedia(`screen and (max-width: 767px)`);
 
+	const options = Object.assign(
+		tippyOptions,
+		JSON.parse(button.dataset.tippyOptions || 'null') || {}
+	);
+
 	if (hasNavigatorShare && isMobileOnly.matches) {
 		$(button).on('click', () =>
-			navigator.share({
+			window.navigator.share({
 				url:
 					$('head link[rel="canonical"]').attr('href') ||
 					window.location.href,
@@ -28,7 +33,7 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 					appendTo: 'parent',
 					arrow: roundArrow,
 				},
-				tippyOptions
+				options
 			)
 		);
 

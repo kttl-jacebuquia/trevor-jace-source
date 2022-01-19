@@ -99,6 +99,7 @@ class Tile {
 						array(
 							'target' => "#{$id} a",
 							'id'     => "{$id}-content",
+							'class'  => array( 'bill-modal' ),
 						)
 					) )->render();
 					?>
