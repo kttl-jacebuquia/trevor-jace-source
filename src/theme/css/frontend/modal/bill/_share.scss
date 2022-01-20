@@ -1,0 +1,30 @@
+.bill-modal {
+  .post-share-more-content {
+    @apply bg-teal-dark;
+    --tw-bg-opacity: 0.12;
+
+    tr[data-row] {
+      &:hover {
+        @apply bg-teal-dark bg-opacity-90 text-white;
+
+        td {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+
+  .tippy-box {
+    @apply pt-px30 -ml-px20;
+  }
+
+  .tippy-svg-arrow {
+    @apply mt-px20 ml-px15;
+
+    svg path {
+      @include set-theme-vars(teal, dark);
+      fill: theme-background(true);
+      --tw-bg-opacity: 0.12;
+    }
+  }
+}

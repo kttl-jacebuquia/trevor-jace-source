@@ -1,0 +1,42 @@
+.bill-modal {
+  .modal-wrap {
+    @apply flex flex-col items-center justify-center px-0 max-w-none;
+  }
+
+  .modal-container {
+    @apply items-center w-full pt-px75;
+
+    @screen md {
+      @apply pt-px57;
+    }
+
+    @screen lg {
+      @apply max-w-none pt-px48;
+      width: rem-calc(924);
+    }
+
+    @screen lg2 {
+      width: rem-calc(1028);
+    }
+  }
+
+  .modal-content-wrap {
+    @apply container;
+
+    @screen md {
+      @apply px-px40;
+    }
+
+    @screen lg {
+      @apply pl-px64 pr-px80;
+    }
+
+    > .container {
+      @apply px-0;
+    }
+  }
+}
+
+@import "./prose";
+@import "./share";
+@import "./bill-content";
