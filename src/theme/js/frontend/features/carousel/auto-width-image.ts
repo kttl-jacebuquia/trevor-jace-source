@@ -11,6 +11,7 @@ export class AutoWidthImageCarousel extends Component {
 		dots: '.auto-width-img-carousel__dots',
 		prevEl: '.auto-width-img-carousel__prev',
 		nextEl: '.auto-width-img-carousel__next',
+		slides: ['.auto-width-img-carousel__slide'],
 	};
 
 	afterInit() {
@@ -27,6 +28,27 @@ export class AutoWidthImageCarousel extends Component {
 				nextArrow: $(this.children.nextEl),
 			});
 		}
+
+		this.handleImageResize();
+	}
+
+	handleImageResize() {
+		this.children?.slides.forEach((slide: HTMLElement) => {
+			const image = slide.querySelector('img') as HTMLImageElement;
+
+			if (image) {
+				const resizeObserver = new window.ResizeObserver(() => {
+					this.onSlideImageResize(slide);
+				});
+
+				resizeObserver.observe(image);
+			}
+		});
+	}
+
+	onSlideImageResize(slide: HTMLElement) {
+		const image = slide.querySelector('img') as HTMLImageElement;
+		slide.style.setProperty('--image-width', String(image.offsetWidth));
 	}
 }
 
