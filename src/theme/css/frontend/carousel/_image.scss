@@ -187,11 +187,16 @@
       max-width: rem-calc(320);
 
       @screen md {
-        @apply tracking-normal text-px14 leading-px20 max-w-none;
+        @apply tracking-normal text-px14 leading-px20;
+        max-width: calc(var(--image-width) * 1px);
       }
 
       @screen lg {
         @apply w-full text-px18 leading-px26;
+      }
+
+      @screen lg2 {
+        @apply text-left;
       }
     }
 
