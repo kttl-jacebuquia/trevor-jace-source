@@ -75,7 +75,6 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 						$elem.text('Link Copied!');
 						break;
 					case 'email':
-						window.location = `mailto:?body=${canonicalURL}`;
 						break;
 				}
 			});
