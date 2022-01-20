@@ -150,7 +150,11 @@
   }
 
   &__item {
-    @apply col-span-full border-px1 border-solid border-blue_green border-opacity-50 shadow-none;
+    @apply col-span-full;
+
+    &:not([data-post-type*="prod"]) {
+      @apply border-px1 border-solid border-blue_green border-opacity-50 shadow-none;
+    }
 
     @screen md {
       @apply col-span-4;
