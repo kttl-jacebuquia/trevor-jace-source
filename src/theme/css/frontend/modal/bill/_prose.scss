@@ -1,0 +1,48 @@
+.bill-modal .prose {
+  @apply max-w-none;
+
+  .wp-block-columns {
+    @apply mb-0 pb-px50;
+
+    @screen md {
+      @apply pb-px60;
+    }
+
+    @screen lg {
+      @apply pb-px50;
+    }
+  }
+
+  .wp-block-column {
+    > :first-child {
+      @apply mt-0;
+    }
+
+    > :last-child {
+      @apply mb-0;
+    }
+  }
+
+  & h3,
+  & h4 {
+    @apply mb-px20;
+
+    @screen md {
+      @apply mb-px30;
+    }
+
+    @screen lg {
+      @apply mb-px16;
+    }
+  }
+
+  p {
+    @screen lg {
+      @apply mb-px30;
+    }
+
+    @screen lg2 {
+      @apply mb-px20;
+    }
+  }
+}

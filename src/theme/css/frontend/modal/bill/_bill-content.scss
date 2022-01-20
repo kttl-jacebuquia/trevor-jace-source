@@ -1,0 +1,115 @@
+.bill-content {
+  &__share {
+    @screen md {
+      @apply ml-px20;
+    }
+  }
+
+  &__code {
+    @apply mb-px14 text-px16 leading-px24 tracking-px_05 font-semibold;
+
+    @screen md {
+      @apply mb-px10 text-px14 leading-px18 tracking-px05;
+    }
+
+    @screen lg {
+      @apply mb-px12 text-px18 leading-px24 tracking-px_05;
+    }
+  }
+
+  &__heading {
+    @apply mb-px14 text-px32 leading-px42 font-semibold;
+
+    @screen md {
+      @apply mb-px30 text-px32 leading-px42 tracking-em005;
+    }
+
+    @screen lg {
+      @apply mb-px32 text-px40 leading-px48 tracking-px_05;
+    }
+  }
+
+  & h3,
+  & h4 {
+    @apply font-semibold text-px18 leading-px26 tracking-em001;
+
+    @screen md {
+      @apply text-px14 leading-px22;
+    }
+
+    @screen lg {
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+  }
+
+  p {
+    @apply text-px16 leading-px22 tracking-em001 font-normal;
+
+    @screen md {
+      @apply text-px14 leading-px22;
+    }
+
+    @screen lg {
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen lg2 {
+      @apply text-px18 leading-px26 tracking-em001;
+    }
+  }
+
+  .trevor-block-bottom-list.trevor-block-bottom-list {
+    @apply rounded-none pt-px38 text-px16 leading-px22 font-normal;
+    @include bleed;
+    padding-left: calc((100vw - theme("container.screens.sm") + (theme("container.padding.DEFAULT") * 2)) / 2);
+    padding-right: calc((100vw - theme("container.screens.sm") + (theme("container.padding.DEFAULT") * 2)) / 2);
+
+    @screen md {
+      @apply py-px30;
+      @apply text-px14 leading-px22;
+    }
+
+    @screen lg {
+      @apply -ml-px64 -mr-px80;
+      @apply pl-px64 pr-px80 pt-px38 pb-px62;
+      @apply text-px16 leading-px22 tracking-em001;
+    }
+
+    @screen lg2 {
+      @apply text-px18 leading-px26 tracking-em001;
+    }
+
+    > :first-child {
+      @apply mt-0;
+    }
+
+    .list-title {
+      @apply mb-px16;
+    }
+
+    h3 {
+      font-size: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+    }
+
+    li {
+      @apply mt-0 mb-px16;
+      font-size: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+
+      @screen lg {
+        @apply mb-px26;
+      }
+
+      @screen lg2 {
+        @apply mb-px14;
+      }
+
+      &:first-child {
+        @apply mt-0;
+      }
+    }
+  }
+}
