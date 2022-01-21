@@ -1,7 +1,7 @@
 .center-text-with-full-image {
   @include block-spacer-settings(
     40,
-    $md: 40,
+    $md: (40, 70),
   );
 
 	&__container {

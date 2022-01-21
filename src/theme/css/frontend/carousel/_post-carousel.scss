@@ -1,21 +1,38 @@
 .post-carousel {
   @include block-spacer-settings(
     $default: (
-      80,
+      50,
+      85,
     ),
     $md: (
+      60,
       80,
     ),
-    $lg: (
-      100,
-    ),
-    $lg2: (
-      100,
-    ),
-    $xl: (
-      100,
-    )
+    $lg: 120,
+    $lg2: 120,
+    $xl: 120
   );
+
+  &-container {
+    @include block-spacer-settings(
+      $default: (
+        50,
+        85,
+      ),
+      $md: (
+        60,
+        80,
+      ),
+      $lg: 120,
+      $lg2: 120,
+      $xl: 120
+    );
+
+    > .post-carousel {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
 
   .page-sub-title {
     @apply w-full font-semibold text-px32 leading-px40 text-center col-span-full;
@@ -102,8 +119,8 @@
       @apply mt-px30;
     }
 
-    @screen xl {
-      @apply mt-px50;
+    @screen lg {
+      @apply mt-px46;
     }
   }
 

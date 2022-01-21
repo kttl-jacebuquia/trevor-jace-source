@@ -271,14 +271,6 @@
 
   // ORG Post Type
   &.type-post {
-    body:not(.is-rc) & {
-      @apply border-teal-dark border-opacity-16 shadow-none border-px2;
-
-      @screen mobile {
-        @apply h-px503;
-      }
-    }
-
     .card-text-container {
       @apply pt-px34 pb-px26;
     }
