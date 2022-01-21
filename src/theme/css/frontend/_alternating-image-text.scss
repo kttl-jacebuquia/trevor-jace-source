@@ -330,6 +330,10 @@
     @screen xl {
       @apply text-px16 leading-px22 tracking-em001 mt-px40;
     }
+
+    &.wave-underline {
+      @apply px-0 min-w-0;
+    }
   }
 
   &__cta-link {
