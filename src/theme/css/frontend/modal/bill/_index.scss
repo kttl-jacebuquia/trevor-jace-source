@@ -4,7 +4,7 @@
   }
 
   .modal-container {
-    @apply items-center w-full pt-px75;
+    @apply items-center w-full h-auto pt-px75;
 
     @screen md {
       @apply pt-px57;
