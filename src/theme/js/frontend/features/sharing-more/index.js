@@ -41,7 +41,6 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 		$(content)
 			.find('tr[data-row]')
 			.on('click', (e) => {
-				e.preventDefault;
 				const type = $(e.currentTarget).attr('data-row');
 				const canonicalURL =
 					$(content).attr('data-url') ||
@@ -53,11 +52,13 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 				switch (type) {
 					case 'facebook':
 					case 'twitter':
+						e.preventDefault();
 						$(
 							`.post-social-share-btn[data-type="${type}"]`
 						).click();
 						break;
 					case 'clipboard':
+						e.preventDefault();
 						copyToClipboard(canonicalURL);
 						const $elem = $(content).find(
 							'[data-row="clipboard"] > td:nth-child(2)'
@@ -74,7 +75,7 @@ export default function sharingMore(button, content, tippyOptions = {}) {
 						}, 2000);
 						$elem.text('Link Copied!');
 						break;
-					case 'email':
+					default:
 						break;
 				}
 			});

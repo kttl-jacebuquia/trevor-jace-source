@@ -93,8 +93,8 @@ class Bill extends Get_Involved_Object {
 										<td>Copy Link</td>
 									</tr>
 									<tr data-row="email">
-										<td><a href="mailto:?body=<?php echo get_permalink( $post ); ?>"><i class="trevor-ti-mail"></i></a></td>
-										<td><a href="mailto:?body=<?php echo get_permalink( $post ); ?>">Email</a></td>
+										<td><a href="mailto:?body=<?php echo urlencode( get_permalink( $post ) ); ?>" target="_blank"><i class="trevor-ti-mail"></i></a></td>
+										<td><a href="mailto:?body=<?php echo urlencode( get_permalink( $post ) ); ?>" target="_blank">Email</a></td>
 									</tr>
 									</tbody>
 								</table>
