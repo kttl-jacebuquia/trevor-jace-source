@@ -1,4 +1,8 @@
 .modal.text-only-popup {
+  .modal-wrap {
+    @apply h-auto;
+  }
+
   .modal-close {
     @screen md {
       @apply m-0 top-px20 right-px20;

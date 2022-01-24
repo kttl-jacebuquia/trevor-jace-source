@@ -132,17 +132,8 @@
         }
 
         a {
-          @apply relative block mt-px20 font-bold ml-px10 text-teal-dark;
-
-          &:after {
-            content: "";
-            border-bottom: 1px solid theme("colors.teal.dark");
-            @apply absolute bottom-0 left-0 right-0 mx-auto w-px127;
-          }
-
-          @screen lg {
-            @apply mt-0 inline-block;
-          }
+          @apply relative font-bold ml-px10 text-teal-dark underline;
+          text-underline-offset: .2em;
         }
       }
     }

@@ -182,7 +182,8 @@
   }
 
   &__image {
-    @apply col-span-5 col-start-8 -mx-px28;
+    @apply col-span-5 col-start-8;
+    @include bleed;
 
     @screen md {
       @include bleed(md);

@@ -87,7 +87,7 @@
   }
 
   &__accordion-header {
-    @apply flex items-center justify-between px-px28 h-px86;
+    @apply flex items-center justify-between py-px30 px-px20 min-h-px86;
   }
 
   &__accordion-toggle {
