@@ -95,14 +95,18 @@ $screen-widths: (
     }
 
     + main > :first-child {
-      @apply pt-px590;
+      @apply pt-px590 mt-0;
 
       @screen md {
         @apply pt-px247;
       }
 
+      @screen lg {
+        @apply pt-px250;
+      }
+
       @screen lg2 {
-        @apply pt-px279;
+        @apply pt-px270;
       }
     }
   }
