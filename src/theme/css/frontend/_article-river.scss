@@ -103,6 +103,18 @@
   &__pagination {
     @apply flex items-center mt-px60 mx-auto relative;
 
+    @screen md {
+      @apply mt-px50;
+    }
+
+    @screen lg {
+      @apply mt-px60;
+    }
+
+    @screen lg2 {
+      @apply mt-px70;
+    }
+
     .swiper-container {
       @apply max-w-px130;
     }

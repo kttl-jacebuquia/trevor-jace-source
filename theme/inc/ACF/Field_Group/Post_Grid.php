@@ -405,9 +405,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 		$cls = array(
 			'tile-grid-container container mx-auto',
-			'mb-px38 mt-px40',
-			'md:mt-px30',
-			'xl:mt-0',
+			'mb-px38',
 		);
 
 		$social_media_accounts = array(
@@ -472,7 +470,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$wrapper_attr['id'] = $id;
 
 		# Build post grid classnames
-		$post_grid_cls = 'post-grid';
+		$post_grid_cls = 'post-grid mt-px40 md:mt-px30 xl:mt-0';
 
 		# Build heading classnames
 		$heading_cls   = array( 'text-center text-teal-dark font-bold' );

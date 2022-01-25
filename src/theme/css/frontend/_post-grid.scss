@@ -3,6 +3,10 @@
     // md
     @apply md:pt-px72;
 
+    .tile-grid-container {
+      @apply mb-0;
+    }
+
     &-heading {
         @apply text-center text-px32 leading-px40 mb-px40 text-teal-dark font-bold;
         // md

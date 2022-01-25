@@ -1,9 +1,21 @@
 .custom-select {
-  @apply flex justify-center;
+  @apply inline-flex justify-center mb-px40 min-h-px50;
+  @apply border-px1 border-solid border-current rounded-px4;
+  @apply px-px30 py-px9;
+  @apply text-teal-dark;
+
+  @screen lg {
+    @apply border-0 py-0 px-0 min-h-0;
+    margin-left: col-offset(1, lg);
+  }
+
+  @screen lg2 {
+    @apply ml-0 mb-px50;
+  }
 
   .label {
-    @apply trevor-ti-chevron-down trevor-ti-after;
-    @apply relative pb-2.5;
+    @apply flex items-center trevor-ti-chevron-down trevor-ti-after;
+    @apply relative;
 
     // Chevron icon
     &:after {
@@ -24,8 +36,7 @@
     }
 
     > button {
-      @apply font-bold text-px20 leading-px30;
-      @apply text-teal-dark;
+      @apply font-bold text-px22 leading-px32 tracking-px05;
       @apply relative;
     }
   }
@@ -75,10 +86,9 @@
     }
   }
 
-  // Research Briefs Archive Page
-  .post-type-archive-trevor_research & {
-    @screen lg-only {
-      @apply ml-px72;
-    }
+  // Adjacent component override
+  + * {
+    margin-top: 0 !important;
   }
+
 }

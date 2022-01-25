@@ -1,11 +1,5 @@
 .post-type-archive {
-  .custom-select {
-    @apply mb-px40;
 
-    @screen xl {
-      @apply mb-px50;
-    }
-  }
 }
 
 @import "./research";

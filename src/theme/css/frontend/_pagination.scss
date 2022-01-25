@@ -75,6 +75,15 @@
 // Numbered pagination
 .number-pagination {
 	@apply flex items-center justify-center;
+  @apply mt-px40;
+
+  @screen md {
+    @apply mt-px70;
+  }
+
+  @screen lg {
+    @apply mt-px60;
+  }
 
 	.page-numbers {
 		@apply w-px30 h-px30 rounded-full overflow-hidden inline-flex items-center justify-center;

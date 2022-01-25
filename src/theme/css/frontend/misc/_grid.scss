@@ -8,14 +8,29 @@ $column-counts: (
   xl: 12,
 );
 
-@mixin col-span( $span: 1, $screen: sm ) {
+// Computes for column span
+@function col-span($span: 1, $screen: sm) {
   $gap: "theme('gap.#{$screen}')";
   $total-columns-count: map-get($column-counts, $screen);
   $total-gaps-count: $total-columns-count - 1;
   $total-gap: "#{$total-gaps-count} * #{$gap}";
 
-  // Apply width
-  width: calc(((100% - (#{$total-gap})) / #{$total-columns-count}) * #{$span} + (#{$gap} * #{$span - 1}));
+  @return calc(((100% - (#{$total-gap})) / #{$total-columns-count}) * #{$span} + (#{$gap} * #{$span - 1}));
 }
 
+// Computes for column offset (used for margin/padding)
+@function col-offset($span: 1, $screen: sm) {
+  $gap: "theme('gap.#{$screen}')";
+  $total-columns-count: map-get($column-counts, $screen);
+  $total-gaps-count: $total-columns-count - 1;
+  $total-gap: "#{$total-gaps-count} * #{$gap}";
+
+  @return calc(((100% - (#{$total-gap})) / #{$total-columns-count}) * #{$span} + (#{$gap} * #{$span - 1}) + #{$gap});
+}
+
+
+@mixin col-span( $span: 1, $screen: sm ) {
+  // Apply width
+  width: col-span($span, $screen);
+}
 
