@@ -209,7 +209,7 @@
 
   // HTML Section
   .htmlSection {
-    @apply col-span-full;
+    @apply col-span-full text-left;
     margin-top: var(--max-scaled-label-height-extra);
     line-height: 1.3;
 
