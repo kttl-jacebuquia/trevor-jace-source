@@ -7,7 +7,7 @@ $bleed-margins: (
   md: calc((100vw - theme('container.screens.md') + (theme('container.padding.md') * 2)) / -2 ),
   lg: calc((100vw - theme('container.screens.lg') + (theme('container.padding.lg') * 2)) / -2 ),
   lg2: calc((100vw - theme('container.screens.lg2') + (theme('container.padding.lg2') * 2)) / -2 ),
-  xl: calc( -1 * theme('container.padding.xl')),
+  xl: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 ),
 );
 
 $single-bleed-widths: (

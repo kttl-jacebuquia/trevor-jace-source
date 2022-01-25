@@ -58,36 +58,14 @@
 
   &__map-container {
     @apply col-span-full relative;
-    @include bleed;
-
-    @screen md {
-      @include bleed(md);
-    }
-
-    @screen lg {
-      @apply col-start-6 col-span-7 -ml-px32;
-      @include bleed-r(lg);
-    }
-
-    @screen lg2 {
-      @apply col-start-5 col-span-8 -ml-px28;
-      @include bleed-r(lg2);
-    }
-
-    @screen xl {
-      margin-right: calc((100vw - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
-    }
-
-    @media only screen and (min-width: 1920px) {
-      margin-right: calc((#{rem-calc(1920px)} - theme('container.screens.xl') + (theme('container.padding.xl') * 2)) / -2 );
-    }
+    @include bleed-always;
   }
 
   &__map {
     min-height: rem-calc(600);
 
     @screen md {
-      min-height: rem-calc(430);
+      min-height: rem-calc(484);
     }
 
     @screen lg {
@@ -95,11 +73,11 @@
     }
 
     @screen lg2 {
-      min-height: rem-calc(586);
+      min-height: rem-calc(670);
     }
 
     @screen xl {
-      min-height: rem-calc(670);
+      min-height: rem-calc(750);
     }
   }
 
@@ -121,17 +99,15 @@
 
   &__download {
     @apply hidden;
-    @apply absolute bottom-px42 transform -translate-x-1/2;
+    @apply absolute top-px40 right-px28;
     @apply overflow-visible;
-    left: 50%;
 
     .ect-map--loaded & {
       @apply block;
     }
 
-    @screen md {
-      @apply bottom-px30 right-px50 translate-x-0;
-      left: auto;
+    @screen xl {
+      @apply top-px30 right-px50;
     }
 
     i {
@@ -153,29 +129,21 @@
   }
 
   &__export-options {
-    @apply absolute left-0 w-full bg-teal-tint hidden bottom-px24 pb-px24;
-    @apply border-l-px1 border-r-px1 border-solid border-teal-dark;
+    @apply w-full hidden absolute left-0 top-px24 pt-px24;
+    @apply border-l-px1 border-r-px1 border-solid border-teal-dark bg-teal-tint;
 
     @screen xl {
-      @apply bottom-px30 pb-px30;
+      @apply top-px30 pt-px30;
     }
   }
 
   &__export {
-    @apply block w-full py-px10 text-center text-teal-dark border-teal-dark border-t-px2 border-solid font-bold;
+    @apply block w-full py-px10 text-center text-teal-dark border-teal-dark border-b-px2 border-solid font-bold;
   }
 
   .highcharts-container {
-    @apply bg-gray-light h-px600 mx-auto;
+    @apply bg-gray-light mx-auto;
     width: 100% !important;
-
-    @screen md {
-      @apply h-px430;
-    }
-
-    @screen xl {
-      @apply h-px670;
-    }
   }
 
   .highcharts-exporting-group {

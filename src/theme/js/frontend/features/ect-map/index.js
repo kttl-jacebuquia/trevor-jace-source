@@ -1,19 +1,13 @@
-import $ from 'jquery';
 import mapRenderer from './renderer';
-import debounce from 'lodash/debounce';
 
 export default function (moduleElement) {
-	const mapForm = moduleElement.querySelector('.ect-map__search');
 	const mapContainer = moduleElement.querySelector('.ect-map__map');
 	const downloadButton = moduleElement.querySelector('.ect-map__download');
-	let stateFilter = '',
-		sheetKey;
+	let sheetKey;
 
 	// Chart-extracted data, update on chart load
 	let chart,
 		statesList,
-		municipalitiesList1,
-		municipalitiesList2,
 		exportDate = '';
 
 	const chartAccessibilityOptions = {
@@ -99,15 +93,9 @@ export default function (moduleElement) {
 			.catch(onSheetsFetchError);
 	};
 
-	function onChartLoaded([
-		chartInstance,
-		[data1, data2, data3],
-		updatedDate,
-	]) {
+	function onChartLoaded([chartInstance, [data1], updatedDate]) {
 		chart = chartInstance;
 		statesList = [...data1];
-		municipalitiesList1 = [...data2];
-		municipalitiesList2 = [...data3];
 		exportDate = updatedDate;
 
 		applyChartAccessibility();
@@ -184,51 +172,6 @@ export default function (moduleElement) {
 			});
 		}
 	}
-
-	function filterMap() {
-		const statePattern = new RegExp(stateFilter, 'i');
-		const filteredStateBySearch = stateFilter
-			? statesList.filter(({ stateName, ...stateData }) =>
-					statePattern.test(stateName)
-			  )
-			: statesList;
-		const matchedStateAbbrevs = filteredStateBySearch.map(({ code }) =>
-			code.split('-')[1].toUpperCase()
-		);
-
-		chart.series.forEach((series, index) => {
-			let seriesData;
-
-			switch (index) {
-				// Filter Municipalities
-				case 1:
-					seriesData = municipalitiesList1.filter(({ ST }) =>
-						matchedStateAbbrevs.includes(ST)
-					);
-					break;
-				case 2:
-					seriesData = municipalitiesList2.filter(({ ST }) =>
-						matchedStateAbbrevs.includes(ST)
-					);
-					break;
-				// Filter states
-				case 3:
-					seriesData = statesList.filter(({ stateName }) =>
-						statePattern.test(stateName)
-					);
-					break;
-			}
-
-			series.setData(seriesData);
-		});
-	}
-
-	function onFormInput() {
-		stateFilter = mapForm.ect_map_search.value;
-		filterMap();
-	}
-
-	mapForm.addEventListener('input', debounce(onFormInput, 300));
 
 	// Get and render map data
 	fetchChartData();

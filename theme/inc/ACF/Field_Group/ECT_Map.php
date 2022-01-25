@@ -55,19 +55,6 @@ class ECT_Map extends A_Field_Group implements I_Block, I_Renderable {
 		?>
 		<div class="ect-map">
 			<div class="ect-map__container">
-				<div class="ect-map__content">
-					<?php if ( ! empty( $title ) ) : ?>
-						<h2 class="ect-map__heading"><?php echo esc_html( $title ); ?></h2>
-					<?php endif; ?>
-
-					<?php if ( ! empty( $description ) ) : ?>
-						<div class="ect-map__description"><?php echo esc_html( $description ); ?></div>
-					<?php endif; ?>
-					<form class="ect-map__search">
-						<input type="search" class="ect-map__search-input" name="ect_map_search" />
-						<button class="ect-map__search-submit trevor-ti-search" aria-label="click to filter map"></button>
-					</form>
-				</div>
 				<div class="ect-map__map-container">
 					<div class="ect-map__map">
 						<div class="w-full h-full flex justify-center items-center bg-gray-light">
