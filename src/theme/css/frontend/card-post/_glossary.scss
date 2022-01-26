@@ -3,15 +3,15 @@
   // NOTE: Manually determine line-clamp values visually.
   .post-desc {
     @apply line-clamp-1;
-    line-clamp: 17;
+    -webkit-line-clamp: 17;
     max-height: none !important;
 
     @screen md {
-      line-clamp: 15;
+      -webkit-line-clamp: 15;
     }
 
     @screen lg {
-      line-clamp: 17;
+      -webkit-line-clamp: 17;
     }
   }
 }

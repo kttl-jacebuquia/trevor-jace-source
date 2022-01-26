@@ -1,5 +1,5 @@
 .card-post.no-thumbnail {
-  &.trevor_rc_article .card-content {
+  &[data-post-type="trevor_rc_article"] .card-content {
     @apply pt-px24;
   }
 
