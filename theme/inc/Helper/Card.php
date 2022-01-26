@@ -6,6 +6,7 @@ use TrevorWP\CPT;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post as PostMeta;
 use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
+use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Card {
 	public static function post( $post, $key = 0, array $options = array() ): string {
@@ -43,10 +44,11 @@ class Card {
 
 		// Determine the type.
 		if ( CPT\RC\Glossary::POST_TYPE === $post_type ) {
-			$title_top  = 'Glossary';
-			$title_btm  = $post->post_excerpt;
-			$desc       = $post->post_content;
-			$title_link = false;
+			$title_top                   = 'Glossary';
+			$title_btm                   = $post->post_excerpt;
+			$desc                        = $post->post_content;
+			$title_link                  = false;
+			$options['hide_cat_eyebrow'] = false;
 		} elseif ( CPT\RC\External::POST_TYPE === $post_type ) {
 			$title_top  = 'Resource';
 			$desc       = $post->post_excerpt;
