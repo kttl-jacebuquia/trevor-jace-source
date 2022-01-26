@@ -114,9 +114,7 @@
       @apply ml-px10;
     }
 
-    &:focus,
-    &:focus-within,
-    &:hover {
+    &--expanded {
       .ect-map__export-options {
         @apply block;
       }

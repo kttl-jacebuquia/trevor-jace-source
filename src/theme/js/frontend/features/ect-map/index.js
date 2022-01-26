@@ -1,5 +1,7 @@
 import mapRenderer from './renderer';
 
+const DOWNLOAD_BUTTON_CLASS_EXPANDED = 'ect-map__download--expanded';
+
 export default function (moduleElement) {
 	const mapContainer = moduleElement.querySelector('.ect-map__map');
 	const downloadButton = moduleElement.querySelector('.ect-map__download');
@@ -130,6 +132,11 @@ export default function (moduleElement) {
 	}
 
 	function applyExporting() {
+		downloadButton.addEventListener('click', onDownloadClick);
+		document.body.addEventListener('click', () =>
+			toggleDownloadOptions(false)
+		);
+
 		const exportButtons = Array.from(
 			downloadButton.querySelectorAll('[data-export-type]')
 		);
@@ -137,6 +144,25 @@ export default function (moduleElement) {
 		exportButtons.forEach((button) => {
 			button.addEventListener('click', onExportClick);
 		});
+	}
+
+	function onDownloadClick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		toggleDownloadOptions();
+	}
+
+	function toggleDownloadOptions(willExpand = null) {
+		const shouldExpand =
+			typeof willExpand === 'boolean'
+				? willExpand
+				: !downloadButton.classList.contains(
+						DOWNLOAD_BUTTON_CLASS_EXPANDED
+				  );
+		downloadButton.classList.toggle(
+			DOWNLOAD_BUTTON_CLASS_EXPANDED,
+			shouldExpand
+		);
 	}
 
 	// Export functionalities
