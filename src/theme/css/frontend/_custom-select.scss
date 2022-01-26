@@ -1,16 +1,36 @@
 .custom-select {
-  @apply inline-flex justify-center mb-px40 min-h-px50;
+  @apply inline-flex justify-center mb-px40 min-h-px50 relative;
   @apply border-px1 border-solid border-current rounded-px4;
   @apply px-px30 py-px9;
   @apply text-teal-dark;
 
   @screen lg {
-    @apply border-0 py-0 px-0 min-h-0;
     margin-left: col-offset(1, lg);
   }
 
   @screen lg2 {
     @apply ml-0 mb-px50;
+  }
+
+  // Pseudo element just to add some element between the label and the dropdown.
+  // This allows hover to still work in the space between, where there is no element present.
+  &::after {
+    @apply block absolute -bottom-px20 left-0 w-full h-px20;
+    content: '';
+  }
+
+  &:hover {
+    .label {
+      &:after {
+        transform: rotate(180deg);
+        @apply mt-0;
+        margin-bottom: rem-calc(11px);
+      }
+    }
+
+    .dropdown {
+      @apply visible;
+    }
   }
 
   .label {
@@ -22,7 +42,6 @@
       @apply text-teal-dark font-bold text-px14 mt-3 ml-2;
     }
 
-    &:hover,
     &.show {
       &:after {
         transform: rotate(180deg);
@@ -31,7 +50,8 @@
       }
 
       .dropdown {
-        @apply flex;
+        @apply visible;
+        transition: visibility .3s .1s;
       }
     }
 
@@ -42,13 +62,13 @@
   }
 
   .dropdown {
-    @apply absolute top-full hidden;
+    @apply absolute top-full flex invisible;
     @apply rounded-px10 overflow-hidden;
-    @apply flex-col;
-    @apply z-2;
+    @apply flex-col mt-px20;
+    @apply z-2 border-solid border-px1 border-teal-dark;
     box-shadow: 0px 0px #{rem-calc(8px)} #{rem-calc(2px)} rgba(0, 58, 72, 0.14);
     width: calc(100vw - 30px);
-    left: rem-calc(-36px);
+    left: rem-calc(-45);
 
     li {
       @apply font-semibold text-px20 leading-px30 text-teal-dark bg-white;
@@ -70,7 +90,7 @@
     .dropdown {
       @apply flex-auto;
       width: 130%;
-      left: rem-calc(-18px);
+      left: rem-calc(-45);
 
       li {
         @apply px-5;
