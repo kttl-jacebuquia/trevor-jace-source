@@ -537,11 +537,11 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						<?php endforeach; ?>
 					</div>
 					<?php if ( 'carousel' === $layout ) : ?>
-						<?php echo static::render_carousel_pagination(); ?>
+						<?php echo static::render_carousel_navigation(); ?>
 					<?php endif; ?>
 				</div>
 				<?php if ( 'carousel' === $layout ) : ?>
-					<div class="swiper-pagination"></div>
+					<?php echo static::render_carousel_pagination(); ?>
 				<?php endif; ?>
 				<?php if ( $show_load_more && count( $posts ) > 0 ) : ?>
 					<div class="topic-cards__block-cta-wrap">
@@ -656,7 +656,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					<?php endif; ?>
 				</div>
 				<?php if ( 'carousel' === $layout ) : ?>
-					<div class="swiper-pagination"></div>
+					<?php echo static::render_carousel_pagination(); ?>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php
@@ -734,7 +734,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		return $args;
 	}
 
-	public static function render_carousel_pagination() {
+	public static function render_carousel_navigation() {
 		$swiper_button_class = array( 'swiper-button' );
 
 		// mobile
@@ -759,6 +759,35 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 					<i class="trevor-ti-arrow-right"></i>
 				</button>
 			</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	public static function render_carousel_pagination() {
+		$pagination_class = array( 'swiper-pagination' );
+
+		// mobile
+		if ( static::$entries_count <= 1 ) {
+			$pagination_class[] = 'hidden';
+		}
+
+		// tablet
+		if ( static::$entries_count > 2 ) {
+			$pagination_class[] = 'md:inline-flex';
+		} else {
+			$pagination_class[] = 'md:hidden';
+		}
+
+		// desktop
+		if ( static::$entries_count > 3 ) {
+			$pagination_class[] = 'lg:inline-flex';
+		} else {
+			$pagination_class[] = 'lg:hidden';
+		}
+
+		ob_start();
+		?>
+			<div class="<?php echo implode( ' ', $pagination_class ); ?>"></div>
 		<?php
 		return ob_get_clean();
 	}

@@ -1,4 +1,7 @@
-.card-post.trevor_rc_glossary {
+.card-post[data-post-type="trevor_rc_glossary"] {
+  .card-text-container {
+    @apply pt-px34 pb-5;
+  }
 
   // NOTE: Manually determine line-clamp values visually.
   .post-desc {
