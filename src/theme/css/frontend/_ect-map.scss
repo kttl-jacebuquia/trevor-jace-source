@@ -1,5 +1,5 @@
 .ect-map {
-  @apply bg-blue_green text-white;
+  @apply bg-gray-light text-white;
 
   &__container {
     @apply container mx-auto;
@@ -62,9 +62,12 @@
   }
 
   &__map {
-    min-height: rem-calc(600);
+    @apply h-full;
+    min-height: rem-calc(600 + 106); // 106px being the total space required for download button + spacing
+    padding-bottom: rem-calc(106);
 
     @screen md {
+      @apply pb-0;
       min-height: rem-calc(484);
     }
 
@@ -81,33 +84,21 @@
     }
   }
 
-  &__search {
-    @apply mt-px30 flex items-center w-full relative text-teal-dark;
-
-    @screen xl {
-      @apply mt-px50;
-    }
-  }
-
-  &__search-input {
-    @apply h-px60 flex items-center appearance-none border-0 rounded-px10 w-full pl-px58;
-  }
-
-  &__search-submit {
-    @apply absolute top-0 left-0 h-full text-px20 flex items-center pl-px28 pr-px10;
-  }
-
   &__download {
     @apply hidden;
-    @apply absolute top-px40 right-px28;
+    @apply absolute bottom-px30 left-1/2 transform -translate-x-1/2;
     @apply overflow-visible;
 
-    .ect-map--loaded & {
-      @apply block;
+    @screen md {
+      @apply top-px40 right-px28 bottom-auto left-auto translate-x-0;
     }
 
     @screen xl {
       @apply top-px30 right-px50;
+    }
+
+    .ect-map--loaded & {
+      @apply block;
     }
 
     i {
