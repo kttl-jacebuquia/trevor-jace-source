@@ -204,6 +204,7 @@
 
   &__item-eyebrow {
     @apply text-px14 leading-px18 tracking-px05 mb-px18 uppercase;
+    @apply overflow-ellipsis whitespace-nowrap overflow-hidden;
   }
 
   &__item-title {
@@ -346,10 +347,6 @@
 
     .swiper-pagination {
       @apply w-full mt-px50;
-
-      @screen xl {
-        @apply flex;
-      }
     }
 
     .swiper-pagination-bullet {

@@ -50,10 +50,6 @@
     @apply mt-px24 lg:mt-px28;
   }
 
-  &.type-trevor_rc_glossary .card-text-container {
-    @apply pt-px34 pb-5;
-  }
-
   :is(&.fundraiser, &.type-trevor_fund_story) {
     &:hover {
       .post-thumbnail-wrap img {
