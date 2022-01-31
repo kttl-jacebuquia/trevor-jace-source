@@ -59,6 +59,15 @@
   &__map-container {
     @apply col-span-full relative;
     @include bleed-always;
+
+    @screen lg {
+      @apply relative min-h-0;
+      padding-top: calc( 100vw * 800 / 1440 );
+    }
+
+    @screen xl {
+      padding-top: rem-calc(720);
+    }
   }
 
   &__map {
@@ -68,19 +77,12 @@
 
     @screen md {
       @apply pb-0;
-      min-height: rem-calc(484);
+      min-height: rem-calc(800);
     }
 
     @screen lg {
-      min-height: rem-calc(616);
-    }
-
-    @screen lg2 {
-      min-height: rem-calc(670);
-    }
-
-    @screen xl {
-      min-height: rem-calc(750);
+      @apply absolute min-h-0 top-px50 left-0 right-0;
+      height: calc(100% - #{rem-calc(100)});
     }
   }
 
