@@ -36,13 +36,13 @@ class Listing {
 
 	showItems() {
 		const activeFilters = getActiveFilters(this.$context);
-		const itemClass = this.generateClass(activeFilters);
+		const itemSelector = this.generateSelector(activeFilters);
 		this.$context
-			.find(`${this.selector}__item${itemClass}`)
+			.find(`${this.selector}__item${itemSelector}`)
 			.addClass('show');
 	}
 
-	generateClass(activeFilters) {
+	generateSelector(activeFilters) {
 		const classes = [];
 		for (const filterGroup in activeFilters) {
 			const filterItems = activeFilters[filterGroup];
@@ -53,7 +53,9 @@ class Listing {
 				}
 			});
 		}
-		return classes.length ? `.${classes.join('.')}` : '';
+		return classes.length
+			? classes.map((_class) => `[class*="${_class}"]`)
+			: '';
 	}
 }
 
