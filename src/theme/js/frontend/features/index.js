@@ -47,3 +47,4 @@ import './jump-links';
 import './g-recaptcha';
 import './faqs';
 import './carousel/auto-width-image';
+import './skip-to-main';

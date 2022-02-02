@@ -29,7 +29,13 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_BOTTOM' ); ?>
 </head>
 <body <?php body_class( 'on-top' ); ?>>
+
+<?php /* Skip to main */ ?>
+<a href="#site-content" id="skip-to-main" class="page-btn page-btn-primary text-white absolute top-0 left-0 z-0 focus:z-9999">Skip to main</a>
+
 <?php echo Options_Page\External_Scripts::get_external_script( 'BODY_TOP' ); ?>
+
+
 <!--[if IE]>
 <p class="browserupgrade">
 	You are using an <strong>outdated</strong> browser.
@@ -40,6 +46,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<?php echo Main_Header::render_logo_sprite(); ?>
 
 	<?php $gradient_type = \TrevorWP\Theme\Util\Tools::get_body_gradient_type(); ?>
+
 	<?php if ( ! empty( $gradient_type ) ) { ?>
 		<div id="bg-wrap">
 			<div id="bg-gradient" class="gradient-type-<?php echo esc_attr( $gradient_type ); ?>"></div>

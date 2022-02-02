@@ -58,6 +58,12 @@ body:not(.on-top) {
         @apply pointer-events-auto;
       }
 
+      > .main-menu > .menu-item {
+        @screen lg {
+          @apply opacity-100 visible;
+        }
+      }
+
       > .main-menu > .menu-item > a > .menu-link-text {
         @screen lg {
           @apply translate-y-0;
@@ -75,7 +81,7 @@ body:not(.on-top) {
 
     .topbar-control-search {
       @screen lg2 {
-        @apply translate-y-0;
+        @apply translate-y-0 visible opacity-100;
       }
     }
 

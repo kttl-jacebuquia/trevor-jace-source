@@ -11,7 +11,7 @@ $after_post_content = \TrevorWP\Theme\Helper\Post::render_after_post( $post );
 get_header();
 ?>
 
-<main id="site-content" role="main" class="<?php echo apply_filters( 'main_class', 'site-content' ); ?>">
+<main role="main" class="<?php echo apply_filters( 'main_class', 'site-content' ); ?>" tabindex="0" id="site-content">
 	<div class="site-content-inner">
 		<article <?php post_class( array( 'post-single' ) ); ?> id="post-<?php the_ID(); ?>">
 			<?php echo \TrevorWP\Theme\Helper\Post_Header::render( $post ); ?>
