@@ -36,7 +36,7 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 					'type'          => 'button_group',
 					'required'      => 1,
 					'default_value' => 'big',
-					'choices'  => array(
+					'choices'       => array(
 						'big'   => 'Big',
 						'small' => 'Small',
 					),
@@ -120,13 +120,12 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 								),
 							)
 						);
-					}
-					else {
+					} else {
 						echo Helper\Carousel::auto_width_img(
 							$gallery_entries,
 							array(
-								'title'  => $title,
-								'class'  => array(),
+								'title' => $title,
+								'class' => array(),
 							)
 						);
 					}
