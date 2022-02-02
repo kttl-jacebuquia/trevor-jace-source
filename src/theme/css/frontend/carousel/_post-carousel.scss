@@ -160,7 +160,7 @@
   }
 
   .swiper-button {
-    @apply w-px100;
+    @apply w-0 overflow-visible;
     --carousel-left-padding: 0;
 
     $breakpoints: lg, lg2, xl, 2xl;
