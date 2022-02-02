@@ -81,12 +81,16 @@
 
 	&__navigation {
 		@apply relative overflow-hidden w-full mt-px12;
-		@apply bg-white border border-teal-dark rounded-px10 overflow-auto;
+		@apply bg-white border border-teal-dark rounded-px4 overflow-auto;
     max-height: rem-calc(310);
 
 		&__item {
 			@apply text-center py-px22 px-px14;
 			@apply cursor-pointer;
+
+      &:not(:first-child) {
+        @apply border-t-px1 border-solid border-teal-tint;
+      }
 
 			@screen md {
 				@apply text-left px-px20;
