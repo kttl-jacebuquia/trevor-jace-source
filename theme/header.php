@@ -161,7 +161,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				?>
 
 				<a role="button" aria-label="click to search in the website" class="search-button" href="<?php echo get_search_link(); ?>">
-					<i class="trevor-ti-search" aria-hidden></i>
+					<i class="trevor-ti-search" aria-hidden="true"></i>
 				</a>
 			</div>
 		</div>
