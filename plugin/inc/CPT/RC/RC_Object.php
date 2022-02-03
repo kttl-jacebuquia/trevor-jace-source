@@ -678,6 +678,7 @@ abstract class RC_Object {
 		$args = array(
 			's'           => $search,
 			'exact'       => true,
+			'sentence'    => true,
 			'post_type'   => Glossary::POST_TYPE,
 			'post_status' => 'publish',
 		);
