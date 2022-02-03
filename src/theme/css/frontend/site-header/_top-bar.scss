@@ -181,7 +181,7 @@
 
 		> .main-menu > .menu-item {
 			@screen lg {
-				@apply px-0 py-px18;
+				@apply px-0 py-px18 opacity-0 invisible;
 
 				&:not(:first-child) {
 					@apply ml-px24;
@@ -290,7 +290,7 @@
 		@apply transition-all duration-300 ease-out invisible opacity-0;
 
 		@screen lg {
-			@apply transform-gpu translate-y-full visible opacity-100;
+			@apply transform-gpu translate-y-full invisible opacity-0;
 			@apply bg-transparent text-indigo;
 			@apply mx-0;
 			@apply hover:opacity-80;

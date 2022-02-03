@@ -21,7 +21,7 @@ if ( empty( get_query_var( Search::QV_SEARCH_SCOPE ) ) ) {
 }
 ?>
 <?php get_header(); ?>
-	<main id="site-content" role="main">
+	<main role="main" tabindex="0" id="site-content">
 		<?php // TODO: Add header ?>
 		<div class="bg-gray-light">
 			<div class="container mx-auto text-center text-indigo py-20">

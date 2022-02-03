@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main id="site-content" role="main" class="site-content">
+<main role="main" class="site-content" tabindex="0" id="site-content">
 	<div class="site-content-inner">
 		<article <?php post_class( array( 'post-single' ) ); ?> id="post-<?php the_ID(); ?>">
 			<?php echo \TrevorWP\Theme\Helper\Post_Header::render( $post ); ?>

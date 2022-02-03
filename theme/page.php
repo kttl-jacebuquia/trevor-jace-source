@@ -4,8 +4,8 @@
 while ( have_posts() ) :
 	the_post();
 	?>
-	<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Header::render(); ?>
-	<main id="site-content" class="bg-white" role="main">
+	<main class="bg-white" role="main" tabindex="0" id="site-content">
+		<?php echo \TrevorWP\Theme\ACF\Field_Group\Page_Header::render(); ?>
 		<?php the_content(); ?>
 	</main>
 <?php endwhile; // end of the loop. ?>

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main id="site-content" role="main">
+<main role="main" tabindex="0" id="site-content">
 	<div class="container mx-auto">
 		<div class="trevor-grid-default-container">
 			<div class="flex flex-col text-center items-center text-white mb-8 md:items-start md:text-left">
