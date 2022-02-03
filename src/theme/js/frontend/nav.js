@@ -9,6 +9,7 @@ const $body = $('body');
 const $navOpener = $('.topbar-control-opener,.opener');
 const $navCloser = $('.burger-nav-control-close');
 const $burgerNav = $('.burger-nav');
+const $burgerNavControls = $('.burger-nav-controls');
 const $ctaLinks = $('.cta-wrap');
 const $switcher = $('.switcher-wrap', $burgerNav);
 const $switcherLinks = $switcher.find('a');
@@ -31,6 +32,9 @@ let isLargeBreakpoint = false;
 // Will store last scroll value before scroll fixing
 let fixedBodyScroll = 0;
 
+// Save last focused element before nav expands
+let lastFocusedElement;
+
 const isBodyOnTop = throttle(() => {
 	const { top } = $topNav.offset();
 
@@ -44,9 +48,11 @@ const isBodyOnTop = throttle(() => {
 	]('on-top');
 	$body.removeClass('is-not-scrolling');
 }, 100);
+
 const isScrolling = debounce(() => {
 	$body.addClass('is-not-scrolling');
 }, 2000);
+
 const toggleNav = (willOpen) => {
 	const navWillOpen =
 		typeof willOpen === 'boolean'
@@ -64,13 +70,26 @@ const toggleNav = (willOpen) => {
 			.style.setProperty('--fixed-body-top', `-${fixedBodyScroll}px`);
 		$body.addClass('is-fixed');
 
-		$topbarLogo
-			.add($navLogo)
-			.add($navOpener)
-			.attr({
-				['aria-hidden']: true,
-				tabindex: -1,
-			});
+		// Save last focused element
+		lastFocusedElement = document.activeElement;
+
+		// Hide everything from screenreaders except burger menu and controls
+		[...document.body.children].forEach((child) => {
+			if (!/burger-nav/i.test(child.className)) {
+				// Retain aria-hidden attribute from elements that already have it
+				if (child.getAttribute('aria-hidden') === 'true') {
+					child.dataset.retainAriaHidden = true;
+				} else {
+					child.setAttribute('aria-hidden', true);
+				}
+			}
+		});
+
+		// Focus on first focusable element within burger nav controls
+		setTimeout(
+			() => $burgerNavControls.get(0).firstElementChild?.focus(),
+			300
+		);
 	} else {
 		$body.removeClass('is-fixed');
 		$root.get(0).style.setProperty('--fixed-body-top', `0px`);
@@ -79,13 +98,16 @@ const toggleNav = (willOpen) => {
 		window.scrollTo(0, fixedBodyScroll);
 		$root.css('scroll-behavior', '');
 
-		$topbarLogo
-			.add($navLogo)
-			.add($navOpener)
-			.attr({
-				['aria-hidden']: null,
-				tabindex: null,
-			});
+		// Show previously hidden elements
+		[...document.body.children].forEach((child) => {
+			if (!child.dataset.retainAriaHidden) {
+				child.removeAttribute('aria-hidden');
+			}
+		});
+
+		if (lastFocusedElement instanceof window.HTMLElement) {
+			lastFocusedElement.focus();
+		}
 	}
 };
 const onBurgerClick = (e) => {
@@ -145,12 +167,16 @@ const onTier1LinkClick = (e) => {
 	e.preventDefault();
 
 	const $menuItemParent = $(e.currentTarget).parent();
+	const $submenu = $menuItemParent.find('.sub-menu');
 	const $currentActiveMenuItem = $tier1Links.filter('.active');
 
 	// Update new active menu item
 	if ($menuItemParent[0] !== $currentActiveMenuItem[0]) {
 		$menuItemParent.addClass('active');
 		$currentActiveMenuItem.removeClass('active');
+		setTimeout(() => {
+			$submenu.get(0).querySelector('a')?.focus();
+		}, 300);
 	}
 
 	// Tier2 view state
@@ -162,8 +188,10 @@ const onBackToTier1Click = (e) => {
 };
 const resetNavState = () => {
 	const $currentActiveMenuItem = $tier1Links.filter('.active');
+	const menuItemLink = $currentActiveMenuItem.get(0)?.firstElementChild;
 	$burgerNav.removeClass('tier-two-visible');
 	$currentActiveMenuItem.removeClass('active');
+	setTimeout(() => menuItemLink?.focus(), 300);
 };
 // Adds click-to-close for nav background blur
 const navBlur = () => {

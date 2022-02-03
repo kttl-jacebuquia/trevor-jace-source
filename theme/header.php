@@ -57,10 +57,10 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 
 	<?php /* Controls for expanded nav menu */ ?>
 	<div class="burger-nav-controls">
-		<a class="btn burger-nav-control burger-nav-control-search" href="<?php echo get_search_link(); ?>">
+		<a class="btn burger-nav-control burger-nav-control-search" href="<?php echo get_search_link(); ?>" aria-label="click to search the site">
 			<i class="trevor-ti-search"></i>
 		</a>
-		<button class="btn burger-nav-control burger-nav-control-close">
+		<button class="btn burger-nav-control burger-nav-control-close" aria-label="click to close burger navigation">
 			<i class="trevor-ti-nav-close"></i>
 		</button>
 	</div>
@@ -124,7 +124,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<div id="top-nav" class="top-nav" role="navigation">
 		<div class="top-nav-inner container <?php echo $nav_color; ?>">
 			<div class="logo-wrap">
-				<a href="<?php echo get_home_url(); ?>" class="logo" rel="home">
+				<a href="<?php echo get_home_url(); ?>" class="logo" rel="home" aria-label="trevor logo, click to go to the homepage">
 					<?php echo Main_Header::render_logo(); ?>
 				</a>
 			</div>
@@ -143,7 +143,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 			</div>
 
 			<div class="opener-wrap">
-				<button type="button" class="opener"><i class="trevor-ti-hamburger-menu"></i></button>
+				<button type="button" class="opener" aria-label="click to open navigation menu"><i class="trevor-ti-hamburger-menu"></i></button>
 			</div>
 
 			<div class="menu-wrap flex items-start <?php echo $nav_color; ?>">
@@ -152,7 +152,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					array(
 						'container_class' => 'main-menu-container main-menu-container-resources',
 						'theme_location'  => 'header-support',
-						'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
+						'items_wrap'      => '<ul role="nav" class="main-menu ' . $nav_color . '">%3$s</ul>',
 					)
 				);
 				?>
@@ -162,7 +162,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					array(
 						'container_class' => 'main-menu-container main-menu-container-organization',
 						'theme_location'  => 'header-organization',
-						'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
+						'items_wrap'      => '<ul role="nav" class="main-menu ' . $nav_color . '">%3$s</ul>',
 					)
 				);
 				?>
@@ -204,7 +204,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				array(
 					'container_class' => 'main-menu-container main-menu-container-resources',
 					'theme_location'  => 'header-support',
-					'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
+					'items_wrap'      => '<ul role="navigation" class="main-menu ' . $nav_color . '">%3$s</ul>',
 				)
 			);
 			?>
@@ -214,7 +214,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				array(
 					'container_class' => 'main-menu-container main-menu-container-organization',
 					'theme_location'  => 'header-organization',
-					'items_wrap'      => '<ul class="main-menu ' . $nav_color . '">%3$s</ul>',
+					'items_wrap'      => '<ul role="navigation" class="main-menu ' . $nav_color . '">%3$s</ul>',
 				)
 			);
 			?>
