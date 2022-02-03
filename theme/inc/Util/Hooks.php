@@ -953,6 +953,22 @@ class Hooks {
 			$atts['class'] = 'tcb-link';
 		}
 
+		if ( empty( $item->menu_item_parent ) ) {
+			// Primary menu labels.
+			$atts['aria-label'] = 'Click to get to ' . $item->post_title;
+		} else {
+			// Secondary menu links.
+			if ( 'custom' === $item->object ) {
+				if ( ! empty( $item->post_title ) ) {
+					$atts['aria-label'] = 'Click to ' . $item->post_title;
+				}
+			} else {
+				if ( ! empty( $item->post_title ) || ! empty( $item->title ) ) {
+					$atts['aria-label'] = 'Click to get to ' . ( $item->post_title ? $item->post_title : $item->title );
+				}
+			}
+		}
+
 		return $atts;
 	}
 

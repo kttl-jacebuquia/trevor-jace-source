@@ -4,6 +4,10 @@
 	}
 
   &-dialog {
+    &:not(.ch2-visible) {
+      @apply invisible opacity-0;
+    }
+
     &-actions {
       div {
         flex-direction: column;
