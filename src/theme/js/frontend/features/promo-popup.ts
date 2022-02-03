@@ -20,6 +20,7 @@ class PromoPopup {
 	static $content: JQuery<String>;
 	static $innerLinks: JQuery;
 	static modal: typeof Modal;
+	static lastActiveElement: HTMLElement | null;
 
 	static selector = '.promo-popup-modal';
 	static innerLinksSelector = 'a[href]';
@@ -95,15 +96,23 @@ class PromoPopup {
 
 	static onInit(_modal: Modal) {
 		this.modal = _modal;
+		this.lastActiveElement =
+			document.activeElement !== document.body
+				? document.activeElement
+				: null;
 	}
 
 	static onClose() {
+		const toFocus =
+			this.lastActiveElement ||
+			(document.getElementById('skip-to-main') as HTMLElement);
 		const dismissedPromos = this.getDismissedPromos();
 		dismissedPromos.push(this.promoID);
 		window.localStorage.setItem(
 			POPUP_MODAL_DISMISSED_KEY,
 			dismissedPromos.join(',')
 		);
+		toFocus.focus();
 	}
 
 	// Fetches for the available promo popup for the current page

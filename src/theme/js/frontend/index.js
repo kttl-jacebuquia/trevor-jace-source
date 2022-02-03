@@ -98,17 +98,26 @@ if ($quickExitModal.length) {
 
 	if (willShowModal) {
 		willDelayPromo = true;
+		let lastActiveElement;
 
 		// Set the timeout longer if the page is scrolling
 		// through contents (URL with hash).
 		const modalTimeout = window.location.hash.length ? 1000 : 500;
 		const options = {
 			onInit(modal) {
+				lastActiveElement =
+					document.activeElement !== document.body
+						? document.activeElement
+						: null;
 				setTimeout(() => modal.open(), modalTimeout);
 			},
 			onClose({ initiator }) {
-				localStorage.setItem('quick-exit-modal-dismissed', true);
+				window.localStorage.setItem('quick-exit-modal-dismissed', true);
 				features.PromoPopup.showWhenAvailable(willDelayPromo);
+				const toFocus =
+					lastActiveElement ||
+					document.getElementById('skip-to-main');
+				toFocus?.focus();
 			},
 		};
 
@@ -235,11 +244,11 @@ features.collapsible($('.js-accordion'), {});
 				.split(',')
 				.slice(0, -1) || [];
 		const tags =
-				$("input[name='rc-search--tags']")
-					.val()
-					?.trim()
-					.split(',')
-					.slice(0, -1) || [];
+			$("input[name='rc-search--tags']")
+				.val()
+				?.trim()
+				.split(',')
+				.slice(0, -1) || [];
 		const searchCancelIcon = $('.icon-search-cancel');
 		const maxInputSize = 35;
 		const form = $('.search-form');
