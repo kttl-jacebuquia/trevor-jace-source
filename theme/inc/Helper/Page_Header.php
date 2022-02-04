@@ -587,7 +587,7 @@ class Page_Header {
 						<?php endforeach; ?>
 					</div>
 					<aside class="page-header__bottom">
-						<button class="page-header__scroll-down trevor-ti-chevron-down animate-bounce bouncing-arrow"></button>
+						<button aria-label="click to scroll down the page" class="page-header__scroll-down trevor-ti-chevron-down animate-bounce bouncing-arrow"></button>
 					</aside>
 				</div>
 			</div>

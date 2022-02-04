@@ -90,7 +90,7 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 						<p class="breathing-exercise__description"><?php echo esc_html( $description ); ?></p>
 					<?php endif; ?>
 					<?php if ( ! empty( $cta_text ) ) : ?>
-						<button class="<?php echo esc_attr( implode( ' ', $cta_class ) ); ?>" type="button">
+						<button class="<?php echo esc_attr( implode( ' ', $cta_class ) ); ?>" type="button" aria-label="click here to start the breathing exercise">
 							<?php echo $cta_text; ?>
 						</button>
 					<?php endif; ?>
