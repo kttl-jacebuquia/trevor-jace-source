@@ -76,6 +76,10 @@
       z-index: var(--z-index-nav-switcher);
       background-color: rgba(16, 16, 102, 0.04);
 
+      @screen mobile {
+        @apply overflow-x-auto;
+      }
+
       > li {
         @apply bg-white flex-1;
         line-height: rem-calc(16);
@@ -277,15 +281,25 @@
     will-change: transform;
     justify-items: center;
 
+    @screen mobile {
+      @apply px-px10;
+    }
+
     // Landscape mobile-tablet
     @media (orientation: landscape) {
       @apply static mt-px20;
     }
 
     .btn {
-      @apply rounded-px100 h-px52 w-px240 bg-white text-orange;
-      @apply text-px20 leading-px20 font-bold py-0 whitespace-nowrap;
+      @apply rounded-px100 min-h-px52 h-auto bg-white text-orange;
+      @apply text-px20 leading-px20 font-bold py-0 text-center px-px24;
       box-sizing: border-box;
+
+      @screen md-max {
+        // Capitalizing CSS min() in order for sass to not evaluate
+        // https://css-tricks.com/when-sass-and-new-css-features-collide/
+        width: Min( #{rem-calc(240)}, 100% );
+      }
 
       &.bg-orange {
         @apply bg-orange text-white;
