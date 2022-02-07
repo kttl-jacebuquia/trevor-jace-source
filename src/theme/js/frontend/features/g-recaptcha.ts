@@ -23,8 +23,34 @@ const onMutation = (mutations: MutationRecord[]) => {
 				possibleRecaptchaIframe.classList.add(
 					'g-recaptcha-image-select-container'
 				);
+				possibleRecaptchaIframe.parentElement?.classList.add(
+					'g-recaptcha-image-select-container-parent'
+				);
+				onRecaptchaRendered();
 			}
 		});
+	});
+};
+
+// Runs after we determine that a recaptcha validation has been added into the page
+const onRecaptchaRendered = () => {
+	// Recaptcha root element is a classless child of the body
+	const bodyChildren: Element[] = Array.from(document.body.children).filter(
+		(childElement: Element) =>
+			childElement instanceof window.HTMLDivElement &&
+			!childElement.className
+	);
+
+	bodyChildren.forEach((possibleRecaptchaRoot) => {
+		if (
+			possibleRecaptchaRoot.querySelector(
+				'.g-recaptcha-image-select-container'
+			)
+		) {
+			possibleRecaptchaRoot.classList.add(
+				'g-recaptcha-image-select-root'
+			);
+		}
 	});
 };
 
