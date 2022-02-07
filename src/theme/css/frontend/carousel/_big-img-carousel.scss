@@ -10,6 +10,21 @@
     @apply pl-0;
   }
 
+  .carousel-wrap {
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    overflow: visible;
+    will-change: transform;
+  }
+
+  .swiper-wrapper {
+    transform-style: flat;
+    overflow: visible;
+    will-change: transform;
+  }
+
   .swiper-slide {
     @apply text-center;
 
@@ -85,6 +100,14 @@
     .carousel-title {
       @apply text-px40 leading-px50;
     }
+
+    .carousel-header {
+      // Using :is to increase specificity without the need for !important
+      :is(.page-sub-title.centered) {
+        @apply col-start-1 col-span-full text-center;
+      }
+    }
+
 
     .swiper-slide {
       figcaption {
