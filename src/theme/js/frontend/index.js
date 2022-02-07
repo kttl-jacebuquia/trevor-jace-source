@@ -22,7 +22,7 @@ const isCardPresent = $('.card-collection');
 const auditSlider = document.querySelectorAll('.audit-container');
 const isNavigator = document.querySelectorAll('.charity-navigator-container');
 const inputSearchField = $('#rc-search-main');
-const bigImageCarousels = $('.big-img-carousel.body-carousel');
+const bigImageCarousels = $('.big-img-carousel');
 const isPhoneField = $('.phone-number-format') ? true : false;
 const $showAllTilesBtn = $(
 	'.tile-grid-container + .view-all-container .view-all-cta'
@@ -208,20 +208,35 @@ if (isCardPresent) {
 }
 
 (() => {
+	console.log({ bigImageCarousels });
 	if (bigImageCarousels.length) {
 		$.each(bigImageCarousels, (index, element) => {
-			const swiper = $(
-				'.carousel-container.swiper-container-initialized',
-				element
-			);
-			if (swiper.length) {
-				const leftPaneSelector = '.swiper-button-prev';
-				const rightPaneSelector = '.swiper-button-next';
-				features.generateSwiperArrows(
-					leftPaneSelector,
-					rightPaneSelector,
-					element
-				);
+			const $swiper = $('.carousel-container', element);
+
+			console.log({ $swiper });
+
+			const onMutate = (mutations, observer) => {
+				if ($swiper.hasClass('swiper-container-initialized')) {
+					observer.disconnect();
+					onSwiperInitialized();
+				}
+			};
+
+			const onSwiperInitialized = () => {
+				const swiperInstance = $swiper.get(0)?.swiper;
+
+				if (swiperInstance) {
+					swiperInstance.on('slideChangeTransitionEnd', () => {
+						swiperInstance.slides[
+							swiperInstance.activeIndex
+						].focus();
+					});
+				}
+			};
+
+			if ($swiper.length) {
+				const observer = new window.MutationObserver(onMutate);
+				observer.observe($swiper.get(0), { attributes: true });
 			}
 		});
 	}
