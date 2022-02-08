@@ -94,7 +94,7 @@ $screen-widths: (
       @apply pt-0;
     }
 
-    + main > :first-child {
+    + * {
       @apply pt-px590 mt-0;
 
       @screen md {
@@ -102,7 +102,7 @@ $screen-widths: (
       }
 
       @screen lg {
-        @apply pt-px250;
+        @apply pt-px270;
       }
 
       @screen lg2 {
@@ -126,15 +126,15 @@ $screen-widths: (
 
     @screen lg {
       padding-top: $top-nav-height-desktop;
-      padding-bottom: 588px;
+      padding-bottom: rem-calc(588);
     }
 
     @screen lg2 {
-      padding-bottom: rem-calc(729);
+      padding-bottom: rem-calc(700);
     }
 
     @screen xl {
-      @apply pb-px907;
+      padding-bottom: rem-calc(850);
     }
   }
 }
