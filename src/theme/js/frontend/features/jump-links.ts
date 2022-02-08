@@ -24,6 +24,7 @@ if (getComputedStyle(document.body).scrollBehavior !== 'smooth') {
 		const sectionSelector: string = `#${hrefSegments[1]}`;
 		const $targetSection = $(sectionSelector);
 
+		// TODO: Leverage global-ui's scrollIntoView module
 		if ($targetSection.length) {
 			// Get section's scroll amount
 			const targetScroll =
