@@ -213,6 +213,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					'container_class' => 'main-menu-container main-menu-container-resources',
 					'theme_location'  => 'header-support',
 					'items_wrap'      => '<ul role="navigation" class="main-menu ' . $nav_color . '">%3$s</ul>',
+					'menu_id'         => 'burger-menu-resources',
 				)
 			);
 			?>
@@ -223,6 +224,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					'container_class' => 'main-menu-container main-menu-container-organization',
 					'theme_location'  => 'header-organization',
 					'items_wrap'      => '<ul role="navigation" class="main-menu ' . $nav_color . '">%3$s</ul>',
+					'menu_id'         => 'burger-menu-organization',
 				)
 			);
 			?>
