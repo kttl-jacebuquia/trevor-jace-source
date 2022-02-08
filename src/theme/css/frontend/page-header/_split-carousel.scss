@@ -139,7 +139,7 @@
         }
 
         .swiper-slide {
-          @apply opacity-10;
+          @apply opacity-10 transition-opacity;
           width: var(--img-height);
 
           figcaption {
@@ -206,7 +206,7 @@
         }
 
         .swiper-button-prev {
-          left: rem-calc(-28px);
+          left: rem-calc(-70);
           right: unset;
           width: rem-calc(120px);
         }
@@ -246,7 +246,7 @@
 
         .swiper-button-prev {
           right: unset;
-          left: rem-calc(-28px);
+          left: rem-calc(-220);
           width: rem-calc(245px);
 
           .swiper-button-wrapper {
@@ -257,7 +257,7 @@
 
         .swiper-button-next {
           left: unset;
-          right: rem-calc(-28px);
+          right: rem-calc(-50);
           width: rem-calc(245px);
         }
 
@@ -269,11 +269,8 @@
 
     @screen xl {
       .big-img-carousel {
-        .swiper-button-prev {
-          left: rem-calc(-28);
-        }
         .swiper-button-next {
-          right: rem-calc(-28);
+          right: rem-calc(-50);
         }
 
         .swiper-pagination {
