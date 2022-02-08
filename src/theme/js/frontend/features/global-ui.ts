@@ -9,6 +9,9 @@ const $body: JQuery = $(document.body);
 
 let fixedBodyScroll = $window.scrollTop();
 
+const smoothScrollSupported =
+	window.getComputedStyle(document.body).scrollBehavior === 'smooth';
+
 /**
  * Disabled/enables scroll. Usefull for full page overlays
  * @param willFix whether to disable scroll or not
@@ -47,6 +50,44 @@ export const onEscapePress = (callback: (args?: any) => any) => {
 				callback();
 			}
 		});
+	}
+};
+
+// Workaround for Element.scrollIntoView which is not yet supported in Safari 15.3
+export const scrollIntoView = (
+	targetElement: HTMLElement,
+	callback: () => void
+) => {
+	// Check native scrollIntoView support
+	if (smoothScrollSupported) {
+		targetElement.scrollIntoView(true);
+		callback();
+	} else {
+		// Use custom scroll animation if scrollIntoView is not supported
+		const $scrollableRoot = $('html,body');
+
+		if (targetElement instanceof window.HTMLElement) {
+			const $targetSection = $(targetElement);
+
+			// Get section's scroll amount
+			const targetScroll =
+				$targetSection.offset()?.top || window.pageYOffset;
+
+			// Compute for scroll duration
+			// Max 3000ms scroll duration
+			const scrollDuration = Math.min(
+				(150 * Math.abs(targetScroll - window.pageYOffset)) / 300,
+				2000
+			);
+
+			// Animate scroll
+			$scrollableRoot.animate(
+				{ scrollTop: targetScroll },
+				scrollDuration,
+				'swing',
+				callback
+			);
+		}
 	}
 };
 

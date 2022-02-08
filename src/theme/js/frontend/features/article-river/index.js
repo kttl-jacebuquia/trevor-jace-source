@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Component from '../../Component';
 import { carousel } from '../carousel';
+import { scrollIntoView } from '../global-ui';
 
 const ENDPOINT = '/wp-json/trevor/v1/article-river-entries';
 
@@ -113,7 +114,10 @@ export default class ArticleRiver extends Component {
 		activePagination.classList.remove('active');
 		pagination.classList.add('active');
 
-		this.getAndRenderPageData();
+		// Scroll to top of component
+		scrollIntoView(this.element, () => {
+			this.getAndRenderPageData();
+		});
 	}
 
 	async getAndRenderPageData() {
@@ -128,7 +132,9 @@ export default class ArticleRiver extends Component {
 		});
 
 		// Replace items in view
-		this.children.listContainer.innerHTML = dataHTML;
+		window.setTimeout(() => {
+			this.children.listContainer.innerHTML = dataHTML;
+		});
 	}
 
 	async requestPageData(requestOptions) {
@@ -138,7 +144,7 @@ export default class ArticleRiver extends Component {
 				[]
 			)
 			.join('&');
-		const response = await fetch([ENDPOINT, params].join('?'));
+		const response = await window.fetch([ENDPOINT, params].join('?'));
 		const { entries_html } = await response.json();
 		return entries_html || '';
 	}
