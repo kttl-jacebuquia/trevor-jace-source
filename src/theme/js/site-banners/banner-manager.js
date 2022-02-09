@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 export default class SiteBanner {
 	constructor(bannerObj) {
+		this.$eventEmitter = $('<div></div>'); // A dummy element to use just as an eventemitter
 		this.$container = $('#siteBannerContainer');
 		this.$banner = null;
 		this.bannerObj = bannerObj;
@@ -74,18 +75,25 @@ export default class SiteBanner {
 	handleCloseClick = (e) => {
 		e.preventDefault();
 
-		sessionStorage.setItem(this.sessionName, Date.now());
-		this.remove();
+		const { originalEvent } = e;
+
+		window.sessionStorage.setItem(this.sessionName, Date.now());
+
+		// Using originalEvent to determine if event is an actual mouse click or not
+		this.remove({
+			trueClick: originalEvent.offsetX > 0 && originalEvent.offsetY > 0,
+		});
+
 		this.updateSiteBannerCSSvariable();
 	};
 
 	isClosed() {
-		return Object.keys(sessionStorage).includes(this.sessionName);
+		return Object.keys(window.sessionStorage).includes(this.sessionName);
 	}
 
-	remove() {
+	remove(eventTriggerData) {
 		this.$banner.remove();
-		this.$banner.trigger('remove');
+		this.$eventEmitter.trigger('remove', eventTriggerData);
 	}
 
 	updateSiteBannerCSSvariable() {
@@ -98,8 +106,14 @@ export default class SiteBanner {
 	}
 
 	on(event, callback) {
-		this.$banner.on(event, () => {
-			callback.apply(this, [this]);
+		this.$eventEmitter.on(event, (originalEvent, data) => {
+			callback.apply(this, [
+				this,
+				{
+					...originalEvent,
+					data,
+				},
+			]);
 		});
 	}
 }
