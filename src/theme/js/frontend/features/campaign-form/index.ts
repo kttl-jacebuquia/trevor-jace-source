@@ -113,6 +113,7 @@ export default class CampaignForm extends Component {
 
 	formSelector = '.join-the-campaign-form__form';
 	successSelector = '.join-the-campaign-form__success';
+	formLabelSelector = '.join-the-campaign-form__phone-label';
 	validationRules: { [key: string]: any } = {
 		fullname: ['required', 'max:30'],
 		email: ['required', 'email', 'max:30'],
@@ -123,6 +124,7 @@ export default class CampaignForm extends Component {
 	form: HTMLFormElement | null = null;
 	formSuccess: HTMLElement | null = null;
 	fields: HTMLInputElement[] = [];
+	phoneLabel: HTMLElement | null = null;
 
 	init() {
 		this.initializeForm();
@@ -131,9 +133,16 @@ export default class CampaignForm extends Component {
 	initializeForm() {
 		this.form = this.element.querySelector(this.formSelector);
 		this.formSuccess = this.element.querySelector(this.successSelector);
+		this.phoneLabel = this.element.querySelector(this.formLabelSelector);
 		this.fields = Array.from(this.form?.elements || []).filter(
 			(element) => (element as HTMLInputElement).name
 		) as HTMLInputElement[];
+
+		// Save phone label's original text
+		if (this.phoneLabel) {
+			this.phoneLabel.dataset.originalText =
+				this.phoneLabel?.textContent?.trim();
+		}
 
 		if (this.form) {
 			this.form.addEventListener('change', this.onFormChange.bind(this));
@@ -177,6 +186,12 @@ export default class CampaignForm extends Component {
 			...PHONE_VALIDATION_RULES,
 			this.form?.sms_notif.checked ? 'required' : null,
 		].filter(Boolean);
+
+		if (this.phoneLabel) {
+			this.phoneLabel.textContent =
+				this.phoneLabel.dataset.originalText +
+				(this.form?.sms_notif.checked ? '*' : '');
+		}
 	}
 
 	onFormSubmit(event: Event) {
