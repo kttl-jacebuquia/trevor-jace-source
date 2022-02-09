@@ -5,7 +5,7 @@ window.trevorWP = window.trevorWP || {};
 window.trevorWP.siteBanners = () => {
 	const bannersById = {};
 
-	const onRemove = ({ id }) => {
+	const onRemove = ({ id }, event) => {
 		// Remove closed banner
 		delete bannersById[id];
 
@@ -14,8 +14,9 @@ window.trevorWP.siteBanners = () => {
 
 		if (availableBanner) {
 			availableBanner.$banner.focus();
-		} else {
+		} else if (event.data?.trueClick === false) {
 			// Focus on skip to main link instead if no more banners
+			// only when tabbing/voiceover was used
 			const skipToMain = document.querySelector('#skip-to-main');
 			skipToMain.focus();
 		}
