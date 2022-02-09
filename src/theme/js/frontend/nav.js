@@ -9,6 +9,7 @@ const $body = $('body');
 const $navOpener = $('.topbar-control-opener,.opener');
 const $navCloser = $('.burger-nav-control-close');
 const $burgerNav = $('.burger-nav');
+const $burgerNavMenu = $('.menu-wrap', $burgerNav);
 const $burgerNavControls = $('.burger-nav-controls');
 const $ctaLinks = $('.cta-wrap');
 const $switcher = $('.switcher-wrap', $burgerNav);
@@ -53,11 +54,19 @@ const isScrolling = debounce(() => {
 	$body.addClass('is-not-scrolling');
 }, 2000);
 
-const toggleNav = (willOpen) => {
+const toggleNav = async (willOpen) => {
 	const navWillOpen =
 		typeof willOpen === 'boolean'
 			? willOpen
 			: !$body.hasClass('is-navigation-open');
+
+	if (navWillOpen) {
+		$burgerNav.prop('hidden', false);
+	}
+
+	// A slight delay in order for computed layout to be applied first
+	// before the next animation runs
+	await new Promise((resolve) => setTimeout(resolve, 10));
 
 	$body.toggleClass('is-navigation-open', navWillOpen);
 	resetNavState();
@@ -209,12 +218,25 @@ const duplicateTier1Text = () => {
 		$duplicate.appendTo(element.parentElement);
 	});
 };
+const onBurgerMenuIntersect = ([{ isIntersecting }]) => {
+	// Add hidden attribute when burger nav is hidden
+	// for a11y considerations
+	if (!isIntersecting) {
+		$burgerNav.prop('hidden', true);
+	}
+};
+const handleBurgerMenuTransition = () => {
+	const intersectionObserver = new window.IntersectionObserver(
+		onBurgerMenuIntersect
+	);
+	intersectionObserver.observe($burgerNavMenu.get(0));
+};
 
 $(isBodyOnTop); // On load
 $(isScrolling); // On load
 $(navBlur);
 $(duplicateTier1Text);
-// $body.addClass('is-not-scrolling');
+$(handleBurgerMenuTransition);
 $(window).on('scroll', isBodyOnTop); // On scroll
 $(window).on('scroll', isScrolling); // On scroll
 $navOpener.on('click', onBurgerClick); // Burger nav click
