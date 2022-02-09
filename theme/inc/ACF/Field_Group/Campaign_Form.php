@@ -98,7 +98,7 @@ class Campaign_Form extends A_Field_Group implements I_Block, I_Renderable {
 						</div>
 						<div class="join-the-campaign-form__field flex full-w relative mb-7 md:mb-0">
 							<div class="floating-label-input">
-								<label for="mobilephone">Mobile Phone</label>
+								<label for="mobilephone" class="join-the-campaign-form__phone-label">Mobile Phone</label>
 								<input
 									name="phone"
 									maxlength="16"
