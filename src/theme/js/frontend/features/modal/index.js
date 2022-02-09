@@ -21,6 +21,7 @@ export class Modal {
 	static renderedModalContents = [];
 
 	constructor($content, options = {}) {
+		this.$eventEmitter = $('<div></div>'); // Just a dummy element to use as eventemitter
 		this.$content = $content;
 		this.options = Object.assign({}, options);
 		this.$overlay = $('<div>')
@@ -53,6 +54,9 @@ export class Modal {
 		if (typeof this.options.onInit === 'function') {
 			this.options.onInit(this);
 		}
+
+		this.$content.get(0).component = this;
+		this.$content.trigger('modal-init', this);
 	}
 
 	open = (e) => {
@@ -104,7 +108,9 @@ export class Modal {
 		this[FOCUS_TRAP_KEY].activate();
 	}
 
-	onAfterClose() {}
+	onAfterClose() {
+		this.$eventEmitter.trigger('modal-close');
+	}
 
 	onTransitionEnd(e) {
 		if (e.target === e.currentTarget) {
@@ -169,6 +175,10 @@ export class Modal {
 				)
 				.attr('aria-hidden', true);
 		}
+	}
+
+	on(eventName, callback) {
+		this.$eventEmitter.on(eventName, () => callback(this));
 	}
 }
 

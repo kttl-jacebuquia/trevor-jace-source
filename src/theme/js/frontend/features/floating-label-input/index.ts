@@ -10,6 +10,8 @@ const ACTIVATED_CLASSLIST = 'floating-label-input--activated';
  */
 
 export default class FloatingLabelInput extends Component {
+	element: (HTMLElement & { floatingLabelInput: FloatingLabelInput }) | null =
+		null;
 	options: { [key: string]: any } = {};
 	children?: {
 		input?: HTMLInputElement | HTMLElement;
@@ -61,6 +63,11 @@ export default class FloatingLabelInput extends Component {
 		};
 
 		this.options = mergedOptions;
+
+		// Add reference to this instance
+		if (this.element) {
+			this.element.floatingLabelInput = this;
+		}
 	}
 
 	// Will be called upon component instantiation
