@@ -1,4 +1,8 @@
 .form-modal {
+  .modal-container  {
+    @apply h-auto;
+  }
+
   .modal-content-wrap {
     @screen mobile {
       @apply max-w-none;
