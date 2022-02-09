@@ -43,7 +43,7 @@
   }
 
 	&--steps {
-		@apply absolute top-0 left-0 bottom-0 right-0 invisible;
+		@apply hidden absolute top-0 left-0 bottom-0 right-0 invisible;
 
     &.visible {
       @apply visible;
