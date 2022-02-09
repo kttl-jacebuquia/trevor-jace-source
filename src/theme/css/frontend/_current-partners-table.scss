@@ -1,4 +1,10 @@
 .current-partners-table {
+  @apply mb-px80;
+
+  @screen xl {
+    @apply mb-px140;
+  }
+
   &__title {
     @apply text-teal-dark;
 
@@ -8,15 +14,9 @@
   }
 
   .table-container {
-    @apply pb-px80;
-
     @screen md {
       @apply container;
       @apply mx-auto;
-    }
-
-    @screen xl {
-      @apply pb-px140;
     }
   }
 
