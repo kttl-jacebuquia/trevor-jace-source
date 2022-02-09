@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import FloatingLabelInput from '../floating-label-input';
 import FormAssemblyForm from '../form-assembly-form';
+import Modal from '../modal';
 
 interface FundraiserQuizOptions {
 	[key: string]: any;
@@ -25,6 +25,7 @@ export default class FundraiserQuiz {
 	parentContainer?: JQuery;
 	backBtn?: JQuery;
 	choices?: JQuery;
+	modalRoot?: JQuery;
 	modalContainer?: JQuery;
 	form?: JQuery;
 	paginationContainer?: JQuery;
@@ -49,6 +50,7 @@ export default class FundraiserQuiz {
 		this.parentContainer = $(`${this.selector}.container`);
 		this.backBtn = $(`${this.selector}__back-btn`);
 		this.choices = $(`${this.selector}__radio-btn`);
+		this.modalRoot = $('#js-fundraiser-quiz');
 		this.modalContainer = $('#js-fundraiser-quiz .modal-container');
 		this.form = $(`form${this.selector}`);
 		this.paginationContainer = $(`${this.selector}__pagination`);
@@ -123,6 +125,7 @@ export default class FundraiserQuiz {
 		});
 
 		this.initDevInquiryForm();
+		this.handleModal();
 	}
 
 	show(options = {}) {
@@ -292,6 +295,24 @@ export default class FundraiserQuiz {
 		} else {
 			this.backBtn.fadeOut();
 		}
+	}
+
+	handleModal() {
+		const modalComponent = this.modalRoot?.get(0)?.component;
+
+		if (!modalComponent) {
+			this.modalRoot?.on('modal-init', this.onModalInit.bind(this));
+		} else {
+			this.onModalInit(null, modalComponent);
+		}
+	}
+
+	onModalInit(event, modalInstance: typeof Modal) {
+		modalInstance.on('modal-close', this.onModalClose.bind(this));
+	}
+
+	onModalClose() {
+		this.clearContentInputs('form');
 	}
 
 	displayPreviousPage() {

@@ -198,10 +198,12 @@ class FormAssemblyForm extends Component {
 		this.children?.inputFields.forEach((inputField: HTMLElement) => {
 			const errorMsg = inputField.querySelector('.errMsg');
 
-			inputField.classList.remove('floating-label-input--activated');
-
 			// Remove error messages
 			errorMsg?.remove();
+
+			inputField.component?.setState({
+				activated: false,
+			});
 		});
 
 		// Reset conditional fields
