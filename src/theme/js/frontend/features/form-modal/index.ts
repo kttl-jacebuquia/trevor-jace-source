@@ -4,6 +4,7 @@ import FormAssemblyForm from '../form-assembly-form';
 class FormModal extends Component {
 	children?: {
 		description: HTMLElement;
+		formAssemblyContainer: HTMLElement;
 		formAssemblyForm: HTMLFormElement;
 	};
 
@@ -12,6 +13,7 @@ class FormModal extends Component {
 	static children = {
 		description: '.form-modal__description',
 		// FormAssembly
+		formAssemblyContainer: '.wFormContainer',
 		formAssemblyForm: '.wForm form',
 	};
 
@@ -35,7 +37,7 @@ class FormModal extends Component {
 		}
 
 		// Remove the form after submission
-		this.children?.formAssemblyForm?.remove();
+		this.children?.formAssemblyContainer?.remove();
 	}
 }
 
