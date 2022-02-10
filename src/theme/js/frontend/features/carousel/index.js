@@ -249,23 +249,25 @@ export const initializeCarousel = (carouselSettings) => {
 		// Focus on the first focusable slide
 		setTimeout(() => {
 			const lastFocusableSlide = [..._swiper.slides]
-				.filter((el) => !el.ariaHidden)
+				.filter((el) => !el.getAttribute('aria-hidden'))
 				.shift();
 			lastFocusableSlide?.firstElementChild.focus();
 			_swiper.navigatedByNav = false;
-		}, 300);
+		}, 150);
 	};
 
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
+
 		// Focus on the last focusable slide
 		setTimeout(() => {
 			const firstFocusableSlide = [..._swiper.slides]
-				.filter((el) => !el.ariaHidden)
+				.filter((el) => !el.getAttribute('aria-hidden') )
 				.pop();
+			const bounds = firstFocusableSlide.getBoundingClientRect();
 			firstFocusableSlide?.firstElementChild.focus();
 			_swiper.navigatedByNav = false;
-		}, 300);
+		}, 150);
 	};
 
 	options.on.slideChangeTransitionEnd = function (_swiper) {
