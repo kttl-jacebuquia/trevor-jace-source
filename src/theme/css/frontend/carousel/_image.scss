@@ -64,12 +64,10 @@
     }
   }
 
-  .big-img-carousel {
-    .swiper-wrapper {
-      @apply items-start;
-    }
-
+  &--big {
     .swiper-slide {
+      will-change: transform;
+
       figcaption {
         @apply text-teal-dark tracking-px05 mt-px28;
 
