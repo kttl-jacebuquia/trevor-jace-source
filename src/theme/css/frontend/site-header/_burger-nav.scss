@@ -101,6 +101,8 @@
   }
 
   .menu-wrap {
+    will-change: transform;
+
     @screen lg-max {
       @apply grid grid-cols-1 fixed right-0 py-px55 overflow-x-hidden;
       @apply transform-gpu translate-x-full;
@@ -110,6 +112,7 @@
       grid-template-rows: auto;
       top: rem-calc(133px); // Just below the switcher
       height: calc(100% - #{rem-calc(133px)}); // 100% minus switcher height
+      right: -1px; // Ensures burger-nav is totally hidden when collapsed
       width: var(--nav-menu-width);
       z-index: var(--z-index-nav-menu);
     }
