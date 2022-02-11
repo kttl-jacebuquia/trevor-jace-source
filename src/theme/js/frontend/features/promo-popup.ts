@@ -66,7 +66,9 @@ class PromoPopup {
 				if (withDelay) {
 					setTimeout(() => this.modal.open(), MODAL_DELAY);
 				} else {
-					this.modal.open();
+					// Add a little delay to ensure that
+					// transitions will take effect
+					setTimeout(() => this.modal.open(), 100);
 				}
 			}
 		} else {
