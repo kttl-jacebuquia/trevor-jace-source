@@ -12,5 +12,13 @@
     @apply line-clamp-1;
     -webkit-line-clamp: 12;
     max-height: none !important;
+
+    @screen md {
+      -webkit-line-clamp: 10;
+    }
+
+    @screen lg {
+      -webkit-line-clamp: 12;
+    }
   }
 }
