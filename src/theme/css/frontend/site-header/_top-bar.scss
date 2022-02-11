@@ -8,6 +8,12 @@
 	@apply transform-gpu -translate-y-full bg-white;
 	z-index: var(--z-index-topbar);
 
+  @screen mobile {
+    body.on-top & {
+      @apply invisible opacity-0;
+    }
+  }
+
 	@screen md {
 		@apply h-px106;
 	}
