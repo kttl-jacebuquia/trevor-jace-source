@@ -122,9 +122,7 @@ class Card {
 			$_class[] = 'no-excerpt';
 		}
 
-		$title         = get_the_title( $post );
-		$wrapped_title = static::_wrap_words( $title );
-		$desc_wrapped  = ! empty( $desc ) ? static::_wrap_words( $desc ) : '';
+		$title = get_the_title( $post );
 
 		$attrs = array(
 			'data-post-type' => $post_type,
@@ -168,10 +166,10 @@ class Card {
 					<h3 class="post-title font-semibold text-px24 leading-px28">
 						<?php if ( $title_link ) { ?>
 							<a href="<?php echo get_the_permalink( $post ); ?>" class="stretched-link">
-								<?php echo $wrapped_title; ?>
+								<?php echo $title; ?>
 							</a>
 						<?php } else { ?>
-							<?php echo $wrapped_title; ?>
+							<?php echo $title; ?>
 						<?php } ?>
 					</h3>
 
@@ -180,7 +178,7 @@ class Card {
 					<?php } ?>
 
 					<?php if ( ! empty( $desc ) ) { ?>
-						<div class="post-desc" aria-label="<?php echo $desc; ?>"><span aria-hidden="true"><?php echo $desc_wrapped; /* Sanitized above */ ?></span></div>
+						<div class="post-desc"><?php echo $desc; ?></div>
 					<?php } ?>
 				</div>
 
