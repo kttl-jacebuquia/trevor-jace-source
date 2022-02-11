@@ -26,7 +26,7 @@ class Breathing_Exercise {
 
 	static public function render_overlay_contents(): void {
 		ob_start(); ?>
-		<div class="breathing-exercise-overlay" tabindex="0" aria-role="dialog" title="Breathing Exercise">
+		<div class="breathing-exercise-overlay" tabindex="0" role="dialog" title="Breathing Exercise">
 			<div class="breathing-exercise-overlay__container">
 				<div class="breathing-exercise-overlay__content content">
 					<div class="countdown">
@@ -77,7 +77,7 @@ class Breathing_Exercise {
 				</div>
 			</div>
 
-			<button class="breathing-exercise-overlay__close trevor-ti-close"></button>
+			<button class="breathing-exercise-overlay__close trevor-ti-close" aria-label="click here to close the breathing excercise popup"></button>
 		</div>
 		<?php
 		echo ob_get_clean();
