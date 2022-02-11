@@ -33,15 +33,17 @@
 .breathing-exercise-overlay {
   @apply fixed top-0 left-0 w-full h-full text-indigo;
   @include z-index(breathing-exercise-overlay);
-  @apply hidden place-items-center text-center text-px18;
+  @apply flex justify-center items-center text-center text-px18;
+  @apply transition-all opacity-0 invisible;
   background: linear-gradient(0deg, #e4e2fa, #ffffff);
 
   &.show {
-    @apply grid;
+    @apply visible opacity-100;
   }
 
   &__container {
-    @apply relative flex justify-center items-center flex-col h-full;
+    @apply relative flex justify-start items-center flex-col;
+    @apply overflow-auto h-auto max-h-full py-px100;
   }
 
   &__content {
@@ -61,10 +63,11 @@
   }
 
   .countdown {
-    @apply h-full flex flex-col items-center justify-center w-px288;
+    @apply h-full flex flex-col items-center justify-center;
+    width: Min(rem-calc(288), 100%);
 
     @screen md {
-      @apply w-px320;
+      width: Min(rem-calc(320), 100%);
     }
 
     &__number {
@@ -89,22 +92,21 @@
   }
 
   .step-one {
-    @apply hidden w-px288;
+    @apply hidden;
+    width: Min(rem-calc(288), 100%);
 
     @screen md {
       @apply w-px360;
+      width: Min(rem-calc(360), 100%);
     }
 
     @screen xl {
       @apply w-px368;
+      width: Min(rem-calc(368), 100%);
     }
 
     &__content {
       @apply flex flex-col justify-center items-center;
-    }
-
-    &__heading {
-
     }
 
     &__description {
@@ -160,7 +162,9 @@
   }
 
   .breathing {
-    @apply hidden h-full;
+    @apply hidden;
+    height: calc(100vh - #{rem-calc(100)});
+    width: 100vw;
 
     &__content {
       @apply flex flex-col items-center justify-start h-full;
@@ -206,13 +210,16 @@
 
     .copy-wrapper {
       @apply px-px44 mt-px160;
+      margin-top: Min(160px, rem-calc(160));
+      z-index: 100;
 
       @screen md {
-        @apply mt-px140 w-px490;
+        margin-top: Min(140px, rem-calc(140));
+        width: Min(100%, #{rem-calc(490)});
       }
 
       @screen lg {
-        @apply mt-px60;
+        margin-top: Min(160px, rem-calc(160));
       }
     }
 
@@ -222,7 +229,7 @@
   }
 
   .breathing-end {
-    @apply hidden;
+    @apply hidden h-full;
 
     &__content {
       @apply flex flex-col items-center justify-center px-px44;

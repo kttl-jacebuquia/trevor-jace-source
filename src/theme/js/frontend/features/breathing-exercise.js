@@ -43,7 +43,8 @@ class BreathingExercise {
 
 	static initializeOverlay() {
 		// Elements
-		this.overlay = $(this.overlaySelector)[0];
+		this.$overlay = $(this.overlaySelector);
+		this.overlay = this.$overlay.get(0);
 		this.container = this.overlay.querySelector(
 			'.breathing-exercise-overlay__container'
 		);
@@ -79,6 +80,9 @@ class BreathingExercise {
 		$(this.close).on('click', () => this.hideOverlay());
 		$(this.countdownSkip).on('click', () => this.skipCountdown());
 		$(this.repeatCTA).on('click', () => this.restart());
+		this.$overlay.on('transitionend', (e) =>
+			this.onOverlayTransitionEnd(e)
+		);
 
 		onEscapePress(this.hideOverlay.bind(this));
 	}
@@ -92,7 +96,7 @@ class BreathingExercise {
 
 	static showOverlay() {
 		toggleBodyFix(true);
-		$(this.overlay).fadeIn();
+		this.$overlay.addClass('show');
 		this.startCountdown();
 		this.focustTrap?.activate();
 	}
@@ -102,13 +106,28 @@ class BreathingExercise {
 		this.breathingActive = false;
 
 		toggleBodyFix(false);
-		$(this.overlay).fadeOut(() => {
-			$(this.coundown).hide();
-			$(this.breathing).hide();
-			$(this.breathingEnd).hide();
-		});
-
+		this.$overlay.removeClass('show');
 		this.focustTrap?.deactivate();
+	}
+
+	static onOverlayTransitionEnd(e) {
+		if (e.target === e.currentTarget) {
+			if (this.$overlay.hasClass('show')) {
+				this.onAfterShow();
+			} else {
+				this.onAfterHide();
+			}
+		}
+	}
+
+	static onAfterShow() {
+		// Some callback functionalities
+	}
+
+	static onAfterHide() {
+		$(this.coundown).hide();
+		$(this.breathing).hide();
+		$(this.breathingEnd).hide();
 	}
 
 	// @returns Promise
