@@ -376,6 +376,17 @@
       }
     }
 
+    .messaging__content {
+      &.bg-transparent {
+        & .messaging-title,
+        & .messaging__description {
+          @screen mobile {
+            @apply mx-0;
+          }
+        }
+      }
+    }
+
     .messaging__description {
       @screen lg {
         @apply mx-px145 w-auto mt-px18;
