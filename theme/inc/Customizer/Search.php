@@ -185,7 +185,6 @@ class Search extends Abstract_Customizer {
 	 */
 	public static function init_all(): void {
 		add_action( 'init', array( static::class, 'handle_init' ) );
-		add_action( 'pre_get_posts', array( static::class, 'pre_get_posts' ) );
 		add_filter( 'query_vars', array( self::class, 'query_vars' ), 10, 1 );
 		add_filter( 'body_class', array( self::class, 'body_class' ), 10, 1 );
 	}
@@ -221,20 +220,6 @@ class Search extends Abstract_Customizer {
 			$main_page_query . '&' . self::QV_SEARCH_SCOPE . '=$matches[1]&paged=$matches[2]',
 			'top'
 		);
-	}
-
-	/**
-	 * @param \WP_Query $query
-	 */
-	public static function pre_get_posts( \WP_Query $query ): void {
-		if ( $query->is_main_query() && ! is_admin() ) {
-			if ( ! Is::rc() && $query->is_search() && ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
-				$search = OP_Search::get_search();
-				$query->set( 'post_type', self::get_scope_post_types( self::get_current_scope() ) );
-				$query->set( 'posts_per_page', $search['posts_per_page'] );
-				$query->set( 'post_status', 'publish' );
-			}
-		}
 	}
 
 	/**
@@ -400,14 +385,64 @@ class Search extends Abstract_Customizer {
 				: null;
 	}
 
-	public static function get_pages() {
-		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
-			return null;
+	public static function get_posts_by_tag( $search ) {
+		if ( empty( get_search_query( false ) ) ) {
+			return array();
 		}
 
 		$q = new \WP_Query(
 			array(
-				's'              => get_search_query( false ),
+				'post_type'      => 'post',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'post_tag',
+						'field'    => 'name',
+						'terms'    => array( $search ),
+					),
+				),
+			)
+		);
+
+		return $q->have_posts()
+				? $q->posts
+				: array();
+	}
+
+	public static function get_rc_posts_by_tag( $search ) {
+		if ( empty( get_search_query( false ) ) ) {
+			return array();
+		}
+
+		$q = new \WP_Query(
+			array(
+				'post_type'      => array(
+					CPT\RC\Article::POST_TYPE,
+					CPT\RC\External::POST_TYPE,
+					CPT\RC\Guide::POST_TYPE,
+				),
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'trevor_rc__tag',
+						'field'    => 'name',
+						'terms'    => array( $search ),
+					),
+				),
+			)
+		);
+
+		return $q->have_posts()
+				? $q->posts
+				: array();
+	}
+
+	public static function get_pages( $search ) {
+		$q = new \WP_Query(
+			array(
+				's'              => $search,
 				'post_type'      => 'page',
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
@@ -419,20 +454,20 @@ class Search extends Abstract_Customizer {
 				: array();
 	}
 
-	public static function get_all_posts() {
-		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
-			return null;
+	public static function get_all_posts( $search, $post_types = array() ) {
+		if ( empty( $post_types ) ) {
+			$post_types = array(
+				CPT\RC\Article::POST_TYPE,
+				CPT\RC\External::POST_TYPE,
+				CPT\RC\Guide::POST_TYPE,
+				CPT\Post::POST_TYPE,
+			);
 		}
 
 		$q = new \WP_Query(
 			array(
-				's'              => get_search_query( false ),
-				'post_type'      => array(
-					CPT\RC\Article::POST_TYPE,
-					CPT\RC\External::POST_TYPE,
-					CPT\RC\Guide::POST_TYPE,
-					CPT\Post::POST_TYPE,
-				),
+				's'              => $search,
+				'post_type'      => $post_types,
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
 			)
@@ -443,12 +478,36 @@ class Search extends Abstract_Customizer {
 				: array();
 	}
 
-	public static function paginate_search_results() {
-		if ( ! empty( get_query_var( self::QV_SEARCH_SCOPE ) ) ) {
-			return null;
+	public static function filter_search() {
+		$posts         = array();
+		$search        = strtolower( get_search_query( false ) );
+		$current_scope = self::get_current_scope();
+		$post_types    = self::get_scope_post_types( $current_scope );
+
+		switch ( $current_scope ) {
+			case 'all':
+				$posts = array_merge( self::get_pages( $search ), self::get_rc_posts_by_tag( $search ), self::get_posts_by_tag( $search ), self::get_all_posts( $search ) );
+				break;
+			case 'resources':
+				$posts = array_merge( self::get_rc_posts_by_tag( $search ), self::get_all_posts( $search, $post_types ) );
+				break;
+			case 'blogs':
+				$posts = array_merge( self::get_posts_by_tag( $search ), self::get_all_posts( $search, $post_types ) );
+				break;
+			default:
+				$posts = self::get_all_posts( $search, $post_types );
+				break;
 		}
 
-		$search_results = array_merge( self::get_pages(), self::get_all_posts() );
+		// Remove duplicate posts
+		$temp_posts = array_unique( array_column( $posts, 'ID' ) );
+		$posts      = array_intersect_key( $posts, $temp_posts );
+
+		return $posts;
+	}
+
+	public static function paginate_search_results() {
+		$search_results = self::filter_search();
 
 		$page   = ! empty( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$search = OP_Search::get_search();
@@ -470,8 +529,13 @@ class Search extends Abstract_Customizer {
 		$posts = array_slice( $search_results, $offset, $limit );
 
 		return array(
-			'posts' => $posts,
-			'total' => $total,
+			'posts'      => $posts,
+			'pagination' => array(
+				'total'       => $total,
+				'total_pages' => $totalPages,
+				'limit'       => $limit,
+				'page'        => $page,
+			),
 		);
 	}
 

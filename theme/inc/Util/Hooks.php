@@ -521,7 +521,7 @@ class Hooks {
 		$with_chevron       = $is_burger_nav_link && ( 0 === $depth || ( 1 === $depth && ! empty( $subtitle ) ) );
 
 		$title  = "<div class='menu-link-text'><span class='title-wrap'>";
-		$title .= $item_title . ( $with_chevron ? '<span class="burger-nav-link-icon trevor-ti-chevron-thick-right" aria-hidden="true"></span>' : '') ;
+		$title .= $item_title . ( $with_chevron ? '<span class="burger-nav-link-icon trevor-ti-chevron-thick-right" aria-hidden="true"></span>' : '' );
 		$title .= '</span>';
 		if ( 0 === $depth ) {
 			$title .= '<span class="submenu-icon trevor-ti-caret-down"></span>';

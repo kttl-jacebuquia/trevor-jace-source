@@ -9,15 +9,15 @@ $search_data = \TrevorWP\Theme\ACF\Options_Page\Search::get_search();
 
 $glossary_item = Page::get_glossary_item();
 
-$posts         = $wp_query->posts;
-$total_results = $wp_query->found_posts;
+$posts         = array();
+$pagination    = array();
+$total_results = 0;
 
-if ( empty( get_query_var( Search::QV_SEARCH_SCOPE ) ) ) {
-	$search_results = Search::paginate_search_results();
-	if ( ! empty( $search_results ) ) {
-		$posts         = $search_results['posts'];
-		$total_results = $search_results['total'];
-	}
+$search_results = Search::paginate_search_results();
+if ( ! empty( $search_results['posts'] ) ) {
+	$posts         = $search_results['posts'];
+	$pagination    = $search_results['pagination'];
+	$total_results = $search_results['pagination']['total'];
 }
 ?>
 <?php get_header(); ?>
@@ -60,7 +60,7 @@ if ( empty( get_query_var( Search::QV_SEARCH_SCOPE ) ) ) {
 						</div>
 
 						<div class="trevor-pagination-default">
-							<?php get_template_part( 'template-parts/pagination' ); ?>
+							<?php get_template_part( 'template-parts/pagination', '', $pagination ); ?>
 						</div>
 					<?php else : ?>
 						<div class="container pt-px60 pb-px110 md:pt-px80 text-center text-indigo">
