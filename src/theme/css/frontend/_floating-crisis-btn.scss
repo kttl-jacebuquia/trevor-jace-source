@@ -2,7 +2,8 @@
   // Defining bottom offsets as CSS variable
   // In order for JS to pick this up
   --button-bottom-offset: var(--floating-crisis-button-bottom);
-  @apply sticky z-10 h-0 flex justify-center items-end;
+  @apply sticky h-0 flex justify-center items-end;
+  z-index: (z-index(nav-base) + 1);
   bottom: var(--button-bottom-offset);
 
   @screen md {
