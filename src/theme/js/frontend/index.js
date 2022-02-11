@@ -116,6 +116,7 @@ if ($quickExitModal.length) {
 				features.PromoPopup.showWhenAvailable(willDelayPromo);
 				const toFocus =
 					lastActiveElement ||
+					document.querySelector('.site-banner > :first-child') ||
 					document.getElementById('skip-to-main');
 				toFocus?.focus();
 			},
