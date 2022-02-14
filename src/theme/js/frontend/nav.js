@@ -9,7 +9,8 @@ const $body = $('body');
 const $navOpener = $('.topbar-control-opener,.opener');
 const $navCloser = $('.burger-nav-control-close');
 const $burgerNav = $('.burger-nav');
-const $burgerNavMenu = $('.menu-wrap', $burgerNav);
+const $burgerNavMenuWrap = $('.menu-wrap', $burgerNav);
+const $burgerNavMenuContainer = $('.main-menu-container', $burgerNav);
 const $burgerNavControls = $('.burger-nav-controls');
 const $ctaLinks = $('.cta-wrap');
 const $switcher = $('.switcher-wrap', $burgerNav);
@@ -21,8 +22,6 @@ const $topbarInner = $topBar.find('.top-bar-inner');
 const $topNav = $('#top-nav');
 const $tier1Links = $burgerNav.find('.main-menu > .menu-item');
 const $backToTier1 = $('.back-to-tier1');
-const $topbarLogo = $topBar.find('.logo-icon');
-const $navLogo = $topNav.find('.logo');
 const $currentMenu = $body.hasClass('is-rc')
 	? $('.main-menu-container-resources', $topNav)
 	: $('.main-menu-container-organization', $topNav);
@@ -229,7 +228,28 @@ const handleBurgerMenuTransition = () => {
 	const intersectionObserver = new window.IntersectionObserver(
 		onBurgerMenuIntersect
 	);
-	intersectionObserver.observe($burgerNavMenu.get(0));
+	intersectionObserver.observe($burgerNavMenuWrap.get(0));
+};
+const applyBurgerMenuContainerA11y = (menuContainer) => {
+	const isHidden = /hidden/i.test(
+		window.getComputedStyle(menuContainer).getPropertyValue('visibility')
+	);
+
+	if (isHidden) {
+		menuContainer.setAttribute('aria-hidden', 'true');
+	} else {
+		menuContainer.removeAttribute('aria-hidden');
+	}
+};
+const onBurgerMenuContainerTransitionEnd = ({ target, currentTarget }) => {
+	if (target === currentTarget) {
+		applyBurgerMenuContainerA11y(currentTarget);
+	}
+};
+const burgerMenuContainerA11y = () => {
+	$burgerNavMenuContainer.each((index, el) => {
+		applyBurgerMenuContainerA11y(el);
+	});
 };
 
 $(isBodyOnTop); // On load
@@ -237,6 +257,7 @@ $(isScrolling); // On load
 $(navBlur);
 $(duplicateTier1Text);
 $(handleBurgerMenuTransition);
+$(burgerMenuContainerA11y);
 $(window).on('scroll', isBodyOnTop); // On scroll
 $(window).on('scroll', isScrolling); // On scroll
 $navOpener.on('click', onBurgerClick); // Burger nav click
@@ -244,5 +265,6 @@ $navCloser.on('click', onBurgerCloseClick); // Burger nav click
 $switcherLinks.on('click', onSwitcherClick); // Switch link click
 $tier1Links.find('> a').on('click', onTier1LinkClick); // Tier-1 link click
 $backToTier1.on('click', onBackToTier1Click);
+$burgerNavMenuContainer.on('transitionend', onBurgerMenuContainerTransitionEnd);
 
 mobileAndSmallDesktop(onSmallBreakpointsMatch, onNotSmallBreakpointsMatch);
