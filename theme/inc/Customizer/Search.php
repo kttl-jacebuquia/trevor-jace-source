@@ -442,7 +442,7 @@ class Search extends Abstract_Customizer {
 	public static function get_pages( $search ) {
 		$q = new \WP_Query(
 			array(
-				's'              => $search,
+				's'              => str_replace( ' ', '+', $search ),
 				'post_type'      => 'page',
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
@@ -466,7 +466,7 @@ class Search extends Abstract_Customizer {
 
 		$q = new \WP_Query(
 			array(
-				's'              => $search,
+				's'              => str_replace( ' ', '+', $search ),
 				'post_type'      => $post_types,
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
