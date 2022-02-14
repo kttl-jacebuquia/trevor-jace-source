@@ -1,11 +1,10 @@
 .card-post.has-post-thumbnail {
   .post-title {
-    @apply text-px24 leading-px28 tracking-px_05;
-    @include max-height( 2 * 28 );
+    @apply text-px24 leading-px28 tracking-px_05 line-clamp-1;
+    -webkit-line-clamp: 2;
 
     @screen lg {
       @apply text-px26 leading-px32 tracking-em_005;
-      @include max-height( 32 * 2 );
     }
 
     > a {
@@ -14,11 +13,11 @@
   }
 
   .post-desc {
-    @apply text-px16 leading-px22 tracking-em001;
-    @include max-height( 2 * 22 );
+    @apply text-px16 leading-px22 tracking-em001 line-clamp-1;
+    -webkit-line-clamp: 2;
 
     @screen xl {
-      @include max-height( 2 * 26 );
+      -webkit-line-clamp: 2;
     }
   }
 }
