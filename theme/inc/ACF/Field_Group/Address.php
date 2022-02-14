@@ -5,26 +5,30 @@ use TrevorWP\Theme\ACF\Field_Group\Form as FG_Form;
 use TrevorWP\Theme\Helper\FundraiserQuizModal;
 
 class Address extends A_Field_Group implements I_Block {
-	const FIELD_TITLE           = 'title';
-	const FIELD_ENTRIES         = 'entries';
-	const FIELD_ENTRY_TITLE     = 'entry_title';
-	const FIELD_ENTRY_LINES     = 'entry_lines';
-	const FIELD_ENTRY_LINE_TYPE = 'entry_line_type';
-	const FIELD_ENTRY_EMAIL     = 'entry_email';
-	const FIELD_ENTRY_PHONE     = 'entry_phone';
-	const FIELD_ENTRY_FORM      = 'entry_form';
-	const FIELD_LINE            = 'line';
+	const FIELD_TITLE             = 'title';
+	const FIELD_ENTRIES           = 'entries';
+	const FIELD_ENTRY_TITLE       = 'entry_title';
+	const FIELD_ENTRY_LINES       = 'entry_lines';
+	const FIELD_ENTRY_LINE_TYPE   = 'entry_line_type';
+	const FIELD_ENTRY_EMAIL       = 'entry_email';
+	const FIELD_ENTRY_PHONE       = 'entry_phone';
+	const FIELD_ENTRY_FORM        = 'entry_form';
+	const FIELD_ENTRY_LINK        = 'entry_link';
+	const FIELD_ENTRY_LINK_TARGET = 'entry_link_target';
+	const FIELD_LINE              = 'line';
 
 	protected static function prepare_register_args(): array {
-		$title           = static::gen_field_key( static::FIELD_TITLE );
-		$entries         = static::gen_field_key( static::FIELD_ENTRIES );
-		$entry_title     = static::gen_field_key( static::FIELD_ENTRY_TITLE );
-		$entry_lines     = static::gen_field_key( static::FIELD_ENTRY_LINES );
-		$entry_line_type = static::gen_field_key( static::FIELD_ENTRY_LINE_TYPE );
-		$entry_email     = static::gen_field_key( static::FIELD_ENTRY_EMAIL );
-		$entry_phone     = static::gen_field_key( static::FIELD_ENTRY_PHONE );
-		$entry_form      = static::gen_field_key( static::FIELD_ENTRY_FORM );
-		$line            = static::gen_field_key( static::FIELD_LINE );
+		$title             = static::gen_field_key( static::FIELD_TITLE );
+		$entries           = static::gen_field_key( static::FIELD_ENTRIES );
+		$entry_title       = static::gen_field_key( static::FIELD_ENTRY_TITLE );
+		$entry_lines       = static::gen_field_key( static::FIELD_ENTRY_LINES );
+		$entry_line_type   = static::gen_field_key( static::FIELD_ENTRY_LINE_TYPE );
+		$entry_email       = static::gen_field_key( static::FIELD_ENTRY_EMAIL );
+		$entry_phone       = static::gen_field_key( static::FIELD_ENTRY_PHONE );
+		$entry_form        = static::gen_field_key( static::FIELD_ENTRY_FORM );
+		$entry_link        = static::gen_field_key( static::FIELD_ENTRY_LINK );
+		$entry_link_target = static::gen_field_key( static::FIELD_ENTRY_LINK_TARGET );
+		$line              = static::gen_field_key( static::FIELD_LINE );
 
 		return array(
 			'title'  => 'Contact Information Block',
@@ -67,6 +71,7 @@ class Address extends A_Field_Group implements I_Block {
 										'mailto'       => 'Mailto',
 										'dev_inq_form' => 'Development Inquiry Form',
 										'forms'        => 'Forms',
+										'link'         => 'External Link',
 									),
 									'default_value' => 'text',
 									'return_format' => 'value',
@@ -123,6 +128,37 @@ class Address extends A_Field_Group implements I_Block {
 									'multiple'          => 0,
 									'return_format'     => 'object',
 									'ui'                => 1,
+								),
+								static::FIELD_ENTRY_LINK  => array(
+									'key'               => $entry_link,
+									'name'              => static::FIELD_ENTRY_LINK,
+									'label'             => 'External Link',
+									'type'              => 'url',
+									'required'          => 1,
+									'conditional_logic' => array(
+										array(
+											'field'    => $entry_line_type,
+											'operator' => '==',
+											'value'    => 'link',
+										),
+									),
+								),
+								static::FIELD_ENTRY_LINK_TARGET => array(
+									'key'               => $entry_link_target,
+									'name'              => static::FIELD_ENTRY_LINK_TARGET,
+									'label'             => 'Open in a new tab?',
+									'type'              => 'true_false',
+									'conditional_logic' => array(
+										array(
+											'field'    => $entry_line_type,
+											'operator' => '==',
+											'value'    => 'link',
+										),
+									),
+									'default_value'     => 0,
+									'ui'                => 1,
+									'ui_on_text'        => '',
+									'ui_off_text'       => '',
 								),
 								static::FIELD_LINE        => array(
 									'key'       => $line,
@@ -199,6 +235,10 @@ class Address extends A_Field_Group implements I_Block {
 										aria-label="click to open Form">
 											<?php echo $line[ static::FIELD_LINE ]; ?>
 										</button>
+									<?php elseif ( 'link' === $line[ static::FIELD_ENTRY_LINE_TYPE ] ) : ?>
+										<a class="wave-underline" href="<?php echo esc_url( $line[ static::FIELD_ENTRY_LINK ] ); ?>" target="<?php echo $line[ static::FIELD_ENTRY_LINK_TARGET ] ? '_blank' : ''; ?>">
+											<?php echo $line[ static::FIELD_LINE ]; ?>
+										</a>
 									<?php else : ?>
 										<?php if ( ! empty( $line[ static::FIELD_LINE ] ) ) : ?>
 											<?php echo $line[ static::FIELD_LINE ]; ?>
