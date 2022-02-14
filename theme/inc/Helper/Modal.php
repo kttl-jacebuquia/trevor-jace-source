@@ -47,8 +47,9 @@ class Modal {
 
 		// Setup modal attributes
 		$attributes = array(
-			'id'   => esc_attr( $this->_selector ),
-			'role' => 'dialog',
+			'id'     => esc_attr( $this->_selector ),
+			'role'   => 'dialog',
+			'hidden' => 'hidden'
 		);
 
 		if ( ! empty( $this->_options['title'] ) ) {

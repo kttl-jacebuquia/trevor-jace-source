@@ -59,12 +59,17 @@ export class Modal {
 		this.$content.trigger('modal-init', this);
 	}
 
-	open = (e) => {
+	open = async (e) => {
 		e?.preventDefault();
 		e?.stopPropagation();
 
 		$document.on('keydown', this._handleKeyDown);
 		this.$overlay.on('click', this.close);
+		this.$content.prop('hidden', false);
+
+		// Add a delay to simulate forced synchronous layout
+		await new Promise((resolve) => window.setTimeout(resolve, 10));
+
 		this.$content.addClass('is-active');
 		document.body.classList.add(this.constructor.bodyActiveClass);
 
@@ -111,6 +116,8 @@ export class Modal {
 
 	onAfterClose() {
 		this.$eventEmitter.trigger('modal-close');
+		this.$content.trigger('modal-close');
+		this.$content.prop('hidden', true);
 	}
 
 	onTransitionEnd(e) {
