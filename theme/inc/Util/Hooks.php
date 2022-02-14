@@ -61,6 +61,9 @@ class Hooks {
 		add_filter( 'nav_menu_link_attributes', array( self::class, 'nav_menu_link_attributes' ), 10, 2 );
 		add_filter( 'nav_menu_item_title', array( self::class, 'nav_menu_item_title' ), 10, 4 );
 
+		# Search Link
+		add_filter( 'search_link', array( self::class, 'sitewide_search_link' ) );
+
 		# Admin Bar
 		add_action( 'admin_bar_init', array( self::class, 'admin_bar_init' ), 10, 0 );
 
@@ -1047,5 +1050,10 @@ class Hooks {
 		$toolbars['Bullink'][1] = array( 'bullist', 'link' );
 
 		return $toolbars;
+	}
+
+	public static function sitewide_search_link() : string {
+		$search = get_search_query();
+		return '/search?s=' . $search;
 	}
 }

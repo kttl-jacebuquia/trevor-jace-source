@@ -1,6 +1,7 @@
 <!doctype html>
 <?php
 
+use TrevorWP\CPT\RC\RC_Object;
 use \TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\Helper\Main_Header;
 use \TrevorWP\Theme\Util\Is;
@@ -11,6 +12,8 @@ $header_data = Options_Page\Header::get_header();
 
 $counselor_link = $header_data['counselor_link'];
 $donate_link    = $header_data['donate_link'];
+
+$search_link = get_search_link( get_search_query( false ) );
 
 $nav_color = 'text-' . Main_Header::get_text_color();
 ?>
@@ -59,7 +62,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 
 	<?php /* Controls for expanded nav menu */ ?>
 	<div class="burger-nav-controls">
-		<a class="btn burger-nav-control burger-nav-control-search" href="<?php echo get_search_link(); ?>" aria-label="click to search the site">
+		<a class="btn burger-nav-control burger-nav-control-search" href="<?php echo $search_link; ?>" aria-label="click to search the site">
 			<i class="trevor-ti-search"></i>
 		</a>
 		<button class="btn burger-nav-control burger-nav-control-close" aria-label="click to close burger navigation">
@@ -97,7 +100,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				<?php /* Will contain menu for desktop, for seamless transition */ ?>
 			</div>
 			<div class="topbar-controls">
-				<a class="topbar-control-search" href="<?php echo get_search_link(); ?>" aria-label="click to search the site">
+				<a class="topbar-control-search" href="<?php echo $search_link; ?>" aria-label="click to search the site">
 					<i class="trevor-ti-search"></i>
 				</a>
 				<button class="topbar-control-opener">
@@ -175,7 +178,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 				);
 				?>
 
-				<a role="button" aria-label="click to search in the website" class="search-button" href="<?php echo get_search_link(); ?>">
+				<a role="button" aria-label="click to search in the website" class="search-button" href="<?php echo $search_link; ?>">
 					<i class="trevor-ti-search" aria-hidden="true"></i>
 				</a>
 			</div>
