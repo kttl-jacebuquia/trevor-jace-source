@@ -88,6 +88,22 @@
         @apply w-full md:w-auto;
       }
     }
+
+    .tags-box {
+      @apply tracking-px6 block mt-px28;
+
+      @screen md {
+        @apply mt-px20;
+      }
+
+      @screen lg {
+        @apply mt-px30;
+      }
+
+      .tag-box {
+        @apply align-middle;
+      }
+    }
   }
 
   .ui-helper-hidden-accessible {
@@ -118,6 +134,18 @@
   .search-featured-3-up {
     .featured-card-3up__heading {
       @apply mb-0;
+    }
+  }
+
+  .trevor-pagination-default {
+    @apply mb-0;
+
+    @screen md {
+      @apply pb-px100;
+    }
+
+    .pagination {
+      @apply mt-0;
     }
   }
 }
