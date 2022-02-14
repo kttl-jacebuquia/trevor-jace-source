@@ -1,16 +1,13 @@
 .card-post.no-excerpt {
   .post-title {
-    @apply text-px22 leading-px32 tracking-px_05;
-    @include max-height( 3 * 32);
+    @apply text-px22 leading-px32 tracking-px_05 line-clamp-3;
 
     @screen lg {
-      @apply text-px26 leading-px32 tracking-em005;
-      @include max-height( 3 * 32);
+      @apply text-px26 leading-px32 tracking-em005 line-clamp-3;
     }
 
     @screen xl {
-      @apply text-px26 leading-px36 tracking-em005;
-      @include max-height( 3 * 36);
+      @apply text-px26 leading-px36 tracking-em005 line-clamp-3;
     }
   }
 }

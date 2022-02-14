@@ -15,25 +15,15 @@
   }
 
   .post-title {
-    @include max-height( 5 * 28 );
-
-    @screen md {
-      @include max-height( 5 * 28 );
-    }
+    @apply line-clamp-3;
 
     @screen lg {
       @apply text-px26 leading-px32 tracking-em_005;
-      @include max-height( 32 * 5 );
     }
   }
 
   .post-desc {
     @apply block tracking-em_005;
-    @apply md:text-px16 md:leading-px22;
-    @include max-height( 5 * 22 );
-
-    @screen xl {
-      @include max-height( 5 * 26 );
-    }
+    @apply md:text-px16 md:leading-px22 line-clamp-5;
   }
 }
