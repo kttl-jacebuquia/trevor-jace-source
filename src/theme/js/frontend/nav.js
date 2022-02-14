@@ -126,7 +126,7 @@ const onBurgerCloseClick = (e) => {
 	e.preventDefault();
 	toggleNav(false);
 };
-const onSwitcherClick = (e) => {
+const onSwitcherClick = async (e) => {
 	/*
 		Proceed with redirect if:
 		1. On medium desktop and up; or
@@ -136,6 +136,8 @@ const onSwitcherClick = (e) => {
 		return;
 	}
 
+	let activeMenuIndex;
+
 	e.preventDefault();
 	$burgerNav.toggleClass(
 		'is_rc',
@@ -143,8 +145,13 @@ const onSwitcherClick = (e) => {
 	);
 	$switcherLinks.each((index, link) => {
 		$(link).toggleClass('active', link === e.currentTarget);
+
+		if (link === e.currentTarget) {
+			activeMenuIndex = index;
+		}
 	});
 
+	burgerMenuContainerA11y(activeMenuIndex);
 	resetNavState();
 };
 const onSmallBreakpointsMatch = () => {
@@ -230,10 +237,8 @@ const handleBurgerMenuTransition = () => {
 	);
 	intersectionObserver.observe($burgerNavMenuWrap.get(0));
 };
-const applyBurgerMenuContainerA11y = (menuContainer) => {
-	const isHidden = /hidden/i.test(
-		window.getComputedStyle(menuContainer).getPropertyValue('visibility')
-	);
+const applyBurgerMenuContainerA11y = (menuContainer, isActive) => {
+	const isHidden = !isActive;
 
 	if (isHidden) {
 		menuContainer.setAttribute('aria-hidden', 'true');
@@ -241,14 +246,9 @@ const applyBurgerMenuContainerA11y = (menuContainer) => {
 		menuContainer.removeAttribute('aria-hidden');
 	}
 };
-const onBurgerMenuContainerTransitionEnd = ({ target, currentTarget }) => {
-	if (target === currentTarget) {
-		applyBurgerMenuContainerA11y(currentTarget);
-	}
-};
-const burgerMenuContainerA11y = () => {
+const burgerMenuContainerA11y = (activeMenuIndex = 0) => {
 	$burgerNavMenuContainer.each((index, el) => {
-		applyBurgerMenuContainerA11y(el);
+		applyBurgerMenuContainerA11y(el, index === activeMenuIndex);
 	});
 };
 
@@ -257,7 +257,7 @@ $(isScrolling); // On load
 $(navBlur);
 $(duplicateTier1Text);
 $(handleBurgerMenuTransition);
-$(burgerMenuContainerA11y);
+$(() => burgerMenuContainerA11y(0));
 $(window).on('scroll', isBodyOnTop); // On scroll
 $(window).on('scroll', isScrolling); // On scroll
 $navOpener.on('click', onBurgerClick); // Burger nav click
@@ -265,6 +265,5 @@ $navCloser.on('click', onBurgerCloseClick); // Burger nav click
 $switcherLinks.on('click', onSwitcherClick); // Switch link click
 $tier1Links.find('> a').on('click', onTier1LinkClick); // Tier-1 link click
 $backToTier1.on('click', onBackToTier1Click);
-$burgerNavMenuContainer.on('transitionend', onBurgerMenuContainerTransitionEnd);
 
 mobileAndSmallDesktop(onSmallBreakpointsMatch, onNotSmallBreakpointsMatch);
