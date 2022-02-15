@@ -205,6 +205,13 @@
     @screen md {
       margin-top: calc(var(--max-scaled-label-height) + var(--max-scaled-label-height-extra));
     }
+
+    // Override base floating-label-input active state styles
+    &--activated:is([data-input-type="checkbox"], [data-input-type="radio"]) {
+      label {
+        @apply translate-y-0 opacity-100 visible;
+      }
+    }
   }
 
   // HTML Section
@@ -220,7 +227,7 @@
 
     a {
       text-decoration: underline;
-      text-underline-offset: .2em;
+      text-underline-offset: 0.2em;
     }
 
     br {
@@ -257,9 +264,9 @@
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     @apply font-medium;
-    box-shadow: inset 0 0 0 100px theme('colors.white.DEFAULT');
+    box-shadow: inset 0 0 0 100px theme("colors.white.DEFAULT");
     border: 0 !important;
-    background-color: theme('colors.white.DEFAULT') !important;
-    -webkit-text-fill-color: theme('colors.blue_green.DEFAULT');
+    background-color: theme("colors.white.DEFAULT") !important;
+    -webkit-text-fill-color: theme("colors.blue_green.DEFAULT");
   }
 }

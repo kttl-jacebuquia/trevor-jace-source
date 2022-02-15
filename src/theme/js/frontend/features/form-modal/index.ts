@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Component from '../../Component';
 import FormAssemblyForm from '../form-assembly-form';
 
@@ -7,6 +8,8 @@ class FormModal extends Component {
 		formAssemblyContainer: HTMLElement;
 		formAssemblyForm: HTMLFormElement;
 	};
+
+	formAssemblyForm?: FormAssemblyForm;
 
 	static selector = '.form-modal';
 
@@ -18,17 +21,23 @@ class FormModal extends Component {
 	};
 
 	afterInit() {
+		this.handleModal();
+
 		if (this.children?.formAssemblyForm) {
 			this.initFormAssemblyForm();
 		}
 	}
 
+	handleModal() {
+		$(this.element).on('modal-close', this.onModalClose.bind(this));
+	}
+
 	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
 	initFormAssemblyForm() {
-		const formAssemblyForm = FormAssemblyForm.initializeWithElement(
+		this.formAssemblyForm = FormAssemblyForm.initializeWithElement(
 			this.children?.formAssemblyForm as HTMLFormElement
 		);
-		formAssemblyForm.on('submit', () => this.onFormSubmitSuccess());
+		this.formAssemblyForm?.on('submit', () => this.onFormSubmitSuccess());
 	}
 
 	onFormSubmitSuccess() {
@@ -38,6 +47,32 @@ class FormModal extends Component {
 
 		// Remove the form after submission
 		this.children?.formAssemblyContainer?.remove();
+	}
+
+	onModalClose() {
+		// Reset next page inputs
+		Array.from(this.element.querySelectorAll('input,select')).forEach(
+			(input: HTMLInputElement | HTMLSelectElement) => {
+				if (input instanceof window.HTMLSelectElement) {
+					input.value = '';
+					return;
+				}
+
+				switch (input.type) {
+					case 'text':
+					case 'number':
+						input.value = '';
+						break;
+					case 'radio':
+					case 'checkbox':
+						input.checked = false;
+						break;
+				}
+			}
+		);
+
+		// Reset next page formss
+		this.formAssemblyForm?.reset();
 	}
 }
 
