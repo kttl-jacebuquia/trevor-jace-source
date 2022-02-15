@@ -119,7 +119,7 @@ class Post_Details extends A_Field_Group {
 		?>
 		<div class="post-file-wrap">
 			<?php if ( ! empty( $file_id ) ) : ?>
-				<a class="btn post-file-btn" href="<?php echo esc_attr( wp_get_attachment_url( $attachment_id ) ); ?>">
+				<a class="btn post-file-btn" href="<?php echo esc_attr( wp_get_attachment_url( $file_id ) ); ?>">
 					<span class="post-file-btn-cta">Download PDF Format</span> <i
 						class="trevor-ti-download post-file-btn-icn"></i>
 				</a>
