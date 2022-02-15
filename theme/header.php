@@ -31,7 +31,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<?php wp_head(); ?>
 	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_BOTTOM' ); ?>
 </head>
-<body <?php body_class( 'on-top' ); ?>>
+<body <?php body_class( 'on-top' ); ?> tabindex="0">
 
 
 <?php echo Options_Page\External_Scripts::get_external_script( 'BODY_TOP' ); ?>
@@ -48,7 +48,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<script>window.trevorWP.siteBanners()</script>
 
 	<?php /* Skip to main */ ?>
-	<a href="#site-content" id="skip-to-main" class="page-btn page-btn-primary text-white absolute top-0 left-0 z-0 focus:z-9999">Skip to main</a>
+	<a href="#site-content" id="skip-to-main" class="page-btn page-btn-primary text-white absolute top-0 left-0 z-0 opacity-0 focus:opacity-100 focus:z-9999">Skip to main</a>
 
 	<?php echo Main_Header::render_logo_sprite(); ?>
 

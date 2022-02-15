@@ -17,8 +17,7 @@ window.trevorWP.siteBanners = () => {
 		} else if (event.data?.trueClick === false) {
 			// Focus on skip to main link instead if no more banners
 			// only when tabbing/voiceover was used
-			const skipToMain = document.querySelector('#skip-to-main');
-			skipToMain.focus();
+			document.body.focus();
 		}
 	};
 
