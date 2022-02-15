@@ -108,7 +108,7 @@ class PromoPopup {
 		const toFocus =
 			this.lastActiveElement ||
 			document.querySelector('.site-banner > :first-child') ||
-			(document.getElementById('skip-to-main') as HTMLElement);
+			document.body;
 		const dismissedPromos = this.getDismissedPromos();
 		dismissedPromos.push(this.promoID);
 		window.localStorage.setItem(

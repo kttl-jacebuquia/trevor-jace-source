@@ -117,7 +117,7 @@ if ($quickExitModal.length) {
 				const toFocus =
 					lastActiveElement ||
 					document.querySelector('.site-banner > :first-child') ||
-					document.getElementById('skip-to-main');
+					document.body;
 				toFocus?.focus();
 			},
 		};
