@@ -105,7 +105,7 @@
 
     @screen lg-max {
       @apply grid grid-cols-1 fixed right-0 py-px55 overflow-x-hidden;
-      @apply transform-gpu translate-x-full;
+      @apply transform-gpu translate-x-full bg-white;
       @apply transition-all duration-300 ease-out;
       @apply invisible opacity-0;
       grid-template-columns: 1fr;
