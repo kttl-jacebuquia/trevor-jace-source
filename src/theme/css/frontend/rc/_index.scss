@@ -3,6 +3,15 @@ body.is-rc {
   --site-theme-background-r: theme('colors.indigo.r');
   --site-theme-background-g: theme('colors.indigo.g');
   --site-theme-background-b: theme('colors.indigo.b');
+
+
+  article.post-single {
+    @apply bg-transparent;
+
+    .post-content-wrap {
+      @apply bg-white;
+    }
+  }
 }
 
 @import "./cards";

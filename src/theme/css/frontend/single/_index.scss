@@ -10,14 +10,14 @@
     &:not(.with-post-recirc) {
       @screen mobile {
         .post-single {
-          @apply pb-px80;
+          @apply pb-px100;
         }
       }
     }
 
-    .recirculation-section {
+    .recirculation-section > :last-child {
       @screen mobile {
-        @apply pb-px80;
+        @apply pb-px100;
       }
     }
   }
