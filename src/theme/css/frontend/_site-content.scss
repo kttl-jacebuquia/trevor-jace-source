@@ -4,7 +4,7 @@
 
   // Add extra bottom space for the last child,
   // giving way for the sticky button
-  > :last-child {
+  > :last-child:not(.recirculation-section) {
     @screen mobile {
       @apply pb-px100 mb-0;
     }
