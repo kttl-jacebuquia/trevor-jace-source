@@ -98,7 +98,6 @@ class BreathingExercise {
 		toggleBodyFix(true);
 		this.$overlay.addClass('show');
 		this.startCountdown();
-		this.focustTrap?.activate();
 	}
 
 	static hideOverlay() {
@@ -121,7 +120,7 @@ class BreathingExercise {
 	}
 
 	static onAfterShow() {
-		// Some callback functionalities
+		this.focustTrap?.activate();
 	}
 
 	static onAfterHide() {
@@ -179,7 +178,9 @@ class BreathingExercise {
 	}
 
 	static showStepOne() {
-		$(this.stepOne).fadeIn();
+		$(this.stepOne).fadeIn({
+			complete: () => $(this.stepOne).focus(),
+		});
 	}
 
 	static colorFunction(ctx) {
@@ -242,14 +243,20 @@ class BreathingExercise {
 	static showBreathingEnd() {
 		this.breathingActive = false;
 		$(this.breathing).fadeOut('slow', () => {
-			$(this.breathingEnd).fadeIn('slow');
+			$(this.breathingEnd).fadeIn({
+				duration: 'slow',
+				complete: () => $(this.breathingEnd).focus(),
+			});
 		});
 	}
 
 	static onStart() {
 		$(this.stepOne).fadeOut('slow');
 		setTimeout(() => {
-			$(this.breathing).fadeIn(1500);
+			$(this.breathing).fadeIn({
+				duration: 1500,
+				complete: () => $(this.breathing).focus(),
+			});
 			this.rotateWords();
 		}, 700);
 	}
