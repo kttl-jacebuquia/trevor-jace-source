@@ -65,13 +65,17 @@ export const scrollIntoView = (
 	} else {
 		// Use custom scroll animation if scrollIntoView is not supported
 		const $scrollableRoot = $('html,body');
+		const $siteBanner: JQuery = $('.site-banner');
+		const $topBar: JQuery = $('.top-bar');
 
 		if (targetElement instanceof window.HTMLElement) {
 			const $targetSection = $(targetElement);
 
 			// Get section's scroll amount
 			const targetScroll =
-				$targetSection.offset()?.top || window.pageYOffset;
+				($targetSection.offset()?.top || window.pageYOffset) -
+				($siteBanner?.height() || 0) -
+				($topBar?.height() || 0);
 
 			// Compute for scroll duration
 			// Max 3000ms scroll duration
