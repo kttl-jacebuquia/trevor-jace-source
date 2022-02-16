@@ -378,10 +378,32 @@
 
     .messaging__content {
       &.bg-transparent {
-        & .messaging-title,
+        @screen md {
+          @apply col-span-full;
+          margin-left: rem-calc(27);
+          margin-right: rem-calc(27);
+        }
+
+        @screen lg2 {
+          margin-left: rem-calc(191);
+          margin-right: rem-calc(191);
+        }
+
+        @screen xl {
+          margin-left: rem-calc(171);
+          margin-right: rem-calc(171);
+        }
+
+        & .messaging__title,
         & .messaging__description {
-          @screen mobile {
-            @apply mx-0;
+          @apply mx-0;
+
+          @screen md {
+            @apply w-auto max-w-full;
+          }
+
+          @screen lg {
+            @apply w-auto max-w-full;
           }
         }
       }
