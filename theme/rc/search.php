@@ -3,7 +3,7 @@
 <?php
 $posts      = $wp_query->posts;
 $no_results = empty( $wp_query->found_posts );
-$glossary = \TrevorWP\CPT\RC\RC_Object::find_glossary( trim( get_search_query( false ) ) );
+$glossary   = \TrevorWP\CPT\RC\RC_Object::find_glossary( trim( get_search_query( false ) ) );
 
 if ( ! empty( $glossary ) ) {
 	$filter_results = \TrevorWP\CPT\RC\RC_Object::filter_results( $glossary );
