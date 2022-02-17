@@ -24,8 +24,16 @@ const checkCookieBannerVisibility = (cookieBannerDialog: HTMLElement) => {
 			FLOATING_BUTTON_OFFSET_VARIABLE,
 			cookieBannerDialog.offsetHeight + 'px'
 		);
+		// Cookie banner is hidden
 	} else {
 		document.body.style.removeProperty(FLOATING_BUTTON_OFFSET_VARIABLE);
+
+		// Checks if cookie banner was hidden by clicking its button
+		if (cookieBannerDialog.contains(document.activeElement)) {
+			console.log('should focus on body');
+			// Focus on body
+			document.body.focus();
+		}
 	}
 };
 
