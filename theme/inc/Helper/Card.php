@@ -45,8 +45,8 @@ class Card {
 		// Determine the type.
 		if ( CPT\RC\Glossary::POST_TYPE === $post_type ) {
 			$title_top                   = 'Glossary';
-			$title_btm                   = $post->post_excerpt;
-			$desc                        = $post->post_content;
+			$title_btm                   = $post->post_excerpt_t ?: $post->post_excerpt;
+			$desc                        = $post->post_content_t ?: $post->post_content;
 			$title_link                  = false;
 			$options['hide_cat_eyebrow'] = false;
 		} elseif ( CPT\RC\External::POST_TYPE === $post_type ) {
