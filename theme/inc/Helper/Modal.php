@@ -49,7 +49,7 @@ class Modal {
 		$attributes = array(
 			'id'     => esc_attr( $this->_selector ),
 			'role'   => 'dialog',
-			'hidden' => 'hidden'
+			'hidden' => 'hidden',
 		);
 
 		if ( ! empty( $this->_options['title'] ) ) {

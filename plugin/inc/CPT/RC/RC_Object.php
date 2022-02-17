@@ -665,31 +665,43 @@ abstract class RC_Object {
 	}
 
 	/**
-	 * Check if the search query has glossaries.
+	 * Check if the search query has glossary.
 	 *
 	 * @param string $search
 	 * @return array
 	 */
-	public static function find_glossaries( $search ) {
+	public static function find_glossary( $search ) {
 		if ( empty( $search ) ) {
 			return false;
 		}
 
-		$args = array(
-			's'           => $search,
-			'exact'       => true,
-			'sentence'    => true,
-			'post_type'   => Glossary::POST_TYPE,
-			'post_status' => 'publish',
+		$q = new \WP_Query(
+			array(
+				's'              => strtolower( str_replace( ' ', '', $search ) ),
+				'post_type'      => CPT\RC\Glossary::POST_TYPE,
+				'posts_per_page' => 1,
+				'paged'          => get_query_var( 'paged' ),
+			)
 		);
 
-		$glossaries = get_posts( $args );
+		if ( ! $q->have_posts() ) {
+			$q = new \WP_Query(
+				array(
+					's'              => strtolower( $search ),
+					'post_type'      => CPT\RC\Glossary::POST_TYPE,
+					'posts_per_page' => 1,
+					'paged'          => get_query_var( 'paged' ),
+				)
+			);
+		}
 
-		return $glossaries;
+		return $q->have_posts()
+				? $q->posts
+				: null;
 	}
 
-	public static function filter_results( $glossaries ) {
-		$posts = array_merge( $glossaries, self::get_all_posts() );
+	public static function filter_results( $glossary ) {
+		$posts = array_merge( $glossary, self::get_all_posts() );
 
 		$page       = ! empty( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$pagination = Resource_Center::get_pagination();

@@ -3,10 +3,10 @@
 <?php
 $posts      = $wp_query->posts;
 $no_results = empty( $wp_query->found_posts );
-$glossaries = \TrevorWP\CPT\RC\RC_Object::find_glossaries( get_search_query( true ) );
+$glossary   = \TrevorWP\CPT\RC\RC_Object::find_glossary( trim( get_search_query( false ) ) );
 
-if ( ! empty( $glossaries ) ) {
-	$filter_results = \TrevorWP\CPT\RC\RC_Object::filter_results( $glossaries );
+if ( ! empty( $glossary ) ) {
+	$filter_results = \TrevorWP\CPT\RC\RC_Object::filter_results( $glossary );
 	$posts          = $filter_results['posts'];
 	$no_results     = empty( $filter_results['total'] );
 }
