@@ -3,12 +3,14 @@
 <?php
 $posts      = $wp_query->posts;
 $no_results = empty( $wp_query->found_posts );
-$glossary   = \TrevorWP\CPT\RC\RC_Object::find_glossary( trim( get_search_query( false ) ) );
+$glossaries = \TrevorWP\CPT\RC\RC_Object::find_glossaries( trim( get_search_query( false ) ) );
+$pagination = array();
 
-if ( ! empty( $glossary ) ) {
-	$filter_results = \TrevorWP\CPT\RC\RC_Object::filter_results( $glossary );
+if ( ! empty( $glossaries ) ) {
+	$filter_results = \TrevorWP\CPT\RC\RC_Object::filter_results( $glossaries );
 	$posts          = $filter_results['posts'];
-	$no_results     = empty( $filter_results['total'] );
+	$pagination     = $filter_results['pagination'];
+	$no_results     = empty( $filter_results['pagination']['total'] );
 }
 ?>
 <main id="site-content" role="main" class="site-content">
@@ -42,7 +44,7 @@ if ( ! empty( $glossary ) ) {
 						?>
 
 						<div class="trevor-pagination-default">
-							<?php get_template_part( 'template-parts/pagination' ); ?>
+							<?php get_template_part( 'template-parts/pagination', '', $pagination ); ?>
 						</div>
 					</div>
 				<?php } elseif ( $no_results ) { ?>
