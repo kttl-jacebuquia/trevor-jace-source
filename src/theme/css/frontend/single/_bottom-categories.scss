@@ -1,5 +1,5 @@
 .post-bottom-categories {
-  @apply bg-violet;
+  @apply bg-violet overflow-hidden;
   backdrop-filter: blur(200px);
   @apply flex flex-col items-center;
   @apply py-16;
