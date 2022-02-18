@@ -28,16 +28,18 @@
   }
 
   .scope {
-    div:not(:first-child) {
-      border-left: 1px solid rgba(16, 16, 102, 0.16);
+    @apply -mx-px14 md:-mx-px20;
+
+    div {
+      @apply mb-px14;
+
+      &:not(:last-child) {
+        border-right: 1px solid rgba(16, 16, 102, 0.16);
+      }
     }
 
     &-link {
-      @apply px-px14 md:px-px20 text-px18 leading-px26 lg:text-px20 lg:leading-px26;
-
-      &--first {
-        @apply pl-0;
-      }
+      @apply inline-flex items-center px-px14 h-px32 md:px-px20 text-px18 leading-px26 lg:text-px20 lg:leading-px26;
     }
 
     &-link:not(.current) {
