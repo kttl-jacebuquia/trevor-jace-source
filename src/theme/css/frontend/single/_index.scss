@@ -1,4 +1,12 @@
 .single {
+  article.post-single {
+    @apply bg-transparent;
+
+    .post-content-wrap {
+      @apply bg-white;
+    }
+  }
+
   // Override bottom padding from _site-content.scss
   .site-content {
     > :last-child {
