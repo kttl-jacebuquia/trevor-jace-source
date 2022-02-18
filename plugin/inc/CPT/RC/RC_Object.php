@@ -604,7 +604,7 @@ abstract class RC_Object {
 		/* We need to modify the post_type qv right this time and just before the solr */
 		$is_rc_lp = ! empty( $query->get( self::QV_RESOURCES_LP ) );
 		if ( $is_rc_lp && $query->is_search() ) {
-			$query->set( 'post_type', self::$PUBLIC_POST_TYPES );
+			$query->set( 'post_type', array_merge( self::$PUBLIC_POST_TYPES, array( Glossary::POST_TYPE ) ) );
 			$query->set( 'post_status', 'publish' );
 		}
 
@@ -665,12 +665,12 @@ abstract class RC_Object {
 	}
 
 	/**
-	 * Check if the search query has glossary.
+	 * Check if the search query have glossaries.
 	 *
 	 * @param string $search
 	 * @return array
 	 */
-	public static function find_glossary( $search ) {
+	public static function find_glossaries( $search ) {
 		if ( empty( $search ) ) {
 			return false;
 		}
@@ -679,8 +679,8 @@ abstract class RC_Object {
 			array(
 				's'              => strtolower( str_replace( ' ', '', $search ) ),
 				'post_type'      => CPT\RC\Glossary::POST_TYPE,
-				'posts_per_page' => 1,
-				'paged'          => get_query_var( 'paged' ),
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
 			)
 		);
 
@@ -689,8 +689,8 @@ abstract class RC_Object {
 				array(
 					's'              => strtolower( $search ),
 					'post_type'      => CPT\RC\Glossary::POST_TYPE,
-					'posts_per_page' => 1,
-					'paged'          => get_query_var( 'paged' ),
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
 				)
 			);
 		}
@@ -700,8 +700,8 @@ abstract class RC_Object {
 				: null;
 	}
 
-	public static function filter_results( $glossary ) {
-		$posts = array_merge( $glossary, self::get_all_posts() );
+	public static function filter_results( $glossaries ) {
+		$posts = array_merge( $glossaries, self::get_all_posts() );
 
 		$page       = ! empty( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$pagination = Resource_Center::get_pagination();
@@ -723,8 +723,13 @@ abstract class RC_Object {
 		$posts = array_slice( $posts, $offset, $limit );
 
 		return array(
-			'posts' => $posts,
-			'total' => $total,
+			'posts'      => $posts,
+			'pagination' => array(
+				'total'       => $total,
+				'total_pages' => $totalPages,
+				'limit'       => $limit,
+				'page'        => $page,
+			),
 		);
 
 	}
@@ -732,7 +737,7 @@ abstract class RC_Object {
 	public static function get_all_posts() {
 		$q = new \WP_Query(
 			array(
-				's'              => get_search_query( true ),
+				's'              => strtolower( trim( get_search_query( false ) ) ),
 				'post_type'      => self::$PUBLIC_POST_TYPES,
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
