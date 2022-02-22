@@ -161,10 +161,10 @@
 
   .swiper-button {
     @apply w-0 overflow-visible;
-    --carousel-left-padding: 0;
 
-    $breakpoints: lg, lg2, xl, 2xl;
+    --carousel-left-padding: 0;
     --carousel-gap: 1.75rem;
+    $breakpoints: lg, lg2, xl, 2xl;
 
     @each $size in $breakpoints {
       @screen #{$size} {
@@ -177,6 +177,10 @@
         --container-padding: theme("container.padding.#{$size}");
         --carousel-left-padding: calc((100vw - (theme("screens.#{$size}") - (2 * var(--container-padding)))) / 2);
       }
+    }
+
+    &:focus .swiper-button-wrapper {
+      outline: -webkit-focus-ring-color auto 1px;
     }
 
     &-prev {

@@ -234,6 +234,7 @@ export const initializeCarousel = (carouselSettings) => {
 		checkNavigationArrows(_swiper);
 		handleNavigationArrows(_swiper);
 		checkPagination(_swiper);
+		togglePaginationFocusability(_swiper, false);
 	};
 
 	options.on.destroy = (_swiper) => {
@@ -246,11 +247,11 @@ export const initializeCarousel = (carouselSettings) => {
 
 	options.on.slidePrevTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
-		// Focus on the first focusable slide
+		// Focus on the last focusable slide
 		setTimeout(() => {
 			const lastFocusableSlide = [..._swiper.slides]
 				.filter((el) => !el.getAttribute('aria-hidden'))
-				.shift();
+				.pop();
 			lastFocusableSlide?.firstElementChild.focus();
 			_swiper.navigatedByNav = false;
 		}, 150);
@@ -259,12 +260,11 @@ export const initializeCarousel = (carouselSettings) => {
 	options.on.slideNextTransitionEnd = (_swiper) => {
 		applySlidesA11y(_swiper);
 
-		// Focus on the last focusable slide
+		// Focus on the first focusable slide
 		setTimeout(() => {
 			const firstFocusableSlide = [..._swiper.slides]
-				.filter((el) => !el.getAttribute('aria-hidden') )
-				.pop();
-			const bounds = firstFocusableSlide.getBoundingClientRect();
+				.filter((el) => !el.getAttribute('aria-hidden'))
+				.shift();
 			firstFocusableSlide?.firstElementChild.focus();
 			_swiper.navigatedByNav = false;
 		}, 150);
@@ -272,6 +272,7 @@ export const initializeCarousel = (carouselSettings) => {
 
 	options.on.slideChangeTransitionEnd = function (_swiper) {
 		checkNavigationArrows(_swiper);
+		checkPaginationFocusability(_swiper);
 	};
 
 	options.on.activeIndexChange = function (_swiper) {
@@ -322,6 +323,55 @@ export const initializeCarousel = (carouselSettings) => {
 		} else {
 			_swiper.el.classList.remove('carousel--paginated');
 			_swiper.el.parentElement?.classList.remove('carousel--paginated');
+		}
+	}
+
+	// Checks if last slide has already been visible,
+	// then makes pagination focusable if it is
+	function checkPaginationFocusability(_swiper) {
+		const isPaginationFocusable = Boolean(
+			_swiper.el.getAttribute('data-pagination-focusable')
+		);
+
+		if (!isPaginationFocusable) {
+			// Check to see if last slide is now visible
+			const [lastSlide] = _swiper.slides.slice(-1);
+			const { right } = lastSlide.getBoundingClientRect();
+			const isLastSlideVisible = right <= window.innerWidth;
+
+			if (isLastSlideVisible) {
+				togglePaginationFocusability(_swiper, true);
+			} else {
+				togglePaginationFocusability(_swiper, false);
+			}
+		}
+	}
+
+	function togglePaginationFocusability(_swiper, willEnable = null) {
+		const paginationElement = _swiper.pagination.el;
+
+		if (paginationElement) {
+			const bullets = Array.from(paginationElement.children);
+			const willBeFocusable =
+				typeof willEnable === 'boolean'
+					? willEnable
+					: !Boolean(
+							_swiper.el.getAttribute('data-pagination-focusable')
+					  );
+
+			// Toggle focusability of the element
+			if (willBeFocusable) {
+				_swiper.el.setAttribute('data-pagination-focusable', 'true');
+				paginationElement.removeAttribute('aria-hidden');
+			} else {
+				_swiper.el.removeAttribute('data-pagination-focusable');
+				paginationElement.setAttribute('aria-hidden', 'true');
+			}
+
+			// Toggle focusability of the bullets
+			bullets.forEach((bullet) => {
+				bullet.setAttribute('tabindex', willBeFocusable ? '0' : '-1');
+			});
 		}
 	}
 
