@@ -30,7 +30,6 @@ const checkCookieBannerVisibility = (cookieBannerDialog: HTMLElement) => {
 
 		// Checks if cookie banner was hidden by clicking its button
 		if (cookieBannerDialog.contains(document.activeElement)) {
-			console.log('should focus on body');
 			// Focus on body
 			document.body.focus();
 		}

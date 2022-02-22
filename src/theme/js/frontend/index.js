@@ -209,12 +209,9 @@ if (isCardPresent) {
 }
 
 (() => {
-	console.log({ bigImageCarousels });
 	if (bigImageCarousels.length) {
 		$.each(bigImageCarousels, (index, element) => {
 			const $swiper = $('.carousel-container', element);
-
-			console.log({ $swiper });
 
 			const onMutate = (mutations, observer) => {
 				if ($swiper.hasClass('swiper-container-initialized')) {
