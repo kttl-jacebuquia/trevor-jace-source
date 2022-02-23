@@ -39,7 +39,7 @@ class Search_Input {
 					<i class="trevor-ti-x"></i>
 				</button>
 			</div>
-			<div id="input-suggestions" class="w-full"></div>
+			<div id="input-suggestions" class="input-suggestions w-full"></div>
 		</label>
 		<?php
 		return ob_get_clean();
