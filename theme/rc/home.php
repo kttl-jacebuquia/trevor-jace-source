@@ -6,7 +6,7 @@ use \TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 
 <?php if ( ! is_paged() ) { ?>
 
-<main id="site-content" role="main" class="site-content">
+<main id="site-content" role="main" class="site-content" tabindex="0">
 
 	<?php echo Resource_Center::render_hero(); ?>
 
