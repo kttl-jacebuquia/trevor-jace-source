@@ -8,6 +8,29 @@
   @screen mobile {
     @apply flex items-stretch;
   }
+
+  &.text-white {
+    .page-btn-link {
+      @include wave-underline-white;
+    }
+  }
+
+  .page-btn-link {
+    @apply bg-transparent text-current;
+    padding: 0 !important;
+
+    @screen md {
+      @apply px-0;
+    }
+
+    @screen lg {
+      @apply px-0;
+    }
+
+    &::after {
+      @apply bg-current;
+    }
+  }
 }
 
 .page-header {
