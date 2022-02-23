@@ -23,6 +23,14 @@
     );
   }
 
+  &.text-white {
+    .messaging__buttons {
+      .page-btn-link {
+        @include wave-underline-white;
+      }
+    }
+  }
+
 	&__container {
 		@apply tw-grid container mx-auto;
 
@@ -214,15 +222,11 @@
 	}
 
 	&__buttons {
-		@apply flex flex-wrap flex-shrink-0 gap-5 justify-center items-center;
+		@apply flex flex-col flex-shrink-0 gap-5 justify-center items-center;
 		@apply text-center mt-px30;
 
-		@screen md {
-			@apply flex-wrap;
-		}
-
     .page-btn-link {
-      @apply text-px18 leading-px24 tracking-px025;
+      @apply text-current text-px18 leading-px24 tracking-px025;
 
       @screen lg {
         @apply text-px20;
@@ -230,6 +234,10 @@
 
       @screen lg2 {
         @apply text-px22 leading-px26;
+      }
+
+      &::after {
+        @apply bg-current;
       }
     }
 
