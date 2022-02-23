@@ -216,6 +216,7 @@ export const initializeCarousel = (carouselSettings) => {
 	 * Initialize remaining carousels
 	 */
 	let swiper;
+	let currentVisibleSlides = [];
 	const baseSelector = carouselSettings.base_selector;
 	const options = carouselSettings.options || {};
 	const breakpoint = carouselSettings.options.breakpoint;
@@ -252,11 +253,21 @@ export const initializeCarousel = (carouselSettings) => {
 
 		// Focus on the first focusable slide
 		setTimeout(() => {
-			const firstFocusableSlide = [..._swiper.slides]
-				.filter((el) => !el.getAttribute('aria-hidden'))
-				.shift();
+			// Don't include non-visible slides
+			const visibleSlides = [..._swiper.slides].filter(
+				(el) => !el.getAttribute('aria-hidden')
+			);
+
+			// Don't include slides from the previous set
+			const [firstFocusableSlide] = visibleSlides.filter(
+				(el) => !currentVisibleSlides.includes(el)
+			);
 			firstFocusableSlide?.firstElementChild.focus();
+
 			_swiper.navigatedByNav = false;
+
+			// Save current set
+			currentVisibleSlides = visibleSlides;
 		}, 150);
 	};
 
