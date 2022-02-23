@@ -245,20 +245,10 @@ export const initializeCarousel = (carouselSettings) => {
 		checkPagination(_swiper);
 	};
 
-	options.on.slidePrevTransitionEnd = (_swiper) => {
+	options.on.slideChangeTransitionEnd = function (_swiper) {
 		applySlidesA11y(_swiper);
-		// Focus on the last focusable slide
-		setTimeout(() => {
-			const lastFocusableSlide = [..._swiper.slides]
-				.filter((el) => !el.getAttribute('aria-hidden'))
-				.pop();
-			lastFocusableSlide?.firstElementChild.focus();
-			_swiper.navigatedByNav = false;
-		}, 150);
-	};
-
-	options.on.slideNextTransitionEnd = (_swiper) => {
-		applySlidesA11y(_swiper);
+		checkNavigationArrows(_swiper);
+		checkPaginationFocusability(_swiper);
 
 		// Focus on the first focusable slide
 		setTimeout(() => {
@@ -268,11 +258,6 @@ export const initializeCarousel = (carouselSettings) => {
 			firstFocusableSlide?.firstElementChild.focus();
 			_swiper.navigatedByNav = false;
 		}, 150);
-	};
-
-	options.on.slideChangeTransitionEnd = function (_swiper) {
-		checkNavigationArrows(_swiper);
-		checkPaginationFocusability(_swiper);
 	};
 
 	options.on.activeIndexChange = function (_swiper) {
