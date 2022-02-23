@@ -652,7 +652,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 						<?php endforeach; ?>
 					</div>
 					<?php if ( 'carousel' === $layout ) : ?>
-						<?php static::render_carousel_pagination(); ?>
+						<?php echo static::render_carousel_navigation(); ?>
 					<?php endif; ?>
 				</div>
 				<?php if ( 'carousel' === $layout ) : ?>
