@@ -322,13 +322,6 @@
       @apply absolute top-1/2 transform -translate-y-1/2;
     }
 
-    .swiper-button-prev,
-    .swiper-button-next {
-      @screen lg {
-        @apply flex;
-      }
-    }
-
     .swiper-button-prev {
       @apply ml-px20;
     }
@@ -336,7 +329,12 @@
     .swiper-button-next {
       @apply mr-px20;
 
+      @screen md {
+        margin-right: -100%;
+      }
+
       @screen lg {
+        margin-right: 0;
         left: calc(300% + theme('gap.lg'));
       }
     }
