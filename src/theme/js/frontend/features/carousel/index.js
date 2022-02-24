@@ -371,7 +371,7 @@ export const initializeCarousel = (carouselSettings) => {
 
 			if (left < 0 || right > windowWidth) {
 				slide.setAttribute('aria-hidden', 'true');
-				slideContent.setAttribute('tabindex', -1);
+				slide.setAttribute('tabindex', -1);
 				// Make contents untabbable
 				[...slide.querySelectorAll('a,button')].forEach((el) =>
 					el.setAttribute('tabindex', -1)
@@ -379,7 +379,7 @@ export const initializeCarousel = (carouselSettings) => {
 				tagsBox?.setAttribute('aria-hidden', true);
 			} else {
 				slide.removeAttribute('aria-hidden');
-				slideContent.setAttribute('tabindex', 0);
+				slide.setAttribute('tabindex', 0);
 				[...slideContent.querySelectorAll('a,button')].forEach((el) =>
 					el.removeAttribute('tabindex')
 				);
