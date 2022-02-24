@@ -10,6 +10,11 @@
   .post-thumbnail-wrap {
     @apply absolute top-0 left-0 w-full h-full;
     @apply -z-1;
+
+    > a {
+      @apply absolute top-0 left-0 w-full h-full;
+      outline-offset: rem-calc(-10);
+    }
   }
 
   .card-content {
@@ -41,6 +46,10 @@
 
     @screen xl {
       @apply text-px34 leading-px44;
+    }
+
+    > a {
+      outline-offset: rem-calc(-10);
     }
   }
 
