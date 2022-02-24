@@ -475,8 +475,8 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		# Build heading classnames
 		$heading_cls   = array( 'text-center text-teal-dark font-bold' );
 		$heading_cls[] = 'mt-px80 text-px32 leading-px40 mb-px40';
-		$heading_cls[] = 'md:pt-px72 md:mb-px40 md:leading-px42 md:mt-0';
-		$heading_cls[] = 'xl:text-px46 xl:leading-px56 xl:tracking-em_001 xl:pt-0';
+		$heading_cls[] = 'md:mb-px40 md:leading-px42 md:mt-0';
+		$heading_cls[] = 'xl:text-px46 xl:leading-px56 xl:tracking-em_001';
 		$heading_cls   = implode( ' ', $heading_cls );
 
 		# Build description classnames
