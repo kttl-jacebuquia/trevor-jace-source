@@ -740,13 +740,6 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		// mobile
 		$swiper_button_class[] = 'hidden';
 
-		// tablet
-		if ( static::$entries_count > 2 ) {
-			$swiper_button_class[] = 'md:inline-flex';
-		} else {
-			$swiper_button_class[] = 'md:hidden';
-		}
-
 		// desktop
 		if ( static::$entries_count > 3 ) {
 			$swiper_button_class[] = 'lg:inline-flex';
