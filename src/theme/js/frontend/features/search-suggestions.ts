@@ -60,6 +60,7 @@ const $inputSearchField = $('#rc-search-main');
 							.prepend(
 								'<li class="list-header"><h3>Popular Searches</h3></li>'
 							)
+							.attr('aria-hidden', 'true')
 							.removeAttr('tabindex');
 					}
 				},
