@@ -262,7 +262,8 @@ export const initializeCarousel = (carouselSettings) => {
 			const [firstFocusableSlide] = visibleSlides.filter(
 				(el) => !currentVisibleSlides.includes(el)
 			);
-			firstFocusableSlide?.firstElementChild.focus();
+
+			firstFocusableSlide?.focus();
 
 			_swiper.navigatedByNav = false;
 

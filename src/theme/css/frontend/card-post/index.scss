@@ -20,7 +20,7 @@
 
   // Thumbnail
   .post-thumbnail-wrap {
-    @apply h-px240 relative;
+    @apply block relative w-full h-px240;
     @apply overflow-hidden;
     @apply flex-shrink-0;
     -webkit-backface-visibility: hidden;
@@ -28,11 +28,16 @@
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
 
+    > a {
+      @apply block absolute top-0 left-0 w-full h-full;
+      @include focus-outline-inset;
+    }
+
     img {
       @apply w-full h-full;
       @apply object-center object-cover;
       @apply transition-transform duration-500;
-      @apply pointer-events-none;
+      @apply pointer-events-none -z-1;
     }
   }
 
@@ -106,9 +111,14 @@
 
   .post-title {
     @apply overflow-hidden break-words relative font-semibold;
+    @include focus-outline-inset;
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: auto;
+
+    a {
+      @include focus-outline-inset;
+    }
 
     .title_top + & {
       @apply text-px22 leading-px32;
