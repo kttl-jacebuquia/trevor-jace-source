@@ -13,6 +13,13 @@
     @apply py-px140;
   }
 
+  // Mobile Drawer style (Accordion)
+  &--mobile-drawer {
+    @screen mobile {
+      @apply pb-px80;
+    }
+  }
+
   & + .guiding-principles {
     @apply mt-0;
   }
@@ -318,8 +325,20 @@
       height: rem-calc(375);
     }
 
+    .topic-cards__item-description {
+      @screen lg-only {
+        -webkit-line-clamp: 4;
+      }
+    }
+
     .swiper-button {
       @apply absolute top-1/2 transform -translate-y-1/2;
+
+      &:focus {
+        .swiper-button-wrapper {
+          outline: 5px auto -webkit-focus-ring-color;
+        }
+      }
     }
 
     .swiper-button-prev {

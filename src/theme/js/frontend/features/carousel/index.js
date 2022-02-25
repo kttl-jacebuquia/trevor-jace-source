@@ -147,8 +147,8 @@ export function generateSwiperArrows(
 
 	/**
 	 *
-	 * @param {className} paneSelector
-	 * @param {object} event
+	 * @param {string} paneSelector
+	 * @param {Object} event
 	 *
 	 * This will generate the swiper button
 	 * in the cursor position inside the pane.
@@ -172,8 +172,8 @@ export function generateSwiperArrows(
 
 	/**
 	 *
-	 * @param {className} paneSelector
-	 * @param {object} event
+	 * @param {string} paneSelector
+	 * @param {Object} event
 	 *
 	 * This will animate the swiper button
 	 * on mousemove event.
@@ -216,13 +216,12 @@ export const initializeCarousel = (carouselSettings) => {
 	 * Initialize remaining carousels
 	 */
 	let swiper;
-	let currentVisibleSlides = [];
 	const baseSelector = carouselSettings.base_selector;
 	const options = carouselSettings.options || {};
 	const breakpoint = carouselSettings.options.breakpoint;
 	const baseContainer = document.querySelector(baseSelector);
 
-	options.on.afterInit = function (_swiper) {
+	options.on.afterInit = function () {
 		document
 			.querySelectorAll('.carousel-testimonials .card-post')
 			.forEach((elem) => {
@@ -230,45 +229,6 @@ export const initializeCarousel = (carouselSettings) => {
 					elem.tagBoxEllipsis.calc();
 				}
 			});
-
-		applySlidesA11y(_swiper);
-		checkNavigationArrows(_swiper);
-		handleNavigationArrows(_swiper);
-		checkPagination(_swiper);
-		togglePaginationFocusability(_swiper, false);
-	};
-
-	options.on.destroy = (_swiper) => {
-		checkPagination(_swiper);
-	};
-
-	options.on.resize = (_swiper) => {
-		checkPagination(_swiper);
-	};
-
-	options.on.slideChangeTransitionEnd = function (_swiper) {
-		applySlidesA11y(_swiper);
-		checkNavigationArrows(_swiper);
-		checkPaginationFocusability(_swiper);
-
-		// Focus on the first focusable slide
-		setTimeout(() => {
-			// Don't include non-visible slides
-			const visibleSlides = [..._swiper.slides].filter(
-				(el) => !el.getAttribute('aria-hidden')
-			);
-
-			// Don't include slides from the previous set
-			const [firstFocusableSlide] = visibleSlides.filter(
-				(el) => !currentVisibleSlides.includes(el)
-			);
-			firstFocusableSlide?.firstElementChild.focus();
-
-			_swiper.navigatedByNav = false;
-
-			// Save current set
-			currentVisibleSlides = visibleSlides;
-		}, 150);
 	};
 
 	options.on.activeIndexChange = function (_swiper) {
@@ -301,139 +261,6 @@ export const initializeCarousel = (carouselSettings) => {
 	};
 
 	options.on.breakpoint = onSwiperBreakpointChange;
-
-	function checkPagination(_swiper) {
-		if (
-			_swiper.pagination.el &&
-			_swiper.pagination.el.children.length > 1
-		) {
-			[..._swiper.pagination.el.children].forEach((button, index) => {
-				button.setAttribute(
-					'aria-label',
-					`click to view slide number ${index + 1}`
-				);
-			});
-
-			_swiper.el.classList.add('carousel--paginated');
-			_swiper.el.parentElement?.classList.add('carousel--paginated');
-		} else {
-			_swiper.el.classList.remove('carousel--paginated');
-			_swiper.el.parentElement?.classList.remove('carousel--paginated');
-		}
-	}
-
-	// Checks if last slide has already been visible,
-	// then makes pagination focusable if it is
-	function checkPaginationFocusability(_swiper) {
-		const isPaginationFocusable = Boolean(
-			_swiper.el.getAttribute('data-pagination-focusable')
-		);
-
-		if (!isPaginationFocusable) {
-			// Check to see if last slide is now visible
-			const [lastSlide] = _swiper.slides.slice(-1);
-			const { right } = lastSlide.getBoundingClientRect();
-			const isLastSlideVisible = right <= window.innerWidth;
-
-			if (isLastSlideVisible) {
-				togglePaginationFocusability(_swiper, true);
-			} else {
-				togglePaginationFocusability(_swiper, false);
-			}
-		}
-	}
-
-	function togglePaginationFocusability(_swiper, willEnable = null) {
-		const paginationElement = _swiper.pagination.el;
-
-		if (paginationElement) {
-			const bullets = Array.from(paginationElement.children);
-			const willBeFocusable =
-				typeof willEnable === 'boolean'
-					? willEnable
-					: !Boolean(
-							_swiper.el.getAttribute('data-pagination-focusable')
-					  );
-
-			// Toggle focusability of the element
-			if (willBeFocusable) {
-				_swiper.el.setAttribute('data-pagination-focusable', 'true');
-				paginationElement.removeAttribute('aria-hidden');
-			} else {
-				_swiper.el.removeAttribute('data-pagination-focusable');
-				paginationElement.setAttribute('aria-hidden', 'true');
-			}
-
-			// Toggle focusability of the bullets
-			bullets.forEach((bullet) => {
-				bullet.setAttribute('tabindex', willBeFocusable ? '0' : '-1');
-			});
-		}
-	}
-
-	function applySlidesA11y(_swiper) {
-		const windowWidth = window.innerWidth;
-
-		// aria-hide slides that are not fully displayed
-		Array.from(_swiper.slides).forEach((slide) => {
-			const { left, right } = slide.getBoundingClientRect();
-			const slideContent = slide.firstElementChild;
-			const tagsBox = slide.querySelector('.tags-box');
-
-			if (left < 0 || right > windowWidth) {
-				slide.setAttribute('aria-hidden', 'true');
-				slide.setAttribute('tabindex', -1);
-				// Make contents untabbable
-				[...slide.querySelectorAll('a,button')].forEach((el) =>
-					el.setAttribute('tabindex', -1)
-				);
-				tagsBox?.setAttribute('aria-hidden', true);
-			} else {
-				slide.removeAttribute('aria-hidden');
-				slide.setAttribute('tabindex', 0);
-				[...slideContent.querySelectorAll('a,button')].forEach((el) =>
-					el.removeAttribute('tabindex')
-				);
-				tagsBox?.removeAttribute('aria-hidden');
-			}
-		});
-	}
-
-	/**
-	 * Show/Hide prev/next nav button depending on whether the first/last slides are visible in the view
-	 * @param {object} _swiper
-	 */
-	function checkNavigationArrows(_swiper) {
-		if (_swiper.navigation?.nextEl || _swiper.navigation?.prevEl) {
-			const slidesCount = _swiper.slides.length;
-			const { activeIndex } = _swiper;
-
-			const isFirstSlideActive = activeIndex === 0;
-			const isLastSlideActive = activeIndex === slidesCount - 1;
-
-			_swiper.navigation?.prevEl.classList.toggle(
-				'invisible',
-				isFirstSlideActive
-			);
-
-			_swiper.navigation?.nextEl.classList.toggle(
-				'invisible',
-				isLastSlideActive
-			);
-		}
-	}
-
-	/**
-	 * Handles additional operations for the navigation
-	 */
-	function handleNavigationArrows(_swiper) {
-		_swiper.navigation?.prevEl?.addEventListener('click', () => {
-			_swiper.navigatedByNav = true;
-		});
-		_swiper.navigation?.nextEl?.addEventListener('click', () => {
-			_swiper.navigatedByNav = true;
-		});
-	}
 
 	function init() {
 		if ((!swiper || swiper.destroyed) && baseContainer) {
