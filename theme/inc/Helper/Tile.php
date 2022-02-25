@@ -203,6 +203,9 @@ class Tile {
 			$options
 		);
 
+		# Aria-label. Change according to post type
+		$link_aria_label = "click to read more about {$data['title']}";
+
 		# class
 		$cls = array( 'tile', 'relative' );
 		if ( ! empty( $options['class'] ) ) {
@@ -228,11 +231,24 @@ class Tile {
 		$attr['data-post']      = $data['id'];
 		$attr['data-post-type'] = $data['post_type'];
 
+		// Aria-label according to post_type
+		switch ( $data['post_type'] ) {
+			case 'trevor_prtnr_prod':
+				$link_aria_label = "click to check out {$data['title']}";
+				break;
+			case 'trevor_gi_bill':
+				$link_aria_label = "click here to read the bill {$data['title']}";
+				break;
+			case 'trevor_gi_letter':
+				$link_aria_label = "click here to read the letter {$data['title']}";
+				break;
+		}
+
 		ob_start();
 		?>
 		<div <?php echo Tools::flat_attr( $attr ); ?>>
 			<?php if ( in_array( 'clickable-card', $cls, true ) ) { ?>
-				<a href="<?php echo $data['cta_url']; ?>" class="card-link">&nbsp;</a>
+				<a aria-hidden="true" tabindex="-1" href="<?php echo $data['cta_url']; ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
 
 			<?php if ( 'product' === $options['card_type'] && ! empty( $data['img'] ) ) { ?>
@@ -252,7 +268,10 @@ class Tile {
 
 				<?php if ( ! empty( $data['cta_txt'] ) ) { ?>
 					<div class="tile-cta-wrap">
-						<a href="<?php echo $data['cta_url']; ?>" class="<?php echo $cta_cls; ?>">
+						<a
+							href="<?php echo $data['cta_url']; ?>"
+							class="<?php echo $cta_cls; ?>"
+							aria-label="<?php echo $link_aria_label; ?>">
 							<span><?php echo $data['cta_txt']; ?></span>
 						</a>
 					</div>

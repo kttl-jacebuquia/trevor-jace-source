@@ -62,6 +62,11 @@ class TopicCards {
 					spaceBetween: 28,
 				},
 			},
+			a11yExtended: {
+				pagination: {
+					alwaysEnable: true,
+				},
+			},
 		});
 	}
 
