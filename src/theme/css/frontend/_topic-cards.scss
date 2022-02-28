@@ -326,7 +326,7 @@
     }
 
     .topic-cards__item-description {
-      @screen lg-only {
+      @screen lg {
         -webkit-line-clamp: 4;
       }
     }
