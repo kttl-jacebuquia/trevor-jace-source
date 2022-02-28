@@ -41,31 +41,36 @@ class ADPContent extends WithState {
 
 			const data = response.data;
 
-			this.populateListingInfo(this.$listingInfo, data.total_jobs);
+			this.populateListingInfo(this.$listingInfo, data?.total_jobs);
 
 			this.populateFilterItems(this.$filterLocations, data.locations);
 			this.populateFilterItems(this.$filterDepartments, data.departments);
 			initFilterNavigation(this.context);
 
-			this.populateJobItems(this.$listingContent, data.jobs);
+			this.populateJobItems(this.$listingContent, data?.jobs);
 			initListing(this.context);
 		});
 	}
 
 	initializeContentObserver() {
-		if ( this.$listingContent.length ) {
-			const observer = new MutationObserver(() => {
+		if (this.$listingContent.length) {
+			const observer = new window.MutationObserver(() => {
 				// Get current items shown in the list
-				const shownItems = this.$listingContent.find('.listing__item.show');
+				const shownItems = this.$listingContent.find(
+					'.listing__item.show'
+				);
 				// Update listing info
-				this.populateListingInfo( this.$listingInfo, shownItems.length );
+				this.populateListingInfo(this.$listingInfo, shownItems?.length);
 			});
 
-			observer.observe(this.$listingContent.get(0), { subtree: true, attributes: true });
+			observer.observe(this.$listingContent.get(0), {
+				subtree: true,
+				attributes: true,
+			});
 		}
 	}
 
-	populateListingInfo($container, total) {
+	populateListingInfo($container, total = 0) {
 		const text = total > 1 ? 'jobs' : 'job';
 		$container.html(`Currently viewing <span>${total} ${text}</span>`);
 	}
@@ -83,7 +88,7 @@ class ADPContent extends WithState {
 		});
 	}
 
-	populateJobItems($container, items) {
+	populateJobItems($container, items = []) {
 		items.forEach((item) => {
 			$container.append(this.generateJobItemMarkup(item));
 		});
@@ -103,18 +108,17 @@ class ADPContent extends WithState {
 					</time>
 				</div>
 				${
-					item?.links?.length && (
-						`<div class="listing__item__cta">
+					item?.links?.length &&
+					`<div class="listing__item__cta">
 							<a href="${item.links[item.links.length - 1].href}"
 							target="_blank">Apply Now</a>
 						</div>`
-					)
 				}
 			</div>
 		`;
 	}
 
-	getDepartments(units) {
+	getDepartments(units = []) {
 		const departments = [];
 		units.forEach((unit) => {
 			if ('Department' !== unit.typeCode.codeValue) {
@@ -132,7 +136,7 @@ class ADPContent extends WithState {
 		return departments;
 	}
 
-	getLocations(requisitionLocations) {
+	getLocations(requisitionLocations = []) {
 		const locations = [];
 		requisitionLocations.forEach((requisitionLocation) => {
 			const shortName = requisitionLocation.nameCode
@@ -150,7 +154,7 @@ class ADPContent extends WithState {
 		return locations;
 	}
 
-	generateJobItemClasses(departments, locations) {
+	generateJobItemClasses(departments = [], locations = []) {
 		const classes = [];
 		[...departments, ...locations].forEach((value) => {
 			classes.push(this.sanitizeOptionValue(value));
@@ -184,7 +188,7 @@ class ADPContent extends WithState {
 
 	getDateAgo(value) {
 		const date = moment(value).format('YYYY-MM-DD'),
-			timezone = scriptVars.wp_timezone,
+			timezone = window.scriptVars.wp_timezone,
 			now = moment().tz(timezone).format('YYYY-MM-DD'),
 			days = moment(now).diff(date, 'days');
 
