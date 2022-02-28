@@ -622,7 +622,7 @@ abstract class RC_Object {
 			return $base;
 		}
 
-		return $base . '?' . http_build_query( array( 's' => $term ) );
+		return $base . '?s=' . urlencode( $term );
 	}
 
 	/**
