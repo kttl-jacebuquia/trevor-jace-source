@@ -183,7 +183,7 @@ class Card {
 				</div>
 
 				<?php if ( ! empty( $tags ) ) { ?>
-					<aside class="tags-box" data-title="<?php echo esc_attr( $title ); ?>" aria-label="tags for <?php echo esc_attr( $title ); ?>">
+					<aside class="tags-box" title="tags for - <?php echo $title_top; ?> - <?php echo esc_attr( $title ); ?>" data-title="<?php echo esc_attr( $title ); ?>" aria-label="tags for <?php echo esc_attr( $title ); ?>">
 						<div class="tags-box__contents">
 							<?php foreach ( $tags as $tag ) { ?>
 								<a

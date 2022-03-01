@@ -242,7 +242,7 @@ class Resource_Center extends A_Options_Page {
 				<?php endif; ?>
 
 				<div class="mt-8 animate-bounce block">
-					<i class="trevor-ti-chevron-down text-4xl text-white bouncing-arrow cursor-pointer"></i>
+					<i class="trevor-ti-chevron-down text-4xl text-white bouncing-arrow cursor-pointer" role="button" aria-label="click to get to the trending section"></i>
 				</div>
 			</div>
 		</div>
