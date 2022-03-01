@@ -80,7 +80,7 @@ export function getFiltersByGroup(context, group) {
 }
 
 export function getActiveFilters(context) {
-	const activeFilters = [];
+	const activeFilters = {};
 	$(context)
 		.find(`${SELECTOR}__navigation__item[aria-checked="true"]`)
 		.each((index, el) => {
