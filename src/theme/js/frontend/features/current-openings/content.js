@@ -97,9 +97,16 @@ class ADPContent extends WithState {
 	generateJobItemMarkup(item) {
 		const departments = this.getDepartments(item.organizationalUnits);
 		const locations = this.getLocations(item.requisitionLocations);
-		const classes = this.generateJobItemClasses(departments, locations);
+		const [department, location] = this.generateJobItemClasses(
+			departments,
+			locations
+		);
 		return `
-			<div class="listing__item show ${classes.join(' ')}">
+			<div
+				class="listing__item show"
+				data-departments=${department}
+				data-locations=${location}
+				>
 				<div class="listing__item-inner">
 					${this.generateEyebrowMarkup(departments, locations)}
 					${this.generateTitleMarkup(item)}

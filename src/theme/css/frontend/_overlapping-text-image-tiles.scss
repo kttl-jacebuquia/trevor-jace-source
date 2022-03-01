@@ -12,6 +12,7 @@
   &__box {
     @apply col-span-full rounded-px10 py-px80 text-indigo;
     @apply px-px24 text-center;
+    @include user-defined-bg;
 
     @screen md {
       @apply col-start-3 col-span-6 px-px76 rounded-r-none;

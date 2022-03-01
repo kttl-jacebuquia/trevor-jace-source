@@ -8,6 +8,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "../colors/index";
+@import "../utils/index";
+@import "../frontend/misc/index";
 @import "../frontend/fonts";
 @import "../frontend/headings";
 @import "../frontend/button";

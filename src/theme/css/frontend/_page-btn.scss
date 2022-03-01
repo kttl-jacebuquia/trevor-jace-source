@@ -1,4 +1,5 @@
 .page-btn {
+  @include button-base;
   @apply inline-block;
   @apply font-bold text-base leading-px22 tracking-em_001;
   @apply rounded-px10;

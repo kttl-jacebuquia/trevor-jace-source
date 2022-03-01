@@ -1,5 +1,6 @@
 .org-mission {
-  @apply bg-purple text-white text-center overflow-hidden;
+  @apply text-white text-center overflow-hidden;
+  @include bg(purple);
 
   &__container {
     @apply container mx-auto tw-grid py-px80;
@@ -70,8 +71,9 @@
   }
 
   &__card {
-    @apply w-full rounded-px10 bg-white text-indigo;
+    @apply w-full rounded-px10 text-indigo;
     @apply py-px70 px-px26 h-auto;
+    @include bg(white);
 
     @screen md {
       width: calc(( 100% - 28px ) / 2);

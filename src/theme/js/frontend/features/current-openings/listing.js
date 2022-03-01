@@ -17,11 +17,10 @@ class Listing {
 	}
 
 	initializeObserver() {
-		const filterHeaderMutationObserver = new MutationObserver(
+		const filterHeaderMutationObserver = new window.MutationObserver(
 			([mutation]) => {
 				if (mutation.attributeName === 'aria-label') {
-					this.hideAllItems();
-					this.showItems();
+					this.toggleItems();
 				}
 			}
 		);
@@ -34,28 +33,23 @@ class Listing {
 		this.$context.find(`${this.selector}__item`).removeClass('show');
 	}
 
-	showItems() {
+	toggleItems() {
 		const activeFilters = getActiveFilters(this.$context);
-		const itemSelector = this.generateSelector(activeFilters);
-		this.$context
-			.find(`${this.selector}__item${itemSelector}`)
-			.addClass('show');
-	}
+		const filterGroupNames = Object.keys(activeFilters);
 
-	generateSelector(activeFilters) {
-		const classes = [];
-		for (const filterGroup in activeFilters) {
-			const filterItems = activeFilters[filterGroup];
-			filterItems.forEach((filterItem) => {
-				const isAllOption = filterItem.indexOf('all-') >= 0;
-				if (!isAllOption) {
-					classes.push(filterItem);
-				}
-			});
-		}
-		return classes.length
-			? classes.map((_class) => `[class*="${_class}"]`)
-			: '';
+		this.$context.find(`${this.selector}__item`).each((index, element) => {
+			$(element).toggleClass(
+				'show',
+				filterGroupNames.every(
+					(groupName) =>
+						!activeFilters[groupName].length ||
+						/^all-.+/.test(activeFilters[groupName][0]) ||
+						activeFilters[groupName].includes(
+							element.dataset[groupName]
+						)
+				)
+			);
+		});
 	}
 }
 

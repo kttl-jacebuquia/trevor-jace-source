@@ -1,5 +1,6 @@
 .header-container--support-crisis-services {
   @apply bg-gradient-crisis-services flex-col text-indigo;
+  @include focusable-children-outline(light);
   background-size: 100% 100%;
 
   @screen md {

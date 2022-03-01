@@ -1,0 +1,20 @@
+// Dark backgrounds for parent element to determine button's proper outline color
+$dark-parent-bg: (
+  indigo,
+  purple,
+  teal-dark,
+  blue_green,
+  violet,
+  orange,
+  black,
+);
+
+// Light backgrounds for parent element to determine button's proper outline color
+$light-parent-bg: (
+  indigo,
+  purple,
+  teal-dark,
+  blue_green,
+  violet,
+  gray-light,
+);

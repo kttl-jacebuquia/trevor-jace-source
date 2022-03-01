@@ -1,5 +1,6 @@
 .topic-cards {
   @apply pt-px80 pb-px40;
+  @include user-defined-bg;
 
   @screen md {
     @apply pt-px80 pb-px100;
@@ -204,8 +205,13 @@
     }
 
     &--bordered {
-      @apply card-sm md:card-md lg:card-lg lg2:card-xl bg-white text-teal-dark;
+      @apply card-sm md:card-md lg:card-lg lg2:card-xl text-teal-dark;
       border: 1px solid rgba(0, 94, 103, 0.5);
+
+      // Just to add specificity
+      &:is(&) {
+        @include bg(white);
+      }
     }
   }
 

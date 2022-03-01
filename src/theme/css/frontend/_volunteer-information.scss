@@ -155,6 +155,7 @@
 		@apply flex items-center;
 		@apply bg-white text-teal-dark rounded-px10;
 		@apply py-px70 px-px26;
+    @include focusable-children-outline(white);
 
 		@screen md {
 			@apply col-span-4 pt-px40;

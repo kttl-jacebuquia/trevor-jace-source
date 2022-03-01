@@ -1,5 +1,6 @@
 .training {
-  @apply py-px80 text-teal-dark bg-gray-light;
+  @apply py-px80 text-teal-dark;
+  @include bg(gray-light);
 
   @screen md {
     @apply py-px80;
@@ -72,7 +73,8 @@
 
   &__card {
     @apply col-span-full text-center pt-px80 pb-px54 px-px28;
-    @apply mt-px50 rounded-px10 bg-white;
+    @apply mt-px50 rounded-px10;
+    @include bg(white);
 
     @screen md {
       @apply col-span-6 col-start-2 mt-px50 py-px90 px-px50;

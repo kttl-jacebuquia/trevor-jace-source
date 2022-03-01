@@ -1,0 +1,27 @@
+// @params $type - dark|light - Parents background to check against
+// @params $isolate - bool - Whether to include parent override
+@mixin focus-outline-base($type: 'light', $isolate: false) {
+  --outline-color: #{if($type == 'light', color(purple), color(white))};
+  outline-offset: rem-calc(3);
+
+  // Default focus outline
+  &:focus {
+    outline: #{rem-calc(1)} solid var(--outline-color);
+  }
+
+  @if ( $isolate == false ) {
+    // For light backgrounds, use purple outline
+    @each $bg_name in $light-parent-bg {
+      .bg-#{$bg_name} & {
+        --outline-color: #{color(purple)};
+      }
+    }
+
+    // For dark backgrounds, use white outline
+    @each $bg_name in $dark-parent-bg {
+      .bg-#{$bg_name} & {
+        --outline-color: #{color(white)};
+      }
+    }
+  }
+}

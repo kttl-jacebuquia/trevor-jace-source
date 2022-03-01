@@ -35,7 +35,7 @@
 
     // Visible hide tag-boxes after the toggle
     & ~ .tag-box {
-      @apply invisible;
+      @apply hidden;
     }
   }
 

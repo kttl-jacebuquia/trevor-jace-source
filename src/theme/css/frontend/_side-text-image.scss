@@ -1,4 +1,6 @@
 .side-text-image {
+  @include user-defined-bg;
+
   &__container {
     @apply tw-grid container mx-auto;
     @apply items-center;

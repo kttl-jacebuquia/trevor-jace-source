@@ -42,6 +42,9 @@
 @import './site-content';
 @import './footer';
 @import './button';
+.test {
+  @include focus-outline-base;
+}
 @import './tags-box';
 @import './card-post/index';
 @import './single/index';

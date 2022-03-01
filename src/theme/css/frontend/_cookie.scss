@@ -1,7 +1,7 @@
 .ch2 {
-	&-icon {
-		display: none !important;
-	}
+  &-icon {
+    display: none !important;
+  }
 
   &-dialog {
     &:not(.ch2-visible) {
@@ -19,85 +19,85 @@
     }
   }
 
-	&-theme-bar &-dialog {
-		@apply transform-gpu translate-y-full transition-transform duration-300 ease-out;
-		bottom: 0 !important;
-		@include z-index(cookie);
+  &-theme-bar &-dialog {
+    @apply transform-gpu translate-y-full transition-transform duration-300 ease-out;
+    bottom: 0 !important;
+    @include z-index(cookie);
 
-		@screen 2xl {
-			@apply container mx-auto;
-			@apply max-w-screen-xl;
-		}
+    @screen 2xl {
+      @apply container mx-auto;
+      @apply max-w-screen-xl;
+    }
 
-		&::before {
-			@apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1;
-			@apply w-screen h-full block;
-			content: '';
-		}
+    &::before {
+      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1;
+      @apply w-screen h-full block;
+      content: "";
+    }
 
-		&-content,
-		&-actions {
-			@apply relative z-2;
-		}
+    &-content,
+    &-actions {
+      @apply relative z-2;
+    }
 
-		&.ch2-visible {
-			@apply bottom-0 translate-y-0;
-		}
-	}
+    &.ch2-visible {
+      @apply bottom-0 translate-y-0;
+    }
+  }
 
-	body.is-rc &-theme-bar.ch2-style-light &-dialog,
+  body.is-rc &-theme-bar.ch2-style-light &-dialog,
   body.page-template-default.text-indigo &-theme-bar.ch2-style-light &-dialog {
-		@apply bg-transparent;
+    @apply bg-indigo;
 
-		&::before {
-			@apply bg-indigo;
-		}
-	}
+    &::before {
+      @apply bg-transparent;
+    }
+  }
 
-	&-theme-bar.ch2-style-light &-dialog {
-		@apply bg-transparent;
-		@apply font-manrope;
-		@apply pt-px30 pb-px40 md:pt-px40 px-px28 md:px-px40;
-		@apply md:flex md:flex-col lg2:flex-row lg2:items-center;
+  &-theme-bar.ch2-style-light &-dialog {
+    @apply font-manrope;
+    @apply pt-px30 pb-px40 md:pt-px40 px-px28 md:px-px40;
+    @apply md:flex md:flex-col lg2:flex-row lg2:items-center;
+    @apply bg-blue_green;
 
-		&::before {
-			@apply bg-blue_green;
-		}
+    &::before {
+      @apply bg-transparent;
+    }
 
-		&-content {
-			@apply pr-px40 text-white flex lg2:pr-px75;
+    &-content {
+      @apply pr-px40 text-white flex lg2:pr-px75;
 
-			p {
-				color: inherit;
-				margin-bottom: 0 !important;
+      p {
+        color: inherit;
+        margin-bottom: 0 !important;
 
-				strong {
-					color: inherit;
-					@apply text-px18 leading-px24 md:text-px20 md:leading-px26;
-				}
-			}
+        strong {
+          color: inherit;
+          @apply text-px18 leading-px24 md:text-px20 md:leading-px26;
+        }
+      }
 
-			:is(p:nth-child(2), a) {
-				@apply text-px14 leading-px20 md:text-px18 md:leading-px24 font-normal;
-				@apply hidden;
-			}
+      :is(p:nth-child(2), a) {
+        @apply text-px14 leading-px20 md:text-px18 md:leading-px24 font-normal;
+        @apply hidden;
+      }
 
-			a {
-				color: inherit;
-				border-color: inherit;
-				@apply border-b-2 transition-none;
-				@include wave-underline-white;
+      a {
+        color: inherit;
+        border-color: inherit;
+        @apply border-b-2 transition-none;
+        @include wave-underline-white;
 
-				&:hover {
-					color: inherit;
-					border-color: inherit;
-				}
-			}
-		}
+        &:hover {
+          color: inherit;
+          border-color: inherit;
+        }
+      }
+    }
 
-		&-actions {
+    &-actions {
       @apply font-bold mt-px28 md:ml-0 lg2:mt-px6;
-			@apply items-start flex flex-col md:items-center md:flex-row;
+      @apply items-start flex flex-col md:items-center md:flex-row;
 
       .ch2-allow-all-btn,
       .ch2-deny-all-btn,
@@ -136,9 +136,9 @@
         background: transparent;
       }
 
-			div + div {
-				@apply mt-px16 md:mt-0;
-			}
-		}
-	}
+      div + div {
+        @apply mt-px16 md:mt-0;
+      }
+    }
+  }
 }
