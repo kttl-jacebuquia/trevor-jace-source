@@ -770,12 +770,12 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 			<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-prev' ) ) ); ?>>
-				<div type="button" class="swiper-button-wrapper" aria-hidden="true">
+				<div role="button" class="swiper-button-wrapper" aria-hidden="true">
 					<i class="trevor-ti-arrow-left"></i>
 				</div>
 			</div>
 			<div <?php echo static::render_attrs( array_merge( $swiper_button_class, array( 'swiper-button-next' ) ) ); ?>>
-				<div type="button" class="swiper-button-wrapper" aria-hidden="true">
+				<div role="button" class="swiper-button-wrapper" aria-hidden="true">
 					<i class="trevor-ti-arrow-right"></i>
 				</div>
 			</div>
