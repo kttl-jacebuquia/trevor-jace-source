@@ -3,6 +3,7 @@
 use DateTime;
 use DateTimeZone;
 use TrevorWP\CPT;
+use TrevorWP\CPT\RC\RC_Object;
 use Twig;
 use TrevorWP\Exception;
 use TrevorWP\Main;
@@ -965,5 +966,16 @@ class Tools {
 	 */
 	public static function get_obj_signature( $val ): string {
 		return md5( serialize( $val ) );
+	}
+
+	/**
+	 *
+	 */
+	public static function get_search_url( $term, $use_rc_search = true ): string {
+		if ( $use_rc_search ) {
+			return RC_Object::get_search_url( $term );
+		}
+
+		return '/search?s=' . urlencode( $term );
 	}
 }

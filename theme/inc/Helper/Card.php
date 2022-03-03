@@ -6,7 +6,7 @@ use TrevorWP\CPT;
 use TrevorWP\CPT\RC\RC_Object;
 use TrevorWP\Meta\Post as PostMeta;
 use TrevorWP\Theme\ACF\Field_Group\A_Field_Group;
-use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
+use TrevorWP\Util\Tools;
 
 class Card {
 	public static function post( $post, $key = 0, array $options = array() ): string {
@@ -24,8 +24,9 @@ class Card {
 			),
 			$options
 		);
-		$post_type = get_post_type( $post );
-		$_class    = &$options['class'];
+		$post_type          = get_post_type( $post );
+		$tags_use_rc_search = 'post' !== $post_type;
+		$_class             = &$options['class'];
 
 		// Double check hide_cat_eyebrow settings
 		if ( empty( $options['hide_cat_eyebrow'] ) ) {
@@ -187,7 +188,7 @@ class Card {
 						<div class="tags-box__contents">
 							<?php foreach ( $tags as $tag ) { ?>
 								<a
-									href="<?php echo esc_url( RC_Object::get_search_url( $tag->name ) ); ?>"
+									href="<?php echo esc_url( Tools::get_search_url( $tag->name, $tags_use_rc_search ) ); ?>"
 									class="tag-box"
 									aria-label="<?php echo $tag->name; ?> tag. Click here to view content under <?php echo $tag->name; ?> tag">
 										<span><?php echo $tag->name; ?></span>
