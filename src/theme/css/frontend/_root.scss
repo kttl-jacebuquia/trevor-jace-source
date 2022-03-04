@@ -74,7 +74,7 @@ body {
 
   @each $color_name in map-keys($theme-colors) {
     &:where(.bg-#{$color_name}) {
-      @apply bg-#{$color_name};
+      background-color: tw-color($color_name);
     }
   }
 }
