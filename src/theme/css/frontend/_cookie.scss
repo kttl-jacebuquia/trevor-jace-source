@@ -3,7 +3,11 @@
     display: none !important;
   }
 
-  &-dialog {
+  &-dialog:is(&-dialog) {
+    @apply overflow-auto;
+    max-height: 100vh;
+    box-sizing: border-box !important;
+
     &:not(.ch2-visible) {
       @apply invisible opacity-0;
     }
