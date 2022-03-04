@@ -1,5 +1,6 @@
 .statistics {
   @apply text-center my-px80;
+  @include user-defined-bg;
 
   @screen xl {
     @apply my-px140;

@@ -2,13 +2,78 @@
 // Refer to tailwind config for the $tw_color_name
 //
 // USAGE
-// background-color: tw-rgba(teal-dark);
+// background-color: tw-color(teal-dark);
 //
 // OUTPUT
 // background-color: rgba(0,58,72,var(--tw-bg-opacity));
-@function tw-color( $tw_color_name ) {
-  @if ( map-has-key($colors, $tw_color_name) ) {
+@function tw-color($tw_color_name) {
+  @if (map-has-key($colors, #{$tw_color_name}-rgba)) {
     @return map-get($colors, #{$tw_color_name}-rgba);
+  } @else if (map-has-key($colors, $tw_color_name)) {
+    @return map-get($colors, $tw_color_name);
+  }
+  @error "Supplied color #{$tw_color_name} does not exist from the colors config.";
+}
+
+// Returns hex color value from $theme-colors
+@function color($tw_color_name) {
+  @if (map-has-key($theme-colors, $tw_color_name)) {
+    @return map-get($theme-colors, $tw_color_name);
   }
   @error "Supplied color does not exist from the colors config. Please refer to your tailwind config.";
+}
+
+// Applies focus outline overrides for the children,
+// According to the background color provided
+@mixin focusable-children-outline($bg_color_name) {
+  $is_dark: $bg_color_name == dark or (index($dark-parent-bg, $bg_color_name) != null);
+
+  & button,
+  & .btn,
+  & a:link,
+  & a:visited,
+  & a:active,
+  & .page-btn,
+  & input[type="submit"] {
+    &:focus {
+      $outline-color: if($is_dark == true, color(white), color(purple));
+      --outline-color: #{$outline-color};
+    }
+  }
+}
+
+// Allows background color setting which includes
+// overrides for the focusable items outlines
+@mixin bg($tw_color_name) {
+  $is_opaque: "#{$tw_color_name}"!="transparent";
+
+  &,
+  & {
+    @if ($is_opaque) {
+      $in_colors_map: map-has-key($colors, #{$tw_color_name}-rgba);
+      $in_theme_colors_map: map-has-key($theme-colors, $tw_color_name);
+
+      @if ($in_theme_colors_map) {
+        background-color: tw-color($tw_color_name);
+      } @else if ($in_colors_map) {
+        background-color: color($tw_color_name);
+      } @else {
+        @error "Supplied color '#{$tw_color_name}' does not exist from the colors config. Please refer to your tailwind config.";
+      }
+
+      // Outline overrides
+      @include focusable-children-outline($tw_color_name);
+    }
+  }
+}
+
+// Adds higher selector specificity for elements that
+// have user-defined backgrounds ( bg-* classnames ).
+// This allows for its focusable children to have appropriate outlines
+@mixin user-defined-bg {
+  @each $color_name in map-keys($theme-colors) {
+    &.bg-#{$color_name} {
+      @include focusable-children-outline($color_name);
+    }
+  }
 }

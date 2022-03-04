@@ -2,6 +2,7 @@
   @apply relative mb-pxn5 px-0;
   @apply w-full max-w-none;
   @apply h-px737 lg2:h-px737 flex items-center text-white;
+  @include focusable-children-outline(dark);
 
   @screen mobile {
     padding-top: $top-nav-height;

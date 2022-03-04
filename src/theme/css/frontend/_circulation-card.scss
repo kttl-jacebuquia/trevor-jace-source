@@ -3,6 +3,20 @@
   @apply py-20 px-6 rounded-px10;
   min-height: rem-calc(503px);
 
+  // Dark BG Variants
+  @each $type in (rc, donation, fundraiser, counselor) {
+    &.type-#{$type} {
+      @include focusable-children-outline(dark);
+    }
+  }
+
+  // Light BG Variants
+  @each $type in (trevorspace, get_help) {
+    &.type-#{$type} {
+      @include focusable-children-outline(light);
+    }
+  }
+
   .inner {
     @apply z-1;
   }

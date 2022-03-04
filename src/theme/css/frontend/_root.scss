@@ -28,48 +28,38 @@ body {
   // Fixed content when nav is expanded for mobile/tablet
   &.is-fixed,
   &.error404 {
-  	@screen lg-max {
-  		@apply fixed;
-	  	top: var(--fixed-body-top);
-  	}
+    @screen lg-max {
+      @apply fixed;
+      top: var(--fixed-body-top);
+    }
   }
 
-	// Fixed content when modal is visible
-	&.is-modal-open {
-		@apply fixed;
-		top: var(--fixed-body-top);
-	}
+  // Fixed content when modal is visible
+  &.is-modal-open {
+    @apply fixed;
+    top: var(--fixed-body-top);
+  }
 
-	// Grid overlay helper
-	&::after {
+  // Grid overlay helper
+  &::after {
     @apply container mx-auto;
-		@apply fixed top-0 left-1/2 grid grid-cols-6 gap-x-px12 transform -translate-x-1/2 h-full pointer-events-none;
-		@apply md:grid-cols-8 md:gap-x-px28;
-		@apply lg:grid-cols-12;
-		content: '';
-		z-index: 1000;
-	}
+    @apply fixed top-0 left-1/2 grid grid-cols-6 gap-x-px12 transform -translate-x-1/2 h-full pointer-events-none;
+    @apply md:grid-cols-8 md:gap-x-px28;
+    @apply lg:grid-cols-12;
+    content: "";
+    z-index: 1000;
+  }
 
-	// Grid overlay override for info page
-	&.page-template-template-info-page-php::after {
-		@screen xl {
-			width: calc(100% - #{rem-calc(200)});
-			max-width: #{rem-calc(1240)};
-		}
-	}
-
-  > main {
-	flex: 1 0 auto;
-
-    > p a {
-      @apply border-0 underline;
-      text-decoration-thickness: rem-calc(2);
-      text-underline-offset: .2em;
+  // Grid overlay override for info page
+  &.page-template-template-info-page-php::after {
+    @screen xl {
+      width: calc(100% - #{rem-calc(200)});
+      max-width: #{rem-calc(1240)};
     }
   }
 
   > footer {
-	@apply flex-shrink-0;
+    @apply flex-shrink-0;
   }
 
   &.error404 {
@@ -81,13 +71,35 @@ body {
       }
     }
   }
+
+  @each $color_name in map-keys($theme-colors) {
+    &:where(.bg-#{$color_name}) {
+      @apply bg-#{$color_name};
+    }
+  }
+}
+
+main {
+  flex: 1 0 auto;
+
+  @each $color_name in map-keys($theme-colors) {
+    &:where(.bg-#{$color_name}) {
+      @include bg($color_name);
+    }
+  }
+
+  > p a {
+    @apply border-0 underline;
+    text-decoration-thickness: rem-calc(2);
+    text-underline-offset: 0.2em;
+  }
 }
 
 :root {
   --fixed-body-top: 0px;
   --floating-crisis-button-bottom: #{rem-calc(10)};
-  --tr-screen-br-sm: theme('screens.sm');
-  --tr-screen-br-md: theme('screens.md');
-  --tr-screen-br-lg: theme('screens.lg');
-  --tr-screen-br-xl: theme('screens.xl');
+  --tr-screen-br-sm: theme("screens.sm");
+  --tr-screen-br-md: theme("screens.md");
+  --tr-screen-br-lg: theme("screens.lg");
+  --tr-screen-br-xl: theme("screens.xl");
 }

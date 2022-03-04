@@ -13,6 +13,8 @@
   --spacer-bottom--lg2: #{rem-calc(120)};
   --spacer-bottom--xl: #{rem-calc(120)};
 
+  @include user-defined-bg;
+
   &--large_text {
     @include block-spacer-settings(
       $default: 120,
@@ -50,6 +52,7 @@
 	&__content {
 		@apply col-span-full;
 		@apply rounded-px10 py-px128;
+    @include user-defined-bg;
 
     @screen md {
       @apply py-px80;

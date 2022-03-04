@@ -1,5 +1,6 @@
 .copy-info-cards {
   @apply text-center;
+  @include user-defined-bg;
 
   &[class*=bg]:not(.bg-transparent) {
     @apply py-px80;
@@ -84,7 +85,8 @@
   }
 
   &__card {
-    @apply col-span-full rounded-px10 overflow-hidden bg-white py-px88 px-px28;
+    @apply col-span-full rounded-px10 overflow-hidden py-px88 px-px28;
+    @include bg(white);
 
     @screen md {
       @apply py-px90 px-px50;

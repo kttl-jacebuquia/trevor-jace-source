@@ -1,6 +1,7 @@
 .header-container {
   &--support-trevorspace {
     @apply pb-px128;
+    @include focusable-children-outline(light);
 
     @screen md {
       padding-top: $top-nav-height-tablet;

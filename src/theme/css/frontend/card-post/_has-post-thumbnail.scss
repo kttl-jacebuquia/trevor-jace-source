@@ -1,4 +1,6 @@
 .card-post.has-post-thumbnail {
+  @include focusable-children-outline(light);
+
   .post-title {
     @apply text-px24 leading-px28 tracking-px_05 line-clamp-1;
     -webkit-line-clamp: 2;

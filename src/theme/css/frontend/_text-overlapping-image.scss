@@ -1,5 +1,6 @@
 .text-overlapping-image {
   @apply py-px100;
+  @include user-defined-bg;
 
   @screen md {
     @apply pt-px80 pb-px100;

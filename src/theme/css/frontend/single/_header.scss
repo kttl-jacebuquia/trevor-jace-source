@@ -16,6 +16,15 @@
 .post-header {
   height: auto;
   min-height: 530px;
+
+  article.post-single & {
+    @include user-defined-bg;
+  }
+
+  article.type-trevor_rc_article &,
+  article.type-trevor_rc_guide & {
+    @include focusable-children-outline(dark);
+  }
 }
 
 .post-header-inner {

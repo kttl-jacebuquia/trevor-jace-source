@@ -5,8 +5,9 @@
 	@apply fixed top-0 left-0;
 	@apply w-full h-px84 pb-px4;
 	@apply transition-all duration-300 ease-out;
-	@apply transform-gpu -translate-y-full bg-white;
+	@apply transform-gpu -translate-y-full;
 	z-index: var(--z-index-topbar);
+  @include bg(white);
 
   @screen mobile {
     body.on-top & {
@@ -162,6 +163,7 @@
             @apply font-manrope font-light text-indigo;
             @apply px-0 bg-transparent transition-opacity duration-300;
             @apply text-px16 leading-px20;
+            @include focus-outline-inset(1);
 
             &:hover {
               @apply opacity-80;
@@ -232,6 +234,10 @@
 
 		// First tier submenu
 		> .main-menu > .menu-item > .sub-menu {
+      a {
+        @apply block;
+      }
+
 			@screen lg {
 				border: 1px solid rgba(16, 16, 102, 0.16);
 

@@ -5,6 +5,7 @@
 
   &__box {
     @apply rounded-px10 bg-violet text-center text-white py-px80;
+    @include focusable-children-outline(violet);
 
     @screen lg {
       @apply py-px100;

@@ -1,10 +1,11 @@
 .post-bottom-categories {
-  @apply bg-violet overflow-hidden;
+  @apply overflow-hidden;
   backdrop-filter: blur(200px);
   @apply flex flex-col items-center;
   @apply py-16;
   @apply w-screen;
   margin-left: calc(-1 * theme("container.padding.DEFAULT"));
+  @include bg(violet);
 
   .list-title {
     @apply text-white font-medium text-center text-px18 leading-px22 tracking-em001;

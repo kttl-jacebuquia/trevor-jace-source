@@ -13,6 +13,7 @@
 
   .card-content {
     @apply bg-transparent;
+    @include focusable-children-outline(black);
   }
 
   .title_top {

@@ -1,4 +1,6 @@
 .header-container {
+  @include user-defined-bg;
+
   @screen mobile {
     padding-top: $top-nav-height;
     margin-top: -$top-nav-height;
@@ -56,7 +58,6 @@
   }
 
   &-title {
-
     tilt {
       @apply inline-block;
     }
@@ -77,9 +78,7 @@
     @apply inline-block text-teal-dark bg-white rounded-px10 py-3 px-8 text-base font-bold leading-px22 mt-10;
   }
 
-
   @screen md {
-
     &-inner {
       @apply flex-row;
     }
@@ -123,7 +122,6 @@
     }
   }
 }
-
 
 @import "./support-trevorspace";
 @import "./support-crisis-services";

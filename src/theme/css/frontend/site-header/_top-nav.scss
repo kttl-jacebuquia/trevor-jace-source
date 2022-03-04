@@ -42,7 +42,7 @@
 			@apply transform-gpu;
 			@apply transition-all duration-300 opacity-100 visible;
 			@apply py-0 translate-x-0 -mr-px30;
-			@apply bg-transparent;
+			background-color: transparent;
 		}
 	}
 
@@ -73,6 +73,10 @@
             @apply ml-px38;
           }
 				}
+
+        a {
+          @include focus-outline-inset(1);
+        }
 			}
 
 			// Chevron
@@ -103,6 +107,11 @@
 			> .menu-item > .sub-menu {
         @apply text-indigo;
 				@apply pt-px24 pb-px32;
+
+        // Tier 1 submenu links
+        a {
+          @apply block;
+        }
 			}
 		}
 	}
@@ -147,6 +156,8 @@
 	}
 
 	.logo-wrap {
+    @apply overflow-visible;
+
 		@screen md {
 			@apply mt-0;
 		}
@@ -255,4 +266,14 @@
 			right: -1rem;
 		}
 	}
+
+  // Hero-based background to be applied on top-nav
+  @each $color_name in map-keys($theme-colors) {
+    $is_opaque: "#{$color_name}" != "transparent";
+    @if ( $is_opaque ) {
+      body.hero-bg-#{$color_name} & {
+        @include focusable-children-outline($color_name);
+      }
+    }
+  }
 }

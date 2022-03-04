@@ -94,3 +94,13 @@ b,
 strong {
   @apply font-semibold;
 }
+
+a:link,
+a:active,
+a:visited {
+  @include focus-outline-base;
+}
+
+input[type="submit"] {
+  @include focus-outline-base;
+}

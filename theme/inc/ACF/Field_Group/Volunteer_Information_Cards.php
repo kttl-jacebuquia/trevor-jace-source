@@ -184,9 +184,9 @@ class Volunteer_Information_Cards extends A_Field_Group implements I_Block, I_Re
 							<?php endif; ?>
 
 							<?php if ( ! empty( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ) ) : ?>
-							<div class="volunteer-information__card__cta">
-								<a href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>"><?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?></a>
-							</div>
+							<a class="volunteer-information__card__cta" href="<?php echo esc_url( $card[ static::FIELD_CARDS_ENTRY_LINK ]['url'] ); ?>" target="<?php echo esc_attr( $card[ static::FIELD_CARDS_ENTRY_LINK ]['target'] ); ?>">
+								<?php echo esc_html( $card[ static::FIELD_CARDS_ENTRY_LINK ]['title'] ); ?>
+							</a>
 							<?php endif; ?>
 						</div>
 					</div>

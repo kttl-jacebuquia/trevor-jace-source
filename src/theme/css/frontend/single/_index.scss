@@ -31,6 +31,11 @@
   }
 }
 
+// using :where in order to lessen specificity
+article:where(.post-single) {
+  @include focusable-children-outline(light);
+}
+
 @import "./content-area";
 @import "./header";
 @import "./block";

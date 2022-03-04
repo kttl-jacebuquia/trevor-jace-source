@@ -621,6 +621,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$bg_color = $val->get( static::FIELD_BG_CLR ) ?? 'teal-dark';
 		if ( ! empty( $bg_color ) ) {
 			$args['styles'][] = "bg-{$bg_color}";
+			static::add_body_class( 'hero-bg-' . $bg_color );
 		}
 
 		# Buttons
@@ -738,5 +739,17 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 	public static function get_hero_type() {
 		return static::get_val( static::FIELD_TYPE );
+	}
+
+	public static function add_body_class( $classname ) {
+		add_filter(
+			'body_class',
+			function( $classes ) use ( $classname ) {
+				return array_merge(
+					$classes,
+					array( $classname ),
+				);
+			},
+		);
 	}
 }

@@ -1,4 +1,6 @@
 .join-the-campaign-form {
+  @include user-defined-bg;
+
   &__field-group {
     @screen md {
       @apply items-start gap-y-px36;

@@ -1,5 +1,6 @@
 .checkmark-text {
-  @apply bg-teal-dark text-white;
+  @apply text-white;
+  @include bg(teal-dark);
 
   &__container {
     @apply tw-grid;
@@ -87,8 +88,9 @@
     }
 
     .checkmark-text__cards--white & {
-      @apply bg-white text-teal-dark rounded-px10;
+      @apply text-teal-dark rounded-px10;
       @apply py-px38 px-px28;
+      @include bg(white);
 
       @screen md {
         @apply px-px38;

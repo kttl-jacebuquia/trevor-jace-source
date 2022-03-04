@@ -192,6 +192,7 @@
       @apply bg-white text-indigo;
       @apply px-px34;
       top: rem-calc(128px);
+      @include focusable-children-outline(white);
 
       // Landscape
       @media (orientation: landscape) {

@@ -1,4 +1,5 @@
 .featured-card-3up {
+  @include user-defined-bg;
 
   &--left {
     @screen xl {

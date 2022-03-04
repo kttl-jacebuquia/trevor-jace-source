@@ -90,6 +90,7 @@
     @apply hidden;
     @apply absolute bottom-px30 left-1/2 transform -translate-x-1/2;
     @apply overflow-visible;
+    @include focus-outline-base(light, true);
 
     @screen md {
       @apply top-px40 right-px28 bottom-auto left-auto translate-x-0;
