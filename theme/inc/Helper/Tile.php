@@ -309,7 +309,15 @@ class Tile {
 		);
 
 		$thumbnail                = Thumbnail::post( $post, ...$thumbnail_variants );
-		$modal_thumbnail          = Thumbnail::post( $post, ...$modal_thumbnail_variants );
+		$modal_thumbnail_images   = Thumbnail::get_post_imgs( $post->ID, ...$modal_thumbnail_variants );
+		$modal_thumbnail_alt      = 'Image of ' . $post->post_title;
+		$modal_thumbnail          = Thumbnail::render_img_variants(
+			$modal_thumbnail_images,
+			array(
+				'alt' => $modal_thumbnail_alt,
+			)
+		);
+		$modal_thumbnail          = implode( "\n", wp_list_pluck( $modal_thumbnail, 0 ) );
 		$is_placeholder_thumbnail = false;
 
 		$options = array_merge(
