@@ -96,7 +96,7 @@ class Thumbnail {
 	 *
 	 * @return array
 	 */
-	public static function render_img_variants( array $images_data ): array {
+	public static function render_img_variants( array $images_data, array $custom_attr = array() ): array {
 		$images_data = array_filter(
 			$images_data,
 			function ( $img_data ): bool {
@@ -121,6 +121,9 @@ class Thumbnail {
 			$prev_count = count( $out );
 			$prev       = $prev_count > 0 ? $out[ $prev_count - 1 ] : null;
 			$next       = $idx + 1 < $img_count ? $images_data[ $idx + 1 ] : null;
+
+			# Alt
+			$attr['alt'] = $custom_attr['alt'] ?? get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 
 			# Class
 			if ( empty( $attr['class'] ) ) {
