@@ -115,6 +115,10 @@
   &__card-heading {
     @apply font-semibold text-px60 leading-px90 tracking-em_001;
 
+    @screen md {
+      @apply text-px44;
+    }
+
     @screen lg {
       @apply text-px70 leading-px90 tracking-em_001;
     }
