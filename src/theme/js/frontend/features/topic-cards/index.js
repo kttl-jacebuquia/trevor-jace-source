@@ -1,4 +1,5 @@
 import Swiper from 'swiper';
+import $ from 'jquery';
 
 const MORE_CARDS_ENDPOINT = '/wp-json/trevor/v1/post-cards';
 class TopicCards {
@@ -157,7 +158,11 @@ class TopicCards {
 			TopicCards.itemsPerView
 		);
 		const newCardsHtml = newCards.join('');
-		this.cardsContainer.innerHTML += newCardsHtml;
+
+		this.cardsContainer.firstElementChild.insertAdjacentHTML(
+			'beforeend',
+			newCardsHtml
+		);
 
 		// Save new IDs, excluding the extra last one
 		const newIDs = responseData.cards_ids.slice(0, TopicCards.itemsPerView);
@@ -173,6 +178,40 @@ class TopicCards {
 				this.loadMore.parentElement
 			);
 		}
+
+		// Append footer html
+		document.body.insertAdjacentHTML('beforeend', responseData.footer_html);
+
+		// Bind new card's modal and sharing modules
+		this.bindNewCards(newIDs);
+	}
+
+	bindNewCards(newPostIDs = []) {
+		newPostIDs.forEach((newID) => {
+			const card = this.cardsContainer.querySelector(
+				`[data-post="${newID}"]`
+			);
+
+			if (card) {
+				const modalID = `${card.id}-content`;
+				const modal = document.getElementById(modalID);
+
+				if (modal) {
+					// Bind modal for card
+					window.trevorWP.features.modal(
+						$(modal),
+						{},
+						$(card.querySelector('a'))
+					);
+					// Bind sharing for card modal
+					window.trevorWP.features.sharingMore(
+						modal.querySelector('.post-share-more-btn'),
+						modal.querySelector('.post-share-more-content'),
+						{ appendTo: modal }
+					);
+				}
+			}
+		});
 	}
 
 	static initializeInstances() {

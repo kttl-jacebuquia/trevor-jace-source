@@ -21,6 +21,7 @@
 
   &__load-more {
     font-weight: 600;
+    @apply rounded-none;
   }
 
   .page-section-content-wrap & {

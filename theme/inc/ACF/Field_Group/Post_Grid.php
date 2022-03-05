@@ -735,30 +735,30 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		}
 	}
 
-	public static function render_post_card( $post = array(), $key, array $tile_options = array() ): string {
-		ob_start();
+	public static function render_post_card( $post = array(), $key, array $tile_options = array(), bool $as_array = false ) {
 		$post_object = get_post( $post );
 
 		switch ( get_post_type( $post_object ) ) {
 			case CPT\Team::POST_TYPE:
-				echo Helper\Tile::staff( $post_object, $key, $tile_options );
+				$rendered_card_data = Helper\Tile::staff( $post_object, $key, $tile_options, $as_array );
 				break;
 			case CPT\Financial_Report::POST_TYPE:
-				echo Helper\Tile::financial_report( $post_object, $key, $tile_options );
+				$rendered_card_data = Helper\Tile::financial_report( $post_object, $key, $tile_options );
 				break;
 			case CPT\Event::POST_TYPE:
-				echo Helper\Tile::event( $post_object, $key, $tile_options );
+				$rendered_card_data = Helper\Tile::event( $post_object, $key, $tile_options );
 				break;
 			case CPT\Post::POST_TYPE:
 			case CPT\RC\Post::POST_TYPE:
 			case CPT\Donate\Fundraiser_Stories::POST_TYPE:
-				echo Helper\Card::post( $post_object, $key, $tile_options );
+				$rendered_card_data = Helper\Card::post( $post_object, $key, $tile_options );
 				break;
 			// TODO: Add other post types
 			default:
-				echo Helper\Tile::post( $post_object, $key, $tile_options );
+				$rendered_card_data = Helper\Tile::post( $post_object, $key, $tile_options, $as_array );
 		}
-		return ob_get_clean();
+
+		return $rendered_card_data;
 	}
 
 	public static function ajax_post_cards( $request ) {
@@ -799,18 +799,22 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		// Get posts
 		$posts = get_posts( $args );
 
-		// Build cards html
+		// Build cards html and footer html
 		$cards_rendered = array();
+		$footer         = '';
 
 		// Render each card
 		foreach ( $posts as $key => $post ) {
-			$cards_rendered[] = static::render_post_card( $post, $key, $tile_options );
+			list( $card_html, $footer_html ) = array_values( static::render_post_card( $post, $key, $tile_options, true ) );
+			$cards_rendered[]                = $card_html;
+			$footer                         .= $footer_html;
 		}
 
 		$resp = new \WP_REST_Response(
 			array(
 				'success'        => true,
 				'cards_rendered' => $cards_rendered,
+				'footer_html'    => $footer,
 				'cards_ids'      => wp_list_pluck( $posts, 'ID' ),
 			),
 			200

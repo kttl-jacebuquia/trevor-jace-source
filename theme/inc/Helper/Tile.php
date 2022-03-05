@@ -22,8 +22,9 @@ class Tile {
 	 *
 	 * @return string
 	 */
-	public static function post( \WP_Post $post, $key, array $options = array() ): string {
+	public static function post( \WP_Post $post, $key, array $options = array(), bool $as_array = false ) {
 		$attachment_id = '';
+		$footer_html   = '';
 
 		if ( CPT\Donate\Partner_Prod::POST_TYPE === $post->post_type ) {
 			$attachment    = Product::get_val( Product::FIELD_PRODUCT_IMAGE, $post->ID );
@@ -91,31 +92,26 @@ class Tile {
 			$id                 = uniqid( 'post-' );
 			$options['id']      = $id;
 			$options['class'][] = 'bill-letter-card';
-
-			add_action(
-				'wp_footer',
-				function () use ( $id, $post ) {
-					echo ( new \TrevorWP\Theme\Helper\Modal(
-						CPT\Get_Involved\Bill::render_modal( $post ),
-						array(
-							'target' => "#{$id} a",
-							'id'     => "{$id}-content",
-							'class'  => array( 'bill-modal' ),
-						)
-					) )->render();
-					?>
+			$footer_html = ( new \TrevorWP\Theme\Helper\Modal(
+				CPT\Get_Involved\Bill::render_modal( $post ),
+				array(
+					'target' => "#{$id} a",
+					'id'     => "{$id}-content",
+					'class'  => array( 'bill-modal' ),
+				)
+			) )->render();
+			ob_start();
+			?>
 				<script>jQuery(function () {
-						trevorWP.features.sharingMore(
-								document.querySelector('#<?php echo $id; ?>-content .post-share-more-btn'),
-								document.querySelector('#<?php echo $id; ?>-content .post-share-more-content'),
-								{appendTo: document.querySelector('#<?php echo $id; ?>-content')}
+					trevorWP.features.sharingMore(
+							document.querySelector('#<?php echo $id; ?>-content .post-share-more-btn'),
+							document.querySelector('#<?php echo $id; ?>-content .post-share-more-content'),
+							{appendTo: document.querySelector('#<?php echo $id; ?>-content')}
 						);
-					})</script>
-					<?php
-				},
-				10,
-				0
-			);
+					});
+				</script>
+			<?php
+			$footer_html .= ob_get_clean();
 		}
 
 		if ( CPT\Research::POST_TYPE === $post->post_type ) {
@@ -124,7 +120,22 @@ class Tile {
 			$data['desc']       = $formatted_date . ' ' . $data['desc'];
 			$options['class'][] = 'research-card';
 		}
-		return self::custom( $data, $key, $options );
+
+		$card_html = self::custom( $data, $key, $options );
+
+		if ( $as_array ) {
+			return compact( 'card_html', 'footer_html' );
+		} else {
+			add_action(
+				'wp_footer',
+				function () use ( $footer_html ) {
+					echo $footer_html;
+				},
+				10,
+				0
+			);
+			return $card_html;
+		}
 	}
 
 	/**
@@ -289,7 +300,7 @@ class Tile {
 	 *
 	 * @return string
 	 */
-	public static function staff( \WP_Post $post, int $key, array $options = array() ) :string {
+	public static function staff( \WP_Post $post, int $key, array $options = array(), bool $as_array = false ) :string {
 		$_class                   = array( 'tile-staff', 'relative', 'shadow-darkGreen', 'overflow-hidden' );
 		$post                     = get_post( $post );
 		$name                     = get_the_title( $post );
@@ -354,32 +365,21 @@ class Tile {
 			$_class[] = 'hidden';
 		}
 
-		/**
-		 * @todo: use AJAX
-		 */
-		$id = \uniqid( 'team-member-' );
-		add_action(
-			'wp_footer',
-			function () use ( $id, $post, $modal_thumbnail, $is_placeholder_thumbnail ) {
-
-				echo ( new \TrevorWP\Theme\Helper\Modal(
-					CPT\Team::render_modal(
-						$post,
-						array(
-							'thumbnail'                => $modal_thumbnail,
-							'is_placeholder_thumbnail' => $is_placeholder_thumbnail,
-						)
-					),
-					array(
-						'target' => "#{$id} a",
-						'id'     => "{$id}-content",
-						'class'  => array( 'team' ),
-					)
-				) )->render();
-			},
-			10,
-			0
-		);
+		$id          = \uniqid( 'team-member-' );
+		$footer_html = ( new \TrevorWP\Theme\Helper\Modal(
+			CPT\Team::render_modal(
+				$post,
+				array(
+					'thumbnail'                => $modal_thumbnail,
+					'is_placeholder_thumbnail' => $is_placeholder_thumbnail,
+				)
+			),
+			array(
+				'target' => "#{$id} a",
+				'id'     => "{$id}-content",
+				'class'  => array( 'team' ),
+			)
+		) )->render();
 
 		$attr          = (array) $options['attr'];
 		$attr['class'] = implode( ' ', $_class );
@@ -419,7 +419,22 @@ class Tile {
 			</a>
 		</article>
 		<?php
-		return ob_get_clean();
+		$card_html = ob_get_clean();
+
+		if ( $as_array ) {
+			return compact( 'card_html', 'footer_html' );
+		} else {
+			add_action(
+				'wp_footer',
+				function () use ( $footer_html ) {
+					echo $footer_html;
+				},
+				10,
+				0
+			);
+
+			return $card_html;
+		}
 	}
 
 	/**
