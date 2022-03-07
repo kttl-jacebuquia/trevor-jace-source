@@ -77,6 +77,11 @@ body {
       background-color: tw-color($color_name);
     }
   }
+
+  // Unnecessary Vendor-injected images
+  > img {
+    @apply hidden;
+  }
 }
 
 main {

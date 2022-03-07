@@ -99,7 +99,7 @@ class Donate_Form extends A_Field_Group implements I_Block, I_Renderable {
 						class="donation-form__heading text-center xl:text-left"><?php echo $heading; ?></h2>
 					<p class="donation-form__intro text-center xl:text-left"><?php echo $intro; ?></p>
 
-					<form action="https://give.thetrevorproject.org/give/63307#!/donation/checkout/" method="get" target="_blank" id="donate-form-<?php echo $uuid; ?>" aria-labelledby="<?php echo 'form-heading-' . $uuid; ?>">
+					<form action="https://give.thetrevorproject.org/give/63307#!/donation/checkout/" method="get" target="_blank" id="donate-form-<?php echo $uuid; ?>" aria-label="<?php echo 'donate-form-' . $uuid; ?>">
 						<div class="frequency">
 							<div class="visually-hidden">
 								<input type="radio" name="recurring" value="0" id="<?php echo $uuid; ?>-once" checked class="donation-frequency">
