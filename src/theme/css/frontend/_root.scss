@@ -77,6 +77,11 @@ body {
       @apply bg-#{$color_name};
     }
   }
+
+  // Unnecessary Vendor-injected images
+  > img {
+    @apply hidden;
+  }
 }
 
 main {

@@ -243,6 +243,7 @@ class Post_Header {
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
 				   data-type="facebook"
+				   aria-label="facebook link"
 				   href="https://www.facebook.com/sharer.php?<?php echo $facebook_share_query; ?>">
 					<i class="share-icon trevor-ti-facebook hover:text-melrose"></i>
 				</a>
@@ -250,11 +251,12 @@ class Post_Header {
 				   rel="noopener noreferrer nofollow"
 				   class="post-social-share-btn"
 				   data-type="twitter"
+				   aria-label="twitter link"
 				   href="https://twitter.com/share?<?php echo $twitter_share_query; ?>">
 					<i class="share-icon trevor-ti-twitter hover:text-melrose"></i>
 				</a>
 				<span>
-					<a href="javascript:void(0)" role="button" class="post-share-more-btn" aria-expanded="true">
+					<a href="javascript:void(0)" role="button" class="post-share-more-btn" aria-label="share more button" aria-expanded="true">
 						<i class="share-icon trevor-ti-share-others hover:text-melrose"></i>
 					</a>
 					<span class="hidden">
@@ -263,19 +265,19 @@ class Post_Header {
 								<h4 class="post-share-more-title">SHARE</h4>
 								<table class="post-share-more-list">
 									<tbody>
-									<tr data-row="facebook">
+									<tr data-row="facebook" aria-label="click to share on facebook">
 										<td><i class="trevor-ti-facebook-alt"></i></td>
 										<td>Facebook</td>
 									</tr>
-									<tr data-row="twitter">
+									<tr data-row="twitter" aria-label="click to share on twitter">
 										<td><i class="trevor-ti-twitter"></i></td>
 										<td>Twitter</td>
 									</tr>
-									<tr data-row="clipboard">
+									<tr data-row="clipboard" aria-label="click to copy link">
 										<td><i class="trevor-ti-link"></i></td>
 										<td>Copy Link</td>
 									</tr>
-									<tr data-row="email">
+									<tr data-row="email" aria-label="click to share on email">
 										<td><i class="trevor-ti-mail"></i></td>
 										<td>Email</td>
 									</tr>
