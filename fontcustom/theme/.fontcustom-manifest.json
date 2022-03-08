@@ -1,14 +1,14 @@
 {
   "checksum": {
-    "previous": "5277782d49264af649e8f51b3e722aa75b2bac11dca062a7e0ceb4f20e45d888",
-    "current": "5277782d49264af649e8f51b3e722aa75b2bac11dca062a7e0ceb4f20e45d888"
+    "previous": "b70bd3db1b21dcecc4db0153d3582402b261f1368ddbf139b3bca8c039184523",
+    "current": "b70bd3db1b21dcecc4db0153d3582402b261f1368ddbf139b3bca8c039184523"
   },
   "fonts": [
-    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.ttf",
-    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.svg",
-    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.woff",
-    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.eot",
-    "../../theme/static/icon-font/trevor-ti_5277782d49264af649e8f51b3e722aa7.woff2"
+    "../../theme/static/icon-font/trevor-ti_b70bd3db1b21dcecc4db0153d3582402.ttf",
+    "../../theme/static/icon-font/trevor-ti_b70bd3db1b21dcecc4db0153d3582402.svg",
+    "../../theme/static/icon-font/trevor-ti_b70bd3db1b21dcecc4db0153d3582402.woff",
+    "../../theme/static/icon-font/trevor-ti_b70bd3db1b21dcecc4db0153d3582402.eot",
+    "../../theme/static/icon-font/trevor-ti_b70bd3db1b21dcecc4db0153d3582402.woff2"
   ],
   "glyphs": {
     "arrow-left": {
@@ -103,6 +103,10 @@
       "codepoint": 61720,
       "source": "./vectors/online.svg"
     },
+    "pause": {
+      "codepoint": 61731,
+      "source": "./vectors/pause.svg"
+    },
     "play": {
       "codepoint": 61730,
       "source": "./vectors/play.svg"
@@ -171,7 +175,7 @@
       "fonts": "../../theme/static/icon-font",
       "preview": "../../build/icon-font/theme"
     },
-    "preprocessor_path": "/wp-content/themes/trevor/static/icon-font/",
+    "preprocessor_path": "../icon-font",
     "quiet": false,
     "templates": [
       "scss",
