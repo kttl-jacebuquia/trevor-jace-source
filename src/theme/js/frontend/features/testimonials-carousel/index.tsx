@@ -2,7 +2,7 @@ import Swiper from 'theme/js/frontend/vendors/swiper';
 import { generateSwiperArrows } from '../carousel/index';
 import $ from 'jquery';
 import debounce from 'lodash/debounce';
-import { SwiperOptions } from 'swiper';
+import { SwiperOptionsWithA11yExtended } from '../../vendors/swiper/a11y-extended';
 
 export default function testimonialsCarousel(eBase: HTMLElement) {
 	const leftPaneSelector = '.carousel-left-arrow-pane';
@@ -48,11 +48,18 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 	}
 
 	function initTextSwiper() {
-		const options: SwiperOptions = {
+		const options: SwiperOptionsWithA11yExtended = {
 			slidesPerView: 1,
 			autoplay: true,
 			updateOnWindowResize: true,
 			simulateTouch: false,
+			autoHeight: true,
+			a11yExtended: {
+				pagination: {
+					alwaysEnable: true,
+					oneToOne: true,
+				},
+			},
 		};
 
 		if (
@@ -70,15 +77,6 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 			options.navigation = {
 				nextEl: '.carousel-right-arrow-pane',
 				prevEl: '.carousel-left-arrow-pane',
-			};
-
-			options.breakpoints = {
-				300: {
-					autoHeight: true,
-				},
-				768: {
-					autoHeight: false,
-				},
 			};
 
 			options.on = {
@@ -140,6 +138,12 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 				$(slide).attr('tabindex', -1).attr('aria-hidden', true);
 			}
 		});
+
+		// Disable a11y for navigation arrows
+		swiper.navigation?.nextEl?.setAttribute('tabindex', '-1');
+		swiper.navigation?.nextEl?.setAttribute('aria-hidden', 'true');
+		swiper.navigation?.prevEl?.setAttribute('tabindex', '-1');
+		swiper.navigation?.prevEl?.setAttribute('aria-hidden', 'true');
 	}
 
 	// Toggles a11y on arrow panes

@@ -1,16 +1,24 @@
-import Swiper, { SwiperOptions } from 'swiper';
-
-declare interface SwiperWithA11yExtended extends Swiper {
-	currentVisibleSlides?: Array<HTMLElement>;
-	navigatedByNav?: boolean;
-}
-
-declare interface SwiperOptionsWithA11yExtended extends SwiperOptions {
+import { Swiper } from 'swiper';
+import { SwiperEvents, SwiperOptions } from 'swiper/types';
+export interface SwiperOptionsWithA11yExtended extends SwiperOptions {
 	a11yExtended: {
 		pagination?: {
+			// Whether to always enable pagination
 			alwaysEnable?: boolean;
+			// Whether a page corresponds to a slide
+			oneToOne?: boolean;
 		};
 	};
+}
+
+export interface SwiperWithA11yExtended extends Swiper {
+	currentVisibleSlides?: Array<HTMLElement>;
+	navigatedByNav?: boolean;
+	params: SwiperOptionsWithA11yExtended;
+	on: <E extends keyof SwiperEvents>(
+		event: E,
+		handler?: SwiperEvents[E] | ((swiper: SwiperWithA11yExtended) => void)
+	) => void;
 }
 
 /**
@@ -24,6 +32,7 @@ const A11yExtended = {
 			pagination: {
 				// Whether to enable only pagination when all cards have been shown
 				alwaysEnable: false,
+				oneToOne: false,
 			},
 		},
 	},
@@ -186,16 +195,33 @@ function togglePaginationFocusability(
 	}
 }
 
-function applySlidesA11y(_swiper: Swiper) {
+function applySlidesA11y(_swiper: SwiperWithA11yExtended) {
 	const windowWidth = window.innerWidth;
 
 	// aria-hide slides that are not fully displayed
-	Array.from(_swiper.slides).forEach((slide) => {
+	Array.from(_swiper.slides).forEach((slide, index) => {
 		const { left, right } = slide.getBoundingClientRect();
 		const slideContent = slide.firstElementChild;
 		const tagsBox = slide.querySelector('.tags-box');
 
-		if (left < 0 || right > windowWidth) {
+		if (_swiper.params.a11yExtended?.pagination?.oneToOne) {
+			if (_swiper.activeIndex === index) {
+				slide.removeAttribute('aria-hidden');
+				slide.setAttribute('tabindex', '0');
+				[...(slideContent?.querySelectorAll('a,button') ?? [])].forEach(
+					(el) => el.removeAttribute('tabindex')
+				);
+				tagsBox?.removeAttribute('aria-hidden');
+			} else {
+				slide.setAttribute('aria-hidden', 'true');
+				slide.setAttribute('tabindex', '-1');
+				// Make contents untabbable
+				[...slide.querySelectorAll('a,button')].forEach((el) =>
+					el.setAttribute('tabindex', '-1')
+				);
+				tagsBox?.setAttribute('aria-hidden', 'true');
+			}
+		} else if (left < 0 || right > windowWidth) {
 			slide.setAttribute('aria-hidden', 'true');
 			slide.setAttribute('tabindex', '-1');
 			// Make contents untabbable
