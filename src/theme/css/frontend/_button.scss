@@ -1,6 +1,7 @@
 @mixin button-base {
   @apply inline-flex items-center justify-center;
   @apply box-border font-bold rounded-px10;
+  transition-property: color, background-color, border, opacity;
   @include focus-outline-base;
 }
 

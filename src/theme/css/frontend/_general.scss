@@ -104,3 +104,9 @@ a:visited {
 input[type="submit"] {
   @include focus-outline-base;
 }
+
+// Override browser defaults
+// see _focus-outline.scss for these variables
+:focus-visible {
+  outline: var(--outline-width) var(--outline-style) var(--outline-color);
+}

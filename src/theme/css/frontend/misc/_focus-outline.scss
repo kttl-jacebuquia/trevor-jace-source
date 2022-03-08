@@ -1,12 +1,15 @@
 // @params $type - dark|light - Parents background to check against
 // @params $isolate - bool - Whether to include parent override
 @mixin focus-outline-base($type: 'light', $isolate: false) {
+  @apply ring-0;
   --outline-color: #{if($type == 'light', color(purple), color(white))};
-  outline-offset: rem-calc(3);
+  --outline-width: #{rem-calc(1)};
+  --outline-style: solid;
 
   // Default focus outline
   &:focus {
-    outline: #{rem-calc(1)} solid var(--outline-color);
+    outline-offset: rem-calc(3);
+    outline: var(--outline-width) var(--outline-style) var(--outline-color);
   }
 
   @if ( $isolate == false ) {

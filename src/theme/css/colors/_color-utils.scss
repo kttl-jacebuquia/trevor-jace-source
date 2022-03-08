@@ -34,7 +34,8 @@
   & a:visited,
   & a:active,
   & .page-btn,
-  & input[type="submit"] {
+  & input[type="submit"],
+  & [tabindex="0"] {
     &:focus {
       $outline-color: if($is_dark == true, color(white), color(purple));
       --outline-color: #{$outline-color};
