@@ -170,6 +170,7 @@
 
     .tile {
       @apply h-full w-full;
+      @include bg(white);
       max-width: none;
     }
   }

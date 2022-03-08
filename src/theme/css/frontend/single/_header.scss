@@ -22,7 +22,8 @@
   }
 
   article.type-trevor_rc_article &,
-  article.type-trevor_rc_guide & {
+  article.type-trevor_rc_guide &,
+  article.type-post & {
     @include focusable-children-outline(dark);
   }
 }
