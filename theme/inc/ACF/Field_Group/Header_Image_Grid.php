@@ -90,7 +90,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					<div class="header-image-grid__grid" role="list">
 						<?php foreach ( $image_entries as $entry ) : ?>
 							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
-								<div class="header-image-grid__item">
+								<div class="header-image-grid__item" role="listitem">
 									<div class="header-image-grid__image">
 										<img
 											class="header-image-grid__img"
