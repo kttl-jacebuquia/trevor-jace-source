@@ -49,6 +49,11 @@
     }
   }
 
+  &-btn:is(&-btn) {
+    @apply shadow-none;
+    @include button-base;
+  }
+
   body.is-rc &-theme-bar.ch2-style-light &-dialog,
   body.page-template-default.text-indigo &-theme-bar.ch2-style-light &-dialog {
     @apply bg-indigo;
