@@ -30,7 +30,7 @@
 
     @screen 2xl {
       @apply container mx-auto;
-      @apply max-w-screen-xl;
+      @apply max-w-none;
     }
 
     &::before {
