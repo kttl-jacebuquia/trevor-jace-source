@@ -250,6 +250,8 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 			)
 		);
 
+		$item_heading_level = ! empty( $headline ) ? 3 : 2;
+
 		ob_start();
 		?>
 		<div id="<?php echo esc_attr( esc_html( $anchor_id ) ); ?>" tabindex="0" class="<?php echo $classname; ?>">
@@ -277,9 +279,11 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_EYEBROW ] ) ) : ?>
 										<p class="alternating-image-text__eyebrow"><?php echo esc_html( $entry[ static::FIELD_ENTRY_EYEBROW ] ); ?></p>
 									<?php endif; ?>
-									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) : ?>
-										<h3 class="alternating-image-text__item-title"><?php echo esc_html( $entry[ static::FIELD_ENTRY_HEADER ] ); ?></h3>
-									<?php endif; ?>
+									<?php
+									if ( ! empty( $entry[ static::FIELD_ENTRY_HEADER ] ) ) {
+										echo static::render_item_heading( $entry[ static::FIELD_ENTRY_HEADER ], $item_heading_level );
+									}
+									?>
 									<?php if ( ! empty( $entry[ static::FIELD_ENTRY_BODY ] ) ) : ?>
 										<div class="alternating-image-text__item-content"><?php echo $entry[ static::FIELD_ENTRY_BODY ]; ?></div>
 									<?php endif; ?>
@@ -302,6 +306,18 @@ class Alternating_Image_Text extends A_Field_Group implements I_Block, I_Rendera
 				<?php endif; ?>
 			</div>
 		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	public static function render_item_heading( string $heading = '', int $level = 3 ): string {
+		$heading_tag = "h{$level}";
+
+		ob_start();
+		?>
+		<<?php echo $heading_tag; ?>
+				class="alternating-image-text__item-title"><?php echo esc_html( $heading ); ?>
+		</<?php echo $heading_tag; ?>>
 		<?php
 		return ob_get_clean();
 	}
