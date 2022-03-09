@@ -36,6 +36,7 @@
   @apply flex justify-center items-center text-center text-px18;
   @apply transition-all opacity-0 invisible;
   background: linear-gradient(0deg, #e4e2fa, #ffffff);
+  @include focusable-children-outline(light);
 
   &.show {
     @apply visible opacity-100;

@@ -33,7 +33,7 @@
 	}
 
 	&__custom {
-		@apply bg-canary;
+		@include bg(canary);
 
 		&.active {
 			@apply block;

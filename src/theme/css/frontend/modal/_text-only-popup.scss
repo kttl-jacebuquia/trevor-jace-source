@@ -1,4 +1,6 @@
 .modal.text-only-popup {
+  @include focusable-children-outline(light);
+
   .modal-wrap {
     @apply h-auto;
   }

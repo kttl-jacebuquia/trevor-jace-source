@@ -1,4 +1,6 @@
 #js-donation-modal {
+  @include focusable-children-outline(light);
+
   .modal-close {
     @apply mt-px20 right-0;
   }

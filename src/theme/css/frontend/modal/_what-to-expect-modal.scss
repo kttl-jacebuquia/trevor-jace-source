@@ -1,5 +1,6 @@
 .what-to-expect-modal {
   @apply text-indigo;
+  @include focusable-children-outline(light);
 
   .modal-wrap {
     @screen mobile {
