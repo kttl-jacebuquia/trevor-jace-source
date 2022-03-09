@@ -1,6 +1,6 @@
 @mixin button-base {
   @apply inline-flex items-center justify-center;
-  @apply box-border font-bold rounded-px10;
+  @apply box-border font-bold;
   transition-property: color, background-color, border, opacity;
   @include focus-outline-base;
 }
@@ -10,7 +10,7 @@ button {
 }
 
 .btn {
-  @apply py-4 px-6;
+  @apply py-4 px-6 rounded-px10;
   @include button-base;
 
   &-link {
