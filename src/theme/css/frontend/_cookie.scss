@@ -3,10 +3,12 @@
     display: none !important;
   }
 
-  &-dialog:is(&-dialog) {
-    @apply overflow-auto;
-    max-height: 100vh;
+  &-dialog:is(&-dialog) {    max-height: 100vh;
     box-sizing: border-box !important;
+
+    @screen mobile {
+      @apply overflow-auto;
+    }
 
     &:not(.ch2-visible) {
       @apply invisible opacity-0;
