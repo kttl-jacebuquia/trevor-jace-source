@@ -1,6 +1,6 @@
 .page-btn {
   @include button-base;
-  @apply inline-block;
+  @apply inline-block rounded-px10;
   @apply font-bold text-base leading-px22 tracking-em_001;
   @apply rounded-px10;
   @apply py-3 px-6;
