@@ -1,5 +1,6 @@
 .quick-exit-modal {
   @apply justify-center items-center;
+  @include focusable-children-outline(light);
 
   .modal-overlay {
     background: rgba(0, 0, 102, 0.1);

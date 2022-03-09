@@ -1,4 +1,6 @@
 .modal.team {
+  @include focusable-children-outline(light);
+
   .team-member__thumbnail-wrap {
     @apply overflow-hidden rounded-px10;
     will-change: transform;
