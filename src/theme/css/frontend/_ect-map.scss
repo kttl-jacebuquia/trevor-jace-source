@@ -1,5 +1,6 @@
 .ect-map {
-  @apply bg-gray-light text-white;
+  @apply text-white;
+  @include bg(gray-light);
 
   &__container {
     @apply container mx-auto;
@@ -90,6 +91,7 @@
     @apply hidden;
     @apply absolute bottom-px30 left-1/2 transform -translate-x-1/2;
     @apply overflow-visible;
+    @apply font-semibold text-px16 leading-px22 tracking-em001;
     @include focus-outline-base(light, true);
 
     @screen md {
@@ -116,21 +118,43 @@
   }
 
   &__download-text {
-    @apply btn relative;
+    @apply btn relative z-1;
     @apply flex whitespace-nowrap rounded-px100;
   }
 
   &__export-options {
-    @apply w-full hidden absolute left-0 top-px24 pt-px24;
-    @apply border-l-px1 border-r-px1 border-solid border-teal-dark bg-teal-tint;
+    @apply w-full hidden absolute left-1/2 top-px58 transform -translate-x-1/2;
+    @apply border-px1 border-solid border-teal-dark bg-white rounded-px10;
+    box-shadow: 0px 0px 8px 2px rgba(0, 58, 72, 0.14);
+    min-width: rem-calc(218);
 
-    @screen xl {
-      @apply top-px30 pt-px30;
+    @screen md {
+      @apply right-0 left-auto transform-none;
     }
   }
 
   &__export {
-    @apply block w-full py-px10 text-center text-teal-dark border-teal-dark border-b-px2 border-solid font-bold;
+    @apply flex items-center justify-center;
+    @apply h-px65 w-full;
+    @apply text-center text-teal-dark;
+    @apply border-teal-tint border-solid px-px20 overflow-hidden whitespace-nowrap;
+    @include focus-outline-inset;
+
+    &:not(:last-child) {
+      @apply border-b-px1;
+    }
+
+    &:first-child {
+      @apply rounded-t-px10;
+    }
+
+    &:last-child {
+      @apply rounded-b-px10;
+    }
+
+    &:is(:hover, :focus) {
+      @apply bg-gray-light;
+    }
   }
 
   .highcharts-container {
