@@ -48,7 +48,8 @@ const A11yExtended = {
 			checkNavigationArrows(_swiper);
 			handleNavigationArrows(_swiper);
 			checkPagination(_swiper);
-
+		},
+		afterInit(_swiper: SwiperWithA11yExtended) {
 			if (
 				!(_swiper?.params as SwiperOptionsWithA11yExtended)
 					?.a11yExtended.pagination?.alwaysEnable
@@ -190,6 +191,12 @@ function togglePaginationFocusability(
 
 		// Toggle focusability of the bullets
 		bullets.forEach((bullet) => {
+			if (willBeFocusable) {
+				bullet.removeAttribute('aria-hidden');
+			} else {
+				bullet.setAttribute('aria-hidden', 'true');
+			}
+
 			bullet.setAttribute('tabindex', willBeFocusable ? '0' : '-1');
 		});
 	}
