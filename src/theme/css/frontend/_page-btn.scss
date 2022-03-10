@@ -9,7 +9,7 @@
   &.primary /* deprecated, use: page-btn-primary */
   , &-primary {
 	@apply text-white;
-  background-color: theme-background();
+  background-color: theme-background(true);
   }
 
   &.secondary /* deprecated, use: page-btn-secondary */
