@@ -210,7 +210,7 @@ class Post {
 		ob_start();
 		?>
 		<div class="post-bottom-categories">
-			<h3 class="list-title">Browse trending content below or choose a topic category to explore.</h3>
+			<h2 class="list-title">Browse trending content below or choose a topic category to explore.</h2>
 			<div class="list-container">
 				<?php foreach ( $terms as $term ) { ?>
 					<a href="<?php echo esc_attr( get_term_link( $term ) ); ?>"
