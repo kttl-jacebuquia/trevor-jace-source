@@ -15,14 +15,11 @@
 
   @include user-defined-bg;
 
+  // Text color
+  --text-color: currentColor;
+
   &--large_text {
-    @include block-spacer-settings(
-      $default: 120,
-      $md: 120,
-      $lg: 120,
-      $lg2: 135,
-      $xl: 135,
-    );
+    @include block-spacer-settings($default: 120, $md: 120, $lg: 120, $lg2: 135, $xl: 135);
   }
 
   &.text-white {
@@ -33,26 +30,27 @@
     }
   }
 
-	&__container {
-		@apply tw-grid container mx-auto;
+  &__container {
+    @apply tw-grid container mx-auto;
 
     body.is-crisis-support & {
       @screen lg {
-        padding-left: theme('container.padding.md');
-        padding-right: theme('container.padding.md');
+        padding-left: theme("container.padding.md");
+        padding-right: theme("container.padding.md");
       }
 
       @screen lg2 {
-        padding-left: theme('container.padding.lg2');
-        padding-right: theme('container.padding.lg2');
+        padding-left: theme("container.padding.lg2");
+        padding-right: theme("container.padding.lg2");
       }
     }
-	}
+  }
 
-	&__content {
-		@apply col-span-full;
-		@apply rounded-px10 py-px128;
+  &__content {
+    @apply col-span-full;
+    @apply rounded-px10 py-px128;
     @include user-defined-bg;
+    --text-color: currentColor;
 
     @screen md {
       @apply py-px80;
@@ -77,22 +75,22 @@
         @apply py-px70;
       }
     }
-	}
+  }
 
-	&__title {
-		@apply font-semibold text-px30 leading-px40 text-center;
+  &__title {
+    @apply font-semibold text-px30 leading-px40 text-center;
 
-		@screen md {
-			@apply text-px32 leading-px42 tracking-px_05;
-		}
+    @screen md {
+      @apply text-px32 leading-px42 tracking-px_05;
+    }
 
     @screen lg {
       @apply text-px40 leading-px48;
     }
 
-		@screen xl {
-			@apply text-px40 leading-px48;
-		}
+    @screen xl {
+      @apply text-px40 leading-px48;
+    }
 
     tilt {
       @apply mx-px8;
@@ -124,14 +122,14 @@
         @apply col-span-8 col-start-3 mb-px18;
       }
     }
-	}
+  }
 
-	&__header {
-		@apply font-normal text-px16 leading-px24 text-center;
+  &__header {
+    @apply font-normal text-px16 leading-px24 text-center;
 
-		@screen md {
-			@apply text-px18 leading-px26 tracking-px05;
-		}
+    @screen md {
+      @apply text-px18 leading-px26 tracking-px05;
+    }
 
     body.is-crisis-support & {
       @apply mb-px14;
@@ -144,10 +142,10 @@
         @apply mb-px14;
       }
     }
-	}
+  }
 
-	&__description {
-		@apply font-semibold text-px24 leading-px28 text-center mt-px14 mx-auto;
+  &__description {
+    @apply font-semibold text-px24 leading-px28 text-center mt-px14 mx-auto;
     letter-spacing: -0.5px;
 
     @screen md {
@@ -161,14 +159,14 @@
       max-width: 47.75rem;
     }
 
-		@screen xl {
-			@apply text-px26 leading-px36 mt-px14;
-		}
+    @screen xl {
+      @apply text-px26 leading-px36 mt-px14;
+    }
 
-		b,
-		strong {
-			@apply font-semibold;
-		}
+    b,
+    strong {
+      @apply font-semibold;
+    }
 
     .messaging__content & {
       @apply font-normal text-px18 leading-px22;
@@ -201,32 +199,32 @@
         }
       }
     }
-	}
+  }
 
-	&__title + &__description,
-	&__title + &__header {
-		@apply mt-px16;
+  &__title + &__description,
+  &__title + &__header {
+    @apply mt-px16;
 
-		@screen md {
-			@apply mt-px15;
-		}
+    @screen md {
+      @apply mt-px15;
+    }
 
-		@screen lg {
-			@apply mt-px18;
-		}
-	}
+    @screen lg {
+      @apply mt-px18;
+    }
+  }
 
-	&__header + &__description {
-		@apply mt-px18;
+  &__header + &__description {
+    @apply mt-px18;
 
-		@screen md {
-			@apply mt-px16;
-		}
-	}
+    @screen md {
+      @apply mt-px16;
+    }
+  }
 
-	&__buttons {
-		@apply flex flex-col flex-shrink-0 gap-5 justify-center items-center;
-		@apply text-center mt-px30;
+  &__buttons {
+    @apply flex flex-col flex-shrink-0 gap-5 justify-center items-center;
+    @apply text-center mt-px30;
 
     .page-btn-link {
       @apply text-current text-px18 leading-px24 tracking-px025;
@@ -259,50 +257,50 @@
         @apply py-px20 px-px40 tracking-px05 text-px20 leading-px26;
       }
     }
-	}
+  }
 
-	&__button {
-		@apply font-semibold min-h-0 h-auto py-px12 px-px24;
-		@apply rounded-px10;
+  &__button {
+    @apply font-semibold min-h-0 h-auto py-px12 px-px24;
+    @apply rounded-px10;
 
-		@screen xl {
-			@apply text-px20 leading-px26 tracking-px05 py-px20 px-px40;
-		}
+    @screen xl {
+      @apply text-px20 leading-px26 tracking-px05 py-px20 px-px40;
+    }
 
-		&--link {
-			@apply p-0 mt-px2 rounded-none;
-		}
-	}
+    &--link {
+      @apply p-0 mt-px2 rounded-none;
+    }
+  }
 
-	&__title,
-	&__header,
-	&__description,
-	&__buttons {
-		@screen md {
-			@apply col-span-6 col-start-2;
-		}
+  &__title,
+  &__header,
+  &__description,
+  &__buttons {
+    @screen md {
+      @apply col-span-6 col-start-2;
+    }
 
-		@screen xl {
-			@apply col-span-8 col-start-2;
-		}
+    @screen xl {
+      @apply col-span-8 col-start-2;
+    }
 
     .messaging__content & {
-      margin-left: theme('container.padding.DEFAULT');
-      margin-right: theme('container.padding.DEFAULT');
+      margin-left: theme("container.padding.DEFAULT");
+      margin-right: theme("container.padding.DEFAULT");
 
       @screen md {
         @apply mx-auto;
 
-        width: percentage( 494 / 668 );
+        width: percentage(494 / 668);
       }
 
       @screen lg {
         @apply mx-auto;
 
-        width: percentage( 554 / 698 );
+        width: percentage(554 / 698);
       }
     }
-	}
+  }
 
   &__large-text {
     @apply text-px26 leading-px36 tracking-px_05 font-normal;
@@ -452,6 +450,41 @@
     &.#{unquote("bg-#{$color-name}")} &__content.#{unquote("bg-#{$color-name}")},
     &.#{unquote("bg-#{$color-name}")} &__content.bg-transparent {
       @apply py-0;
+    }
+  }
+
+  // Button hover styles logic
+
+  // Primary and Secondary button
+  & .page-btn-primary,
+  & .page-btn-secondary {
+    @apply hover:bg-opacity-90 focus:bg-opacity-90;
+  }
+
+  // Custom buttons
+  // Opaque buttons
+  .page-btn[class*="bg-"]:not(.bg-transparent) {
+    @apply hover:bg-opacity-90 focus:bg-opacity-90;
+  }
+
+  // Custom button against light-background parent
+  @each $color_name in $light-parent-bg {
+    $is_opaque_bg: "#{$color_name}"!="transparent";
+
+    @if ($is_opaque_bg) {
+      &.bg-#{$color_name} {
+        // Transparent button
+        .page-btn.bg-transparent {
+          &:hover,
+          &:focus {
+            @apply bg-current;
+
+            * {
+              @apply text-white;
+            }
+          }
+        }
+      }
     }
   }
 }
