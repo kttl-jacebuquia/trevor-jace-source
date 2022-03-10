@@ -1,3 +1,5 @@
 @mixin focus-outline-inset( $inset_px: 10 ) {
-  outline-offset: rem-calc($inset_px * -1);
+  &:focus {
+    outline-offset: rem-calc($inset_px * -1);
+  }
 }
