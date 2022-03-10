@@ -66,6 +66,7 @@ export class Modal {
 		$document.on('keydown', this._handleKeyDown);
 		this.$overlay.on('click', this.close);
 		this.$content.prop('hidden', false);
+		this.$content.removeAttr('aria-hidden');
 
 		// Add a delay to simulate forced synchronous layout
 		await new Promise((resolve) => window.setTimeout(resolve, 10));
