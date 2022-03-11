@@ -98,10 +98,6 @@
       @apply top-px40 right-px28 bottom-auto left-auto translate-x-0;
     }
 
-    @screen xl {
-      @apply top-px30 right-px50;
-    }
-
     .ect-map--loaded & {
       @apply block;
     }
@@ -120,10 +116,14 @@
   &__download-text {
     @apply btn relative z-1;
     @apply flex whitespace-nowrap rounded-px100;
+
+    @screen xl {
+      @apply w-px198 h-px46 text-px16 leading-px22 tracking-em001;
+    }
   }
 
   &__export-options {
-    @apply w-full hidden absolute left-1/2 top-px58 transform -translate-x-1/2;
+    @apply min-w-full hidden absolute left-1/2 top-px58 transform -translate-x-1/2;
     @apply border-px1 border-solid border-teal-dark bg-white rounded-px10;
     box-shadow: 0px 0px 8px 2px rgba(0, 58, 72, 0.14);
     min-width: rem-calc(218);
@@ -134,11 +134,15 @@
   }
 
   &__export {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-start;
     @apply h-px65 w-full;
     @apply text-center text-teal-dark;
     @apply border-teal-tint border-solid px-px20 overflow-hidden whitespace-nowrap;
     @include focus-outline-inset;
+
+    @screen lg {
+      @apply text-px18 leading-px24;
+    }
 
     &:not(:last-child) {
       @apply border-b-px1;
