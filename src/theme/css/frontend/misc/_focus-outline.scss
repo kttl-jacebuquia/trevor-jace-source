@@ -1,8 +1,16 @@
+// Makes use of data-whatinput information to provide
+// focus styles only for keyboard users
+@mixin focus-styles {
+  [data-whatinput="keyboard"] &:focus {
+    @content;
+  }
+}
+
 // @params $type - dark|light - Parents background to check against
 // @params $isolate - bool - Whether to include parent override
-@mixin focus-outline-base($type: 'light', $isolate: false) {
+@mixin focus-outline-base($type: "light", $isolate: false) {
   @apply ring-0;
-  --outline-color: #{if($type == 'light', color(purple), color(white))};
+  --outline-color: #{if($type == "light", color(purple), color(white))};
   --outline-width: #{rem-calc(1)};
   --outline-style: solid;
 
@@ -12,7 +20,7 @@
     outline: var(--outline-width) var(--outline-style) var(--outline-color);
   }
 
-  @if ( $isolate == false ) {
+  @if ($isolate == false) {
     // For light backgrounds, use purple outline
     @each $bg_name in $light-parent-bg {
       .bg-#{$bg_name} & {
