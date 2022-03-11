@@ -458,13 +458,21 @@
   // Primary and Secondary button
   & .page-btn-primary,
   & .page-btn-secondary {
-    @apply hover:bg-opacity-90 focus:bg-opacity-90;
+    @apply hover:bg-opacity-90;
+
+    @include focus-styles {
+      @apply bg-opacity-90;
+    }
   }
 
   // Custom buttons
   // Opaque buttons
   .page-btn[class*="bg-"]:not(.bg-transparent) {
-    @apply hover:bg-opacity-90 focus:bg-opacity-90;
+    @apply hover:bg-opacity-90;
+
+    @include focus-styles {
+      @apply bg-opacity-90;
+    }
   }
 
   // Custom button against light-background parent
@@ -475,8 +483,15 @@
       &.bg-#{$color_name} {
         // Transparent button
         .page-btn.bg-transparent {
-          &:hover,
-          &:focus {
+          &:hover {
+            @apply bg-current;
+
+            * {
+              @apply text-white;
+            }
+          }
+
+          @include focus-styles {
             @apply bg-current;
 
             * {

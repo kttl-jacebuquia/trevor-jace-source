@@ -152,7 +152,11 @@
       @apply rounded-b-px10;
     }
 
-    &:is(:hover, :focus) {
+    &:is(:hover) {
+      @apply bg-gray-light;
+    }
+
+    @include focus-styles {
       @apply bg-gray-light;
     }
   }
