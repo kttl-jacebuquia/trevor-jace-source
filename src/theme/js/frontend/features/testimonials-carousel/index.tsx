@@ -80,15 +80,14 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 			};
 
 			options.on = {
-				init: () => {
-					checkArrow();
-				},
-				afterInit: (swiper) => {
+				afterInit: (swiper: Swiper) => {
 					applyA11y();
 					onSlideChange(swiper);
+					removeArrowsA11y(swiper);
 				},
 				slideChange: (swiper) => {
 					onSlideChange(swiper);
+					checkArrow();
 				},
 				slideChangeTransitionStart: (swiper) => {
 					onSlideChangeTransitionStart(swiper);
@@ -96,7 +95,7 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 				slideChangeTransitionEnd: (swiper) => {
 					onSlideChangeTransitionEnd(swiper);
 				},
-				resize: () => {
+				resize: (swiper) => {
 					checkArrow();
 				},
 			};
@@ -105,6 +104,34 @@ export default function testimonialsCarousel(eBase: HTMLElement) {
 		}
 
 		return new Swiper(txtWrap?.querySelector('.swiper-container'), options);
+	}
+
+	function removeArrowsA11y(swiper: Swiper) {
+		const arrows: HTMLElement[] = [
+			swiper.navigation?.prevEl,
+			swiper.navigation?.nextEl,
+		];
+
+		const onMutate = () => {
+			arrows.forEach((arrow) => {
+				if (
+					arrow?.getAttribute('role') ||
+					Number(arrow?.getAttribute('tabindex')) !== -1
+				) {
+					arrow.removeAttribute('role');
+					arrow.removeAttribute('aria-label');
+					arrow.setAttribute('tabindex', '-1');
+				}
+			});
+		};
+
+		const observer = new window.MutationObserver(onMutate);
+
+		arrows.forEach((arrow) => {
+			if (arrow instanceof HTMLElement) {
+				observer.observe(arrow, { attributes: true });
+			}
+		});
 	}
 
 	function checkArrow() {
