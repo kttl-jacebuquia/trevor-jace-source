@@ -10,6 +10,10 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
 
   &__headings {
     @apply col-span-full text-center;
+
+    @screen lg {
+      @apply text-left;
+    }
   }
 
   &__heading {
