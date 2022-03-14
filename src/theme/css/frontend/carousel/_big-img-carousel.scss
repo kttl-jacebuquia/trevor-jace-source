@@ -27,9 +27,7 @@
 
   .swiper-slide {
     @apply text-center;
-
-    figure {
-    }
+    @include focus-outline-base;
 
     .img-wrap {
       height: var(--img-height);

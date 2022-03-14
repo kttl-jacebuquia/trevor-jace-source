@@ -329,6 +329,8 @@
     .topic-cards__item {
       @apply w-full flex-shrink-0;
       height: rem-calc(375);
+      @include focus-outline-base;
+      @include focus-outline-inset;
     }
 
     .topic-cards__item-description {

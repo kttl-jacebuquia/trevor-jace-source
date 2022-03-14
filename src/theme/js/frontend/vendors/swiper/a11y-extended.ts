@@ -243,6 +243,10 @@ function applySlidesA11y(_swiper: SwiperWithA11yExtended) {
 				(el) => el.removeAttribute('tabindex')
 			);
 			tagsBox?.removeAttribute('aria-hidden');
+			// Make contents  tabbable
+			[...slide.querySelectorAll('a,button')].forEach((el) =>
+				el.removeAttribute('tabindex')
+			);
 		}
 	});
 }
