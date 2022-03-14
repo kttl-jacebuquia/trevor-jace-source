@@ -25,7 +25,7 @@
   &__headgroup {
     @apply col-span-full text-center;
 
-    @screen xl {
+    @screen lg2 {
       @apply col-span-5 text-left;
     }
   }
@@ -35,6 +35,10 @@
 
     @screen md {
       @apply text-px32 leading-px42;
+    }
+
+    @screen lg2 {
+      @apply text-px40 leading-px48 tracking-px_05;
     }
 
     @screen xl {
@@ -49,6 +53,10 @@
       @apply text-px18 leading-px24 tracking-px05 mt-px14 mx-px60;
     }
 
+    @screen lg2 {
+      @apply text-px22 leading-px32 tracking-px05 mx-0 mt-px20;
+    }
+
     @screen xl {
       @apply mx-0 mt-px16 text-px24 leading-px34 tracking-em005;
     }
@@ -59,6 +67,10 @@
 
     @screen md {
       @apply mt-px40;
+    }
+
+    @screen lg2 {
+      @apply mt-px44 h-px66 text-px20 leading-px26 tracking-px05;
     }
 
     @screen xl {
@@ -77,7 +89,7 @@
     @apply w-full mx-auto mt-px50;
   }
 
-  @screen xl {
+  @screen lg2 {
     @apply col-span-6 col-start-7 mt-0;
   }
 }
@@ -97,16 +109,16 @@
 
 .partners-block__tier-name {
   @apply text-px20 leading-px26 text-teal-dark font-semibold;
-  // xl
-  @apply xl:text-px24 xl:leading-px34 tracking-em005;
+  // lg2
+  @apply lg2:text-px24 lg2:leading-px34 lg2:tracking-em005;
 }
 
 .partners-block__tier-amount {
   @apply text-px20 leading-px26 text-teal-dark mt-px4;
   // md
   @apply md:mt-px8 md:text-px18 md:leading-px24 md:tracking-px05;
-  // xl
-  @apply xl:mt-px2 xl:text-px20 xl:leading-px32 xl:tracking-px05;
+  // lg2
+  @apply lg2:mt-px2 lg2:text-px20 lg2:leading-px32 lg2:tracking-px05;
 }
 
 .partners-block__list {
