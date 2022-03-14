@@ -609,6 +609,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 								<?php endif; ?>
 								<button
 									class="topic-cards__accordion-toggle accordion-button"
+									data-title="<?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?>"
 									aria-label="click to expand <?php echo esc_attr( $topic[ static::FIELD_TOPIC_ENTRY_TITLE ] ); ?>">
 								</button>
 							</div>
