@@ -314,11 +314,6 @@
 
       @screen md {
         @apply mr-auto ml-0;
-        width: calc((100% - theme('gap.md')) / 2);
-      }
-
-      @screen lg {
-        width: calc((100% - (theme('gap.lg') * 2)) / 3);
       }
     }
 
@@ -359,14 +354,14 @@
     .swiper-button-next {
       @apply mr-px20;
 
-      @screen md {
-        margin-right: -100%;
-      }
+      // @screen md {
+      //   margin-right: -100%;
+      // }
 
-      @screen lg {
-        margin-right: 0;
-        left: calc(300% + theme('gap.lg'));
-      }
+      // @screen lg {
+      //   margin-right: 0;
+      //   left: calc(300% + theme('gap.lg'));
+      // }
     }
 
     .swiper-button-wrapper {
