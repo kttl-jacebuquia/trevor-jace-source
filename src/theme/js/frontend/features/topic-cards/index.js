@@ -58,9 +58,13 @@ class TopicCards {
 			breakpoints: {
 				768: {
 					spaceBetween: 28,
+					slidesPerView: 2,
+					slidesPerGroup: 2,
 				},
 				1024: {
 					spaceBetween: 28,
+					slidesPerView: 3,
+					slidesPerGroup: 3,
 				},
 			},
 			a11yExtended: {
