@@ -244,6 +244,7 @@
   .post-type-archive-trevor_gi_bill &,
   .post-type-archive-trevor_gi_letter & {
     @apply shadow-none md:shadow-none lg:shadow-none lg2:shadow-none xl:shadow-none;
+    @include focus-outline-base(light);
   }
 
   &-title-top {
