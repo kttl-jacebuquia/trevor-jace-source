@@ -16,8 +16,7 @@
 
   // Default focus outline
   &:focus {
-    outline-offset: rem-calc(3);
-    outline: var(--outline-width) var(--outline-style) var(--outline-color);
+    @include apply-focus-styles;
   }
 
   @if ($isolate == false) {
@@ -35,4 +34,9 @@
       }
     }
   }
+}
+
+@mixin apply-focus-styles {
+  outline-offset: rem-calc(3);
+  outline: var(--outline-width) var(--outline-style) var(--outline-color);
 }

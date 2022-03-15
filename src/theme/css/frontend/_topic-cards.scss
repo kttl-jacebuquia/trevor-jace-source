@@ -341,10 +341,13 @@
 
     .swiper-button {
       @apply absolute top-1/2 transform -translate-y-1/2;
+      @include focus-outline-base(light);
 
       &:focus {
+        outline: none;
+
         .swiper-button-wrapper {
-          outline: 5px auto -webkit-focus-ring-color;
+          @include apply-focus-styles;
         }
       }
     }
