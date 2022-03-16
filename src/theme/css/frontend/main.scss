@@ -42,9 +42,6 @@
 @import './site-content';
 @import './footer';
 @import './button';
-.test {
-  @include focus-outline-base;
-}
 @import './tags-box';
 @import './card-post/index';
 @import './single/index';
@@ -117,6 +114,7 @@
 @import './form-assembly/index';
 @import './faqs';
 @import './intro-text';
+@import './skip-to-main';
 
 // Page specific
 @import './rc'; // Resources Center

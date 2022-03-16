@@ -182,11 +182,17 @@
     }
 
     .tile-staff {
-      border-radius: 10px;
+      @apply rounded-px10 overflow-visible;
       height: 100%;
+
+      a {
+        @apply h-full block rounded-px10;
+        @include focus-outline-base(light, true);
+      }
     }
 
     .post-thumbnail-wrap {
+      @apply rounded-t-px10 overflow-hidden;
       background-color: rgba(243, 243, 247, var(--tw-bg-opacity));
       background-image: url("/wp-content/themes/trevor/static/media/staff-placeholder.png");
       background-position: center center;
@@ -202,6 +208,10 @@
         object-fit: cover;
         object-position: center center;
       }
+    }
+
+    .information {
+      @apply rounded-b-px10 overflow-hidden bg-white;
     }
   }
 

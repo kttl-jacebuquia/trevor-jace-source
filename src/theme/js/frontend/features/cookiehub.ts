@@ -8,8 +8,10 @@ const onBodyMutate = (
 ) => {
 	if (
 		mutations.some(({ addedNodes }: MutationRecord) =>
-			[...addedNodes].some((node: HTMLElement) =>
-				node.classList?.contains(COOKIE_BANNER_CLASSNAME)
+			[...addedNodes].some((node) =>
+				(node as HTMLElement).classList?.contains(
+					COOKIE_BANNER_CLASSNAME
+				)
 			)
 		)
 	) {
@@ -37,9 +39,17 @@ const checkCookieBannerVisibility = (cookieBannerDialog: HTMLElement) => {
 };
 
 const handleCookieBanner = () => {
+	const cookieBanner = document.querySelector(
+		`.${COOKIE_BANNER_CLASSNAME}`
+	) as HTMLElement;
 	const cookieBannerDialog = document.querySelector(
 		`.${COOKIE_BANNER_CLASSNAME}-dialog`
 	);
+
+	console.log({ cookieBanner });
+
+	// Make sure cookie banner is always at the beginning of the body
+	document.body.insertAdjacentElement('afterbegin', cookieBanner);
 
 	// Dialog visibility is triggered by the classname
 	// So mutation observer is needed
