@@ -152,6 +152,10 @@
     .text-icon__content {
       @apply -mx-px28;
 
+      @screen below-mobile {
+        @apply -mx-container-padding-default;
+      }
+
       @screen md {
         @apply col-span-full col-start-1 -mx-px50;
       }

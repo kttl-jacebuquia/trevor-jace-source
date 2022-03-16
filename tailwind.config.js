@@ -91,9 +91,13 @@ const config = {
 	separator: ':',
 	theme: {
 		screens: {
+			'below-mobile': { max: px2rem(376) },
 			mobile: { max: px2rem(767) },
+			'mobile-only': { min: px2rem(375), max: px2rem(767) },
+			'mobile-up': { min: px2rem(375) },
 			'md-minmax': { min: px2rem(768), max: px2rem(1023) },
 			'md-max': { max: px2rem(1023) },
+			'mobile-md': { min: px2rem(375), max: px2rem(1023) },
 			'lg-max': { max: px2rem(1279) },
 			'lg-only': { min: px2rem(1023), max: px2rem(1279) },
 			sm: px2rem(375),
@@ -223,7 +227,8 @@ const config = {
 			},
 			container: {
 				padding: {
-					DEFAULT: px2rem(28),
+					DEFAULT: `${100 * (28 / 375)}vw`,
+					'mobile-up': px2rem(28),
 					sm: px2rem(28),
 					md: px2rem(50),
 					lg: px2rem(90),
@@ -348,6 +353,7 @@ const config = {
 				...px2remMap(divisibles(10, 10, 0, 100)),
 			},
 			spacing: {
+				'container-padding-default': `${100 * (28 / 375)}vw`, // visual 28px, usefull for zoomed in layout
 				full: '100%',
 				vwfull: '100vw',
 				pxn5: px2rem(-5),

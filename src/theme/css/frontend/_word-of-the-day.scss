@@ -54,6 +54,7 @@
 
   &__heading {
     @apply block mt-px2 font-semibold text-px32 leading-px42;
+    @apply below-mobile:break-words;
 
     @screen md {
       @apply text-px40 leading-px50 mt-px4;

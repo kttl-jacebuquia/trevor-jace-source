@@ -12,6 +12,7 @@
 
   &__contents {
     @apply tracking-px6 px-px24 pt-px24 -mt-px24 -mb-px8 w-full;
+    @apply below-mobile:px-container-padding-default;
     background-color: var(--card-background);
   }
 

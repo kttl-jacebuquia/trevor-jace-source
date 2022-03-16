@@ -2,8 +2,8 @@
   @include focusable-children-outline(light);
 
   .post-title {
-    @apply text-px24 leading-px28 tracking-px_05 line-clamp-1;
-    -webkit-line-clamp: 2;
+    @apply text-px24 leading-px28 tracking-px_05 line-clamp-2;
+    @apply below-mobile:line-clamp-3;
 
     @screen lg {
       @apply text-px26 leading-px32 tracking-em_005;
@@ -15,8 +15,8 @@
   }
 
   .post-desc {
-    @apply text-px16 leading-px22 tracking-em001 line-clamp-1;
-    -webkit-line-clamp: 2;
+    @apply text-px16 leading-px22 tracking-em001 line-clamp-2;
+    @apply below-mobile:line-clamp-4;
 
     @screen xl {
       -webkit-line-clamp: 2;

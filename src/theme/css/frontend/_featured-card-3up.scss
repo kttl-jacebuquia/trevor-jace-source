@@ -12,7 +12,7 @@
 
   &--carousel {
     .featured-card-3up__items-container {
-      $offset-value: calc(((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT'));
+      $offset-value: calc(((100vw - #{theme("screens.sm")}) / 2) + theme("container.padding.DEFAULT"));
 
       margin-left: calc(-1 * #{$offset-value});
       margin-right: calc(-1 * #{$offset-value});
@@ -23,13 +23,19 @@
 
       @each $screen in md, lg {
         @screen #{$screen} {
-          $offset-value: calc(((100vw - #{theme('screens.' + $screen)}) / 2) + theme('container.padding.#{$screen}'));
+          $offset-value: calc(((100vw - #{theme("screens." + $screen)}) / 2) + theme("container.padding.#{$screen}"));
 
           margin-left: calc(-1 * #{$offset-value});
           margin-right: calc(-1 * #{$offset-value});
           padding-left: $offset-value;
           padding-right: $offset-value;
         }
+      }
+    }
+
+    @screen below-mobile {
+      .featured-card-3up__items-container {
+        @apply mx-0;
       }
     }
 
@@ -79,7 +85,7 @@
       }
 
       @screen lg2 {
-        display: none!important;
+        display: none !important;
       }
     }
 
@@ -195,14 +201,14 @@
   .swiper-button-prev {
     @screen lg {
       @apply justify-start;
-      left: calc( theme("container.padding.lg") / 2 );
+      left: calc(theme("container.padding.lg") / 2);
     }
   }
 
   .swiper-button-next {
     @screen lg {
       @apply justify-end;
-      right: calc( theme("container.padding.lg") + ( var(--arrow-button-width) / 2 ) );
+      right: calc(theme("container.padding.lg") + (var(--arrow-button-width) / 2));
     }
   }
 }

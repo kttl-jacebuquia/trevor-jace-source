@@ -82,6 +82,11 @@
       @apply -mx-px28 max-w-none;
       width: calc(100% + 56px);
 
+      @screen below-mobile {
+        @apply -mx-container-padding-default w-auto;
+        width: calc(100% + theme('container.padding.DEFAULT') * 2);
+      }
+
       @screen md {
         @apply w-full m-0;
       }

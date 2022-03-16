@@ -30,6 +30,10 @@
       @apply col-span-full mr-pxn25 ml-pxn25;
       border-top: 1px solid theme("colors.teal.dark");
 
+      @screen below-mobile {
+        @apply -mx-container-padding-default;
+      }
+
       @screen md {
         @apply mx-0;
       }

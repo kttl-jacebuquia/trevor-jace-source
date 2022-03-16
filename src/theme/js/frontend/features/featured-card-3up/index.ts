@@ -30,7 +30,7 @@ export default class FeaturedCardThreeUp extends Component {
 			prevEl: '.swiper-button-prev',
 		},
 		breakpoints: {
-			300: {
+			0: {
 				slidesPerView: 1,
 				spaceBetween: 18,
 			},

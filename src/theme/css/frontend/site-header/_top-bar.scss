@@ -273,6 +273,8 @@
 
   // CTAs
   .cta-wrap {
+    @apply below-mobile:hidden;
+
     @screen lg-only {
       @apply transform-gpu translate-x-px50 mr-px10;
       @apply transition-transform duration-300 ease-out;
@@ -283,9 +285,10 @@
 	.topbar-controls {
 		@apply flex transition-transform duration-300 ease-out;
 		@apply will-transform transform-gpu translate-y-0 flex-shrink-0;
+    @apply below-mobile:ml-0;
 		z-index: var(--z-index-nav-controls);
 
-    @screen lg-max {
+    @screen mobile-md {
       @apply -ml-px40;
     }
 
