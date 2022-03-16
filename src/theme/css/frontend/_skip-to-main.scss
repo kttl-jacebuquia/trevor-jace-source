@@ -1,0 +1,5 @@
+#skip-to-main:is(#skip-to-main) {
+  @screen lg {
+    @include focus-outline-base(light, true);
+  }
+}
