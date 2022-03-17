@@ -62,6 +62,7 @@ export class Modal {
 	open = async (e) => {
 		e?.preventDefault();
 		e?.stopPropagation();
+		this.lastActiveElement = document.activeElement || document.body;
 
 		$document.on('keydown', this._handleKeyDown);
 		this.$overlay.on('click', this.close);
@@ -100,6 +101,8 @@ export class Modal {
 		this.toggleBackgroundElements(true);
 
 		$('#blur3px').parent().remove();
+
+		(this.lastActiveElement || document.body).focus();
 
 		if (typeof this.options.onClose === 'function') {
 			this.options.onClose({

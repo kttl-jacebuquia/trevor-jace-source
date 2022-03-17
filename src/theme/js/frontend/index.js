@@ -345,6 +345,13 @@ if (isPhoneField) {
 				$loadMore.on('click', () => {
 					$(el).find("[data-staff-part='last']").fadeIn();
 					$loadMore.closest('.staff__load-more-container').fadeOut();
+					setTimeout(
+						() =>
+							el
+								.querySelector("[data-staff-part='last'] a")
+								.focus(),
+						100
+					);
 				});
 			}
 		});
