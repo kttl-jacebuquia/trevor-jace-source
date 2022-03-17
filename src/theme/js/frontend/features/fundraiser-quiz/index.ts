@@ -6,6 +6,10 @@ interface FundraiserQuizOptions {
 	[key: string]: any;
 }
 
+interface ShowFundraiserQuizOptions {
+	initialVertex?: string;
+}
+
 export default class FundraiserQuiz {
 	selector: string = '.fundraiser-quiz';
 	options?: FundraiserQuizOptions;
@@ -34,6 +38,7 @@ export default class FundraiserQuiz {
 	$devInquirySlide?: JQuery;
 
 	// HTMLElements
+	choicesForms?: HTMLFormElement[];
 	devInquiryForm?: HTMLElement;
 	devInquiryFieldsContainer?: HTMLElement;
 
@@ -60,12 +65,17 @@ export default class FundraiserQuiz {
 		this.currentPage = 0;
 		this.options = options;
 
+		this.choicesForms = Array.from(
+			this.parentContainer
+				?.get(0)
+				?.querySelectorAll(`${this.selector}__choices-form`) || []
+		);
 		this.ajaxAction = this.parentContainer.data('ajax-action');
 		this.$devInquirySlide = this.parentContainer.find(
 			'[data-vertex="form"]'
 		);
 		this.devInquiryForm =
-			this.parentContainer?.get(0)?.querySelector('form') || undefined;
+			this.$devInquirySlide?.get(0)?.querySelector('form') || undefined;
 		this.devInquiryFieldsContainer = this.$devInquirySlide
 			.find('.fundraiser-quiz__fields')
 			.get(0);
@@ -106,11 +116,11 @@ export default class FundraiserQuiz {
 		/**
 		 * Initialize the radio button events
 		 */
-		if (this.choices.length) {
-			this.choices.on('click' as any, (e) => {
-				this.displayNextPage(e.target);
-			});
-		}
+		// if (this.choices.length) {
+		// 	this.choices.on('click' as any, (e) => {
+		// 		this.handleChoiceClick(e.target);
+		// 	});
+		// }
 
 		this.backBtn.on('click', () => {
 			this.displayPreviousPage();
@@ -124,11 +134,15 @@ export default class FundraiserQuiz {
 			}
 		});
 
+		// Initialize choices forms
+		this.choicesForms?.forEach(this.initChoicesForm.bind(this));
+
+		// Initialize other features
 		this.initDevInquiryForm();
 		this.handleModal();
 	}
 
-	show(options = {}) {
+	show(options: ShowFundraiserQuizOptions = {}) {
 		// Default initial step
 		let $initialStepContent = $(`${this.selector}--step-one`);
 
@@ -140,7 +154,7 @@ export default class FundraiserQuiz {
 		// Reset counter
 		this.currentVertexStack = [];
 
-		// Override iniial step if supplied in options
+		// Override initial step if supplied in options
 		if (options.initialVertex) {
 			const $content = $(
 				document.querySelector(
@@ -160,10 +174,10 @@ export default class FundraiserQuiz {
 		$initialStepContent.removeAttr('style');
 		$initialStepContent.removeClass('hidden');
 
-		this.choices.attr('checked', false);
-		this.backBtn.hide();
+		this.choices?.prop('checked', false);
+		this.backBtn?.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
-		this.paginationContainer.hide();
+		this.paginationContainer?.hide();
 
 		setTimeout(() => {
 			$initialStepContent.fadeIn(500, () => {
@@ -184,10 +198,54 @@ export default class FundraiserQuiz {
 		}
 	}
 
+	initChoicesForm(choicesForm: HTMLFormElement) {
+		// When user selects a choice
+		choicesForm.addEventListener(
+			'change',
+			this.onChoiceFormChange.bind(this)
+		);
+
+		// When user clicks "Next Question"
+		choicesForm.addEventListener(
+			'submit',
+			this.onChoiceFormSubmit.bind(this)
+		);
+	}
+
+	onChoiceFormChange(event: Event) {
+		const choicesForm = event.currentTarget as HTMLFormElement;
+		const submitButton = choicesForm?.querySelector('[type="submit"]');
+
+		submitButton?.removeAttribute('disabled');
+		submitButton?.removeAttribute('aria-hidden');
+	}
+
+	onChoiceFormSubmit(event: Event) {
+		event.preventDefault();
+
+		const choicesForm = event.currentTarget as HTMLFormElement;
+		const [keyName] = new FormData(choicesForm).keys();
+		const selection = Array.from(
+			choicesForm[keyName] as HTMLInputElement[]
+		).find(({ checked }) => checked);
+
+		// Display next page
+		this.displayNextPage(selection);
+	}
+
 	onFormSubmitSuccess() {
 		if (this.devInquiryFieldsContainer) {
 			this.devInquiryFieldsContainer.outerHTML = '';
 		}
+	}
+
+	handleChoiceClick(btn: HTMLInputElement) {
+		const choicesForm = btn.form;
+		const choicesSubmitBtn = choicesForm?.querySelector('[type="submit"]');
+
+		// Enable submit
+		choicesSubmitBtn?.removeAttribute('disabled');
+		choicesSubmitBtn?.removeAttribute('aria-hidden');
 	}
 
 	displayNextPage(btn) {
@@ -224,7 +282,13 @@ export default class FundraiserQuiz {
 			this.clearContentInputs(nextVertex);
 
 			// Show new content
-			$content.removeClass('hidden').fadeIn();
+			$content.removeClass('hidden').fadeIn({
+				done() {
+					setTimeout(() => {
+						$content.get(0).focus();
+					}, 100);
+				},
+			});
 		}
 	}
 
@@ -244,6 +308,10 @@ export default class FundraiserQuiz {
 				case 'radio':
 				case 'checkbox':
 					input.checked = false;
+					break;
+				case 'submit':
+					input.setAttribute('disabled', 'true');
+					input.setAttribute('aria-hidden', 'true');
 					break;
 			}
 		});

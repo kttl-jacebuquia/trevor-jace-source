@@ -1,5 +1,5 @@
 .modal#js-fundraiser-quiz {
-	@apply bg-teal-dark;
+  @apply bg-teal-dark;
 
   .modal-wrap {
     @apply block bg-teal-dark;
@@ -10,31 +10,30 @@
     }
   }
 
-	.modal-container {
-		@apply max-w-none h-full min-h-full w-full justify-start rounded-none bg-teal-dark p-0 shadow-none;
+  .modal-container {
+    @apply max-w-none h-full min-h-full w-full justify-start rounded-none bg-teal-dark p-0 shadow-none;
 
-		&.dev-form {
-			@apply bg-blue_green;
-		}
-	}
+    &.dev-form {
+      @apply bg-blue_green;
+    }
+  }
 
-	.modal-content-wrap {
-		@apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0 px-0;
-		@apply py-px130;
-	}
+  .modal-content-wrap {
+    @apply h-screen flex flex-col justify-center m-0 min-h-full h-auto flex-shrink-0 px-0;
+    @apply py-px130;
+  }
 
-	.modal-close {
-		@apply absolute flex justify-center items-center m-0 top-px28 right-px28 bg-white text-teal-dark py-px12 px-px17;
-		@apply w-px45 h-px45 p-0;
-		@apply md:top-px50 md:right-px50;
-		@apply xl:w-px50 xl:h-px50;
-		border-radius: rem-calc(18px);
-	}
-
+  .modal-close {
+    @apply absolute flex justify-center items-center m-0 top-px28 right-px28 bg-white text-teal-dark py-px12 px-px17;
+    @apply w-px45 h-px45 p-0;
+    @apply md:top-px50 md:right-px50;
+    @apply xl:w-px50 xl:h-px50;
+    border-radius: rem-calc(18px);
+  }
 }
 
 .fundraiser-quiz {
-	@apply flex flex-col items-center justify-start px-0;
+  @apply flex flex-col items-center justify-start px-0;
 
   &.container {
     @screen mobile {
@@ -42,8 +41,8 @@
     }
   }
 
-	&--steps {
-		@apply hidden absolute top-0 left-0 bottom-0 right-0 invisible;
+  &--steps {
+    @apply hidden absolute top-0 left-0 bottom-0 right-0 invisible;
 
     &.visible {
       @apply visible;
@@ -52,284 +51,302 @@
     &.static {
       @apply static;
     }
-	}
+  }
 
-	&--form {
-		@apply pb-px64 xl:pb-px100 w-full;
+  &--form {
+    @apply pb-px64 xl:pb-px100 w-full;
 
-		@screen md {
-			@apply container pb-px130 px-0;
-		}
-	}
+    @screen md {
+      @apply container pb-px130 px-0;
+    }
+  }
 
-	&__title {
-		@apply font-semibold text-px24 leading-px28 text-center tracking-px_05 mb-px16;
-		@apply md:text-px32 md:leading-px42 md:mb-px15 md:tracking-em_001;
-		@apply xl:mb-px12 xl:text-px36 xl:leading-px48 xl:tracking-normal;
-	}
+  &__title {
+    @apply font-semibold text-px24 leading-px28 text-center tracking-px_05 mb-px16;
+    @apply md:text-px32 md:leading-px42 md:mb-px15 md:tracking-em_001;
+    @apply xl:mb-px12 xl:text-px36 xl:leading-px48 xl:tracking-normal;
+  }
 
-	&__description {
-		@apply font-normal text-px16 leading-px24 text-center mb-px16;
-		@apply md:leading-px22 md:mb-px15 md:tracking-em005;
-		@apply xl:text-px20 xl:leading-px30 xl:tracking-px05 xl:mb-px12;
-	}
+  &__description {
+    @apply font-normal text-px16 leading-px24 text-center mb-px16;
+    @apply md:leading-px22 md:mb-px15 md:tracking-em005;
+    @apply xl:text-px20 xl:leading-px30 xl:tracking-px05 xl:mb-px12;
+  }
 
-	&__instruction {
-		@apply font-normal text-px14 leading-px20 xl:text-px16 xl:leading-px22 tracking-px05;
-	}
+  &__instruction {
+    @apply font-normal text-px14 leading-px20 xl:text-px16 xl:leading-px22 tracking-px05;
+  }
 
-	&--step-one &__choices {
-		@apply w-full;
-		@apply md:w-auto;
+  &--step-one &__choices {
+    @apply w-full;
+    @apply md:w-auto;
 
-		@screen md {
-			column-gap: #{rem-calc(34px)};
-			column-count: 2;
-		}
-	}
+    @screen md {
+      column-gap: #{rem-calc(34px)};
+      column-count: 2;
+    }
+  }
 
-	&--step-one &__title {
-		@apply text-left md:text-center;
-	}
+  &--step-one &__title {
+    @apply text-left md:text-center;
+  }
 
-	&--step-one &__description {
-		@apply text-left md:text-center;
-	}
+  &--step-one &__description {
+    @apply text-left md:text-center;
+  }
 
-	&--step-one &__instruction {
-		@apply text-left md:text-center;
-	}
+  &--step-one &__instruction {
+    @apply text-left md:text-center;
+  }
 
-	fieldset {
-		@apply flex justify-center;
-	}
+  &__choices-form,
+  & fieldset {
+    @apply flex justify-center;
+  }
 
-	&__choices {
-		@apply font-normal text-left text-px16 leading-px22 tracking-px05 mt-px38;
-		column-count: 1;
+  &__choices-form {
+    flex-wrap: wrap;
+  }
 
-		@screen md {
-			@apply text-px18 leading-px26 tracking-normal mt-px72 mx-auto;
-			width: 80%;
-		}
+  &__choices {
+    @apply font-normal text-left text-px16 leading-px22 tracking-px05 mt-px38;
+    column-count: 1;
 
-		@screen xl {
-			@apply mx-auto mt-px50 w-2/4 gap-x-px30 gap-px30;
-		}
-	}
+    @screen md {
+      @apply text-px18 leading-px26 tracking-normal mt-px72 mx-auto;
+      width: 80%;
+    }
 
-	&--steps &__choices {
-		@apply w-auto flex flex-col justify-start gap-y-px30;
-	}
+    @screen xl {
+      @apply mx-auto mt-px50 w-2/4 gap-x-px30 gap-px30;
+    }
+  }
 
-	&--steps &__btn-container {
-		@apply w-auto m-0;
-	}
+  &--steps &__choices {
+    @apply w-auto flex flex-col justify-start gap-y-px30;
+  }
 
-	&__btn-container {
-		@apply relative mb-px26 flex justify-start items-center;
+  &--steps &__btn-container {
+    @apply w-auto m-0;
+  }
 
-		.fundraiser-quiz--step-one & {
-			@apply justify-start;
-		}
+  &__btn-container {
+    @apply relative mb-px26 flex justify-start items-center;
 
-		@screen md {
-			@apply md:mb-px22;
-		}
+    .fundraiser-quiz--step-one & {
+      @apply justify-start;
+    }
 
-		label {
-			@apply inline-block pl-px35 md:pl-px40;
-		}
-	}
+    @screen md {
+      @apply md:mb-px22;
+    }
 
-	&__radio-btn {
-		@apply bg-teal-dark border-2 border-solid border-white rounded-px10 shadow-radio;
-		@apply w-px18 h-px18 -mr-px18 transition-all duration-300 ease-in-out appearance-none outline-none align-middle;
+    label {
+      @apply inline-block pl-px35 md:pl-px40;
+    }
+  }
 
-		&:checked {
-			@apply bg-white;
-		}
-	}
+  &__radio-btn {
+    @apply bg-teal-dark border-2 border-solid border-white rounded-px10 shadow-radio;
+    @apply w-px18 h-px18 -mr-px18 transition-all duration-300 ease-in-out appearance-none outline-none align-middle;
 
-	&__fields {
-		@apply flex flex-col text-px18 leading-px26 md:leading-px22 xl:text-px20 xl:leading-px24 font-medium mt-px40 md:mt-px50 xl:mt-px60;
+    &:checked {
+      @apply bg-white;
+    }
+  }
 
-		:is(input, textarea, select) {
-			@apply bg-gray-light text-blue_green py-px20 px-px28 rounded-px10 w-full;
+  &__fields {
+    @apply flex flex-col text-px18 leading-px26 md:leading-px22 xl:text-px20 xl:leading-px24 font-medium mt-px40 md:mt-px50 xl:mt-px60;
 
-			&::placeholder {
-				@apply text-blue_green;
-			}
-		}
+    :is(input, textarea, select) {
+      @apply bg-gray-light text-blue_green py-px20 px-px28 rounded-px10 w-full;
 
-		@screen xl {
-			@apply mx-auto;
-			max-width: rem-calc(818px);
-		}
-	}
+      &::placeholder {
+        @apply text-blue_green;
+      }
+    }
 
-	:is(&__message, &__inquiry) {
-		@apply mt-px18 md:mt-px20 xl:mt-px30;
-	}
+    @screen xl {
+      @apply mx-auto;
+      max-width: rem-calc(818px);
+    }
+  }
 
-	&__small-fields {
-		@apply flex flex-col md:flex-row justify-center;
+  :is(&__message, &__inquiry) {
+    @apply mt-px18 md:mt-px20 xl:mt-px30;
+  }
 
-		& + & {
-			@apply mt-px18;
+  &__small-fields {
+    @apply flex flex-col md:flex-row justify-center;
 
-			@screen md {
-				@apply mt-px20;
-			}
-		}
+    & + & {
+      @apply mt-px18;
 
-		input {
-			@apply w-full;
+      @screen md {
+        @apply mt-px20;
+      }
+    }
 
-			@screen xl {
-				max-width: rem-calc(395px);
-			}
-		}
+    input {
+      @apply w-full;
 
-		input + input {
-			@apply mt-px18;
+      @screen xl {
+        max-width: rem-calc(395px);
+      }
+    }
 
-			@screen md {
-				@apply mt-0 ml-px28;
-			}
-		}
-	}
+    input + input {
+      @apply mt-px18;
 
-	&__message {
-		@apply mt-px18 md:mt-px20 xl:mt-px30;
-		height: rem-calc(240px);
-		resize: none;
+      @screen md {
+        @apply mt-0 ml-px28;
+      }
+    }
+  }
 
-		@screen md {
-			height: rem-calc(225px);
-		}
-	}
+  &__message {
+    @apply mt-px18 md:mt-px20 xl:mt-px30;
+    height: rem-calc(240px);
+    resize: none;
 
-	&__submit {
-		@apply bg-white text-blue_green font-bold text-px16 leading-px22 mt-px50 px-0 self-start;
-		width: rem-calc(319px);
+    @screen md {
+      height: rem-calc(225px);
+    }
+  }
 
-		@screen md {
-			width: rem-calc(233px);
-		}
-	}
+  &__submit {
+    @apply bg-white text-blue_green font-bold text-px16 leading-px22 mt-px50 px-0 self-start;
+    width: rem-calc(319px);
 
-	&__create-fundraiser-btn {
-		@apply bg-white text-teal-dark mt-px40 inline-flex items-center justify-center mx-auto h-px46 box-border h-px46;
+    @screen md {
+      width: rem-calc(233px);
+    }
+  }
+
+  &__create-fundraiser-btn {
+    @apply bg-white text-teal-dark mt-px40 inline-flex items-center justify-center mx-auto h-px46 box-border h-px46;
 
     @screen xl {
       @apply h-px66;
     }
-	}
+  }
 
-	&__get-your-fundraiser {
-		@apply bg-white text-teal-dark text-left rounded-px10 mt-px80 pt-px58 pb-20 px-px28;
+  &__get-your-fundraiser {
+    @apply bg-white text-teal-dark text-left rounded-px10 mt-px80 pt-px58 pb-20 px-px28;
 
-		@screen md {
-			@apply pt-px80 pb-20 px-16 mx-auto;
+    @screen md {
+      @apply pt-px80 pb-20 px-16 mx-auto;
 
-			max-width: rem-calc(550px);
-		}
+      max-width: rem-calc(550px);
+    }
 
-		@screen xl {
-			@apply pt-px58 px-20;
-			max-width: rem-calc(764px);
-		}
+    @screen xl {
+      @apply pt-px58 px-20;
+      max-width: rem-calc(764px);
+    }
 
-		&-title {
-			@apply font-bold text-px32 leading-px40 xl:text-px30 mb-px10 md:mb-px15;
-		}
+    &-title {
+      @apply font-bold text-px32 leading-px40 xl:text-px30 mb-px10 md:mb-px15;
+    }
 
-		&-description {
-			@apply font-normal text-px18 leading-px26;
-		}
+    &-description {
+      @apply font-normal text-px18 leading-px26;
+    }
 
-		&-links {
-			@apply flex flex-col md:flex-row flex-wrap mt-px15;
-		}
+    &-links {
+      @apply flex flex-col md:flex-row flex-wrap mt-px15;
+    }
 
-		&-link {
-			@apply text-px18 leading-px24 tracking-em001 font-bold py-4;
-			@apply xl:text-px20 xl:leading-px26;
-			@apply md:mr-px30;
+    &-link {
+      @apply text-px18 leading-px24 tracking-em001 font-bold py-4;
+      @apply xl:text-px20 xl:leading-px26;
+      @apply md:mr-px30;
 
-			a {
-				@apply border-b-2 border-teal-dark;
-			}
-		}
-	}
+      a {
+        @apply border-b-2 border-teal-dark;
+      }
+    }
+  }
 
-	&__back-btn {
-		@apply flex items-center bg-transparent text-white absolute left-px30 top-px28 p-px12;
-		@apply text-px16 leading-px22 -ml-px12;
-		@apply md:left-px70;
+  &__back-btn {
+    @apply flex items-center bg-transparent text-white absolute left-px30 top-px28 p-px12;
+    @apply text-px16 leading-px22 -ml-px12;
+    @apply md:left-px70;
 
-		&::before {
-			content: "<";
-			@apply flex items-center text-px24 mr-px12;
-		}
-	}
+    &::before {
+      content: "<";
+      @apply flex items-center text-px24 mr-px12;
+    }
+  }
 
-	&__pagination {
-		@apply absolute top-px40 left-1/2 text-white text-px14 leading-px18 hidden;
-		@apply transform -translate-x-1/2;
-		@apply md:top-px50 md:text-px18 md:leading-px26;
-		@apply xl:block xl:text-px22 xl:leading-px32;
-	}
+  &__pagination {
+    @apply absolute top-px40 left-1/2 text-white text-px14 leading-px18 hidden;
+    @apply transform -translate-x-1/2;
+    @apply md:top-px50 md:text-px18 md:leading-px26;
+    @apply xl:block xl:text-px22 xl:leading-px32;
+  }
 
+  // Vertex Specific Styles
+  [data-vertex="create"] {
+    .fundraiser-quiz__title {
+      @apply font-bold text-px32 leading-px40;
+      @apply md:leading-px42;
+      @apply xl:text-px36 xl:leading-px48;
+    }
 
-	// Vertex Specific Styles
-	[data-vertex="create"] {
-		.fundraiser-quiz__title {
-			@apply font-bold text-px32 leading-px40;
-			@apply md:leading-px42;
-			@apply xl:text-px36 xl:leading-px48;
-		}
+    .fundraiser-quiz__get-your-fundraiser-title {
+      @apply font-bold text-px30 leading-px40 tracking-em005;
+      @apply md:text-px32;
+      @apply xl:text-px30 xl:leading-px40;
+    }
+  }
 
-		.fundraiser-quiz__get-your-fundraiser-title {
-			@apply font-bold text-px30 leading-px40 tracking-em005;
-			@apply md:text-px32;
-			@apply xl:text-px30 xl:leading-px40;
-		}
-	}
+  // Form
 
+  input:not([type="radio"]),
+  textarea {
+    @apply text-teal-dark border-none;
+  }
 
-	// Form
+  input[type="radio"]:not(:checked) {
+    @apply bg-white bg-opacity-10 shadow-none;
+  }
 
-	input:not([type="radio"]),
-	textarea {
-		@apply text-teal-dark border-none;
-	}
+  // Per question overrides
+  &--gathering,
+  &--collect-donations,
+  &--who-is-fundraising {
+    @apply container mx-auto flex flex-col justify-center items-center text-white;
 
-	input[type="radio"]:not(:checked) {
-		@apply bg-white bg-opacity-10 shadow-none;
-	}
+    .fundraiser-quiz__title {
+      @apply inline-block;
+    }
 
-	// Per question overrides
-	&--gathering,
-	&--collect-donations,
-	&--who-is-fundraising {
-		@apply container mx-auto flex flex-col justify-center items-center text-white;
-
-		.fundraiser-quiz__title {
-			@apply inline-block;
-		}
-
-		fieldset {
-			@apply self-start;
+    & .fundraiser-quiz__choices-form,
+    & fieldset {
+      @apply self-start;
 
       @screen md {
         @apply self-center;
       }
-		}
-	}
+    }
+  }
 
   &--create-fundraiser {
     @apply container mx-auto text-center text-white;
+  }
+
+  &__next-question-wrap {
+    @apply flex justify-center items-center w-full mt-px40;
+  }
+
+  &__next-question {
+    @apply btn;
+    @apply h-px58 w-px170;
+    @apply bg-white text-blue_green text-px16 leading-px22 tracking-em001 whitespace-nowrap font-semibold;
+
+    &[disabled] {
+      @apply bg-opacity-80 cursor-not-allowed;
+    }
   }
 }
