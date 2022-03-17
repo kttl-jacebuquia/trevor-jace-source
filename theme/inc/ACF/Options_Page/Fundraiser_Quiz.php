@@ -438,7 +438,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function step_one( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--step-one hidden bg-teal-dark">
+			<div class="fundraiser-quiz--step-one hidden bg-teal-dark" tabindex="0">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
@@ -447,7 +447,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 					<p class="fundraiser-quiz__description"><?php echo esc_html( $data['description'] ); ?></p>
 				<?php } ?>
 				<p class="fundraiser-quiz__instruction">* Choose one</p>
-				<fieldset>
+				<form class="fundraiser-quiz__choices-form">
 					<div class="fundraiser-quiz__choices">
 						<?php
 						if ( ! empty( $data['choices'] ) ) {
@@ -462,7 +462,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 						}
 						?>
 					</div>
-				</fieldset>
+					<?php echo static::render_next_question_button(); ?>
+				</form>
 			</div>
 		<?php
 		return ob_get_clean();
@@ -479,7 +480,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 		$form_assembly_form = preg_replace( "/{$pattern}/", '', $form_assembly_form );
 
 		?>
-			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form">
+			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form" tabindex="0">
 					<?php if ( ! empty( $data['title'] ) ) { ?>
 						<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 					<?php } ?>
@@ -500,7 +501,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function create_fundraiser( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--create-fundraiser fundraiser-quiz--steps" data-vertex="create">
+			<div class="fundraiser-quiz--create-fundraiser fundraiser-quiz--steps" data-vertex="create" tabindex="0">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title">Are you ready to start fundraising?</h2>
 				<?php } ?>
@@ -540,12 +541,12 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function collect_donations( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--collect-donations fundraiser-quiz--steps" data-vertex="collect">
+			<div class="fundraiser-quiz--collect-donations fundraiser-quiz--steps" data-vertex="collect" tabindex="0">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
 				<p class="fundraiser-quiz__instruction">* Choose one</p>
-				<fieldset>
+				<form class="fundraiser-quiz__choices-form">
 					<div class="fundraiser-quiz__choices">
 						<div class="fundraiser-quiz__btn-container">
 							<input class="fundraiser-quiz__radio-btn" type="radio" id="yes-collect" name="collect_donations" value="yes" data-vertex="collect">
@@ -556,7 +557,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 							<label for="no-collect">No</label>
 						</div>
 					</div>
-				</fieldset>
+					<?php echo static::render_next_question_button(); ?>
+				</form>
 			</div>
 		<?php
 		return ob_get_clean();
@@ -565,14 +567,14 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function who_is_fundraising( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--who-is-fundraising fundraiser-quiz--steps" data-vertex="who">
+			<div class="fundraiser-quiz--who-is-fundraising fundraiser-quiz--steps" data-vertex="who" tabindex="0">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
 
 				<p class="fundraiser-quiz__instruction">* Choose one</p>
 				<?php if ( ! empty( $data['choices'] ) ) { ?>
-					<fieldset>
+					<form class="fundraiser-quiz__choices-form">
 						<div class="fundraiser-quiz__choices">
 							<?php foreach ( $data['choices'] as $item ) { ?>
 								<div class="fundraiser-quiz__btn-container">
@@ -581,7 +583,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 								</div>
 							<?php } ?>
 						</div>
-					</fieldset>
+						<?php echo static::render_next_question_button(); ?>
+					</form>
 				<?php } ?>
 
 			</div>
@@ -592,12 +595,12 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function gathering( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--gathering fundraiser-quiz--steps" data-vertex="gathering">
+			<div class="fundraiser-quiz--gathering fundraiser-quiz--steps" data-vertex="gathering" tabindex="0">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title">Are you planning to have a gathering?</h2>
 				<?php } ?>
 				<p class="fundraiser-quiz__instruction">* Choose one</p>
-				<fieldset>
+				<form class="fundraiser-quiz__choices-form">
 					<div class="fundraiser-quiz__choices">
 						<div class="fundraiser-quiz__btn-container">
 							<input class="fundraiser-quiz__radio-btn" type="radio" id="yes-gathering" name="gathering" value="yes" data-vertex="gathering">
@@ -608,7 +611,18 @@ class Fundraiser_Quiz extends A_Options_Page {
 							<label for="no-gathering">No</label>
 						</div>
 					</div>
-				</fieldset>
+					<?php echo static::render_next_question_button(); ?>
+				</form>
+			</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	protected static function render_next_question_button(): string {
+		ob_start();
+		?>
+			<div class="fundraiser-quiz__next-question-wrap">
+				<input class="fundraiser-quiz__next-question" aria-hidden="true" aria-label="click to go to the next question" type="submit" disabled value="Next Question" />
 			</div>
 		<?php
 		return ob_get_clean();
