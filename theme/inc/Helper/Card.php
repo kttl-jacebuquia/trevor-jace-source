@@ -16,7 +16,7 @@ class Card {
 			return '';
 		}
 
-		$options   = array_merge(
+		$options            = array_merge(
 			array(
 				'class'            => array(), // Additional classes.
 				'num_words'        => 100, // for description.

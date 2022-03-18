@@ -73,7 +73,7 @@ if ( ! empty( $glossaries ) ) {
 							) {
 								$search_url = \TrevorWP\CPT\RC\RC_Object::get_search_url( $search );
 								?>
-									<?php if ( ! empty( $search_url ) ): ?>
+									<?php if ( ! empty( $search_url ) ) : ?>
 										<a href="<?php echo esc_url( $search_url ); ?>"
 										class="bg-violet-light hover:bg-melrose text-indigo font-medium text-px14 leading-px18 tracking-em001 rounded-full py-1.5 px-3.5 mb-3 mr-2"><?php echo esc_html( $search ); ?></a>
 									<?php endif; ?>
