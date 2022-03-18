@@ -10,6 +10,10 @@ wp.domReady(() => {
 			name: 'wave',
 			label: 'Wave',
 			isDefault: true,
-		}
+		},
+		{
+			name: 'line',
+			label: 'Line',
+		},
 	]);
 });
