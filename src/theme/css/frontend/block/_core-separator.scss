@@ -1,8 +1,11 @@
 .wp-block-separator {
-  &, /* To catch the default, if default changes, remove this */
   &.is-style-wave {
-	@apply border-none;
-	background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 8px 0;
-	height: 12px;
+    @apply border-none;
+    background: transparent url("/wp-content/themes/trevor/static/media/h-divider-wave.svg") repeat-x 8px 0;
+    height: 12px;
+  }
+
+  &.is-style-line {
+    @apply border-current opacity-50;
   }
 }
