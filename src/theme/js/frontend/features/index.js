@@ -49,3 +49,4 @@ import './faqs';
 import './carousel/auto-width-image';
 import './skip-to-main';
 import './search-suggestions';
+import './partner-logo';

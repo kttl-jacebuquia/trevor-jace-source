@@ -25,7 +25,7 @@
 
     @screen md {
       border-style: hidden;
-      box-shadow: 0 0 0 2px theme('colors.teal.lighter');
+      box-shadow: 0 0 0 2px theme("colors.teal.lighter");
       @apply m-auto border-collapse rounded-px10;
 
       tr:first-child th,
@@ -41,11 +41,11 @@
 
     tr {
       &:first-child {
-        border-top: 2px solid theme('colors.teal.lighter');
+        border-top: 2px solid theme("colors.teal.lighter");
       }
 
       &:last-child {
-        border-bottom: 2px solid theme('colors.teal.lighter');
+        border-bottom: 2px solid theme("colors.teal.lighter");
       }
 
       @screen md {
@@ -60,7 +60,7 @@
     }
 
     tr + tr {
-      border-top: 2px solid theme('colors.teal.lighter');
+      border-top: 2px solid theme("colors.teal.lighter");
     }
 
     th,
@@ -155,7 +155,6 @@
         @apply pt-px70 pb-px100 pl-px55 pr-px60 gap-px40;
       }
 
-
       &.logo-size-text {
         @apply px-px28 gap-x-3 -mt-px30 block;
         column-count: 2;
@@ -245,17 +244,22 @@
           }
 
           @screen lg {
-            @apply w-full max-h-none;
-          }
+            @apply w-full max-h-none transform;
 
-          @screen xl {
-            @apply w-auto max-w-full max-h-px120;
+            &[data-aspect-ratio-class="portrait"] {
+              @apply scale-75;
+            }
+
+            &[data-aspect-ratio-class="square"] {
+              --tw-scale-x: .6;
+              --tw-scale-y: .6;
+            }
           }
         }
       }
 
       &.logo-size-normal {
-        @apply grid grid-cols-3 gap-x-5 gap-y-16 grid-flow-row;
+        @apply grid grid-cols-3 gap-x-5 gap-y-16 auto-rows-fr;
 
         @screen md {
           @apply grid-cols-4 py-12 gap-x-7 gap-y-24;
@@ -269,6 +273,12 @@
           @apply py-px50 grid-cols-5 gap-x-px15 gap-y-px10;
         }
 
+        a {
+          @screen lg {
+            @include aspect-ratio(1, 1);
+          }
+        }
+
         img {
           @apply mx-auto w-5/6;
 
@@ -277,12 +287,27 @@
           }
 
           @screen lg {
-            @apply w-5/6;
+            @apply absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto h-auto;
+
+            &[data-aspect-ratio-class="square"] {
+              height: 50%;
+            }
+
+            &[data-aspect-ratio-class="landscape"] {
+              width: 60%;
+            }
+
+            &[data-aspect-ratio-class="wide"] {
+              width: 85%;
+            }
+
+            &[data-aspect-ratio-class="portrait"] {
+              height: 85%;
+            }
           }
 
           @screen lg2 {
             @apply mx-auto;
-            width: calc(100% - #{rem-calc(30)});
           }
         }
       }
@@ -290,7 +315,6 @@
   }
 
   .cards {
-
     &__title {
       @apply mt-px80 mx-0 mb-px60 text-teal-dark;
 

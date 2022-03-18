@@ -2,6 +2,7 @@
 
 use TrevorWP\Meta\Post;
 use TrevorWP\Meta\Taxonomy;
+use WP_Post;
 
 /**
  * Tier Type Helper.
@@ -34,7 +35,7 @@ class Tier {
 											target="_blank"
 											title="<?php echo esc_attr( $post->post_title ); ?>"
 										>
-											<?php echo get_the_post_thumbnail( $post, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD, array( 'class' => 'partner-logo' ) ); ?>
+											<?php echo static::render_partner_logo( $post ); ?>
 										</a>
 									<?php endforeach ?>
 								<?php else : ?>
@@ -110,5 +111,44 @@ class Tier {
 		</div>
 		<?php
 			return ob_get_clean();
+	}
+
+	protected static function render_partner_logo ( $post ): string {
+		$attrs         = array( 'class' => 'partner-logo' );
+		$post_image_id = get_post_thumbnail_id( $post );
+		list(
+			$image_src,
+			$width,
+			$height
+		)              = wp_get_attachment_image_src( $post_image_id, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
+		$is_svg        = preg_match( "/\.svg$/i", $image_src );
+
+		// Add aspect ratio class according to dimensions
+		if ( $is_svg ) {
+			// SVGs does not provide width and height, so we let JS compute it
+			$attrs['class'] .= ' partner-logo--dynamic';
+		} else {
+			$attrs['data-aspect-ratio-class'] = static::get_aspect_ratio_class( $width, $height );
+		}
+
+		return get_the_post_thumbnail( $post, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD, $attrs );
+	}
+
+	// Should match JS file partner-logo.ts (getAspectRatioClass function)
+	protected static function get_aspect_ratio_class ( int $width, $height ): string {
+		$width_height_ratio = $width / $height;
+
+		switch (true) {
+			case ($width_height_ratio >= .75 && $width_height_ratio <= 1.34):
+				return 'square';
+			case ($width_height_ratio < .75):
+				return 'portrait';
+			case ($width_height_ratio > 1.34 && $width_height_ratio < 1.8):
+				return 'landscape';
+			case ($width_height_ratio >= 1.8):
+				return 'wide';
+			default:
+				return "";
+		}
 	}
 }
