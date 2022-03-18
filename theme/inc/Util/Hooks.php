@@ -108,6 +108,16 @@ class Hooks {
 		# Remove unnecessary ids from navigation items
 		add_filter( 'nav_menu_item_id', '__return_null', 10, 3 );
 
+		// Fix ACF-Gutenberg preview issue @reference https://support.advancedcustomfields.com/forums/topic/custom-fields-on-post-preview/#post-150273
+		if ( class_exists( 'acf_revisions' ) ) {
+			// Reference to ACF's <code>acf_revisions</code> class
+			// We need this to target its method, acf_revisions::acf_validate_post_id
+			$acf_revs_cls = acf()->revisions;
+
+			// This hook is added the ACF file: includes/revisions.php:36 (in ACF PRO v5.11)
+			remove_filter( 'acf/validate_post_id', array( $acf_revs_cls, 'acf_validate_post_id', 10 ) );
+		}
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 

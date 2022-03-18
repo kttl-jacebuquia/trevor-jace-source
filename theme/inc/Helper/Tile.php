@@ -94,7 +94,7 @@ class Tile {
 			$id                 = uniqid( 'post-' );
 			$options['id']      = $id;
 			$options['class'][] = 'bill-letter-card';
-			$footer_html = ( new \TrevorWP\Theme\Helper\Modal(
+			$footer_html        = ( new \TrevorWP\Theme\Helper\Modal(
 				CPT\Get_Involved\Bill::render_modal( $post ),
 				array(
 					'target' => "#{$id} a",
