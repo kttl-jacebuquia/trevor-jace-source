@@ -330,6 +330,12 @@
 
     .tile-inner {
       @apply px-6 pb-12 xl:pb-14;
+
+      @screen below-mobile {
+        @apply px-container-padding-default;
+        word-break: break-word;
+      }
+
       @screen md {
         padding-bottom: rem-calc(52px);
       }

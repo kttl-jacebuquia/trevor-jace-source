@@ -23,6 +23,14 @@
   table {
     @apply w-full text-teal-dark;
 
+    @screen below-mobile {
+      table-layout: fixed;
+
+      * {
+        @apply max-w-full;
+      }
+    }
+
     @screen md {
       border-style: hidden;
       box-shadow: 0 0 0 2px theme('colors.teal.lighter');
@@ -215,6 +223,10 @@
       &.logo-size-big {
         @apply grid grid-cols-1 gap-y-px120 py-20;
 
+        @screen below-mobile {
+          @apply px-container-padding-default;
+        }
+
         @screen md {
           @apply py-8 grid-cols-3 gap-x-16 gap-y-7 items-center content-start;
         }
@@ -256,6 +268,10 @@
 
       &.logo-size-normal {
         @apply grid grid-cols-3 gap-x-5 gap-y-16 grid-flow-row;
+
+        @screen below-mobile {
+          @apply px-container-padding-default;
+        }
 
         @screen md {
           @apply grid-cols-4 py-12 gap-x-7 gap-y-24;

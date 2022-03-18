@@ -19,6 +19,10 @@
     -webkit-font-smoothing: auto;
     margin-bottom: rem-calc(20);
 
+    @screen below-mobile {
+      @apply px-container-padding-default min-h-px55 h-auto;
+    }
+
     // Light variant
     &--light {
       @apply bg-white border-white text-orange;

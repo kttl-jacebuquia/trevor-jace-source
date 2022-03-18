@@ -1,5 +1,6 @@
 .card-post {
-  @apply h-px496;
+  @apply h-auto mobile-up:h-px496;
+  min-height: rem-calc(496);
 
   @screen md {
     @apply h-px450;

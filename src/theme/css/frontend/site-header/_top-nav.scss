@@ -143,6 +143,10 @@
 	@apply static flex flex-row items-center justify-between h-full;
 	@apply mx-auto pt-px18;
 
+  @screen below-mobile {
+    @apply flex-wrap;
+  }
+
   @screen md {
     @apply px-0;
   }
@@ -188,6 +192,10 @@
 
   .top-nav-cta-wrap {
     @apply flex ml-auto mt-px5 mr-px18;
+
+    @screen below-mobile {
+      @apply mx-0;
+    }
 
     @screen md {
       @apply mt-0;

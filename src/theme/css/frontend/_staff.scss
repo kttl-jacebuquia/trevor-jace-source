@@ -81,6 +81,10 @@
     margin-left: calc(((100vw - 100%) / 2) * -1);
     padding-left: calc((100vw - 100%) / 2);
 
+    @screen below-mobile {
+      @apply -mx-container-padding-default px-container-padding-default;
+    }
+
     @screen lg {
       @apply col-span-full mt-px55 ml-0 pl-0;
       width: auto;
@@ -120,9 +124,12 @@
   }
 
   &__card {
-    width: 82.7586206897%;
     height: auto;
     @apply w-px264 mr-px12 text-left;
+
+    @screen below-mobile {
+      @apply w-full;
+    }
 
     @screen md {
       @apply mr-px18;
@@ -289,6 +296,10 @@
 
   .swiper-pagination {
     @apply mt-px50 ml-pxn28;
+
+    @screen below-mobile {
+      @apply mx-0;
+    }
 
     @screen lg {
       display: none;

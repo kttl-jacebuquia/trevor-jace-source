@@ -13,6 +13,10 @@
     &.centered {
       @apply mx-0 text-center col-span-4 col-start-2;
 
+      @screen below-mobile {
+        @apply col-span-full;
+      }
+
       @screen md {
         @apply col-span-6 col-start-2;
       }

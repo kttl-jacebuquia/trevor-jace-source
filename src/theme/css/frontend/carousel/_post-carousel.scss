@@ -38,6 +38,7 @@
 
   .page-sub-title {
     @apply w-full font-semibold text-px32 leading-px40 text-center col-span-full;
+    @apply below-mobile:break-words;
 
     @screen md {
       @apply text-px32 leading-px42 col-span-6 col-start-2;
@@ -77,7 +78,11 @@
   }
 
   .carousel-container {
-    width: theme("postCard.width.DEFAULT");
+    @apply w-full;
+
+    @screen mobile-up {
+      width: theme("postCard.width.DEFAULT");
+    }
 
     @screen mobile {
       @apply mx-auto;

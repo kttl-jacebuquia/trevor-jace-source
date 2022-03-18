@@ -32,6 +32,10 @@
   &--wrapper {
     @apply pt-px80 pb-px80 rounded-px10 pl-px30 pr-px30 bg-teal-tint;
 
+    @screen below-mobile {
+      @apply px-container-padding-default;
+    }
+
     @screen lg {
       @apply pb-px90 pt-px90;
     }

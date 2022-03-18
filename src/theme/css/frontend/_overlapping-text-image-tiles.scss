@@ -14,6 +14,10 @@
     @apply px-px24 text-center;
     @include user-defined-bg;
 
+    @screen below-mobile {
+      @apply px-container-padding-default;
+    }
+
     @screen md {
       @apply col-start-3 col-span-6 px-px76 rounded-r-none;
       @include bleed-r(md);
@@ -104,7 +108,11 @@
   &__image {
     @apply col-span-5 -ml-px55 relative -mt-px40 rounded-l-none rounded-px10 overflow-hidden;
 
-    @screen mobile {
+    @screen below-mobile {
+      @apply -ml-container-padding-default;
+    }
+
+    @screen mobile-only {
       margin-left: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
     }
 
@@ -203,7 +211,11 @@
     .overlapping-text-image-tiles__image {
       @apply col-start-2 col-span-5 ml-0 -mr-px90 rounded-r-none rounded-px10;
 
-      @screen mobile {
+      @screen below-mobile {
+        @apply -mr-container-padding-default;
+      }
+
+      @screen mobile-only {
         margin-right: calc(-1 * (((100vw - #{theme('screens.sm')}) / 2) + theme('container.padding.DEFAULT')));
       }
 

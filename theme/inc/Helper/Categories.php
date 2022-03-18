@@ -39,10 +39,10 @@ class Categories {
 			<div class="container mx-auto tw-grid lg:tw-grid-desktop py-px60 md:py-20 flex flex-col items-center">
 				<p class="col-span-6 md:col-start-2 lg:col-start-4 text-center font-medium text-base leading-px22 tracking-px05 mb-px25 md:mb-px28 md:px-px60 md:text-px18 md:leading-px22 md:tracking-em001 lg:px-px45 lg:text-px20 lg:leading-px24 md:tracking-px05 xl:px-px75">
 					Browse trending content below or choose a topic category to explore.</p>
-				<div class="mobile:-mx-px28 col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3 flex flex-wrap justify-center">
+				<div class="below-mobile:w-auto below-mobile:-mx-container-padding-default mobile-only:-mx-px28 col-span-6 md:col-start-2 lg:col-span-8 lg:col-start-3 flex flex-wrap justify-center">
 					<?php foreach ( $featured_cats as $cat ) { ?>
 						<a href="<?php echo get_term_link( $cat ); ?>"
-						class="rounded-full hover:bg-persian_blue-lighter py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?php echo $cat->name; ?></a>
+						class="rounded-full below-mobile:max-w-full hover:bg-persian_blue-lighter py-1.5 px-5 bg-violet mx-2 mb-3 text-white text-px14 leading-px18 tracking-em001 lg:text-px18 lg:leading-px22 lg:tracking-px05"><?php echo $cat->name; ?></a>
 					<?php } ?>
 				</div>
 			</div>

@@ -3,6 +3,10 @@
   @apply py-20 px-6 rounded-px10;
   min-height: rem-calc(503px);
 
+  @screen below-mobile {
+    @apply px-container-padding-default;
+  }
+
   // Dark BG Variants
   @each $type in (rc, donation, fundraiser, counselor) {
     &.type-#{$type} {
@@ -18,7 +22,7 @@
   }
 
   .inner {
-    @apply z-1;
+    @apply z-1 max-w-full;
   }
 
   .bg-inner {

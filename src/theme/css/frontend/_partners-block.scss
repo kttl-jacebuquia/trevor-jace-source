@@ -126,6 +126,10 @@
     @apply flex flex-col;
     @apply px-px86 py-px100;
 
+    @screen below-mobile {
+      @apply px-container-padding-default;
+    }
+
     @screen md {
       @apply flex-row justify-between;
       @apply pt-px18 pb-px30 px-px60;

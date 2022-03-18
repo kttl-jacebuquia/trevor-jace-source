@@ -1,3 +1,11 @@
+@for $level from 1 to 6 {
+  h#{$level} {
+    @screen below-mobile {
+      word-break: break-word;
+    }
+  }
+}
+
 .heading-lg-tilted {
   @apply font-manrope font-bold text-px32 leading-px40 tracking-em005;
 

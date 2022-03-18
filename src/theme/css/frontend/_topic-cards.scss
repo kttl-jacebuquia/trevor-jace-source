@@ -81,6 +81,10 @@
     @apply mt-px38 -ml-px28 -mr-px28;
     @apply border-blue_green border-solid border-t-px1 border-b-px1;
 
+    @screen below-mobile {
+      @apply -mx-container-padding-default;
+    }
+
     @screen md {
       @apply hidden;
     }

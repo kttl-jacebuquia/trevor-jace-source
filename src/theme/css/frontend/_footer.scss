@@ -30,6 +30,10 @@ footer {
     @apply flex-1 mb-12 h-auto;
     width: #{rem-calc(200)};
 
+    @screen below-mobile {
+      @apply -mx-container-padding-default w-auto;
+    }
+
     @screen md {
       @apply h-auto;
     }
@@ -153,7 +157,7 @@ footer {
     }
 
     &.social-links {
-      @apply mb-0 flex flex-row;
+      @apply mb-0 flex flex-row flex-wrap;
 
       li {
         @apply flex-auto mr-7;

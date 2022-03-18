@@ -71,6 +71,10 @@
     @apply md:flex md:flex-col lg2:flex-row lg2:items-center;
     @apply bg-blue_green;
 
+    @screen below-mobile {
+      @apply px-container-padding-default;
+    }
+
     &::before {
       @apply bg-transparent;
     }

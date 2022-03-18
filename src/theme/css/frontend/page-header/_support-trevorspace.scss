@@ -154,6 +154,10 @@
     .page-btn {
       @apply min-w-px216;
 
+      @screen below-mobile {
+        @apply min-w-0;
+      }
+
       @screen md {
         @apply min-w-px135;
       }

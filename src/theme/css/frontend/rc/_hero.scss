@@ -1,6 +1,10 @@
 .resource-center-hero {
   @apply tw-grid;
 
+  @screen below-mobile {
+    word-break: break-word;
+  }
+
   &__content {
     @apply col-span-full;
 
@@ -95,6 +99,8 @@
   }
 
   &__topics {
+    @apply below-mobile:mx-0;
+
     @screen xl {
       @apply max-w-px733 w-auto;
     }
@@ -102,6 +108,10 @@
 
   &__topic {
     @apply font-medium h-px34 px-px14;
+
+    @screen below-mobile {
+      @apply h-auto min-h-px34;
+    }
 
     @screen xl {
       @apply text-px18 leading-px22 font-medium;

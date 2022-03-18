@@ -322,6 +322,10 @@
     @apply inline-flex items-center justify-center mt-px24 h-px58 max-w-px276 min-w-px187 py-0 text-center;
     @apply text-px18 leading-px24;
 
+    @screen below-mobile {
+      @apply min-w-0 h-auto py-container-padding-default;
+    }
+
     @screen md {
       @apply mt-px20 min-w-0 max-w-none px-px32 h-px46;
       @apply text-px16 leading-px22 tracking-em001;

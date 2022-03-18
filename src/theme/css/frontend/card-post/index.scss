@@ -4,11 +4,10 @@
   @apply flex flex-col relative;
   @apply overflow-hidden;
   @apply shadow-light rounded-px10;
-  @apply h-px503;
+  @apply mobile-up:h-px503;
   @apply max-w-full;
   @apply mx-auto;
   @apply w-full;
-
   perspective: 1px;
 
   // Assign bg color to CSS variable so it can be used by the tags box
@@ -16,6 +15,11 @@
     &.bg-#{$color-name} {
       --card-background: #{$color-value};
     }
+  }
+
+  @screen below-mobile {
+    @apply h-auto;
+    min-height: rem-calc(503);
   }
 
   // Thumbnail
@@ -86,7 +90,12 @@
   .post-title,
   .title-btm,
   .post-desc {
-    @apply px-6;
+    padding-left: theme('container.padding.DEFAULT');
+    padding-right: theme('container.padding.DEFAULT');
+
+    @screen mobile-up {
+      @apply px-6;
+    }
   }
 
   .title-top {

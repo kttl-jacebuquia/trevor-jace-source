@@ -8,7 +8,7 @@
   }
 
   .post-title {
-    @apply line-clamp-4;
+    @apply line-clamp-4 below-mobile:line-clamp-5;
   }
 
   .post-desc {
