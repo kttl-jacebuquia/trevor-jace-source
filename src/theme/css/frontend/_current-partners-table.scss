@@ -231,7 +231,7 @@
         }
 
         @screen lg {
-          @apply py-px50 pl-px45 pr-0 gap-x-px10;
+          @apply py-px50 pl-px45 pr-px20 gap-x-px10;
         }
 
         @screen lg2 {
@@ -282,7 +282,7 @@
         }
 
         @screen lg {
-          @apply py-px50 pl-px45 pr-0 grid-cols-5 gap-x-px10 gap-y-px10;
+          @apply py-px50 pl-px45 pr-px20 grid-cols-5 gap-x-px10 gap-y-px10;
         }
 
         @screen lg2 {
