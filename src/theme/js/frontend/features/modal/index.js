@@ -32,17 +32,7 @@ export class Modal {
 			.on('click', this.close.bind(this));
 
 		// Create focus trap
-		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content[0], {
-			initialFocus: this.$content.find('.modal-container').get(0),
-			onPostDeactivate: () => {
-				// If focus remains inside the modal, remove focus
-				if (this.$content[0].contains(document.activeElement)) {
-					setTimeout(() => {
-						document.querySelector('a[href],button').focus();
-					}, 500);
-				}
-			},
-		});
+		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content.get(0));
 
 		this.$content.on('transitionend', (e) => this.onTransitionEnd(e));
 
@@ -102,8 +92,6 @@ export class Modal {
 
 		$('#blur3px').parent().remove();
 
-		(this.lastActiveElement || document.body).focus();
-
 		if (typeof this.options.onClose === 'function') {
 			this.options.onClose({
 				initiator: e ? e.currentTarget : null,
@@ -113,12 +101,17 @@ export class Modal {
 	};
 
 	onAfterOpen() {
+		const focusableElement = this.$content.find('.modal-container')?.get(0);
+		focusableElement?.focus();
 		this.toggleBackgroundElements(false);
 		this[FOCUS_TRAP_KEY].activate();
-		this.$content.find('.modal-container').get(0)?.focus();
+
 	}
 
 	onAfterClose() {
+		const focusableElement = this.lastActiveElement || document.body;
+		focusableElement?.focus();
+
 		this.$eventEmitter.trigger('modal-close');
 		this.$content.trigger('modal-close');
 		this.$content.prop('hidden', true);

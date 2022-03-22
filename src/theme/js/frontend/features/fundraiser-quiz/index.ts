@@ -366,7 +366,7 @@ export default class FundraiserQuiz {
 	}
 
 	handleModal() {
-		const modalComponent = this.modalRoot?.get(0)?.component;
+		const modalComponent: Modal = this.modalRoot?.get(0)?.component;
 
 		if (!modalComponent) {
 			this.modalRoot?.on('modal-init', this.onModalInit.bind(this));
