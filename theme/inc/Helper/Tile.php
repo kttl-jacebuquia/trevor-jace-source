@@ -398,14 +398,14 @@ class Tile {
 
 		ob_start();
 		?>
-		<article <?php echo Tools::flat_attr( $attr ); ?>>
-			<a href="<?php echo get_permalink( $post ); ?>">
+		<div <?php echo Tools::flat_attr( $attr ); ?>>
+			<a href="<?php echo get_permalink( $post ); ?>" aria-label="click here to read more aboud <?php echo esc_html( $name ); ?>">
 				<div class="post-thumbnail-wrap bg-gray-light">
 					<?php echo $thumbnail; ?>
 				</div>
 				<div class="information bg-white text-teal-dark px-4 xl:px-6 pt-4 xl:pt-6 pb-px24">
 					<p class="information__name font-semibold <?php echo implode( ' ', $name_class ); ?>">
-						<?php echo esc_html( $name ); ?>
+						<?php echo ( $name ); ?>
 					</p>
 					<?php if ( ! empty( $group ) || ! empty( $pronoun ) ) { ?>
 						<div class="information__details <?php echo $details_class; ?>">
@@ -419,7 +419,7 @@ class Tile {
 					<?php } ?>
 				</div>
 			</a>
-		</article>
+		</div>
 		<?php
 		$card_html = ob_get_clean();
 
