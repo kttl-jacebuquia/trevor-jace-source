@@ -143,9 +143,11 @@ class Tier {
 				return 'square';
 			case ($width_height_ratio < .75):
 				return 'portrait';
-			case ($width_height_ratio > 1.34 && $width_height_ratio < 1.8):
+			case $width_height_ratio > 1.34 && $width_height_ratio < 1.8:
 				return 'landscape';
-			case ($width_height_ratio >= 1.8):
+			case $width_height_ratio >= 1.8 && $width_height_ratio < 4:
+				return 'landscape-wide';
+			case $width_height_ratio >= 4:
 				return 'wide';
 			default:
 				return "";
