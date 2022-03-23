@@ -23,7 +23,9 @@ const getAspectRatioClass = (width: number, height: number): string => {
 			return 'portrait';
 		case widthHeightRatio > 1.34 && widthHeightRatio < 1.8:
 			return 'landscape';
-		case widthHeightRatio >= 1.8:
+		case widthHeightRatio >= 1.8 && widthHeightRatio < 4:
+			return 'landscape-wide';
+		case widthHeightRatio >= 4:
 			return 'wide';
 		default:
 			return '';

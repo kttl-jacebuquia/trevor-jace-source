@@ -313,6 +313,10 @@
               width: 60%;
             }
 
+            &[data-aspect-ratio-class="landscape-wide"] {
+              width: 60%;
+            }
+
             &[data-aspect-ratio-class="wide"] {
               width: 85%;
             }
