@@ -15,7 +15,7 @@
   --outline-style: solid;
 
   // Default focus outline
-  &:focus {
+  [data-whatinput="keyboard"] &:focus {
     @include apply-focus-styles;
   }
 
