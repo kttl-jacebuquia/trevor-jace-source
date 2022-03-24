@@ -263,8 +263,8 @@
             }
 
             &[data-aspect-ratio-class="square"] {
-              --tw-scale-x: .6;
-              --tw-scale-y: .6;
+              --tw-scale-x: 0.6;
+              --tw-scale-y: 0.6;
             }
           }
         }
@@ -304,26 +304,6 @@
 
           @screen lg {
             @apply absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto h-auto;
-
-            &[data-aspect-ratio-class="square"] {
-              height: 50%;
-            }
-
-            &[data-aspect-ratio-class="landscape"] {
-              width: 60%;
-            }
-
-            &[data-aspect-ratio-class="landscape-wide"] {
-              width: 60%;
-            }
-
-            &[data-aspect-ratio-class="wide"] {
-              width: 85%;
-            }
-
-            &[data-aspect-ratio-class="portrait"] {
-              height: 85%;
-            }
           }
 
           @screen lg2 {
@@ -370,6 +350,31 @@
         @screen lg {
           flex-basis: calc(606 / 1240 * 100%);
         }
+      }
+    }
+  }
+
+  // Aspect ratio classes
+  img:is(.partner-logo) {
+    @screen lg {
+      &[data-aspect-ratio-class="square"] {
+        height: 50%;
+      }
+
+      &[data-aspect-ratio-class="landscape"] {
+        width: 60%;
+      }
+
+      &[data-aspect-ratio-class="landscape-wide"] {
+        width: 60%;
+      }
+
+      &[data-aspect-ratio-class="wide"] {
+        width: 85%;
+      }
+
+      &[data-aspect-ratio-class="portrait"] {
+        height: 85%;
       }
     }
   }
