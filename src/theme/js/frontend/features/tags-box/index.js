@@ -28,6 +28,7 @@ export default class TagsBox extends Component {
 		this.bindToggle();
 		this.handleMutation();
 		this.bindResize();
+		this.element.classList.add('tags-box--initialized');
 	}
 
 	handleMutation() {
