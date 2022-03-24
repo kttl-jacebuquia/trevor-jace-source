@@ -1,5 +1,5 @@
 .card-post {
-  --card-background: theme('colors.white.DEFAULT');
+  --card-background: theme("colors.white.DEFAULT");
   color: var(--site-theme-background);
   @apply flex flex-col relative;
   @apply overflow-hidden;
@@ -90,8 +90,8 @@
   .post-title,
   .title-btm,
   .post-desc {
-    padding-left: theme('container.padding.DEFAULT');
-    padding-right: theme('container.padding.DEFAULT');
+    padding-left: theme("container.padding.DEFAULT");
+    padding-right: theme("container.padding.DEFAULT");
 
     @screen mobile-up {
       @apply px-6;
@@ -354,6 +354,10 @@
     .fundraiser-progress-wrap {
       @apply h-px20;
     }
+  }
+
+  .tags-box--initialized {
+    @apply overflow-visible;
   }
 }
 
