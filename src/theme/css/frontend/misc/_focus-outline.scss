@@ -14,6 +14,11 @@
   --outline-width: #{rem-calc(1)};
   --outline-style: solid;
 
+  // Remove initial browser outlines
+  &:focus {
+    outline: none;
+  }
+
   // Default focus outline
   [data-whatinput="keyboard"] &:focus {
     @include apply-focus-styles;
