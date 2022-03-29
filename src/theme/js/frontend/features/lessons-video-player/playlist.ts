@@ -92,6 +92,12 @@ export default class Playlist extends OverflowFade {
 
 		// Update state
 		this.setState({ currentItem });
+
+		// Emit event
+		this.emit('videoSelected', {
+			videoType: currentItem.videoType,
+			videoId: currentItem.videoId,
+		});
 	}
 
 	// Fetches the video's poster/thumbnail if none is given in the CMS
@@ -119,7 +125,7 @@ export default class Playlist extends OverflowFade {
 	}
 
 	async populateVimeoItemDetails(itemElement: HTMLElement) {
-		const { poster, src } = itemElement.dataset;
+		const { poster, src, title } = itemElement.dataset;
 		const videoData = await getVimeoVideoData(src || '');
 
 		if (videoData) {
@@ -129,10 +135,17 @@ export default class Playlist extends OverflowFade {
 				videoData.duration
 			);
 
+			const datetime = this.formatDurationWords(
+				itemElement.dataset.duration
+			);
 			const durationElement = itemElement.querySelector(
 				'.lessons-video-player__playlist-item-duration'
 			) as HTMLElement;
 			durationElement.textContent = itemElement.dataset.duration;
+			durationElement.setAttribute(
+				'aria-label',
+				`Duration for ${title}: ${datetime}`
+			);
 
 			if (!poster) {
 				itemElement.dataset.thumbnail = videoData.thumbnail_url;
@@ -185,6 +198,32 @@ export default class Playlist extends OverflowFade {
 		const seconds = Math.floor(durationSeconds % 60);
 
 		return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+	}
+
+	formatDurationWords(durationString: string): string {
+		const durationWords = [];
+		const durationSegments = durationString.split(':');
+
+		durationSegments.reverse();
+
+		const [seconds, minutes, hours] = durationSegments;
+
+		if (parseInt(hours) > 0) {
+			const h = parseInt(hours);
+			durationWords.push(`${h}hour${h > 1 ? 's' : ''}`);
+		}
+
+		if (parseInt(minutes) > 0) {
+			const m = parseInt(minutes);
+			durationWords.push(`${m}minutes${m > 1 ? 's' : ''}`);
+		}
+
+		if (parseInt(seconds) > 0) {
+			const s = parseInt(seconds);
+			durationWords.push(`${s}seconds${s > 1 ? 's' : ''}`);
+		}
+
+		return durationWords.join(', ');
 	}
 
 	checkPlayedItems() {

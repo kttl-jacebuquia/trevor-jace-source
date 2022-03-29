@@ -63,7 +63,9 @@ export default class Lesson extends Component {
 	// Defines event handlers to attach to children
 	eventHandlers = {
 		player: { transitionend: this.onPlayerTransitionEnd.bind(this) },
-		poster: { load: this.onPosterLoaded.bind(this) },
+		poster: {
+			load: this.onPosterLoaded.bind(this),
+		},
 		play: { click: this.onPlayClick.bind(this) },
 		iframe: { load: this.onVideoLoaded.bind(this) },
 	};
@@ -109,7 +111,7 @@ export default class Lesson extends Component {
 
 	// Ensures a valid lesson data being passed
 	sanitizeLessonData(rawLessonData: LessonData) {
-		const curatedLessonData = {};
+		const curatedLessonData: LessonData = {};
 
 		Object.keys(this.state.lesson).forEach((dataKey) => {
 			curatedLessonData[dataKey] = rawLessonData[dataKey] || '';
@@ -123,6 +125,8 @@ export default class Lesson extends Component {
 			if (!this.state.posterLoaded) {
 				(this.children?.poster as HTMLImageElement).src =
 					this.state.lesson.poster || '';
+			} else if (this.state.iframeLoaded) {
+				this.emit('videoLoaded', this.state.lesson);
 			}
 		}
 	}
@@ -282,7 +286,7 @@ export default class Lesson extends Component {
 			this.children.title.dataset.number = lesson.number as string;
 			this.children.body.innerText = lesson.description || '';
 			this.children.download.innerText = lesson.downloadLabel || '';
-			this.children.download.href = lesson.downloadURL;
+			this.children.download.href = lesson.downloadURL || '';
 
 			// Hide empty elements
 			[
@@ -292,7 +296,7 @@ export default class Lesson extends Component {
 			].forEach((element) =>
 				element.classList.toggle(
 					'hidden',
-					element.textContent.trim() ? false : true
+					element.textContent?.trim() ? false : true
 				)
 			);
 

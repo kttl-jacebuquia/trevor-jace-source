@@ -76,11 +76,11 @@
   }
 
   &__vimeo-placeholder {
-    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+    @apply w-full h-full top-0 left-0 transition-all opacity-0 invisible;
   }
 
   &__youtube-placeholder {
-    @apply w-full h-full top-0 left-0 transition-all opacity-0;
+    @apply w-full h-full top-0 left-0 transition-all opacity-0 invisible;
   }
 
   iframe {
@@ -138,5 +138,9 @@
       mt-px20 inline-block -mb-px12,
       $lg: mt-px30
     );
+
+    &.hidden {
+      @apply hidden;
+    }
   }
 }

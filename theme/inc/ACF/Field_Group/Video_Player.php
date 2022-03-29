@@ -165,7 +165,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 								<img src="<?php echo $first_video['poster']; ?>" />
 							</figure>
 							<!-- Play button -->
-							<button class="lessons-video-player__play trevor-ti-play"></button>
+							<button class="lessons-video-player__play trevor-ti-play" aria-label="click to play the video"></button>
 						</div>
 						<div class="lessons-video-player__title" data-number="1"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
 						<div class="lessons-video-player__body"><?php echo esc_html( $first_video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></div>
@@ -181,7 +181,7 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 							<?php $counter = 1; ?>
 							<?php foreach ( $video_entries as $video ) : ?>
 								<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_VIMEO ] ) ) : ?>
-									<button
+									<div
 										<?php
 											echo self::render_attrs(
 												array( 'lessons-video-player__playlist-item' ),
@@ -196,37 +196,57 @@ class Video_Player extends A_Field_Group implements I_Block, I_Renderable {
 													'data-download-url' => esc_attr( $video['download_url'] ),
 													'data-download-label' => esc_attr( $video['download_label'] ),
 													'data-lesson-id' => esc_attr( uniqid( 'lesson_' ) ),
-													'aria-label' => esc_attr( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] . ', click to select this video' ),
+													'aria-label' => 'playlist item: ' . esc_attr( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ),
 													'role' => 'listitem',
-												),
+												)
 											);
 										?>
 									>
-										<figure class="lessons-video-player__playlist-item-thumbnail">
-											<?php if ( ! empty( $video['thumbnail_id'] ) ) : ?>
-												<?php
-													echo wp_get_attachment_image(
-														$video['thumbnail_id'],
-														'thumbnail',
-														false,
-														array(
-															'class' => 'lessons-video-player__playlist-thumbnail',
-														),
-													);
-												?>
-											<?php else : ?>
-												<img class="lessons-video-player__playlist-thumbnail">
-											<?php endif; ?>
-											<span class="trevor-ti-play lessons-video-player__playlist-thumbnail-icon"></span>
-										</figure>
-										<div class="lessons-video-player__playlist-item-content">
-											<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ) ) : ?>
-												<h4 class="lessons-video-player__playlist-item-title"><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></h4>
-											<?php endif; ?>
-											<aside class="lessons-video-player__playlist-item-duration">8:08</aside>
-										</div>
-										<div class="lessons-video-player__playlist-icon trevor-ti-checkmark"></div>
-									</button>
+										<button
+											<?php
+												echo self::render_attrs(
+													array( 'lessons-video-player__playlist-item-button' ),
+													array(
+														'aria-label' => 'click to select this video',
+													),
+												);
+											?>
+										>
+											<figure class="lessons-video-player__playlist-item-thumbnail">
+												<?php if ( ! empty( $video['thumbnail_id'] ) ) : ?>
+													<?php
+														echo wp_get_attachment_image(
+															$video['thumbnail_id'],
+															'thumbnail',
+															false,
+															array(
+																'class' => 'lessons-video-player__playlist-thumbnail',
+															),
+														);
+													?>
+												<?php else : ?>
+													<img class="lessons-video-player__playlist-thumbnail" aria-hidden="true">
+												<?php endif; ?>
+												<span class="trevor-ti-play lessons-video-player__playlist-thumbnail-icon"></span>
+											</figure>
+											<div class="lessons-video-player__playlist-item-content">
+												<?php if ( ! empty( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ) ) : ?>
+													<h4 class="lessons-video-player__playlist-item-title"><?php echo esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ); ?></h4>
+												<?php endif; ?>
+												<aside
+													<?php
+														echo self::render_attrs(
+															array( 'lessons-video-player__playlist-item-duration' ),
+															array(
+																'title' => 'Duration for ' . esc_html( $video[ static::FIELD_VIDEO_ENTRY_HEADER ] ),
+															)
+														)
+													?>
+												>0:00</aside>
+											</div>
+											<div class="lessons-video-player__playlist-icon trevor-ti-checkmark"></div>
+										</button>
+									</div>
 								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
