@@ -17,6 +17,8 @@ export default class LessonsVideoPlayer extends Component {
 		playlist: Playlist,
 	};
 
+	isInViewport = false;
+
 	// Will be called upon component instantiation
 	async afterInit() {
 		// Initialize playlist
@@ -26,11 +28,13 @@ export default class LessonsVideoPlayer extends Component {
 
 		this.members?.lesson.on('videoPlayed', this.onVideoPlayed.bind(this));
 		this.members?.lesson.on('videoEnded', this.onVideoEnded.bind(this));
+		this.members?.lesson.on('videoLoaded', this.onVideoLoaded.bind(this));
 
 		// Initialize lesson player
 		const firstItem = this.members?.playlist.getItemByIndex(0);
 
 		this.loadLesson(firstItem);
+		this.handleViewportVisibility();
 	}
 
 	onPlaylistItemStateChange(playlistState: PlaylistState) {
@@ -49,6 +53,23 @@ export default class LessonsVideoPlayer extends Component {
 			this.members?.lesson.loadLessonData(updatedData);
 		} else {
 			this.members?.lesson.loadLessonData(lessonData);
+		}
+	}
+
+	handleViewportVisibility() {
+		const intersectionObserver = new window.IntersectionObserver(
+			this.onIntersect.bind(this)
+		);
+		intersectionObserver.observe(this.element);
+	}
+
+	onIntersect([{ isIntersecting }]: IntersectionObserverEntry[]) {
+		this.isInViewport = isIntersecting;
+	}
+
+	onVideoLoaded() {
+		if (this.isInViewport) {
+			this.members?.lesson.children.play.focus();
 		}
 	}
 

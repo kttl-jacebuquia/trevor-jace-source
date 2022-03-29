@@ -24,13 +24,6 @@
 
   &__playlist-item {
     counter-increment: playlist-item;
-    @include tw-respond(
-      flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
-      $md: p-px30,
-      $lg: py-px30 px-px0 gap-x-px10 items-start,
-      $lg2: pl-px20 gap-x-px28,
-    );
-    -webkit-appearance: none;
 
     &:not(:first-child) {
       &::before {
@@ -39,6 +32,16 @@
         content: "";
       }
     }
+  }
+
+  &__playlist-item-button {
+    @include tw-respond(
+      flex justify-between items-center py-px18 px-px10 relative rounded-none w-full,
+      $md: p-px30,
+      $lg: py-px30 px-px0 gap-x-px10 items-start,
+      $lg2: pl-px20 gap-x-px28,
+    );
+    -webkit-appearance: none;
   }
 
   &__playlist-item-thumbnail {
