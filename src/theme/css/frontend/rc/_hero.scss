@@ -117,19 +117,4 @@
       @apply text-px18 leading-px22 font-medium;
     }
   }
-
-  .icon-search-cancel {
-    @include focus-outline-base(light, true);
-    @include focus-outline-inset(5);
-  }
-
-  .input-suggestions {
-    .ui-menu-item {
-      @include focus-outline-base(light, true);
-
-      &.is-active {
-        @include apply-focus-styles;
-      }
-    }
-  }
 }
