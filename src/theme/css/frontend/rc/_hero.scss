@@ -61,7 +61,7 @@
     }
 
     @screen lg2 {
-      width: calc(100% - #{rem-calc(128)})
+      width: calc(100% - #{rem-calc(128)});
     }
 
     @screen xl {
@@ -115,6 +115,21 @@
 
     @screen xl {
       @apply text-px18 leading-px22 font-medium;
+    }
+  }
+
+  .icon-search-cancel {
+    @include focus-outline-base(light, true);
+    @include focus-outline-inset(5);
+  }
+
+  .input-suggestions {
+    .ui-menu-item {
+      @include focus-outline-base(light, true);
+
+      &.is-active {
+        @include apply-focus-styles;
+      }
     }
   }
 }
