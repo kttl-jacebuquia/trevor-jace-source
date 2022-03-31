@@ -35,7 +35,7 @@ const $inputSearchField = $('#rc-search-main');
 			$inputSearchField.attr('size', $inputSearchField.val().length);
 		}
 
-		$inputSearchField
+		const autocomplete = $inputSearchField
 			.autocomplete({
 				source(request, response) {
 					const dataSource = request.term ? tags : terms;
@@ -47,8 +47,34 @@ const $inputSearchField = $('#rc-search-main');
 				},
 				minLength: 0,
 				appendTo: $suggestionsContainer,
-				focus: () => {
+				focus(event, { item }) {
+					let hasMatch = false;
+
 					$('.ui-helper-hidden-accessible').hide();
+					autocomplete.menu.element
+						.children()
+						.toArray()
+						.forEach((itemElement: HTMLElement) => {
+							const $item = $(itemElement);
+							const { uiAutocompleteItem } = $item.data();
+							$item.toggleClass(
+								'is-active',
+								uiAutocompleteItem?.value === item?.value &&
+									!hasMatch
+							);
+
+							// Scroll item into view
+							if (
+								uiAutocompleteItem &&
+								uiAutocompleteItem?.value === item?.value
+							) {
+								hasMatch = true;
+
+								autocomplete.menu.element
+									.parent()
+									.scrollTop(itemElement.offsetTop - 30);
+							}
+						});
 				},
 				open() {
 					/**
@@ -104,9 +130,13 @@ const $inputSearchField = $('#rc-search-main');
 					return false;
 				}
 			})
-			.data('ui-autocomplete')._renderItem = function (ul, item) {
+			.data('ui-autocomplete');
+
+		autocomplete._renderItem = function (ul, item) {
 			return $('<li>')
-				.append(`<a href="?s=${item.value}">${item.label}</a>`)
+				.append(
+					`<a href="?s=${item.value}" data-value="${item.value}">${item.label}</a>`
+				)
 				.appendTo(ul);
 		};
 
