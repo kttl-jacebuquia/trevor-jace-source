@@ -150,4 +150,8 @@
       @apply mt-0;
     }
   }
+
+  .search-page-content {
+    @include focusable-children-outline(light);
+  }
 }

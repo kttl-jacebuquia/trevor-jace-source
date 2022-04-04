@@ -34,7 +34,7 @@ if ( ! empty( $search_results['posts'] ) ) {
 				</form>
 			</div>
 		</div>
-		<div class="bg-white">
+		<div class="search-page-content bg-white">
 			<?php if ( is_search() ) : # Show search results ?>
 				<div class="container mx-auto">
 					<?php echo Page::render_scopes(); ?>
