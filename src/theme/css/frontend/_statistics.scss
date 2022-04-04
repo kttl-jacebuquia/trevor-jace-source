@@ -64,7 +64,7 @@
 
   &__cards-container {
     @apply mt-px60 col-span-full;
-    @include bleed;
+    @include bleed(default);
 
     &:not(.swiper-container-initialized) {
       .swiper-pagination {
@@ -126,6 +126,10 @@
 
   &__card-body {
     @apply block mx-auto mt-px12 text-px20 leading-px26 mt-px12;
+
+    @screen mobile-only {
+      max-width: rem-calc(320);
+    }
 
     @screen md {
       @apply mt-px15 max-w-px248;

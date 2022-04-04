@@ -3,7 +3,7 @@ Allows a container's child to bleed out
 on the sides, touch the edges of the viewpor
 */
 $bleed-margins: (
-  default: calc((100vw - theme('container.screens.sm') + (theme('container.padding.DEFAULT') * 2)) / -2 ),
+  default: calc((100vw - theme('container.screens.sm') + (theme('container.padding.sm') * 2)) / -2 ),
   md: calc((100vw - theme('container.screens.md') + (theme('container.padding.md') * 2)) / -2 ),
   lg: calc((100vw - theme('container.screens.lg') + (theme('container.padding.lg') * 2)) / -2 ),
   lg2: calc((100vw - theme('container.screens.lg2') + (theme('container.padding.lg2') * 2)) / -2 ),
