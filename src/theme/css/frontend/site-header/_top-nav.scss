@@ -284,4 +284,10 @@
       }
     }
   }
+
+  body.is-site-search & {
+    @screen lg {
+      @include focusable-children-outline(light);
+    }
+  }
 }
