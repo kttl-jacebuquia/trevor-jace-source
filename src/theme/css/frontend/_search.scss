@@ -92,7 +92,7 @@
     }
 
     .tags-box {
-      @apply tracking-px6 block mt-px28 h-auto;
+      @apply tracking-px6 block mt-px28 h-auto overflow-visible;
 
       @screen md {
         @apply mt-px20;
