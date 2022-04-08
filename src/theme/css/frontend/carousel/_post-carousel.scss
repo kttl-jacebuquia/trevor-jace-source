@@ -186,8 +186,13 @@
       }
     }
 
-    &:focus .swiper-button-wrapper {
-      outline: -webkit-focus-ring-color auto 1px;
+    .swiper-button-wrapper {
+      @include focus-outline-base(light, true);
+    }
+
+    [data-whatinput="keyboard"] &:focus .swiper-button-wrapper {
+      @include apply-focus-styles;
+      outline-offset: rem-calc(-5);
     }
 
     &-prev {
