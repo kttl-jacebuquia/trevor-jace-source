@@ -5,6 +5,7 @@ use TrevorWP\Util\Tools;
 use \TrevorWP\Meta;
 use \TrevorWP\Theme\Single_Page;
 use TrevorWP\Theme\ACF\Field_Group;
+use TrevorWP\Theme\ACF\Field_Group\DOM_Attr;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\ACF\Field_Group\Financial_Report;
 use TrevorWP\Theme\ACF\Field_Group\Product;
@@ -216,14 +217,16 @@ class Tile {
 			$options
 		);
 
-		# Aria-label. Change according to post type
-		$link_aria_label = "click to read more about {$data['title']}";
-
 		# class
 		$cls = array( 'tile', 'relative' );
 		if ( ! empty( $options['class'] ) ) {
 			$cls = array_merge( $cls, $options['class'] );
 		}
+
+		# CTA Attributes
+		$cta_attrs = array(
+			'aria-label' => "click to read more about {$data['title']}",
+		);
 
 		if ( $options['hidden'] ) {
 			$cls[] = 'hidden';
@@ -247,13 +250,14 @@ class Tile {
 		// Aria-label according to post_type
 		switch ( $data['post_type'] ) {
 			case 'trevor_prtnr_prod':
-				$link_aria_label = "click to check out {$data['title']}";
+				$cta_attrs['aria-label'] = "click to check out {$data['title']}";
+				$cta_attrs['target']     = '_blank';
 				break;
 			case 'trevor_gi_bill':
-				$link_aria_label = "click here to read the bill {$data['title']}";
+				$cta_attrs['aria-label'] = "click here to read the bill {$data['title']}";
 				break;
 			case 'trevor_gi_letter':
-				$link_aria_label = "click here to read the letter {$data['title']}";
+				$cta_attrs['aria-label'] = "click here to read the letter {$data['title']}";
 				break;
 		}
 
@@ -284,7 +288,7 @@ class Tile {
 						<a
 							href="<?php echo $data['cta_url']; ?>"
 							class="<?php echo $cta_cls; ?>"
-							aria-label="<?php echo $link_aria_label; ?>">
+							<?php echo DOM_Attr::render_attrs( array(), $cta_attrs ); ?>>
 							<span><?php echo $data['cta_txt']; ?></span>
 						</a>
 					</div>
