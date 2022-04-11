@@ -670,9 +670,9 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$campaign_id   = $val->get( static::FIELD_CAMPAIGN_ID );
 
 		if ( static::SOURCE_TOP_INDIVIDUALS === $source && ! empty( $campaign_id ) ) {
-			$posts = Content::get_fundraisers( $campaign_id, (int) $display_limit, true );
+			$posts = Content::get_fundraisers( $campaign_id, (int) $display_limit, true ) ?? array();
 		} elseif ( static::SOURCE_TOP_TEAMS === $source && ! empty( $campaign_id ) ) {
-			$posts = Content::get_fundraising_teams( $campaign_id, (int) $display_limit, true );
+			$posts = Content::get_fundraising_teams( $campaign_id, (int) $display_limit, true ) ?? array();
 		}
 
 		return $posts;
