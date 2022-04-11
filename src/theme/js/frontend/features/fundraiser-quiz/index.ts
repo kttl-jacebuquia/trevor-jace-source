@@ -217,7 +217,7 @@ export default class FundraiserQuiz {
 		const submitButton = choicesForm?.querySelector('[type="submit"]');
 
 		submitButton?.removeAttribute('disabled');
-		submitButton?.removeAttribute('aria-hidden');
+		submitButton?.removeAttribute('aria-disabled');
 	}
 
 	onChoiceFormSubmit(event: Event) {
@@ -245,7 +245,7 @@ export default class FundraiserQuiz {
 
 		// Enable submit
 		choicesSubmitBtn?.removeAttribute('disabled');
-		choicesSubmitBtn?.removeAttribute('aria-hidden');
+		choicesSubmitBtn?.removeAttribute('aria-disabled');
 	}
 
 	displayNextPage(btn) {
@@ -311,7 +311,7 @@ export default class FundraiserQuiz {
 					break;
 				case 'submit':
 					input.setAttribute('disabled', 'true');
-					input.setAttribute('aria-hidden', 'true');
+					input.setAttribute('aria-disabled', 'true');
 					break;
 			}
 		});
