@@ -622,7 +622,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 		ob_start();
 		?>
 			<div class="fundraiser-quiz__next-question-wrap">
-				<input class="fundraiser-quiz__next-question" aria-hidden="true" aria-label="click to go to the next question" type="submit" disabled value="Next Question" />
+				<input class="fundraiser-quiz__next-question" aria-disabled="true" aria-label="click to go to the next question" type="submit" disabled value="Next Question" />
 			</div>
 		<?php
 		return ob_get_clean();
