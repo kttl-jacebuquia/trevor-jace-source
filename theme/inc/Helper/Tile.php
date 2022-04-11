@@ -250,6 +250,7 @@ class Tile {
 		// Aria-label according to post_type
 		switch ( $data['post_type'] ) {
 			case 'trevor_prtnr_prod':
+			case 'trevor_prod_prtnr':
 				$cta_attrs['aria-label'] = "click to check out {$data['title']}";
 				$cta_attrs['target']     = '_blank';
 				break;
