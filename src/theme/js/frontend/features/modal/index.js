@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import * as focusTrap from 'focus-trap';
+import tabFocus from 'ally.js/maintain/tab-focus';
 import { toggleBodyFix } from '../global-ui';
 
 const $document = $(document);
@@ -31,9 +31,6 @@ export class Modal {
 			.find(this.constructor.closeSelector)
 			.on('click', this.close.bind(this));
 
-		// Create focus trap
-		this[FOCUS_TRAP_KEY] = focusTrap.createFocusTrap(this.$content.get(0));
-
 		this.$content.on('transitionend', (e) => this.onTransitionEnd(e));
 
 		this.constructor.renderedModalContents.push($content[0]);
@@ -52,7 +49,7 @@ export class Modal {
 	open = async (e) => {
 		e?.preventDefault();
 		e?.stopPropagation();
-		this.lastActiveElement = document.activeElement || document.body;
+		this.lastActiveElement = e.currentTarget || document.activeElement || document.body;
 
 		$document.on('keydown', this._handleKeyDown);
 		this.$overlay.on('click', this.close);
@@ -87,7 +84,6 @@ export class Modal {
 		document.body.classList.remove(this.constructor.bodyActiveClass);
 
 		this.toggleBodyFix(false);
-		this[FOCUS_TRAP_KEY].deactivate();
 		this.toggleBackgroundElements(true);
 
 		$('#blur3px').parent().remove();
@@ -102,19 +98,33 @@ export class Modal {
 
 	onAfterOpen() {
 		const focusableElement = this.$content.find('.modal-container')?.get(0);
-		focusableElement?.focus();
 		this.toggleBackgroundElements(false);
-		this[FOCUS_TRAP_KEY].activate();
 
+		// Ensure existing handle is disengaged first
+		this[FOCUS_TRAP_KEY]?.disengage();
+
+		// Initialize a new one
+		this[FOCUS_TRAP_KEY] = tabFocus({
+			context: focusableElement.parentElement,
+		});
+
+		// Focus on modal content
+		setTimeout(() => {
+			focusableElement?.focus();
+		}, 1000);
 	}
 
 	onAfterClose() {
 		const focusableElement = this.lastActiveElement || document.body;
-		focusableElement?.focus();
 
 		this.$eventEmitter.trigger('modal-close');
 		this.$content.trigger('modal-close');
 		this.$content.prop('hidden', true);
+
+		// Disengage focus trap
+		this[FOCUS_TRAP_KEY]?.disengage();
+
+		focusableElement?.focus();
 	}
 
 	onTransitionEnd(e) {

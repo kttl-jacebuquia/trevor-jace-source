@@ -1,9 +1,3 @@
-/**
- * NOTE
- *
- * Once fully implemented, consider dropping out ../tag-box-ellipsis
- */
-
 import Component from '../../Component';
 
 export default class TagsBox extends Component {
