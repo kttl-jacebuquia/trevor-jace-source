@@ -1,6 +1,6 @@
 import DrawBlob, { generatePoints } from 'blob-animated';
 import $ from 'jquery';
-import * as focusTrap from 'focus-trap';
+import tabFocus from 'ally.js/maintain/tab-focus';
 
 import { toggleBodyFix, onEscapePress } from './global-ui';
 
@@ -32,11 +32,10 @@ class BreathingExercise {
 
 		if ($toggles.length) {
 			this.initializeOverlay();
-			this.initializeFocusTrap();
 
 			$toggles.on('click', (e) => {
 				e.preventDefault();
-				this.showOverlay();
+				this.showOverlay(e.currentTarget);
 			});
 		}
 	}
@@ -88,16 +87,21 @@ class BreathingExercise {
 	}
 
 	static initializeFocusTrap() {
-		// Create focus trap
-		this.focustTrap = focusTrap.createFocusTrap(this.overlay, {
-			initialFocus: this.overlay,
+		this.focusTrap?.disengage();
+
+		this.focusTrap = tabFocus({
+			context: this.overlay
 		});
+
+		this.overlay.focus();
 	}
 
-	static showOverlay() {
+	static showOverlay(initiator) {
 		toggleBodyFix(true);
 		this.$overlay.addClass('show');
 		this.startCountdown();
+		this.initializeFocusTrap();
+		this.lastActiveElement = initiator || document.body;
 	}
 
 	static hideOverlay() {
@@ -106,7 +110,7 @@ class BreathingExercise {
 
 		toggleBodyFix(false);
 		this.$overlay.removeClass('show');
-		this.focustTrap?.deactivate();
+		this.focustTrap?.disengage();
 	}
 
 	static onOverlayTransitionEnd(e) {
@@ -127,6 +131,7 @@ class BreathingExercise {
 		$(this.coundown).hide();
 		$(this.breathing).hide();
 		$(this.breathingEnd).hide();
+		this.lastActiveElement?.focus();
 	}
 
 	// @returns Promise
