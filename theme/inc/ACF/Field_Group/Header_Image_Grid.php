@@ -5,6 +5,9 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	const FIELD_DESCRIPTION   = 'description';
 	const FIELD_IMAGE_ENTRIES = 'image_entries';
 	const FIELD_ENTRY_IMAGE   = 'entry_image';
+	const FIELD_LINKS         = 'link_entries';
+	const FIELD_ENTRY_LABEL   = 'entry_label';
+	const FIELD_ENTRY_LINK    = 'entry_link';
 
 	/**
 	 * @inheritDoc
@@ -14,6 +17,9 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$description   = static::gen_field_key( static::FIELD_DESCRIPTION );
 		$image_entries = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
 		$entry_image   = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
+		$links         = static::gen_field_key( static::FIELD_LINKS );
+		$entry_label   = static::gen_field_key( static::FIELD_ENTRY_LABEL );
+		$entry_link    = static::gen_field_key( static::FIELD_ENTRY_LINK );
 
 		return array(
 			'title'  => 'Header + Image Grid',
@@ -49,6 +55,32 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						),
 					),
 				),
+				static::FIELD_LINKS         => array(
+					'key'          => $links,
+					'label'        => 'Links',
+					'name'         => static::FIELD_LINKS,
+					'type'         => 'repeater',
+					'collapsed'    => $entry_label,
+					'layout'       => 'row',
+					'button_label' => 'Add Link',
+					'sub_fields'   => array(
+						static::FIELD_ENTRY_LABEL => array(
+							'key'      => $entry_label,
+							'name'     => static::FIELD_ENTRY_LABEL,
+							'label'    => 'Label',
+							'type'     => 'text',
+							'required' => 1,
+						),
+						static::FIELD_ENTRY_LINK  => array(
+							'key'          => $entry_link,
+							'label'        => 'URL',
+							'name'         => static::FIELD_ENTRY_LINK,
+							'type'         => 'url',
+							'instructions' => '',
+							'required'     => 1,
+						),
+					),
+				),
 			),
 		);
 	}
@@ -74,11 +106,18 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$header        = static::get_val( static::FIELD_HEADER );
 		$description   = static::get_val( static::FIELD_DESCRIPTION );
 		$image_entries = static::get_val( static::FIELD_IMAGE_ENTRIES );
+		$link_entries  = static::get_val( static::FIELD_LINKS );
+
+		$class_names = array( 'header-image-grid' );
+
+		if ( ! empty( $link_entries ) ) {
+			$class_names[] = 'header-image-grid--with-link';
+		}
 
 		ob_start();
 		// Next Step - FE
 		?>
-		<div class="header-image-grid">
+		<div <?php echo self::render_attrs( $class_names ); ?>>
 			<div class="header-image-grid__container">
 				<?php if ( ! empty( $header ) ) : ?>
 					<h2 class="header-image-grid__heading"><?php echo esc_html( $header ); ?></h2>
@@ -98,6 +137,23 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 											alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>"
 										/>
 									</div>
+								</div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+				<?php if ( ! empty( $link_entries ) ) : ?>
+					<div class="header-image-grid__links" role="list">
+						<?php foreach ( $link_entries as $entry ) : ?>
+							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_LINK ] ) ) : ?>
+								<div class="header-image-grid__link-item" role="listitem">
+									<a
+										href="<?php echo $entry[ static::FIELD_ENTRY_LINK ]; ?>"
+										class="header-image-grid__link"
+										target="_blank"
+									>
+										<?php echo $entry[ static::FIELD_ENTRY_LABEL ]; ?>
+									</a>
 								</div>
 							<?php endif; ?>
 						<?php endforeach; ?>
