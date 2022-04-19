@@ -455,6 +455,9 @@ const config = {
 				'gradient-article-recirculation': `url('${theme(
 					'paths.themeGradients'
 				)}/article-recirculation.jpg')`,
+				'gradient-advocate': `url('${theme(
+					'paths.themeGradients'
+				)}/advocate.svg')`,
 			}),
 			opacity: {
 				16: '0.16',

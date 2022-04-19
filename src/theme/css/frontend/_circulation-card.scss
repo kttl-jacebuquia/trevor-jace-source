@@ -78,11 +78,44 @@
 
     .circulation-card-title {
       @apply mx-auto;
-      width: percentage( 167 / 270 );
+      width: percentage(167 / 270);
     }
 
     .circulation-card-cta {
       @apply text-white bg-orange;
+    }
+  }
+
+  // Type: Advocate
+  &.type-advocate {
+    @apply px-px36;
+
+    @screen md {
+      @apply px-px86;
+    }
+
+    @screen lg {
+      @apply px-px36;
+    }
+
+    @screen lg2 {
+      @apply px-px60;
+    }
+
+    @screen xl {
+      @apply px-px38;
+    }
+
+    .circulation-card-title {
+      @screen lg2 {
+        @apply text-px52 leading-px62;
+      }
+
+      tilt {
+        @screen lg2 {
+          @apply text-px70 leading-px80;
+        }
+      }
     }
   }
 

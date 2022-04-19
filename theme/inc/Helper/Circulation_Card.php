@@ -11,6 +11,7 @@ class Circulation_Card {
 	const TYPE_DONATION    = 'donation';
 	const TYPE_FUNDRAISER  = 'fundraiser';
 	const TYPE_COUNSELOR   = 'counselor';
+	const TYPE_ADVOCATE    = 'advocate';
 
 	/* Settings */
 	const SETTINGS = array(
@@ -20,6 +21,7 @@ class Circulation_Card {
 		self::TYPE_DONATION    => array( 'name' => 'Donation' ),
 		self::TYPE_FUNDRAISER  => array( 'name' => 'Fundraiser' ),
 		self::TYPE_COUNSELOR   => array( 'name' => 'Counselor' ),
+		self::TYPE_ADVOCATE    => array( 'name' => 'Advocate' ),
 	);
 
 	const DEFAULTS = array(
@@ -268,6 +270,16 @@ class Circulation_Card {
 	static public function render_counselor( array $args ): string {
 		$args['cls']          = array_merge( $args['cls'], array( 'bg-teal-dark' ) );
 		$args['bg-inner-cls'] = 'bg-gradient-darkgreen';
+
+		return ( new self( $args ) )->render();
+	}
+
+	/**
+	 * @return string
+	 */
+	static public function render_advocate( array $args ): string {
+		$args['cls']          = array_merge( $args['cls'], array( 'bg-teal-dark' ) );
+		$args['bg-inner-cls'] = 'bg-gradient-advocate bg-cover';
 
 		return ( new self( $args ) )->render();
 	}
