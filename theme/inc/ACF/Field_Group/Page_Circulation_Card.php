@@ -12,6 +12,7 @@ class Page_Circulation_Card extends A_Basic_Section {
 	const TYPE_DONATION    = 'donation';
 	const TYPE_FUNDRAISER  = 'fundraiser';
 	const TYPE_COUNSELOR   = 'counselor';
+	const TYPE_ADVOCATE    = 'advocate';
 
 	/** @inheritdoc */
 	public static function _get_fields(): array {
@@ -35,6 +36,7 @@ class Page_Circulation_Card extends A_Basic_Section {
 						static::TYPE_DONATION    => 'Donation',
 						static::TYPE_FUNDRAISER  => 'Fundraiser',
 						static::TYPE_COUNSELOR   => 'Counselor',
+						static::TYPE_ADVOCATE    => 'Advocate',
 					),
 					'ui'            => 1,
 				),
