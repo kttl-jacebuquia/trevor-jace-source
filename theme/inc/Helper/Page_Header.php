@@ -200,7 +200,7 @@ class Page_Header {
 	}
 
 	/**
-	 * Image BG Page header.
+	 * Full Bleed Image/Video + Text Page header.
 	 *
 	 * @param array $options
 	 *
@@ -215,6 +215,10 @@ class Page_Header {
 
 		if ( ! empty( $options['content_alignment'] ) ) {
 			$attrs['class'][] = 'content-' . $options['content_alignment'];
+
+			if ( 'center' === $options['content_alignment'] ) {
+				$attrs['class'][] = 'content-' . $options['content_size'];
+			}
 		}
 
 		$attrs['class'] = implode( ' ', $attrs['class'] );

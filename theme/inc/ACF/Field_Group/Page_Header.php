@@ -20,6 +20,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_THRESHOLD_MESSAGE = 'threshold_message';
 	const FIELD_BOTTOM_TEXT       = 'bottom_text';
 	const FIELD_CONTENT_ALIGNMENT = 'content_alignment';
+	const FIELD_CONTENT_SIZE      = 'content_size';
 	const FIELD_CALL_NUMBER       = 'call_number';
 	const FIELD_SMS_NUMBER        = 'sms_number';
 
@@ -40,6 +41,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$threshold_message = static::gen_field_key( static::FIELD_THRESHOLD_MESSAGE );
 		$bottom_text       = static::gen_field_key( static::FIELD_BOTTOM_TEXT );
 		$content_alignment = static::gen_field_key( static::FIELD_CONTENT_ALIGNMENT );
+		$content_size      = static::gen_field_key( static::FIELD_CONTENT_SIZE );
 		$call_number       = static::gen_field_key( static::FIELD_CALL_NUMBER );
 		$sms_number        = static::gen_field_key( static::FIELD_SMS_NUMBER );
 
@@ -100,6 +102,28 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'layout'            => 'horizontal',
 					'return_format'     => 'value',
 					'save_other_choice' => 0,
+				),
+				static::FIELD_CONTENT_SIZE => array(
+					'key'               => $content_size,
+					'name'              => static::FIELD_CONTENT_SIZE,
+					'label'             => 'Text Size',
+					'type'              => 'button_group',
+					'choices'           => array(
+						'normal' => 'Normal',
+						'xl'     => 'XL',
+					),
+					'allow_null'        => 0,
+					'other_choice'      => 0,
+					'default_value'     => 'normal',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $content_alignment,
+								'operator' => '==',
+								'value'    => 'center',
+							),
+						),
+					),
 				),
 			),
 			static::_gen_tab_field(
@@ -691,6 +715,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 			$args['media_type']        = $media_type;
 			$args['content_alignment'] = $val->get( static::FIELD_CONTENT_ALIGNMENT );
+			$args['content_size']      = $val->get( static::FIELD_CONTENT_SIZE );
 
 			if ( 'video' === $media_type ) {
 				$args['video'] = $val->get( static::FIELD_VIDEO );
