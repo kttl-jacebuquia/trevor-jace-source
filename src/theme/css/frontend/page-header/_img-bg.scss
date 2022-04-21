@@ -38,6 +38,7 @@
   &.content-xl {
     @screen md {
       @apply pt-px160;
+      height: rem-calc(478);
     }
 
     @screen lg {
@@ -98,8 +99,32 @@
       }
     }
 
+    .button-group {
+      @apply mt-px20;
+
+      @screen lg {
+        @apply mt-px30;
+      }
+
+      @screen lg2 {
+        @apply mt-px40;
+      }
+    }
+
     .page-btn {
       @apply text-px18 leading-px24;
+
+      @screen lg {
+        @apply h-px64;
+      }
+
+      @screen lg2 {
+        @apply h-px64;
+      }
+
+      @screen xl {
+        @apply h-px66;
+      }
     }
   }
 
@@ -109,7 +134,7 @@
     // Media overfill
     &::after {
       @apply block absolute top-0 left-0 w-full h-full bg-black opacity-22;
-      content: '';
+      content: "";
     }
   }
 
@@ -236,13 +261,13 @@
 @screen lg {
   .type-img-bg {
     .page-header-content {
-        h1 {
-          @apply text-px40 leading-px48 tracking-px_05;
-        }
+      h1 {
+        @apply text-px40 leading-px48 tracking-px_05;
+      }
 
-        tilt {
-          @apply text-px50 leading-px60 tracking-em005;
-        }
+      tilt {
+        @apply text-px50 leading-px60 tracking-em005;
+      }
     }
 
     // Left Alignment

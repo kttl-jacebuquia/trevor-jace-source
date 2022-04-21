@@ -11,6 +11,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	const FIELD_TITLE_TOP         = 'title_top';
 	const FIELD_CAROUSEL          = 'carousel';
 	const FIELD_IMAGE             = 'image';
+	const FIELD_IMAGE_MOBILE      = 'image_mobile';
 	const FIELD_BG_CLR            = 'bg_clr';
 	const FIELD_TEXT_CLR          = 'text_clr';
 	const FIELD_IMAGE_ENTRIES     = 'image_entries';
@@ -32,6 +33,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		$title_top         = static::gen_field_key( static::FIELD_TITLE_TOP );
 		$carousel          = static::gen_field_key( static::FIELD_CAROUSEL );
 		$image             = static::gen_field_key( static::FIELD_IMAGE );
+		$image_mobile      = static::gen_field_key( static::FIELD_IMAGE_MOBILE );
 		$text_clr          = static::gen_field_key( static::FIELD_TEXT_CLR );
 		$bg_clr            = static::gen_field_key( static::FIELD_BG_CLR );
 		$image_entries     = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
@@ -314,6 +316,26 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 								'value'    => 'split_img',
 							),
 						),
+						array(
+							array(
+								'field'    => $type,
+								'operator' => '==',
+								'value'    => 'img_bg',
+							),
+							array(
+								'field'    => $media_type,
+								'operator' => '==',
+								'value'    => 'image',
+							),
+						),
+					),
+				),
+				static::FIELD_IMAGE_MOBILE  => array(
+					'key'               => $image_mobile,
+					'name'              => static::FIELD_IMAGE_MOBILE,
+					'label'             => 'Image (Mobile)',
+					'type'              => 'image',
+					'conditional_logic' => array(
 						array(
 							array(
 								'field'    => $type,
@@ -716,6 +738,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 			$args['media_type']        = $media_type;
 			$args['content_alignment'] = $val->get( static::FIELD_CONTENT_ALIGNMENT );
 			$args['content_size']      = $val->get( static::FIELD_CONTENT_SIZE );
+			$args['image_mobile']      = $val->get( static::FIELD_IMAGE_MOBILE );
 
 			if ( 'video' === $media_type ) {
 				$args['video'] = $val->get( static::FIELD_VIDEO );
