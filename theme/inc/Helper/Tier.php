@@ -113,7 +113,7 @@ class Tier {
 			return ob_get_clean();
 	}
 
-	protected static function render_partner_logo ( $post ): string {
+	protected static function render_partner_logo( $post ): string {
 		$attrs         = array( 'class' => 'partner-logo' );
 		$post_image_id = get_post_thumbnail_id( $post );
 		list(
@@ -121,7 +121,7 @@ class Tier {
 			$width,
 			$height
 		)              = wp_get_attachment_image_src( $post_image_id, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
-		$is_svg        = preg_match( "/\.svg$/i", $image_src );
+		$is_svg        = preg_match( '/\.svg$/i', $image_src );
 
 		// Add aspect ratio class according to dimensions
 		if ( $is_svg ) {
@@ -135,13 +135,13 @@ class Tier {
 	}
 
 	// Should match JS file partner-logo.ts (getAspectRatioClass function)
-	protected static function get_aspect_ratio_class ( int $width, $height ): string {
+	protected static function get_aspect_ratio_class( int $width, $height ): string {
 		$width_height_ratio = $width / $height;
 
-		switch (true) {
-			case ($width_height_ratio >= .75 && $width_height_ratio <= 1.34):
+		switch ( true ) {
+			case ( $width_height_ratio >= .75 && $width_height_ratio <= 1.34 ):
 				return 'square';
-			case ($width_height_ratio < .75):
+			case ( $width_height_ratio < .75 ):
 				return 'portrait';
 			case $width_height_ratio > 1.34 && $width_height_ratio < 1.8:
 				return 'landscape';
@@ -150,7 +150,7 @@ class Tier {
 			case $width_height_ratio >= 5:
 				return 'wide';
 			default:
-				return "";
+				return '';
 		}
 	}
 }

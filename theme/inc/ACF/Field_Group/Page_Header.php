@@ -103,7 +103,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 					'return_format'     => 'value',
 					'save_other_choice' => 0,
 				),
-				static::FIELD_CONTENT_SIZE => array(
+				static::FIELD_CONTENT_SIZE      => array(
 					'key'               => $content_size,
 					'name'              => static::FIELD_CONTENT_SIZE,
 					'label'             => 'Text Size',

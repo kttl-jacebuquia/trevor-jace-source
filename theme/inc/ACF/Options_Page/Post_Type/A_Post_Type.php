@@ -13,6 +13,7 @@ use TrevorWP\Theme\ACF\Options_Page\A_Options_Page;
 abstract class A_Post_Type extends A_Options_Page {
 	const OTHER_FIELDS = array(
 		'sort',
+		'exclude_cat',
 		'pagination_type',
 		'text_contents',
 		'cta',
@@ -30,6 +31,7 @@ abstract class A_Post_Type extends A_Options_Page {
 	const FIELD_PAGE_SLUG               = 'page_slug';
 	const FIELD_HEADER                  = 'header';
 	const FIELD_SORTER_ACTIVE           = 'sorter_active';
+	const FIELD_ARCHIVE_EXCLUDE_CAT     = 'arc_exclude_cat';
 	const FIELD_ARCHIVE_PP              = 'arc_pp';
 	const FIELD_ARCHIVE_PAGINATION_TYPE = 'arc_pg_type';
 	const FIELD_ARCHIVE_CONTENT_TOP     = 'arc_content_top';
@@ -91,6 +93,7 @@ abstract class A_Post_Type extends A_Options_Page {
 
 	public static function _get_other_fields() {
 		$sorter_active       = static::gen_field_key( static::FIELD_SORTER_ACTIVE );
+		$exclude_cat         = static::gen_field_key( static::FIELD_ARCHIVE_EXCLUDE_CAT );
 		$archive_pp          = static::gen_field_key( static::FIELD_ARCHIVE_PP );
 		$archive_pt          = static::gen_field_key( static::FIELD_ARCHIVE_PAGINATION_TYPE );
 		$archive_content_top = static::gen_field_key( static::FIELD_ARCHIVE_CONTENT_TOP );
@@ -114,6 +117,22 @@ abstract class A_Post_Type extends A_Options_Page {
 							'label'         => 'Sorter Active',
 							'default_value' => true,
 							'ui'            => true,
+						);
+						break;
+
+					// Add exclude category
+					case 'exclude_cat':
+						$fields[ static::FIELD_ARCHIVE_EXCLUDE_CAT ] = array(
+							'key'           => $exclude_cat,
+							'name'          => $exclude_cat,
+							'label'         => 'Exclude Categories',
+							'type'          => 'taxonomy',
+							'taxonomy'      => 'category',
+							'field_type'    => 'multi_select',
+							'add_term'      => 0,
+							'return_format' => 'id',
+							'multiple'      => 0,
+							'allow_null'    => 1,
 						);
 						break;
 
