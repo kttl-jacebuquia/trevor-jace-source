@@ -14,6 +14,11 @@ class Site_Banners extends A_Options_Page {
 	const FIELD_CUSTOM_ENTRY_MESSAGE    = 'custom_entry_message';
 	const FIELD_CUSTOM_ENTRY_START_DATE = 'custom_entry_start_date';
 	const FIELD_CUSTOM_ENTRY_END_DATE   = 'custom_entry_end_date';
+	const FIELD_PRIDE_PROMO_TITLE       = 'pride_promo_title';
+	const FIELD_PRIDE_PROMO_LINK        = 'pride_promo_link';
+	const FIELD_PRIDE_PROMO_LINK_LABEL  = 'pride_promo_link_title';
+	const FIELD_PRIDE_PROMO_LINK_URL    = 'pride_promo_link_url';
+	const FIELD_PRIDE_PROMO_EXLUDE_POST = 'exclude_in_post';
 
 	/** @inheritDoc */
 	protected static function prepare_page_register_args(): array {
@@ -38,6 +43,12 @@ class Site_Banners extends A_Options_Page {
 		$custom_entry_end_date   = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_END_DATE );
 		$custom_entry_title      = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_TITLE );
 		$custom_entry_message    = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_MESSAGE );
+		$pride_promo_title       = static::gen_field_key( static::FIELD_PRIDE_PROMO_TITLE );
+		$pride_promo_link        = static::gen_field_key( static::FIELD_PRIDE_PROMO_LINK );
+		$pride_promo_link_label  = static::gen_field_key( static::FIELD_PRIDE_PROMO_LINK_LABEL );
+		$pride_promo_link_url    = static::gen_field_key( static::FIELD_PRIDE_PROMO_LINK_URL );
+		$pride_promo_exclude     = static::gen_field_key( static::FIELD_PRIDE_PROMO_EXLUDE_POST );
+
 		$current_long_wait_value = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT ) ? 'TRUE' : 'FALSE';
 
 		return array_merge(
@@ -162,6 +173,58 @@ class Site_Banners extends A_Options_Page {
 							),
 						),
 					),
+				),
+			),
+			static::_gen_tab_field( 'Pride Promo' ),
+			array(
+				static::FIELD_PRIDE_PROMO_TITLE => array(
+					'key'          => $pride_promo_title,
+					'name'         => static::FIELD_PRIDE_PROMO_TITLE,
+					'label'        => 'Title',
+					'type'         => 'text',
+					'instructions' => 'HTML tags are accepted. Use ' . esc_html( '<tilt></tilt>' ) . ' for cursive text style',
+				),
+				static::FIELD_PRIDE_PROMO_LINK  => array(
+					'key'        => $pride_promo_link,
+					'name'       => static::FIELD_PRIDE_PROMO_LINK,
+					'label'      => 'Link',
+					'type'       => 'group',
+					'layout'     => 'block',
+					'sub_fields' => array(
+						static::FIELD_PRIDE_PROMO_LINK_LABEL => array(
+							'key'     => $pride_promo_link_label,
+							'name'    => static::FIELD_PRIDE_PROMO_LINK_LABEL,
+							'label'   => 'Link Text',
+							'type'    => 'text',
+							'wrapper' => array(
+								'width' => '50%',
+							),
+						),
+						static::FIELD_PRIDE_PROMO_LINK_URL => array(
+							'key'     => $pride_promo_link_url,
+							'name'    => static::FIELD_PRIDE_PROMO_LINK_URL,
+							'label'   => 'Link URL',
+							'type'    => 'page_link',
+							'wrapper' => array(
+								'width' => '50%',
+							),
+						),
+					),
+				),
+				static::FIELD_PRIDE_PROMO_EXLUDE_POST => array(
+					'key'           => $pride_promo_exclude,
+					'name'          => static::FIELD_PRIDE_PROMO_EXLUDE_POST,
+					'label'         => 'Exclude in Post',
+					'type'          => 'post_object',
+					'instructions'  => 'Post/Page where this banner should not appear',
+					'post_type'     => array(
+						0 => 'page',
+					),
+					'taxonomy'      => '',
+					'allow_null'    => 0,
+					'multiple'      => 0,
+					'return_format' => 'id',
+					'ui'            => 1,
 				),
 			)
 		);

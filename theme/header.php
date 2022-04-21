@@ -27,6 +27,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="post-id" content="<?php echo get_the_ID(); ?>">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 	<?php echo Options_Page\External_Scripts::get_external_script( 'HEAD_BOTTOM' ); ?>

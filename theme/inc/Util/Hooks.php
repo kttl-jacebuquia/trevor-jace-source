@@ -814,6 +814,19 @@ class Hooks {
 			}
 		}
 
+		# Pride Promo Banner
+		$pride_promo_title = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_TITLE );
+
+		if ( ! empty( $pride_promo_title ) ) {
+			$banners[] = array(
+				'title'      => $pride_promo_title,
+				'link_text'  => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK )[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ],
+				'link_url'   => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK )[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ],
+				'type'       => 'pride_promo',
+				'exclude_in' => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_EXLUDE_POST ),
+			);
+		}
+
 		# Add their signatures
 		foreach ( $banners as &$banner ) {
 			$banner['id'] = substr( \TrevorWP\Util\Tools::get_obj_signature( $banner ), 3, 6 );

@@ -78,6 +78,98 @@
 		@apply mb-px15 md:mb-0 md:mr-px20;
 	}
 
+  // Pride Promo banner
+  &__pride_promo {
+    @apply bg-gradient-pride-promo bg-white;
+    background-size: 100% 100%;
+
+    .site-banner__container {
+      @apply py-px32 container;
+
+      @screen mobile {
+        @apply max-w-none;
+      }
+
+      @screen lg {
+        max-width: theme('container.screens.lg');
+      }
+
+      @screen lg2 {
+        @apply py-px28 px-px40;
+        width: calc(100% - 80px);
+        max-width: theme('container.screens.lg2');
+      }
+
+      @screen xl {
+        max-width: theme('container.screens.xl');
+      }
+    }
+
+    .site-banner__warning {
+      @apply hidden;
+    }
+
+    .site-banner__text {
+      @apply flex flex-wrap items-center;
+    }
+
+    .site-banner__title {
+      @apply font-semibold text-px20 leading-px26 tracking-em001 w-full;
+
+      @screen md {
+        @apply text-px20 leading-px26 tracking-em001 w-auto;
+      }
+
+      @screen lg {
+        @apply text-px30 leading-px36 tracking-em005;
+      }
+
+      @screen lg2 {
+        @apply text-px30 leading-px36 tracking-em005;
+      }
+
+      tilt {
+        @apply relative text-px32 leading-px38 mr-px5 transform rotate-0;
+
+        @screen md {
+          @apply text-px32 leading-px38 tracking-em001;
+        }
+
+        @screen lg {
+          @apply text-px44 leading-px54 tracking-em005;
+        }
+
+        @screen lg2 {
+          @apply text-px44 leading-px54 tracking-em005;
+        }
+      }
+    }
+
+    .site-banner__pride-promo-link {
+      @apply mt-px15 text-px16 leading-px24 font-semibold pb-px2 border-b-px2 border-solid border-current;
+
+      @screen md {
+        @apply ml-px24 mt-0 text-px16 leading-px24;
+      }
+
+      @screen lg {
+        @apply ml-px30 text-px20 leading-px24 tracking-em005;
+      }
+    }
+
+    .site-banner__close-btn {
+      @apply w-px35 h-px35 top-px16 right-px16;
+
+      @screen lg {
+        @apply top-px20 right-px20;
+      }
+
+      @screen xl {
+        @apply right-0;
+      }
+    }
+  }
+
 	:is(&__title, &__description) {
 		@apply font-normal text-px14 leading-px20 lg:text-px16 lg:leading-px22;
 	}
@@ -91,7 +183,7 @@
 	}
 
 	&__close-btn {
-		@apply absolute right-px20 top-px20 text-px30 font-bold flex xl:right-0;
+		@apply absolute right-px20 top-px20 text-px30 font-bold flex xl:right-0 w-px35 h-px35;
 
 		i {
 			@apply flex;

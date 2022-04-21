@@ -9,11 +9,26 @@ export default class SiteBanner {
 		this.sessionName = `sessionBannerObj-${this.bannerObj.id}`;
 		this.containerHeight = 0;
 		this.id = bannerObj.id;
+	}
 
-		if (!this.isClosed()) {
-			this.build();
-			this.insert();
-		}
+	// Checks to see if this banner is
+	// not yet closed and is not in excluded page
+	isRenderable() {
+		return !this.isClosed() && this.isAllowedInPage();
+	}
+
+	isAllowedInPage() {
+		const postIDMeta = document.querySelector('meta[name="post-id"]');
+		const currentPost = postIDMeta?.getAttribute('content');
+
+		return (
+			Number(this.bannerObj.exclude_in || '') !== Number(currentPost || 0)
+		);
+	}
+
+	render() {
+		this.build();
+		this.insert();
 	}
 
 	insert() {
@@ -51,7 +66,7 @@ export default class SiteBanner {
 		if (bannerObj.title) {
 			$('<span/>', {
 				class: 'site-banner__title',
-				text: `${bannerObj.title} `,
+				html: `${bannerObj.title} `,
 			}).appendTo($text);
 		}
 
@@ -60,6 +75,15 @@ export default class SiteBanner {
 			$('<span/>', {
 				class: 'site-banner__description',
 				html: bannerObj.desc,
+			}).appendTo($text);
+		}
+
+		// Link (for pride_promo type)
+		if (bannerObj.type === 'pride_promo') {
+			$('<a/>', {
+				class: 'site-banner__pride-promo-link',
+				text: bannerObj.link_text,
+				href: bannerObj.link_url,
 			}).appendTo($text);
 		}
 

@@ -23,11 +23,17 @@ window.trevorWP.siteBanners = () => {
 
 	$.get('/wp-json/trevor/v1/site-banners').then((resp) => {
 		if (resp.success) {
-			resp.banners.forEach((bannerObj) => {
-				const banner = new SiteBanner(bannerObj);
-				banner.on('remove', onRemove);
-				bannersById[banner.id] = banner;
-			});
+			// Show only up to 2 banners at a time,
+			// with the Pride LP having least priority
+			resp.banners
+				.map((bannerObj) => new SiteBanner(bannerObj))
+				.filter((banner) => banner.isRenderable())
+				.slice(0, 2)
+				.forEach((banner) => {
+					banner.render();
+					banner.on('remove', onRemove);
+					bannersById[banner.id] = banner;
+				});
 		}
 	});
 };
