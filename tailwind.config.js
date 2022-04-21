@@ -458,6 +458,9 @@ const config = {
 				'gradient-advocate': `url('${theme(
 					'paths.themeGradients'
 				)}/advocate.svg')`,
+				'gradient-pride-promo': `url('${theme(
+					'paths.themeGradients'
+				)}/pride_promo.png')`,
 			}),
 			opacity: {
 				16: '0.16',
