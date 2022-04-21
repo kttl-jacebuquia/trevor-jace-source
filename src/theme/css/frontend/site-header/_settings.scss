@@ -51,6 +51,10 @@ $z-index-topbar: $z-index-nav-white-bg + 1;
 
 	@screen lg {
 		--top-bar-height: #{rem-calc(78px)};
-		--top-nav-height: 11rem;
+		--top-nav-height: #{$top-nav-height-tablet};
+	}
+
+  @screen xl {
+		--top-nav-height: #{$top-nav-height-desktop};
 	}
 }

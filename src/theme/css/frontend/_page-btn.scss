@@ -5,28 +5,30 @@
   @apply rounded-px10;
   @apply py-3 px-6;
 
-
   &.primary /* deprecated, use: page-btn-primary */
   , &-primary {
-	@apply text-white;
-  background-color: theme-background(true);
+    @apply text-white;
+    background-color: theme-background(true);
   }
 
   &.secondary /* deprecated, use: page-btn-secondary */
   , &-secondary {
-	@apply bg-white border-2;
-  color: theme-background();
-  border-color: theme-background();
+    @apply bg-white;
+    color: theme-background();
+
+    &:is(button, a) {
+      box-shadow: inset 0 0 0 #{rem-calc(2)} #{theme-background()};
+    }
   }
 
   @screen xl {
-	@apply text-px20 leading-px26;
-	@apply py-5 px-20;
+    @apply text-px20 leading-px26;
+    @apply py-5 px-20;
   }
 
-	&-link {
-		@apply p-0 text-px24 leading-px34 tracking-px05 pb-px2 border-b-px2 pb-px6 rounded-none;
-		@apply text-px18 leading-px34 border-b-px1 pb-px5;
+  &-link {
+    @apply p-0 text-px24 leading-px34 tracking-px05 pb-px2 border-b-px2 pb-px6 rounded-none;
+    @apply text-px18 leading-px34 border-b-px1 pb-px5;
     border-color: theme-background();
-	}
+  }
 }
