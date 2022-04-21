@@ -773,7 +773,7 @@ class Post_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$post_in      = array();
 
 		// Ensure $tile_options members are arrays as well
-		$tile_options['attr'] = (array) ( $tile_options['attr'] ?? [] );
+		$tile_options['attr'] = (array) ( $tile_options['attr'] ?? array() );
 
 		// Include ids that are not in $exclude
 		if ( ! empty( $include ) ) {
