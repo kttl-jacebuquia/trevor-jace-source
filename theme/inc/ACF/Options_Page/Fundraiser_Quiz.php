@@ -438,7 +438,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function step_one( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--step-one hidden bg-teal-dark" tabindex="0">
+			<div class="fundraiser-quiz--step-one hidden bg-teal-dark">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
@@ -480,7 +480,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 		$form_assembly_form = preg_replace( "/{$pattern}/", '', $form_assembly_form );
 
 		?>
-			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form" tabindex="0">
+			<div class="fundraiser-quiz--form fundraiser-quiz--steps" data-vertex="form">
 					<?php if ( ! empty( $data['title'] ) ) { ?>
 						<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 					<?php } ?>
@@ -501,7 +501,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function create_fundraiser( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--create-fundraiser fundraiser-quiz--steps" data-vertex="create" tabindex="0">
+			<div class="fundraiser-quiz--create-fundraiser fundraiser-quiz--steps" data-vertex="create">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title">Are you ready to start fundraising?</h2>
 				<?php } ?>
@@ -541,7 +541,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function collect_donations( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--collect-donations fundraiser-quiz--steps" data-vertex="collect" tabindex="0">
+			<div class="fundraiser-quiz--collect-donations fundraiser-quiz--steps" data-vertex="collect">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
@@ -567,7 +567,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function who_is_fundraising( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--who-is-fundraising fundraiser-quiz--steps" data-vertex="who" tabindex="0">
+			<div class="fundraiser-quiz--who-is-fundraising fundraiser-quiz--steps" data-vertex="who">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title"><?php echo esc_html( $data['title'] ); ?></h2>
 				<?php } ?>
@@ -595,7 +595,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 	protected static function gathering( array $data = array() ): string {
 		ob_start();
 		?>
-			<div class="fundraiser-quiz--gathering fundraiser-quiz--steps" data-vertex="gathering" tabindex="0">
+			<div class="fundraiser-quiz--gathering fundraiser-quiz--steps" data-vertex="gathering">
 				<?php if ( ! empty( $data['title'] ) ) { ?>
 					<h2 class="fundraiser-quiz__title">Are you planning to have a gathering?</h2>
 				<?php } ?>
