@@ -113,15 +113,6 @@ export default class FundraiserQuiz {
 
 		this.createGraph();
 
-		/**
-		 * Initialize the radio button events
-		 */
-		// if (this.choices.length) {
-		// 	this.choices.on('click' as any, (e) => {
-		// 		this.handleChoiceClick(e.target);
-		// 	});
-		// }
-
 		this.backBtn.on('click', () => {
 			this.displayPreviousPage();
 		});
@@ -283,10 +274,8 @@ export default class FundraiserQuiz {
 
 			// Show new content
 			$content.removeClass('hidden').fadeIn({
-				done() {
-					setTimeout(() => {
-						$content.get(0).focus();
-					}, 100);
+				done: () => {
+					(this.modalContainer || $content.get(0))?.focus();
 				},
 			});
 		}
@@ -384,18 +373,21 @@ export default class FundraiserQuiz {
 	}
 
 	displayPreviousPage() {
-		this.answers.pop();
-		let $previousContent = null;
+		this.answers?.pop();
+		let $previousContent: JQuery | null = null;
 		let prevVertex = null;
 
-		if (this.prevVertexStack.length) {
+		if (this.prevVertexStack?.length) {
 			prevVertex = this.prevVertexStack.pop();
 			this.changeContainerBackground(prevVertex);
 			this.handleBackButtonDisplay(prevVertex);
-			$previousContent = $(this.containers[prevVertex], this.selector);
+			$previousContent = $(
+				this.containers[prevVertex || 0],
+				this.selector
+			);
 		}
 
-		const latestVertex = this.currentVertexStack.pop();
+		const latestVertex = this.currentVertexStack?.pop() || 0;
 		this.computeCurrentPageNumber(); // must be after currentVertexStack.pop as this function is using the currentVertexStack variable
 
 		if ($previousContent !== null && $previousContent.length) {
@@ -403,7 +395,13 @@ export default class FundraiserQuiz {
 				$(this.containers[latestVertex], this.selector).removeClass(
 					this.classes
 				);
-				$previousContent.fadeIn();
+				$previousContent?.fadeIn({
+					done: () => {
+						(
+							this.modalContainer || $previousContent?.get(0)
+						)?.focus();
+					},
+				});
 			});
 		}
 	}
