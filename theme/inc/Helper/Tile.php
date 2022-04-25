@@ -269,6 +269,14 @@ class Tile {
 				<a aria-hidden="true" tabindex="-1" href="<?php echo $data['cta_url']; ?>" class="card-link">&nbsp;</a>
 			<?php } ?>
 
+			<?php if ( ! empty( $options['post_data'] ) ) : ?>
+				<?php
+					// Remove recursion
+					unset( $options['post_data']->tile_options );
+				?>
+				<script hidden type="application/json"><?php echo json_encode( $options['post_data'] ); ?></script>
+			<?php endif; ?>
+
 			<?php if ( 'product' === $options['card_type'] && ! empty( $data['img'] ) ) { ?>
 				<?php echo $data['img']; ?>
 			<?php } ?>
