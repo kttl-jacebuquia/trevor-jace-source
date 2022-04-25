@@ -39,6 +39,7 @@ class TopicCards {
 
 		this.saveInitialPosts();
 		this.initializeLoadMore();
+		this.extractPostData();
 	}
 
 	initializeCarousel() {
@@ -90,11 +91,13 @@ class TopicCards {
 			this.postIds = postIds;
 		}
 
-		items.forEach((itemElement) => {
+		this.items = items.map((itemElement) => {
 			const { post } = itemElement.dataset;
 			if (post) {
 				this.savePostID(Number(post));
 			}
+
+			return itemElement;
 		});
 	}
 
@@ -213,6 +216,21 @@ class TopicCards {
 						modal.querySelector('.post-share-more-content'),
 						{ appendTo: modal }
 					);
+				}
+			}
+		});
+	}
+
+	extractPostData() {
+		this.items.forEach((card) => {
+			const jsonScript = card.querySelector('script');
+
+			if (jsonScript) {
+				try {
+					const jsonData = JSON.parse(jsonScript.textContent);
+					card.post = jsonData;
+				} catch (err) {
+					console.error(err);
 				}
 			}
 		});
