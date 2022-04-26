@@ -158,7 +158,7 @@
     @apply col-span-full mt-px20 text-center flex flex-col;
 
     @screen md {
-      @apply block mt-px78 justify-center -mb-44;
+      @apply block mt-px78 justify-center -mb-px44;
       letter-spacing: rem-calc(36);
     }
 
