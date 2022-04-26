@@ -37,6 +37,7 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	/** @inheritDoc */
 	public static function register(): bool {
 		add_filter( 'acf/fields/relationship/query/name=' . static::FIELD_PRODUCTS, array( static::class, 'relationship_query_products' ), 10, 3 );
+		add_filter( 'acf/fields/relationship/result/name=' . static::FIELD_PRODUCTS, array( static::class, 'relationship_result_products' ), 10, 4 );
 
 		return parent::register();
 	}
@@ -766,13 +767,6 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 			$current_date = wp_date( 'Ymd', $current_date->date, $current_date->timezone );
 
 			$args['meta_query'] = array(
-				'relation' => 'AND',
-				array(
-					'key'     => Product::FIELD_PRODUCT_START_DATE,
-					'value'   => $current_date,
-					'compare' => '<=',
-					'type'    => 'DATE',
-				),
 				array(
 					'key'     => Product::FIELD_PRODUCT_END_DATE,
 					'value'   => $current_date,
@@ -783,6 +777,29 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Add custom text on product results title
+	 */
+	public static function relationship_result_products( $text, $post, $field, $post_id ) {
+		$current_date = current_datetime();
+		$current_date = wp_date( 'Ymd', $current_date->date, $current_date->timezone );
+		$status       = 'Inactive';
+
+		$val        = new Field_Val_Getter( Product::class, $post );
+		$start_date = $val->get( Product::FIELD_PRODUCT_START_DATE );
+		$end_date   = $val->get( Product::FIELD_PRODUCT_END_DATE );
+
+		if ( strtotime( $current_date ) < strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
+			$status = 'Upcoming';
+		} else if ( strtotime( $current_date ) >= strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
+			$status = 'Active';
+		}
+
+		$text = "<em>$status | $start_date</em><br/>$text";
+
+		return $text;
 	}
 
 	public static function render_carousel_navigation() {
