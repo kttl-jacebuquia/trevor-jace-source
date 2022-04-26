@@ -785,17 +785,17 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	public static function relationship_result_products( $text, $post, $field, $post_id ) {
 		$current_date = current_datetime();
 		$current_date = wp_date( 'Ymd', $current_date->date, $current_date->timezone );
-		$active = 'Inactive';
-			
-		$val  = new Field_Val_Getter( Product::class, $post );
+		$active       = 'Inactive';
+
+		$val        = new Field_Val_Getter( Product::class, $post );
 		$start_date = $val->get( Product::FIELD_PRODUCT_START_DATE );
-		$end_date = $val->get( Product::FIELD_PRODUCT_END_DATE );
+		$end_date   = $val->get( Product::FIELD_PRODUCT_END_DATE );
 
 		if ( strtotime( $current_date ) >= strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
 			$active = 'Active';
 		}
 
-		$text = "<em>$active | $start_date </em><br/>$text";
+		$text = "<em>$active | $start_date</em><br/>$text";
 
 		return $text;
 	}
