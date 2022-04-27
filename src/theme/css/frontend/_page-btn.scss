@@ -3,7 +3,11 @@
   @apply inline-block rounded-px10;
   @apply font-bold text-base leading-px22 tracking-em_001;
   @apply rounded-px10;
-  @apply py-3 px-6;
+  @apply py-3 px-px32;
+
+  @screen lg {
+    @apply px-px40;
+  }
 
   &.primary /* deprecated, use: page-btn-primary */
   , &-primary {
@@ -23,7 +27,7 @@
 
   @screen xl {
     @apply text-px20 leading-px26;
-    @apply py-5 px-20;
+    @apply py-5;
   }
 
   &-link {

@@ -10,22 +10,18 @@ button {
 }
 
 .btn {
-  @apply py-4 px-6 rounded-px10;
+  @apply py-4 px-px32 rounded-px10;
   @include button-base;
 
   &-link {
-	@apply inline-flex text-indigo font-bold border-b-2 pb-0.5;
+    @apply inline-flex text-indigo font-bold border-b-2 pb-0.5;
   }
 
   &-secondary {
-	@apply bg-indigo;
-  }
-
-  @screen md {
-	@apply px-8;
+    @apply bg-indigo;
   }
 
   @screen lg {
-	@apply px-12;
+    @apply px-px40;
   }
 }
