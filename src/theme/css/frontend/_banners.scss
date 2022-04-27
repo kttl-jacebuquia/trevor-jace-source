@@ -84,20 +84,18 @@
     background-size: 100% 100%;
 
     .site-banner__container {
-      @apply py-px32 container;
+      @apply py-px32 px-px28;
 
-      @screen mobile {
-        @apply max-w-none;
+      @screen md {
+        @apply px-px28 py-px36;
       }
 
       @screen lg {
-        max-width: theme('container.screens.lg');
+        @apply px-px40 py-px28;
       }
 
       @screen lg2 {
-        @apply py-px28 px-px40;
-        width: calc(100% - 80px);
-        max-width: theme('container.screens.lg2');
+        @apply py-px28 max-w-none w-auto;
       }
 
       @screen xl {
@@ -110,7 +108,7 @@
     }
 
     .site-banner__text {
-      @apply flex flex-wrap items-center;
+      @apply flex flex-wrap items-baseline;
     }
 
     .site-banner__title {
@@ -121,51 +119,48 @@
       }
 
       @screen lg {
-        @apply text-px30 leading-px36 tracking-em005;
+        @apply text-px24 leading-px30 tracking-em005;
       }
 
       @screen lg2 {
-        @apply text-px30 leading-px36 tracking-em005;
+        @apply text-px24 leading-px30 tracking-em005;
       }
 
       tilt {
-        @apply relative text-px32 leading-px38 mr-px5 transform rotate-0;
+        @apply relative text-px32 leading-px38 mr-px8 transform rotate-0;
 
         @screen md {
           @apply text-px32 leading-px38 tracking-em001;
         }
 
         @screen lg {
-          @apply text-px44 leading-px54 tracking-em005;
+          @apply text-px35 leading-px45 tracking-em005;
         }
 
         @screen lg2 {
-          @apply text-px44 leading-px54 tracking-em005;
+          @apply text-px35 leading-px45 tracking-em005;
         }
       }
     }
 
     .site-banner__pride-promo-link {
-      @apply mt-px15 text-px16 leading-px24 font-semibold pb-px2 border-b-px2 border-solid border-current;
+      @apply relative mt-px15 text-px16 leading-px24 font-semibold pb-px2;
+      @include wave-underline-dynamic;
 
       @screen md {
-        @apply ml-px24 mt-0 text-px16 leading-px24;
+        @apply ml-px24 mt-0 -top-px6 pb-0 text-px16 leading-px24;
       }
 
       @screen lg {
-        @apply ml-px30 text-px20 leading-px24 tracking-em005;
+        @apply ml-px30 text-px20 -top-px4 leading-px24 tracking-em005 pb-px2;
       }
     }
 
     .site-banner__close-btn {
       @apply w-px35 h-px35 top-px16 right-px16;
 
-      @screen lg {
-        @apply top-px20 right-px20;
-      }
-
-      @screen xl {
-        @apply right-0;
+      @screen md {
+        @apply top-px18 right-px18;
       }
     }
   }
