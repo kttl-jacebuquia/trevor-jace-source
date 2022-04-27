@@ -78,7 +78,7 @@ class Embed extends A_Basic_Section implements I_Block, I_Renderable {
 
 		# Build wrapper classnames
 		$wrapper_cls = array(
-			'custom-embed flex justify-center items-center flex-nowrap',
+			'custom-embed flex justify-center items-center flex-nowrap block-spacer',
 		);
 
 		# Build embed classnames

@@ -1,12 +1,34 @@
 .custom-embed {
-  @apply -mt-px20;
+  // Block spacer variables
+  // Top Spacing
+  --spacer-top--default: #{rem-calc(40)};
+  --spacer-top--md: #{rem-calc(60)};
+  --spacer-top--lg: #{rem-calc(50)};
+  --spacer-top--lg2: #{rem-calc(50)};
+  --spacer-top--xl: #{rem-calc(80)};
+  // Bottom Spacing
+  --spacer-bottom--default: #{rem-calc(115)};
+  --spacer-bottom--md: #{rem-calc(80)};
+  --spacer-bottom--lg: #{rem-calc(120)};
+  --spacer-bottom--lg2: #{rem-calc(100)};
+  --spacer-bottom--xl: #{rem-calc(120)};
+
+  @apply mt-px40 mb-px115;
 
   @screen md {
-    @apply -mt-px30;
+    @apply mt-px60 mb-px80;
+  }
+
+  @screen lg {
+    @apply mt-px50 mb-px120;
+  }
+
+  @screen lg2 {
+    @apply mt-px50 mb-px100;
   }
 
   @screen xl {
-    @apply -mt-px10;
+    @apply mt-px80 mb-px120;
   }
 
   &__container {
