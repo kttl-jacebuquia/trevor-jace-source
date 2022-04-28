@@ -4,6 +4,7 @@ use TrevorWP\CPT;
 use TrevorWP\Main;
 use TrevorWP\Meta;
 use TrevorWP\Util\Tools;
+use TrevorWP\CPT\Donate\Fundraiser_Stories;
 
 /**
  * Post Header Helper
@@ -216,7 +217,7 @@ class Post_Header {
 		}
 
 		# Author
-		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE ) ) && Meta\Post::can_show_author_box( $post->ID ) ) {
+		if ( in_array( $post->post_type, array( CPT\Post::POST_TYPE, CPT\Donate\Fundraiser_Stories::POST_TYPE ) ) && Meta\Post::can_show_author_box( $post->ID ) ) {
 			ob_start();
 			?>
 			<div class="author-box mid-row-text">
@@ -356,8 +357,14 @@ class Post_Header {
 	public static function get_header_type( \WP_Post $post ): string {
 		$type = get_post_meta( $post->ID, Meta\Post::KEY_HEADER_TYPE, true );
 
-		if ( empty( $type ) || ! in_array( $type, self::ALL_TYPES ) ) {
-			$type = self::DEFAULT_TYPE;
+		if ( empty( $type ) || ! in_array( $type, self::ALL_TYPES, true ) ) {
+			switch ( $post->post_type ) {
+				case Fundraiser_Stories::POST_TYPE:
+					$type = self::TYPE_SQUARE;
+					break;
+				default:
+					$type = self::DEFAULT_TYPE;
+			}
 		}
 
 		return $type;

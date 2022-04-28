@@ -7,6 +7,7 @@ use TrevorWP\Util\Log;
 use TrevorWP\CPT;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
 use TrevorWP\Util\Tools;
+use TrevorWP\CPT\Donate\Fundraiser_Stories;
 
 /**
  * Abstract Resource Center Object
@@ -111,7 +112,11 @@ abstract class RC_Object {
 		}
 
 		## Tag
-		$tag_post_types = self::$PUBLIC_POST_TYPES;
+		$tag_post_types = array_merge(
+			self::$PUBLIC_POST_TYPES,
+			array( Fundraiser_Stories::POST_TYPE ),
+		);
+
 		register_taxonomy(
 			self::TAXONOMY_TAG,
 			$tag_post_types,
