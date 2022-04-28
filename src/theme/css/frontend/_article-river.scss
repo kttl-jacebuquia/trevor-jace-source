@@ -21,7 +21,7 @@
     @apply py-px40;
 
     @screen md {
-      @apply flex pt-px50;
+      @apply flex items-start pt-px50;
     }
 
     @screen lg {
