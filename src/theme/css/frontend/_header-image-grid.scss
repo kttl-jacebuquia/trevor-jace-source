@@ -1,17 +1,17 @@
 .header-image-grid {
-  @apply pt-px88 pb-px120;
+  @apply pt-px88 pb-px100;
   @apply bg-white text-teal-dark text-center;
 
   @screen md {
-    @apply pt-px100;
+    @apply pt-px100 pb-px120;
   }
 
   @screen lg {
-    @apply py-px120;
+    @apply pt-px120 pb-px90;
   }
 
   @screen lg2 {
-    @apply py-px140;
+    @apply pt-px140 pb-px120;
   }
 
   &__container {

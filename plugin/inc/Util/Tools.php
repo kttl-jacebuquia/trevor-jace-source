@@ -917,7 +917,12 @@ class Tools {
 	 * @return string|null
 	 */
 	public static function get_post_tag_tax( $post ): ?string {
-		if ( in_array( get_post_type( $post ), CPT\RC\RC_Object::$PUBLIC_POST_TYPES ) ) {
+		$tags_post_types = array_merge(
+			CPT\RC\RC_Object::$PUBLIC_POST_TYPES,
+			array( CPT\Donate\Fundraiser_Stories::POST_TYPE ),
+		);
+
+		if ( in_array( get_post_type( $post ), $tags_post_types ) ) {
 			return CPT\RC\RC_Object::TAXONOMY_TAG;
 		}
 

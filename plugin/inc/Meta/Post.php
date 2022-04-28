@@ -105,18 +105,31 @@ class Post {
 				self::KEY_HEADER_SNOW_SHARE   => array(
 					'type'       => 'boolean',
 					'default'    => true,
-					'post_types' => array_merge( $article_kind, array( CPT\Research::POST_TYPE ) ),
+					'post_types' => array_merge(
+						$article_kind,
+						array(
+							CPT\Research::POST_TYPE,
+							CPT\Donate\Fundraiser_Stories::POST_TYPE,
+						),
+					),
 				),
 				self::KEY_HEADER_SHOW_DATE    => array(
 					'type'       => 'boolean',
 					'default'    => true,
-					'post_types' => array_merge( $article_kind, array( CPT\Research::POST_TYPE ) ),
+					'post_types' => array_merge(
+						$article_kind,
+						array(
+							CPT\Research::POST_TYPE,
+							CPT\Donate\Fundraiser_Stories::POST_TYPE,
+						),
+					),
 				),
 				self::KEY_HEADER_SHOW_AUTHOR  => array(
 					'type'       => 'boolean',
 					'default'    => true,
 					'post_types' => array(
 						CPT\Post::POST_TYPE,
+						CPT\Donate\Fundraiser_Stories::POST_TYPE,
 					),
 				),
 				self::KEY_LENGTH_IND          => array(
