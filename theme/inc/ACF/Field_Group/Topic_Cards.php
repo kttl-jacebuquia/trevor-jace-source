@@ -782,24 +782,20 @@ class Topic_Cards extends A_Field_Group implements I_Block, I_Renderable {
 	/**
 	 * Add custom text on product results title
 	 */
-	public static function relationship_result_products( $text, $post, $field, $post_id ) {
+	public static function relationship_result_products( $text, $post ) {
 		$current_date = current_datetime();
 		$current_date = wp_date( 'Ymd', $current_date->date, $current_date->timezone );
-		$status       = 'Inactive';
 
 		$val        = new Field_Val_Getter( Product::class, $post );
 		$start_date = $val->get( Product::FIELD_PRODUCT_START_DATE );
 		$end_date   = $val->get( Product::FIELD_PRODUCT_END_DATE );
 
 		if ( strtotime( $current_date ) < strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
-			$status = 'Upcoming';
-		} else if ( strtotime( $current_date ) >= strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
-			$status = 'Active';
+			return "<em>Upcoming | $start_date<br/>$text</em>";
+		} elseif ( strtotime( $current_date ) >= strtotime( $start_date ) && strtotime( $current_date ) <= strtotime( $end_date ) ) {
+			// Active
+			return $text;
 		}
-
-		$text = "<em>$status | $start_date</em><br/>$text";
-
-		return $text;
 	}
 
 	public static function render_carousel_navigation() {
