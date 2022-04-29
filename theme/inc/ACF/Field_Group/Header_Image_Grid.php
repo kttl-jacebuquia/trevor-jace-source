@@ -1,25 +1,29 @@
 <?php namespace TrevorWP\Theme\ACF\Field_Group;
 
 class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_HEADER        = 'header';
-	const FIELD_DESCRIPTION   = 'description';
-	const FIELD_IMAGE_ENTRIES = 'image_entries';
-	const FIELD_ENTRY_IMAGE   = 'entry_image';
-	const FIELD_LINKS         = 'link_entries';
-	const FIELD_ENTRY_LABEL   = 'entry_label';
-	const FIELD_ENTRY_LINK    = 'entry_link';
+	const FIELD_HEADER            = 'header';
+	const FIELD_DESCRIPTION       = 'description';
+	const FIELD_IMAGE_ENTRIES     = 'image_entries';
+	const FIELD_ENTRY_IMAGE       = 'entry_image';
+	const FIELD_ENTRY_IMAGE_LINK  = 'entry_image_link';
+	const FIELD_ENTRY_IMAGE_TITLE = 'entry_image_title';
+	const FIELD_LINKS             = 'link_entries';
+	const FIELD_ENTRY_LABEL       = 'entry_label';
+	const FIELD_ENTRY_LINK        = 'entry_link';
 
 	/**
 	 * @inheritDoc
 	 */
 	protected static function prepare_register_args(): array {
-		$header        = static::gen_field_key( static::FIELD_HEADER );
-		$description   = static::gen_field_key( static::FIELD_DESCRIPTION );
-		$image_entries = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
-		$entry_image   = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
-		$links         = static::gen_field_key( static::FIELD_LINKS );
-		$entry_label   = static::gen_field_key( static::FIELD_ENTRY_LABEL );
-		$entry_link    = static::gen_field_key( static::FIELD_ENTRY_LINK );
+		$header            = static::gen_field_key( static::FIELD_HEADER );
+		$description       = static::gen_field_key( static::FIELD_DESCRIPTION );
+		$image_entries     = static::gen_field_key( static::FIELD_IMAGE_ENTRIES );
+		$entry_image       = static::gen_field_key( static::FIELD_ENTRY_IMAGE );
+		$entry_image_title = static::gen_field_key( static::FIELD_ENTRY_IMAGE_TITLE );
+		$entry_image_link  = static::gen_field_key( static::FIELD_ENTRY_IMAGE_LINK );
+		$links             = static::gen_field_key( static::FIELD_LINKS );
+		$entry_label       = static::gen_field_key( static::FIELD_ENTRY_LABEL );
+		$entry_link        = static::gen_field_key( static::FIELD_ENTRY_LINK );
 
 		return array(
 			'title'  => 'Header + Image Grid',
@@ -43,7 +47,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					'type'       => 'repeater',
 					'layout'     => 'block',
 					'sub_fields' => array(
-						static::FIELD_ENTRY_IMAGE => array(
+						static::FIELD_ENTRY_IMAGE      => array(
 							'key'           => $entry_image,
 							'name'          => static::FIELD_ENTRY_IMAGE,
 							'label'         => 'Image',
@@ -52,6 +56,20 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							'return_format' => 'array',
 							'preview_size'  => 'thumbnail',
 							'library'       => 'all',
+						),
+						static::FIELD_ENTRY_IMAGE_TITLE => array(
+							'key'      => $entry_image_title,
+							'name'     => static::FIELD_ENTRY_IMAGE_TITLE,
+							'label'    => 'Image Title',
+							'type'     => 'text',
+							'required' => 1,
+						),
+						static::FIELD_ENTRY_IMAGE_LINK => array(
+							'key'      => $entry_image_link,
+							'name'     => static::FIELD_ENTRY_IMAGE_LINK,
+							'label'    => 'Image Link',
+							'type'     => 'url',
+							'required' => 0,
 						),
 					),
 				),
@@ -130,13 +148,25 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						<?php foreach ( $image_entries as $entry ) : ?>
 							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 								<div class="header-image-grid__item" role="listitem">
-									<div class="header-image-grid__image">
+									<?php
+										$image_wrapper_attrs = array(
+											'class' => 'header-image-grid__image',
+											'href'  => 'javascript:;',
+										);
+
+										if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE_LINK ] ) ) {
+											$image_wrapper_attrs['href']       = $entry[ static::FIELD_ENTRY_IMAGE_LINK ];
+											$image_wrapper_attrs['target']     = '_blank';
+											$image_wrapper_attrs['aria-label'] = 'click to go to ' . ( $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] ? $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] : ' the image link');
+										}
+										?>
+									<a <?php echo self::render_attrs( array(), $image_wrapper_attrs ); ?>>
 										<img
 											class="header-image-grid__img"
 											src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>"
 											alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>"
 										/>
-									</div>
+									</a>
 								</div>
 							<?php endif; ?>
 						<?php endforeach; ?>
