@@ -68,7 +68,15 @@
     @apply mt-px18;
 
     @screen md {
-      @apply col-span-6;
+      @apply mt-px15 col-span-6;
+    }
+
+    @screen lg {
+      @apply mt-px20;
+    }
+
+    @screen lg2 {
+      margin-top: rem-calc(23);
     }
 
     @screen xl {
