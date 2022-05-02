@@ -746,10 +746,31 @@ class Hooks {
 	 * Check if custom site banner is active.
 	 */
 	public static function is_custom_site_banner_entry_active( array $entry, string $current_date ): bool {
-		$active       = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
-		$start_date   = ! empty( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ] ) ? strtotime( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ] ) : '';
-		$end_date     = ! empty( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ] ) ? strtotime( $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ] ) : '';
-		$current_date = strtotime( $current_date );
+		$is_long_wait = Site_Banners::is_long_wait();
+		$force_show   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_FORCE_SHOW ];
+
+		if ( $force_show ) {
+			return true;
+		}
+
+		if ( $is_long_wait ) {
+			return true;
+		}
+
+		$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
+		$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
+		$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
+
+		return static::is_date_active( $current_date, $start_date, $end_date, $active );
+	}
+
+	/**
+	 * Check if date is active.
+	 */
+	public static function is_date_active( $current_date, $start_date, $end_date, $active = true ): bool {
+		$current_date = ! empty( $current_date ) ? strtotime( $current_date ) : '';
+		$start_date   = ! empty( $start_date ) ? strtotime( $start_date ) : '';
+		$end_date     = ! empty( $end_date ) ? strtotime( $end_date ) : '';
 
 		if ( $active && empty( $start_date ) && empty( $end_date ) ) {
 			return true;
@@ -811,7 +832,7 @@ class Hooks {
 				);
 			}
 		} else {
-			$is_long_wait = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, false );
+			$is_long_wait = Site_Banners::is_long_wait();
 			$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
 
 			if ( $force_show ) {
@@ -829,14 +850,21 @@ class Hooks {
 
 		# Pride Promo Banner
 		$pride_promo_title = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_TITLE );
+		$pride_start_date  = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_START_DATE );
+		$pride_end_date    = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_END_DATE );
 
-		if ( ! empty( $pride_promo_title ) ) {
+		if ( ! empty( $pride_promo_title ) && static::is_date_active( $current_date, $pride_start_date, $pride_end_date, true ) ) {
+			$promo_Link      = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK );
+			$promo_link_text = ! empty( $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] ) ? $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] : '';
+			$promo_Link_url  = ! empty( $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] ) ? $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] : '';
+			$pride_lp_id     = url_to_postid( $promo_Link_url ) ?? false;
+
 			$banners[] = array(
 				'title'      => $pride_promo_title,
-				'link_text'  => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK )[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ],
-				'link_url'   => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK )[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ],
+				'link_text'  => $promo_link_text,
+				'link_url'   => $promo_Link_url,
 				'type'       => 'pride_promo',
-				'exclude_in' => Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_EXLUDE_POST ),
+				'exclude_in' => $pride_lp_id,
 			);
 		}
 
