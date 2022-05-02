@@ -13,6 +13,10 @@
   , &-primary {
     @apply text-white;
     background-color: theme-background(true);
+
+    .page-template-template-circle-of-light .bg-violet .page-header & {
+      @apply bg-orange;
+    }
   }
 
   &.secondary /* deprecated, use: page-btn-secondary */

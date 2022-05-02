@@ -1,0 +1,217 @@
+.circle-of-light {
+  @apply container;// for horz padding
+  color: #fff;
+  max-width: none;// override “container”
+
+  &__wrap {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 904px;
+    text-align: center;
+  }// end wrap
+
+  &__image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 208px;
+  }
+
+  &__heading {
+    @apply font-bold;
+    @apply text-px30 leading-px38 tracking-em005;
+    margin-bottom: 0.83em;
+    margin-top: 25px;
+
+    @screen md {
+      @apply text-px32 leading-px42;
+    }
+
+    @screen lg {
+      @apply text-px40 leading-px48 tracking-em_001;
+    }
+
+    @screen lg2 {
+      @apply text-px46 leading-px56 tracking-px_05;
+    }
+  }// end heading
+
+  &__description {
+    @include wysiwyg;
+    @apply font-normal text-px18;
+    line-height: 1.4;
+
+    @screen md {
+      @apply tracking-em_005;
+    }
+
+    @screen lg2 {
+      @apply text-px26;
+    }
+  }// end description
+
+  &__grid {
+    @apply mx-auto;
+    display: grid;
+    gap: 58px 47px;
+    grid-template-columns: 1fr;
+    margin-top: 70px;
+
+    @screen md {
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      justify-content: space-between;
+    }
+
+    &-item {}// end item
+  }// end grid
+
+  &__card {
+    @apply text-teal-dark;
+
+    &-top {
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      padding: 20px;
+
+      @screen md {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 25px;
+      }
+
+      @screen lg2 {
+        padding: 25px 43px 24px 56px;
+      }
+    }// end top
+
+    &-content {}
+
+    &-title {
+      @apply text-px32;
+      font-weight: bold;
+      line-height: 1.1;
+      margin-bottom: 6px;
+
+      @screen lg {
+        @apply text-px35 tracking-em005;
+      }
+    }// end title
+
+    &-subtitle {
+      @apply text-px20 tracking-em005;
+      line-height: 1.45;
+    }// end subtitle
+
+    &-image {
+      margin-bottom: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 190px;
+      width: 50%;
+
+      @screen md {
+        flex-shrink: 1;
+        order: 2;
+        margin: 0;
+        padding-left: 37px;
+        width: 40%;
+      }
+
+      @screen lg2 {
+        width: 43%;
+      }
+    }// end image
+
+    &-bottom {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 30px 20px;
+      width: 100%;
+
+      @screen md {
+        padding: 30px 40px;
+      }
+
+      @screen lg2 {
+        padding: 34px 56px 29px;
+      }
+    }// end bottom
+
+    &-contact {
+      @apply text-indigo text-px16;
+      font-weight: bold;
+      line-height: 1.4;
+      word-break: break-word;// for long mailto links
+
+      @screen md {
+        @apply text-px18;
+      }
+
+      @screen lg2 {
+        @apply text-px22;
+      }
+
+      a {
+        text-decoration: underline;
+
+        &:hover,
+        &:focus,
+        &:active {
+          text-decoration: none;
+        }
+      }
+    }// end contact
+
+    &-toggle {
+      @include button-base;
+      @apply text-px18;
+      background-color: #fff;
+      border-radius: 500px;// arbitrary large value
+      font-weight: bold;
+      line-height: 1;
+      margin-top: 40px;
+      padding: 19px 28px 21px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+      }
+
+      .is-expanded {
+        display: none;
+      }
+
+      .is-open & {
+        .is-expanded {
+          display: block;
+        }
+
+        .is-collapsed {
+          display: none;
+        }
+      }
+    }// end toggle
+
+    &-intro {
+      @apply font-semibold text-px25;
+      line-height: 1.5;
+    }// end intro
+
+    &-body {
+      @include wysiwyg;
+      @apply h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 invisible;
+      will-change: height;
+
+      .is-open & {
+        @apply opacity-100 visible;
+      }
+
+      & > *:first-child {
+        margin-top: 30px;
+      }
+    }// end body
+  }// end card
+}

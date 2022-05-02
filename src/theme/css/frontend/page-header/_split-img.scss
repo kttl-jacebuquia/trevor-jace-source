@@ -41,7 +41,7 @@
       }
 
       @screen lg {
-        @apply col-span-5 pb-0;
+        @apply col-span-5;
       }
 
       @screen lg2 {
@@ -91,6 +91,11 @@
 
     .page-header-img-wrap {
       @apply relative mt-auto mt-auto mb-0;
+
+      // Don’t vertically center on the “Circle of Light” template
+      .page-template-template-circle-of-light & {
+        @apply mt-0;
+      }
 
       @screen md {
         @apply col-span-4 w-full my-auto;

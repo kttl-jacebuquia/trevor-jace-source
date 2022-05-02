@@ -98,6 +98,7 @@ class ACF {
 		Field_Group\Post_Details::class,
 		Field_Group\Promo_Popup::class,
 		Field_Group\Form::class,
+		Field_Group\Circle_Of_Light::class,
 	);
 
 	public static function construct() {
