@@ -47,7 +47,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					'type'       => 'repeater',
 					'layout'     => 'block',
 					'sub_fields' => array(
-						static::FIELD_ENTRY_IMAGE      => array(
+						static::FIELD_ENTRY_IMAGE       => array(
 							'key'           => $entry_image,
 							'name'          => static::FIELD_ENTRY_IMAGE,
 							'label'         => 'Image',
@@ -64,7 +64,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							'type'     => 'text',
 							'required' => 1,
 						),
-						static::FIELD_ENTRY_IMAGE_LINK => array(
+						static::FIELD_ENTRY_IMAGE_LINK  => array(
 							'key'      => $entry_image_link,
 							'name'     => static::FIELD_ENTRY_IMAGE_LINK,
 							'label'    => 'Image Link',
@@ -157,7 +157,7 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 										if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE_LINK ] ) ) {
 											$image_wrapper_attrs['href']       = $entry[ static::FIELD_ENTRY_IMAGE_LINK ];
 											$image_wrapper_attrs['target']     = '_blank';
-											$image_wrapper_attrs['aria-label'] = 'click to go to ' . ( $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] ? $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] : ' the image link');
+											$image_wrapper_attrs['aria-label'] = 'click to go to ' . ( $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] ? $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] : ' the image link' );
 										}
 										?>
 									<a <?php echo self::render_attrs( array(), $image_wrapper_attrs ); ?>>
