@@ -45,6 +45,7 @@ import './form-modal';
 import './jump-links';
 import './g-recaptcha';
 import './faqs';
+import './circle-of-light';
 import './carousel/auto-width-image';
 import './skip-to-main';
 import './search-suggestions';
