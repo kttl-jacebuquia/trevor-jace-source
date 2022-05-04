@@ -13,30 +13,22 @@
   --spacer-bottom--lg2: #{rem-calc(100)};
   --spacer-bottom--xl: #{rem-calc(120)};
 
-  @apply mt-px40 mb-px115;
-
-  @screen md {
-    @apply mt-px60 mb-px80;
-  }
-
-  @screen lg {
-    @apply mt-px50 mb-px120;
-  }
-
-  @screen lg2 {
-    @apply mt-px50 mb-px100;
-  }
-
-  @screen xl {
-    @apply mt-px80 mb-px120;
-  }
-
   &__container {
     @apply container mx-auto;
 
     @screen xl {
       @apply grid tw-grid-desktop;
     }
+  }
+
+  // Reduce top spacing after succeeding a messaging block
+  .messaging:not([class*="bg-"]) + &,
+  .messaging.bg-transparent + & {
+    --spacer-top--default: #{rem-calc(-60)};
+    --spacer-top--md: #{rem-calc(-100)};
+    --spacer-top--lg: #{rem-calc(-50)};
+    --spacer-top--lg2: #{rem-calc(-70)};
+    --spacer-top--xl: #{rem-calc(-80)};
   }
 }
 .embed-content {
