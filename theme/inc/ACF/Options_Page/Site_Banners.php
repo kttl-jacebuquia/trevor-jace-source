@@ -270,15 +270,22 @@ class Site_Banners extends A_Options_Page {
 		$url = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_URL );
 
 		if ( $url ) {
-			$response = wp_remote_get( $url );
+			$response = wp_remote_get( $url, array( 'timeout' => 2 ) );
 
-			if ( is_array( $response ) ) {
+			if ( is_array( $response ) && ! is_wp_error( $response ) ) {
 				$body = json_decode( $response['body'] );
 
-				set_transient( static::LONG_WAIT_TRANSIENT, $body->isLongWait, 10 * MINUTE_IN_SECONDS );
-				update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, empty( $body->isLongWait ) ? 0 : 1 );
+				$long_wait = empty( $body->isLongWait ) ? 0 : 1;
 
-				return $body->isLongWait;
+				set_transient( static::LONG_WAIT_TRANSIENT, $long_wait, 10 * MINUTE_IN_SECONDS );
+				update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, $long_wait );
+
+				return $long_wait;
+			} else {
+				set_transient( static::LONG_WAIT_TRANSIENT, 0, 10 * MINUTE_IN_SECONDS );
+				update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, 0 );
+
+				return false;
 			}
 		}
 
