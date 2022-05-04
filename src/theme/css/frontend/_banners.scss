@@ -127,14 +127,14 @@
       }
 
       tilt {
-        @apply relative text-px32 leading-px38 mr-px8 transform rotate-0;
+        @apply relative text-px32 leading-px38 mr-px5 transform rotate-0;
 
         @screen md {
           @apply text-px32 leading-px38 tracking-em001;
         }
 
         @screen lg {
-          @apply text-px35 leading-px45 tracking-em005;
+          @apply text-px35 leading-px45 tracking-em005 mr-px8;
         }
 
         @screen lg2 {
