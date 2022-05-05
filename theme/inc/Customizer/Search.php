@@ -442,7 +442,7 @@ class Search extends Abstract_Customizer {
 	public static function get_pages( $search ) {
 		$q = new \WP_Query(
 			array(
-				's'              => str_replace( ' ', '+', $search ),
+				's'              => $search,
 				'post_type'      => 'page',
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
@@ -466,7 +466,7 @@ class Search extends Abstract_Customizer {
 
 		$q = new \WP_Query(
 			array(
-				's'              => str_replace( ' ', '+', $search ),
+				's'              => $search,
 				'post_type'      => $post_types,
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
@@ -484,24 +484,56 @@ class Search extends Abstract_Customizer {
 		$current_scope = self::get_current_scope();
 		$post_types    = self::get_scope_post_types( $current_scope );
 
+		$rc_posts_by_tag = self::get_rc_posts_by_tag( $search );
+		$posts_by_tag    = self::get_posts_by_tag( $search );
+
 		switch ( $current_scope ) {
 			case 'all':
-				$posts = array_merge( self::get_pages( $search ), self::get_rc_posts_by_tag( $search ), self::get_posts_by_tag( $search ), self::get_all_posts( $search ) );
+				if ( ! empty( $rc_posts_by_tag ) ) {
+					$posts = array_merge( $posts, $rc_posts_by_tag );
+				}
+
+				if ( ! empty( $posts_by_tag ) ) {
+					$posts = array_merge( $posts, $posts_by_tag );
+				}
+
+				if ( empty( $rc_posts_by_tag ) && empty( $posts_by_tag ) ) {
+					$posts = array_merge( self::get_pages( $search ), self::get_all_posts( $search ) );
+				}
+
 				break;
 			case 'resources':
-				$posts = array_merge( self::get_rc_posts_by_tag( $search ), self::get_all_posts( $search, $post_types ) );
+				if ( ! empty( $rc_posts_by_tag ) ) {
+					$posts = array_merge( $posts, $rc_posts_by_tag );
+				}
+
+				if ( empty( $rc_posts_by_tag ) && empty( $posts_by_tag ) ) {
+					$posts = array_merge( $posts, self::get_all_posts( $search, $post_types ) );
+				}
+
 				break;
 			case 'blogs':
-				$posts = array_merge( self::get_posts_by_tag( $search ), self::get_all_posts( $search, $post_types ) );
+				if ( ! empty( $posts_by_tag ) ) {
+					$posts = array_merge( $posts, $posts_by_tag );
+				}
+
+				if ( empty( $rc_posts_by_tag ) && empty( $posts_by_tag ) ) {
+					$posts = array_merge( $posts, self::get_all_posts( $search, $post_types ) );
+				}
+
 				break;
 			default:
-				$posts = self::get_all_posts( $search, $post_types );
+				if ( empty( $rc_posts_by_tag ) && empty( $posts_by_tag ) ) {
+					$posts = array_merge( $posts, self::get_all_posts( $search, $post_types ) );
+				}
 				break;
 		}
 
-		// Remove duplicate posts
-		$temp_posts = array_unique( array_column( $posts, 'ID' ) );
-		$posts      = array_intersect_key( $posts, $temp_posts );
+		if ( ! empty( $posts ) ) {
+			// Remove duplicate posts
+			$temp_posts = array_unique( array_column( $posts, 'ID' ) );
+			$posts      = array_intersect_key( $posts, $temp_posts );
+		}
 
 		return $posts;
 	}
