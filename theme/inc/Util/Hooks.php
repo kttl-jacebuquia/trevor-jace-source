@@ -757,38 +757,37 @@ class Hooks {
 			return true;
 		}
 
-		$active     = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_ACTIVE ];
 		$start_date = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_START_DATE ];
 		$end_date   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_END_DATE ];
 
-		return static::is_date_active( $current_date, $start_date, $end_date, $active );
+		return static::is_date_active( $current_date, $start_date, $end_date );
 	}
 
 	/**
 	 * Check if date is active.
 	 */
-	public static function is_date_active( $current_date, $start_date, $end_date, $active = true ): bool {
+	public static function is_date_active( $current_date, $start_date, $end_date ): bool {
 		$current_date = ! empty( $current_date ) ? strtotime( $current_date ) : '';
 		$start_date   = ! empty( $start_date ) ? strtotime( $start_date ) : '';
 		$end_date     = ! empty( $end_date ) ? strtotime( $end_date ) : '';
 
-		if ( $active && empty( $start_date ) && empty( $end_date ) ) {
+		if ( empty( $start_date ) && empty( $end_date ) ) {
 			return true;
 		}
 
-		if ( $active && ! empty( $start_date ) && ! empty( $end_date ) ) {
+		if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 			if ( $current_date >= $start_date && $current_date <= $end_date ) {
 				return true;
 			}
 		}
 
-		if ( $active && ! empty( $start_date ) && empty( $end_date ) ) {
+		if ( ! empty( $start_date ) && empty( $end_date ) ) {
 			if ( $current_date >= $start_date ) {
 				return true;
 			}
 		}
 
-		if ( $active && empty( $start_date ) && ! empty( $end_date ) ) {
+		if ( empty( $start_date ) && ! empty( $end_date ) ) {
 			if ( $current_date <= $end_date ) {
 				return true;
 			}
@@ -825,7 +824,7 @@ class Hooks {
 		if ( class_exists( 'Trevor_Chat_Button_Public' ) ) {
 			$long_wait_message = do_shortcode( '[trevor-wait-time]' );
 
-			if ( ! empty( $long_wait_message ) && empty( $banners ) ) {
+			if ( ! empty( $long_wait_message ) ) {
 				$banners[] = array(
 					'desc' => $long_wait_message,
 					'type' => 'long_wait',
@@ -839,7 +838,7 @@ class Hooks {
 				$is_long_wait = true;
 			}
 
-			if ( $is_long_wait && empty( $banners ) ) {
+			if ( $is_long_wait ) {
 				$banners[] = array(
 					'title' => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_TITLE ),
 					'desc'  => Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_DESCRIPTION ),
@@ -854,15 +853,15 @@ class Hooks {
 		$pride_end_date    = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_END_DATE );
 
 		if ( ! empty( $pride_promo_title ) && static::is_date_active( $current_date, $pride_start_date, $pride_end_date, true ) ) {
-			$promo_Link      = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK );
-			$promo_link_text = ! empty( $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] ) ? $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] : '';
-			$promo_Link_url  = ! empty( $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] ) ? $promo_Link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] : '';
-			$pride_lp_id     = url_to_postid( $promo_Link_url ) ?? false;
+			$promo_link      = Site_Banners::get_option( Site_Banners::FIELD_PRIDE_PROMO_LINK );
+			$promo_link_text = ! empty( $promo_link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] ) ? $promo_link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_LABEL ] : '';
+			$promo_link_url  = ! empty( $promo_link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] ) ? $promo_link[ Site_Banners::FIELD_PRIDE_PROMO_LINK_URL ] : '';
+			$pride_lp_id     = url_to_postid( $promo_link_url ) ?? false;
 
 			$banners[] = array(
 				'title'      => $pride_promo_title,
 				'link_text'  => $promo_link_text,
-				'link_url'   => $promo_Link_url,
+				'link_url'   => $promo_link_url,
 				'type'       => 'pride_promo',
 				'exclude_in' => $pride_lp_id,
 			);
@@ -873,6 +872,10 @@ class Hooks {
 			$banner['id'] = substr( \TrevorWP\Util\Tools::get_obj_signature( $banner ), 3, 6 );
 		}
 
+		// Cache timeouts
+		$browser_to = 30; # 30 sec
+		$proxy_to   = 10; # 10 sec
+
 		$resp = new \WP_REST_Response(
 			array(
 				'success' => true,
@@ -882,7 +885,7 @@ class Hooks {
 		);
 
 		// Cache timeouts
-		$browser_to = 5 * 60; # 5 min
+		$browser_to = 30; # 30 sec
 		$proxy_to   = 10; # 10 sec
 		$resp->header( 'Cache-Control', sprintf( 'public, max-age=%d, s-maxage=%d', $browser_to, $proxy_to ) );
 

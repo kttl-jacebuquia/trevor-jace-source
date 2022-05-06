@@ -11,7 +11,6 @@ class Site_Banners extends A_Options_Page {
 	const FIELD_LONG_WAIT_DESCRIPTION   = 'long_wait_description';
 	const FIELD_LONG_WAIT_CURRENT       = 'long_wait_current';
 	const FIELD_CUSTOM_ENTRIES          = 'custom_entries';
-	const FIELD_CUSTOM_ENTRY_ACTIVE     = 'custom_entry_active';
 	const FIELD_CUSTOM_ENTRY_FORCE_SHOW = 'custom_entry_force_show';
 	const FIELD_CUSTOM_ENTRY_TITLE      = 'custom_entry_title';
 	const FIELD_CUSTOM_ENTRY_MESSAGE    = 'custom_entry_message';
@@ -43,7 +42,6 @@ class Site_Banners extends A_Options_Page {
 		$long_wait_current       = static::gen_field_key( static::FIELD_LONG_WAIT_CURRENT );
 		$custom_entries          = static::gen_field_key( static::FIELD_CUSTOM_ENTRIES );
 		$custom_entry_force_show = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_FORCE_SHOW );
-		$custom_entry_active     = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_ACTIVE );
 		$custom_entry_start_date = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_START_DATE );
 		$custom_entry_end_date   = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_END_DATE );
 		$custom_entry_title      = static::gen_field_key( static::FIELD_CUSTOM_ENTRY_TITLE );
@@ -126,18 +124,6 @@ class Site_Banners extends A_Options_Page {
 					'type'       => 'repeater',
 					'layout'     => 'block',
 					'sub_fields' => array(
-						static::FIELD_CUSTOM_ENTRY_ACTIVE  => array(
-							'key'         => $custom_entry_active,
-							'name'        => static::FIELD_CUSTOM_ENTRY_ACTIVE,
-							'label'       => 'Active',
-							'type'        => 'true_false',
-							'ui'          => 1,
-							'ui_on_text'  => '',
-							'ui_off_text' => '',
-							'wrapper'     => array(
-								'width' => '50%',
-							),
-						),
 						static::FIELD_CUSTOM_ENTRY_FORCE_SHOW => array(
 							'key'         => $custom_entry_force_show,
 							'name'        => static::FIELD_CUSTOM_ENTRY_FORCE_SHOW,
@@ -146,33 +132,44 @@ class Site_Banners extends A_Options_Page {
 							'ui'          => 1,
 							'ui_on_text'  => '',
 							'ui_off_text' => '',
-							'wrapper'     => array(
-								'width' => '50%',
-							),
 						),
 						static::FIELD_CUSTOM_ENTRY_START_DATE => array(
-							'key'            => $custom_entry_start_date,
-							'name'           => static::FIELD_CUSTOM_ENTRY_START_DATE,
-							'label'          => 'Start Date',
-							'type'           => 'date_time_picker',
-							'wrapper'        => array(
+							'key'               => $custom_entry_start_date,
+							'name'              => static::FIELD_CUSTOM_ENTRY_START_DATE,
+							'label'             => 'Start Date',
+							'type'              => 'date_time_picker',
+							'display_format'    => 'M j, Y g:i:s a',
+							'return_format'     => 'M j, Y H:i:s',
+							'first_day'         => 0,
+							'wrapper'           => array(
 								'width' => '50%',
 							),
-							'display_format' => 'M j, Y g:i:s a',
-							'return_format'  => 'M j, Y H:i:s',
-							'first_day'      => 0,
+							'conditional_logic' => array(
+								array(
+									'field'    => $custom_entry_force_show,
+									'operator' => '==',
+									'value'    => 0,
+								),
+							),
 						),
 						static::FIELD_CUSTOM_ENTRY_END_DATE => array(
-							'key'            => $custom_entry_end_date,
-							'name'           => static::FIELD_CUSTOM_ENTRY_END_DATE,
-							'label'          => 'End Date',
-							'type'           => 'date_time_picker',
-							'wrapper'        => array(
+							'key'               => $custom_entry_end_date,
+							'name'              => static::FIELD_CUSTOM_ENTRY_END_DATE,
+							'label'             => 'End Date',
+							'type'              => 'date_time_picker',
+							'display_format'    => 'M j, Y g:i:s a',
+							'return_format'     => 'M j, Y H:i:s',
+							'first_day'         => 0,
+							'wrapper'           => array(
 								'width' => '50%',
 							),
-							'display_format' => 'M j, Y g:i:s a',
-							'return_format'  => 'M j, Y H:i:s',
-							'first_day'      => 0,
+							'conditional_logic' => array(
+								array(
+									'field'    => $custom_entry_force_show,
+									'operator' => '==',
+									'value'    => 0,
+								),
+							),
 						),
 						static::FIELD_CUSTOM_ENTRY_TITLE   => array(
 							'key'      => $custom_entry_title,
@@ -277,12 +274,12 @@ class Site_Banners extends A_Options_Page {
 
 				$long_wait = empty( $body->isLongWait ) ? 0 : 1;
 
-				set_transient( static::LONG_WAIT_TRANSIENT, $long_wait, 10 * MINUTE_IN_SECONDS );
+				set_transient( static::LONG_WAIT_TRANSIENT, $long_wait, 30 );
 				update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, $long_wait );
 
 				return $long_wait;
 			} else {
-				set_transient( static::LONG_WAIT_TRANSIENT, 0, 10 * MINUTE_IN_SECONDS );
+				set_transient( static::LONG_WAIT_TRANSIENT, 0, 30 );
 				update_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT, 0 );
 
 				return false;
