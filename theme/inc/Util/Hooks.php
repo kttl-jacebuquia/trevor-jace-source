@@ -819,17 +819,16 @@ class Hooks {
 			}
 		}
 
+
 		# Long waiting banner
 		# Use Trevor_Chat_Button_Public implementation if available
-		if ( class_exists( 'Trevor_Chat_Button_Public' ) ) {
-			$long_wait_message = do_shortcode( '[trevor-wait-time]' );
+		$long_wait_message = class_exists( 'Trevor_Chat_Button_Public' ) ? do_shortcode( '[trevor-wait-time]' ) : '';
 
-			if ( ! empty( $long_wait_message ) ) {
-				$banners[] = array(
-					'desc' => $long_wait_message,
-					'type' => 'long_wait',
-				);
-			}
+		if ( ! empty( $long_wait_message ) ) {
+			$banners[] = array(
+				'desc' => $long_wait_message,
+				'type' => 'long_wait',
+			);
 		} else {
 			$is_long_wait = Site_Banners::is_long_wait();
 			$force_show   = Site_Banners::get_option( Site_Banners::FIELD_LONG_WAIT_FORCE_SHOW );
