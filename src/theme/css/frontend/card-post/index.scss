@@ -45,26 +45,12 @@
     }
   }
 
-  &.is-hover {
-    .post-thumbnail-wrap img {
-      @apply transform scale-105;
-    }
-  }
-
   body.is-rc &.type-trevor_rc_glossary .hover-hit-area {
     @apply hidden;
   }
 
   &:not(.bg-full) .post-thumbnail-wrap + * {
     @apply mt-px24 lg:mt-px28;
-  }
-
-  :is(&.fundraiser, &.type-trevor_fund_story) {
-    &:hover {
-      .post-thumbnail-wrap img {
-        @apply transform scale-105;
-      }
-    }
   }
 
   .title-top {

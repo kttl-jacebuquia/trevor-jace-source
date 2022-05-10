@@ -1,6 +1,14 @@
 .card-post.has-post-thumbnail {
   @include focusable-children-outline(light);
 
+  &:not(.bg-full):hover {
+    --card-background: #{theme('colors.gray.light')};
+
+    .card-content {
+      @apply bg-gray-light transition-colors;
+    }
+  }
+
   .post-title {
     @apply text-px24 leading-px28 tracking-px_05 line-clamp-2;
     @apply below-mobile:line-clamp-3;
