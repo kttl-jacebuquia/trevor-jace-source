@@ -149,24 +149,25 @@ class Header_Image_Grid extends A_Field_Group implements I_Block, I_Renderable {
 							<?php if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ) ) : ?>
 								<div class="header-image-grid__item" role="listitem">
 									<?php
+										$image_wrapper_tag   = 'div';
 										$image_wrapper_attrs = array(
 											'class' => 'header-image-grid__image',
-											'href'  => 'javascript:;',
 										);
 
 										if ( ! empty( $entry[ static::FIELD_ENTRY_IMAGE_LINK ] ) ) {
+											$image_wrapper_tag                 = 'a';
 											$image_wrapper_attrs['href']       = $entry[ static::FIELD_ENTRY_IMAGE_LINK ];
 											$image_wrapper_attrs['target']     = '_blank';
 											$image_wrapper_attrs['aria-label'] = 'click to go to ' . ( $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] ? $entry[ static::FIELD_ENTRY_IMAGE_TITLE ] : ' the image link' );
 										}
 										?>
-									<a <?php echo self::render_attrs( array(), $image_wrapper_attrs ); ?>>
+									<<?php echo $image_wrapper_tag; ?> <?php echo self::render_attrs( array(), $image_wrapper_attrs ); ?>>
 										<img
 											class="header-image-grid__img"
 											src="<?php echo esc_url( $entry[ static::FIELD_ENTRY_IMAGE ]['url'] ); ?>"
 											alt="<?php echo ! empty( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) ? esc_attr( $entry[ static::FIELD_ENTRY_IMAGE ]['alt'] ) : esc_attr( $header ); ?>"
 										/>
-									</a>
+									</<?php echo $image_wrapper_tag; ?>>
 								</div>
 							<?php endif; ?>
 						<?php endforeach; ?>
