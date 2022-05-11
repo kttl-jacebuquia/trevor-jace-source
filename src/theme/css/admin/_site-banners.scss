@@ -1,0 +1,15 @@
+[data-key="trvr-site-banners:f:long_wait_current"] {
+  cursor: not-allowed;
+
+  .acf-label {
+    pointer-events: none;
+  }
+
+  .acf-input {
+    pointer-events: none;
+  }
+
+  .acf-switch {
+    opacity: .5;
+  }
+}

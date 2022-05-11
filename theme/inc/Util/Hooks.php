@@ -118,6 +118,9 @@ class Hooks {
 			remove_filter( 'acf/validate_post_id', array( $acf_revs_cls, 'acf_validate_post_id', 10 ) );
 		}
 
+		# Apply dynamic value for Long Wait Site Banner
+		add_filter( 'acf/load_value/name=' . Site_Banners::FIELD_LONG_WAIT_CURRENT, array( Site_Banners::class, 'is_long_wait' ) );
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 

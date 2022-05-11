@@ -154,6 +154,10 @@
       @screen lg {
         @apply ml-px30 text-px20 -top-px4 leading-px24 tracking-em005 pb-px2;
       }
+
+      @screen xl {
+        @apply text-px18 leading-px26 tracking-em005 -top-px6;
+      }
     }
 
     .site-banner__close-btn {
