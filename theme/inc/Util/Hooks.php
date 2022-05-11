@@ -886,11 +886,6 @@ class Hooks {
 			200
 		);
 
-		// Cache timeouts
-		$browser_to = 30; # 30 sec
-		$proxy_to   = 10; # 10 sec
-		$resp->header( 'Cache-Control', sprintf( 'public, max-age=%d, s-maxage=%d', $browser_to, $proxy_to ) );
-
 		return $resp;
 	}
 
