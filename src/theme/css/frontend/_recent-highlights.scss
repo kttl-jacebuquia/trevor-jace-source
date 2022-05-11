@@ -73,7 +73,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     @apply h-auto items-stretch;
   }
 
-  &__card {
+  &__card.swiper-slide {
     @apply rounded-px10 bg-white text-teal-dark relative w-full h-auto;
     box-shadow: 0px 6px 12px rgba(0, 58, 72, 0.1);
 
@@ -88,6 +88,10 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
 
     @screen lg2 {
       height: rem-calc(464);
+    }
+
+    @screen xl {
+      height: rem-calc(522);
     }
   }
 
@@ -131,7 +135,7 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     @apply pt-px30 pb-px75 px-px24;
 
     @screen lg {
-      @apply py-px60 pl-px40 pr-px17;
+      @apply py-px50 pb-px20 pl-px40 pr-px17;
     }
   }
 
@@ -161,12 +165,12 @@ $arrow-right: '/wp-content/themes/trevor/static/media/carousel-arrow-right.svg';
     }
 
     @screen lg {
-      @apply mt-px20 text-px18 leading-px26 tracking-em_001;
+      @apply mt-px15 text-px16 leading-px22 line-clamp-5;
     }
   }
 
   &__cta {
-    @apply inline-block;
+    @apply inline-block font-semibold;
 
     // Covers the whole card to make it clickable;
     @screen md-max {
