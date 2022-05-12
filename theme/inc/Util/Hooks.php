@@ -749,14 +749,9 @@ class Hooks {
 	 * Check if custom site banner is active.
 	 */
 	public static function is_custom_site_banner_entry_active( array $entry, string $current_date ): bool {
-		$is_long_wait = Site_Banners::is_long_wait();
-		$force_show   = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_FORCE_SHOW ];
+		$force_show = $entry[ Site_Banners::FIELD_CUSTOM_ENTRY_FORCE_SHOW ];
 
 		if ( $force_show ) {
-			return true;
-		}
-
-		if ( $is_long_wait ) {
 			return true;
 		}
 
@@ -775,7 +770,7 @@ class Hooks {
 		$end_date     = ! empty( $end_date ) ? strtotime( $end_date ) : '';
 
 		if ( empty( $start_date ) && empty( $end_date ) ) {
-			return true;
+			return false;
 		}
 
 		if ( ! empty( $start_date ) && ! empty( $end_date ) ) {

@@ -21,19 +21,21 @@ window.trevorWP.siteBanners = () => {
 		}
 	};
 
-	$.get('/wp-json/trevor/v1/site-banners').then((resp) => {
-		if (resp.success) {
-			// Show only up to 2 banners at a time,
-			// with the Pride LP having least priority
-			resp.banners
-				.map((bannerObj) => new SiteBanner(bannerObj))
-				.filter((banner) => banner.isRenderable())
-				.slice(0, 2)
-				.forEach((banner) => {
-					banner.render();
-					banner.on('remove', onRemove);
-					bannersById[banner.id] = banner;
-				});
+	$.get('/wp-json/trevor/v1/site-banners?nonce=' + Date.now()).then(
+		(resp) => {
+			if (resp.success) {
+				// Show only up to 2 banners at a time,
+				// with the Pride LP having least priority
+				resp.banners
+					.map((bannerObj) => new SiteBanner(bannerObj))
+					.filter((banner) => banner.isRenderable())
+					.slice(0, 2)
+					.forEach((banner) => {
+						banner.render();
+						banner.on('remove', onRemove);
+						bannersById[banner.id] = banner;
+					});
+			}
 		}
-	});
+	);
 };
