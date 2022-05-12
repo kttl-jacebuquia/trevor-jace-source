@@ -53,8 +53,6 @@ class Site_Banners extends A_Options_Page {
 		$pride_promo_link_label  = static::gen_field_key( static::FIELD_PRIDE_PROMO_LINK_LABEL );
 		$pride_promo_link_url    = static::gen_field_key( static::FIELD_PRIDE_PROMO_LINK_URL );
 
-		$current_long_wait_value = get_option( Main::OPTION_KEY_COUNSELOR_LONG_WAIT ) ? 'TRUE' : 'FALSE';
-
 		return array_merge(
 			static::_gen_tab_field( 'Long Wait' ),
 			array(
@@ -112,7 +110,7 @@ class Site_Banners extends A_Options_Page {
 				static::FIELD_LONG_WAIT_CURRENT     => array(
 					'key'         => $long_wait_current,
 					'name'        => static::FIELD_LONG_WAIT_CURRENT,
-					'label'       => 'Current Value',
+					'label'       => 'Current Value (Read Only)',
 					'type'        => 'true_false',
 					'ui'          => 1,
 					'ui_on_text'  => 'TRUE',
