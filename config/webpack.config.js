@@ -133,9 +133,7 @@ module.exports = function (webpackEnv) {
 			: isEnvDevelopment && 'development',
 		// Stop compilation early in production
 		bail: isEnvProduction,
-		devtool: isEnvProduction
-			? 'nosources-source-map' // without source content
-			: isEnvDevelopment && 'cheap-module-source-map',
+		devtool: 'cheap-module-source-map',
 		// These are the "entry points" to our application.
 		// This means they will be the "root" imports that are included in JS bundle.
 		entry,
@@ -165,49 +163,8 @@ module.exports = function (webpackEnv) {
 			globalObject: 'this',
 		},
 		optimization: {
-			minimize: isEnvProduction,
+			minimize: true,
 			minimizer: [
-				// This is only used in production mode
-				new TerserPlugin({
-					terserOptions: {
-						parse: {
-							// We want terser to parse ecma 8 code. However, we don't want it
-							// to apply any minification steps that turns valid ecma 5 code
-							// into invalid ecma 5 code. This is why the 'compress' and 'output'
-							// sections only apply transformations that are ecma 5 safe
-							// https://github.com/facebook/create-react-app/pull/4234
-							ecma: 8,
-						},
-						compress: {
-							ecma: 5,
-							warnings: false,
-							// Disabled because of an issue with Uglify breaking seemingly valid code:
-							// https://github.com/facebook/create-react-app/issues/2376
-							// Pending further investigation:
-							// https://github.com/mishoo/UglifyJS2/issues/2011
-							comparisons: false,
-							// Disabled because of an issue with Terser breaking valid code:
-							// https://github.com/facebook/create-react-app/issues/5250
-							// Pending further investigation:
-							// https://github.com/terser-js/terser/issues/120
-							inline: 2,
-						},
-						mangle: {
-							safari10: true,
-						},
-						// Added for profiling in devtools
-						keep_classnames: false,
-						keep_fnames: false,
-						output: {
-							ecma: 5,
-							comments: false,
-							// Turned on because emoji and regex is not minified properly using default
-							// https://github.com/facebook/create-react-app/issues/2488
-							ascii_only: true,
-						},
-					},
-					sourceMap: shouldUseSourceMap,
-				}),
 				// This is only used in production mode
 				new OptimizeCSSAssetsPlugin({
 					cssProcessorOptions: {
@@ -352,7 +309,8 @@ module.exports = function (webpackEnv) {
 								cacheDirectory: true,
 								// See #6846 for context on why cacheCompression is disabled
 								cacheCompression: false,
-								compact: isEnvProduction,
+								compact: false,
+								minified: false,
 							},
 						},
 						// Process any JS outside of the app with Babel.
