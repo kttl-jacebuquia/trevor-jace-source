@@ -24,7 +24,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 console.log('Creating an optimized production build...');
 
 // Generate configuration
-const config = configFactory('development');
+const config = configFactory('production');
 const compiler = webpack(config);
 
 return new Promise((resolve, reject) => {
