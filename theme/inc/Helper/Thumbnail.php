@@ -46,7 +46,18 @@ class Thumbnail {
 			return null;
 		}
 
-		return implode( "\n", wp_list_pluck( self::post_image( $post->ID, ...$variants ), 0 ) );
+		$post_image = self::post_image( $post->ID, ...$variants );
+		$post_type  = get_post_type( $post );
+
+		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post ) ) {
+			echo wp_json_encode( compact( 'post_image', 'post_type' ), JSON_PRETTY_PRINT );
+		} else {
+			echo '<script type="application/json">';
+			echo wp_json_encode( compact( 'post_type' ), JSON_PRETTY_PRINT );
+			echo '</script>';
+		}
+
+		return implode( "\n", wp_list_pluck( $post_image, 0 ) );
 	}
 
 	/**
