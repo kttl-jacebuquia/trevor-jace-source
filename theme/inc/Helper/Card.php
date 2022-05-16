@@ -105,8 +105,10 @@ class Card {
 			if ( $is_bg_full ) {
 				// Prefer vertical image on full bg.
 				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_VERTICAL );
+				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
 			} else {
 				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_VERTICAL );
 			}
 
 			// Fallback to the square.
