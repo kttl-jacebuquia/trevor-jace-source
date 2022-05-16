@@ -28,13 +28,20 @@ class Card {
 		$tags_use_rc_search = 'post' !== $post_type;
 		$_class             = &$options['class'];
 
+		// Catch debug logs from operations below
+		// ob_start();
+		echo '<script type="application/json" hidden>';
+
 		// Double check hide_cat_eyebrow settings
 		if ( empty( $options['hide_cat_eyebrow'] ) ) {
 			$options['hide_cat_eyebrow'] = ! \get_post_meta( $post->ID, PostMeta::KEY_SHOW_CARD_EYEBROW, true );
 		}
 
 		// The default class name.
-		$_class[] = 'card-post';
+		$_class = array_merge(
+			$_class,
+			get_post_class( array( 'card-post' ), $post->ID ),
+		);
 
 		$icon_cls   = null;
 		$desc       = null;
@@ -93,9 +100,6 @@ class Card {
 		// Thumbnail variants.
 		$thumb_var = array();
 
-		// Catch debug logs from operations below
-		ob_start();
-
 		// External Resources should have no image
 		if ( CPT\RC\External::POST_TYPE !== $post_type ) {
 			if ( $is_bg_full ) {
@@ -109,7 +113,11 @@ class Card {
 			$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
 		}
 
+		echo '---------------------------------------';
+		echo 'Getting Post Images';
 		$thumb         = ! empty( $thumb_var ) ? Thumbnail::post( $post, ...$thumb_var ) : false;
+		echo 'Got Post Images';
+		echo '---------------------------------------';
 
 		echo json_encode( compact( 'thumb' ), JSON_PRETTY_PRINT );
 
@@ -131,22 +139,31 @@ class Card {
 
 		$title = get_the_title( $post );
 
+		echo '\n--------------------------------------- After Title ---------------------------------------\n';
+
 		$attrs = array(
 			'data-post-type' => $post_type,
 		);
 
-		$post_class = get_post_class( $_class, $post->ID );
+		echo '\n--------------------------------------- After Attrs ---------------------------------------\n';
 
-		if ( $has_thumbnail && ! in_array( 'has-post-thumbnail', $post_class, true ) ) {
-			array_push( $post_class, 'has-post-thumbnail' );
+		// $post_class = get_post_class( $_class, $post->ID );
+
+		echo '\n--------------------------------------- After Post Class ---------------------------------------\n';
+
+		if ( $has_thumbnail && ! in_array( 'has-post-thumbnail', $_class, true ) ) {
+			array_push( $_class, 'has-post-thumbnail' );
 		}
 
+		echo '\n--------------------------------------- End of Script ---------------------------------------\n';
+
 		// Record all debug logs from operations above
-		$debug_logs = ob_get_clean();
+		// $debug_logs = ob_get_clean();
+		echo '</script>';
 
 		ob_start();
 		?>
-		<article <?php echo A_Field_Group::render_attrs( $post_class, $attrs ); ?>>
+		<article <?php echo A_Field_Group::render_attrs( $_class, $attrs ); ?>>
 			<?php if ( in_array( 'bg-full', $_class, true ) && $has_thumbnail ) { ?>
 				<div class="post-thumbnail-wrap">
 					<a href="<?php echo esc_url( get_the_permalink( $post ) ); ?>" aria-label="click to read <?php echo $title; ?>">
@@ -221,7 +238,7 @@ class Card {
 				?>
 			</script>
 			<script type="text/plain" class="card-logs" hidden>
-				<?php echo $debug_logs; ?>
+				<?php // echo $debug_logs; ?>
 			</script>
 		</article>
 		<?php
