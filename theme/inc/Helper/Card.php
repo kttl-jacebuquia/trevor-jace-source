@@ -28,10 +28,6 @@ class Card {
 		$tags_use_rc_search = 'post' !== $post_type;
 		$_class             = &$options['class'];
 
-		// Catch debug logs from operations below
-		// ob_start();
-		echo '<script type="application/json" hidden>';
-
 		// Double check hide_cat_eyebrow settings
 		if ( empty( $options['hide_cat_eyebrow'] ) ) {
 			$options['hide_cat_eyebrow'] = ! \get_post_meta( $post->ID, PostMeta::KEY_SHOW_CARD_EYEBROW, true );
@@ -105,23 +101,19 @@ class Card {
 			if ( $is_bg_full ) {
 				// Prefer vertical image on full bg.
 				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_VERTICAL );
+				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
 			} else {
 				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_HORIZONTAL );
+				$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_VERTICAL );
 			}
 
 			// Fallback to the square.
 			$thumb_var[] = self::_get_thumb_var( Thumbnail::TYPE_SQUARE );
 		}
 
-		echo '---------------------------------------';
-		echo 'Getting Post Images';
 		$thumb         = ! empty( $thumb_var ) ? Thumbnail::post( $post, ...$thumb_var ) : false;
-		echo 'Got Post Images';
-		echo '---------------------------------------';
-
-		echo json_encode( compact( 'thumb' ), JSON_PRETTY_PRINT );
-
 		$has_thumbnail = ! empty( $thumb );
+
 		if ( ! $has_thumbnail ) {
 			$_class[] = 'no-thumbnail';
 		}
@@ -139,27 +131,13 @@ class Card {
 
 		$title = get_the_title( $post );
 
-		echo '\n--------------------------------------- After Title ---------------------------------------\n';
-
 		$attrs = array(
 			'data-post-type' => $post_type,
 		);
 
-		echo '\n--------------------------------------- After Attrs ---------------------------------------\n';
-
-		// $post_class = get_post_class( $_class, $post->ID );
-
-		echo '\n--------------------------------------- After Post Class ---------------------------------------\n';
-
 		if ( $has_thumbnail && ! in_array( 'has-post-thumbnail', $_class, true ) ) {
 			array_push( $_class, 'has-post-thumbnail' );
 		}
-
-		echo '\n--------------------------------------- End of Script ---------------------------------------\n';
-
-		// Record all debug logs from operations above
-		// $debug_logs = ob_get_clean();
-		echo '</script>';
 
 		ob_start();
 		?>
@@ -224,22 +202,6 @@ class Card {
 					</aside>
 				<?php } ?>
 			</div>
-
-			<script type="application/json" class="card-meta" hidden>
-				<?php
-					echo json_encode(
-						array(
-							'thumb_var' => $thumb_var,
-							'post' => $post,
-							'thumb' => $thumb,
-						),
-						JSON_PRETTY_PRINT
-					)
-				?>
-			</script>
-			<script type="text/plain" class="card-logs" hidden>
-				<?php // echo $debug_logs; ?>
-			</script>
 		</article>
 		<?php
 		return ob_get_clean();
