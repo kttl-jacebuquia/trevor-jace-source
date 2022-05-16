@@ -93,6 +93,9 @@ class Card {
 		// Thumbnail variants.
 		$thumb_var = array();
 
+		// Catch debug logs from operations below
+		ob_start();
+
 		// External Resources should have no image
 		if ( CPT\RC\External::POST_TYPE !== $post_type ) {
 			if ( $is_bg_full ) {
@@ -107,6 +110,9 @@ class Card {
 		}
 
 		$thumb         = ! empty( $thumb_var ) ? Thumbnail::post( $post, ...$thumb_var ) : false;
+
+		echo json_encode( compact( 'thumb' ), JSON_PRETTY_PRINT );
+
 		$has_thumbnail = ! empty( $thumb );
 		if ( ! $has_thumbnail ) {
 			$_class[] = 'no-thumbnail';
@@ -134,6 +140,9 @@ class Card {
 		if ( $has_thumbnail && ! in_array( 'has-post-thumbnail', $post_class, true ) ) {
 			array_push( $post_class, 'has-post-thumbnail' );
 		}
+
+		// Record all debug logs from operations above
+		$debug_logs = ob_get_clean();
 
 		ob_start();
 		?>
@@ -198,6 +207,22 @@ class Card {
 					</aside>
 				<?php } ?>
 			</div>
+
+			<script type="application/json" class="card-meta" hidden>
+				<?php
+					echo json_encode(
+						array(
+							'thumb_var' => $thumb_var,
+							'post' => $post,
+							'thumb' => $thumb,
+						),
+						JSON_PRETTY_PRINT
+					)
+				?>
+			</script>
+			<script type="text/plain" class="card-logs" hidden>
+				<?php echo $debug_logs; ?>
+			</script>
 		</article>
 		<?php
 		return ob_get_clean();

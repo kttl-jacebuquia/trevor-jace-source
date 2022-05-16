@@ -58,7 +58,11 @@ class Thumbnail {
 	public static function post_image( int $post_id, ...$variants ): ?array {
 		$found_images = self::get_post_imgs( $post_id, ...$variants );
 
-		return self::render_img_variants( $found_images );
+		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post_id ) ) {
+			echo wp_json_encode( $found_images, JSON_PRETTY_PRINT );
+		}
+
+		return self::render_img_variants( $found_images, array(), $post_id );
 	}
 
 	/**
@@ -96,7 +100,7 @@ class Thumbnail {
 	 *
 	 * @return array
 	 */
-	public static function render_img_variants( array $images_data, array $custom_attr = array() ): array {
+	public static function render_img_variants( array $images_data, array $custom_attr = array(), $post ): array {
 		$images_data = array_filter(
 			$images_data,
 			function ( $img_data ): bool {
@@ -110,9 +114,13 @@ class Thumbnail {
 				return true;
 			}
 		);
+		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post ) ) {
+			echo wp_json_encode( compact( 'images_data' ), JSON_PRETTY_PRINT );
+		}
 		$images_data = array_values( $images_data ); // reset numeric index, we'll use it below
 		$img_count   = count( $images_data );
 		$out         = array();
+
 
 		foreach ( $images_data as $idx => $img_data ) {
 			list( $img_id, $variant )       = $img_data;
