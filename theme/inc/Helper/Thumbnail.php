@@ -59,7 +59,7 @@ class Thumbnail {
 		$found_images = self::get_post_imgs( $post_id, ...$variants );
 
 		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post_id ) ) {
-			echo wp_json_encode( $found_images, JSON_PRETTY_PRINT );
+			echo wp_json_encode( compact( 'found_images' ), JSON_PRETTY_PRINT );
 		}
 
 		return self::render_img_variants( $found_images, array(), $post_id );
@@ -114,9 +114,11 @@ class Thumbnail {
 				return true;
 			}
 		);
+
 		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post ) ) {
 			echo wp_json_encode( compact( 'images_data' ), JSON_PRETTY_PRINT );
 		}
+
 		$images_data = array_values( $images_data ); // reset numeric index, we'll use it below
 		$img_count   = count( $images_data );
 		$out         = array();
@@ -152,9 +154,18 @@ class Thumbnail {
 			}
 
 			$class = implode( ' ', $class );
-			if ( ! empty( $html = wp_get_attachment_image( $img_id, $size, false, $attr ) ) ) {
+			$html  = wp_get_attachment_image( $img_id, $size, false, $attr );
+			if ( ! empty( $html ) ) {
 				$out[] = array( $html, $variant );
 			}
+
+			if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post ) ) {
+				echo wp_json_encode( compact( 'img_id', 'variant', 'html', 'size', 'attr' ), JSON_PRETTY_PRINT );
+			}
+		}
+
+		if ( \TrevorWP\CPT\Donate\Fundraiser_Stories::POST_TYPE === get_post_type( $post ) ) {
+			echo wp_json_encode( compact( 'out' ), JSON_PRETTY_PRINT );
 		}
 
 		return $out;
