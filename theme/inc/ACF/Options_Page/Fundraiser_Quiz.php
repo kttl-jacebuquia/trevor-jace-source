@@ -411,8 +411,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 
 		ob_start();
 		?>
-			<button class="fundraiser-quiz__back-btn">BACK</button>
-			<div class="fundraiser-quiz__pagination"><span class="fundraiser-quiz__current-page"></span>/<span class="fundraiser-quiz__total-page"></span></div>
+			<button class="fundraiser-quiz__back-btn" aria-label="click to go to the previous question">BACK</button>
+			<div class="fundraiser-quiz__pagination"><span class="sr-only">slide</span><span class="fundraiser-quiz__current-page"></span><span aria-hidden="hidden">/</span><span class="sr-only">of</span><span class="fundraiser-quiz__total-page"></span></div>
 			<div
 			<?php
 				echo static::render_attrs(

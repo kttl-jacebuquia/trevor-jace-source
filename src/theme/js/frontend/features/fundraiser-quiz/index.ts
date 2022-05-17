@@ -275,7 +275,9 @@ export default class FundraiserQuiz {
 			// Show new content
 			$content.removeClass('hidden').fadeIn({
 				done: () => {
-					(this.modalContainer || $content.get(0))?.focus();
+					setTimeout(() => {
+						this.modalContainer?.get(0)?.focus();
+					}, 400);
 				},
 			});
 		}
@@ -397,9 +399,16 @@ export default class FundraiserQuiz {
 				);
 				$previousContent?.fadeIn({
 					done: () => {
-						(
-							this.modalContainer || $previousContent?.get(0)
-						)?.focus();
+						setTimeout(() => {
+							this.modalContainer?.get(0)?.focus();
+
+							console.log(
+								'previous',
+								'should focus',
+								this.modalContainer,
+								this.modalContainer?.get(0)
+							);
+						}, 500);
 					},
 				});
 			});

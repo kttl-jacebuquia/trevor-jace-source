@@ -32,8 +32,8 @@ const $quickExitModal = $('.js-quick-exit-modal');
 const $ectMap = $('.ect-map');
 const $staffCarousel = $('.staff.is-carousel');
 const $staffGrid = $('.staff.is-grid');
-
 const faqTrigger = $('.faq-list__toggle');
+const $siteWideSearchInput = $('.is-site-search .search-field');
 
 // Tag Box Ellipsis
 // features.tagBoxEllipsis($('.card-post'));
@@ -360,6 +360,10 @@ if (isPhoneField) {
 
 if ($ectMap.length) {
 	$ectMap.each((index, element) => features.ectMap(element));
+}
+
+if ($siteWideSearchInput.length) {
+	$siteWideSearchInput.get(0).focus();
 }
 
 features.QuickExit.init();
