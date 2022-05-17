@@ -47,7 +47,6 @@ class Thumbnail {
 		}
 
 		$post_image = self::post_image( $post->ID, ...$variants );
-		$post_type  = get_post_type( $post );
 
 		return implode( "\n", wp_list_pluck( $post_image, 0 ) );
 	}
@@ -99,7 +98,7 @@ class Thumbnail {
 	 *
 	 * @return array
 	 */
-	public static function render_img_variants( array $images_data, array $custom_attr = array(), $post ): array {
+	public static function render_img_variants( array $images_data, array $custom_attr = array() ): array {
 		$images_data = array_filter(
 			$images_data,
 			function ( $img_data ): bool {
