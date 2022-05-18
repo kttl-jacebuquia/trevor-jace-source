@@ -314,6 +314,15 @@ export default class FundraiserQuiz {
 	computeCurrentPageNumber() {
 		this.currentPage = 1 + this.currentVertexStack.length;
 		this.currentPageContainer.html(this.currentPage);
+
+		this.paginationContainer?.attr(
+			'aria-label',
+			`slide ${this.currentPage} of ${this.totalPages}`
+		);
+
+		this.paginationContainer?.html(
+			`${this.currentPage}/${this.totalPages}`
+		);
 	}
 
 	computeTotalPageNumber(vertex) {
@@ -326,8 +335,6 @@ export default class FundraiserQuiz {
 
 			++this.totalPages;
 		}
-
-		this.totalPageContainer.html(this.totalPages);
 	}
 
 	/**
@@ -401,13 +408,6 @@ export default class FundraiserQuiz {
 					done: () => {
 						setTimeout(() => {
 							this.modalContainer?.get(0)?.focus();
-
-							console.log(
-								'previous',
-								'should focus',
-								this.modalContainer,
-								this.modalContainer?.get(0)
-							);
 						}, 500);
 					},
 				});
