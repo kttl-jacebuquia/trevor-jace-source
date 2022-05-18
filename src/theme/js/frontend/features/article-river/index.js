@@ -22,10 +22,6 @@ export default class ArticleRiver extends Component {
 		slidesPerView: 4,
 		slidesPerGroup: 4,
 		pagination: false,
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		},
 		on: {
 			init: this.onSwiperInit.bind(this),
 		},
@@ -42,9 +38,23 @@ export default class ArticleRiver extends Component {
 	// Will be called upon component instantiation
 	afterInit() {
 		const $paginationContainer = $(this.children.paginationContainer);
+		const nextEl = this.element.querySelector(
+			'.article-river__pagination-nav--next'
+		);
+		const prevEl = this.element.querySelector(
+			'.article-river__pagination-nav--prev'
+		);
+
+		const navigationOptions = {
+			nextEl,
+			prevEl,
+		};
 
 		if (this.children.paginationPages.length > 4) {
-			carousel($paginationContainer, this.swiperOptions);
+			carousel($paginationContainer, {
+				...this.swiperOptions,
+				navigation: navigationOptions,
+			});
 		}
 
 		if (this.paginationType === 'ajax') {
