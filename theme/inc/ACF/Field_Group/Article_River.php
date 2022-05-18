@@ -346,7 +346,7 @@ class Article_River extends A_Field_Group implements I_Block, I_Renderable {
 		ob_start();
 		?>
 		<div class="article-river__pagination">
-			<div class="article-river__pagination-nav swiper-button-prev trevor-ti-chevron-thick-right"></div>
+			<div class="article-river__pagination-nav article-river__pagination-nav--prev swiper-button-prev trevor-ti-chevron-thick-right"></div>
 			<div class="swiper-container">
 				<div class="article-river__pagination-pages swiper-wrapper">
 					<?php foreach ( $pages as $page ) : ?>
@@ -372,7 +372,7 @@ class Article_River extends A_Field_Group implements I_Block, I_Renderable {
 					<?php endforeach; ?>
 				</div>
 			</div>
-			<div class="article-river__pagination-nav swiper-button-next trevor-ti-chevron-thick-right"></div>
+			<div class="article-river__pagination-nav article-river__pagination-nav--next swiper-button-next trevor-ti-chevron-thick-right"></div>
 		</div>
 		<?php
 		return ob_get_clean();
