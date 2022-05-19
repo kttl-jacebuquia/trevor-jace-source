@@ -173,6 +173,13 @@ export default class FundraiserQuiz {
 		setTimeout(() => {
 			$initialStepContent.fadeIn(500, () => {
 				$initialStepContent.addClass(this.classes);
+				$initialStepContent
+					.attr({
+						tabindex: '0',
+						role: 'group',
+					})
+					.get(0)
+					?.focus();
 			});
 		}, 100);
 	}
@@ -276,7 +283,15 @@ export default class FundraiserQuiz {
 			$content.removeClass('hidden').fadeIn({
 				done: () => {
 					setTimeout(() => {
-						this.modalContainer?.get(0)?.focus();
+						const toFocus =
+							$content
+								.attr({
+									tabindex: '0',
+									role: 'group',
+								})
+								.get(0) || this.modalContainer?.get(0);
+
+						toFocus?.focus();
 					}, 400);
 				},
 			});
@@ -407,7 +422,10 @@ export default class FundraiserQuiz {
 				$previousContent?.fadeIn({
 					done: () => {
 						setTimeout(() => {
-							this.modalContainer?.get(0)?.focus();
+							const toFocus =
+								$previousContent?.get(0) ||
+								this.modalContainer?.get(0);
+							toFocus?.focus();
 						}, 500);
 					},
 				});
