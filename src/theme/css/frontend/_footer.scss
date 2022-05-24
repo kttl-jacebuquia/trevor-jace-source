@@ -121,7 +121,7 @@ footer {
       }
 
       a {
-        @apply block text-px18 leading-px22 uppercase;
+        @apply inline-block text-px18 leading-px22 uppercase;
         @apply transition-opacity duration-300 hover:opacity-80;
       }
 
