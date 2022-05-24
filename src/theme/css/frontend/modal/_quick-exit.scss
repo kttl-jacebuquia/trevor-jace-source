@@ -3,9 +3,13 @@
   @include focusable-children-outline(light);
 
   .modal-overlay {
-    background: rgba(0, 0, 102, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(0,0,0, 0.6);
     opacity: 1;
+
+    @supports (backdrop-filter: blur(10px)) {
+      background: rgba(0, 0, 102, 0.1);
+      backdrop-filter: blur(10px);
+    }
   }
 
   .modal-container {
