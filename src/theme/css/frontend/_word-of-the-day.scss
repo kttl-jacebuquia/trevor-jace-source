@@ -32,11 +32,7 @@
     }
 
     @screen lg {
-      @apply col-span-7 col-start-1 px-px40;
-    }
-
-    @screen lg2 {
-      @apply px-px70;
+      @apply col-span-7 col-start-1;
     }
 
     .no-image & {
@@ -98,13 +94,6 @@
 
     @screen lg {
       @apply col-start-8 col-span-5 mt-0;
-
-      margin-left: calc( -1 * #{theme('container.padding.DEFAULT')} );
-      margin-right: -70px;
-    }
-
-    @screen xl {
-      @apply mx-0;
     }
   }
 
