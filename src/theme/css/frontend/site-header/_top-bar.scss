@@ -4,8 +4,9 @@
 #top-bar {
 	@apply fixed top-0 left-0;
 	@apply w-full h-px84 pb-px4;
-	@apply transition-all duration-300 ease-out;
+	@apply duration-300 ease-out;
 	@apply transform-gpu -translate-y-full;
+  transition-property: opacity, visibility;
 	z-index: var(--z-index-topbar);
   @include bg(white);
 
