@@ -7,6 +7,10 @@
     // xl
     @apply xl:mt-px58 xl:tracking-em_005 xl:px-0;
 
+  a {
+    @include wave-underline-dynamic;
+  }
+
 	&-btm {
 		@apply md:mb-0;
 	}
