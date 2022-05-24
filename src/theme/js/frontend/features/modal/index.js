@@ -49,7 +49,7 @@ export class Modal {
 	open = async (e) => {
 		e?.preventDefault();
 		e?.stopPropagation();
-		this.lastActiveElement = e.currentTarget || document.activeElement || document.body;
+		this.lastActiveElement = e?.currentTarget || document.activeElement || document.body;
 
 		$document.on('keydown', this._handleKeyDown);
 		this.$overlay.on('click', this.close);
