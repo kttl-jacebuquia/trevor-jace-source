@@ -152,7 +152,7 @@ const onSwitcherClick = async (e) => {
 	});
 
 	burgerMenuContainerA11y(activeMenuIndex);
-	resetNavState();
+	resetNavState(true);
 };
 const onSmallBreakpointsMatch = () => {
 	isLargeBreakpoint = false;
@@ -201,12 +201,15 @@ const onBackToTier1Click = (e) => {
 	e.preventDefault();
 	resetNavState();
 };
-const resetNavState = () => {
+const resetNavState = (noFocusOnActiveMenu = false) => {
 	const $currentActiveMenuItem = $tier1Links.filter('.active');
 	const menuItemLink = $currentActiveMenuItem.get(0)?.firstElementChild;
 	$burgerNav.removeClass('tier-two-visible');
 	$currentActiveMenuItem.removeClass('active');
-	setTimeout(() => menuItemLink?.focus(), 300);
+
+	if (!noFocusOnActiveMenu) {
+		setTimeout(() => menuItemLink?.focus(), 300);
+	}
 };
 // Adds click-to-close for nav background blur
 const navBlur = () => {
