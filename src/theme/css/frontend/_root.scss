@@ -92,12 +92,6 @@ main {
       @include bg($color_name);
     }
   }
-
-  > p a {
-    @apply border-0 underline;
-    text-decoration-thickness: rem-calc(2);
-    text-underline-offset: 0.2em;
-  }
 }
 
 :root {
