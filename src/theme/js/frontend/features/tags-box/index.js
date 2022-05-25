@@ -18,6 +18,7 @@ export default class TagsBox extends Component {
 
 	// Will be called upon component instantiation
 	afterInit() {
+		this.element.setAttribute('tabindex', '0');
 		this.generateToggleButton();
 		this.bindToggle();
 		this.handleMutation();
@@ -76,8 +77,12 @@ export default class TagsBox extends Component {
 	}
 
 	// Triggers when state is change by calling this.setState()
-	componentDidUpdate() {
+	componentDidUpdate(changedStates) {
 		this.computeLayout();
+
+		if ('expanded' in changedStates) {
+			this.element.focus();
+		}
 	}
 
 	computeLayout() {
