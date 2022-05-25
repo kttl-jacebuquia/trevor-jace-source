@@ -112,3 +112,12 @@ input[type="submit"] {
     outline: var(--outline-width) var(--outline-style) var(--outline-color);
   }
 }
+
+// Native paragraph block
+main > p,
+p:not([class]) {
+  a {
+    @include wave-underline-dynamic;
+    text-decoration: none;
+  }
+}
