@@ -31,11 +31,16 @@ export default class FundraiserQuiz {
 	choices?: JQuery;
 	modalRoot?: JQuery;
 	modalContainer?: JQuery;
+	modalContent?: JQuery;
+	content?: JQuery;
 	form?: JQuery;
 	paginationContainer?: JQuery;
 	currentPageContainer?: JQuery;
 	totalPageContainer?: JQuery;
 	$devInquirySlide?: JQuery;
+	controlsWrapper?: JQuery;
+	controlsReferencePrimary?: JQuery;
+	controlsReferenceSecondary?: JQuery;
 
 	// HTMLElements
 	choicesForms?: HTMLFormElement[];
@@ -57,13 +62,27 @@ export default class FundraiserQuiz {
 		this.choices = $(`${this.selector}__radio-btn`);
 		this.modalRoot = $('#js-fundraiser-quiz');
 		this.modalContainer = $('#js-fundraiser-quiz .modal-container');
+		this.modalContent = $('#js-fundraiser-quiz .modal-content-wrap');
+		this.content = this.modalRoot?.find('.fundraiser-quiz__contents');
 		this.form = $(`form${this.selector}`);
+		this.controlsWrapper = this.modalRoot?.find(
+			'.fundraiser-quiz__controls'
+		);
+		this.controlsReferencePrimary = this.modalRoot?.find(
+			'.fundraiser-quiz__controls-reference-primary'
+		);
+		this.controlsReferenceSecondary = this.modalRoot?.find(
+			'.fundraiser-quiz__controls-reference-secondary'
+		);
 		this.paginationContainer = $(`${this.selector}__pagination`);
 		this.currentPageContainer = $(`${this.selector}__current-page`);
 		this.totalPageContainer = $(`${this.selector}__total-page`);
 		this.totalPages = 1;
 		this.currentPage = 0;
 		this.options = options;
+
+		// this.modalRoot?.attr('tabindex', '0');
+		this.modalContainer?.removeAttr('tabindex');
 
 		this.choicesForms = Array.from(
 			this.parentContainer
@@ -168,20 +187,14 @@ export default class FundraiserQuiz {
 		this.choices?.prop('checked', false);
 		this.backBtn?.hide();
 		$(`${this.selector}--steps`).removeClass(this.classes);
-		this.paginationContainer?.hide();
+		this.controls?.hide();
 
-		setTimeout(() => {
-			$initialStepContent.fadeIn(500, () => {
+		$initialStepContent.attr('tabindex', '0').fadeIn(500, () => {
+			setTimeout(() => {
 				$initialStepContent.addClass(this.classes);
-				$initialStepContent
-					.attr({
-						tabindex: '0',
-						role: 'group',
-					})
-					.get(0)
-					?.focus();
-			});
-		}, 100);
+				$initialStepContent?.get(0)?.focus();
+			}, 100);
+		});
 	}
 
 	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
@@ -250,7 +263,7 @@ export default class FundraiserQuiz {
 		const vertex = btn.dataset.vertex;
 		const [nextVertex] = this.graph.get(vertex);
 		this.answers.push(btn.value);
-		this.currentVertexStack.push(nextVertex);
+		this.currentVertexStack?.push(nextVertex);
 		this.handleBackButtonDisplay(nextVertex);
 
 		if (this.mainVerteces.includes(vertex)) {
@@ -259,7 +272,7 @@ export default class FundraiserQuiz {
 		}
 
 		this.computeCurrentPageNumber();
-		this.paginationContainer.fadeIn();
+
 		// Get the new content
 		const $content = $(
 			`[data-vertex="${nextVertex}"]:not(input)`,
@@ -271,31 +284,80 @@ export default class FundraiserQuiz {
 			this.prevVertexStack.push(vertex);
 			this.handleNextContentRadioBtns($content);
 
+			this.clearContentInputs(nextVertex);
+
+			this.controlsWrapper?.fadeOut(200, () => {
+				// Move pagination controls
+				$content
+					.find('.fundraiser-quiz__controls-reference-secondary')
+					.after(this.controlsWrapper);
+
+				this.controlsWrapper.fadeIn(200);
+			});
+
 			// Hide old content
-			$oldContent.fadeOut(400, () => {
+			$oldContent.removeAttr('tabindex').fadeOut(400, () => {
 				this.changeContainerBackground(nextVertex);
 				$content.addClass(this.classes);
 			});
 
-			this.clearContentInputs(nextVertex);
-
 			// Show new content
-			$content.removeClass('hidden').fadeIn({
-				done: () => {
-					setTimeout(() => {
-						const toFocus =
-							$content
-								.attr({
-									tabindex: '0',
-									role: 'group',
-								})
-								.get(0) || this.modalContainer?.get(0);
+			$content
+				.attr('tabindex', '0')
+				.removeClass('hidden')
+				.delay(400)
+				.fadeIn(400);
 
-						toFocus?.focus();
-					}, 400);
-				},
-			});
+			setTimeout(() => {
+				$content.get(0)?.focus();
+			}, 900);
 		}
+	}
+
+	displayPreviousPage() {
+		this.answers?.pop();
+		let $previousContent: JQuery | null = null;
+		let prevVertex = null;
+
+		if (this.prevVertexStack?.length) {
+			prevVertex = this.prevVertexStack.pop();
+			this.changeContainerBackground(prevVertex);
+			this.handleBackButtonDisplay(prevVertex);
+			$previousContent = $(
+				this.containers[prevVertex || 0],
+				this.selector
+			);
+		}
+
+		const latestVertex = this.currentVertexStack?.pop() || 0;
+		const $currentContent = this.modalRoot?.find(
+			this.containers[latestVertex]
+		);
+		const $previousContentReference = $previousContent?.find(
+			'.fundraiser-quiz__controls-reference-secondary'
+		);
+
+		this.computeCurrentPageNumber(); // must be after currentVertexStack.pop as this function is using the currentVertexStack variable
+
+		if ($previousContent?.length) {
+			this.controlsWrapper?.fadeOut(200, () => {
+				this.controlsWrapper
+					?.insertAfter($previousContentReference)
+					.fadeIn(200);
+			});
+
+			$currentContent?.fadeOut(400, () => {
+				$currentContent
+					?.removeClass(this.classes)
+					.removeAttr('tabindex');
+			});
+
+			$previousContent.attr('tabindex', '0').delay(400).fadeIn(400);
+		}
+
+		setTimeout(() => {
+			$previousContent?.get(0).focus();
+		}, 1000);
 	}
 
 	clearContentInputs(vertexOrSelector: string) {
@@ -328,7 +390,7 @@ export default class FundraiserQuiz {
 
 	computeCurrentPageNumber() {
 		this.currentPage = 1 + this.currentVertexStack.length;
-		this.currentPageContainer.html(this.currentPage);
+		this.currentPageContainer?.html(String(this.currentPage));
 
 		this.paginationContainer?.attr(
 			'aria-label',
@@ -338,6 +400,8 @@ export default class FundraiserQuiz {
 		this.paginationContainer?.html(
 			`${this.currentPage}/${this.totalPages}`
 		);
+
+		this.backBtn?.attr('data-current', this.currentPage);
 	}
 
 	computeTotalPageNumber(vertex) {
@@ -379,7 +443,7 @@ export default class FundraiserQuiz {
 	}
 
 	handleModal() {
-		const modalComponent: Modal = this.modalRoot?.get(0)?.component;
+		const modalComponent: Modal = this.modalContainer?.get(0)?.component;
 
 		if (!modalComponent) {
 			this.modalRoot?.on('modal-init', this.onModalInit.bind(this));
@@ -394,43 +458,6 @@ export default class FundraiserQuiz {
 
 	onModalClose() {
 		this.clearContentInputs('form');
-	}
-
-	displayPreviousPage() {
-		this.answers?.pop();
-		let $previousContent: JQuery | null = null;
-		let prevVertex = null;
-
-		if (this.prevVertexStack?.length) {
-			prevVertex = this.prevVertexStack.pop();
-			this.changeContainerBackground(prevVertex);
-			this.handleBackButtonDisplay(prevVertex);
-			$previousContent = $(
-				this.containers[prevVertex || 0],
-				this.selector
-			);
-		}
-
-		const latestVertex = this.currentVertexStack?.pop() || 0;
-		this.computeCurrentPageNumber(); // must be after currentVertexStack.pop as this function is using the currentVertexStack variable
-
-		if ($previousContent !== null && $previousContent.length) {
-			$(this.containers[latestVertex], this.selector).fadeOut(400, () => {
-				$(this.containers[latestVertex], this.selector).removeClass(
-					this.classes
-				);
-				$previousContent?.fadeIn({
-					done: () => {
-						setTimeout(() => {
-							const toFocus =
-								$previousContent?.get(0) ||
-								this.modalContainer?.get(0);
-							toFocus?.focus();
-						}, 500);
-					},
-				});
-			});
-		}
 	}
 
 	changeContainerBackground(vertex) {

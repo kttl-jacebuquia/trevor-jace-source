@@ -282,8 +282,12 @@
     }
   }
 
+  &__controls {
+    @apply hidden;
+  }
+
   &__pagination {
-    @apply absolute top-px40 left-1/2 text-white text-px14 leading-px18 hidden;
+    @apply absolute top-px40 left-1/2 text-white text-px14 leading-px18;
     @apply transform -translate-x-1/2;
     @apply md:top-px50 md:text-px18 md:leading-px26;
     @apply xl:block xl:text-px22 xl:leading-px32;
