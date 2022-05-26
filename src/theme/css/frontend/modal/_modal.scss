@@ -10,8 +10,14 @@
 
   .modal-overlay {
     @apply absolute w-full h-full z-40;
-    background-color: rgba(0, 58, 72, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(0,0,0, 0.2);
+    opacity: 1;
+
+    @supports (backdrop-filter: blur(10px)) {
+      background-color: rgba(0, 58, 72, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
   }
 
   .modal-wrap {
