@@ -9,7 +9,6 @@
   .modal-overlay {
     @apply bg-white;
     --tw-bg-opacity: 0.08;
-    backdrop-filter: blur(10px);
   }
 
   .modal-container {
