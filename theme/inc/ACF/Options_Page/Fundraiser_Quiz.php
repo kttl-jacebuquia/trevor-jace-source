@@ -411,24 +411,29 @@ class Fundraiser_Quiz extends A_Options_Page {
 
 		ob_start();
 		?>
-			<button class="fundraiser-quiz__back-btn" aria-label="click to go to the previous question">BACK</button>
-			<div class="fundraiser-quiz__pagination" role="text"></div>
-			<div
-			<?php
-				echo static::render_attrs(
-					array( 'fundraiser-quiz container mx-auto text-white text-center' ),
-					array( 'data-ajax-action' => Form_Assembly::ACTION ),
-				);
-			?>
-			>
+			<div class="fundraiser-quiz__contents" aria-live="polite">
+				<div class="fundraiser-quiz__controls-reference-primary" hidden></div>
+				<div class="fundraiser-quiz__controls">
+					<button class="fundraiser-quiz__back-btn" aria-label="click to go to the previous question" type="button">BACK</button>
+					<div class="fundraiser-quiz__pagination" role="text"></div>
+				</div>
+				<div
 				<?php
-					echo self::step_one( $step_1_data );
-					echo self::form( $dev_form_data );
-					echo self::create_fundraiser( $create_fundraiser_data );
-					echo self::collect_donations( $collect_donations_data );
-					echo self::who_is_fundraising( $who_is_fundraising_data );
-					echo self::gathering( $planning_to_gather_data );
+					echo static::render_attrs(
+						array( 'fundraiser-quiz container mx-auto text-white text-center' ),
+						array( 'data-ajax-action' => Form_Assembly::ACTION ),
+					);
 				?>
+				>
+					<?php
+						echo self::step_one( $step_1_data );
+						echo self::form( $dev_form_data );
+						echo self::create_fundraiser( $create_fundraiser_data );
+						echo self::collect_donations( $collect_donations_data );
+						echo self::who_is_fundraising( $who_is_fundraising_data );
+						echo self::gathering( $planning_to_gather_data );
+					?>
+				</div>
 			</div>
 		<?php
 		return ob_get_clean();
@@ -454,8 +459,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 							foreach ( $data['choices'] as $item ) {
 								?>
 							<div class="fundraiser-quiz__btn-container">
-								<input class="fundraiser-quiz__radio-btn" type="radio" name="step-1" id="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>" value="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>" data-vertex="<?php echo $item['type']; ?>">
-								<label for="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>"><?php echo esc_html( $item['item'] ); ?></label>
+								<input class="fundraiser-quiz__radio-btn" type="radio" name="step-1" id="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>" value="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>" data-vertex="<?php echo $item['type']; ?>" aria-label="<?php echo esc_html( $item['item'] ); ?>">
+								<label aria-hidden="true" for="<?php echo esc_attr( acf_slugify( $item['item'] ) ); ?>"><?php echo esc_html( $item['item'] ); ?></label>
 							</div>
 								<?php
 							}
@@ -533,6 +538,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 						</ul>
 					<?php } ?>
 				</div>
+				<div class="span fundraiser-quiz__controls-reference-secondary" hidden></div>
 			</div>
 		<?php
 		return ob_get_clean();
@@ -549,12 +555,12 @@ class Fundraiser_Quiz extends A_Options_Page {
 				<form class="fundraiser-quiz__choices-form">
 					<div class="fundraiser-quiz__choices">
 						<div class="fundraiser-quiz__btn-container">
-							<input class="fundraiser-quiz__radio-btn" type="radio" id="yes-collect" name="collect_donations" value="yes" data-vertex="collect">
-							<label for="yes-collect">Yes</label>
+							<input aria-label="Yes" class="fundraiser-quiz__radio-btn" type="radio" id="yes-collect" name="collect_donations" value="yes" data-vertex="collect">
+							<label aria-hidden="true" for="yes-collect">Yes</label>
 						</div>
 						<div class="fundraiser-quiz__btn-container">
-							<input class="fundraiser-quiz__radio-btn" type="radio" id="no-collect" name="collect_donations" value="no" data-vertex="collect">
-							<label for="no-collect">No</label>
+							<input aria-label="No" class="fundraiser-quiz__radio-btn" type="radio" id="no-collect" name="collect_donations" value="no" data-vertex="collect">
+							<label aria-hidden="true" for="no-collect">No</label>
 						</div>
 					</div>
 					<?php echo static::render_next_question_button(); ?>
@@ -578,8 +584,8 @@ class Fundraiser_Quiz extends A_Options_Page {
 						<div class="fundraiser-quiz__choices">
 							<?php foreach ( $data['choices'] as $item ) { ?>
 								<div class="fundraiser-quiz__btn-container">
-									<input class="fundraiser-quiz__radio-btn" type="radio" id="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>" name="who_is_fundraising" value="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>" data-vertex="who">
-									<label for="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>"><?php echo esc_html( $item['who_fundraising_item'] ); ?></label>
+									<input aria-label="<?php echo esc_html( $item['who_fundraising_item'] ); ?>" class="fundraiser-quiz__radio-btn" type="radio" id="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>" name="who_is_fundraising" value="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>" data-vertex="who">
+									<label aria-hidden="true" for="<?php echo esc_attr( acf_slugify( $item['who_fundraising_item'] ) ); ?>"><?php echo esc_html( $item['who_fundraising_item'] ); ?></label>
 								</div>
 							<?php } ?>
 						</div>
@@ -603,12 +609,12 @@ class Fundraiser_Quiz extends A_Options_Page {
 				<form class="fundraiser-quiz__choices-form">
 					<div class="fundraiser-quiz__choices">
 						<div class="fundraiser-quiz__btn-container">
-							<input class="fundraiser-quiz__radio-btn" type="radio" id="yes-gathering" name="gathering" value="yes" data-vertex="gathering">
-							<label for="yes-gathering">Yes</label>
+							<input aria-label="yes" class="fundraiser-quiz__radio-btn" type="radio" id="yes-gathering" name="gathering" value="yes" data-vertex="gathering">
+							<label aria-hidden="true" for="yes-gathering">Yes</label>
 						</div>
 						<div class="fundraiser-quiz__btn-container">
-							<input class="fundraiser-quiz__radio-btn" type="radio" id="no-gathering" name="gathering" value="no" data-vertex="gathering">
-							<label for="no-gathering">No</label>
+							<input aria-label="no" class="fundraiser-quiz__radio-btn" type="radio" id="no-gathering" name="gathering" value="no" data-vertex="gathering">
+							<label aria-hidden="true" for="no-gathering">No</label>
 						</div>
 					</div>
 					<?php echo static::render_next_question_button(); ?>
@@ -622,6 +628,7 @@ class Fundraiser_Quiz extends A_Options_Page {
 		ob_start();
 		?>
 			<div class="fundraiser-quiz__next-question-wrap">
+				<div class="span fundraiser-quiz__controls-reference-secondary" hidden></div>
 				<input class="fundraiser-quiz__next-question" aria-disabled="true" aria-label="click to go to the next question" type="submit" disabled value="Next Question" />
 			</div>
 		<?php
