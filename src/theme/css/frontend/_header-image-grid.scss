@@ -21,14 +21,14 @@
 
   &__heading {
     @apply text-center col-span-full;
-    @apply font-semibold text-px32 leading-px42;
+    @apply font-bold text-px32 leading-px42;
 
     @screen md {
       @apply col-span-6 col-start-2;
     }
 
     @screen lg {
-      @apply text-px40 leading-px50 tracking-em_001 col-start-2 col-span-10;
+      @apply text-px40 leading-px48 tracking-em_001 col-start-2 col-span-10;
 
       & + .header-image-grid__grid {
         @apply mt-px80;
@@ -36,7 +36,7 @@
     }
 
     @screen lg2 {
-      @apply col-start-3 col-span-8;
+      @apply col-start-3 col-span-8 text-px40 leading-px48;
 
       & + .header-image-grid__grid {
         @apply mt-px100;
@@ -213,7 +213,7 @@
       }
 
       @screen lg {
-        @apply text-px40 leading-px50 tracking-em_001;
+        @apply text-px40 leading-px48 tracking-em_001;
       }
 
       @screen xl {
