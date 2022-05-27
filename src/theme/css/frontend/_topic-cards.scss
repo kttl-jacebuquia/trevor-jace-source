@@ -42,12 +42,12 @@
     }
 
     @screen lg2 {
-      @apply text-px40 leading-px50 tracking-normal;
+      @apply text-px40 leading-px48 tracking-normal;
       max-width: #{rem-calc(900)};
     }
 
     @screen xl {
-      @apply text-px46 leading-px56 tracking-em_001;
+      @apply text-px40 leading-px48 tracking-normal;
     }
 
     & + .topic-cards__accordion {
