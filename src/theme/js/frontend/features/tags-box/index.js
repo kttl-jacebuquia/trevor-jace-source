@@ -81,7 +81,7 @@ export default class TagsBox extends Component {
 		this.computeLayout();
 
 		if ('expanded' in changedStates) {
-			this.element.focus();
+			this.children?.tags[0]?.focus();
 		}
 	}
 
