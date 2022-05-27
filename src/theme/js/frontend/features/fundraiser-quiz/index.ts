@@ -150,6 +150,9 @@ export default class FundraiserQuiz {
 		// Initialize other features
 		this.initDevInquiryForm();
 		this.handleModal();
+
+		// Handle focus
+		this.handleFocusableChildren();
 	}
 
 	show(options: ShowFundraiserQuizOptions = {}) {
@@ -496,6 +499,32 @@ export default class FundraiserQuiz {
 	addEdge(source, destination) {
 		if (this.graph.get(source).indexOf(destination) === -1) {
 			this.graph.get(source).push(destination);
+		}
+	}
+
+	handleFocusableChildren() {
+		const $focusableChildren = this.modalContainer?.find('button, input');
+
+		$focusableChildren?.toArray().forEach((child) => {
+			child.addEventListener('focus', () => {
+				this.checkElementVisibility(child);
+			});
+		});
+	}
+
+	checkElementVisibility(child: HTMLElement) {
+		const { top } = child.getBoundingClientRect();
+		const viewportHeight = window.innerHeight - 80; // Account for iOS Safari controls
+
+		// If element is out of view, scroll it into view
+		if (top > viewportHeight || top < 0) {
+			const halfViewport = viewportHeight / 2;
+			const targetScroll =
+				(this.modalContainer?.get(0)?.scrollTop || 0) +
+				top -
+				halfViewport;
+
+			this.modalContainer?.get(0)?.scrollTo(0, targetScroll);
 		}
 	}
 }
