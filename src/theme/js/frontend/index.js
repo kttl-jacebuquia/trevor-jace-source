@@ -317,6 +317,12 @@ if (isPhoneField) {
 				loop: false,
 				slidesPerView: 'auto',
 				centeredSlides: false,
+				breakpoints: {
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 28,
+					},
+				},
 				on: {
 					init(_swiper) {
 						swiper = _swiper;
@@ -328,7 +334,7 @@ if (isPhoneField) {
 			};
 
 			if ($cards.length) {
-				matchMedia.mobileAndTablet(
+				matchMedia.mobileAndSmallDesktop(
 					() =>
 						!swiper &&
 						features.carousel($swiperContainer, swiperOptions),

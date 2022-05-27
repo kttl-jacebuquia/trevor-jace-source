@@ -168,6 +168,12 @@
       }
     }
 
+    .is-carousel & {
+      @screen lg2 {
+        @apply col-span-3;
+      }
+    }
+
     .staff-col-3 & {
       .information {
         @apply text-center;
@@ -251,7 +257,7 @@
     }
 
     // Expanded state
-    &--expanded + .staff__load-more-container {
+    &--expanded+.staff__load-more-container {
       @apply hidden;
     }
   }
@@ -308,6 +314,57 @@
 
   .swiper-pagination-bullet {
     @apply bg-current;
+  }
+}
+
+// Carousel Layout
+.staff.is-carousel {
+  .staff__cards-container {
+    @screen lg-max {
+      @apply overflow-hidden;
+    }
+
+    @screen mobile {
+      @include bleed;
+      padding-right: calc((100vw - 100%) / 2);
+    }
+
+    @screen md-minmax {
+      @include bleed(md)
+    }
+
+    @screen lg-only {
+      @include bleed(lg);
+      // Refer to _bleed.scss
+      padding-left: calc((100vw - theme('container.screens.lg') + (theme('container.padding.lg') * 2)) / 2 );
+      padding-right: calc((100vw - theme('container.screens.lg') + (theme('container.padding.lg') * 2)) / 2 );
+    }
+  }
+
+  .staff__cards-wrapper {
+    @screen lg-only {
+      @apply flex gap-x-0;
+    }
+
+    @screen lg2 {
+      @apply grid;
+    }
+  }
+
+  .staff__card.swiper-slide {
+    @screen lg {
+      @apply mr-0;
+    }
+  }
+
+  .swiper-pagination {
+    @screen lg {
+      @apply flex;
+    }
+
+    @screen lg2 {
+      @apply hidden;
+    }
   }
 }
 
