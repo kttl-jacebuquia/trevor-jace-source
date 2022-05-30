@@ -10,7 +10,8 @@ use TrevorWP\Util\Tools;
 
 class Card {
 	public static function post( $post, $key = 0, array $options = array() ): string {
-		$post = get_post( $post );
+		$post      = get_post( $post );
+		$card_hash = wp_generate_uuid4();
 
 		if ( empty( $post ) ) {
 			return '';
@@ -187,8 +188,17 @@ class Card {
 					<?php } ?>
 				</div>
 
-				<?php if ( ! empty( $tags ) ) { ?>
-					<aside class="tags-box" title="tags for - <?php echo $title_top; ?> - <?php echo esc_attr( $title ); ?>" data-title="<?php echo esc_attr( $title ); ?>" aria-label="tags for <?php echo esc_attr( $title ); ?>">
+				<?php
+					if ( ! empty( $tags ) ) {
+						$tags_box_attrs = array(
+							'id'         => $card_hash,
+							'class'      => 'tags-box',
+							'title'      => "tags for -  {$title_top} - ". esc_attr( $title ),
+							'data-title' => esc_attr( $title ),
+							'aria-label' => "tags for " . esc_attr( $title ),
+						);
+				?>
+					<div <?php echo A_Field_Group::render_attrs( array(), $tags_box_attrs ); ?>>
 						<div class="tags-box__contents">
 							<?php foreach ( $tags as $tag ) { ?>
 								<a
@@ -199,7 +209,7 @@ class Card {
 								</a>
 							<?php } ?>
 						</div>
-					</aside>
+					</div>
 				<?php } ?>
 			</div>
 		</article>

@@ -53,6 +53,7 @@ export default class TagsBox extends Component {
 			type: 'button',
 			'aria-label': 'click to expand tags',
 			'aria-expanded': false,
+			'aria-controls': this.element.id,
 		});
 	}
 
@@ -81,7 +82,7 @@ export default class TagsBox extends Component {
 		this.computeLayout();
 
 		if ('expanded' in changedStates) {
-			this.children?.tags[0]?.focus();
+			this.toggleButton?.focus();
 		}
 	}
 
@@ -113,6 +114,7 @@ export default class TagsBox extends Component {
 				'aria-label',
 				'click to collapse tags group'
 			);
+			this.toggleButton.setAttribute('aria-expanded', 'true');
 		}
 		// Collapsed
 		else {
@@ -133,6 +135,7 @@ export default class TagsBox extends Component {
 				'aria-label',
 				'click to expand tags group'
 			);
+			this.toggleButton.setAttribute('aria-expanded', 'false');
 		}
 	}
 }
