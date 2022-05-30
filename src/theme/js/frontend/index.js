@@ -317,6 +317,10 @@ if (isPhoneField) {
 				loop: false,
 				slidesPerView: 'auto',
 				centeredSlides: false,
+				navigation: {
+					prevEl: $(el).find('.swiper-button-prev').get(0),
+					nextEl: $(el).find('.swiper-button-next').get(0),
+				},
 				breakpoints: {
 					1024: {
 						slidesPerView: 3,

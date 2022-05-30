@@ -299,22 +299,6 @@
   &__cta {
     @apply btn;
   }
-
-  .swiper-pagination {
-    @apply mt-px50 ml-pxn28;
-
-    @screen below-mobile {
-      @apply mx-0;
-    }
-
-    @screen lg {
-      display: none;
-    }
-  }
-
-  .swiper-pagination-bullet {
-    @apply bg-current;
-  }
 }
 
 // Carousel Layout
@@ -330,7 +314,8 @@
     }
 
     @screen md-minmax {
-      @include bleed(md)
+      @include bleed(md);
+      padding-right: calc((100vw - 100%) / 2);
     }
 
     @screen lg-only {
@@ -357,7 +342,39 @@
     }
   }
 
+  .swiper-button:not([aria-disabled="true"]) {
+    @screen lg-only {
+      @apply flex;
+    }
+  }
+
+  .swiper-button-prev {
+    @screen lg-only {
+      left: calc((100vw - 64rem + (5.63rem * 2)) / 2);
+      right: auto;
+
+      .swiper-button-wrapper {
+        left: auto;
+        right: rem-calc(-20);
+      }
+    }
+  }
+
+  .swiper-button-next {
+    @screen lg-only {
+      left: auto;
+      right: calc((100vw - 64rem + (5.63rem * 2)) / 2);
+
+      .swiper-button-wrapper {
+        left: rem-calc(-20);
+        right: auto;
+      }
+    }
+  }
+
   .swiper-pagination {
+    @apply mt-px50;
+
     @screen lg {
       @apply flex;
     }
@@ -365,6 +382,10 @@
     @screen lg2 {
       @apply hidden;
     }
+  }
+
+  .swiper-pagination-bullet {
+    @apply bg-current;
   }
 }
 

@@ -292,6 +292,16 @@ class Staff_Module extends A_Field_Group implements I_Block, I_Renderable {
 									</div>
 								<?php endforeach; ?>
 							</div>
+							<div class="swiper-button swiper-button-prev">
+								<button class="swiper-button-wrapper">
+									<i class="trevor-ti-arrow-left"></i>
+								</button>
+							</div>
+							<div class="swiper-button swiper-button-next">
+								<button class="swiper-button-wrapper">
+									<i class="trevor-ti-arrow-right"></i>
+								</button>
+							</div>
 							<div class="swiper-pagination"></div>
 						</div>
 					<?php elseif ( 'grid' === $display_type ) : ?>
