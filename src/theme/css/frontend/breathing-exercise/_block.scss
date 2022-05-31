@@ -1,6 +1,10 @@
 .breathing-exercise {
-  @apply bg-breathing-exercise-mobile text-indigo;
+  @apply bg-breathing-exercise-mobile;
   @apply bg-cover;
+
+  &:not(.breathing-exercise-header) {
+    @apply text-indigo;
+  }
 
   @screen md {
     @apply bg-breathing-exercise-tablet;

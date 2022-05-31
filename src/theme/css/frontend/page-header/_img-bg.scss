@@ -1,8 +1,13 @@
 .type-img-bg {
   @apply relative mb-pxn5 px-0;
   @apply w-full max-w-none;
-  @apply h-px737 lg2:h-px737 flex items-center text-white;
+  @apply h-px737 lg2:h-px737 flex items-center;
   @include focusable-children-outline(dark);
+
+  // Default styles
+  &:not([class*="text-"]) {
+    @apply text-white;
+  }
 
   @screen mobile {
     padding-top: $top-nav-height;

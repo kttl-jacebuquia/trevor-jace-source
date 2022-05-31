@@ -23,9 +23,11 @@
 }
 
 .page-header {
+
   // - - Split Carousel
   &.type-split-carousel {
     @apply px-0 max-w-none overflow-hidden;
+
     .carousel-wrap {
       @apply mt-0;
     }
@@ -47,12 +49,20 @@
     }
 
     .big-img-carousel {
+      @apply text-current;
+
       .swiper-wrapper {
         @apply w-full;
       }
 
       .img-wrap {
         @apply w-full;
+      }
+
+      .swiper-slide {
+        figcaption {
+          @apply text-current;
+        }
       }
     }
 
@@ -224,6 +234,7 @@
         .swiper-slide {
           figcaption {
             @apply text-px18 leading-px26;
+
             a {
               @apply text-px20 leading-px26;
             }

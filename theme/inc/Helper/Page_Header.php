@@ -208,9 +208,11 @@ class Page_Header {
 	 * @todo: Complete this implementation by moving all classnames to scss file
 	 */
 	public static function img_bg( array $options ): ?string {
-
 		$attrs = array(
-			'class' => array( 'page-header type-img-bg' ),
+			'class' => array_merge(
+				array( 'page-header type-img-bg' ),
+				$options['styles']
+			),
 		);
 
 		if ( ! empty( $options['content_alignment'] ) ) {
@@ -583,9 +585,14 @@ class Page_Header {
 			array( 'sms', 'Text Us' ),
 		);
 
+		$classes = array_merge(
+			array( 'header-container header-container--support-crisis-services' ),
+			$options['styles'] ?? array(),
+		);
+
 		ob_start();
 		?>
-			<div class='header-container header-container--support-crisis-services'>
+			<div <?php echo A_Field_Group::render_attrs( $classes ); ?>>
 				<div class='hero page-header type-support-crisis-services'>
 					<?php if ( ! empty( $title ) ) : ?>
 						<h1 class="page-header-title"><?php echo $title; ?></h1>
@@ -634,7 +641,12 @@ class Page_Header {
 		);
 
 		$render_options = array(
-			'class' => 'breathing-exercise-header',
+			'class' => implode( ' ',
+				array_merge(
+					array( 'breathing-exercise-header' ),
+					$options['styles'],
+				),
+			),
 		);
 
 		return Field_Group\Breathing_Exercise::render( false, $data, $render_options );
