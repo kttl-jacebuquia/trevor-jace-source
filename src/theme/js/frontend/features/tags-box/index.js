@@ -1,4 +1,7 @@
+import tabFocus from 'ally.js/maintain/tab-focus';
 import Component from '../../Component';
+
+const FOCUS_TRAP_KEY = Symbol();
 
 export default class TagsBox extends Component {
 	// Defines the element selector which will initialize this component
@@ -82,6 +85,7 @@ export default class TagsBox extends Component {
 		this.computeLayout();
 
 		if ('expanded' in changedStates) {
+			this.toggleFocusTrap();
 			this.toggleButton?.focus();
 		}
 	}
@@ -136,6 +140,21 @@ export default class TagsBox extends Component {
 				'click to expand tags group'
 			);
 			this.toggleButton.setAttribute('aria-expanded', 'false');
+		}
+	}
+
+	toggleFocusTrap() {
+		if (this.state.expanded) {
+			// Ensure existing handle is disengaged first
+			this[FOCUS_TRAP_KEY]?.disengage();
+
+			// Initialize a new one
+			this[FOCUS_TRAP_KEY] = tabFocus({
+				context: this.element,
+			});
+		} else {
+			// Disengage focus trap
+			this[FOCUS_TRAP_KEY]?.disengage();
 		}
 	}
 }
