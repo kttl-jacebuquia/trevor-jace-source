@@ -1,9 +1,20 @@
 .browserupgrade {
-	@apply bg-gray-light text-indigo text-center p-px40;
+	@apply text-center p-px40;
+  background-color: theme('colors.gray.light');
+  color: theme('colors.indigo.DEFAULT');
   font-size: 1.1rem;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 999999999;
+
+  // IE doesn't support @supports
+  @supports (display: block) {
+    display: none;
+  }
 
   a {
-	@apply underline;
+	  @apply underline;
   }
 }
 

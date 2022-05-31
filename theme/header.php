@@ -37,13 +37,11 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 
 <?php echo Options_Page\External_Scripts::get_external_script( 'BODY_TOP' ); ?>
 
-
-<!--[if IE]>
 <p class="browserupgrade">
 	You are using an <strong>outdated</strong> browser.
 	Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.
 </p>
-<![endif]-->
+
 <?php if ( ! is_page_template( 'template-thank-you.php' ) ) : ?>
 	<aside class="site-banner" id="siteBannerContainer" aria-label="site-banner"></aside>
 	<script>window.trevorWP.siteBanners()</script>
