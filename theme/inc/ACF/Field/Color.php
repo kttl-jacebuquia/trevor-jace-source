@@ -7,9 +7,10 @@ class Color extends A_Field {
 			array(
 				'label'    => 'Color',
 				'type'     => 'select',
-				'required' => 0,
+				'required' => 'transparent',
 				'choices'  => array(
-					'transparent'         => 'None',
+					'not_set'             => 'Not Set',
+					'transparent'         => 'None (Transparent)',
 					'current'             => 'Current',
 					'white'               => 'White',
 					'black'               => 'Black',

@@ -83,7 +83,7 @@ class Breathing_Exercise extends A_Field_Group implements I_Block, I_Renderable 
 			<div class="breathing-exercise__container">
 				<div class="breathing-exercise__content">
 					<?php if ( ! empty( $title ) ) : ?>
-						<h2 class="breathing-exercise__title"><?php echo esc_html( $title ); ?></h2>
+						<h2 class="breathing-exercise__title"><?php echo $title; ?></h2>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $description ) ) : ?>

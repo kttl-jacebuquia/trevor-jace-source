@@ -416,18 +416,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 				),
 			),
 			static::_gen_tab_field(
-				'Styling',
-				array(
-					'conditional_logic' => array(
-						array(
-							array(
-								'field'    => $type,
-								'operator' => '!=',
-								'value'    => 'breathing_exercise',
-							),
-						),
-					),
-				),
+				'Styling'
 			),
 			array(
 				static::FIELD_TEXT_CLR => Field\Color::gen_args(
@@ -456,6 +445,11 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 									'field'    => $type,
 									'operator' => '!=',
 									'value'    => 'support_crisis_services',
+								),
+								array(
+									'field'    => $type,
+									'operator' => '!=',
+									'value'    => 'breathing_exercise',
 								),
 							),
 						),
@@ -658,14 +652,14 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args['styles'] = array();
 		# Text color
-		$txt_color = $val->get( static::FIELD_TEXT_CLR ) ?? 'white';
-		if ( ! empty( $txt_color ) ) {
+		$txt_color = static::get_text_color();
+		if ( ! empty( $txt_color ) && 'not_set' !== $txt_color ) {
 			$args['styles'][] = "text-{$txt_color}";
 		}
 
 		# BG Color
-		$bg_color = $val->get( static::FIELD_BG_CLR ) ?? 'teal-dark';
-		if ( ! empty( $bg_color ) ) {
+		$bg_color = ! in_array( $type, array( 'support_crisis_services', 'breathing_exercise' ) ) ? $val->get( static::FIELD_BG_CLR ) ?? 'teal-dark' : null;
+		if ( ! empty( $bg_color ) && 'not_set' !== $txt_color ) {
 			$args['styles'][] = "bg-{$bg_color}";
 			static::add_body_class( 'hero-bg-' . $bg_color );
 		}
@@ -782,7 +776,21 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 	}
 
 	public static function get_text_color() {
-		return static::get_val( static::FIELD_TEXT_CLR );
+		$type     = static::get_val( static::FIELD_TYPE );
+		$text_clr = static::get_val( static::FIELD_TEXT_CLR );
+
+		// Apply default text color according to header type if not set
+		if ( empty( $text_clr ) || 'not_set' === $text_clr ) {
+			switch ( $type ) {
+				case 'support_crisis_services':
+				case 'breathing_exercise':
+					return 'indigo';
+				default:
+					return 'white';
+			}
+		}
+
+		return $text_clr;
 	}
 
 	public static function get_hero_type() {
