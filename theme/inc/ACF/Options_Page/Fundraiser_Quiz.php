@@ -412,11 +412,6 @@ class Fundraiser_Quiz extends A_Options_Page {
 		ob_start();
 		?>
 			<div class="fundraiser-quiz__contents" aria-live="polite">
-				<div class="fundraiser-quiz__controls-reference-primary" hidden></div>
-				<div class="fundraiser-quiz__controls">
-					<button class="fundraiser-quiz__back-btn" aria-label="click to go to the previous question" type="button">BACK</button>
-					<div class="fundraiser-quiz__pagination" role="text"></div>
-				</div>
 				<div
 				<?php
 					echo static::render_attrs(
@@ -433,6 +428,10 @@ class Fundraiser_Quiz extends A_Options_Page {
 						echo self::who_is_fundraising( $who_is_fundraising_data );
 						echo self::gathering( $planning_to_gather_data );
 					?>
+				</div>
+				<div class="fundraiser-quiz__controls">
+					<button class="fundraiser-quiz__back-btn" aria-label="click to go to the previous question" type="button">BACK</button>
+					<div class="fundraiser-quiz__pagination" role="text"></div>
 				</div>
 			</div>
 		<?php
@@ -628,7 +627,6 @@ class Fundraiser_Quiz extends A_Options_Page {
 		ob_start();
 		?>
 			<div class="fundraiser-quiz__next-question-wrap">
-				<div class="span fundraiser-quiz__controls-reference-secondary" hidden></div>
 				<input class="fundraiser-quiz__next-question" aria-disabled="true" aria-label="click to go to the next question" type="submit" disabled value="Next Question" />
 			</div>
 		<?php
