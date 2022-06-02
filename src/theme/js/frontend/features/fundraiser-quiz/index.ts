@@ -198,6 +198,8 @@ export default class FundraiserQuiz {
 				$initialStepContent?.get(0)?.focus();
 			}, 100);
 		});
+
+		this.controlsWrapper?.hide();
 	}
 
 	// Incorporate FloatingLabelInputs to FormAssembly DevInquiryForm
@@ -262,10 +264,10 @@ export default class FundraiserQuiz {
 		choicesSubmitBtn?.removeAttribute('aria-disabled');
 	}
 
-	displayNextPage(btn) {
-		const vertex = btn.dataset.vertex;
+	displayNextPage(btn?: HTMLInputElement) {
+		const vertex = btn?.dataset.vertex || '';
 		const [nextVertex] = this.graph.get(vertex);
-		this.answers.push(btn.value);
+		this.answers?.push(btn?.value || '');
 		this.currentVertexStack?.push(nextVertex);
 		this.handleBackButtonDisplay(nextVertex);
 
@@ -284,18 +286,13 @@ export default class FundraiserQuiz {
 
 		if ($content.length) {
 			const $oldContent = $(this.containers[vertex], this.selector);
-			this.prevVertexStack.push(vertex);
+			this.prevVertexStack?.push(vertex);
 			this.handleNextContentRadioBtns($content);
 
 			this.clearContentInputs(nextVertex);
 
 			this.controlsWrapper?.fadeOut(200, () => {
-				// Move pagination controls
-				$content
-					.find('.fundraiser-quiz__controls-reference-secondary')
-					.after(this.controlsWrapper);
-
-				this.controlsWrapper.fadeIn(200);
+				this.controlsWrapper?.fadeIn(200);
 			});
 
 			// Hide old content
@@ -330,25 +327,18 @@ export default class FundraiserQuiz {
 				this.containers[prevVertex || 0],
 				this.selector
 			);
+		} else {
+			this.controlsWrapper?.hide();
 		}
 
 		const latestVertex = this.currentVertexStack?.pop() || 0;
 		const $currentContent = this.modalRoot?.find(
 			this.containers[latestVertex]
 		);
-		const $previousContentReference = $previousContent?.find(
-			'.fundraiser-quiz__controls-reference-secondary'
-		);
 
 		this.computeCurrentPageNumber(); // must be after currentVertexStack.pop as this function is using the currentVertexStack variable
 
 		if ($previousContent?.length) {
-			this.controlsWrapper?.fadeOut(200, () => {
-				this.controlsWrapper
-					?.insertAfter($previousContentReference)
-					.fadeIn(200);
-			});
-
 			$currentContent?.fadeOut(400, () => {
 				$currentContent
 					?.removeClass(this.classes)
