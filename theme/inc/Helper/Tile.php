@@ -412,7 +412,7 @@ class Tile {
 		ob_start();
 		?>
 		<div <?php echo Tools::flat_attr( $attr ); ?>>
-			<a href="<?php echo get_permalink( $post ); ?>" aria-label="click here to read more aboud <?php echo esc_html( $name ); ?>">
+			<a href="<?php echo get_permalink( $post ); ?>" aria-label="click here to read more about <?php echo esc_html( $name ); ?>">
 				<div class="post-thumbnail-wrap bg-gray-light">
 					<?php echo $thumbnail; ?>
 				</div>
