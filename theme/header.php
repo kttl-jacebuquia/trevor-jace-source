@@ -117,7 +117,7 @@ $nav_color = 'text-' . Main_Header::get_text_color();
 					<a href="<?php echo esc_url( $donate_link['url'] ); ?>"
 					class="btn white-orange border-2" rel="noopener nofollow"
 					target="<?php echo esc_attr( $donate_link['target'] ); ?>"
-					aria-label="click to get to counselor page">
+					aria-label="click to get to donate">
 						<?php echo esc_html( $donate_link['title'] ); ?>
 					</a>
 				</div>
