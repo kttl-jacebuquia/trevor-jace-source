@@ -93,7 +93,8 @@
     }
 
     a {
-      @apply font-semibold text-px18 leading-px24 tracking-em001 pb-px4 border-b-px1 border-solid border-current;
+      @include wave-underline-dynamic;
+      @apply font-semibold text-px18 leading-px24 tracking-em001 border-b-px1;
 
       @screen md {
         @apply text-px18 leading-px24 tracking-em001;
