@@ -652,7 +652,7 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 
 		$args['styles'] = array();
 		# Text color
-		$txt_color = static::get_text_color();
+		$txt_color = static::get_text_color( $val );
 		if ( ! empty( $txt_color ) && 'not_set' !== $txt_color ) {
 			$args['styles'][] = "text-{$txt_color}";
 		}
@@ -775,9 +775,9 @@ class Page_Header extends A_Basic_Section implements I_Renderable {
 		return Helper\Page_Header::$type( $args );
 	}
 
-	public static function get_text_color() {
-		$type     = static::get_val( static::FIELD_TYPE );
-		$text_clr = static::get_val( static::FIELD_TEXT_CLR );
+	public static function get_text_color( Field_Val_Getter $val = null ) {
+		$type     = ! empty( $val ) ? $val->get( static::FIELD_TYPE ) : static::get_val( static::FIELD_TYPE );
+		$text_clr = ! empty( $val ) ? $val->get( static::FIELD_TEXT_CLR ) : static::get_val( static::FIELD_TEXT_CLR );
 
 		// Apply default text color according to header type if not set
 		if ( empty( $text_clr ) || 'not_set' === $text_clr ) {
