@@ -4,7 +4,7 @@ import initListing from './listing';
 import moment from 'moment-timezone';
 import WithState from '../../WithState';
 
-class ADPContent extends WithState {
+class JobsContent extends WithState {
 	state = {
 		loading: false,
 	};
@@ -95,8 +95,8 @@ class ADPContent extends WithState {
 	}
 
 	generateJobItemMarkup(item) {
-		const departments = this.getDepartments(item.organizationalUnits);
-		const locations = this.getLocations(item.requisitionLocations);
+		const departments = item.department ? [item.department] : [];
+		const locations = item.location ? [item.location] : [];
 		const [department, location] = this.generateJobItemClasses(
 			departments,
 			locations
@@ -104,22 +104,23 @@ class ADPContent extends WithState {
 		return `
 			<div
 				class="listing__item show"
-				data-departments=${department}
-				data-locations=${location}
+				data-departments=${department || ''}
+				data-locations=${location || ''}
 				>
 				<div class="listing__item-inner">
 					${this.generateEyebrowMarkup(departments, locations)}
 					${this.generateTitleMarkup(item)}
 					<time class="listing__item__date">
-						${this.getDateAgo(item.requisitionStatusCode.effectiveDate)}
+						${this.getDateAgo(item.createdAt)}
 					</time>
 				</div>
 				${
-					item?.links?.length &&
-					`<div class="listing__item__cta">
-							<a href="${item.links[item.links.length - 1].href}"
+					(item?.applyUrl &&
+						`<div class="listing__item__cta">
+							<a href="${item.applyUrl}"
 							target="_blank">Apply Now</a>
-						</div>`
+						</div>`) ||
+					''
 				}
 			</div>
 		`;
@@ -179,11 +180,11 @@ class ADPContent extends WithState {
 	}
 
 	generateTitleMarkup(item) {
-		const workTypeMarkup = item.workerTypeCode
-			? `<span>(${item.workerTypeCode.shortName})</span>`
+		const workTypeMarkup = item.commitment
+			? `<span>(${item.commitment})</span>`
 			: '';
 		return `<h3 class="listing__item__title">
-					${item.job.jobTitle}
+					${item.title}
 					${workTypeMarkup}
 				</h3>
 		`;
@@ -216,6 +217,8 @@ class ADPContent extends WithState {
 }
 
 export default function initContent(context) {
-	const content = new ADPContent(context);
-	content.init();
+	Array.from(document.querySelectorAll(context)).forEach((element) => {
+		const content = new JobsContent(element);
+		content.init();
+	});
 }
