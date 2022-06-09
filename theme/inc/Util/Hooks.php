@@ -18,6 +18,7 @@ use TrevorWP\Theme\ACF\Options_Page\SEO_Details;
 use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Ajax\ADP;
+use TrevorWP\Theme\Ajax\Lever;
 use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
@@ -135,6 +136,9 @@ class Hooks {
 
 		# ADP API
 		ADP::construct();
+
+		# Lever API
+		Lever::construct();
 
 		# MailChimp API
 		MailChimp::construct();

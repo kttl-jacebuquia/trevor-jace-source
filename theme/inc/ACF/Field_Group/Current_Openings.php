@@ -70,7 +70,7 @@ class Current_Openings extends A_Field_Group implements I_Block, I_Renderable {
 
 				<div class="current-openings__content">
 					<div class="listing js-current-openings"
-						data-endpoint="/wp-admin/admin-ajax.php?action=adp">
+						data-endpoint="/wp-admin/admin-ajax.php?action=lever">
 						<div class="listing__header">
 							<?php echo static::render_filter_navigation(); ?>
 							<div class="listing__info"></div>
