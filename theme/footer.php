@@ -78,5 +78,8 @@ $footer_external_script = Options_Page\External_Scripts::get_external_script( 'B
 </footer>
 <?php endif; ?>
 <?php echo $footer_external_script; ?>
+<script>
+	console.log('This is a test') 
+</script>
 </body>
 </html>
