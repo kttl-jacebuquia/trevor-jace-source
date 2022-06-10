@@ -63,7 +63,7 @@ class Image_Carousel extends A_Field_Group implements I_Block, I_Renderable {
 							'key'   => $gallery_entry_caption,
 							'name'  => static::FIELD_GALLERY_ENTRY_CAPTION,
 							'label' => 'Caption',
-							'type'  => 'textarea',
+							'type'  => 'wysiwyg',
 						),
 					),
 				),
