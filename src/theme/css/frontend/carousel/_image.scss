@@ -65,6 +65,24 @@
   }
 
   &--big {
+    @apply my-px80;
+
+    @screen md {
+      @apply my-px100;
+    }
+
+    @screen lg {
+      @apply my-px120;
+    }
+
+    @screen xl {
+      @apply mt-px140;
+    }
+
+    .carousel-image__container {
+      @apply py-0;
+    }
+
     .swiper-slide {
       will-change: transform;
 
