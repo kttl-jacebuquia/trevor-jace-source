@@ -1,8 +1,8 @@
 .faqs {
-  @apply pb-px80 pt-px80 bg-white;
+  @apply mb-px80 mt-px80 bg-white;
 
   @screen lg {
-    @apply pb-px120 pt-px120;
+    @apply mb-px120 mt-px120;
   }
 
   &__container {

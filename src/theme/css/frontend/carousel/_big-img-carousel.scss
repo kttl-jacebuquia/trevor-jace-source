@@ -93,7 +93,6 @@
 
   @screen lg {
     --img-height: theme("carousel.bigImg.heightLG");
-    @apply mb-20;
 
     .carousel-title {
       @apply text-px40 leading-px50;
