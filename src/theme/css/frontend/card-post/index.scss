@@ -9,6 +9,8 @@
   @apply mx-auto;
   @apply w-full;
   perspective: 1px;
+  @include focus-outline-base;
+  @include focus-outline-inset;
 
   // Assign bg color to CSS variable so it can be used by the tags box
   @each $color-name, $color-value in $colors {

@@ -1,5 +1,8 @@
 import { Swiper } from 'swiper';
 import { SwiperEvents, SwiperOptions } from 'swiper/types';
+
+const SLIDE_FOCUSABLE_CHILDREN_SELECTOR = 'a,button';
+
 export interface SwiperOptionsWithA11yExtended extends SwiperOptions {
 	a11yExtended: {
 		pagination?: {
@@ -111,7 +114,7 @@ function onSlideChangeTransitionEnd(_swiper: SwiperWithA11yExtended) {
 				: visibleSlides;
 
 		// Focus on slide
-		firstFocusableSlide?.focus();
+		firstFocusableSlide.firstElementChild?.focus();
 
 		_swiper.navigatedByNav = false;
 
@@ -208,47 +211,47 @@ function applySlidesA11y(_swiper: SwiperWithA11yExtended) {
 	// aria-hide slides that are not fully displayed
 	Array.from(_swiper.slides).forEach((slide, index) => {
 		const { left, right } = slide.getBoundingClientRect();
-		const slideContent = slide.firstElementChild;
-		const tagsBox = slide.querySelector('.tags-box');
 
 		if (_swiper.params.a11yExtended?.pagination?.oneToOne) {
 			if (_swiper.activeIndex === index) {
-				slide.removeAttribute('aria-hidden');
-				slide.setAttribute('tabindex', '0');
-				[...(slideContent?.querySelectorAll('a,button') ?? [])].forEach(
-					(el) => el.removeAttribute('tabindex')
-				);
-				tagsBox?.removeAttribute('aria-hidden');
+				setSlideA11y(slide, true);
 			} else {
-				slide.setAttribute('aria-hidden', 'true');
-				slide.setAttribute('tabindex', '-1');
-				// Make contents untabbable
-				[...slide.querySelectorAll('a,button')].forEach((el) =>
-					el.setAttribute('tabindex', '-1')
-				);
-				tagsBox?.setAttribute('aria-hidden', 'true');
+				setSlideA11y(slide, false);
 			}
 		} else if (left < 0 || right > windowWidth) {
-			slide.setAttribute('aria-hidden', 'true');
-			slide.setAttribute('tabindex', '-1');
-			// Make contents untabbable
-			[...slide.querySelectorAll('a,button')].forEach((el) =>
-				el.setAttribute('tabindex', '-1')
-			);
-			tagsBox?.setAttribute('aria-hidden', 'true');
+			setSlideA11y(slide, false);
 		} else {
-			slide.removeAttribute('aria-hidden');
-			slide.setAttribute('tabindex', '0');
-			[...(slideContent?.querySelectorAll('a,button') ?? [])].forEach(
-				(el) => el.removeAttribute('tabindex')
-			);
-			tagsBox?.removeAttribute('aria-hidden');
-			// Make contents  tabbable
-			[...slide.querySelectorAll('a,button')].forEach((el) =>
-				el.removeAttribute('tabindex')
-			);
+			setSlideA11y(slide, true);
 		}
 	});
+}
+
+function setSlideA11y(slide: Element, makeFocusable: boolean) {
+	if (typeof makeFocusable === 'boolean') {
+		const slideContent = slide.querySelector('.card-post');
+		const tagsBox = slide.querySelector('.tags-box');
+
+		if (makeFocusable) {
+			slide?.removeAttribute('aria-hidden');
+			slideContent?.setAttribute('tabindex', '0');
+			[
+				...(slideContent?.querySelectorAll(
+					SLIDE_FOCUSABLE_CHILDREN_SELECTOR
+				) ?? []),
+			].forEach((el) => el.setAttribute('tabindex', '0'));
+			tagsBox?.removeAttribute('aria-hidden');
+		} else {
+			slide?.setAttribute('aria-hidden', 'true');
+			slideContent?.setAttribute('tabindex', '-1');
+			// Make contents untabbable
+			[
+				...(slideContent?.querySelectorAll(
+					SLIDE_FOCUSABLE_CHILDREN_SELECTOR
+				) ?? []),
+			].forEach((el) => el.setAttribute('tabindex', '-1'));
+			tagsBox?.setAttribute('aria-hidden', 'true');
+		}
+	}
 }
 
 /**

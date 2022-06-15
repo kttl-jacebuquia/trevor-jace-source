@@ -21,7 +21,6 @@ export default class TagsBox extends Component {
 
 	// Will be called upon component instantiation
 	afterInit() {
-		this.element.setAttribute('tabindex', '0');
 		this.generateToggleButton();
 		this.bindToggle();
 		this.handleMutation();
