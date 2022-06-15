@@ -87,6 +87,8 @@
 			@apply flex items-center transition-transform duration-300 ease-out;
 			@apply w-full h-full;
 			@apply transform-gpu;
+      @include focus-outline-base(light);
+      @include focus-outline-inset;
 
 			@screen lg {
 				@apply translate-y-full text-px38;
@@ -310,6 +312,7 @@
 			@apply bg-transparent text-indigo;
 			@apply mx-0;
 			@apply hover:opacity-80;
+      @include focus-outline-inset;
 		}
 
 		.trevor-ti-search {
