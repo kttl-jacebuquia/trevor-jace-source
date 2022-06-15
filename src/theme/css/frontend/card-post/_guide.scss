@@ -1,10 +1,17 @@
 .card-post[data-post-type="trevor_rc_guide"] {
+  @include focus-outline-base(dark);
+
   // Expanded tags underlay
   &::after {
     @apply absolute bottom-0 left-0 right-0 top-0 block;
     @apply transition-opacity opacity-0 pointer-events-none bg-indigo;
     content: '';
     --tw-bg-opacity: .78;
+  }
+
+  .post-thumbnail-wrap > a {
+    @include focus-outline-base(dark);
+    @include focus-outline-inset(5);
   }
 
   .post-title {

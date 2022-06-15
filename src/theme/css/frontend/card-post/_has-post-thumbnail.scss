@@ -1,11 +1,17 @@
 .card-post.has-post-thumbnail {
-  @include focusable-children-outline(light);
+  &:not([data-post-type="trevor_rc_guide"]) {
+    @include focusable-children-outline(light);
+  }
 
-  &:not(.bg-full):hover {
-    --card-background: #{theme('colors.gray.light')};
+  &:not(.bg-full) {
+    @include focus-outline-base(light);
 
-    .card-content {
-      @apply bg-gray-light transition-colors;
+    &:hover {
+      --card-background: #{theme('colors.gray.light')};
+
+      .card-content {
+        @apply bg-gray-light transition-colors;
+      }
     }
   }
 

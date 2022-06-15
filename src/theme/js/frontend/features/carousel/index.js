@@ -39,9 +39,21 @@ export function carousel($element, option = {}) {
 		a11y: true,
 		autoHeight: true,
 		...option,
+		init: false,
 	});
 
+	swiper.on('afterInit', onCarouselAfterInit);
+
+	swiper.init();
+
 	return swiper;
+}
+
+function onCarouselAfterInit(swiper) {
+	console.log('carouselInit');
+	// Array.from(swiper.slides).forEach((slide) => {
+	// 	slide.removeAttribute('tabindex');
+	// });
 }
 
 export function carouselNavigator($element) {
@@ -222,7 +234,9 @@ export const initializeCarousel = (carouselSettings) => {
 	const breakpoint = carouselSettings.options.breakpoint;
 	const baseContainer = document.querySelector(baseSelector);
 
-	options.on.afterInit = function () {
+	options.on.afterInit = function (_swiper) {
+		_swiper.slides.forEach((slide) => slide.removeAttribute('tabindex'));
+
 		document
 			.querySelectorAll('.carousel-testimonials .card-post')
 			.forEach((elem) => {
