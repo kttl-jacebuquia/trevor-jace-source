@@ -4,17 +4,22 @@
  Aims to implement component functionalities
  Refer to the bottom of the page for sample use
 */
-import WithState from './WithState';
+import WithState, { State } from './WithState';
+
 const instancesStore = Symbol('instancesStore');
 
-export default class Component extends WithState {
+export default class Component<
+	ElementType,
+	StateInterface = State
+> extends WithState<StateInterface> {
 	children?: { [key: string]: HTMLElement | HTMLElement[] };
 	members?: { [key: string]: any };
+	state?: StateInterface;
 	static selector: string;
 
 	static isDOMReady = false;
 
-	constructor(public element: HTMLElement) {
+	constructor(public element: ElementType) {
 		super();
 	}
 

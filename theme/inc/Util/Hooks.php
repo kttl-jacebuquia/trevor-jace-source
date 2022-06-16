@@ -10,6 +10,7 @@ use TrevorWP\Main;
 use TrevorWP\Theme\ACF\ACF;
 use TrevorWP\Theme\ACF\Field_Group\Page_Header;
 use TrevorWP\Theme\ACF\Field_Group\Chat_Link_Option;
+use TrevorWP\Theme\ACF\Field_Group\Events_Grid;
 use TrevorWP\Theme\ACF\Options_Page;
 use TrevorWP\Theme\ACF\Options_Page\Post_Type\A_Post_Type;
 use TrevorWP\Theme\ACF\Options_Page\Resource_Center;
@@ -19,6 +20,7 @@ use TrevorWP\Theme\ACF\Options_Page\Site_Banners;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 use TrevorWP\Theme\Ajax\ADP;
 use TrevorWP\Theme\Ajax\Lever;
+use TrevorWP\Theme\Ajax\Classy;
 use TrevorWP\Theme\Ajax\MailChimp;
 use TrevorWP\Theme\Ajax\PhoneTwoAction;
 use TrevorWP\Theme\Ajax\SVG;
@@ -122,6 +124,9 @@ class Hooks {
 		# Apply dynamic value for Long Wait Site Banner
 		add_filter( 'acf/load_value/name=' . Site_Banners::FIELD_LONG_WAIT_CURRENT, array( Site_Banners::class, 'is_long_wait' ) );
 
+		// Automatically fill ID field when saved.
+		add_filter( 'acf/update_value/name=' . Events_Grid::FIELD_ID, array( Events_Grid::class, 'apply_field_id' ) );
+
 		# Trevor Chat Button
 		Trevor_Chat::init();
 
@@ -139,6 +144,9 @@ class Hooks {
 
 		# Lever API
 		Lever::construct();
+
+		# Lever API
+		Classy::construct();
 
 		# MailChimp API
 		MailChimp::construct();

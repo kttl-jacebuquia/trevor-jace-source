@@ -3,18 +3,21 @@
  */
 const STATE_CHANGE_EVENT = Symbol();
 
-type State = { [key: string]: any };
+export type State = { [key: string]: any };
 
-export default class WithState {
+export default class WithState<StateType = State> {
 	// Define this in child class
-	state: State = {};
+	state?: StateType | State = {};
+	[STATE_CHANGE_EVENT]: string;
 
 	constructor() {
 		// Will serve as custom event name for each instance
 		this[STATE_CHANGE_EVENT] = String(Math.random());
 
-		document.addEventListener(this[STATE_CHANGE_EVENT], ({ detail }: CustomEventInit) =>
-			this.componentDidUpdate(detail as State)
+		document.addEventListener(
+			this[STATE_CHANGE_EVENT],
+			({ detail }: CustomEventInit) =>
+				this.componentDidUpdate(detail as StateType)
 		);
 	}
 
@@ -22,43 +25,48 @@ export default class WithState {
 	 *
 	 * @param {object} stateMap
 	 */
-	setState(stateMap: State) {
-		const statesToChange = Object.entries(stateMap)
-			.filter(
-				([stateKey, stateValue]) =>
-					stateKey in this.state &&
-					this.state[stateKey] !== stateValue
-			)
-			.map(([stateKey, stateValue]) => ({
-				[stateKey]: stateValue,
-			}));
+	setState(stateMap: Partial<StateType>) {
+		if (this.state) {
+			const statesToChange = Object.entries(stateMap)
+				.filter(
+					([stateKey, stateValue]) =>
+						stateKey in (this.state || {}) &&
+						(this.state || {})[stateKey] !== stateValue
+				)
+				.map(([stateKey, stateValue]) => ({
+					[stateKey]: stateValue,
+				}));
 
-		if (statesToChange.length) {
-			const stateChange = statesToChange.reduce(
-				(all, change) => ({
-					...all,
-					...change,
-				}),
-				{}
-			);
+			if (statesToChange.length) {
+				const stateChange = statesToChange.reduce(
+					(all, change) => ({
+						...all,
+						...change,
+					}),
+					{}
+				);
 
-			this.state = {
-				...this.state,
-				...stateChange,
-			};
+				this.state = {
+					...this.state,
+					...stateChange,
+				};
 
-			const stateChangeEvent = new CustomEvent(this[STATE_CHANGE_EVENT], {
-				detail: stateChange,
-			});
-			document.dispatchEvent(stateChangeEvent);
+				const stateChangeEvent = new CustomEvent(
+					this[STATE_CHANGE_EVENT],
+					{
+						detail: stateChange,
+					}
+				);
+				document.dispatchEvent(stateChangeEvent);
+			}
 		}
 	}
 
-	componentDidUpdate(changedState) {
+	componentDidUpdate(changedState: Partial<StateType>) {
 		// Override this method in child class
 	}
 
-	onStateChange(callback) {
+	onStateChange(callback: Function) {
 		if (typeof callback === 'function') {
 			document.addEventListener(this[STATE_CHANGE_EVENT], () =>
 				callback(this.state)

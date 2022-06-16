@@ -1,0 +1,14 @@
+.events-grid {
+  &__container {
+    @apply container mx-auto;
+  }
+
+  &__grid {
+    @apply tw-grid;
+    grid-gap: rem-calc(28);
+  }
+
+  &__card {
+    @apply col-span-4;
+  }
+}
