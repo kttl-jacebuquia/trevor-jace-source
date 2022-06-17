@@ -331,8 +331,9 @@
       @apply text-px16 leading-px22 tracking-em001;
     }
 
-    @screen xl {
-      @apply text-px16 leading-px22 tracking-em001 mt-px40;
+    @screen lg {
+      @apply leading-px22 tracking-em001 mt-px40;
+      font-size: rem-calc(19);
     }
 
     &.wave-underline {
