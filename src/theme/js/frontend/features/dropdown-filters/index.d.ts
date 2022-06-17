@@ -16,6 +16,7 @@ export interface DropdownFiltersOptions {
 	fields?: DropdownFilterField[];
 	class?: string;
 	headline?: string;
+	onChange?: (activeFilters: FilterOptions) => void;
 }
 
 export interface DropdownFiltersState {

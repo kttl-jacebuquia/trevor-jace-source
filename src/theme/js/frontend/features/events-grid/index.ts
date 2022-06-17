@@ -27,7 +27,7 @@ export default class EventsGrid extends Component<
 	dates: FilterOptionProp[] = [];
 	types: FilterOptionProp[] = [];
 	events: (ClassyEvent & WithFilterValues)[] = [];
-	eventsVisible: (ClassyEvent & WithFilterValues)[] = [];
+	eventsFiltered: (ClassyEvent & WithFilterValues)[] = [];
 	pagination?: Pagination;
 	filters?: DropdownFilters;
 
@@ -156,6 +156,7 @@ export default class EventsGrid extends Component<
 		if (this.children?.filters) {
 			const options: DropdownFiltersOptions = {
 				fields: this.generateDropdownFilterFields(),
+				onChange: this.onDropdownFilterChange.bind(this),
 			};
 
 			this.filters = new DropdownFilters(
@@ -179,7 +180,7 @@ export default class EventsGrid extends Component<
 		const to = from + PER_PAGE;
 		const gridContainer = this.children?.grid as HTMLElement;
 
-		const eventsFiltered = this.events.filter(
+		this.eventsFiltered = this.events.filter(
 			({ locationFilter, dateFilter, typeFilter }) =>
 				[locationFilter, dateFilter, typeFilter].every(
 					(filterValue, index) => {
@@ -191,7 +192,7 @@ export default class EventsGrid extends Component<
 				)
 		);
 
-		const eventsPaged = eventsFiltered.slice(from, to);
+		const eventsPaged = this.eventsFiltered.slice(from, to);
 
 		const renderedCards = eventsPaged.map((eventData) =>
 			this.renderEventCard(eventData)
@@ -394,9 +395,16 @@ export default class EventsGrid extends Component<
 		}
 	}
 
-	renderUpdates() {
+	renderUpdates(reloadPagination = false) {
 		this.appendHistory();
 		this.renderGrid();
+
+		if (reloadPagination) {
+			this.pagination?.setTotalPages(
+				Math.ceil(this.eventsFiltered.length / PER_PAGE)
+			);
+		}
+
 		this.updatePagination();
 	}
 
@@ -409,8 +417,12 @@ export default class EventsGrid extends Component<
 		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
 	}
 
-	componentDidUpdate() {
-		this.renderUpdates();
+	onDropdownFilterChange(activeFilters: FilterOptions) {
+		this.setState({ activeFilters, page: 1 });
+	}
+
+	componentDidUpdate(changedState: Partial<EventsGridStateType>) {
+		this.renderUpdates('activeFilters' in changedState);
 	}
 }
 

@@ -1,4 +1,8 @@
+import $ from 'jquery';
 import WithState from '../../WithState';
+import { mobileAndTablet } from '../../match-media';
+
+import FilterNavigationItem from './filter-navigation-item';
 
 import type {
 	DropdownFilterField,
@@ -13,6 +17,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 	fields: DropdownFilterField[];
 	headline: string;
 	options: DropdownFiltersOptions;
+	filters: { [id: string]: FilterNavigationItem } = {};
 
 	state = {
 		activeFilters: {},
@@ -35,6 +40,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 
 	init() {
 		this.render();
+		this.handleOutsideClick();
 	}
 
 	renderFilterOptions(filterOptions: FilterOptions): HTMLLIElement[] {
@@ -44,7 +50,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 					<li class="filter__navigation__item"
 						data-option-value="${filterOptionValue}"
 						role="menuitemcheckbox"
-						aria-checked="true">
+						aria-checked="false">
 						${filterOptionLabel}
 					</li>
 					`;
@@ -56,10 +62,6 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 					}
 				).content.firstChild as HTMLLIElement;
 
-				optionElement.addEventListener('click', (e) =>
-					this.onOptionClick(e)
-				);
-
 				return optionElement;
 			}
 		);
@@ -67,7 +69,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 
 	renderFilter(filterField: DropdownFilterField): HTMLLIElement {
 		const html = `
-		<li class="filter" role="none">
+		<li class="filter" role="none" data-filter-field="${filterField.id}">
 			<button class="filter__header"
 					role="menuitem"
 					aria-haspopup="true"
@@ -81,7 +83,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 			<div class="filter__content">
 				<ul class="filter__navigation"
 					role="menu"
-					data-option-group="locations"
+					data-option-group="${filterField.id}"
 					aria-label="Locations">
 					<li class="filter__navigation__item"
 						data-option-value=""
@@ -114,6 +116,9 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 			filterContent?.appendChild(optionElement)
 		);
 
+		// Bind filter dropdown
+		this.bindFilter(filterFieldElement);
+
 		return filterFieldElement;
 	}
 
@@ -127,8 +132,112 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 		});
 	}
 
-	onOptionClick(e: Event) {
-		e.preventDefault();
-		console.log('clicked', e.currentTarget);
+	bindFilter(filterElement: HTMLElement) {
+		const filterOptions =
+			filterElement.querySelector(`.filter__navigation`);
+		const filterButton = filterElement.querySelector(`.filter__header`);
+
+		mobileAndTablet(
+			() => {
+				$(filterButton).on('click', function (e) {
+					e.stopPropagation();
+
+					$(filterElement).toggleClass('filter--expanded');
+
+					if (
+						$(filterElement)
+							.siblings('.filter')
+							.hasClass('filter--expanded')
+					) {
+						$(filterElement)
+							.siblings('.filter')
+							.removeClass('filter--expanded');
+					}
+				});
+			},
+			() => {
+				$(filterElement).hover(
+					function () {
+						$(this).addClass('filter--expanded');
+
+						filterButton.setAttribute(
+							'aria-expanded',
+							filterElement.classList.contains('filter--expanded')
+						);
+					},
+					function () {
+						$(this).removeClass('filter--expanded');
+
+						filterButton.setAttribute('filter--expanded', false);
+					}
+				);
+			}
+		);
+
+		const filterDropdown = new FilterNavigationItem(filterOptions, {
+			onSelect: this.onFilterSelect.bind(this),
+		});
+		filterDropdown.init();
+
+		this.filters[filterElement?.dataset?.filterField || ''] =
+			filterDropdown;
+	}
+
+	handleOutsideClick() {
+		// Handle click outside.
+		mobileAndTablet(
+			() => {
+				$(document).click(function (e) {
+					if ($('.filter--expanded').length) {
+						const elemClasses = e.target.classList;
+
+						if (
+							!elemClasses.contains('filter') &&
+							!elemClasses.contains('filter__navigation__item') &&
+							!elemClasses.contains('filter__header') &&
+							!elemClasses.contains('trevor-ti-caret-down')
+						) {
+							$('.filter--expanded').removeClass(
+								'filter--expanded'
+							);
+						}
+					}
+				});
+			},
+			() => {}
+		);
+	}
+
+	getActiveFilters() {
+		const activeFilters: { [key: string]: any[] } = {};
+
+		$(this.element)
+			.find(`.filter__navigation__item[aria-checked="true"]`)
+			.each((index, el) => {
+				const $item = $(el);
+				const value = $item.data('option-value') as string;
+
+				if (value) {
+					const group = $item
+						.closest(`.filter__navigation`)
+						.data('option-group');
+					activeFilters[group] = [];
+					activeFilters[group].push(value);
+				}
+			});
+		return activeFilters;
+	}
+
+	onFilterSelect() {
+		if (typeof this.options.onChange === 'function') {
+			const activeFilters: { [key: string]: string } = {};
+
+			Object.entries(this.getActiveFilters()).forEach(([key, values]) => {
+				if (values && values[0]) {
+					activeFilters[key] = values[0] as string;
+				}
+			});
+			this.options.onChange(activeFilters);
+		}
 	}
 }
