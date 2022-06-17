@@ -82,6 +82,7 @@ class ACF {
 		Field_Group\Video_Player::class,
 		Field_Group\Custom_Heading::class,
 		Field_Group\Intro_Text::class,
+		Field_Group\Events_Grid::class,
 		// Page Specific
 		Field_Group\Page_Header::class,
 		Field_Group\Page_Circulation_Card::class,

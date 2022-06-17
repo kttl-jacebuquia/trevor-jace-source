@@ -69,4 +69,58 @@ class Content {
 
 		return $result;
 	}
+
+	public static function get_events_data() {
+		$events = array();
+
+		// pagination flag
+		$has_more_events = true;
+		$current_page    = 1;
+
+		while ( $has_more_events ) {
+			$events_data = static::fetch_events_paginated( $current_page );
+			$events      = array_merge( $events, $events_data->data );
+
+			// Break if no more page left
+			if ( empty( $events_data->next_page_url ) ) {
+				$has_more_events = false;
+				break;
+			}
+
+			// Continue fetching next page
+			$current_page++;
+		}
+
+		return $events;
+	}
+
+	protected static function fetch_events_paginated( $page = 1 ) {
+		$client = APIClient::get_instance();
+		$org_id = APIClient::TREVOR_ORGANIZATION_ID;
+
+		// To be used later for filtering out past events
+		$current_date_gmt = gmdate( 'Y-m-d\TH:i:s+0000' );
+
+		// TODO: Include started_at filter when there are available future events
+		$filters = array(
+			'status=active',
+			urlencode( "started_at>={$current_date_gmt}" ),
+		);
+
+		$params = array(
+			'per_page' => 100,
+			'sort'     => 'started_at:asc',
+			'page'     => $page,
+			'filter'   => implode( ',', $filters ),
+		);
+
+		// Get events data from API
+		$response = $client->request(
+			"organizations/{$org_id}/campaigns",
+			'GET',
+			$params,
+		);
+
+		return json_decode( $response );
+	}
 }

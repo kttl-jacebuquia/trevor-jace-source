@@ -12,6 +12,8 @@ class APIClient {
 	const CLASSY_API_BASEURL = 'https://api.classy.org';
 	const CLASSY_API_VERSION = '2.0';
 
+	const TREVOR_ORGANIZATION_ID = '6271';
+
 	/**
 	 * @var APIClient
 	 */
