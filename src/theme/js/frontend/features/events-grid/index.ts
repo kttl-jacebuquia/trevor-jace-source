@@ -2,13 +2,15 @@ import moment from 'moment-timezone';
 import Component from '../../Component';
 import { WPAjax } from '../wp-ajax';
 import { slugify } from '../slugify';
-import { getParams } from '../url';
+import { getParams, replaceParams } from '../url';
 
 import type { ClassyEvent, WithFilterValues } from './classy-event.d';
 import type { EventsGridStateType, ActiveFiltersState } from './index.d';
 import type { FilterOptionProp } from '../dropdown-filters/index.d';
+import Pagination, { URL_PARAMS_PAGE_PLACEHOLDER } from '../pagination';
 
 const PARAMS_KEY = 'events-grid';
+const PER_PAGE = 9;
 
 export default class EventsGrid extends Component<
 	HTMLElement,
@@ -20,12 +22,14 @@ export default class EventsGrid extends Component<
 	types: FilterOptionProp[] = [];
 	events: (ClassyEvent & WithFilterValues)[] = [];
 	eventsVisible: (ClassyEvent & WithFilterValues)[] = [];
+	pagination?: Pagination;
 
 	static selector = '.events-grid';
 
 	static children = {
 		filters: '.events-grid__filters',
 		grid: '.events-grid__grid',
+		pagination: '.events-grid__pagination',
 	};
 
 	state = {
@@ -46,6 +50,7 @@ export default class EventsGrid extends Component<
 		await this.fetchItems();
 		this.extractFilters();
 		this.loadStateFromParams();
+		this.initializePagination();
 	}
 
 	async fetchItems() {
@@ -112,6 +117,23 @@ export default class EventsGrid extends Component<
 		);
 	}
 
+	initializePagination() {
+		if (this.children?.pagination) {
+			const options = {
+				totalPages: Math.ceil(this.events.length / PER_PAGE),
+				currentPage: this.state.page,
+				onChange: this.onPaginationPageChange.bind(this),
+			};
+
+			this.pagination = new Pagination(
+				this.children.pagination as HTMLElement,
+				options
+			);
+
+			this.pagination.init();
+		}
+	}
+
 	setFilters(activeFilters: ActiveFiltersState) {
 		this.setState({ activeFilters });
 		this.appendHistory();
@@ -120,6 +142,9 @@ export default class EventsGrid extends Component<
 	renderGrid() {
 		const { location, date, type } = this.state.activeFilters;
 		const activeFilterValues = [location, date, type];
+		const from = (Number(this.state.page) - 1) * PER_PAGE;
+		const to = from + PER_PAGE;
+		const gridContainer = this.children?.grid as HTMLElement;
 
 		const eventsFiltered = this.events.filter(
 			({ locationFilter, dateFilter, typeFilter }) =>
@@ -133,15 +158,14 @@ export default class EventsGrid extends Component<
 				)
 		);
 
-		const renderedCards = eventsFiltered.map((eventData) =>
+		const eventsPaged = eventsFiltered.slice(from, to);
+
+		const renderedCards = eventsPaged.map((eventData) =>
 			this.renderEventCard(eventData)
 		);
 
-		console.log({ renderedCards });
-
-		if (this.children?.grid) {
-			(this.children.grid as HTMLElement).innerHTML =
-				renderedCards.join('');
+		if (gridContainer) {
+			gridContainer.innerHTML = renderedCards.join('');
 		}
 	}
 
@@ -155,7 +179,7 @@ export default class EventsGrid extends Component<
 			timezone_identifier: timezone,
 			address1,
 			locationFilter,
-			id
+			id,
 		} = event;
 
 		const { label: matchedLocation = '' } =
@@ -182,7 +206,9 @@ export default class EventsGrid extends Component<
 		];
 
 		return `
-		<article class="${classes.join(' ')}" id="${id}">
+		<article class="${classes.join(
+			' '
+		)}" id="${id}" tabindex="0" aria-label="${name}">
 			${labelHtml}
 			<div class="card-content relative">
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
@@ -236,6 +262,12 @@ export default class EventsGrid extends Component<
 
 	// Updates history by including filters as parameters
 	appendHistory() {
+		const params = this.getStateAsParams();
+		const url = replaceParams(params);
+		history.pushState('', '', url);
+	}
+
+	getStateAsParams() {
 		const filters = Object.entries(this.state.activeFilters)
 			.filter(([key, value]) => value)
 			.reduce(
@@ -247,7 +279,6 @@ export default class EventsGrid extends Component<
 			);
 
 		const params = {
-			...getParams(),
 			[PARAMS_KEY]: JSON.stringify({
 				id: this.id,
 				filters,
@@ -255,10 +286,7 @@ export default class EventsGrid extends Component<
 			}),
 		};
 
-		const url = new URL(window.location.origin + window.location.pathname);
-		url.search = new URLSearchParams(params).toString();
-
-		history.pushState('', '', url);
+		return params;
 	}
 
 	// Extract filters and pagination from URL params if there is any
@@ -276,14 +304,39 @@ export default class EventsGrid extends Component<
 				});
 			}
 		} else {
-			this.renderGrid();
-			this.appendHistory();
+			this.renderUpdates();
 		}
 	}
 
-	componentDidUpdate() {
-		this.renderGrid();
+	updatePagination() {
+		if (this.pagination) {
+			const currentParams = this.getStateAsParams();
+
+			if (!(PARAMS_KEY in currentParams)) {
+				currentParams[PARAMS_KEY] = '{}';
+			}
+
+			const eventsGridData = JSON.parse(currentParams[PARAMS_KEY]);
+			eventsGridData.page = URL_PARAMS_PAGE_PLACEHOLDER;
+			currentParams[PARAMS_KEY] = JSON.stringify(eventsGridData);
+
+			this.pagination.setURLTemplate(replaceParams(currentParams));
+		}
+	}
+
+	renderUpdates() {
 		this.appendHistory();
+		this.renderGrid();
+		this.updatePagination();
+	}
+
+	onPaginationPageChange(page: number) {
+		this.setState({ page });
+		this.element.focus();
+	}
+
+	componentDidUpdate() {
+		this.renderUpdates();
 	}
 }
 

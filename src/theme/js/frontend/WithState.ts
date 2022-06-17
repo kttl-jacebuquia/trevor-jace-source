@@ -5,9 +5,9 @@ const STATE_CHANGE_EVENT = Symbol();
 
 export type State = { [key: string]: any };
 
-export default class WithState<StateType = State> {
+export default class WithState<StateType> {
 	// Define this in child class
-	state?: StateType | State = {};
+	state?: StateType;
 	[STATE_CHANGE_EVENT]: string;
 
 	constructor() {

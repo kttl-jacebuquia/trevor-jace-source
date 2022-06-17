@@ -68,7 +68,7 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		$id = static::get_val( static::FIELD_ID );
 
 		ob_start(); ?>
-			<section class="events-grid events-grid--loading" id="<?php echo $id; ?>" >
+			<section class="events-grid events-grid--loading" id="<?php echo $id; ?>" aria-label="events grid" tabindex="0">
 				<div class="events-grid__container">
 					<?php echo static::render_filters(); ?>
 					<?php echo static::render_grid(); ?>
@@ -101,9 +101,7 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	protected static function render_pagination() {
 		ob_start();
 		?>
-			<div class="events-grid__pagination">
-				Pagination
-			</div>
+			<div class="events-grid__pagination"></div>
 		<?php
 			return ob_get_clean();
 	}
