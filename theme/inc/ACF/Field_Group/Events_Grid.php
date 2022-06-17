@@ -65,14 +65,17 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 
 	/** @inheritDoc */
 	public static function render( $post = false, array $data = null, array $options = array() ): ?string {
-		$id = static::get_val( static::FIELD_ID );
+		$id      = static::get_val( static::FIELD_ID );
+		$heading = static::get_val( static::FIELD_HEADING );
 
 		ob_start(); ?>
 			<section class="events-grid events-grid--loading" id="<?php echo $id; ?>" aria-label="events grid" tabindex="0">
 				<div class="events-grid__container">
-					<?php echo static::render_filters(); ?>
-					<?php echo static::render_grid(); ?>
-					<?php echo static::render_pagination(); ?>
+					<h2 class="events-grid__heading"><?php echo $heading; ?></h2>
+					<p class="events-grid__loading text-center my-px50">Loading...</p>
+					<div class="events-grid__filters"></div>
+					<div class="events-grid__grid"></div>
+					<div class="events-grid__pagination"></div>
 					<?php echo static::render_empty_content(); ?>
 				</div>
 			</section>
@@ -80,52 +83,43 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 		return ob_get_clean();
 	}
 
-	protected static function render_filters() {
-		ob_start();
-		?>
-			<div class="events-grid__filters">
-				FILTERS
-			</div>
-		<?php
-			return ob_get_clean();
-	}
-
-	protected static function render_grid() {
-		ob_start();
-		?>
-			<div class="events-grid__grid"></div>
-		<?php
-			return ob_get_clean();
-	}
-
-	protected static function render_pagination() {
-		ob_start();
-		?>
-			<div class="events-grid__pagination"></div>
-		<?php
-			return ob_get_clean();
-	}
-
 	protected static function render_empty_content() {
+		$empty_message = static::get_val( static::FIELD_EMPTY_MESSAGE );
+
 		$social_media_accounts = array(
 			array(
-				'url'  => Footer::get_option( Footer::FIELD_FACEBOOK_URL ),
-				'icon' => 'trevor-ti-facebook',
+				'url'   => Footer::get_option( Footer::FIELD_FACEBOOK_URL ),
+				'icon'  => 'trevor-ti-facebook',
+				'label' => 'click to go to our facebook page',
 			),
 			array(
-				'url'  => Footer::get_option( Footer::FIELD_TWITTER_URL ),
-				'icon' => 'trevor-ti-twitter',
+				'url'   => Footer::get_option( Footer::FIELD_TWITTER_URL ),
+				'icon'  => 'trevor-ti-twitter',
+				'label' => 'click to go to our twitter page',
 			),
 			array(
-				'url'  => Footer::get_option( Footer::FIELD_INSTAGRAM_URL ),
-				'icon' => 'trevor-ti-instagram',
+				'url'   => Footer::get_option( Footer::FIELD_INSTAGRAM_URL ),
+				'icon'  => 'trevor-ti-instagram',
+				'label' => 'click to go to our instagram page',
 			),
 		);
 
 		ob_start();
 		?>
-			<div class="events-grid__empty">
-				Empty Content
+			<div class="events-grid__empty hidden">
+				<p class="events-grid__empty-text">
+					<?php echo $empty_message; ?>
+				</p>
+				<div class="events-grid__social">
+					<?php foreach ( $social_media_accounts as $social_link ): ?>
+						<a
+							class="events-grid__social-link"
+							href="<?php echo $social_link['url']; ?>"
+							aria-label="<?php echo $social_link['label']; ?>">
+							<i class="<?php echo $social_link['icon']; ?>" aria-hidden="true"></i>
+						</a>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		<?php
 			return ob_get_clean();

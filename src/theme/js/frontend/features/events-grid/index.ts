@@ -37,6 +37,8 @@ export default class EventsGrid extends Component<
 		filters: '.events-grid__filters',
 		grid: '.events-grid__grid',
 		pagination: '.events-grid__pagination',
+		empty: '.events-grid__empty',
+		loading: '.events-grid__loading',
 	};
 
 	state = {
@@ -55,10 +57,18 @@ export default class EventsGrid extends Component<
 
 	async afterInit() {
 		await this.fetchItems();
-		this.extractFilters();
-		this.loadStateFromParams();
-		this.initializePagination();
-		this.initializeFilters();
+
+		if (this.events?.length) {
+			this.extractFilters();
+			this.loadStateFromParams();
+			this.initializePagination();
+			this.initializeFilters();
+		} else {
+			this.showEmpty();
+		}
+
+		this.element.classList.remove('events-grid--loading');
+		(this.children?.loading as HTMLElement)?.classList.add('hidden');
 	}
 
 	async fetchItems() {
@@ -393,6 +403,10 @@ export default class EventsGrid extends Component<
 	onPaginationPageChange(page: number) {
 		this.setState({ page });
 		this.element.focus();
+	}
+
+	showEmpty() {
+		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
 	}
 
 	componentDidUpdate() {
