@@ -1,6 +1,11 @@
 .events-grid {
   &__container {
     @apply container mx-auto;
+
+    @screen lg-only {
+      padding-left: rem-calc(163);
+      padding-right: rem-calc(163);
+    }
   }
 
   &__grid {
@@ -8,7 +13,27 @@
     grid-gap: rem-calc(28);
   }
 
-  &__card {
-    @apply col-span-4;
+  &__card.card-post.event {
+    @apply col-span-full min-h-0;
+    width: rem-calc(320);
+    height: rem-calc(410);
+
+    @screen md {
+      @apply col-span-4;
+      height: rem-calc(442);
+    }
+
+    @screen lg {
+      width: 100%;
+      height: rem-calc(466);
+    }
+
+    @screen lg-only {
+      @apply col-span-6;
+    }
+
+    @screen lg2 {
+      width: 100%;
+    }
   }
 }

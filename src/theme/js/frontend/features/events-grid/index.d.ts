@@ -6,4 +6,5 @@ export interface ActiveFiltersState {
 
 export interface EventsGridStateType {
 	activeFilters: ActiveFiltersState;
+	page: number;
 }

@@ -34,6 +34,7 @@ export default class EventsGrid extends Component<
 			date: '',
 			type: '',
 		},
+		page: 1,
 	};
 
 	constructor(element: HTMLElement) {
@@ -44,7 +45,7 @@ export default class EventsGrid extends Component<
 	async afterInit() {
 		await this.fetchItems();
 		this.extractFilters();
-		this.loadFiltersFromParams();
+		this.loadStateFromParams();
 	}
 
 	async fetchItems() {
@@ -136,6 +137,8 @@ export default class EventsGrid extends Component<
 			this.renderEventCard(eventData)
 		);
 
+		console.log({ renderedCards });
+
 		if (this.children?.grid) {
 			(this.children.grid as HTMLElement).innerHTML =
 				renderedCards.join('');
@@ -152,62 +155,77 @@ export default class EventsGrid extends Component<
 			timezone_identifier: timezone,
 			address1,
 			locationFilter,
+			id
 		} = event;
 
 		const { label: matchedLocation = '' } =
 			this.locations.find(({ value }) => locationFilter === value) || {};
 		const locationLabel = [address1, matchedLocation]
 			.filter(Boolean)
-			.join(' | ');
+			.join('<span class="event-location__separator"></span>');
 
 		const dateTime = moment(startDate)
 			.tz(timezone || '')
-			.format('MMM DD, YYYY, h:MM A');
+			.format('MMM DD, YYYY, h:MM A z');
 
-		const labelHtml = type
-			? `
-		<span class="card-label">
-			${this.typeToTitle(type)}
-		</span>`
-			: '';
-		const thumbnailHtml = thumbnail
-			? `
-		<div class="post-thumbnail-wrap">
-			<a href="${url}">
-				<img src="${thumbnail}" alt="Image for ${name}"/>
-			</a>
-		</div>
-		`
-			: '';
-		const titleTopHtml = `<div class="title-top">${dateTime}</div>`;
-		const locationHtml = `<div class="event-location">${locationLabel}</div>`;
+		const labelHtml = this.renderType(type || '');
+		const thumbnailHtml = this.renderThumbnail(
+			thumbnail || '',
+			url,
+			name || ''
+		);
+		const titleTopHtml = this.renderEyebrow(dateTime);
+		const locationHtml = this.renderLocation(locationLabel);
 		const classes = [
 			'events-grid__card card-post event trevor_event type-trevor_event',
+			thumbnail ? 'has-post-thumbnail' : 'no-thumbnail',
 		];
 
-		if (thumbnail) {
-			classes.push('has-post-thumbnail');
-		}
-
 		return `
-		<article class="${classes.join(' ')}">
+		<article class="${classes.join(' ')}" id="${id}">
 			${labelHtml}
 			<div class="card-content relative">
 				<div class="card-text-container relative flex flex-col flex-initial md:flex-auto">
 					${thumbnailHtml}
 					${titleTopHtml}
-
 					<h3 class="post-title">
 						<a href="${url}" class="stretched-link">${name}</a>
 					</h3>
-
-					<div class="post-desc"><span>Description</span></div>
 					${locationHtml}
 				</div>
 
-				<a href="${url}" target="_blank" rel="noreferer" class="absolute top-0 left-0 h-full w-full z-1"></a>
+				<a href="${url}" target="_blank" rel="noreferer" class="absolute top-0 left-0 ${'h-full w-full z-1'.replace(
+			/.*/,
+			''
+		)}"></a>
 			</div>
 		</article>`;
+	}
+
+	renderLocation(locationLabel = '') {
+		return `<div class="event-location">${locationLabel}</div>`;
+	}
+
+	renderEyebrow(eyebrow = '') {
+		return eyebrow ? `<div class="title-top">${eyebrow}</div>` : '';
+	}
+
+	renderType(type: string) {
+		return type
+			? `<span class="card-label">${this.typeToTitle(type)}</span>`
+			: '';
+	}
+
+	renderThumbnail(thumbnail?: string, url: string = '#', alt: string = '') {
+		return thumbnail
+			? `
+				<div class="post-thumbnail-wrap">
+					<a href="${url}">
+						<img src="${thumbnail}" alt="Image for ${alt}"/>
+					</a>
+				</div>
+	`
+			: '';
 	}
 
 	typeToTitle(type: string = '') {
@@ -233,6 +251,7 @@ export default class EventsGrid extends Component<
 			[PARAMS_KEY]: JSON.stringify({
 				id: this.id,
 				filters,
+				page: this.state.page,
 			}),
 		};
 
@@ -242,22 +261,29 @@ export default class EventsGrid extends Component<
 		history.pushState('', '', url);
 	}
 
-	// Extract filters from URL params if there is any
-	loadFiltersFromParams() {
+	// Extract filters and pagination from URL params if there is any
+	loadStateFromParams() {
 		const params = getParams();
 
 		if (PARAMS_KEY in params) {
-			const { id, filters } = JSON.parse(params[PARAMS_KEY]);
+			const { id, filters, page = 1 } = JSON.parse(params[PARAMS_KEY]);
 
 			// Only use filters from params if ID matches
 			if (id === this.id) {
-				this.setFilters(filters);
+				this.setState({
+					activeFilters: filters,
+					page,
+				});
 			}
+		} else {
+			this.renderGrid();
+			this.appendHistory();
 		}
 	}
 
 	componentDidUpdate() {
 		this.renderGrid();
+		this.appendHistory();
 	}
 }
 
