@@ -115,7 +115,8 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 						<a
 							class="events-grid__social-link"
 							href="<?php echo $social_link['url']; ?>"
-							aria-label="<?php echo $social_link['label']; ?>">
+							aria-label="<?php echo $social_link['label']; ?>"
+							target="_blank">
 							<i class="<?php echo $social_link['icon']; ?>" aria-hidden="true"></i>
 						</a>
 					<?php endforeach; ?>
