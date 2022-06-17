@@ -181,15 +181,16 @@ export default class EventsGrid extends Component<
 		const gridContainer = this.children?.grid as HTMLElement;
 
 		this.eventsFiltered = this.events.filter(
-			({ locationFilter, dateFilter, typeFilter }) =>
-				[locationFilter, dateFilter, typeFilter].every(
+			({ locationFilter, dateFilter, typeFilter }) => {
+				return [locationFilter, dateFilter, typeFilter].every(
 					(filterValue, index) => {
 						return (
 							!activeFilterValues[index] ||
 							activeFilterValues[index] === filterValue
 						);
 					}
-				)
+				);
+			}
 		);
 
 		const eventsPaged = this.eventsFiltered.slice(from, to);
@@ -345,7 +346,7 @@ export default class EventsGrid extends Component<
 	generateDropdownFilterFields(): DropdownFilterField[] {
 		const fields: DropdownFilterField[] = [
 			{
-				id: 'event-type',
+				id: 'type',
 				buttonLabel: 'Event Type',
 				allLabel: 'All Event Types',
 				options: this.types.reduce((allOptions, { value, label }) => {
@@ -408,13 +409,13 @@ export default class EventsGrid extends Component<
 		this.updatePagination();
 	}
 
+	showEmpty() {
+		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
+	}
+
 	onPaginationPageChange(page: number) {
 		this.setState({ page });
 		this.element.focus();
-	}
-
-	showEmpty() {
-		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
 	}
 
 	onDropdownFilterChange(activeFilters: FilterOptions) {

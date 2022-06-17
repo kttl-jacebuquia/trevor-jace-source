@@ -58,7 +58,10 @@ export default class Pagination extends WithState<PaginationState> {
 	}
 
 	setTotalPages(totalPages = 0, retainCurrentPage = false) {
-		const newOptions: Partial<PaginationOptions> = { totalPages };
+		const newOptions: Partial<PaginationOptions> = {
+			...this.options,
+			totalPages,
+		};
 
 		if (!retainCurrentPage) {
 			newOptions.currentPage = 1;
