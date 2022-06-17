@@ -128,14 +128,15 @@
     }
 
     &-text {
-      @apply font-semibold text-px20 leading-px22 mt-px14;
+      @apply font-bold text-px20 leading-px22 mt-px14;
 
       @screen md {
         @apply text-px18 leading-px22 mt-px6;
       }
 
-      @screen lg2 {
-        @apply text-px18 leading-px22 tracking-px05;
+      @screen lg {
+        @apply leading-px22 tracking-px05;
+        font-size: rem-calc(19);
       }
     }
   }
