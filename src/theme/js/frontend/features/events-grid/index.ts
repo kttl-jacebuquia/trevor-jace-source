@@ -6,8 +6,14 @@ import { getParams, replaceParams } from '../url';
 
 import type { ClassyEvent, WithFilterValues } from './classy-event.d';
 import type { EventsGridStateType, ActiveFiltersState } from './index.d';
-import type { FilterOptionProp } from '../dropdown-filters/index.d';
+import type {
+	DropdownFiltersOptions,
+	FilterOptionProp,
+	DropdownFilterField,
+	FilterOptions,
+} from '../dropdown-filters/index.d';
 import Pagination, { URL_PARAMS_PAGE_PLACEHOLDER } from '../pagination';
+import DropdownFilters from '../dropdown-filters';
 
 const PARAMS_KEY = 'events-grid';
 const PER_PAGE = 9;
@@ -23,6 +29,7 @@ export default class EventsGrid extends Component<
 	events: (ClassyEvent & WithFilterValues)[] = [];
 	eventsVisible: (ClassyEvent & WithFilterValues)[] = [];
 	pagination?: Pagination;
+	filters?: DropdownFilters;
 
 	static selector = '.events-grid';
 
@@ -51,6 +58,7 @@ export default class EventsGrid extends Component<
 		this.extractFilters();
 		this.loadStateFromParams();
 		this.initializePagination();
+		this.initializeFilters();
 	}
 
 	async fetchItems() {
@@ -131,6 +139,21 @@ export default class EventsGrid extends Component<
 			);
 
 			this.pagination.init();
+		}
+	}
+
+	initializeFilters() {
+		if (this.children?.filters) {
+			const options: DropdownFiltersOptions = {
+				fields: this.generateDropdownFilterFields(),
+			};
+
+			this.filters = new DropdownFilters(
+				this.children.filters as HTMLElement,
+				options
+			);
+
+			this.filters.init();
 		}
 	}
 
@@ -306,6 +329,43 @@ export default class EventsGrid extends Component<
 		} else {
 			this.renderUpdates();
 		}
+	}
+
+	generateDropdownFilterFields(): DropdownFilterField[] {
+		const fields: DropdownFilterField[] = [
+			{
+				id: 'event-type',
+				buttonLabel: 'Event Type',
+				allLabel: 'All Event Types',
+				options: this.types.reduce((allOptions, { value, label }) => {
+					allOptions[value] = label;
+					return allOptions;
+				}, {} as FilterOptions),
+			},
+			{
+				id: 'location',
+				buttonLabel: 'Loation',
+				allLabel: 'All Locations',
+				options: this.locations.reduce(
+					(allOptions, { value, label }) => {
+						allOptions[value] = label;
+						return allOptions;
+					},
+					{} as FilterOptions
+				),
+			},
+			{
+				id: 'date',
+				buttonLabel: 'Date',
+				allLabel: 'All Dates',
+				options: this.dates.reduce((allOptions, { value, label }) => {
+					allOptions[value] = label;
+					return allOptions;
+				}, {} as FilterOptions),
+			},
+		];
+
+		return fields;
 	}
 
 	updatePagination() {
