@@ -98,7 +98,7 @@ class Content {
 		$client = APIClient::get_instance();
 		$org_id = APIClient::TREVOR_ORGANIZATION_ID;
 
-		// To be used later for filtering out past events
+		// Filtering out past events.
 		$current_date_gmt = gmdate( 'Y-m-d\TH:i:s+0000' );
 
 		// TODO: Include started_at filter when there are available future events

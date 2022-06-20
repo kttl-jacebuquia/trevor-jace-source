@@ -18,6 +18,24 @@ import DropdownFilters from '../dropdown-filters';
 const PARAMS_KEY = 'events-grid';
 const PER_PAGE = 9;
 
+const extractDataFromUrl = (gridID = '') => {
+	const params = getParams();
+
+	if (PARAMS_KEY in params) {
+		const { id, filters, page = 1 } = JSON.parse(params[PARAMS_KEY]);
+
+		// Only use filters from params if ID matches
+		if (id === gridID) {
+			return {
+				activeFilters: filters,
+				page,
+			};
+		}
+	}
+
+	return null;
+};
+
 export default class EventsGrid extends Component<
 	HTMLElement,
 	EventsGridStateType
@@ -27,9 +45,10 @@ export default class EventsGrid extends Component<
 	dates: FilterOptionProp[] = [];
 	types: FilterOptionProp[] = [];
 	events: (ClassyEvent & WithFilterValues)[] = [];
-	eventsVisible: (ClassyEvent & WithFilterValues)[] = [];
+	eventsFiltered: (ClassyEvent & WithFilterValues)[] = [];
 	pagination?: Pagination;
 	filters?: DropdownFilters;
+	initialized = false;
 
 	static selector = '.events-grid';
 
@@ -53,14 +72,33 @@ export default class EventsGrid extends Component<
 	constructor(element: HTMLElement) {
 		super(element);
 		this.id = this.element.id;
+
+		// Load state from params
+		const stateFromParams: EventsGridStateType | null = extractDataFromUrl(
+			this.id
+		);
+
+		// Load state from params
+		if (stateFromParams) {
+			this.state.page = stateFromParams?.page || this.state.page;
+			Object.entries(stateFromParams?.activeFilters || {}).forEach(
+				([key, value]) => {
+					this.state.activeFilters[key as keyof ActiveFiltersState] =
+						value ||
+						this.state.activeFilters[
+							key as keyof ActiveFiltersState
+						];
+				}
+			);
+		}
 	}
 
 	async afterInit() {
 		await this.fetchItems();
 
 		if (this.events?.length) {
-			this.extractFilters();
-			this.loadStateFromParams();
+			this.extractFiltersFromEvents();
+			this.renderGrid();
 			this.initializePagination();
 			this.initializeFilters();
 		} else {
@@ -69,6 +107,8 @@ export default class EventsGrid extends Component<
 
 		this.element.classList.remove('events-grid--loading');
 		(this.children?.loading as HTMLElement)?.classList.add('hidden');
+
+		this.initialized = true;
 	}
 
 	async fetchItems() {
@@ -81,7 +121,7 @@ export default class EventsGrid extends Component<
 		this.events = data;
 	}
 
-	extractFilters() {
+	extractFiltersFromEvents() {
 		// Temporary store for filter values to avoid duplicates
 		const locationSlugs: string[] = [];
 		const dateValues: string[] = [];
@@ -138,7 +178,7 @@ export default class EventsGrid extends Component<
 	initializePagination() {
 		if (this.children?.pagination) {
 			const options = {
-				totalPages: Math.ceil(this.events.length / PER_PAGE),
+				totalPages: Math.ceil(this.eventsFiltered.length / PER_PAGE),
 				currentPage: this.state.page,
 				onChange: this.onPaginationPageChange.bind(this),
 			};
@@ -156,6 +196,8 @@ export default class EventsGrid extends Component<
 		if (this.children?.filters) {
 			const options: DropdownFiltersOptions = {
 				fields: this.generateDropdownFilterFields(),
+				onChange: this.onDropdownFilterChange.bind(this),
+				initialFilters: this.state.activeFilters,
 			};
 
 			this.filters = new DropdownFilters(
@@ -179,19 +221,20 @@ export default class EventsGrid extends Component<
 		const to = from + PER_PAGE;
 		const gridContainer = this.children?.grid as HTMLElement;
 
-		const eventsFiltered = this.events.filter(
-			({ locationFilter, dateFilter, typeFilter }) =>
-				[locationFilter, dateFilter, typeFilter].every(
+		this.eventsFiltered = this.events.filter(
+			({ locationFilter, dateFilter, typeFilter }) => {
+				return [locationFilter, dateFilter, typeFilter].every(
 					(filterValue, index) => {
 						return (
 							!activeFilterValues[index] ||
 							activeFilterValues[index] === filterValue
 						);
 					}
-				)
+				);
+			}
 		);
 
-		const eventsPaged = eventsFiltered.slice(from, to);
+		const eventsPaged = this.eventsFiltered.slice(from, to);
 
 		const renderedCards = eventsPaged.map((eventData) =>
 			this.renderEventCard(eventData)
@@ -295,12 +338,12 @@ export default class EventsGrid extends Component<
 
 	// Updates history by including filters as parameters
 	appendHistory() {
-		const params = this.getStateAsParams();
+		const params = this.stateAsParams();
 		const url = replaceParams(params);
 		history.pushState('', '', url);
 	}
 
-	getStateAsParams() {
+	stateAsParams() {
 		const filters = Object.entries(this.state.activeFilters)
 			.filter(([key, value]) => value)
 			.reduce(
@@ -322,29 +365,10 @@ export default class EventsGrid extends Component<
 		return params;
 	}
 
-	// Extract filters and pagination from URL params if there is any
-	loadStateFromParams() {
-		const params = getParams();
-
-		if (PARAMS_KEY in params) {
-			const { id, filters, page = 1 } = JSON.parse(params[PARAMS_KEY]);
-
-			// Only use filters from params if ID matches
-			if (id === this.id) {
-				this.setState({
-					activeFilters: filters,
-					page,
-				});
-			}
-		} else {
-			this.renderUpdates();
-		}
-	}
-
 	generateDropdownFilterFields(): DropdownFilterField[] {
 		const fields: DropdownFilterField[] = [
 			{
-				id: 'event-type',
+				id: 'type',
 				buttonLabel: 'Event Type',
 				allLabel: 'All Event Types',
 				options: this.types.reduce((allOptions, { value, label }) => {
@@ -354,7 +378,7 @@ export default class EventsGrid extends Component<
 			},
 			{
 				id: 'location',
-				buttonLabel: 'Loation',
+				buttonLabel: 'Location',
 				allLabel: 'All Locations',
 				options: this.locations.reduce(
 					(allOptions, { value, label }) => {
@@ -380,7 +404,7 @@ export default class EventsGrid extends Component<
 
 	updatePagination() {
 		if (this.pagination) {
-			const currentParams = this.getStateAsParams();
+			const currentParams = this.stateAsParams();
 
 			if (!(PARAMS_KEY in currentParams)) {
 				currentParams[PARAMS_KEY] = '{}';
@@ -394,10 +418,25 @@ export default class EventsGrid extends Component<
 		}
 	}
 
-	renderUpdates() {
-		this.appendHistory();
+	renderUpdates(reloadPagination = false) {
 		this.renderGrid();
+
+		// Initial render doesn't need history update
+		if (this.initialized) {
+			this.appendHistory();
+		}
+
+		if (reloadPagination) {
+			this.pagination?.setTotalPages(
+				Math.ceil(this.eventsFiltered.length / PER_PAGE)
+			);
+		}
+
 		this.updatePagination();
+	}
+
+	showEmpty() {
+		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
 	}
 
 	onPaginationPageChange(page: number) {
@@ -405,12 +444,12 @@ export default class EventsGrid extends Component<
 		this.element.focus();
 	}
 
-	showEmpty() {
-		(this.children?.empty as HTMLElement)?.classList.remove('hidden');
+	onDropdownFilterChange(activeFilters: FilterOptions) {
+		this.setState({ activeFilters, page: 1 });
 	}
 
-	componentDidUpdate() {
-		this.renderUpdates();
+	componentDidUpdate(changedState: Partial<EventsGridStateType>) {
+		this.renderUpdates('activeFilters' in changedState);
 	}
 }
 
