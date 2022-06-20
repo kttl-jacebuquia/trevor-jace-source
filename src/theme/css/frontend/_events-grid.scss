@@ -22,6 +22,14 @@
     }
   }
 
+  &__filters {
+    @apply mt-px36 mb-px34;
+
+    @screen md {
+      @apply mt-px58 mb-px38;
+    }
+  }
+
   &__grid {
     @apply tw-grid;
     grid-gap: rem-calc(28);
