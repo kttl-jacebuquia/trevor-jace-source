@@ -115,9 +115,9 @@ class JobsContent extends WithState {
 					</time>
 				</div>
 				${
-					(item?.applyUrl &&
+					(item?.hostedUrl &&
 						`<div class="listing__item__cta">
-							<a href="${item.applyUrl}"
+							<a href="${item.hostedUrl}"
 							target="_blank">Apply Now</a>
 						</div>`) ||
 					''
