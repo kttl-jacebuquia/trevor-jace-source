@@ -7,8 +7,7 @@ import FilterNavigationItem from './filter-navigation-item';
 import type {
 	DropdownFilterField,
 	DropdownFiltersOptions,
-	DropdownFiltersState,
-	FilterOptions,
+	DropdownFiltersState
 } from './index.d';
 
 export default class DropdownFilters extends WithState<DropdownFiltersState> {
@@ -43,31 +42,54 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 		this.handleOutsideClick();
 	}
 
-	renderFilterOptions(filterOptions: FilterOptions): HTMLLIElement[] {
-		return Object.entries(filterOptions).map(
-			([filterOptionValue, filterOptionLabel]) => {
-				const optionElementHtml = `
+	renderFilterOptions(filterField: DropdownFilterField): HTMLLIElement[] {
+		const initialOption =
+			this.options.initialFilters &&
+			filterField.id in this.options.initialFilters
+				? this.options.initialFilters[filterField.id]
+				: '';
+
+		// Prepend "All" option
+		const options = [
+			['', filterField.allLabel],
+			...Object.entries(filterField.options),
+		];
+
+		return options.map(([filterOptionValue, filterOptionLabel]) => {
+			const optionElementHtml = `
 					<li class="filter__navigation__item"
 						data-option-value="${filterOptionValue}"
 						role="menuitemcheckbox"
-						aria-checked="false">
+						aria-checked="${initialOption === filterOptionValue}">
 						${filterOptionLabel}
 					</li>
 					`;
 
-				const optionElement = Object.assign(
-					document.createElement('template'),
-					{
-						innerHTML: optionElementHtml.trim(),
-					}
-				).content.firstChild as HTMLLIElement;
+			const optionElement = Object.assign(
+				document.createElement('template'),
+				{
+					innerHTML: optionElementHtml.trim(),
+				}
+			).content.firstChild as HTMLLIElement;
 
-				return optionElement;
-			}
-		);
+			return optionElement;
+		});
 	}
 
 	renderFilter(filterField: DropdownFilterField): HTMLLIElement {
+		const hasActiveFilter = (this.options?.initialFilters || {})[
+			filterField.id
+		]
+			? true
+			: false;
+		const buttonLabel = hasActiveFilter
+			? filterField.options[
+					(this.options.initialFilters || {})[
+						filterField.id as string
+					]
+			  ]
+			: filterField.buttonLabel;
+
 		const html = `
 		<li class="filter" role="none" data-filter-field="${filterField.id}">
 			<button class="filter__header"
@@ -76,7 +98,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 					aria-expanded="false"
 					aria-label="${filterField.allLabel}"
 					type="button">
-				<span>${filterField.buttonLabel}</span>
+				<span>${buttonLabel}</span>
 				<i class="trevor-ti-caret-down"></i>
 			</button>
 
@@ -85,12 +107,6 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 					role="menu"
 					data-option-group="${filterField.id}"
 					aria-label="Locations">
-					<li class="filter__navigation__item"
-						data-option-value=""
-						role="menuitemcheckbox"
-						aria-checked="true">
-						${filterField.allLabel}
-					</li>
 				</ul>
 			</div>
 		</li>
@@ -107,9 +123,7 @@ export default class DropdownFilters extends WithState<DropdownFiltersState> {
 			'.filter__navigation'
 		);
 
-		const filterOptionsElements = this.renderFilterOptions(
-			filterField.options
-		);
+		const filterOptionsElements = this.renderFilterOptions(filterField);
 
 		// Append options
 		filterOptionsElements.forEach((optionElement) =>
