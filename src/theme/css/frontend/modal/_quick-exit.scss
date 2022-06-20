@@ -2,6 +2,11 @@
   @apply justify-center items-center;
   @include focusable-children-outline(light);
 
+  .modal-wrap {
+    @apply items-start py-px30 h-auto overflow-auto;
+    max-height: 100vh;
+  }
+
   .modal-overlay {
     @supports (backdrop-filter: blur(10px)) {
       background: rgba(0, 0, 102, 0.1);

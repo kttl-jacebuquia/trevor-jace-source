@@ -3,6 +3,9 @@
   @include focusable-children-outline(light);
 
   .modal-wrap {
+    @apply items-start py-px30 h-auto overflow-auto;
+    max-height: 100vh;
+
     @screen xl {
       padding-left: rem-calc(100px);
       padding-right: rem-calc(100px);
