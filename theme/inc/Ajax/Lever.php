@@ -37,9 +37,6 @@ class Lever {
 	 * Gets jobs data. Includes extracted filter items (locations and departments).
 	 */
 	public static function get_jobs_data() {
-		// Test
-		// $url = 'https://api.lever.co/v0/postings/leverdemo?mode=json&limit=30';
-
 		// Trevor Lever
 		$url = 'https://api.lever.co/v0/postings/thetrevorproject?mode=json';
 
@@ -74,6 +71,7 @@ class Lever {
 			// Extract job data
 			$job_data = array(
 				'applyUrl'         => $job['applyUrl'],
+				'hostedUrl'        => $job['hostedUrl'],
 				'id'               => $job['id'],
 				'descriptionPlain' => $job['descriptionPlain'],
 				'title'            => $job['text'],
