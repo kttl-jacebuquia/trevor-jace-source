@@ -19,6 +19,7 @@
 
     @screen md {
       @apply col-span-6 col-start-2;
+      max-height: none;
     }
 
     @screen lg {
