@@ -5,6 +5,14 @@
     @apply mb-px168;
   }
 
+  @screen md {
+    @apply mt-px120 mb-px140;
+  }
+
+  @screen xl {
+    @apply mb-px160;
+  }
+
   &__container {
     @apply container mx-auto;
 
