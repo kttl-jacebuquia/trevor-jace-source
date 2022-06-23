@@ -123,12 +123,14 @@ class Tier {
 		)              = wp_get_attachment_image_src( $post_image_id, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD );
 		$is_svg        = preg_match( '/\.svg$/i', $image_src );
 
-		// Add aspect ratio class according to dimensions
-		if ( $is_svg ) {
-			// SVGs does not provide width and height, so we let JS compute it
-			$attrs['class'] .= ' partner-logo--dynamic';
-		} else {
-			$attrs['data-aspect-ratio-class'] = static::get_aspect_ratio_class( $width, $height );
+		if ( $post_image_id ) {
+			// Add aspect ratio class according to dimensions
+			if ( $is_svg ) {
+				// SVGs does not provide width and height, so we let JS compute it
+				$attrs['class'] .= ' partner-logo--dynamic';
+			} else {
+				$attrs['data-aspect-ratio-class'] = static::get_aspect_ratio_class( $width, $height );
+			}
 		}
 
 		return get_the_post_thumbnail( $post, \TrevorWP\Theme\Helper\Thumbnail::SIZE_MD, $attrs );
