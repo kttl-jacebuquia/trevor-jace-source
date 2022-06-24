@@ -4,15 +4,25 @@ use TrevorWP\Theme\ACF\Options_Page\Footer;
 use TrevorWP\Theme\ACF\Util\Field_Val_Getter;
 
 class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
-	const FIELD_ID            = 'id';
-	const FIELD_HEADING       = 'heading';
-	const FIELD_EMPTY_MESSAGE = 'empty_message';
+	const FIELD_ID                    = 'id';
+	const FIELD_HEADING               = 'heading';
+	const FIELD_EVENT_MESSAGE_TOGGLE  = 'event_message_toggle';
+	const FIELD_DEFAULT_MESSAGE       = 'default_message';
+	const FIELD_CUSTOM_MESSAGE        = 'custom_message';
+	const FIELD_SOCIAL_LINKS          = 'social_links';
+	const FIELD_SOCIAL_LINK_TYPE      = 'social_link_type';
+	const FIELD_SOCIAL_LINK_URL       = 'social_link_url';
 
 	/** @inheritDoc */
 	protected static function prepare_register_args(): array {
-		$id            = static::gen_field_key( static::FIELD_ID );
-		$heading       = static::gen_field_key( static::FIELD_HEADING );
-		$empty_message = static::gen_field_key( static::FIELD_EMPTY_MESSAGE );
+		$id                    = static::gen_field_key( static::FIELD_ID );
+		$heading               = static::gen_field_key( static::FIELD_HEADING );
+		$custom_message_toggle = static::gen_field_key( static::FIELD_EVENT_MESSAGE_TOGGLE );
+		$empty_message         = static::gen_field_key( static::FIELD_DEFAULT_MESSAGE );
+		$custom_message        = static::gen_field_key( static::FIELD_CUSTOM_MESSAGE );
+		$social_links          = static::gen_field_key( static::FIELD_SOCIAL_LINKS );
+		$social_link_type      = static::gen_field_key( static::FIELD_SOCIAL_LINK_TYPE );
+		$social_link_url       = static::gen_field_key( static::FIELD_SOCIAL_LINK_URL );
 
 		return array(
 			'title'  => 'Events Grid',
@@ -24,13 +34,82 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 					'type'          => 'text',
 					'default_value' => 'Upcoming Events',
 				),
-				static::FIELD_EMPTY_MESSAGE => array(
-					'key'           => $empty_message,
-					'name'          => static::FIELD_EMPTY_MESSAGE,
-					'label'         => 'No Events Message',
-					'type'          => 'textarea',
-					'instructions'  => 'A message to display when there is no event available.',
-					'default_value' => 'No Events Available.',
+				static::FIELD_EVENT_MESSAGE_TOGGLE => array(
+					'key'           => $custom_message_toggle,
+					'name'          => static::FIELD_EVENT_MESSAGE_TOGGLE,
+					'label'         => 'Event Message',
+					'type'          => 'button_group',
+					'required'      => 1,
+					'choices'       => array(
+						'default' => 'Default',
+						'custom'  => 'Custom',
+					),
+					'default_value' => 'default',
+				),
+				static::FIELD_DEFAULT_MESSAGE => array(
+					'key'               => $empty_message,
+					'name'              => static::FIELD_DEFAULT_MESSAGE,
+					'label'             => 'Default Message',
+					'type'              => 'textarea',
+					'instructions'      => 'A message to display when there is no event available.',
+					'default_value'     => 'We are working on how to safely host events during these difficult times. Please follow us on social to stay up to date.',
+					'readonly'          => 1,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $custom_message_toggle,
+								'operator' => '==',
+								'value'    => 'default',
+							),
+						),
+					),
+				),
+				static::FIELD_CUSTOM_MESSAGE => array(
+					'key'               => $custom_message,
+					'name'              => static::FIELD_CUSTOM_MESSAGE,
+					'label'             => 'Custom Message',
+					'type'              => 'textarea',
+					'instructions'      => 'A message to display when there is no event available.',
+					'default_value'     => 'We are working on how to safely host events during these difficult times. Please follow us on social to stay up to date.',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => $custom_message_toggle,
+								'operator' => '==',
+								'value'    => 'custom',
+							),
+						),
+					),
+				),
+				static::FIELD_SOCIAL_LINKS => array(
+					'key'        => $social_links,
+					'name'       => static::FIELD_SOCIAL_LINKS,
+					'label'      => 'Social Links',
+					'type'       => 'repeater',
+					'layout'     => 'block',
+					'sub_fields' => array(
+						static::FIELD_SOCIAL_LINK_TYPE => array(
+							'key'           => $social_link_type,
+							'name'          => static::FIELD_SOCIAL_LINK_TYPE,
+							'label'         => 'Type',
+							'type'          => 'select',
+							'required'      => 1,
+							'choices'       => array(
+								'facebook'  => 'Facebook',
+								'twitter'   => 'Twitter',
+								'instagram' => 'Instagram',
+							),
+							'default_value' => 'facebook',
+							'return_format' => 'value',
+						),
+						static::FIELD_SOCIAL_LINK_URL  => array(
+							'key'           => $social_link_url,
+							'name'          => static::FIELD_SOCIAL_LINK_URL,
+							'label'         => 'URL',
+							'type'          => 'url',
+							'required'      => 1,
+						),
+					),
 				),
 				static::FIELD_ID      => array(
 					'key'          => $id,
@@ -84,25 +163,28 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 	}
 
 	protected static function render_empty_content() {
-		$empty_message = static::get_val( static::FIELD_EMPTY_MESSAGE );
+		$message_toggle = static::get_val( static::FIELD_EVENT_MESSAGE_TOGGLE );
+		$social_links   = static::get_val( static::FIELD_SOCIAL_LINKS );
 
-		$social_media_accounts = array(
-			array(
-				'url'   => Footer::get_option( Footer::FIELD_FACEBOOK_URL ),
-				'icon'  => 'trevor-ti-facebook',
-				'label' => 'click to go to our facebook page',
-			),
-			array(
-				'url'   => Footer::get_option( Footer::FIELD_TWITTER_URL ),
-				'icon'  => 'trevor-ti-twitter',
-				'label' => 'click to go to our twitter page',
-			),
-			array(
-				'url'   => Footer::get_option( Footer::FIELD_INSTAGRAM_URL ),
-				'icon'  => 'trevor-ti-instagram',
-				'label' => 'click to go to our instagram page',
-			),
-		);
+		$empty_message  = 'We are working on how to safely host events during these difficult times. Please follow us on social to stay up to date.';
+		
+		if ( 'default' === $message_toggle ) {
+			$empty_message = static::get_val( static::FIELD_DEFAULT_MESSAGE );
+		} elseif ( 'custom' === $message_toggle ) {
+			$empty_message = static::get_val( static::FIELD_CUSTOM_MESSAGE );
+		}
+
+		$social_media_accounts = array();
+
+		foreach( $social_links as $link ) {
+			$type = $link[ static::FIELD_SOCIAL_LINK_TYPE ] ?? '';
+
+			$social_media_accounts[] = array(
+				'url'   => $link[ static::FIELD_SOCIAL_LINK_URL ] ?? '',
+				'icon'  => 'trevor-ti-' . $type,
+				'label' => 'click to go to our ' . $type . ' page'
+			);
+		}
 
 		ob_start();
 		?>
