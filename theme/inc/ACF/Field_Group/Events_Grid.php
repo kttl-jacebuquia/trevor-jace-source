@@ -49,7 +49,7 @@ class Events_Grid extends A_Field_Group implements I_Block, I_Renderable {
 				static::FIELD_DEFAULT_MESSAGE => array(
 					'key'               => $empty_message,
 					'name'              => static::FIELD_DEFAULT_MESSAGE,
-					'label'             => 'No Events Message',
+					'label'             => 'Default Message',
 					'type'              => 'textarea',
 					'instructions'      => 'A message to display when there is no event available.',
 					'default_value'     => 'We are working on how to safely host events during these difficult times. Please follow us on social to stay up to date.',
